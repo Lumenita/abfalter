@@ -1,0 +1,32 @@
+{
+  "abfalter": {
+    "basicInfo": {
+      "base": "Base",
+      "spec": "Spec.",
+      "mult": "Mult",
+      "temp": "Temp.",
+      "final": "Final",
+      "actual": "Actual",
+      "mastery": "Mastery",
+      "half": "Half",
+      "full": "Full"
+    },
+    "magicTab": {
+      "mproj": "Magic Projection",
+      "maccu": "Magic Accumulation",
+      "maccua": "Accumulation",
+      "maccur": "Regeneration",
+      "zeon": "Zeon",
+      "minnate": "Innate Magic",
+      "mtheory": "Magic Theory",
+      "imbalance": "Imbalance",
+      "offensive": "Off.",
+      "defensive": "Def.",
+      "standard": "Standard",
+      "frompow": "From POW",
+      "regenmult": "Regen Mult.",
+      "recoverymult": "Recovery Mult.",
+      "finalregen": "Final Regen/day"
+    }
+  }
+}

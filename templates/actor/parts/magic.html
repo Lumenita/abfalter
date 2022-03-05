@@ -1,0 +1,323 @@
+﻿<div class="tab magic">
+    <div>
+        <div class="mproj">
+            <h2>
+                {{localize "abfalter.magicTab.mproj"}}
+                <label class="mproj-box">
+                    <input type="checkbox" name="data.mproj.status" data-dtype="boolean" {{checked data.mproj.status}} />
+                </label>
+            </h2>
+            {{#if data.mproj.status}}
+            <div>
+                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.mproj.base" value="{{data.mproj.base}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.mproj.spec" value="{{data.mproj.spec}}" /> </label>
+                <label> <span> {{localize "abfalter.magicTab.imbalance"}} </span> <input type="number" name="data.mproj.imbalance" value="{{data.mproj.imbalance}}" /> </label>
+                <div>
+                    <label>
+                        <button type="button" name="x" class="mastery-box "> <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
+                    </label>
+                    <label>
+                        <button type="button" name="x" class="mastery-box "> <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
+                    </label>
+                </div>
+            </div>
+            {{/if}}
+            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mproj.temp" value="{{data.mproj.temp}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.mprojfinal" value="{{data.mprojfinal}}" readonly/> </label>
+            <div>
+                <button type="button" class="mystic rollable" data-roll="d100+@mprojfinaloff" data-label="Magic Proj. Offensive">
+                    <span> {{localize "abfalter.magicTab.offensive"}} </span> <span> {{data.mprojfinaloff}} </span>
+                </button><!--
+                 --><button type="button" class="mystic rollable" data-roll="d10+@mprojfinaldef" data-label="Magic Proj. Defensive">
+                        <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{data.mprojfinaldef}} </span>
+                </button>
+            </div>
+            <h2> {{localize "abfalter.magicTab.mtheory"}} </h2>
+            <label class="magictheory">
+                <select name="data.mproj.mtheory" data-dtype="String">
+                    {{#select data.mproj.mtheory}}
+                    <option value="Standard"> {{localize "abfalter.magicTab.standard"}} </option>
+                    <option value="Onmyodo"> Onmyodo </option>
+                    <option value="Vodoun"> Vodoun </option>
+                    <option value="Shamanism"> Shamanism </option>
+                    <option value="Natural Magic"> Natural Magic </option>
+                    {{/select}}
+                </select>
+            </label>
+        </div><!--Magic Projection-->
+
+        <div class="maccu">
+            <h2> {{localize "abfalter.magicTab.maccu"}} </h2>
+            <div>
+                <div class="maccu2">
+                    <h3>
+                        {{localize "abfalter.magicTab.maccua"}}
+                        <label class="maccu-box">
+                            <input type="checkbox" name="data.maccu.status" data-dtype="boolean" {{checked data.maccu.status}} />
+                        </label>
+                    </h3>
+                    {{#if data.maccu.status}}
+                    <div>
+                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.maccu.base" value="{{data.maccu.base}}" /> </label>
+                        <label> <span> {{localize "abfalter.magicTab.frompow"}} </span> <input type="number" name="data.maccupow" value="{{data.maccupow}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.mult"}} </span> <input type="number" name="data.maccu.mult" value="{{data.maccu.mult}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.maccu.spec" value="{{data.maccu.spec}}" /> </label>
+                    </div>
+                    {{/if}}
+                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.maccu.temp" value="{{data.maccu.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.maccufinal" value="{{data.maccufinal}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.maccu.actual" value="{{data.maccu.actual}}" /> </label>
+                    <div>
+                        <button type="button" class="maccuHalf" data-ability="{{data.maccuhalffinal}}">
+                            <span> {{localize "abfalter.basicInfo.half"}} </span>
+                        </button><!--
+                        --><button type="button" class="maccuFull" data-ability="{{data.maccufinal}}">
+                               <span> {{localize "abfalter.basicInfo.full"}} </span> 
+                        </button>
+                    </div>
+                </div><!--Accumulation-->
+                <div class="mregen2">
+                    <h3>
+                        {{localize "abfalter.magicTab.maccur"}}
+                        <label class="mregen-box">
+                            <input type="checkbox" name="data.mregen.status" data-dtype="boolean" {{checked data.mregen.status}} />
+                        </label>
+                    </h3>
+                    {{#if data.mregen.status}}
+                    <div>
+                        <label> <span> {{localize "abfalter.magicTab.regenmult"}} </span> <input type="number" name="data.mregen.regenmult" value="{{data.mregen.regenmult}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.mregen.spec" value="{{data.mregen.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.magicTab.recoverymult"}} </span> <input type="number" name="data.mregen.recoverymult" value="{{data.mregen.recoverymult}}" /> </label>
+                    </div>
+                    {{/if}}
+                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mregen.temp" value="{{data.mregen.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.magicTab.finalregen"}} </span> <input type="number" name="data.mregenfinal" value="{{data.mregenfinal}}" readonly /> </label>
+                    <div>
+                        <button type="button" class="mregenFull" data-ability="{{data.mregenfinal}}">
+                            <span> {{localize "abfalter.basicInfo.full"}} </span>
+                        </button>
+                    </div>
+                </div><!--Regeneration-->
+            </div>
+        </div><!--Magic Accumulation-->
+
+        <div class="zeon">
+            <h2>
+                {{localize "abfalter.magicTab.zeon"}}
+                <label class="zeon-box">
+                    <input type="checkbox" name="data.zeon.status" data-dtype="boolean" {{checked data.zeon.status}} />
+                </label>
+            </h2>
+            {{#if data.zeon.status}}
+            <div>
+                <label> <span> Base </span> <input type="number" name="data.zeon.base" value="{{data.zeon.base}}" /> </label>
+                <label> <span> From POW </span> <input type="number" name="data.zeonpow" value="{{data.zeonpow}}" readonly /> </label>
+                <label> <span> Class </span> <input type="number" name="data.zeonbonus" value="{{data.zeonbonus}}" readonly /> </label>
+                <label> <span> Spec. </span> <input type="number" name="data.zeon.spec" value="{{data.zeon.spec}}" /> </label>
+            </div>
+            {{/if}}
+            <label> <span> Temp. </span> <input type="number" name="data.zeon.temp" value="{{data.zeon.temp}}" /> </label>
+            <label> <span> Final </span> <input type="number" name="data.zeonfinal" value="{{data.zeonfinal}}" readonly /> </label>
+            <label> <span> Actual </span> <input type="number" name="data.zeon.actual" value="{{data.zeon.actual}}" /> </label>
+            <div class="minnate">
+                <h3> {{localize "abfalter.magicTab.minnate"}} </h3>
+                <div>
+                    <div>
+                        <span> Bonus </span>
+                        <label> <input type="number" name="data.zeon.minnate" value="{{data.zeon.minnate}}" /> </label>
+                    </div>
+                    <div>
+                        <span> Final </span>
+                        <label> <input type="number" name="data.minnatefinal" value="{{data.minnatefinal}}" readonly /> </label>
+                    </div>
+                </div>
+            </div>
+        </div><!--Zeon-->
+    </div>
+
+    <div class="s1">
+        <div>
+            <div class="summoning">
+                <h2> Summoning Abilities </h2>
+                <div>
+                    <span> Ability </span>
+                    <span> Base </span>
+                    <span> Class </span>
+                    <span> Spec. </span>
+                    <span> Final </span>
+                </div>
+                <div>
+                    <button type="button" class="mystic rollable" data-roll="d100+@summonfinal" data-label="Summon">
+                        <span> Summon </span>
+                    </button>
+                    <input type="number" name="data.summoning.summon.base" value="{{data.summoning.summon.base}}" />
+                    <input type="number" name="data.summonbonus" value="{{data.summonbonus}}" readonly />
+                    <input type="number" name="data.summoning.summon.spec" value="{{data.summoning.summon.spec}}" />
+                    <input type="number" name="data.summonfinal" value="{{data.summonfinal}}" readonly />
+                    <label>
+                        <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                    </label>
+                </div>
+                <div>
+                    <button type="button" class="mystic rollable" data-roll="d100+@controlfinal" data-label="Control">
+                        <span> Control </span>
+                    </button>
+                    <input type="number" name="data.summoning.control.base" value="{{data.summoning.control.base}}" />
+                    <input type="number" name="data.controlbonus" value="{{data.controlbonus}}" readonly />
+                    <input type="number" name="data.summoning.control.spec" value="{{data.summoning.control.spec}}" />
+                    <input type="number" name="data.controlfinal" value="{{data.controlfinal}}" readonly />
+                    <label>
+                        <button type="button" name="x" class="mastery-box "> <span> Mastery </span> </button>
+                    </label>
+                </div>
+                <div>
+                    <button type="button" class="mystic rollable" data-roll="d100+@bindfinal" data-label="Bind">
+                        <span> Bind </span>
+                    </button>
+                    <input type="number" name="data.summoning.bind.base" value="{{data.summoning.bind.base}}" />
+                    <input type="number" name="data.bindbonus" value="{{data.bindbonus}}" readonly />
+                    <input type="number" name="data.summoning.bind.spec" value="{{data.summoning.bind.spec}}" />
+                    <input type="number" name="data.bindfinal" value="{{data.bindfinal}}" readonly />
+                    <label>
+                        <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                    </label>
+                </div>
+                <div>
+                    <button type="button" class="mystic rollable" data-roll="d100+@banishfinal" data-label="Banish">
+                        <span> Banish </span>
+                    </button>
+                    <input type="number" name="data.summoning.banish.base" value="{{data.summoning.banish.base}}" />
+                    <input type="number" name="data.banishbonus" value="{{data.banishbonus}}" readonly />
+                    <input type="number" name="data.summoning.banish.spec" value="{{data.summoning.banish.spec}}" />
+                    <input type="number" name="data.banishfinal" value="{{data.banishfinal}}" readonly />
+                    <label>
+                        <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                    </label>
+                </div>
+            </div>
+
+            <div class="metamagic">
+                <h2> Metamagic </h2>
+                <span> Item for metamagic here </span>
+            </div>
+
+            <div class="turnmaint">
+                <h2> Turn Maintenance </h2>
+                <span> new item created by spell added here </span>
+                <span> include a checkbox for active or not </span>
+                <span> include a total zeon cost </span>
+                <span> include a button to remove zeon from pool </span>
+                <span> include a way to delete item but not create </span>
+            </div>
+
+            <div class="daymaint">
+                <h2> Daily Maintenance </h2>
+                <span> new item created by spell added here </span>
+                <span> include a checkbox for active or not </span>
+                <span> include a total zeon cost </span>
+                <span> include a button to remove zeon from pool </span>
+                <span> include a way to delete item but not create </span>
+            </div>
+        </div>
+        <!--    <label> <span> x </span> <input type="number" name="x" value="{{x}}" /> </label>      -->
+
+        <div>
+            <div class="s2">
+                <div class="spellpath">
+                    <h2> Spell Paths </h2>
+                    <div class="items-list">
+                        {{#each spellPaths as |spellPath id|}}
+                        <div class="spellPath-item item" data-item-id="{{spellPath._id}}">
+                            <input class="spellPath-name inline-edit" data-field="name" type="text" value="{{spellPath.name}}" placeholder="NAME" />
+                            <input class="spellPath-level inline-edit" data-field="data.level" type="number" value="{{spellPath.data.level}}" placeholder="0" />
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                        {{#if data.spellpathinfo.subpathbool}}
+                        <div>
+                            <span> This is true </span>
+                        </div>
+                        {{/if}}
+                        {{/each}}
+                    </div>
+                    <a class="item-create" data-type="spellPath" title="Create item" ><i class="fas fa-plus"></i> Add Spellpath </a>
+                </div>
+
+                <div class="mlevels">
+                    <h2>
+                        Magic Levels
+                        <label class="mlevel-box">
+                            <input type="checkbox" name="data.mlevel.status" data-dtype="boolean" {{checked data.mlevel.status}} />
+                        </label>
+                    </h2>
+                    {{#if data.mlevel.status}}
+                    <div>
+                        <label> <span> Base </span> <input type="number" name="data.mlevel.base" value="{{data.mlevel.base}}" /> </label>
+                        <label> <span> From INT </span> <input type="number" name="data.mlevelint" value="{{data.mlevelint}}" readonly /> </label>
+                        <label> <span> Spec. </span> <input type="number" name="data.mlevel.spec" value="{{data.mlevel.spec}}" /> </label>
+                    </div>
+                    {{/if}}
+                    <label> <span> Temp. </span> <input type="number" name="data.mlevel.temp" value="{{data.mlevel.temp}}" /> </label>
+                    <label> <span> Final </span> <input type="number" name="data.mlevelfinal" value="{{data.mlevelfinal}}" readonly /> </label>
+                    <label> <span> Used </span> <input type="number" name="data.mlevelused" value="{{data.mlevelused}}" readonly /> </label>
+                </div>
+            </div>
+
+            <div class="spells">
+                <h2> Spell Book </h2>
+                <div class="items-list">
+                {{#each spells as |item id|}}
+                    <div class="spell-item flexrow" data-item-id="{{item._id}}">
+                        <div class="item-name">
+                            <h4>{{item.name}}</h4>
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                {{/each}}
+                </div>
+                <a class="item-control item-create" title="Create item" data-type="spell"><i class="fas fa-plus"></i> Add Spell</a>
+            </div>
+
+            <div class="invocations">
+                <h2> invocations </h2>
+                <div class="items-list">
+                    {{#each invocations as |item id|}}
+                    <div class="item flexrow" data-item-id="{{item._id}}">
+                        <div class="item-name">
+                            <h4>{{item.name}}</h4>
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <a class="item-control item-create" title="Create item" data-type="invocation"><i class="fas fa-plus"></i> Add Invocation</a>
+            </div>
+
+            <div class="incarnations">
+                <h2> Incarnation </h2>
+                <div class="items-list">
+                    {{#each incarnations as |item id|}}
+                    <div class="item flexrow" data-item-id="{{item._id}}">
+                        <div class="item-name">
+                            <h4>{{item.name}}</h4>
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <a class="item-control item-create" title="Create item" data-type="incarnation"><i class="fas fa-plus"></i> Add Incarnation</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,844 @@
+/* Global Style */
+label {
+    margin: 0px;
+    padding: 0px;
+}
+textarea {
+    border: none;
+    width: 100%;
+    padding: 0px;
+    text-align: justify;
+    border-radius: 0px;
+    margin: 0px;
+}
+button {
+    line-height: normal;
+}
+
+h2 {
+    display: flex;
+    width: 100%;
+    font-size: 19pt;
+    color: black;
+    justify-content: center;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    z-index: 1;
+    margin-bottom: 3px;
+}
+h3 {
+    display: flex;
+    width: 100%;
+    font-size: 12pt;
+    justify-content: center;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    z-index: 1;
+    align-items: center;
+}
+
+h4 {
+    margin: 5px;
+}
+
+.physical {
+    text-shadow: 1px 1px 1px #00CC00;
+}
+.mental {
+    text-shadow: 1px 1px 1px #0000CC;
+}
+.fumbleroll {
+    color: red;
+}
+.openroll {
+    color: forestgreen;
+}
+.normalroll {
+    color: black;
+}
+.armorpenalty {
+    text-shadow: 1px 1px 1px lightcoral;
+}
+.natemph {
+    text-shadow: 1px 1px 1px orange;
+}
+.mastery-box {
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
+}
+.editor-box {
+    height: 200px;
+    border: 1px solid black;
+    background-color: aliceblue;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.editor {
+    height: 200px;
+}
+/* 
+    -------------
+    Header Format
+    -------------
+*/
+.abfalter {
+    min-width: 775px;
+}
+.abfalter .sheet-header .profile-img {
+    display: flex;
+    width: 150px;
+    height: 82px;
+    float: left;
+}
+
+.abfalter .sheet-header {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 85px;
+    flex: 0 0 85px;
+    overflow: hidden;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.abfalter .sheet-header .profile-img {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 82px;
+  flex: 0 0 82px;
+  height: 82px;
+  margin-right: 0px;
+}
+/*
+    -------------
+    Header Layout
+    -------------
+*/
+.abfalter .sheet-header .char-info {
+    display: flex;
+    width: calc(100% - 155px);
+    justify-content: space-between;
+    margin-left: 5px;
+    flex-wrap: wrap;
+}
+.abfalter .sheet-header .char-info > label {
+    display: flex;
+    justify-content: space-between;
+    width: calc(33.33% - 10px);
+    margin-right: 2.5px;
+    margin-left: 2.5px;
+    min-width: 130px;
+    font-size: 13px;
+}
+.abfalter .sheet-header .char-info > label > span {
+    display: flex;
+    align-items: center;
+    margin-left: -2px;
+    font-weight: normal;
+    white-space: nowrap;
+    width: 40px;
+}
+.abfalter .sheet-header .char-info > label > input[type="text"],
+.abfalter .sheet-header .char-info > label > input[type="number"] {
+    display: flex;
+    border: 0px;
+    border-bottom: 1px solid black;
+    padding-right: 0px;
+    padding-left: 0px;
+    width: calc(100% - 40px);
+    text-align: center;
+}
+.abfalter .sheet-header .char-info > label:nth-child(5),
+.abfalter .sheet-header .char-info > label:nth-child(6),
+.abfalter .sheet-header .char-info > label:nth-child(7),
+.abfalter .sheet-header .char-info > label:nth-child(8),
+.abfalter .sheet-header .char-info > label:nth-child(9),
+.abfalter .sheet-header .char-info > label:nth-child(10),
+.abfalter .sheet-header .char-info > label:nth-child(11),
+.abfalter .sheet-header .char-info > label:nth-child(12),
+.abfalter .sheet-header .char-info > label:nth-child(13),
+.abfalter .sheet-header .char-info > label:nth-child(14){
+    width: calc(16.665% - 10px);
+    min-width: 100px;
+}
+.abfalter .sheet-header .char-info > label:nth-child(4) > span,
+.abfalter .sheet-header .char-info > label:nth-child(5) > span,
+.abfalter .sheet-header .char-info > label:nth-child(6) > span{
+    width: 45px;
+}
+.abfalter .sheet-header .char-info > label:nth-child(4) > input[type="text"],
+.abfalter .sheet-header .char-info > label:nth-child(5) > input[type="text"],
+.abfalter .sheet-header .char-info > label:nth-child(6) > input[type="text"] {
+    width: calc(100% - 45px);
+}
+.abfalter .sheet-header .char-info > label:nth-child(7) > span,
+.abfalter .sheet-header .char-info > label:nth-child(8) > span {
+    width: 40px;
+}
+.abfalter .sheet-header .char-info > label:nth-child(7) > input[type="number"],
+.abfalter .sheet-header .char-info > label:nth-child(8) > input[type="text"] {
+    width: calc(100% - 40px);
+    text-align: center;
+}
+.abfalter .sheet-header .char-info > label:nth-child(9) > span {
+    width: 50px;
+}
+.abfalter .sheet-header .char-info > label:nth-child(9) > input[type="number"] {
+    width: calc(100% - 50px);
+}
+.abfalter .sheet-header .char-info > label:nth-child(10) > span {
+    width: 32px;
+}
+.abfalter .sheet-header .char-info > label:nth-child(10) > input[type="number"] {
+    width: calc(100% - 32px);
+}
+.abfalter .sheet-header .char-info > label:nth-child(11) > span,
+.abfalter .sheet-header .char-info > label:nth-child(13) > span {
+    width: 20px;
+}
+.abfalter .sheet-header .char-info  > label:nth-child(11) > input[type="number"],
+.abfalter .sheet-header .char-info > label:nth-child(13) > input[type="number"] {
+    width: calc(100% - 20px);
+}
+.abfalter .sheet-header .char-info > label:nth-child(12) > span {
+    width: 65px;
+}
+.abfalter .sheet-header .char-info > label:nth-child(12) > input[type="number"] {
+    width: calc(100% - 65px);
+}
+.abfalter .sheet-header .char-info > label:nth-child(14) > span {
+    width: 55px;
+}
+.abfalter .sheet-header .char-info > label:nth-child(14) > input[type="number"] {
+    width: calc(100% - 55px);
+}
+/*
+    ------------
+    Menu Drawing
+    ------------
+*/
+.abfalter .sheet-tabs {
+  -webkit-box-flex: 0;
+  -ms-flex: 0;
+  flex: 0;
+}
+.abfalter .tabs {
+  height: 40px;
+  border-top: 1px solid #AAA;
+  border-bottom: 1px solid #AAA;
+}
+.abfalter .tabs .item {
+  line-height: 40px;
+  font-weight: bold;
+}
+.abfalter .tabs .item.active {
+  text-decoration: underline;
+  color: darkblue;
+  text-shadow: none;
+}
+
+
+
+
+
+
+
+
+/*
+    ***************
+    ---------------
+         Magic
+    ---------------
+    ***************
+*/
+/*
+    ------------
+    Magic Layout
+    ------------
+*/
+.magic {
+    flex-wrap: wrap;
+}
+.magic > div:first-of-type {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.mproj {
+    width: 28%;
+}
+.maccu {
+    width: 48%;
+}
+.maccu > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.maccu > div > div {
+    width: 47%;
+}
+.zeon {
+    width: 18%;
+}
+.magic .s1 {
+    width: 100%;
+    display: contents;
+}
+.magic .s1 > div {
+    width: 48.5%;
+}
+.mlevels {
+    width: 48%;
+}
+.spellpath {
+    width: 48%;
+}
+.minnate > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.magic .s2 {
+    display: flex;
+    justify-content: space-between;
+}
+/*
+    ----------------
+    Magic Projection
+    ----------------
+*/
+.mproj > h2 > label {
+    width: 0%;
+}
+.mproj > h2 > label > input {
+    height: 18px;
+    opacity: 0;
+}
+.mproj:hover > h2 > label > input {
+    opacity: 1;
+}
+.mproj > h2 > label > input:checked {
+    opacity: 1;
+}
+.mproj > label,
+.mproj > div > label {
+    display: flex;
+    width: 100%;
+    height: 20px;
+    padding-right: 15px;
+    padding-left: 5px;
+}
+.mproj > label > span,
+.mproj > div > label > span {
+    display: flex;
+    width: 60%;
+    font-size: 12px;
+    align-items: center;
+    height: 20px;
+}
+.mproj > label > input,
+.mproj > div > label > input {
+    display: flex;
+    width: 40%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 12px;
+    border-bottom: 1px solid black;
+}
+.mproj > label:nth-of-type(2) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 23px;
+}
+.mproj > label:nth-of-type(2) {
+    font-weight: bold;
+}
+.mproj > label:nth-of-type(2) > input {
+    background: transparent;
+    border-bottom: 0px;
+}
+.mproj > div:last-of-type {
+    display: flex;
+    justify-content: center;
+}
+.mproj > div > button {
+    width: 50%;
+    margin: 0px;
+    height: 25px;
+    border-radius: 0px;
+    border: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.mproj > div > button:first-of-type {
+    border-right: 1px solid;
+}
+.mproj > div > button > span:first-of-type {
+    padding-left: 20%;
+}
+.mproj > div > button > span:last-of-type {
+    padding-right: 20%;
+}
+.mproj > div > div {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.mproj .magictheory {
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    margin: 0px;
+}
+.mproj > label > select {
+    height: 20px;
+    text-align: center;
+    width: 70%;
+}
+/*
+    ----------------
+    Zeon
+    ----------------
+*/
+.maccu > div > div > h3 > label {
+    width: 0%;
+}
+.maccu > div > div > h3 > label > input {
+    height: 18px;
+    opacity: 0;
+}
+.maccu > div > div:hover > h3 > label > input {
+    opacity: 1;
+}
+.maccu > div > div > h3 > label > input:checked {
+    opacity: 1;
+}
+.maccu > div > div > label,
+.maccu > div > div > div > label {
+    display: flex;
+    width: 100%;
+    height: 20px;
+    padding-right: 15px;
+    padding-left: 5px;
+}
+.maccu > div > div > label > span,
+.maccu > div > div > div > label > span {
+    display: flex;
+    width: 60%;
+    font-size: 12px;
+    align-items: center;
+    height: 20px;
+}
+.maccu > div > div > label > input,
+.maccu > div > div > div > label > input {
+    display: flex;
+    width: 40%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 12px;
+    border-bottom: 1px solid black;
+}
+.maccu > div > div > label:nth-of-type(3),
+.mregen2 > label:nth-of-type(2) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 23px;
+}
+.maccu > div > div > label:nth-of-type(2),
+.maccu > div > div > label:nth-of-type(3) {
+    font-weight: bold;
+}
+.maccu > div > div > label:nth-of-type(2) > input,
+.maccu2 > div > label:nth-of-type(2) > input {
+    background: transparent;
+    border-bottom: 0px;
+}
+.maccu > div > div > div > button {
+    width: 50%;
+    margin: 0px;
+    height: 25px;
+    border-radius: 0px;
+    border: 0px;
+}
+.maccu2 > div > button:first-of-type {
+    border-right: 1px solid;
+}
+.mregen2 > div:last-of-type {
+    display: flex;
+    justify-content: end;
+}
+/*
+    ----
+    Zeon
+    ----
+*/
+.zeon > h2 > label {
+    width: 0%;
+}
+.zeon > h2 > label > input {
+    height: 18px;
+    opacity: 0;
+}
+.zeon:hover > h2 > label > input {
+    opacity: 1;
+}
+.zeon > h2 > label > input:checked {
+    opacity: 1;
+}
+.zeon > label,
+.zeon > div > label {
+    display: flex;
+    width: 100%;
+    height: 20px;
+    padding-right: 15px;
+    padding-left: 5px;
+}
+.zeon > label > span,
+.zeon > div > label > span {
+    display: flex;
+    width: 50%;
+    font-size: 12px;
+    align-items: center;
+    height: 20px;
+}
+.zeon > label > input,
+.zeon > div > label > input {
+    display: flex;
+    width: 50%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 12px;
+    border-bottom: 1px solid black;
+}
+.zeon > label:nth-of-type(3) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 23px;
+}
+.zeon > label:nth-of-type(2),
+.zeon > label:nth-of-type(3) {
+    font-weight: bold;
+}
+.zeon > label:nth-of-type(2) > input,
+.zeon > div > label:nth-of-type(2) > input,
+.zeon > div > label:nth-of-type(3) > input {
+    background: transparent;
+    border-bottom: 0px;
+}
+/*
+    ------------
+    Innate Magic
+    ------------
+*/
+.minnate > h3 {
+    padding-top: 10px;
+    margin-bottom: 0px;
+}
+.minnate > div > div > span {
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+    height: 20px;
+    justify-content: center;
+}
+.minnate > div > div > label {
+    display: flex;
+    justify-content: center;
+}
+.minnate > div > div > label > input {
+    display: flex;
+    width: 80%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 12px;
+    border-bottom: 1px solid black;
+}
+.minnate > div > div:last-of-type > label > input {
+    background: transparent;
+    border-bottom: 0px;
+}
+.minnate > div > div:last-of-type > span {
+    font-weight: bold;
+}
+/*
+    ------------
+    Magic Levels
+    ------------
+*/
+.mlevels > label,
+.mlevels > div > label {
+    display: flex;
+    width: 100%;
+    height: 20px;
+    padding-right: 15px;
+    padding-left: 5px;
+}
+.mlevels > label > span,
+.mlevels > div > label > span {
+    display: flex;
+    width: 50%;
+    font-size: 12px;
+    align-items: center;
+    height: 20px;
+}
+.mlevels > label > input,
+.mlevels > div > label > input {
+    display: flex;
+    width: 50%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 12px;
+    border-bottom: 1px solid black;
+}
+.mlevels > label:nth-of-type(3) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 23px;
+}
+.mlevels > label:nth-of-type(2),
+.mlevels > label:nth-of-type(3) {
+    font-weight: bold;
+}
+.mlevels > label:nth-of-type(2) > input,
+.mlevels > label:nth-of-type(3) > input,
+.mlevels > div > label:nth-of-type(2) > input {
+    background: transparent;
+    border-bottom: 0px;
+}
+.mlevels > h2 > label > input {
+    height: 18px;
+    opacity: 0;
+}
+.mlevels:hover > h2 > label > input {
+    opacity: 1;
+}
+.mlevels > h2 > label > input:checked {
+    opacity: 1;
+}
+/*
+    -----------
+    Spell Paths
+    -----------
+*/
+
+
+/*
+    ---------
+    Metamagic
+    ---------
+*/
+
+
+/*
+    ----------------
+    Turn Maintenance
+    ----------------
+*/
+
+
+/*
+    ------------------
+    Daily Maintenance
+    ------------------
+*/
+
+
+/*
+    ------------------
+    Sumoning Abilities
+    ------------------
+*/
+.summoning > div {
+    display: flex;
+    justify-content: space-between;
+}
+.summoning > div:first-of-type {
+    width: 84%;
+    justify-content: start;
+}
+.summoning > div:first-of-type > span:first-of-type {
+    padding-left: 8%;
+    padding-right: 13%;
+}
+.summoning > div:first-of-type > span:nth-of-type(3) {
+    padding-left: 10%;
+    padding-right: 9%;
+}
+.summoning > div:first-of-type > span:nth-of-type(5) {
+    padding-left: 9%
+}
+.summoning > div > button {
+    width: 22%;
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
+}
+.summoning > div > input {
+    width: 14%;
+    display: flex;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 12px;
+    border-bottom: 1px solid black;
+}
+.summoning > div > input:nth-of-type(2),
+.summoning > div > input:nth-of-type(4) {
+    background: transparent;
+    border-bottom: 0px;
+}
+/*
+    ----------
+    Spell Book
+    ----------
+*/
+
+
+/*
+    -----------
+    Invocations
+    -----------
+*/
+
+
+/*
+    ------------
+    Incarnations
+    ------------
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    ***************
+    ---------------
+         Items
+    ---------------
+    ***************
+*/
+/*
+    -----
+    Default
+    -----
+*/
+/*
+    -----
+    Spell
+    -----
+*/
+.spellheader {
+    display: flex;
+}
+.spellheader > img {
+    width: 100px;
+    height: 100px;
+}
+.spellheader > div > label,
+.spellheader > div > div > label{
+    display: flex;
+    width: 100%;
+    height: 20px;
+    padding-right: 20px;
+    padding-left: 5px;
+}
+.spellheader > div > label > span,
+.spellheader > div > div > label > span{
+    display: flex;
+    width: 45%;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+}
+.spellheader > div > div > label > select {
+    width: 55%;
+    height: 20px;
+    text-align: center;
+}
+.spellheader > div > label > input,
+.spellheader > div > div > label > input {
+    display: flex;
+    width: 55%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+.spellheader > div {
+    display: flex;
+    flex-wrap: wrap;
+}
+.spellheader > div > div {
+    width: 100%;
+    display: flex;
+}
+.spellheader > div > label > span {
+  width: 21.7%
+}
+.spellheader > div > label > input {
+  width: 78.3%;
+}

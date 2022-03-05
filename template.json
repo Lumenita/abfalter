@@ -1,0 +1,589 @@
+{
+  "Actor": {
+    "types": [ "character", "npc", "monster" ],
+    "templates": {
+      "info": {
+        "race": "",
+        "class": "",
+        "gender": "",
+        "height": "",
+        "weight": "",
+        "size": 10,
+        "age": "18",
+        "appearance": 5,
+        "experience": 0,
+        "levelinfo": {
+          "levelmod": 0,
+          "presencemod": 0
+        }
+      },
+      "stats": {
+        "stats": {
+          "Agility": {
+            "base": 5,
+            "spec": 0,
+            "temp": 0,
+            "opposed": 0
+          },
+          "Constitution": {
+            "base": 5,
+            "spec": 0,
+            "temp": 0,
+            "opposed": 0
+          },
+          "Strength": {
+            "base": 5,
+            "spec": 0,
+            "temp": 0,
+            "opposed": 0
+          },
+          "Dexterity": {
+            "base": 5,
+            "spec": 0,
+            "temp": 0,
+            "opposed": 0
+          },
+          "Intelligence": {
+            "base": 5,
+            "spec": 0,
+            "temp": 0,
+            "opposed": 0
+          },
+          "Perception": {
+            "base": 5,
+            "spec": 0,
+            "temp": 0,
+            "opposed": 0
+          },
+          "Power": {
+            "base": 5,
+            "spec": 0,
+            "temp": 0,
+            "opposed": 0
+          },
+          "Willpower": {
+            "base": 5,
+            "spec": 0,
+            "temp": 0,
+            "opposed": 0
+          }
+        },
+        "resistances": {
+          "Physical": {
+            "mod": 0
+          },
+          "Disease": {
+            "mod": 0
+          },
+          "Poison": {
+            "mod": 0
+          },
+          "Magic": {
+            "mod": 0
+          },
+          "Psychic": {
+            "mod": 0
+          }
+        },
+        "movement": {
+          "pen": 0,
+          "spec": 0,
+          "temp": 0
+        },
+        "lifepoints": {
+          "multiple": 1,
+          "spec": 0,
+          "temp": 0,
+          "actual": 0
+        },
+        "fatigue": {
+          "spec": 0,
+          "temp": 0,
+          "actual": 0
+        },
+        "regeneration": {
+          "spec": 0,
+          "temp": 0
+        },
+        "combatstats": {
+          "atkbase": 0,
+          "atkspecial": 0,
+          "atktemp": 0,
+          "blkbase": 0,
+          "blkspecial": 0,
+          "blktemp": 0,
+          "dodbase": 0,
+          "dodspecial": 0,
+          "dodtemp": 0
+        },
+        "initiative": {
+          "name": "",
+          "spec": 0
+        },
+        "secondary": {
+          "acrobatics": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "athleticism": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "climb": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "jump": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "ride": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "swim": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "etiquette": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "intimidate": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "leadership": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "persuasion": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "streetwise": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "style": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "trading": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "notice": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "search": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "track": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "animals": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "appraisal": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "architecture": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "herballore": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "history": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "law": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "magicappr": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "medicine": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "memorize": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "navigation": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "occult": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "science": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "tactics": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "composure": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "featsofstr": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "withstpain": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "disguise": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "hide": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "lockpicking": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "poisons": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "stealth": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "theft": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "traplore": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "alchemy": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "animism": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "art": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "dance": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "forging": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "jewelry": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "music": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "runes": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "ritualcalig": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "slofhand": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          },
+          "tailoring": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0
+          }
+        },
+        "aam": 0
+      },
+      "mystic": {
+        "mproj": {
+          "base": 0,
+          "spec": 0,
+          "imbalance": 0,
+          "temp": 0,
+          "mtheory": "Standard"
+        },
+        "maccu": {
+          "base": 0,
+          "mult": 0,
+          "spec": 0,
+          "temp": 0,
+          "actual": 0
+        },
+        "mregen": {
+          "regenmult": 0,
+          "spec": 0,
+          "recoverymult": 1,
+          "temp": 0
+        },
+        "zeon": {
+          "base": 0,
+          "spec": 0,
+          "temp": 0,
+          "actual": 0,
+          "minnate": 0
+        },
+        "mlevel": {
+          "base": 0,
+          "spec": 0,
+          "temp": 0
+        },
+        "summoning": {
+          "summon": {
+            "base": 0,
+            "spec": 0
+          },
+          "control": {
+            "base": 0,
+            "spec": 0
+          },
+          "bind": {
+            "base": 0,
+            "spec": 0
+          },
+          "banish": {
+            "base": 0,
+            "spec": 0
+          }
+        }
+      }
+    },
+    "character": {
+      "templates": [ "info", "stats", "mystic" ]
+    },
+    "npc": {
+      "templates": [ "info" ]
+    },
+    "monster": {
+      "templates": [ "info", "stats" ]
+    }
+  },
+  "Item": {
+    "types": [ "spellPath", "spell" ],
+    "templates": {
+      "itemDescription": {
+        "description": ""
+      }
+    },
+    "spellPath": {
+      "name": "",
+      "level": 0,
+      "subPath": "",
+      "subPathBool": false
+    },
+    "spell": {
+      "templates": [ "itemDescription" ],
+      "path": "",
+      "level": 0,
+      "action": "Active",
+      "projection": "Offensive",
+      "bought": "SpellPath",
+      "cost": 0,
+      "type": "Attack",
+      "maintType": "None",
+      "basic": {
+        "intReq": 0,
+        "zeonCost": 0,
+        "maint": 0,
+        "rollDesc": ""
+      },
+      "intermediate": {
+        "intReq": 0,
+        "zeonCost": 0,
+        "maint": 0,
+        "rollDesc": ""
+      },
+      "advanced": {
+        "intReq": 0,
+        "zeonCost": 0,
+        "maint": 0,
+        "rollDesc": ""
+      },
+      "arcane": {
+        "intReq": 0,
+        "zeonCost": 0,
+        "maint": 0,
+        "rollDesc": ""
+      }
+    }
+  }
+}
