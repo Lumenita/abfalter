@@ -538,11 +538,89 @@
     }
   },
   "Item": {
-    "types": [ "spellPath", "spell" ],
+    "types": [ "class", "advantage", "disadvantage", "spellPath", "spell", "incarnation", "invocation", "metaMagic", "turnMaint", "dailyMaint" ],
     "templates": {
       "itemDescription": {
         "description": ""
       }
+    },
+    "class": {
+      "main": {
+        "levels": 0,
+        "lp": 0,
+        "initiative": 0,
+        "attack": 0,
+        "dodge": 0,
+        "block": 0,
+        "weararmor": 0,
+        "mk": 0,
+        "pp": 0,
+        "zeon": 0,
+        "summon": 0,
+        "control": 0,
+        "bind": 0,
+        "banish": 0
+      },
+      "secondary": {
+        "acro": 0,
+        "athleticism": 0,
+        "climb": 0,
+        "jump": 0,
+        "ride": 0,
+        "swim": 0,
+        "etiquette": 0,
+        "intimidate": 0,
+        "leadership": 0,
+        "persuasion": 0,
+        "streetwise": 0,
+        "style": 0,
+        "trading": 0,
+        "notice": 0,
+        "search": 0,
+        "track": 0,
+        "animals": 0,
+        "appraisal": 0,
+        "architecture": 0,
+        "herballore": 0,
+        "history": 0,
+        "law": 0,
+        "magicappr": 0,
+        "medicine": 0,
+        "memorize": 0,
+        "navigation": 0,
+        "occult": 0,
+        "science": 0,
+        "tactics": 0,
+        "composure": 0,
+        "featsofstr": 0,
+        "withstpain": 0,
+        "disguise": 0,
+        "hide": 0,
+        "lockpicking": 0,
+        "poisons": 0,
+        "stealth": 0,
+        "theft": 0,
+        "traplore": 0,
+        "alchemy": 0,
+        "animism": 0,
+        "art": 0,
+        "dance": 0,
+        "forging": 0,
+        "jewelry": 0,
+        "music": 0,
+        "runes": 0,
+        "ritualcalig": 0,
+        "slofhand": 0,
+        "tailoring": 0
+      }
+    },
+    "advantage": {
+      "templates": [ "itemDescription" ],
+      "cost": 0
+    },
+    "disadvantage": {
+      "templates": [ "itemDescription" ],
+      "benefit": 0
     },
     "spellPath": {
       "name": "",
@@ -584,6 +662,26 @@
         "maint": 0,
         "rollDesc": ""
       }
+    },
+    "incarnation": {
+      "templates": [ "itemDescription" ],
+      "level": 0
+    },
+    "invocation": {
+      "templates": [ "itemDescription" ],
+      "level": 0
+    },
+    "metaMagic": {
+      "templates": [ "itemDescription" ],
+      "cost": 0
+    },
+    "turnMaint": {
+      "status": false,
+      "zeon": 0
+    },
+    "dailyMaint": {
+      "status": false,
+      "zeon": 0
     }
   }
 }

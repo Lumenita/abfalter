@@ -4,12 +4,18 @@
       "base": "Base",
       "spec": "Spec.",
       "mult": "Mult",
+      "class": "Class",
       "temp": "Temp.",
       "final": "Final",
       "actual": "Actual",
       "mastery": "Mastery",
       "half": "Half",
-      "full": "Full"
+      "full": "Full",
+      "bonus": "Bonus",
+      "ability": "Ability"
+    },
+    "sheet": {
+      "newItem": "Name here"
     },
     "magicTab": {
       "mproj": "Magic Projection",
@@ -26,7 +32,12 @@
       "frompow": "From POW",
       "regenmult": "Regen Mult.",
       "recoverymult": "Recovery Mult.",
-      "finalregen": "Final Regen/day"
+      "finalregen": "Final Regen/day",
+      "summoning": "Summoning Abilities",
+      "summon": "Summon",
+      "control": "Control",
+      "bind": "Bind",
+      "banish": "Banish"
     }
   }
 }

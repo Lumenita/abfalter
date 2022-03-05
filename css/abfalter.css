@@ -238,12 +238,802 @@ h4 {
 }
 
 
+/*
+    ***************
+    ---------------
+    GENERAL DRAWING
+    ---------------
+    ***************
+*/
 
-
-
-
-
-
+/*
+    -------------------
+    General Page Layout
+    -------------------
+*/
+.general > div:nth-of-type(1) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.general > div:nth-of-type(1) > div:nth-of-type(1) {
+    display: flex;
+    width: 50%;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+.general > div:nth-of-type(1) > div:nth-of-type(2) {
+    width: 48%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+}
+.general > div:nth-of-type(1) > div:nth-of-type(3) {
+    display: flex;
+    width: 35%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+}
+.general > div:nth-of-type(1) > div:nth-of-type(4) {
+    display: flex;
+    width: 25%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+}
+.general > div:nth-of-type(1):not(:last-of-type),
+.general > div:nth-of-type(1) > div:not(:last-of-type),
+.general > div:nth-of-type(1) > div:nth-of-type(1) > div:not(:last-of-type),
+.general > div:nth-of-type(1) > div:nth-of-type(2) > div:not(:last-of-type),
+.general > div:nth-of-type(1) > div:nth-of-type(4) > div:not(:last-of-type) {
+    margin-bottom: 4px;
+}
+/*
+    ---------------
+    Characteristics
+    ---------------
+*/
+.characteristics {
+    display: flex;
+    width: 95%;
+    flex-wrap: wrap;
+}
+.characteristics > div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.characteristics > div:not(:first-of-type) {
+    width: 100%;
+    min-height: 20px;
+}
+.characteristics > div:first-of-type {
+    border-bottom: 5px solid transparent;
+    border-image: url(../img/border.png) 10 stretch;
+    height: 20px;
+}
+.characteristics > div:first-of-type > span:last-of-type {
+    margin-right: 26px;
+}
+.characteristics > div > span {
+    width: 33.33%;
+    text-align: center;
+}
+.characteristics > div > span:nth-child(2) {
+    border-right: 1px solid black;
+}
+.characteristics > div > .compact {
+    width: calc(100% - 26px);
+    margin-top: -2px;
+    flex-wrap: wrap;
+}
+.characteristics > div > .compact > button{
+    width: calc(33.33%);
+    height: 20px;
+    border: 0px;
+}
+.characteristics > div > .compact > button:first-of-type {
+    width: 66.66%;
+    border-right: 1px solid 
+}
+.characteristics > div > .compact > button:first-of-type > span {
+    width: 47%;
+    display: inherit;
+}
+.characteristics > div > .compact > button[type="button"] {
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+}
+.characteristics > div > .compact > button > span {
+    font-size: 13px;
+}
+.characteristics > div > label > input{
+    width: 18px;
+    height: 18px;
+    margin-top: -2px;
+    margin-left: -5px;
+    opacity: 0;
+}
+.characteristics > div > label > input:checked {
+    opacity: 1;
+}
+.characteristics > div:hover > label > input {
+    opacity: 1;
+}
+.characteristics > div > .extend {
+    margin-bottom: 5px;
+}
+.characteristics > div > .extend > h3 {
+    border-bottom: 5px solid transparent;
+    border-image: url(../img/border.png) 10 stretch;
+    width: 100%;
+    text-align: center;
+}
+.characteristics > div > .extend  > label {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.characteristics > div > .extend  > label > span {
+    font-size: 13px;
+    font-weight: normal;
+    vertical-align: bottom;
+    align-items: flex-end;
+    color: black;
+}
+.characteristics > div > .extend > label > span,
+.characteristics > div > .extend > label > input[type="number"] {
+    width: calc(50% - 5px);
+    display: inline-block;
+}
+.characteristics > div > .extend > label > input[type="number"] {
+    text-align: center;
+    border: 0px;
+    border-bottom: 1px solid black;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.characteristics > div > .extend > label:nth-of-type(4) > input,
+.characteristics > div > .extend > label:nth-of-type(5) > input,
+.characteristics > div > .extend > label:nth-of-type(7) > input {
+    background: transparent;
+    border: 0px;
+} 
+.characteristics > div > .extend > label:nth-of-type(4) {
+    border-top: 5px solid transparent;
+    border-image: url(../img/border.png) 10 stretch;
+}
+.characteristics > div > .extend > label:nth-of-type(4) > span,
+.characteristics > div > .extend > label:nth-of-type(5) > span,
+.characteristics > div > .extend > label:nth-of-type(7) > span {
+    font-weight: bold;
+}
+.characteristics > div > .extend > label:nth-of-type(6) {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-image: url(../img/border.png) 10 stretch;
+}
+/* 
+    ----------
+    Resistance
+    ----------
+*/
+.resistances {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.resistances > div {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.resistances > div:nth-of-type(2) {
+    margin-top: -2px;
+}
+.resistances > div:first-of-type {
+    border-bottom: 5px solid transparent;
+    border-image: url(../img/border.png) 10 stretch;
+    z-index: 1;
+    height: 20px;
+}
+.resistances > div > span {
+    display: flex;
+    width: 33.33%;
+    justify-content: center;
+}
+.resistances > div > div {
+    display: flex;
+    width: 100%;
+    height: 20px;
+}
+.resistances > div > div > button[type="button"] {
+    width: 66.66%;
+    padding: 0px;
+    display: flex;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+}
+.resistances > div > div > button > span {
+    width: 50%;
+}
+.resistances > div > div > input[type="number"] {
+    width: 33%;
+    text-align: center;
+    border: 0px;
+    border-bottom: 1px solid black;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    padding-left: 0px;
+    height: 20px;
+}
+/*
+    -------------------
+    All Action Modifier
+    -------------------
+*/
+.modactions {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.modactions > label {
+    width: 100%;
+    display: flex;
+    font-size: 12px;
+}
+.modactions > label:not(:last-of-type) {
+    margin-bottom: 5px;
+    align-content: center;
+}
+.modactions > label > span {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    width: 70%;
+    padding-left: 10%;
+}
+.modactions > label > input[type="number"] {
+    padding: 0px;
+    text-align: center;
+    border: 0px;
+    border-bottom: 1px solid black;
+    width: 25%;
+    height: 20px;
+}
+.modactions > label:nth-of-type(2) > input {
+    background: transparent;
+    border: 0px;
+}
+/*
+    --------
+    Movement      *Consistency Up from hereon
+    --------
+*/
+.movement {
+    display: flex;
+    flex-wrap: wrap;
+}
+.movement > label {
+    display : flex;
+    width: 100%;
+    height: 20px;
+    padding-right: 15px;
+    padding-left: 5px;
+}
+.movement > label:nth-of-type(5) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 5px;
+    padding-bottom: 24px;
+}
+.movement > label > span {
+    display: flex;
+    width: 60%;
+    font-size: 12px;
+    font-weight: normal;
+    align-items: center;
+    height: 20px;
+}
+.movement > label > input {
+    display: flex;
+    width: 40%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 12px;
+    border-bottom: 1px solid black;
+}
+.movement > label:nth-of-type(1) > input,
+.movement > label:nth-of-type(5) > input,
+.movement > label:nth-of-type(6) > input,
+.movement > label:nth-of-type(7) > input,
+.movement > label:nth-of-type(8) > input {
+    background: transparent;
+    border-bottom: 0px;
+}
+.movement > label:nth-of-type(5) > span,
+.movement > label:nth-of-type(6) > span,
+.movement > label:nth-of-type(7) > span,
+.movement > label:nth-of-type(8) > span {
+    font-weight: bold;
+}
+/*
+    -------------------
+    LP, Fatigue & Regen
+    -------------------
+*/
+.regeneration {
+    width: 35%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.lifepoints,
+.fatigue {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.lifepoints > label,
+.lifepoints > div > label,
+.fatigue > label,
+.fatigue > div > label,
+.regeneration > label {
+    display : flex;
+    width: 100%;
+    height: 20px;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.lifepoints > label > span,
+.lifepoints > div > label > span,
+.fatigue > label > span,
+.fatigue > div > label > span {
+    display: flex;
+    width: 55%;
+    padding-left: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    align-items: center;
+    height: 20px;
+    color: black;
+}
+.fatigue > h2 > label {
+    padding-top: 2px;
+    width: 0%;
+}
+.lifepoints > h2 > label {
+    width: 0%;
+}
+.lifepoints > h2 > label > input {
+    height: 18px;
+    opacity: 0;
+}
+.lifepoints:hover > h2 > label > input {
+    opacity: 1;
+}
+.lifepoints > h2 > label > input:checked {
+    opacity: 1;
+}
+.fatigue > h2 > label > input {
+    height: 18px;
+    opacity: 0;
+}
+.fatigue:hover > h2 > label >input {
+    opacity: 1;
+}
+.fatigue > h2 > label > input:checked {
+    opacity: 1;
+}
+.regeneration > label > span {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    padding-left: 5px;
+    font-size: 12px;
+    height: 20px;
+}
+.lifepoints > label > input,
+.lifepoints > div > label > input,
+.fatigue > label > input,
+.fatigue > div > label > input {
+    display: flex;
+    height: 20px;
+    width: 45%;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 12px;
+    border-bottom: 1px solid black;
+}
+.regeneration > label > input {
+    display: flex;
+    width: 40%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 12px;
+    border-bottom: 1px solid black;
+}
+.lifepoints > label:nth-of-type(3),
+.regeneration > label:nth-of-type(4),
+.fatigue > label:nth-of-type(3) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 5px;
+    padding-bottom: 24px;
+}
+.lifepoints > label:nth-of-type(2) > span,
+.lifepoints > label:nth-of-type(3) > span,
+.fatigue > label:nth-of-type(2) > span,
+.fatigue > label:nth-of-type(3) > span,
+.regeneration > label:nth-of-type(4) > span,
+.regeneration > label:nth-of-type(5) > span,
+.regeneration > label:nth-of-type(6) > span,
+.regeneration > label:nth-of-type(7) > span {
+    font-weight: bold;
+}
+.lifepoints > div > label:nth-of-type(1) > input,
+.lifepoints > div > label:nth-of-type(3) > input,
+.lifepoints > label:nth-of-type(2) > input,
+.fatigue > div > label:nth-of-type(1) > input,
+.fatigue > label:nth-of-type(2) > input,
+.regeneration > label:nth-of-type(1) > input,
+.regeneration > label:nth-of-type(4) > input,
+.regeneration > label:nth-of-type(5) > input,
+.regeneration > label:nth-of-type(6) > input,
+.regeneration > label:nth-of-type(7) > input {
+    background: transparent;
+    border-bottom: 0px;
+}
+/*
+    ----------------------
+    Attack, Block, & Dodge
+    ----------------------
+*/
+.atkdef {
+    flex-wrap: wrap;
+    width: 30%;
+}
+.atkdef > h2 > label {
+    width: 0%;
+    padding-top: 2px;
+}
+.atkdef > h2 > label > input {
+    height: 18px;
+    opacity: 0;
+}
+.atkdef:hover > h2 > label > input {
+    opacity: 1;
+}
+.atkdef > h2 > label > input:checked {
+    opacity: 1;
+}
+.atkdef > label,
+.atkdef > div > label {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    height: 20px;
+    justify-content: space-between;
+}
+.atkdef > label > span,
+.atkdef > div > label > span {
+    display: flex;
+    width: 55%;
+    font-size: 12px;
+    height: 20px;
+    align-items: center;
+    padding-left: 5px;
+    font-weight: normal;
+}
+.atkdef > label > input,
+.atkdef > div > label > input {
+    width: 45%;
+    text-align: center;
+    border: 0px;
+    border-bottom: 1px solid black;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    padding-left: 0px;
+    font-size: 12px;
+    height: 20px;
+}
+.atkdef > div > label:nth-of-type(2) > input,
+.atkdef > label:last-of-type > input {
+    background: transparent;
+    border-bottom: 0px;
+}
+.atkdef > label:last-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 5px;
+    padding-bottom: 24px;
+}
+.atkdef > label:first-of-type {
+    align-items: center;
+}
+.atkdef > label:last-of-type > span {
+    font-weight: bold;
+}
+.atkdef > button[type="button"] {
+    margin: 0px;
+    width: 100%;
+    height: 25px;
+    border-radius: 0px;
+    border: 0px;
+}
+.atkdef > div:last-of-type {
+    display: grid;
+    justify-content: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+/*
+    ----------
+    Initiative
+    ----------
+*/
+.initiative {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.initiative > div {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.initiative > button {
+    display: flex;
+    width: calc(100% - 26px);
+    justify-content: space-between;
+    height: 22px;
+    margin: 0px;
+    padding-right: 5%;
+    margin-top: -2px;
+    border: 0px;
+}
+.initiative > label > input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    margin-top: -2px;
+    margin-left: -5px;
+    opacity: 0;
+}
+.initiative:hover > label > input {
+    opacity: 1;
+}
+.initiative > label > input:checked {
+    opacity: 1;
+}
+.initiative > div {
+    display: flex;
+    width: calc(100% - 26px);
+    justify-content: space-between;
+}
+.initiative > div > input[type="text"] {
+    width: 100%;
+    font-size: 15px;
+    border: 0px;
+    border-bottom: 1px solid black;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    padding-left: 5px;
+    padding-top: 0px;
+    height: 20px;
+}
+.initiative > div > label {
+    display: flex;
+    width: calc(20% - 3px);
+    flex-wrap: wrap;
+}
+.initiative > div > label > span {
+    display: flex;
+    width: 100%;
+    font-size: 12px;
+    justify-content: center;
+    height: 20px;
+    margin-top: 3px;
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+}
+.initiative > div > label > input[type="number"] {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    font-size: 12px;
+    text-align: center;
+    height: 20px;
+    border: 0px;
+    border-bottom: 1px solid black;
+    margin-top: -2px;
+}
+.initiative > div > label:nth-of-type(3) > input,
+.initiative > div > label:nth-of-type(5) > input {
+    background: transparent;
+    border: 0px;
+}
+/*
+    ---------------------------
+    Advantages & DIs-advantages
+    ---------------------------
+*/
+.advdis {
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+}
+.advdis > div:nth-of-type(2) {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+}
+.advdis > div {
+    display: contents;
+    font-size: 14px;
+}
+.advdis > div > span:nth-of-type(2) {
+    padding-right: 15%;
+}
+.advdis > div > div {
+    width: 100%;
+}
+.advdis > div > div > div:nth-of-type(2) {
+    flex: 0 0 50px;
+}
+.advdis > div > div > div > input {
+    width: 15%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 12px;
+    border-bottom: 1px solid black;
+} 
+/*
+    ---------------------------
+    Secondary Abilities Drawing
+    ---------------------------
+*/
+.secondary > div > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.secondary > div > div:first-of-type {   
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    height: 20px;
+}
+.secondary > div > div > button {
+    height: 20px;
+    width: 50%;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+    border-radius: 0px;
+    padding-right: 5%;
+    border: 0px;
+}
+.secondary > div > div > button > span:nth-of-type(2) {
+    padding-right: 5%;
+}
+.secondary > div > div > input {
+    width: 18%;
+    height: 20px;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    font-size: 12px;
+    text-align: center;
+    border: 0px;
+    border-bottom: 1px solid black;
+    margin-left: 3px;
+}
+.secondary > div > div > input:nth-of-type(3) {
+    border: 0px;
+    background: transparent;
+}
+.secondary > div > div > input[type="checkbox"] {
+    height: 18px;
+    margin: 0px;
+    margin-bottom: 2px;
+    opacity: 0;
+}
+.secondary > div > div:hover > input[type="checkbox"] {
+    opacity: 1;
+}
+.secondary > div > div > input[type="checkbox"]:checked {
+    opacity: 1;
+}
+.secondary > div > div > span:first-of-type {
+    width: 20%;
+    text-align: center;
+}
+.secondary > div > div > span:nth-of-type(3),
+.secondary > div > div > span:nth-of-type(4),
+.secondary > div > div > span:nth-of-type(5),
+.secondary > div > div > span:nth-of-type(6) {
+    width: 8%;
+}
+.secondary > div > div > span:nth-of-type(7) {
+    width: 6%;
+    padding-left: 5px;
+}
+.secondary > div > .extend {
+    font-size: 12px;
+    height: 20px;
+    width: 100%;
+    justify-content: center;
+    padding-left: 15px;
+}
+.secondary > div > .extend  > span:first-of-type {
+    width: 10%;
+    text-align: end;
+}
+.secondary > div > .extend  > span:nth-of-type(2) {
+    width: 10%;
+    text-align: end;
+}
+.secondary > div > .extend  > span:last-of-type {
+    width: 22%;
+    text-align: end;
+    padding-left: 5%;
+}
+.secondary > div > .extend > input[type="number"] {
+    width: 12%;
+}
+.secondary > div > .extend > input[type="number"]:last-of-type {
+    width: 8%;
+}
+.secondary > div > .extend > label {
+    padding-left: 10%;
+}
+.secondary > div > .extend > label > input {
+    height: 18px;
+}
+.secondary > div > .extend > label {
+    padding-right: 15px;
+    padding-left: 15px;
+}
 /*
     ***************
     ---------------
@@ -754,6 +1544,226 @@ h4 {
 
 
 
+/*
+    ***************
+    ---------------
+        Psychic
+    ---------------
+    ***************
+*/
+/*
+    --------------
+    Psychic Layout
+    --------------
+*/
+.psychic > div {
+    flex-wrap: wrap;
+}
+.s3,
+.s4 {
+    display: flex;
+    justify-content: space-between;
+}
+.ppoint,
+.ppotential,
+.pproj,
+.pdisc {
+    width: 23.5%;
+}
+.s4 > div {
+    width: 48%;
+}
+
+
+
+
+
+
+
+
+
+
+/*
+    **************
+    --------------
+          Ki
+    --------------
+    **************
+*/
+/*
+    ---------
+    Ki Layout
+    ---------
+*/
+.ki {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+}
+.kiabilities {
+    width: 33.5%;
+}
+.s5 {
+    width: 63.5%;
+    flex-wrap: wrap;
+}
+.s5 > div {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+}
+.kipool {
+    width: 38%;
+}
+.mk {
+    width: 58%;
+}
+.arsmagnus {
+    width: 68%;
+}
+.limits {
+    width: 28%;
+}
+/*
+    ---------
+    Ki Abilities
+    ---------
+*/
+
+
+/*
+    --------
+    Ki Pools
+    --------
+*/
+
+
+/*
+    -------------
+    MK & Ki Seals
+    -------------
+*/
+
+
+/*
+    ----------
+    Ars Magnus
+    ----------
+*/
+
+
+/*
+    ------
+    Limits
+    ------
+*/
+
+
+/*
+    ------------
+    Martial Arts
+    ------------
+*/
+
+
+/*
+    -----------------
+    Ki Seal Creatures
+    -----------------
+*/
+
+
+/*
+    -------------
+    Ki techniques
+    -------------
+*/
+
+
+
+
+
+
+
+
+
+
+
+/*
+    ***************
+    ---------------
+    SETTINGS FORMAT
+    ---------------
+    ***************
+*/
+
+/*
+    ----------------
+    RollRange Drawing
+    ----------------
+*/
+.rollRange {
+    display: flex;
+    width: calc(30% - 2.5%);
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0px;
+}
+.rollRange > div {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.rollRange > div > label {
+    display: flex;
+    width: calc(50% - 2.5px);
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.rollRange > div > label > span {
+    display: flex;
+    width: 50px;
+    padding-left: 5px;
+    padding-right: 3px;
+    font-size: 11px;
+}
+.rollRange > div > label > input[type="number"] {
+    display: flex;
+    width: calc(100% - 55px);
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    flex-wrap: wrap;
+    text-align: center;
+    border-bottom: 1px solid black;
+    font-size: 11px;
+    height: 18px;
+}
+.rollRange > div > label > select {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% - 55px);
+    padding: 0px;
+    border: 0px;
+    border-bottom: 1px solid black;
+    height: 18px;
+    font-size: 11px;
+}
+
+/*
+    ****************
+    ----------------
+       Background
+    ----------------
+    ****************
+*/
+
+/*
+    -----
+    x
+    -----
+*/
 
 
 
@@ -782,6 +1792,70 @@ h4 {
     Default
     -----
 */
+.animabf .items-list {
+  list-style: none;
+  margin: 4px 0;
+  padding: 0;
+  overflow-y: auto;
+}
+.animabf .items-list .item {
+  line-height: 10px;
+  padding: 3px;
+  border-bottom: 1px solid #BBB;
+  align-items: center;
+}
+.animabf .items-list .item-name {
+  margin: 0;
+  display: flex;
+  font-size: 13px;
+  justify-content: space-between;
+}
+
+.animabf .items-list .item-header {
+  font-weight: bold;
+}
+.animabf .items-list .item .item-image {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 24px;
+  flex: 0 0 24px;
+  margin-right: 5px;
+}
+.animabf .items-list .item img {
+  display: block;
+}
+.animabf .items-list .item-controls {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 86px;
+  text-align: right;
+}
+/*
+    -----
+    Class
+    -----
+*/
+.classtab {
+    width: 100%;
+    flex-wrap: wrap;
+    font-size: 16px;
+}
+.classtab > div > label > span {
+    width: 20%
+}
+.classtab > div > label > input {
+    width: 30%
+}
+.classtab > label > span {
+    font-weight: normal;
+    width: 20%;
+    align-items: flex-end;
+    height: 19px;
+    padding-top: 4px;
+    position: sticky;
+}
+.classtab > label > input[type="number"] {
+    width: 30%;
+    align-items: end;
+}
 /*
     -----
     Spell
@@ -841,4 +1915,59 @@ h4 {
 }
 .spellheader > div > label > input {
   width: 78.3%;
+}
+
+
+
+
+/*
+    ***************
+    ---------------
+         Chat
+    ---------------
+    ***************
+*/
+.message-sender {
+    opacity: 0;
+}
+/*
+    --------
+    Sec Roll
+    --------
+*/
+.secondarychatmsg > div {
+    font-size: 17px;
+
+}
+.secondarychatmsg > div:nth-of-type(1) {
+    font-size: 23px;
+    display: flex;
+    justify-content: center;
+}
+.secondarychatmsg > div:nth-of-type(2) {
+    display: flex;
+    justify-content: space-between;
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.secondarychatmsg > div:nth-of-type(2) > span:nth-of-type(1) {
+    padding-left: 5%;
+}
+.secondarychatmsg > div:nth-of-type(2) > span:nth-of-type(2) {
+    padding-right: 15%;
+}
+.openRollMod,
+.fumblerollmod {
+    height: 25px;
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    width: 80%;
+    display: initial;
+    margin-left: 10%;
+    background-color: #b5b3a4;
 }

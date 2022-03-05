@@ -1,3 +1,1739 @@
-<div class="tab general">
-    <label> <span> GENERAL </span></label>
+﻿<div class="tab general">
+    <div>
+
+        <div>
+            <div class="characteristics">
+                <h2>Characteristics</h2>
+                <div>
+                    <span> Atr. </span>
+                    <span> Final </span>
+                    <span> Opposed </span>
+                </div>
+                <div>
+                    {{#if data.stats.Agility.status}}
+                        <div class="extend">
+                        <h3 class="physical"> Agility </h3>
+                        <label> 
+                            <span> Base </span> 
+                            <input type="number" name="data.stats.Agility.base" value="{{data.stats.Agility.base}}" data-dtype="number" />
+                        </label>
+                        <label> <span> Special </span> <input type="number" name="data.stats.Agility.spec" value="{{data.stats.Agility.spec}}" /> </label>
+                        <label> <span> Temp. </span> <input type="number" name="data.stats.Agility.temp" value="{{data.stats.Agility.temp}}" /> </label>
+                        <label> <span> Final </span> <input type="number" value="{{data.stats.Agility.final}}" readonly /> </label>
+                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Agility.mod}}" readonly /> </label>
+                        <label> <span> Opposed </span> <input type="number" name="data.stats.Agility.opposed" value="{{data.stats.Agility.opposed}}" /> </label>
+                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Agility.opposedfinal}}" readonly /> </label>
+                    </div><!-- <i class="fas fa-dice-d20"></i>-->
+                    {{else}}
+                        <div class="compact">
+                        <button type="button" id="Agility_charac" class="stat-final rollable" data-roll="d10+@stats.Agility.final" data-label="Agility">
+                            <span class="physical"> AGI </span> <span> {{data.stats.Agility.final}} </span>
+                        </button><!--
+                        --><button type="button" id="Agility_opposed" class="stat-final rollable" data-roll="d10+@stats.Agility.opposedfinal" data-label="Opposed Agility">
+                            <span> {{data.stats.Agility.opposedfinal}} </span>
+                        </button>
+                    </div>
+                    {{/if}}
+                    <label>
+                        <input type="checkbox" name="data.stats.Agility.status" data-dtype="boolean" {{checked data.stats.Agility.status}} />
+                    </label>
+                </div> <!--Agility-->
+
+                <div>
+                    {{#if data.stats.Constitution.status}}
+                        <div class="extend" id="con-extend">
+                        <h3 class="physical"> Constitution </h3>
+                        <label> 
+                            <span> Base </span> 
+                            <input type="number" name="data.stats.Constitution.base" value="{{data.stats.Constitution.base}}" data-dtype="number" />
+                        </label>
+                        <label> <span> Special </span> <input type="number" name="data.stats.Constitution.spec" value="{{data.stats.Constitution.spec}}" /> </label>
+                        <label> <span> Temp. </span> <input type="number" name="data.stats.Constitution.temp" value="{{data.stats.Constitution.temp}}" /> </label>
+                        <label> <span> Final </span> <input type="number" value="{{data.stats.Constitution.final}}" readonly /> </label>
+                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Constitution.mod}}" readonly /> </label>
+                        <label> <span> Opposed </span> <input type="number" name="data.stats.Constitution.opposed" value="{{data.stats.Constitution.opposed}}" /> </label>
+                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Constitution.opposedfinal}}" readonly /> </label>
+                    </div><!-- <i class="fas fa-dice-d20"></i>-->
+                    {{else}}
+                        <div class="compact" id="con-compact">
+                        <button type="button" id="Constitution_charac" class="stat-final rollable" data-roll="d10+@stats.Constitution.final" data-label="Constitution">
+                            <span class="physical"> CON </span> <span> {{data.stats.Constitution.final}} </span>
+                        </button><!--
+                        --><button type="button" id="Constitution_opposed" class="stat-final rollable" data-roll="d10+@stats.Constitution.opposedfinal" data-label="Opposed Constitution">
+                            <span> {{data.stats.Constitution.opposedfinal}} </span>
+                        </button>
+                    </div>
+                    {{/if}}
+                    <label>
+                        <input type="checkbox" name="data.stats.Constitution.status" data-dtype="boolean" {{checked data.stats.Constitution.status}} />
+                    </label>
+                </div> <!--Constitution-->
+                <div>
+                    {{#if data.stats.Strength.status}}
+                        <div class="extend" id="str-extend">
+                        <h3 class="physical"> Strength </h3>
+                        <label> 
+                            <span> Base </span> 
+                            <input type="number" name="data.stats.Strength.base" value="{{data.stats.Strength.base}}" data-dtype="number" />
+                        </label>
+                        <label> <span> Special </span> <input type="number" name="data.stats.Strength.spec" value="{{data.stats.Strength.spec}}" /> </label>
+                        <label> <span> Temp. </span> <input type="number" name="data.stats.Strength.temp" value="{{data.stats.Strength.temp}}" /> </label>
+                        <label> <span> Final </span> <input type="number" value="{{data.stats.Strength.final}}" readonly /> </label>
+                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Strength.mod}}" readonly /> </label>
+                        <label> <span> Opposed </span> <input type="number" name="data.stats.Strength.opposed" value="{{data.stats.Strength.opposed}}" /> </label>
+                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Strength.opposedfinal}}" readonly /> </label>
+                    </div><!-- <i class="fas fa-dice-d20"></i>-->
+                    {{else}}
+                        <div class="compact" id="str-compact">
+                        <button type="button" id="Strength_charac" class="stat-final rollable" data-roll="d10+@stats.Strength.final" data-label="Strength">
+                            <span class="physical"> STR </span> <span> {{data.stats.Strength.final}} </span>
+                        </button><!--
+                        --><button type="button" id="Strength_opposed" class="stat-final rollable" data-roll="d10+@stats.Strength.opposedfinal" data-label="Opposed Strength">
+                            <span> {{data.stats.Strength.opposedfinal}} </span>
+                        </button>
+                    </div>
+                    {{/if}}
+                    <label>
+                        <input type="checkbox" name="data.stats.Strength.status" data-dtype="boolean" {{checked data.stats.Strength.status}} />
+                    </label>
+                </div> <!--Strength-->
+                <div>
+                    {{#if data.stats.Dexterity.status}}
+                        <div class="extend" id="dex-extend">
+                        <h3 class="physical"> Dexterity </h3>
+                        <label> 
+                            <span> Base </span> 
+                            <input type="number" name="data.stats.Dexterity.base" value="{{data.stats.Dexterity.base}}" data-dtype="number" />
+                        </label>
+                        <label> <span> Special </span> <input type="number" name="data.stats.Dexterity.spec" value="{{data.stats.Dexterity.spec}}" /> </label>
+                        <label> <span> Temp. </span> <input type="number" name="data.stats.Dexterity.temp" value="{{data.stats.Dexterity.temp}}" /> </label>
+                        <label> <span> Final </span> <input type="number" value="{{data.stats.Dexterity.final}}" readonly /> </label>
+                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Dexterity.mod}}" readonly /> </label>
+                        <label> <span> Opposed </span> <input type="number" name="data.stats.Dexterity.opposed" value="{{data.stats.Dexterity.opposed}}" /> </label>
+                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Dexterity.opposedfinal}}" readonly /> </label>
+                    </div><!-- <i class="fas fa-dice-d20"></i>-->
+                    {{else}}
+                        <div class="compact" id="dex-compact">
+                        <button type="button" id="Dexterity_charac" class="stat-final rollable" data-roll="d10+@stats.Dexterity.final" data-label="Dexterity">
+                            <span class="physical"> DEX </span> <span> {{data.stats.Dexterity.final}} </span>
+                        </button><!--
+                        --><button type="button" id="Dexterity_opposed" class="stat-final rollable" data-roll="d10+@stats.Dexterity.opposedfinal" data-label="Opposed Dexterity">
+                            <span> {{data.stats.Dexterity.opposedfinal}} </span>
+                        </button>
+                    </div>
+                    {{/if}}
+                    <label>
+                        <input type="checkbox" name="data.stats.Dexterity.status" data-dtype="boolean" {{checked data.stats.Dexterity.status}} />
+                    </label>
+                </div> <!--Dexterity-->
+                <div>
+                    {{#if data.stats.Intelligence.status}}
+                        <div class="extend" id="int-extend">
+                        <h3 class="mental"> Intelligence </h3>
+                        <label> 
+                            <span> Base </span> 
+                            <input type="number" name="data.stats.Intelligence.base" value="{{data.stats.Intelligence.base}}" data-dtype="number" />
+                        </label>
+                        <label> <span> Special </span> <input type="number" name="data.stats.Intelligence.spec" value="{{data.stats.Intelligence.spec}}" /> </label>
+                        <label> <span> Temp. </span> <input type="number" name="data.stats.Intelligence.temp" value="{{data.stats.Intelligence.temp}}" /> </label>
+                        <label> <span> Final </span> <input type="number" value="{{data.stats.Intelligence.final}}" readonly /> </label>
+                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Intelligence.mod}}" readonly /> </label>
+                        <label> <span> Opposed </span> <input type="number" name="data.stats.Intelligence.opposed" value="{{data.stats.Intelligence.opposed}}" /> </label>
+                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Intelligence.opposedfinal}}" readonly /> </label>
+                    </div><!-- <i class="fas fa-dice-d20"></i>-->
+                    {{else}}
+                        <div class="compact" id="int-compact">
+                        <button type="button" id="Intelligence_charac" class="stat-final rollable" data-roll="d10+@stats.Intelligence.final" data-label="Intelligence">
+                            <span class="mental"> INT </span> <span> {{data.stats.Intelligence.final}} </span>
+                        </button><!--
+                        --><button type="button" id="Intelligence_opposed" class="stat-final rollable" data-roll="d10+@stats.Intelligence.opposedfinal" data-label="Opposed Intelligence">
+                            <span> {{data.stats.Intelligence.opposedfinal}} </span>
+                        </button>
+                    </div>
+                    {{/if}}
+                    <label>
+                        <input type="checkbox" name="data.stats.Intelligence.status" data-dtype="boolean" {{checked data.stats.Intelligence.status}} />
+                    </label>
+                </div> <!--Intelligence-->
+                <div>
+                    {{#if data.stats.Perception.status}}
+                        <div class="extend" id="per-extend">
+                        <h3 class="mental"> Perception </h3>
+                        <label> 
+                            <span> Base </span> 
+                            <input type="number" name="data.stats.Perception.base" value="{{data.stats.Perception.base}}" data-dtype="number" />
+                        </label>
+                        <label> <span> Special </span> <input type="number" name="data.stats.Perception.spec" value="{{data.stats.Perception.spec}}" /> </label>
+                        <label> <span> Temp. </span> <input type="number" name="data.stats.Perception.temp" value="{{data.stats.Perception.temp}}" /> </label>
+                        <label> <span> Final </span> <input type="number" value="{{data.stats.Perception.final}}" readonly /> </label>
+                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Perception.mod}}" readonly /> </label>
+                        <label> <span> Opposed </span> <input type="number" name="data.stats.Perception.opposed" value="{{data.stats.Perception.opposed}}" /> </label>
+                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Perception.opposedfinal}}" readonly /> </label>
+                    </div><!-- <i class="fas fa-dice-d20"></i>-->
+                    {{else}}
+                        <div class="compact" id="per-compact">
+                        <button type="button" id="Perception_charac" class="stat-final rollable" data-roll="d10+@stats.Perception.final" data-label="Perception">
+                            <span class="mental"> PER </span> <span> {{data.stats.Perception.final}} </span>
+                        </button><!--
+                        --><button type="button" id="Perception_opposed" class="stat-final rollable" data-roll="d10+@stats.Perception.opposedfinal" data-label="Opposed Perception">
+                            <span> {{data.stats.Perception.opposedfinal}} </span>
+                        </button>
+                    </div>
+                    {{/if}}
+                    <label>
+                        <input type="checkbox" name="data.stats.Perception.status" data-dtype="boolean" {{checked data.stats.Perception.status}} />
+                    </label>
+                </div> <!--Perception-->
+                <div>
+                    {{#if data.stats.Power.status}}
+                        <div class="extend" id="pow-extend">
+                        <h3 class="mental"> Power </h3>
+                        <label> 
+                            <span> Base </span> 
+                            <input type="number" name="data.stats.Power.base" value="{{data.stats.Power.base}}" data-dtype="number" />
+                        </label>
+                        <label> <span> Special </span> <input type="number" name="data.stats.Power.spec" value="{{data.stats.Power.spec}}" /> </label>
+                        <label> <span> Temp. </span> <input type="number" name="data.stats.Power.temp" value="{{data.stats.Power.temp}}" /> </label>
+                        <label> <span> Final </span> <input type="number" value="{{data.stats.Power.final}}" readonly /> </label>
+                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Power.mod}}" readonly /> </label>
+                        <label> <span> Opposed </span> <input type="number" name="data.stats.Power.opposed" value="{{data.stats.Power.opposed}}" /> </label>
+                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Power.opposedfinal}}" readonly /> </label>
+                    </div><!-- <i class="fas fa-dice-d20"></i>-->
+                    {{else}}
+                        <div class="compact" id="pow-compact">
+                        <button type="button" id="Power_charac" class="stat-final rollable" data-roll="d10+@stats.Power.final" data-label="Power">
+                            <span class="mental"> POW </span> <span> {{data.stats.Power.final}} </span>
+                        </button><!--
+                        --><button type="button" id="Power_opposed" class="stat-final rollable" data-roll="d10+@stats.Power.opposedfinal" data-label="Opposed Power">
+                            <span> {{data.stats.Power.opposedfinal}} </span>
+                        </button>
+                    </div>
+                    {{/if}}
+                    <label>
+                        <input type="checkbox" name="data.stats.Power.status" data-dtype="boolean" {{checked data.stats.Power.status}} />
+                    </label>
+                </div> <!--Power-->
+                <div>
+                    {{#if data.stats.Willpower.status}}
+                        <div class="extend" id="wp-extend">
+                        <h3 class="mental"> Willpower </h3>
+                        <label> 
+                            <span> Base </span> 
+                            <input type="number" name="data.stats.Willpower.base" value="{{data.stats.Willpower.base}}" data-dtype="number" />
+                        </label>
+                        <label> <span> Special </span> <input type="number" name="data.stats.Willpower.spec" value="{{data.stats.Willpower.spec}}" /> </label>
+                        <label> <span> Temp. </span> <input type="number" name="data.stats.Willpower.temp" value="{{data.stats.Willpower.temp}}" /> </label>
+                        <label> <span> Final </span> <input type="number" value="{{data.stats.Willpower.final}}" readonly /> </label>
+                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Willpower.mod}}" readonly /> </label>
+                        <label> <span> Opposed </span> <input type="number" name="data.stats.Willpower.opposed" value="{{data.stats.Willpower.opposed}}" /> </label>
+                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Willpower.opposedfinal}}" readonly /> </label>
+                    </div><!-- <i class="fas fa-dice-d20"></i>-->
+                    {{else}}
+                        <div class="compact" id="wp-compact">
+                        <button type="button" id="Willpower_charac" class="stat-final rollable" data-roll="d10+@stats.Willpower.final" data-label="Willpower">
+                            <span class="mental"> WP </span> <span> {{data.stats.Willpower.final}} </span>
+                        </button><!--
+                        --><button type="button" id="Willpower_opposed" class="stat-final rollable" data-roll="d10+@stats.Willpower.opposedfinal" data-label="Opposed Willpower">
+                            <span> {{data.stats.Willpower.opposedfinal}} </span>
+                        </button>
+                    </div>
+                    {{/if}}
+                    <label>
+                        <input type="checkbox" name="data.stats.Willpower.status" data-dtype="boolean" {{checked data.stats.Willpower.status}} />
+                    </label>
+                </div> <!--Willpower-->
+            </div>
+        </div> <!--Characteristics-->
+
+        <div>
+            <div class="resistances">
+                <h2> Resistances </h2>
+                <div>
+                    <span> Type </span>
+                    <span> Final </span>
+                    <span> Special </span>
+                </div>
+                {{#each data.resistances as |res key|}}
+                <div>
+                    <div>
+                        <button type="button" id="physical_resist" class="phys-resist rollable" data-roll="d100+@resistances.{{key}}.final" data-label="{{key}} Resist">
+                            <span> {{res.short}} </span>
+                            <span> {{res.final}} </span>
+                        </button>
+                        <input type="number" name="data.resistances.{{key}}.mod" value="{{res.mod}}" />
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            <div class="modactions">
+                <label> <span> All Action Modifier </span> <input type="number" name="data.aam" value="{{data.aam}}" /> </label>
+                <label> <span> Number of Actions </span> <input type="number" name="data.actionumber" value="{{data.actionnumber}}" readonly /> </label>
+            </div>
+        </div> <!--Resistances-->
+
+        <div>
+            <div class="movement">
+                <h2> Movement </h2>
+                <label> <span> Base </span> <input type="number" name="data.stats.Agility.final" value="{{data.stats.Agility.final}}" readonly /> </label>
+                <label> <span> Pen. </span> <input type="number" name="data.movement.pen" value="{{data.movement.pen}}" /> </label>
+                <label> <span> Spec. </span> <input type="number" name="data.movement.spec" value="{{data.movement.spec}}" /> </label>
+                <label> <span> Temp. </span> <input type="number" name="data.movement.temp" value="{{data.movement.temp}}" /> </label>
+                <label> <span> Final </span> <input type="number" name="data.finalmove" value="{{data.finalmove}}" readonly /> </label>
+                <label> <span> Full </span> <input type="text" name="data.fullmove" value="{{data.fullmove}}" readonly /> </label>
+                <label> <span> 1/4 Move </span> <input type="text" name="data.fourthmove" value="{{data.fourthmove}}" readonly /> </label>
+                <label> <span> Running </span> <input type="text" name="data.runningmove" value="{{data.runningmove}}" readonly /> </label>
+            </div>
+        </div> <!--Movement-->
+
+        <div>
+            <div class="lifepoints">
+                <h2> LP                 
+                    <label class="lp-box">
+                        <input type="checkbox" name="data.lifepoints.status" data-dtype="boolean" {{checked data.lifepoints.status}} />
+                    </label>
+                </h2>
+                {{#if data.lifepoints.status}}
+                <div>
+                    <label> <span> Base </span> <input type="number" name="data.lpbase" value="{{data.lpbase}}" readonly/> </label>
+                    <label> <span> Mult. </span> <input type="number" name="data.lifepoints.multiple" value="{{data.lifepoints.multiple}}" /> </label>
+                    <label> <span> Class </span> <input type="number" name="data.lpbonus" value="{{data.lpbonus}}" readonly/> </label>
+                    <label> <span> Spec. </span> <input type="number" name="data.lifepoints.spec" value="{{data.lifepoints.spec}}" /> </label>
+                </div>
+                {{/if}}
+                <label> <span> Temp. </span> <input type="number" name="data.lifepoints.temp" value="{{data.lifepoints.temp}}" /> </label>
+                <label> <span> Final </span> <input type="number" name="data.lpfinal" value="{{data.lpfinal}}" readonly/> </label>
+                <label> <span> Actual </span> <input type="number" name="data.lifepoints.actual" value="{{data.lifepoints.actual}}" /> </label>
+            </div>
+
+            <div class="fatigue">
+                <h2> Fatigue 
+                    <label class="fatigue-box">
+                        <input type="checkbox" name="data.fatigue.status" data-dtype="boolean" {{checked data.fatigue.status}} />
+                    </label>
+                </h2>
+                {{#if data.fatigue.status}}
+                <div>
+                    <label> <span> Base </span> <input type="number" name="data.fatiguebase" value="{{data.fatiguebase}}" readonly/> </label>
+                    <label> <span> Spec. </span> <input type="number" name="data.fatigue.spec" value="{{data.fatigue.spec}}" /> </label>
+                </div>
+                {{/if}}
+                <label> <span> Temp. </span> <input type="number" name="data.fatigue.temp" value="{{data.fatigue.temp}}" /> </label>
+                <label> <span> Final </span> <input type="number" name="data.fatiguefinal" value="{{data.fatiguefinal}}" readonly/> </label>
+                <label> <span> Actual </span> <input type="number" name="data.fatigue.actual" value="{{data.fatigue.actual}}" /> </label>
+            </div>
+        </div> <!--Lifepoints & Fatigue-->
+
+        <div class="regeneration">
+            <h2> Regen. </h2>
+            <label> <span> Base </span> <input type="number" name="data.regenbase" value="{{data.regenbase}}" readonly /> </label>
+            <label> <span> Spec </span> <input type="number" name="data.regeneration.spec" value="{{data.regeneration.spec}}" /> </label>
+            <label> <span> Temp. </span> <input type="number" name="data.regeneration.temp" value="{{data.regeneration.temp}}" /> </label>
+            <label> <span> Final </span> <input type="number" name="data.regenfinal" value="{{data.regenfinal}}" readonly /> </label>
+            <label> <span> Resting </span> <input type="text" name="data.resting" value="{{data.resting}}" readonly /> </label>
+            <label> <span> No Rest </span> <input type="text" name="data.notresting" value="{{data.notresting}}" readonly /> </label>
+            <label> <span> Redu.Penalty </span> <input type="text" name="data.redpenalty" value="{{data.redpenalty}}" readonly /> </label>
+        </div> <!--Regeneration-->
+
+        <div class="atkdef">
+            <h2> Attack
+                <label class="attack-box">
+                    <input type="checkbox" name="data.attack.status" data-dtype="boolean" {{checked data.attack.status}} />
+                </label>
+            </h2>
+            {{#if data.attack.status}}
+            <div>
+                <label> <span> Base </span> <input type="number" name="data.combatstats.atkbase" value="{{data.combatstats.atkbase}}" /> </label>
+                <label> <span> Class </span> <input type="number" name="data.attackbonus" value="{{data.attackbonus}}" readonly /> </label>
+                <label> <span> Special </span> <input type="number" name="data.combatstats.atkspecial" value="{{data.combatstats.atkspecial}}" /> </label>
+            </div>
+            <div>
+                <label>
+                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                </label>
+            </div>
+            {{/if}}
+            <label> <span> Temp. </span> <input type="number" name="data.combatstats.atktemp" value="{{data.combatstats.atktemp}}" /> </label>
+            <label> <span> Final </span> <input type="number" name="data.atkfinal" value="{{data.atkfinal}}" readonly /> </label>
+            <button type="button" id="atkroll" class="combat rollable" data-roll="d100+@atkfinal" data-label="Attack">
+                <span> <i class="fas fa-dice-d20"></i> </span>
+            </button>
+        </div> <!--Attack-->
+
+        <div class="atkdef">
+            <h2> Block
+                <label class="block-box">
+                    <input type="checkbox" name="data.block.status" data-dtype="boolean" {{checked data.block.status}} />
+                </label>
+            </h2>
+            {{#if data.block.status}}
+            <div>
+                <label> <span> Base </span> <input type="number" name="data.combatstats.blkbase" value="{{data.combatstats.blkbase}}" /> </label>
+                <label> <span> Class </span> <input type="number" name="data.blockbonus" value="{{data.blockbonus}}" readonly /> </label>
+                <label> <span> Special </span> <input type="number" name="data.combatstats.blkspecial" value="{{data.combatstats.blkspecial}}" /> </label>
+            </div>
+            <div>
+                <label>
+                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                </label>
+            </div>
+            {{/if}}
+            <label> <span> Temp. </span> <input type="number" name="data.combatstats.blktemp" value="{{data.combatstats.blktemp}}" /> </label>
+            <label> <span> Final </span> <input type="number" name="data.blkfinal" value="{{data.blkfinal}}" readonly /> </label>
+            <button type="button" id="blkroll" class="combat rollable" data-roll="d100+@blkfinal" data-label="Block">
+                <span> <i class="fas fa-dice-d20"></i> </span> 
+            </button>
+        </div> <!--Block-->
+
+        <div class="atkdef">
+            <h2> Dodge
+                <label class="dodge-box">
+                    <input type="checkbox" name="data.dodge.status" data-dtype="boolean" {{checked data.dodge.status}} />
+                </label>
+            </h2>
+            {{#if data.dodge.status}}
+            <div>
+                <label> <span> Base </span> <input type="number" name="data.combatstats.dodbase" value="{{data.combatstats.dodbase}}" /> </label>
+                <label> <span> Class </span> <input type="number" name="data.dodgebonus" value="{{data.dodgebonus}}" readonly /> </label>
+                <label> <span> Special </span> <input type="number" name="data.combatstats.dodspecial" value="{{data.combatstats.dodspecial}}" /> </label>
+            </div>
+            <div>
+                <label>
+                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                </label>
+            </div>
+            {{/if}}
+            <label> <span> Temp. </span> <input type="number" name="data.combatstats.dodtemp" value="{{data.combatstats.dodtemp}}" /> </label>
+            <label> <span> Final </span> <input type="number" name="data.dodfinal" value="{{data.dodfinal}}" readonly /> </label>
+            <button type="button" id="dodroll" class="combat rollable" data-roll="d100+@dodfinal" data-label="Dodge">
+                <span> <i class="fas fa-dice-d20"> </i> </span>
+            </button>
+        </div> <!--Dodge-->
+
+        <div class="initiative">
+            <h2> Initiative </h2>
+            {{#if data.initiative.status}}
+            <div>
+                <input type="text" name="data.initiative.name" value="{{data.initiative.name}}" />
+                <label> <span> Armor </span> <input type="number" name="1" value="1" readonly /> </label>
+                <label> <span> Weapon </span> <input type="number" name="2" value="2" readonly /> </label>
+                <label> <span> Class </span> <input type="number" name="data.inibonus" value="{{data.inibonus}}" readonly /> </label>
+                <label> <span> Spec. </span> <input type="number" name="data.initiative.spec" value="{{data.initiative.spec}}" /> </label>
+                <label> <span> Final </span> <input type="number" name="4" value="4" readonly /> </label>
+            </div>
+            {{else}}
+            <button type="button">
+                <span> {{data.initiative.name}} </span>
+                <span> 4 </span>
+            </button>
+            {{/if}}
+            <label class="ini-box">
+                <input type="checkbox" name="data.initiative.status" data-dtype="boolean" {{checked data.initiative.status}} />
+            </label>
+        </div><!--Initiative-->
+
+        <div class="advdis">
+            <h2> Advantages </h2>
+            <div>
+                <span> Name </span>
+                <span> Cost </span>
+            </div>
+            <div class="items-list">
+                {{#each advantages as |advantage id|}}
+                <div class="advantage-item item flexrow" data-item-id="{{advantage._id}}">
+                        <input class="advantage-name inline-edit" data-field="name" type="text" value="{{advantage.name}}" placeholder="Name" />
+                        <input type="number" value="{{data.adv.cost}}" readonly />
+                    <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            <a class="item-control item-create" title="Create item" data-type="advantage"><i class="fas fa-plus"></i> Add item</a>
+        </div><!--Advantages-->
+
+        <div class="advdis">
+            <h2> Disadvantages </h2>
+            <div>
+                <span> Name </span>
+                <span> Benefit </span>
+            </div>
+            <div class="items-list">
+                {{#each disadvantages as |disadvantage id|}}
+                <div class="disadvantage-item item flexrow" data-item-id="{{disadvantage._id}}">
+                        <h4>{{disadvantage.name}}</h4>
+                        <input type="number" value="{{data.disadv.benefit}}" readonly />
+                    <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            <a class="item-control item-create" title="Create item" data-type="disadvantage"><i class="fas fa-plus"></i> Add item</a>
+        </div><!--Disadvantages-->
+    </div>
+
+    <div class="secondary">
+        <h2> Secondary Abilities </h2>
+        <div>
+            <div>
+                <span> Athletics </span>
+                <span> Final </span>
+                <span> Temp. </span>
+                <span> Spec </span>
+                <span> Class </span>
+                <span> Base </span>
+                <span> Attr. </span>
+                <input type="checkbox" name="data.athletics.status" data-dtype="boolean" {{checked data.athletics.status}} />
+            </div>
+            {{#if data.athletics.status}}
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.acrofinal}}" data-label="Acrobatics" >
+                    <span class="armorpenalty"> Acrobatics </span>
+                    <span> {{data.acrofinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.acrobatics.temp" value="{{data.secondary.acrobatics.temp}}" />
+                <input type="number" name="data.secondary.acrobatics.spec" value="{{data.secondary.acrobatics.spec}}" />
+                <input type="number" name="data.acrobaticsbonus" value="{{data.acrobaticsbonus}}" readonly />
+                <input type="number" name="data.secondary.acrobatics.base" value="{{data.secondary.acrobatics.base}}" />
+                <span class="physical"> AGI </span>
+                <input type="checkbox" name="data.acrobatics.status" data-dtype="boolean" {{checked data.acrobatics.status}} />
+            </div>
+            {{#if data.acrobatics.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.acrobatics.nat" value="{{data.secondary.acrobatics.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.acrobatics.natural" value="{{data.secondary.acrobatics.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.acrobaticsnatfinal" value="{{data.acrobaticsnatfinal}}" readonly />
+                <label>
+                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.athleticismfinal}}" data-label="Athleticism">
+                    <span class="armorpenalty"> Athleticism </span>
+                    <span> {{data.athleticismfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.athleticism.temp" value="{{data.secondary.athleticism.temp}}" />
+                <input type="number" name="data.secondary.athleticism.spec" value="{{data.secondary.athleticism.spec}}" />
+                <input type="number" name="data.athleticismbonus" value="{{data.athleticismbonus}}" readonly />
+                <input type="number" name="data.secondary.athleticism.base" value="{{data.secondary.athleticism.base}}" />
+                <span class="physical"> AGI </span>
+                <input type="checkbox" name="data.athleticism.status" data-dtype="boolean" {{checked data.athleticism.status}} />
+            </div>
+            {{#if data.athleticism.status}}
+            <div class="extend"> 
+                <span> # Nat. </span> <input type="number" name="data.secondary.athleticism.nat" value="{{data.secondary.athleticism.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.athleticism.natural" value="{{data.secondary.athleticism.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.athleticismnatfinal" value="{{data.athleticismnatfinal}}" readonly />
+                <label>
+                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.climbfinal}}" data-label="Climb">
+                    <span class="armorpenalty"> Climb </span>
+                    <span> {{data.climbfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.climb.temp" value="{{data.secondary.climb.temp}}" />
+                <input type="number" name="data.secondary.climb.spec" value="{{data.secondary.climb.spec}}" />
+                <input type="number" name="data.climbbonus" value="{{data.climbbonus}}" readonly />
+                <input type="number" name="data.secondary.climb.base" value="{{data.secondary.climb.base}}" />
+                <span class="physical"> AGI </span>
+                <input type="checkbox" name="data.climb.status" data-dtype="boolean" {{checked data.climb.status}} />
+            </div>
+            {{#if data.climb.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.climb.nat" value="{{data.secondary.climb.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.climb.natural" value="{{data.secondary.climb.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.climbnatfinal" value="{{data.climbnatfinal}}" readonly />
+                <label>
+                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.jumpfinal}}" data-label="Jump">
+                    <span class="armorpenalty"> Jump </span>
+                    <span> {{data.jumpfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.jump.temp" value="{{data.secondary.jump.temp}}" />
+                <input type="number" name="data.secondary.jump.spec" value="{{data.secondary.jump.spec}}" />
+                <input type="number" name="data.jumpbonus" value="{{data.jumpbonus}}" readonly />
+                <input type="number" name="data.secondary.jump.base" value="{{data.secondary.jump.base}}" />
+                <span class="physical"> STR </span>
+                <input type="checkbox" name="data.jump.status" data-dtype="boolean" {{checked data.jump.status}} />
+            </div>
+            {{#if data.jump.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.jump.nat" value="{{data.secondary.jump.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.jump.natural" value="{{data.secondary.jump.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.jumpnatfinal" value="{{data.jumpnatfinal}}" readonly />
+                <label>
+                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.ridefinal}}" data-label="Ride">
+                    <span class="armorpenalty"> Ride </span>
+                    <span> {{data.ridefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.ride.temp" value="{{data.secondary.ride.temp}}" />
+                <input type="number" name="data.secondary.ride.spec" value="{{data.secondary.ride.spec}}" />
+                <input type="number" name="data.ridebonus" value="{{data.ridebonus}}" readonly />
+                <input type="number" name="data.secondary.ride.base" value="{{data.secondary.ride.base}}" />
+                <span class="physical"> AGI </span>
+                <input type="checkbox" name="data.ride.status" data-dtype="boolean" {{checked data.ride.status}} />
+            </div>
+            {{#if data.ride.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.ride.nat" value="{{data.secondary.ride.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.ride.natural" value="{{data.secondary.ride.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.ridenatfinal" value="{{data.ridenatfinal}}" readonly />
+                <label>
+                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.swimfinal}}" data-label="Swim">
+                    <span class="armorpenalty"> Swim </span>
+                    <span> {{data.swimfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.swim.temp" value="{{data.secondary.swim.temp}}" />
+                <input type="number" name="data.secondary.swim.spec" value="{{data.secondary.swim.spec}}" />
+                <input type="number" name="data.swimbonus" value="{{data.swimbonus}}" readonly />
+                <input type="number" name="data.secondary.swim.base" value="{{data.secondary.swim.base}}" />
+                <span class="physical"> AGI </span>
+                <input type="checkbox" name="data.swim.status" data-dtype="boolean" {{checked data.swim.status}} />
+            </div>
+            {{#if data.swim.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.swim.nat" value="{{data.secondary.swim.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.swim.natural" value="{{data.secondary.swim.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.swimnatfinal" value="{{data.swimnatfinal}}" readonly />
+                <label>
+                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                </label>
+            </div>
+            {{/if}}
+
+            {{/if}}
+
+        </div><!--Athletics Fields-->
+
+        <div>
+            <div>
+                <span> Social </span>
+                <span> Final </span>
+                <span> Temp. </span>
+                <span> Spec </span>
+                <span> Class </span>
+                <span> Base </span>
+                <span> Attr. </span>
+                <input type="checkbox" name="data.social.status" data-dtype="boolean" {{checked data.social.status}} />
+            </div>
+            {{#if data.social.status}}
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.etiquettefinal}}" data-label="Etiquette">
+                    <span> Etiquette </span>
+                    <span> {{data.etiquettefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.etiquette.temp" value="{{data.secondary.etiquette.temp}}" />
+                <input type="number" name="data.secondary.etiquette.spec" value="{{data.secondary.etiquette.spec}}" />
+                <input type="number" name="data.etiquettebonus" value="{{data.etiquettebonus}}" readonly />
+                <input type="number" name="data.secondary.etiquette.base" value="{{data.secondary.etiquette.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.etiquette.status" data-dtype="boolean" {{checked data.etiquette.status}} />
+            </div>
+            {{#if data.etiquette.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.etiquette.nat" value="{{data.secondary.etiquette.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.etiquette.natural" value="{{data.secondary.etiquette.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.etiquettenatfinal" value="{{data.etiquettenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.etiquettemastery.status" data-dtype="boolean" {{checked data.etiquettemastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button"  class="rollSecondary" data-ability="{{data.intimidatefinal}}" data-label="Intimidate">
+                    <span> Intimidate </span>
+                    <span> {{data.intimidatefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.intimidate.temp" value="{{data.secondary.intimidate.temp}}" />
+                <input type="number" name="data.secondary.intimidate.spec" value="{{data.secondary.intimidate.spec}}" />
+                <input type="number" name="data.intimidatebonus" value="{{data.intimidatebonus}}" readonly />
+                <input type="number" name="data.secondary.intimidate.base" value="{{data.secondary.intimidate.base}}" />
+                <span class="mental"> WP </span>
+                <input type="checkbox" name="data.intimidate.status" data-dtype="boolean" {{checked data.intimidate.status}} />
+            </div>
+            {{#if data.intimidate.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.intimidate.nat" value="{{data.secondary.intimidate.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.intimidate.natural" value="{{data.secondary.intimidate.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.intimidatenatfinal" value="{{data.intimidatenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.intimidatemastery.status" data-dtype="boolean" {{checked data.intimidatemastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.leadershipfinal}}" data-label="Leadership">
+                    <span> Leadership </span>
+                    <span> {{data.leadershipfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.leadership.temp" value="{{data.secondary.leadership.temp}}" />
+                <input type="number" name="data.secondary.leadership.spec" value="{{data.secondary.leadership.spec}}" />
+                <input type="number" name="data.leadershipbonus" value="{{data.leadershipbonus}}" readonly />
+                <input type="number" name="data.secondary.leadership.base" value="{{data.secondary.leadership.base}}" />
+                <span class="mental"> POW </span>
+                <input type="checkbox" name="data.leadership.status" data-dtype="boolean" {{checked data.leadership.status}} />
+            </div>
+            {{#if data.leadership.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.leadership.nat" value="{{data.secondary.leadership.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.leadership.natural" value="{{data.secondary.leadership.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.leadershipnatfinal" value="{{data.leadershipnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.leadershipmastery.status" data-dtype="boolean" {{checked data.leadershipmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.persuasionfinal}}" data-label="Persuasion">
+                    <span> Persuasion </span>
+                    <span> {{data.persuasionfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.persuasion.temp" value="{{data.secondary.persuasion.temp}}" />
+                <input type="number" name="data.secondary.persuasion.spec" value="{{data.secondary.persuasion.spec}}" />
+                <input type="number" name="data.persuasionbonus" value="{{data.persuasionbonus}}" readonly />
+                <input type="number" name="data.secondary.persuasion.base" value="{{data.secondary.persuasion.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.persuasion.status" data-dtype="boolean" {{checked data.persuasion.status}} />
+            </div>
+            {{#if data.persuasion.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.persuasion.nat" value="{{data.secondary.persuasion.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.persuasion.natural" value="{{data.secondary.persuasion.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.persuasionnatfinal" value="{{data.persuasionnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.persuasionmastery.status" data-dtype="boolean" {{checked data.persuasionmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.streetwisefinal}}" data-label="Streetwise">
+                    <span> Streetwise </span>
+                    <span> {{data.streetwisefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.streetwise.temp" value="{{data.secondary.streetwise.temp}}" />
+                <input type="number" name="data.secondary.streetwise.spec" value="{{data.secondary.streetwise.spec}}" />
+                <input type="number" name="data.streetwisebonus" value="{{data.streetwisebonus}}" readonly />
+                <input type="number" name="data.secondary.streetwise.base" value="{{data.secondary.streetwise.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.streetwise.status" data-dtype="boolean" {{checked data.streetwise.status}} />
+            </div>
+            {{#if data.streetwise.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.streetwise.nat" value="{{data.secondary.streetwise.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.streetwise.natural" value="{{data.secondary.streetwise.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.streetwisenatfinal" value="{{data.streetwisenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.streetwisemastery.status" data-dtype="boolean" {{checked data.streetwisemastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.stylefinal}}" data-label="Style">
+                    <span> Style </span>
+                    <span> {{data.stylefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.style.temp" value="{{data.secondary.style.temp}}" />
+                <input type="number" name="data.secondary.style.spec" value="{{data.secondary.style.spec}}" />
+                <input type="number" name="data.stylebonus" value="{{data.stylebonus}}" readonly />
+                <input type="number" name="data.secondary.style.base" value="{{data.secondary.style.base}}" />
+                <span class="mental"> POW </span>
+                <input type="checkbox" name="data.style.status" data-dtype="boolean" {{checked data.style.status}} />
+            </div>
+            {{#if data.style.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.style.nat" value="{{data.secondary.style.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.style.natural" value="{{data.secondary.style.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.stylenatfinal" value="{{data.stylenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.stylemastery.status" data-dtype="boolean" {{checked data.stylemastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.tradingfinal}}" data-label="Trading">
+                    <span> Trading </span>
+                    <span> {{data.tradingfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.trading.temp" value="{{data.secondary.trading.temp}}" />
+                <input type="number" name="data.secondary.trading.spec" value="{{data.secondary.trading.spec}}" />
+                <input type="number" name="data.tradingbonus" value="{{data.tradingbonus}}" readonly />
+                <input type="number" name="data.secondary.trading.base" value="{{data.secondary.trading.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.trading.status" data-dtype="boolean" {{checked data.trading.status}} />
+            </div>
+            {{#if data.trading.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.trading.nat" value="{{data.secondary.trading.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.trading.natural" value="{{data.secondary.trading.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.tradingnatfinal" value="{{data.tradingnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.tradingmastery.status" data-dtype="boolean" {{checked data.tradingmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            {{/if}}
+        </div><!--Social Fields-->
+
+        <div>
+            <div>
+                <span> Perceptive </span>
+                <span> Final </span>
+                <span> Temp. </span>
+                <span> Spec </span>
+                <span> Class </span>
+                <span> Base </span>
+                <span> Attr. </span>
+                <input type="checkbox" name="data.perceptive.status" data-dtype="boolean" {{checked data.perceptive.status}} />
+            </div>
+            {{#if data.perceptive.status}}
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.noticefinal}}" data-label="Notice">
+                    <span> Notice </span>
+                    <span> {{data.noticefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.notice.temp" value="{{data.secondary.notice.temp}}" />
+                <input type="number" name="data.secondary.notice.spec" value="{{data.secondary.notice.spec}}" />
+                <input type="number" name="data.noticebonus" value="{{data.noticebonus}}" readonly />
+                <input type="number" name="data.secondary.notice.base" value="{{data.secondary.notice.base}}" />
+                <span class="mental"> PER </span>
+                <input type="checkbox" name="data.notice.status" data-dtype="boolean" {{checked data.notice.status}} />
+            </div>
+            {{#if data.notice.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.notice.nat" value="{{data.secondary.notice.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.notice.natural" value="{{data.secondary.notice.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.noticenatfinal" value="{{data.noticenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.noticemastery.status" data-dtype="boolean" {{checked data.noticemastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button"  class="rollSecondary" data-ability="{{data.searchfinal}}" data-label="Search">
+                    <span> Search </span>
+                    <span> {{data.searchfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.search.temp" value="{{data.secondary.search.temp}}" />
+                <input type="number" name="data.secondary.search.spec" value="{{data.secondary.search.spec}}" />
+                <input type="number" name="data.searchbonus" value="{{data.searchbonus}}" readonly />
+                <input type="number" name="data.secondary.search.base" value="{{data.secondary.search.base}}" />
+                <span class="mental"> PER </span>
+                <input type="checkbox" name="data.search.status" data-dtype="boolean" {{checked data.search.status}} />
+            </div>
+            {{#if data.search.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.search.nat" value="{{data.secondary.search.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.search.natural" value="{{data.secondary.search.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.searchnatfinal" value="{{data.searchnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.searchmastery.status" data-dtype="boolean" {{checked data.searchmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button"  class="rollSecondary" data-ability="{{data.trackfinal}}" data-label="Track">
+                    <span> Track </span>
+                    <span> {{data.trackfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.track.temp" value="{{data.secondary.track.temp}}" />
+                <input type="number" name="data.secondary.track.spec" value="{{data.secondary.track.spec}}" />
+                <input type="number" name="data.trackbonus" value="{{data.trackbonus}}" readonly />
+                <input type="number" name="data.secondary.track.base" value="{{data.secondary.track.base}}" />
+                <span class="mental"> PER </span>
+                <input type="checkbox" name="data.track.status" data-dtype="boolean" {{checked data.track.status}} />
+            </div>
+            {{#if data.track.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.track.nat" value="{{data.secondary.track.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.track.natural" value="{{data.secondary.track.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.tracknatfinal" value="{{data.tracknatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.trackmastery.status" data-dtype="boolean" {{checked data.trackmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            {{/if}}
+        </div><!--Perceptive Fields-->
+
+        <div>
+            <div>
+                <span> intellectual </span>
+                <span> Final </span>
+                <span> Temp. </span>
+                <span> Spec </span>
+                <span> Class </span>
+                <span> Base </span>
+                <span> Attr. </span>
+                <input type="checkbox" name="data.intellectual.status" data-dtype="boolean" {{checked data.intellectual.status}} />
+            </div>
+            {{#if data.intellectual.status}}
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.animalsfinal}}" data-label="Animals">
+                    <span> Animals </span>
+                    <span> {{data.animalsfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.animals.temp" value="{{data.secondary.animals.temp}}" />
+                <input type="number" name="data.secondary.animals.spec" value="{{data.secondary.animals.spec}}" />
+                <input type="number" name="data.animalsbonus" value="{{data.animalsbonus}}" readonly />
+                <input type="number" name="data.secondary.animals.base" value="{{data.secondary.animals.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.animals.status" data-dtype="boolean" {{checked data.animals.status}} />
+            </div>
+            {{#if data.animals.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.animals.nat" value="{{data.secondary.animals.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.animals.natural" value="{{data.secondary.animals.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.animalsnatfinal" value="{{data.animalsnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.animalsmastery.status" data-dtype="boolean" {{checked data.animalsmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+        <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.appraisalfinal}}" data-label="Appraisal">
+                    <span> Appraisal </span>
+                    <span> {{data.appraisalfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.appraisal.temp" value="{{data.secondary.appraisal.temp}}" />
+                <input type="number" name="data.secondary.appraisal.spec" value="{{data.secondary.appraisal.spec}}" />
+                <input type="number" name="data.appraisalbonus" value="{{data.appraisalbonus}}" readonly />
+                <input type="number" name="data.secondary.appraisal.base" value="{{data.secondary.appraisal.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.appraisal.status" data-dtype="boolean" {{checked data.appraisal.status}} />
+            </div>
+            {{#if data.appraisal.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.appraisal.nat" value="{{data.secondary.appraisal.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.appraisal.natural" value="{{data.secondary.appraisal.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.appraisalnatfinal" value="{{data.appraisalnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.appraisalmastery.status" data-dtype="boolean" {{checked data.appraisalmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.architecturefinal}}" data-label="Architecture">
+                    <span> Architecture </span>
+                    <span> {{data.architecturefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.architecture.temp" value="{{data.secondary.architecture.temp}}" />
+                <input type="number" name="data.secondary.architecture.spec" value="{{data.secondary.architecture.spec}}" />
+                <input type="number" name="data.architecturebonus" value="{{data.architecturebonus}}" readonly />
+                <input type="number" name="data.secondary.architecture.base" value="{{data.secondary.architecture.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.architecture.status" data-dtype="boolean" {{checked data.architecture.status}} />
+            </div>
+            {{#if data.architecture.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.architecture.nat" value="{{data.secondary.architecture.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.architecture.natural" value="{{data.secondary.architecture.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.architecturenatfinal" value="{{data.architecturenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.architecturemastery.status" data-dtype="boolean" {{checked data.architecturemastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.herballorefinal}}" data-label="Herballore">
+                    <span> Herballore </span>
+                    <span> {{data.herballorefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.herballore.temp" value="{{data.secondary.herballore.temp}}" />
+                <input type="number" name="data.secondary.herballore.spec" value="{{data.secondary.herballore.spec}}" />
+                <input type="number" name="data.herballorebonus" value="{{data.herballorebonus}}" readonly />
+                <input type="number" name="data.secondary.herballore.base" value="{{data.secondary.herballore.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.herballore.status" data-dtype="boolean" {{checked data.herballore.status}} />
+            </div>
+            {{#if data.herballore.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.herballore.nat" value="{{data.secondary.herballore.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.herballore.natural" value="{{data.secondary.herballore.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.herballorenatfinal" value="{{data.herballorenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.herballoremastery.status" data-dtype="boolean" {{checked data.herballoremastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.historyfinal}}" data-label="History">
+                    <span> History </span>
+                    <span> {{data.historyfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.history.temp" value="{{data.secondary.history.temp}}" />
+                <input type="number" name="data.secondary.history.spec" value="{{data.secondary.history.spec}}" />
+                <input type="number" name="data.historybonus" value="{{data.historybonus}}" readonly />
+                <input type="number" name="data.secondary.history.base" value="{{data.secondary.history.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.history.status" data-dtype="boolean" {{checked data.history.status}} />
+            </div>
+            {{#if data.history.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.history.nat" value="{{data.secondary.history.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.history.natural" value="{{data.secondary.history.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.historynatfinal" value="{{data.historynatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.historymastery.status" data-dtype="boolean" {{checked data.historymastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.lawfinal}}" data-label="Law">
+                    <span> Law </span>
+                    <span> {{data.lawfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.law.temp" value="{{data.secondary.law.temp}}" />
+                <input type="number" name="data.secondary.law.spec" value="{{data.secondary.law.spec}}" />
+                <input type="number" name="data.lawbonus" value="{{data.lawbonus}}" readonly />
+                <input type="number" name="data.secondary.law.base" value="{{data.secondary.law.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.law.status" data-dtype="boolean" {{checked data.law.status}} />
+            </div>
+            {{#if data.law.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.law.nat" value="{{data.secondary.law.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.law.natural" value="{{data.secondary.law.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.lawnatfinal" value="{{data.lawnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.lawmastery.status" data-dtype="boolean" {{checked data.lawmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+        <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.magicapprfinal}}" data-label="Magic Appr.">
+                    <span> Magic Appr. </span>
+                    <span> {{data.magicapprfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.magicappr.temp" value="{{data.secondary.magicappr.temp}}" />
+                <input type="number" name="data.secondary.magicappr.spec" value="{{data.secondary.magicappr.spec}}" />
+                <input type="number" name="data.magicapprbonus" value="{{data.magicapprbonus}}" readonly />
+                <input type="number" name="data.secondary.magicappr.base" value="{{data.secondary.magicappr.base}}" />
+                <span class="mental"> POW </span>
+                <input type="checkbox" name="data.magicappr.status" data-dtype="boolean" {{checked data.magicappr.status}} />
+            </div>
+            {{#if data.magicappr.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.magicappr.nat" value="{{data.secondary.magicappr.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.magicappr.natural" value="{{data.secondary.magicappr.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.magicapprnatfinal" value="{{data.magicapprnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.magicapprmastery.status" data-dtype="boolean" {{checked data.magicapprmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.medicinefinal}}" data-label="Medicine">
+                    <span> Medicine </span>
+                    <span> {{data.medicinefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.medicine.temp" value="{{data.secondary.medicine.temp}}" />
+                <input type="number" name="data.secondary.medicine.spec" value="{{data.secondary.medicine.spec}}" />
+                <input type="number" name="data.medicinebonus" value="{{data.medicinebonus}}" readonly />
+                <input type="number" name="data.secondary.medicine.base" value="{{data.secondary.medicine.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.medicine.status" data-dtype="boolean" {{checked data.medicine.status}} />
+            </div>
+            {{#if data.medicine.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.medicine.nat" value="{{data.secondary.medicine.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.medicine.natural" value="{{data.secondary.medicine.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.medicinenatfinal" value="{{data.medicinenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.medicinemastery.status" data-dtype="boolean" {{checked data.medicinemastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.memorizefinal}}" data-label="Memorize">
+                    <span> Memorize </span>
+                    <span> {{data.memorizefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.memorize.temp" value="{{data.secondary.memorize.temp}}" />
+                <input type="number" name="data.secondary.memorize.spec" value="{{data.secondary.memorize.spec}}" />
+                <input type="number" name="data.memorizebonus" value="{{data.memorizebonus}}" readonly />
+                <input type="number" name="data.secondary.memorize.base" value="{{data.secondary.memorize.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.memorize.status" data-dtype="boolean" {{checked data.memorize.status}} />
+            </div>
+            {{#if data.memorize.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.memorize.nat" value="{{data.secondary.memorize.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.memorize.natural" value="{{data.secondary.memorize.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.memorizenatfinal" value="{{data.memorizenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.memorizemastery.status" data-dtype="boolean" {{checked data.memorizemastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.navigationfinal}}" data-label="Navigation">
+                    <span> Navigation </span>
+                    <span> {{data.navigationfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.navigation.temp" value="{{data.secondary.navigation.temp}}" />
+                <input type="number" name="data.secondary.navigation.spec" value="{{data.secondary.navigation.spec}}" />
+                <input type="number" name="data.navigationbonus" value="{{data.navigationbonus}}" readonly />
+                <input type="number" name="data.secondary.navigation.base" value="{{data.secondary.navigation.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.navigation.status" data-dtype="boolean" {{checked data.navigation.status}} />
+            </div>
+            {{#if data.navigation.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.navigation.nat" value="{{data.secondary.navigation.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.navigation.natural" value="{{data.secondary.navigation.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.navigationnatfinal" value="{{data.navigationnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.navigationmastery.status" data-dtype="boolean" {{checked data.navigationmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.occultfinal}}" data-label="Occult">
+                    <span> Occult </span>
+                    <span> {{data.occultfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.occult.temp" value="{{data.secondary.occult.temp}}" />
+                <input type="number" name="data.secondary.occult.spec" value="{{data.secondary.occult.spec}}" />
+                <input type="number" name="data.occultbonus" value="{{data.occultbonus}}" readonly />
+                <input type="number" name="data.secondary.occult.base" value="{{data.secondary.occult.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.occult.status" data-dtype="boolean" {{checked data.occult.status}} />
+            </div>
+            {{#if data.occult.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.occult.nat" value="{{data.secondary.occult.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.occult.natural" value="{{data.secondary.occult.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.occultnatfinal" value="{{data.occultnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.occultmastery.status" data-dtype="boolean" {{checked data.occultmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.sciencefinal}}" data-label="Science">
+                    <span> Science </span>
+                    <span> {{data.sciencefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.science.temp" value="{{data.secondary.science.temp}}" />
+                <input type="number" name="data.secondary.science.spec" value="{{data.secondary.science.spec}}" />
+                <input type="number" name="data.sciencebonus" value="{{data.sciencebonus}}" readonly />
+                <input type="number" name="data.secondary.science.base" value="{{data.secondary.science.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.science.status" data-dtype="boolean" {{checked data.science.status}} />
+            </div>
+            {{#if data.science.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.science.nat" value="{{data.secondary.science.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.science.natural" value="{{data.secondary.science.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.sciencenatfinal" value="{{data.sciencenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.sciencemastery.status" data-dtype="boolean" {{checked data.sciencemastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.tacticsfinal}}" data-label="Tactics">
+                    <span> Tactics </span>
+                    <span> {{data.tacticsfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.tactics.temp" value="{{data.secondary.tactics.temp}}" />
+                <input type="number" name="data.secondary.tactics.spec" value="{{data.secondary.tactics.spec}}" />
+                <input type="number" name="data.tacticsbonus" value="{{data.tacticsbonus}}" readonly />
+                <input type="number" name="data.secondary.tactics.base" value="{{data.secondary.tactics.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.tactics.status" data-dtype="boolean" {{checked data.tactics.status}} />
+            </div>
+            {{#if data.tactics.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.tactics.nat" value="{{data.secondary.tactics.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.tactics.natural" value="{{data.secondary.tactics.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.tacticsnatfinal" value="{{data.tacticsnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.tacticsmastery.status" data-dtype="boolean" {{checked data.tacticsmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            {{/if}}
+        </div><!--Intellectual Fields-->
+
+        <div>
+            <div>
+                <span> Vigor </span>
+                <span> Final </span>
+                <span> Temp. </span>
+                <span> Spec </span>
+                <span> Class </span>
+                <span> Base </span>
+                <span> Attr. </span>
+                <input type="checkbox" name="data.vigor.status" data-dtype="boolean" {{checked data.vigor.status}} />
+            </div>
+            {{#if data.vigor.status}}
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.composurefinal}}" data-label="Composure">
+                    <span> Composure </span>
+                    <span> {{data.composurefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.composure.temp" value="{{data.secondary.composure.temp}}" />
+                <input type="number" name="data.secondary.composure.spec" value="{{data.secondary.composure.spec}}" />
+                <input type="number" name="data.composurebonus" value="{{data.composurebonus}}" readonly />
+                <input type="number" name="data.secondary.composure.base" value="{{data.secondary.composure.base}}" />
+                <span class="mental"> WP </span>
+                <input type="checkbox" name="data.composure.status" data-dtype="boolean" {{checked data.composure.status}} />
+            </div>
+            {{#if data.composure.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.composure.nat" value="{{data.secondary.composure.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.composure.natural" value="{{data.secondary.composure.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.composurenatfinal" value="{{data.composurenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.composuremastery.status" data-dtype="boolean" {{checked data.composuremastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.featsofstrfinal}}" data-label="Feats of Str.">
+                    <span class="armorpenalty"> Feats of Str. </span>
+                    <span> {{data.featsofstrfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.featsofstr.temp" value="{{data.secondary.featsofstr.temp}}" />
+                <input type="number" name="data.secondary.featsofstr.spec" value="{{data.secondary.featsofstr.spec}}" />
+                <input type="number" name="data.featsofstrbonus" value="{{data.featsofstrbonus}}" readonly />
+                <input type="number" name="data.secondary.featsofstr.base" value="{{data.secondary.featsofstr.base}}" />
+                <span class="mental"> STR </span>
+                <input type="checkbox" name="data.featsofstr.status" data-dtype="boolean" {{checked data.featsofstr.status}} />
+            </div>
+            {{#if data.featsofstr.status}}
+            <div class="extend"> 
+                <span> # Nat. </span> <input type="number" name="data.secondary.featsofstr.nat" value="{{data.secondary.featsofstr.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.featsofstr.natural" value="{{data.secondary.featsofstr.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.featsofstrnatfinal" value="{{data.featsofstrnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.featsofstrmastery.status" data-dtype="boolean" {{checked data.featsofstrmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.withstpainfinal}}" data-label="Withst. Pain">
+                    <span> Withst. Pain </span>
+                    <span> {{data.withstpainfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.withstpain.temp" value="{{data.secondary.withstpain.temp}}" />
+                <input type="number" name="data.secondary.withstpain.spec" value="{{data.secondary.withstpain.spec}}" />
+                <input type="number" name="data.withstpainbonus" value="{{data.withstpainbonus}}" readonly />
+                <input type="number" name="data.secondary.withstpain.base" value="{{data.secondary.withstpain.base}}" />
+                <span class="mental"> WP </span>
+                <input type="checkbox" name="data.withstpain.status" data-dtype="boolean" {{checked data.withstpain.status}} />
+            </div>
+            {{#if data.withstpain.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.withstpain.nat" value="{{data.secondary.withstpain.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.withstpain.natural" value="{{data.secondary.withstpain.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.withstpainnatfinal" value="{{data.withstpainnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.withstpainmastery.status" data-dtype="boolean" {{checked data.withstpainmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            {{/if}}
+        </div><!--Vigor Fields-->
+
+        <div>
+            <div>
+                <span> Subterfuge </span>
+                <span> Final </span>
+                <span> Temp. </span>
+                <span> Spec </span>
+                <span> Class </span>
+                <span> Base </span>
+                <span> Attr. </span>
+                <input type="checkbox" name="data.subterfuge.status" data-dtype="boolean" {{checked data.subterfuge.status}} />
+            </div>
+            {{#if data.subterfuge.status}}
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.disguisefinal}}" data-label="Disguise">
+                    <span> Disguise </span>
+                    <span> {{data.disguisefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.disguise.temp" value="{{data.secondary.disguise.temp}}" />
+                <input type="number" name="data.secondary.disguise.spec" value="{{data.secondary.disguise.spec}}" />
+                <input type="number" name="data.disguisebonus" value="{{data.disguisebonus}}" readonly />
+                <input type="number" name="data.secondary.disguise.base" value="{{data.secondary.disguise.base}}" />
+                <span class="physical"> DEX </span>
+                <input type="checkbox" name="data.disguise.status" data-dtype="boolean" {{checked data.disguise.status}} />
+            </div>
+            {{#if data.disguise.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.disguise.nat" value="{{data.secondary.disguise.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.disguise.natural" value="{{data.secondary.disguise.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.disguisenatfinal" value="{{data.disguisenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.disguisemastery.status" data-dtype="boolean" {{checked data.disguisemastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.hidefinal}}" data-label="Hide">
+                    <span class="armorpenalty"> Hide </span>
+                    <span> {{data.hidefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.hide.temp" value="{{data.secondary.hide.temp}}" />
+                <input type="number" name="data.secondary.hide.spec" value="{{data.secondary.hide.spec}}" />
+                <input type="number" name="data.hidebonus" value="{{data.hidebonus}}" readonly />
+                <input type="number" name="data.secondary.hide.base" value="{{data.secondary.hide.base}}" />
+                <span class="mental"> PER </span>
+                <input type="checkbox" name="data.hide.status" data-dtype="boolean" {{checked data.hide.status}} />
+            </div>
+            {{#if data.hide.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.hide.nat" value="{{data.secondary.hide.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.hide.natural" value="{{data.secondary.hide.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.hidenatfinal" value="{{data.hidenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.hidemastery.status" data-dtype="boolean" {{checked data.hidemastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.lockpickingfinal}}l" data-label="Lockpicking">
+                    <span> Lockpicking </span>
+                    <span> {{data.lockpickingfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.lockpicking.temp" value="{{data.secondary.lockpicking.temp}}" />
+                <input type="number" name="data.secondary.lockpicking.spec" value="{{data.secondary.lockpicking.spec}}" />
+                <input type="number" name="data.lockpickingbonus" value="{{data.lockpickingbonus}}" readonly />
+                <input type="number" name="data.secondary.lockpicking.base" value="{{data.secondary.lockpicking.base}}" />
+                <span class="physical"> DEX </span>
+                <input type="checkbox" name="data.lockpicking.status" data-dtype="boolean" {{checked data.lockpicking.status}} />
+            </div>
+            {{#if data.lockpicking.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.lockpicking.nat" value="{{data.secondary.lockpicking.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.lockpicking.natural" value="{{data.secondary.lockpicking.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.lockpickingnatfinal" value="{{data.lockpickingnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.lockpickingmastery.status" data-dtype="boolean" {{checked data.lockpickingmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button"  class="rollSecondary" data-ability="{{data.poisonsfinal}}" data-label="Poisons">
+                    <span> Poisons </span>
+                    <span> {{data.poisonsfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.poisons.temp" value="{{data.secondary.poisons.temp}}" />
+                <input type="number" name="data.secondary.poisons.spec" value="{{data.secondary.poisons.spec}}" />
+                <input type="number" name="data.poisonsbonus" value="{{data.poisonsbonus}}" readonly />
+                <input type="number" name="data.secondary.poisons.base" value="{{data.secondary.poisons.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.poisons.status" data-dtype="boolean" {{checked data.poisons.status}} />
+            </div>
+            {{#if data.poisons.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.poisons.nat" value="{{data.secondary.poisons.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.poisons.natural" value="{{data.secondary.poisons.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.poisonsnatfinal" value="{{data.poisonsnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.poisonsmastery.status" data-dtype="boolean" {{checked data.poisonsmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.stealthfinal}}" data-label="Stealth">
+                    <span class="armorpenalty"> Stealth </span>
+                    <span> {{data.stealthfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.stealth.temp" value="{{data.secondary.stealth.temp}}" />
+                <input type="number" name="data.secondary.stealth.spec" value="{{data.secondary.stealth.spec}}" />
+                <input type="number" name="data.stealthbonus" value="{{data.stealthbonus}}" readonly />
+                <input type="number" name="data.secondary.stealth.base" value="{{data.secondary.stealth.base}}" />
+                <span class="physical"> AGI </span>
+                <input type="checkbox" name="data.stealth.status" data-dtype="boolean" {{checked data.stealth.status}} />
+            </div>
+            {{#if data.stealth.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.stealth.nat" value="{{data.secondary.stealth.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.stealth.natural" value="{{data.secondary.stealth.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.stealthnatfinal" value="{{data.stealthnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.stealthmastery.status" data-dtype="boolean" {{checked data.stealthmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.theftfinal}}" data-label="Theft">
+                    <span> Theft </span>
+                    <span> {{data.theftfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.theft.temp" value="{{data.secondary.theft.temp}}" />
+                <input type="number" name="data.secondary.theft.spec" value="{{data.secondary.theft.spec}}" />
+                <input type="number" name="data.theftbonus" value="{{data.theftbonus}}" readonly />
+                <input type="number" name="data.secondary.theft.base" value="{{data.secondary.theft.base}}" />
+                <span class="physical"> DEX </span>
+                <input type="checkbox" name="data.theft.status" data-dtype="boolean" {{checked data.theft.status}} />
+            </div>
+            {{#if data.theft.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.theft.nat" value="{{data.secondary.theft.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.theft.natural" value="{{data.secondary.theft.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.theftnatfinal" value="{{data.theftnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.theftmastery.status" data-dtype="boolean" {{checked data.theftmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.traplorefinal}}" data-label="Traplore">
+                    <span> Traplore </span>
+                    <span> {{data.traplorefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.traplore.temp" value="{{data.secondary.traplore.temp}}" />
+                <input type="number" name="data.secondary.traplore.spec" value="{{data.secondary.traplore.spec}}" />
+                <input type="number" name="data.traplorebonus" value="{{data.traplorebonus}}" readonly />
+                <input type="number" name="data.secondary.traplore.base" value="{{data.secondary.traplore.base}}" />
+                <span class="physical"> DEX </span>
+                <input type="checkbox" name="data.traplore.status" data-dtype="boolean" {{checked data.traplore.status}} />
+            </div>
+            {{#if data.traplore.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.traplore.nat" value="{{data.secondary.traplore.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.traplore.natural" value="{{data.secondary.traplore.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.traplorenatfinal" value="{{data.traplorenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.traploremastery.status" data-dtype="boolean" {{checked data.traploremastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            {{/if}}
+        </div><!--Subterfuge Fields-->
+
+        <div>
+            <div>
+                <span> Creative </span>
+                <span> Final </span>
+                <span> Temp. </span>
+                <span> Spec </span>
+                <span> Class </span>
+                <span> Base </span>
+                <span> Attr. </span>
+                <input type="checkbox" name="data.creative.status" data-dtype="boolean" {{checked data.creative.status}} />
+            </div>
+            {{#if data.creative.status}}
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.alchemyfinal}}" data-label="Alchemy">
+                    <span> Alchemy </span>
+                    <span> {{data.alchemyfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.alchemy.temp" value="{{data.secondary.alchemy.temp}}" />
+                <input type="number" name="data.secondary.alchemy.spec" value="{{data.secondary.alchemy.spec}}" />
+                <input type="number" name="data.alchemybonus" value="{{data.alchemybonus}}" readonly />
+                <input type="number" name="data.secondary.alchemy.base" value="{{data.secondary.alchemy.base}}" />
+                <span class="mental"> INT </span>
+                <input type="checkbox" name="data.alchemy.status" data-dtype="boolean" {{checked data.alchemy.status}} />
+            </div>
+            {{#if data.alchemy.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.alchemy.nat" value="{{data.secondary.alchemy.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.alchemy.natural" value="{{data.secondary.alchemy.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.alchemynatfinal" value="{{data.alchemynatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.alchemymastery.status" data-dtype="boolean" {{checked data.alchemymastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.animismfinal}}" data-label="Animism">
+                    <span> Animism </span>
+                    <span> {{data.animismfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.animism.temp" value="{{data.secondary.animism.temp}}" />
+                <input type="number" name="data.secondary.animism.spec" value="{{data.secondary.animism.spec}}" />
+                <input type="number" name="data.animismbonus" value="{{data.animismbonus}}" readonly />
+                <input type="number" name="data.secondary.animism.base" value="{{data.secondary.animism.base}}" />
+                <span class="mental"> POW </span>
+                <input type="checkbox" name="data.animism.status" data-dtype="boolean" {{checked data.animism.status}} />
+            </div>
+            {{#if data.animism.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.animism.nat" value="{{data.secondary.animism.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.animism.natural" value="{{data.secondary.animism.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.animismnatfinal" value="{{data.animismnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.animismmastery.status" data-dtype="boolean" {{checked data.animismmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.artfinal}}" data-label="Art">
+                    <span> Art </span>
+                    <span> {{data.artfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.art.temp" value="{{data.secondary.art.temp}}" />
+                <input type="number" name="data.secondary.art.spec" value="{{data.secondary.art.spec}}" />
+                <input type="number" name="data.artbonus" value="{{data.artbonus}}" readonly />
+                <input type="number" name="data.secondary.art.base" value="{{data.secondary.art.base}}" />
+                <span class="mental"> POW </span>
+                <input type="checkbox" name="data.art.status" data-dtype="boolean" {{checked data.art.status}} />
+            </div>
+            {{#if data.art.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.art.nat" value="{{data.secondary.art.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.art.natural" value="{{data.secondary.art.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.artnatfinal" value="{{data.artnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.artmastery.status" data-dtype="boolean" {{checked data.artmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.dancefinal}}" data-label="Dance">
+                    <span class="armorpenalty"> Dance </span>
+                    <span> {{data.dancefinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.dance.temp" value="{{data.secondary.dance.temp}}" />
+                <input type="number" name="data.secondary.dance.spec" value="{{data.secondary.dance.spec}}" />
+                <input type="number" name="data.dancebonus" value="{{data.dancebonus}}" readonly />
+                <input type="number" name="data.secondary.dance.base" value="{{data.secondary.dance.base}}" />
+                <span class="physical"> AGI </span>
+                <input type="checkbox" name="data.dance.status" data-dtype="boolean" {{checked data.dance.status}} />
+            </div>
+            {{#if data.dance.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.dance.nat" value="{{data.secondary.dance.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.dance.natural" value="{{data.secondary.dance.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.dancenatfinal" value="{{data.dancenatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.dancemastery.status" data-dtype="boolean" {{checked data.dancemastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.forgingfinal}}" data-label="Forging">
+                    <span> Forging </span>
+                    <span> {{data.forgingfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.forging.temp" value="{{data.secondary.forging.temp}}" />
+                <input type="number" name="data.secondary.forging.spec" value="{{data.secondary.forging.spec}}" />
+                <input type="number" name="data.forgingbonus" value="{{data.forgingbonus}}" readonly />
+                <input type="number" name="data.secondary.forging.base" value="{{data.secondary.forging.base}}" />
+                <span class="physical"> DEX </span>
+                <input type="checkbox" name="data.forging.status" data-dtype="boolean" {{checked data.forging.status}} />
+            </div>
+            {{#if data.forging.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.forging.nat" value="{{data.secondary.forging.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.forging.natural" value="{{data.secondary.forging.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.forgingnatfinal" value="{{data.forgingnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.forgingmastery.status" data-dtype="boolean" {{checked data.forgingmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.jewelryfinal}}" data-label="Jewelry">
+                    <span> Jewelry </span>
+                    <span> {{data.jewelryfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.jewelry.temp" value="{{data.secondary.jewelry.temp}}" />
+                <input type="number" name="data.secondary.jewelry.spec" value="{{data.secondary.jewelry.spec}}" />
+                <input type="number" name="data.jewelrybonus" value="{{data.jewelrybonus}}" readonly />
+                <input type="number" name="data.secondary.jewelry.base" value="{{data.secondary.jewelry.base}}" />
+                <span class="physical"> DEX </span>
+                <input type="checkbox" name="data.jewelry.status" data-dtype="boolean" {{checked data.jewelry.status}} />
+            </div>
+            {{#if data.jewelry.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.jewelry.nat" value="{{data.secondary.jewelry.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.jewelry.natural" value="{{data.secondary.jewelry.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.jewelrynatfinal" value="{{data.jewelrynatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.jewelrymastery.status" data-dtype="boolean" {{checked data.jewelrymastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.musicfinal}}" data-label="Music">
+                    <span> Music </span>
+                    <span> {{data.musicfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.music.temp" value="{{data.secondary.music.temp}}" />
+                <input type="number" name="data.secondary.music.spec" value="{{data.secondary.music.spec}}" />
+                <input type="number" name="data.musicbonus" value="{{data.musicbonus}}" readonly />
+                <input type="number" name="data.secondary.music.base" value="{{data.secondary.music.base}}" />
+                <span class="mental"> POW </span>
+                <input type="checkbox" name="data.music.status" data-dtype="boolean" {{checked data.music.status}} />
+            </div>
+            {{#if data.music.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.music.nat" value="{{data.secondary.music.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.music.natural" value="{{data.secondary.music.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.musicnatfinal" value="{{data.musicnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.musicmastery.status" data-dtype="boolean" {{checked data.musicmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.runesfinal}}" data-label="Runes">
+                    <span> Runes </span>
+                    <span> {{data.runesfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.runes.temp" value="{{data.secondary.runes.temp}}" />
+                <input type="number" name="data.secondary.runes.spec" value="{{data.secondary.runes.spec}}" />
+                <input type="number" name="data.runesbonus" value="{{data.runesbonus}}" readonly />
+                <input type="number" name="data.secondary.runes.base" value="{{data.secondary.runes.base}}" />
+                <span class="physical"> DEX </span>
+                <input type="checkbox" name="data.runes.status" data-dtype="boolean" {{checked data.runes.status}} />
+            </div>
+            {{#if data.runes.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.runes.nat" value="{{data.secondary.runes.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.runes.natural" value="{{data.secondary.runes.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.runesnatfinal" value="{{data.runesnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.runesmastery.status" data-dtype="boolean" {{checked data.runesmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.ritualcaligfinal}}" data-label="Ritual Cal.">
+                    <span> Ritual Cal. </span>
+                    <span> {{data.ritualcaligfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.ritualcalig.temp" value="{{data.secondary.ritualcalig.temp}}" />
+                <input type="number" name="data.secondary.ritualcalig.spec" value="{{data.secondary.ritualcalig.spec}}" />
+                <input type="number" name="data.ritualcaligbonus" value="{{data.ritualcaligbonus}}" readonly />
+                <input type="number" name="data.secondary.ritualcalig.base" value="{{data.secondary.ritualcalig.base}}" />
+                <span class="physical"> DEX </span>
+                <input type="checkbox" name="data.ritualcalig.status" data-dtype="boolean" {{checked data.ritualcalig.status}} />
+            </div>
+            {{#if data.ritualcalig.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.ritualcalig.nat" value="{{data.secondary.ritualcalig.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.ritualcalig.natural" value="{{data.secondary.ritualcalig.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.ritualcalignatfinal" value="{{data.ritualcalignatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.ritualcaligmastery.status" data-dtype="boolean" {{checked data.ritualcaligmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.slofhandfinal}}" data-label="Sl. of Hand">
+                    <span> Sl. of Hand </span>
+                    <span> {{data.slofhandfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.slofhand.temp" value="{{data.secondary.slofhand.temp}}" />
+                <input type="number" name="data.secondary.slofhand.spec" value="{{data.secondary.slofhand.spec}}" />
+                <input type="number" name="data.slofhandbonus" value="{{data.slofhandbonus}}" readonly />
+                <input type="number" name="data.secondary.slofhand.base" value="{{data.secondary.slofhand.base}}" />
+                <span class="physical"> DEX </span>
+                <input type="checkbox" name="data.slofhand.status" data-dtype="boolean" {{checked data.slofhand.status}} />
+            </div>
+            {{#if data.slofhand.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.slofhand.nat" value="{{data.secondary.slofhand.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.slofhand.natural" value="{{data.secondary.slofhand.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.slofhandnatfinal" value="{{data.slofhandnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.slofhandmastery.status" data-dtype="boolean" {{checked data.slofhandmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollSecondary" data-ability="{{data.tailoringfinal}}" data-label="Tailoring">
+                    <span> Tailoring </span>
+                    <span> {{data.tailoringfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.tailoring.temp" value="{{data.secondary.tailoring.temp}}" />
+                <input type="number" name="data.secondary.tailoring.spec" value="{{data.secondary.tailoring.spec}}" />
+                <input type="number" name="data.tailoringbonus" value="{{data.tailoringbonus}}" readonly />
+                <input type="number" name="data.secondary.tailoring.base" value="{{data.secondary.tailoring.base}}" />
+                <span class="physical"> DEX </span>
+                <input type="checkbox" name="data.tailoring.status" data-dtype="boolean" {{checked data.tailoring.status}} />
+            </div>
+            {{#if data.tailoring.status}}
+            <div class="extend">
+                <span> # Nat. </span> <input type="number" name="data.secondary.tailoring.nat" value="{{data.secondary.tailoring.nat}}" />
+                <span> N.A. </span> <input type="number" name="data.secondary.tailoring.natural" value="{{data.secondary.tailoring.natural}}" />
+                <span class="natemph"> Total Nat </span> <input type="number" name="data.tailoringnatfinal" value="{{data.tailoringnatfinal}}" readonly />
+                <label class="mastery-box">
+                    <input type="checkbox" name="data.tailoringmastery.status" data-dtype="boolean" {{checked data.tailoringmastery.status}} />
+                </label>
+            </div>
+            {{/if}}
+
+            {{/if}}
+
+
+
+        </div><!--Creative Fields-->
+
+    </div>
 </div>

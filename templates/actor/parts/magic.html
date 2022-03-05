@@ -110,24 +110,24 @@
             </h2>
             {{#if data.zeon.status}}
             <div>
-                <label> <span> Base </span> <input type="number" name="data.zeon.base" value="{{data.zeon.base}}" /> </label>
-                <label> <span> From POW </span> <input type="number" name="data.zeonpow" value="{{data.zeonpow}}" readonly /> </label>
-                <label> <span> Class </span> <input type="number" name="data.zeonbonus" value="{{data.zeonbonus}}" readonly /> </label>
-                <label> <span> Spec. </span> <input type="number" name="data.zeon.spec" value="{{data.zeon.spec}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.zeon.base" value="{{data.zeon.base}}" /> </label>
+                <label> <span> {{localize "abfalter.magicTab.frompow"}} </span> <input type="number" name="data.zeonpow" value="{{data.zeonpow}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="data.zeonbonus" value="{{data.zeonbonus}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.zeon.spec" value="{{data.zeon.spec}}" /> </label>
             </div>
             {{/if}}
-            <label> <span> Temp. </span> <input type="number" name="data.zeon.temp" value="{{data.zeon.temp}}" /> </label>
-            <label> <span> Final </span> <input type="number" name="data.zeonfinal" value="{{data.zeonfinal}}" readonly /> </label>
-            <label> <span> Actual </span> <input type="number" name="data.zeon.actual" value="{{data.zeon.actual}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.zeon.temp" value="{{data.zeon.temp}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.zeonfinal" value="{{data.zeonfinal}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.zeon.actual" value="{{data.zeon.actual}}" /> </label>
             <div class="minnate">
                 <h3> {{localize "abfalter.magicTab.minnate"}} </h3>
                 <div>
                     <div>
-                        <span> Bonus </span>
+                        <span> {{localize "abfalter.basicInfo.bonus"}} </span>
                         <label> <input type="number" name="data.zeon.minnate" value="{{data.zeon.minnate}}" /> </label>
                     </div>
                     <div>
-                        <span> Final </span>
+                        <span> {{localize "abfalter.basicInfo.final"}} </span>
                         <label> <input type="number" name="data.minnatefinal" value="{{data.minnatefinal}}" readonly /> </label>
                     </div>
                 </div>
@@ -138,72 +138,100 @@
     <div class="s1">
         <div>
             <div class="summoning">
-                <h2> Summoning Abilities </h2>
+                <h2> {{localize "abfalter.magicTab.summoning"}} </h2>
                 <div>
-                    <span> Ability </span>
-                    <span> Base </span>
-                    <span> Class </span>
-                    <span> Spec. </span>
-                    <span> Final </span>
+                    <span> {{localize "abfalter.basicInfo.ability"}} </span>
+                    <span> {{localize "abfalter.basicInfo.base"}} </span>
+                    <span> {{localize "abfalter.basicInfo.class"}} </span>
+                    <span> {{localize "abfalter.basicInfo.spec"}} </span>
+                    <span> {{localize "abfalter.basicInfo.final"}} </span>
                 </div>
                 <div>
                     <button type="button" class="mystic rollable" data-roll="d100+@summonfinal" data-label="Summon">
-                        <span> Summon </span>
+                        <span> {{localize "abfalter.magicTab.summon"}} </span>
                     </button>
                     <input type="number" name="data.summoning.summon.base" value="{{data.summoning.summon.base}}" />
                     <input type="number" name="data.summonbonus" value="{{data.summonbonus}}" readonly />
                     <input type="number" name="data.summoning.summon.spec" value="{{data.summoning.summon.spec}}" />
                     <input type="number" name="data.summonfinal" value="{{data.summonfinal}}" readonly />
                     <label>
-                        <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                        <button type="button" name="x" class="mastery-box"> <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
                     </label>
                 </div>
                 <div>
                     <button type="button" class="mystic rollable" data-roll="d100+@controlfinal" data-label="Control">
-                        <span> Control </span>
+                        <span> {{localize "abfalter.magicTab.control"}} </span>
                     </button>
                     <input type="number" name="data.summoning.control.base" value="{{data.summoning.control.base}}" />
                     <input type="number" name="data.controlbonus" value="{{data.controlbonus}}" readonly />
                     <input type="number" name="data.summoning.control.spec" value="{{data.summoning.control.spec}}" />
                     <input type="number" name="data.controlfinal" value="{{data.controlfinal}}" readonly />
                     <label>
-                        <button type="button" name="x" class="mastery-box "> <span> Mastery </span> </button>
+                        <button type="button" name="x" class="mastery-box "> <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
                     </label>
                 </div>
                 <div>
                     <button type="button" class="mystic rollable" data-roll="d100+@bindfinal" data-label="Bind">
-                        <span> Bind </span>
+                        <span> {{localize "abfalter.magicTab.bind"}} </span>
                     </button>
                     <input type="number" name="data.summoning.bind.base" value="{{data.summoning.bind.base}}" />
                     <input type="number" name="data.bindbonus" value="{{data.bindbonus}}" readonly />
                     <input type="number" name="data.summoning.bind.spec" value="{{data.summoning.bind.spec}}" />
                     <input type="number" name="data.bindfinal" value="{{data.bindfinal}}" readonly />
                     <label>
-                        <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                        <button type="button" name="x" class="mastery-box"> <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
                     </label>
                 </div>
                 <div>
                     <button type="button" class="mystic rollable" data-roll="d100+@banishfinal" data-label="Banish">
-                        <span> Banish </span>
+                        <span> {{localize "abfalter.magicTab.banish"}} </span>
                     </button>
                     <input type="number" name="data.summoning.banish.base" value="{{data.summoning.banish.base}}" />
                     <input type="number" name="data.banishbonus" value="{{data.banishbonus}}" readonly />
                     <input type="number" name="data.summoning.banish.spec" value="{{data.summoning.banish.spec}}" />
                     <input type="number" name="data.banishfinal" value="{{data.banishfinal}}" readonly />
                     <label>
-                        <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                        <button type="button" name="x" class="mastery-box"> <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
                     </label>
                 </div>
             </div>
 
             <div class="metamagic">
                 <h2> Metamagic </h2>
-                <span> Item for metamagic here </span>
+                <div class="items-list">
+                    {{#each metaMagics as |metaMagic id|}}
+                    <div class="invocation-item item" data-item-id="{{metaMagic._id}}">
+                        <div class="item-name">
+                            <h4>{{metaMagic.name}}</h4>
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <a class="item-control item-create" title="Create item" data-type="metaMagic"><i class="fas fa-plus"></i> Add Meta Magic</a>
+                <span> Only 1 meta Magic Item Allowed, created with character sheet already </span>
             </div>
 
             <div class="turnmaint">
                 <h2> Turn Maintenance </h2>
-                <span> new item created by spell added here </span>
+                <div class="items-list">
+                    {{#each turnMaints as |turnMaint id|}}
+                    <div class="invocation-item item" data-item-id="{{turnMaint._id}}">
+                        <div class="item-name">
+                            <h4>{{turnMaint.name}}</h4>
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <a class="item-control item-create" title="Create item" data-type="turnMaint"><i class="fas fa-plus"></i> Add Turn Maint </a>
+
                 <span> include a checkbox for active or not </span>
                 <span> include a total zeon cost </span>
                 <span> include a button to remove zeon from pool </span>
@@ -212,7 +240,21 @@
 
             <div class="daymaint">
                 <h2> Daily Maintenance </h2>
-                <span> new item created by spell added here </span>
+                <div class="items-list">
+                    {{#each dailyMaints as |dailyMaint id|}}
+                    <div class="invocation-item item" data-item-id="{{dailyMaint._id}}">
+                        <div class="item-name">
+                            <h4>{{dailyMaint.name}}</h4>
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <a class="item-control item-create" title="Create item" data-type="dailyMaint"><i class="fas fa-plus"></i> Add Daily Maint</a>
+
                 <span> include a checkbox for active or not </span>
                 <span> include a total zeon cost </span>
                 <span> include a button to remove zeon from pool </span>
@@ -242,7 +284,7 @@
                         {{/if}}
                         {{/each}}
                     </div>
-                    <a class="item-create" data-type="spellPath" title="Create item" ><i class="fas fa-plus"></i> Add Spellpath </a>
+                    <a class="item-create" title="Create item" data-type="spellPath" ><i class="fas fa-plus"></i> Add Spellpath </a>
                 </div>
 
                 <div class="mlevels">
@@ -268,10 +310,10 @@
             <div class="spells">
                 <h2> Spell Book </h2>
                 <div class="items-list">
-                {{#each spells as |item id|}}
-                    <div class="spell-item flexrow" data-item-id="{{item._id}}">
-                        <div class="item-name">
-                            <h4>{{item.name}}</h4>
+                {{#each spells as |spell id|}}
+                    <div class="spell-item item" data-item-id="{{spell._id}}">
+                        <div class="item-name item-roll">
+                            <h4>{{spell.name}}</h4>
                         </div>
                         <div class="item-controls">
                             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
@@ -286,10 +328,10 @@
             <div class="invocations">
                 <h2> invocations </h2>
                 <div class="items-list">
-                    {{#each invocations as |item id|}}
-                    <div class="item flexrow" data-item-id="{{item._id}}">
+                    {{#each invocations as |invocation id|}}
+                    <div class="invocation-item item" data-item-id="{{invocation._id}}">
                         <div class="item-name">
-                            <h4>{{item.name}}</h4>
+                            <h4>{{invocation.name}}</h4>
                         </div>
                         <div class="item-controls">
                             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
@@ -304,10 +346,10 @@
             <div class="incarnations">
                 <h2> Incarnation </h2>
                 <div class="items-list">
-                    {{#each incarnations as |item id|}}
-                    <div class="item flexrow" data-item-id="{{item._id}}">
+                    {{#each incarnations as |incarnation id|}}
+                    <div class="incarnation-item item" data-item-id="{{incarnation._id}}">
                         <div class="item-name">
-                            <h4>{{item.name}}</h4>
+                            <h4>{{incarnation.name}}</h4>
                         </div>
                         <div class="item-controls">
                             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

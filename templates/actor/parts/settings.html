@@ -1,3 +1,63 @@
-<div class="tab settings">
-    <label> <span> SETTINGS </span></label>
+﻿<div class="tab settings">
+    <div class="rollRange">
+        <h2> Open Roll Range </h2>
+        <div>
+            <label> <span> Base </span> <input type="number" name="attr_or_base" value="90" /> </label>
+            <label> <span> Spec. </span> <input type="number" name="attr_or_special" value="0" /> </label>
+            <label> <span> Temp. </span> <input type="number" name="attr_or_temp" value="0" /> </label>
+
+            <label>
+                <span data-i18n="doubles"> Doubles </span> <select name="attr_ord">
+                    <option value="" selected="true" data-i18n="no">No</option>
+                    <option value="cs11cs22cs33cs44cs55cs66cs77cs88cs99" data-i18n="yes">Yes</option>
+                </select>
+            </label>
+
+        </div>
+        <div>
+            <label> <span> Final </span> <input type="number" name="attr_orr" value="5" disabled /> </label>
+        </div>
+    </div><!--
+ --><div class="rollRange">
+        <h2> Fumble Range </h2>
+        <div>
+            <label> <span> Base </span> <input type="number" name="attr_f_base" value="3" /> </label>
+            <label> <span> Spec. </span> <input type="number" name="attr_f_special" value="0" /> </label>
+            <label> <span> Temp. </span> <input type="number" name="attr_f_temp" value="0" /> </label>
+        </div>
+        <div>
+            <label> <span> Final </span> <input type="number" name="attr_fr" value="7" disabled /> </label>
+        </div>
+    </div>
+
+
+
+
+    <div class="optionsCharacters">
+        <h2> Chraracter Options </h2>
+        <label> <span> level mod </span> <input type="number" name="data.levelinfo.levelmod" value="{{data.levelinfo.levelmod}}" /> </label>
+        <label> <span> presence mod </span> <input type="number" name="data.levelinfo.presencemod" value="{{data.levelinfo.presencemod}}" /> </label>
+    </div>
+
+    <div class="classes">
+        <h2> Innate Classes </h2>
+        <div>
+            <span> Class </span>
+            <span> Level </span>
+            <a class="item-control item-create" title="Create item" data-type="class"><i class="fas fa-plus"></i> Add item</a>
+        </div>
+
+        <div class="items-list">
+            {{#each classes as |class id|}}
+            <div class="item-class item flexrow" data-item-id="{{class._id}}">
+                    <h4>{{class.name}}</h4>
+                <div class="item-controls">
+                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+    </div>
 </div>

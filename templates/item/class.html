@@ -1,0 +1,154 @@
+﻿<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+            <label> <span> Level </span> <input type="number" name="data.main.levels" value="{{data.main.levels}}" /> </label>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="main">Main Stats</a>
+        <a class="item" data-tab="others">Extra Abilities</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Main Stats Tab --}}
+        <div class="classtab" data-group="primary" data-tab="main">
+            <div>
+                <label> <span> Lifepoint/Level </span> <input type="number" name="data.main.lp" value="{{data.main.lp}}" /> </label>
+                <label> <span> Initiative/Level </span> <input type="number" name="data.main.initiative" value="{{data.main.initiative}}" /> </label>
+            </div>
+            <div>
+                <label> <span> Attack/Level </span> <input type="number" name="data.main.attack" value="{{data.main.attack}}" /> </label>
+                <label> <span> Dodge/Level </span> <input type="number" name="data.main.dodge" value="{{data.main.dodge}}" /> </label>
+            </div>
+            <label> <span> Block/Level </span> <input type="number" name="data.main.block" value="{{data.main.block}}" /> </label>
+            <label> <span> Wear Armor/Level </span> <input type="number" name="data.main.weararmor" value="{{data.main.weararmor}}" /> </label>
+            <label> <span> MK/Level </span> <input type="number" name="data.main.mk" value="{{data.main.mk}}" /> </label>
+            <label> <span> PP/Level </span> <input type="number" name="data.main.pp" value="{{data.main.pp}}" /> </label>
+            <label> <span> Zeon/Level </span> <input type="number" name="data.main.zeon" value="{{data.main.zeon}}" /> </label>
+            <h3> Summoning abilities </h3>
+            <label> <span> Summon/Level </span> <input type="number" name="data.main.summon" value="{{data.main.summon}}" /> </label>
+            <label> <span> Control/Level </span> <input type="number" name="data.main.control" value="{{data.main.control}}" /> </label>
+            <label> <span> Bind/Level </span> <input type="number" name="data.main.bind" value="{{data.main.bind}}" /> </label>
+            <label> <span> Banish/Level </span> <input type="number" name="data.main.banish" value="{{data.main.banish}}" /> </label>
+            <h3> Secondary abilities </h3>
+            <label> <span> Athletics </span></label>
+            <label class="athletics-box">
+                <input type="checkbox" name="data.athletics.status" data-dtype="boolean" {{checked data.athletics.status}} />
+            </label>
+            {{#if data.athletics.status}}
+            <div>
+                <label> <span> Acrobatics/Level </span> <input type="number" name="data.secondary.acro" value="{{data.secondary.acro}}" /> </label>
+                <label> <span> Athleticism/Level </span> <input type="number" name="data.secondary.athleticism" value="{{data.secondary.athleticism}}" /> </label>
+                <label> <span> Climb/Level </span> <input type="number" name="data.secondary.climb" value="{{data.secondary.climb}}" /> </label>
+                <label> <span> Jump/Level </span> <input type="number" name="data.secondary.jump" value="{{data.secondary.jump}}" /> </label>
+                <label> <span> Ride/Level </span> <input type="number" name="data.secondary.ride" value="{{data.secondary.ride}}" /> </label>
+                <label> <span> Swim/Level </span> <input type="number" name="data.secondary.swim" value="{{data.secondary.swim}}" /> </label>
+            </div>
+            {{/if}}
+            <label> <span> Social </span></label>
+            <label class="social-box">
+                <input type="checkbox" name="data.social.status" data-dtype="boolean" {{checked data.social.status}} />
+            </label>
+            {{#if data.social.status}}
+            <div>
+                <label> <span> Etiquette/Level </span> <input type="number" name="data.secondary.etiquette" value="{{data.secondary.etiquette}}" /> </label>
+                <label> <span> Intimidate/Level </span> <input type="number" name="data.secondary.intimidate" value="{{data.secondary.intimidate}}" /> </label>
+                <label> <span> Leadership/Level </span> <input type="number" name="data.secondary.leadership" value="{{data.secondary.leadership}}" /> </label>
+                <label> <span> Persuasion/Level </span> <input type="number" name="data.secondary.persuasion" value="{{data.secondary.persuasion}}" /> </label>
+                <label> <span> Streetwise/Level </span> <input type="number" name="data.secondary.streetwise" value="{{data.secondary.streetwise}}" /> </label>
+                <label> <span> Style/Level </span> <input type="number" name="data.secondary.style" value="{{data.secondary.style}}" /> </label>
+                <label> <span> Trading/Level </span> <input type="number" name="data.secondary.trading" value="{{data.secondary.trading}}" /> </label>
+            </div>
+            {{/if}}
+            <label> <span> Perceptive </span></label>
+            <label class="perceptive-box">
+                <input type="checkbox" name="data.perceptive.status" data-dtype="boolean" {{checked data.perceptive.status}} />
+            </label>
+            {{#if data.perceptive.status}}
+            <div>
+                <label> <span> Notice/Level </span> <input type="number" name="data.secondary.notice" value="{{data.secondary.notice}}" /> </label>
+                <label> <span> Search/Level </span> <input type="number" name="data.secondary.search" value="{{data.secondary.search}}" /> </label>
+                <label> <span> Track/Level </span> <input type="number" name="data.secondary.track" value="{{data.secondary.track}}" /> </label>
+            </div>
+            {{/if}}
+            <label> <span> Intellectual </span></label>
+            <label class="intellectual-box">
+                <input type="checkbox" name="data.intellectual.status" data-dtype="boolean" {{checked data.intellectual.status}} />
+            </label>
+            {{#if data.intellectual.status}}
+            <div>
+                <label> <span> Animals/Level </span> <input type="number" name="data.secondary.animals" value="{{data.secondary.animals}}" /> </label>
+                <label> <span> Appraisal/Level </span> <input type="number" name="data.secondary.appraisal" value="{{data.secondary.appraisal}}" /> </label>
+                <label> <span> Architecture/Level </span> <input type="number" name="data.secondary.architecture" value="{{data.secondary.architecture}}" /> </label>
+                <label> <span> Herbal Lore/Level </span> <input type="number" name="data.secondary.herballore" value="{{data.secondary.herballore}}" /> </label>
+                <label> <span> History/Level </span> <input type="number" name="data.secondary.history" value="{{data.secondary.history}}" /> </label>
+                <label> <span> Law/Level </span> <input type="number" name="data.secondary.law" value="{{data.secondary.law}}" /> </label>
+                <label> <span> Magic Appr./Level </span> <input type="number" name="data.secondary.magicappr" value="{{data.secondary.magicappr}}" /> </label>
+                <label> <span> Medicine/Level </span> <input type="number" name="data.secondary.medicine" value="{{data.secondary.medicine}}" /> </label>
+                <label> <span> Memorize/Level </span> <input type="number" name="data.secondary.memorize" value="{{data.secondary.memorize}}" /> </label>
+                <label> <span> Navigation/Level </span> <input type="number" name="data.secondary.navigation" value="{{data.secondary.navigation}}" /> </label>
+                <label> <span> Occult/Level </span> <input type="number" name="data.secondary.occult" value="{{data.secondary.occult}}" /> </label>
+                <label> <span> Science/Level </span> <input type="number" name="data.secondary.science" value="{{data.secondary.science}}" /> </label>
+                <label> <span> Tactics/Level </span> <input type="number" name="data.secondary.tactics" value="{{data.secondary.tactics}}" /> </label>
+            </div>
+            {{/if}}
+            <label> <span> Vigor </span></label>
+            <label class="vigor-box">
+                <input type="checkbox" name="data.vigor.status" data-dtype="boolean" {{checked data.vigor.status}} />
+            </label>
+            {{#if data.vigor.status}}
+            <div>
+                <label> <span> Composure/Level </span> <input type="number" name="data.secondary.composure" value="{{data.secondary.composure}}" /> </label>
+                <label> <span> Feats of Str./Level </span> <input type="number" name="data.secondary.featsofstr" value="{{data.secondary.featsofstr}}" /> </label>
+                <label> <span> Withst. Pain/Level </span> <input type="number" name="data.secondary.withstpain" value="{{data.secondary.withstpain}}" /> </label>
+            </div>
+            {{/if}}
+            <label> <span> Subterfuge </span></label>
+            <label class="subterfuge-box">
+                <input type="checkbox" name="data.subterfuge.status" data-dtype="boolean" {{checked data.subterfuge.status}} />
+            </label>
+            {{#if data.subterfuge.status}}
+            <div>
+                <label> <span> Disguise/Level </span> <input type="number" name="data.secondary.disguise" value="{{data.secondary.disguise}}" /> </label>
+                <label> <span> Hide/Level </span> <input type="number" name="data.secondary.hide" value="{{data.secondary.hide}}" /> </label>
+                <label> <span> Lockpicking/Level </span> <input type="number" name="data.secondary.lockpicking" value="{{data.secondary.lockpicking}}" /> </label>
+                <label> <span> Poisons/Level </span> <input type="number" name="data.secondary.poisons" value="{{data.secondary.poisons}}" /> </label>
+                <label> <span> Stealth/Level </span> <input type="number" name="data.secondary.stealth" value="{{data.secondary.stealth}}" /> </label>
+                <label> <span> Theft/Level </span> <input type="number" name="data.secondary.theft" value="{{data.secondary.theft}}" /> </label>
+                <label> <span> Trap Lore/Level </span> <input type="number" name="data.secondary.traplore" value="{{data.secondary.traplore}}" /> </label>
+            </div>
+            {{/if}}
+            <label> <span> Creative </span></label>
+            <label class="creative-box">
+                <input type="checkbox" name="data.creative.status" data-dtype="boolean" {{checked data.creative.status}} />
+            </label>
+            {{#if data.creative.status}}
+            <div>
+                <label> <span> Alchemy/Level </span> <input type="number" name="data.secondary.alchemy" value="{{data.secondary.alchemy}}" /> </label>
+                <label> <span> Animism/Level </span> <input type="number" name="data.secondary.animism" value="{{data.secondary.animism}}" /> </label>
+                <label> <span> Art/Level </span> <input type="number" name="data.secondary.art" value="{{data.secondary.art}}" /> </label>
+                <label> <span> Dance/Level </span> <input type="number" name="data.secondary.dance" value="{{data.secondary.dance}}" /> </label>
+                <label> <span> Forging/Level </span> <input type="number" name="data.secondary.forging" value="{{data.secondary.forging}}" /> </label>
+                <label> <span> Jewelry/Level </span> <input type="number" name="data.secondary.jewelry" value="{{data.secondary.jewelry}}" /> </label>
+                <label> <span> Music/Level </span> <input type="number" name="data.secondary.music" value="{{data.secondary.music}}" /> </label>
+                <label> <span> Runes/Level </span> <input type="number" name="data.secondary.runes" value="{{data.secondary.runes}}" /> </label>
+                <label> <span> Ritual Calligraphy/Level </span> <input type="number" name="data.secondary.ritualcalig" value="{{data.secondary.ritualcalig}}" /> </label>
+                <label> <span> Sl. of Hand/Level </span> <input type="number" name="data.secondary.slofhand" value="{{data.secondary.slofhand}}" /> </label>
+                <label> <span> Tailoring/Level </span> <input type="number" name="data.secondary.tailoring" value="{{data.secondary.tailoring}}" /> </label>
+            </div>
+            {{/if}}
+        </div>
+
+        {{!-- Extra Tab --}}
+        <div class="tab others" data-group="primary" data-tab="others">
+            {{!-- As you add new fields, add them in here! --}}
+        </div>
+    </section>
+</form>

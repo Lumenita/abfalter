@@ -1,14 +1,12 @@
 import { abfalter } from "./config.js"
-
+import abfalterItem from "./item/abfalterItem.js"
 import abfalterItemSheet from "./item/abfalterItemSheet.js"
-
+import abfalterActor from "./actor/abfalterActor.js"
 import abfalterCharacterSheet from "./actor/abfalterCharacterSheet.js"
 
 
 async function preloadHandlebarsTemplates () {
     const templatePaths = [
-        // Chat templates
-
         // sheet templates
         "systems/abfalter/templates/actor/parts/general.html",
         "systems/abfalter/templates/actor/parts/background.html",
@@ -17,7 +15,6 @@ async function preloadHandlebarsTemplates () {
         "systems/abfalter/templates/actor/parts/ki.html",
         "systems/abfalter/templates/actor/parts/armory.html",
         "systems/abfalter/templates/actor/parts/settings.html",
-
     ];
     return loadTemplates(templatePaths);
 };
@@ -25,8 +22,8 @@ async function preloadHandlebarsTemplates () {
 Hooks.once("init", function () {
     console.log("abfalter | Initializing Anima Beyond Fantasy Alter System");
 
-    //CONFIG.Actor.documentClass = ;
-    //CONFIG.Item.documentClass = ;
+    CONFIG.Actor.documentClass = abfalterActor;
+    CONFIG.Item.documentClass = abfalterItem;
     CONFIG.abfalter = abfalter;
 
     Actors.unregisterSheet("core", ActorSheet);
