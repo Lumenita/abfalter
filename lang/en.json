@@ -1,6 +1,7 @@
 {
   "abfalter": {
     "basicInfo": {
+      "name": "Name",
       "base": "Base",
       "spec": "Spec.",
       "mult": "Mult",
@@ -12,10 +13,15 @@
       "half": "Half",
       "full": "Full",
       "bonus": "Bonus",
-      "ability": "Ability"
+      "ability": "Ability",
+      "used": "Used",
+      "type": "Type",
+      "cost": "Cost"
     },
     "sheet": {
-      "newItem": "Name here"
+      "newItem": "Name here",
+      "edit": "Edit",
+      "delete": "Delete"
     },
     "magicTab": {
       "mproj": "Magic Projection",
@@ -37,7 +43,67 @@
       "summon": "Summon",
       "control": "Control",
       "bind": "Bind",
-      "banish": "Banish"
+      "banish": "Banish",
+      "metaMagic": "Metamagic",
+      "addMetaMagic": "Add Metamagic",
+      "turnMaint": "Turn Maintenance",
+      "addTurnMaint": "Add Turn Maintenance",
+      "dailyMaint": "Daily Maintenance",
+      "addDailyMaint": "Add Daily Maintenance",
+      "spellPath": "Spell Path",
+      "addSpellPath": "Add Spellpath",
+      "mLevels": "Magic Levels",
+      "fromInt": "From INT",
+      "spellBook": "Spell Book",
+      "addSpell": "Add Spell",
+      "invocation": "Invocation",
+      "addInvocation": "Add Invocation",
+      "incarnation": "Incarnation",
+      "addIncarnation": "Add Incarnation"
+    },
+    "armoryTab": {
+      "wearArmor": "Wear Armor",
+      "armor": "Armor",
+      "addArmor": "Add Armor",
+      "prof": "Proficiency",
+      "addProf": "Add Proficiency",
+      "quality": "Quality",
+      "presence": "Presence",
+      "fortitude": "Fortitude",
+      "requir": "Requirement",
+      "penalty": "Penalties",
+      "cut": "CUT",
+      "imp": "IMP",
+      "thr": "THR",
+      "heat": "HEAT",
+      "ele": "ELE",
+      "cold": "COLD",
+      "ene": "ENE",
+      "spirit": "SPIRIT",
+      "addHelmet": "Add Helmet",
+      "finalHelmet": "Final Helmet AT",
+      "finalArmor": "Final Armor AT",
+      "totalNatPen": "Total Natural Penalty",
+      "totalMovePen": "Total Move Penalty",
+      "totalArtPowEq": "Total Eqp. Presence",
+      "otherArt": "Other Eqp. Presence",
+      "profName": "Proficiency Name",
+      "starting": "Starting",
+      "similar": "Similar",
+      "mixedClass": "Mixed Class",
+      "diffType": "Different Type",
+      "wholeClass": "Whole Class",
+      "archetype": "Archetype",
+      "style": "Style",
+      "mystical": "Mystical",
+      "psychic": "Psychic",
+      "other": "Other",
+      "cCoin": "Copper Coins",
+      "sCoin": "Silver Coins",
+      "gCoin": "Gold Coins",
+      "addCoin": "Add Currency Type",
+      "quantity": "Quantity",
+      "currency": "Currency"
     }
   }
 }

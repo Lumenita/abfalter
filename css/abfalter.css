@@ -36,11 +36,9 @@ h3 {
     z-index: 1;
     align-items: center;
 }
-
 h4 {
     margin: 5px;
 }
-
 .physical {
     text-shadow: 1px 1px 1px #00CC00;
 }
@@ -92,6 +90,7 @@ h4 {
     height: 82px;
     float: left;
 }
+
 
 .abfalter .sheet-header {
     -webkit-box-flex: 0;
@@ -217,26 +216,23 @@ h4 {
     Menu Drawing
     ------------
 */
-.abfalter .sheet-tabs {
-  -webkit-box-flex: 0;
-  -ms-flex: 0;
-  flex: 0;
-}
-.abfalter .tabs {
-  height: 40px;
-  border-top: 1px solid #AAA;
-  border-bottom: 1px solid #AAA;
-}
-.abfalter .tabs .item {
-  line-height: 40px;
-  font-weight: bold;
+.sheet nav.sheet-tabs {
+    align-items: center;
+    padding: 0px;
+    border-top: 1px solid #AAA;
+    border-bottom: 1px solid #AAA;
+    height: 30px;
+    flex: 0;
 }
 .abfalter .tabs .item.active {
-  text-decoration: underline;
-  color: darkblue;
-  text-shadow: none;
+    text-decoration: underline;
+    color: darkblue;
+    text-shadow: none;
 }
-
+.abfalter .tabs .item {
+    line-height: 40px;
+    font-weight: bold;
+}
 
 /*
     ***************
@@ -1681,14 +1677,307 @@ h4 {
 
 
 
+/*
+    *************
+    -------------
+    ARMORY FORMAT
+    -------------
+    *************
+*/
+/*
+    -------------
+    Armory layout
+    -------------
+*/
+.armory > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+.wearArmor {
+    width: 23%;
+}
+.armor {
+    width: 73%;
+}
+.prof {
+    width: 38%;
+}
+.weapons {
+    width: 58%;
+}
+.currency {
+    display: flex;
+    flex-wrap: wrap;
+    width: 25%;
+}
+.inventory {
+    width: 71%
+}
+/*
+    ------------------
+    Wear Armor & Stats
+    ------------------
+*/
+.wearArmor > label {
+    display: flex;
+    width: 100%;
+    height: 20px;
+    padding-right: 15px;
+    padding-left: 5px;
+}
+.wearArmor > label > span  {
+    display: flex;
+    width: 50%;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+}
+.wearArmor > label > input {
+    display: flex;
+    width: 50%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+.wearArmor > label:nth-of-type(5) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 23px;
+    font-weight: bold;
+}
+.wearArmor > label:nth-of-type(2) > input,
+.wearArmor > label:nth-of-type(5) > input,
+.wearArmor > label:nth-of-type(6) > input,
+.wearArmor > label:nth-of-type(7) > input,
+.wearArmor > label:nth-of-type(9) > input {
+    background: transparent;
+    border-bottom: 0px;
+}
+.wearArmor > label:nth-of-type(6) > span,
+.wearArmor > label:nth-of-type(7) > span,
+.wearArmor > label:nth-of-type(8) > span,
+.wearArmor > label:nth-of-type(9) > span {
+    width: 80%;
+}
+.wearArmor > label:nth-of-type(6) > input,
+.wearArmor > label:nth-of-type(7) > input,
+.wearArmor > label:nth-of-type(8) > input,
+.wearArmor > label:nth-of-type(9) > input {
+    width: 20%;
+}
+/*
+    -----
+    Armor
+    -----
+*/
+.armor > div:first-of-type {
+    display: flex;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+}
+.armor > div > span:first-of-type,
+.armor-item > div > span:first-of-type,
+.armor-item2 > div > span:first-of-type,
+.armorHelmet-item > div > span:first-of-type,
+.armorHelmet-item2 > div > span:first-of-type {
+    width: 26%;
+    text-align: center;
+    font-size: 13px;
+}
+.armor > div:first-of-type > span:not(:first-of-type),
+.armor-item > div > span:not(:first-of-type),
+.armorHelmet-item > div > span:not(:first-of-type) {
+    width: 15.2%;
+    text-align: center;
+    font-size: 13px;
+}
+.armor-item,
+.armor-item2,
+.armorHelmet-item,
+.armorHelmet-item2 {
+    border-bottom: 1px solid black;
+}
+.armor-item > div,
+.armor-item2 > div,
+.armorHelmet-item > div,
+.armorHelmet-item2 > div {
+    display: flex;
+}
+.armor > div:nth-of-type(4) {
+    display: flex;
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.armor > div:nth-of-type(2),
+.armor > div:nth-of-type(5) {
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+}
+.armor > div:nth-of-type(3),
+.armor > div:nth-of-type(6) {
+    margin-top: 7px;
+    padding-top: 7px;
+}
+.armor > div:nth-of-type(8) {
+    display: flex;
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    margin-top: 3px;
+    padding-top: 3px;
+}
+.armor > div:nth-of-type(9) {
+    display: flex;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+}
+.armor > div:nth-of-type(4) > span:not(:first-of-type),
+.armor > div:nth-of-type(8) > span:not(:first-of-type),
+.armor > div:nth-of-type(9) > span:not(:first-of-type),
+.armor-item2 > div > span:not(:first-of-type),
+.armorHelmet-item2 > div > span:not(:first-of-type) {
+    width: 9.25%;
+    text-align: center;
+    font-size: 13px;
+}
+.armor > div:nth-of-type(7) {
+    padding-top: 3px;
+    display: flex;
+    justify-content: space-between;
+}
+/*
+    -----------
+    Proficiency
+    -----------
+*/
+.prof > div:first-of-type {
+    display: flex;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+    text-align: center;
+}
+.prof-item > div {
+    display: flex;
+}
+.prof > div:first-of-type > span,
+.prof-item > div > label:first-of-type {
+    width: 50%
+}
+.prof > div:first-of-type > span:nth-of-type(2),
+.prof-item > div > select {
+    width: 40%
+}
+.prof > div:first-of-type > span:nth-of-type(3),
+.prof-item > div > input {
+    width: 10%
+}
+.prof-item > div > label > input,
+.prof-item > div > input {
+    display: flex;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+.prof-item > div > select {
+    height: 20px;
+    font-size: 13px;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-bottom: 1px solid black;
+    margin-right: 2px;
+}
+/*
+    ------
+    Weapon
+    ------
+*/
 
 
 
 
 
-
-
-
+/*
+    --------
+    Currency 
+    --------
+*/
+.currency > label,
+.currency-item > div { 
+    display: flex;
+}
+.currency > div:first-of-type {
+    display: flex;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+    text-align: center;
+    width: 100%;
+}
+.currency > div > span:first-of-type,
+.currency > label > span,
+.currency-item > div > input:first-of-type {
+    width: 70%;
+}
+.currency > div > span:last-of-type,
+.currency > label > input,
+.currency-item > div > input:last-of-type {
+    width: 30%;
+}
+.currency > label {
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+}
+.currency > label > input,
+.currency-item > div > input {
+    display: flex;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+.currency > label > input,
+.currency-item > div > input:last-of-type {
+    margin-left: 2px;
+}
+/*
+    ---------
+    Invnetory
+    ---------
+*/
 /*
     ***************
     ---------------
@@ -1696,10 +1985,9 @@ h4 {
     ---------------
     ***************
 */
-
 /*
     ----------------
-    RollRange Drawing
+    RollRange Layout
     ----------------
 */
 .rollRange {
@@ -1916,10 +2204,26 @@ h4 {
 .spellheader > div > label > input {
   width: 78.3%;
 }
-
-
-
-
+/*
+    -----
+    Armor
+    -----
+*/
+.armorHeader,
+.armorContent,
+.armorContent2 {
+    display: flex;
+}
+.armorHeader > img {
+    width: 100px;
+    height: 100px;
+}
+.armorContent > label {
+    width: 16.6%
+}
+.armorContent2 > label {
+    width: 12.5%
+}
 /*
     ***************
     ---------------

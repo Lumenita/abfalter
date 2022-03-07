@@ -1,0 +1,27 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div class="armorHeader">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <h2> ARMOR </h2>
+        <div>
+            <label> <span> Name </span> <input type="text" name="name" value="{{item.name}}" placeholder="Name" /> </label>
+        </div>
+    </div>
+    <div class="armorContent">
+        <label> <span> Quality </span> <input type="number" name="data.quality" value="{{data.quality}}" /> </label>
+        <label> <span> Presence </span> <input type="number" name="data.presence" value="{{data.presence}}" /> </label>
+        <label> <span> Fortitude </span> <input type="number" name="data.fortitude" value="{{data.fortitude}}" /> </label>
+        <label> <span> Requirement </span> <input type="number" name="data.requirement" value="{{data.requirement}}" /> </label>
+        <label> <span> Natural Penalty </span> <input type="number" name="data.natPenalty" value="{{data.natPenalty}}" /> </label>
+        <label> <span> Movement Penalty </span> <input type="number" name="data.movePenalty" value="{{data.movePenalty}}" /> </label>
+    </div>
+    <div class="armorContent2">
+        <label> <span> CUT </span> <input type="number" name="data.AT.cut" value="{{data.AT.cut}}" /> </label>
+        <label> <span> IMP </span> <input type="number" name="data.AT.imp" value="{{data.AT.imp}}" /> </label>
+        <label> <span> THR </span> <input type="number" name="data.AT.thr" value="{{data.AT.thr}}" /> </label>
+        <label> <span> HEAT </span> <input type="number" name="data.AT.heat" value="{{data.AT.heat}}" /> </label>
+        <label> <span> COLD </span> <input type="number" name="data.AT.cold" value="{{data.AT.cold}}" /> </label>
+        <label> <span> ELE </span> <input type="number" name="data.AT.ele" value="{{data.AT.ele}}" /> </label>
+        <label> <span> ENE </span> <input type="number" name="data.AT.ene" value="{{data.AT.ene}}" /> </label>
+        <label> <span> SPIRIT </span> <input type="number" name="data.AT.spt" value="{{data.AT.spt}}" /> </label>
+    </div>
+</form>

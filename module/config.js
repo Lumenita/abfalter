@@ -1,6 +1,7 @@
 export const abfalter = {};
 
 abfalter.basicInfo = {
+    name: "abfalter.basicInfo.name",
     base: "abfalter.basicInfo.base",
     spec: "abfalter.basicInfo.spec.",
     mult: "abfalter.basicInfo.mult",
@@ -12,11 +13,16 @@ abfalter.basicInfo = {
     half: "abfalter.basicInfo.half",
     full: "abfalter.basicInfo.full",
     bonus: "abfalter.basicInfo.bonus",
-    ability: "abfalter.basicInfo.ability"
+    ability: "abfalter.basicInfo.ability",
+    used: "abfalter.basicInfo.used",
+    type: "abfalter.basicInfo.type",
+    cost: "abfalter.basicInfo.cost"
 }
 
 abfalter.sheet = {
-    newItem: "abfalter.sheet.newItem"
+    newItem: "abfalter.sheet.newItem",
+    edit: "abfalter.sheet.edit",
+    delete: "abfalter.sheet.delete"
 }
 
 abfalter.magicTab = {
@@ -39,5 +45,66 @@ abfalter.magicTab = {
     summon: "abfalter.magicTab.summon",
     control: "abfalter.magicTab.control",
     bind: "abfalter.magicTab.bind",
-    banish: "abfalter.magicTab.banish"
+    banish: "abfalter.magicTab.banish",
+    metaMagic: "abfalter.magicTab.metaMagic",
+    addMetaMagic: "abfalter.magicTab.addMetaMagic",
+    turnMaint: "abfalter.magicTab.turnMaint",
+    addTurnMaint: "abfalter.magicTab.addTurnMaint",
+    dailyMaint: "abfalter.magicTab.dailyMaint",
+    addDailyMaint: "abfalter.magicTab.addDailyMaint",
+    spellPath: "abfalter.magicTab.spellPath",
+    addSpellPath: "abfalter.magicTab.addSpellPath",
+    mLevels: "abfalter.magicTab.mLevels",
+    fromInt: "abfalter.magicTab.fromInt",
+    spellBook: "abfalter.magicTab.spellBook",
+    addSpell: "abfalter.magicTab.addSpell",
+    invocation: "abfalter.magicTab.invocation",
+    addInvocation: "abfalter.magicTab.addInvocation",
+    incarnation: "abfalter.magicTab.incarnation",
+    addIncarnation: "abfalter.magicTab.addIncarnation"
+}
+
+abfalter.armoryTab = {
+    wearArmor: "abfalter.armoryTab.wearArmor",
+    armor: "abfalter.armoryTab.armor",
+    addArmor: "abfalter.armoryTab.addArmor",
+    prof: "abfalter.armoryTab.prof",
+    addProf: "abfalter.armoryTab.addProf",
+    quality: "abfalter.armoryTab.quality",
+    presence: "abfalter.armoryTab.presence",
+    fortitude: "abfalter.armoryTab.fortitude",
+    requir: "abfalter.armoryTab.requir",
+    penalty: "abfalter.armoryTab.penalty",
+    cut: "abfalter.armoryTab.cut",
+    imp: "abfalter.armoryTab.imp",
+    thr: "abfalter.armoryTab.thr",
+    heat: "abfalter.armoryTab.heat",
+    ele: "abfalter.armoryTab.ele",
+    cold: "abfalter.armoryTab.cold",
+    ene: "abfalter.armoryTab.ene",
+    spirit: "abfalter.armoryTab.spirit",
+    addHelmet: "abfalter.armoryTab.addHelmet",
+    finalHelmet: "abfalter.armoryTab.finalHelmet",
+    finalArmor: "abfalter.armoryTab.finalArmor",
+    totalNatPen: "abfalter.armoryTab.totalNatPen",
+    totalMovePen: "abfalter.armoryTab.totalMovePen",
+    totalArtPowEq: "abfalter.armoryTab.totalArtPowEq",
+    otherArt: "abfalter.armoryTab.otherArt",
+    profName: "abfalter.armoryTab.profName",
+    starting: "abfalter.armoryTab.starting",
+    similar: "abfalter.armoryTab.similar",
+    mixedClass: "abfalter.armoryTab.mixedClass",
+    diffType: "abfalter.armoryTab.diffType",
+    wholeClass:"abfalter.armoryTab.wholeClass",
+    archetype: "abfalter.armoryTab.archetype",
+    style: "abfalter.armoryTab.style",
+    mystical: "abfalter.armoryTab.mystical",
+    psychic: "abfalter.armoryTab.psychic",
+    other: "abfalter.armoryTab.other",
+    cCoin: "abfalter.armoryTab.cCoin",
+    sCoin: "abfalter.armoryTab.sCoin",
+    gCoin: "abfalter.armoryTab.gCoin",
+    addCoin: "abfalter.armoryTab.addCoin",
+    quantity: "abfalter.armoryTab.quantity",
+    currency: "abfalter.armoryTab.currency"
 }

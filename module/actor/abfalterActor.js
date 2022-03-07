@@ -97,7 +97,7 @@ export default class abfalterActor extends Actor {
         data.attackbonus = atk;
         data.dodgebonus = dod;
         data.blockbonus = blk;
-        data.weararmorbonus = weararm; //Unused
+        data.weararmorbonus = weararm;
         data.mkbonus = mk; //unused
         data.ppbonus = pp; //unused
         data.zeonbonus = zeon;
@@ -1261,6 +1261,72 @@ export default class abfalterActor extends Actor {
             data.bindfinal = Math.floor(data.summoning.bind.base + data.bindbonus + data.summoning.bind.spec + data.stats.Power.mod + data.aam);
             data.banishfinal = Math.floor(data.summoning.banish.base + data.banishbonus + data.summoning.banish.spec + data.stats.Power.mod + data.aam);
         }
+
+
+
+
+
+
+
+
+        // Wear Armor
+        data.wearArmorFinal = Math.floor(data.wearArmor.base + data.weararmorbonus + data.wearArmor.spec + data.wearArmor.temp + data.stats.Strength.mod);
+        // Armor
+        const [quantity, req, natPen, movePen] = this.items.reduce((arr2, item) => {
+            if (item.type === "armor") {
+                const number = parseInt(item.data.data.quantity) || 0;
+                arr2[0] += number;
+                arr2[1] += parseInt(item.data.data.newRequirement) || 0;
+                arr2[2] += parseInt(item.data.data.newNatPenalty) || 0;
+                arr2[3] += parseInt(item.data.data.newMovePenalty) || 0;
+            }
+            return arr2;
+        }, [0, 0, 0, 0]);
+        data.armorMod = Math.floor(data.wearArmorFinal - req);
+        if (natPen - data.armorMod < 0) {
+            data.totalNatPen = 0;
+        } else {
+            data.totalNatPen = Math.floor(((quantity - 1) * 20) + (natPen - data.armorMod));
+        }
+        data.movePenMod = Math.floor(data.armorMod / 50);
+        console.log(data.movePenMod);
+
+        if (movePen - data.movePenMod < 0) {
+            data.totalMovePen = movePen;
+        } else {
+            data.totalMovePen = movePen - data.movePenMod
+        }
+
+        /*
+         * Auto calculation of AT values, requires a nested array, organizae the nested array, grab the largest value
+         * then sum all of the same AT value. Largest value + half of the rest so, largest + value2/2 + value3/2 etc
+         * WIll do later, this is too hard
+        const [cut[, imp, thr, heat, cold, ele, ene, spt] = this.items.reduce((arr2, item) => {
+            console.log("before the IF Statement");
+            if (item.type === "armor") {
+                console.log("In the IF statement");
+                const number = parseInt(item.data.data.quantity) || 0;
+                arr2[0] += number;
+                arr2[arr2[0]] = [item.data.data.AT.newCut, item.data.data.AT.newImp];
+                //arr2[2] = [item.data.data.AT.newImp];
+                //arr2[3] = [item.data.data.AT.newThr];
+                //arr2[4] = [item.data.data.AT.newHeat];
+                //arr2[5] = [item.data.data.AT.newCold];
+                //arr2[6] = [item.data.data.AT.newEle];
+                //arr2[7] = [item.data.data.AT.newEne];
+                //arr2[8] = [item.data.data.AT.newSpt];
+                console.log(arr2[0]);
+                console.log(arr2[1]);
+                //arr2[1] = [2, item.data.data.AT.newImp];
+                //console.log(arr2);
+            }
+            console.log("out of the if statement");
+            console.log(arr2);
+            return arr2;
+        }, [0, 0, 0, 0, 0, 0, 0, 0]);*/
+
+
+
 
 
     }

@@ -29,6 +29,16 @@ export default class abfalterCharacterSheet extends ActorSheet {
         }
 
     ]
+    itemContextMenuDelete = [
+        {
+            name: game.i18n.localize("abfalter.sheet.delete"),
+            icon: '<i class="fas fa-trash"></i>',
+            callback: element => {
+                this.actor.deleteEmbeddedDocuments("Item", [element.data("item-id")]);
+            }
+        }
+
+    ]
 
     getData() {
         const baseData = super.getData();
@@ -41,16 +51,24 @@ export default class abfalterCharacterSheet extends ActorSheet {
         }
 
         //Initialize Items
-        sheetData.classes = baseData.items.filter(function (item) { return item.type == "class" });
+        sheetData.inventories = baseData.items.filter(function (item) { return item.type == "inventory" });
+        sheetData.weapons = baseData.items.filter(function (item) { return item.type == "weapon" });
+        sheetData.armors = baseData.items.filter(function (item) { return item.type == "armor" });
+        sheetData.armorHelmets = baseData.items.filter(function (item) { return item.type == "armorHelmet" });
+
         sheetData.advantages = baseData.items.filter(function (item) { return item.type == "advantage" });
         sheetData.disadvantages = baseData.items.filter(function (item) { return item.type == "disadvantage" });
-        sheetData.spellPaths = baseData.items.filter(function (item) { return item.type == "spellPath" });
         sheetData.spells = baseData.items.filter(function (item) { return item.type == "spell" });
+
+        sheetData.classes = baseData.items.filter(function (item) { return item.type == "class" });
+        sheetData.spellPaths = baseData.items.filter(function (item) { return item.type == "spellPath" });
         sheetData.incarnations = baseData.items.filter(function (item) { return item.type == "incarnation" });
         sheetData.invocations = baseData.items.filter(function (item) { return item.type == "invocation" });
         sheetData.metaMagics = baseData.items.filter(function (item) { return item.type == "metaMagic" });
         sheetData.dailyMaints = baseData.items.filter(function (item) { return item.type == "dailyMaint" });
         sheetData.turnMaints = baseData.items.filter(function (item) { return item.type == "turnMaint" });
+        sheetData.currencies = baseData.items.filter(function (item) { return item.type == "currency" });
+        sheetData.proficiencies = baseData.items.filter(function (item) { return item.type == "proficiency" });
 
         return sheetData;
     }
@@ -62,7 +80,14 @@ export default class abfalterCharacterSheet extends ActorSheet {
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
 
-            new ContextMenu(html, ".spellPath-item", this.itemContextMenu);
+            new ContextMenu(html, ".spellPath-item", this.itemContextMenuDelete);
+            new ContextMenu(html, ".armor-item", this.itemContextMenu);
+            new ContextMenu(html, ".armor-item2", this.itemContextMenu);
+            new ContextMenu(html, ".armorHelmet-item", this.itemContextMenu);
+            new ContextMenu(html, ".armorHelmet-item2", this.itemContextMenu);
+            new ContextMenu(html, ".prof-item", this.itemContextMenuDelete);
+            new ContextMenu(html, ".currency-item", this.itemContextMenuDelete);
+
         }
 
         if (this.actor.isOwner) {
@@ -128,6 +153,15 @@ export default class abfalterCharacterSheet extends ActorSheet {
 
         return item.update({ [field]: element.value });
     }
+
+
+
+
+
+
+
+
+
 
     _onItemRoll(event) {
         event.preventDefault();
