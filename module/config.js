@@ -22,7 +22,8 @@ abfalter.basicInfo = {
 abfalter.sheet = {
     newItem: "abfalter.sheet.newItem",
     edit: "abfalter.sheet.edit",
-    delete: "abfalter.sheet.delete"
+    delete: "abfalter.sheet.delete",
+    equip: "abfalter.sheet.equip"
 }
 
 abfalter.magicTab = {
@@ -66,6 +67,8 @@ abfalter.magicTab = {
 
 abfalter.armoryTab = {
     wearArmor: "abfalter.armoryTab.wearArmor",
+    stats: "abfalter.armoryTab.stats",
+    armorStats: "abfalter.armoryTab.armorStats",
     armor: "abfalter.armoryTab.armor",
     addArmor: "abfalter.armoryTab.addArmor",
     prof: "abfalter.armoryTab.prof",
@@ -106,5 +109,13 @@ abfalter.armoryTab = {
     gCoin: "abfalter.armoryTab.gCoin",
     addCoin: "abfalter.armoryTab.addCoin",
     quantity: "abfalter.armoryTab.quantity",
-    currency: "abfalter.armoryTab.currency"
+    currency: "abfalter.armoryTab.currency",
+    inventory: "abfalter.armoryTab.inventory",
+    addInventory: "abfalter.armoryTab.addInventory",
+    dmgBarrier: "abfalter.armoryTab.dmgBarrier",
+    dmgRdc: "abfalter.armoryTab.dmgRdc",
+    totWeight: "abfalter.armoryTab.totWeight",
+    weapons: "abfalter.armoryTab.weapons",
+    addWeapons: "abfalter.armoryTab.addWeapons",
+    finalDmg: "abfalter.armoryTab.finalDmg"
 }

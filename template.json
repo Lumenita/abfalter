@@ -532,15 +532,41 @@
           "spec": 0,
           "temp": 0
         },
+        "armorFinal": {
+          "cut": 0,
+          "imp": 0,
+          "thr": 0,
+          "heat": 0,
+          "cold": 0,
+          "ele": 0,
+          "ene": 0,
+          "spt": 0
+        },
+        "helmArmorFinal": {
+          "cut": 0,
+          "imp": 0,
+          "thr": 0,
+          "heat": 0,
+          "cold": 0,
+          "ele": 0,
+          "ene": 0,
+          "spt": 0
+        },
         "currency": {
           "copper": 0,
           "silver": 0,
           "gold": 0
+        },
+        "otherStats": {
+          "itemPresence": 0,
+          "damageBarrier": 0,
+          "dmgRdc": 0,
+          "artPresence": 0
         }
       } 
     },
     "character": {
-      "templates": [ "info", "stats", "mystic" ]
+      "templates": [ "info", "stats", "mystic", "armory" ]
     },
     "npc": {
       "templates": [ "info" ]
@@ -551,22 +577,23 @@
   },
   "Item": {
     "types": [
-      "class",
-      "advantage",
-      "disadvantage",
-      "spellPath",
-      "spell",
-      "incarnation",
-      "invocation",
-      "metaMagic",
-      "turnMaint",
-      "dailyMaint",
       "inventory",
       "weapon",
       "armor",
+      "armorHelmet",
+      "advantage",
+      "disadvantage",
+      "spell",
+      "incarnation",
+      "invocation",
+      "class",
+      "spellPath",
+      "metaMagic",
+      "turnMaint",
+      "dailyMaint",
       "currency",
-      "proficiency",
-      "armorHelmet"
+      "proficiency"
+
     ],
     "templates": {
       "itemDescription": {
@@ -715,13 +742,31 @@
     "inventory": {
       "templates": [ "itemDescription" ],
       "quantity": 0,
-      "weight": 0
+      "price": "",
+      "quality": "",
+      "weight": 0,
+      "fortitude": "",
+      "presence": 0,
+      "rarity": ""
     },
     "weapon": {
+      "templates": [ "itemDescription" ],
+      "equipped": false,
+      "quality": 0,
+      "fortitude": 0,
       "attack": 0,
       "defense": 0,
       "dodge": 0,
-      "damage": 0
+      "shield": "",
+      "prim": "",
+      "sec": "",
+      "damage": 0,
+      "dmgMod": 0,
+      "twoHanded": false,
+      "breakage": 0,
+      "strBreak": "",
+      "presence": 0,
+      "speed": 0
     },
     "armor": {
       "templates": [ "itemDescription" ],
@@ -732,6 +777,7 @@
       "requirement": 0,
       "natPenalty": 0,
       "movePenalty": 0,
+      "natural": false,
       "equipped": false,
       "AT": {
         "cut": 0,
@@ -746,12 +792,13 @@
     },
     "armorHelmet": {
       "templates": [ "itemDescription" ],
+      "quantity": 1,
       "quality": 0,
       "presence": 0,
       "fortitude": 0,
       "requirement": 0,
-      "natPenalty": 0,
-      "movePenalty": 0,
+      "perPenalty": 0,
+      "natural": false,
       "equipped": false,
       "AT": {
         "cut": 0,

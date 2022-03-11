@@ -11,6 +11,37 @@ export default class abfalterCharacterSheet extends ActorSheet {
         });
     }
 
+    itemContextMenuEquip = [
+        {
+            name: game.i18n.localize("abfalter.sheet.equip"),
+            icon: '<i class="fas fa-comment"></i>',
+            callback: element => {
+                const item = this.actor.items.get(element.data("item-id"));
+                if (item.data.data.equipped == false) {
+                    element.equipped = true;
+                } else {
+                    element.equipped = false;
+                }
+                item.update({ "data.equipped": element.equipped });
+            }
+        },
+        {
+            name: game.i18n.localize("abfalter.sheet.edit"),
+            icon: '<i class="fas fa-edit"></i>',
+            callback: element => {
+                const item = this.actor.items.get(element.data("item-id"));
+                item.sheet.render(true);
+            }
+        },
+        {
+            name: game.i18n.localize("abfalter.sheet.delete"),
+            icon: '<i class="fas fa-trash"></i>',
+            callback: element => {
+                this.actor.deleteEmbeddedDocuments("Item", [element.data("item-id")]);
+            }
+        }
+
+    ]
     itemContextMenu = [
         {
             name: game.i18n.localize("abfalter.sheet.edit"),
@@ -55,11 +86,9 @@ export default class abfalterCharacterSheet extends ActorSheet {
         sheetData.weapons = baseData.items.filter(function (item) { return item.type == "weapon" });
         sheetData.armors = baseData.items.filter(function (item) { return item.type == "armor" });
         sheetData.armorHelmets = baseData.items.filter(function (item) { return item.type == "armorHelmet" });
-
         sheetData.advantages = baseData.items.filter(function (item) { return item.type == "advantage" });
         sheetData.disadvantages = baseData.items.filter(function (item) { return item.type == "disadvantage" });
         sheetData.spells = baseData.items.filter(function (item) { return item.type == "spell" });
-
         sheetData.classes = baseData.items.filter(function (item) { return item.type == "class" });
         sheetData.spellPaths = baseData.items.filter(function (item) { return item.type == "spellPath" });
         sheetData.incarnations = baseData.items.filter(function (item) { return item.type == "incarnation" });
@@ -69,6 +98,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
         sheetData.turnMaints = baseData.items.filter(function (item) { return item.type == "turnMaint" });
         sheetData.currencies = baseData.items.filter(function (item) { return item.type == "currency" });
         sheetData.proficiencies = baseData.items.filter(function (item) { return item.type == "proficiency" });
+        sheetData.weaponAttacks = baseData.items.filter(function (item) { return item.type == "weaponAttack" });
 
         return sheetData;
     }
@@ -80,13 +110,17 @@ export default class abfalterCharacterSheet extends ActorSheet {
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
 
-            new ContextMenu(html, ".spellPath-item", this.itemContextMenuDelete);
-            new ContextMenu(html, ".armor-item", this.itemContextMenu);
-            new ContextMenu(html, ".armor-item2", this.itemContextMenu);
-            new ContextMenu(html, ".armorHelmet-item", this.itemContextMenu);
-            new ContextMenu(html, ".armorHelmet-item2", this.itemContextMenu);
+            new ContextMenu(html, ".inventory-item", this.itemContextMenu);
+
+            new ContextMenu(html, ".armor-item", this.itemContextMenuEquip);
+            new ContextMenu(html, ".armor-item2", this.itemContextMenuEquip);
+            new ContextMenu(html, ".armorHelmet-item", this.itemContextMenuEquip);
+            new ContextMenu(html, ".armorHelmet-item2", this.itemContextMenuEquip);
+            new ContextMenu(html, ".weapon-item", this.itemContextMenuEquip);
+
             new ContextMenu(html, ".prof-item", this.itemContextMenuDelete);
             new ContextMenu(html, ".currency-item", this.itemContextMenuDelete);
+            new ContextMenu(html, ".spellPath-item", this.itemContextMenuDelete);
 
         }
 

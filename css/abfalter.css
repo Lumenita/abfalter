@@ -15,6 +15,7 @@ button {
     line-height: normal;
 }
 
+
 h2 {
     display: flex;
     width: 100%;
@@ -60,6 +61,15 @@ h4 {
 .natemph {
     text-shadow: 1px 1px 1px orange;
 }
+.equipped > span {
+   color: darkblue;
+}
+.notEquipped > span {
+    color: #878787;
+}
+.expand-down {
+    text-align: center;
+}
 .mastery-box {
     margin: 0px;
     height: 20px;
@@ -81,7 +91,7 @@ h4 {
     Header Format
     -------------
 */
-.abfalter {
+.actor {
     min-width: 775px;
 }
 .abfalter .sheet-header .profile-img {
@@ -1708,7 +1718,6 @@ h4 {
     width: 58%;
 }
 .currency {
-    display: flex;
     flex-wrap: wrap;
     width: 25%;
 }
@@ -1851,13 +1860,25 @@ h4 {
     padding-bottom: 3px;
 }
 .armor > div:nth-of-type(4) > span:not(:first-of-type),
-.armor > div:nth-of-type(8) > span:not(:first-of-type),
-.armor > div:nth-of-type(9) > span:not(:first-of-type),
 .armor-item2 > div > span:not(:first-of-type),
 .armorHelmet-item2 > div > span:not(:first-of-type) {
     width: 9.25%;
     text-align: center;
     font-size: 13px;
+}
+.armor > div:nth-of-type(8) > input,
+.armor > div:nth-of-type(9) > input {
+    width: 9.05%;
+    margin-left: 2px;
+    text-align: center;
+    font-size: 13px;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-bottom: 1px solid black;
 }
 .armor > div:nth-of-type(7) {
     padding-top: 3px;
@@ -1919,11 +1940,47 @@ h4 {
     Weapon
     ------
 */
-
-
-
-
-
+.weapons > div:first-of-type {
+    display: flex;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+    text-align: center;
+    width: 100%;
+}
+.weapon-item {
+    display: flex;
+    justify-content: space-between;
+}
+.weapon-item > div:first-of-type {
+    width: 95%;
+    display: contents;
+    text-align: center;
+}
+.weapons > div:first-of-type > span:nth-of-type(2),
+.weapon-item > div > span:nth-of-type(2) {
+    width: 69%;
+}
+.weapons > div:first-of-type > span:nth-of-type(1),
+.weapon-item > div > span:first-of-type {
+    width: 15%;
+}
+.weapons > div:first-of-type > span:nth-of-type(1),
+.weapons > div:first-of-type > span:nth-of-type(2) {
+    margin-right: .3%;
+}
+.weapons > div:first-of-type > span:nth-of-type(3),
+.weapon-item > div > span:nth-of-type(3) {
+    width: 10%;
+}
+.weapon-item > div:last-of-type {
+    width: 5%;
+    align-self: center;
+    justify-content: center;
+    display: flex;
+    font-size: 15px;
+}
 /*
     --------
     Currency 
@@ -1978,6 +2035,57 @@ h4 {
     Invnetory
     ---------
 */
+.inventory > div:first-of-type {
+    display: flex;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+    text-align: center;
+    width: 100%;
+}
+.inventory-item {
+    display: flex;
+    justify-content: space-between;
+}
+.inventory-item > div:first-of-type {
+    width: 95%;
+    display: contents;
+}
+.inventory > div:first-of-type > span:nth-of-type(2),
+.inventory-item > div > input:nth-of-type(2) {
+    width: 70%;
+}
+.inventory > div:first-of-type > span:nth-of-type(1),
+.inventory-item > div > input:first-of-type {
+    width: 9%;
+}
+.inventory > div:first-of-type > span:nth-of-type(1),
+.inventory > div:first-of-type > span:nth-of-type(2) {
+    margin-right: .3%;
+}
+.inventory > div:first-of-type > span:nth-of-type(3),
+.inventory-item > div > input:nth-of-type(3) {
+    width: 15%;
+}
+.inventory-item > div:last-of-type {
+    width: 5%;
+    align-self: center;
+    justify-content: center;
+    display: flex;
+    font-size: 15px;
+}
+.inventory-item > div > input {
+    display: flex;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
 /*
     ***************
     ---------------

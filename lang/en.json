@@ -21,7 +21,8 @@
     "sheet": {
       "newItem": "Name here",
       "edit": "Edit",
-      "delete": "Delete"
+      "delete": "Delete",
+      "equip": "Toggle Equip"
     },
     "magicTab": {
       "mproj": "Magic Projection",
@@ -63,6 +64,8 @@
     },
     "armoryTab": {
       "wearArmor": "Wear Armor",
+      "stats": "Extra Stats",
+      "armorStats": "Armor Stats",
       "armor": "Armor",
       "addArmor": "Add Armor",
       "prof": "Proficiency",
@@ -84,7 +87,7 @@
       "finalHelmet": "Final Helmet AT",
       "finalArmor": "Final Armor AT",
       "totalNatPen": "Total Natural Penalty",
-      "totalMovePen": "Total Move Penalty",
+      "totalMovePen": "Total Mov. Penalty",
       "totalArtPowEq": "Total Eqp. Presence",
       "otherArt": "Other Eqp. Presence",
       "profName": "Proficiency Name",
@@ -103,7 +106,15 @@
       "gCoin": "Gold Coins",
       "addCoin": "Add Currency Type",
       "quantity": "Quantity",
-      "currency": "Currency"
+      "currency": "Currency",
+      "inventory": "Inventory",
+      "addInventory": "Add Item",
+      "dmgBarrier": "Damage Barrier",
+      "dmgRdc": "Base Dmg. Reduction",
+      "totWeight": "Total Inv. Weight",
+      "weapons": "Weapons",
+      "addWeapons": "Add Weapon",
+      "finalDmg": "Final Dmg."
     }
   }
 }

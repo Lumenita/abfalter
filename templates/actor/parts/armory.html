@@ -7,11 +7,11 @@
             <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.wearArmor.spec" value="{{data.wearArmor.spec}}" /> </label>
             <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.wearArmor.temp" value="{{data.wearArmor.temp}}" /> </label>
             <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.wearArmorFinal" value="{{data.wearArmorFinal}}" readonly /> </label>
-            <h2> Stats </h2>
+            <h2> {{localize "abfalter.armoryTab.armorStats"}} </h2>
             <label> <span class="armorpenalty"> {{localize "abfalter.armoryTab.totalNatPen"}} </span> <input type="number" name="data.totalNatPen" value="{{data.totalNatPen}}" readonly /> </label>
             <label> <span> {{localize "abfalter.armoryTab.totalMovePen"}} </span> <input type="number" name="data.totalMovePen" value="{{data.totalMovePen}}" readonly /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.otherArt"}} </span> <input type="number" name="x" value="0" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.totalArtPowEq"}} </span> <input type="number" name="x" value="0" readonly /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.dmgBarrier"}} </span> <input type="number" name="data.otherStats.damageBarrier" value="{{data.otherStats.damageBarrier}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.dmgRdc"}} </span> <input type="number" name="data.otherStats.dmgRdc" value="{{data.otherStats.dmgRdc}}" /> </label>
         </div>
 
         <div class="armor">
@@ -27,13 +27,13 @@
             <div class="items-list">
                 {{#each armorHelmets as |armorHelmet id|}}
                 <div class="armorHelmet-item item" data-item-id="{{armorHelmet._id}}">
-                    <div>
+                    <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}"> 
                         <span> {{armorHelmet.name}} </span>
                         <span> {{data.quality}} </span>
                         <span> {{data.newPresence}} </span>
                         <span> {{data.newFortitude}} </span>
                         <span> {{data.newRequirement}} </span>
-                        <span> {{data.newMovePenalty}} / {{data.newNatPenalty}} </span>
+                        <span> {{data.newPerPenalty}} </span>
                     </div>
                 </div>
                 {{/each}}
@@ -41,7 +41,7 @@
             <div class="items-list">
                 {{#each armors as |armor id|}}
                 <div class="armor-item item" data-item-id="{{armor._id}}">
-                    <div>
+                    <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}">
                         <span> {{armor.name}} </span>
                         <span> {{data.quality}} </span>
                         <span> {{data.newPresence}} </span>
@@ -66,7 +66,7 @@
             <div class="items-list">
                 {{#each armorHelmets as |armorHelmet id|}}
                 <div class="armorHelmet-item2 item" data-item-id="{{armorHelmet._id}}">
-                    <div>
+                    <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}">
                         <span> {{armorHelmet.name}} </span>
                         <span> {{data.AT.newCut}} </span>
                         <span> {{data.AT.newImp}} </span>
@@ -83,7 +83,7 @@
             <div class="items-list">
                 {{#each armors as |armor id|}}
                 <div class="armor-item2 item" data-item-id="{{armor._id}}">
-                    <div>
+                    <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}">
                         <span> {{armor.name}} </span>
                         <span> {{data.AT.newCut}} </span>
                         <span> {{data.AT.newImp}} </span>
@@ -103,25 +103,25 @@
             </div>
             <div>
                 <span> {{localize "abfalter.armoryTab.finalHelmet"}} </span>
-                <span> x </span>
-                <span> x </span>
-                <span> x </span>
-                <span> x </span>
-                <span> x </span>
-                <span> x </span>
-                <span> x </span>
-                <span> x </span>
+                <input type="number" name="data.helmArmorFinal.cut" value="{{data.helmArmorFinal.cut}}" />
+                <input type="number" name="data.helmArmorFinal.imp" value="{{data.helmArmorFinal.imp}}" />
+                <input type="number" name="data.helmArmorFinal.thr" value="{{data.helmArmorFinal.thr}}" />
+                <input type="number" name="data.helmArmorFinal.heat" value="{{data.helmArmorFinal.heat}}" />
+                <input type="number" name="data.helmArmorFinal.cold" value="{{data.helmArmorFinal.cold}}" />
+                <input type="number" name="data.helmArmorFinal.ele" value="{{data.helmArmorFinal.ele}}" />
+                <input type="number" name="data.helmArmorFinal.ene" value="{{data.helmArmorFinal.ene}}" />
+                <input type="number" name="data.helmArmorFinal.spt" value="{{data.helmArmorFinal.spt}}" />
             </div>
             <div>
                 <span> {{localize "abfalter.armoryTab.finalArmor"}} </span>
-                <span> x </span>
-                <span> x </span>
-                <span> x </span>
-                <span> x </span>
-                <span> x </span>
-                <span> x </span>
-                <span> x </span>
-                <span> x </span>
+                <input type="number" name="data.armorFinal.cut" value="{{data.armorFinal.cut}}" />
+                <input type="number" name="data.armorFinal.imp" value="{{data.armorFinal.imp}}" />
+                <input type="number" name="data.armorFinal.thr" value="{{data.armorFinal.thr}}" />
+                <input type="number" name="data.armorFinal.heat" value="{{data.armorFinal.heat}}" />
+                <input type="number" name="data.armorFinal.cold" value="{{data.armorFinal.cold}}" />
+                <input type="number" name="data.armorFinal.ele" value="{{data.armorFinal.ele}}" />
+                <input type="number" name="data.armorFinal.ene" value="{{data.armorFinal.ene}}" />
+                <input type="number" name="data.armorFinal.spt" value="{{data.armorFinal.spt}}" />
             </div>
         </div>
     </div>
@@ -162,21 +162,27 @@
         </div>
 
         <div class="weapons">
-            <h2> Weapons </h2>
+            <h2> {{localize "abfalter.armoryTab.weapons"}}  </h2>
+            <div>
+                <span> {{localize "abfalter.armoryTab.finalDmg"}} </span>
+                <span> {{localize "abfalter.basicInfo.name"}} </span>
+                <span> {{localize "abfalter.armoryTab.fortitude"}} </span>
+            </div>
             <div class="items-list">
                 {{#each weapons as |weapon id|}}
-                <div class="spell-item item" data-item-id="{{weapon._id}}">
-                    <div class="item-name item-roll">
-                        <h4>{{weapon.name}}</h4>
+                <div class="weapon-item item" data-item-id="{{weapon._id}}">
+                    <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}">
+                        <span> {{data.quality}} </span>
+                        <span> {{weapon.name}} </span>
+                        <span> {{data.fortitude}} </span>
                     </div>
                     <div class="item-controls">
                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                     </div>
                 </div>
                 {{/each}}
             </div>
-            <a class="item-control item-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addSpell"}} </a>
+            <a class="item-control item-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addWeapons"}} </a>
         </div>
     </div>
 
@@ -201,24 +207,34 @@
                 {{/each}}
             </div>
             <a class="item-control item-create" title="Create item" data-type="currency"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addCoin"}} </a>
+            <h2> {{localize "abfalter.armoryTab.stats"}} </h2>
+            <label> <span> {{localize "abfalter.armoryTab.otherArt"}} </span> <input type="number" name="data.otherStats.artPresence" value="{{data.otherStats.artPresence}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.totalArtPowEq"}} </span> <input type="number" name="x" value="0" readonly /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.totWeight"}} </span> <input type="number" name="x" value="0" readonly /> </label>
         </div>
 
         <div class="inventory">
-            <h2> Inventory </h2>
+            <h2> {{localize "abfalter.armoryTab.inventory"}} </h2>
+            <div>
+                <span> {{localize "abfalter.armoryTab.quantity"}} </span>
+                <span> {{localize "abfalter.basicInfo.name"}} </span>
+                <span> {{localize "abfalter.armoryTab.quality"}} </span>
+            </div>
             <div class="items-list">
                 {{#each inventories as |inventory id|}}
-                <div class="spell-item item" data-item-id="{{inventory._id}}">
-                    <div class="item-name item-roll">
-                        <h4>{{inventory.name}}</h4>
+                <div class="inventory-item item" data-item-id="{{inventory._id}}">
+                    <div>
+                        <input class="inv-quantity inline-edit" data-field="data.quantity" type="number" value="{{inventory.data.quantity}}" />
+                        <input class="item-name inline-edit" data-field="name" type="text" value="{{inventory.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
+                        <input class="inv-quality inline-edit" data-field="data.quality" type="text" value="{{inventory.data.quality}}" />
                     </div>
                     <div class="item-controls">
                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                     </div>
                 </div>
                 {{/each}}
             </div>
-            <a class="item-control item-create" title="Create item" data-type="inventory"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addSpell"}} </a>
+            <a class="item-control item-create" title="Create item" data-type="inventory"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addInventory"}} </a>
         </div>
     </div>
 </div>
