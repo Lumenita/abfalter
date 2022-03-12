@@ -9,6 +9,7 @@
             <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.wearArmorFinal" value="{{data.wearArmorFinal}}" readonly /> </label>
             <h2> {{localize "abfalter.armoryTab.armorStats"}} </h2>
             <label> <span class="armorpenalty"> {{localize "abfalter.armoryTab.totalNatPen"}} </span> <input type="number" name="data.totalNatPen" value="{{data.totalNatPen}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.totalPerPen"}} </span> <input type="number" name="data.totalPerPen" value="{{data.totalPerPen}}" readonly /> </label>
             <label> <span> {{localize "abfalter.armoryTab.totalMovePen"}} </span> <input type="number" name="data.totalMovePen" value="{{data.totalMovePen}}" readonly /> </label>
             <label> <span> {{localize "abfalter.armoryTab.dmgBarrier"}} </span> <input type="number" name="data.otherStats.damageBarrier" value="{{data.otherStats.damageBarrier}}" /> </label>
             <label> <span> {{localize "abfalter.armoryTab.dmgRdc"}} </span> <input type="number" name="data.otherStats.dmgRdc" value="{{data.otherStats.dmgRdc}}" /> </label>
@@ -33,7 +34,7 @@
                         <span> {{data.newPresence}} </span>
                         <span> {{data.newFortitude}} </span>
                         <span> {{data.newRequirement}} </span>
-                        <span> {{data.newPerPenalty}} </span>
+                        <span> {{data.newNatPenalty}} </span>
                     </div>
                 </div>
                 {{/each}}
@@ -103,25 +104,25 @@
             </div>
             <div>
                 <span> {{localize "abfalter.armoryTab.finalHelmet"}} </span>
-                <input type="number" name="data.helmArmorFinal.cut" value="{{data.helmArmorFinal.cut}}" />
-                <input type="number" name="data.helmArmorFinal.imp" value="{{data.helmArmorFinal.imp}}" />
-                <input type="number" name="data.helmArmorFinal.thr" value="{{data.helmArmorFinal.thr}}" />
-                <input type="number" name="data.helmArmorFinal.heat" value="{{data.helmArmorFinal.heat}}" />
-                <input type="number" name="data.helmArmorFinal.cold" value="{{data.helmArmorFinal.cold}}" />
-                <input type="number" name="data.helmArmorFinal.ele" value="{{data.helmArmorFinal.ele}}" />
-                <input type="number" name="data.helmArmorFinal.ene" value="{{data.helmArmorFinal.ene}}" />
-                <input type="number" name="data.helmArmorFinal.spt" value="{{data.helmArmorFinal.spt}}" />
+                <span> {{data.ahCutFinal}} </span>
+                <span> {{data.ahImpFinal}} </span>
+                <span> {{data.ahThrFinal}} </span>
+                <span> {{data.ahHeatFinal}} </span>
+                <span> {{data.ahColdFinal}} </span>
+                <span> {{data.ahEleFinal}} </span>
+                <span> {{data.ahEneFinal}} </span>
+                <span> {{data.ahSptFinal}} </span>
             </div>
             <div>
                 <span> {{localize "abfalter.armoryTab.finalArmor"}} </span>
-                <input type="number" name="data.armorFinal.cut" value="{{data.armorFinal.cut}}" />
-                <input type="number" name="data.armorFinal.imp" value="{{data.armorFinal.imp}}" />
-                <input type="number" name="data.armorFinal.thr" value="{{data.armorFinal.thr}}" />
-                <input type="number" name="data.armorFinal.heat" value="{{data.armorFinal.heat}}" />
-                <input type="number" name="data.armorFinal.cold" value="{{data.armorFinal.cold}}" />
-                <input type="number" name="data.armorFinal.ele" value="{{data.armorFinal.ele}}" />
-                <input type="number" name="data.armorFinal.ene" value="{{data.armorFinal.ene}}" />
-                <input type="number" name="data.armorFinal.spt" value="{{data.armorFinal.spt}}" />
+                <span> {{data.aCutFinal}} </span>
+                <span> {{data.aImpFinal}} </span>
+                <span> {{data.aThrFinal}} </span>
+                <span> {{data.aHeatFinal}} </span>
+                <span> {{data.aColdFinal}} </span>
+                <span> {{data.aEleFinal}} </span>
+                <span> {{data.aEneFinal}} </span>
+                <span> {{data.aSptFinal}} </span>
             </div>
         </div>
     </div>
@@ -207,10 +208,6 @@
                 {{/each}}
             </div>
             <a class="item-control item-create" title="Create item" data-type="currency"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addCoin"}} </a>
-            <h2> {{localize "abfalter.armoryTab.stats"}} </h2>
-            <label> <span> {{localize "abfalter.armoryTab.otherArt"}} </span> <input type="number" name="data.otherStats.artPresence" value="{{data.otherStats.artPresence}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.totalArtPowEq"}} </span> <input type="number" name="x" value="0" readonly /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.totWeight"}} </span> <input type="number" name="x" value="0" readonly /> </label>
         </div>
 
         <div class="inventory">

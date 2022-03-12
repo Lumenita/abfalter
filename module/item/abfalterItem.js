@@ -55,12 +55,6 @@ export default class abfalterItem extends Item {
         } else {
             this.data.data.newNatPenalty = 0;
         };
-        this.data.data.newMovePen = Math.floor(+this.data.data.movePenalty - +this.data.data.qualityValue);
-        if (this.data.data.newMovePen > 0) {
-            this.data.data.newMovePenalty = this.data.data.newMovePen;
-        } else {
-            this.data.data.newMovePenalty = 0;
-        };
         this.data.data.AT.newCut = Math.floor(+this.data.data.AT.cut + +this.data.data.qualityValue);
         this.data.data.AT.newImp = Math.floor(+this.data.data.AT.imp + +this.data.data.qualityValue);
         this.data.data.AT.newThr = Math.floor(+this.data.data.AT.thr + +this.data.data.qualityValue);

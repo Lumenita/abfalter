@@ -797,7 +797,7 @@
       "presence": 0,
       "fortitude": 0,
       "requirement": 0,
-      "perPenalty": 0,
+      "natPenalty": 0,
       "natural": false,
       "equipped": false,
       "AT": {

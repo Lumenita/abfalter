@@ -88,8 +88,6 @@
       "finalArmor": "Final Armor AT",
       "totalNatPen": "Total Natural Penalty",
       "totalMovePen": "Total Mov. Penalty",
-      "totalArtPowEq": "Total Eqp. Presence",
-      "otherArt": "Other Eqp. Presence",
       "profName": "Proficiency Name",
       "starting": "Starting",
       "similar": "Similar",
@@ -111,10 +109,10 @@
       "addInventory": "Add Item",
       "dmgBarrier": "Damage Barrier",
       "dmgRdc": "Base Dmg. Reduction",
-      "totWeight": "Total Inv. Weight",
       "weapons": "Weapons",
       "addWeapons": "Add Weapon",
-      "finalDmg": "Final Dmg."
+      "finalDmg": "Final Dmg.",
+      "totalPerPen": "Total Per. Penalty"
     }
   }
 }

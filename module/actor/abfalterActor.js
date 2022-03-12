@@ -1272,29 +1272,131 @@ export default class abfalterActor extends Actor {
         // Wear Armor
         data.wearArmorFinal = Math.floor(data.wearArmor.base + data.weararmorbonus + data.wearArmor.spec + data.wearArmor.temp + data.stats.Strength.mod);
         // Armor
-        const [quantity, req, natPen, movePen] = this.items.reduce((arr2, item) => {
+        const [quantity, req, natPen, movePen, aCutMax, aCutTot, aImpMax, aImpTot, aThrMax, aThrTot, aHeatMax, aHeatTot, aColdMax, aColdTot,
+                aEleMax, aEleTot, aEneMax, aEneTot, aSptMax, aSptTot] = this.items.reduce((arr2, item) => {
             if (item.type === "armor") {
                 if (item.data.data.equipped == true) {
                     arr2[0] += parseInt(item.data.data.quantity) || 0;
                     arr2[1] += parseInt(item.data.data.newRequirement) || 0;
                     arr2[2] += parseInt(item.data.data.newNatPenalty) || 0;
                     arr2[3] += parseInt(item.data.data.newMovePenalty) || 0;
+                    if (arr2[4] < item.data.data.AT.newCut) {
+                        arr2[4] = item.data.data.AT.newCut;
+                    }
+                    arr2[5] += parseInt(item.data.data.AT.newCut / 2) || 0;
+                    if (arr2[6] < item.data.data.AT.newImp) {
+                        arr2[6] = item.data.data.AT.newImp;
+                    }
+                    arr2[7] += parseInt(item.data.data.AT.newImp / 2) || 0;
+                    if (arr2[8] < item.data.data.AT.newThr) {
+                        arr2[8] = item.data.data.AT.newThr;
+                    }
+                    arr2[9] += parseInt(item.data.data.AT.newThr / 2) || 0;
+                    if (arr2[10] < item.data.data.AT.newHeat) {
+                        arr2[10] = item.data.data.AT.newHeat;
+                    }
+                    arr2[11] += parseInt(item.data.data.AT.newHeat / 2) || 0;
+                    if (arr2[12] < item.data.data.AT.newCold) {
+                        arr2[12] = item.data.data.AT.newCold;
+                    }
+                    arr2[13] += parseInt(item.data.data.AT.newCold / 2) || 0;
+                    if (arr2[14] < item.data.data.AT.newEle) {
+                        arr2[14] = item.data.data.AT.newEle;
+                    }
+                    arr2[15] += parseInt(item.data.data.AT.newEle / 2) || 0;
+                    if (arr2[16] < item.data.data.AT.newEne) {
+                        arr2[16] = item.data.data.AT.newEne;
+                    }
+                    arr2[17] += parseInt(item.data.data.AT.newEne / 2) || 0;
+                    if (arr2[18] < item.data.data.AT.newSpt) {
+                        arr2[18] = item.data.data.AT.newSpt;
+                    }
+                    arr2[19] += parseInt(item.data.data.AT.newSpt / 2) || 0;
                 }
             }
             return arr2;
-        }, [0, 0, 0, 0]);
+                }, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        // Armor Final AT
+        data.aCutFinal = Math.floor((aCutTot - ~~(aCutMax / 2)) + aCutMax);
+        data.aImpFinal = Math.floor((aImpTot - ~~(aImpMax / 2)) + aImpMax);
+        data.aThrFinal = Math.floor((aThrTot - ~~(aThrMax / 2)) + aThrMax);
+        data.aHeatFinal = Math.floor((aHeatTot - ~~(aHeatMax / 2)) + aHeatMax);
+        data.aColdFinal = Math.floor((aColdTot - ~~(aColdMax / 2)) + aColdMax);
+        data.aEleFinal = Math.floor((aEleTot - ~~(aEleMax / 2)) + aEleMax);
+        data.aEneFinal = Math.floor((aEneTot - ~~(aEneMax / 2)) + aEneMax);
+        data.aSptFinal = Math.floor((aSptTot - ~~(aSptMax / 2)) + aSptMax);
+
+        const [ahReq, ahCutMax, ahCutTot, ahImpMax, ahImpTot, ahThrMax, ahThrTot, ahHeatMax, ahHeatTot, ahColdMax, ahColdTot,
+            ahEleMax, ahEleTot, ahEneMax, ahEneTot, ahSptMax, ahSptTot, perPen] = this.items.reduce((arr3, item) => {
+                if (item.type === "armorHelmet") {
+                    if (item.data.data.equipped == true) {
+                        arr3[0] += parseInt(item.data.data.newRequirement) || 0;
+                        if (arr3[1] < item.data.data.AT.newCut) {
+                            arr3[1] = item.data.data.AT.newCut;
+                        }
+                        arr3[2] += parseInt(item.data.data.AT.newCut / 2) || 0;
+                        if (arr3[3] < item.data.data.AT.newImp) {
+                            arr3[3] = item.data.data.AT.newImp;
+                        }
+                        arr3[4] += parseInt(item.data.data.AT.newImp / 2) || 0;
+                        if (arr3[5] < item.data.data.AT.newThr) {
+                            arr3[5] = item.data.data.AT.newThr;
+                        }
+                        arr3[6] += parseInt(item.data.data.AT.newThr / 2) || 0;
+                        if (arr3[7] < item.data.data.AT.newHeat) {
+                            arr3[7] = item.data.data.AT.newHeat;
+                        }
+                        arr3[8] += parseInt(item.data.data.AT.newHeat / 2) || 0;
+                        if (arr3[9] < item.data.data.AT.newCold) {
+                            arr3[9] = item.data.data.AT.newCold;
+                        }
+                        arr3[10] += parseInt(item.data.data.AT.newCold / 2) || 0;
+                        if (arr3[11] < item.data.data.AT.newEle) {
+                            arr3[11] = item.data.data.AT.newEle;
+                        }
+                        arr3[12] += parseInt(item.data.data.AT.newEle / 2) || 0;
+                        if (arr3[13] < item.data.data.AT.newEne) {
+                            arr3[13] = item.data.data.AT.newEne;
+                        }
+                        arr3[14] += parseInt(item.data.data.AT.newEne / 2) || 0;
+                        if (arr3[15] < item.data.data.AT.newSpt) {
+                            arr3[15] = item.data.data.AT.newSpt;
+                        }
+                        arr3[16] += parseInt(item.data.data.AT.newSpt / 2) || 0;
+                        arr3[17] += parseInt(item.data.data.newNatPenalty) || 0;
+                    }
+                }
+                return arr3;
+            }, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); 
+
+        // Helmet Final AT
+        data.ahCutFinal = Math.floor((ahCutTot - ~~(ahCutMax / 2)) + ahCutMax);
+        data.ahImpFinal = Math.floor((ahImpTot - ~~(ahImpMax / 2)) + ahImpMax);
+        data.ahThrFinal = Math.floor((ahThrTot - ~~(ahThrMax / 2)) + ahThrMax);
+        data.ahHeatFinal = Math.floor((ahHeatTot - ~~(ahHeatMax / 2)) + ahHeatMax);
+        data.ahColdFinal = Math.floor((ahColdTot - ~~(ahColdMax / 2)) + ahColdMax);
+        data.ahEleFinal = Math.floor((ahEleTot - ~~(ahEleMax / 2)) + ahEleMax);
+        data.ahEneFinal = Math.floor((ahEneTot - ~~(ahEneMax / 2)) + ahEneMax);
+        data.ahSptFinal = Math.floor((ahSptTot - ~~(ahSptMax / 2)) + ahSptMax);
+
+        // Armor Stats
         data.armorMod = Math.floor(data.wearArmorFinal - req);
         if (natPen - data.armorMod < 0) {
-            data.totalNatPen = Math.floor(((quantity - 1) * 20) + 0);
+            data.totalNatPen = Math.max(0, Math.floor(((quantity - 1) * 20) + 0));
         } else {
-            data.totalNatPen = Math.floor(((quantity - 1) * 20) + (natPen - data.armorMod));
+            data.totalNatPen = Math.max(0, Math.floor(((quantity - 1) * 20) + (natPen - data.armorMod)));
         }
-        data.movePenMod = Math.floor(data.armorMod / 50);
+        data.movePenMod = Math.max(0, Math.floor(data.armorMod / 50));
         if (movePen - data.movePenMod < 0) {
             data.totalMovePen = movePen;
         } else {
             data.totalMovePen = movePen - data.movePenMod
         }
+        data.totalPerPen = perPen;
+
+
+
+
 
 
 

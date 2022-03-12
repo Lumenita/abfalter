@@ -14,7 +14,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
     itemContextMenuEquip = [
         {
             name: game.i18n.localize("abfalter.sheet.equip"),
-            icon: '<i class="fas fa-comment"></i>',
+            icon: '<i class="fas fa-caret-right"></i>',
             callback: element => {
                 const item = this.actor.items.get(element.data("item-id"));
                 if (item.data.data.equipped == false) {

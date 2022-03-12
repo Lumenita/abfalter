@@ -91,8 +91,6 @@ abfalter.armoryTab = {
     finalArmor: "abfalter.armoryTab.finalArmor",
     totalNatPen: "abfalter.armoryTab.totalNatPen",
     totalMovePen: "abfalter.armoryTab.totalMovePen",
-    totalArtPowEq: "abfalter.armoryTab.totalArtPowEq",
-    otherArt: "abfalter.armoryTab.otherArt",
     profName: "abfalter.armoryTab.profName",
     starting: "abfalter.armoryTab.starting",
     similar: "abfalter.armoryTab.similar",
@@ -114,8 +112,8 @@ abfalter.armoryTab = {
     addInventory: "abfalter.armoryTab.addInventory",
     dmgBarrier: "abfalter.armoryTab.dmgBarrier",
     dmgRdc: "abfalter.armoryTab.dmgRdc",
-    totWeight: "abfalter.armoryTab.totWeight",
     weapons: "abfalter.armoryTab.weapons",
     addWeapons: "abfalter.armoryTab.addWeapons",
-    finalDmg: "abfalter.armoryTab.finalDmg"
+    finalDmg: "abfalter.armoryTab.finalDmg",
+    totalPerPen: "abfalter.armoryTab.totalPerPen"
 }

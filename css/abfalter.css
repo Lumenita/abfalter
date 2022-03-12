@@ -1769,20 +1769,22 @@ h4 {
 .wearArmor > label:nth-of-type(5) > input,
 .wearArmor > label:nth-of-type(6) > input,
 .wearArmor > label:nth-of-type(7) > input,
-.wearArmor > label:nth-of-type(9) > input {
+.wearArmor > label:nth-of-type(8) > input {
     background: transparent;
     border-bottom: 0px;
 }
 .wearArmor > label:nth-of-type(6) > span,
 .wearArmor > label:nth-of-type(7) > span,
 .wearArmor > label:nth-of-type(8) > span,
-.wearArmor > label:nth-of-type(9) > span {
+.wearArmor > label:nth-of-type(9) > span,
+.wearArmor > label:nth-of-type(10) > span{
     width: 80%;
 }
 .wearArmor > label:nth-of-type(6) > input,
 .wearArmor > label:nth-of-type(7) > input,
 .wearArmor > label:nth-of-type(8) > input,
-.wearArmor > label:nth-of-type(9) > input {
+.wearArmor > label:nth-of-type(9) > input,
+.wearArmor > label:nth-of-type(10) > input {
     width: 20%;
 }
 /*
@@ -1861,24 +1863,12 @@ h4 {
 }
 .armor > div:nth-of-type(4) > span:not(:first-of-type),
 .armor-item2 > div > span:not(:first-of-type),
+.armor > div:nth-of-type(8) > span:not(:first-of-type),
+.armor > div:nth-of-type(9) > span:not(:first-of-type),
 .armorHelmet-item2 > div > span:not(:first-of-type) {
     width: 9.25%;
     text-align: center;
     font-size: 13px;
-}
-.armor > div:nth-of-type(8) > input,
-.armor > div:nth-of-type(9) > input {
-    width: 9.05%;
-    margin-left: 2px;
-    text-align: center;
-    font-size: 13px;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    border-bottom: 1px solid black;
 }
 .armor > div:nth-of-type(7) {
     padding-top: 3px;
