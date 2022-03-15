@@ -16,7 +16,11 @@
       "ability": "Ability",
       "used": "Used",
       "type": "Type",
-      "cost": "Cost"
+      "cost": "Cost",
+      "spent": "Spent",
+      "yes": "Yes",
+      "no": "No",
+      "active": "Active!"
     },
     "sheet": {
       "newItem": "Name here",
@@ -61,6 +65,31 @@
       "addInvocation": "Add Invocation",
       "incarnation": "Incarnation",
       "addIncarnation": "Add Incarnation"
+    },
+    "psychicTab": {
+      "pp": "PP",
+      "ppotential": "Potential",
+      "pproj": "Projection",
+      "pmodule": "Psychic Module",
+      "pmoduleText": "Use Attack & Defense",
+      "pmoduleText2": "as Psychic Projection",
+      "pdisc": "Disciplines",
+      "paddDisc": "Add Discipline",
+      "freeppMax": "Total Free PP",
+      "freepp": "Current Free PP",
+      "fromWP": "From WP",
+      "maintMatrix": "Maintained Matrices",
+      "numOfSlots": "# of Innate Slots:",
+      "totalppSlots": "Total PP cost is:",
+      "potency": "Potency",
+      "addMaintMatrix": "Add Maintained Matrix",
+      "mentalPatterns": "Mental Patterns",
+      "psychicMatrices": "Psychic Matrices",
+      "patternName": "Pattern Name",
+      "totalCost": "Total Cost",
+      "cancelled": "Cancelled?",
+      "addMentalPattern": "Add Mental Pattern",
+      "addPsychicMatrix": "Add Psychic Matrix"
     },
     "armoryTab": {
       "wearArmor": "Wear Armor",
@@ -113,6 +142,13 @@
       "addWeapons": "Add Weapon",
       "finalDmg": "Final Dmg.",
       "totalPerPen": "Total Per. Penalty"
+    },
+    "settingsTab": {
+      "openRoll": "Open Roll Range",
+      "fumbleRoll": "Fumble Roll Range",
+      "charOptions": "Character Options",
+      "presenceMod": "Presence Mod",
+      "levelMod": "Level Mod"
     }
   }
 }

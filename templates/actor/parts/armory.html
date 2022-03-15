@@ -27,7 +27,7 @@
             </div>
             <div class="items-list">
                 {{#each armorHelmets as |armorHelmet id|}}
-                <div class="armorHelmet-item item" data-item-id="{{armorHelmet._id}}">
+                <div class="armorHelmet-item item equip-item" data-item-id="{{armorHelmet._id}}">
                     <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}"> 
                         <span> {{armorHelmet.name}} </span>
                         <span> {{data.quality}} </span>
@@ -41,7 +41,7 @@
             </div>
             <div class="items-list">
                 {{#each armors as |armor id|}}
-                <div class="armor-item item" data-item-id="{{armor._id}}">
+                <div class="armor-item item equip-item" data-item-id="{{armor._id}}">
                     <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}">
                         <span> {{armor.name}} </span>
                         <span> {{data.quality}} </span>
@@ -66,7 +66,7 @@
             </div>
             <div class="items-list">
                 {{#each armorHelmets as |armorHelmet id|}}
-                <div class="armorHelmet-item2 item" data-item-id="{{armorHelmet._id}}">
+                <div class="armorHelmet-item2 item equip-item" data-item-id="{{armorHelmet._id}}">
                     <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}">
                         <span> {{armorHelmet.name}} </span>
                         <span> {{data.AT.newCut}} </span>
@@ -83,7 +83,7 @@
             </div>
             <div class="items-list">
                 {{#each armors as |armor id|}}
-                <div class="armor-item2 item" data-item-id="{{armor._id}}">
+                <div class="armor-item2 item equip-item" data-item-id="{{armor._id}}">
                     <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}">
                         <span> {{armor.name}} </span>
                         <span> {{data.AT.newCut}} </span>
@@ -137,7 +137,7 @@
             </div>
             <div class="items-list">
                 {{#each proficiencies as |proficiency id|}}
-                <div class="prof-item item" data-item-id="{{proficiency._id}}">
+                <div class="prof-item item delete-item" data-item-id="{{proficiency._id}}">
                     <div>
                         <label> <input class="prof-name inline-edit" data-field="name" type="text" value="{{proficiency.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" /> </label>
                         <select name="proficiency.data.type" class="prof-type inline-edit" data-field="data.type">
@@ -171,7 +171,7 @@
             </div>
             <div class="items-list">
                 {{#each weapons as |weapon id|}}
-                <div class="weapon-item item" data-item-id="{{weapon._id}}">
+                <div class="weapon-item item equip-item" data-item-id="{{weapon._id}}">
                     <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}">
                         <span> {{data.quality}} </span>
                         <span> {{weapon.name}} </span>
@@ -199,7 +199,7 @@
             <label> <span> {{localize "abfalter.armoryTab.gCoin"}} </span> <input type="number" name="data.currency.gold" value="{{data.currency.gold}}" /> </label>
             <div class="items-list">
                 {{#each currencies as |currency id|}}
-                <div class="currency-item item" data-item-id="{{currency._id}}">
+                <div class="currency-item item delete-item" data-item-id="{{currency._id}}">
                     <div>
                         <input class="item-name inline-edit" data-field="name" type="text" value="{{currency.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
                         <input class="coin-quantity inline-edit" data-field="data.quantity" type="number" value="{{currency.data.quantity}}" />
@@ -219,7 +219,7 @@
             </div>
             <div class="items-list">
                 {{#each inventories as |inventory id|}}
-                <div class="inventory-item item" data-item-id="{{inventory._id}}">
+                <div class="inventory-item item normal-item" data-item-id="{{inventory._id}}">
                     <div>
                         <input class="inv-quantity inline-edit" data-field="data.quantity" type="number" value="{{inventory.data.quantity}}" />
                         <input class="item-name inline-edit" data-field="name" type="text" value="{{inventory.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />

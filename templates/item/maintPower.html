@@ -1,0 +1,13 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div>
+        <span> This is the Maintained Matrices Item, which shows the name, potency, & description of the item on the actor sheet. </span>
+        <span> This popup cannot be opened in the actor sheet. </span>
+    </div>
+    <div>
+        <label> <span> Name </span> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
+        <label> <span> Potency </span> <input name="data.value" type="number" value="{{data.value}}" />  </label>
+    </div>
+    <div class="editor-box">
+        {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+    </div>
+</form>

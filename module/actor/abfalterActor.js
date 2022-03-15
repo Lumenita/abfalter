@@ -12,85 +12,174 @@ export default class abfalterActor extends Actor {
         const data = actorData.data;
         const stats = data.stats;
 
-        // Determine Class Level Bonusses --find a more efficient way?
-        const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish,
-            acro, athle, climb, jump, ride, swim, etiq, intim, leader, persua, street, style, trading,
-            notice, search, track, animals, appra, archi, herb, hist, law, magicapr, medic, mem, navi, occ,
-            science, tactic, comp, fos, wstp, disg, hide, lock, poisn, stealth, theft, trapl, alche, anims,
-            art, dance, forgi, jewel, music, runes, ritcal, soh, tailoring] = this.items.reduce((arr, item) => {
-            if (item.type === "class") {
-                const classLevels = parseInt(item.data.data.main.levels) || 0;
-                arr[0] += classLevels;
-                arr[1] += classLevels * (parseInt(item.data.data.main.lp) || 0);
-                arr[2] += classLevels * (parseInt(item.data.data.main.initiative) || 0);
-                arr[3] += classLevels * (parseInt(item.data.data.main.attack) || 0);
-                arr[4] += classLevels * (parseInt(item.data.data.main.dodge) || 0);
-                arr[5] += classLevels * (parseInt(item.data.data.main.block) || 0);
-                arr[6] += classLevels * (parseInt(item.data.data.main.weararmor) || 0);
-                arr[7] += classLevels * (parseInt(item.data.data.main.mk) || 0);
-                arr[8] += classLevels * (parseInt(item.data.data.main.pp) || 0);
-                arr[9] += classLevels * (parseInt(item.data.data.main.zeon) || 0);
-                arr[10] += classLevels * (parseInt(item.data.data.main.summon) || 0);
-                arr[11] += classLevels * (parseInt(item.data.data.main.control) || 0);
-                arr[12] += classLevels * (parseInt(item.data.data.main.bind) || 0);
-                arr[13] += classLevels * (parseInt(item.data.data.main.banish) || 0);
-                arr[14] += classLevels * (parseInt(item.data.data.secondary.acro) || 0);
-                arr[15] += classLevels * (parseInt(item.data.data.secondary.athleticism) || 0);
-                arr[16] += classLevels * (parseInt(item.data.data.secondary.climb) || 0);
-                arr[17] += classLevels * (parseInt(item.data.data.secondary.jump) || 0);
-                arr[18] += classLevels * (parseInt(item.data.data.secondary.ride) || 0);
-                arr[19] += classLevels * (parseInt(item.data.data.secondary.swim) || 0);
-                arr[20] += classLevels * (parseInt(item.data.data.secondary.etiquette) || 0);
-                arr[21] += classLevels * (parseInt(item.data.data.secondary.intimidate) || 0);
-                arr[22] += classLevels * (parseInt(item.data.data.secondary.leadership) || 0);
-                arr[23] += classLevels * (parseInt(item.data.data.secondary.persuasion) || 0);
-                arr[24] += classLevels * (parseInt(item.data.data.secondary.streetwise) || 0);
-                arr[25] += classLevels * (parseInt(item.data.data.secondary.style) || 0);
-                arr[26] += classLevels * (parseInt(item.data.data.secondary.trading) || 0);
-                arr[27] += classLevels * (parseInt(item.data.data.secondary.notice) || 0);
-                arr[28] += classLevels * (parseInt(item.data.data.secondary.search) || 0);
-                arr[29] += classLevels * (parseInt(item.data.data.secondary.track) || 0);
-                arr[30] += classLevels * (parseInt(item.data.data.secondary.animals) || 0);
-                arr[31] += classLevels * (parseInt(item.data.data.secondary.appraisal) || 0);
-                arr[32] += classLevels * (parseInt(item.data.data.secondary.architecture) || 0);
-                arr[33] += classLevels * (parseInt(item.data.data.secondary.herballore) || 0);
-                arr[34] += classLevels * (parseInt(item.data.data.secondary.history) || 0);
-                arr[35] += classLevels * (parseInt(item.data.data.secondary.law) || 0);
-                arr[36] += classLevels * (parseInt(item.data.data.secondary.magicappr) || 0);
-                arr[37] += classLevels * (parseInt(item.data.data.secondary.medicine) || 0);
-                arr[38] += classLevels * (parseInt(item.data.data.secondary.memorize) || 0);
-                arr[39] += classLevels * (parseInt(item.data.data.secondary.navigation) || 0);
-                arr[40] += classLevels * (parseInt(item.data.data.secondary.occult) || 0);
-                arr[41] += classLevels * (parseInt(item.data.data.secondary.science) || 0);
-                arr[42] += classLevels * (parseInt(item.data.data.secondary.tactics) || 0);
-                arr[43] += classLevels * (parseInt(item.data.data.secondary.composure) || 0);
-                arr[44] += classLevels * (parseInt(item.data.data.secondary.featsofstr) || 0);
-                arr[45] += classLevels * (parseInt(item.data.data.secondary.withstpain) || 0);
-                arr[46] += classLevels * (parseInt(item.data.data.secondary.disguise) || 0);
-                arr[47] += classLevels * (parseInt(item.data.data.secondary.hide) || 0);
-                arr[48] += classLevels * (parseInt(item.data.data.secondary.lockpicking) || 0);
-                arr[49] += classLevels * (parseInt(item.data.data.secondary.poisons) || 0);
-                arr[50] += classLevels * (parseInt(item.data.data.secondary.stealth) || 0);
-                arr[51] += classLevels * (parseInt(item.data.data.secondary.theft) || 0);
-                arr[52] += classLevels * (parseInt(item.data.data.secondary.traplore) || 0);
-                arr[53] += classLevels * (parseInt(item.data.data.secondary.alchemy) || 0);
-                arr[54] += classLevels * (parseInt(item.data.data.secondary.animism) || 0);
-                arr[55] += classLevels * (parseInt(item.data.data.secondary.art) || 0);
-                arr[56] += classLevels * (parseInt(item.data.data.secondary.dance) || 0);
-                arr[57] += classLevels * (parseInt(item.data.data.secondary.forging) || 0);
-                arr[58] += classLevels * (parseInt(item.data.data.secondary.jewelry) || 0);
-                arr[59] += classLevels * (parseInt(item.data.data.secondary.music) || 0);
-                arr[60] += classLevels * (parseInt(item.data.data.secondary.runes) || 0);
-                arr[61] += classLevels * (parseInt(item.data.data.secondary.ritualcalig) || 0);
-                arr[62] += classLevels * (parseInt(item.data.data.secondary.slofhand) || 0);
-                arr[63] += classLevels * (parseInt(item.data.data.secondary.tailoring) || 0);
-
-            }
+        // Determine Class Level Bonusses
+        const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish, acro,
+            athle, climb, jump, ride, swim, etiq, intim, leader, persua, street, style, trading, notice, search, track,
+            animals, appra, archi, herb, hist, law, magicapr, medic, mem, navi, occ, science, tactic, comp, fos,
+            wstp, disg, hide, lock, poisn, stealth, theft, trapl, alche, anims, art, dance, forgi, jewel, music,
+            runes, ritcal, soh, tailoring, quantity, req, natPen, movePen, aCutMax, aCutTot, aImpMax, aImpTot, aThrMax, aThrTot, aHeatMax,
+            aHeatTot, aColdMax, aColdTot, aEleMax, aEleTot, aEneMax, aEneTot, aSptMax, aSptTot, ahReq, ahCutMax, ahCutTot, ahImpMax, ahImpTot, ahThrMax,
+            ahThrTot, ahHeatMax, ahHeatTot, ahColdMax, ahColdTot, ahEleMax, ahEleTot, ahEneMax, ahEneTot, ahSptMax, ahSptTot, perPen, usedpp, matrixpp] = this.items.reduce((arr, item) => {
+                if (item.type === "class") {
+                    const classLevels = parseInt(item.data.data.main.levels) || 0;
+                    arr[0] += classLevels;
+                    arr[1] += classLevels * (parseInt(item.data.data.main.lp) || 0);
+                    arr[2] += classLevels * (parseInt(item.data.data.main.initiative) || 0);
+                    arr[3] += classLevels * (parseInt(item.data.data.main.attack) || 0);
+                    arr[4] += classLevels * (parseInt(item.data.data.main.dodge) || 0);
+                    arr[5] += classLevels * (parseInt(item.data.data.main.block) || 0);
+                    arr[6] += classLevels * (parseInt(item.data.data.main.weararmor) || 0);
+                    arr[7] += classLevels * (parseInt(item.data.data.main.mk) || 0);
+                    arr[8] += classLevels * (parseInt(item.data.data.main.pp) || 0);
+                    arr[9] += classLevels * (parseInt(item.data.data.main.zeon) || 0);
+                    arr[10] += classLevels * (parseInt(item.data.data.main.summon) || 0);
+                    arr[11] += classLevels * (parseInt(item.data.data.main.control) || 0);
+                    arr[12] += classLevels * (parseInt(item.data.data.main.bind) || 0);
+                    arr[13] += classLevels * (parseInt(item.data.data.main.banish) || 0);
+                    arr[14] += classLevels * (parseInt(item.data.data.secondary.acro) || 0);
+                    arr[15] += classLevels * (parseInt(item.data.data.secondary.athleticism) || 0);
+                    arr[16] += classLevels * (parseInt(item.data.data.secondary.climb) || 0);
+                    arr[17] += classLevels * (parseInt(item.data.data.secondary.jump) || 0);
+                    arr[18] += classLevels * (parseInt(item.data.data.secondary.ride) || 0);
+                    arr[19] += classLevels * (parseInt(item.data.data.secondary.swim) || 0);
+                    arr[20] += classLevels * (parseInt(item.data.data.secondary.etiquette) || 0);
+                    arr[21] += classLevels * (parseInt(item.data.data.secondary.intimidate) || 0);
+                    arr[22] += classLevels * (parseInt(item.data.data.secondary.leadership) || 0);
+                    arr[23] += classLevels * (parseInt(item.data.data.secondary.persuasion) || 0);
+                    arr[24] += classLevels * (parseInt(item.data.data.secondary.streetwise) || 0);
+                    arr[25] += classLevels * (parseInt(item.data.data.secondary.style) || 0);
+                    arr[26] += classLevels * (parseInt(item.data.data.secondary.trading) || 0);
+                    arr[27] += classLevels * (parseInt(item.data.data.secondary.notice) || 0);
+                    arr[28] += classLevels * (parseInt(item.data.data.secondary.search) || 0);
+                    arr[29] += classLevels * (parseInt(item.data.data.secondary.track) || 0);
+                    arr[30] += classLevels * (parseInt(item.data.data.secondary.animals) || 0);
+                    arr[31] += classLevels * (parseInt(item.data.data.secondary.appraisal) || 0);
+                    arr[32] += classLevels * (parseInt(item.data.data.secondary.architecture) || 0);
+                    arr[33] += classLevels * (parseInt(item.data.data.secondary.herballore) || 0);
+                    arr[34] += classLevels * (parseInt(item.data.data.secondary.history) || 0);
+                    arr[35] += classLevels * (parseInt(item.data.data.secondary.law) || 0);
+                    arr[36] += classLevels * (parseInt(item.data.data.secondary.magicappr) || 0);
+                    arr[37] += classLevels * (parseInt(item.data.data.secondary.medicine) || 0);
+                    arr[38] += classLevels * (parseInt(item.data.data.secondary.memorize) || 0);
+                    arr[39] += classLevels * (parseInt(item.data.data.secondary.navigation) || 0);
+                    arr[40] += classLevels * (parseInt(item.data.data.secondary.occult) || 0);
+                    arr[41] += classLevels * (parseInt(item.data.data.secondary.science) || 0);
+                    arr[42] += classLevels * (parseInt(item.data.data.secondary.tactics) || 0);
+                    arr[43] += classLevels * (parseInt(item.data.data.secondary.composure) || 0);
+                    arr[44] += classLevels * (parseInt(item.data.data.secondary.featsofstr) || 0);
+                    arr[45] += classLevels * (parseInt(item.data.data.secondary.withstpain) || 0);
+                    arr[46] += classLevels * (parseInt(item.data.data.secondary.disguise) || 0);
+                    arr[47] += classLevels * (parseInt(item.data.data.secondary.hide) || 0);
+                    arr[48] += classLevels * (parseInt(item.data.data.secondary.lockpicking) || 0);
+                    arr[49] += classLevels * (parseInt(item.data.data.secondary.poisons) || 0);
+                    arr[50] += classLevels * (parseInt(item.data.data.secondary.stealth) || 0);
+                    arr[51] += classLevels * (parseInt(item.data.data.secondary.theft) || 0);
+                    arr[52] += classLevels * (parseInt(item.data.data.secondary.traplore) || 0);
+                    arr[53] += classLevels * (parseInt(item.data.data.secondary.alchemy) || 0);
+                    arr[54] += classLevels * (parseInt(item.data.data.secondary.animism) || 0);
+                    arr[55] += classLevels * (parseInt(item.data.data.secondary.art) || 0);
+                    arr[56] += classLevels * (parseInt(item.data.data.secondary.dance) || 0);
+                    arr[57] += classLevels * (parseInt(item.data.data.secondary.forging) || 0);
+                    arr[58] += classLevels * (parseInt(item.data.data.secondary.jewelry) || 0);
+                    arr[59] += classLevels * (parseInt(item.data.data.secondary.music) || 0);
+                    arr[60] += classLevels * (parseInt(item.data.data.secondary.runes) || 0);
+                    arr[61] += classLevels * (parseInt(item.data.data.secondary.ritualcalig) || 0);
+                    arr[62] += classLevels * (parseInt(item.data.data.secondary.slofhand) || 0);
+                    arr[63] += classLevels * (parseInt(item.data.data.secondary.tailoring) || 0);
+                }
+                if (item.type === "armor") {
+                    if (item.data.data.equipped == true) {
+                        arr[64] += parseInt(item.data.data.quantity) || 0;
+                        arr[65] += parseInt(item.data.data.newRequirement) || 0;
+                        arr[66] += parseInt(item.data.data.newNatPenalty) || 0;
+                        arr[67] += parseInt(item.data.data.newMovePenalty) || 0;
+                        if (arr[68] < item.data.data.AT.newCut) {
+                            arr[68] = item.data.data.AT.newCut;
+                        }
+                        arr[69] += parseInt(item.data.data.AT.newCut / 2) || 0;
+                        if (arr[70] < item.data.data.AT.newImp) {
+                            arr[70] = item.data.data.AT.newImp;
+                        }
+                        arr[71] += parseInt(item.data.data.AT.newImp / 2) || 0;
+                        if (arr[72] < item.data.data.AT.newThr) {
+                            arr[72] = item.data.data.AT.newThr;
+                        }
+                        arr[73] += parseInt(item.data.data.AT.newThr / 2) || 0;
+                        if (arr[74] < item.data.data.AT.newHeat) {
+                            arr[74] = item.data.data.AT.newHeat;
+                        }
+                        arr[75] += parseInt(item.data.data.AT.newHeat / 2) || 0;
+                        if (arr[76] < item.data.data.AT.newCold) {
+                            arr[76] = item.data.data.AT.newCold;
+                        }
+                        arr[77] += parseInt(item.data.data.AT.newCold / 2) || 0;
+                        if (arr[78] < item.data.data.AT.newEle) {
+                            arr[78] = item.data.data.AT.newEle;
+                        }
+                        arr[79] += parseInt(item.data.data.AT.newEle / 2) || 0;
+                        if (arr[80] < item.data.data.AT.newEne) {
+                            arr[80] = item.data.data.AT.newEne;
+                        }
+                        arr[81] += parseInt(item.data.data.AT.newEne / 2) || 0;
+                        if (arr[82] < item.data.data.AT.newSpt) {
+                            arr[82] = item.data.data.AT.newSpt;
+                        }
+                        arr[83] += parseInt(item.data.data.AT.newSpt / 2) || 0;
+                    }
+                }
+                if (item.type === "armorHelmet") {
+                    if (item.data.data.equipped == true) {
+                        arr[84] += parseInt(item.data.data.newRequirement) || 0;
+                        if (arr[85] < item.data.data.AT.newCut) {
+                            arr[85] = item.data.data.AT.newCut;
+                        }
+                        arr[86] += parseInt(item.data.data.AT.newCut / 2) || 0;
+                        if (arr[87] < item.data.data.AT.newImp) {
+                            arr[87] = item.data.data.AT.newImp;
+                        }
+                        arr[88] += parseInt(item.data.data.AT.newImp / 2) || 0;
+                        if (arr[89] < item.data.data.AT.newThr) {
+                            arr[89] = item.data.data.AT.newThr;
+                        }
+                        arr[90] += parseInt(item.data.data.AT.newThr / 2) || 0;
+                        if (arr[91] < item.data.data.AT.newHeat) {
+                            arr[91] = item.data.data.AT.newHeat;
+                        }
+                        arr[92] += parseInt(item.data.data.AT.newHeat / 2) || 0;
+                        if (arr[93] < item.data.data.AT.newCold) {
+                            arr[93] = item.data.data.AT.newCold;
+                        }
+                        arr[94] += parseInt(item.data.data.AT.newCold / 2) || 0;
+                        if (arr[95] < item.data.data.AT.newEle) {
+                            arr[95] = item.data.data.AT.newEle;
+                        }
+                        arr[96] += parseInt(item.data.data.AT.newEle / 2) || 0;
+                        if (arr[97] < item.data.data.AT.newEne) {
+                            arr[97] = item.data.data.AT.newEne;
+                        }
+                        arr[98] += parseInt(item.data.data.AT.newEne / 2) || 0;
+                        if (arr[99] < item.data.data.AT.newSpt) {
+                            arr[99] = item.data.data.AT.newSpt;
+                        }
+                        arr[100] += parseInt(item.data.data.AT.newSpt / 2) || 0;
+                        arr[101] += parseInt(item.data.data.newNatPenalty) || 0;
+                    }
+                }
+                if (item.type === "discipline") {
+                    arr[102] += parseInt(item.data.data.quantity) || 0;
+                }
+                if (item.type === "psychicMatrix") {
+                    arr[102] += parseInt(item.data.data.quantity) || 0;
+                    arr[103] += parseInt(item.data.data.bonus / 10) || 0;
+                }
             return arr;
             }, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0]);
+
         data.level = level;
         data.lpbonus = lpbonus;
         data.inibonus = ini;
@@ -99,12 +188,13 @@ export default class abfalterActor extends Actor {
         data.blockbonus = blk;
         data.weararmorbonus = weararm;
         data.mkbonus = mk; //unused
-        data.ppbonus = pp; //unused
+        data.ppbonus = pp;
         data.zeonbonus = zeon;
         data.summonbonus = summon;
         data.controlbonus = control;
         data.bindbonus = bind;
         data.banishbonus = banish;
+
         data.acrobaticsbonus = acro;
         data.athleticismbonus = athle;
         data.climbbonus = climb;
@@ -1250,17 +1340,67 @@ export default class abfalterActor extends Actor {
         data.mlevelused = Math.floor(data.mlevelfinal - 1);
 
         // Summoning Abilities
-        if (data.aam > 0) {
-            data.summonfinal = Math.floor(data.summoning.summon.base + data.summonbonus + data.summoning.summon.spec + data.stats.Power.mod);
-            data.controlfinal = Math.floor(data.summoning.control.base + data.controlbonus + data.summoning.control.spec + data.stats.Willpower.mod);
-            data.bindfinal = Math.floor(data.summoning.bind.base + data.bindbonus + data.summoning.bind.spec + data.stats.Power.mod);
-            data.banishfinal = Math.floor(data.summoning.banish.base + data.banishbonus + data.summoning.banish.spec + data.stats.Power.mod);
-        } else {
-            data.summonfinal = Math.floor(data.summoning.summon.base + data.summonbonus + data.summoning.summon.spec + data.stats.Power.mod + data.aam);
-            data.controlfinal = Math.floor(data.summoning.control.base + data.controlbonus + data.summoning.control.spec + data.stats.Willpower.mod + data.aam);
-            data.bindfinal = Math.floor(data.summoning.bind.base + data.bindbonus + data.summoning.bind.spec + data.stats.Power.mod + data.aam);
-            data.banishfinal = Math.floor(data.summoning.banish.base + data.banishbonus + data.summoning.banish.spec + data.stats.Power.mod + data.aam);
+        data.summonfinal = Math.floor(data.summoning.summon.base + data.summonbonus + data.summoning.summon.spec + data.stats.Power.mod + data.aam);
+        data.controlfinal = Math.floor(data.summoning.control.base + data.controlbonus + data.summoning.control.spec + data.stats.Willpower.mod + data.aam);
+        data.bindfinal = Math.floor(data.summoning.bind.base + data.bindbonus + data.summoning.bind.spec + data.stats.Power.mod + data.aam);
+        data.banishfinal = Math.floor(data.summoning.banish.base + data.banishbonus + data.summoning.banish.spec + data.stats.Power.mod + data.aam);
+
+        // Psychic Potential
+        if (data.stats.Willpower.final < 5) {
+            data.fromWP = 0;
+        } else if (data.stats.Willpower.final >= 5 && data.stats.Willpower.final < 15) {
+            data.fromWP = Math.floor((data.stats.Willpower.final - 4) * 10);
+        } else if (data.stats.Willpower.final >= 15) {
+            data.fromWP = Math.floor(((data.stats.Willpower.final - 14) * 20) + 100)
         }
+        data.finalPotential = Math.floor(data.ppotential.base + data.fromWP + +data.ppotential.spent + data.ppotential.spec + data.ppotential.temp + data.aam);
+        switch (data.ppotential.spent) {
+            case "10":
+                data.ppotentialpp = 1;
+                break;
+            case "20":
+                data.ppotentialpp = 3;
+                break;
+            case "30":
+                data.ppotentialpp = 6;
+                break;
+            case "40":
+                data.ppotentialpp = 10;
+                break;
+            case "50":
+                data.ppotentialpp = 15;
+                break;
+            case "60":
+                data.ppotentialpp = 21;
+                break;
+            case "70":
+                data.ppotentialpp = 28;
+                break;
+            case "80":
+                data.ppotentialpp = 36;
+                break;
+            case "90":
+                data.ppotentialpp = 45;
+                break;
+            case "100":
+                data.ppotentialpp = 55;
+                break;
+            default:
+                data.ppotentialpp = 0;
+                break;
+        }
+
+        // Psychic Points
+        data.finalpp = Math.floor(data.ppoint.base + data.ppoint.spec + data.ppbonus);
+        data.innateSlotspp = Math.floor(data.other.innateSlots * 2);
+        data.maxFreepp = Math.floor(data.finalpp - (+usedpp + data.ppotentialpp + +matrixpp + data.innateSlotspp));
+
+        // Psychic Projection
+        data.pprojfinal = Math.floor(data.pproj.base + data.pproj.spec + data.pproj.temp + data.stats.Dexterity.mod + data.aam);
+
+
+
+
 
 
 
@@ -1271,51 +1411,7 @@ export default class abfalterActor extends Actor {
 
         // Wear Armor
         data.wearArmorFinal = Math.floor(data.wearArmor.base + data.weararmorbonus + data.wearArmor.spec + data.wearArmor.temp + data.stats.Strength.mod);
-        // Armor
-        const [quantity, req, natPen, movePen, aCutMax, aCutTot, aImpMax, aImpTot, aThrMax, aThrTot, aHeatMax, aHeatTot, aColdMax, aColdTot,
-                aEleMax, aEleTot, aEneMax, aEneTot, aSptMax, aSptTot] = this.items.reduce((arr2, item) => {
-            if (item.type === "armor") {
-                if (item.data.data.equipped == true) {
-                    arr2[0] += parseInt(item.data.data.quantity) || 0;
-                    arr2[1] += parseInt(item.data.data.newRequirement) || 0;
-                    arr2[2] += parseInt(item.data.data.newNatPenalty) || 0;
-                    arr2[3] += parseInt(item.data.data.newMovePenalty) || 0;
-                    if (arr2[4] < item.data.data.AT.newCut) {
-                        arr2[4] = item.data.data.AT.newCut;
-                    }
-                    arr2[5] += parseInt(item.data.data.AT.newCut / 2) || 0;
-                    if (arr2[6] < item.data.data.AT.newImp) {
-                        arr2[6] = item.data.data.AT.newImp;
-                    }
-                    arr2[7] += parseInt(item.data.data.AT.newImp / 2) || 0;
-                    if (arr2[8] < item.data.data.AT.newThr) {
-                        arr2[8] = item.data.data.AT.newThr;
-                    }
-                    arr2[9] += parseInt(item.data.data.AT.newThr / 2) || 0;
-                    if (arr2[10] < item.data.data.AT.newHeat) {
-                        arr2[10] = item.data.data.AT.newHeat;
-                    }
-                    arr2[11] += parseInt(item.data.data.AT.newHeat / 2) || 0;
-                    if (arr2[12] < item.data.data.AT.newCold) {
-                        arr2[12] = item.data.data.AT.newCold;
-                    }
-                    arr2[13] += parseInt(item.data.data.AT.newCold / 2) || 0;
-                    if (arr2[14] < item.data.data.AT.newEle) {
-                        arr2[14] = item.data.data.AT.newEle;
-                    }
-                    arr2[15] += parseInt(item.data.data.AT.newEle / 2) || 0;
-                    if (arr2[16] < item.data.data.AT.newEne) {
-                        arr2[16] = item.data.data.AT.newEne;
-                    }
-                    arr2[17] += parseInt(item.data.data.AT.newEne / 2) || 0;
-                    if (arr2[18] < item.data.data.AT.newSpt) {
-                        arr2[18] = item.data.data.AT.newSpt;
-                    }
-                    arr2[19] += parseInt(item.data.data.AT.newSpt / 2) || 0;
-                }
-            }
-            return arr2;
-                }, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
         // Armor Final AT
         data.aCutFinal = Math.floor((aCutTot - ~~(aCutMax / 2)) + aCutMax);
         data.aImpFinal = Math.floor((aImpTot - ~~(aImpMax / 2)) + aImpMax);
@@ -1325,49 +1421,6 @@ export default class abfalterActor extends Actor {
         data.aEleFinal = Math.floor((aEleTot - ~~(aEleMax / 2)) + aEleMax);
         data.aEneFinal = Math.floor((aEneTot - ~~(aEneMax / 2)) + aEneMax);
         data.aSptFinal = Math.floor((aSptTot - ~~(aSptMax / 2)) + aSptMax);
-
-        const [ahReq, ahCutMax, ahCutTot, ahImpMax, ahImpTot, ahThrMax, ahThrTot, ahHeatMax, ahHeatTot, ahColdMax, ahColdTot,
-            ahEleMax, ahEleTot, ahEneMax, ahEneTot, ahSptMax, ahSptTot, perPen] = this.items.reduce((arr3, item) => {
-                if (item.type === "armorHelmet") {
-                    if (item.data.data.equipped == true) {
-                        arr3[0] += parseInt(item.data.data.newRequirement) || 0;
-                        if (arr3[1] < item.data.data.AT.newCut) {
-                            arr3[1] = item.data.data.AT.newCut;
-                        }
-                        arr3[2] += parseInt(item.data.data.AT.newCut / 2) || 0;
-                        if (arr3[3] < item.data.data.AT.newImp) {
-                            arr3[3] = item.data.data.AT.newImp;
-                        }
-                        arr3[4] += parseInt(item.data.data.AT.newImp / 2) || 0;
-                        if (arr3[5] < item.data.data.AT.newThr) {
-                            arr3[5] = item.data.data.AT.newThr;
-                        }
-                        arr3[6] += parseInt(item.data.data.AT.newThr / 2) || 0;
-                        if (arr3[7] < item.data.data.AT.newHeat) {
-                            arr3[7] = item.data.data.AT.newHeat;
-                        }
-                        arr3[8] += parseInt(item.data.data.AT.newHeat / 2) || 0;
-                        if (arr3[9] < item.data.data.AT.newCold) {
-                            arr3[9] = item.data.data.AT.newCold;
-                        }
-                        arr3[10] += parseInt(item.data.data.AT.newCold / 2) || 0;
-                        if (arr3[11] < item.data.data.AT.newEle) {
-                            arr3[11] = item.data.data.AT.newEle;
-                        }
-                        arr3[12] += parseInt(item.data.data.AT.newEle / 2) || 0;
-                        if (arr3[13] < item.data.data.AT.newEne) {
-                            arr3[13] = item.data.data.AT.newEne;
-                        }
-                        arr3[14] += parseInt(item.data.data.AT.newEne / 2) || 0;
-                        if (arr3[15] < item.data.data.AT.newSpt) {
-                            arr3[15] = item.data.data.AT.newSpt;
-                        }
-                        arr3[16] += parseInt(item.data.data.AT.newSpt / 2) || 0;
-                        arr3[17] += parseInt(item.data.data.newNatPenalty) || 0;
-                    }
-                }
-                return arr3;
-            }, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); 
 
         // Helmet Final AT
         data.ahCutFinal = Math.floor((ahCutTot - ~~(ahCutMax / 2)) + ahCutMax);
@@ -1394,8 +1447,9 @@ export default class abfalterActor extends Actor {
         }
         data.totalPerPen = perPen;
 
-
-
+        // Settings
+        data.openRangeFinal = Math.floor(data.rollRange.base + data.rollRange.spec + data.rollRange.temp);
+        data.fumbleRangeFinal = Math.floor(data.fumleRange.base + data.fumleRange.spec + data.fumleRange.temp);
 
 
 

@@ -3,8 +3,8 @@ export default class abfalterItemSheet extends ItemSheet {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["abfalter", "sheet", "item"],
-            width: 650,
-            height: 500,
+            width: 500,
+            height: 450,
             resizable: true,
             tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
         });

@@ -72,7 +72,7 @@ function _openroll(oldroll, oldvalue, oldcolor) {
 
 export async function openSecondaryDiceDialogue(actor, finalvalue, label) {
     const data = actor.data;
-    const template = "systems/animabf/templates/dialogues/secondaryroll.html";
+    const template = "systems/abfalter/templates/dialogues/secondaryroll.html";
     let confirmed = false;
 
     const html = await renderTemplate(template, { finalvalue: finalvalue, label: label});

@@ -16,7 +16,11 @@ abfalter.basicInfo = {
     ability: "abfalter.basicInfo.ability",
     used: "abfalter.basicInfo.used",
     type: "abfalter.basicInfo.type",
-    cost: "abfalter.basicInfo.cost"
+    cost: "abfalter.basicInfo.cost",
+    spent: "abfalter.basicInfo.spent",
+    yes: "abfalter.basicInfo.yes",
+    no: "abfalter.basicInfo.no",
+    active: "abfalter.basicInfo.active",
 }
 
 abfalter.sheet = {
@@ -63,6 +67,32 @@ abfalter.magicTab = {
     addInvocation: "abfalter.magicTab.addInvocation",
     incarnation: "abfalter.magicTab.incarnation",
     addIncarnation: "abfalter.magicTab.addIncarnation"
+}
+
+abfalter.psychicTab = {
+    pp: "abfalter.psychicTab.pp",
+    ppotential: "abfalter.psychicTab.ppotential",
+    pproj: "abfalter.psychicTab.pproj",
+    pmodule: "abfalter.psychicTab.pmodule",
+    pmoduleText: "abfalter.psychicTab.pmoduleText",
+    pmoduleText2: "abfalter.psychicTab.pmoduleText2",
+    pdisc: "abfalter.psychicTab.pdisc",
+    paddDisc: "abfalter.psychicTab.paddDisc",
+    freeppMax: "abfalter.psychicTab.freeppMax",
+    freepp: "abfalter.psychicTab.freepp",
+    fromWP: "abfalter.psychicTab.fromWP",
+    maintMatrix: "abfalter.psychicTab.maintMatrix",
+    numOfSlots: "abfalter.psychicTab.numOfSlots",
+    totalppSlots: "abfalter.psychicTab.totalppSlots",
+    potency: "abfalter.psychicTab.potency",
+    addMaintMatrix: "abfalter.psychicTab.addMaintMatrix",
+    mentalPatterns: "abfalter.psychicTab.mentalPatterns",
+    psychicMatrices: "abfalter.psychicTab.psychicMatrices",
+    patternName: "abfalter.psychicTab.patternName",
+    totalCost: "abfalter.psychicTab.totalCost",
+    cancelled: "abfalter.psychicTab.cancelled",
+    addMentalPattern: "abfalter.psychicTab.addMentalPattern",
+    addPsychicMatrix: "abfalter.psychicTab.addPsychicMatrix"
 }
 
 abfalter.armoryTab = {
@@ -116,4 +146,12 @@ abfalter.armoryTab = {
     addWeapons: "abfalter.armoryTab.addWeapons",
     finalDmg: "abfalter.armoryTab.finalDmg",
     totalPerPen: "abfalter.armoryTab.totalPerPen"
+}
+
+abfalter.settingsTab = {
+    openRoll: "abfalter.settingsTab.openRoll",
+    fumbleRoll: "abfalter.settingsTab.fumbleRoll",
+    charOptions: "abfalter.settingsTab.charOptions",
+    presenceMod: "abfalter.settingsTab.presenceMod",
+    levelMod: "abfalter.settingsTab.levelMod",
 }

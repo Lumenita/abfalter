@@ -1,43 +1,47 @@
 ﻿<div class="tab settings">
-    <div class="rollRange">
-        <h2> Open Roll Range </h2>
-        <div>
-            <label> <span> Base </span> <input type="number" name="attr_or_base" value="90" /> </label>
-            <label> <span> Spec. </span> <input type="number" name="attr_or_special" value="0" /> </label>
-            <label> <span> Temp. </span> <input type="number" name="attr_or_temp" value="0" /> </label>
+    <div>
+        <div class="rollRange">
+            <h2> {{localize "abfalter.settingsTab.openRoll"}} </h2>
+            <div>
+                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.rollRange.base" value="{{data.rollRange.base}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.rollRange.spec" value="{{data.rollRange.spec}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.rollRange.temp" value="{{data.rollRange.temp}}" /> </label>
+                <label>
+                    <select name="data.rollRange.doubles" data-dtype="boolean">
+                        {{#select data.rollRange.doubles}}
+                        <option value="false"> {{localize "abfalter.basicInfo.no"}} </option>
+                        <option value="true"> {{localize "abfalter.basicInfo.yes"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.openRangeFinal" value="{{data.openRangeFinal}}" readonly /> </label>
+            </div>
+        </div>
 
-            <label>
-                <span data-i18n="doubles"> Doubles </span> <select name="attr_ord">
-                    <option value="" selected="true" data-i18n="no">No</option>
-                    <option value="cs11cs22cs33cs44cs55cs66cs77cs88cs99" data-i18n="yes">Yes</option>
-                </select>
-            </label>
+        <div class="rollRange">
+            <h2> {{localize "abfalter.settingsTab.fumbleRoll"}} </h2>
+            <div>
+                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.fumleRange.base" value="{{data.fumleRange.base}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.fumleRange.spec" value="{{data.fumleRange.spec}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.fumleRange.temp" value="{{data.fumleRange.temp}}" /> </label>
+            </div>
+            <div>
+                <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.fumbleRangeFinal" value="{{data.fumbleRangeFinal}}" readonly /> </label>
+            </div>
+        </div>
 
-        </div>
-        <div>
-            <label> <span> Final </span> <input type="number" name="attr_orr" value="5" disabled /> </label>
-        </div>
-    </div><!--
- --><div class="rollRange">
-        <h2> Fumble Range </h2>
-        <div>
-            <label> <span> Base </span> <input type="number" name="attr_f_base" value="3" /> </label>
-            <label> <span> Spec. </span> <input type="number" name="attr_f_special" value="0" /> </label>
-            <label> <span> Temp. </span> <input type="number" name="attr_f_temp" value="0" /> </label>
-        </div>
-        <div>
-            <label> <span> Final </span> <input type="number" name="attr_fr" value="7" disabled /> </label>
+        <div class="charOptions">
+            <h2> {{localize "abfalter.settingsTab.charOptions"}} </h2>
+            <label> <span> {{localize "abfalter.settingsTab.levelMod"}} </span> <input type="number" name="data.levelinfo.levelmod" value="{{data.levelinfo.levelmod}}" /> </label>
+            <label> <span> {{localize "abfalter.settingsTab.presenceMod"}} </span> <input type="number" name="data.levelinfo.presencemod" value="{{data.levelinfo.presencemod}}" /> </label>
         </div>
     </div>
 
 
 
 
-    <div class="optionsCharacters">
-        <h2> Chraracter Options </h2>
-        <label> <span> level mod </span> <input type="number" name="data.levelinfo.levelmod" value="{{data.levelinfo.levelmod}}" /> </label>
-        <label> <span> presence mod </span> <input type="number" name="data.levelinfo.presencemod" value="{{data.levelinfo.presencemod}}" /> </label>
-    </div>
 
     <div class="classes">
         <h2> Innate Classes </h2>

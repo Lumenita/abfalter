@@ -99,6 +99,10 @@ export default class abfalterCharacterSheet extends ActorSheet {
         sheetData.currencies = baseData.items.filter(function (item) { return item.type == "currency" });
         sheetData.proficiencies = baseData.items.filter(function (item) { return item.type == "proficiency" });
         sheetData.weaponAttacks = baseData.items.filter(function (item) { return item.type == "weaponAttack" });
+        sheetData.disciplines = baseData.items.filter(function (item) { return item.type == "discipline" });
+        sheetData.mentalPatterns = baseData.items.filter(function (item) { return item.type == "mentalPattern" });
+        sheetData.psychicMatrixs = baseData.items.filter(function (item) { return item.type == "psychicMatrix" });
+        sheetData.maintPowers = baseData.items.filter(function (item) { return item.type == "maintPower" });
 
         return sheetData;
     }
@@ -109,17 +113,13 @@ export default class abfalterCharacterSheet extends ActorSheet {
             html.find(".inline-edit").change(this._onLineItemEdit.bind(this));
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
+            html.find(".item-expand").click(this._onItemExpand.bind(this));
+            html.find(".item-toggle").click(this._onItemToggle.bind(this));
 
-            new ContextMenu(html, ".inventory-item", this.itemContextMenu);
+            new ContextMenu(html, ".normal-item", this.itemContextMenu);
+            new ContextMenu(html, ".equip-item", this.itemContextMenuEquip);
+            new ContextMenu(html, ".delete-item", this.itemContextMenuDelete);
 
-            new ContextMenu(html, ".armor-item", this.itemContextMenuEquip);
-            new ContextMenu(html, ".armor-item2", this.itemContextMenuEquip);
-            new ContextMenu(html, ".armorHelmet-item", this.itemContextMenuEquip);
-            new ContextMenu(html, ".armorHelmet-item2", this.itemContextMenuEquip);
-            new ContextMenu(html, ".weapon-item", this.itemContextMenuEquip);
-
-            new ContextMenu(html, ".prof-item", this.itemContextMenuDelete);
-            new ContextMenu(html, ".currency-item", this.itemContextMenuDelete);
             new ContextMenu(html, ".spellPath-item", this.itemContextMenuDelete);
 
         }
@@ -139,11 +139,19 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 const value = $(ev.currentTarget).attr("data-ability");
                 this.document.update({ "data.zeon.actual": Math.floor(this.document.data.data.zeon.actual + (value / 1)) });
             }); 
-
             html.find('.rollSecondary').click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
                 let label = $(ev.currentTarget).attr("data-label");
                 openSecondaryDiceDialogue(this.actor, value, label);
+            });
+            html.find(".psychicModule").click(ev => {
+                let value = $(ev.currentTarget).attr("data-ability");
+                if (value == "false") {
+                    value = true;
+                } else {
+                    value = false;
+                }
+                this.document.update({ "data.other.moduleStatus": value });
             });
         }
 
@@ -188,9 +196,32 @@ export default class abfalterCharacterSheet extends ActorSheet {
         return item.update({ [field]: element.value });
     }
 
+    _onItemExpand(event) {
+        event.preventDefault();
+        let element = event.currentTarget;
+        let itemId = element.closest(".item").dataset.itemId;
+        let item = this.actor.items.get(itemId);
+        if (item.data.data.expand == false) {
+            element.expand = true;
+        } else {
+            element.expand = false;
+        }
+        console.log(element.expand);
+        item.update({ "data.expand": element.expand });
+    }
 
-
-
+    _onItemToggle(event) {
+        event.preventDefault();
+        let element = event.currentTarget;
+        let itemId = element.closest(".item").dataset.itemId;
+        let item = this.actor.items.get(itemId);
+        if (item.data.data.toggle == false) {
+            element.toggle = true;
+        } else {
+            element.toggle = false;
+        }
+        item.update({ "data.toggle": element.toggle });
+    }
 
 
 

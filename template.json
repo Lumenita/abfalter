@@ -15,6 +15,17 @@
         "levelinfo": {
           "levelmod": 0,
           "presencemod": 0
+        },
+        "rollRange": {
+          "base": 90,
+          "spec": 0,
+          "temp": 0,
+          "doubles": false
+        },
+        "fumleRange": {
+          "base": 3,
+          "spec": 0,
+          "temp": 0
         }
       },
       "stats": {
@@ -563,10 +574,32 @@
           "dmgRdc": 0,
           "artPresence": 0
         }
-      } 
+      },
+      "psychic": {
+        "ppoint": {
+          "base": 0,
+          "spec": 0,
+          "freepp": 0
+        },
+        "ppotential": {
+          "base": 0,
+          "spent": 0,
+          "spec": 0,
+          "temp": 0
+        },
+        "pproj": {
+          "base": 0,
+          "spec": 0,
+          "temp": 0
+        },
+        "other": {
+          "innateSlots": 0,
+          "moduleStatus": false
+        }
+      }
     },
     "character": {
-      "templates": [ "info", "stats", "mystic", "armory" ]
+      "templates": [ "info", "stats", "mystic", "armory", "psychic" ]
     },
     "npc": {
       "templates": [ "info" ]
@@ -584,13 +617,17 @@
       "advantage",
       "disadvantage",
       "spell",
+      "psychicMatrix",
       "incarnation",
       "invocation",
+      "mentalPattern",
       "class",
+      "discipline",
       "spellPath",
       "metaMagic",
       "turnMaint",
       "dailyMaint",
+      "maintPower",
       "currency",
       "proficiency"
 
@@ -817,6 +854,38 @@
     "proficiency": {
       "type": "",
       "cost": 0
+    },
+    "discipline": {
+      "quantity": 1
+    },
+    "mentalPattern": {
+      "templates": [ "itemDescription" ],
+      "cost": 0,
+      "expand": false,
+      "toggle": false,
+      "cancelCost": 0,
+      "opposite": "",
+      "penalty": ""
+    },
+    "psychicMatrix": {
+      "templates": [ "itemDescription" ],
+      "quantity": 1,
+      "bonus": 0,
+      "effect20": "",
+      "effect40": "",
+      "effect80": "",
+      "effect120": "",
+      "effect140": "",
+      "effect180": "",
+      "effect240": "",
+      "effect280": "",
+      "effect320": "",
+      "effect440": ""
+    },
+    "maintPower": {
+      "templates": [ "itemDescription" ],
+      "value": 0,
+      "expand": false
     }
   }
 }

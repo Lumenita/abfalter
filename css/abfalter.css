@@ -20,7 +20,6 @@ h2 {
     display: flex;
     width: 100%;
     font-size: 19pt;
-    color: black;
     justify-content: center;
     border-image: url(../img/border.png) 10 stretch;
     border-bottom: 5px solid black;
@@ -40,12 +39,7 @@ h3 {
 h4 {
     margin: 5px;
 }
-.physical {
-    text-shadow: 1px 1px 1px #00CC00;
-}
-.mental {
-    text-shadow: 1px 1px 1px #0000CC;
-}
+
 .fumbleroll {
     color: red;
 }
@@ -55,6 +49,12 @@ h4 {
 .normalroll {
     color: black;
 }
+.physical {
+    text-shadow: 1px 1px 1px #00CC00;
+}
+.mental {
+    text-shadow: 1px 1px 1px #0000CC;
+}
 .armorpenalty {
     text-shadow: 1px 1px 1px lightcoral;
 }
@@ -62,13 +62,29 @@ h4 {
     text-shadow: 1px 1px 1px orange;
 }
 .equipped > span {
-   color: darkblue;
+    color: darkblue;
 }
 .notEquipped > span {
     color: #878787;
 }
+.selected {
+    background-color: #b5b3f3;
+}
+.notSelected {
+    background-color: #c3c3b8;
+}
+.notExpand {
+    display: none;
+}
 .expand-down {
     text-align: center;
+}
+.expand-box {
+    width: 0%;
+}
+.expand-box > input {
+    height: 18px;
+    width: 18px;
 }
 .mastery-box {
     margin: 0px;
@@ -1579,16 +1595,442 @@ h4 {
 .s4 > div {
     width: 48%;
 }
+/*
+    --
+    PP
+    --
+*/
+.ppoint > label,
+.ppoint > div > label {
+    display: flex;
+    width: 100%;
+    height: 20px;
+    padding-right: 15px;
+    padding-left: 5px;
+}
+.ppoint > label > span,
+.ppoint > div > label > span {
+    display: flex;
+    width: 60%;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+}
+.ppoint > label > input,
+.ppoint > div > label > input {
+    display: flex;
+    width: 40%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+.ppoint > label:nth-of-type(2) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    margin-top: 3px;
+    padding-top: 3px;
+    font-weight: bold;
+}
+.ppoint > label:nth-of-type(3) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-top: 8px;
+    padding-bottom: 23px;
+    font-weight: bold;
+}
+.ppoint > div > label:nth-of-type(3) > input,
+.ppoint > label:nth-of-type(1) > input,
+.ppoint > label:nth-of-type(2) > input {
+    background: transparent;
+    border-bottom: 0px;
+}
+.ppoint > h2 > label > input {
+    opacity: 0;
+}
+.ppoint:hover > h2 > label > input {
+    opacity: 1;
+}
+.ppoint > h2 > label > input:checked {
+    opacity: 1;
+}
+/*
+    ---------
+    Potential
+    ---------
+*/
+.ppotential > label,
+.ppotential > div > label {
+    display: flex;
+    width: 100%;
+    height: 20px;
+    padding-right: 15px;
+    padding-left: 5px;
+}
+.ppotential > label > span,
+.ppotential > div > label > span {
+    display: flex;
+    width: 60%;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+}
+.ppotential > label > input,
+.ppotential > div > label > input {
+    display: flex;
+    width: 40%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+.ppotential > label:nth-of-type(2) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 23px;
+    font-weight: bold;
+}
+.ppotential > div > label > select {
+    height: 20px;
+    width: 40%;
+    text-align: center;
+    border: 0px;
+    border-bottom: 1px solid black;
+}
+.ppotential > div > label:nth-of-type(5) {
+    margin: 3px 0 3px 0;
+    justify-content: center;
+}
+.ppotential > div > label:nth-of-type(5) > button {
+    width: 40%;
+}
+.ppotential > div > label:nth-of-type(2) > input,
+.ppotential > label:nth-of-type(2) > input {
+    background: transparent;
+    border-bottom: 0px;
+}
+.ppotential > h2 > label > input {
+    opacity: 0;
+}
+.ppotential:hover > h2 > label > input {
+    opacity: 1;
+}
+.ppotential > h2 > label > input:checked {
+    opacity: 1;
+}
+.ppotential > div > button {
+    margin: 0px;
+    height: 25px;
+    border-radius: 0px;
+    border: 0px;
+}
+/*
+    ----------
+    Projection
+    ----------
+*/
+.pproj > label,
+.pproj > div > label {
+    display: flex;
+    width: 100%;
+    height: 20px;
+    padding-right: 15px;
+    padding-left: 5px;
+}
+.pproj > label > span,
+.pproj > div > label > span {
+    display: flex;
+    width: 60%;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+}
+.pproj > label > input,
+.pproj > div > label > input {
+    display: flex;
+    width: 40%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+.pproj > label:nth-of-type(2) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 23px;
+    font-weight: bold;
+}
+.pproj > label:nth-of-type(2) > input {
+    background: transparent;
+    border-bottom: 0px;
+}
+.pproj > div > label:nth-of-type(3) {
+    margin: 3px 0 3px 0;
+    justify-content: center;
+}
+.pproj > div > label:nth-of-type(3) > button {
+    width: 40%;
+}
+.pproj > h2 > label > input {
+    opacity: 0;
+}
+.pproj:hover > h2 > label > input {
+    opacity: 1;
+}
+.pproj > h2 > label > input:checked {
+    opacity: 1;
+}
+.pproj > div > button {
+    margin: 0px;
+    height: 25px;
+    border-radius: 0px;
+    border: 0px;
+}
+.pmodButton {
+   display: flex;
+}
+.pmodButton > button {
+    width: 50%;
+}
+.pmodButton > button:first-of-type {
+    border-right: 1px solid black;
+}
+/*
+    --------------------
+    Module & Disciplines
+    --------------------
+*/
+.pdisc > div:first-of-type > button {
+    display: grid;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+}
+.discipline-item > div > input {
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+/*
+    ---------------
+    Mental Patterns
+    ---------------
+*/
+.ppaterns > div:first-of-type {
+    display: flex;
+    text-align: center;
+    width: 102%;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+}
+.mentalPattern-item > div {
+    justify-content: space-between;
+    height: 20px;
+}
+.mentalPattern-item > div > input:first-of-type,
+.ppaterns > div > span:first-of-type {
+    width: 55%;
+}
+.mentalPattern-item > div > input:nth-of-type(2),
+.ppaterns > div > span:nth-of-type(2) {
+    width: 21%;
+}
+.mentalPattern-item > div > button,
+.ppaterns > div > span:last-of-type {
+    width: 17%;
+}
+.mentalPattern-item > div > a {
+    font-size: 15px;
+    width: 5%;
+    height: 20px;
+    text-align: center;
+    align-self: center;
+}
+.mentalPattern-item > div > input {
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+.mentalPattern-item > div > input:nth-of-type(2) {
+    background: transparent;
+    border-bottom: 0px;
+}
+.mentalPattern-item > div > button {
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
+}
+/*
+    ----------------
+    Psychic Matrices
+    ----------------
+*/
+.ppowers > div:first-of-type {
+    text-align: center;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+    display: flex;
+}
+.ppowers > div:first-of-type > span:first-of-type {
+    width: 78%;
+}
+.ppowers > div:first-of-type > span:nth-of-type(2){
+    width: 15%;
+}
+.psychicMatrix-item > div {
+    justify-content: space-between;
+    display: flex;
+    height: 20px;
+}
+.psychicMatrix-item > div > input:first-of-type {
+    width: 78%
+}
+.psychicMatrix-item > div > input:nth-of-type(2) {
+    width: 15%
+}
+.psychicMatrix-item > div > a {
+    width: 5%;
+    font-size: 15px;
+    text-align: center;
+    align-self: center;
+}
+.psychicMatrix-item > div > input {
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+/*
+    -------------------
+    Maintained Matrices
+    -------------------
+*/
+.pmaint > div:first-of-type {
+    display: flex;
+}
+.pmaint > div > label:first-of-type {
+    width: 50%;
+    height: 20px;
+    padding-left: 15px;
+    display: flex;
+}
+.pmaint > div > label:nth-of-type(2) {
+    width: 50%;
+    height: 20px;
+    padding-right: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
 
-
-
-
-
-
-
-
-
-
+.pmaint > div > label > span {
+    display: contents;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+}
+.pmaint > div > label > input {
+    display: flex;
+    width: 15%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    margin-left: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+.pmaint > div > label:nth-of-type(2) > input {
+    background: transparent;
+    border-bottom: 0px;
+}
+.pmaint > div:nth-of-type(2) {
+    display: flex;
+    text-align: center;
+}
+.pmaint > div:nth-of-type(2) > span:first-of-type {
+    width: 78%;
+}
+.pmaint > div:nth-of-type(2) > span:nth-of-type(2) {
+    width: 15%;
+}
+.pmaint > div:nth-of-type(2) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.maintPower-item > div:first-of-type{
+    display: flex;
+    justify-content: space-between;
+}
+.maintPower-item > div > input {
+    display: flex;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+.maintPower-item > div > input:first-of-type {
+    width: 78%;
+}
+.maintPower-item > div > input:nth-of-type(2) {
+    width: 15%;
+}
+.maintPower-item > div > a {
+    width: 5%;
+    font-size: 15px;
+    text-align: center;
+    align-self: center;
+}
 /*
     **************
     --------------
@@ -2322,6 +2764,78 @@ h4 {
 .armorContent2 > label {
     width: 12.5%
 }
+
+
+
+/*
+    ----------
+    Discipline
+    ----------
+*/
+.discipline > div:last-of-type{
+    margin-top: 10px;
+}
+.discipline > div > label {
+    display: flex;
+}
+.discipline > div > span {
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+}
+.discipline > div > label > input {
+    display: flex;
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    margin-left: 10px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+/*
+    -----------
+    Maint Power
+    -----------
+*/
+/*
+    --------------
+    Mental Pattern
+    --------------
+*/
+/*
+    --------------
+    Psychic Matrix
+    --------------
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
     ***************
     ---------------
