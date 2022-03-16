@@ -9,8 +9,8 @@
     "\\templates",
     "\\templates\\actor",
     "\\templates\\actor\\parts",
-    "\\templates\\dialogues"
+    "\\templates\\item"
   ],
-  "SelectedNode": "\\system.json",
+  "SelectedNode": "\\module\\actor\\abfalterActor.js",
   "PreviewInSolutionExplorer": false
 }

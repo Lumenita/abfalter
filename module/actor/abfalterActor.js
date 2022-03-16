@@ -298,6 +298,28 @@ export default class abfalterActor extends Actor {
                 case 20:
                     stat.mod = 45;
                     break;
+                case 21:
+                case 22:
+                    stat.mod = 50;
+                    break;
+                case 23:
+                case 24:
+                    stat.mod = 55;
+                    break;
+                case 25:
+                    stat.mod = 60;
+                    break;
+                case 26:
+                case 27:
+                    stat.mod = 65;
+                    break;
+                case 28:
+                case 29:
+                    stat.mod = 70;
+                    break;
+                case 30:
+                    stat.mod = 75;
+                    break;
                 default:
                     stat.mod = 0;
             }
@@ -1397,11 +1419,6 @@ export default class abfalterActor extends Actor {
 
         // Psychic Projection
         data.pprojfinal = Math.floor(data.pproj.base + data.pproj.spec + data.pproj.temp + data.stats.Dexterity.mod + data.aam);
-
-
-
-
-
 
 
 

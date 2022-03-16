@@ -20,10 +20,28 @@
       "spent": "Spent",
       "yes": "Yes",
       "no": "No",
-      "active": "Active!"
+      "active": "Active",
+      "passive": "Passive",
+      "level": "Level",
+      "description": "Description",
+      "action": "Action",
+      "difficulty": "Difficulty",
+      "effect": "Effect",
+      "routine": "Routine",
+      "easy": "Easy",
+      "average": "Average",
+      "difficult": "Difficult",
+      "vDifficult": "Very Difficult",
+      "absurd": "Absurd",
+      "almostImp": "Almost Imp.",
+      "impossible": "Impossible",
+      "inhuman": "Inhuman",
+      "zen": "Zen"
+
     },
     "sheet": {
-      "newItem": "Name here",
+      "newItem": "Name goes here",
+      "nameItem": "A name is required here",
       "edit": "Edit",
       "delete": "Delete",
       "equip": "Toggle Equip"
@@ -89,7 +107,13 @@
       "totalCost": "Total Cost",
       "cancelled": "Cancelled?",
       "addMentalPattern": "Add Mental Pattern",
-      "addPsychicMatrix": "Add Psychic Matrix"
+      "addPsychicMatrix": "Add Psychic Matrix",
+      "patternInfoB": "Bonus information goes here",
+      "patternInfoP": "Penalty information goes here",
+      "maintInfo": "Maintained Matrix inforormation goes here",
+      "cancelCost": "Cancel Cost",
+      "oppPattern": "Opposite Pattern",
+      "maint": "Maint"
     },
     "armoryTab": {
       "wearArmor": "Wear Armor",

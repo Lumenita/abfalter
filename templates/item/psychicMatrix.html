@@ -1,12 +1,12 @@
 <form class="{{cssClass}}" autocomplete="off">
     <div class="itemStart">
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
+        <label> <input name="{{localize "abfalter.basicInfo.name"}}" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
     <div class="psychicMatrix">
         <div>
             <label>
-                <span> Level </span>
+                <span> {{localize "abfalter.basicInfo.level"}} </span>
                 <select name="data.level" data-dtype="number">
                     {{#select data.level}}
                     <option value="1"> 1 </option>
@@ -16,43 +16,43 @@
                 </select>
             </label>
             <label>
-                <span> Action </span>
+                <span> {{localize "abfalter.basicInfo.action"}} </span>
                 <select name="data.action" data-dtype="text">
                     {{#select data.action}}
-                    <option value="Active"> Active </option>
-                    <option value="Passive"> Passive </option>
+                    <option value="Active"> {{localize "abfalter.basicInfo.active"}} </option>
+                    <option value="Passive"> {{localize "abfalter.basicInfo.passive"}} </option>
                     {{/select}}
                 </select>
             </label>
             <label>
-                <span> Maint </span>
+                <span> {{localize "abfalter.psychicTab.maint"}} </span>
                 <select name="data.maint" data-dtype="text">
                     {{#select data.maint}}
-                    <option value="No"> No </option>
-                    <option value="Yes"> Yes </option>
+                    <option value="No"> {{localize "abfalter.basicInfo.no"}} </option>
+                    <option value="Yes"> {{localize "abfalter.basicInfo.yes"}} </option>
                     {{/select}}
                 </select>
             </label>
         </div>
         <div>
-            <span> Description </span>
+            <span> {{localize "abfalter.basicInfo.description"}} </span>
         </div>
         <textarea rows="7" name="data.description" placeholder="Description of matrix goes here">{{data.description}}</textarea>
         <div>
-            <span> Difficulty </span>
-            <span> Effect </span>
+            <span> {{localize "abfalter.basicInfo.difficulty"}} </span>
+            <span> {{localize "abfalter.basicInfo.effect"}} </span>
         </div>
         <div>
-            <label> <span> 20 </span> <span> routine </span> <input type="text" name="data.effect20" value="{{data.effect20}}" /> </label>
-            <label> <span> 40 </span> <span> easy </span> <input type="text" name="data.effect40" value="{{data.effect40}}" /> </label>
-            <label> <span> 80 </span> <span> average </span> <input type="text" name="data.effect80" value="{{data.effect80}}" /> </label>
-            <label> <span> 120 </span> <span> difficult </span> <input type="text" name="data.effect120" value="{{data.effect120}}" /> </label>
-            <label> <span> 140 </span> <span> very difficult </span> <input type="text" name="data.effect140" value="{{data.effect140}}" /> </label>
-            <label> <span> 180 </span> <span> absurd </span> <input type="text" name="data.effect180" value="{{data.effect180}}" /> </label>
-            <label> <span> 240 </span> <span> almost imp. </span> <input type="text" name="data.effect240" value="{{data.effect240}}" /> </label>
-            <label> <span> 280 </span> <span> impossible </span> <input type="text" name="data.effect280" value="{{data.effect280}}" /> </label>
-            <label> <span> 320 </span> <span> inhuman </span> <input type="text" name="data.effect320" value="{{data.effect320}}" /> </label>
-            <label> <span> 440 </span> <span> Zen </span> <input type="text" name="data.effect440" value="{{data.effect440}}" /> </label>
+            <label> <span> 20 </span> <span> {{localize "abfalter.basicInfo.routine"}} </span> <input type="text" name="data.effect20" value="{{data.effect20}}" /> </label>
+            <label> <span> 40 </span> <span> {{localize "abfalter.basicInfo.easy"}} </span> <input type="text" name="data.effect40" value="{{data.effect40}}" /> </label>
+            <label> <span> 80 </span> <span> {{localize "abfalter.basicInfo.average"}} </span> <input type="text" name="data.effect80" value="{{data.effect80}}" /> </label>
+            <label> <span> 120 </span> <span> {{localize "abfalter.basicInfo.difficult"}} </span> <input type="text" name="data.effect120" value="{{data.effect120}}" /> </label>
+            <label> <span> 140 </span> <span> {{localize "abfalter.basicInfo.vDifficult"}} </span> <input type="text" name="data.effect140" value="{{data.effect140}}" /> </label>
+            <label> <span> 180 </span> <span> {{localize "abfalter.basicInfo.absurd"}} </span> <input type="text" name="data.effect180" value="{{data.effect180}}" /> </label>
+            <label> <span> 240 </span> <span> {{localize "abfalter.basicInfo.almostImp"}} </span> <input type="text" name="data.effect240" value="{{data.effect240}}" /> </label>
+            <label> <span> 280 </span> <span> {{localize "abfalter.basicInfo.impossible"}} </span> <input type="text" name="data.effect280" value="{{data.effect280}}" /> </label>
+            <label> <span> 320 </span> <span> {{localize "abfalter.basicInfo.inhuman"}} </span> <input type="text" name="data.effect320" value="{{data.effect320}}" /> </label>
+            <label> <span> 440 </span> <span> {{localize "abfalter.basicInfo.zen"}} </span> <input type="text" name="data.effect440" value="{{data.effect440}}" /> </label>
         </div>
     </div>
 </form>

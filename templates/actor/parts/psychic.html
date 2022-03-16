@@ -116,7 +116,7 @@
                 {{#each disciplines as |discipline id|}}
                 <div class="discipline-item item delete-item" data-item-id="{{discipline._id}}">
                     <div>
-                        <input class="item-name inline-edit" data-field="name" type="text" value="{{discipline.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
+                        <input class="item-name inline-edit" data-field="name" type="text" value="{{discipline.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                     </div>
                 </div>
                 {{/each}}
@@ -138,7 +138,7 @@
                     {{#each mentalPatterns as |mentalPattern id|}}
                     <div class="mentalPattern-item item normal-item" data-item-id="{{mentalPattern._id}}">
                         <div>
-                            <input class="item-name inline-edit" data-field="name" type="text" value="{{mentalPattern.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{mentalPattern.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                             <input class="maintPower" data-field="data.finalCost" type="number" value="{{mentalPattern.data.finalCost}}" readonly />
                             <button type="button" class="item-toggle" data-ability="{{data.toggle}}">
                                 {{#if data.toggle}}
@@ -147,13 +147,13 @@
                                 <span> {{localize "abfalter.basicInfo.no"}} </span>
                                 {{/if}}
                             </button>
-                            <a class="item-expand" title="Expand Item"><i class="fas fa-caret-down"></i></a>
+                            <a class="item-expand" title="Expand Item"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
                         <div class="patternInfo {{#if data.expand}}expand{{else}}notExpand{{/if}}">
-                            <span> Bonus </span>
-                            <textarea class="inline-edit" data-field="data.description">{{mentalPattern.data.description}}</textarea>
-                            <span> Penalty </span>
-                            <textarea class="inline-edit" data-field="data.penalty">{{mentalPattern.data.penalty}}</textarea>
+                            <span> {{localize "abfalter.basicInfo.bonus"}} </span>
+                            <textarea class="inline-edit" data-field="data.description" placeholder="{{localize "abfalter.psychicTab.patternInfoB"}}">{{mentalPattern.data.description}}</textarea>
+                            <span> {{localize "abfalter.armoryTab.penalty"}} </span>
+                            <textarea class="inline-edit" data-field="data.penalty" placeholder="{{localize "abfalter.psychicTab.patternInfoP"}}">{{mentalPattern.data.penalty}}</textarea>
                         </div>
                     </div>
                     {{/each}}
@@ -171,9 +171,17 @@
                     {{#each psychicMatrixs as |psychicMatrix id|}}
                     <div class="psychicMatrix-item item normal-item" data-item-id="{{psychicMatrix._id}}">
                         <div>
-                            <input class="item-name inline-edit" data-field="name" type="text" value="{{psychicMatrix.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
+                            <a class="item-control item-chat" title="Chat Item"><i class="fas fa-comment-dots"></i></a>
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{psychicMatrix.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                             <input class="maintPower inline-edit" data-field="data.bonus" type="number" value="{{psychicMatrix.data.bonus}}" />
-                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-expand" title="Expand Item"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
+                            {{#if actor.data.data.other.moduleStatus}}
+                            <span> Atk / def </span>
+                            {{else}}
+                            <span> proj </span>
+                            {{/if}}
                         </div>
                     </div>
                     {{/each}}
@@ -196,12 +204,12 @@
                 {{#each maintPowers as |maintPower id|}}
                 <div class="maintPower-item item delete-item" data-item-id="{{maintPower._id}}">
                     <div>
-                        <input class="item-name inline-edit" data-field="name" type="text" value="{{maintPower.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
+                        <input class="item-name inline-edit" data-field="name" type="text" value="{{maintPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                         <input class="maint-value inline-edit" data-field="data.value" type="number" value="{{maintPower.data.value}}" />
-                        <a class="item-expand" title="Expand Item"><i class="fas fa-caret-down"></i></a>
+                        <a class="item-expand" title="Expand Item"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
-                        <textarea class="inline-edit" data-field="data.description">{{maintPower.data.description}}</textarea>
+                        <textarea class="inline-edit" data-field="data.description" placeholder="{{localize "abfalter.psychicTab.maintInfo"}}">{{maintPower.data.description}}</textarea>
                     </div>
                 </div>
                 {{/each}}

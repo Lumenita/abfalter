@@ -1911,18 +1911,19 @@ h4 {
     display: flex;
 }
 .ppowers > div:first-of-type > span:first-of-type {
-    width: 78%;
+    width: 73%;
+    margin-left: 5.8%;
 }
 .ppowers > div:first-of-type > span:nth-of-type(2){
     width: 15%;
 }
-.psychicMatrix-item > div {
+.psychicMatrix-item > div:first-of-type {
     justify-content: space-between;
     display: flex;
     height: 20px;
 }
 .psychicMatrix-item > div > input:first-of-type {
-    width: 78%
+    width: 73%
 }
 .psychicMatrix-item > div > input:nth-of-type(2) {
     width: 15%
@@ -2647,43 +2648,6 @@ h4 {
     font-size: 25px;
     border-bottom: 1px solid black;
 }
-
-.animabf .items-list {
-    list-style: none;
-    margin: 4px 0;
-    padding: 0;
-    overflow-y: auto;
-}
-.animabf .items-list .item {
-  line-height: 10px;
-  padding: 3px;
-  border-bottom: 1px solid #BBB;
-  align-items: center;
-}
-.animabf .items-list .item-name {
-  margin: 0;
-  display: flex;
-  font-size: 13px;
-  justify-content: space-between;
-}
-
-.animabf .items-list .item-header {
-  font-weight: bold;
-}
-.animabf .items-list .item .item-image {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 24px;
-  flex: 0 0 24px;
-  margin-right: 5px;
-}
-.animabf .items-list .item img {
-  display: block;
-}
-.animabf .items-list .item-controls {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 86px;
-  text-align: right;
-}
 /*
     -----
     Class
@@ -2838,27 +2802,49 @@ h4 {
     Mental Pattern
     --------------
 */
-.mentalPattern > div > label {
-    display: flex;
+.mentalPattern > div:first-of-type,
+.mentalPattern > div:nth-of-type(2) {
+    text-align: center;
 }
 .mentalPattern > div > label > input {
     width: 40%;
     height: 20px;
     text-align: center;
     border: 0px;
-    margin-left: 10px;
+    margin-left: 3px;
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
     font-size: 13px;
     border-bottom: 1px solid black;
 }
-.mentalPattern > div > label > span,
+.mentalPattern > div > label > span {
+    width: 30%;
+}
+.mentalPattern > div:nth-of-type(2) > label > input {
+    width: 15%;
+}
 .mentalPattern > div > span {
     width: 60%;
     font-size: 13px;
     align-items: center;
     height: 20px;
+}
+.mentalPattern > div:nth-of-type(2) > label:first-of-type {
+    align-items: baseline;
+    width: 30%;
+    padding-right: 2%;
+}
+.mentalPattern > div:nth-of-type(3),
+.mentalPattern > div:nth-of-type(4) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    text-align: center;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 /*
     --------------
@@ -2945,25 +2931,6 @@ h4 {
     align-items: center;
     height: 20px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-psychicMatrix
 /*
     ***************
     ---------------
@@ -2971,9 +2938,7 @@ psychicMatrix
     ---------------
     ***************
 */
-.message-sender {
-    opacity: 0;
-}
+
 /*
     --------
     Sec Roll

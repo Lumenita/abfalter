@@ -1,21 +1,23 @@
 <form class="{{cssClass}}" autocomplete="off">
     <div class="itemStart">
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
+        <label> <input name="{{localize "abfalter.basicInfo.name"}}" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
     <div class="mentalPattern">
         <div>
-            <label> <span> Cost </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
-            <label> <span> Cancel Cost </span> <input type="number" name="data.cancelCost" value="{{data.cancelCost}}" /> </label>
+            <label> <span> {{localize "abfalter.psychicTab.oppPattern"}} </span> <input type="text" name="data.opposite" value="{{data.opposite}}" placeholder="Name of Opposite Pattern" /> </label>
         </div>
         <div>
-            <label> <span> Opposite Pattern </span> <input type="text" name="data.opposite" value="{{data.opposite}}" placeholder="Name of Opposite Pattern" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
+            <label> <span> {{localize "abfalter.psychicTab.cancelCost"}} </span> <input type="number" name="data.cancelCost" value="{{data.cancelCost}}" /> </label>
         </div>
         <div>
-            <span> Bonus </span>
-            <textarea name="data.description" placeholder="bonus information goes here">{{data.description}}</textarea>
-            <span> Penalty </span>
-            <textarea name="data.penalty" placeholder="penalty information goes here">{{data.penalty}}</textarea>
+            <span> {{localize "abfalter.basicInfo.bonus"}} </span>
         </div>
+        <textarea name="data.description" rows="6" placeholder="{{localize "abfalter.psychicTab.patternInfoB"}}">{{data.description}}</textarea>
+        <div>
+            <span> {{localize "abfalter.armoryTab.penalty"}} </span>
+        </div>
+        <textarea name="data.penalty" rows="6" placeholder="{{localize "abfalter.psychicTab.patternInfoP"}}">{{data.penalty}}</textarea>
     </div>
 </form>

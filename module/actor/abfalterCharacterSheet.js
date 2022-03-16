@@ -161,12 +161,10 @@ export default class abfalterCharacterSheet extends ActorSheet {
     _onItemCreate(event) {
         event.preventDefault();
         let element = event.currentTarget;
-
         let itemData = {
             name: game.i18n.localize("abfalter.sheet.newItem"),
             type: element.dataset.type
         }
-
         return this.actor.createEmbeddedDocuments("Item", [itemData]);
     }
 
@@ -201,12 +199,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
         let element = event.currentTarget;
         let itemId = element.closest(".item").dataset.itemId;
         let item = this.actor.items.get(itemId);
-        if (item.data.data.expand == false) {
-            element.expand = true;
-        } else {
-            element.expand = false;
-        }
-        console.log(element.expand);
+        element.expand = !item.data.data.expand;
         item.update({ "data.expand": element.expand });
     }
 
@@ -215,11 +208,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
         let element = event.currentTarget;
         let itemId = element.closest(".item").dataset.itemId;
         let item = this.actor.items.get(itemId);
-        if (item.data.data.toggle == false) {
-            element.toggle = true;
-        } else {
-            element.toggle = false;
-        }
+        element.toggle = !item.data.data.toggle;
         item.update({ "data.toggle": element.toggle });
     }
 

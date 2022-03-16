@@ -574,8 +574,7 @@
         },
         "other": {
           "innateSlots": 0,
-          "moduleStatus": false,
-          "testing": ""
+          "moduleStatus": false
         }
       }
     },
@@ -851,6 +850,7 @@
     "psychicMatrix": {
       "templates": [ "itemDescription" ],
       "quantity": 1,
+      "expand": false,
       "bonus": 0,
       "level": 0,
       "action": "",

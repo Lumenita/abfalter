@@ -1,11 +1,13 @@
-<form class="{{cssClass}} discipline" autocomplete="off">
-    <div>
-        <p><span> This is the Discipline Item. </span></p>
-        <p><span> It shows the name of the item on the actor sheet. </span></p>
-        <p><span> This page cannot be opened from the actor sheet </span></p>
+<form class="{{cssClass}}" autocomplete="off">
+    <div class="itemStart">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <label> <input name="{{localize "abfalter.basicInfo.name"}}" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
-    <div>
-        <label> <span> Name </span> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
+    <div class="discipline">
+        <div>
+            <p><span> This is the Discipline Item. </span></p>
+            <p><span> It shows the name of the item on the actor sheet. </span></p>
+            <p><span> This page cannot be opened unless you create the item as the GM </span></p>
+        </div>
     </div>
-
 </form>

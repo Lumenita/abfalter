@@ -21,10 +21,28 @@ abfalter.basicInfo = {
     yes: "abfalter.basicInfo.yes",
     no: "abfalter.basicInfo.no",
     active: "abfalter.basicInfo.active",
+    passive: "abfalter.basicInfo.passive",
+    level: "abfalter.basicInfo.level",
+    description: "abfalter.basicInfo.description",
+    action: "abfalter.basicInfo.action",
+    difficulty: "abfalter.basicInfo.difficulty",
+    effect: "abfalter.basicInfo.effect",
+    routine: "abfalter.basicInfo.routine",
+    easy: "abfalter.basicInfo.easy",
+    average: "abfalter.basicInfo.average",
+    difficult: "abfalter.basicInfo.difficult",
+    vDifficult: "abfalter.basicInfo.vDifficult",
+    absurd: "abfalter.basicInfo.absurd",
+    almostImp: "abfalter.basicInfo.almostImp",
+    impossible: "abfalter.basicInfo.impossible",
+    inhuman: "abfalter.basicInfo.inhuman",
+    zen: "abfalter.basicInfo.zen",
+
 }
 
 abfalter.sheet = {
     newItem: "abfalter.sheet.newItem",
+    nameItem: "abfalter.sheet.nameItem",
     edit: "abfalter.sheet.edit",
     delete: "abfalter.sheet.delete",
     equip: "abfalter.sheet.equip"
@@ -92,7 +110,14 @@ abfalter.psychicTab = {
     totalCost: "abfalter.psychicTab.totalCost",
     cancelled: "abfalter.psychicTab.cancelled",
     addMentalPattern: "abfalter.psychicTab.addMentalPattern",
-    addPsychicMatrix: "abfalter.psychicTab.addPsychicMatrix"
+    addPsychicMatrix: "abfalter.psychicTab.addPsychicMatrix",
+    patternInfoB: "abfalter.psychicTab.patternInfoB",
+    patternInfoP: "abfalter.psychicTab.patternInfoP",
+    maintInfo: "abfalter.psychicTab.maintInfo",
+    cancelCost: "abfalter.psychicTab.cancelCost",
+    oppPattern: "abfalter.psychicTab.oppPattern",
+    maint: "abfalter.psychicTab.maint"
+
 }
 
 abfalter.armoryTab = {
