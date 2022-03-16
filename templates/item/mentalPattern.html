@@ -1,6 +1,21 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <div>
-        <span> Yo Mental Pattern Here </span>
+    <div class="itemStart">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
-
+    <div class="mentalPattern">
+        <div>
+            <label> <span> Cost </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
+            <label> <span> Cancel Cost </span> <input type="number" name="data.cancelCost" value="{{data.cancelCost}}" /> </label>
+        </div>
+        <div>
+            <label> <span> Opposite Pattern </span> <input type="text" name="data.opposite" value="{{data.opposite}}" placeholder="Name of Opposite Pattern" /> </label>
+        </div>
+        <div>
+            <span> Bonus </span>
+            <textarea name="data.description" placeholder="bonus information goes here">{{data.description}}</textarea>
+            <span> Penalty </span>
+            <textarea name="data.penalty" placeholder="penalty information goes here">{{data.penalty}}</textarea>
+        </div>
+    </div>
 </form>

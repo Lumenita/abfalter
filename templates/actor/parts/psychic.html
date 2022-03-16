@@ -139,7 +139,7 @@
                     <div class="mentalPattern-item item normal-item" data-item-id="{{mentalPattern._id}}">
                         <div>
                             <input class="item-name inline-edit" data-field="name" type="text" value="{{mentalPattern.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
-                            <input class="maintPower inline-edit" data-field="data.value" type="number" value="{{maintPower.data.value}}" readonly />
+                            <input class="maintPower" data-field="data.finalCost" type="number" value="{{mentalPattern.data.finalCost}}" readonly />
                             <button type="button" class="item-toggle" data-ability="{{data.toggle}}">
                                 {{#if data.toggle}}
                                 <span> {{localize "abfalter.basicInfo.yes"}} </span>
@@ -149,8 +149,11 @@
                             </button>
                             <a class="item-expand" title="Expand Item"><i class="fas fa-caret-down"></i></a>
                         </div>
-                        <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
-                            <span> Description goes Here (input with 2-3 lines). </span>
+                        <div class="patternInfo {{#if data.expand}}expand{{else}}notExpand{{/if}}">
+                            <span> Bonus </span>
+                            <textarea class="inline-edit" data-field="data.description">{{mentalPattern.data.description}}</textarea>
+                            <span> Penalty </span>
+                            <textarea class="inline-edit" data-field="data.penalty">{{mentalPattern.data.penalty}}</textarea>
                         </div>
                     </div>
                     {{/each}}
@@ -198,8 +201,7 @@
                         <a class="item-expand" title="Expand Item"><i class="fas fa-caret-down"></i></a>
                     </div>
                     <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
-                        <span> Description goes Here (input with 2-3 lines). </span>
-                        <input class="maint-desc inline-edit" data-field="data.description" value="{{maintPower.data.description}}" type="text" rows="2" />
+                        <textarea class="inline-edit" data-field="data.description">{{maintPower.data.description}}</textarea>
                     </div>
                 </div>
                 {{/each}}

@@ -1845,15 +1845,18 @@ h4 {
 .ppaterns > div:first-of-type {
     display: flex;
     text-align: center;
-    width: 102%;
+    width: 100%;
     border-image: url(../img/border.png) 10 stretch;
     border-bottom: 5px solid black;
     margin-bottom: 3px;
     padding-bottom: 3px;
 }
+.ppaterns > div:first-of-type > span:first-of-type,
+.ppaterns > div:first-of-type > span:nth-of-type(2) {
+    margin-right: 0.7%;
+}
 .mentalPattern-item > div {
     justify-content: space-between;
-    height: 20px;
 }
 .mentalPattern-item > div > input:first-of-type,
 .ppaterns > div > span:first-of-type {
@@ -1890,7 +1893,7 @@ h4 {
 }
 .mentalPattern-item > div > button {
     margin: 0px;
-    height: 20px;
+    height: 21px;
     border-radius: 0px;
     border: 0px;
 }
@@ -2620,11 +2623,36 @@ h4 {
     Default
     -----
 */
+.itemStart {
+    display: flex;
+    align-items: center;
+}
+.itemStart > label {
+    display: contents;
+}
+.itemStart  > img {
+    height: 60px;
+    width: 60px;
+}
+.itemStart > label > input {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    border: 0px;
+    margin-left: 10px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 25px;
+    border-bottom: 1px solid black;
+}
+
 .animabf .items-list {
-  list-style: none;
-  margin: 4px 0;
-  padding: 0;
-  overflow-y: auto;
+    list-style: none;
+    margin: 4px 0;
+    padding: 0;
+    overflow-y: auto;
 }
 .animabf .items-list .item {
   line-height: 10px;
@@ -2768,22 +2796,30 @@ h4 {
 
 
 /*
-    ----------
-    Discipline
-    ----------
+    ------------------------
+    Discipline & Maint Power
+    ------------------------
 */
-.discipline > div:last-of-type{
+.maintPower > div:nth-of-type(2),
+.discipline > div:last-of-type {
     margin-top: 10px;
 }
+.maintPower > div > label,
 .discipline > div > label {
     display: flex;
 }
+.maintPower > div > span,
 .discipline > div > span {
     display: flex;
     font-size: 13px;
     align-items: center;
     height: 20px;
 }
+.maintPower > div,
+.discipline > div {
+    text-align: center;
+}
+.maintPower > div > label > input,
 .discipline > div > label > input {
     display: flex;
     width: 100%;
@@ -2798,20 +2834,117 @@ h4 {
     border-bottom: 1px solid black;
 }
 /*
-    -----------
-    Maint Power
-    -----------
-*/
-/*
     --------------
     Mental Pattern
     --------------
 */
+.mentalPattern > div > label {
+    display: flex;
+}
+.mentalPattern > div > label > input {
+    width: 40%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    margin-left: 10px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+.mentalPattern > div > label > span,
+.mentalPattern > div > span {
+    width: 60%;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+}
 /*
     --------------
     Psychic Matrix
     --------------
 */
+.psychicMatrix > div:not(:first-of-type) > label {
+    display: flex;
+}
+.psychicMatrix > div:first-of-type {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: baseline;
+    margin: 10px 0 0 0;
+}
+.psychicMatrix > div:first-of-type > label {
+    display: contents;
+}
+.psychicMatrix > div:first-of-type > label > span {
+    width: 13%;
+    text-align: end;
+    margin-right: 9px;
+}
+.psychicMatrix > div:first-of-type > label > select {
+    width: 19%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    border-bottom: 1px solid black;
+}
+.psychicMatrix > div:nth-of-type(2) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    text-align: center;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.psychicMatrix > div:nth-of-type(3) {
+    display: flex;
+    text-align: center;
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+}
+.psychicMatrix > div:nth-of-type(3) > span:first-of-type {
+    width: 25%;
+}
+.psychicMatrix > div:nth-of-type(3) > span:last-of-type {
+    width: 75%;
+}
+.psychicMatrix > div:nth-of-type(4) > label {
+    text-align: center;
+}
+.psychicMatrix > div:nth-of-type(4) > label > span:first-of-type {
+    width: 7%;
+    border-right: 1px solid black;
+}
+.psychicMatrix > div:nth-of-type(4) > label > span:last-of-type {
+    width: 18%;
+}
+.psychicMatrix > div:nth-of-type(4) > label > input {
+    width: 75%;
+}
+.psychicMatrix > div > label > input {
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+.psychicMatrix > div > label > span,
+.psychicMatrix > div > span {
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+}
 
 
 
@@ -2830,12 +2963,7 @@ h4 {
 
 
 
-
-
-
-
-
-
+psychicMatrix
 /*
     ***************
     ---------------

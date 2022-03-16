@@ -22,6 +22,16 @@
       "path": "lang/en.json"
     }
   ],
+  "dependencies": [
+    {
+      "name": "libWrapper",
+      "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json"
+    },
+    {
+      "name": "Compendium Folders",
+      "manifest": "https://raw.githubusercontent.com/earlSt1/vtt-compendium-folders/09x-update/module.json"
+    }
+  ],
   "gridDistance": 5,
   "gridUnits": "ft",
   "primaryTokenAttribute": "health",

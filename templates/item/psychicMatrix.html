@@ -1,6 +1,58 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <div>
-        <span> Yo Known Power Here </span>
+    <div class="itemStart">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
-
+    <div class="psychicMatrix">
+        <div>
+            <label>
+                <span> Level </span>
+                <select name="data.level" data-dtype="number">
+                    {{#select data.level}}
+                    <option value="1"> 1 </option>
+                    <option value="2"> 2 </option>
+                    <option value="3"> 3 </option>
+                    {{/select}}
+                </select>
+            </label>
+            <label>
+                <span> Action </span>
+                <select name="data.action" data-dtype="text">
+                    {{#select data.action}}
+                    <option value="Active"> Active </option>
+                    <option value="Passive"> Passive </option>
+                    {{/select}}
+                </select>
+            </label>
+            <label>
+                <span> Maint </span>
+                <select name="data.maint" data-dtype="text">
+                    {{#select data.maint}}
+                    <option value="No"> No </option>
+                    <option value="Yes"> Yes </option>
+                    {{/select}}
+                </select>
+            </label>
+        </div>
+        <div>
+            <span> Description </span>
+        </div>
+        <textarea rows="7" name="data.description" placeholder="Description of matrix goes here">{{data.description}}</textarea>
+        <div>
+            <span> Difficulty </span>
+            <span> Effect </span>
+        </div>
+        <div>
+            <label> <span> 20 </span> <span> routine </span> <input type="text" name="data.effect20" value="{{data.effect20}}" /> </label>
+            <label> <span> 40 </span> <span> easy </span> <input type="text" name="data.effect40" value="{{data.effect40}}" /> </label>
+            <label> <span> 80 </span> <span> average </span> <input type="text" name="data.effect80" value="{{data.effect80}}" /> </label>
+            <label> <span> 120 </span> <span> difficult </span> <input type="text" name="data.effect120" value="{{data.effect120}}" /> </label>
+            <label> <span> 140 </span> <span> very difficult </span> <input type="text" name="data.effect140" value="{{data.effect140}}" /> </label>
+            <label> <span> 180 </span> <span> absurd </span> <input type="text" name="data.effect180" value="{{data.effect180}}" /> </label>
+            <label> <span> 240 </span> <span> almost imp. </span> <input type="text" name="data.effect240" value="{{data.effect240}}" /> </label>
+            <label> <span> 280 </span> <span> impossible </span> <input type="text" name="data.effect280" value="{{data.effect280}}" /> </label>
+            <label> <span> 320 </span> <span> inhuman </span> <input type="text" name="data.effect320" value="{{data.effect320}}" /> </label>
+            <label> <span> 440 </span> <span> Zen </span> <input type="text" name="data.effect440" value="{{data.effect440}}" /> </label>
+        </div>
+    </div>
 </form>

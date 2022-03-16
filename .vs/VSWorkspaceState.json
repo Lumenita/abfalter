@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\css",
+    "\\lang",
+    "\\module",
+    "\\module\\actor",
+    "\\module\\item",
+    "\\templates",
+    "\\templates\\actor",
+    "\\templates\\actor\\parts",
+    "\\templates\\dialogues"
+  ],
+  "SelectedNode": "\\system.json",
+  "PreviewInSolutionExplorer": false
+}

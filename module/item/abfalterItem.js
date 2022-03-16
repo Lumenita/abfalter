@@ -65,6 +65,13 @@ export default class abfalterItem extends Item {
         this.data.data.AT.newSpt = Math.floor(+this.data.data.AT.spt + +this.data.data.qualityValue);
     }
 
+    prepareMentalPattern() {
+        if (this.data.data.toggle == true) {
+            this.data.data.finalCost = Math.floor(+this.data.data.cost + +this.data.data.cancelCost);
+        } else {
+            this.data.data.finalCost = this.data.data.cost;
+        }
+    }
 
 
 
