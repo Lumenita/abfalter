@@ -5,12 +5,14 @@ export default class abfalterActor extends Actor {
 
     prepareDerivedData() {
         const actorData = this.data;
+
         this._prepareCharacterData(actorData);
     }
 
     _prepareCharacterData(actorData) {
         const data = actorData.data;
         const stats = data.stats;
+
 
         // Determine Class Level Bonusses
         const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish, acro,
@@ -1419,12 +1421,6 @@ export default class abfalterActor extends Actor {
 
         // Psychic Projection
         data.pprojfinal = Math.floor(data.pproj.base + data.pproj.spec + data.pproj.temp + data.stats.Dexterity.mod + data.aam);
-
-
-
-
-
-
 
         // Wear Armor
         data.wearArmorFinal = Math.floor(data.wearArmor.base + data.weararmorbonus + data.wearArmor.spec + data.wearArmor.temp + data.stats.Strength.mod);

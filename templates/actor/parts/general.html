@@ -506,7 +506,9 @@
                 <span> N.A. </span> <input type="number" name="data.secondary.acrobatics.natural" value="{{data.secondary.acrobatics.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.acrobaticsnatfinal" value="{{data.acrobaticsnatfinal}}" readonly />
                 <label>
-                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                    <button type="button" class="mastery-box" data-label="data.secondary.acrobatics.mastery"  data-ability="{{data.secondary.acrobatics.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -529,7 +531,9 @@
                 <span> N.A. </span> <input type="number" name="data.secondary.athleticism.natural" value="{{data.secondary.athleticism.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.athleticismnatfinal" value="{{data.athleticismnatfinal}}" readonly />
                 <label>
-                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                    <button type="button" class="mastery-box" data-ability="{{data.secondary.athleticism.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}

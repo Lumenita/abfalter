@@ -17,10 +17,10 @@
             </label>
             <label>
                 <span> {{localize "abfalter.basicInfo.action"}} </span>
-                <select name="data.action" data-dtype="text">
+                <select name="data.action" data-dtype="number">
                     {{#select data.action}}
-                    <option value="Active"> {{localize "abfalter.basicInfo.active"}} </option>
-                    <option value="Passive"> {{localize "abfalter.basicInfo.passive"}} </option>
+                    <option value="1"> {{localize "abfalter.basicInfo.active"}} </option>
+                    <option value="0"> {{localize "abfalter.basicInfo.passive"}} </option>
                     {{/select}}
                 </select>
             </label>

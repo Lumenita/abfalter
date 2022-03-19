@@ -137,14 +137,16 @@
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "athleticism": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "climb": {
             "base": 0,
@@ -577,6 +579,7 @@
           "moduleStatus": false
         }
       }
+
     },
     "character": {
       "templates": [ "info", "stats", "mystic", "armory", "psychic" ]
@@ -853,7 +856,7 @@
       "expand": false,
       "bonus": 0,
       "level": 0,
-      "action": "",
+      "action": 1,
       "maint": "",
       "effect20": "",
       "effect40": "",

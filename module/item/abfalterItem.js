@@ -73,6 +73,15 @@ export default class abfalterItem extends Item {
         }
     }
 
+    preparePsychicMatrix() {
+
+        if (this.parent != null) {
+            if (this.parent.data) {
+                this.data.data.type = this.parent.data.data.other.moduleStatus;
+                this.data.data.newPotential = +this.parent.data.data.finalPotential + +this.data.data.bonus;
+            }
+        }
+    }
 
 
 

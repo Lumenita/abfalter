@@ -176,12 +176,8 @@
                             <input class="maintPower inline-edit" data-field="data.bonus" type="number" value="{{psychicMatrix.data.bonus}}" />
                             <a class="item-expand" title="Expand Item"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
-                            {{#if actor.data.data.other.moduleStatus}}
-                            <span> Atk / def </span>
-                            {{else}}
-                            <span> proj </span>
-                            {{/if}}
+                        <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}"> 
+                            <span> Potential Button w/ Bonus WIP </span>
                         </div>
                     </div>
                     {{/each}}
