@@ -1,0 +1,5 @@
+# IDE
+.vs/
+
+# Foundry
+*.lock
