@@ -153,336 +153,384 @@
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "jump": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "ride": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "swim": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "etiquette": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "intimidate": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "leadership": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "persuasion": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "streetwise": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "style": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "trading": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "notice": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "search": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "track": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "animals": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "appraisal": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "architecture": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "herballore": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "history": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "law": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "magicappr": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "medicine": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "memorize": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "navigation": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "occult": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "science": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "tactics": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "composure": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "featsofstr": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "withstpain": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "disguise": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "hide": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "lockpicking": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "poisons": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "stealth": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "theft": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "traplore": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "alchemy": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "animism": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "art": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "dance": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "forging": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "jewelry": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "music": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "runes": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "ritualcalig": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "slofhand": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           },
           "tailoring": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
-            "natural": 0
+            "natural": 0,
+            "mastery": false
           }
         },
         "aam": 0
@@ -539,6 +587,305 @@
           }
         }
       },
+      "ki": {
+        "kiAbility": {
+          "useOfKi": {
+            "status": false,
+            "status2": false,
+            "cost": 40
+          },
+          "kiControl": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "kiDetection": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiErudition": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiCombatAura": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiPhysDom": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiPhysChange": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "kiSuperiorChange": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiMultBodies": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "kiGreaterMult": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "kiArcaneMult": {
+            "status": false,
+            "status2": false,
+            "cost": 40
+          },
+          "kiMagnitude": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "kiArcaneMagn": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "kiAgeControl": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiTechImi": {
+            "status": false,
+            "status2": false,
+            "cost": 50
+          },
+          "kiTechPush": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "weightElimination": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiLevitation": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiObjectMotion": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiMassMove": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiFlight": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiPresenceEx": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiEnergyArmor": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiGreaterArmor": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiArcaneArmor": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiAuraEx": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiEleFire": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiEleWater": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiEleAir": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiEleEarth": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiEleLight": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiEleDark": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiIncreaseDmg": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiIncreaseReach": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiIncreaseSpd": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiDestruction": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiAbsorbtion": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "kiPhysShield": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiTrans": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiHeal": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiSupHeal": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiStabil": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiLifeSac": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiUseOfEne": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiConceal": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiAuraConceal": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiFalseDeath": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiEleminationOfNec": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiEleImmHeat": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiEleImmCold": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiEleImmEle": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiPenRed": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiRecovery": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiRestoreOther": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "kiCharacAug": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiSupCharacAug": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "kiImpovTech": {
+            "status": false,
+            "status2": false,
+            "cost": 50
+          },
+          "kiInhumanity": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "kiZen": {
+            "status": false,
+            "status2": false,
+            "cost": 50
+          }
+        }
+      },
       "armory": {
         "wearArmor": {
           "base": 0,
@@ -582,7 +929,7 @@
 
     },
     "character": {
-      "templates": [ "info", "stats", "mystic", "armory", "psychic" ]
+      "templates": [ "info", "stats", "mystic", "armory", "psychic", "ki" ]
     },
     "npc": {
       "templates": [ "info" ]

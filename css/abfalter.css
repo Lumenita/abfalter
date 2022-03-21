@@ -91,7 +91,16 @@ h4 {
     height: 20px;
     border-radius: 0px;
     border: 0px;
+    background-color: #a5a5a5;
 }
+.mastered {
+    color: #17ff17;
+}
+.notMastered {
+    color: black;
+}
+
+
 .editor-box {
     height: 200px;
     border: 1px solid black;
@@ -2081,7 +2090,46 @@ h4 {
     Ki Abilities
     ---------
 */
-
+.kiAbility {
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
+    width: 15%;
+    color: #fffbe4;
+}
+.kiNotBought {
+    background-color: #38373e;
+}
+.kiBought {
+    background-color: #0064cb;
+}
+.kiFree {
+    background-color: #127212;
+}
+.kiabilities > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.kiabilities > span {
+    font-size: 13px;
+}
+.subKi1 {
+    margin-left: 10px;
+}
+.subKi2 {
+    margin-left: 30px;
+}
+.subKi3 {
+    margin-left: 50px;
+}
+.subKi4 {
+    margin-left: 70px;
+}
+.subKi5 {
+    margin-left: 90px;
+}
 
 /*
     --------

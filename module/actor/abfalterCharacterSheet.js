@@ -155,6 +155,33 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 }
                 this.document.update({ "data.other.moduleStatus": value });
             });
+            html.find(".mastery-box").click(ev => {
+                let value = $(ev.currentTarget).attr("data-ability");
+                let label = $(ev.currentTarget).attr("data-label");
+                if (value == "false") {
+                    value = true;
+                } else {
+                    value = false;
+                }                
+                this.document.update({ [label]: value });
+            });
+            html.find(".kiAbility").click(ev => {
+                let value = $(ev.currentTarget).attr("data-ability");
+                let value2 = $(ev.currentTarget).attr("data-ability2");
+                let label = $(ev.currentTarget).attr("data-label");
+                let label2 = $(ev.currentTarget).attr("data-label2");
+                if (value == "false" && value2 == "false") {
+                    value = true;
+                    value2 = false;
+                } else if (value == "true" && value2 == "false") {
+                    value = true;
+                    value2 = true;
+                } else {
+                    value = false;
+                    value2 = false;
+                }
+                this.document.update({ [label]: value, [label2]: value2 });
+            });
         }
 
         super.activateListeners(html);

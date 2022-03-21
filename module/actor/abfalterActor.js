@@ -337,6 +337,17 @@ export default class abfalterActor extends Actor {
         data.presence = Math.floor((data.dp / 20) + data.levelinfo.presencemod);
         data.nextlevel = Math.floor(((data.level + data.levelinfo.levelmod) * 25) + 75);
 
+        //Ki Calculations
+        data.kiThingMK = 0;
+        for (let [key, kiThing] of Object.entries(data.kiAbility)) {
+            if (kiThing.status == true && kiThing.status2 == false) {
+                data.kiThingMK += kiThing.cost;
+            } else {
+                data.kiThingMK += 0;
+            }
+        }
+
+
         //Resistances
         for (let [key, res] of Object.entries(data.resistances)) {
             switch (key) {
@@ -1463,8 +1474,6 @@ export default class abfalterActor extends Actor {
         // Settings
         data.openRangeFinal = Math.floor(data.rollRange.base + data.rollRange.spec + data.rollRange.temp);
         data.fumbleRangeFinal = Math.floor(data.fumleRange.base + data.fumleRange.spec + data.fumleRange.temp);
-
-
 
 
 

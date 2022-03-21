@@ -506,7 +506,7 @@
                 <span> N.A. </span> <input type="number" name="data.secondary.acrobatics.natural" value="{{data.secondary.acrobatics.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.acrobaticsnatfinal" value="{{data.acrobaticsnatfinal}}" readonly />
                 <label>
-                    <button type="button" class="mastery-box" data-label="data.secondary.acrobatics.mastery"  data-ability="{{data.secondary.acrobatics.mastery}}">
+                    <button type="button" class="mastery-box {{#if data.secondary.acrobatics.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.acrobatics.mastery"  data-ability="{{data.secondary.acrobatics.mastery}}">
                         <span> Mastery </span> 
                     </button>
                 </label>
@@ -531,7 +531,7 @@
                 <span> N.A. </span> <input type="number" name="data.secondary.athleticism.natural" value="{{data.secondary.athleticism.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.athleticismnatfinal" value="{{data.athleticismnatfinal}}" readonly />
                 <label>
-                    <button type="button" class="mastery-box" data-ability="{{data.secondary.athleticism.mastery}}">
+                    <button type="button" class="mastery-box {{#if data.secondary.athleticism.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.athleticism.mastery"  data-ability="{{data.secondary.athleticism.mastery}}">
                         <span> Mastery </span> 
                     </button>
                 </label>
@@ -556,7 +556,9 @@
                 <span> N.A. </span> <input type="number" name="data.secondary.climb.natural" value="{{data.secondary.climb.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.climbnatfinal" value="{{data.climbnatfinal}}" readonly />
                 <label>
-                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                    <button type="button" class="mastery-box {{#if data.secondary.climb.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.climb.mastery"  data-ability="{{data.secondary.climb.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -579,7 +581,9 @@
                 <span> N.A. </span> <input type="number" name="data.secondary.jump.natural" value="{{data.secondary.jump.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.jumpnatfinal" value="{{data.jumpnatfinal}}" readonly />
                 <label>
-                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                    <button type="button" class="mastery-box {{#if data.secondary.jump.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.jump.mastery"  data-ability="{{data.secondary.jump.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -602,7 +606,9 @@
                 <span> N.A. </span> <input type="number" name="data.secondary.ride.natural" value="{{data.secondary.ride.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.ridenatfinal" value="{{data.ridenatfinal}}" readonly />
                 <label>
-                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                    <button type="button" class="mastery-box {{#if data.secondary.ride.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.ride.mastery"  data-ability="{{data.secondary.ride.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -625,7 +631,9 @@
                 <span> N.A. </span> <input type="number" name="data.secondary.swim.natural" value="{{data.secondary.swim.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.swimnatfinal" value="{{data.swimnatfinal}}" readonly />
                 <label>
-                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
+                    <button type="button" class="mastery-box {{#if data.secondary.swim.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.swim.mastery"  data-ability="{{data.secondary.swim.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -663,8 +671,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.etiquette.nat" value="{{data.secondary.etiquette.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.etiquette.natural" value="{{data.secondary.etiquette.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.etiquettenatfinal" value="{{data.etiquettenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.etiquettemastery.status" data-dtype="boolean" {{checked data.etiquettemastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.etiquette.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.etiquette.mastery"  data-ability="{{data.secondary.etiquette.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -686,8 +696,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.intimidate.nat" value="{{data.secondary.intimidate.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.intimidate.natural" value="{{data.secondary.intimidate.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.intimidatenatfinal" value="{{data.intimidatenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.intimidatemastery.status" data-dtype="boolean" {{checked data.intimidatemastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.intimidate.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.intimidate.mastery"  data-ability="{{data.secondary.intimidate.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -709,8 +721,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.leadership.nat" value="{{data.secondary.leadership.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.leadership.natural" value="{{data.secondary.leadership.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.leadershipnatfinal" value="{{data.leadershipnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.leadershipmastery.status" data-dtype="boolean" {{checked data.leadershipmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.leadership.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.leadership.mastery"  data-ability="{{data.secondary.leadership.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -732,8 +746,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.persuasion.nat" value="{{data.secondary.persuasion.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.persuasion.natural" value="{{data.secondary.persuasion.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.persuasionnatfinal" value="{{data.persuasionnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.persuasionmastery.status" data-dtype="boolean" {{checked data.persuasionmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.persuasion.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.persuasion.mastery"  data-ability="{{data.secondary.persuasion.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -755,8 +771,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.streetwise.nat" value="{{data.secondary.streetwise.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.streetwise.natural" value="{{data.secondary.streetwise.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.streetwisenatfinal" value="{{data.streetwisenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.streetwisemastery.status" data-dtype="boolean" {{checked data.streetwisemastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.streetwise.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.streetwise.mastery"  data-ability="{{data.secondary.streetwise.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -778,8 +796,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.style.nat" value="{{data.secondary.style.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.style.natural" value="{{data.secondary.style.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.stylenatfinal" value="{{data.stylenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.stylemastery.status" data-dtype="boolean" {{checked data.stylemastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.style.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.style.mastery"  data-ability="{{data.secondary.style.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -801,8 +821,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.trading.nat" value="{{data.secondary.trading.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.trading.natural" value="{{data.secondary.trading.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.tradingnatfinal" value="{{data.tradingnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.tradingmastery.status" data-dtype="boolean" {{checked data.tradingmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.trading.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.trading.mastery"  data-ability="{{data.secondary.trading.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -839,8 +861,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.notice.nat" value="{{data.secondary.notice.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.notice.natural" value="{{data.secondary.notice.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.noticenatfinal" value="{{data.noticenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.noticemastery.status" data-dtype="boolean" {{checked data.noticemastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.perceptive.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.perceptive.mastery"  data-ability="{{data.secondary.perceptive.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -862,8 +886,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.search.nat" value="{{data.secondary.search.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.search.natural" value="{{data.secondary.search.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.searchnatfinal" value="{{data.searchnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.searchmastery.status" data-dtype="boolean" {{checked data.searchmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.search.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.search.mastery"  data-ability="{{data.secondary.search.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -885,8 +911,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.track.nat" value="{{data.secondary.track.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.track.natural" value="{{data.secondary.track.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.tracknatfinal" value="{{data.tracknatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.trackmastery.status" data-dtype="boolean" {{checked data.trackmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.track.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.track.mastery"  data-ability="{{data.secondary.track.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -923,8 +951,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.animals.nat" value="{{data.secondary.animals.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.animals.natural" value="{{data.secondary.animals.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.animalsnatfinal" value="{{data.animalsnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.animalsmastery.status" data-dtype="boolean" {{checked data.animalsmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.animals.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.animals.mastery"  data-ability="{{data.secondary.animals.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -946,8 +976,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.appraisal.nat" value="{{data.secondary.appraisal.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.appraisal.natural" value="{{data.secondary.appraisal.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.appraisalnatfinal" value="{{data.appraisalnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.appraisalmastery.status" data-dtype="boolean" {{checked data.appraisalmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.appraisal.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.appraisal.mastery"  data-ability="{{data.secondary.appraisal.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -969,8 +1001,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.architecture.nat" value="{{data.secondary.architecture.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.architecture.natural" value="{{data.secondary.architecture.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.architecturenatfinal" value="{{data.architecturenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.architecturemastery.status" data-dtype="boolean" {{checked data.architecturemastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.architecture.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.architecture.mastery"  data-ability="{{data.secondary.architecture.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -992,8 +1026,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.herballore.nat" value="{{data.secondary.herballore.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.herballore.natural" value="{{data.secondary.herballore.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.herballorenatfinal" value="{{data.herballorenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.herballoremastery.status" data-dtype="boolean" {{checked data.herballoremastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.herballore.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.herballore.mastery"  data-ability="{{data.secondary.herballore.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1015,8 +1051,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.history.nat" value="{{data.secondary.history.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.history.natural" value="{{data.secondary.history.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.historynatfinal" value="{{data.historynatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.historymastery.status" data-dtype="boolean" {{checked data.historymastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.history.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.history.mastery"  data-ability="{{data.secondary.history.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1038,8 +1076,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.law.nat" value="{{data.secondary.law.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.law.natural" value="{{data.secondary.law.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.lawnatfinal" value="{{data.lawnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.lawmastery.status" data-dtype="boolean" {{checked data.lawmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.law.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.law.mastery"  data-ability="{{data.secondary.law.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1061,8 +1101,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.magicappr.nat" value="{{data.secondary.magicappr.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.magicappr.natural" value="{{data.secondary.magicappr.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.magicapprnatfinal" value="{{data.magicapprnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.magicapprmastery.status" data-dtype="boolean" {{checked data.magicapprmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.magicappr.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.magicappr.mastery"  data-ability="{{data.secondary.magicappr.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1084,8 +1126,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.medicine.nat" value="{{data.secondary.medicine.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.medicine.natural" value="{{data.secondary.medicine.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.medicinenatfinal" value="{{data.medicinenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.medicinemastery.status" data-dtype="boolean" {{checked data.medicinemastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.medicine.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.medicine.mastery"  data-ability="{{data.secondary.medicine.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1107,8 +1151,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.memorize.nat" value="{{data.secondary.memorize.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.memorize.natural" value="{{data.secondary.memorize.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.memorizenatfinal" value="{{data.memorizenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.memorizemastery.status" data-dtype="boolean" {{checked data.memorizemastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.memorize.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.memorize.mastery"  data-ability="{{data.secondary.memorize.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1130,8 +1176,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.navigation.nat" value="{{data.secondary.navigation.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.navigation.natural" value="{{data.secondary.navigation.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.navigationnatfinal" value="{{data.navigationnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.navigationmastery.status" data-dtype="boolean" {{checked data.navigationmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.navigation.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.navigation.mastery"  data-ability="{{data.secondary.navigation.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1153,8 +1201,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.occult.nat" value="{{data.secondary.occult.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.occult.natural" value="{{data.secondary.occult.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.occultnatfinal" value="{{data.occultnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.occultmastery.status" data-dtype="boolean" {{checked data.occultmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.occult.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.occult.mastery"  data-ability="{{data.secondary.occult.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1176,8 +1226,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.science.nat" value="{{data.secondary.science.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.science.natural" value="{{data.secondary.science.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.sciencenatfinal" value="{{data.sciencenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.sciencemastery.status" data-dtype="boolean" {{checked data.sciencemastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.science.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.science.mastery"  data-ability="{{data.secondary.science.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1199,8 +1251,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.tactics.nat" value="{{data.secondary.tactics.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.tactics.natural" value="{{data.secondary.tactics.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.tacticsnatfinal" value="{{data.tacticsnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.tacticsmastery.status" data-dtype="boolean" {{checked data.tacticsmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.tactics.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.tactics.mastery"  data-ability="{{data.secondary.tactics.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1237,8 +1291,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.composure.nat" value="{{data.secondary.composure.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.composure.natural" value="{{data.secondary.composure.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.composurenatfinal" value="{{data.composurenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.composuremastery.status" data-dtype="boolean" {{checked data.composuremastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.composure.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.composure.mastery"  data-ability="{{data.secondary.composure.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1260,8 +1316,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.featsofstr.nat" value="{{data.secondary.featsofstr.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.featsofstr.natural" value="{{data.secondary.featsofstr.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.featsofstrnatfinal" value="{{data.featsofstrnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.featsofstrmastery.status" data-dtype="boolean" {{checked data.featsofstrmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.featsofstr.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.featsofstr.mastery"  data-ability="{{data.secondary.featsofstr.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1283,8 +1341,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.withstpain.nat" value="{{data.secondary.withstpain.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.withstpain.natural" value="{{data.secondary.withstpain.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.withstpainnatfinal" value="{{data.withstpainnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.withstpainmastery.status" data-dtype="boolean" {{checked data.withstpainmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.withstpain.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.withstpain.mastery"  data-ability="{{data.secondary.withstpain.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1321,8 +1381,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.disguise.nat" value="{{data.secondary.disguise.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.disguise.natural" value="{{data.secondary.disguise.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.disguisenatfinal" value="{{data.disguisenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.disguisemastery.status" data-dtype="boolean" {{checked data.disguisemastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.disguise.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.disguise.mastery"  data-ability="{{data.secondary.disguise.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1344,8 +1406,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.hide.nat" value="{{data.secondary.hide.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.hide.natural" value="{{data.secondary.hide.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.hidenatfinal" value="{{data.hidenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.hidemastery.status" data-dtype="boolean" {{checked data.hidemastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.hide.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.hide.mastery"  data-ability="{{data.secondary.hide.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1367,8 +1431,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.lockpicking.nat" value="{{data.secondary.lockpicking.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.lockpicking.natural" value="{{data.secondary.lockpicking.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.lockpickingnatfinal" value="{{data.lockpickingnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.lockpickingmastery.status" data-dtype="boolean" {{checked data.lockpickingmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.lockpicking.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.lockpicking.mastery"  data-ability="{{data.secondary.lockpicking.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1390,8 +1456,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.poisons.nat" value="{{data.secondary.poisons.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.poisons.natural" value="{{data.secondary.poisons.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.poisonsnatfinal" value="{{data.poisonsnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.poisonsmastery.status" data-dtype="boolean" {{checked data.poisonsmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.poisons.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.poisons.mastery"  data-ability="{{data.secondary.poisons.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1413,8 +1481,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.stealth.nat" value="{{data.secondary.stealth.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.stealth.natural" value="{{data.secondary.stealth.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.stealthnatfinal" value="{{data.stealthnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.stealthmastery.status" data-dtype="boolean" {{checked data.stealthmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.stealth.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.stealth.mastery"  data-ability="{{data.secondary.stealth.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1436,8 +1506,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.theft.nat" value="{{data.secondary.theft.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.theft.natural" value="{{data.secondary.theft.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.theftnatfinal" value="{{data.theftnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.theftmastery.status" data-dtype="boolean" {{checked data.theftmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.theft.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.theft.mastery"  data-ability="{{data.secondary.theft.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1459,8 +1531,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.traplore.nat" value="{{data.secondary.traplore.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.traplore.natural" value="{{data.secondary.traplore.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.traplorenatfinal" value="{{data.traplorenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.traploremastery.status" data-dtype="boolean" {{checked data.traploremastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.traplore.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.traplore.mastery"  data-ability="{{data.secondary.traplore.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1497,8 +1571,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.alchemy.nat" value="{{data.secondary.alchemy.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.alchemy.natural" value="{{data.secondary.alchemy.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.alchemynatfinal" value="{{data.alchemynatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.alchemymastery.status" data-dtype="boolean" {{checked data.alchemymastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.alchemy.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.alchemy.mastery"  data-ability="{{data.secondary.alchemy.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1520,8 +1596,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.animism.nat" value="{{data.secondary.animism.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.animism.natural" value="{{data.secondary.animism.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.animismnatfinal" value="{{data.animismnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.animismmastery.status" data-dtype="boolean" {{checked data.animismmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.animism.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.animism.mastery"  data-ability="{{data.secondary.animism.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1543,8 +1621,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.art.nat" value="{{data.secondary.art.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.art.natural" value="{{data.secondary.art.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.artnatfinal" value="{{data.artnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.artmastery.status" data-dtype="boolean" {{checked data.artmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.art.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.art.mastery"  data-ability="{{data.secondary.art.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1566,8 +1646,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.dance.nat" value="{{data.secondary.dance.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.dance.natural" value="{{data.secondary.dance.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.dancenatfinal" value="{{data.dancenatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.dancemastery.status" data-dtype="boolean" {{checked data.dancemastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.dance.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.dance.mastery"  data-ability="{{data.secondary.dance.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1589,8 +1671,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.forging.nat" value="{{data.secondary.forging.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.forging.natural" value="{{data.secondary.forging.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.forgingnatfinal" value="{{data.forgingnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.forgingmastery.status" data-dtype="boolean" {{checked data.forgingmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.forging.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.forging.mastery"  data-ability="{{data.secondary.forging.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1612,8 +1696,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.jewelry.nat" value="{{data.secondary.jewelry.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.jewelry.natural" value="{{data.secondary.jewelry.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.jewelrynatfinal" value="{{data.jewelrynatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.jewelrymastery.status" data-dtype="boolean" {{checked data.jewelrymastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.jewelry.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.jewelry.mastery"  data-ability="{{data.secondary.jewelry.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1635,8 +1721,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.music.nat" value="{{data.secondary.music.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.music.natural" value="{{data.secondary.music.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.musicnatfinal" value="{{data.musicnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.musicmastery.status" data-dtype="boolean" {{checked data.musicmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.music.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.music.mastery"  data-ability="{{data.secondary.music.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1658,8 +1746,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.runes.nat" value="{{data.secondary.runes.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.runes.natural" value="{{data.secondary.runes.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.runesnatfinal" value="{{data.runesnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.runesmastery.status" data-dtype="boolean" {{checked data.runesmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.runes.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.runes.mastery"  data-ability="{{data.secondary.runes.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1681,8 +1771,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.ritualcalig.nat" value="{{data.secondary.ritualcalig.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.ritualcalig.natural" value="{{data.secondary.ritualcalig.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.ritualcalignatfinal" value="{{data.ritualcalignatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.ritualcaligmastery.status" data-dtype="boolean" {{checked data.ritualcaligmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.ritualcalig.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.ritualcalig.mastery"  data-ability="{{data.secondary.ritualcalig.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1704,8 +1796,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.slofhand.nat" value="{{data.secondary.slofhand.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.slofhand.natural" value="{{data.secondary.slofhand.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.slofhandnatfinal" value="{{data.slofhandnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.slofhandmastery.status" data-dtype="boolean" {{checked data.slofhandmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.slofhand.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.slofhand.mastery"  data-ability="{{data.secondary.slofhand.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
@@ -1727,8 +1821,10 @@
                 <span> # Nat. </span> <input type="number" name="data.secondary.tailoring.nat" value="{{data.secondary.tailoring.nat}}" />
                 <span> N.A. </span> <input type="number" name="data.secondary.tailoring.natural" value="{{data.secondary.tailoring.natural}}" />
                 <span class="natemph"> Total Nat </span> <input type="number" name="data.tailoringnatfinal" value="{{data.tailoringnatfinal}}" readonly />
-                <label class="mastery-box">
-                    <input type="checkbox" name="data.tailoringmastery.status" data-dtype="boolean" {{checked data.tailoringmastery.status}} />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.tailoring.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.tailoring.mastery"  data-ability="{{data.secondary.tailoring.mastery}}">
+                        <span> Mastery </span> 
+                    </button>
                 </label>
             </div>
             {{/if}}
