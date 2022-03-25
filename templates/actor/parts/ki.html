@@ -460,9 +460,6 @@
         </div>
         {{/if}}
         {{/if}}<!--End of Use of Ki If Statement-->
-
-
-
         <!--        <div>
     <label class="subKi2">
         <span title="yyy"> xxx </span>
@@ -473,28 +470,172 @@
     </label>
     </div>-->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <h2> Nemesis Abilities </h2>
-        <span> nemesis abilities here</span>
+        <div>
+            <span title="{{localize "abfalter.kiTab.descuseOfNemesis"}}"> {{localize "abfalter.kiTab.useOfNemesis"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.useOfNemesis.status}}{{#if data.kiAbility.useOfNemesis.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.useOfNemesis.status" data-label2="data.kiAbility.useOfNemesis.status2" data-ability="{{data.kiAbility.useOfNemesis.status}}" data-ability2="{{data.kiAbility.useOfNemesis.status2}}">
+                <span> {{data.kiAbility.useOfNemesis.cost}} </span>
+            </button>
+        </div>
+        {{#if data.kiAbility.useOfNemesis.status}}
+        <div>
+            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiArmor"}}"> {{localize "abfalter.kiTab.nemiArmor"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiArmor.status}}{{#if data.kiAbility.nemiArmor.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiArmor.status" data-label2="data.kiAbility.nemiArmor.status2" data-ability="{{data.kiAbility.nemiArmor.status}}" data-ability2="{{data.kiAbility.nemiArmor.status2}}">
+                <span> {{data.kiAbility.nemiArmor.cost}} </span>
+            </button>
+        </div>
+        {{#if data.kiAbility.nemiArmor.status}}
+        <div>
+            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiNoht"}}"> {{localize "abfalter.kiTab.nemiNoht"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiNoht.status}}{{#if data.kiAbility.nemiNoht.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiNoht.status" data-label2="data.kiAbility.nemiNoht.status2" data-ability="{{data.kiAbility.nemiNoht.status}}" data-ability2="{{data.kiAbility.nemiNoht.status2}}">
+                <span> {{data.kiAbility.nemiNoht.cost}} </span>
+            </button>
+        </div>
+        {{/if}}
+        <div>
+            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiKiCancel"}}"> {{localize "abfalter.kiTab.nemiKiCancel"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiKiCancel.status}}{{#if data.kiAbility.nemiKiCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiKiCancel.status" data-label2="data.kiAbility.nemiKiCancel.status2" data-ability="{{data.kiAbility.nemiKiCancel.status}}" data-ability2="{{data.kiAbility.nemiKiCancel.status2}}">
+                <span> {{data.kiAbility.nemiKiCancel.cost}} </span>
+            </button>
+        </div>
+        {{#if data.kiAbility.nemiKiCancel.status}}
+        <div>
+            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiGreaterKiCancel"}}"> {{localize "abfalter.kiTab.nemiGreaterKiCancel"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiGreaterKiCancel.status}}{{#if data.kiAbility.nemiGreaterKiCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiGreaterKiCancel.status" data-label2="data.kiAbility.nemiGreaterKiCancel.status2" data-ability="{{data.kiAbility.nemiGreaterKiCancel.status}}" data-ability2="{{data.kiAbility.nemiGreaterKiCancel.status2}}">
+                <span> {{data.kiAbility.nemiGreaterKiCancel.cost}} </span>
+            </button>
+        </div>
+        {{/if}}
+        <div>
+            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiMysticCancel"}}"> {{localize "abfalter.kiTab.nemiMysticCancel"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiMysticCancel.status}}{{#if data.kiAbility.nemiMysticCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiMysticCancel.status" data-label2="data.kiAbility.nemiMysticCancel.status2" data-ability="{{data.kiAbility.nemiMysticCancel.status}}" data-ability2="{{data.kiAbility.nemiMysticCancel.status2}}">
+                <span> {{data.kiAbility.nemiMysticCancel.cost}} </span>
+            </button>
+        </div>
+        {{#if data.kiAbility.nemiMysticCancel.status}}
+        <div>
+            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiGreaterMysticCancel"}}"> {{localize "abfalter.kiTab.nemiGreaterMysticCancel"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiGreaterMysticCancel.status}}{{#if data.kiAbility.nemiGreaterMysticCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiGreaterMysticCancel.status" data-label2="data.kiAbility.nemiGreaterMysticCancel.status2" data-ability="{{data.kiAbility.nemiGreaterMysticCancel.status}}" data-ability2="{{data.kiAbility.nemiGreaterMysticCancel.status2}}">
+                <span> {{data.kiAbility.nemiGreaterMysticCancel.cost}} </span>
+            </button>
+        </div>
+        {{/if}}
+        <div>
+            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiMatrixCancel"}}"> {{localize "abfalter.kiTab.nemiMatrixCancel"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiMatrixCancel.status}}{{#if data.kiAbility.nemiMatrixCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiMatrixCancel.status" data-label2="data.kiAbility.nemiMatrixCancel.status2" data-ability="{{data.kiAbility.nemiMatrixCancel.status}}" data-ability2="{{data.kiAbility.nemiMatrixCancel.status2}}">
+                <span> {{data.kiAbility.nemiMatrixCancel.cost}} </span>
+            </button>
+        </div>
+        {{#if data.kiAbility.nemiMatrixCancel.status}}
+        <div>
+            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiGreaterMatrixCancel"}}"> {{localize "abfalter.kiTab.nemiGreaterMatrixCancel"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiGreaterMatrixCancel.status}}{{#if data.kiAbility.nemiGreaterMatrixCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiGreaterMatrixCancel.status" data-label2="data.kiAbility.nemiGreaterMatrixCancel.status2" data-ability="{{data.kiAbility.nemiGreaterMatrixCancel.status}}" data-ability2="{{data.kiAbility.nemiGreaterMatrixCancel.status2}}">
+                <span> {{data.kiAbility.nemiGreaterMatrixCancel.cost}} </span>
+            </button>
+        </div>
+        {{/if}}
+        <div>
+            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiBindCancel"}}"> {{localize "abfalter.kiTab.nemiBindCancel"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiBindCancel.status}}{{#if data.kiAbility.nemiBindCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiBindCancel.status" data-label2="data.kiAbility.nemiBindCancel.status2" data-ability="{{data.kiAbility.nemiBindCancel.status}}" data-ability2="{{data.kiAbility.nemiBindCancel.status2}}">
+                <span> {{data.kiAbility.nemiBindCancel.cost}} </span>
+            </button>
+        </div>
+        <div>
+            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiEmptyExt"}}"> {{localize "abfalter.kiTab.nemiEmptyExt"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiEmptyExt.status}}{{#if data.kiAbility.nemiEmptyExt.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiEmptyExt.status" data-label2="data.kiAbility.nemiEmptyExt.status2" data-ability="{{data.kiAbility.nemiEmptyExt.status}}" data-ability2="{{data.kiAbility.nemiEmptyExt.status2}}">
+                <span> {{data.kiAbility.nemiEmptyExt.cost}} </span>
+            </button>
+        </div>
+        {{#if data.kiAbility.nemiEmptyExt.status}}
+        <div>
+            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiFormOfEmpty"}}"> {{localize "abfalter.kiTab.nemiFormOfEmpty"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiFormOfEmpty.status}}{{#if data.kiAbility.nemiFormOfEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiFormOfEmpty.status" data-label2="data.kiAbility.nemiFormOfEmpty.status2" data-ability="{{data.kiAbility.nemiFormOfEmpty.status}}" data-ability2="{{data.kiAbility.nemiFormOfEmpty.status2}}">
+                <span> {{data.kiAbility.nemiFormOfEmpty.cost}} </span>
+            </button>
+        </div>
+        {{/if}}
+        <div>
+            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiBodyEmpty"}}"> {{localize "abfalter.kiTab.nemiBodyEmpty"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiBodyEmpty.status}}{{#if data.kiAbility.nemiBodyEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiBodyEmpty.status" data-label2="data.kiAbility.nemiBodyEmpty.status2" data-ability="{{data.kiAbility.nemiBodyEmpty.status}}" data-ability2="{{data.kiAbility.nemiBodyEmpty.status2}}">
+                <span> {{data.kiAbility.nemiBodyEmpty.cost}} </span>
+            </button>
+        </div>
+        {{#if data.kiAbility.nemiBodyEmpty.status}}
+        <div>
+            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiNoNeeds"}}"> {{localize "abfalter.kiTab.nemiNoNeeds"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiNoNeeds.status}}{{#if data.kiAbility.nemiNoNeeds.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiNoNeeds.status" data-label2="data.kiAbility.nemiNoNeeds.status2" data-ability="{{data.kiAbility.nemiNoNeeds.status}}" data-ability2="{{data.kiAbility.nemiNoNeeds.status2}}">
+                <span> {{data.kiAbility.nemiNoNeeds.cost}} </span>
+            </button>
+        </div>
+        <div>
+            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiMoveEmpty"}}"> {{localize "abfalter.kiTab.nemiMoveEmpty"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiMoveEmpty.status}}{{#if data.kiAbility.nemiMoveEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiMoveEmpty.status" data-label2="data.kiAbility.nemiMoveEmpty.status2" data-ability="{{data.kiAbility.nemiMoveEmpty.status}}" data-ability2="{{data.kiAbility.nemiMoveEmpty.status2}}">
+                <span> {{data.kiAbility.nemiMoveEmpty.cost}} </span>
+            </button>
+        </div>
+        <div>
+            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiEssenceEmpty"}}"> {{localize "abfalter.kiTab.nemiEssenceEmpty"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiEssenceEmpty.status}}{{#if data.kiAbility.nemiEssenceEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiEssenceEmpty.status" data-label2="data.kiAbility.nemiEssenceEmpty.status2" data-ability="{{data.kiAbility.nemiEssenceEmpty.status}}" data-ability2="{{data.kiAbility.nemiEssenceEmpty.status2}}">
+                <span> {{data.kiAbility.nemiEssenceEmpty.cost}} </span>
+            </button>
+        </div>
+        {{#if data.kiAbility.nemiEssenceEmpty.status}}
+        <div>
+            <span class="subKi3" title="{{localize "abfalter.kiTab.descnemiOneNothing"}}"> {{localize "abfalter.kiTab.nemiOneNothing"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiOneNothing.status}}{{#if data.kiAbility.nemiOneNothing.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiOneNothing.status" data-label2="data.kiAbility.nemiOneNothing.status2" data-ability="{{data.kiAbility.nemiOneNothing.status}}" data-ability2="{{data.kiAbility.nemiOneNothing.status2}}">
+                <span> {{data.kiAbility.nemiOneNothing.cost}} </span>
+            </button>
+        </div>
+        {{/if}}
+        {{/if}}
+        <div>
+            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiAuraEmpty"}}"> {{localize "abfalter.kiTab.nemiAuraEmpty"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiAuraEmpty.status}}{{#if data.kiAbility.nemiAuraEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiAuraEmpty.status" data-label2="data.kiAbility.nemiAuraEmpty.status2" data-ability="{{data.kiAbility.nemiAuraEmpty.status}}" data-ability2="{{data.kiAbility.nemiAuraEmpty.status2}}">
+                <span> {{data.kiAbility.nemiAuraEmpty.cost}} </span>
+            </button>
+        </div>
+        <div>
+            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiUndetectable"}}"> {{localize "abfalter.kiTab.nemiUndetectable"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiUndetectable.status}}{{#if data.kiAbility.nemiUndetectable.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiUndetectable.status" data-label2="data.kiAbility.nemiUndetectable.status2" data-ability="{{data.kiAbility.nemiUndetectable.status}}" data-ability2="{{data.kiAbility.nemiUndetectable.status2}}">
+                <span> {{data.kiAbility.nemiUndetectable.cost}} </span>
+            </button>
+        </div>
+        <div>
+            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiInhumanity"}}"> {{localize "abfalter.kiTab.nemiInhumanity"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiInhumanity.status}}{{#if data.kiAbility.nemiInhumanity.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiInhumanity.status" data-label2="data.kiAbility.nemiInhumanity.status2" data-ability="{{data.kiAbility.nemiInhumanity.status}}" data-ability2="{{data.kiAbility.nemiInhumanity.status2}}">
+                <span> {{data.kiAbility.nemiInhumanity.cost}} </span>
+            </button>
+        </div>
+        {{#if data.kiAbility.nemiInhumanity.status}}
+        <div>
+            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiZen"}}"> {{localize "abfalter.kiTab.nemiZen"}} </span>
+            <button type="button" class="kiAbility {{#if data.kiAbility.nemiZen.status}}{{#if data.kiAbility.nemiZen.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                    data-label="data.kiAbility.nemiZen.status" data-label2="data.kiAbility.nemiZen.status2" data-ability="{{data.kiAbility.nemiZen.status}}" data-ability2="{{data.kiAbility.nemiZen.status2}}">
+                <span> {{data.kiAbility.nemiZen.cost}} </span>
+            </button>
+        </div>
+        {{/if}}
+        {{/if}}<!--End of Use of Nemesis If Statement-->
 
     </div>
 

@@ -883,6 +883,111 @@
             "status": false,
             "status2": false,
             "cost": 50
+          },
+          "useOfNemesis": {
+            "status": false,
+            "status2": false,
+            "cost": 70
+          },
+          "nemiArmor": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "nemiNoht": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "nemiKiCancel": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "nemiGreaterKiCancel": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "nemiMysticCancel": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "nemiGreaterMysticCancel": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "nemiMatrixCancel": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "nemiGreaterMatrixCancel": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "nemiBindCancel": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "nemiEmptyExt": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "nemiFormOfEmpty": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "nemiBodyEmpty": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "nemiNoNeeds": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "nemiMoveEmpty": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "nemiEssenceEmpty": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "nemiOneNothing": {
+            "status": false,
+            "status2": false,
+            "cost": 40
+          },
+          "nemiAuraEmpty": {
+            "status": false,
+            "status2": false,
+            "cost": 30
+          },
+          "nemiUndetectable": {
+            "status": false,
+            "status2": false,
+            "cost": 10
+          },
+          "nemiInhumanity": {
+            "status": false,
+            "status2": false,
+            "cost": 20
+          },
+          "nemiZen": {
+            "status": false,
+            "status2": false,
+            "cost": 40
           }
         }
       },

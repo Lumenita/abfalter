@@ -219,7 +219,6 @@ export default class abfalterCharacterSheet extends ActorSheet {
         let itemId = element.closest(".item").dataset.itemId;
         let item = this.actor.items.get(itemId);
         let field = element.dataset.field;
-
         return item.update({ [field]: element.value });
     }
 

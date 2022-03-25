@@ -14,7 +14,7 @@ export default class abfalterActor extends Actor {
         const stats = data.stats;
 
 
-        // Determine Class Level Bonusses
+        // Determine Item Values
         const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish, acro,
             athle, climb, jump, ride, swim, etiq, intim, leader, persua, street, style, trading, notice, search, track,
             animals, appra, archi, herb, hist, law, magicapr, medic, mem, navi, occ, science, tactic, comp, fos,
@@ -346,7 +346,6 @@ export default class abfalterActor extends Actor {
                 data.kiThingMK += 0;
             }
         }
-
 
         //Resistances
         for (let [key, res] of Object.entries(data.resistances)) {
