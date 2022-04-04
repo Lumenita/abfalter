@@ -1,6 +1,99 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <div>
-        <span> Yo Weapon Here </span>
+    <div class="itemStart">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
 
+    <div class="weaponContent">
+        <h2> Weapon Details </h2>
+        <div>
+            <label> <span> Quality </span> <input type="number" name="data.quality" value="{{data.quality}}" /> </label>
+            <label> <span> Presence </span> <input type="number" name="data.presence" value="{{data.presence}}" /> </label>
+        </div>
+        <div>
+            <label> <span> Attack </span> <input type="number" name="data.attack" value="{{data.attack}}" /> </label>
+            <label> <span> Dodge </span> <input type="number" name="data.dodge" value="{{data.dodge}}" /> </label>
+        </div>
+        <div>
+            <label> <span> Block </span> <input type="number" name="data.block" value="{{data.block}}" /> </label>
+            <label>
+                <span> Shield Type </span>
+                <select name="data.shield" data-dtype="text">
+                    {{#select data.shield}}
+                    <option value="none"> No Shield </option>
+                    <option value="buckler"> Buckler </option>
+                    <option value="shield"> Shield </option>
+                    <option value="fShield"> Tower Shield </option>
+                    {{/select}}
+                </select>
+            </label>
+        </div>
+        <h3> Damage Types </h3>
+        <div>
+            <label>
+                <span> Primary </span>
+                <select name="data.primDmgT" data-dtype="text">
+                    {{#select data.primDmgT}}
+                    <option value="CUT"> CUT </option>
+                    <option value="IMP"> IMP </option>
+                    <option value="THR"> THR </option>
+                    <option value="HEAT"> HEAT </option>
+                    <option value="COLD"> COLD </option>
+                    <option value="ELE"> ELE </option>
+                    <option value="ENE"> ENE </option>
+                    <option value="SPIRIT"> SPIRIT </option>
+                    {{/select}}
+                </select>
+            </label>
+            <label>
+                <span> Secondary </span>
+                <select name="data.secDmgT" data-dtype="text">
+                    {{#select data.secDmgT}}
+                    <option value="NONE"> None </option>
+                    <option value="CUT"> CUT </option>
+                    <option value="IMP"> IMP </option>
+                    <option value="THR"> THR </option>
+                    <option value="HEAT"> HEAT </option>
+                    <option value="COLD"> COLD </option>
+                    <option value="ELE"> ELE </option>
+                    <option value="ENE"> ENE </option>
+                    <option value="SPIRIT"> SPIRIT </option>
+                    {{/select}}
+                </select>
+            </label>
+        </div>
+
+        <div>
+            <h3> Damage Options </h3>
+            <div>
+                <label> <span> Base </span> <input type="number" name="data.baseDmg" value="{{data.baseDmg}}" /> </label>
+                <label>
+                    <span> Modifier </span>
+                    <select name="data.dmgMod" data-dtype="text">
+                        {{#select data.dmgMod}}
+                        <option value="Strength"> Strength </option>
+                        <option value="IMP"> 7 Char </option>
+                        <option value="THR"> 2x Str </option>
+                        <option value="HEAT"> 2x prensence + Power </option>
+                        {{/select}}
+                    </select>
+                </label>
+                <button type="button" class="psychicModule toggleBoolean {{#if data.twoHanded}}selected{{else}}notSelected{{/if}}" data-label="data.twoHanded" data-ability="{{data.twoHanded}}">
+                    <span> Two-Handed </span>
+                </button>
+            </div>
+        </div>
+
+        <div>
+            <label> <span> Fortitude </span> <input type="number" name="data.fortitude" value="{{data.fortitude}}" /> </label>
+            <label> <span> Breakage </span> <input type="number" name="data.breakage" value="{{data.breakage}}" /> </label>
+            <label> <span> Speed </span> <input type="number" name="data.speed" value="{{data.speed}}" /> </label>
+            <button type="button" class="psychicModule toggleBoolean {{#if data.complex}}selected{{else}}notSelected{{/if}}" data-label="data.complex" data-ability="{{data.complex}}">
+                <span> Complex </span>
+            </button>
+        </div>
+
+        <h3> Description </h3>
+        <textarea name="data.description" rows="7" placeholder="{{localize "abfalter.psychicTab.patternInfoB"}}">{{data.description}}</textarea>
+    </div>
 </form>

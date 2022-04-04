@@ -1,67 +1,111 @@
 ﻿<div class="tab settings">
-    <div>
-        <div class="rollRange">
-            <h2> {{localize "abfalter.settingsTab.openRoll"}} </h2>
-            <div>
-                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.rollRange.base" value="{{data.rollRange.base}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.rollRange.spec" value="{{data.rollRange.spec}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.rollRange.temp" value="{{data.rollRange.temp}}" /> </label>
-                <label>
-                    <select name="data.rollRange.doubles" data-dtype="boolean">
-                        {{#select data.rollRange.doubles}}
-                        <option value="false"> {{localize "abfalter.basicInfo.no"}} </option>
-                        <option value="true"> {{localize "abfalter.basicInfo.yes"}} </option>
-                        {{/select}}
-                    </select>
-                </label>
+    <div class="setting1">
+        <div>
+            <div class="rollRange">
+                <h2> {{localize "abfalter.settingsTab.openRoll"}} </h2>
+                <div>
+                    <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.rollRange.base" value="{{data.rollRange.base}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.rollRange.spec" value="{{data.rollRange.spec}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.rollRange.temp" value="{{data.rollRange.temp}}" /> </label>
+                    <label>
+                        <select name="data.rollRange.doubles" data-dtype="boolean">
+                            {{#select data.rollRange.doubles}}
+                            <option value="false"> {{localize "abfalter.basicInfo.no"}} </option>
+                            <option value="true"> {{localize "abfalter.basicInfo.yes"}} </option>
+                            {{/select}}
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.openRangeFinal" value="{{data.openRangeFinal}}" readonly /> </label>
+                </div>
             </div>
-            <div>
-                <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.openRangeFinal" value="{{data.openRangeFinal}}" readonly /> </label>
+
+            <div class="rollRange">
+                <h2> {{localize "abfalter.settingsTab.fumbleRoll"}} </h2>
+                <div>
+                    <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.fumleRange.base" value="{{data.fumleRange.base}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.fumleRange.spec" value="{{data.fumleRange.spec}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.fumleRange.temp" value="{{data.fumleRange.temp}}" /> </label>
+                </div>
+                <div>
+                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.fumbleRangeFinal" value="{{data.fumbleRangeFinal}}" readonly /> </label>
+                </div>
             </div>
         </div>
 
-        <div class="rollRange">
-            <h2> {{localize "abfalter.settingsTab.fumbleRoll"}} </h2>
-            <div>
-                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.fumleRange.base" value="{{data.fumleRange.base}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.fumleRange.spec" value="{{data.fumleRange.spec}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.fumleRange.temp" value="{{data.fumleRange.temp}}" /> </label>
-            </div>
-            <div>
-                <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.fumbleRangeFinal" value="{{data.fumbleRangeFinal}}" readonly /> </label>
-            </div>
-        </div>
 
         <div class="charOptions">
             <h2> {{localize "abfalter.settingsTab.charOptions"}} </h2>
-            <label> <span> {{localize "abfalter.settingsTab.levelMod"}} </span> <input type="number" name="data.levelinfo.levelmod" value="{{data.levelinfo.levelmod}}" /> </label>
-            <label> <span> {{localize "abfalter.settingsTab.presenceMod"}} </span> <input type="number" name="data.levelinfo.presencemod" value="{{data.levelinfo.presencemod}}" /> </label>
+            <div>
+                <label> <span> {{localize "abfalter.settingsTab.levelMod"}} </span> <input type="number" name="data.levelinfo.levelmod" value="{{data.levelinfo.levelmod}}" /> </label>
+                <label> <span> {{localize "abfalter.settingsTab.presenceMod"}} </span> <input type="number" name="data.levelinfo.presencemod" value="{{data.levelinfo.presencemod}}" /> </label>
+            </div>
+            <div>
+                <label> <span> stuff </span></label>
+            </div>
+        </div>
+
+        <div>
+            <h2> Toggles </h2>
+            <div>
+                <h3> Ki </h3>
+                <label class="{{#if data.toggles.innatePower}}checkLock{{/if}}">
+                    <span> Unified Ki Pools </span>
+                    <input type="checkbox" name="data.toggles.unifiedPools" data-dtype="boolean" {{checked data.toggles.unifiedPools}} />
+                </label>
+                {{#if data.toggles.unifiedPools}}
+                <label>
+                    <span> Innate Power </span>
+                    <input type="checkbox" name="data.toggles.innatePower" data-dtype="boolean" {{checked data.toggles.innatePower}} />
+                </label>
+                {{/if}}
+                <label>
+                    <span> Dragon Seals </span>
+                    <input type="checkbox" name="data.toggles.dragonSeals" data-dtype="boolean" {{checked data.toggles.dragonSeals}} />
+                </label>
+            </div>
+
+            <div>
+                <h3> Psychic </h3>
+                <label>
+                    <span> Increased Strengthening </span>
+                    <input type="checkbox" name="data.toggles.psychicStrengthening" data-dtype="boolean" {{checked data.toggles.psychicStrengthening}} />
+                </label>
+            </div>
         </div>
     </div>
 
 
-
-
-
-    <div class="classes">
-        <h2> Innate Classes </h2>
-        <div>
-            <span> Class </span>
-            <span> Level </span>
-            <a class="item-control item-create" title="Create item" data-type="class"><i class="fas fa-plus"></i> Add item</a>
-        </div>
-
-        <div class="items-list">
-            {{#each classes as |class id|}}
-            <div class="item-class item flexrow" data-item-id="{{class._id}}">
-                    <h4>{{class.name}}</h4>
-                <div class="item-controls">
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                </div>
+    <div>
+        <div class="classes">
+            <h2> Innate Classes </h2>
+            <div>
+                <span> Class </span>
+                <span> Level </span>
+                <a class="item-control item-create" title="Create item" data-type="class"><i class="fas fa-plus"></i> Add item</a>
             </div>
-            {{/each}}
+
+            <div class="items-list">
+                {{#each classes as |class id|}}
+                <div class="item-class item flexrow" data-item-id="{{class._id}}">
+                    <h4>{{class.name}}</h4>
+                    <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+
         </div>
 
+        <div>
+            <h2> Homebrew Settings / WIP </h2>
+            <label>
+                <span> Spirit Damage Type </span>
+                <input type="checkbox" name="data.toggles.spiritDamageType" data-dtype="boolean" {{checked data.toggles.spiritDamageType}} />
+            </label>
+        </div>
     </div>
 </div>

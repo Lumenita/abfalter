@@ -1,6 +1,25 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <div>
-        <span> Yo Invnetory Here </span>
+    <div class="itemStart">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
 
+    <div class="invContent">
+        <h2> Item Description</h2>
+        <div>
+            <label> <span> Quantity </span> <input type="number" name="data.quantity" value="{{data.quantity}}" /> </label>
+            <label> <span> Quality </span> <input type="text" name="data.quality" value="{{data.quality}}" /> </label>
+            <label> <span> Price </span> <input type="text" name="data.price" value="{{data.price}}" /> </label>
+            <label> <span> Weight </span> <input type="number" name="data.weight" value="{{data.weight}}" /> </label>
+        </div>
+
+        <div>
+            <label> <span> presence </span> <input type="number" name="data.presence" value="{{data.presence}}" /> </label>
+            <label> <span> fortitude </span> <input type="text" name="data.fortitude" value="{{data.fortitude}}" /> </label>
+            <label> <span> rarity </span> <input type="text" name="data.rarity" value="{{data.rarity}}" /> </label>
+        </div>
+
+        <h3> Info </h3>
+        <textarea name="data.description" rows="7" placeholder="{{localize "abfalter.psychicTab.patternInfoB"}}">{{data.description}}</textarea>
+    </div>
 </form>

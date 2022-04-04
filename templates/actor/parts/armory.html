@@ -28,7 +28,8 @@
             <div class="items-list">
                 {{#each armorHelmets as |armorHelmet id|}}
                 <div class="armorHelmet-item item equip-item" data-item-id="{{armorHelmet._id}}">
-                    <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}"> 
+                    <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}">
+                        <a class="item-control item-chat" title="Item to Chat"><i class="fas fa-comment-dots"></i></a>
                         <span> {{armorHelmet.name}} </span>
                         <span> {{data.quality}} </span>
                         <span> {{data.newPresence}} </span>
@@ -43,6 +44,7 @@
                 {{#each armors as |armor id|}}
                 <div class="armor-item item equip-item" data-item-id="{{armor._id}}">
                     <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}">
+                        <a class="item-control item-chat" title="Item to Chat"><i class="fas fa-comment-dots"></i></a>
                         <span> {{armor.name}} </span>
                         <span> {{data.quality}} </span>
                         <span> {{data.newPresence}} </span>
@@ -62,7 +64,9 @@
                 <span> {{localize "abfalter.armoryTab.cold"}} </span>
                 <span> {{localize "abfalter.armoryTab.ele"}} </span>
                 <span> {{localize "abfalter.armoryTab.ene"}} </span>
+                {{#if data.toggles.spiritDamageType}}
                 <span> {{localize "abfalter.armoryTab.spirit"}} </span>
+                {{/if}}
             </div>
             <div class="items-list">
                 {{#each armorHelmets as |armorHelmet id|}}
@@ -76,7 +80,9 @@
                         <span> {{data.AT.newCold}} </span>
                         <span> {{data.AT.newEle}} </span>
                         <span> {{data.AT.newEne}} </span>
+                        {{#if data.spiritHomebrew}}
                         <span> {{data.AT.newSpt}} </span>
+                        {{/if}}
                     </div>
                 </div>
                 {{/each}}
@@ -93,7 +99,9 @@
                         <span> {{data.AT.newCold}} </span>
                         <span> {{data.AT.newEle}} </span>
                         <span> {{data.AT.newEne}} </span>
+                        {{#if data.spiritHomebrew}}
                         <span> {{data.AT.newSpt}} </span>
+                        {{/if}}
                     </div>
                 </div>
                 {{/each}}
@@ -111,7 +119,9 @@
                 <span> {{data.ahColdFinal}} </span>
                 <span> {{data.ahEleFinal}} </span>
                 <span> {{data.ahEneFinal}} </span>
+                {{#if data.toggles.spiritDamageType}}
                 <span> {{data.ahSptFinal}} </span>
+                {{/if}}
             </div>
             <div>
                 <span> {{localize "abfalter.armoryTab.finalArmor"}} </span>
@@ -122,7 +132,9 @@
                 <span> {{data.aColdFinal}} </span>
                 <span> {{data.aEleFinal}} </span>
                 <span> {{data.aEneFinal}} </span>
+                {{#if data.toggles.spiritDamageType}}
                 <span> {{data.aSptFinal}} </span>
+                {{/if}}
             </div>
         </div>
     </div>
@@ -173,12 +185,14 @@
                 {{#each weapons as |weapon id|}}
                 <div class="weapon-item item equip-item" data-item-id="{{weapon._id}}">
                     <div class="{{#if data.equipped}}equipped{{else}}notEquipped{{/if}}">
+                        <a class="item-control item-chat" title="Item to Chat"><i class="fas fa-comment-dots"></i></a>
                         <span> {{data.quality}} </span>
                         <span> {{weapon.name}} </span>
                         <span> {{data.fortitude}} </span>
+                        <a class="item-expand" title="Expand Item"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <div class="item-controls">
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                    <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
+                        <span> Stuff </span>
                     </div>
                 </div>
                 {{/each}}
@@ -221,12 +235,14 @@
                 {{#each inventories as |inventory id|}}
                 <div class="inventory-item item normal-item" data-item-id="{{inventory._id}}">
                     <div>
+                        <a class="item-control item-chat" title="Item to Chat"><i class="fas fa-comment-dots"></i></a>
                         <input class="inv-quantity inline-edit" data-field="data.quantity" type="number" value="{{inventory.data.quantity}}" />
                         <input class="item-name inline-edit" data-field="name" type="text" value="{{inventory.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
                         <input class="inv-quality inline-edit" data-field="data.quality" type="text" value="{{inventory.data.quality}}" />
+                        <a class="item-expand" title="Expand Item"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <div class="item-controls">
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                    <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
+                        <span> Stuff </span>
                     </div>
                 </div>
                 {{/each}}

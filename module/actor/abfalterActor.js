@@ -21,7 +21,8 @@ export default class abfalterActor extends Actor {
             wstp, disg, hide, lock, poisn, stealth, theft, trapl, alche, anims, art, dance, forgi, jewel, music,
             runes, ritcal, soh, tailoring, quantity, req, natPen, movePen, aCutMax, aCutTot, aImpMax, aImpTot, aThrMax, aThrTot, aHeatMax,
             aHeatTot, aColdMax, aColdTot, aEleMax, aEleTot, aEneMax, aEneTot, aSptMax, aSptTot, ahReq, ahCutMax, ahCutTot, ahImpMax, ahImpTot, ahThrMax,
-            ahThrTot, ahHeatMax, ahHeatTot, ahColdMax, ahColdTot, ahEleMax, ahEleTot, ahEneMax, ahEneTot, ahSptMax, ahSptTot, perPen, usedpp, matrixpp] = this.items.reduce((arr, item) => {
+            ahThrTot, ahHeatMax, ahHeatTot, ahColdMax, ahColdTot, ahEleMax, ahEleTot, ahEneMax, ahEneTot, ahSptMax, ahSptTot, perPen, usedpp, matrixpp, arsMk,
+            maMk] = this.items.reduce((arr, item) => {
                 if (item.type === "class") {
                     const classLevels = parseInt(item.data.data.main.levels) || 0;
                     arr[0] += classLevels;
@@ -172,7 +173,17 @@ export default class abfalterActor extends Actor {
                 }
                 if (item.type === "psychicMatrix") {
                     arr[102] += parseInt(item.data.data.quantity) || 0;
-                    arr[103] += parseInt(item.data.data.bonus / 10) || 0;
+                    if (data.toggles.psychicStrengthening == true) {
+                        arr[103] += parseInt(item.data.data.bonus / 20) || 0;
+                    } else {
+                        arr[103] += parseInt(item.data.data.bonus / 10) || 0;
+                    }
+                }
+                if (item.type === "arsMagnus") {
+                    arr[104] += parseInt(item.data.data.mk) || 0;
+                }
+                if (item.type === "martialArt") {
+                    arr[105] += parseInt(item.data.data.mk) || 0;
                 }
             return arr;
             }, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -180,7 +191,7 @@ export default class abfalterActor extends Actor {
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0]);
+                0, 0, 0, 0, 0, 0]);
 
         data.level = level;
         data.lpbonus = lpbonus;
@@ -189,7 +200,6 @@ export default class abfalterActor extends Actor {
         data.dodgebonus = dod;
         data.blockbonus = blk;
         data.weararmorbonus = weararm;
-        data.mkbonus = mk; //unused
         data.ppbonus = pp;
         data.zeonbonus = zeon;
         data.summonbonus = summon;
@@ -266,6 +276,7 @@ export default class abfalterActor extends Actor {
                     break;
                 case 5:
                     stat.mod = 0;
+
                     break;
                 case 6:
                 case 7:
@@ -326,6 +337,27 @@ export default class abfalterActor extends Actor {
                     stat.mod = 0;
             }
             stat.opposedfinal = Math.floor((stat.final + stat.opposed) + (data.aam / 20));
+            //Ki Pools
+            if (stat != "Intelligence" && "Perception") {
+                if (stat.final >= 1 && stat.final <= 9) {
+                    stat.kiPoolAccuBase = 1;
+                } else if (stat.final >= 10 && stat.final <= 12) {
+                    stat.kiPoolAccuBase = 2;
+                } else if (stat.final >= 13 && stat.final <= 15) {
+                    stat.kiPoolAccuBase = 3;
+                } else if (stat.final >= 16) {
+                    stat.kiPoolAccuBase = 4;
+                } else {
+                    stat.kiPoolAccuBase = 0;
+                }
+                if (stat.final <= 10) {
+                    stat.kiPoolBase = Math.floor(stat.final);
+                } else if (stat.final > 10) {
+                    stat.kiPoolBase = Math.floor(((stat.final - 10) * 2) + 10);
+                } else {
+                    stat.kiPoolBase = 0;
+                }
+            }
         }
 
         //Stuff Xp, Presence, Next lvl Xp
@@ -337,7 +369,8 @@ export default class abfalterActor extends Actor {
         data.presence = Math.floor((data.dp / 20) + data.levelinfo.presencemod);
         data.nextlevel = Math.floor(((data.level + data.levelinfo.levelmod) * 25) + 75);
 
-        //Ki Calculations
+        //Mk Calculations
+        data.mkBonus = mk;
         data.kiThingMK = 0;
         for (let [key, kiThing] of Object.entries(data.kiAbility)) {
             if (kiThing.status == true && kiThing.status2 == false) {
@@ -345,6 +378,50 @@ export default class abfalterActor extends Actor {
             } else {
                 data.kiThingMK += 0;
             }
+        }
+        data.kiSealMk = 0;
+        for (let [key, kiSealStuff] of Object.entries(data.kiSeal.minor)) {
+            if (kiSealStuff.mastery == true && kiSealStuff.mastery2 == false) {
+                data.kiSealMk += 30;
+            } else {
+                data.kiSealMk += 0;
+            }
+        }
+        for (let [key, kiSealStuff] of Object.entries(data.kiSeal.major)) {
+            if (kiSealStuff.mastery == true && kiSealStuff.mastery2 == false) {
+                data.kiSealMk += 50;
+            } else {
+                data.kiSealMk += 0;
+            }
+        }
+        data.limitsMK = +data.limits.limitOne + +data.limits.limitTwo;
+        data.arsMagMK = arsMk;
+        data.mArtMk = maMk;
+        data.mkFinal = Math.floor(data.mk.base + data.mk.temp + data.mk.spec + data.mkBonus + data.mArtMk);
+        data.mkUsed = Math.floor(data.limitsMK + data.kiThingMK + data.kiSealMk + data.arsMagMK + 0);
+
+        //Ki Pool
+        if (data.toggles.innatePower == false) {
+            data.kiPoolAgiAccumTot = Math.floor(data.stats.Agility.kiPoolAccuBase + data.kiPool.agi.spec + data.kiPool.agi.temp + Math.ceil(data.aam / 20));
+            data.kiPoolAgiTot = Math.floor(data.stats.Agility.kiPoolBase + data.kiPool.agi.specMax + data.kiPool.agi.tempMax);
+            data.kiPoolConAccumTot = Math.floor(data.stats.Constitution.kiPoolAccuBase + data.kiPool.con.spec + data.kiPool.con.temp + Math.ceil(data.aam / 20));
+            data.kiPoolConTot = Math.floor(data.stats.Constitution.kiPoolBase + data.kiPool.con.specMax + data.kiPool.con.tempMax);
+            data.kiPoolDexAccumTot = Math.floor(data.stats.Dexterity.kiPoolAccuBase + data.kiPool.dex.spec + data.kiPool.dex.temp + Math.ceil(data.aam / 20));
+            data.kiPoolDexTot = Math.floor(data.stats.Dexterity.kiPoolBase + data.kiPool.dex.specMax + data.kiPool.dex.tempMax);
+            data.kiPoolStrAccumTot = Math.floor(data.stats.Strength.kiPoolAccuBase + data.kiPool.str.spec + data.kiPool.str.temp + Math.ceil(data.aam / 20));
+            data.kiPoolStrTot = Math.floor(data.stats.Strength.kiPoolBase + data.kiPool.str.specMax + data.kiPool.str.tempMax);
+            data.kiPoolPowAccumTot = Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + Math.ceil(data.aam / 20));
+            data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax);
+            data.kiPoolWPAccumTot = Math.floor(data.stats.Willpower.kiPoolAccuBase + data.kiPool.wp.spec + data.kiPool.wp.temp + Math.ceil(data.aam / 20));
+            data.kiPoolWPTot = Math.floor(data.stats.Willpower.kiPoolBase + data.kiPool.wp.specMax + data.kiPool.wp.tempMax);
+            if (data.toggles.unifiedPools == true) {
+                data.unifiedTotal = Math.floor(data.kiPoolAgiTot + data.kiPoolConTot + data.kiPoolDexTot + data.kiPoolStrTot + data.kiPoolPowTot + data.kiPoolWPTot);
+            }
+        } else {
+            data.stats.Power.kiPoolAccuBase = data.stats.Power.kiPoolAccuBase * 6;
+            data.stats.Power.kiPoolBase = data.stats.Power.kiPoolBase * 6;
+            data.kiPoolPowAccumTot = Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + Math.ceil(data.aam / 20));
+            data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax);
         }
 
         //Resistances
@@ -429,11 +506,8 @@ export default class abfalterActor extends Actor {
         }
 
         //Movement
-        if (data.aam > -20) {
-            data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp - data.movement.pen);
-        } else {
-            data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp - data.movement.pen + (data.aam / 20));
-        }
+        data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp - data.movement.pen + Math.ceil(data.aam / 20));
+
         switch (data.finalmove) {
             case 1:
                 data.fullmove = "3 ft";

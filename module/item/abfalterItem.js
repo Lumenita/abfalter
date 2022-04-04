@@ -37,6 +37,12 @@ export default class abfalterItem extends Item {
         this.data.data.AT.newEle = Math.floor(+this.data.data.AT.ele + +this.data.data.qualityValue);
         this.data.data.AT.newEne = Math.floor(+this.data.data.AT.ene + +this.data.data.qualityValue);
         this.data.data.AT.newSpt = Math.floor(+this.data.data.AT.spt + +this.data.data.qualityValue);
+
+        if (this.parent != null) {
+            if (this.parent.data) {
+                this.data.data.spiritHomebrew = this.parent.data.data.toggles.spiritDamageType;
+            }
+        }
     }
 
     prepareArmorHelmet() {
@@ -63,6 +69,12 @@ export default class abfalterItem extends Item {
         this.data.data.AT.newEle = Math.floor(+this.data.data.AT.ele + +this.data.data.qualityValue);
         this.data.data.AT.newEne = Math.floor(+this.data.data.AT.ene + +this.data.data.qualityValue);
         this.data.data.AT.newSpt = Math.floor(+this.data.data.AT.spt + +this.data.data.qualityValue);
+
+        if (this.parent != null) {
+            if (this.parent.data) {
+                this.data.data.spiritHomebrew = this.parent.data.data.toggles.spiritDamageType;
+            }
+        }
     }
 
     prepareMentalPattern() {

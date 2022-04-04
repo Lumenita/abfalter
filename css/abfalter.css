@@ -3,6 +3,42 @@ label {
     margin: 0px;
     padding: 0px;
 }
+span {
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+    text-align: center;
+    display: grid;
+}
+input[type=number], input[type=text] {
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    text-align: center;
+    border: 0px;
+    height: 20px;
+    border-bottom: 1px solid black;
+}
+input:read-only {
+    background-color: transparent;
+    border: 0;
+}
+select {
+    height: 20px;
+    font-size: 13px;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-bottom: 1px solid black;
+    text-align: center;
+    appearance: none;
+}
+a {
+    text-align: center;
+    align-self: center;
+}
 textarea {
     border: none;
     width: 100%;
@@ -14,8 +50,6 @@ textarea {
 button {
     line-height: normal;
 }
-
-
 h2 {
     display: flex;
     width: 100%;
@@ -36,10 +70,10 @@ h3 {
     z-index: 1;
     align-items: center;
 }
-h4 {
-    margin: 5px;
+/* Colors */
+.hidden {
+    display: none;
 }
-
 .fumbleroll {
     color: red;
 }
@@ -82,6 +116,9 @@ h4 {
 .expand-box {
     width: 0%;
 }
+.showOpacity {
+    opacity: 1 !important;
+}
 .expand-box > input {
     height: 18px;
     width: 18px;
@@ -99,6 +136,42 @@ h4 {
 .notMastered {
     color: black;
 }
+.checkLock {
+    pointer-events: none;
+}
+.fa-comment-dots:before {
+    color: #4e4e4e;
+}
+
+/* Select Box Custom Arrow & Center Contents */
+.csSelect::after,
+.csSelect1::after {
+    content: "\203A"
+}
+.csSelect,
+.csSelect1 {
+    position: relative
+}
+.csSelect::after {
+    position: absolute;
+    top: -3px;
+    right: 5px;
+    pointer-events: none;
+    font-size: 20px;
+    transform: rotate(90deg);
+}
+.csSelect1::after {
+    position: absolute;
+    top: -3px;
+    right: 20px;
+    pointer-events: none;
+    font-size: 20px;
+    transform: rotate(90deg);
+}
+
+
+
+
 
 
 .editor-box {
@@ -175,6 +248,7 @@ h4 {
 .abfalter .sheet-header .char-info > label > input[type="text"],
 .abfalter .sheet-header .char-info > label > input[type="number"] {
     display: flex;
+    height: 25px;
     border: 0px;
     border-bottom: 1px solid black;
     padding-right: 0px;
@@ -521,7 +595,7 @@ h4 {
 .modactions > label {
     width: 100%;
     display: flex;
-    font-size: 12px;
+    font-size: 13px;
 }
 .modactions > label:not(:last-of-type) {
     margin-bottom: 5px;
@@ -574,7 +648,7 @@ h4 {
 .movement > label > span {
     display: flex;
     width: 60%;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: normal;
     align-items: center;
     height: 20px;
@@ -588,7 +662,7 @@ h4 {
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    font-size: 12px;
+    font-size: 13px;
     border-bottom: 1px solid black;
 }
 .movement > label:nth-of-type(1) > input,
@@ -639,7 +713,7 @@ h4 {
     display: flex;
     width: 55%;
     padding-left: 5px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: normal;
     align-items: center;
     height: 20px;
@@ -677,7 +751,7 @@ h4 {
     align-items: center;
     width: 60%;
     padding-left: 5px;
-    font-size: 12px;
+    font-size: 13px;
     height: 20px;
 }
 .lifepoints > label > input,
@@ -692,7 +766,7 @@ h4 {
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    font-size: 12px;
+    font-size: 13px;
     border-bottom: 1px solid black;
 }
 .regeneration > label > input {
@@ -704,7 +778,7 @@ h4 {
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    font-size: 12px;
+    font-size: 13px;
     border-bottom: 1px solid black;
 }
 .lifepoints > label:nth-of-type(3),
@@ -776,7 +850,7 @@ h4 {
 .atkdef > div > label > span {
     display: flex;
     width: 55%;
-    font-size: 12px;
+    font-size: 13px;
     height: 20px;
     align-items: center;
     padding-left: 5px;
@@ -791,7 +865,7 @@ h4 {
     padding-bottom: 0px;
     padding-right: 0px;
     padding-left: 0px;
-    font-size: 12px;
+    font-size: 13px;
     height: 20px;
 }
 .atkdef > div > label:nth-of-type(2) > input,
@@ -891,7 +965,7 @@ h4 {
 .initiative > div > label > span {
     display: flex;
     width: 100%;
-    font-size: 12px;
+    font-size: 13px;
     justify-content: center;
     height: 20px;
     margin-top: 3px;
@@ -903,7 +977,7 @@ h4 {
     padding-right: 0px;
     padding-left: 0px;
     padding-bottom: 0px;
-    font-size: 12px;
+    font-size: 13px;
     text-align: center;
     height: 20px;
     border: 0px;
@@ -955,7 +1029,7 @@ h4 {
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    font-size: 12px;
+    font-size: 13px;
     border-bottom: 1px solid black;
 } 
 /*
@@ -993,7 +1067,7 @@ h4 {
     padding-right: 0px;
     padding-left: 0px;
     padding-bottom: 0px;
-    font-size: 12px;
+    font-size: 13px;
     text-align: center;
     border: 0px;
     border-bottom: 1px solid black;
@@ -1030,7 +1104,7 @@ h4 {
     padding-left: 5px;
 }
 .secondary > div > .extend {
-    font-size: 12px;
+    font-size: 13px;
     height: 20px;
     width: 100%;
     justify-content: center;
@@ -1154,7 +1228,7 @@ h4 {
 .mproj > div > label > span {
     display: flex;
     width: 60%;
-    font-size: 12px;
+    font-size: 13px;
     align-items: center;
     height: 20px;
 }
@@ -1168,7 +1242,7 @@ h4 {
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    font-size: 12px;
+    font-size: 13px;
     border-bottom: 1px solid black;
 }
 .mproj > label:nth-of-type(2) {
@@ -1258,7 +1332,7 @@ h4 {
 .maccu > div > div > div > label > span {
     display: flex;
     width: 60%;
-    font-size: 12px;
+    font-size: 13px;
     align-items: center;
     height: 20px;
 }
@@ -1272,7 +1346,7 @@ h4 {
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    font-size: 12px;
+    font-size: 13px;
     border-bottom: 1px solid black;
 }
 .maccu > div > div > label:nth-of-type(3),
@@ -1338,7 +1412,7 @@ h4 {
 .zeon > div > label > span {
     display: flex;
     width: 50%;
-    font-size: 12px;
+    font-size: 13px;
     align-items: center;
     height: 20px;
 }
@@ -1352,7 +1426,7 @@ h4 {
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    font-size: 12px;
+    font-size: 13px;
     border-bottom: 1px solid black;
 }
 .zeon > label:nth-of-type(3) {
@@ -1385,7 +1459,7 @@ h4 {
 }
 .minnate > div > div > span {
     display: flex;
-    font-size: 12px;
+    font-size: 13px;
     align-items: center;
     height: 20px;
     justify-content: center;
@@ -1403,7 +1477,7 @@ h4 {
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    font-size: 12px;
+    font-size: 13px;
     border-bottom: 1px solid black;
 }
 .minnate > div > div:last-of-type > label > input {
@@ -1430,7 +1504,7 @@ h4 {
 .mlevels > div > label > span {
     display: flex;
     width: 50%;
-    font-size: 12px;
+    font-size: 13px;
     align-items: center;
     height: 20px;
 }
@@ -1444,7 +1518,7 @@ h4 {
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    font-size: 12px;
+    font-size: 13px;
     border-bottom: 1px solid black;
 }
 .mlevels > label:nth-of-type(3) {
@@ -1544,7 +1618,7 @@ h4 {
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    font-size: 12px;
+    font-size: 13px;
     border-bottom: 1px solid black;
 }
 .summoning > div > input:nth-of-type(2),
@@ -1659,13 +1733,10 @@ h4 {
     background: transparent;
     border-bottom: 0px;
 }
-.ppoint > h2 > label > input {
+.ppoint > h2 > label > a {
     opacity: 0;
 }
-.ppoint:hover > h2 > label > input {
-    opacity: 1;
-}
-.ppoint > h2 > label > input:checked {
+.ppoint:hover > h2 > label > a {
     opacity: 1;
 }
 /*
@@ -1674,7 +1745,8 @@ h4 {
     ---------
 */
 .ppotential > label,
-.ppotential > div > label {
+.ppotential > div > label,
+.ppotential > div > div > label {
     display: flex;
     width: 100%;
     height: 20px;
@@ -1682,7 +1754,8 @@ h4 {
     padding-left: 5px;
 }
 .ppotential > label > span,
-.ppotential > div > label > span {
+.ppotential > div > label > span,
+.ppotential > div > div > label > span {
     display: flex;
     width: 60%;
     font-size: 13px;
@@ -1712,18 +1785,14 @@ h4 {
     padding-bottom: 23px;
     font-weight: bold;
 }
-.ppotential > div > label > select {
-    height: 20px;
+.ppotential > div > div > label > select {
     width: 40%;
-    text-align: center;
-    border: 0px;
-    border-bottom: 1px solid black;
 }
-.ppotential > div > label:nth-of-type(5) {
+.ppotential > div > label:nth-of-type(4) {
     margin: 3px 0 3px 0;
     justify-content: center;
 }
-.ppotential > div > label:nth-of-type(5) > button {
+.ppotential > div > label:nth-of-type(4) > button {
     width: 40%;
 }
 .ppotential > div > label:nth-of-type(2) > input,
@@ -1731,13 +1800,10 @@ h4 {
     background: transparent;
     border-bottom: 0px;
 }
-.ppotential > h2 > label > input {
+.ppotential > h2 > label > a {q
     opacity: 0;
 }
-.ppotential:hover > h2 > label > input {
-    opacity: 1;
-}
-.ppotential > h2 > label > input:checked {
+.ppotential:hover > h2 > label > a {
     opacity: 1;
 }
 .ppotential > div > button {
@@ -1801,13 +1867,10 @@ h4 {
 .pproj > div > label:nth-of-type(3) > button {
     width: 40%;
 }
-.pproj > h2 > label > input {
+.pproj > h2 > label > a {
     opacity: 0;
 }
-.pproj:hover > h2 > label > input {
-    opacity: 1;
-}
-.pproj > h2 > label > input:checked {
+.pproj:hover > h2 > label > a {
     opacity: 1;
 }
 .pproj > div > button {
@@ -1851,6 +1914,11 @@ h4 {
     Mental Patterns
     ---------------
 */
+.mentalPattern-item > div > textarea {
+    resize: vertical;
+    min-height: 4em;
+    max-height: 8em;
+}
 .ppaterns > div:first-of-type {
     display: flex;
     text-align: center;
@@ -2061,14 +2129,15 @@ h4 {
     display: flex;
     justify-content: space-between;
 }
-.kiabilities {
+.kiAbilities {
     width: 33.5%;
 }
 .s5 {
     width: 63.5%;
     flex-wrap: wrap;
 }
-.s5 > div {
+.s5 > div:nth-of-type(2),
+.s5 > div:nth-of-type(3) {
     flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
@@ -2079,12 +2148,37 @@ h4 {
 .mk {
     width: 58%;
 }
-.arsmagnus {
+.arsMagnus {
     width: 68%;
 }
 .limits {
     width: 28%;
 }
+.kiNotBought {
+    background-color: #38373e;
+}
+.kiBought {
+    background-color: #0064cb;
+}
+.kiFree {
+    background-color: #127212;
+}
+.mk > div,
+.limits > div,
+.kipool > div:not(:first-of-type),
+.kiseals > div:not(:first-of-type),
+.unarmed > div:not(:first-of-type),
+.kiSealsCreatures > div:not(:first-of-type),
+.martialarts > div:not(:first-of-type),
+.arsMagnus > div:not(:first-of-type) {
+    width: 95%;
+    margin: 0 0 0 2.5%;
+}
+/*
+    ------
+    Shared
+    ------
+*/
 /*
     ---------
     Ki Abilities
@@ -2098,22 +2192,10 @@ h4 {
     width: 15%;
     color: #fffbe4;
 }
-.kiNotBought {
-    background-color: #38373e;
-}
-.kiBought {
-    background-color: #0064cb;
-}
-.kiFree {
-    background-color: #127212;
-}
-.kiabilities > div {
+.kiAbilities > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.kiabilities > span {
-    font-size: 13px;
 }
 .subKi1 {
     margin-left: 10px;
@@ -2130,57 +2212,329 @@ h4 {
 .subKi5 {
     margin-left: 90px;
 }
-
+/*
+    --------------
+    Unarmed Damage
+    --------------
+*/
+.unarmed > div,
+.unarmed > div > div {
+    display: flex;
+    justify-content: flex-start;
+}
+.unarmed > div:first-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+}
+.unarmed > div:first-of-type > span:first-of-type {
+    margin-left: 2.5%;
+}
+.unarmed > div > span:not(:nth-of-type(2)) {
+    width: 14.25%
+}
+.unarmed > div > input:first-of-type {
+    width: 15%;
+}
+.unarmed > div > span:nth-of-type(2) {
+    width: 66.5%
+}
+.unarmed > div > div {
+    width: 70%;
+}
+.unarmed > div > div > input {
+    width: 15%;
+}
+.unarmed > div > div > span {
+    width: 4%;
+}
+.unarmed > div > div > div {
+    width: 100%;
+}
+.unarmed > div > div > div > select {
+    width: 100%;
+}
+.unarmed > div > input:nth-of-type(2) {
+    width: 15%;
+}
+.unarmed > div:nth-of-type(2) {
+    width: 95%;
+}
+.unarmed > textarea {
+    margin: 5px 0 0 2.5%;
+    width: 95%;
+}
+.unarmed > h2 > label > a {
+    opacity: 0;
+}
+.unarmed:hover > h2 > label > a {
+    opacity: 1;
+}
 /*
     --------
     Ki Pools
     --------
 */
-
-
+.kipool > div:first-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+}
+.kipool > div:first-of-type > span:first-of-type {
+    margin: 0 0 0 27.2%;
+}
+.kipool > div:first-of-type,
+.kipool > div:nth-of-type(8) > div,
+.kipool > div > div {
+    display: flex;
+    justify-content: flex-start;
+}
+.kipool > div > div > span {
+    width: 26%;
+}
+.kipool > div > span {
+    width: 21.85%;
+}
+.kipool > div > div > input,
+.kipool > div:nth-of-type(8) > div > input {
+    width: 23%;
+}
+.kipool > div > div > a {
+    width: 5%;
+    font-size: 15px;
+}
+.kipool > div > div:not(:first-of-type) > span {
+    font-size: 11px;
+    color: #2c2c2c;
+    font-style: italic;
+    padding: 0 0 0 8px;
+}
+.kipool > div:nth-of-type(8) > div > span {
+    width: 49%
+}
 /*
-    -------------
-    MK & Ki Seals
-    -------------
+    --
+    MK 
+    --
 */
-
-
+.mk > div,
+.mk > div > label {
+    display: flex;
+    justify-content: space-between;
+}
+.mk > div > label {
+    width: 50%;
+}
+.mk > div > label > span {
+    width: 60%;
+    display: flex;
+    padding: 0 0 0 9%;
+}
+.mk > div > label > input {
+    width: 35%;
+}
+.mk > div:last-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin: 3px 0 3px 2.5%;
+    padding: 3px 0 3px 0;
+}
+.mk > h2 > label > a {
+    opacity: 0;
+}
+.mk:hover > h2 > label > a {
+    opacity: 1;
+}
 /*
     ----------
     Ars Magnus
     ----------
 */
-
-
+.arsMagnus > div:not(:nth-of-type(2)),
+.arsMagnus-item > div:first-of-type {
+    display: flex;
+    justify-content: flex-start;
+}
+.arsMagnus > div:first-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+}
+.arsMagnus > div > span:first-of-type {
+    width: 64.6%;
+}
+.arsMagnus > div > span {
+    width: 9.5%;
+    margin: 0 0 0 1%;
+}
+.arsMagnus > div:first-of-type > span:first-of-type {
+    margin: 0 0 0 7.5%;
+}
+.arsMagnus-item > div > a {
+    width: 5%;
+    font-size: 15px;
+}
+.arsMagnus-item > div > input:first-of-type {
+    width: 68%;
+    margin: 0;
+}
+.arsMagnus-item > div > input {
+    width: 10%;
+    margin: 0 0 0 1%;
+}
+.arsMagnus-item > div > textarea {
+    margin: 3px 0 0 0;
+}
+.arsMagnus > div:nth-of-type(3) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin: 3px 0 3px 2.5%;
+    padding: 3px 0 3px 0;
+}
+.arsMagnus > div:nth-of-type(4) > input {
+    width: 9.5%;
+    margin: 0 0 0 1%;
+}
 /*
     ------
     Limits
     ------
 */
-
-
+.limits > div > select {
+    width: 100%;
+}
 /*
     ------------
     Martial Arts
     ------------
 */
-
-
+.martialarts > div:first-of-type,
+.martialArt-item > div:first-of-type {
+    display: flex;
+    justify-content: flex-start;
+}
+.martialarts > div:first-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+}
+.martialarts > div > span:first-of-type {
+    width: 48.45%;
+    margin: 0 0 0 7.25%;
+}
+.martialarts > div > span:nth-of-type(2) {
+    width: 19%;
+}
+.martialarts > div > span {
+    width: 7.6%;
+    margin: 0 0 0 1%;
+}
+.martialArt-item > div > a {
+    width: 5%;
+    font-size: 15px;
+}
+.martialArt-item > div > input:first-of-type {
+    width: 51%;
+    margin: 0;
+}
+.martialArt-item > div > div {
+    width: 20%;
+    margin: 0 0 0 1%;
+}
+.martialArt-item > div > div > select {
+    width: 100%;
+}
+.martialArt-item > div > input {
+    width: 8%;
+    margin: 0 0 0 1%;
+}
+.martialArt-item > div > textarea {
+    margin: 5px 0 0 0;
+}
 /*
     -----------------
     Ki Seal Creatures
     -----------------
 */
-
-
+.kiseals > h2 > label > a {
+    opacity: 0;
+}
+.kiseals:hover > h2 > label > a {
+    opacity: 1;
+}
+.kisealmast > div {
+    display: flex;
+    justify-content: space-evenly;
+}
+.kisealmast > div:first-of-type > span:first-of-type {
+    margin: 0 0 0 2.5%;
+}
+.kisealmast > div:first-of-type > span:last-of-type {
+    margin: 0 2.5% 0 0;
+}
+.kisealmast > div:not(:first-of-type) {
+    width: 95%;
+    margin: 0 0 0 2.5%;
+}
+.kisealmast > div > span,
+.kisealmast > div > button {
+    width: 15%;
+}
+.kisealmast > div:last-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    padding: 0 0 5px 0;
+}
+.kiSealsCreatures > div:first-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+}
+.kiSealsCreatures > div:first-of-type,
+.kiSealCreature-item > div:first-of-type {
+    display: flex;
+    justify-content: flex-start;
+}
+.kiSealsCreatures > div > span:first-of-type {
+    width: 70.3%;
+    margin: 0 0 0 7.25%;
+}
+.kiSealsCreatures > div > span {
+    width: 14.25%;
+    margin: 0 0 0 1%;
+}
+.kiSealCreature-item > div > a {
+    width: 5%;
+    font-size: 15px;
+}
+.kiSealCreature-item > div:first-of-type > input:first-of-type {
+    width: 74%;
+    margin: 0;
+}
+.kiSealCreature-item > div:first-of-type > input {
+    width: 15%;
+    margin: 0 0 0 1%;
+}
+.kiSealCreature-item > div:last-of-type > div {
+    display: flex;
+    justify-content: space-between;
+}
+.kiSealCreature-item > div:last-of-type > div > span:first-of-type {
+    width: 20%;
+}
+.kiSealCreature-item > div:last-of-type > div > span,
+.kiSealCreature-item > div:last-of-type > div > input {
+    width: 15%;
+}
+.kiSealCreature-item > div:last-of-type > textarea {
+    margin: 5px 0 0 0;
+}
 /*
     -------------
     Ki techniques
     -------------
 */
-
-
-
+.kiTechnique-item > div:first-of-type {
+    display: flex;
+    justify-content: space-between;
+}
 /*
     *************
     -------------
@@ -2293,6 +2647,10 @@ h4 {
     margin-bottom: 3px;
     padding-bottom: 3px;
 }
+.armor-item > div > a,
+.armorHelmet-item > div > a {
+    position: absolute;
+}
 .armor > div > span:first-of-type,
 .armor-item > div > span:first-of-type,
 .armor-item2 > div > span:first-of-type,
@@ -2320,9 +2678,11 @@ h4 {
 .armorHelmet-item > div,
 .armorHelmet-item2 > div {
     display: flex;
+    justify-content: space-between;
 }
 .armor > div:nth-of-type(4) {
     display: flex;
+    justify-content: space-between;
     border-image: url(../img/border.png) 10 stretch;
     border-top: 5px solid black;
     border-bottom: 5px solid black;
@@ -2343,6 +2703,7 @@ h4 {
 }
 .armor > div:nth-of-type(8) {
     display: flex;
+    justify-content: space-between;
     border-image: url(../img/border.png) 10 stretch;
     border-top: 5px solid black;
     margin-top: 3px;
@@ -2350,6 +2711,7 @@ h4 {
 }
 .armor > div:nth-of-type(9) {
     display: flex;
+    justify-content: space-between;
     border-image: url(../img/border.png) 10 stretch;
     border-bottom: 5px solid black;
     margin-bottom: 3px;
@@ -2430,40 +2792,39 @@ h4 {
     border-bottom: 5px solid black;
     margin-bottom: 3px;
     padding-bottom: 3px;
+    padding-left: 6.5%;
+    padding-right: 6.7%;
+    justify-content: space-between;
     text-align: center;
     width: 100%;
 }
 .weapon-item {
-    display: flex;
     justify-content: space-between;
 }
 .weapon-item > div:first-of-type {
-    width: 95%;
-    display: contents;
+    justify-content: space-between;
+    width: 100%;
+    display: flex;
     text-align: center;
-}
-.weapons > div:first-of-type > span:nth-of-type(2),
-.weapon-item > div > span:nth-of-type(2) {
-    width: 69%;
 }
 .weapons > div:first-of-type > span:nth-of-type(1),
 .weapon-item > div > span:first-of-type {
     width: 15%;
 }
-.weapons > div:first-of-type > span:nth-of-type(1),
-.weapons > div:first-of-type > span:nth-of-type(2) {
-    margin-right: .3%;
+.weapons > div:first-of-type > span:nth-of-type(2),
+.weapon-item > div > span:nth-of-type(2) {
+    width: 64%;
 }
 .weapons > div:first-of-type > span:nth-of-type(3),
 .weapon-item > div > span:nth-of-type(3) {
     width: 10%;
 }
-.weapon-item > div:last-of-type {
-    width: 5%;
-    align-self: center;
-    justify-content: center;
-    display: flex;
+.weapon-item > div > a {
     font-size: 15px;
+    width: 5%;
+    height: 20px;
+    text-align: center;
+    align-self: center;
 }
 /*
     --------
@@ -2525,39 +2886,38 @@ h4 {
     border-bottom: 5px solid black;
     margin-bottom: 3px;
     padding-bottom: 3px;
+    padding-right: 6.5%;
+    padding-left: 5.7%;
     text-align: center;
+    justify-content: space-between;
     width: 100%;
 }
 .inventory-item {
-    display: flex;
     justify-content: space-between;
 }
 .inventory-item > div:first-of-type {
-    width: 95%;
-    display: contents;
+    justify-content: space-between;
+    width: 100%;
+    display: flex;
 }
 .inventory > div:first-of-type > span:nth-of-type(2),
 .inventory-item > div > input:nth-of-type(2) {
-    width: 70%;
+    width: 64%;
 }
 .inventory > div:first-of-type > span:nth-of-type(1),
 .inventory-item > div > input:first-of-type {
     width: 9%;
 }
-.inventory > div:first-of-type > span:nth-of-type(1),
-.inventory > div:first-of-type > span:nth-of-type(2) {
-    margin-right: .3%;
-}
 .inventory > div:first-of-type > span:nth-of-type(3),
 .inventory-item > div > input:nth-of-type(3) {
     width: 15%;
 }
-.inventory-item > div:last-of-type {
-    width: 5%;
-    align-self: center;
-    justify-content: center;
-    display: flex;
+.inventory-item > div > a {
     font-size: 15px;
+    width: 5%;
+    height: 20px;
+    text-align: center;
+    align-self: center;
 }
 .inventory-item > div > input {
     display: flex;
@@ -2573,20 +2933,30 @@ h4 {
 /*
     ***************
     ---------------
-    SETTINGS FORMAT
+    SETTINGS LAYOUT
     ---------------
     ***************
 */
+.setting1 {
+    display: flex;
+    justify-content: space-between;
+}
+.setting1 > div:first-of-type {
+    width: 25%
+}
+.charOptions {
+    width: 35%;
+}
+.setting1 > div:last-of-type {
+    width: 32%;
+}
 /*
-    ----------------
-    RollRange Layout
-    ----------------
+    ---------
+    RollRange
+    ---------
 */
 .rollRange {
-    display: flex;
-    width: calc(30% - 2.5%);
     flex-wrap: wrap;
-    justify-content: space-between;
     margin: 0px;
 }
 .rollRange > div {
@@ -2789,24 +3159,45 @@ h4 {
     Armor
     -----
 */
-.armorHeader,
-.armorContent,
-.armorContent2 {
+.armorContent > div {
     display: flex;
+    justify-content: space-evenly;
 }
-.armorHeader > img {
-    width: 100px;
-    height: 100px;
+.armorContent > div > label {
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
 }
-.armorContent > label {
-    width: 16.6%
+.armorContent > div:nth-of-type(1) > label,
+.armorContent > div:nth-of-type(2) > label,
+.armorContent > div:nth-of-type(3) > label {
+    width: 48%;
 }
-.armorContent2 > label {
-    width: 12.5%
+.armorContent > div:nth-of-type(4) > label,
+.armorContent > div:nth-of-type(5) > label,
+.armorContent > div:nth-of-type(6) > label {
+    width: 25%;
 }
-
-
-
+.armorContent > div > label > input {
+    display: flex;
+    width: 35%;
+    height: 20px;
+    text-align: center;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    border-bottom: 1px solid black;
+}
+.armorContent > div > label > span {
+    display: flex;
+    width: 50%;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+}
 /*
     ------------------------
     Discipline & Maint Power
@@ -2986,7 +3377,9 @@ h4 {
     ---------------
     ***************
 */
-
+.chat-message .message-header .message-metadata {
+    display: block;
+}
 /*
     --------
     Sec Roll
@@ -2994,7 +3387,6 @@ h4 {
 */
 .secondarychatmsg > div {
     font-size: 17px;
-
 }
 .secondarychatmsg > div:nth-of-type(1) {
     font-size: 23px;

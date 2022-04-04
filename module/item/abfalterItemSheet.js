@@ -27,4 +27,17 @@ export default class abfalterItemSheet extends ItemSheet {
 
         return sheetData;
     }
+
+    activateListeners(html) {
+        html.find(".toggleBoolean").click(ev => {
+            let value = $(ev.currentTarget).attr("data-ability");
+            let label = $(ev.currentTarget).attr("data-label");
+            if (value == "false") {
+                value = true;
+            } else {
+                value = false;
+            }
+            this.document.update({ [label]: value });
+        });
+    }
 }

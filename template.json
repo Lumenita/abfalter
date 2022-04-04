@@ -26,6 +26,13 @@
           "base": 3,
           "spec": 0,
           "temp": 0
+        },
+        "toggles": {
+          "spiritDamageType": true,
+          "psychicStrengthening": false,
+          "unifiedPools": false,
+          "innatePower": false,
+          "dragonSeals": false
         }
       },
       "stats": {
@@ -989,6 +996,125 @@
             "status2": false,
             "cost": 40
           }
+        },
+        "fistDamage": {
+          "base": 0,
+          "mult": 0,
+          "multOption": "str",
+          "status":  false
+        },
+        "kiPool": {
+          "agi": {
+            "spec": 0,
+            "specMax": 0,
+            "temp": 0,
+            "tempMax": 0,
+            "actual": 0,
+            "status":  false
+          },
+          "con": {
+            "spec": 0,
+            "specMax": 0,
+            "temp": 0,
+            "tempMax": 0,
+            "actual": 0,
+            "status": false
+          },
+          "dex": {
+            "spec": 0,
+            "specMax": 0,
+            "temp": 0,
+            "tempMax": 0,
+            "actual": 0,
+            "status": false
+          },
+          "str": {
+            "spec": 0,
+            "specMax": 0,
+            "temp": 0,
+            "tempMax": 0,
+            "actual": 0,
+            "status": false
+          },
+          "pow": {
+            "spec": 0,
+            "specMax": 0,
+            "temp": 0,
+            "tempMax": 0,
+            "actual": 0,
+            "status": false
+          },
+          "wp": {
+            "spec": 0,
+            "specMax": 0,
+            "temp": 0,
+            "tempMax": 0,
+            "actual": 0,
+            "status": false
+          },
+          "unified": 0
+
+        },
+        "mk": {
+          "base": 0,
+          "spec": 0,
+          "temp": 0,
+          "status": false
+        },
+        "kiSeal": {
+          "status": false,
+          "minor": {
+            "wood": {
+              "mastery": false,
+              "mastery2": false
+            },
+            "metal": {
+              "mastery": false,
+              "mastery2": false
+            },
+            "air": {
+              "mastery": false,
+              "mastery2": false
+            },
+            "water": {
+              "mastery": false,
+              "mastery2": false
+            },
+            "fire": {
+              "mastery": false,
+              "mastery2": false
+            }
+          },
+          "major": {
+            "wood": {
+              "mastery": false,
+              "mastery2": false
+            },
+            "metal": {
+              "mastery": false,
+              "mastery2": false
+            },
+            "air": {
+              "mastery": false,
+              "mastery2": false
+            },
+            "water": {
+              "mastery": false,
+              "mastery2": false
+            },
+            "fire": {
+              "mastery": false,
+              "mastery2": false
+            }
+          }
+        },
+        "limits": {
+          "limitOne": 0,
+          "limitTwo": 0
+        },
+        "arsMagnus": {
+          "dragonSeal": 0,
+          "dragonDoor": 0
         }
       },
       "armory": {
@@ -1013,18 +1139,21 @@
         "ppoint": {
           "base": 0,
           "spec": 0,
-          "freepp": 0
+          "freepp": 0,
+          "desc": ""
         },
         "ppotential": {
           "base": 0,
           "spent": 0,
           "spec": 0,
-          "temp": 0
+          "temp": 0,
+          "mastery": false
         },
         "pproj": {
           "base": 0,
           "spec": 0,
-          "temp": 0
+          "temp": 0,
+          "mastery": false
         },
         "other": {
           "innateSlots": 0,
@@ -1052,7 +1181,11 @@
       "advantage",
       "disadvantage",
       "spell",
+      "kiTechnique",
+      "arsMagnus",
+      "martialArt",
       "psychicMatrix",
+      "kiSealCreature",
       "incarnation",
       "invocation",
       "mentalPattern",
@@ -1213,6 +1346,7 @@
     },
     "inventory": {
       "templates": [ "itemDescription" ],
+      "expand": false,
       "quantity": 0,
       "price": "",
       "quality": "",
@@ -1224,17 +1358,19 @@
     "weapon": {
       "templates": [ "itemDescription" ],
       "equipped": false,
+      "expand": false,
       "quality": 0,
       "fortitude": 0,
       "attack": 0,
-      "defense": 0,
+      "block": 0,
       "dodge": 0,
-      "shield": "",
-      "prim": "",
-      "sec": "",
-      "damage": 0,
-      "dmgMod": 0,
+      "shield": "none",
+      "primDmgT": "CUT",
+      "secDmgT": "NONE",
+      "baseDmg": 0,
+      "dmgMod": "Strength",
       "twoHanded": false,
+      "complex": false,
       "breakage": 0,
       "strBreak": "",
       "presence": 0,
@@ -1325,6 +1461,45 @@
       "templates": [ "itemDescription" ],
       "value": 0,
       "expand": false
+    },
+    "kiSealCreature": {
+      "templates": [ "itemDescription" ],
+      "level": 0,
+      "expand": false,
+      "minor": {
+        "wood": 0,
+        "metal": 0,
+        "air": 0,
+        "fire": 0,
+        "water": 0
+      },
+      "major": {
+        "wood": 0,
+        "metal": 0,
+        "air": 0,
+        "fire": 0,
+        "water": 0
+      }
+    },
+    "kiTechnique": {
+      "templates": [ "itemDescription" ],
+      "expand": false
+    },
+    "arsMagnus": {
+      "templates": [ "itemDescription" ],
+      "expand": false,
+      "dp": 0,
+      "mk": 0
+    },
+    "martialArt": {
+      "templates": [ "itemDescription" ],
+      "expand": false,
+      "bonusAtk": 0,
+      "bonusDef": 0,
+      "bonusDod": 0,
+      "dp": 0,
+      "mk": 0,
+      "degree": "base"
     }
   }
 }

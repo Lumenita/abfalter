@@ -3,8 +3,8 @@
         <div class="ppoint">
             <h2>
                 {{localize "abfalter.psychicTab.pp"}}
-                <label class="expand-box">
-                    <input type="checkbox" name="data.ppoint.status" data-dtype="boolean" {{checked data.ppoint.status}} />
+                <label class="expand-box"> 
+                    <a class="toggleBoolean {{#if data.ppoint.status}}showOpacity{{/if}}" data-label="data.ppoint.status" data-ability="{{data.ppoint.status}}"><i class="{{#if data.ppoint.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
             </h2>
             {{#if data.ppoint.status}}
@@ -23,33 +23,37 @@
             <h2>
                 {{localize "abfalter.psychicTab.ppotential"}}
                 <label class="expand-box">
-                    <input type="checkbox" name="data.ppotential.status" data-dtype="boolean" {{checked data.ppotential.status}} />
+                    <a class="toggleBoolean {{#if data.ppotential.status}}showOpacity{{/if}}" data-label="data.ppotential.status" data-ability="{{data.ppotential.status}}"><i class="{{#if data.ppotential.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
             </h2>
             {{#if data.ppotential.status}}
             <div>
                 <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.ppotential.base" value="{{data.ppotential.base}}" /> </label>
                 <label> <span> {{localize "abfalter.psychicTab.fromWP"}} </span> <input type="number" name="data.fromWP" value="{{data.fromWP}}" readonly/> </label>
-                <label> <span> {{localize "abfalter.basicInfo.spent"}} </span> 
-                    <select name="data.ppotential.spent" data-dtype="number">
-                        {{#select data.ppotential.spent}}
-                        <option value="0"> 0 </option>
-                        <option value="10"> 1 </option>
-                        <option value="20"> 3 </option>
-                        <option value="30"> 6 </option>
-                        <option value="40"> 10 </option>
-                        <option value="50"> 15 </option>
-                        <option value="60"> 21 </option>
-                        <option value="70"> 28 </option>
-                        <option value="80"> 36 </option>
-                        <option value="90"> 45 </option>
-                        <option value="100"> 55 </option>
-                         {{/select}}
-                    </select>
-                </label>
+                <div class="csSelect1">
+                    <label>
+                        <span> {{localize "abfalter.basicInfo.spent"}} </span>
+                        <select name="data.ppotential.spent" data-dtype="number">
+                            {{#select data.ppotential.spent}}
+                            <option value="0"> 0 </option>
+                            <option value="10"> 1 </option>
+                            <option value="20"> 3 </option>
+                            <option value="30"> 6 </option>
+                            <option value="40"> 10 </option>
+                            <option value="50"> 15 </option>
+                            <option value="60"> 21 </option>
+                            <option value="70"> 28 </option>
+                            <option value="80"> 36 </option>
+                            <option value="90"> 45 </option>
+                            <option value="100"> 55 </option>
+                            {{/select}}
+                        </select>
+                    </label>
+                </div>
                 <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.ppotential.spec" value="{{data.ppotential.spec}}" /> </label>
                 <label>
-                    <button type="button" name="x" class="mastery-box "> <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
+                    <button type="button" class="mastery-box {{#if data.ppotential.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.ppotential.mastery" data-ability="{{data.ppotential.mastery}}">
+                    <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
                 </label>
             </div>
             {{/if}}
@@ -66,7 +70,7 @@
             <h2>
                 {{localize "abfalter.psychicTab.pproj"}}
                 <label class="expand-box">
-                    <input type="checkbox" name="data.pproj.status" data-dtype="boolean" {{checked data.pproj.status}} />
+                    <a class="toggleBoolean {{#if data.pproj.status}}showOpacity{{/if}}" data-label="data.pproj.status" data-ability="{{data.pproj.status}}"><i class="{{#if data.pproj.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
             </h2>
             {{#if data.pproj.status}}
@@ -74,7 +78,8 @@
                 <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.pproj.base" value="{{data.pproj.base}}" /> </label>
                 <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.pproj.spec" value="{{data.pproj.spec}}" /> </label>
                 <label>
-                    <button type="button" name="x" class="mastery-box "> <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
+                    <button type="button" class="mastery-box {{#if data.pproj.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.pproj.mastery" data-ability="{{data.pproj.mastery}}">
+                    <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
                 </label>
             </div>
             {{/if}}
@@ -101,12 +106,12 @@
         <div class="pdisc">
             <h2> {{localize "abfalter.psychicTab.pmodule"}} </h2>
             <div>
-                <button type="button" class="psychicModule {{#if data.other.moduleStatus}}selected{{else}}notSelected{{/if}}" data-ability="{{data.other.moduleStatus}}" data-label="Psychic Module">
+                <button type="button" class="psychicModule toggleBoolean {{#if data.other.moduleStatus}}selected{{else}}notSelected{{/if}}" data-ability="{{data.other.moduleStatus}}" data-label="data.other.moduleStatus">
                     <span> {{localize "abfalter.psychicTab.pmoduleText"}} </span>
                     <span> {{localize "abfalter.psychicTab.pmoduleText2"}} </span>
                     {{#if data.other.moduleStatus}}
                     <div>
-                        <span> {{localize "abfalter.basicInfo.active"}} </span>
+                        <span> {{localize "abfalter.basicInfo.active"}}!! </span>
                     </div>
                     {{/if}}
                 </button>
@@ -140,7 +145,7 @@
                         <div>
                             <input class="item-name inline-edit" data-field="name" type="text" value="{{mentalPattern.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                             <input class="maintPower" data-field="data.finalCost" type="number" value="{{mentalPattern.data.finalCost}}" readonly />
-                            <button type="button" class="item-toggle" data-ability="{{data.toggle}}">
+                            <button type="button" class="item-toggle" data-ability="{{data.toggle}}" data-label="data.toggle">
                                 {{#if data.toggle}}
                                 <span> {{localize "abfalter.basicInfo.yes"}} </span>
                                 {{else}}

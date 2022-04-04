@@ -17,11 +17,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
             icon: '<i class="fas fa-caret-right"></i>',
             callback: element => {
                 const item = this.actor.items.get(element.data("item-id"));
-                if (item.data.data.equipped == false) {
-                    element.equipped = true;
-                } else {
-                    element.equipped = false;
-                }
+                element.equipped = !item.data.data.equipped;
                 item.update({ "data.equipped": element.equipped });
             }
         },
@@ -105,6 +101,10 @@ export default class abfalterCharacterSheet extends ActorSheet {
         sheetData.mentalPatterns = baseData.items.filter(function (item) { return item.type == "mentalPattern" });
         sheetData.psychicMatrixs = baseData.items.filter(function (item) { return item.type == "psychicMatrix" });
         sheetData.maintPowers = baseData.items.filter(function (item) { return item.type == "maintPower" });
+        sheetData.kiSealCreatures = baseData.items.filter(function (item) { return item.type == "kiSealCreature" });
+        sheetData.kiTechniques = baseData.items.filter(function (item) { return item.type == "kiTechnique" });
+        sheetData.martialArts = baseData.items.filter(function (item) { return item.type == "martialArt" });
+        sheetData.arsMagnuses = baseData.items.filter(function (item) { return item.type == "arsMagnus" });
 
         return sheetData;
     }
@@ -146,14 +146,15 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 let label = $(ev.currentTarget).attr("data-label");
                 openSecondaryDiceDialogue(this.actor, value, label);
             });
-            html.find(".psychicModule").click(ev => {
+            html.find(".toggleBoolean").click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
+                let label = $(ev.currentTarget).attr("data-label");
                 if (value == "false") {
                     value = true;
                 } else {
                     value = false;
                 }
-                this.document.update({ "data.other.moduleStatus": value });
+                this.document.update({ [label]: value });
             });
             html.find(".mastery-box").click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
