@@ -661,7 +661,7 @@
                 </div>
                 <input type="number" name="data.unarmedDmgFinal" value="{{data.unarmedDmgFinal}}" readonly />
             </div>
-            <textarea class="auto-expand" name="data.fistDamage.desc" rows="3" placeholder="{{localize "abfalter.basicInfo.extraInfo"}}">{{data.fistDamage.desc}}</textarea>
+            <textarea class="textarea-auto-resize" name="data.fistDamage.desc" rows="5" placeholder="{{localize "abfalter.basicInfo.extraInfo"}}">{{data.fistDamage.desc}}</textarea>
             {{/if}}
         </div>
 
@@ -888,14 +888,13 @@
                     {{#each arsMagnuses as |arsMagnus id|}}
                     <div class="arsMagnus-item item normal-item" data-item-id="{{arsMagnus._id}}">
                         <div>
-                            <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                             <input class="item-name inline-edit" data-field="name" type="text" value="{{arsMagnus.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                             <input class="dp-value inline-edit" data-field="data.dp" type="number" value="{{arsMagnus.data.dp}}" />
                             <input class="mk-value inline-edit" data-field="data.mk" type="number" value="{{arsMagnus.data.mk}}" />
                             <a class="item-expand"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
                         <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
-                            <textarea class="inline-edit itemAuto-expand" data-field="data.description" placeholder="{{localize "abfalter.kiTab.arsMagInfo"}}">{{arsMagnus.data.description}}</textarea>
+                            <textarea class="inline-edit itemAuto-expand" data-field="data.description" rows="5" placeholder="{{localize "abfalter.kiTab.arsMagInfo"}}">{{arsMagnus.data.description}}</textarea>
                         </div>
                     </div>
                     {{/each}}
@@ -960,7 +959,6 @@
                 {{#each martialArts as |martialArt id|}}
                 <div class="martialArt-item item normal-item" data-item-id="{{martialArt._id}}">
                     <div>
-                        <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                         <input class="item-name inline-edit" data-field="name" type="text" value="{{martialArt.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                         <div class="csSelect">
                             <select class="inline-edit" data-field="data.degree" data-dtype="number">
@@ -977,7 +975,7 @@
                         <a class="item-expand"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
-                        <textarea class="inline-edit itemAuto-expand" data-field="data.description" placeholder="{{localize "abfalter.kiTab.martialInfo"}}">{{martialArt.data.description}}</textarea>
+                        <textarea class="inline-edit itemAuto-expand" data-field="data.description" rows="5" placeholder="{{localize "abfalter.kiTab.martialInfo"}}">{{martialArt.data.description}}</textarea>
                     </div>
                 </div>
                 {{/each}}
@@ -1090,7 +1088,7 @@
                                 <input class="mwater-value inline-edit" data-field="data.major.water" type="number" value="{{kiSealCreature.data.major.water}}" />
                                 <input class="mfire-value inline-edit" data-field="data.major.fire" type="number" value="{{kiSealCreature.data.major.fire}}" />
                             </div>
-                            <textarea class="inline-edit itemAuto-expand" data-field="data.description" placeholder="{{localize "abfalter.kiTab.kiSealInfo"}}">{{kiSealCreature.data.description}}</textarea>
+                            <textarea class="inline-edit itemAuto-expand" data-field="data.description" rows="5" placeholder="{{localize "abfalter.kiTab.kiSealInfo"}}">{{kiSealCreature.data.description}}</textarea>
                         </div>
                     </div>
                     {{/each}}
@@ -1099,18 +1097,97 @@
             </div>
         </div>
 
-        <div class="kitech">
+        <div class="kiTech">
             <h2> {{localize "abfalter.kiTab.kiTechnique"}} </h2>
+            <div>
+                <span> {{localize "abfalter.basicInfo.name"}} </span>
+                <span> {{localize "abfalter.basicInfo.level"}} </span>
+                <span> {{localize "abfalter.basicInfo.mk"}} </span>
+            </div>
             <div class="items-list">
                 {{#each kiTechniques as |kiTechnique id|}}
                 <div class="kiTechnique-item item normal-item" data-item-id="{{kiTechnique._id}}">
                     <div>
                         <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                         <input class="item-name inline-edit" data-field="name" type="text" value="{{kiTechnique.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                        <input class="inline-edit" data-field="data.mk" type="number" value="{{kiTechnique.data.mk}}" />
+                        <input class="inline-edit" data-field="data.level" type="number" value="{{kiTechnique.data.level}}" />
                         <a class="item-expand"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
-                        <span> Stuff </span>
+                        <div>
+                            {{#if data.innatePower}}
+                            <div class="techExpand techExpandFirst">
+                                <span> Ki </span>
+                                <span> {{localize "abfalter.basicInfo.pow"}} </span>
+                            </div>
+                            {{else}}
+                            <span> KI </span>
+                            <span> {{localize "abfalter.basicInfo.agi"}} </span>
+                            <span> {{localize "abfalter.basicInfo.con"}} </span>
+                            <span> {{localize "abfalter.basicInfo.dex"}} </span>
+                            <span> {{localize "abfalter.basicInfo.str"}} </span>
+                            <span> {{localize "abfalter.basicInfo.pow"}} </span>
+                            <span> {{localize "abfalter.basicInfo.wp"}} </span>
+                            {{/if}}
+                            <span> Action Info </span>
+                        </div>
+                        <div>
+                            {{#if data.innatePower}}
+                            <div class="techExpand">
+                                <span> Innate Power Use </span>
+                                <input class="inline-edit" data-field="data.use.unified" type="number" value="{{kiTechnique.data.use.unified}}" />
+                            </div>
+                            {{else}}
+                            <span> use </span>
+                            <input class="inline-edit" data-field="data.use.agi" type="number" value="{{kiTechnique.data.use.agi}}" />
+                            <input class="inline-edit" data-field="data.use.con" type="number" value="{{kiTechnique.data.use.con}}" />
+                            <input class="inline-edit" data-field="data.use.dex" type="number" value="{{kiTechnique.data.use.dex}}" />
+                            <input class="inline-edit" data-field="data.use.str" type="number" value="{{kiTechnique.data.use.str}}" />
+                            <input class="inline-edit" data-field="data.use.pow" type="number" value="{{kiTechnique.data.use.pow}}" />
+                            <input class="inline-edit" data-field="data.use.wp" type="number" value="{{kiTechnique.data.use.wp}}" />
+                            {{/if}}
+                            <div class="csSelect techSelect">
+                                <select class="inline-edit" data-field="data.frequency" data-dtype="number">
+                                    {{#select data.frequency}}
+                                    <option value="1"> action </option>
+                                    <option value="2"> turn </option>
+                                    <option value="3"> variable </option>
+                                    {{/select}}
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            {{#if data.unified}}
+                            <div class="techExpand">
+                                {{#if data.innatePower}}
+                                <span> Innate Power Maint </span>
+                                {{else}}
+                                <span> Unified Maint </span>
+                                {{/if}}
+                                <input class="inline-edit" data-field="data.maint.unified" type="number" value="{{kiTechnique.data.maint.unified}}" />
+                            </div>
+                            {{else}}
+                            <span> Maint </span>
+                            <input class="inline-edit" data-field="data.maint.agi" type="number" value="{{kiTechnique.data.maint.agi}}" />
+                            <input class="inline-edit" data-field="data.maint.con" type="number" value="{{kiTechnique.data.maint.con}}" />
+                            <input class="inline-edit" data-field="data.maint.dex" type="number" value="{{kiTechnique.data.maint.dex}}" />
+                            <input class="inline-edit" data-field="data.maint.str" type="number" value="{{kiTechnique.data.maint.str}}" />
+                            <input class="inline-edit" data-field="data.maint.pow" type="number" value="{{kiTechnique.data.maint.pow}}" />
+                            <input class="inline-edit" data-field="data.maint.wp" type="number" value="{{kiTechnique.data.maint.wp}}" />
+                            {{/if}}
+                            <div class="csSelect techSelect">
+                                <select class="inline-edit" data-field="data.actionType" data-dtype="number">
+                                    {{#select data.actionType}}
+                                    <option value="1"> attack </option>
+                                    <option value="2"> defemse </option>
+                                    <option value="3"> counterattack </option>
+                                    <option value="4"> variable </option>
+                                    {{/select}}
+                                </select>
+                            </div>
+                        </div>
+                        <textarea class="inline-edit itemAuto-expand" data-field="data.description" rows="5" placeholder="{{localize "abfalter.kiTab.kiSealInfo"}}">{{kiTechnique.data.description}}</textarea>
                     </div>
                 </div>
                 {{/each}}

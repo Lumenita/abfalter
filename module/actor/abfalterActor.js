@@ -5,7 +5,7 @@ export default class abfalterActor extends Actor {
 
     prepareDerivedData() {
         const actorData = this.data;
-
+        console.log("load Character Data");
         this._prepareCharacterData(actorData);
     }
 
@@ -258,6 +258,15 @@ export default class abfalterActor extends Actor {
         data.slofhandbonus = soh;
         data.tailoringbonus = tailoring;
 
+        //Stuff Xp, Presence, Next lvl Xp
+        if (data.level == 0) {
+            data.dp = 400;
+        } else {
+            data.dp = Math.floor((data.level * 100) + 500);
+        }
+        data.presence = Math.floor((data.dp / 20) + data.levelinfo.presencemod);
+        data.nextlevel = Math.floor(((data.level + data.levelinfo.levelmod) * 25) + 75);
+
         // Characteristics & Mods
         for (let [key, stat] of Object.entries(data.stats)) {
             stat.final = Math.floor(stat.base + stat.spec + stat.temp);
@@ -276,7 +285,6 @@ export default class abfalterActor extends Actor {
                     break;
                 case 5:
                     stat.mod = 0;
-
                     break;
                 case 6:
                 case 7:
@@ -360,14 +368,21 @@ export default class abfalterActor extends Actor {
             }
         }
 
-        //Stuff Xp, Presence, Next lvl Xp
-        if (data.level == 0) {
-            data.dp = 400;
-        } else {
-            data.dp = Math.floor((data.level * 100) + 500);
+        //Unarmed Damage
+        switch (data.fistDamage.multOption) {
+            case "strength":
+                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Strength.mod));
+                break;
+            case "power":
+                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Power.mod));
+                break;
+            case "presence":
+                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * ((2 * data.presence) + data.stats.Power.mod)));
+                break;
+            default:
+                data.unarmedDmgFinal = data.fistDamage.base;
+
         }
-        data.presence = Math.floor((data.dp / 20) + data.levelinfo.presencemod);
-        data.nextlevel = Math.floor(((data.level + data.levelinfo.levelmod) * 25) + 75);
 
         //Mk Calculations
         data.mkBonus = mk;
@@ -507,7 +522,6 @@ export default class abfalterActor extends Actor {
 
         //Movement
         data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp - data.movement.pen + Math.ceil(data.aam / 20));
-
         switch (data.finalmove) {
             case 1:
                 data.fullmove = "3 ft";

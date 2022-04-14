@@ -22,6 +22,7 @@ input[type=number], input[type=text] {
 }
 input:read-only {
     background-color: transparent;
+    padding: 1px 0 0 0;
     border: 0;
 }
 select {
@@ -69,6 +70,9 @@ h3 {
     border-bottom: 5px solid black;
     z-index: 1;
     align-items: center;
+}
+#context-menu li.context-item {
+    text-align: center;
 }
 /* Colors */
 .hidden {
@@ -168,10 +172,7 @@ h3 {
     font-size: 20px;
     transform: rotate(90deg);
 }
-
-
-
-
+/* Text Area Auto Resize */
 
 
 .editor-box {
@@ -1686,31 +1687,17 @@ h3 {
 .ppoint > label,
 .ppoint > div > label {
     display: flex;
-    width: 100%;
-    height: 20px;
     padding-right: 15px;
     padding-left: 5px;
 }
 .ppoint > label > span,
 .ppoint > div > label > span {
-    display: flex;
     width: 60%;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
+    text-align: start;
 }
 .ppoint > label > input,
 .ppoint > div > label > input {
-    display: flex;
     width: 40%;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
 }
 .ppoint > label:nth-of-type(2) {
     border-image: url(../img/border.png) 10 stretch;
@@ -1720,18 +1707,7 @@ h3 {
     font-weight: bold;
 }
 .ppoint > label:nth-of-type(3) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-    padding-top: 8px;
-    padding-bottom: 23px;
     font-weight: bold;
-}
-.ppoint > div > label:nth-of-type(3) > input,
-.ppoint > label:nth-of-type(1) > input,
-.ppoint > label:nth-of-type(2) > input {
-    background: transparent;
-    border-bottom: 0px;
 }
 .ppoint > h2 > label > a {
     opacity: 0;
@@ -1748,32 +1724,20 @@ h3 {
 .ppotential > div > label,
 .ppotential > div > div > label {
     display: flex;
-    width: 100%;
-    height: 20px;
     padding-right: 15px;
     padding-left: 5px;
 }
 .ppotential > label > span,
 .ppotential > div > label > span,
 .ppotential > div > div > label > span {
-    display: flex;
     width: 60%;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
+    text-align: start;
 }
 .ppotential > label > input,
-.ppotential > div > label > input {
-    display: flex;
+.ppotential > div > label > input,
+.ppotential > div > div > label > select,
+.ppotential > div > label:nth-of-type(4) > button {
     width: 40%;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
 }
 .ppotential > label:nth-of-type(2) {
     border-image: url(../img/border.png) 10 stretch;
@@ -1782,25 +1746,14 @@ h3 {
     margin-top: 3px;
     margin-bottom: 3px;
     padding-top: 3px;
-    padding-bottom: 23px;
+    padding-bottom: 3px;
     font-weight: bold;
-}
-.ppotential > div > div > label > select {
-    width: 40%;
 }
 .ppotential > div > label:nth-of-type(4) {
     margin: 3px 0 3px 0;
     justify-content: center;
 }
-.ppotential > div > label:nth-of-type(4) > button {
-    width: 40%;
-}
-.ppotential > div > label:nth-of-type(2) > input,
-.ppotential > label:nth-of-type(2) > input {
-    background: transparent;
-    border-bottom: 0px;
-}
-.ppotential > h2 > label > a {q
+.ppotential > h2 > label > a {
     opacity: 0;
 }
 .ppotential:hover > h2 > label > a {
@@ -1820,31 +1773,17 @@ h3 {
 .pproj > label,
 .pproj > div > label {
     display: flex;
-    width: 100%;
-    height: 20px;
     padding-right: 15px;
     padding-left: 5px;
 }
 .pproj > label > span,
 .pproj > div > label > span {
-    display: flex;
     width: 60%;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
+    text-align: start;
 }
 .pproj > label > input,
 .pproj > div > label > input {
-    display: flex;
     width: 40%;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
 }
 .pproj > label:nth-of-type(2) {
     border-image: url(../img/border.png) 10 stretch;
@@ -1853,12 +1792,8 @@ h3 {
     margin-top: 3px;
     margin-bottom: 3px;
     padding-top: 3px;
-    padding-bottom: 23px;
+    padding-bottom: 3px;
     font-weight: bold;
-}
-.pproj > label:nth-of-type(2) > input {
-    background: transparent;
-    border-bottom: 0px;
 }
 .pproj > div > label:nth-of-type(3) {
     margin: 3px 0 3px 0;
@@ -1899,78 +1834,61 @@ h3 {
     border-radius: 0px;
     border: 0px;
 }
-.discipline-item > div > input {
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
-}
 /*
     ---------------
     Mental Patterns
     ---------------
 */
+.ppaterns > div:not(:first-of-type),
+.ppowers > div:not(:first-of-type),
+.pmaint > div:last-of-type { 
+    width: 95%;
+    margin: 0 0 0 2.5%;
+}
+.ppaterns > div:first-of-type,
+.mentalPattern-item > div:first-of-type {
+    display: flex;
+    justify-content: flex-start;
+}
 .mentalPattern-item > div > textarea {
     resize: vertical;
     min-height: 4em;
     max-height: 8em;
 }
 .ppaterns > div:first-of-type {
-    display: flex;
-    text-align: center;
-    width: 100%;
     border-image: url(../img/border.png) 10 stretch;
     border-bottom: 5px solid black;
     margin-bottom: 3px;
     padding-bottom: 3px;
 }
-.ppaterns > div:first-of-type > span:first-of-type,
-.ppaterns > div:first-of-type > span:nth-of-type(2) {
-    margin-right: 0.7%;
-}
-.mentalPattern-item > div {
-    justify-content: space-between;
-}
-.mentalPattern-item > div > input:first-of-type,
 .ppaterns > div > span:first-of-type {
-    width: 55%;
+    width: 52.25%;
+    margin: 0 0 0 2.5%;
 }
-.mentalPattern-item > div > input:nth-of-type(2),
 .ppaterns > div > span:nth-of-type(2) {
-    width: 21%;
+    width: 19.95%;
+    margin: 0 1% 0 1%;
 }
-.mentalPattern-item > div > button,
 .ppaterns > div > span:last-of-type {
+    width: 16.15%;
+}
+.mentalPattern-item > div > input:first-of-type {
+    width: 55%
+}
+.mentalPattern-item > div > input:nth-of-type(2) {
+    width: 21%;
+    margin: 0 1% 0 1%;
+}
+.mentalPattern-item > div > button {
     width: 17%;
 }
 .mentalPattern-item > div > a {
-    font-size: 15px;
     width: 5%;
-    height: 20px;
-    text-align: center;
-    align-self: center;
-}
-.mentalPattern-item > div > input {
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
-}
-.mentalPattern-item > div > input:nth-of-type(2) {
-    background: transparent;
-    border-bottom: 0px;
+    font-size: 15px;
 }
 .mentalPattern-item > div > button {
     margin: 0px;
-    height: 21px;
+    height: 20px;
     border-radius: 0px;
     border: 0px;
 }
@@ -1979,102 +1897,81 @@ h3 {
     Psychic Matrices
     ----------------
 */
+.ppowers > div:first-of-type,
+.psychicMatrix-item > div:first-of-type {
+    display: flex;
+    justify-content: flex-start;
+}
 .ppowers > div:first-of-type {
-    text-align: center;
     border-image: url(../img/border.png) 10 stretch;
     border-bottom: 5px solid black;
     margin-bottom: 3px;
     padding-bottom: 3px;
-    display: flex;
 }
 .ppowers > div:first-of-type > span:first-of-type {
-    width: 73%;
-    margin-left: 5.8%;
+    width: 70.3%;
+    margin: 0 0 0 7.25%;
 }
 .ppowers > div:first-of-type > span:nth-of-type(2){
-    width: 15%;
-}
-.psychicMatrix-item > div:first-of-type {
-    justify-content: space-between;
-    display: flex;
-    height: 20px;
+    width: 14.25%;
+    margin: 0 0 0 1%;
 }
 .psychicMatrix-item > div > input:first-of-type {
-    width: 73%
+    width: 74%;
 }
 .psychicMatrix-item > div > input:nth-of-type(2) {
-    width: 15%
+    width: 15%;
+    margin: 0 0 0 1%;
 }
 .psychicMatrix-item > div > a {
     width: 5%;
     font-size: 15px;
-    text-align: center;
-    align-self: center;
-}
-.psychicMatrix-item > div > input {
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
 }
 /*
     -------------------
     Maintained Matrices
     -------------------
 */
-.pmaint > div:first-of-type {
+.pmaint > div:not(:last-of-type),
+.maintPower-item > div:first-of-type {
     display: flex;
+    justify-content: flex-start;
 }
 .pmaint > div > label:first-of-type {
-    width: 50%;
-    height: 20px;
     padding-left: 15px;
     display: flex;
 }
 .pmaint > div > label:nth-of-type(2) {
-    width: 50%;
-    height: 20px;
     padding-right: 15px;
     display: flex;
     justify-content: flex-end;
 }
-
-.pmaint > div > label > span {
-    display: contents;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-}
 .pmaint > div > label > input {
-    display: flex;
     width: 15%;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
     margin-left: 5px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
 }
-.pmaint > div > label:nth-of-type(2) > input {
-    background: transparent;
-    border-bottom: 0px;
-}
-.pmaint > div:nth-of-type(2) {
-    display: flex;
-    text-align: center;
-}
+
 .pmaint > div:nth-of-type(2) > span:first-of-type {
-    width: 78%;
+    width: 75.05%;
+    margin: 0 0 0 2.5%;
 }
 .pmaint > div:nth-of-type(2) > span:nth-of-type(2) {
+    width: 14.25%;
+    margin: 0 0 0 1%;
+}
+.maintPower-item > div > input:first-of-type {
+    width: 79%;
+}
+.maintPower-item > div > input:nth-of-type(2) {
     width: 15%;
+    margin: 0 0 0 1%;
+}
+.maintPower-item > div > a {
+    width: 5%;
+    font-size: 15px;
+}
+.maintPower-item > div > textarea {
+    margin: 5px 0 0 0;
 }
 .pmaint > div:nth-of-type(2) {
     border-image: url(../img/border.png) 10 stretch;
@@ -2084,33 +1981,6 @@ h3 {
     margin-bottom: 3px;
     padding-top: 3px;
     padding-bottom: 3px;
-}
-.maintPower-item > div:first-of-type{
-    display: flex;
-    justify-content: space-between;
-}
-.maintPower-item > div > input {
-    display: flex;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
-}
-.maintPower-item > div > input:first-of-type {
-    width: 78%;
-}
-.maintPower-item > div > input:nth-of-type(2) {
-    width: 15%;
-}
-.maintPower-item > div > a {
-    width: 5%;
-    font-size: 15px;
-    text-align: center;
-    align-self: center;
 }
 /*
     **************
@@ -2165,6 +2035,7 @@ h3 {
 }
 .mk > div,
 .limits > div,
+.kiTech > div:not(:first-of-type),
 .kipool > div:not(:first-of-type),
 .kiseals > div:not(:first-of-type),
 .unarmed > div:not(:first-of-type),
@@ -2174,11 +2045,6 @@ h3 {
     width: 95%;
     margin: 0 0 0 2.5%;
 }
-/*
-    ------
-    Shared
-    ------
-*/
 /*
     ---------
     Ki Abilities
@@ -2359,21 +2225,19 @@ h3 {
     border-bottom: 5px solid black;
 }
 .arsMagnus > div > span:first-of-type {
-    width: 64.6%;
+    width: 69.35%;
+    margin: 0 0 0 2.5%;
 }
 .arsMagnus > div > span {
     width: 9.5%;
     margin: 0 0 0 1%;
-}
-.arsMagnus > div:first-of-type > span:first-of-type {
-    margin: 0 0 0 7.5%;
 }
 .arsMagnus-item > div > a {
     width: 5%;
     font-size: 15px;
 }
 .arsMagnus-item > div > input:first-of-type {
-    width: 68%;
+    width: 73%;
     margin: 0;
 }
 .arsMagnus-item > div > input {
@@ -2417,8 +2281,8 @@ h3 {
     border-bottom: 5px solid black;
 }
 .martialarts > div > span:first-of-type {
-    width: 48.45%;
-    margin: 0 0 0 7.25%;
+    width: 53.2%;
+    margin: 0 0 0 2.5%;
 }
 .martialarts > div > span:nth-of-type(2) {
     width: 19%;
@@ -2432,7 +2296,7 @@ h3 {
     font-size: 15px;
 }
 .martialArt-item > div > input:first-of-type {
-    width: 51%;
+    width: 56%;
     margin: 0;
 }
 .martialArt-item > div > div {
@@ -2531,9 +2395,71 @@ h3 {
     Ki techniques
     -------------
 */
-.kiTechnique-item > div:first-of-type {
+.kiTech > div:first-of-type,
+.kiTechnique-item > div:first-of-type,
+.kiTechnique-item > div:last-of-type > div {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+}
+.kiTech > div:first-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+}
+.kiTech > div > span:first-of-type {
+    width: 64.7%;
+    margin: 0 0 0 7.25%;
+}
+.kiTech > div > span {
+    width: 9.5%;
+    margin: 0 0 0 1%;
+}
+.kiTechnique-item > div > input:first-of-type {
+    width: 68%;
+    margin: 0;
+}
+.kiTechnique-item > div > input {
+    width: 10%;
+    margin: 0 0 0 1%;
+}
+.kiTechnique-item > div > a {
+    width: 5%;
+    font-size: 15px;
+}
+.kiTechnique-item > div:last-of-type > div > span:first-of-type {
+    margin: 0%;
+}
+.kiTechnique-item > div:last-of-type > div > span,
+.kiTechnique-item > div:last-of-type > div > input {
+    width: 10%;
+    margin: 0 0 0 1%;
+}
+.kiTechnique-item > div:last-of-type > div:first-of-type > span:last-of-type,
+.techSelect {
+    width: 23%;
+    margin: 0 0 0 1%;
+    border-left: 1px solid black;
+}
+.kiTechnique-item > div:last-of-type > div > div > select {
+    width: 100%;
+}
+.kiTechnique-item > div:last-of-type > textarea {
+    margin: 5px 0 0 0;
+}
+.kiTechnique-item > div:last-of-type > div > div > span:nth-of-type(2) {
+    width: 30%;
+    justify-content: center;
+}
+.techExpand {
+    width: 46%;
+    display: flex;
+    margin: 0 15% 0 15%;
+}
+.techExpand > span {
+    width: 70%;
+    justify-content: flex-start;
+}
+.techExpand > input {
+    width: 30%;
 }
 /*
     *************

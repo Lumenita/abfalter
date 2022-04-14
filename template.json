@@ -1000,8 +1000,10 @@
         "fistDamage": {
           "base": 0,
           "mult": 0,
-          "multOption": "str",
-          "status":  false
+          "descNum": 3,
+          "desc": "",
+          "multOption": "strength",
+          "status": false
         },
         "kiPool": {
           "agi": {
@@ -1483,7 +1485,29 @@
     },
     "kiTechnique": {
       "templates": [ "itemDescription" ],
-      "expand": false
+      "expand": false,
+      "level": 0,
+      "mk": 0,
+      "actionType": 1,
+      "frequency": 1,
+      "use": {
+        "unified": 0,
+        "agi": 0,
+        "con": 0,
+        "dex": 0,
+        "str": 0,
+        "pow": 0,
+        "wp": 0
+      },
+      "maint": {
+        "unified": 0,
+        "agi": 0,
+        "con": 0,
+        "dex": 0,
+        "str": 0,
+        "pow": 0,
+        "wp": 0
+      }
     },
     "arsMagnus": {
       "templates": [ "itemDescription" ],

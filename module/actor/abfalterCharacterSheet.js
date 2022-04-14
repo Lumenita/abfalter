@@ -126,6 +126,11 @@ export default class abfalterCharacterSheet extends ActorSheet {
 
         }
 
+        $("textarea.textarea-auto-resize").on("input", function () {
+            
+            console.log(this.style.height);
+        });
+
         if (this.actor.isOwner) {
             html.find(".item-roll").click(this._onItemRoll.bind(this));
 

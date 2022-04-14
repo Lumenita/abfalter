@@ -98,7 +98,7 @@ export async function openSecondaryDiceDialogue(actor, finalvalue, label) {
                 </div>
                 <div title="Roll + Final + Fatigue + Modifier
 (${rollResult.roll}) + ${rollResult.totalnum} + ${rollResult.fatiguemodfin} + ${rollResult.modifiermod}">
-                    <span > ${label} </span>
+                    <div> ${label} </div>
                     <span class="${rollResult.color}" > ${rollResult.finalRoll} </span>
                 </div> 
             </div>`

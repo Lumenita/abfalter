@@ -1,6 +1,7 @@
 export default class abfalterItem extends Item {
     prepareData() {
         super.prepareData();
+        console.log("load Item Data");
 
         let functionName = `prepare${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}`
         if (this[`${functionName}`])
@@ -95,6 +96,14 @@ export default class abfalterItem extends Item {
         }
     }
 
+    prepareKiTechnique() {
+        if (this.parent != null) {
+            if (this.parent.data) {
+                this.data.data.unified = this.parent.data.data.toggles.unifiedPools;
+                this.data.data.innatePower = this.parent.data.data.toggles.innatePower;
+            }
+        }
+    }
 
 
 
