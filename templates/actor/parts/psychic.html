@@ -126,7 +126,7 @@
                 </div>
                 {{/each}}
             </div>
-            <a class="item-control item-create" title="Create item" data-type="discipline"><i class="fas fa-plus"></i> {{localize "abfalter.psychicTab.paddDisc"}} </a>
+            <a class="item-control item-create" data-type="discipline"><i class="fas fa-plus"></i> {{localize "abfalter.psychicTab.paddDisc"}} </a>
         </div>
     </div>
 
@@ -152,7 +152,7 @@
                                 <span> {{localize "abfalter.basicInfo.no"}} </span>
                                 {{/if}}
                             </button>
-                            <a class="item-expand" title="Expand Item"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                            <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
                         <div class="patternInfo {{#if data.expand}}expand{{else}}notExpand{{/if}}">
                             <span> {{localize "abfalter.basicInfo.bonus"}} </span>
@@ -163,7 +163,7 @@
                     </div>
                     {{/each}}
                 </div>
-                <a class="item-control item-create" title="Create item" data-type="mentalPattern"><i class="fas fa-plus"></i> {{localize "abfalter.psychicTab.addMentalPattern"}} </a>
+                <a class="item-control item-create" data-type="mentalPattern"><i class="fas fa-plus"></i> {{localize "abfalter.psychicTab.addMentalPattern"}} </a>
             </div>
 
             <div class="ppowers">
@@ -176,10 +176,10 @@
                     {{#each psychicMatrixs as |psychicMatrix id|}}
                     <div class="psychicMatrix-item item normal-item" data-item-id="{{psychicMatrix._id}}">
                         <div>
-                            <a class="item-control item-chat" title="Item to Chat"><i class="fas fa-comment-dots"></i></a>
+                            <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                             <input class="item-name inline-edit" data-field="name" type="text" value="{{psychicMatrix.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                             <input class="maintPower inline-edit" data-field="data.bonus" type="number" value="{{psychicMatrix.data.bonus}}" />
-                            <a class="item-expand" title="Expand Item"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                            <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
                         <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}"> 
                             <span> Potential Button w/ Bonus WIP </span>
@@ -187,7 +187,7 @@
                     </div>
                     {{/each}}
                 </div>
-                <a class="item-control item-create" title="Create item" data-type="psychicMatrix"><i class="fas fa-plus"></i> {{localize "abfalter.psychicTab.addPsychicMatrix"}} </a>
+                <a class="item-control item-create" data-type="psychicMatrix"><i class="fas fa-plus"></i> {{localize "abfalter.psychicTab.addPsychicMatrix"}} </a>
             </div>
         </div>
 
@@ -207,7 +207,7 @@
                     <div>
                         <input class="item-name inline-edit" data-field="name" type="text" value="{{maintPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                         <input class="maint-value inline-edit" data-field="data.value" type="number" value="{{maintPower.data.value}}" />
-                        <a class="item-expand" title="Expand Item"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
                         <textarea class="inline-edit" data-field="data.description" placeholder="{{localize "abfalter.psychicTab.maintInfo"}}">{{maintPower.data.description}}</textarea>
@@ -215,7 +215,7 @@
                 </div>
                 {{/each}}
             </div>
-            <a class="item-control item-create" title="Create item" data-type="maintPower"><i class="fas fa-plus"></i> {{localize "abfalter.psychicTab.addMaintMatrix"}} </a>
+            <a class="item-control item-create" data-type="maintPower"><i class="fas fa-plus"></i> {{localize "abfalter.psychicTab.addMaintMatrix"}} </a>
         </div>
     </div>
 </div>

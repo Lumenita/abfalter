@@ -23,7 +23,7 @@
                         <label> <span> Mod </span> <input type="number" value="{{data.stats.Agility.mod}}" readonly /> </label>
                         <label> <span> Opposed </span> <input type="number" name="data.stats.Agility.opposed" value="{{data.stats.Agility.opposed}}" /> </label>
                         <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Agility.opposedfinal}}" readonly /> </label>
-                    </div><!-- <i class="fas fa-dice-d20"></i>-->
+                    </div>
                     {{else}}
                         <div class="compact">
                         <button type="button" id="Agility_charac" class="stat-final rollable" data-roll="d10+@stats.Agility.final" data-label="Agility">
@@ -53,7 +53,7 @@
                         <label> <span> Mod </span> <input type="number" value="{{data.stats.Constitution.mod}}" readonly /> </label>
                         <label> <span> Opposed </span> <input type="number" name="data.stats.Constitution.opposed" value="{{data.stats.Constitution.opposed}}" /> </label>
                         <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Constitution.opposedfinal}}" readonly /> </label>
-                    </div><!-- <i class="fas fa-dice-d20"></i>-->
+                    </div>
                     {{else}}
                         <div class="compact" id="con-compact">
                         <button type="button" id="Constitution_charac" class="stat-final rollable" data-roll="d10+@stats.Constitution.final" data-label="Constitution">
@@ -287,9 +287,10 @@
 
         <div>
             <div class="lifepoints">
-                <h2> LP                 
-                    <label class="lp-box">
-                        <input type="checkbox" name="data.lifepoints.status" data-dtype="boolean" {{checked data.lifepoints.status}} />
+                <h2>
+                    LP
+                    <label class="expand-box">
+                        <a class="toggleBoolean {{#if data.lifepoints.status}}showOpacity{{/if}}" data-label="data.lifepoints.status" data-ability="{{data.lifepoints.status}}"><i class="{{#if data.lifepoints.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </h2>
                 {{#if data.lifepoints.status}}
@@ -306,9 +307,10 @@
             </div>
 
             <div class="fatigue">
-                <h2> Fatigue 
-                    <label class="fatigue-box">
-                        <input type="checkbox" name="data.fatigue.status" data-dtype="boolean" {{checked data.fatigue.status}} />
+                <h2>
+                    Fatigue
+                    <label class="expand-box">
+                        <a class="toggleBoolean {{#if data.fatigue.status}}showOpacity{{/if}}" data-label="data.fatigue.status" data-ability="{{data.fatigue.status}}"><i class="{{#if data.fatigue.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </h2>
                 {{#if data.fatigue.status}}
@@ -335,12 +337,13 @@
         </div> <!--Regeneration-->
 
         <div class="atkdef">
-            <h2> Attack
-                <label class="attack-box">
-                    <input type="checkbox" name="data.attack.status" data-dtype="boolean" {{checked data.attack.status}} />
+            <h2>
+                Attack
+                <label class="expand-box">
+                    <a class="toggleBoolean {{#if data.combatstats.atkStatus}}showOpacity{{/if}}" data-label="data.combatstats.atkStatus" data-ability="{{data.combatstats.atkStatus}}"><i class="{{#if data.combatstats.atkStatus}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
             </h2>
-            {{#if data.attack.status}}
+            {{#if data.combatstats.atkStatus}}
             <div>
                 <label> <span> Base </span> <input type="number" name="data.combatstats.atkbase" value="{{data.combatstats.atkbase}}" /> </label>
                 <label> <span> Class </span> <input type="number" name="data.attackbonus" value="{{data.attackbonus}}" readonly /> </label>
@@ -360,12 +363,13 @@
         </div> <!--Attack-->
 
         <div class="atkdef">
-            <h2> Block
-                <label class="block-box">
-                    <input type="checkbox" name="data.block.status" data-dtype="boolean" {{checked data.block.status}} />
+            <h2>
+                Block
+                <label class="expand-box">
+                    <a class="toggleBoolean {{#if data.combatstats.blkStatus}}showOpacity{{/if}}" data-label="data.combatstats.blkStatus" data-ability="{{data.combatstats.blkStatus}}"><i class="{{#if data.combatstats.blkStatus}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
             </h2>
-            {{#if data.block.status}}
+            {{#if data.combatstats.blkStatus}}
             <div>
                 <label> <span> Base </span> <input type="number" name="data.combatstats.blkbase" value="{{data.combatstats.blkbase}}" /> </label>
                 <label> <span> Class </span> <input type="number" name="data.blockbonus" value="{{data.blockbonus}}" readonly /> </label>
@@ -380,17 +384,18 @@
             <label> <span> Temp. </span> <input type="number" name="data.combatstats.blktemp" value="{{data.combatstats.blktemp}}" /> </label>
             <label> <span> Final </span> <input type="number" name="data.blkfinal" value="{{data.blkfinal}}" readonly /> </label>
             <button type="button" id="blkroll" class="combat rollable" data-roll="d100+@blkfinal" data-label="Block">
-                <span> <i class="fas fa-dice-d20"></i> </span> 
+                <span> <i class="fas fa-dice-d20"></i> </span>
             </button>
         </div> <!--Block-->
 
         <div class="atkdef">
-            <h2> Dodge
-                <label class="dodge-box">
-                    <input type="checkbox" name="data.dodge.status" data-dtype="boolean" {{checked data.dodge.status}} />
+            <h2>
+                Dodge
+                <label class="expand-box">
+                    <a class="toggleBoolean {{#if data.combatstats.dodStatus}}showOpacity{{/if}}" data-label="data.combatstats.dodStatus" data-ability="{{data.combatstats.dodStatus}}"><i class="{{#if data.combatstats.dodStatus}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
             </h2>
-            {{#if data.dodge.status}}
+            {{#if data.combatstats.dodStatus}}
             <div>
                 <label> <span> Base </span> <input type="number" name="data.combatstats.dodbase" value="{{data.combatstats.dodbase}}" /> </label>
                 <label> <span> Class </span> <input type="number" name="data.dodgebonus" value="{{data.dodgebonus}}" readonly /> </label>
@@ -426,8 +431,8 @@
                 <span> 4 </span>
             </button>
             {{/if}}
-            <label class="ini-box">
-                <input type="checkbox" name="data.initiative.status" data-dtype="boolean" {{checked data.initiative.status}} />
+            <label class="expand-box">
+                <a class="toggleBoolean {{#if data.initiative.status}}showOpacity{{/if}}" data-label="data.initiative.status" data-ability="{{data.initiative.status}}"><i class="{{#if data.initiative.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </label>
         </div><!--Initiative-->
 

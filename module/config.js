@@ -57,6 +57,8 @@ abfalter.basicInfo = {
     pow: "abfalter.basicInfo.pow",
     willPower: "abfalter.basicInfo.willPower",
     wp: "abfalter.basicInfo.wp",
+    attack: "abfalter.basicInfo.attack",
+    defense: "abfalter.basicInfo.defense",
 
 }
 
@@ -79,6 +81,8 @@ abfalter.magicTab = {
     imbalance: "abfalter.magicTab.imbalance",
     offensive: "abfalter.magicTab.offensive",
     defensive: "abfalter.magicTab.defensive",
+    offensive1: "abfalter.magicTab.offensive1",
+    defensive1: "abfalter.magicTab.defensive1",
     standard: "abfalter.magicTab.standard",
     frompow: "abfalter.magicTab.frompow",
     regenmult: "abfalter.magicTab.regenmult",
@@ -104,7 +108,32 @@ abfalter.magicTab = {
     invocation: "abfalter.magicTab.invocation",
     addInvocation: "abfalter.magicTab.addInvocation",
     incarnation: "abfalter.magicTab.incarnation",
-    addIncarnation: "abfalter.magicTab.addIncarnation"
+    addIncarnation: "abfalter.magicTab.addIncarnation",
+    path: "abfalter.magicTab.path",
+    spiritual: "abfalter.magicTab.spiritual",
+    effect: "abfalter.magicTab.effect",
+    automatic: "abfalter.magicTab.automatic",
+    detection: "abfalter.magicTab.detection",
+    maintType: "abfalter.magicTab.maintType",
+    turn: "abfalter.magicTab.turn",
+    daily: "abfalter.magicTab.daily",
+    bought: "abfalter.magicTab.bought",
+    spellPath1: "abfalter.magicTab.spellPath1",
+    single: "abfalter.magicTab.single",
+    notBought: "abfalter.magicTab.notBought",
+    rank: "abfalter.magicTab.rank",
+    req: "abfalter.magicTab.req",
+    maint: "abfalter.magicTab.maint",
+    basic: "abfalter.magicTab.basic",
+    intermidiate: "abfalter.magicTab.intermidiate",
+    advanced: "abfalter.magicTab.advanced",
+    arcane: "abfalter.magicTab.arcane",
+    spellDesc: "abfalter.magicTab.spellDesc",
+    basicDesc: "abfalter.magicTab.basicDesc",
+    intDesc: "abfalter.magicTab.intDesc",
+    advDesc: "abfalter.magicTab.advDesc",
+    arcDesc: "abfalter.magicTab.arcDesc"
+
 }
 
 abfalter.psychicTab = {
@@ -137,7 +166,6 @@ abfalter.psychicTab = {
     cancelCost: "abfalter.psychicTab.cancelCost",
     oppPattern: "abfalter.psychicTab.oppPattern",
     maint: "abfalter.psychicTab.maint"
-
 }
 
 abfalter.kiTab = {

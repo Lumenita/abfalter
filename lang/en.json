@@ -56,11 +56,13 @@
       "power": "Power",
       "pow": "POW",
       "willPower": "Willpower",
-      "wp": "WP"
+      "wp": "WP",
+      "attack": "Attack",
+      "defense": "Defense"
 
     },
     "sheet": {
-      "newItem": "Placeholder Name",
+      "newItem": "New Item",
       "nameItem": "A name is required here",
       "edit": "Edit",
       "delete": "Delete",
@@ -77,6 +79,8 @@
       "imbalance": "Imbalance",
       "offensive": "Off.",
       "defensive": "Def.",
+      "offensive1": "Offensive",
+      "defensive1": "Defensive",
       "standard": "Standard",
       "frompow": "From POW",
       "regenmult": "Regen Mult.",
@@ -93,7 +97,7 @@
       "addTurnMaint": "Add Turn Maintenance",
       "dailyMaint": "Daily Maintenance",
       "addDailyMaint": "Add Daily Maintenance",
-      "spellPath": "Spell Path",
+      "spellPath": "Spell Paths",
       "addSpellPath": "Add Spellpath",
       "mLevels": "Magic Levels",
       "fromInt": "From INT",
@@ -102,7 +106,33 @@
       "invocation": "Invocation",
       "addInvocation": "Add Invocation",
       "incarnation": "Incarnation",
-      "addIncarnation": "Add Incarnation"
+      "addIncarnation": "Add Incarnation",
+      "path": "Path",
+      "spiritual": "Spiritual",
+      "effect": "Effect",
+      "automatic": "Automatic",
+      "detection": "Detection",
+      "maintType": "Maint. Type",
+      "turn": "Turn",
+      "daily": "Daily",
+      "bought": "Bought?",
+      "spellPath1": "Spell Path",
+      "single": "Single",
+      "notBought": "Not Bought",
+      "rank": "Rank",
+      "req": "Req.",
+      "maint": "Maint.",
+      "basic": "Basic",
+      "intermidiate": "Intermidiate",
+      "advanced": "Advanced",
+      "arcane": "Arcane",
+      "spellDesc": "Main description of the spell",
+      "basicDesc": "Short description of the basic version of the spell",
+      "intDesc": "Short description of the intermidiate version of the spell",
+      "advDesc": "Short description of the advanced version of the spell",
+      "arcDesc": "Short description of the arcane version of the spell"
+
+
     },
     "psychicTab": {
       "pp": "PP",

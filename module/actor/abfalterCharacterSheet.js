@@ -124,12 +124,15 @@ export default class abfalterCharacterSheet extends ActorSheet {
 
             new ContextMenu(html, ".spellPath-item", this.itemContextMenuDelete);
 
+            $("textarea").each(function () {
+                this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+            }).on("input", function () {
+                this.style.height = "auto";
+                this.style.height = (this.scrollHeight) + "px";
+            });
+
         }
 
-        $("textarea.textarea-auto-resize").on("input", function () {
-            
-            console.log(this.style.height);
-        });
 
         if (this.actor.isOwner) {
             html.find(".item-roll").click(this._onItemRoll.bind(this));

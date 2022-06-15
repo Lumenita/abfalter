@@ -5,7 +5,6 @@ export default class abfalterActor extends Actor {
 
     prepareDerivedData() {
         const actorData = this.data;
-        console.log("load Character Data");
         this._prepareCharacterData(actorData);
     }
 
@@ -22,7 +21,7 @@ export default class abfalterActor extends Actor {
             runes, ritcal, soh, tailoring, quantity, req, natPen, movePen, aCutMax, aCutTot, aImpMax, aImpTot, aThrMax, aThrTot, aHeatMax,
             aHeatTot, aColdMax, aColdTot, aEleMax, aEleTot, aEneMax, aEneTot, aSptMax, aSptTot, ahReq, ahCutMax, ahCutTot, ahImpMax, ahImpTot, ahThrMax,
             ahThrTot, ahHeatMax, ahHeatTot, ahColdMax, ahColdTot, ahEleMax, ahEleTot, ahEneMax, ahEneTot, ahSptMax, ahSptTot, perPen, usedpp, matrixpp, arsMk,
-            maMk] = this.items.reduce((arr, item) => {
+            maMk, techMk] = this.items.reduce((arr, item) => {
                 if (item.type === "class") {
                     const classLevels = parseInt(item.data.data.main.levels) || 0;
                     arr[0] += classLevels;
@@ -185,13 +184,16 @@ export default class abfalterActor extends Actor {
                 if (item.type === "martialArt") {
                     arr[105] += parseInt(item.data.data.mk) || 0;
                 }
+                if (item.type === "kiTechnique") {
+                    arr[106] += parseInt(item.data.data.mk) || 0;
+                }
             return arr;
             }, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0]);
+                0, 0, 0, 0, 0, 0, 0]);
 
         data.level = level;
         data.lpbonus = lpbonus;
@@ -384,9 +386,11 @@ export default class abfalterActor extends Actor {
 
         }
 
-        //Mk Calculations
-        data.mkBonus = mk;
-        data.kiThingMK = 0;
+        /*
+         *  Mk Calculations
+         */
+        data.mkBonus = mk; //Class Mk
+        data.kiThingMK = 0; //Ki Abilities Cost
         for (let [key, kiThing] of Object.entries(data.kiAbility)) {
             if (kiThing.status == true && kiThing.status2 == false) {
                 data.kiThingMK += kiThing.cost;
@@ -394,7 +398,7 @@ export default class abfalterActor extends Actor {
                 data.kiThingMK += 0;
             }
         }
-        data.kiSealMk = 0;
+        data.kiSealMk = 0; //Minor & Major Seals Cost
         for (let [key, kiSealStuff] of Object.entries(data.kiSeal.minor)) {
             if (kiSealStuff.mastery == true && kiSealStuff.mastery2 == false) {
                 data.kiSealMk += 30;
@@ -409,11 +413,12 @@ export default class abfalterActor extends Actor {
                 data.kiSealMk += 0;
             }
         }
-        data.limitsMK = +data.limits.limitOne + +data.limits.limitTwo;
-        data.arsMagMK = arsMk;
-        data.mArtMk = maMk;
-        data.mkFinal = Math.floor(data.mk.base + data.mk.temp + data.mk.spec + data.mkBonus + data.mArtMk);
-        data.mkUsed = Math.floor(data.limitsMK + data.kiThingMK + data.kiSealMk + data.arsMagMK + 0);
+        data.limitsMK = +data.limits.limitOne + +data.limits.limitTwo; //Limits Cost
+        data.arsMagMK = arsMk; //Ars Magnus Cost
+        data.mArtMk = maMk; //Martial Arts Bonus MK
+        data.kiTechMk = techMk; //Ki Technique Cost
+        data.mkFinal = Math.floor(data.mk.base + data.mk.temp + data.mk.spec + data.mkBonus + data.mArtMk); //Total Final Mk
+        data.mkUsed = Math.floor(data.limitsMK + data.kiThingMK + data.kiSealMk + data.arsMagMK + data.kiTechMk); //Total Used Mk
 
         //Ki Pool
         if (data.toggles.innatePower == false) {

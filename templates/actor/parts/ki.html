@@ -661,7 +661,7 @@
                 </div>
                 <input type="number" name="data.unarmedDmgFinal" value="{{data.unarmedDmgFinal}}" readonly />
             </div>
-            <textarea class="textarea-auto-resize" name="data.fistDamage.desc" rows="5" placeholder="{{localize "abfalter.basicInfo.extraInfo"}}">{{data.fistDamage.desc}}</textarea>
+            <textarea class="textarea-auto-resize" name="data.fistDamage.desc" placeholder="{{localize "abfalter.basicInfo.extraInfo"}}">{{data.fistDamage.desc}}</textarea>
             {{/if}}
         </div>
 
@@ -866,7 +866,7 @@
                 </div>
                 <div>
                     <label> <span> {{localize "abfalter.kiTab.arsMagnus"}} </span> <input type="number" name="data.arsMagMK" value="{{data.arsMagMK}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.kiTab.kiTechnique"}} </span> <input type="number" name="data.mkTechnique" value="{{data.mkTechnique}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.kiTab.kiTechnique"}} </span> <input type="number" name="data.kiTechMk" value="{{data.kiTechMk}}" readonly /> </label>
                 </div>
                 {{/if}}
                 <div>
@@ -891,10 +891,10 @@
                             <input class="item-name inline-edit" data-field="name" type="text" value="{{arsMagnus.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                             <input class="dp-value inline-edit" data-field="data.dp" type="number" value="{{arsMagnus.data.dp}}" />
                             <input class="mk-value inline-edit" data-field="data.mk" type="number" value="{{arsMagnus.data.mk}}" />
-                            <a class="item-expand"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                            <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
                         <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
-                            <textarea class="inline-edit itemAuto-expand" data-field="data.description" rows="5" placeholder="{{localize "abfalter.kiTab.arsMagInfo"}}">{{arsMagnus.data.description}}</textarea>
+                            <textarea class="inline-edit itemAuto-expand" data-field="data.description" placeholder="{{localize "abfalter.kiTab.arsMagInfo"}}">{{arsMagnus.data.description}}</textarea>
                         </div>
                     </div>
                     {{/each}}
@@ -972,10 +972,10 @@
                         </div>
                         <input class="dp-value inline-edit" data-field="data.dp" type="number" value="{{martialArt.data.dp}}" />
                         <input class="mk-value inline-edit" data-field="data.mk" type="number" value="{{martialArt.data.mk}}" />
-                        <a class="item-expand"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
-                        <textarea class="inline-edit itemAuto-expand" data-field="data.description" rows="5" placeholder="{{localize "abfalter.kiTab.martialInfo"}}">{{martialArt.data.description}}</textarea>
+                        <textarea class="inline-edit itemAuto-expand" data-field="data.description" placeholder="{{localize "abfalter.kiTab.martialInfo"}}">{{martialArt.data.description}}</textarea>
                     </div>
                 </div>
                 {{/each}}
@@ -1061,7 +1061,7 @@
                             <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                             <input class="item-name inline-edit" data-field="name" type="text" value="{{kiSealCreature.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                             <input class="sealLevel-value inline-edit" data-field="data.level" type="number" value="{{kiSealCreature.data.level}}" />
-                            <a class="item-expand"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                            <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
                         <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
                             <div>
@@ -1088,7 +1088,7 @@
                                 <input class="mwater-value inline-edit" data-field="data.major.water" type="number" value="{{kiSealCreature.data.major.water}}" />
                                 <input class="mfire-value inline-edit" data-field="data.major.fire" type="number" value="{{kiSealCreature.data.major.fire}}" />
                             </div>
-                            <textarea class="inline-edit itemAuto-expand" data-field="data.description" rows="5" placeholder="{{localize "abfalter.kiTab.kiSealInfo"}}">{{kiSealCreature.data.description}}</textarea>
+                            <textarea class="inline-edit itemAuto-expand" data-field="data.description" placeholder="{{localize "abfalter.kiTab.kiSealInfo"}}">{{kiSealCreature.data.description}}</textarea>
                         </div>
                     </div>
                     {{/each}}
@@ -1110,9 +1110,9 @@
                     <div>
                         <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                         <input class="item-name inline-edit" data-field="name" type="text" value="{{kiTechnique.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
-                        <input class="inline-edit" data-field="data.mk" type="number" value="{{kiTechnique.data.mk}}" />
                         <input class="inline-edit" data-field="data.level" type="number" value="{{kiTechnique.data.level}}" />
-                        <a class="item-expand"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        <input class="inline-edit" data-field="data.mk" type="number" value="{{kiTechnique.data.mk}}" />
+                        <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
                         <div>
@@ -1187,7 +1187,7 @@
                                 </select>
                             </div>
                         </div>
-                        <textarea class="inline-edit itemAuto-expand" data-field="data.description" rows="5" placeholder="{{localize "abfalter.kiTab.kiSealInfo"}}">{{kiTechnique.data.description}}</textarea>
+                        <textarea class="inline-edit itemAuto-expand" data-field="data.description" placeholder="{{localize "abfalter.kiTab.kiSealInfo"}}">{{kiTechnique.data.description}}</textarea>
                     </div>
                 </div>
                 {{/each}}

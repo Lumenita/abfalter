@@ -43,6 +43,7 @@ a {
 textarea {
     border: none;
     width: 100%;
+    resize: none;
     padding: 0px;
     text-align: justify;
     border-radius: 0px;
@@ -149,11 +150,13 @@ h3 {
 
 /* Select Box Custom Arrow & Center Contents */
 .csSelect::after,
-.csSelect1::after {
+.csSelect1::after,
+.csSelect2::after {
     content: "\203A"
 }
 .csSelect,
-.csSelect1 {
+.csSelect1,
+.csSelect2 {
     position: relative
 }
 .csSelect::after {
@@ -168,6 +171,14 @@ h3 {
     position: absolute;
     top: -3px;
     right: 20px;
+    pointer-events: none;
+    font-size: 20px;
+    transform: rotate(90deg);
+}
+.csSelect2::after {
+    position: absolute;
+    top: -3px;
+    right: 45px;
     pointer-events: none;
     font-size: 20px;
     transform: rotate(90deg);
@@ -199,8 +210,6 @@ h3 {
     height: 82px;
     float: left;
 }
-
-
 .abfalter .sheet-header {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 85px;
@@ -377,14 +386,14 @@ h3 {
 }
 .general > div:nth-of-type(1) > div:nth-of-type(3) {
     display: flex;
-    width: 35%;
+    width: 33%;
     flex-wrap: wrap;
     justify-content: center;
     align-items: baseline;
 }
 .general > div:nth-of-type(1) > div:nth-of-type(4) {
     display: flex;
-    width: 25%;
+    width: 27%;
     flex-wrap: wrap;
     justify-content: center;
     align-items: baseline;
@@ -626,16 +635,9 @@ h3 {
     Movement      *Consistency Up from hereon
     --------
 */
-.movement {
-    display: flex;
-    flex-wrap: wrap;
-}
 .movement > label {
     display : flex;
-    width: 100%;
-    height: 20px;
-    padding-right: 15px;
-    padding-left: 5px;
+    padding: 0 10px 0 10px;
 }
 .movement > label:nth-of-type(5) {
     border-image: url(../img/border.png) 10 stretch;
@@ -643,36 +645,15 @@ h3 {
     border-bottom: 5px solid black;
     margin-top: 3px;
     margin-bottom: 3px;
-    padding-top: 5px;
-    padding-bottom: 24px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 .movement > label > span {
     display: flex;
-    width: 60%;
-    font-size: 13px;
-    font-weight: normal;
-    align-items: center;
-    height: 20px;
+    width: 55%;
 }
 .movement > label > input {
-    display: flex;
-    width: 40%;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
-}
-.movement > label:nth-of-type(1) > input,
-.movement > label:nth-of-type(5) > input,
-.movement > label:nth-of-type(6) > input,
-.movement > label:nth-of-type(7) > input,
-.movement > label:nth-of-type(8) > input {
-    background: transparent;
-    border-bottom: 0px;
+    width: 45%;
 }
 .movement > label:nth-of-type(5) > span,
 .movement > label:nth-of-type(6) > span,
@@ -687,14 +668,10 @@ h3 {
 */
 .regeneration {
     width: 35%;
-    display: flex;
-    flex-wrap: wrap;
 }
 .lifepoints,
 .fatigue {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
 }
 .lifepoints > label,
 .lifepoints > div > label,
@@ -702,10 +679,7 @@ h3 {
 .fatigue > div > label,
 .regeneration > label {
     display : flex;
-    width: 100%;
-    height: 20px;
-    padding-right: 0px;
-    padding-left: 0px;
+    padding: 0 10px 0 10px;
 }
 .lifepoints > label > span,
 .lifepoints > div > label > span,
@@ -713,74 +687,31 @@ h3 {
 .fatigue > div > label > span {
     display: flex;
     width: 55%;
-    padding-left: 5px;
-    font-size: 13px;
-    font-weight: normal;
-    align-items: center;
-    height: 20px;
-    color: black;
 }
-.fatigue > h2 > label {
-    padding-top: 2px;
-    width: 0%;
-}
-.lifepoints > h2 > label {
-    width: 0%;
-}
-.lifepoints > h2 > label > input {
-    height: 18px;
+.lifepoints > h2 > label > a {
     opacity: 0;
 }
-.lifepoints:hover > h2 > label > input {
+.lifepoints:hover > h2 > label > a {
     opacity: 1;
 }
-.lifepoints > h2 > label > input:checked {
-    opacity: 1;
-}
-.fatigue > h2 > label > input {
-    height: 18px;
+.fatigue > h2 > label > a {
     opacity: 0;
 }
-.fatigue:hover > h2 > label >input {
-    opacity: 1;
-}
-.fatigue > h2 > label > input:checked {
+.fatigue:hover > h2 > label > a {
     opacity: 1;
 }
 .regeneration > label > span {
     display: flex;
-    align-items: center;
     width: 60%;
-    padding-left: 5px;
-    font-size: 13px;
-    height: 20px;
 }
 .lifepoints > label > input,
 .lifepoints > div > label > input,
 .fatigue > label > input,
 .fatigue > div > label > input {
-    display: flex;
-    height: 20px;
     width: 45%;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
 }
 .regeneration > label > input {
-    display: flex;
     width: 40%;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
 }
 .lifepoints > label:nth-of-type(3),
 .regeneration > label:nth-of-type(4),
@@ -790,8 +721,8 @@ h3 {
     border-bottom: 5px solid black;
     margin-top: 3px;
     margin-bottom: 3px;
-    padding-top: 5px;
-    padding-bottom: 24px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 .lifepoints > label:nth-of-type(2) > span,
 .lifepoints > label:nth-of-type(3) > span,
@@ -803,76 +734,33 @@ h3 {
 .regeneration > label:nth-of-type(7) > span {
     font-weight: bold;
 }
-.lifepoints > div > label:nth-of-type(1) > input,
-.lifepoints > div > label:nth-of-type(3) > input,
-.lifepoints > label:nth-of-type(2) > input,
-.fatigue > div > label:nth-of-type(1) > input,
-.fatigue > label:nth-of-type(2) > input,
-.regeneration > label:nth-of-type(1) > input,
-.regeneration > label:nth-of-type(4) > input,
-.regeneration > label:nth-of-type(5) > input,
-.regeneration > label:nth-of-type(6) > input,
-.regeneration > label:nth-of-type(7) > input {
-    background: transparent;
-    border-bottom: 0px;
-}
 /*
     ----------------------
     Attack, Block, & Dodge
     ----------------------
 */
 .atkdef {
-    flex-wrap: wrap;
     width: 30%;
 }
-.atkdef > h2 > label {
-    width: 0%;
-    padding-top: 2px;
-}
-.atkdef > h2 > label > input {
-    height: 18px;
+.atkdef > h2 > label > a {
     opacity: 0;
 }
-.atkdef:hover > h2 > label > input {
-    opacity: 1;
-}
-.atkdef > h2 > label > input:checked {
+.atkdef:hover > h2 > label > a {
     opacity: 1;
 }
 .atkdef > label,
 .atkdef > div > label {
-    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    height: 20px;
-    justify-content: space-between;
+    padding: 0 10px 0 10px;
 }
 .atkdef > label > span,
 .atkdef > div > label > span {
-    display: flex;
     width: 55%;
-    font-size: 13px;
-    height: 20px;
-    align-items: center;
-    padding-left: 5px;
-    font-weight: normal;
+    text-align: start;
 }
 .atkdef > label > input,
 .atkdef > div > label > input {
     width: 45%;
-    text-align: center;
-    border: 0px;
-    border-bottom: 1px solid black;
-    padding-bottom: 0px;
-    padding-right: 0px;
-    padding-left: 0px;
-    font-size: 13px;
-    height: 20px;
-}
-.atkdef > div > label:nth-of-type(2) > input,
-.atkdef > label:last-of-type > input {
-    background: transparent;
-    border-bottom: 0px;
 }
 .atkdef > label:last-of-type {
     border-image: url(../img/border.png) 10 stretch;
@@ -880,16 +768,11 @@ h3 {
     border-bottom: 5px solid black;
     margin-top: 3px;
     margin-bottom: 3px;
-    padding-top: 5px;
-    padding-bottom: 24px;
-}
-.atkdef > label:first-of-type {
-    align-items: center;
-}
-.atkdef > label:last-of-type > span {
+    padding-top: 3px;
+    padding-bottom: 3px;
     font-weight: bold;
 }
-.atkdef > button[type="button"] {
+.atkdef > button {
     margin: 0px;
     width: 100%;
     height: 25px;
@@ -936,12 +819,14 @@ h3 {
     margin-left: -5px;
     opacity: 0;
 }
-.initiative:hover > label > input {
+
+.initiative > label > a {
+    opacity: 0;
+}
+.initiative:hover > label > a {
     opacity: 1;
 }
-.initiative > label > input:checked {
-    opacity: 1;
-}
+
 .initiative > div {
     display: flex;
     width: calc(100% - 26px);
@@ -1140,6 +1025,21 @@ h3 {
     padding-right: 15px;
     padding-left: 15px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
     ***************
     ---------------
@@ -1156,27 +1056,26 @@ h3 {
     flex-wrap: wrap;
 }
 .magic > div:first-of-type {
-    width: 100%;
     display: flex;
     justify-content: space-between;
 }
 .mproj {
-    width: 28%;
+    width: 29%;
 }
 .maccu {
     width: 48%;
 }
 .maccu > div {
-    width: 100%;
     display: flex;
     justify-content: space-between;
 }
 .maccu > div > div {
-    width: 47%;
+    width: 48%;
 }
 .zeon {
-    width: 18%;
+    width: 19%;
 }
+
 .magic .s1 {
     width: 100%;
     display: contents;
@@ -1187,13 +1086,11 @@ h3 {
 .mlevels {
     width: 48%;
 }
-.spellpath {
+.spellPath {
     width: 48%;
 }
 .minnate > div {
-    width: 100%;
     display: flex;
-    justify-content: space-between;
 }
 .magic .s2 {
     display: flex;
@@ -1204,47 +1101,26 @@ h3 {
     Magic Projection
     ----------------
 */
-.mproj > h2 > label {
-    width: 0%;
-}
-.mproj > h2 > label > input {
-    height: 18px;
+.mproj > h2 > label > a {
     opacity: 0;
 }
-.mproj:hover > h2 > label > input {
-    opacity: 1;
-}
-.mproj > h2 > label > input:checked {
+.mproj:hover > h2 > label > a {
     opacity: 1;
 }
 .mproj > label,
 .mproj > div > label {
     display: flex;
-    width: 100%;
-    height: 20px;
     padding-right: 15px;
     padding-left: 5px;
 }
 .mproj > label > span,
 .mproj > div > label > span {
-    display: flex;
-    width: 60%;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
+    width: 65%;
+    text-align: start;
 }
 .mproj > label > input,
 .mproj > div > label > input {
-    display: flex;
-    width: 40%;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
+    width: 35%;
 }
 .mproj > label:nth-of-type(2) {
     border-image: url(../img/border.png) 10 stretch;
@@ -1253,18 +1129,11 @@ h3 {
     margin-top: 3px;
     margin-bottom: 3px;
     padding-top: 3px;
-    padding-bottom: 23px;
-}
-.mproj > label:nth-of-type(2) {
+    padding-bottom: 3px;
     font-weight: bold;
 }
-.mproj > label:nth-of-type(2) > input {
-    background: transparent;
-    border-bottom: 0px;
-}
-.mproj > div:last-of-type {
+.mProjButton {
     display: flex;
-    justify-content: center;
 }
 .mproj > div > button {
     width: 50%;
@@ -1292,63 +1161,44 @@ h3 {
     padding-top: 3px;
     padding-bottom: 3px;
 }
-.mproj .magictheory {
+.mproj > div:last-of-type > label {
     display: flex;
     justify-content: center;
     padding: 0px;
     margin: 0px;
 }
-.mproj > label > select {
+.mproj > div:last-of-type > label > select {
     height: 20px;
     text-align: center;
     width: 70%;
 }
 /*
-    ----------------
-    Zeon
-    ----------------
+    ------------------
+    Magic Accumulation
+    ------------------
 */
-.maccu > div > div > h3 > label {
-    width: 0%;
-}
-.maccu > div > div > h3 > label > input {
-    height: 18px;
+.maccu2 > h3 > label > a,
+.mregen2 > h3 > label > a {
     opacity: 0;
 }
-.maccu > div > div:hover > h3 > label > input {
-    opacity: 1;
-}
-.maccu > div > div > h3 > label > input:checked {
+.maccu2:hover > h3 > label > a,
+.mregen2:hover > h3 > label > a {
     opacity: 1;
 }
 .maccu > div > div > label,
 .maccu > div > div > div > label {
     display: flex;
-    width: 100%;
-    height: 20px;
     padding-right: 15px;
     padding-left: 5px;
 }
 .maccu > div > div > label > span,
 .maccu > div > div > div > label > span {
-    display: flex;
     width: 60%;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
+    text-align: start;
 }
 .maccu > div > div > label > input,
 .maccu > div > div > div > label > input {
-    display: flex;
     width: 40%;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
 }
 .maccu > div > div > label:nth-of-type(3),
 .mregen2 > label:nth-of-type(2) {
@@ -1358,16 +1208,11 @@ h3 {
     margin-top: 3px;
     margin-bottom: 3px;
     padding-top: 3px;
-    padding-bottom: 23px;
+    padding-bottom: 3px;
 }
 .maccu > div > div > label:nth-of-type(2),
 .maccu > div > div > label:nth-of-type(3) {
     font-weight: bold;
-}
-.maccu > div > div > label:nth-of-type(2) > input,
-.maccu2 > div > label:nth-of-type(2) > input {
-    background: transparent;
-    border-bottom: 0px;
 }
 .maccu > div > div > div > button {
     width: 50%;
@@ -1388,47 +1233,26 @@ h3 {
     Zeon
     ----
 */
-.zeon > h2 > label {
-    width: 0%;
-}
-.zeon > h2 > label > input {
-    height: 18px;
+.zeon > h2 > label > a {
     opacity: 0;
 }
-.zeon:hover > h2 > label > input {
-    opacity: 1;
-}
-.zeon > h2 > label > input:checked {
+.zeon:hover > h2 > label > a {
     opacity: 1;
 }
 .zeon > label,
 .zeon > div > label {
     display: flex;
-    width: 100%;
-    height: 20px;
     padding-right: 15px;
     padding-left: 5px;
 }
 .zeon > label > span,
 .zeon > div > label > span {
-    display: flex;
-    width: 50%;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
+    width: 60%;
+    text-align: start;
 }
 .zeon > label > input,
 .zeon > div > label > input {
-    display: flex;
-    width: 50%;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
+    width: 40%;
 }
 .zeon > label:nth-of-type(3) {
     border-image: url(../img/border.png) 10 stretch;
@@ -1437,17 +1261,11 @@ h3 {
     margin-top: 3px;
     margin-bottom: 3px;
     padding-top: 3px;
-    padding-bottom: 23px;
+    padding-bottom: 3px;
 }
 .zeon > label:nth-of-type(2),
 .zeon > label:nth-of-type(3) {
     font-weight: bold;
-}
-.zeon > label:nth-of-type(2) > input,
-.zeon > div > label:nth-of-type(2) > input,
-.zeon > div > label:nth-of-type(3) > input {
-    background: transparent;
-    border-bottom: 0px;
 }
 /*
     ------------
@@ -1455,14 +1273,10 @@ h3 {
     ------------
 */
 .minnate > h3 {
-    padding-top: 10px;
+    padding-top: 5px;
     margin-bottom: 0px;
 }
 .minnate > div > div > span {
-    display: flex;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
     justify-content: center;
 }
 .minnate > div > div > label {
@@ -1470,94 +1284,39 @@ h3 {
     justify-content: center;
 }
 .minnate > div > div > label > input {
-    display: flex;
-    width: 80%;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
-}
-.minnate > div > div:last-of-type > label > input {
-    background: transparent;
-    border-bottom: 0px;
+    width: 60%;
 }
 .minnate > div > div:last-of-type > span {
     font-weight: bold;
 }
 /*
-    ------------
-    Magic Levels
-    ------------
+    ------------------
+    Sumoning Abilities
+    ------------------
 */
-.mlevels > label,
-.mlevels > div > label {
+.summoning > div {
     display: flex;
-    width: 100%;
-    height: 20px;
-    padding-right: 15px;
-    padding-left: 5px;
+    justify-content: flex-start;
 }
-.mlevels > label > span,
-.mlevels > div > label > span {
-    display: flex;
-    width: 50%;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
+.summoning > div:first-of-type > span:first-of-type {
+    width: 23%;
+    margin: 0 1.5% 0 0;
 }
-.mlevels > label > input,
-.mlevels > div > label > input {
-    display: flex;
-    width: 50%;
+.summoning > div > button {
+    width: 23%;
+    margin: 0 1.5% 0 0;
     height: 20px;
-    text-align: center;
+    border-radius: 0px;
     border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
 }
-.mlevels > label:nth-of-type(3) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-top: 3px;
-    padding-bottom: 23px;
+.summoning > div:first-of-type > span,
+.summoning > div > input {
+    width: 14%;
+    margin: 0 1.5% 0 0;
 }
-.mlevels > label:nth-of-type(2),
-.mlevels > label:nth-of-type(3) {
-    font-weight: bold;
+.summoning > div > label {
+    width: 13.5%;
 }
-.mlevels > label:nth-of-type(2) > input,
-.mlevels > label:nth-of-type(3) > input,
-.mlevels > div > label:nth-of-type(2) > input {
-    background: transparent;
-    border-bottom: 0px;
-}
-.mlevels > h2 > label > input {
-    height: 18px;
-    opacity: 0;
-}
-.mlevels:hover > h2 > label > input {
-    opacity: 1;
-}
-.mlevels > h2 > label > input:checked {
-    opacity: 1;
-}
-/*
-    -----------
-    Spell Paths
-    -----------
-*/
-
-
 /*
     ---------
     Metamagic
@@ -1580,60 +1339,175 @@ h3 {
 
 
 /*
-    ------------------
-    Sumoning Abilities
-    ------------------
+    -----------
+    Spell Paths
+    -----------
 */
-.summoning > div {
+.spellPath > div:first-of-type,
+.spellPath-item > div {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
-.summoning > div:first-of-type {
-    width: 84%;
-    justify-content: start;
+.spellPath > div > span:first-of-type,
+.spellPath-item > div > input:first-of-type {
+    width: 79%;
 }
-.summoning > div:first-of-type > span:first-of-type {
-    padding-left: 8%;
-    padding-right: 13%;
+.spellPath > div > span,
+.spellPath-item > div > input {
+    width: 20%;
+    margin: 0 0 0 1%;
 }
-.summoning > div:first-of-type > span:nth-of-type(3) {
-    padding-left: 10%;
-    padding-right: 9%;
+.spellPath-item > div > span {
+    width: 20%;
+    margin: 0 1% 0 0;
 }
-.summoning > div:first-of-type > span:nth-of-type(5) {
-    padding-left: 9%
+/*
+    ------------
+    Magic Levels
+    ------------
+*/
+.mlevels > h2 > label > a {
+    opacity: 0;
 }
-.summoning > div > button {
-    width: 22%;
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: 0px;
+.mlevels:hover > h2 > label > a {
+    opacity: 1;
 }
-.summoning > div > input {
-    width: 14%;
+.mlevels > label,
+.mlevels > div > label {
     display: flex;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
+    padding-right: 15px;
+    padding-left: 5px;
 }
-.summoning > div > input:nth-of-type(2),
-.summoning > div > input:nth-of-type(4) {
-    background: transparent;
-    border-bottom: 0px;
+.mlevels > label > span,
+.mlevels > div > label > span {
+    width: 60%;
+    text-align: start;
+}
+.mlevels > label > input,
+.mlevels > div > label > input {
+    width: 40%;
+}
+.mlevels > label:nth-of-type(3) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.mlevels > label:nth-of-type(2),
+.mlevels > label:nth-of-type(3) {
+    font-weight: bold;
 }
 /*
     ----------
     Spell Book
     ----------
 */
-
-
+.spell-item > div:not(:first-of-type),
+.spell-item > div:not(:first-of-type) > label,
+.spell-item > div > div {
+    display: flex;
+    justify-content: flex-start;
+}
+.spell-item > div > div > a {
+    width: 5%;
+}
+.spell-item > div > div > input:first-of-type {
+    margin: 0 0 0 5%;
+}
+.spell-item > div > div > input:first-of-type,
+.spell-item > div > div > span:first-of-type {
+    width: 62%;
+}
+.spell-item > div > div > input:nth-of-type(2),
+.spell-item > div > div > span:nth-of-type(2) {
+    width: 18%;
+    margin: 0 0 0 1%;
+}
+.spell-item > div > div > input:nth-of-type(3),
+.spell-item > div > div > span:nth-of-type(3) {
+    width: 8%;
+    margin: 0 0 0 1%;
+}
+.spell-item > div > div:nth-of-type(2) > span {
+    font-size: 11px;
+}
+.spell-item > div > div:nth-of-type(2) > span:first-of-type {
+    width: 62%;
+    margin: 0 0 0 5%;
+}
+.spell-item > div:not(:first-of-type) > label {
+    width: 32.5%;
+}
+.spell-item > div:not(:first-of-type) > label:not(:first-of-type) {
+    margin: 0 0 0 1%;
+}
+.spell-item > div:not(:first-of-type) > label > span {
+    width: 49%;
+}
+.spell-item > div:not(:first-of-type) > label > select,
+.spell-item > div:not(:first-of-type) > label > input {
+    width: 50%;
+    margin: 0 0 0 1%;
+}
+.spell-item > div:nth-of-type(4) > span {
+    width: 23%;
+    margin: 0 0 0 1%;
+}
+.spell-item > div:nth-of-type(4) > span:first-of-type {
+    width: 18%;
+    margin: 0 0 0 10%;
+}
+.spell-item > div:nth-of-type(3),
+.spell-item > div:nth-of-type(5),
+.spell-item > div:nth-of-type(6),
+.spell-item > div:nth-of-type(7),
+.spell-item > div:nth-of-type(8) {
+    padding: 0 0 5px 0;
+}
+.spell-item > div:nth-of-type(5) > a,
+.spell-item > div:nth-of-type(6) > a,
+.spell-item > div:nth-of-type(7) > a,
+.spell-item > div:nth-of-type(8) > a {
+    width: 5%;
+    margin: 0 0 0 5%;
+}
+.spell-item > div:nth-of-type(5) > span,
+.spell-item > div:nth-of-type(6) > span,
+.spell-item > div:nth-of-type(7) > span,
+.spell-item > div:nth-of-type(8) > span {
+    width: 18%;
+}
+.spell-item > div:nth-of-type(5) > input,
+.spell-item > div:nth-of-type(6) > input,
+.spell-item > div:nth-of-type(7) > input,
+.spell-item > div:nth-of-type(8) > input {
+    width: 23%;
+    margin: 0 0 0 1%;
+}
+.spell-item > div:nth-of-type(3) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+}
+.spell-item > div:nth-of-type(4) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.spell-item > div > div > a {
+    opacity: 0;
+}
+.spell-item > div > div:hover > a {
+    opacity: 1;
+}
 /*
     -----------
     Invocations
@@ -1850,11 +1724,6 @@ h3 {
     display: flex;
     justify-content: flex-start;
 }
-.mentalPattern-item > div > textarea {
-    resize: vertical;
-    min-height: 4em;
-    max-height: 8em;
-}
 .ppaterns > div:first-of-type {
     border-image: url(../img/border.png) 10 stretch;
     border-bottom: 5px solid black;
@@ -1885,6 +1754,12 @@ h3 {
 .mentalPattern-item > div > a {
     width: 5%;
     font-size: 15px;
+}
+.mentalPattern-item > div > a {
+    opacity: 0;
+}
+.mentalPattern-item > div:hover > a {
+    opacity: 1;
 }
 .mentalPattern-item > div > button {
     margin: 0px;
@@ -1926,6 +1801,12 @@ h3 {
 .psychicMatrix-item > div > a {
     width: 5%;
     font-size: 15px;
+}
+.psychicMatrix-item > div > a {
+    opacity: 0;
+}
+.psychicMatrix-item > div:hover > a {
+    opacity: 1;
 }
 /*
     -------------------
@@ -1969,6 +1850,12 @@ h3 {
 .maintPower-item > div > a {
     width: 5%;
     font-size: 15px;
+}
+.maintPower-item > div > a {
+    opacity: 0;
+}
+.maintPower-item > div:hover > a {
+    opacity: 1;
 }
 .maintPower-item > div > textarea {
     margin: 5px 0 0 0;
@@ -2167,6 +2054,12 @@ h3 {
     width: 5%;
     font-size: 15px;
 }
+.kipool > div > div >  a {
+    opacity: 0;
+}
+.kipool > div:hover > div > a {
+    opacity: 1;
+}
 .kipool > div > div:not(:first-of-type) > span {
     font-size: 11px;
     color: #2c2c2c;
@@ -2236,6 +2129,12 @@ h3 {
     width: 5%;
     font-size: 15px;
 }
+.arsMagnus-item > div > a {
+    opacity: 0;
+}
+.arsMagnus-item > div:hover > a {
+    opacity: 1;
+}
 .arsMagnus-item > div > input:first-of-type {
     width: 73%;
     margin: 0;
@@ -2258,6 +2157,7 @@ h3 {
     width: 9.5%;
     margin: 0 0 0 1%;
 }
+
 /*
     ------
     Limits
@@ -2294,6 +2194,12 @@ h3 {
 .martialArt-item > div > a {
     width: 5%;
     font-size: 15px;
+}
+.martialArt-item > div > a {
+    opacity: 0;
+}
+.martialArt-item > div:hover > a {
+    opacity: 1;
 }
 .martialArt-item > div > input:first-of-type {
     width: 56%;
@@ -2368,6 +2274,12 @@ h3 {
     width: 5%;
     font-size: 15px;
 }
+.kiSealCreature-item > div > a {
+    opacity: 0;
+}
+.kiSealCreature-item > div:hover > a {
+    opacity: 1;
+}
 .kiSealCreature-item > div:first-of-type > input:first-of-type {
     width: 74%;
     margin: 0;
@@ -2424,6 +2336,12 @@ h3 {
 .kiTechnique-item > div > a {
     width: 5%;
     font-size: 15px;
+}
+.kiTechnique-item > div > a {
+    opacity: 0;
+}
+.kiTechnique-item > div:hover > a {
+    opacity: 1;
 }
 .kiTechnique-item > div:last-of-type > div > span:first-of-type {
     margin: 0%;
@@ -2505,29 +2423,15 @@ h3 {
 */
 .wearArmor > label {
     display: flex;
-    width: 100%;
-    height: 20px;
     padding-right: 15px;
     padding-left: 5px;
 }
 .wearArmor > label > span  {
-    display: flex;
-    width: 50%;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
+    width: 60%;
+    text-align: start;
 }
 .wearArmor > label > input {
-    display: flex;
-    width: 50%;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
+    width: 40%;
 }
 .wearArmor > label:nth-of-type(5) {
     border-image: url(../img/border.png) 10 stretch;
@@ -2536,16 +2440,8 @@ h3 {
     margin-top: 3px;
     margin-bottom: 3px;
     padding-top: 3px;
-    padding-bottom: 23px;
+    padding-bottom: 3px;
     font-weight: bold;
-}
-.wearArmor > label:nth-of-type(2) > input,
-.wearArmor > label:nth-of-type(5) > input,
-.wearArmor > label:nth-of-type(6) > input,
-.wearArmor > label:nth-of-type(7) > input,
-.wearArmor > label:nth-of-type(8) > input {
-    background: transparent;
-    border-bottom: 0px;
 }
 .wearArmor > label:nth-of-type(6) > span,
 .wearArmor > label:nth-of-type(7) > span,
@@ -2668,96 +2564,83 @@ h3 {
     border-bottom: 5px solid black;
     margin-bottom: 3px;
     padding-bottom: 3px;
-    text-align: center;
 }
 .prof-item > div {
     display: flex;
 }
 .prof > div:first-of-type > span,
 .prof-item > div > label:first-of-type {
-    width: 50%
+    width: 50%;
 }
 .prof > div:first-of-type > span:nth-of-type(2),
 .prof-item > div > select {
-    width: 40%
+    width: 38%;
+    margin: 0 0 0 1%;
 }
 .prof > div:first-of-type > span:nth-of-type(3),
 .prof-item > div > input {
-    width: 10%
-}
-.prof-item > div > label > input,
-.prof-item > div > input {
-    display: flex;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
-}
-.prof-item > div > select {
-    height: 20px;
-    font-size: 13px;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    border-bottom: 1px solid black;
-    margin-right: 2px;
+    width: 10%;
+    margin: 0 0 0 1%;
 }
 /*
     ------
     Weapon
     ------
 */
-.weapons > div:first-of-type {
+.weapons > div:not(:first-of-type) {
+    width: 95%;
+    margin: 0 0 0 2.5%;
+}
+.weapons > div:first-of-type,
+.weapon-item > div:first-of-type {
     display: flex;
+    justify-content: flex-start;
+}
+.weapons > div:first-of-type {
     border-image: url(../img/border.png) 10 stretch;
     border-bottom: 5px solid black;
     margin-bottom: 3px;
     padding-bottom: 3px;
-    padding-left: 6.5%;
-    padding-right: 6.7%;
-    justify-content: space-between;
-    text-align: center;
-    width: 100%;
 }
-.weapon-item {
-    justify-content: space-between;
+.weapons > div:first-of-type > span:nth-of-type(1) {
+    width: 14.25%;
+    margin: 0 0 0 7.25%;
 }
-.weapon-item > div:first-of-type {
-    justify-content: space-between;
-    width: 100%;
-    display: flex;
-    text-align: center;
-}
-.weapons > div:first-of-type > span:nth-of-type(1),
 .weapon-item > div > span:first-of-type {
     width: 15%;
 }
-.weapons > div:first-of-type > span:nth-of-type(2),
-.weapon-item > div > span:nth-of-type(2) {
-    width: 64%;
+.weapons > div:first-of-type > span:nth-of-type(2) {
+    width: 57.95%;
+    margin: 0 0 0 .95%;
 }
-.weapons > div:first-of-type > span:nth-of-type(3),
+.weapon-item > div > span:nth-of-type(2) {
+    width: 61%;
+    margin: 0 0 0 1%;
+}
+.weapons > div:first-of-type > span:nth-of-type(3) {
+    width: 11.4%;
+    margin: 0 0 0 0.95%;
+}
 .weapon-item > div > span:nth-of-type(3) {
-    width: 10%;
+    width: 12%;
+    margin: 0 0 0 1%;
 }
 .weapon-item > div > a {
     font-size: 15px;
     width: 5%;
-    height: 20px;
-    text-align: center;
-    align-self: center;
+}
+.weapon-item > div > a {
+    opacity: 0;
+}
+.weapon-item > div:hover > a {
+    opacity: 1;
 }
 /*
     --------
     Currency 
     --------
 */
-.currency > label,
+.currency > div > label,
 .currency-item > div { 
     display: flex;
 }
@@ -2767,94 +2650,70 @@ h3 {
     border-bottom: 5px solid black;
     margin-bottom: 3px;
     padding-bottom: 3px;
-    text-align: center;
-    width: 100%;
 }
 .currency > div > span:first-of-type,
-.currency > label > span,
+.currency > div > label > span,
 .currency-item > div > input:first-of-type {
-    width: 70%;
+    width: 69%;
 }
 .currency > div > span:last-of-type,
-.currency > label > input,
+.currency > div > label > input,
 .currency-item > div > input:last-of-type {
     width: 30%;
-}
-.currency > label {
-    width: 100%;
-    text-align: center;
-    font-size: 13px;
-}
-.currency > label > input,
-.currency-item > div > input {
-    display: flex;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
-}
-.currency > label > input,
-.currency-item > div > input:last-of-type {
-    margin-left: 2px;
+    margin: 0 0 0 1%;
 }
 /*
     ---------
     Invnetory
     ---------
 */
+.inventory > div:not(:first-of-type) {
+    width: 95%;
+    margin: 0 0 0 2.5%;
+}
 .inventory > div:first-of-type {
-    display: flex;
     border-image: url(../img/border.png) 10 stretch;
     border-bottom: 5px solid black;
     margin-bottom: 3px;
     padding-bottom: 3px;
-    padding-right: 6.5%;
-    padding-left: 5.7%;
-    text-align: center;
-    justify-content: space-between;
-    width: 100%;
 }
-.inventory-item {
-    justify-content: space-between;
-}
+.inventory > div:first-of-type,
 .inventory-item > div:first-of-type {
-    justify-content: space-between;
-    width: 100%;
     display: flex;
-}
-.inventory > div:first-of-type > span:nth-of-type(2),
-.inventory-item > div > input:nth-of-type(2) {
-    width: 64%;
-}
-.inventory > div:first-of-type > span:nth-of-type(1),
-.inventory-item > div > input:first-of-type {
-    width: 9%;
-}
-.inventory > div:first-of-type > span:nth-of-type(3),
-.inventory-item > div > input:nth-of-type(3) {
-    width: 15%;
+    justify-content: flex-start;
 }
 .inventory-item > div > a {
     font-size: 15px;
     width: 5%;
-    height: 20px;
-    text-align: center;
-    align-self: center;
 }
-.inventory-item > div > input {
-    display: flex;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
+.inventory > div:first-of-type > span:nth-of-type(1) {
+    width: 8.55%;
+    margin: 0 0 0 7.25%
+}
+.inventory-item > div:first-of-type > input:first-of-type {
+    width: 9%;
+}
+.inventory > div:first-of-type > span:nth-of-type(2) {
+    width: 60.8%;
+    margin: 0 0 0 0.95%
+}
+.inventory-item > div:first-of-type > input:nth-of-type(2) {
+    width: 64%;
+    margin: 0 0 0 1%
+}
+.inventory > div:first-of-type > span:nth-of-type(3) {
+    width: 14.25%;
+    margin: 0 0 0 0.95%
+}
+.inventory-item > div:first-of-type > input:nth-of-type(3) {
+    width: 15%;
+    margin: 0 0 0 1%
+}
+.inventory-item > div > a {
+    opacity: 0;
+}
+.inventory-item > div:hover > a {
+    opacity: 1;
 }
 /*
     ***************
@@ -2863,69 +2722,151 @@ h3 {
     ---------------
     ***************
 */
-.setting1 {
+.settings {
+    flex-wrap: wrap;
     display: flex;
-    justify-content: space-between;
 }
-.setting1 > div:first-of-type {
-    width: 25%
+.settingsOptions {
+    width: 33%
+}
+.settings2 {
+    width: 63%;
+    margin: 0 0 0 4%;
+}
+.settings2 >  div:first-of-type {
+    display: flex;
+}
+.settings2 >  div:first-of-type > div:first-of-type {
+    width: 43%;
 }
 .charOptions {
-    width: 35%;
+    width: 53%;
+    margin: 0 0 0 4%;
 }
-.setting1 > div:last-of-type {
-    width: 32%;
+/*
+    ---------
+    Settings
+    ---------
+*/
+.settingsOptions > div > label {
+    display: flex;
+    padding-right: 15px;
+    padding-left: 5px;
 }
+
 /*
     ---------
     RollRange
     ---------
 */
-.rollRange {
-    flex-wrap: wrap;
-    margin: 0px;
-}
 .rollRange > div {
     display: flex;
-    width: 100%;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 .rollRange > div > label {
     display: flex;
-    width: calc(50% - 2.5px);
-    flex-wrap: wrap;
+    width: 48%;
     justify-content: space-between;
 }
 .rollRange > div > label > span {
     display: flex;
-    width: 50px;
-    padding-left: 5px;
-    padding-right: 3px;
-    font-size: 11px;
+    width: 60%;
 }
 .rollRange > div > label > input[type="number"] {
-    display: flex;
-    width: calc(100% - 55px);
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    flex-wrap: wrap;
-    text-align: center;
-    border-bottom: 1px solid black;
-    font-size: 11px;
-    height: 18px;
+    width: 40%;
 }
 .rollRange > div > label > select {
-    display: flex;
-    flex-wrap: wrap;
-    width: calc(100% - 55px);
-    padding: 0px;
-    border: 0px;
-    border-bottom: 1px solid black;
-    height: 18px;
-    font-size: 11px;
+    width: 40%;
 }
+
+/*
+    ---------
+    Character Options
+    ---------
+*/
+.charOptions > div > label {
+    display: flex;
+    padding-right: 15px;
+    padding-left: 5px;
+}
+.charOptions > div > label > span {
+    width: 60%;
+}
+.charOptions > div > label > input {
+    width: 40%;
+}
+/*
+    ---------
+    Innate Bonuses
+    ---------
+*/
+.innateBonuses > div:not(:first-of-type) {
+    width: 95%;
+    margin: 0 0 0 2.5%;
+}
+.innateBonuses > div:first-of-type,
+.class-item > div:first-of-type {
+    display: flex;
+    justify-content: flex-start;
+}
+.innateBonuses > div:first-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+}
+.innateBonuses > div:first-of-type > span:first-of-type {
+    width: 79.8%;
+    margin: 0 0 0 2.5%;
+}
+.class-item > div:first-of-type > input:first-of-type {
+    width: 84%
+}
+.innateBonuses > div:first-of-type > span:last-of-type {
+    width: 9.5%;
+    margin: 0 0 0 0.95%;
+}
+.class-item > div:first-of-type > input:last-of-type {
+    width: 10%;
+    margin: 0 0 0 1%;
+}
+.class-item > div:first-of-type > a {
+    width: 5%;
+    font-size: 15px;
+}
+.class-item > div > a {
+    opacity: 0;
+}
+.class-item > div:hover > a {
+    opacity: 1;
+}
+
+
+
+
+
+
+
+/*
+    ---------
+    Homebrew Stuffs
+    ---------
+*/
+.homebrew > label {
+    display: flex;
+    padding-right: 15px;
+    padding-left: 5px;
+}
+
+
+
+
+
+
+
+
+
 
 /*
     ****************

@@ -32,7 +32,8 @@
           "psychicStrengthening": false,
           "unifiedPools": false,
           "innatePower": false,
-          "dragonSeals": false
+          "dragonSeals": false,
+          "currencyHide": false
         }
       },
       "stats": {
@@ -109,12 +110,14 @@
           "temp": 0
         },
         "lifepoints": {
+          "status": false,
           "multiple": 1,
           "spec": 0,
           "temp": 0,
           "actual": 0
         },
         "fatigue": {
+          "status": false,
           "spec": 0,
           "temp": 0,
           "actual": 0
@@ -127,14 +130,18 @@
           "atkbase": 0,
           "atkspecial": 0,
           "atktemp": 0,
+          "atkStatus": false,
           "blkbase": 0,
           "blkspecial": 0,
           "blktemp": 0,
+          "blkStatus": false,
           "dodbase": 0,
           "dodspecial": 0,
-          "dodtemp": 0
+          "dodtemp": 0,
+          "dodStatus":  false
         },
         "initiative": {
+          "status": false,
           "name": "",
           "spec": 0
         },
@@ -548,6 +555,8 @@
           "spec": 0,
           "imbalance": 0,
           "temp": 0,
+          "masteryOff": false,
+          "masteryDef": false,
           "mtheory": "Standard"
         },
         "maccu": {
@@ -578,19 +587,23 @@
         "summoning": {
           "summon": {
             "base": 0,
-            "spec": 0
+            "spec": 0,
+            "mastery": false
           },
           "control": {
             "base": 0,
-            "spec": 0
+            "spec": 0,
+            "mastery": false
           },
           "bind": {
             "base": 0,
-            "spec": 0
+            "spec": 0,
+            "mastery": false
           },
           "banish": {
             "base": 0,
-            "spec": 0
+            "spec": 0,
+            "mastery": false
           }
         }
       },
@@ -1208,6 +1221,7 @@
       }
     },
     "class": {
+      "expand": false,
       "main": {
         "levels": 0,
         "lp": 0,
@@ -1288,11 +1302,11 @@
     "spellPath": {
       "name": "",
       "level": 0,
-      "subPath": "",
-      "subPathBool": false
+      "subPath": ""
     },
     "spell": {
       "templates": [ "itemDescription" ],
+      "expand": false,
       "path": "",
       "level": 0,
       "action": "Active",

@@ -1,131 +1,123 @@
 <form class="{{cssClass}}" autocomplete="off">
-  <div class="spellheader">
-      <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-      <div>
-          <label> <span> Name </span> <input type="text" name="name" value="{{item.name}}" placeholder="Name" /> </label>
-          <div>
-              <label> <span> Path </span> <input type="text" name="data.path" value="{{data.path}}"/> </label>
-              <label> <span> Level </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
-          </div>
-          <div>
-              <label>
-                  <span> Action </span>
-                  <select name="data.action" data-dtype="String">
-                      {{#select data.action}}
-                      <option value="Active"> Active </option>
-                      <option value="Passive"> Passive </option>
-                      {{/select}}
-                  </select>
-              </label>
-              <label>
-                  <span> Projection </span>
-                  <select name="data.projection" data-dtype="String">
-                      {{#select data.projection}}
-                      <option value="Offensive"> Offensive </option>
-                      <option value="Defensive"> Defensive </option>
-                      {{/select}}
-                  </select>
-              </label>
-          </div>
-          <div>
-              <label>
-                  <span> Type </span>
-                  <select name="data.type" data-dtype="String">
-                      {{#select data.type}}
-                      <option value="Attack"> Attack </option>
-                      <option value="Defense"> Defense </option>
-                      <option value="Spiritual"> Spiritual </option>
-                      <option value="Effect"> Effect </option>
-                      <option value="Automatic"> Automatic </option>
-                      <option value="Detection"> Detection </option>
-                      {{/select}}
-                  </select>
-              </label>
-              <label>
-                  <span> Maint. Type </span>
-                  <select name="data.mainttype" data-dtype="String">
-                      {{#select data.mainttype}}
-                      <option value="None"> None </option>
-                      <option value="Turn"> Turn </option>
-                      <option value="Daily"> Daily </option>
-                      {{/select}}
-                  </select>
-              </label>
-          </div>
-          <div>
-              <label>
-                  <span> Bought? </span>
-                  <select name="data.bought" data-dtype="String">
-                      {{#select data.bought}}
-                      <option value="SpellPath"> Spell Path </option>
-                      <option value="Single"> Single </option>
-                      <option value="Not Bought"> Not Bought </option>
-                      {{/select}}
-                  </select>
-              </label>
-              <label> <span> Cost </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
-          </div>
-      </div>
+    <div class="spellheader">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <div>
+            <label> <span> Name </span> <input type="text" name="name" value="{{item.name}}" placeholder="Name" /> </label>
+            <div>
+                <label> <span> Path </span> <input type="text" name="data.path" value="{{data.path}}" /> </label>
+                <label> <span> Level </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
+            </div>
+            <div>
+                <label>
+                    <span> Action </span>
+                    <select name="data.action" data-dtype="String">
+                        {{#select data.action}}
+                        <option value="Active"> Active </option>
+                        <option value="Passive"> Passive </option>
+                        {{/select}}
+                    </select>
+                </label>
+                <label>
+                    <span> Projection </span>
+                    <select name="data.projection" data-dtype="String">
+                        {{#select data.projection}}
+                        <option value="Offensive"> Offensive </option>
+                        <option value="Defensive"> Defensive </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <span> Type </span>
+                    <select name="data.type" data-dtype="String">
+                        {{#select data.type}}
+                        <option value="Attack"> Attack </option>
+                        <option value="Defense"> Defense </option>
+                        <option value="Spiritual"> Spiritual </option>
+                        <option value="Effect"> Effect </option>
+                        <option value="Automatic"> Automatic </option>
+                        <option value="Detection"> Detection </option>
+                        {{/select}}
+                    </select>
+                </label>
+                <label>
+                    <span> Maint. Type </span>
+                    <select name="data.mainttype" data-dtype="String">
+                        {{#select data.mainttype}}
+                        <option value="None"> None </option>
+                        <option value="Turn"> Turn </option>
+                        <option value="Daily"> Daily </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <span> Bought? </span>
+                    <select name="data.bought" data-dtype="String">
+                        {{#select data.bought}}
+                        <option value="SpellPath"> Spell Path </option>
+                        <option value="Single"> Single </option>
+                        <option value="Not Bought"> Not Bought </option>
+                        {{/select}}
+                    </select>
+                </label>
+                <label> <span> Cost </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
+            </div>
+        </div>
 
-  </div>
+    </div>
 
-  <div class="spellcontent">
-      <div class="editor-box">
-          {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
-      </div>
-      <div>
-          <span> Rank </span>
-          <span> Requirement </span>
-          <span> Zeon </span>
-          <span> Maint. </span>
-      </div>
+    <div class="spellcontent">
+        <textarea class="inline-edit" name="data.description" placeholder="{{localize "abfalter.maginTab.mainInfo"}}">{{data.description}}</textarea>
 
-      <div>
-          <button type="button" class="item-roll" data-roll="d51">
-              <span> Basic </span>
-          </button>
-          <input type="number" name="data.base.intreq" value="{{data.base.intreq}}" />
-          <input type="number" name="data.base.zeoncost" value="{{data.base.zeoncost}}" />
-          <input type="number" name="data.base.maint" value="{{data.base.maint}}" />
-      </div>
-      <div class="editor-box">
-          {{editor content=data.basic.rollDesc target="data.basic.rollDesc" button=true owner=owner editable=editable}}
-      </div>
+        <div>
+            <span> Rank </span>
+            <span> Requirement </span>
+            <span> Zeon </span>
+            <span> Maint. </span>
+        </div>
 
-      <div>
-          <button type="button" class="mystic rollable" data-roll="d52">
-              <span> Intermediate </span>
-          </button>
-          <input type="number" name="data.intermediate.intreq" value="{{data.intermediate.intreq}}" />
-          <input type="number" name="data.intermediate.zeoncost" value="{{data.intermediate.zeoncost}}" />
-          <input type="number" name="data.intermediate.maint" value="{{data.intermediate.maint}}" />
-      </div>
-      <div class="editor-box">
-          {{editor content=data.intermediate.rollDesc target="data.intermediate.rollDesc" button=true owner=owner editable=editable}}
-      </div>
+        <div>
+            <button type="button" class="item-roll" data-roll="d51">
+                <span> Basic </span>
+            </button>
+            <input type="number" name="data.base.intreq" value="{{data.base.intreq}}" />
+            <input type="number" name="data.base.zeoncost" value="{{data.base.zeoncost}}" />
+            <input type="number" name="data.base.maint" value="{{data.base.maint}}" />
+        </div>
+        <textarea class="inline-edit" name="data.basic.rollDesc" placeholder="{{localize "abfalter.maginTab.mainInfo"}}">{{data.basic.rollDesc}}</textarea>
 
-      <div>
-          <button type="button" class="mystic rollable" data-roll="d53">
-              <span> Advanced </span>
-          </button>
-          <input type="number" name="data.advanced.intreq" value="{{data.advanced.intreq}}" />
-          <input type="number" name="data.advanced.zeoncost" value="{{data.advanced.zeoncost}}" />
-          <input type="number" name="data.advanced.maint" value="{{data.advanced.maint}}" />
-      </div>
-      <div class="editor-box">
-          {{editor content=data.advanced.rollDesc target="data.advanced.rollDesc" button=true owner=owner editable=editable}}
-      </div>
+        <div>
+            <button type="button" class="mystic rollable" data-roll="d52">
+                <span> Intermediate </span>
+            </button>
+            <input type="number" name="data.intermediate.intreq" value="{{data.intermediate.intreq}}" />
+            <input type="number" name="data.intermediate.zeoncost" value="{{data.intermediate.zeoncost}}" />
+            <input type="number" name="data.intermediate.maint" value="{{data.intermediate.maint}}" />
+        </div>
+        <textarea class="inline-edit" name="data.intermediate.rollDesc" placeholder="{{localize "abfalter.maginTab.mainInfo"}}">{{data.intermediate.rollDesc}}</textarea>
 
-      <div>
-          <button type="button" class="mystic rollable" data-roll="d54">
-              <span> Arcane </span>
-          </button>
-          <input type="number" name="data.arcane.intreq" value="{{data.arcane.intreq}}" />
-          <input type="number" name="data.arcane.zeoncost" value="{{data.arcane.zeoncost}}" />
-          <input type="number" name="data.arcane.maint" value="{{data.arcane.maint}}" />
-      </div>
-      <div class="editor-box">
-          {{editor content=data.arcane.rollDesc target="data.arcane.rollDesc" button=true owner=owner editable=editable}}
-      </div>
-  </div>
+        <div>
+            <button type="button" class="mystic rollable" data-roll="d53">
+                <span> Advanced </span>
+            </button>
+            <input type="number" name="data.advanced.intreq" value="{{data.advanced.intreq}}" />
+            <input type="number" name="data.advanced.zeoncost" value="{{data.advanced.zeoncost}}" />
+            <input type="number" name="data.advanced.maint" value="{{data.advanced.maint}}" />
+        </div>
+        <textarea class="inline-edit" name="data.advanced.rollDesc" placeholder="{{localize "abfalter.maginTab.mainInfo"}}">{{data.advanced.rollDesc}}</textarea>
+
+        <div>
+            <button type="button" class="mystic rollable" data-roll="d54">
+                <span> Arcane </span>
+            </button>
+            <input type="number" name="data.arcane.intreq" value="{{data.arcane.intreq}}" />
+            <input type="number" name="data.arcane.zeoncost" value="{{data.arcane.zeoncost}}" />
+            <input type="number" name="data.arcane.maint" value="{{data.arcane.maint}}" />
+        </div>
+        <textarea class="inline-edit" name="data.arcane.rollDesc" placeholder="{{localize "abfalter.maginTab.mainInfo"}}">{{data.arcane.rollDesc}}</textarea>
+
+    </div>
 </form>
