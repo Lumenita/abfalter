@@ -1,255 +1,252 @@
 ﻿<div class="tab general">
-    <div>
-
+    <div class="g1">
         <div>
             <div class="characteristics">
-                <h2>Characteristics</h2>
+                <h2>{{localize "abfalter.generalTab.characteristics"}}</h2>
                 <div>
-                    <span> Atr. </span>
-                    <span> Final </span>
-                    <span> Opposed </span>
+                    <span> {{localize "abfalter.generalTab.atr"}} </span>
+                    <span> {{localize "abfalter.basicInfo.final"}} </span>
+                    <span> {{localize "abfalter.generalTab.opposed"}} </span>
                 </div>
                 <div>
                     {{#if data.stats.Agility.status}}
-                        <div class="extend">
-                        <h3 class="physical"> Agility </h3>
-                        <label> 
-                            <span> Base </span> 
+                    <div class="extend">
+                        <h3 class="physical"> {{localize "abfalter.basicInfo.agility"}} </h3>
+                        <label>
+                            <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Agility.base" value="{{data.stats.Agility.base}}" data-dtype="number" />
                         </label>
-                        <label> <span> Special </span> <input type="number" name="data.stats.Agility.spec" value="{{data.stats.Agility.spec}}" /> </label>
-                        <label> <span> Temp. </span> <input type="number" name="data.stats.Agility.temp" value="{{data.stats.Agility.temp}}" /> </label>
-                        <label> <span> Final </span> <input type="number" value="{{data.stats.Agility.final}}" readonly /> </label>
-                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Agility.mod}}" readonly /> </label>
-                        <label> <span> Opposed </span> <input type="number" name="data.stats.Agility.opposed" value="{{data.stats.Agility.opposed}}" /> </label>
-                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Agility.opposedfinal}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.special"}} </span> <input type="number" name="data.stats.Agility.spec" value="{{data.stats.Agility.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Agility.temp" value="{{data.stats.Agility.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{data.stats.Agility.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{data.stats.Agility.mod}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="data.stats.Agility.opposed" value="{{data.stats.Agility.opposed}}" /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{data.stats.Agility.opposedfinal}}" readonly /> </label>
                     </div>
                     {{else}}
-                        <div class="compact">
+                    <div class="compact">
                         <button type="button" id="Agility_charac" class="stat-final rollable" data-roll="d10+@stats.Agility.final" data-label="Agility">
-                            <span class="physical"> AGI </span> <span> {{data.stats.Agility.final}} </span>
-                        </button><!--
-                        --><button type="button" id="Agility_opposed" class="stat-final rollable" data-roll="d10+@stats.Agility.opposedfinal" data-label="Opposed Agility">
+                            <span class="physical"> {{localize "abfalter.basicInfo.agi"}} </span> <span> {{data.stats.Agility.final}} </span>
+                        </button>
+                        <button type="button" id="Agility_opposed" class="stat-final rollable" data-roll="d10+@stats.Agility.opposedfinal" data-label="Opposed Agility">
                             <span> {{data.stats.Agility.opposedfinal}} </span>
                         </button>
                     </div>
                     {{/if}}
-                    <label>
-                        <input type="checkbox" name="data.stats.Agility.status" data-dtype="boolean" {{checked data.stats.Agility.status}} />
+                    <label class="expand-box">
+                        <a class="toggleBoolean {{#if data.stats.Agility.status}}showOpacity{{/if}}" data-label="data.stats.Agility.status" data-ability="{{data.stats.Agility.status}}"><i class="{{#if data.stats.Agility.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </div> <!--Agility-->
 
                 <div>
                     {{#if data.stats.Constitution.status}}
-                        <div class="extend" id="con-extend">
-                        <h3 class="physical"> Constitution </h3>
-                        <label> 
-                            <span> Base </span> 
+                    <div class="extend">
+                        <h3 class="physical"> {{localize "abfalter.basicInfo.consti"}} </h3>
+                        <label>
+                            <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Constitution.base" value="{{data.stats.Constitution.base}}" data-dtype="number" />
                         </label>
-                        <label> <span> Special </span> <input type="number" name="data.stats.Constitution.spec" value="{{data.stats.Constitution.spec}}" /> </label>
-                        <label> <span> Temp. </span> <input type="number" name="data.stats.Constitution.temp" value="{{data.stats.Constitution.temp}}" /> </label>
-                        <label> <span> Final </span> <input type="number" value="{{data.stats.Constitution.final}}" readonly /> </label>
-                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Constitution.mod}}" readonly /> </label>
-                        <label> <span> Opposed </span> <input type="number" name="data.stats.Constitution.opposed" value="{{data.stats.Constitution.opposed}}" /> </label>
-                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Constitution.opposedfinal}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.special"}} </span> <input type="number" name="data.stats.Constitution.spec" value="{{data.stats.Constitution.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Constitution.temp" value="{{data.stats.Constitution.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{data.stats.Constitution.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{data.stats.Constitution.mod}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="data.stats.Constitution.opposed" value="{{data.stats.Constitution.opposed}}" /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{data.stats.Constitution.opposedfinal}}" readonly /> </label>
                     </div>
                     {{else}}
-                        <div class="compact" id="con-compact">
+                    <div class="compact">
                         <button type="button" id="Constitution_charac" class="stat-final rollable" data-roll="d10+@stats.Constitution.final" data-label="Constitution">
-                            <span class="physical"> CON </span> <span> {{data.stats.Constitution.final}} </span>
-                        </button><!--
-                        --><button type="button" id="Constitution_opposed" class="stat-final rollable" data-roll="d10+@stats.Constitution.opposedfinal" data-label="Opposed Constitution">
+                            <span class="physical"> {{localize "abfalter.basicInfo.con"}} </span> <span> {{data.stats.Constitution.final}} </span>
+                        </button>
+                        <button type="button" id="Constitution_opposed" class="stat-final rollable" data-roll="d10+@stats.Constitution.opposedfinal" data-label="Opposed Constitution">
                             <span> {{data.stats.Constitution.opposedfinal}} </span>
                         </button>
                     </div>
                     {{/if}}
-                    <label>
-                        <input type="checkbox" name="data.stats.Constitution.status" data-dtype="boolean" {{checked data.stats.Constitution.status}} />
+                    <label class="expand-box">
+                        <a class="toggleBoolean {{#if data.stats.Constitution.status}}showOpacity{{/if}}" data-label="data.stats.Constitution.status" data-ability="{{data.stats.Constitution.status}}"><i class="{{#if data.stats.Constitution.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </div> <!--Constitution-->
                 <div>
                     {{#if data.stats.Strength.status}}
-                        <div class="extend" id="str-extend">
-                        <h3 class="physical"> Strength </h3>
-                        <label> 
-                            <span> Base </span> 
+                    <div class="extend">
+                        <h3 class="physical"> {{localize "abfalter.basicInfo.strength"}} </h3>
+                        <label>
+                            <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Strength.base" value="{{data.stats.Strength.base}}" data-dtype="number" />
                         </label>
-                        <label> <span> Special </span> <input type="number" name="data.stats.Strength.spec" value="{{data.stats.Strength.spec}}" /> </label>
-                        <label> <span> Temp. </span> <input type="number" name="data.stats.Strength.temp" value="{{data.stats.Strength.temp}}" /> </label>
-                        <label> <span> Final </span> <input type="number" value="{{data.stats.Strength.final}}" readonly /> </label>
-                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Strength.mod}}" readonly /> </label>
-                        <label> <span> Opposed </span> <input type="number" name="data.stats.Strength.opposed" value="{{data.stats.Strength.opposed}}" /> </label>
-                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Strength.opposedfinal}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.special"}} </span> <input type="number" name="data.stats.Strength.spec" value="{{data.stats.Strength.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Strength.temp" value="{{data.stats.Strength.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{data.stats.Strength.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{data.stats.Strength.mod}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="data.stats.Strength.opposed" value="{{data.stats.Strength.opposed}}" /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{data.stats.Strength.opposedfinal}}" readonly /> </label>
                     </div><!-- <i class="fas fa-dice-d20"></i>-->
                     {{else}}
-                        <div class="compact" id="str-compact">
+                    <div class="compact">
                         <button type="button" id="Strength_charac" class="stat-final rollable" data-roll="d10+@stats.Strength.final" data-label="Strength">
-                            <span class="physical"> STR </span> <span> {{data.stats.Strength.final}} </span>
-                        </button><!--
-                        --><button type="button" id="Strength_opposed" class="stat-final rollable" data-roll="d10+@stats.Strength.opposedfinal" data-label="Opposed Strength">
+                            <span class="physical"> {{localize "abfalter.basicInfo.str"}} </span> <span> {{data.stats.Strength.final}} </span>
+                        </button>
+                        <button type="button" id="Strength_opposed" class="stat-final rollable" data-roll="d10+@stats.Strength.opposedfinal" data-label="Opposed Strength">
                             <span> {{data.stats.Strength.opposedfinal}} </span>
                         </button>
                     </div>
                     {{/if}}
-                    <label>
-                        <input type="checkbox" name="data.stats.Strength.status" data-dtype="boolean" {{checked data.stats.Strength.status}} />
+                    <label class="expand-box">
+                        <a class="toggleBoolean {{#if data.stats.Strength.status}}showOpacity{{/if}}" data-label="data.stats.Strength.status" data-ability="{{data.stats.Strength.status}}"><i class="{{#if data.stats.Strength.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </div> <!--Strength-->
                 <div>
                     {{#if data.stats.Dexterity.status}}
-                        <div class="extend" id="dex-extend">
-                        <h3 class="physical"> Dexterity </h3>
-                        <label> 
-                            <span> Base </span> 
+                    <div class="extend">
+                        <h3 class="physical"> {{localize "abfalter.basicInfo.dexerity"}} </h3>
+                        <label>
+                            <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Dexterity.base" value="{{data.stats.Dexterity.base}}" data-dtype="number" />
                         </label>
-                        <label> <span> Special </span> <input type="number" name="data.stats.Dexterity.spec" value="{{data.stats.Dexterity.spec}}" /> </label>
-                        <label> <span> Temp. </span> <input type="number" name="data.stats.Dexterity.temp" value="{{data.stats.Dexterity.temp}}" /> </label>
-                        <label> <span> Final </span> <input type="number" value="{{data.stats.Dexterity.final}}" readonly /> </label>
-                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Dexterity.mod}}" readonly /> </label>
-                        <label> <span> Opposed </span> <input type="number" name="data.stats.Dexterity.opposed" value="{{data.stats.Dexterity.opposed}}" /> </label>
-                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Dexterity.opposedfinal}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.special"}} </span> <input type="number" name="data.stats.Dexterity.spec" value="{{data.stats.Dexterity.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Dexterity.temp" value="{{data.stats.Dexterity.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{data.stats.Dexterity.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{data.stats.Dexterity.mod}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="data.stats.Dexterity.opposed" value="{{data.stats.Dexterity.opposed}}" /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{data.stats.Dexterity.opposedfinal}}" readonly /> </label>
                     </div><!-- <i class="fas fa-dice-d20"></i>-->
                     {{else}}
-                        <div class="compact" id="dex-compact">
+                    <div class="compact">
                         <button type="button" id="Dexterity_charac" class="stat-final rollable" data-roll="d10+@stats.Dexterity.final" data-label="Dexterity">
-                            <span class="physical"> DEX </span> <span> {{data.stats.Dexterity.final}} </span>
-                        </button><!--
-                        --><button type="button" id="Dexterity_opposed" class="stat-final rollable" data-roll="d10+@stats.Dexterity.opposedfinal" data-label="Opposed Dexterity">
+                            <span class="physical"> {{localize "abfalter.basicInfo.dex"}} </span> <span> {{data.stats.Dexterity.final}} </span>
+                        </button>
+                        <button type="button" id="Dexterity_opposed" class="stat-final rollable" data-roll="d10+@stats.Dexterity.opposedfinal" data-label="Opposed Dexterity">
                             <span> {{data.stats.Dexterity.opposedfinal}} </span>
                         </button>
                     </div>
                     {{/if}}
-                    <label>
-                        <input type="checkbox" name="data.stats.Dexterity.status" data-dtype="boolean" {{checked data.stats.Dexterity.status}} />
+                    <label class="expand-box">
+                        <a class="toggleBoolean {{#if data.stats.Dexterity.status}}showOpacity{{/if}}" data-label="data.stats.Dexterity.status" data-ability="{{data.stats.Dexterity.status}}"><i class="{{#if data.stats.Dexterity.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </div> <!--Dexterity-->
                 <div>
                     {{#if data.stats.Intelligence.status}}
-                        <div class="extend" id="int-extend">
-                        <h3 class="mental"> Intelligence </h3>
-                        <label> 
-                            <span> Base </span> 
+                    <div class="extend">
+                        <h3 class="mental"> {{localize "abfalter.basicInfo.intell"}} </h3>
+                        <label>
+                            <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Intelligence.base" value="{{data.stats.Intelligence.base}}" data-dtype="number" />
                         </label>
-                        <label> <span> Special </span> <input type="number" name="data.stats.Intelligence.spec" value="{{data.stats.Intelligence.spec}}" /> </label>
-                        <label> <span> Temp. </span> <input type="number" name="data.stats.Intelligence.temp" value="{{data.stats.Intelligence.temp}}" /> </label>
-                        <label> <span> Final </span> <input type="number" value="{{data.stats.Intelligence.final}}" readonly /> </label>
-                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Intelligence.mod}}" readonly /> </label>
-                        <label> <span> Opposed </span> <input type="number" name="data.stats.Intelligence.opposed" value="{{data.stats.Intelligence.opposed}}" /> </label>
-                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Intelligence.opposedfinal}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.special"}} </span> <input type="number" name="data.stats.Intelligence.spec" value="{{data.stats.Intelligence.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Intelligence.temp" value="{{data.stats.Intelligence.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{data.stats.Intelligence.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{data.stats.Intelligence.mod}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="data.stats.Intelligence.opposed" value="{{data.stats.Intelligence.opposed}}" /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{data.stats.Intelligence.opposedfinal}}" readonly /> </label>
                     </div><!-- <i class="fas fa-dice-d20"></i>-->
                     {{else}}
-                        <div class="compact" id="int-compact">
+                    <div class="compact">
                         <button type="button" id="Intelligence_charac" class="stat-final rollable" data-roll="d10+@stats.Intelligence.final" data-label="Intelligence">
-                            <span class="mental"> INT </span> <span> {{data.stats.Intelligence.final}} </span>
-                        </button><!--
-                        --><button type="button" id="Intelligence_opposed" class="stat-final rollable" data-roll="d10+@stats.Intelligence.opposedfinal" data-label="Opposed Intelligence">
+                            <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span> <span> {{data.stats.Intelligence.final}} </span>
+                        </button>
+                        <button type="button" id="Intelligence_opposed" class="stat-final rollable" data-roll="d10+@stats.Intelligence.opposedfinal" data-label="Opposed Intelligence">
                             <span> {{data.stats.Intelligence.opposedfinal}} </span>
                         </button>
                     </div>
                     {{/if}}
-                    <label>
-                        <input type="checkbox" name="data.stats.Intelligence.status" data-dtype="boolean" {{checked data.stats.Intelligence.status}} />
+                    <label class="expand-box">
+                        <a class="toggleBoolean {{#if data.stats.Intelligence.status}}showOpacity{{/if}}" data-label="data.stats.Intelligence.status" data-ability="{{data.stats.Intelligence.status}}"><i class="{{#if data.stats.Intelligence.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </div> <!--Intelligence-->
                 <div>
                     {{#if data.stats.Perception.status}}
-                        <div class="extend" id="per-extend">
-                        <h3 class="mental"> Perception </h3>
-                        <label> 
-                            <span> Base </span> 
+                    <div class="extend">
+                        <h3 class="mental"> {{localize "abfalter.basicInfo.perception"}} </h3>
+                        <label>
+                            <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Perception.base" value="{{data.stats.Perception.base}}" data-dtype="number" />
                         </label>
-                        <label> <span> Special </span> <input type="number" name="data.stats.Perception.spec" value="{{data.stats.Perception.spec}}" /> </label>
-                        <label> <span> Temp. </span> <input type="number" name="data.stats.Perception.temp" value="{{data.stats.Perception.temp}}" /> </label>
-                        <label> <span> Final </span> <input type="number" value="{{data.stats.Perception.final}}" readonly /> </label>
-                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Perception.mod}}" readonly /> </label>
-                        <label> <span> Opposed </span> <input type="number" name="data.stats.Perception.opposed" value="{{data.stats.Perception.opposed}}" /> </label>
-                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Perception.opposedfinal}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.special"}} </span> <input type="number" name="data.stats.Perception.spec" value="{{data.stats.Perception.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Perception.temp" value="{{data.stats.Perception.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{data.stats.Perception.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{data.stats.Perception.mod}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="data.stats.Perception.opposed" value="{{data.stats.Perception.opposed}}" /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{data.stats.Perception.opposedfinal}}" readonly /> </label>
                     </div><!-- <i class="fas fa-dice-d20"></i>-->
                     {{else}}
-                        <div class="compact" id="per-compact">
+                    <div class="compact">
                         <button type="button" id="Perception_charac" class="stat-final rollable" data-roll="d10+@stats.Perception.final" data-label="Perception">
-                            <span class="mental"> PER </span> <span> {{data.stats.Perception.final}} </span>
-                        </button><!--
-                        --><button type="button" id="Perception_opposed" class="stat-final rollable" data-roll="d10+@stats.Perception.opposedfinal" data-label="Opposed Perception">
+                            <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span> <span> {{data.stats.Perception.final}} </span>
+                        </button>
+                        <button type="button" id="Perception_opposed" class="stat-final rollable" data-roll="d10+@stats.Perception.opposedfinal" data-label="Opposed Perception">
                             <span> {{data.stats.Perception.opposedfinal}} </span>
                         </button>
                     </div>
                     {{/if}}
-                    <label>
-                        <input type="checkbox" name="data.stats.Perception.status" data-dtype="boolean" {{checked data.stats.Perception.status}} />
+                    <label class="expand-box">
+                        <a class="toggleBoolean {{#if data.stats.Perception.status}}showOpacity{{/if}}" data-label="data.stats.Perception.status" data-ability="{{data.stats.Perception.status}}"><i class="{{#if data.stats.Perception.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </div> <!--Perception-->
                 <div>
                     {{#if data.stats.Power.status}}
-                        <div class="extend" id="pow-extend">
-                        <h3 class="mental"> Power </h3>
-                        <label> 
-                            <span> Base </span> 
+                    <div class="extend">
+                        <h3 class="mental"> {{localize "abfalter.basicInfo.power"}} </h3>
+                        <label>
+                            <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Power.base" value="{{data.stats.Power.base}}" data-dtype="number" />
                         </label>
-                        <label> <span> Special </span> <input type="number" name="data.stats.Power.spec" value="{{data.stats.Power.spec}}" /> </label>
-                        <label> <span> Temp. </span> <input type="number" name="data.stats.Power.temp" value="{{data.stats.Power.temp}}" /> </label>
-                        <label> <span> Final </span> <input type="number" value="{{data.stats.Power.final}}" readonly /> </label>
-                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Power.mod}}" readonly /> </label>
-                        <label> <span> Opposed </span> <input type="number" name="data.stats.Power.opposed" value="{{data.stats.Power.opposed}}" /> </label>
-                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Power.opposedfinal}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.special"}} </span> <input type="number" name="data.stats.Power.spec" value="{{data.stats.Power.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Power.temp" value="{{data.stats.Power.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{data.stats.Power.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{data.stats.Power.mod}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="data.stats.Power.opposed" value="{{data.stats.Power.opposed}}" /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{data.stats.Power.opposedfinal}}" readonly /> </label>
                     </div><!-- <i class="fas fa-dice-d20"></i>-->
                     {{else}}
-                        <div class="compact" id="pow-compact">
+                    <div class="compact">
                         <button type="button" id="Power_charac" class="stat-final rollable" data-roll="d10+@stats.Power.final" data-label="Power">
-                            <span class="mental"> POW </span> <span> {{data.stats.Power.final}} </span>
-                        </button><!--
-                        --><button type="button" id="Power_opposed" class="stat-final rollable" data-roll="d10+@stats.Power.opposedfinal" data-label="Opposed Power">
+                            <span class="mental"> {{localize "abfalter.basicInfo.pow"}} </span> <span> {{data.stats.Power.final}} </span>
+                        </button>
+                        <button type="button" id="Power_opposed" class="stat-final rollable" data-roll="d10+@stats.Power.opposedfinal" data-label="Opposed Power">
                             <span> {{data.stats.Power.opposedfinal}} </span>
                         </button>
                     </div>
                     {{/if}}
-                    <label>
-                        <input type="checkbox" name="data.stats.Power.status" data-dtype="boolean" {{checked data.stats.Power.status}} />
+                    <label class="expand-box">
+                        <a class="toggleBoolean {{#if data.stats.Power.status}}showOpacity{{/if}}" data-label="data.stats.Power.status" data-ability="{{data.stats.Power.status}}"><i class="{{#if data.stats.Power.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </div> <!--Power-->
                 <div>
                     {{#if data.stats.Willpower.status}}
-                        <div class="extend" id="wp-extend">
-                        <h3 class="mental"> Willpower </h3>
-                        <label> 
-                            <span> Base </span> 
+                    <div class="extend">
+                        <h3 class="mental"> {{localize "abfalter.basicInfo.willPower"}} </h3>
+                        <label>
+                            <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Willpower.base" value="{{data.stats.Willpower.base}}" data-dtype="number" />
                         </label>
-                        <label> <span> Special </span> <input type="number" name="data.stats.Willpower.spec" value="{{data.stats.Willpower.spec}}" /> </label>
-                        <label> <span> Temp. </span> <input type="number" name="data.stats.Willpower.temp" value="{{data.stats.Willpower.temp}}" /> </label>
-                        <label> <span> Final </span> <input type="number" value="{{data.stats.Willpower.final}}" readonly /> </label>
-                        <label> <span> Mod </span> <input type="number" value="{{data.stats.Willpower.mod}}" readonly /> </label>
-                        <label> <span> Opposed </span> <input type="number" name="data.stats.Willpower.opposed" value="{{data.stats.Willpower.opposed}}" /> </label>
-                        <label> <span> Final Opp. </span> <input type="number" value="{{data.stats.Willpower.opposedfinal}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.special"}} </span> <input type="number" name="data.stats.Willpower.spec" value="{{data.stats.Willpower.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Willpower.temp" value="{{data.stats.Willpower.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{data.stats.Willpower.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{data.stats.Willpower.mod}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="data.stats.Willpower.opposed" value="{{data.stats.Willpower.opposed}}" /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{data.stats.Willpower.opposedfinal}}" readonly /> </label>
                     </div><!-- <i class="fas fa-dice-d20"></i>-->
                     {{else}}
-                        <div class="compact" id="wp-compact">
+                    <div class="compact">
                         <button type="button" id="Willpower_charac" class="stat-final rollable" data-roll="d10+@stats.Willpower.final" data-label="Willpower">
-                            <span class="mental"> WP </span> <span> {{data.stats.Willpower.final}} </span>
-                        </button><!--
-                        --><button type="button" id="Willpower_opposed" class="stat-final rollable" data-roll="d10+@stats.Willpower.opposedfinal" data-label="Opposed Willpower">
+                            <span class="mental"> {{localize "abfalter.basicInfo.wp"}} </span> <span> {{data.stats.Willpower.final}} </span>
+                        </button>
+                        <button type="button" id="Willpower_opposed" class="stat-final rollable" data-roll="d10+@stats.Willpower.opposedfinal" data-label="Opposed Willpower">
                             <span> {{data.stats.Willpower.opposedfinal}} </span>
                         </button>
                     </div>
                     {{/if}}
-                    <label>
-                        <input type="checkbox" name="data.stats.Willpower.status" data-dtype="boolean" {{checked data.stats.Willpower.status}} />
+                    <label class="expand-box">
+                        <a class="toggleBoolean {{#if data.stats.Willpower.status}}showOpacity{{/if}}" data-label="data.stats.Willpower.status" data-ability="{{data.stats.Willpower.status}}"><i class="{{#if data.stats.Willpower.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </div> <!--Willpower-->
-            </div>
-        </div> <!--Characteristics-->
+            </div><!--Characteristics-->
 
-        <div>
             <div class="resistances">
                 <h2> Resistances </h2>
                 <div>
-                    <span> Type </span>
+                    <span> {{localize "abfalter.generalTab.atr"}}Type </span>
                     <span> Final </span>
                     <span> Special </span>
                 </div>
@@ -264,12 +261,12 @@
                     </div>
                 </div>
                 {{/each}}
-            </div>
-            <div class="modactions">
-                <label> <span> All Action Modifier </span> <input type="number" name="data.aam" value="{{data.aam}}" /> </label>
-                <label> <span> Number of Actions </span> <input type="number" name="data.actionumber" value="{{data.actionnumber}}" readonly /> </label>
-            </div>
-        </div> <!--Resistances-->
+                <div class="modactions">
+                    <label> <span> All Action Modifier </span> <input type="number" name="data.aam" value="{{data.aam}}" /> </label>
+                    <label> <span> Number of Actions </span> <input type="number" name="data.actionumber" value="{{data.actionnumber}}" readonly /> </label>
+                </div>
+            </div><!--Resistances-->
+        </div>
 
         <div>
             <div class="movement">
@@ -282,144 +279,152 @@
                 <label> <span> Full </span> <input type="text" name="data.fullmove" value="{{data.fullmove}}" readonly /> </label>
                 <label> <span> 1/4 Move </span> <input type="text" name="data.fourthmove" value="{{data.fourthmove}}" readonly /> </label>
                 <label> <span> Running </span> <input type="text" name="data.runningmove" value="{{data.runningmove}}" readonly /> </label>
-            </div>
-        </div> <!--Movement-->
+            </div><!--Movement-->
+
+            <div class="g2">
+                <div class="lifepoints">
+                    <h2>
+                        LP
+                        <label class="expand-box">
+                            <a class="toggleBoolean {{#if data.lifepoints.status}}showOpacity{{/if}}" data-label="data.lifepoints.status" data-ability="{{data.lifepoints.status}}"><i class="{{#if data.lifepoints.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </label>
+                    </h2>
+                    {{#if data.lifepoints.status}}
+                    <div>
+                        <label> <span> Base </span> <input type="number" name="data.lpbase" value="{{data.lpbase}}" readonly /> </label>
+                        <label> <span> Mult. </span> <input type="number" name="data.lifepoints.multiple" value="{{data.lifepoints.multiple}}" /> </label>
+                        <label> <span> Class </span> <input type="number" name="data.lpbonus" value="{{data.lpbonus}}" readonly /> </label>
+                        <label> <span> Spec. </span> <input type="number" name="data.lifepoints.spec" value="{{data.lifepoints.spec}}" /> </label>
+                    </div>
+                    {{/if}}
+                    <label> <span> Temp. </span> <input type="number" name="data.lifepoints.temp" value="{{data.lifepoints.temp}}" /> </label>
+                    <label> <span> Final </span> <input type="number" name="data.lpfinal" value="{{data.lpfinal}}" readonly /> </label>
+                    <label> <span> Actual </span> <input type="number" name="data.lifepoints.actual" value="{{data.lifepoints.actual}}" /> </label>
+                </div>
+
+                <div class="fatigue">
+                    <h2>
+                        Fatigue
+                        <label class="expand-box">
+                            <a class="toggleBoolean {{#if data.fatigue.status}}showOpacity{{/if}}" data-label="data.fatigue.status" data-ability="{{data.fatigue.status}}"><i class="{{#if data.fatigue.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </label>
+                    </h2>
+                    {{#if data.fatigue.status}}
+                    <div>
+                        <label> <span> Base </span> <input type="number" name="data.fatiguebase" value="{{data.fatiguebase}}" readonly /> </label>
+                        <label> <span> Spec. </span> <input type="number" name="data.fatigue.spec" value="{{data.fatigue.spec}}" /> </label>
+                    </div>
+                    {{/if}}
+                    <label> <span> Temp. </span> <input type="number" name="data.fatigue.temp" value="{{data.fatigue.temp}}" /> </label>
+                    <label> <span> Final </span> <input type="number" name="data.fatiguefinal" value="{{data.fatiguefinal}}" readonly /> </label>
+                    <label> <span> Actual </span> <input type="number" name="data.fatigue.actual" value="{{data.fatigue.actual}}" /> </label>
+                </div>
+            </div> <!--Lifepoints & Fatigue-->
+
+            <div class="regeneration">
+                <h2> Regen. </h2>
+                <label> <span> Base </span> <input type="number" name="data.regenbase" value="{{data.regenbase}}" readonly /> </label>
+                <label> <span> Spec </span> <input type="number" name="data.regeneration.spec" value="{{data.regeneration.spec}}" /> </label>
+                <label> <span> Temp. </span> <input type="number" name="data.regeneration.temp" value="{{data.regeneration.temp}}" /> </label>
+                <label> <span> Final </span> <input type="number" name="data.regenfinal" value="{{data.regenfinal}}" readonly /> </label>
+                <label> <span> Resting </span> <input type="text" name="data.resting" value="{{data.resting}}" readonly /> </label>
+                <label> <span> No Rest </span> <input type="text" name="data.notresting" value="{{data.notresting}}" readonly /> </label>
+                <label> <span> Redu.Penalty </span> <input type="text" name="data.redpenalty" value="{{data.redpenalty}}" readonly /> </label>
+            </div> <!--Regeneration-->
+        </div> 
 
         <div>
-            <div class="lifepoints">
+            <div class="atkdef">
                 <h2>
-                    LP
+                    Attack
                     <label class="expand-box">
-                        <a class="toggleBoolean {{#if data.lifepoints.status}}showOpacity{{/if}}" data-label="data.lifepoints.status" data-ability="{{data.lifepoints.status}}"><i class="{{#if data.lifepoints.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        <a class="toggleBoolean {{#if data.combatstats.atkStatus}}showOpacity{{/if}}" data-label="data.combatstats.atkStatus" data-ability="{{data.combatstats.atkStatus}}"><i class="{{#if data.combatstats.atkStatus}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </h2>
-                {{#if data.lifepoints.status}}
+                {{#if data.combatstats.atkStatus}}
                 <div>
-                    <label> <span> Base </span> <input type="number" name="data.lpbase" value="{{data.lpbase}}" readonly/> </label>
-                    <label> <span> Mult. </span> <input type="number" name="data.lifepoints.multiple" value="{{data.lifepoints.multiple}}" /> </label>
-                    <label> <span> Class </span> <input type="number" name="data.lpbonus" value="{{data.lpbonus}}" readonly/> </label>
-                    <label> <span> Spec. </span> <input type="number" name="data.lifepoints.spec" value="{{data.lifepoints.spec}}" /> </label>
+                    <label> <span> Base </span> <input type="number" name="data.combatstats.atkbase" value="{{data.combatstats.atkbase}}" /> </label>
+                    <label> <span> Class </span> <input type="number" name="data.attackbonus" value="{{data.attackbonus}}" readonly /> </label>
+                    <label> <span> Special </span> <input type="number" name="data.combatstats.atkspecial" value="{{data.combatstats.atkspecial}}" /> </label>
+                </div>
+                <div>
+                    <label>
+                        <button type="button" class="mastery-box {{#if data.combatstats.atkMastery}}mastered{{else}}notMastered{{/if}}" data-label="data.combatstats.atkMastery" data-ability="{{data.combatstats.atkMastery}}">
+                            <span> Mastery </span>
+                        </button>
+                    </label>
                 </div>
                 {{/if}}
-                <label> <span> Temp. </span> <input type="number" name="data.lifepoints.temp" value="{{data.lifepoints.temp}}" /> </label>
-                <label> <span> Final </span> <input type="number" name="data.lpfinal" value="{{data.lpfinal}}" readonly/> </label>
-                <label> <span> Actual </span> <input type="number" name="data.lifepoints.actual" value="{{data.lifepoints.actual}}" /> </label>
-            </div>
+                <label> <span> Temp. </span> <input type="number" name="data.combatstats.atktemp" value="{{data.combatstats.atktemp}}" /> </label>
+                <label> <span> Final </span> <input type="number" name="data.atkfinal" value="{{data.atkfinal}}" readonly /> </label>
+                <button type="button" id="atkroll" class="combat rollable" data-roll="d100+@atkfinal" data-label="Attack">
+                    <span> <i class="fas fa-dice-d20"></i> </span>
+                </button>
+            </div> <!--Attack-->
 
-            <div class="fatigue">
+            <div class="atkdef">
                 <h2>
-                    Fatigue
+                    Block
                     <label class="expand-box">
-                        <a class="toggleBoolean {{#if data.fatigue.status}}showOpacity{{/if}}" data-label="data.fatigue.status" data-ability="{{data.fatigue.status}}"><i class="{{#if data.fatigue.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        <a class="toggleBoolean {{#if data.combatstats.blkStatus}}showOpacity{{/if}}" data-label="data.combatstats.blkStatus" data-ability="{{data.combatstats.blkStatus}}"><i class="{{#if data.combatstats.blkStatus}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </h2>
-                {{#if data.fatigue.status}}
+                {{#if data.combatstats.blkStatus}}
                 <div>
-                    <label> <span> Base </span> <input type="number" name="data.fatiguebase" value="{{data.fatiguebase}}" readonly/> </label>
-                    <label> <span> Spec. </span> <input type="number" name="data.fatigue.spec" value="{{data.fatigue.spec}}" /> </label>
+                    <label> <span> Base </span> <input type="number" name="data.combatstats.blkbase" value="{{data.combatstats.blkbase}}" /> </label>
+                    <label> <span> Class </span> <input type="number" name="data.blockbonus" value="{{data.blockbonus}}" readonly /> </label>
+                    <label> <span> Special </span> <input type="number" name="data.combatstats.blkspecial" value="{{data.combatstats.blkspecial}}" /> </label>
+                </div>
+                <div>
+                    <label>
+                        <button type="button" class="mastery-box {{#if data.combatstats.blkMastery}}mastered{{else}}notMastered{{/if}}" data-label="data.combatstats.blkMastery" data-ability="{{data.combatstats.blkMastery}}">
+                            <span> Mastery </span>
+                        </button>
+                    </label>
                 </div>
                 {{/if}}
-                <label> <span> Temp. </span> <input type="number" name="data.fatigue.temp" value="{{data.fatigue.temp}}" /> </label>
-                <label> <span> Final </span> <input type="number" name="data.fatiguefinal" value="{{data.fatiguefinal}}" readonly/> </label>
-                <label> <span> Actual </span> <input type="number" name="data.fatigue.actual" value="{{data.fatigue.actual}}" /> </label>
-            </div>
-        </div> <!--Lifepoints & Fatigue-->
+                <label> <span> Temp. </span> <input type="number" name="data.combatstats.blktemp" value="{{data.combatstats.blktemp}}" /> </label>
+                <label> <span> Final </span> <input type="number" name="data.blkfinal" value="{{data.blkfinal}}" readonly /> </label>
+                <button type="button" id="blkroll" class="combat rollable" data-roll="d100+@blkfinal" data-label="Block">
+                    <span> <i class="fas fa-dice-d20"></i> </span>
+                </button>
+            </div> <!--Block-->
 
-        <div class="regeneration">
-            <h2> Regen. </h2>
-            <label> <span> Base </span> <input type="number" name="data.regenbase" value="{{data.regenbase}}" readonly /> </label>
-            <label> <span> Spec </span> <input type="number" name="data.regeneration.spec" value="{{data.regeneration.spec}}" /> </label>
-            <label> <span> Temp. </span> <input type="number" name="data.regeneration.temp" value="{{data.regeneration.temp}}" /> </label>
-            <label> <span> Final </span> <input type="number" name="data.regenfinal" value="{{data.regenfinal}}" readonly /> </label>
-            <label> <span> Resting </span> <input type="text" name="data.resting" value="{{data.resting}}" readonly /> </label>
-            <label> <span> No Rest </span> <input type="text" name="data.notresting" value="{{data.notresting}}" readonly /> </label>
-            <label> <span> Redu.Penalty </span> <input type="text" name="data.redpenalty" value="{{data.redpenalty}}" readonly /> </label>
-        </div> <!--Regeneration-->
-
-        <div class="atkdef">
-            <h2>
-                Attack
-                <label class="expand-box">
-                    <a class="toggleBoolean {{#if data.combatstats.atkStatus}}showOpacity{{/if}}" data-label="data.combatstats.atkStatus" data-ability="{{data.combatstats.atkStatus}}"><i class="{{#if data.combatstats.atkStatus}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                </label>
-            </h2>
-            {{#if data.combatstats.atkStatus}}
-            <div>
-                <label> <span> Base </span> <input type="number" name="data.combatstats.atkbase" value="{{data.combatstats.atkbase}}" /> </label>
-                <label> <span> Class </span> <input type="number" name="data.attackbonus" value="{{data.attackbonus}}" readonly /> </label>
-                <label> <span> Special </span> <input type="number" name="data.combatstats.atkspecial" value="{{data.combatstats.atkspecial}}" /> </label>
-            </div>
-            <div>
-                <label>
-                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
-                </label>
-            </div>
-            {{/if}}
-            <label> <span> Temp. </span> <input type="number" name="data.combatstats.atktemp" value="{{data.combatstats.atktemp}}" /> </label>
-            <label> <span> Final </span> <input type="number" name="data.atkfinal" value="{{data.atkfinal}}" readonly /> </label>
-            <button type="button" id="atkroll" class="combat rollable" data-roll="d100+@atkfinal" data-label="Attack">
-                <span> <i class="fas fa-dice-d20"></i> </span>
-            </button>
-        </div> <!--Attack-->
-
-        <div class="atkdef">
-            <h2>
-                Block
-                <label class="expand-box">
-                    <a class="toggleBoolean {{#if data.combatstats.blkStatus}}showOpacity{{/if}}" data-label="data.combatstats.blkStatus" data-ability="{{data.combatstats.blkStatus}}"><i class="{{#if data.combatstats.blkStatus}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                </label>
-            </h2>
-            {{#if data.combatstats.blkStatus}}
-            <div>
-                <label> <span> Base </span> <input type="number" name="data.combatstats.blkbase" value="{{data.combatstats.blkbase}}" /> </label>
-                <label> <span> Class </span> <input type="number" name="data.blockbonus" value="{{data.blockbonus}}" readonly /> </label>
-                <label> <span> Special </span> <input type="number" name="data.combatstats.blkspecial" value="{{data.combatstats.blkspecial}}" /> </label>
-            </div>
-            <div>
-                <label>
-                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
-                </label>
-            </div>
-            {{/if}}
-            <label> <span> Temp. </span> <input type="number" name="data.combatstats.blktemp" value="{{data.combatstats.blktemp}}" /> </label>
-            <label> <span> Final </span> <input type="number" name="data.blkfinal" value="{{data.blkfinal}}" readonly /> </label>
-            <button type="button" id="blkroll" class="combat rollable" data-roll="d100+@blkfinal" data-label="Block">
-                <span> <i class="fas fa-dice-d20"></i> </span>
-            </button>
-        </div> <!--Block-->
-
-        <div class="atkdef">
-            <h2>
-                Dodge
-                <label class="expand-box">
-                    <a class="toggleBoolean {{#if data.combatstats.dodStatus}}showOpacity{{/if}}" data-label="data.combatstats.dodStatus" data-ability="{{data.combatstats.dodStatus}}"><i class="{{#if data.combatstats.dodStatus}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                </label>
-            </h2>
-            {{#if data.combatstats.dodStatus}}
-            <div>
-                <label> <span> Base </span> <input type="number" name="data.combatstats.dodbase" value="{{data.combatstats.dodbase}}" /> </label>
-                <label> <span> Class </span> <input type="number" name="data.dodgebonus" value="{{data.dodgebonus}}" readonly /> </label>
-                <label> <span> Special </span> <input type="number" name="data.combatstats.dodspecial" value="{{data.combatstats.dodspecial}}" /> </label>
-            </div>
-            <div>
-                <label>
-                    <button type="button" name="x" class="mastery-box"> <span> Mastery </span> </button>
-                </label>
-            </div>
-            {{/if}}
-            <label> <span> Temp. </span> <input type="number" name="data.combatstats.dodtemp" value="{{data.combatstats.dodtemp}}" /> </label>
-            <label> <span> Final </span> <input type="number" name="data.dodfinal" value="{{data.dodfinal}}" readonly /> </label>
-            <button type="button" id="dodroll" class="combat rollable" data-roll="d100+@dodfinal" data-label="Dodge">
-                <span> <i class="fas fa-dice-d20"> </i> </span>
-            </button>
-        </div> <!--Dodge-->
+            <div class="atkdef">
+                <h2>
+                    Dodge
+                    <label class="expand-box">
+                        <a class="toggleBoolean {{#if data.combatstats.dodStatus}}showOpacity{{/if}}" data-label="data.combatstats.dodStatus" data-ability="{{data.combatstats.dodStatus}}"><i class="{{#if data.combatstats.dodStatus}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </label>
+                </h2>
+                {{#if data.combatstats.dodStatus}}
+                <div>
+                    <label> <span> Base </span> <input type="number" name="data.combatstats.dodbase" value="{{data.combatstats.dodbase}}" /> </label>
+                    <label> <span> Class </span> <input type="number" name="data.dodgebonus" value="{{data.dodgebonus}}" readonly /> </label>
+                    <label> <span> Special </span> <input type="number" name="data.combatstats.dodspecial" value="{{data.combatstats.dodspecial}}" /> </label>
+                </div>
+                <div>
+                    <label>
+                        <button type="button" class="mastery-box {{#if data.combatstats.dodMastery}}mastered{{else}}notMastered{{/if}}" data-label="data.combatstats.dodMastery" data-ability="{{data.combatstats.dodMastery}}">
+                            <span> Mastery </span>
+                        </button>
+                    </label>
+                </div>
+                {{/if}}
+                <label> <span> Temp. </span> <input type="number" name="data.combatstats.dodtemp" value="{{data.combatstats.dodtemp}}" /> </label>
+                <label> <span> Final </span> <input type="number" name="data.dodfinal" value="{{data.dodfinal}}" readonly /> </label>
+                <button type="button" id="dodroll" class="combat rollable" data-roll="d100+@dodfinal" data-label="Dodge">
+                    <span> <i class="fas fa-dice-d20"> </i> </span>
+                </button>
+            </div> <!--Dodge-->
+        </div>
 
         <div class="initiative">
             <h2> Initiative </h2>
             {{#if data.initiative.status}}
             <div>
                 <input type="text" name="data.initiative.name" value="{{data.initiative.name}}" />
-                <label> <span> Armor </span> <input type="number" name="1" value="1" readonly /> </label>
+                <label> <span> Armor </span> <input type="number" name="data.totalNatPen" value="-{{data.totalNatPen}}" readonly /> </label>
                 <label> <span> Weapon </span> <input type="number" name="2" value="2" readonly /> </label>
                 <label> <span> Class </span> <input type="number" name="data.inibonus" value="{{data.inibonus}}" readonly /> </label>
                 <label> <span> Spec. </span> <input type="number" name="data.initiative.spec" value="{{data.initiative.spec}}" /> </label>
@@ -428,7 +433,7 @@
             {{else}}
             <button type="button">
                 <span> {{data.initiative.name}} </span>
-                <span> 4 </span>
+                <span> Final ini </span>
             </button>
             {{/if}}
             <label class="expand-box">
@@ -444,17 +449,19 @@
             </div>
             <div class="items-list">
                 {{#each advantages as |advantage id|}}
-                <div class="advantage-item item flexrow" data-item-id="{{advantage._id}}">
-                        <input class="advantage-name inline-edit" data-field="name" type="text" value="{{advantage.name}}" placeholder="Name" />
-                        <input type="number" value="{{data.adv.cost}}" readonly />
-                    <div class="item-controls">
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                <div class="advantage-item item normal-item" data-item-id="{{advantage._id}}">
+                    <div>
+                        <input class="item-name inline-edit" data-field="name" type="text" value="{{advantage.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                        <input class="inline-edit" data-field="data.advantage.cost" type="number" value="{{advantage.data.advantage.cost}}" />
+                        <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </div>
+                    <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
+                        <textarea class="inline-edit" data-field="data.description" placeholder="{{localize "abfalter.basicInfo.maintInfo"}}">{{advantage.data.description}}</textarea>
                     </div>
                 </div>
                 {{/each}}
             </div>
-            <a class="item-control item-create" title="Create item" data-type="advantage"><i class="fas fa-plus"></i> Add item</a>
+            <a class="item-control item-create" data-type="advantage"><i class="fas fa-plus"></i> Add item </a>
         </div><!--Advantages-->
 
         <div class="advdis">
@@ -465,17 +472,19 @@
             </div>
             <div class="items-list">
                 {{#each disadvantages as |disadvantage id|}}
-                <div class="disadvantage-item item flexrow" data-item-id="{{disadvantage._id}}">
-                        <h4>{{disadvantage.name}}</h4>
-                        <input type="number" value="{{data.disadv.benefit}}" readonly />
-                    <div class="item-controls">
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                <div class="disadvantage-item item normal-item" data-item-id="{{disadvantage._id}}">
+                    <div>
+                        <input class="item-name inline-edit" data-field="name" type="text" value="{{disadvantage.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                        <input class="inline-edit" data-field="data.disadvantage.benefit" type="number" value="{{disadvantage.data.disadvantage.benefit}}" />
+                        <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </div>
+                    <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
+                        <textarea class="inline-edit" data-field="data.description" placeholder="{{localize "abfalter.basicInfo.maintInfo"}}">{{disadvantage.data.description}}</textarea>
                     </div>
                 </div>
                 {{/each}}
             </div>
-            <a class="item-control item-create" title="Create item" data-type="disadvantage"><i class="fas fa-plus"></i> Add item</a>
+            <a class="item-control item-create" data-type="disadvantage"><i class="fas fa-plus"></i> Add item </a>
         </div><!--Disadvantages-->
     </div>
 
@@ -483,14 +492,16 @@
         <h2> Secondary Abilities </h2>
         <div>
             <div>
-                <span> Athletics </span>
-                <span> Final </span>
+                <div>
+                    <span> Athletics </span>
+                    <span> Final </span>
+                </div>
                 <span> Temp. </span>
                 <span> Spec </span>
                 <span> Class </span>
                 <span> Base </span>
                 <span> Attr. </span>
-                <input type="checkbox" name="data.athletics.status" data-dtype="boolean" {{checked data.athletics.status}} />
+                <a class="toggleBoolean {{#if data.athletics.status}}showOpacity{{/if}}" data-label="data.athletics.status" data-ability="{{data.athletics.status}}"><i class="{{#if data.athletics.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.athletics.status}}
             <div>
@@ -503,7 +514,7 @@
                 <input type="number" name="data.acrobaticsbonus" value="{{data.acrobaticsbonus}}" readonly />
                 <input type="number" name="data.secondary.acrobatics.base" value="{{data.secondary.acrobatics.base}}" />
                 <span class="physical"> AGI </span>
-                <input type="checkbox" name="data.acrobatics.status" data-dtype="boolean" {{checked data.acrobatics.status}} />
+                <a class="toggleBoolean {{#if data.acrobatics.status}}showOpacity{{/if}}" data-label="data.acrobatics.status" data-ability="{{data.acrobatics.status}}"><i class="{{#if data.acrobatics.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.acrobatics.status}}
             <div class="extend">
@@ -528,7 +539,7 @@
                 <input type="number" name="data.athleticismbonus" value="{{data.athleticismbonus}}" readonly />
                 <input type="number" name="data.secondary.athleticism.base" value="{{data.secondary.athleticism.base}}" />
                 <span class="physical"> AGI </span>
-                <input type="checkbox" name="data.athleticism.status" data-dtype="boolean" {{checked data.athleticism.status}} />
+                <a class="toggleBoolean {{#if data.athleticism.status}}showOpacity{{/if}}" data-label="data.athleticism.status" data-ability="{{data.athleticism.status}}"><i class="{{#if data.athleticism.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.athleticism.status}}
             <div class="extend"> 
@@ -553,7 +564,7 @@
                 <input type="number" name="data.climbbonus" value="{{data.climbbonus}}" readonly />
                 <input type="number" name="data.secondary.climb.base" value="{{data.secondary.climb.base}}" />
                 <span class="physical"> AGI </span>
-                <input type="checkbox" name="data.climb.status" data-dtype="boolean" {{checked data.climb.status}} />
+                <a class="toggleBoolean {{#if data.climb.status}}showOpacity{{/if}}" data-label="data.climb.status" data-ability="{{data.climb.status}}"><i class="{{#if data.climb.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.climb.status}}
             <div class="extend">
@@ -578,7 +589,7 @@
                 <input type="number" name="data.jumpbonus" value="{{data.jumpbonus}}" readonly />
                 <input type="number" name="data.secondary.jump.base" value="{{data.secondary.jump.base}}" />
                 <span class="physical"> STR </span>
-                <input type="checkbox" name="data.jump.status" data-dtype="boolean" {{checked data.jump.status}} />
+                <a class="toggleBoolean {{#if data.jump.status}}showOpacity{{/if}}" data-label="data.jump.status" data-ability="{{data.jump.status}}"><i class="{{#if data.jump.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.jump.status}}
             <div class="extend">
@@ -603,7 +614,7 @@
                 <input type="number" name="data.ridebonus" value="{{data.ridebonus}}" readonly />
                 <input type="number" name="data.secondary.ride.base" value="{{data.secondary.ride.base}}" />
                 <span class="physical"> AGI </span>
-                <input type="checkbox" name="data.ride.status" data-dtype="boolean" {{checked data.ride.status}} />
+                <a class="toggleBoolean {{#if data.ride.status}}showOpacity{{/if}}" data-label="data.ride.status" data-ability="{{data.ride.status}}"><i class="{{#if data.ride.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.ride.status}}
             <div class="extend">
@@ -628,7 +639,7 @@
                 <input type="number" name="data.swimbonus" value="{{data.swimbonus}}" readonly />
                 <input type="number" name="data.secondary.swim.base" value="{{data.secondary.swim.base}}" />
                 <span class="physical"> AGI </span>
-                <input type="checkbox" name="data.swim.status" data-dtype="boolean" {{checked data.swim.status}} />
+                <a class="toggleBoolean {{#if data.swim.status}}showOpacity{{/if}}" data-label="data.swim.status" data-ability="{{data.swim.status}}"><i class="{{#if data.swim.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.swim.status}}
             <div class="extend">
@@ -649,14 +660,16 @@
 
         <div>
             <div>
-                <span> Social </span>
-                <span> Final </span>
+                <div>
+                    <span> Social </span>
+                    <span> Final </span>
+                </div>
                 <span> Temp. </span>
                 <span> Spec </span>
                 <span> Class </span>
                 <span> Base </span>
                 <span> Attr. </span>
-                <input type="checkbox" name="data.social.status" data-dtype="boolean" {{checked data.social.status}} />
+                <a class="toggleBoolean {{#if data.social.status}}showOpacity{{/if}}" data-label="data.social.status" data-ability="{{data.social.status}}"><i class="{{#if data.social.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.social.status}}
             <div>
@@ -669,7 +682,7 @@
                 <input type="number" name="data.etiquettebonus" value="{{data.etiquettebonus}}" readonly />
                 <input type="number" name="data.secondary.etiquette.base" value="{{data.secondary.etiquette.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.etiquette.status" data-dtype="boolean" {{checked data.etiquette.status}} />
+                <a class="toggleBoolean {{#if data.etiquette.status}}showOpacity{{/if}}" data-label="data.etiquette.status" data-ability="{{data.etiquette.status}}"><i class="{{#if data.etiquette.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.etiquette.status}}
             <div class="extend">
@@ -694,7 +707,7 @@
                 <input type="number" name="data.intimidatebonus" value="{{data.intimidatebonus}}" readonly />
                 <input type="number" name="data.secondary.intimidate.base" value="{{data.secondary.intimidate.base}}" />
                 <span class="mental"> WP </span>
-                <input type="checkbox" name="data.intimidate.status" data-dtype="boolean" {{checked data.intimidate.status}} />
+                <a class="toggleBoolean {{#if data.intimidate.status}}showOpacity{{/if}}" data-label="data.intimidate.status" data-ability="{{data.intimidate.status}}"><i class="{{#if data.intimidate.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.intimidate.status}}
             <div class="extend">
@@ -719,7 +732,7 @@
                 <input type="number" name="data.leadershipbonus" value="{{data.leadershipbonus}}" readonly />
                 <input type="number" name="data.secondary.leadership.base" value="{{data.secondary.leadership.base}}" />
                 <span class="mental"> POW </span>
-                <input type="checkbox" name="data.leadership.status" data-dtype="boolean" {{checked data.leadership.status}} />
+                <a class="toggleBoolean {{#if data.leadership.status}}showOpacity{{/if}}" data-label="data.leadership.status" data-ability="{{data.leadership.status}}"><i class="{{#if data.leadership.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.leadership.status}}
             <div class="extend">
@@ -744,7 +757,7 @@
                 <input type="number" name="data.persuasionbonus" value="{{data.persuasionbonus}}" readonly />
                 <input type="number" name="data.secondary.persuasion.base" value="{{data.secondary.persuasion.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.persuasion.status" data-dtype="boolean" {{checked data.persuasion.status}} />
+                <a class="toggleBoolean {{#if data.persuasion.status}}showOpacity{{/if}}" data-label="data.persuasion.status" data-ability="{{data.persuasion.status}}"><i class="{{#if data.persuasion.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.persuasion.status}}
             <div class="extend">
@@ -769,7 +782,7 @@
                 <input type="number" name="data.streetwisebonus" value="{{data.streetwisebonus}}" readonly />
                 <input type="number" name="data.secondary.streetwise.base" value="{{data.secondary.streetwise.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.streetwise.status" data-dtype="boolean" {{checked data.streetwise.status}} />
+                <a class="toggleBoolean {{#if data.streetwise.status}}showOpacity{{/if}}" data-label="data.streetwise.status" data-ability="{{data.streetwise.status}}"><i class="{{#if data.streetwise.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.streetwise.status}}
             <div class="extend">
@@ -794,7 +807,7 @@
                 <input type="number" name="data.stylebonus" value="{{data.stylebonus}}" readonly />
                 <input type="number" name="data.secondary.style.base" value="{{data.secondary.style.base}}" />
                 <span class="mental"> POW </span>
-                <input type="checkbox" name="data.style.status" data-dtype="boolean" {{checked data.style.status}} />
+                <a class="toggleBoolean {{#if data.style.status}}showOpacity{{/if}}" data-label="data.style.status" data-ability="{{data.style.status}}"><i class="{{#if data.style.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.style.status}}
             <div class="extend">
@@ -819,7 +832,7 @@
                 <input type="number" name="data.tradingbonus" value="{{data.tradingbonus}}" readonly />
                 <input type="number" name="data.secondary.trading.base" value="{{data.secondary.trading.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.trading.status" data-dtype="boolean" {{checked data.trading.status}} />
+                <a class="toggleBoolean {{#if data.trading.status}}showOpacity{{/if}}" data-label="data.trading.status" data-ability="{{data.trading.status}}"><i class="{{#if data.trading.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.trading.status}}
             <div class="extend">
@@ -839,14 +852,16 @@
 
         <div>
             <div>
-                <span> Perceptive </span>
-                <span> Final </span>
+                <div>
+                    <span> Perceptive </span>
+                    <span> Final </span>
+                </div>
                 <span> Temp. </span>
                 <span> Spec </span>
                 <span> Class </span>
                 <span> Base </span>
                 <span> Attr. </span>
-                <input type="checkbox" name="data.perceptive.status" data-dtype="boolean" {{checked data.perceptive.status}} />
+                <a class="toggleBoolean {{#if data.perceptive.status}}showOpacity{{/if}}" data-label="data.perceptive.status" data-ability="{{data.perceptive.status}}"><i class="{{#if data.perceptive.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.perceptive.status}}
             <div>
@@ -859,7 +874,7 @@
                 <input type="number" name="data.noticebonus" value="{{data.noticebonus}}" readonly />
                 <input type="number" name="data.secondary.notice.base" value="{{data.secondary.notice.base}}" />
                 <span class="mental"> PER </span>
-                <input type="checkbox" name="data.notice.status" data-dtype="boolean" {{checked data.notice.status}} />
+                <a class="toggleBoolean {{#if data.notice.status}}showOpacity{{/if}}" data-label="data.notice.status" data-ability="{{data.notice.status}}"><i class="{{#if data.notice.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.notice.status}}
             <div class="extend">
@@ -884,7 +899,7 @@
                 <input type="number" name="data.searchbonus" value="{{data.searchbonus}}" readonly />
                 <input type="number" name="data.secondary.search.base" value="{{data.secondary.search.base}}" />
                 <span class="mental"> PER </span>
-                <input type="checkbox" name="data.search.status" data-dtype="boolean" {{checked data.search.status}} />
+                <a class="toggleBoolean {{#if data.search.status}}showOpacity{{/if}}" data-label="data.search.status" data-ability="{{data.search.status}}"><i class="{{#if data.search.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.search.status}}
             <div class="extend">
@@ -909,7 +924,7 @@
                 <input type="number" name="data.trackbonus" value="{{data.trackbonus}}" readonly />
                 <input type="number" name="data.secondary.track.base" value="{{data.secondary.track.base}}" />
                 <span class="mental"> PER </span>
-                <input type="checkbox" name="data.track.status" data-dtype="boolean" {{checked data.track.status}} />
+                <a class="toggleBoolean {{#if data.track.status}}showOpacity{{/if}}" data-label="data.track.status" data-ability="{{data.track.status}}"><i class="{{#if data.track.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.track.status}}
             <div class="extend">
@@ -929,14 +944,16 @@
 
         <div>
             <div>
-                <span> intellectual </span>
-                <span> Final </span>
+                <div>
+                    <span> intellectual </span>
+                    <span> Final </span>
+                </div>
                 <span> Temp. </span>
                 <span> Spec </span>
                 <span> Class </span>
                 <span> Base </span>
                 <span> Attr. </span>
-                <input type="checkbox" name="data.intellectual.status" data-dtype="boolean" {{checked data.intellectual.status}} />
+                <a class="toggleBoolean {{#if data.intellectual.status}}showOpacity{{/if}}" data-label="data.intellectual.status" data-ability="{{data.intellectual.status}}"><i class="{{#if data.intellectual.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.intellectual.status}}
             <div>
@@ -949,7 +966,7 @@
                 <input type="number" name="data.animalsbonus" value="{{data.animalsbonus}}" readonly />
                 <input type="number" name="data.secondary.animals.base" value="{{data.secondary.animals.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.animals.status" data-dtype="boolean" {{checked data.animals.status}} />
+                <a class="toggleBoolean {{#if data.animals.status}}showOpacity{{/if}}" data-label="data.animals.status" data-ability="{{data.animals.status}}"><i class="{{#if data.animals.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.animals.status}}
             <div class="extend">
@@ -974,7 +991,7 @@
                 <input type="number" name="data.appraisalbonus" value="{{data.appraisalbonus}}" readonly />
                 <input type="number" name="data.secondary.appraisal.base" value="{{data.secondary.appraisal.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.appraisal.status" data-dtype="boolean" {{checked data.appraisal.status}} />
+                <a class="toggleBoolean {{#if data.appraisal.status}}showOpacity{{/if}}" data-label="data.appraisal.status" data-ability="{{data.appraisal.status}}"><i class="{{#if data.appraisal.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.appraisal.status}}
             <div class="extend">
@@ -999,7 +1016,7 @@
                 <input type="number" name="data.architecturebonus" value="{{data.architecturebonus}}" readonly />
                 <input type="number" name="data.secondary.architecture.base" value="{{data.secondary.architecture.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.architecture.status" data-dtype="boolean" {{checked data.architecture.status}} />
+                <a class="toggleBoolean {{#if data.architecture.status}}showOpacity{{/if}}" data-label="data.architecture.status" data-ability="{{data.architecture.status}}"><i class="{{#if data.architecture.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.architecture.status}}
             <div class="extend">
@@ -1024,7 +1041,7 @@
                 <input type="number" name="data.herballorebonus" value="{{data.herballorebonus}}" readonly />
                 <input type="number" name="data.secondary.herballore.base" value="{{data.secondary.herballore.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.herballore.status" data-dtype="boolean" {{checked data.herballore.status}} />
+                <a class="toggleBoolean {{#if data.herballore.status}}showOpacity{{/if}}" data-label="data.herballore.status" data-ability="{{data.herballore.status}}"><i class="{{#if data.herballore.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.herballore.status}}
             <div class="extend">
@@ -1049,7 +1066,7 @@
                 <input type="number" name="data.historybonus" value="{{data.historybonus}}" readonly />
                 <input type="number" name="data.secondary.history.base" value="{{data.secondary.history.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.history.status" data-dtype="boolean" {{checked data.history.status}} />
+                <a class="toggleBoolean {{#if data.history.status}}showOpacity{{/if}}" data-label="data.history.status" data-ability="{{data.history.status}}"><i class="{{#if data.history.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.history.status}}
             <div class="extend">
@@ -1074,7 +1091,7 @@
                 <input type="number" name="data.lawbonus" value="{{data.lawbonus}}" readonly />
                 <input type="number" name="data.secondary.law.base" value="{{data.secondary.law.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.law.status" data-dtype="boolean" {{checked data.law.status}} />
+                <a class="toggleBoolean {{#if data.law.status}}showOpacity{{/if}}" data-label="data.law.status" data-ability="{{data.law.status}}"><i class="{{#if data.law.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.law.status}}
             <div class="extend">
@@ -1099,7 +1116,7 @@
                 <input type="number" name="data.magicapprbonus" value="{{data.magicapprbonus}}" readonly />
                 <input type="number" name="data.secondary.magicappr.base" value="{{data.secondary.magicappr.base}}" />
                 <span class="mental"> POW </span>
-                <input type="checkbox" name="data.magicappr.status" data-dtype="boolean" {{checked data.magicappr.status}} />
+                <a class="toggleBoolean {{#if data.magicappr.status}}showOpacity{{/if}}" data-label="data.magicappr.status" data-ability="{{data.magicappr.status}}"><i class="{{#if data.magicappr.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.magicappr.status}}
             <div class="extend">
@@ -1124,7 +1141,7 @@
                 <input type="number" name="data.medicinebonus" value="{{data.medicinebonus}}" readonly />
                 <input type="number" name="data.secondary.medicine.base" value="{{data.secondary.medicine.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.medicine.status" data-dtype="boolean" {{checked data.medicine.status}} />
+                <a class="toggleBoolean {{#if data.medicine.status}}showOpacity{{/if}}" data-label="data.medicine.status" data-ability="{{data.medicine.status}}"><i class="{{#if data.medicine.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.medicine.status}}
             <div class="extend">
@@ -1149,7 +1166,7 @@
                 <input type="number" name="data.memorizebonus" value="{{data.memorizebonus}}" readonly />
                 <input type="number" name="data.secondary.memorize.base" value="{{data.secondary.memorize.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.memorize.status" data-dtype="boolean" {{checked data.memorize.status}} />
+                <a class="toggleBoolean {{#if data.memorize.status}}showOpacity{{/if}}" data-label="data.memorize.status" data-ability="{{data.memorize.status}}"><i class="{{#if data.memorize.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.memorize.status}}
             <div class="extend">
@@ -1174,7 +1191,7 @@
                 <input type="number" name="data.navigationbonus" value="{{data.navigationbonus}}" readonly />
                 <input type="number" name="data.secondary.navigation.base" value="{{data.secondary.navigation.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.navigation.status" data-dtype="boolean" {{checked data.navigation.status}} />
+                <a class="toggleBoolean {{#if data.navigation.status}}showOpacity{{/if}}" data-label="data.navigation.status" data-ability="{{data.navigation.status}}"><i class="{{#if data.navigation.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.navigation.status}}
             <div class="extend">
@@ -1199,7 +1216,7 @@
                 <input type="number" name="data.occultbonus" value="{{data.occultbonus}}" readonly />
                 <input type="number" name="data.secondary.occult.base" value="{{data.secondary.occult.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.occult.status" data-dtype="boolean" {{checked data.occult.status}} />
+                <a class="toggleBoolean {{#if data.occult.status}}showOpacity{{/if}}" data-label="data.occult.status" data-ability="{{data.occult.status}}"><i class="{{#if data.occult.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.occult.status}}
             <div class="extend">
@@ -1224,7 +1241,7 @@
                 <input type="number" name="data.sciencebonus" value="{{data.sciencebonus}}" readonly />
                 <input type="number" name="data.secondary.science.base" value="{{data.secondary.science.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.science.status" data-dtype="boolean" {{checked data.science.status}} />
+                <a class="toggleBoolean {{#if data.science.status}}showOpacity{{/if}}" data-label="data.science.status" data-ability="{{data.science.status}}"><i class="{{#if data.science.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.science.status}}
             <div class="extend">
@@ -1249,7 +1266,7 @@
                 <input type="number" name="data.tacticsbonus" value="{{data.tacticsbonus}}" readonly />
                 <input type="number" name="data.secondary.tactics.base" value="{{data.secondary.tactics.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.tactics.status" data-dtype="boolean" {{checked data.tactics.status}} />
+                <a class="toggleBoolean {{#if data.tactics.status}}showOpacity{{/if}}" data-label="data.tactics.status" data-ability="{{data.tactics.status}}"><i class="{{#if data.tactics.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.tactics.status}}
             <div class="extend">
@@ -1269,14 +1286,16 @@
 
         <div>
             <div>
-                <span> Vigor </span>
-                <span> Final </span>
+                <div>
+                    <span> Vigor </span>
+                    <span> Final </span>
+                </div>
                 <span> Temp. </span>
                 <span> Spec </span>
                 <span> Class </span>
                 <span> Base </span>
                 <span> Attr. </span>
-                <input type="checkbox" name="data.vigor.status" data-dtype="boolean" {{checked data.vigor.status}} />
+                <a class="toggleBoolean {{#if data.vigor.status}}showOpacity{{/if}}" data-label="data.vigor.status" data-ability="{{data.vigor.status}}"><i class="{{#if data.vigor.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.vigor.status}}
             <div>
@@ -1289,7 +1308,7 @@
                 <input type="number" name="data.composurebonus" value="{{data.composurebonus}}" readonly />
                 <input type="number" name="data.secondary.composure.base" value="{{data.secondary.composure.base}}" />
                 <span class="mental"> WP </span>
-                <input type="checkbox" name="data.composure.status" data-dtype="boolean" {{checked data.composure.status}} />
+                <a class="toggleBoolean {{#if data.composure.status}}showOpacity{{/if}}" data-label="data.composure.status" data-ability="{{data.composure.status}}"><i class="{{#if data.composure.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.composure.status}}
             <div class="extend">
@@ -1314,7 +1333,7 @@
                 <input type="number" name="data.featsofstrbonus" value="{{data.featsofstrbonus}}" readonly />
                 <input type="number" name="data.secondary.featsofstr.base" value="{{data.secondary.featsofstr.base}}" />
                 <span class="mental"> STR </span>
-                <input type="checkbox" name="data.featsofstr.status" data-dtype="boolean" {{checked data.featsofstr.status}} />
+                <a class="toggleBoolean {{#if data.featsofstr.status}}showOpacity{{/if}}" data-label="data.featsofstr.status" data-ability="{{data.featsofstr.status}}"><i class="{{#if data.featsofstr.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.featsofstr.status}}
             <div class="extend"> 
@@ -1339,7 +1358,7 @@
                 <input type="number" name="data.withstpainbonus" value="{{data.withstpainbonus}}" readonly />
                 <input type="number" name="data.secondary.withstpain.base" value="{{data.secondary.withstpain.base}}" />
                 <span class="mental"> WP </span>
-                <input type="checkbox" name="data.withstpain.status" data-dtype="boolean" {{checked data.withstpain.status}} />
+                <a class="toggleBoolean {{#if data.withstpain.status}}showOpacity{{/if}}" data-label="data.withstpain.status" data-ability="{{data.withstpain.status}}"><i class="{{#if data.withstpain.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.withstpain.status}}
             <div class="extend">
@@ -1359,14 +1378,16 @@
 
         <div>
             <div>
-                <span> Subterfuge </span>
-                <span> Final </span>
+                <div>
+                    <span> Subterfuge </span>
+                    <span> Final </span>
+                </div>
                 <span> Temp. </span>
                 <span> Spec </span>
                 <span> Class </span>
                 <span> Base </span>
                 <span> Attr. </span>
-                <input type="checkbox" name="data.subterfuge.status" data-dtype="boolean" {{checked data.subterfuge.status}} />
+                <a class="toggleBoolean {{#if data.subterfuge.status}}showOpacity{{/if}}" data-label="data.subterfuge.status" data-ability="{{data.subterfuge.status}}"><i class="{{#if data.subterfuge.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.subterfuge.status}}
             <div>
@@ -1379,7 +1400,7 @@
                 <input type="number" name="data.disguisebonus" value="{{data.disguisebonus}}" readonly />
                 <input type="number" name="data.secondary.disguise.base" value="{{data.secondary.disguise.base}}" />
                 <span class="physical"> DEX </span>
-                <input type="checkbox" name="data.disguise.status" data-dtype="boolean" {{checked data.disguise.status}} />
+                <a class="toggleBoolean {{#if data.disguise.status}}showOpacity{{/if}}" data-label="data.disguise.status" data-ability="{{data.disguise.status}}"><i class="{{#if data.disguise.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.disguise.status}}
             <div class="extend">
@@ -1404,7 +1425,7 @@
                 <input type="number" name="data.hidebonus" value="{{data.hidebonus}}" readonly />
                 <input type="number" name="data.secondary.hide.base" value="{{data.secondary.hide.base}}" />
                 <span class="mental"> PER </span>
-                <input type="checkbox" name="data.hide.status" data-dtype="boolean" {{checked data.hide.status}} />
+                <a class="toggleBoolean {{#if data.hide.status}}showOpacity{{/if}}" data-label="data.hide.status" data-ability="{{data.hide.status}}"><i class="{{#if data.hide.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.hide.status}}
             <div class="extend">
@@ -1429,7 +1450,7 @@
                 <input type="number" name="data.lockpickingbonus" value="{{data.lockpickingbonus}}" readonly />
                 <input type="number" name="data.secondary.lockpicking.base" value="{{data.secondary.lockpicking.base}}" />
                 <span class="physical"> DEX </span>
-                <input type="checkbox" name="data.lockpicking.status" data-dtype="boolean" {{checked data.lockpicking.status}} />
+                <a class="toggleBoolean {{#if data.lockpicking.status}}showOpacity{{/if}}" data-label="data.lockpicking.status" data-ability="{{data.lockpicking.status}}"><i class="{{#if data.lockpicking.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.lockpicking.status}}
             <div class="extend">
@@ -1454,7 +1475,7 @@
                 <input type="number" name="data.poisonsbonus" value="{{data.poisonsbonus}}" readonly />
                 <input type="number" name="data.secondary.poisons.base" value="{{data.secondary.poisons.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.poisons.status" data-dtype="boolean" {{checked data.poisons.status}} />
+                <a class="toggleBoolean {{#if data.poisons.status}}showOpacity{{/if}}" data-label="data.poisons.status" data-ability="{{data.poisons.status}}"><i class="{{#if data.poisons.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.poisons.status}}
             <div class="extend">
@@ -1479,7 +1500,7 @@
                 <input type="number" name="data.stealthbonus" value="{{data.stealthbonus}}" readonly />
                 <input type="number" name="data.secondary.stealth.base" value="{{data.secondary.stealth.base}}" />
                 <span class="physical"> AGI </span>
-                <input type="checkbox" name="data.stealth.status" data-dtype="boolean" {{checked data.stealth.status}} />
+                <a class="toggleBoolean {{#if data.stealth.status}}showOpacity{{/if}}" data-label="data.stealth.status" data-ability="{{data.stealth.status}}"><i class="{{#if data.stealth.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.stealth.status}}
             <div class="extend">
@@ -1504,7 +1525,7 @@
                 <input type="number" name="data.theftbonus" value="{{data.theftbonus}}" readonly />
                 <input type="number" name="data.secondary.theft.base" value="{{data.secondary.theft.base}}" />
                 <span class="physical"> DEX </span>
-                <input type="checkbox" name="data.theft.status" data-dtype="boolean" {{checked data.theft.status}} />
+                <a class="toggleBoolean {{#if data.theft.status}}showOpacity{{/if}}" data-label="data.theft.status" data-ability="{{data.theft.status}}"><i class="{{#if data.theft.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.theft.status}}
             <div class="extend">
@@ -1529,7 +1550,7 @@
                 <input type="number" name="data.traplorebonus" value="{{data.traplorebonus}}" readonly />
                 <input type="number" name="data.secondary.traplore.base" value="{{data.secondary.traplore.base}}" />
                 <span class="physical"> DEX </span>
-                <input type="checkbox" name="data.traplore.status" data-dtype="boolean" {{checked data.traplore.status}} />
+                <a class="toggleBoolean {{#if data.traplore.status}}showOpacity{{/if}}" data-label="data.traplore.status" data-ability="{{data.traplore.status}}"><i class="{{#if data.traplore.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.traplore.status}}
             <div class="extend">
@@ -1549,14 +1570,16 @@
 
         <div>
             <div>
-                <span> Creative </span>
-                <span> Final </span>
+                <div>
+                    <span> Creative </span>
+                    <span> Final </span>
+                </div>
                 <span> Temp. </span>
                 <span> Spec </span>
                 <span> Class </span>
                 <span> Base </span>
                 <span> Attr. </span>
-                <input type="checkbox" name="data.creative.status" data-dtype="boolean" {{checked data.creative.status}} />
+                <a class="toggleBoolean {{#if data.creative.status}}showOpacity{{/if}}" data-label="data.creative.status" data-ability="{{data.creative.status}}"><i class="{{#if data.creative.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.creative.status}}
             <div>
@@ -1569,7 +1592,7 @@
                 <input type="number" name="data.alchemybonus" value="{{data.alchemybonus}}" readonly />
                 <input type="number" name="data.secondary.alchemy.base" value="{{data.secondary.alchemy.base}}" />
                 <span class="mental"> INT </span>
-                <input type="checkbox" name="data.alchemy.status" data-dtype="boolean" {{checked data.alchemy.status}} />
+                <a class="toggleBoolean {{#if data.alchemy.status}}showOpacity{{/if}}" data-label="data.alchemy.status" data-ability="{{data.alchemy.status}}"><i class="{{#if data.alchemy.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.alchemy.status}}
             <div class="extend">
@@ -1594,7 +1617,7 @@
                 <input type="number" name="data.animismbonus" value="{{data.animismbonus}}" readonly />
                 <input type="number" name="data.secondary.animism.base" value="{{data.secondary.animism.base}}" />
                 <span class="mental"> POW </span>
-                <input type="checkbox" name="data.animism.status" data-dtype="boolean" {{checked data.animism.status}} />
+                <a class="toggleBoolean {{#if data.animism.status}}showOpacity{{/if}}" data-label="data.animism.status" data-ability="{{data.animism.status}}"><i class="{{#if data.animism.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.animism.status}}
             <div class="extend">
@@ -1619,7 +1642,7 @@
                 <input type="number" name="data.artbonus" value="{{data.artbonus}}" readonly />
                 <input type="number" name="data.secondary.art.base" value="{{data.secondary.art.base}}" />
                 <span class="mental"> POW </span>
-                <input type="checkbox" name="data.art.status" data-dtype="boolean" {{checked data.art.status}} />
+                <a class="toggleBoolean {{#if data.art.status}}showOpacity{{/if}}" data-label="data.art.status" data-ability="{{data.art.status}}"><i class="{{#if data.art.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.art.status}}
             <div class="extend">
@@ -1644,7 +1667,7 @@
                 <input type="number" name="data.dancebonus" value="{{data.dancebonus}}" readonly />
                 <input type="number" name="data.secondary.dance.base" value="{{data.secondary.dance.base}}" />
                 <span class="physical"> AGI </span>
-                <input type="checkbox" name="data.dance.status" data-dtype="boolean" {{checked data.dance.status}} />
+                <a class="toggleBoolean {{#if data.dance.status}}showOpacity{{/if}}" data-label="data.dance.status" data-ability="{{data.dance.status}}"><i class="{{#if data.dance.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.dance.status}}
             <div class="extend">
@@ -1669,7 +1692,7 @@
                 <input type="number" name="data.forgingbonus" value="{{data.forgingbonus}}" readonly />
                 <input type="number" name="data.secondary.forging.base" value="{{data.secondary.forging.base}}" />
                 <span class="physical"> DEX </span>
-                <input type="checkbox" name="data.forging.status" data-dtype="boolean" {{checked data.forging.status}} />
+                <a class="toggleBoolean {{#if data.forging.status}}showOpacity{{/if}}" data-label="data.forging.status" data-ability="{{data.forging.status}}"><i class="{{#if data.forging.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.forging.status}}
             <div class="extend">
@@ -1694,7 +1717,7 @@
                 <input type="number" name="data.jewelrybonus" value="{{data.jewelrybonus}}" readonly />
                 <input type="number" name="data.secondary.jewelry.base" value="{{data.secondary.jewelry.base}}" />
                 <span class="physical"> DEX </span>
-                <input type="checkbox" name="data.jewelry.status" data-dtype="boolean" {{checked data.jewelry.status}} />
+                <a class="toggleBoolean {{#if data.jewelry.status}}showOpacity{{/if}}" data-label="data.jewelry.status" data-ability="{{data.jewelry.status}}"><i class="{{#if data.jewelry.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.jewelry.status}}
             <div class="extend">
@@ -1719,7 +1742,7 @@
                 <input type="number" name="data.musicbonus" value="{{data.musicbonus}}" readonly />
                 <input type="number" name="data.secondary.music.base" value="{{data.secondary.music.base}}" />
                 <span class="mental"> POW </span>
-                <input type="checkbox" name="data.music.status" data-dtype="boolean" {{checked data.music.status}} />
+                <a class="toggleBoolean {{#if data.music.status}}showOpacity{{/if}}" data-label="data.music.status" data-ability="{{data.music.status}}"><i class="{{#if data.music.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.music.status}}
             <div class="extend">
@@ -1744,7 +1767,7 @@
                 <input type="number" name="data.runesbonus" value="{{data.runesbonus}}" readonly />
                 <input type="number" name="data.secondary.runes.base" value="{{data.secondary.runes.base}}" />
                 <span class="physical"> DEX </span>
-                <input type="checkbox" name="data.runes.status" data-dtype="boolean" {{checked data.runes.status}} />
+                <a class="toggleBoolean {{#if data.runes.status}}showOpacity{{/if}}" data-label="data.runes.status" data-ability="{{data.runes.status}}"><i class="{{#if data.runes.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.runes.status}}
             <div class="extend">
@@ -1769,7 +1792,7 @@
                 <input type="number" name="data.ritualcaligbonus" value="{{data.ritualcaligbonus}}" readonly />
                 <input type="number" name="data.secondary.ritualcalig.base" value="{{data.secondary.ritualcalig.base}}" />
                 <span class="physical"> DEX </span>
-                <input type="checkbox" name="data.ritualcalig.status" data-dtype="boolean" {{checked data.ritualcalig.status}} />
+                <a class="toggleBoolean {{#if data.ritualcalig.status}}showOpacity{{/if}}" data-label="data.ritualcalig.status" data-ability="{{data.ritualcalig.status}}"><i class="{{#if data.ritualcalig.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.ritualcalig.status}}
             <div class="extend">
@@ -1794,7 +1817,7 @@
                 <input type="number" name="data.slofhandbonus" value="{{data.slofhandbonus}}" readonly />
                 <input type="number" name="data.secondary.slofhand.base" value="{{data.secondary.slofhand.base}}" />
                 <span class="physical"> DEX </span>
-                <input type="checkbox" name="data.slofhand.status" data-dtype="boolean" {{checked data.slofhand.status}} />
+                <a class="toggleBoolean {{#if data.slofhand.status}}showOpacity{{/if}}" data-label="data.slofhand.status" data-ability="{{data.slofhand.status}}"><i class="{{#if data.slofhand.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.slofhand.status}}
             <div class="extend">
@@ -1819,7 +1842,7 @@
                 <input type="number" name="data.tailoringbonus" value="{{data.tailoringbonus}}" readonly />
                 <input type="number" name="data.secondary.tailoring.base" value="{{data.secondary.tailoring.base}}" />
                 <span class="physical"> DEX </span>
-                <input type="checkbox" name="data.tailoring.status" data-dtype="boolean" {{checked data.tailoring.status}} />
+                <a class="toggleBoolean {{#if data.tailoring.status}}showOpacity{{/if}}" data-label="data.tailoring.status" data-ability="{{data.tailoring.status}}"><i class="{{#if data.tailoring.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.tailoring.status}}
             <div class="extend">
@@ -1835,9 +1858,6 @@
             {{/if}}
 
             {{/if}}
-
-
-
         </div><!--Creative Fields-->
 
     </div>

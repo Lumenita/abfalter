@@ -131,14 +131,17 @@
           "atkspecial": 0,
           "atktemp": 0,
           "atkStatus": false,
+          "atkMastery": false,
           "blkbase": 0,
           "blkspecial": 0,
           "blktemp": 0,
           "blkStatus": false,
+          "blkMastery": false,
           "dodbase": 0,
           "dodspecial": 0,
           "dodtemp": 0,
-          "dodStatus":  false
+          "dodStatus": false,
+          "dodMastery": false
         },
         "initiative": {
           "status": false,
@@ -1293,10 +1296,12 @@
     },
     "advantage": {
       "templates": [ "itemDescription" ],
+      "expand": false,
       "cost": 0
     },
     "disadvantage": {
       "templates": [ "itemDescription" ],
+      "expand": false,
       "benefit": 0
     },
     "spellPath": {

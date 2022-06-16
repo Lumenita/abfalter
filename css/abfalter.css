@@ -228,7 +228,7 @@ h3 {
 }
 /*
     -------------
-    Header Layout
+    Header Layout *taken from the roll20 variant -> will be overhauled at a later date.
     -------------
 */
 .abfalter .sheet-header .char-info {
@@ -356,171 +356,130 @@ h3 {
 /*
     ***************
     ---------------
-    GENERAL DRAWING
+    GENERAL DRAWING      *Consistency Up from hereon
     ---------------
     ***************
 */
-
 /*
     -------------------
     General Page Layout
     -------------------
 */
-.general > div:nth-of-type(1) {
+.general {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+}
+.g1,
+.secondary,
+.characteristics,
+.resistances {
+    width: 49%
+}
+.g1 > div:first-of-type {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: baseline;
 }
-.general > div:nth-of-type(1) > div:nth-of-type(1) {
+.g1 > div:nth-of-type(2),
+.g1 > div:nth-of-type(3) {
     display: flex;
-    width: 50%;
-    flex-wrap: wrap;
-    align-items: baseline;
+    justify-content: space-between;
 }
-.general > div:nth-of-type(1) > div:nth-of-type(2) {
-    width: 48%;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: baseline;
-}
-.general > div:nth-of-type(1) > div:nth-of-type(3) {
-    display: flex;
+.movement {
     width: 33%;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: baseline;
 }
-.general > div:nth-of-type(1) > div:nth-of-type(4) {
-    display: flex;
-    width: 27%;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: baseline;
+.g2 {
+    width: 28%;
 }
-.general > div:nth-of-type(1):not(:last-of-type),
-.general > div:nth-of-type(1) > div:not(:last-of-type),
-.general > div:nth-of-type(1) > div:nth-of-type(1) > div:not(:last-of-type),
-.general > div:nth-of-type(1) > div:nth-of-type(2) > div:not(:last-of-type),
-.general > div:nth-of-type(1) > div:nth-of-type(4) > div:not(:last-of-type) {
-    margin-bottom: 4px;
+.regeneration {
+    width: 35%;
 }
 /*
     ---------------
     Characteristics
     ---------------
 */
-.characteristics {
-    display: flex;
-    width: 95%;
-    flex-wrap: wrap;
-}
 .characteristics > div {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
-}
-.characteristics > div:not(:first-of-type) {
-    width: 100%;
-    min-height: 20px;
+    justify-content: flex-start;
 }
 .characteristics > div:first-of-type {
-    border-bottom: 5px solid transparent;
     border-image: url(../img/border.png) 10 stretch;
-    height: 20px;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
 }
 .characteristics > div:first-of-type > span:last-of-type {
-    margin-right: 26px;
+    margin-right: 12%;
 }
 .characteristics > div > span {
     width: 33.33%;
     text-align: center;
 }
-.characteristics > div > span:nth-child(2) {
+.characteristics > div > span:nth-of-type(2) {
     border-right: 1px solid black;
 }
 .characteristics > div > .compact {
-    width: calc(100% - 26px);
-    margin-top: -2px;
-    flex-wrap: wrap;
-}
-.characteristics > div > .compact > button{
-    width: calc(33.33%);
-    height: 20px;
-    border: 0px;
+    width: 88%;
+    display: flex;
 }
 .characteristics > div > .compact > button:first-of-type {
     width: 66.66%;
     border-right: 1px solid 
 }
-.characteristics > div > .compact > button:first-of-type > span {
-    width: 47%;
-    display: inherit;
+.characteristics > div > .compact > button{
+    width: 33.33%;
+    border: 0px;
 }
-.characteristics > div > .compact > button[type="button"] {
+.characteristics > div > .compact > button:first-of-type > span {
+    padding: 0px;
+    width: 50%;
+}
+.characteristics > div > .compact > button:last-of-type > span {
+    padding: 0px;
+    width: 100%;
+}
+.characteristics > div > .compact > button {
     padding: 0px;
     margin: 0px;
     border-radius: 0px;
+    display: flex;
 }
-.characteristics > div > .compact > button > span {
-    font-size: 13px;
-}
-.characteristics > div > label > input{
-    width: 18px;
-    height: 18px;
-    margin-top: -2px;
-    margin-left: -5px;
+.characteristics > div > label > a{
+    margin-left: 5px;
+    font-size: 15px;
     opacity: 0;
 }
-.characteristics > div > label > input:checked {
-    opacity: 1;
-}
-.characteristics > div:hover > label > input {
+.characteristics > div:hover > label > a {
     opacity: 1;
 }
 .characteristics > div > .extend {
     margin-bottom: 5px;
 }
 .characteristics > div > .extend > h3 {
-    border-bottom: 5px solid transparent;
     border-image: url(../img/border.png) 10 stretch;
-    width: 100%;
-    text-align: center;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
 }
 .characteristics > div > .extend  > label {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+    display: flex
 }
 .characteristics > div > .extend  > label > span {
-    font-size: 13px;
-    font-weight: normal;
-    vertical-align: bottom;
-    align-items: flex-end;
-    color: black;
+    width: 45%;
+    text-align: start;
+    margin: 0 0 0 10%;
 }
-.characteristics > div > .extend > label > span,
-.characteristics > div > .extend > label > input[type="number"] {
-    width: calc(50% - 5px);
-    display: inline-block;
+.characteristics > div > .extend > label > input {
+    width: 35%;
+    margin: 0 10% 0 0;
 }
-.characteristics > div > .extend > label > input[type="number"] {
-    text-align: center;
-    border: 0px;
-    border-bottom: 1px solid black;
-    padding-bottom: 0px;
-    padding-right: 0px;
-    padding-left: 0px;
-}
-.characteristics > div > .extend > label:nth-of-type(4) > input,
-.characteristics > div > .extend > label:nth-of-type(5) > input,
-.characteristics > div > .extend > label:nth-of-type(7) > input {
-    background: transparent;
-    border: 0px;
-} 
 .characteristics > div > .extend > label:nth-of-type(4) {
-    border-top: 5px solid transparent;
     border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    margin-top: 3px;
+    padding-top: 3px;
 }
 .characteristics > div > .extend > label:nth-of-type(4) > span,
 .characteristics > div > .extend > label:nth-of-type(5) > span,
@@ -528,34 +487,31 @@ h3 {
     font-weight: bold;
 }
 .characteristics > div > .extend > label:nth-of-type(6) {
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
     border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 /* 
     ----------
     Resistance
     ----------
 */
-.resistances {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-}
 .resistances > div {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.resistances > div:nth-of-type(2) {
-    margin-top: -2px;
-}
+
 .resistances > div:first-of-type {
-    border-bottom: 5px solid transparent;
     border-image: url(../img/border.png) 10 stretch;
-    z-index: 1;
-    height: 20px;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
 }
 .resistances > div > span {
     display: flex;
@@ -567,7 +523,7 @@ h3 {
     width: 100%;
     height: 20px;
 }
-.resistances > div > div > button[type="button"] {
+.resistances > div > div > button {
     width: 66.66%;
     padding: 0px;
     display: flex;
@@ -578,15 +534,8 @@ h3 {
 .resistances > div > div > button > span {
     width: 50%;
 }
-.resistances > div > div > input[type="number"] {
+.resistances > div > div > input {
     width: 33%;
-    text-align: center;
-    border: 0px;
-    border-bottom: 1px solid black;
-    padding-bottom: 0px;
-    padding-right: 0px;
-    padding-left: 0px;
-    height: 20px;
 }
 /*
     -------------------
@@ -597,42 +546,28 @@ h3 {
     border-image: url(../img/border.png) 10 stretch;
     border-top: 5px solid black;
     border-bottom: 5px solid black;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 .modactions > label {
-    width: 100%;
     display: flex;
-    font-size: 13px;
 }
 .modactions > label:not(:last-of-type) {
     margin-bottom: 5px;
-    align-content: center;
 }
 .modactions > label > span {
     display: flex;
-    align-items: center;
     font-weight: bold;
     width: 70%;
-    padding-left: 10%;
 }
-.modactions > label > input[type="number"] {
-    padding: 0px;
-    text-align: center;
-    border: 0px;
-    border-bottom: 1px solid black;
+.modactions > label > input {
     width: 25%;
-    height: 20px;
-}
-.modactions > label:nth-of-type(2) > input {
-    background: transparent;
-    border: 0px;
 }
 /*
     --------
-    Movement      *Consistency Up from hereon
+    Movement
     --------
 */
 .movement > label {
@@ -666,13 +601,7 @@ h3 {
     LP, Fatigue & Regen
     -------------------
 */
-.regeneration {
-    width: 35%;
-}
-.lifepoints,
-.fatigue {
-    width: 100%;
-}
+
 .lifepoints > label,
 .lifepoints > div > label,
 .fatigue > label,
@@ -792,132 +721,107 @@ h3 {
 */
 .initiative {
     display: flex;
-    width: 100%;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 .initiative > div {
     display: flex;
-    width: 100%;
+    width: 94%;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 .initiative > button {
     display: flex;
-    width: calc(100% - 26px);
+    width: 94%;
     justify-content: space-between;
-    height: 22px;
+    height: 25px;
     margin: 0px;
     padding-right: 5%;
-    margin-top: -2px;
     border: 0px;
+    align-items: center;
 }
-.initiative > label > input[type="checkbox"] {
-    width: 22px;
-    height: 22px;
-    margin-top: -2px;
-    margin-left: -5px;
-    opacity: 0;
-}
-
 .initiative > label > a {
+    margin-left: -19px;
+    font-size: 19px;
     opacity: 0;
 }
 .initiative:hover > label > a {
     opacity: 1;
 }
-
-.initiative > div {
-    display: flex;
-    width: calc(100% - 26px);
-    justify-content: space-between;
-}
-.initiative > div > input[type="text"] {
-    width: 100%;
+.initiative > div > input {
     font-size: 15px;
-    border: 0px;
-    border-bottom: 1px solid black;
-    padding-bottom: 0px;
-    padding-right: 0px;
-    padding-left: 5px;
-    padding-top: 0px;
-    height: 20px;
 }
 .initiative > div > label {
     display: flex;
-    width: calc(20% - 3px);
+    width: 19%;
     flex-wrap: wrap;
 }
 .initiative > div > label > span {
-    display: flex;
-    width: 100%;
-    font-size: 13px;
-    justify-content: center;
-    height: 20px;
-    margin-top: 3px;
     border-image: url(../img/border.png) 10 stretch;
     border-top: 5px solid black;
-}
-.initiative > div > label > input[type="number"] {
+    display: flex;
     width: 100%;
-    padding-right: 0px;
-    padding-left: 0px;
-    padding-bottom: 0px;
-    font-size: 13px;
-    text-align: center;
-    height: 20px;
-    border: 0px;
-    border-bottom: 1px solid black;
-    margin-top: -2px;
+    justify-content: center;
+    margin-top: 3px;
 }
-.initiative > div > label:nth-of-type(3) > input,
-.initiative > div > label:nth-of-type(5) > input {
-    background: transparent;
-    border: 0px;
+.initiative > div > label > input {
+    width: 100%;
 }
 /*
     ---------------------------
     Advantages & DIs-advantages
     ---------------------------
 */
-.advdis {
-    width: 100%;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-between;
+.advdis > div:last-of-type {
+    width: 95%;
+    margin: 0 0 0 2.5%;
 }
-.advdis > div:nth-of-type(2) {
+.advdis > div:first-of-type,
+.advantage-item > div:first-of-type,
+.disadvantage-item > div:first-of-type {
     display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
+}
+.advdis > div:first-of-type {
     border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
 }
-.advdis > div {
-    display: contents;
-    font-size: 14px;
+.advdis > div:first-of-type > span:first-of-type {
+    width: 75.05%;
+    margin: 0 0 0 2.375%;
 }
-.advdis > div > span:nth-of-type(2) {
-    padding-right: 15%;
+.advdis > div:first-of-type > span:nth-of-type(2){
+    width: 14.25%;
+    margin: 0 0 0 0.95%;
 }
-.advdis > div > div {
-    width: 100%;
+.advantage-item > div > input:first-of-type,
+.disadvantage-item > div > input:first-of-type {
+    width: 79%;
+    margin: 0px;
 }
-.advdis > div > div > div:nth-of-type(2) {
-    flex: 0 0 50px;
-}
-.advdis > div > div > div > input {
+.advantage-item > div > input:nth-of-type(2),
+.disadvantage-item > div > input:nth-of-type(2) {
     width: 15%;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
-} 
+    margin: 0 0 0 1%;
+}
+.advantage-item > div > a,
+.disadvantage-item > div > a {
+    width: 5%;
+    font-size: 15px;
+}
+.advantage-item > div > a,
+.disadvantage-item > div > a {
+    opacity: 0;
+}
+.advantage-item > div:hover > a,
+.disadvantage-item > div:hover > a {
+    opacity: 1;
+}
+.advdis > div > div > div > textarea {
+    margin: 3px 0 0 0;
+}
 /*
     ---------------------------
     Secondary Abilities Drawing
@@ -925,44 +829,61 @@ h3 {
 */
 .secondary > div > div {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 }
 .secondary > div > div:first-of-type {   
     border-image: url(../img/border.png) 10 stretch;
     border-bottom: 5px solid black;
-    height: 20px;
+}
+.secondary > div > div > a {
+    width: 5%;
+    font-size: 15px;
+    opacity: 0;
+}
+.secondary > div > div:hover > a {
+    opacity: 1;
+}
+.secondary > div > div:first-of-type > div {
+    display: flex;
+    justify-content: space-between;
+    width: 35%;
+}
+.secondary > div > div:first-of-type > div > span:first-of-type {
+    padding: 0 0 0 4%;
+}
+.secondary > div > div:first-of-type > div > span:last-of-type,
+.secondary > div > div > button > span:nth-of-type(2) {
+    padding: 0 10% 0 0;
+}
+.secondary > div > div:first-of-type > span,
+.secondary > div > div > input {
+    width: 11.5%;
+    margin: 0 0 0 1%;
+}
+.secondary > div > div:first-of-type > span:nth-of-type(5),
+.secondary > div > div > span {
+    width: 9%;
+    margin: 0 0 0 1%;
 }
 .secondary > div > div > button {
     height: 20px;
-    width: 50%;
-    font-size: 13px;
+    width: 35%;
     display: flex;
     justify-content: space-between;
     margin: 0px;
     border-radius: 0px;
-    padding-right: 5%;
     border: 0px;
 }
-.secondary > div > div > button > span:nth-of-type(2) {
-    padding-right: 5%;
-}
-.secondary > div > div > input {
-    width: 18%;
-    height: 20px;
-    padding-right: 0px;
-    padding-left: 0px;
-    padding-bottom: 0px;
-    font-size: 13px;
-    text-align: center;
-    border: 0px;
-    border-bottom: 1px solid black;
-    margin-left: 3px;
-}
-.secondary > div > div > input:nth-of-type(3) {
-    border: 0px;
-    background: transparent;
-}
+
+
+
+
+
+
+
+
+
 .secondary > div > div > input[type="checkbox"] {
     height: 18px;
     margin: 0px;
@@ -975,20 +896,21 @@ h3 {
 .secondary > div > div > input[type="checkbox"]:checked {
     opacity: 1;
 }
-.secondary > div > div > span:first-of-type {
-    width: 20%;
-    text-align: center;
-}
-.secondary > div > div > span:nth-of-type(3),
-.secondary > div > div > span:nth-of-type(4),
-.secondary > div > div > span:nth-of-type(5),
-.secondary > div > div > span:nth-of-type(6) {
-    width: 8%;
-}
-.secondary > div > div > span:nth-of-type(7) {
-    width: 6%;
-    padding-left: 5px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .secondary > div > .extend {
     font-size: 13px;
     height: 20px;
@@ -1025,21 +947,6 @@ h3 {
     padding-right: 15px;
     padding-left: 15px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
     ***************
     ---------------

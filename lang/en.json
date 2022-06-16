@@ -61,6 +61,15 @@
       "defense": "Defense"
 
     },
+    "generalTab": {
+      "characteristics": "Characteristics",
+      "opposed": "Opposed",
+      "atr": "Atr.",
+      "special": "Special",
+      "modifier": "Mod",
+      "finalOpposed": "Final Opp."
+
+    },
     "sheet": {
       "newItem": "New Item",
       "nameItem": "A name is required here",

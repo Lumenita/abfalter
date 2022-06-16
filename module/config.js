@@ -59,6 +59,16 @@ abfalter.basicInfo = {
     wp: "abfalter.basicInfo.wp",
     attack: "abfalter.basicInfo.attack",
     defense: "abfalter.basicInfo.defense",
+    
+}
+
+abfalter.generalTab = {
+    characteristics: "abfalter.generalTab.characteristics",
+    opposed: "abfalter.generalTab.opposed",
+    atr: "abfalter.generalTab.atr",
+    special: "abfalter.generalTab.special",
+    modifier: "abfalter.generalTab.modifier",
+    finalOpposed: "abfalter.generalTab.finalOpposed"
 
 }
 
