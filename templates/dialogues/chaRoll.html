@@ -1,0 +1,19 @@
+<div>
+    <div class="secondarychatmsg">
+        <div>
+            <span> {{rollResult.data.name}} </span>
+        </div>
+        <div title="{{rollResult.result}}">
+            <span> {{label}} </span>
+            <span class="{{rollResult.color}}"> {{rollResult.newTotal}} </span>
+        </div>
+    </div>
+    <div>
+        {{#if rollResult.explode}}
+        <span> Open Roll! </span>
+        {{/if}}
+        {{#if rollResult.fumble}}
+        <span> Fumble! </span>
+        {{/if}}
+    </div>
+</div>

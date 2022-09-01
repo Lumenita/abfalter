@@ -1,4 +1,4 @@
-import { openSecondaryDiceDialogue } from "../diceroller.js";
+import { openModifierDialogue } from "../diceroller.js";
 
 export default class abfalterCharacterSheet extends ActorSheet {
     static get defaultOptions() {
@@ -77,8 +77,6 @@ export default class abfalterCharacterSheet extends ActorSheet {
             config: CONFIG.abfalter
         }
 
-
-
         //Initialize Items
         sheetData.inventories = baseData.items.filter(function (item) { return item.type == "inventory" });
         sheetData.weapons = baseData.items.filter(function (item) { return item.type == "weapon" });
@@ -135,8 +133,6 @@ export default class abfalterCharacterSheet extends ActorSheet {
 
 
         if (this.actor.isOwner) {
-            html.find(".item-roll").click(this._onItemRoll.bind(this));
-
             html.find('.maccuHalf').click(ev => {
                 const value = $(ev.currentTarget).attr("data-ability");
                 this.document.update({ "data.maccu.actual": Math.floor(this.document.data.data.maccu.actual + (value / 1)) });
@@ -149,11 +145,6 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 const value = $(ev.currentTarget).attr("data-ability");
                 this.document.update({ "data.zeon.actual": Math.floor(this.document.data.data.zeon.actual + (value / 1)) });
             }); 
-            html.find('.rollSecondary').click(ev => {
-                let value = $(ev.currentTarget).attr("data-ability");
-                let label = $(ev.currentTarget).attr("data-label");
-                openSecondaryDiceDialogue(this.actor, value, label);
-            });
             html.find(".toggleBoolean").click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
                 let label = $(ev.currentTarget).attr("data-label");
@@ -191,16 +182,37 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 }
                 this.document.update({ [label]: value, [label2]: value2 });
             });
+
+            html.find(".item-chat").click(this._onItemChatRoll.bind(this));
+            html.find(".item-roll").click(this._onItemRoll.bind(this));
+            html.find('.rollable').click(this._onRoll.bind(this));
+
+
         }
 
         super.activateListeners(html);
     }
 
+    _onRoll(event) {
+        event.preventDefault();
+        const element = event.currentTarget;
+        const dataset = element.dataset;
+
+        openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type, dataset.ability);
+    }
+
     _onItemCreate(event) {
         event.preventDefault();
         let element = event.currentTarget;
+        const type = element.dataset.type;
+
+        const types = {
+            "inventory": "New item in inv",
+            "default": game.i18n.localize("abfalter.sheet.newItem"),
+        };
+        const name = (types[type] || types["default"]);
         let itemData = {
-            name: game.i18n.localize("abfalter.sheet.newItem"),
+            name: name,
             type: element.dataset.type
         }
         return this.actor.createEmbeddedDocuments("Item", [itemData]);
@@ -249,10 +261,12 @@ export default class abfalterCharacterSheet extends ActorSheet {
         item.update({ "data.toggle": element.toggle });
     }
 
+    _onItemChatRoll(event) {
+        const itemID = event.currentTarget.closest(".item").dataset.itemId;
+        const item = this.actor.items.get(itemID);
 
-
-
-
+        item.roll();
+    }
 
     _onItemRoll(event) {
         event.preventDefault();
@@ -261,5 +275,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
 
         item.roll();
     }
+
+
 }
 

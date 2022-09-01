@@ -7,7 +7,6 @@ import abfalterCharacterSheet from "./actor/abfalterCharacterSheet.js"
 
 async function preloadHandlebarsTemplates () {
     const templatePaths = [
-        // sheet templates
         "systems/abfalter/templates/actor/parts/general.html",
         "systems/abfalter/templates/actor/parts/background.html",
         "systems/abfalter/templates/actor/parts/magic.html",
@@ -15,6 +14,7 @@ async function preloadHandlebarsTemplates () {
         "systems/abfalter/templates/actor/parts/ki.html",
         "systems/abfalter/templates/actor/parts/armory.html",
         "systems/abfalter/templates/actor/parts/settings.html",
+        "templates/dice/roll.html"
     ];
     return loadTemplates(templatePaths);
 };

@@ -120,7 +120,7 @@ export default class abfalterItem extends Item {
     async roll() {
         let chatData = {
             user: game.user.id,
-            speaker: ChatMessage.getSpeaker()
+            speaker: ChatMessage.getSpeaker(),
         };
 
         let cardData = {

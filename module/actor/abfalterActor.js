@@ -273,6 +273,9 @@ export default class abfalterActor extends Actor {
         for (let [key, stat] of Object.entries(data.stats)) {
             stat.final = Math.floor(stat.base + stat.spec + stat.temp);
             switch (stat.final) {
+                case 0:
+                    stat.mod = -40;
+                    break;
                 case 1:
                     stat.mod = -30;
                     break;
@@ -346,6 +349,10 @@ export default class abfalterActor extends Actor {
                 default:
                     stat.mod = 0;
             }
+            if (stat.final > 30) {
+                stat.final = 30;
+                stat.mod = 75;
+            }
             stat.opposedfinal = Math.floor((stat.final + stat.opposed) + (data.aam / 20));
             //Ki Pools
             if (stat != "Intelligence" && "Perception") {
@@ -383,7 +390,6 @@ export default class abfalterActor extends Actor {
                 break;
             default:
                 data.unarmedDmgFinal = data.fistDamage.base;
-
         }
 
         /*
@@ -475,6 +481,7 @@ export default class abfalterActor extends Actor {
         //Calculating Number of Actions
         const actnumcalc = data.stats.Agility.base + data.stats.Dexterity.base;
         switch (actnumcalc) {
+            case 0:
             case 1:
             case 2:
             case 3:
@@ -526,7 +533,7 @@ export default class abfalterActor extends Actor {
         }
 
         //Movement
-        data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp - data.movement.pen + Math.ceil(data.aam / 20));
+        data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp - data.movement.pen + Math.min(0, Math.ceil(data.aam / 20)));
         switch (data.finalmove) {
             case 1:
                 data.fullmove = "3 ft";
@@ -634,7 +641,11 @@ export default class abfalterActor extends Actor {
                 data.runningmove = "0";
                 break;
         }
-
+        if (data.finalmove > 20) {
+            data.fullmove = "Special";
+            data.fourthmove = "Special";
+            data.runningmove = "Special";
+        }
         //Lifepoint Calculation
         data.lpbase = Math.floor(25 + 10 * data.stats.Constitution.final + data.stats.Constitution.mod - Math.ceil((data.stats.Constitution.final - 1) / data.stats.Constitution.final) * 5);
         data.lpfinal = Math.floor(data.lpbase + lpbonus + data.lifepoints.spec + data.lifepoints.temp + Math.ceil(data.lifepoints.multiple * data.stats.Constitution.final));
@@ -812,7 +823,7 @@ export default class abfalterActor extends Actor {
         // Initiative
 
 
-        /**
+        /*
             Secondaries
         */
         // Acrobatics

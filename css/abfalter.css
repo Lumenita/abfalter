@@ -79,13 +79,13 @@ h3 {
 .hidden {
     display: none;
 }
-.fumbleroll {
+.fumbleRoll {
     color: red;
 }
-.openroll {
+.openRoll {
     color: forestgreen;
 }
-.normalroll {
+.normalRoll {
     color: black;
 }
 .physical {
@@ -136,7 +136,7 @@ h3 {
     background-color: #a5a5a5;
 }
 .mastered {
-    color: #17ff17;
+    color: #48ed12;
 }
 .notMastered {
     color: black;
@@ -456,6 +456,7 @@ h3 {
 }
 .characteristics > div > .extend {
     margin-bottom: 5px;
+    width: 88%;
 }
 .characteristics > div > .extend > h3 {
     border-image: url(../img/border.png) 10 stretch;
@@ -797,12 +798,16 @@ h3 {
     margin: 0 0 0 0.95%;
 }
 .advantage-item > div > input:first-of-type,
-.disadvantage-item > div > input:first-of-type {
+.advantage-item > div > span:first-of-type,
+.disadvantage-item > div > input:first-of-type,
+.disadvantage-item > div > span:first-of-type {
     width: 79%;
     margin: 0px;
 }
 .advantage-item > div > input:nth-of-type(2),
-.disadvantage-item > div > input:nth-of-type(2) {
+.advantage-item > div > span:nth-of-type(2),
+.disadvantage-item > div > input:nth-of-type(2),
+.disadvantage-item > div > span:nth-of-type(2) {
     width: 15%;
     margin: 0 0 0 1%;
 }
@@ -819,7 +824,7 @@ h3 {
 .disadvantage-item > div:hover > a {
     opacity: 1;
 }
-.advdis > div > div > div > textarea {
+.advdis > div > div > textarea {
     margin: 3px 0 0 0;
 }
 /*
@@ -3144,6 +3149,15 @@ h3 {
     align-items: center;
     height: 20px;
 }
+
+
+
+
+
+
+
+
+
 /*
     ***************
     ---------------
@@ -3151,6 +3165,10 @@ h3 {
     ---------------
     ***************
 */
+.message-content {
+    display: flex;
+    flex-direction: column;
+}
 .chat-message .message-header .message-metadata {
     display: block;
 }
