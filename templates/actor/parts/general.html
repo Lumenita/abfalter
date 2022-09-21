@@ -128,6 +128,36 @@
                         <a class="toggleBoolean {{#if data.stats.Dexterity.status}}showOpacity{{/if}}" data-label="data.stats.Dexterity.status" data-ability="{{data.stats.Dexterity.status}}"><i class="{{#if data.stats.Dexterity.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </div>
+                <!--Perception-->
+                <div>
+                    {{#if data.stats.Perception.status}}
+                    <div class="extend">
+                        <h3 class="physical"> {{localize "abfalter.basicInfo.perception"}} </h3>
+                        <label>
+                            <span> {{localize "abfalter.basicInfo.base"}} </span>
+                            <input type="number" name="data.stats.Perception.base" value="{{data.stats.Perception.base}}" data-dtype="number" />
+                        </label>
+                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.stats.Perception.spec" value="{{data.stats.Perception.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Perception.temp" value="{{data.stats.Perception.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{data.stats.Perception.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{data.stats.Perception.mod}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="data.stats.Perception.opposed" value="{{data.stats.Perception.opposed}}" /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{data.stats.Perception.opposedfinal}}" readonly /> </label>
+                    </div><!-- <i class="fas fa-dice-d20"></i>-->
+                    {{else}}
+                    <div class="compact">
+                        <button type="button" class="rollable" data-roll="{{data.stats.Perception.final}}" data-label="{{localize "abfalter.basicInfo.perception"}}" data-type="characteristicRoll">
+                            <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span> <span> {{data.stats.Perception.final}} </span>
+                        </button>
+                        <button type="button" class="rollable" data-roll="{{data.stats.Perception.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.basicInfo.perception"}}" data-type="characteristicRoll">
+                            <span> {{data.stats.Perception.opposedfinal}} </span>
+                        </button>
+                    </div>
+                    {{/if}}
+                    <label class="expand-box">
+                        <a class="toggleBoolean {{#if data.stats.Perception.status}}showOpacity{{/if}}" data-label="data.stats.Perception.status" data-ability="{{data.stats.Perception.status}}"><i class="{{#if data.stats.Perception.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </label>
+                </div>
                 <!--Intelligence-->
                 <div>
                     {{#if data.stats.Intelligence.status}}
@@ -156,36 +186,6 @@
                     {{/if}}
                     <label class="expand-box">
                         <a class="toggleBoolean {{#if data.stats.Intelligence.status}}showOpacity{{/if}}" data-label="data.stats.Intelligence.status" data-ability="{{data.stats.Intelligence.status}}"><i class="{{#if data.stats.Intelligence.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                    </label>
-                </div>
-                <!--Perception-->
-                <div>
-                    {{#if data.stats.Perception.status}}
-                    <div class="extend">
-                        <h3 class="mental"> {{localize "abfalter.basicInfo.perception"}} </h3>
-                        <label>
-                            <span> {{localize "abfalter.basicInfo.base"}} </span>
-                            <input type="number" name="data.stats.Perception.base" value="{{data.stats.Perception.base}}" data-dtype="number" />
-                        </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.stats.Perception.spec" value="{{data.stats.Perception.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Perception.temp" value="{{data.stats.Perception.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{data.stats.Perception.final}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{data.stats.Perception.mod}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="data.stats.Perception.opposed" value="{{data.stats.Perception.opposed}}" /> </label>
-                        <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{data.stats.Perception.opposedfinal}}" readonly /> </label>
-                    </div><!-- <i class="fas fa-dice-d20"></i>-->
-                    {{else}}
-                    <div class="compact">
-                        <button type="button" class="rollable" data-roll="{{data.stats.Perception.final}}" data-label="{{localize "abfalter.basicInfo.perception"}}" data-type="characteristicRoll">
-                            <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span> <span> {{data.stats.Perception.final}} </span>
-                        </button>
-                        <button type="button" class="rollable" data-roll="{{data.stats.Perception.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.basicInfo.perception"}}" data-type="characteristicRoll">
-                            <span> {{data.stats.Perception.opposedfinal}} </span>
-                        </button>
-                    </div>
-                    {{/if}}
-                    <label class="expand-box">
-                        <a class="toggleBoolean {{#if data.stats.Perception.status}}showOpacity{{/if}}" data-label="data.stats.Perception.status" data-ability="{{data.stats.Perception.status}}"><i class="{{#if data.stats.Perception.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </div>
                 <!--Power-->
@@ -455,27 +455,30 @@
                 <span> {{localize "abfalter.basicInfo.name"}} </span>
                 <span> {{localize "abfalter.basicInfo.cost"}} </span>
             </div>
-            <div class="item-list">
+            <div class="{{#if data.itemToggle.advantages}}item-list{{/if}}">
                 {{#each advantages as |advantage id|}}
                 <div class="advantage-item item normal-item" data-item-id="{{advantage._id}}">
-                    {{#if data.expand}}
+                    {{#if system.expand}}
                     <div>
                         <input class="item-name inline-edit" data-field="name" type="text" value="{{advantage.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
-                        <input class="inline-edit" data-field="data.advantage.cost" type="number" value="{{advantage.data.cost}}" />
-                        <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        <input class="inline-edit" data-field="system.cost" type="number" value="{{advantage.system.cost}}" />
+                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <textarea class="inline-edit" data-field="data.description" placeholder="{{localize "abfalter.basicInfo.maintInfo"}}">{{advantage.data.description}}</textarea>
+                    <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.basicInfo.advInfo"}}">{{advantage.system.description}}</textarea>
                     {{else}}
-                    <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
+                    <div class="{{#if system.expand}}expand{{else}}notExpand{{/if}}">
                         <span> {{advantage.name}} </span>
-                        <span> {{advantage.data.cost}} </span>
-                        <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        <span> {{advantage.system.cost}} </span>
+                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     {{/if}}
                 </div>
                 {{/each}}
             </div>
-            <a class="item-control item-create" data-type="advantage"><i class="fas fa-plus"></i> {{localize "abfalter.sheet.addItem"}} </a>
+            <div>
+                <a class="item-control item-create" data-type="advantage"><i class="fas fa-plus"></i> {{localize "abfalter.sheet.addItem"}} </a>
+                <a class="toggleBoolean {{#if data.itemToggle.advantages}}armorpenalty{{/if}}" data-label="data.itemToggle.advantages" data-ability="{{data.itemToggle.advantages}}"><i class="{{#if data.itemToggle.advantages}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+            </div>
         </div><!--Advantages-->
 
         <div class="advdis">
@@ -484,27 +487,30 @@
                 <span> {{localize "abfalter.basicInfo.name"}} </span>
                 <span> {{localize "abfalter.generalTab.benefit"}} </span>
             </div>
-            <div class="item-list">
+            <div class="{{#if data.itemToggle.disadvantages}}item-list{{/if}}">
                 {{#each disadvantages as |disadvantage id|}}
                 <div class="disadvantage-item item normal-item" data-item-id="{{disadvantage._id}}">
-                    {{#if data.expand}}
+                    {{#if system.expand}}
                     <div>
                         <input class="item-name inline-edit" data-field="name" type="text" value="{{disadvantage.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
-                        <input class="inline-edit" data-field="data.disadvantage.benefit" type="number" value="{{disadvantage.data.benefit}}" />
-                        <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        <input class="inline-edit" data-field="system.benefit" type="number" value="{{disadvantage.system.benefit}}" />
+                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <textarea class="inline-edit" data-field="data.description" placeholder="{{localize "abfalter.basicInfo.maintInfo"}}">{{disadvantage.data.description}}</textarea>
+                    <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.basicInfo.disadvInfo"}}">{{disadvantage.system.description}}</textarea>
                     {{else}}
-                <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
-                    <span> {{disadvantage.name}} </span>
-                    <span> {{disadvantage.data.benefit}} </span>
-                    <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                </div>
+                    <div class="{{#if system.expand}}expand{{else}}notExpand{{/if}}">
+                        <span> {{disadvantage.name}} </span>
+                        <span> {{disadvantage.system.benefit}} </span>
+                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </div>
                     {{/if}}
                 </div>
                 {{/each}}
             </div>
-            <a class="item-control item-create" data-type="disadvantage"><i class="fas fa-plus"></i> {{localize "abfalter.sheet.addItem"}} </a>
+            <div>
+                <a class="item-control item-create" data-type="disadvantage"><i class="fas fa-plus"></i> {{localize "abfalter.sheet.addItem"}} </a>
+                <a class="toggleBoolean {{#if data.itemToggle.disadvantages}}armorpenalty{{/if}}" data-label="data.itemToggle.disadvantages" data-ability="{{data.itemToggle.disadvantages}}"><i class="{{#if data.itemToggle.disadvantages}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+            </div>
         </div><!--Disadvantages-->
     </div>
 
@@ -522,9 +528,9 @@
                 <span> {{localize "abfalter.basicInfo.class"}} </span>
                 <span> {{localize "abfalter.basicInfo.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
-                <a class="toggleBoolean {{#if data.athletics.status}}showOpacity{{/if}}" data-label="data.athletics.status" data-ability="{{data.athletics.status}}"><i class="{{#if data.athletics.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.main.athletics}}showOpacity{{/if}}" data-label="data.secondary.main.athletics" data-ability="{{data.secondary.main.athletics}}"><i class="{{#if data.secondary.main.athletics}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.athletics.status}}
+            {{#if data.secondary.main.athletics}}
             <div>
                 <button type="button" class="rollable" data-roll="{{data.acrofinal}}" data-label="{{localize "abfalter.generalTab.acrobatic"}}" data-type="secondaryRoll" data-ability="{{data.secondary.acrobatics.mastery}}">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.acrobatic"}} </span>
@@ -535,9 +541,9 @@
                 <input type="number" name="data.acrobaticsbonus" value="{{data.acrobaticsbonus}}" readonly />
                 <input type="number" name="data.secondary.acrobatics.base" value="{{data.secondary.acrobatics.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.agi"}} </span>
-                <a class="toggleBoolean {{#if data.acrobatics.status}}showOpacity{{/if}}" data-label="data.acrobatics.status" data-ability="{{data.acrobatics.status}}"><i class="{{#if data.acrobatics.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.acrobatics.status}}showOpacity{{/if}}" data-label="data.secondary.acrobatics.status" data-ability="{{data.secondary.acrobatics.status}}"><i class="{{#if data.secondary.acrobatics.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.acrobatics.status}}
+            {{#if data.secondary.acrobatics.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.acrobatics.nat" value="{{data.secondary.acrobatics.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.acrobatics.natural" value="{{data.secondary.acrobatics.natural}}" />
@@ -560,9 +566,9 @@
                 <input type="number" name="data.athleticismbonus" value="{{data.athleticismbonus}}" readonly />
                 <input type="number" name="data.secondary.athleticism.base" value="{{data.secondary.athleticism.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.agi"}} </span>
-                <a class="toggleBoolean {{#if data.athleticism.status}}showOpacity{{/if}}" data-label="data.athleticism.status" data-ability="{{data.athleticism.status}}"><i class="{{#if data.athleticism.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.athleticism.status}}showOpacity{{/if}}" data-label="data.secondary.athleticism.status" data-ability="{{data.secondary.athleticism.status}}"><i class="{{#if data.secondary.athleticism.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.athleticism.status}}
+            {{#if data.secondary.athleticism.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.athleticism.nat" value="{{data.secondary.athleticism.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.athleticism.natural" value="{{data.secondary.athleticism.natural}}" />
@@ -585,15 +591,15 @@
                 <input type="number" name="data.climbbonus" value="{{data.climbbonus}}" readonly />
                 <input type="number" name="data.secondary.climb.base" value="{{data.secondary.climb.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.agi"}} </span>
-                <a class="toggleBoolean {{#if data.climb.status}}showOpacity{{/if}}" data-label="data.climb.status" data-ability="{{data.climb.status}}"><i class="{{#if data.climb.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.climb.status}}showOpacity{{/if}}" data-label="data.secondary.climb.status" data-ability="{{data.secondary.climb.status}}"><i class="{{#if data.secondary.climb.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.climb.status}}
+            {{#if data.secondary.climb.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.climb.nat" value="{{data.secondary.climb.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.climb.natural" value="{{data.secondary.climb.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.climbnatfinal" value="{{data.climbnatfinal}}" readonly />
                 <label>
-                    <button type="button" class="mastery-box {{#if data.secondary.climb.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.climb.mastery" data-ability="{{data.secondary.climb.mastery}}">
+                    <button type="button" class="mastery-box {{#if data.secondary.secondary.climb.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.climb.mastery" data-ability="{{data.secondary.climb.mastery}}">
                         <span> {{localize "abfalter.basicInfo.mastery"}} </span>
                     </button>
                 </label>
@@ -610,9 +616,9 @@
                 <input type="number" name="data.jumpbonus" value="{{data.jumpbonus}}" readonly />
                 <input type="number" name="data.secondary.jump.base" value="{{data.secondary.jump.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.str"}} </span>
-                <a class="toggleBoolean {{#if data.jump.status}}showOpacity{{/if}}" data-label="data.jump.status" data-ability="{{data.jump.status}}"><i class="{{#if data.jump.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.jump.status}}showOpacity{{/if}}" data-label="data.secondary.jump.status" data-ability="{{data.secondary.jump.status}}"><i class="{{#if data.secondary.jump.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.jump.status}}
+            {{#if data.secondary.jump.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.jump.nat" value="{{data.secondary.jump.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.jump.natural" value="{{data.secondary.jump.natural}}" />
@@ -635,9 +641,9 @@
                 <input type="number" name="data.ridebonus" value="{{data.ridebonus}}" readonly />
                 <input type="number" name="data.secondary.ride.base" value="{{data.secondary.ride.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.agi"}} </span>
-                <a class="toggleBoolean {{#if data.ride.status}}showOpacity{{/if}}" data-label="data.ride.status" data-ability="{{data.ride.status}}"><i class="{{#if data.ride.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.ride.status}}showOpacity{{/if}}" data-label="data.secondary.ride.status" data-ability="{{data.secondary.ride.status}}"><i class="{{#if data.secondary.ride.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.ride.status}}
+            {{#if data.secondary.ride.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.ride.nat" value="{{data.secondary.ride.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.ride.natural" value="{{data.secondary.ride.natural}}" />
@@ -660,9 +666,9 @@
                 <input type="number" name="data.swimbonus" value="{{data.swimbonus}}" readonly />
                 <input type="number" name="data.secondary.swim.base" value="{{data.secondary.swim.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.agi"}} </span>
-                <a class="toggleBoolean {{#if data.swim.status}}showOpacity{{/if}}" data-label="data.swim.status" data-ability="{{data.swim.status}}"><i class="{{#if data.swim.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.swim.status}}showOpacity{{/if}}" data-label="data.secondary.swim.status" data-ability="{{data.secondary.swim.status}}"><i class="{{#if data.secondary.swim.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.swim.status}}
+            {{#if data.secondary.swim.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.swim.nat" value="{{data.secondary.swim.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.swim.natural" value="{{data.secondary.swim.natural}}" />
@@ -689,9 +695,9 @@
                 <span> {{localize "abfalter.basicInfo.class"}} </span>
                 <span> {{localize "abfalter.basicInfo.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
-                <a class="toggleBoolean {{#if data.social.status}}showOpacity{{/if}}" data-label="data.social.status" data-ability="{{data.social.status}}"><i class="{{#if data.social.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.main.social}}showOpacity{{/if}}" data-label="data.secondary.main.social" data-ability="{{data.secondary.main.social}}"><i class="{{#if data.secondary.main.social}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.social.status}}
+            {{#if data.secondary.main.social}}
             <div>
                 <button type="button" class="rollable" data-roll="{{data.etiquettefinal}}" data-label="{{localize "abfalter.generalTab.etiquette"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.etiquette"}} </span>
@@ -702,9 +708,9 @@
                 <input type="number" name="data.etiquettebonus" value="{{data.etiquettebonus}}" readonly />
                 <input type="number" name="data.secondary.etiquette.base" value="{{data.secondary.etiquette.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.etiquette.status}}showOpacity{{/if}}" data-label="data.etiquette.status" data-ability="{{data.etiquette.status}}"><i class="{{#if data.etiquette.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.etiquette.status}}showOpacity{{/if}}" data-label="data.secondary.etiquette.status" data-ability="{{data.secondary.etiquette.status}}"><i class="{{#if data.secondary.etiquette.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.etiquette.status}}
+            {{#if data.secondary.etiquette.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.etiquette.nat" value="{{data.secondary.etiquette.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.etiquette.natural" value="{{data.secondary.etiquette.natural}}" />
@@ -727,9 +733,9 @@
                 <input type="number" name="data.intimidatebonus" value="{{data.intimidatebonus}}" readonly />
                 <input type="number" name="data.secondary.intimidate.base" value="{{data.secondary.intimidate.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.wp"}} </span>
-                <a class="toggleBoolean {{#if data.intimidate.status}}showOpacity{{/if}}" data-label="data.intimidate.status" data-ability="{{data.intimidate.status}}"><i class="{{#if data.intimidate.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.intimidate.status}}showOpacity{{/if}}" data-label="data.secondary.intimidate.status" data-ability="{{data.secondary.intimidate.status}}"><i class="{{#if data.secondary.intimidate.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.intimidate.status}}
+            {{#if data.secondary.intimidate.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.intimidate.nat" value="{{data.secondary.intimidate.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.intimidate.natural" value="{{data.secondary.intimidate.natural}}" />
@@ -752,9 +758,9 @@
                 <input type="number" name="data.leadershipbonus" value="{{data.leadershipbonus}}" readonly />
                 <input type="number" name="data.secondary.leadership.base" value="{{data.secondary.leadership.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.pow"}} </span>
-                <a class="toggleBoolean {{#if data.leadership.status}}showOpacity{{/if}}" data-label="data.leadership.status" data-ability="{{data.leadership.status}}"><i class="{{#if data.leadership.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.leadership.status}}showOpacity{{/if}}" data-label="data.secondary.leadership.status" data-ability="{{data.secondary.leadership.status}}"><i class="{{#if data.secondary.leadership.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.leadership.status}}
+            {{#if data.secondary.leadership.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.leadership.nat" value="{{data.secondary.leadership.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.leadership.natural" value="{{data.secondary.leadership.natural}}" />
@@ -777,9 +783,9 @@
                 <input type="number" name="data.persuasionbonus" value="{{data.persuasionbonus}}" readonly />
                 <input type="number" name="data.secondary.persuasion.base" value="{{data.secondary.persuasion.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.persuasion.status}}showOpacity{{/if}}" data-label="data.persuasion.status" data-ability="{{data.persuasion.status}}"><i class="{{#if data.persuasion.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.persuasion.status}}showOpacity{{/if}}" data-label="data.secondary.persuasion.status" data-ability="{{data.secondary.persuasion.status}}"><i class="{{#if data.secondary.persuasion.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.persuasion.status}}
+            {{#if data.secondary.persuasion.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.persuasion.nat" value="{{data.secondary.persuasion.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.persuasion.natural" value="{{data.secondary.persuasion.natural}}" />
@@ -802,9 +808,9 @@
                 <input type="number" name="data.streetwisebonus" value="{{data.streetwisebonus}}" readonly />
                 <input type="number" name="data.secondary.streetwise.base" value="{{data.secondary.streetwise.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.streetwise.status}}showOpacity{{/if}}" data-label="data.streetwise.status" data-ability="{{data.streetwise.status}}"><i class="{{#if data.streetwise.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.streetwise.status}}showOpacity{{/if}}" data-label="data.secondary.streetwise.status" data-ability="{{data.secondary.streetwise.status}}"><i class="{{#if data.secondary.streetwise.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.streetwise.status}}
+            {{#if data.secondary.streetwise.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.streetwise.nat" value="{{data.secondary.streetwise.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.streetwise.natural" value="{{data.secondary.streetwise.natural}}" />
@@ -827,9 +833,9 @@
                 <input type="number" name="data.stylebonus" value="{{data.stylebonus}}" readonly />
                 <input type="number" name="data.secondary.style.base" value="{{data.secondary.style.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.pow"}} </span>
-                <a class="toggleBoolean {{#if data.style.status}}showOpacity{{/if}}" data-label="data.style.status" data-ability="{{data.style.status}}"><i class="{{#if data.style.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.style.status}}showOpacity{{/if}}" data-label="data.secondary.style.status" data-ability="{{data.secondary.style.status}}"><i class="{{#if data.secondary.style.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.style.status}}
+            {{#if data.secondary.style.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.style.nat" value="{{data.secondary.style.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.style.natural" value="{{data.secondary.style.natural}}" />
@@ -852,9 +858,9 @@
                 <input type="number" name="data.tradingbonus" value="{{data.tradingbonus}}" readonly />
                 <input type="number" name="data.secondary.trading.base" value="{{data.secondary.trading.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.trading.status}}showOpacity{{/if}}" data-label="data.trading.status" data-ability="{{data.trading.status}}"><i class="{{#if data.trading.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.trading.status}}showOpacity{{/if}}" data-label="data.secondary.trading.status" data-ability="{{data.secondary.trading.status}}"><i class="{{#if data.secondary.trading.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.trading.status}}
+            {{#if data.secondary.trading.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.trading.nat" value="{{data.secondary.trading.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.trading.natural" value="{{data.secondary.trading.natural}}" />
@@ -881,9 +887,9 @@
                 <span> {{localize "abfalter.basicInfo.class"}} </span>
                 <span> {{localize "abfalter.basicInfo.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
-                <a class="toggleBoolean {{#if data.perceptive.status}}showOpacity{{/if}}" data-label="data.perceptive.status" data-ability="{{data.perceptive.status}}"><i class="{{#if data.perceptive.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.main.perceptive}}showOpacity{{/if}}" data-label="data.secondary.main.perceptive" data-ability="{{data.secondary.main.perceptive}}"><i class="{{#if data.secondary.main.perceptive}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.perceptive.status}}
+            {{#if data.secondary.main.perceptive}}
             <div>
                 <button type="button" class="rollable" data-roll="{{data.noticefinal}}" data-label="{{localize "abfalter.generalTab.notice"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.notice"}} </span>
@@ -893,10 +899,10 @@
                 <input type="number" name="data.secondary.notice.spec" value="{{data.secondary.notice.spec}}" />
                 <input type="number" name="data.noticebonus" value="{{data.noticebonus}}" readonly />
                 <input type="number" name="data.secondary.notice.base" value="{{data.secondary.notice.base}}" />
-                <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span>
-                <a class="toggleBoolean {{#if data.notice.status}}showOpacity{{/if}}" data-label="data.notice.status" data-ability="{{data.notice.status}}"><i class="{{#if data.notice.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span>
+                <a class="toggleBoolean {{#if data.secondary.notice.status}}showOpacity{{/if}}" data-label="data.secondary.notice.status" data-ability="{{data.secondary.notice.status}}"><i class="{{#if data.secondary.notice.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.notice.status}}
+            {{#if data.secondary.notice.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.notice.nat" value="{{data.secondary.notice.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.notice.natural" value="{{data.secondary.notice.natural}}" />
@@ -918,10 +924,10 @@
                 <input type="number" name="data.secondary.search.spec" value="{{data.secondary.search.spec}}" />
                 <input type="number" name="data.searchbonus" value="{{data.searchbonus}}" readonly />
                 <input type="number" name="data.secondary.search.base" value="{{data.secondary.search.base}}" />
-                <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span>
-                <a class="toggleBoolean {{#if data.search.status}}showOpacity{{/if}}" data-label="data.search.status" data-ability="{{data.search.status}}"><i class="{{#if data.search.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span>
+                <a class="toggleBoolean {{#if data.secondary.search.status}}showOpacity{{/if}}" data-label="data.secondary.search.status" data-ability="{{data.secondary.search.status}}"><i class="{{#if data.secondary.search.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.search.status}}
+            {{#if data.secondary.search.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.search.nat" value="{{data.secondary.search.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.search.natural" value="{{data.secondary.search.natural}}" />
@@ -943,10 +949,10 @@
                 <input type="number" name="data.secondary.track.spec" value="{{data.secondary.track.spec}}" />
                 <input type="number" name="data.trackbonus" value="{{data.trackbonus}}" readonly />
                 <input type="number" name="data.secondary.track.base" value="{{data.secondary.track.base}}" />
-                <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span>
-                <a class="toggleBoolean {{#if data.track.status}}showOpacity{{/if}}" data-label="data.track.status" data-ability="{{data.track.status}}"><i class="{{#if data.track.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span>
+                <a class="toggleBoolean {{#if data.secondary.track.status}}showOpacity{{/if}}" data-label="data.secondary.track.status" data-ability="{{data.secondary.track.status}}"><i class="{{#if data.secondary.track.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.track.status}}
+            {{#if data.secondary.track.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.track.nat" value="{{data.secondary.track.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.track.natural" value="{{data.secondary.track.natural}}" />
@@ -973,9 +979,9 @@
                 <span> {{localize "abfalter.basicInfo.class"}} </span>
                 <span> {{localize "abfalter.basicInfo.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
-                <a class="toggleBoolean {{#if data.intellectual.status}}showOpacity{{/if}}" data-label="data.intellectual.status" data-ability="{{data.intellectual.status}}"><i class="{{#if data.intellectual.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.main.intellectual}}showOpacity{{/if}}" data-label="data.secondary.main.intellectual" data-ability="{{data.secondary.main.intellectual}}"><i class="{{#if data.secondary.main.intellectual}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.intellectual.status}}
+            {{#if data.secondary.main.intellectual}}
             <div>
                 <button type="button" class="rollable" data-roll="{{data.animalsfinal}}" data-label="{{localize "abfalter.generalTab.animals"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.animals"}} </span>
@@ -986,9 +992,9 @@
                 <input type="number" name="data.animalsbonus" value="{{data.animalsbonus}}" readonly />
                 <input type="number" name="data.secondary.animals.base" value="{{data.secondary.animals.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.animals.status}}showOpacity{{/if}}" data-label="data.animals.status" data-ability="{{data.animals.status}}"><i class="{{#if data.animals.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.animals.status}}showOpacity{{/if}}" data-label="data.secondary.animals.status" data-ability="{{data.secondary.animals.status}}"><i class="{{#if data.secondary.animals.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.animals.status}}
+            {{#if data.secondary.animals.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.animals.nat" value="{{data.secondary.animals.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.animals.natural" value="{{data.secondary.animals.natural}}" />
@@ -1011,9 +1017,9 @@
                 <input type="number" name="data.appraisalbonus" value="{{data.appraisalbonus}}" readonly />
                 <input type="number" name="data.secondary.appraisal.base" value="{{data.secondary.appraisal.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.appraisal.status}}showOpacity{{/if}}" data-label="data.appraisal.status" data-ability="{{data.appraisal.status}}"><i class="{{#if data.appraisal.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.appraisal.status}}showOpacity{{/if}}" data-label="data.secondary.appraisal.status" data-ability="{{data.secondary.appraisal.status}}"><i class="{{#if data.secondary.appraisal.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.appraisal.status}}
+            {{#if data.secondary.appraisal.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.appraisal.nat" value="{{data.secondary.appraisal.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.appraisal.natural" value="{{data.secondary.appraisal.natural}}" />
@@ -1036,9 +1042,9 @@
                 <input type="number" name="data.architecturebonus" value="{{data.architecturebonus}}" readonly />
                 <input type="number" name="data.secondary.architecture.base" value="{{data.secondary.architecture.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.architecture.status}}showOpacity{{/if}}" data-label="data.architecture.status" data-ability="{{data.architecture.status}}"><i class="{{#if data.architecture.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.architecture.status}}showOpacity{{/if}}" data-label="data.secondary.architecture.status" data-ability="{{data.secondary.architecture.status}}"><i class="{{#if data.secondary.architecture.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.architecture.status}}
+            {{#if data.secondary.architecture.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.architecture.nat" value="{{data.secondary.architecture.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.architecture.natural" value="{{data.secondary.architecture.natural}}" />
@@ -1061,9 +1067,9 @@
                 <input type="number" name="data.herballorebonus" value="{{data.herballorebonus}}" readonly />
                 <input type="number" name="data.secondary.herballore.base" value="{{data.secondary.herballore.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.herballore.status}}showOpacity{{/if}}" data-label="data.herballore.status" data-ability="{{data.herballore.status}}"><i class="{{#if data.herballore.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.herballore.status}}showOpacity{{/if}}" data-label="data.secondary.herballore.status" data-ability="{{data.secondary.herballore.status}}"><i class="{{#if data.secondary.herballore.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.herballore.status}}
+            {{#if data.secondary.herballore.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.herballore.nat" value="{{data.secondary.herballore.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.herballore.natural" value="{{data.secondary.herballore.natural}}" />
@@ -1086,9 +1092,9 @@
                 <input type="number" name="data.historybonus" value="{{data.historybonus}}" readonly />
                 <input type="number" name="data.secondary.history.base" value="{{data.secondary.history.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.history.status}}showOpacity{{/if}}" data-label="data.history.status" data-ability="{{data.history.status}}"><i class="{{#if data.history.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.history.status}}showOpacity{{/if}}" data-label="data.secondary.history.status" data-ability="{{data.secondary.history.status}}"><i class="{{#if data.secondary.history.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.history.status}}
+            {{#if data.secondary.history.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.history.nat" value="{{data.secondary.history.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.history.natural" value="{{data.secondary.history.natural}}" />
@@ -1111,9 +1117,9 @@
                 <input type="number" name="data.lawbonus" value="{{data.lawbonus}}" readonly />
                 <input type="number" name="data.secondary.law.base" value="{{data.secondary.law.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.law.status}}showOpacity{{/if}}" data-label="data.law.status" data-ability="{{data.law.status}}"><i class="{{#if data.law.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.law.status}}showOpacity{{/if}}" data-label="data.secondary.law.status" data-ability="{{data.secondary.law.status}}"><i class="{{#if data.secondary.law.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.law.status}}
+            {{#if data.secondary.law.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.law.nat" value="{{data.secondary.law.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.law.natural" value="{{data.secondary.law.natural}}" />
@@ -1136,9 +1142,9 @@
                 <input type="number" name="data.magicapprbonus" value="{{data.magicapprbonus}}" readonly />
                 <input type="number" name="data.secondary.magicappr.base" value="{{data.secondary.magicappr.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.pow"}} </span>
-                <a class="toggleBoolean {{#if data.magicappr.status}}showOpacity{{/if}}" data-label="data.magicappr.status" data-ability="{{data.magicappr.status}}"><i class="{{#if data.magicappr.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.magicappr.status}}showOpacity{{/if}}" data-label="data.secondary.magicappr.status" data-ability="{{data.secondary.magicappr.status}}"><i class="{{#if data.secondary.magicappr.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.magicappr.status}}
+            {{#if data.secondary.magicappr.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.magicappr.nat" value="{{data.secondary.magicappr.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.magicappr.natural" value="{{data.secondary.magicappr.natural}}" />
@@ -1161,9 +1167,9 @@
                 <input type="number" name="data.medicinebonus" value="{{data.medicinebonus}}" readonly />
                 <input type="number" name="data.secondary.medicine.base" value="{{data.secondary.medicine.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.medicine.status}}showOpacity{{/if}}" data-label="data.medicine.status" data-ability="{{data.medicine.status}}"><i class="{{#if data.medicine.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.medicine.status}}showOpacity{{/if}}" data-label="data.secondary.medicine.status" data-ability="{{data.secondary.medicine.status}}"><i class="{{#if data.secondary.medicine.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.medicine.status}}
+            {{#if data.secondary.medicine.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.medicine.nat" value="{{data.secondary.medicine.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.medicine.natural" value="{{data.secondary.medicine.natural}}" />
@@ -1186,9 +1192,9 @@
                 <input type="number" name="data.memorizebonus" value="{{data.memorizebonus}}" readonly />
                 <input type="number" name="data.secondary.memorize.base" value="{{data.secondary.memorize.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.memorize.status}}showOpacity{{/if}}" data-label="data.memorize.status" data-ability="{{data.memorize.status}}"><i class="{{#if data.memorize.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.memorize.status}}showOpacity{{/if}}" data-label="data.secondary.memorize.status" data-ability="{{data.secondary.memorize.status}}"><i class="{{#if data.secondary.memorize.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.memorize.status}}
+            {{#if data.secondary.memorize.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.memorize.nat" value="{{data.secondary.memorize.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.memorize.natural" value="{{data.secondary.memorize.natural}}" />
@@ -1211,9 +1217,9 @@
                 <input type="number" name="data.navigationbonus" value="{{data.navigationbonus}}" readonly />
                 <input type="number" name="data.secondary.navigation.base" value="{{data.secondary.navigation.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.navigation.status}}showOpacity{{/if}}" data-label="data.navigation.status" data-ability="{{data.navigation.status}}"><i class="{{#if data.navigation.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.navigation.status}}showOpacity{{/if}}" data-label="data.secondary.navigation.status" data-ability="{{data.secondary.navigation.status}}"><i class="{{#if data.secondary.navigation.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.navigation.status}}
+            {{#if data.secondary.navigation.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.navigation.nat" value="{{data.secondary.navigation.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.navigation.natural" value="{{data.secondary.navigation.natural}}" />
@@ -1236,9 +1242,9 @@
                 <input type="number" name="data.occultbonus" value="{{data.occultbonus}}" readonly />
                 <input type="number" name="data.secondary.occult.base" value="{{data.secondary.occult.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.occult.status}}showOpacity{{/if}}" data-label="data.occult.status" data-ability="{{data.occult.status}}"><i class="{{#if data.occult.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.occult.status}}showOpacity{{/if}}" data-label="data.secondary.occult.status" data-ability="{{data.secondary.occult.status}}"><i class="{{#if data.secondary.occult.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.occult.status}}
+            {{#if data.secondary.occult.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.occult.nat" value="{{data.secondary.occult.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.occult.natural" value="{{data.secondary.occult.natural}}" />
@@ -1261,9 +1267,9 @@
                 <input type="number" name="data.sciencebonus" value="{{data.sciencebonus}}" readonly />
                 <input type="number" name="data.secondary.science.base" value="{{data.secondary.science.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.science.status}}showOpacity{{/if}}" data-label="data.science.status" data-ability="{{data.science.status}}"><i class="{{#if data.science.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.science.status}}showOpacity{{/if}}" data-label="data.secondary.science.status" data-ability="{{data.secondary.science.status}}"><i class="{{#if data.secondary.science.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.science.status}}
+            {{#if data.secondary.science.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.science.nat" value="{{data.secondary.science.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.science.natural" value="{{data.secondary.science.natural}}" />
@@ -1286,9 +1292,9 @@
                 <input type="number" name="data.tacticsbonus" value="{{data.tacticsbonus}}" readonly />
                 <input type="number" name="data.secondary.tactics.base" value="{{data.secondary.tactics.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.tactics.status}}showOpacity{{/if}}" data-label="data.tactics.status" data-ability="{{data.tactics.status}}"><i class="{{#if data.tactics.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.tactics.status}}showOpacity{{/if}}" data-label="data.secondary.tactics.status" data-ability="{{data.secondary.tactics.status}}"><i class="{{#if data.secondary.tactics.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.tactics.status}}
+            {{#if data.secondary.tactics.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.tactics.nat" value="{{data.secondary.tactics.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.tactics.natural" value="{{data.secondary.tactics.natural}}" />
@@ -1315,9 +1321,9 @@
                 <span> {{localize "abfalter.basicInfo.class"}} </span>
                 <span> {{localize "abfalter.basicInfo.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
-                <a class="toggleBoolean {{#if data.vigor.status}}showOpacity{{/if}}" data-label="data.vigor.status" data-ability="{{data.vigor.status}}"><i class="{{#if data.vigor.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.main.vigor}}showOpacity{{/if}}" data-label="data.secondary.main.vigor" data-ability="{{data.secondary.main.vigor}}"><i class="{{#if data.secondary.main.vigor}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.vigor.status}}
+            {{#if data.secondary.main.vigor}}
             <div>
                 <button type="button" class="rollable" data-roll="{{data.composurefinal}}" data-label="{{localize "abfalter.generalTab.composure"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.composure"}} </span>
@@ -1328,9 +1334,9 @@
                 <input type="number" name="data.composurebonus" value="{{data.composurebonus}}" readonly />
                 <input type="number" name="data.secondary.composure.base" value="{{data.secondary.composure.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.wp"}}</span>
-                <a class="toggleBoolean {{#if data.composure.status}}showOpacity{{/if}}" data-label="data.composure.status" data-ability="{{data.composure.status}}"><i class="{{#if data.composure.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.composure.status}}showOpacity{{/if}}" data-label="data.secondary.composure.status" data-ability="{{data.secondary.composure.status}}"><i class="{{#if data.secondary.composure.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.composure.status}}
+            {{#if data.secondary.composure.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.composure.nat" value="{{data.secondary.composure.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.composure.natural" value="{{data.secondary.composure.natural}}" />
@@ -1353,9 +1359,9 @@
                 <input type="number" name="data.featsofstrbonus" value="{{data.featsofstrbonus}}" readonly />
                 <input type="number" name="data.secondary.featsofstr.base" value="{{data.secondary.featsofstr.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.str"}} </span>
-                <a class="toggleBoolean {{#if data.featsofstr.status}}showOpacity{{/if}}" data-label="data.featsofstr.status" data-ability="{{data.featsofstr.status}}"><i class="{{#if data.featsofstr.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.featsofstr.status}}showOpacity{{/if}}" data-label="data.secondary.featsofstr.status" data-ability="{{data.secondary.featsofstr.status}}"><i class="{{#if data.secondary.featsofstr.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.featsofstr.status}}
+            {{#if data.secondary.featsofstr.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.featsofstr.nat" value="{{data.secondary.featsofstr.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.featsofstr.natural" value="{{data.secondary.featsofstr.natural}}" />
@@ -1378,9 +1384,9 @@
                 <input type="number" name="data.withstpainbonus" value="{{data.withstpainbonus}}" readonly />
                 <input type="number" name="data.secondary.withstpain.base" value="{{data.secondary.withstpain.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.wp"}}</span>
-                <a class="toggleBoolean {{#if data.withstpain.status}}showOpacity{{/if}}" data-label="data.withstpain.status" data-ability="{{data.withstpain.status}}"><i class="{{#if data.withstpain.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.withstpain.status}}showOpacity{{/if}}" data-label="data.secondary.withstpain.status" data-ability="{{data.secondary.withstpain.status}}"><i class="{{#if data.secondary.withstpain.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.withstpain.status}}
+            {{#if data.secondary.withstpain.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.withstpain.nat" value="{{data.secondary.withstpain.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.withstpain.natural" value="{{data.secondary.withstpain.natural}}" />
@@ -1407,9 +1413,9 @@
                 <span> {{localize "abfalter.basicInfo.class"}} </span>
                 <span> {{localize "abfalter.basicInfo.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
-                <a class="toggleBoolean {{#if data.subterfuge.status}}showOpacity{{/if}}" data-label="data.subterfuge.status" data-ability="{{data.subterfuge.status}}"><i class="{{#if data.subterfuge.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.main.subterfuge}}showOpacity{{/if}}" data-label="data.secondary.main.subterfuge" data-ability="{{data.secondary.main.subterfuge}}"><i class="{{#if data.secondary.main.subterfuge}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.subterfuge.status}}
+            {{#if data.secondary.main.subterfuge}}
             <div>
                 <button type="button" class="rollable" data-roll="{{data.disguisefinal}}" data-label="{{localize "abfalter.generalTab.disguise"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.disguise"}} </span>
@@ -1420,9 +1426,9 @@
                 <input type="number" name="data.disguisebonus" value="{{data.disguisebonus}}" readonly />
                 <input type="number" name="data.secondary.disguise.base" value="{{data.secondary.disguise.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.wp"}} </span>
-                <a class="toggleBoolean {{#if data.disguise.status}}showOpacity{{/if}}" data-label="data.disguise.status" data-ability="{{data.disguise.status}}"><i class="{{#if data.disguise.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.disguise.status}}showOpacity{{/if}}" data-label="data.secondary.disguise.status" data-ability="{{data.secondary.disguise.status}}"><i class="{{#if data.secondary.disguise.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.disguise.status}}
+            {{#if data.secondary.disguise.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.disguise.nat" value="{{data.secondary.disguise.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.disguise.natural" value="{{data.secondary.disguise.natural}}" />
@@ -1444,10 +1450,10 @@
                 <input type="number" name="data.secondary.hide.spec" value="{{data.secondary.hide.spec}}" />
                 <input type="number" name="data.hidebonus" value="{{data.hidebonus}}" readonly />
                 <input type="number" name="data.secondary.hide.base" value="{{data.secondary.hide.base}}" />
-                <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span>
-                <a class="toggleBoolean {{#if data.hide.status}}showOpacity{{/if}}" data-label="data.hide.status" data-ability="{{data.hide.status}}"><i class="{{#if data.hide.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span>
+                <a class="toggleBoolean {{#if data.secondary.hide.status}}showOpacity{{/if}}" data-label="data.secondary.hide.status" data-ability="{{data.secondary.hide.status}}"><i class="{{#if data.secondary.hide.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.hide.status}}
+            {{#if data.secondary.hide.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.hide.nat" value="{{data.secondary.hide.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.hide.natural" value="{{data.secondary.hide.natural}}" />
@@ -1470,9 +1476,9 @@
                 <input type="number" name="data.lockpickingbonus" value="{{data.lockpickingbonus}}" readonly />
                 <input type="number" name="data.secondary.lockpicking.base" value="{{data.secondary.lockpicking.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.dex"}} </span>
-                <a class="toggleBoolean {{#if data.lockpicking.status}}showOpacity{{/if}}" data-label="data.lockpicking.status" data-ability="{{data.lockpicking.status}}"><i class="{{#if data.lockpicking.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.lockpicking.status}}showOpacity{{/if}}" data-label="data.secondary.lockpicking.status" data-ability="{{data.secondary.lockpicking.status}}"><i class="{{#if data.secondary.lockpicking.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.lockpicking.status}}
+            {{#if data.secondary.lockpicking.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.lockpicking.nat" value="{{data.secondary.lockpicking.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.lockpicking.natural" value="{{data.secondary.lockpicking.natural}}" />
@@ -1495,9 +1501,9 @@
                 <input type="number" name="data.poisonsbonus" value="{{data.poisonsbonus}}" readonly />
                 <input type="number" name="data.secondary.poisons.base" value="{{data.secondary.poisons.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.poisons.status}}showOpacity{{/if}}" data-label="data.poisons.status" data-ability="{{data.poisons.status}}"><i class="{{#if data.poisons.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.poisons.status}}showOpacity{{/if}}" data-label="data.secondary.poisons.status" data-ability="{{data.secondary.poisons.status}}"><i class="{{#if data.secondary.poisons.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.poisons.status}}
+            {{#if data.secondary.poisons.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.poisons.nat" value="{{data.secondary.poisons.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.poisons.natural" value="{{data.secondary.poisons.natural}}" />
@@ -1520,9 +1526,9 @@
                 <input type="number" name="data.stealthbonus" value="{{data.stealthbonus}}" readonly />
                 <input type="number" name="data.secondary.stealth.base" value="{{data.secondary.stealth.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.agi"}} </span>
-                <a class="toggleBoolean {{#if data.stealth.status}}showOpacity{{/if}}" data-label="data.stealth.status" data-ability="{{data.stealth.status}}"><i class="{{#if data.stealth.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.stealth.status}}showOpacity{{/if}}" data-label="data.secondary.stealth.status" data-ability="{{data.secondary.stealth.status}}"><i class="{{#if data.secondary.stealth.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.stealth.status}}
+            {{#if data.secondary.stealth.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.stealth.nat" value="{{data.secondary.stealth.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.stealth.natural" value="{{data.secondary.stealth.natural}}" />
@@ -1545,9 +1551,9 @@
                 <input type="number" name="data.theftbonus" value="{{data.theftbonus}}" readonly />
                 <input type="number" name="data.secondary.theft.base" value="{{data.secondary.theft.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.dex"}} </span>
-                <a class="toggleBoolean {{#if data.theft.status}}showOpacity{{/if}}" data-label="data.theft.status" data-ability="{{data.theft.status}}"><i class="{{#if data.theft.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.theft.status}}showOpacity{{/if}}" data-label="data.secondary.theft.status" data-ability="{{data.secondary.theft.status}}"><i class="{{#if data.secondary.theft.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.theft.status}}
+            {{#if data.secondary.theft.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.theft.nat" value="{{data.secondary.theft.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.theft.natural" value="{{data.secondary.theft.natural}}" />
@@ -1570,9 +1576,9 @@
                 <input type="number" name="data.traplorebonus" value="{{data.traplorebonus}}" readonly />
                 <input type="number" name="data.secondary.traplore.base" value="{{data.secondary.traplore.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.dex"}} </span>
-                <a class="toggleBoolean {{#if data.traplore.status}}showOpacity{{/if}}" data-label="data.traplore.status" data-ability="{{data.traplore.status}}"><i class="{{#if data.traplore.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.traplore.status}}showOpacity{{/if}}" data-label="data.secondary.traplore.status" data-ability="{{data.secondary.traplore.status}}"><i class="{{#if data.secondary.traplore.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.traplore.status}}
+            {{#if data.secondary.traplore.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.traplore.nat" value="{{data.secondary.traplore.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.traplore.natural" value="{{data.secondary.traplore.natural}}" />
@@ -1599,9 +1605,9 @@
                 <span> {{localize "abfalter.basicInfo.class"}} </span>
                 <span> {{localize "abfalter.basicInfo.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
-                <a class="toggleBoolean {{#if data.creative.status}}showOpacity{{/if}}" data-label="data.creative.status" data-ability="{{data.creative.status}}"><i class="{{#if data.creative.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.main.creative}}showOpacity{{/if}}" data-label="data.secondary.main.creative" data-ability="{{data.secondary.main.creative}}"><i class="{{#if data.secondary.main.creative}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.creative.status}}
+            {{#if data.secondary.main.creative}}
             <div>
                 <button type="button" class="rollable" data-roll="{{data.alchemyfinal}}" data-label="{{localize "abfalter.generalTab.alchemy"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.alchemy"}} </span>
@@ -1612,9 +1618,9 @@
                 <input type="number" name="data.alchemybonus" value="{{data.alchemybonus}}" readonly />
                 <input type="number" name="data.secondary.alchemy.base" value="{{data.secondary.alchemy.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
-                <a class="toggleBoolean {{#if data.alchemy.status}}showOpacity{{/if}}" data-label="data.alchemy.status" data-ability="{{data.alchemy.status}}"><i class="{{#if data.alchemy.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.alchemy.status}}showOpacity{{/if}}" data-label="data.secondary.alchemy.status" data-ability="{{data.secondary.alchemy.status}}"><i class="{{#if data.secondary.alchemy.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.alchemy.status}}
+            {{#if data.secondary.alchemy.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.alchemy.nat" value="{{data.secondary.alchemy.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.alchemy.natural" value="{{data.secondary.alchemy.natural}}" />
@@ -1637,9 +1643,9 @@
                 <input type="number" name="data.animismbonus" value="{{data.animismbonus}}" readonly />
                 <input type="number" name="data.secondary.animism.base" value="{{data.secondary.animism.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.pow"}} </span>
-                <a class="toggleBoolean {{#if data.animism.status}}showOpacity{{/if}}" data-label="data.animism.status" data-ability="{{data.animism.status}}"><i class="{{#if data.animism.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.animism.status}}showOpacity{{/if}}" data-label="data.secondary.animism.status" data-ability="{{data.secondary.animism.status}}"><i class="{{#if data.secondary.animism.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.animism.status}}
+            {{#if data.secondary.animism.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.animism.nat" value="{{data.secondary.animism.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.animism.natural" value="{{data.secondary.animism.natural}}" />
@@ -1662,9 +1668,9 @@
                 <input type="number" name="data.artbonus" value="{{data.artbonus}}" readonly />
                 <input type="number" name="data.secondary.art.base" value="{{data.secondary.art.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.pow"}} </span>
-                <a class="toggleBoolean {{#if data.art.status}}showOpacity{{/if}}" data-label="data.art.status" data-ability="{{data.art.status}}"><i class="{{#if data.art.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.art.status}}showOpacity{{/if}}" data-label="data.secondary.art.status" data-ability="{{data.secondary.art.status}}"><i class="{{#if data.secondary.art.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.art.status}}
+            {{#if data.secondary.art.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.art.nat" value="{{data.secondary.art.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.art.natural" value="{{data.secondary.art.natural}}" />
@@ -1687,9 +1693,9 @@
                 <input type="number" name="data.dancebonus" value="{{data.dancebonus}}" readonly />
                 <input type="number" name="data.secondary.dance.base" value="{{data.secondary.dance.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.agi"}} </span>
-                <a class="toggleBoolean {{#if data.dance.status}}showOpacity{{/if}}" data-label="data.dance.status" data-ability="{{data.dance.status}}"><i class="{{#if data.dance.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.dance.status}}showOpacity{{/if}}" data-label="data.secondary.dance.status" data-ability="{{data.secondary.dance.status}}"><i class="{{#if data.secondary.dance.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.dance.status}}
+            {{#if data.secondary.dance.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.dance.nat" value="{{data.secondary.dance.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.dance.natural" value="{{data.secondary.dance.natural}}" />
@@ -1712,9 +1718,9 @@
                 <input type="number" name="data.forgingbonus" value="{{data.forgingbonus}}" readonly />
                 <input type="number" name="data.secondary.forging.base" value="{{data.secondary.forging.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.dex"}} </span>
-                <a class="toggleBoolean {{#if data.forging.status}}showOpacity{{/if}}" data-label="data.forging.status" data-ability="{{data.forging.status}}"><i class="{{#if data.forging.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.forging.status}}showOpacity{{/if}}" data-label="data.secondary.forging.status" data-ability="{{data.secondary.forging.status}}"><i class="{{#if data.secondary.forging.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.forging.status}}
+            {{#if data.secondary.forging.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.forging.nat" value="{{data.secondary.forging.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.forging.natural" value="{{data.secondary.forging.natural}}" />
@@ -1737,9 +1743,9 @@
                 <input type="number" name="data.jewelrybonus" value="{{data.jewelrybonus}}" readonly />
                 <input type="number" name="data.secondary.jewelry.base" value="{{data.secondary.jewelry.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.dex"}}</span>
-                <a class="toggleBoolean {{#if data.jewelry.status}}showOpacity{{/if}}" data-label="data.jewelry.status" data-ability="{{data.jewelry.status}}"><i class="{{#if data.jewelry.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.jewelry.status}}showOpacity{{/if}}" data-label="data.secondary.jewelry.status" data-ability="{{data.secondary.jewelry.status}}"><i class="{{#if data.secondary.jewelry.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.jewelry.status}}
+            {{#if data.secondary.jewelry.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.jewelry.nat" value="{{data.secondary.jewelry.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.jewelry.natural" value="{{data.secondary.jewelry.natural}}" />
@@ -1762,9 +1768,9 @@
                 <input type="number" name="data.musicbonus" value="{{data.musicbonus}}" readonly />
                 <input type="number" name="data.secondary.music.base" value="{{data.secondary.music.base}}" />
                 <span class="mental"> {{localize "abfalter.basicInfo.pow"}} </span>
-                <a class="toggleBoolean {{#if data.music.status}}showOpacity{{/if}}" data-label="data.music.status" data-ability="{{data.music.status}}"><i class="{{#if data.music.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.music.status}}showOpacity{{/if}}" data-label="data.secondary.music.status" data-ability="{{data.secondary.music.status}}"><i class="{{#if data.secondary.music.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.music.status}}
+            {{#if data.secondary.music.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.music.nat" value="{{data.secondary.music.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.music.natural" value="{{data.secondary.music.natural}}" />
@@ -1787,9 +1793,9 @@
                 <input type="number" name="data.runesbonus" value="{{data.runesbonus}}" readonly />
                 <input type="number" name="data.secondary.runes.base" value="{{data.secondary.runes.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.dex"}}</span>
-                <a class="toggleBoolean {{#if data.runes.status}}showOpacity{{/if}}" data-label="data.runes.status" data-ability="{{data.runes.status}}"><i class="{{#if data.runes.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.runes.status}}showOpacity{{/if}}" data-label="data.secondary.runes.status" data-ability="{{data.secondary.runes.status}}"><i class="{{#if data.secondary.runes.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.runes.status}}
+            {{#if data.secondary.runes.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.runes.nat" value="{{data.secondary.runes.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.runes.natural" value="{{data.secondary.runes.natural}}" />
@@ -1812,9 +1818,9 @@
                 <input type="number" name="data.ritualcaligbonus" value="{{data.ritualcaligbonus}}" readonly />
                 <input type="number" name="data.secondary.ritualcalig.base" value="{{data.secondary.ritualcalig.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.dex"}} </span>
-                <a class="toggleBoolean {{#if data.ritualcalig.status}}showOpacity{{/if}}" data-label="data.ritualcalig.status" data-ability="{{data.ritualcalig.status}}"><i class="{{#if data.ritualcalig.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.ritualcalig.status}}showOpacity{{/if}}" data-label="data.secondary.ritualcalig.status" data-ability="{{data.secondary.ritualcalig.status}}"><i class="{{#if data.secondary.ritualcalig.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.ritualcalig.status}}
+            {{#if data.secondary.ritualcalig.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.ritualcalig.nat" value="{{data.secondary.ritualcalig.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.ritualcalig.natural" value="{{data.secondary.ritualcalig.natural}}" />
@@ -1837,9 +1843,9 @@
                 <input type="number" name="data.slofhandbonus" value="{{data.slofhandbonus}}" readonly />
                 <input type="number" name="data.secondary.slofhand.base" value="{{data.secondary.slofhand.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.dex"}} </span>
-                <a class="toggleBoolean {{#if data.slofhand.status}}showOpacity{{/if}}" data-label="data.slofhand.status" data-ability="{{data.slofhand.status}}"><i class="{{#if data.slofhand.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.slofhand.status}}showOpacity{{/if}}" data-label="data.secondary.slofhand.status" data-ability="{{data.secondary.slofhand.status}}"><i class="{{#if data.secondary.slofhand.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.slofhand.status}}
+            {{#if data.secondary.slofhand.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.slofhand.nat" value="{{data.secondary.slofhand.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.slofhand.natural" value="{{data.secondary.slofhand.natural}}" />
@@ -1862,9 +1868,9 @@
                 <input type="number" name="data.tailoringbonus" value="{{data.tailoringbonus}}" readonly />
                 <input type="number" name="data.secondary.tailoring.base" value="{{data.secondary.tailoring.base}}" />
                 <span class="physical"> {{localize "abfalter.basicInfo.dex"}} </span>
-                <a class="toggleBoolean {{#if data.tailoring.status}}showOpacity{{/if}}" data-label="data.tailoring.status" data-ability="{{data.tailoring.status}}"><i class="{{#if data.tailoring.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a class="toggleBoolean {{#if data.secondary.tailoring.status}}showOpacity{{/if}}" data-label="data.secondary.tailoring.status" data-ability="{{data.secondary.tailoring.status}}"><i class="{{#if data.secondary.tailoring.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.tailoring.status}}
+            {{#if data.secondary.tailoring.status}}
             <div class="extend">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.tailoring.nat" value="{{data.secondary.tailoring.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.tailoring.natural" value="{{data.secondary.tailoring.natural}}" />

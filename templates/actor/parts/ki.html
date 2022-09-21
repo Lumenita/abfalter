@@ -693,7 +693,7 @@
                         <input type="number" name="data.kiPool.agi.specMax" value="{{data.kiPool.agi.specMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.temp"}} </span>
+                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
                         <input type="number" name="data.kiPool.agi.temp" value="{{data.kiPool.agi.temp}}" />
                         <input type="number" name="data.kiPool.agi.tempMax" value="{{data.kiPool.agi.tempMax}}" />
                     </div>
@@ -719,7 +719,7 @@
                         <input type="number" name="data.kiPool.con.specMax" value="{{data.kiPool.con.specMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.temp"}} </span>
+                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
                         <input type="number" name="data.kiPool.con.temp" value="{{data.kiPool.con.temp}}" />
                         <input type="number" name="data.kiPool.con.tempMax" value="{{data.kiPool.con.tempMax}}" />
                     </div>
@@ -745,7 +745,7 @@
                         <input type="number" name="data.kiPool.dex.specMax" value="{{data.kiPool.dex.specMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.temp"}} </span>
+                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
                         <input type="number" name="data.kiPool.dex.temp" value="{{data.kiPool.dex.temp}}" />
                         <input type="number" name="data.kiPool.dex.tempMax" value="{{data.kiPool.dex.tempMax}}" />
                     </div>
@@ -771,7 +771,7 @@
                         <input type="number" name="data.kiPool.str.specMax" value="{{data.kiPool.str.specMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.temp"}} </span>
+                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
                         <input type="number" name="data.kiPool.str.temp" value="{{data.kiPool.str.temp}}" />
                         <input type="number" name="data.kiPool.str.tempMax" value="{{data.kiPool.str.tempMax}}" />
                     </div>
@@ -797,7 +797,7 @@
                         <input type="number" name="data.kiPool.pow.specMax" value="{{data.kiPool.pow.specMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.temp"}} </span>
+                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
                         <input type="number" name="data.kiPool.pow.temp" value="{{data.kiPool.pow.temp}}" />
                         <input type="number" name="data.kiPool.pow.tempMax" value="{{data.kiPool.pow.tempMax}}" />
                     </div>
@@ -823,7 +823,7 @@
                         <input type="number" name="data.kiPool.wp.specMax" value="{{data.kiPool.wp.specMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.temp"}} </span>
+                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
                         <input type="number" name="data.kiPool.wp.temp" value="{{data.kiPool.wp.temp}}" />
                         <input type="number" name="data.kiPool.wp.tempMax" value="{{data.kiPool.wp.tempMax}}" />
                     </div>
@@ -849,7 +849,7 @@
                 </h2>
                 <div>
                     <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.mk.base" value="{{data.mk.base}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mk.temp" value="{{data.mk.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.extra"}} </span> <input type="number" name="data.mk.temp" value="{{data.mk.temp}}" /> </label>
                 </div>
                 <div>
                     <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.mk.spec" value="{{data.mk.spec}}" /> </label>
@@ -884,22 +884,34 @@
                     <span> {{localize "abfalter.basicInfo.dp"}} </span>
                     <span> {{localize "abfalter.basicInfo.mk"}} </span>
                 </div>
-                <div class="items-list">
+                <div class="{{#if data.itemToggle.arsMagnus}}item-list{{/if}}">
                     {{#each arsMagnuses as |arsMagnus id|}}
                     <div class="arsMagnus-item item normal-item" data-item-id="{{arsMagnus._id}}">
+                        {{#if system.expand}}                        
                         <div>
                             <input class="item-name inline-edit" data-field="name" type="text" value="{{arsMagnus.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
-                            <input class="dp-value inline-edit" data-field="data.dp" type="number" value="{{arsMagnus.data.dp}}" />
-                            <input class="mk-value inline-edit" data-field="data.mk" type="number" value="{{arsMagnus.data.mk}}" />
-                            <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                            <input class="inline-edit" data-field="system.dp" type="number" value="{{arsMagnus.system.dp}}" />
+                            <input class="inline-edit" data-field="system.mk" type="number" value="{{arsMagnus.system.mk}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
-                            <textarea class="inline-edit itemAuto-expand" data-field="data.description" placeholder="{{localize "abfalter.kiTab.arsMagInfo"}}">{{arsMagnus.data.description}}</textarea>
+                        <div>
+                            <textarea class="inline-edit itemAuto-expand" data-field="system.description" placeholder="{{localize "abfalter.kiTab.arsMagInfo"}}">{{arsMagnus.system.description}}</textarea>
                         </div>
+                        {{else}}
+                        <div>
+                            <span> {{arsMagnus.name}} </span>
+                            <span> {{arsMagnus.system.dp}} </span>
+                            <span> {{arsMagnus.system.mk}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
                     </div>
                     {{/each}}
                 </div>
-                <a class="item-control item-create" data-type="arsMagnus"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addArsMag"}} </a>
+                <div>
+                    <a class="item-control item-create" data-type="arsMagnus"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addArsMag"}} </a>
+                    <a class="toggleBoolean {{#if data.itemToggle.arsMagnus}}armorpenalty{{/if}}" data-label="data.itemToggle.arsMagnus" data-ability="{{data.itemToggle.arsMagnus}}"><i class="{{#if data.itemToggle.arsMagnus}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                </div>
                 {{#if data.toggles.dragonSeals}}
                 <div>
                     <span> {{localize "abfalter.kiTab.specialMag"}} </span>
@@ -955,42 +967,56 @@
                 <span> {{localize "abfalter.basicInfo.dp"}} </span>
                 <span> {{localize "abfalter.basicInfo.mk"}} </span>
             </div>
-            <div class="items-list">
+            <div class="{{#if data.itemToggle.martialArt}}item-list{{/if}}">
                 {{#each martialArts as |martialArt id|}}
                 <div class="martialArt-item item normal-item" data-item-id="{{martialArt._id}}">
+                    {{#if system.expand}}
                     <div>
                         <input class="item-name inline-edit" data-field="name" type="text" value="{{martialArt.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                         <div class="csSelect">
-                            <select class="inline-edit" data-field="data.degree" data-dtype="number">
-                                {{#select data.degree}}
-                                <option value="base"> {{localize "abfalter.basicInfo.base"}} </option>
-                                <option value="te"> {{localize "abfalter.kiTab.advanced"}} </option>
-                                <option value="Sup"> {{localize "abfalter.kiTab.supreme"}} </option>
-                                <option value="arc"> {{localize "abfalter.kiTab.arcane"}} </option>
+                            <select class="inline-edit" data-field="system.degree" data-dtype="number">
+                                {{#select system.degree}}
+                                <option value="Base"> {{localize "abfalter.basicInfo.base"}} </option>
+                                <option value="Advanced"> {{localize "abfalter.kiTab.advanced"}} </option>
+                                <option value="Supreme"> {{localize "abfalter.kiTab.supreme"}} </option>
+                                <option value="Arcane"> {{localize "abfalter.kiTab.arcane"}} </option>
                                 {{/select}}
                             </select>
                         </div>
-                        <input class="dp-value inline-edit" data-field="data.dp" type="number" value="{{martialArt.data.dp}}" />
-                        <input class="mk-value inline-edit" data-field="data.mk" type="number" value="{{martialArt.data.mk}}" />
-                        <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        <input class="inline-edit" data-field="system.dp" type="number" value="{{martialArt.system.dp}}" />
+                        <input class="inline-edit" data-field="system.mk" type="number" value="{{martialArt.system.mk}}" />
+                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
-                        <textarea class="inline-edit itemAuto-expand" data-field="data.description" placeholder="{{localize "abfalter.kiTab.martialInfo"}}">{{martialArt.data.description}}</textarea>
+                    <div class="{{#if system.expand}}expand{{else}}notExpand{{/if}}">
+                        <textarea class="inline-edit itemAuto-expand" data-field="system.description" placeholder="{{localize "abfalter.kiTab.martialInfo"}}">{{martialArt.system.description}}</textarea>
                     </div>
+                    {{else}}
+                    <div>
+                        <span> {{martialArt.name}} </span>
+                        <span> {{martialArt.system.degree}} </span>
+                        <span> {{martialArt.system.dp}} </span>
+                        <span> {{martialArt.system.mk}} </span>
+                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </div>
+                    {{/if}}
                 </div>
+
                 {{/each}}
             </div>
-            <a class="item-control item-create" data-type="martialArt"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addMartialArt"}} </a>
+            <div>
+                <a class="item-control item-create" data-type="martialArt"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addMartialArt"}} </a>
+                <a class="toggleBoolean {{#if data.itemToggle.martialArt}}armorpenalty{{/if}}" data-label="data.itemToggle.martialArt" data-ability="{{data.itemToggle.martialArt}}"><i class="{{#if data.itemToggle.martialArt}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+            </div>
         </div>
 
         <div class="kiseals">
             <h2>
                 {{localize "abfalter.kiTab.kiSeals"}}
                 <label class="expand-box">
-                    <a class="toggleBoolean {{#if data.kiseals.status}}showOpacity{{/if}}" data-label="data.kiseals.status" data-ability="{{data.kiseals.status}}"><i class="{{#if data.kiseals.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    <a class="toggleBoolean {{#if data.kiSeal.status}}showOpacity{{/if}}" data-label="data.kiSeal.status" data-ability="{{data.kiSeal.status}}"><i class="{{#if data.kiSeal.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
             </h2>
-            {{#if data.kiseals.status}}
+            {{#if data.kiSeal.status}}
             <div class="kisealmast">
                 <h3> {{localize "abfalter.kiTab.kiSealMaster"}} </h3>
                 <div>
@@ -1054,16 +1080,17 @@
                     <span> {{localize "abfalter.kiTab.creatureName"}} </span>
                     <span> {{localize "abfalter.basicInfo.level"}} </span>
                 </div>
-                <div class="items-list">
+                <div class="{{#if data.itemToggle.kiSealCreature}}item-list{{/if}}">
                     {{#each kiSealCreatures as |kiSealCreature id|}}
                     <div class="kiSealCreature-item item normal-item" data-item-id="{{kiSealCreature._id}}">
+                        {{#if system.expand}}
                         <div>
                             <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                             <input class="item-name inline-edit" data-field="name" type="text" value="{{kiSealCreature.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
-                            <input class="sealLevel-value inline-edit" data-field="data.level" type="number" value="{{kiSealCreature.data.level}}" />
-                            <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                            <input class="inline-edit" data-field="system.level" type="number" value="{{kiSealCreature.system.level}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
+                        <div>
                             <div>
                                 <span> {{localize "abfalter.kiTab.sealType"}} </span>
                                 <span> {{localize "abfalter.kiTab.sealWood"}} </span>
@@ -1074,26 +1101,37 @@
                             </div>
                             <div>
                                 <span> {{localize "abfalter.kiTab.minor"}} </span>
-                                <input class="wood-value inline-edit" data-field="data.minor.wood" type="number" value="{{kiSealCreature.data.minor.wood}}" />
-                                <input class="metal-value inline-edit" data-field="data.minor.metal" type="number" value="{{kiSealCreature.data.minor.metal}}" />
-                                <input class="air-value inline-edit" data-field="data.minor.air" type="number" value="{{kiSealCreature.data.minor.air}}" />
-                                <input class="water-value inline-edit" data-field="data.minor.water" type="number" value="{{kiSealCreature.data.minor.water}}" />
-                                <input class="fire-value inline-edit" data-field="data.minor.fire" type="number" value="{{kiSealCreature.data.minor.fire}}" />
+                                <input class="inline-edit" data-field="system.minor.wood" type="number" value="{{kiSealCreature.system.minor.wood}}" />
+                                <input class="inline-edit" data-field="system.minor.metal" type="number" value="{{kiSealCreature.system.minor.metal}}" />
+                                <input class="inline-edit" data-field="system.minor.air" type="number" value="{{kiSealCreature.system.minor.air}}" />
+                                <input class="inline-edit" data-field="system.minor.water" type="number" value="{{kiSealCreature.system.minor.water}}" />
+                                <input class="inline-edit" data-field="system.minor.fire" type="number" value="{{kiSealCreature.system.minor.fire}}" />
                             </div>
                             <div>
                                 <span> {{localize "abfalter.kiTab.major"}} </span>
-                                <input class="mwood-value inline-edit" data-field="data.major.wood" type="number" value="{{kiSealCreature.data.major.wood}}" />
-                                <input class="mmetal-value inline-edit" data-field="data.major.metal" type="number" value="{{kiSealCreature.data.major.metal}}" />
-                                <input class="mair-value inline-edit" data-field="data.major.air" type="number" value="{{kiSealCreature.data.major.air}}" />
-                                <input class="mwater-value inline-edit" data-field="data.major.water" type="number" value="{{kiSealCreature.data.major.water}}" />
-                                <input class="mfire-value inline-edit" data-field="data.major.fire" type="number" value="{{kiSealCreature.data.major.fire}}" />
+                                <input class="inline-edit" data-field="system.major.wood" type="number" value="{{kiSealCreature.system.major.wood}}" />
+                                <input class="inline-edit" data-field="system.major.metal" type="number" value="{{kiSealCreature.system.major.metal}}" />
+                                <input class="inline-edit" data-field="system.major.air" type="number" value="{{kiSealCreature.system.major.air}}" />
+                                <input class="inline-edit" data-field="system.major.water" type="number" value="{{kiSealCreature.system.major.water}}" />
+                                <input class="inline-edit" data-field="system.major.fire" type="number" value="{{kiSealCreature.system.major.fire}}" />
                             </div>
-                            <textarea class="inline-edit itemAuto-expand" data-field="data.description" placeholder="{{localize "abfalter.kiTab.kiSealInfo"}}">{{kiSealCreature.data.description}}</textarea>
+                            <textarea class="inline-edit itemAuto-expand" data-field="system.description" placeholder="{{localize "abfalter.kiTab.kiSealInfo"}}">{{kiSealCreature.system.description}}</textarea>
                         </div>
+                        {{else}}
+                        <div>
+                            <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
+                            <span> {{kiSealCreature.name}} </span>
+                            <span> {{kiSealCreature.system.level}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
                     </div>
                     {{/each}}
                 </div>
-                <a class="item-control item-create" data-type="kiSealCreature"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addKiSealCreature"}} </a>
+                <div>
+                    <a class="item-control item-create" data-type="kiSealCreature"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addKiSealCreature"}} </a>
+                    <a class="toggleBoolean {{#if data.itemToggle.kiSealCreature}}armorpenalty{{/if}}" data-label="data.itemToggle.kiSealCreature" data-ability="{{data.itemToggle.kiSealCreature}}"><i class="{{#if data.itemToggle.kiSealCreature}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                </div>
             </div>
         </div>
 
@@ -1104,25 +1142,26 @@
                 <span> {{localize "abfalter.basicInfo.level"}} </span>
                 <span> {{localize "abfalter.basicInfo.mk"}} </span>
             </div>
-            <div class="items-list">
+            <div class="{{#if data.itemToggle.kiTechnique}}item-list{{/if}}">
                 {{#each kiTechniques as |kiTechnique id|}}
                 <div class="kiTechnique-item item normal-item" data-item-id="{{kiTechnique._id}}">
+                    {{#if system.expand}}
                     <div>
                         <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                         <input class="item-name inline-edit" data-field="name" type="text" value="{{kiTechnique.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
-                        <input class="inline-edit" data-field="data.level" type="number" value="{{kiTechnique.data.level}}" />
-                        <input class="inline-edit" data-field="data.mk" type="number" value="{{kiTechnique.data.mk}}" />
-                        <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        <input class="inline-edit" data-field="system.level" type="number" value="{{kiTechnique.system.level}}" />
+                        <input class="inline-edit" data-field="system.mk" type="number" value="{{kiTechnique.system.mk}}" />
+                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <div class="{{#if data.expand}}expand{{else}}notExpand{{/if}}">
+                    <div>
                         <div>
-                            {{#if data.innatePower}}
+                            {{#if system.innatePower}}
                             <div class="techExpand techExpandFirst">
-                                <span> Ki </span>
+                                <span> {{localize "abfalter.kiTab.ki"}} </span>
                                 <span> {{localize "abfalter.basicInfo.pow"}} </span>
                             </div>
                             {{else}}
-                            <span> KI </span>
+                            <span> {{localize "abfalter.kiTab.ki"}} </span>
                             <span> {{localize "abfalter.basicInfo.agi"}} </span>
                             <span> {{localize "abfalter.basicInfo.con"}} </span>
                             <span> {{localize "abfalter.basicInfo.dex"}} </span>
@@ -1130,69 +1169,81 @@
                             <span> {{localize "abfalter.basicInfo.pow"}} </span>
                             <span> {{localize "abfalter.basicInfo.wp"}} </span>
                             {{/if}}
-                            <span> Action Info </span>
+                        <span> {{localize "abfalter.kiTab.actionInfo"}} </span>
                         </div>
                         <div>
-                            {{#if data.innatePower}}
+                            {{#if system.innatePower}}
                             <div class="techExpand">
-                                <span> Innate Power Use </span>
-                                <input class="inline-edit" data-field="data.use.unified" type="number" value="{{kiTechnique.data.use.unified}}" />
+                                <span> {{localize "abfalter.kiTab.innatePowerUse"}} </span>
+                                <input class="inline-edit" data-field="system.use.unified" type="number" value="{{kiTechnique.system.use.unified}}" />
                             </div>
                             {{else}}
-                            <span> use </span>
-                            <input class="inline-edit" data-field="data.use.agi" type="number" value="{{kiTechnique.data.use.agi}}" />
-                            <input class="inline-edit" data-field="data.use.con" type="number" value="{{kiTechnique.data.use.con}}" />
-                            <input class="inline-edit" data-field="data.use.dex" type="number" value="{{kiTechnique.data.use.dex}}" />
-                            <input class="inline-edit" data-field="data.use.str" type="number" value="{{kiTechnique.data.use.str}}" />
-                            <input class="inline-edit" data-field="data.use.pow" type="number" value="{{kiTechnique.data.use.pow}}" />
-                            <input class="inline-edit" data-field="data.use.wp" type="number" value="{{kiTechnique.data.use.wp}}" />
+                            <span> {{localize "abfalter.kiTab.use"}} </span>
+                            <input class="inline-edit" data-field="system.use.agi" type="number" value="{{kiTechnique.system.use.agi}}" />
+                            <input class="inline-edit" data-field="system.use.con" type="number" value="{{kiTechnique.system.use.con}}" />
+                            <input class="inline-edit" data-field="system.use.dex" type="number" value="{{kiTechnique.system.use.dex}}" />
+                            <input class="inline-edit" data-field="system.use.str" type="number" value="{{kiTechnique.system.use.str}}" />
+                            <input class="inline-edit" data-field="system.use.pow" type="number" value="{{kiTechnique.system.use.pow}}" />
+                            <input class="inline-edit" data-field="system.use.wp" type="number" value="{{kiTechnique.system.use.wp}}" />
                             {{/if}}
                             <div class="csSelect techSelect">
-                                <select class="inline-edit" data-field="data.frequency" data-dtype="number">
-                                    {{#select data.frequency}}
-                                    <option value="1"> action </option>
-                                    <option value="2"> turn </option>
-                                    <option value="3"> variable </option>
+                                <select class="inline-edit" data-field="system.frequency" data-dtype="number">
+                                    {{#select system.frequency}}
+                                    <option value="1"> {{localize "abfalter.kiTab.action"}} </option>
+                                    <option value="2"> {{localize "abfalter.kiTab.turn"}} </option>
+                                    <option value="3"> {{localize "abfalter.kiTab.variable"}} </option>
                                     {{/select}}
                                 </select>
                             </div>
                         </div>
                         <div>
-                            {{#if data.unified}}
+                            {{#if system.unified}}
                             <div class="techExpand">
-                                {{#if data.innatePower}}
-                                <span> Innate Power Maint </span>
+                                {{#if system.innatePower}}
+                                <span> {{localize "abfalter.kiTab.innatePowerMaint"}} </span>
                                 {{else}}
-                                <span> Unified Maint </span>
+                                <span> {{localize "abfalter.kiTab.unifiedMaint"}} </span>
                                 {{/if}}
-                                <input class="inline-edit" data-field="data.maint.unified" type="number" value="{{kiTechnique.data.maint.unified}}" />
+                                <input class="inline-edit" data-field="system.maint.unified" type="number" value="{{kiTechnique.system.maint.unified}}" />
                             </div>
                             {{else}}
-                            <span> Maint </span>
-                            <input class="inline-edit" data-field="data.maint.agi" type="number" value="{{kiTechnique.data.maint.agi}}" />
-                            <input class="inline-edit" data-field="data.maint.con" type="number" value="{{kiTechnique.data.maint.con}}" />
-                            <input class="inline-edit" data-field="data.maint.dex" type="number" value="{{kiTechnique.data.maint.dex}}" />
-                            <input class="inline-edit" data-field="data.maint.str" type="number" value="{{kiTechnique.data.maint.str}}" />
-                            <input class="inline-edit" data-field="data.maint.pow" type="number" value="{{kiTechnique.data.maint.pow}}" />
-                            <input class="inline-edit" data-field="data.maint.wp" type="number" value="{{kiTechnique.data.maint.wp}}" />
+                        <span> {{localize "abfalter.kiTab.maint"}} </span>
+                            <input class="inline-edit" data-field="system.maint.agi" type="number" value="{{kiTechnique.system.maint.agi}}" />
+                            <input class="inline-edit" data-field="system.maint.con" type="number" value="{{kiTechnique.system.maint.con}}" />
+                            <input class="inline-edit" data-field="system.maint.dex" type="number" value="{{kiTechnique.system.maint.dex}}" />
+                            <input class="inline-edit" data-field="system.maint.str" type="number" value="{{kiTechnique.system.maint.str}}" />
+                            <input class="inline-edit" data-field="system.maint.pow" type="number" value="{{kiTechnique.system.maint.pow}}" />
+                            <input class="inline-edit" data-field="system.maint.wp" type="number" value="{{kiTechnique.system.maint.wp}}" />
                             {{/if}}
                             <div class="csSelect techSelect">
-                                <select class="inline-edit" data-field="data.actionType" data-dtype="number">
-                                    {{#select data.actionType}}
-                                    <option value="1"> attack </option>
-                                    <option value="2"> defemse </option>
-                                    <option value="3"> counterattack </option>
-                                    <option value="4"> variable </option>
+                                <select class="inline-edit" data-field="system.actionType" data-dtype="number">
+                                    {{#select system.actionType}}
+                                    <option value="1"> {{localize "abfalter.kiTab.attack"}} </option>
+                                    <option value="2"> {{localize "abfalter.kiTab.defense"}} </option>
+                                    <option value="3"> {{localize "abfalter.kiTab.counterAttack"}} </option>
+                                    <option value="4"> {{localize "abfalter.kiTab.variable"}} </option>
                                     {{/select}}
                                 </select>
                             </div>
                         </div>
-                        <textarea class="inline-edit itemAuto-expand" data-field="data.description" placeholder="{{localize "abfalter.kiTab.kiSealInfo"}}">{{kiTechnique.data.description}}</textarea>
+                        <textarea class="inline-edit itemAuto-expand" data-field="system.description" placeholder="{{localize "abfalter.kiTab.kiTechInfo"}}">{{kiTechnique.system.description}}</textarea>
                     </div>
+                    {{else}}
+                    <div>
+                        <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
+                        <span> {{kiTechnique.name}} </span>
+                        <span> {{kiTechnique.system.level}} </span>
+                        <span> {{kiTechnique.system.mk}} </span>
+                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </div>
+                    {{/if}}
                 </div>
                 {{/each}}
             </div>
-            <a class="item-control item-create" data-type="kiTechnique"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addKiTechnique"}} </a>
+            <div>
+                <a class="item-control item-create" data-type="kiTechnique"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addKiTechnique"}} </a>
+                <a class="toggleBoolean {{#if data.itemToggle.kiTechnique}}armorpenalty{{/if}}" data-label="data.itemToggle.kiTechnique" data-ability="{{data.itemToggle.kiTechnique}}"><i class="{{#if data.itemToggle.kiTechnique}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+            </div>
         </div>
     </div>
 </div>

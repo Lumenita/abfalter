@@ -12,7 +12,7 @@ export async function openModifierDialogue(actorData, finalValue, label, type, m
     const template = "systems/abfalter/templates/dialogues/basicModifiers.html";
     let confirmed = false;
     let fatMod = false;
-    if (type == "resRoll") {
+    if (type == "resRoll" || type == "potentialRoll" || type == "summoningRoll") {
         fatMod = true;
     }
 
@@ -31,6 +31,8 @@ export async function openModifierDialogue(actorData, finalValue, label, type, m
                         rollCharacteristic(html, actorData, finalValue, label);
                         break;
                     case "secondaryRoll":
+                    case "potentialRoll":
+                    case "summoningRoll":
                         rollSecondary(html, actorData, finalValue, label, mastery);
                         break;
                     case "resRoll":
@@ -92,7 +94,7 @@ async function rollSecondary(html, actorData, finalValue, label, mastery) {
     let rollResult = await new Roll(rollFormula, actorData).roll({ async: true });
     rollResult.rolledDice = rollResult.total - finalValue - fatigueFinal - mod;
 
-    let fumbleRange = actorData.data.data.fumbleRangeFinal;
+    let fumbleRange = actorData.system.fumbleRangeFinal;
     if (mastery == "true" && fumbleRange > 1) {
         fumbleRange -= 1;
     }
@@ -100,16 +102,20 @@ async function rollSecondary(html, actorData, finalValue, label, mastery) {
     rollResult.color = "";
     rollResult.fumble = false;
     rollResult.explode = false;
+    rollResult.doubles = false;
+    rollResult.openRange = actorData.system.openRangeFinal;
+
     if (rollResult.rolledDice <= fumbleRange) {
         rollResult.color = "fumbleRoll";
         rollResult.fumble = true;
-    } else if (rollResult.rolledDice >= actorData.data.data.openRangeFinal) {
+    } else if (rollResult.rolledDice >= actorData.system.openRangeFinal) {
         rollResult.color = "openRoll";
         rollResult.explode = true;
     } else {
         rollResult.color = "normalRoll";
     }
-    if (actorData.data.data.rollRange.doubles == "true") {
+    if (actorData.system.rollRange.doubles == "true") {
+        rollResult.doubles = true;
         switch (rollResult.rolledDice) {
             case 11:
             case 22:
@@ -120,7 +126,7 @@ async function rollSecondary(html, actorData, finalValue, label, mastery) {
             case 66:
             case 77:
             case 88:
-                rollResult.color = "openroll"
+                rollResult.color = "openRoll"
                 break;
             default:
                 break;
@@ -133,11 +139,12 @@ async function rollSecondary(html, actorData, finalValue, label, mastery) {
         user: game.user.id,
         speaker: ChatMessage.getSpeaker({ actorData: actorData }),
         sound: CONFIG.sounds.dice,
-        content,
+        content: content,
+        rolls: [rollResult]
     };
+
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     ChatMessage.create(chatData);
-
 }
 
 export async function rollResistance(html, actorData, finalValue, label) {
@@ -178,34 +185,41 @@ export async function rollResistance(html, actorData, finalValue, label) {
 
 
 
+export async function openRollFunction(roll, total, doubles, openRange, label, name) {
 
+    let baseDice = "1d100";
+    let rollFormula = `${baseDice} + ${total}`
+    let rollResult = await new Roll(rollFormula).roll({ async: true });
+    rollResult.rolledDice = rollResult.total - total;
+    rollResult.openRange = openRange;
+    rollResult.data.name = name;
 
-async function openroll(oldroll, oldvalue, oldcolor, data) {
-
-
-    let openroll = false;
-    if (oldcolor != "openroll") {
-        return { openroll, openroll };
-    } else {
-        openroll = true;
-    }
-    let roll = Math.ceil(Math.random() * 100);
-    let color = "";
-    if (data.rollRange.doubles == "true") {
-        if (roll > oldroll && roll >= 90 || roll == 11 || roll == 22 || roll == 33 || roll == 44 || roll == 55 || roll == 66 || roll == 77 || roll == 88) { // Counts doubles
-            color = "openroll";
+    rollResult.color = "normalRoll";
+    if (rollResult.rolledDice > roll) {
+        if (doubles == "true") {
+            if (rollResult.rolledDice >= openRange || rollResult.rolledDice == 11 || rollResult.rolledDice == 22 || rollResult.rolledDice == 33 || rollResult.rolledDice == 44 || rollResult.rolledDice == 55 || rollResult.rolledDice == 66 || rollResult.rolledDice == 77 || rollResult.rolledDice == 88) {
+                rollResult.color = "openRoll";
+                rollResult.explode = true;
+            }
         } else {
-            color = "normalroll";
+            if (rollResult.rolledDice >= openRange) {
+                rollResult.color = "openRoll";
+                rollResult.explode = true;
+            }
         }
     } else {
-        if (roll > oldroll && roll >= 90) { // Doesn't count doubles
-            color = "openroll";
-        } else {
-            color = "normalroll";
-        }
+        rollResult.color = "normalRoll";
     }
 
-    let newvalue = Math.floor(oldvalue + roll);
-
-    return { newvalue: newvalue, color: color, roll: roll, openroll: openroll };
+    const template = "systems/abfalter/templates/dialogues/secRoll.html"
+    const content = await renderTemplate(template, { rollResult: rollResult, label: label });
+    const chatData = {
+        user: game.user.id,
+        //speaker: ChatMessage.getSpeaker({ actorData: actorData }),
+        sound: CONFIG.sounds.dice,
+        content: content,
+        rolls: rollResult
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+    ChatMessage.create(chatData);
 }

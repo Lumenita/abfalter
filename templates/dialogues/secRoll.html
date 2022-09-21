@@ -10,7 +10,7 @@
     </div>
     <div>
         {{#if rollResult.explode}}
-        <span> Open Roll! </span>
+        <button class="secOpenRoll" data-label="{{rollResult.rolledDice}}" data-label2="{{rollResult.total}}" data-label3="{{rollResult.doubles}}" data-label4="{{rollResult.openRange}}" data-label5="{{label}}" data-label6="{{rollResult.data.name}}"> Open Roll! </button>
         {{/if}}
         {{#if rollResult.fumble}}
         <span> Fumble Severity! </span>

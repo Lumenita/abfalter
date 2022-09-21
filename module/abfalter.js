@@ -1,4 +1,5 @@
 import { abfalter } from "./config.js"
+import * as Chat from "./chat.js"
 import abfalterItem from "./item/abfalterItem.js"
 import abfalterItemSheet from "./item/abfalterItemSheet.js"
 import abfalterActor from "./actor/abfalterActor.js"
@@ -7,6 +8,7 @@ import abfalterCharacterSheet from "./actor/abfalterCharacterSheet.js"
 
 async function preloadHandlebarsTemplates () {
     const templatePaths = [
+        "systems/abfalter/templates/actor/parts/bio.html",
         "systems/abfalter/templates/actor/parts/general.html",
         "systems/abfalter/templates/actor/parts/background.html",
         "systems/abfalter/templates/actor/parts/magic.html",
@@ -33,3 +35,5 @@ Hooks.once("init", function () {
 
     return preloadHandlebarsTemplates();
 });
+
+Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));

@@ -14,24 +14,28 @@
                 <label> <span> {{localize "abfalter.magicTab.imbalance"}} </span> <input type="number" name="data.mproj.imbalance" value="{{data.mproj.imbalance}}" /> </label>
                 <div>
                     <label>
-                        <button type="button" class="mastery-box {{#if data.mproj.masteryOff}}mastered{{else}}notMastered{{/if}}" data-label="data.mproj.masteryOff" data-ability="{{data.mproj.masteryOff}}"> 
-                        <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
+                        <button type="button" class="mastery-box {{#if data.mproj.masteryOff}}mastered{{else}}notMastered{{/if}}" data-label="data.mproj.masteryOff" data-ability="{{data.mproj.masteryOff}}">
+                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                        </button>
                     </label>
                     <label>
                         <button type="button" class="mastery-box {{#if data.mproj.masteryDef}}mastered{{else}}notMastered{{/if}}" data-label="data.mproj.masteryDef" data-ability="{{data.mproj.masteryDef}}">
-                        <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
+                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                        </button>
                     </label>
                 </div>
             </div>
             {{/if}}
             <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mproj.temp" value="{{data.mproj.temp}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.mprojfinal" value="{{data.mprojfinal}}" readonly/> </label>
+            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.mprojfinal" value="{{data.mprojfinal}}" readonly /> </label>
             <div class="mProjButton">
                 <button type="button" class="mystic rollable" data-roll="d100+@mprojfinaloff" data-label="Magic Proj. Offensive">
                     <span> {{localize "abfalter.magicTab.offensive"}} </span> <span> {{data.mprojfinaloff}} </span>
-                </button><!--
-                 --><button type="button" class="mystic rollable" data-roll="d10+@mprojfinaldef" data-label="Magic Proj. Defensive">
-                        <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{data.mprojfinaldef}} </span>
+                </button>
+                <!--
+                -->
+                <button type="button" class="mystic rollable" data-roll="d10+@mprojfinaldef" data-label="Magic Proj. Defensive">
+                    <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{data.mprojfinaldef}} </span>
                 </button>
             </div>
             <h3> {{localize "abfalter.magicTab.mtheory"}} </h3>
@@ -76,7 +80,7 @@
                             <span> {{localize "abfalter.basicInfo.half"}} </span>
                         </button><!--
                         --><button type="button" class="maccuFull" data-ability="{{data.maccufinal}}">
-                               <span> {{localize "abfalter.basicInfo.full"}} </span> 
+                            <span> {{localize "abfalter.basicInfo.full"}} </span>
                         </button>
                     </div>
                 </div><!--Accumulation-->
@@ -141,6 +145,56 @@
 
     <div class="s1">
         <div>
+            <div class="s2">
+                <div class="mlevels">
+                    <h2>
+                        {{localize "abfalter.magicTab.mLevels"}}
+                        <label class="expand-box">
+                            <a class="toggleBoolean {{#if data.mlevel.status}}showOpacity{{/if}}" data-label="data.mlevel.status" data-ability="{{data.mlevel.status}}"><i class="{{#if data.mlevel.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </label>
+                    </h2>
+                    {{#if data.mlevel.status}}
+                    <div>
+                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.mlevel.base" value="{{data.mlevel.base}}" /> </label>
+                        <label> <span> {{localize "abfalter.magicTab.fromInt"}} </span> <input type="number" name="data.mlevelint" value="{{data.mlevelint}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.mlevel.spec" value="{{data.mlevel.spec}}" /> </label>
+                    </div>
+                    {{/if}}
+                    <label> <span> {{localize "abfalter.basicInfo.extra"}} </span> <input type="number" name="data.mlevel.temp" value="{{data.mlevel.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.mlevelfinal" value="{{data.mlevelfinal}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.used"}} </span> <input type="number" name="data.mlevelused" value="{{data.mlevelused}}" readonly /> </label>
+                </div>
+
+                <div class="spellPath">
+                    <h2> {{localize "abfalter.magicTab.spellPath"}} </h2>
+                    <div>
+                        <span> {{localize "abfalter.magicTab.spellPath"}} </span>
+                        <span> {{localize "abfalter.basicInfo.level"}} </span>
+                    </div>
+                    <div class="{{#if data.itemToggle.spellPath}}item-list{{/if}}">
+                        {{#each spellPaths as |spellPath id|}}
+                        <div class="spellPath-item item" data-item-id="{{spellPath._id}}">
+                            {{#if system.toggleItem}}
+                            <div>
+                                <input class="inline-edit" data-field="name" type="text" value="{{spellPath.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                                <input class="inline-edit" data-field="system.level" type="number" value="{{spellPath.system.level}}" />
+                            </div>
+                            {{else}}
+                            <div>
+                                <span> {{spellPath.name}} </span>
+                                <span> {{spellPath.system.level}} </span>
+                            </div>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div>
+                        <a class="item-create" data-type="spellPath"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addSpellPath"}} </a>
+                        <a class="toggleBoolean {{#if data.itemToggle.spellPath}}armorpenalty{{/if}}" data-label="data.itemToggle.spellPath" data-ability="{{data.itemToggle.spellPath}}"><i class="{{#if data.itemToggle.spellPath}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                    </div>
+                </div>
+            </div>
+
             <div class="summoning">
                 <h2> {{localize "abfalter.magicTab.summoning"}} </h2>
                 <div>
@@ -151,7 +205,7 @@
                     <span> {{localize "abfalter.basicInfo.final"}} </span>
                 </div>
                 <div>
-                    <button type="button" class="mystic rollable" data-roll="d100+@summonfinal" data-label="Summon">
+                    <button type="button" class="rollable" data-roll="{{data.summonfinal}}" data-label="{{localize "abfalter.magicTab.summon"}}" data-type="summoningRoll" data-ability="{{data.summoning.summon.mastery}}">
                         <span> {{localize "abfalter.magicTab.summon"}} </span>
                     </button>
                     <input type="number" name="data.summoning.summon.base" value="{{data.summoning.summon.base}}" />
@@ -159,12 +213,13 @@
                     <input type="number" name="data.summoning.summon.spec" value="{{data.summoning.summon.spec}}" />
                     <input type="number" name="data.summonfinal" value="{{data.summonfinal}}" readonly />
                     <label>
-                        <button type="button" class="mastery-box {{#if data.summoning.summon.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.summoning.summon.mastery" data-ability="{{data.summoning.summon.mastery}}"> 
-                        <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
+                        <button type="button" class="mastery-box {{#if data.summoning.summon.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.summoning.summon.mastery" data-ability="{{data.summoning.summon.mastery}}">
+                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                        </button>
                     </label>
                 </div>
                 <div>
-                    <button type="button" class="mystic rollable" data-roll="d100+@controlfinal" data-label="Control">
+                    <button type="button" class="rollable" data-roll="{{data.controlfinal}}" data-label="{{localize "abfalter.magicTab.control"}}" data-type="summoningRoll" data-ability="{{data.summoning.control.mastery}}">
                         <span> {{localize "abfalter.magicTab.control"}} </span>
                     </button>
                     <input type="number" name="data.summoning.control.base" value="{{data.summoning.control.base}}" />
@@ -173,12 +228,12 @@
                     <input type="number" name="data.controlfinal" value="{{data.controlfinal}}" readonly />
                     <label>
                         <button type="button" class="mastery-box {{#if data.summoning.control.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.summoning.control.mastery" data-ability="{{data.summoning.control.mastery}}">
-                        <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
                         </button>
                     </label>
                 </div>
                 <div>
-                    <button type="button" class="mystic rollable" data-roll="d100+@bindfinal" data-label="Bind">
+                    <button type="button" class="rollable" data-roll="{{data.bindfinal}}" data-label="{{localize "abfalter.magicTab.bind"}}" data-type="summoningRoll" data-ability="{{data.summoning.bind.mastery}}">
                         <span> {{localize "abfalter.magicTab.bind"}} </span>
                     </button>
                     <input type="number" name="data.summoning.bind.base" value="{{data.summoning.bind.base}}" />
@@ -187,12 +242,12 @@
                     <input type="number" name="data.bindfinal" value="{{data.bindfinal}}" readonly />
                     <label>
                         <button type="button" class="mastery-box {{#if data.summoning.bind.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.summoning.bind.mastery" data-ability="{{data.summoning.bind.mastery}}">
-                        <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
                         </button>
                     </label>
                 </div>
                 <div>
-                    <button type="button" class="mystic rollable" data-roll="d100+@banishfinal" data-label="Banish">
+                    <button type="button" class="rollable" data-roll="{{data.banishfinal}}" data-label="{{localize "abfalter.magicTab.banish"}}" data-type="summoningRoll" data-ability="{{data.summoning.banish.mastery}}">
                         <span> {{localize "abfalter.magicTab.banish"}} </span>
                     </button>
                     <input type="number" name="data.summoning.banish.base" value="{{data.summoning.banish.base}}" />
@@ -201,29 +256,10 @@
                     <input type="number" name="data.banishfinal" value="{{data.banishfinal}}" readonly />
                     <label>
                         <button type="button" class="mastery-box {{#if data.summoning.banish.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.summoning.banish.mastery" data-ability="{{data.summoning.banish.mastery}}">
-                        <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
                         </button>
                     </label>
                 </div>
-            </div>
-
-            <div class="metamagic">
-                <h2> {{localize "abfalter.magicTab.metaMagic"}} </h2>
-                <div class="items-list">
-                    {{#each metaMagics as |metaMagic id|}}
-                    <div class="invocation-item item" data-item-id="{{metaMagic._id}}">
-                        <div class="item-name">
-                            <h4>{{metaMagic.name}}</h4>
-                        </div>
-                        <div class="item-controls">
-                            <a class="item-control item-edit"><i class="fas fa-edit"></i></a>
-                            <a class="item-control item-delete"><i class="fas fa-trash"></i></a>
-                        </div>
-                    </div>
-                    {{/each}}
-                </div>
-                <a class="item-control item-create" data-type="metaMagic"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addMetaMagic"}} </a>
-                <span> Only 1 meta Magic Item Allowed, created with character sheet already </span>
             </div>
 
             <div class="turnmaint">
@@ -272,65 +308,20 @@
                 <span> include a way to delete item but not create </span>
             </div>
         </div>
-        <!--    <label> <span> x </span> <input type="number" name="x" value="{{x}}" /> </label>      -->
 
         <div>
-            <div class="s2">
-                <div class="spellPath">
-                    <h2> {{localize "abfalter.magicTab.spellPath"}} </h2>
-                    <div>
-                        <span> {{localize "abfalter.magicTab.spellPath"}} </span>
-                        <span> {{localize "abfalter.basicInfo.level"}} </span>
-                    </div>
-                    <div class="items-list">
-                        {{#each spellPaths as |spellPath id|}}
-                        <div class="spellPath-item item" data-item-id="{{spellPath._id}}">
-                            <div>
-                                <input class="inline-edit" data-field="name" type="text" value="{{spellPath.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
-                                <input class="inline-edit" data-field="data.level" type="number" value="{{spellPath.data.level}}" />
-                            </div>
-                            <div>
-                                <span> Sub </span>
-                                <input class="inline-edit" data-field="data.subPath" type="text" value="{{spellPath.data.subPath}}" />
-                            </div>
-                        </div>
-                        {{/each}}
-                    </div>
-                    <a class="item-create" data-type="spellPath"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addSpellPath"}} </a>
-                </div>
-
-                <div class="mlevels">
-                    <h2>
-                        {{localize "abfalter.magicTab.mLevels"}}
-                        <label class="expand-box">
-                            <a class="toggleBoolean {{#if data.mlevel.status}}showOpacity{{/if}}" data-label="data.mlevel.status" data-ability="{{data.mlevel.status}}"><i class="{{#if data.mlevel.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </label>
-                    </h2>
-                    {{#if data.mlevel.status}}
-                    <div>
-                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.mlevel.base" value="{{data.mlevel.base}}" /> </label>
-                        <label> <span> {{localize "abfalter.magicTab.fromInt"}} </span> <input type="number" name="data.mlevelint" value="{{data.mlevelint}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.mlevel.spec" value="{{data.mlevel.spec}}" /> </label>
-                    </div>
-                    {{/if}}
-                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mlevel.temp" value="{{data.mlevel.temp}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.mlevelfinal" value="{{data.mlevelfinal}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.used"}} </span> <input type="number" name="data.mlevelused" value="{{data.mlevelused}}" readonly /> </label>
-                </div>
-            </div>
-
             <div class="spells">
                 <h2> {{localize "abfalter.magicTab.spellBook"}} </h2>
-                <div class="items-list">
-                {{#each spells as |spell id|}}
+                <div class="{{#if data.itemToggle.spell}}item-list{{/if}}">
+                    {{#each spells as |spell id|}}
                     <div class="spell-item item normal-item" data-item-id="{{spell._id}}">
-                        {{#if data.expand}}
+                        {{#if system.expand}}
                         <div>
                             <div>
                                 <input class="item-name inline-edit" data-field="name" type="text" value="{{spell.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
-                                <input class="inline-edit" data-field="data.path" type="text" value="{{spell.data.path}}" />
-                                <input class="inline-edit" data-field="data.level" type="number" value="{{spell.data.level}}" />
-                                <a class="item-expand :"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                                <input class="inline-edit" data-field="system.path" type="text" value="{{spell.system.path}}" />
+                                <input class="inline-edit" data-field="system.level" type="number" value="{{spell.system.level}}" />
+                                <a class="item-expand :"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                             </div>
                             <div>
                                 <span> {{localize "abfalter.basicInfo.name"}} </span>
@@ -341,8 +332,8 @@
                         <div>
                             <label>
                                 <span> {{localize "abfalter.basicInfo.action"}} </span>
-                                <select class="inline-edit" data-field="data.action" data-dtype="String">
-                                    {{#select data.action}}
+                                <select class="inline-edit" data-field="system.action" data-dtype="String">
+                                    {{#select system.action}}
                                     <option value="Active"> {{localize "abfalter.basicInfo.active"}} </option>
                                     <option value="Passive"> {{localize "abfalter.basicInfo.passive"}} </option>
                                     {{/select}}
@@ -350,8 +341,8 @@
                             </label>
                             <label>
                                 <span> {{localize "abfalter.basicInfo.type"}} </span>
-                                <select class="inline-edit" data-field="data.type" data-dtype="String">
-                                    {{#select data.type}}
+                                <select class="inline-edit" data-field="system.type" data-dtype="String">
+                                    {{#select system.type}}
                                     <option value="Attack"> {{localize "abfalter.basicInfo.attack"}} </option>
                                     <option value="Defense"> {{localize "abfalter.basicInfo.defense"}} </option>
                                     <option value="Spiritual"> {{localize "abfalter.magicTab.spiritual"}} </option>
@@ -363,8 +354,8 @@
                             </label>
                             <label>
                                 <span> {{localize "abfalter.psychicTab.pproj"}} </span>
-                                <select class="inline-edit" data-field="data.projection" data-dtype="String">
-                                    {{#select data.projection}}
+                                <select class="inline-edit" data-field="system.projection" data-dtype="String">
+                                    {{#select system.projection}}
                                     <option value="Offensive"> {{localize "abfalter.magicTab.offensive1"}} </option>
                                     <option value="Defensive"> {{localize "abfalter.magicTab.defensive1"}} </option>
                                     {{/select}}
@@ -374,8 +365,8 @@
                         <div>
                             <label>
                                 <span> {{localize "abfalter.magicTab.maintType"}} </span>
-                                <select class="inline-edit" data-field="data.mainttype" data-dtype="String">
-                                    {{#select data.mainttype}}
+                                <select class="inline-edit" data-field="system.mainttype" data-dtype="String">
+                                    {{#select system.mainttype}}
                                     <option value="None"> {{localize "abfalter.basicInfo.none"}} </option>
                                     <option value="Turn"> {{localize "abfalter.magicTab.turn"}} </option>
                                     <option value="Daily"> {{localize "abfalter.magicTab.daily"}} </option>
@@ -384,17 +375,17 @@
                             </label>
                             <label>
                                 <span> {{localize "abfalter.magicTab.bought"}} </span>
-                                <select class="inline-edit" data-field="data.bought" data-dtype="String">
-                                    {{#select data.bought}}
+                                <select class="inline-edit" data-field="system.bought" data-dtype="String">
+                                    {{#select system.bought}}
                                     <option value="SpellPath"> {{localize "abfalter.magicTab.spellPath1"}} </option>
                                     <option value="Single"> {{localize "abfalter.magicTab.single"}} </option>
                                     <option value="Not Bought"> {{localize "abfalter.magicTab.notBought"}} </option>
                                     {{/select}}
                                 </select>
                             </label>
-                            <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" class="inline-edit" data-field="data.cost" value="{{data.cost}}" /> </label>
+                            <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" class="inline-edit" data-field="system.cost" value="{{system.cost}}" /> </label>
                         </div>
-                        <textarea class="inline-edit" data-field="data.description" placeholder="{{localize "abfalter.magicTab.spellDesc"}}">{{spell.data.description}}</textarea>
+                        <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.magicTab.spellDesc"}}">{{spell.system.description}}</textarea>
                         <div>
                             <span> {{localize "abfalter.magicTab.rank"}} </span>
                             <span> {{localize "abfalter.magicTab.req"}} </span>
@@ -404,50 +395,72 @@
                         <div>
                             <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.basic"}} </span>
-                            <input class="inline-edit" data-field="data.base.intreq" type="text" value="{{spell.data.base.intreq}}" />
-                            <input class="inline-edit" data-field="data.base.zeoncost" type="text" value="{{spell.data.base.zeoncost}}" />
-                            <input class="inline-edit" data-field="data.base.maint" type="text" value="{{spell.data.base.maint}}" />
+                            <input class="inline-edit" data-field="system.base.intreq" type="text" value="{{spell.system.base.intreq}}" />
+                            <input class="inline-edit" data-field="system.base.zeoncost" type="text" value="{{spell.system.base.zeoncost}}" />
+                            <input class="inline-edit" data-field="system.base.maint" type="text" value="{{spell.system.base.maint}}" />
                         </div>
-                        <textarea class="inline-edit" data-field="data.basic.rollDesc" placeholder="{{localize "abfalter.magicTab.basicDesc"}}">{{spell.data.basic.rollDesc}}</textarea>
+                        <textarea class="inline-edit" data-field="system.basic.rollDesc" placeholder="{{localize "abfalter.magicTab.basicDesc"}}">{{spell.system.basic.rollDesc}}</textarea>
                         <div>
                             <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.intermidiate"}} </span>
-                            <input class="inline-edit" data-field="data.intermediate.intreq" type="text" value="{{spell.data.intermediate.intreq}}" />
-                            <input class="inline-edit" data-field="data.intermediate.zeoncost" type="text" value="{{spell.data.intermediate.zeoncost}}" />
-                            <input class="inline-edit" data-field="data.intermediate.maint" type="text" value="{{spell.data.intermediate.maint}}" />
+                            <input class="inline-edit" data-field="system.intermediate.intreq" type="text" value="{{spell.system.intermediate.intreq}}" />
+                            <input class="inline-edit" data-field="system.intermediate.zeoncost" type="text" value="{{spell.system.intermediate.zeoncost}}" />
+                            <input class="inline-edit" data-field="system.intermediate.maint" type="text" value="{{spell.system.intermediate.maint}}" />
                         </div>
-                        <textarea class="inline-edit" data-field="data.intermediate.rollDesc" placeholder="{{localize "abfalter.magicTab.intDesc"}}">{{spell.data.intermediate.rollDesc}}</textarea>
+                        <textarea class="inline-edit" data-field="system.intermediate.rollDesc" placeholder="{{localize "abfalter.magicTab.intDesc"}}">{{spell.system.intermediate.rollDesc}}</textarea>
                         <div>
                             <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.advanced"}} </span>
-                            <input class="inline-edit" data-field="data.advanced.intreq" type="text" value="{{spell.data.advanced.intreq}}" />
-                            <input class="inline-edit" data-field="data.advanced.zeoncost" type="text" value="{{spell.data.advanced.zeoncost}}" />
-                            <input class="inline-edit" data-field="data.advanced.maint" type="text" value="{{spell.data.advanced.maint}}" />
+                            <input class="inline-edit" data-field="system.advanced.intreq" type="text" value="{{spell.system.advanced.intreq}}" />
+                            <input class="inline-edit" data-field="system.advanced.zeoncost" type="text" value="{{spell.system.advanced.zeoncost}}" />
+                            <input class="inline-edit" data-field="system.advanced.maint" type="text" value="{{spell.system.advanced.maint}}" />
                         </div>
-                        <textarea class="inline-edit" data-field="data.advanced.rollDesc" placeholder="{{localize "abfalter.magicTab.advDesc"}}">{{spell.data.advanced.rollDesc}}</textarea>
+                        <textarea class="inline-edit" data-field="system.advanced.rollDesc" placeholder="{{localize "abfalter.magicTab.advDesc"}}">{{spell.system.advanced.rollDesc}}</textarea>
                         <div>
                             <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.arcane"}} </span>
-                            <input class="inline-edit" data-field="data.arcane.intreq" type="text" value="{{spell.data.arcane.intreq}}" />
-                            <input class="inline-edit" data-field="data.arcane.zeoncost" type="text" value="{{spell.data.arcane.zeoncost}}" />
-                            <input class="inline-edit" data-field="data.arcane.maint" type="text" value="{{spell.data.arcane.maint}}" />
+                            <input class="inline-edit" data-field="system.arcane.intreq" type="text" value="{{spell.system.arcane.intreq}}" />
+                            <input class="inline-edit" data-field="system.arcane.zeoncost" type="text" value="{{spell.system.arcane.zeoncost}}" />
+                            <input class="inline-edit" data-field="system.arcane.maint" type="text" value="{{spell.system.arcane.maint}}" />
                         </div>
-                        <textarea class="inline-edit" data-field="data.arcane.rollDesc" placeholder="{{localize "abfalter.magicTab.arcDesc"}}">{{spell.data.arcane.rollDesc}}</textarea>
+                        <textarea class="inline-edit" data-field="system.arcane.rollDesc" placeholder="{{localize "abfalter.magicTab.arcDesc"}}">{{spell.system.arcane.rollDesc}}</textarea>
                         {{else}}
                         <div>
                             <div>
                                 <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                                 <span> {{spell.name}} </span>
-                                <span> {{data.path}} </span>
-                                <span> {{data.level}} </span>
-                                <a class="item-expand"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                                <span> {{system.path}} </span>
+                                <span> {{system.level}} </span>
+                                <a class="item-expand"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                             </div>
                         </div>
                         {{/if}}
                     </div>
-                {{/each}}
+                    {{/each}}
                 </div>
-                <a class="item-control item-create" data-type="spell"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addSpell"}} </a>
+                <div>
+                    <a class="item-control item-create" data-type="spell"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addSpell"}} </a>
+                    <a class="toggleBoolean {{#if data.itemToggle.spell}}armorpenalty{{/if}}" data-label="data.itemToggle.spell" data-ability="{{data.itemToggle.spell}}"><i class="{{#if data.itemToggle.spell}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                </div>
+            </div>
+
+            <div class="metamagic">
+                <h2> {{localize "abfalter.magicTab.metaMagic"}} </h2>
+                <div class="items-list">
+                    {{#each metaMagics as |metaMagic id|}}
+                    <div class="invocation-item item" data-item-id="{{metaMagic._id}}">
+                        <div class="item-name">
+                            <h4>{{metaMagic.name}}</h4>
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control item-edit"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <a class="item-control item-create" data-type="metaMagic"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addMetaMagic"}} </a>
+                <span> Only 1 meta Magic Item Allowed, created with character sheet already </span>
             </div>
 
             <div class="invocations">

@@ -1,35 +1,42 @@
 {
-  "name": "abfalter",
+  "id": "abfalter",
   "title": "Anima Beyond Fantasy Altered",
-  "description": "Engligh Version of 'Fantasy Flight Games' Anima Beyond Fantasy System",
-  "version": "0.0.2",
-  "minimumCoreVersion": "0.8.6",
-  "compatibleCoreVersion": "9",
-  "author": "Luminita (Jesse Davis)",
+  "description": "Engligh Version of 'Fantasy Flight Games' Anima Beyond Fantasy System altered by some house rules.",
+  "version": "0.0.3",
+  "compatibility": {
+    "minimum": 10,
+    "verified": "10.284"
+  },
+  "authors": [
+    {
+      "name": "Jesse Davis",
+      "email": "Davis.Jesse97@outlook.com",
+      "discord": "Yúkí#1065"
+    }
+  ],
+  "requires": [
+    {
+      "id": "libWrapper",
+      "type": "module",
+      "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json"
+    },
+    {
+      "id": "Compendium Folders",
+      "type": "module",
+      "manifest": "https://raw.githubusercontent.com/earlSt1/vtt-compendium-folders/09x-update/module.json"
+    }
+  ],
   "esmodules": [
     "module/abfalter.js"
   ],
   "styles": [
     "css/abfalter.css"
   ],
-  "packs": [
-
-  ],
   "languages": [
     {
       "lang": "en",
       "name": "English",
       "path": "lang/en.json"
-    }
-  ],
-  "dependencies": [
-    {
-      "name": "libWrapper",
-      "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json"
-    },
-    {
-      "name": "Compendium Folders",
-      "manifest": "https://raw.githubusercontent.com/earlSt1/vtt-compendium-folders/09x-update/module.json"
     }
   ],
   "gridDistance": 5,

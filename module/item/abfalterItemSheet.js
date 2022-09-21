@@ -1,5 +1,26 @@
 export default class abfalterItemSheet extends ItemSheet {
 
+    constructor(...args) {
+        super(...args);
+
+        switch (this.object.type) {
+            case "advantage":
+                this.options.height = this.position.height = 750;
+                this.options.width = this.position.width = 500;
+                break;
+            case "mentalPattern":
+                this.options.height = this.position.height = 500;
+                break;
+            case "psychicMatrix":
+                this.options.height = this.position.height = 550;
+                break;
+            default:
+                this.options.height = this.position.height = 400;
+                break;
+        }
+    }
+
+
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["abfalter", "sheet", "item"],
@@ -12,7 +33,7 @@ export default class abfalterItemSheet extends ItemSheet {
 
     get template() {
         const path = "systems/abfalter/templates/item";
-        return `${path}/${this.item.data.type}.html`;
+        return `${path}/${this.item.type}.html`;
     }
 
     getData() {
@@ -21,10 +42,10 @@ export default class abfalterItemSheet extends ItemSheet {
             owner: this.item.isOwner,
             editable: this.isEditable,
             item: baseData.item,
-            data: baseData.item.data.data,
+            data: baseData.item.system,
             config: CONFIG.abfalter
         };
-
+        console.log("Im here");
         return sheetData;
     }
 

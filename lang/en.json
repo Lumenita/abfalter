@@ -33,7 +33,7 @@
       "easy": "Easy",
       "average": "Average",
       "difficult": "Difficult",
-      "vDifficult": "Very Difficult",
+      "vDifficult": "Very Diff.",
       "absurd": "Absurd",
       "almostImp": "Almost Imp.",
       "impossible": "Impossible",
@@ -61,7 +61,9 @@
       "block": "Block",
       "dodge": "Dodge",
       "defense": "Defense",
-      "acrobatics": "acro"
+      "advInfo": "Advatage information",
+      "disadvInfo": "Disadvantage information",
+      "extra": "Extra"
     },
     "generalTab": {
       "characteristics": "Characteristics",
@@ -151,11 +153,13 @@
     },
     "sheet": {
       "newItem": "New Item",
-      "nameItem": "A name is required here",
+      "nameItem": "A name is required",
       "edit": "Edit",
       "delete": "Delete",
       "equip": "Toggle Equip",
-      "addItem": "Add Item"
+      "addItem": "Add Item",
+      "modify": "Modify",
+      "toggle": "Toggle"
 
     },
     "magicTab": {
@@ -248,12 +252,13 @@
       "cancelled": "Cancelled?",
       "addMentalPattern": "Add Mental Pattern",
       "addPsychicMatrix": "Add Psychic Matrix",
-      "patternInfoB": "Bonus information goes here",
-      "patternInfoP": "Penalty information goes here",
-      "maintInfo": "Maintained Matrix inforormation goes here",
+      "patternInfoB": "Bonus information",
+      "patternInfoP": "Penalty information",
+      "maintInfo": "Maintained Matrix inforormation",
       "cancelCost": "Cancel Cost",
       "oppPattern": "Opposite Pattern",
-      "maint": "Maint"
+      "maint": "Maint",
+      "psychicPotential": "Psychic Potential"
     },
     "kiTab": {
       "kiAbilities": "Ki Abilities",
@@ -466,7 +471,21 @@
       "kiSealMaster": "Ki Seal Mastery",
       "creatureName": "Creature Name",
       "sealType": "Seal Type",
-      "kiSealInfo": "Ki Seal Information"
+      "kiSealInfo": "Ki Seal Information",
+      "ki": "Ki",
+      "actionInfo": "Action Info",
+      "innatePowerUse": "Innate Power Use",
+      "use": "Use",
+      "action": "Action",
+      "turn": "Turn",
+      "variable": "Variable",
+      "innatePowerMaint": "Innate Power Maint.",
+      "unifiedMaint": "Unified Maint.",
+      "maint": "Maint.",
+      "attack": "Attack",
+      "defense": "Defense",
+      "counterAttack": "Counter Attack",
+      "kiTechInfo": "Ki Technique Information"
     },
     "armoryTab": {
       "wearArmor": "Wear Armor",

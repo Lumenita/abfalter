@@ -17,7 +17,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
             icon: '<i class="fas fa-caret-right"></i>',
             callback: element => {
                 const item = this.actor.items.get(element.data("item-id"));
-                element.equipped = !item.data.data.equipped;
+                element.equipped = !item.system.equipped;
                 item.update({ "data.equipped": element.equipped });
             }
         },
@@ -58,6 +58,15 @@ export default class abfalterCharacterSheet extends ActorSheet {
     ]
     itemContextMenuDelete = [
         {
+            name: game.i18n.localize("abfalter.sheet.toggle"),
+            icon: '<i class="fas fa-caret-right"></i>',
+            callback: element => {
+                const item = this.actor.items.get(element.data("item-id"));
+                element.toggleItem = !item.system.toggleItem;
+                item.update({ "data.toggleItem": element.toggleItem });
+            }
+        },
+        {
             name: game.i18n.localize("abfalter.sheet.delete"),
             icon: '<i class="fas fa-trash"></i>',
             callback: element => {
@@ -66,14 +75,23 @@ export default class abfalterCharacterSheet extends ActorSheet {
         }
 
     ]
+    itemContextMenuOnlyDelete = [
+        {
+            name: game.i18n.localize("abfalter.sheet.delete"),
+            icon: '<i class="fas fa-trash"></i>',
+            callback: element => {
+                this.actor.deleteEmbeddedDocuments("Item", [element.data("item-id")]);
+            }
+        }
 
+    ]
     getData() {
         const baseData = super.getData();
         let sheetData = {
             owner: this.actor.isOwner,
             editable: this.isEditable,
             actor: baseData.actor,
-            data: baseData.actor.data.data,
+            data: baseData.actor.system,
             config: CONFIG.abfalter
         }
 
@@ -119,6 +137,8 @@ export default class abfalterCharacterSheet extends ActorSheet {
             new ContextMenu(html, ".normal-item", this.itemContextMenu);
             new ContextMenu(html, ".equip-item", this.itemContextMenuEquip);
             new ContextMenu(html, ".delete-item", this.itemContextMenuDelete);
+            new ContextMenu(html, ".onlyDelete-item", this.itemContextMenuOnlyDelete);
+
 
             new ContextMenu(html, ".spellPath-item", this.itemContextMenuDelete);
 
@@ -131,19 +151,18 @@ export default class abfalterCharacterSheet extends ActorSheet {
 
         }
 
-
         if (this.actor.isOwner) {
             html.find('.maccuHalf').click(ev => {
                 const value = $(ev.currentTarget).attr("data-ability");
-                this.document.update({ "data.maccu.actual": Math.floor(this.document.data.data.maccu.actual + (value / 1)) });
+                this.document.update({ "data.maccu.actual": Math.floor(this.document.system.maccu.actual + (value / 1)) });
             });
             html.find('.maccuFull').click(ev => {
                 const value = $(ev.currentTarget).attr("data-ability");
-                this.document.update({ "data.maccu.actual": Math.floor(this.document.data.data.maccu.actual + (value / 1)) });
+                this.document.update({ "data.maccu.actual": Math.floor(this.document.system.maccu.actual + (value / 1)) });
             });
             html.find('.mregenFull').click(ev => {
                 const value = $(ev.currentTarget).attr("data-ability");
-                this.document.update({ "data.zeon.actual": Math.floor(this.document.data.data.zeon.actual + (value / 1)) });
+                this.document.update({ "data.zeon.actual": Math.floor(this.document.system.zeon.actual + (value / 1)) });
             }); 
             html.find(".toggleBoolean").click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
@@ -186,7 +205,6 @@ export default class abfalterCharacterSheet extends ActorSheet {
             html.find(".item-chat").click(this._onItemChatRoll.bind(this));
             html.find(".item-roll").click(this._onItemRoll.bind(this));
             html.find('.rollable').click(this._onRoll.bind(this));
-
 
         }
 
@@ -248,7 +266,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
         let element = event.currentTarget;
         let itemId = element.closest(".item").dataset.itemId;
         let item = this.actor.items.get(itemId);
-        element.expand = !item.data.data.expand;
+        element.expand = !item.system.expand;
         item.update({ "data.expand": element.expand });
     }
 
@@ -257,7 +275,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
         let element = event.currentTarget;
         let itemId = element.closest(".item").dataset.itemId;
         let item = this.actor.items.get(itemId);
-        element.toggle = !item.data.data.toggle;
+        element.toggle = !item.system.toggle;
         item.update({ "data.toggle": element.toggle });
     }
 

@@ -1,5 +1,4 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
-
     {{!-- Sheet Header --}}
     <header class="sheet-header">
         <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
@@ -23,19 +22,24 @@
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
+        {{#if owner}}
         <a class="item" data-tab="general">{{localize "General"}}</a>
         <a class="item" data-tab="background">{{localize "Background"}}</a>
         <a class="item" data-tab="magic">{{localize "Magic"}}</a>
         <a class="item" data-tab="psychic">{{localize "Psychic"}}</a>
         <a class="item" data-tab="ki">{{localize "Ki"}}</a>
         <a class="item" data-tab="armory">{{localize "Armory"}}</a>
-        <a class="item" data-tab="settings">{{localize "X"}}</a>
+        {{/if}}
+        <a class="item" data-tab="bio">{{localize "Bio & Info"}}</a>
+        {{#if owner}}
+        <a class="item" data-tab="settings">{{localize "Settings"}}</a>
+        {{/if}}
     </nav>
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
-
         {{!-- Sheet Location Tab --}}
+        {{#if owner}}
         <div class="tab general" data-group="primary" data-tab="general">
 {{> systems/abfalter/templates/actor/parts/general.html }}
         </div>
@@ -54,10 +58,15 @@
         <div class="tab armory" data-group="primary" data-tab="armory">
 {{> systems/abfalter/templates/actor/parts/armory.html }}
         </div>
+        {{/if}}
+        <div class="tab bio" data-group="primary" data-tab="bio">
+{{> systems/abfalter/templates/actor/parts/bio.html }}
+        </div>
+        {{#if owner}}
         <div class="tab settings" data-group="primary" data-tab="settings">
 {{> systems/abfalter/templates/actor/parts/settings.html }}
         </div>
-
+        {{/if}}
     </section>
 </form>
 

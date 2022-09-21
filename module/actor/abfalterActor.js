@@ -1,19 +1,21 @@
 export default class abfalterActor extends Actor {
+
+
     prepareData() {
         super.prepareData();
     }
 
     prepareDerivedData() {
-        const actorData = this.data;
+        const actorData = this.system;
         this._prepareCharacterData(actorData);
     }
 
     _prepareCharacterData(actorData) {
-        const data = actorData.data;
+        const data = actorData;
         const stats = data.stats;
 
 
-        // Determine Item Values
+        // Determine Item Values / Last used arr[107]  3
         const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish, acro,
             athle, climb, jump, ride, swim, etiq, intim, leader, persua, street, style, trading, notice, search, track,
             animals, appra, archi, herb, hist, law, magicapr, medic, mem, navi, occ, science, tactic, comp, fos,
@@ -21,171 +23,174 @@ export default class abfalterActor extends Actor {
             runes, ritcal, soh, tailoring, quantity, req, natPen, movePen, aCutMax, aCutTot, aImpMax, aImpTot, aThrMax, aThrTot, aHeatMax,
             aHeatTot, aColdMax, aColdTot, aEleMax, aEleTot, aEneMax, aEneTot, aSptMax, aSptTot, ahReq, ahCutMax, ahCutTot, ahImpMax, ahImpTot, ahThrMax,
             ahThrTot, ahHeatMax, ahHeatTot, ahColdMax, ahColdTot, ahEleMax, ahEleTot, ahEneMax, ahEneTot, ahSptMax, ahSptTot, perPen, usedpp, matrixpp, arsMk,
-            maMk, techMk] = this.items.reduce((arr, item) => {
+            maMk, techMk, pathLvl] = this.items.reduce((arr, item) => {
                 if (item.type === "class") {
-                    const classLevels = parseInt(item.data.data.main.levels) || 0;
+                    const classLevels = parseInt(item.system.main.levels) || 0;
                     arr[0] += classLevels;
-                    arr[1] += classLevels * (parseInt(item.data.data.main.lp) || 0);
-                    arr[2] += classLevels * (parseInt(item.data.data.main.initiative) || 0);
-                    arr[3] += classLevels * (parseInt(item.data.data.main.attack) || 0);
-                    arr[4] += classLevels * (parseInt(item.data.data.main.dodge) || 0);
-                    arr[5] += classLevels * (parseInt(item.data.data.main.block) || 0);
-                    arr[6] += classLevels * (parseInt(item.data.data.main.weararmor) || 0);
-                    arr[7] += classLevels * (parseInt(item.data.data.main.mk) || 0);
-                    arr[8] += classLevels * (parseInt(item.data.data.main.pp) || 0);
-                    arr[9] += classLevels * (parseInt(item.data.data.main.zeon) || 0);
-                    arr[10] += classLevels * (parseInt(item.data.data.main.summon) || 0);
-                    arr[11] += classLevels * (parseInt(item.data.data.main.control) || 0);
-                    arr[12] += classLevels * (parseInt(item.data.data.main.bind) || 0);
-                    arr[13] += classLevels * (parseInt(item.data.data.main.banish) || 0);
-                    arr[14] += classLevels * (parseInt(item.data.data.secondary.acro) || 0);
-                    arr[15] += classLevels * (parseInt(item.data.data.secondary.athleticism) || 0);
-                    arr[16] += classLevels * (parseInt(item.data.data.secondary.climb) || 0);
-                    arr[17] += classLevels * (parseInt(item.data.data.secondary.jump) || 0);
-                    arr[18] += classLevels * (parseInt(item.data.data.secondary.ride) || 0);
-                    arr[19] += classLevels * (parseInt(item.data.data.secondary.swim) || 0);
-                    arr[20] += classLevels * (parseInt(item.data.data.secondary.etiquette) || 0);
-                    arr[21] += classLevels * (parseInt(item.data.data.secondary.intimidate) || 0);
-                    arr[22] += classLevels * (parseInt(item.data.data.secondary.leadership) || 0);
-                    arr[23] += classLevels * (parseInt(item.data.data.secondary.persuasion) || 0);
-                    arr[24] += classLevels * (parseInt(item.data.data.secondary.streetwise) || 0);
-                    arr[25] += classLevels * (parseInt(item.data.data.secondary.style) || 0);
-                    arr[26] += classLevels * (parseInt(item.data.data.secondary.trading) || 0);
-                    arr[27] += classLevels * (parseInt(item.data.data.secondary.notice) || 0);
-                    arr[28] += classLevels * (parseInt(item.data.data.secondary.search) || 0);
-                    arr[29] += classLevels * (parseInt(item.data.data.secondary.track) || 0);
-                    arr[30] += classLevels * (parseInt(item.data.data.secondary.animals) || 0);
-                    arr[31] += classLevels * (parseInt(item.data.data.secondary.appraisal) || 0);
-                    arr[32] += classLevels * (parseInt(item.data.data.secondary.architecture) || 0);
-                    arr[33] += classLevels * (parseInt(item.data.data.secondary.herballore) || 0);
-                    arr[34] += classLevels * (parseInt(item.data.data.secondary.history) || 0);
-                    arr[35] += classLevels * (parseInt(item.data.data.secondary.law) || 0);
-                    arr[36] += classLevels * (parseInt(item.data.data.secondary.magicappr) || 0);
-                    arr[37] += classLevels * (parseInt(item.data.data.secondary.medicine) || 0);
-                    arr[38] += classLevels * (parseInt(item.data.data.secondary.memorize) || 0);
-                    arr[39] += classLevels * (parseInt(item.data.data.secondary.navigation) || 0);
-                    arr[40] += classLevels * (parseInt(item.data.data.secondary.occult) || 0);
-                    arr[41] += classLevels * (parseInt(item.data.data.secondary.science) || 0);
-                    arr[42] += classLevels * (parseInt(item.data.data.secondary.tactics) || 0);
-                    arr[43] += classLevels * (parseInt(item.data.data.secondary.composure) || 0);
-                    arr[44] += classLevels * (parseInt(item.data.data.secondary.featsofstr) || 0);
-                    arr[45] += classLevels * (parseInt(item.data.data.secondary.withstpain) || 0);
-                    arr[46] += classLevels * (parseInt(item.data.data.secondary.disguise) || 0);
-                    arr[47] += classLevels * (parseInt(item.data.data.secondary.hide) || 0);
-                    arr[48] += classLevels * (parseInt(item.data.data.secondary.lockpicking) || 0);
-                    arr[49] += classLevels * (parseInt(item.data.data.secondary.poisons) || 0);
-                    arr[50] += classLevels * (parseInt(item.data.data.secondary.stealth) || 0);
-                    arr[51] += classLevels * (parseInt(item.data.data.secondary.theft) || 0);
-                    arr[52] += classLevels * (parseInt(item.data.data.secondary.traplore) || 0);
-                    arr[53] += classLevels * (parseInt(item.data.data.secondary.alchemy) || 0);
-                    arr[54] += classLevels * (parseInt(item.data.data.secondary.animism) || 0);
-                    arr[55] += classLevels * (parseInt(item.data.data.secondary.art) || 0);
-                    arr[56] += classLevels * (parseInt(item.data.data.secondary.dance) || 0);
-                    arr[57] += classLevels * (parseInt(item.data.data.secondary.forging) || 0);
-                    arr[58] += classLevels * (parseInt(item.data.data.secondary.jewelry) || 0);
-                    arr[59] += classLevels * (parseInt(item.data.data.secondary.music) || 0);
-                    arr[60] += classLevels * (parseInt(item.data.data.secondary.runes) || 0);
-                    arr[61] += classLevels * (parseInt(item.data.data.secondary.ritualcalig) || 0);
-                    arr[62] += classLevels * (parseInt(item.data.data.secondary.slofhand) || 0);
-                    arr[63] += classLevels * (parseInt(item.data.data.secondary.tailoring) || 0);
+                    arr[1] += classLevels * (parseInt(item.system.main.lp) || 0);
+                    arr[2] += classLevels * (parseInt(item.system.main.initiative) || 0);
+                    arr[3] += classLevels * (parseInt(item.system.main.attack) || 0);
+                    arr[4] += classLevels * (parseInt(item.system.main.dodge) || 0);
+                    arr[5] += classLevels * (parseInt(item.system.main.block) || 0);
+                    arr[6] += classLevels * (parseInt(item.system.main.weararmor) || 0);
+                    arr[7] += classLevels * (parseInt(item.system.main.mk) || 0);
+                    arr[8] += classLevels * (parseInt(item.system.main.pp) || 0);
+                    arr[9] += classLevels * (parseInt(item.system.main.zeon) || 0);
+                    arr[10] += classLevels * (parseInt(item.system.main.summon) || 0);
+                    arr[11] += classLevels * (parseInt(item.system.main.control) || 0);
+                    arr[12] += classLevels * (parseInt(item.system.main.bind) || 0);
+                    arr[13] += classLevels * (parseInt(item.system.main.banish) || 0);
+                    arr[14] += classLevels * (parseInt(item.system.secondary.acro) || 0);
+                    arr[15] += classLevels * (parseInt(item.system.secondary.athleticism) || 0);
+                    arr[16] += classLevels * (parseInt(item.system.secondary.climb) || 0);
+                    arr[17] += classLevels * (parseInt(item.system.secondary.jump) || 0);
+                    arr[18] += classLevels * (parseInt(item.system.secondary.ride) || 0);
+                    arr[19] += classLevels * (parseInt(item.system.secondary.swim) || 0);
+                    arr[20] += classLevels * (parseInt(item.system.secondary.etiquette) || 0);
+                    arr[21] += classLevels * (parseInt(item.system.secondary.intimidate) || 0);
+                    arr[22] += classLevels * (parseInt(item.system.secondary.leadership) || 0);
+                    arr[23] += classLevels * (parseInt(item.system.secondary.persuasion) || 0);
+                    arr[24] += classLevels * (parseInt(item.system.secondary.streetwise) || 0);
+                    arr[25] += classLevels * (parseInt(item.system.secondary.style) || 0);
+                    arr[26] += classLevels * (parseInt(item.system.secondary.trading) || 0);
+                    arr[27] += classLevels * (parseInt(item.system.secondary.notice) || 0);
+                    arr[28] += classLevels * (parseInt(item.system.secondary.search) || 0);
+                    arr[29] += classLevels * (parseInt(item.system.secondary.track) || 0);
+                    arr[30] += classLevels * (parseInt(item.system.secondary.animals) || 0);
+                    arr[31] += classLevels * (parseInt(item.system.secondary.appraisal) || 0);
+                    arr[32] += classLevels * (parseInt(item.system.secondary.architecture) || 0);
+                    arr[33] += classLevels * (parseInt(item.system.secondary.herballore) || 0);
+                    arr[34] += classLevels * (parseInt(item.system.secondary.history) || 0);
+                    arr[35] += classLevels * (parseInt(item.system.secondary.law) || 0);
+                    arr[36] += classLevels * (parseInt(item.system.secondary.magicappr) || 0);
+                    arr[37] += classLevels * (parseInt(item.system.secondary.medicine) || 0);
+                    arr[38] += classLevels * (parseInt(item.system.secondary.memorize) || 0);
+                    arr[39] += classLevels * (parseInt(item.system.secondary.navigation) || 0);
+                    arr[40] += classLevels * (parseInt(item.system.secondary.occult) || 0);
+                    arr[41] += classLevels * (parseInt(item.system.secondary.science) || 0);
+                    arr[42] += classLevels * (parseInt(item.system.secondary.tactics) || 0);
+                    arr[43] += classLevels * (parseInt(item.system.secondary.composure) || 0);
+                    arr[44] += classLevels * (parseInt(item.system.secondary.featsofstr) || 0);
+                    arr[45] += classLevels * (parseInt(item.system.secondary.withstpain) || 0);
+                    arr[46] += classLevels * (parseInt(item.system.secondary.disguise) || 0);
+                    arr[47] += classLevels * (parseInt(item.system.secondary.hide) || 0);
+                    arr[48] += classLevels * (parseInt(item.system.secondary.lockpicking) || 0);
+                    arr[49] += classLevels * (parseInt(item.system.secondary.poisons) || 0);
+                    arr[50] += classLevels * (parseInt(item.system.secondary.stealth) || 0);
+                    arr[51] += classLevels * (parseInt(item.system.secondary.theft) || 0);
+                    arr[52] += classLevels * (parseInt(item.system.secondary.traplore) || 0);
+                    arr[53] += classLevels * (parseInt(item.system.secondary.alchemy) || 0);
+                    arr[54] += classLevels * (parseInt(item.system.secondary.animism) || 0);
+                    arr[55] += classLevels * (parseInt(item.system.secondary.art) || 0);
+                    arr[56] += classLevels * (parseInt(item.system.secondary.dance) || 0);
+                    arr[57] += classLevels * (parseInt(item.system.secondary.forging) || 0);
+                    arr[58] += classLevels * (parseInt(item.system.secondary.jewelry) || 0);
+                    arr[59] += classLevels * (parseInt(item.system.secondary.music) || 0);
+                    arr[60] += classLevels * (parseInt(item.system.secondary.runes) || 0);
+                    arr[61] += classLevels * (parseInt(item.system.secondary.ritualcalig) || 0);
+                    arr[62] += classLevels * (parseInt(item.system.secondary.slofhand) || 0);
+                    arr[63] += classLevels * (parseInt(item.system.secondary.tailoring) || 0);
                 }
                 if (item.type === "armor") {
-                    if (item.data.data.equipped == true) {
-                        arr[64] += parseInt(item.data.data.quantity) || 0;
-                        arr[65] += parseInt(item.data.data.newRequirement) || 0;
-                        arr[66] += parseInt(item.data.data.newNatPenalty) || 0;
-                        arr[67] += parseInt(item.data.data.newMovePenalty) || 0;
-                        if (arr[68] < item.data.data.AT.newCut) {
-                            arr[68] = item.data.data.AT.newCut;
+                    if (item.system.equipped == true) {
+                        arr[64] += parseInt(item.system.quantity) || 0;
+                        arr[65] += parseInt(item.system.newRequirement) || 0;
+                        arr[66] += parseInt(item.system.newNatPenalty) || 0;
+                        arr[67] += parseInt(item.system.newMovePenalty) || 0;
+                        if (arr[68] < item.system.AT.newCut) {
+                            arr[68] = item.system.AT.newCut;
                         }
-                        arr[69] += parseInt(item.data.data.AT.newCut / 2) || 0;
-                        if (arr[70] < item.data.data.AT.newImp) {
-                            arr[70] = item.data.data.AT.newImp;
+                        arr[69] += parseInt(item.system.AT.newCut / 2) || 0;
+                        if (arr[70] < item.system.AT.newImp) {
+                            arr[70] = item.system.AT.newImp;
                         }
-                        arr[71] += parseInt(item.data.data.AT.newImp / 2) || 0;
-                        if (arr[72] < item.data.data.AT.newThr) {
-                            arr[72] = item.data.data.AT.newThr;
+                        arr[71] += parseInt(item.system.AT.newImp / 2) || 0;
+                        if (arr[72] < item.system.AT.newThr) {
+                            arr[72] = item.system.AT.newThr;
                         }
-                        arr[73] += parseInt(item.data.data.AT.newThr / 2) || 0;
-                        if (arr[74] < item.data.data.AT.newHeat) {
-                            arr[74] = item.data.data.AT.newHeat;
+                        arr[73] += parseInt(item.system.AT.newThr / 2) || 0;
+                        if (arr[74] < item.system.AT.newHeat) {
+                            arr[74] = item.system.AT.newHeat;
                         }
-                        arr[75] += parseInt(item.data.data.AT.newHeat / 2) || 0;
-                        if (arr[76] < item.data.data.AT.newCold) {
-                            arr[76] = item.data.data.AT.newCold;
+                        arr[75] += parseInt(item.system.AT.newHeat / 2) || 0;
+                        if (arr[76] < item.system.AT.newCold) {
+                            arr[76] = item.system.AT.newCold;
                         }
-                        arr[77] += parseInt(item.data.data.AT.newCold / 2) || 0;
-                        if (arr[78] < item.data.data.AT.newEle) {
-                            arr[78] = item.data.data.AT.newEle;
+                        arr[77] += parseInt(item.system.AT.newCold / 2) || 0;
+                        if (arr[78] < item.system.AT.newEle) {
+                            arr[78] = item.system.AT.newEle;
                         }
-                        arr[79] += parseInt(item.data.data.AT.newEle / 2) || 0;
-                        if (arr[80] < item.data.data.AT.newEne) {
-                            arr[80] = item.data.data.AT.newEne;
+                        arr[79] += parseInt(item.system.AT.newEle / 2) || 0;
+                        if (arr[80] < item.system.AT.newEne) {
+                            arr[80] = item.system.AT.newEne;
                         }
-                        arr[81] += parseInt(item.data.data.AT.newEne / 2) || 0;
-                        if (arr[82] < item.data.data.AT.newSpt) {
-                            arr[82] = item.data.data.AT.newSpt;
+                        arr[81] += parseInt(item.system.AT.newEne / 2) || 0;
+                        if (arr[82] < item.system.AT.newSpt) {
+                            arr[82] = item.system.AT.newSpt;
                         }
-                        arr[83] += parseInt(item.data.data.AT.newSpt / 2) || 0;
+                        arr[83] += parseInt(item.system.AT.newSpt / 2) || 0;
                     }
                 }
                 if (item.type === "armorHelmet") {
-                    if (item.data.data.equipped == true) {
-                        arr[84] += parseInt(item.data.data.newRequirement) || 0;
-                        if (arr[85] < item.data.data.AT.newCut) {
-                            arr[85] = item.data.data.AT.newCut;
+                    if (item.system.equipped == true) {
+                        arr[84] += parseInt(item.system.newRequirement) || 0;
+                        if (arr[85] < item.system.AT.newCut) {
+                            arr[85] = item.system.AT.newCut;
                         }
-                        arr[86] += parseInt(item.data.data.AT.newCut / 2) || 0;
-                        if (arr[87] < item.data.data.AT.newImp) {
-                            arr[87] = item.data.data.AT.newImp;
+                        arr[86] += parseInt(item.system.AT.newCut / 2) || 0;
+                        if (arr[87] < item.system.AT.newImp) {
+                            arr[87] = item.system.AT.newImp;
                         }
-                        arr[88] += parseInt(item.data.data.AT.newImp / 2) || 0;
-                        if (arr[89] < item.data.data.AT.newThr) {
-                            arr[89] = item.data.data.AT.newThr;
+                        arr[88] += parseInt(item.system.AT.newImp / 2) || 0;
+                        if (arr[89] < item.system.AT.newThr) {
+                            arr[89] = item.system.AT.newThr;
                         }
-                        arr[90] += parseInt(item.data.data.AT.newThr / 2) || 0;
-                        if (arr[91] < item.data.data.AT.newHeat) {
-                            arr[91] = item.data.data.AT.newHeat;
+                        arr[90] += parseInt(item.system.AT.newThr / 2) || 0;
+                        if (arr[91] < item.system.AT.newHeat) {
+                            arr[91] = item.system.AT.newHeat;
                         }
-                        arr[92] += parseInt(item.data.data.AT.newHeat / 2) || 0;
-                        if (arr[93] < item.data.data.AT.newCold) {
-                            arr[93] = item.data.data.AT.newCold;
+                        arr[92] += parseInt(item.system.AT.newHeat / 2) || 0;
+                        if (arr[93] < item.system.AT.newCold) {
+                            arr[93] = item.system.AT.newCold;
                         }
-                        arr[94] += parseInt(item.data.data.AT.newCold / 2) || 0;
-                        if (arr[95] < item.data.data.AT.newEle) {
-                            arr[95] = item.data.data.AT.newEle;
+                        arr[94] += parseInt(item.system.AT.newCold / 2) || 0;
+                        if (arr[95] < item.system.AT.newEle) {
+                            arr[95] = item.system.AT.newEle;
                         }
-                        arr[96] += parseInt(item.data.data.AT.newEle / 2) || 0;
-                        if (arr[97] < item.data.data.AT.newEne) {
-                            arr[97] = item.data.data.AT.newEne;
+                        arr[96] += parseInt(item.system.AT.newEle / 2) || 0;
+                        if (arr[97] < item.system.AT.newEne) {
+                            arr[97] = item.system.AT.newEne;
                         }
-                        arr[98] += parseInt(item.data.data.AT.newEne / 2) || 0;
-                        if (arr[99] < item.data.data.AT.newSpt) {
-                            arr[99] = item.data.data.AT.newSpt;
+                        arr[98] += parseInt(item.system.AT.newEne / 2) || 0;
+                        if (arr[99] < item.system.AT.newSpt) {
+                            arr[99] = item.system.AT.newSpt;
                         }
-                        arr[100] += parseInt(item.data.data.AT.newSpt / 2) || 0;
-                        arr[101] += parseInt(item.data.data.newNatPenalty) || 0;
+                        arr[100] += parseInt(item.system.AT.newSpt / 2) || 0;
+                        arr[101] += parseInt(item.system.newNatPenalty) || 0;
                     }
                 }
                 if (item.type === "discipline") {
-                    arr[102] += parseInt(item.data.data.quantity) || 0;
+                    arr[102] += parseInt(item.system.quantity) || 0;
                 }
                 if (item.type === "psychicMatrix") {
-                    arr[102] += parseInt(item.data.data.quantity) || 0;
+                    arr[102] += parseInt(item.system.quantity) || 0;
                     if (data.toggles.psychicStrengthening == true) {
-                        arr[103] += parseInt(item.data.data.bonus / 20) || 0;
+                        arr[103] += parseInt(item.system.bonus / 20) || 0;
                     } else {
-                        arr[103] += parseInt(item.data.data.bonus / 10) || 0;
+                        arr[103] += parseInt(item.system.bonus / 10) || 0;
                     }
                 }
                 if (item.type === "arsMagnus") {
-                    arr[104] += parseInt(item.data.data.mk) || 0;
+                    arr[104] += parseInt(item.system.mk) || 0;
                 }
                 if (item.type === "martialArt") {
-                    arr[105] += parseInt(item.data.data.mk) || 0;
+                    arr[105] += parseInt(item.system.mk) || 0;
                 }
                 if (item.type === "kiTechnique") {
-                    arr[106] += parseInt(item.data.data.mk) || 0;
+                    arr[106] += parseInt(item.system.mk) || 0;
+                }
+                if (item.type === "spellPath") {
+                    arr[107] += parseInt(item.system.level) || 0;
                 }
             return arr;
             }, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -193,9 +198,8 @@ export default class abfalterActor extends Actor {
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0]);
+                0, 0, 0, 0, 0, 0, 0, 0]);
 
-        data.level = level;
         data.lpbonus = lpbonus;
         data.inibonus = ini;
         data.attackbonus = atk;
@@ -209,58 +213,8 @@ export default class abfalterActor extends Actor {
         data.bindbonus = bind;
         data.banishbonus = banish;
 
-        data.acrobaticsbonus = acro;
-        data.athleticismbonus = athle;
-        data.climbbonus = climb;
-        data.jumpbonus = jump;
-        data.ridebonus = ride;
-        data.swimbonus = swim;
-        data.etiquettebonus = etiq;
-        data.intimidatebonus = intim;
-        data.leadershipbonus = leader;
-        data.persuasionbonus = persua;
-        data.streetwisebonus = street;
-        data.stylebonus = style;
-        data.tradingbonus = trading;
-        data.noticebonus = notice;
-        data.searchbonus = search;
-        data.trackbonus = track;
-        data.animalsbonus = animals;
-        data.appraisalbonus = appra;
-        data.architecturebonus = archi;
-        data.herballorebonus = herb;
-        data.historybonus = hist;
-        data.lawbonus = law;
-        data.magicapprbonus = magicapr;
-        data.medicinebonus = medic;
-        data.memorizebonus = mem;
-        data.navigationbonus = navi;
-        data.occultbonus = occ;
-        data.sciencebonus = science;
-        data.tacticsbonus = tactic;
-        data.composurebonus = comp;
-        data.featsofstrbonus = fos;
-        data.withstpainbonus = wstp;
-        data.disguisebonus = disg;
-        data.hidebonus = hide;
-        data.lockpickingbonus = lock;
-        data.poisonsbonus = poisn;
-        data.stealthbonus = stealth;
-        data.theftbonus = theft;
-        data.traplorebonus = trapl;
-        data.alchemybonus = alche;
-        data.animismbonus = anims;
-        data.artbonus = art;
-        data.dancebonus = dance;
-        data.forgingbonus = forgi;
-        data.jewelrybonus = jewel;
-        data.musicbonus = music;
-        data.runesbonus = runes;
-        data.ritualcaligbonus = ritcal;
-        data.slofhandbonus = soh;
-        data.tailoringbonus = tailoring;
-
         //Stuff Xp, Presence, Next lvl Xp
+        data.level = level;
         if (data.level == 0) {
             data.dp = 400;
         } else {
@@ -269,9 +223,15 @@ export default class abfalterActor extends Actor {
         data.presence = Math.floor((data.dp / 20) + data.levelinfo.presencemod);
         data.nextlevel = Math.floor(((data.level + data.levelinfo.levelmod) * 25) + 75);
 
-        // Characteristics & Mods
+        //Helmet Perception Penalty
+        data.totalPerPen = perPen;
+
+        //All Action Mod
+        data.aamFinal = data.aam
+
+        //Characteristics & Mods
         for (let [key, stat] of Object.entries(data.stats)) {
-            stat.final = Math.floor(stat.base + stat.spec + stat.temp);
+            stat.final = Math.floor(~~stat.base + stat.spec + stat.temp);
             switch (stat.final) {
                 case 0:
                     stat.mod = -40;
@@ -349,11 +309,15 @@ export default class abfalterActor extends Actor {
                 default:
                     stat.mod = 0;
             }
-            if (stat.final > 30) {
+            if (30 < stat.final) {
                 stat.final = 30;
                 stat.mod = 75;
             }
-            stat.opposedfinal = Math.floor((stat.final + stat.opposed) + (data.aam / 20));
+            if (key == "Perception") {
+                stat.opposedfinal = Math.floor((stat.final + stat.opposed) + ~~(data.aamFinal / 20) - data.totalPerPen);
+            } else {
+                stat.opposedfinal = Math.floor((stat.final + stat.opposed) + ~~(data.aamFinal / 20));
+            }
             //Ki Pools
             if (stat != "Intelligence" && "Perception") {
                 if (stat.final >= 1 && stat.final <= 9) {
@@ -390,6 +354,7 @@ export default class abfalterActor extends Actor {
                 break;
             default:
                 data.unarmedDmgFinal = data.fistDamage.base;
+                break;
         }
 
         /*
@@ -428,17 +393,17 @@ export default class abfalterActor extends Actor {
 
         //Ki Pool
         if (data.toggles.innatePower == false) {
-            data.kiPoolAgiAccumTot = Math.floor(data.stats.Agility.kiPoolAccuBase + data.kiPool.agi.spec + data.kiPool.agi.temp + Math.ceil(data.aam / 20));
+            data.kiPoolAgiAccumTot = Math.max(0, Math.floor(data.stats.Agility.kiPoolAccuBase + data.kiPool.agi.spec + data.kiPool.agi.temp + Math.min(0, ~~(data.aamFinal / 20)))); // Math.ceil(data.aam / 20));
             data.kiPoolAgiTot = Math.floor(data.stats.Agility.kiPoolBase + data.kiPool.agi.specMax + data.kiPool.agi.tempMax);
-            data.kiPoolConAccumTot = Math.floor(data.stats.Constitution.kiPoolAccuBase + data.kiPool.con.spec + data.kiPool.con.temp + Math.ceil(data.aam / 20));
+            data.kiPoolConAccumTot = Math.max(0, Math.floor(data.stats.Constitution.kiPoolAccuBase + data.kiPool.con.spec + data.kiPool.con.temp + Math.min(0, ~~(data.aamFinal / 20))));
             data.kiPoolConTot = Math.floor(data.stats.Constitution.kiPoolBase + data.kiPool.con.specMax + data.kiPool.con.tempMax);
-            data.kiPoolDexAccumTot = Math.floor(data.stats.Dexterity.kiPoolAccuBase + data.kiPool.dex.spec + data.kiPool.dex.temp + Math.ceil(data.aam / 20));
+            data.kiPoolDexAccumTot = Math.max(0, Math.floor(data.stats.Dexterity.kiPoolAccuBase + data.kiPool.dex.spec + data.kiPool.dex.temp + Math.min(0, ~~(data.aamFinal / 20))));
             data.kiPoolDexTot = Math.floor(data.stats.Dexterity.kiPoolBase + data.kiPool.dex.specMax + data.kiPool.dex.tempMax);
-            data.kiPoolStrAccumTot = Math.floor(data.stats.Strength.kiPoolAccuBase + data.kiPool.str.spec + data.kiPool.str.temp + Math.ceil(data.aam / 20));
+            data.kiPoolStrAccumTot = Math.max(0, Math.floor(data.stats.Strength.kiPoolAccuBase + data.kiPool.str.spec + data.kiPool.str.temp + Math.min(0, ~~(data.aamFinal / 20))));
             data.kiPoolStrTot = Math.floor(data.stats.Strength.kiPoolBase + data.kiPool.str.specMax + data.kiPool.str.tempMax);
-            data.kiPoolPowAccumTot = Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + Math.ceil(data.aam / 20));
+            data.kiPoolPowAccumTot = Math.max(0, Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + Math.min(0, ~~(data.aamFinal / 20))));
             data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax);
-            data.kiPoolWPAccumTot = Math.floor(data.stats.Willpower.kiPoolAccuBase + data.kiPool.wp.spec + data.kiPool.wp.temp + Math.ceil(data.aam / 20));
+            data.kiPoolWPAccumTot = Math.max(0, Math.floor(data.stats.Willpower.kiPoolAccuBase + data.kiPool.wp.spec + data.kiPool.wp.temp + Math.min(0, ~~(data.aamFinal / 20))));
             data.kiPoolWPTot = Math.floor(data.stats.Willpower.kiPoolBase + data.kiPool.wp.specMax + data.kiPool.wp.tempMax);
             if (data.toggles.unifiedPools == true) {
                 data.unifiedTotal = Math.floor(data.kiPoolAgiTot + data.kiPoolConTot + data.kiPoolDexTot + data.kiPoolStrTot + data.kiPoolPowTot + data.kiPoolWPTot);
@@ -446,8 +411,45 @@ export default class abfalterActor extends Actor {
         } else {
             data.stats.Power.kiPoolAccuBase = data.stats.Power.kiPoolAccuBase * 6;
             data.stats.Power.kiPoolBase = data.stats.Power.kiPoolBase * 6;
-            data.kiPoolPowAccumTot = Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + Math.ceil(data.aam / 20));
+            data.kiPoolPowAccumTot = Math.max(0, Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + Math.min(0, ~~(data.aamFinal / 20))));
             data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax);
+        }
+
+        // Wear Armor
+        data.wearArmorFinal = Math.floor(data.wearArmor.base + data.weararmorbonus + data.wearArmor.spec + data.wearArmor.temp + data.stats.Strength.mod);
+
+        // Armor Final AT
+        data.aCutFinal = Math.floor((aCutTot - ~~(aCutMax / 2)) + aCutMax);
+        data.aImpFinal = Math.floor((aImpTot - ~~(aImpMax / 2)) + aImpMax);
+        data.aThrFinal = Math.floor((aThrTot - ~~(aThrMax / 2)) + aThrMax);
+        data.aHeatFinal = Math.floor((aHeatTot - ~~(aHeatMax / 2)) + aHeatMax);
+        data.aColdFinal = Math.floor((aColdTot - ~~(aColdMax / 2)) + aColdMax);
+        data.aEleFinal = Math.floor((aEleTot - ~~(aEleMax / 2)) + aEleMax);
+        data.aEneFinal = Math.floor((aEneTot - ~~(aEneMax / 2)) + aEneMax);
+        data.aSptFinal = Math.floor((aSptTot - ~~(aSptMax / 2)) + aSptMax);
+
+        // Helmet Final AT
+        data.ahCutFinal = Math.floor((ahCutTot - ~~(ahCutMax / 2)) + ahCutMax);
+        data.ahImpFinal = Math.floor((ahImpTot - ~~(ahImpMax / 2)) + ahImpMax);
+        data.ahThrFinal = Math.floor((ahThrTot - ~~(ahThrMax / 2)) + ahThrMax);
+        data.ahHeatFinal = Math.floor((ahHeatTot - ~~(ahHeatMax / 2)) + ahHeatMax);
+        data.ahColdFinal = Math.floor((ahColdTot - ~~(ahColdMax / 2)) + ahColdMax);
+        data.ahEleFinal = Math.floor((ahEleTot - ~~(ahEleMax / 2)) + ahEleMax);
+        data.ahEneFinal = Math.floor((ahEneTot - ~~(ahEneMax / 2)) + ahEneMax);
+        data.ahSptFinal = Math.floor((ahSptTot - ~~(ahSptMax / 2)) + ahSptMax);
+
+        // Armor Stats
+        data.armorMod = Math.floor(data.wearArmorFinal - req);
+        if (natPen - data.armorMod < 0) {
+            data.totalNatPen = Math.max(0, Math.floor(((quantity - 1) * 20) + 0));
+        } else {
+            data.totalNatPen = Math.max(0, Math.floor(((quantity - 1) * 20) + (natPen - data.armorMod)));
+        }
+        data.movePenMod = Math.max(0, Math.floor(data.armorMod / 50));
+        if (movePen - data.movePenMod < 0) {
+            data.totalMovePen = movePen;
+        } else {
+            data.totalMovePen = movePen - data.movePenMod
         }
 
         //Resistances
@@ -479,7 +481,7 @@ export default class abfalterActor extends Actor {
         }
 
         //Calculating Number of Actions
-        const actnumcalc = data.stats.Agility.base + data.stats.Dexterity.base;
+        const actnumcalc = ~~data.stats.Agility.base + ~~data.stats.Dexterity.base;
         switch (actnumcalc) {
             case 0:
             case 1:
@@ -533,7 +535,7 @@ export default class abfalterActor extends Actor {
         }
 
         //Movement
-        data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp - data.movement.pen + Math.min(0, Math.ceil(data.aam / 20)));
+        data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp - data.movement.pen + Math.min(0, Math.ceil(data.aamFinal / 20)) - data.totalMovePen);
         switch (data.finalmove) {
             case 1:
                 data.fullmove = "3 ft";
@@ -816,465 +818,521 @@ export default class abfalterActor extends Actor {
         }
 
         // Attack, Block, & Dodge
-        data.atkfinal = Math.floor(data.combatstats.atkbase + data.attackbonus + data.combatstats.atkspecial + data.combatstats.atktemp + data.stats.Dexterity.mod + data.aam);
-        data.blkfinal = Math.floor(data.combatstats.blkbase + data.blockbonus + data.combatstats.blkspecial + data.combatstats.blktemp + data.stats.Dexterity.mod + data.aam);
-        data.dodfinal = Math.floor(data.combatstats.dodbase + data.dodgebonus + data.combatstats.dodspecial + data.combatstats.dodtemp + data.stats.Agility.mod + data.aam);
+        data.atkfinal = Math.floor(data.combatstats.atkbase + data.attackbonus + data.combatstats.atkspecial + data.combatstats.atktemp + data.stats.Dexterity.mod + data.aamFinal);
+        data.blkfinal = Math.floor(data.combatstats.blkbase + data.blockbonus + data.combatstats.blkspecial + data.combatstats.blktemp + data.stats.Dexterity.mod + data.aamFinal);
+        data.dodfinal = Math.floor(data.combatstats.dodbase + data.dodgebonus + data.combatstats.dodspecial + data.combatstats.dodtemp + data.stats.Agility.mod + data.aamFinal);
 
         // Initiative
+
+
+
+
 
 
         /*
             Secondaries
         */
-        // Acrobatics
+        // Acrobatics data.totalNatPen
+        data.acrobaticsbonus = acro;
         data.acrobaticsnat = Math.floor(stats.Agility.mod + data.secondary.acrobatics.natural + Math.ceil(data.secondary.acrobatics.nat * stats.Agility.mod));
         if (data.acrobaticsnat < 100) {
             data.acrobaticsnatfinal = data.acrobaticsnat;
         } else {
             data.acrobaticsnatfinal = 100;
         }
-        data.acrofinal = Math.floor(data.secondary.acrobatics.temp + data.secondary.acrobatics.spec + data.secondary.acrobatics.base + data.acrobaticsbonus + data.acrobaticsnatfinal + data.aam);
+        data.acrofinal = Math.floor(data.secondary.acrobatics.temp + data.secondary.acrobatics.spec + data.secondary.acrobatics.base + data.acrobaticsbonus + data.acrobaticsnatfinal + data.aamFinal - data.totalNatPen);
 
         // Athelticism
+        data.athleticismbonus = athle;
+
         data.athleticismnat = Math.floor(stats.Agility.mod + data.secondary.athleticism.natural + Math.ceil(data.secondary.athleticism.nat * stats.Agility.mod));
         if (data.athleticismnat < 100) {
             data.athleticismnatfinal = data.athleticismnat;
         } else {
             data.athleticismnatfinal = 100;
         }
-        data.athleticismfinal = Math.floor(data.secondary.athleticism.temp + data.secondary.athleticism.spec + data.secondary.athleticism.base + data.athleticismbonus + data.athleticismnatfinal + data.aam);
+        data.athleticismfinal = Math.floor(data.secondary.athleticism.temp + data.secondary.athleticism.spec + data.secondary.athleticism.base + data.athleticismbonus + data.athleticismnatfinal + data.aamFinal - data.totalNatPen);
 
         // Climb
+        data.climbbonus = climb;
         data.climbnat = Math.floor(stats.Agility.mod + data.secondary.climb.natural + Math.ceil(data.secondary.climb.nat * stats.Agility.mod));
         if (data.climbnat < 100) {
             data.climbnatfinal = data.climbnat;
         } else {
             data.climbnatfinal = 100;
         }
-        data.climbfinal = Math.floor(data.secondary.climb.temp + data.secondary.climb.spec + data.secondary.climb.base + data.climbbonus + data.climbnatfinal + data.aam);
+        data.climbfinal = Math.floor(data.secondary.climb.temp + data.secondary.climb.spec + data.secondary.climb.base + data.climbbonus + data.climbnatfinal + data.aamFinal - data.totalNatPen);
 
         // Jump
+        data.jumpbonus = jump;
         data.jumpnat = Math.floor(stats.Strength.mod + data.secondary.jump.natural + Math.ceil(data.secondary.jump.nat * stats.Strength.mod));
         if (data.jumpnat < 100) {
             data.jumpnatfinal = data.jumpnat;
         } else {
             data.jumpnatfinal = 100;
         }
-        data.jumpfinal = Math.floor(data.secondary.jump.temp + data.secondary.jump.spec + data.secondary.jump.base + data.jumpbonus + data.jumpnatfinal + data.aam);
+        data.jumpfinal = Math.floor(data.secondary.jump.temp + data.secondary.jump.spec + data.secondary.jump.base + data.jumpbonus + data.jumpnatfinal + data.aamFinal - data.totalNatPen);
 
         // Ride
+        data.ridebonus = ride;
         data.ridenat = Math.floor(stats.Agility.mod + data.secondary.ride.natural + Math.ceil(data.secondary.ride.nat * stats.Agility.mod));
         if (data.ridenat < 100) {
             data.ridenatfinal = data.ridenat;
         } else {
             data.ridenatfinal = 100;
         }
-        data.ridefinal = Math.floor(data.secondary.ride.temp + data.secondary.ride.spec + data.secondary.ride.base + data.ridebonus + data.ridenatfinal + data.aam);
+        data.ridefinal = Math.floor(data.secondary.ride.temp + data.secondary.ride.spec + data.secondary.ride.base + data.ridebonus + data.ridenatfinal + data.aamFinal - data.totalNatPen);
 
         // Swim
+        data.swimbonus = swim;
         data.swimnat = Math.floor(stats.Agility.mod + data.secondary.swim.natural + Math.ceil(data.secondary.swim.nat * stats.Agility.mod));
         if (data.swimnat < 100) {
             data.swimnatfinal = data.swimnat;
         } else {
             data.swimnatfinal = 100;
         }
-        data.swimfinal = Math.floor(data.secondary.swim.temp + data.secondary.swim.spec + data.secondary.swim.base + data.swimbonus + data.swimnatfinal + data.aam);
+        data.swimfinal = Math.floor(data.secondary.swim.temp + data.secondary.swim.spec + data.secondary.swim.base + data.swimbonus + data.swimnatfinal + data.aamFinal - data.totalNatPen);
 
         // etiquette
+        data.etiquettebonus = etiq;
         data.etiquettenat = Math.floor(stats.Intelligence.mod + data.secondary.etiquette.natural + Math.ceil(data.secondary.etiquette.nat * stats.Intelligence.mod));
         if (data.etiquettenat < 100) {
             data.etiquettenatfinal = data.etiquettenat;
         } else {
             data.etiquettenatfinal = 100;
         }
-        data.etiquettefinal = Math.floor(data.secondary.etiquette.temp + data.secondary.etiquette.spec + data.secondary.etiquette.base + data.etiquettebonus + data.etiquettenatfinal + data.aam);
+        data.etiquettefinal = Math.floor(data.secondary.etiquette.temp + data.secondary.etiquette.spec + data.secondary.etiquette.base + data.etiquettebonus + data.etiquettenatfinal + data.aamFinal);
 
         // Intimidate
+        data.intimidatebonus = intim;
         data.intimidatenat = Math.floor(stats.Willpower.mod + data.secondary.intimidate.natural + Math.ceil(data.secondary.intimidate.nat * stats.Willpower.mod));
         if (data.intimidatenat < 100) {
             data.intimidatenatfinal = data.intimidatenat;
         } else {
             data.intimidatenatfinal = 100;
         }
-        data.intimidatefinal = Math.floor(data.secondary.intimidate.temp + data.secondary.intimidate.spec + data.secondary.intimidate.base + data.intimidatebonus + data.intimidatenatfinal + data.aam);
+        data.intimidatefinal = Math.floor(data.secondary.intimidate.temp + data.secondary.intimidate.spec + data.secondary.intimidate.base + data.intimidatebonus + data.intimidatenatfinal + data.aamFinal);
 
         // Leadership
+        data.leadershipbonus = leader;
         data.leadershipnat = Math.floor(stats.Power.mod + data.secondary.leadership.natural + Math.ceil(data.secondary.leadership.nat * stats.Power.mod));
         if (data.leadershipnat < 100) {
             data.leadershipnatfinal = data.leadershipnat;
         } else {
             data.leadershipnatfinal = 100;
         }
-        data.leadershipfinal = Math.floor(data.secondary.leadership.temp + data.secondary.leadership.spec + data.secondary.leadership.base + data.leadershipbonus + data.leadershipnatfinal + data.aam);
+        data.leadershipfinal = Math.floor(data.secondary.leadership.temp + data.secondary.leadership.spec + data.secondary.leadership.base + data.leadershipbonus + data.leadershipnatfinal + data.aamFinal);
 
         // persuasion
+        data.persuasionbonus = persua;
         data.persuasionnat = Math.floor(stats.Intelligence.mod + data.secondary.persuasion.natural + Math.ceil(data.secondary.persuasion.nat * stats.Intelligence.mod));
         if (data.persuasionnat < 100) {
             data.persuasionnatfinal = data.persuasionnat;
         } else {
             data.persuasionnatfinal = 100;
         }
-        data.persuasionfinal = Math.floor(data.secondary.persuasion.temp + data.secondary.persuasion.spec + data.secondary.persuasion.base + data.persuasionbonus + data.persuasionnatfinal + data.aam);
+        data.persuasionfinal = Math.floor(data.secondary.persuasion.temp + data.secondary.persuasion.spec + data.secondary.persuasion.base + data.persuasionbonus + data.persuasionnatfinal + data.aamFinal);
 
         // streetwise
+        data.streetwisebonus = street;
         data.streetwisenat = Math.floor(stats.Intelligence.mod + data.secondary.streetwise.natural + Math.ceil(data.secondary.streetwise.nat * stats.Intelligence.mod));
         if (data.streetwisenat < 100) {
             data.streetwisenatfinal = data.streetwisenat;
         } else {
             data.streetwisenatfinal = 100;
         }
-        data.streetwisefinal = Math.floor(data.secondary.streetwise.temp + data.secondary.streetwise.spec + data.secondary.streetwise.base + data.streetwisebonus + data.streetwisenatfinal + data.aam);
+        data.streetwisefinal = Math.floor(data.secondary.streetwise.temp + data.secondary.streetwise.spec + data.secondary.streetwise.base + data.streetwisebonus + data.streetwisenatfinal + data.aamFinal);
 
         // style
+        data.stylebonus = style;
         data.stylenat = Math.floor(stats.Power.mod + data.secondary.style.natural + Math.ceil(data.secondary.style.nat * stats.Power.mod));
         if (data.stylenat < 100) {
             data.stylenatfinal = data.stylenat;
         } else {
             data.stylenatfinal = 100;
         }
-        data.stylefinal = Math.floor(data.secondary.style.temp + data.secondary.style.spec + data.secondary.style.base + data.stylebonus + data.stylenatfinal + data.aam);
+        data.stylefinal = Math.floor(data.secondary.style.temp + data.secondary.style.spec + data.secondary.style.base + data.stylebonus + data.stylenatfinal + data.aamFinal);
 
         // trading
+        data.tradingbonus = trading;
         data.tradingnat = Math.floor(stats.Intelligence.mod + data.secondary.trading.natural + Math.ceil(data.secondary.trading.nat * stats.Intelligence.mod));
         if (data.tradingnat < 100) {
             data.tradingnatfinal = data.tradingnat;
         } else {
             data.tradingnatfinal = 100;
         }
-        data.tradingfinal = Math.floor(data.secondary.trading.temp + data.secondary.trading.spec + data.secondary.trading.base + data.tradingbonus + data.tradingnatfinal + data.aam);
+        data.tradingfinal = Math.floor(data.secondary.trading.temp + data.secondary.trading.spec + data.secondary.trading.base + data.tradingbonus + data.tradingnatfinal + data.aamFinal);
 
         // notice
+        data.noticebonus = notice;
         data.noticenat = Math.floor(stats.Perception.mod + data.secondary.notice.natural + Math.ceil(data.secondary.notice.nat * stats.Perception.mod));
         if (data.noticenat < 100) {
             data.noticenatfinal = data.noticenat;
         } else {
             data.noticenatfinal = 100;
         }
-        data.noticefinal = Math.floor(data.secondary.notice.temp + data.secondary.notice.spec + data.secondary.notice.base + data.noticebonus + data.noticenatfinal + data.aam);
+        data.noticefinal = Math.floor(data.secondary.notice.temp + data.secondary.notice.spec + data.secondary.notice.base + data.noticebonus + data.noticenatfinal + data.aamFinal);
 
         // search
+        data.searchbonus = search;
         data.searchnat = Math.floor(stats.Perception.mod + data.secondary.search.natural + Math.ceil(data.secondary.search.nat * stats.Perception.mod));
         if (data.searchnat < 100) {
             data.searchnatfinal = data.searchnat;
         } else {
             data.searchnatfinal = 100;
         }
-        data.searchfinal = Math.floor(data.secondary.search.temp + data.secondary.search.spec + data.secondary.search.base + data.searchbonus + data.searchnatfinal + data.aam);
+        data.searchfinal = Math.floor(data.secondary.search.temp + data.secondary.search.spec + data.secondary.search.base + data.searchbonus + data.searchnatfinal + data.aamFinal);
 
         // track
+        data.trackbonus = track;
         data.tracknat = Math.floor(stats.Perception.mod + data.secondary.track.natural + Math.ceil(data.secondary.track.nat * stats.Perception.mod));
         if (data.tracknat < 100) {
             data.tracknatfinal = data.tracknat;
         } else {
             data.tracknatfinal = 100;
         }
-        data.trackfinal = Math.floor(data.secondary.track.temp + data.secondary.track.spec + data.secondary.track.base + data.trackbonus + data.tracknatfinal + data.aam);
+        data.trackfinal = Math.floor(data.secondary.track.temp + data.secondary.track.spec + data.secondary.track.base + data.trackbonus + data.tracknatfinal + data.aamFinal);
 
         // animals
+        data.animalsbonus = animals;
         data.animalsnat = Math.floor(stats.Intelligence.mod + data.secondary.animals.natural + Math.ceil(data.secondary.animals.nat * stats.Intelligence.mod));
         if (data.animalsnat < 100) {
             data.animalsnatfinal = data.animalsnat;
         } else {
             data.animalsnatfinal = 100;
         }
-        data.animalsfinal = Math.floor(data.secondary.animals.temp + data.secondary.animals.spec + data.secondary.animals.base + data.animalsbonus + data.animalsnatfinal + data.aam);
+        data.animalsfinal = Math.floor(data.secondary.animals.temp + data.secondary.animals.spec + data.secondary.animals.base + data.animalsbonus + data.animalsnatfinal + data.aamFinal);
 
         // appraisal
+        data.appraisalbonus = appra;
         data.appraisalnat = Math.floor(stats.Intelligence.mod + data.secondary.appraisal.natural + Math.ceil(data.secondary.appraisal.nat * stats.Intelligence.mod));
         if (data.appraisalnat < 100) {
             data.appraisalnatfinal = data.appraisalnat;
         } else {
             data.appraisalnatfinal = 100;
         }
-        data.appraisalfinal = Math.floor(data.secondary.appraisal.temp + data.secondary.appraisal.spec + data.secondary.appraisal.base + data.appraisalbonus + data.appraisalnatfinal + data.aam);
+        data.appraisalfinal = Math.floor(data.secondary.appraisal.temp + data.secondary.appraisal.spec + data.secondary.appraisal.base + data.appraisalbonus + data.appraisalnatfinal + data.aamFinal);
 
         // architecture
+        data.architecturebonus = archi;
         data.architecturenat = Math.floor(stats.Intelligence.mod + data.secondary.architecture.natural + Math.ceil(data.secondary.architecture.nat * stats.Intelligence.mod));
         if (data.architecturenat < 100) {
             data.architecturenatfinal = data.architecturenat;
         } else {
             data.architecturenatfinal = 100;
         }
-        data.architecturefinal = Math.floor(data.secondary.architecture.temp + data.secondary.architecture.spec + data.secondary.architecture.base + data.architecturebonus + data.architecturenatfinal + data.aam);
+        data.architecturefinal = Math.floor(data.secondary.architecture.temp + data.secondary.architecture.spec + data.secondary.architecture.base + data.architecturebonus + data.architecturenatfinal + data.aamFinal);
 
         // herballore
+        data.herballorebonus = herb;
         data.herballorenat = Math.floor(stats.Intelligence.mod + data.secondary.herballore.natural + Math.ceil(data.secondary.herballore.nat * stats.Intelligence.mod));
         if (data.herballorenat < 100) {
             data.herballorenatfinal = data.herballorenat;
         } else {
             data.herballorenatfinal = 100;
         }
-        data.herballorefinal = Math.floor(data.secondary.herballore.temp + data.secondary.herballore.spec + data.secondary.herballore.base + data.herballorebonus + data.herballorenatfinal + data.aam);
+        data.herballorefinal = Math.floor(data.secondary.herballore.temp + data.secondary.herballore.spec + data.secondary.herballore.base + data.herballorebonus + data.herballorenatfinal + data.aamFinal);
 
         // history
+        data.historybonus = hist;
         data.historynat = Math.floor(stats.Intelligence.mod + data.secondary.history.natural + Math.ceil(data.secondary.history.nat * stats.Intelligence.mod));
         if (data.historynat < 100) {
             data.historynatfinal = data.historynat;
         } else {
             data.historynatfinal = 100;
         }
-        data.historyfinal = Math.floor(data.secondary.history.temp + data.secondary.history.spec + data.secondary.history.base + data.historybonus + data.historynatfinal + data.aam);
+        data.historyfinal = Math.floor(data.secondary.history.temp + data.secondary.history.spec + data.secondary.history.base + data.historybonus + data.historynatfinal + data.aamFinal);
 
         // law
+        data.lawbonus = law;
         data.lawnat = Math.floor(stats.Intelligence.mod + data.secondary.law.natural + Math.ceil(data.secondary.law.nat * stats.Intelligence.mod));
         if (data.lawnat < 100) {
             data.lawnatfinal = data.lawnat;
         } else {
             data.lawnatfinal = 100;
         }
-        data.lawfinal = Math.floor(data.secondary.law.temp + data.secondary.law.spec + data.secondary.law.base + data.lawbonus + data.lawnatfinal + data.aam);
+        data.lawfinal = Math.floor(data.secondary.law.temp + data.secondary.law.spec + data.secondary.law.base + data.lawbonus + data.lawnatfinal + data.aamFinal);
 
         // magicappr
+        data.magicapprbonus = magicapr;
         data.magicapprnat = Math.floor(stats.Power.mod + data.secondary.magicappr.natural + Math.ceil(data.secondary.magicappr.nat * stats.Power.mod));
         if (data.magicapprnat < 100) {
             data.magicapprnatfinal = data.magicapprnat;
         } else {
             data.magicapprnatfinal = 100;
         }
-        data.magicapprfinal = Math.floor(data.secondary.magicappr.temp + data.secondary.magicappr.spec + data.secondary.magicappr.base + data.magicapprbonus + data.magicapprnatfinal + data.aam);
+        data.magicapprfinal = Math.floor(data.secondary.magicappr.temp + data.secondary.magicappr.spec + data.secondary.magicappr.base + data.magicapprbonus + data.magicapprnatfinal + data.aamFinal);
 
         // medicine
+        data.medicinebonus = medic;
         data.medicinenat = Math.floor(stats.Intelligence.mod + data.secondary.medicine.natural + Math.ceil(data.secondary.medicine.nat * stats.Intelligence.mod));
         if (data.medicinenat < 100) {
             data.medicinenatfinal = data.medicinenat;
         } else {
             data.medicinenatfinal = 100;
         }
-        data.medicinefinal = Math.floor(data.secondary.medicine.temp + data.secondary.medicine.spec + data.secondary.medicine.base + data.medicinebonus + data.medicinenatfinal + data.aam);
+        data.medicinefinal = Math.floor(data.secondary.medicine.temp + data.secondary.medicine.spec + data.secondary.medicine.base + data.medicinebonus + data.medicinenatfinal + data.aamFinal);
 
         // memorize
+        data.memorizebonus = mem;
         data.memorizenat = Math.floor(stats.Intelligence.mod + data.secondary.memorize.natural + Math.ceil(data.secondary.memorize.nat * stats.Intelligence.mod));
         if (data.memorizenat < 100) {
             data.memorizenatfinal = data.memorizenat;
         } else {
             data.memorizenatfinal = 100;
         }
-        data.memorizefinal = Math.floor(data.secondary.memorize.temp + data.secondary.memorize.spec + data.secondary.memorize.base + data.memorizebonus + data.memorizenatfinal + data.aam);
+        data.memorizefinal = Math.floor(data.secondary.memorize.temp + data.secondary.memorize.spec + data.secondary.memorize.base + data.memorizebonus + data.memorizenatfinal + data.aamFinal);
 
         // navigation
+        data.navigationbonus = navi;
         data.navigationnat = Math.floor(stats.Intelligence.mod + data.secondary.navigation.natural + Math.ceil(data.secondary.navigation.nat * stats.Intelligence.mod));
         if (data.navigationnat < 100) {
             data.navigationnatfinal = data.navigationnat;
         } else {
             data.navigationnatfinal = 100;
         }
-        data.navigationfinal = Math.floor(data.secondary.navigation.temp + data.secondary.navigation.spec + data.secondary.navigation.base + data.navigationbonus + data.navigationnatfinal + data.aam);
+        data.navigationfinal = Math.floor(data.secondary.navigation.temp + data.secondary.navigation.spec + data.secondary.navigation.base + data.navigationbonus + data.navigationnatfinal + data.aamFinal);
 
         // occult
+        data.occultbonus = occ;
         data.occultnat = Math.floor(stats.Intelligence.mod + data.secondary.occult.natural + Math.ceil(data.secondary.occult.nat * stats.Intelligence.mod));
         if (data.occultnat < 100) {
             data.occultnatfinal = data.occultnat;
         } else {
             data.occultnatfinal = 100;
         }
-        data.occultfinal = Math.floor(data.secondary.occult.temp + data.secondary.occult.spec + data.secondary.occult.base + data.occultbonus + data.occultnatfinal + data.aam);
+        data.occultfinal = Math.floor(data.secondary.occult.temp + data.secondary.occult.spec + data.secondary.occult.base + data.occultbonus + data.occultnatfinal + data.aamFinal);
 
         // science
+        data.sciencebonus = science;
         data.sciencenat = Math.floor(stats.Intelligence.mod + data.secondary.science.natural + Math.ceil(data.secondary.science.nat * stats.Intelligence.mod));
         if (data.sciencenat < 100) {
             data.sciencenatfinal = data.sciencenat;
         } else {
             data.sciencenatfinal = 100;
         }
-        data.sciencefinal = Math.floor(data.secondary.science.temp + data.secondary.science.spec + data.secondary.science.base + data.sciencebonus + data.sciencenatfinal + data.aam);
+        data.sciencefinal = Math.floor(data.secondary.science.temp + data.secondary.science.spec + data.secondary.science.base + data.sciencebonus + data.sciencenatfinal + data.aamFinal);
 
         // tactics
+        data.tacticsbonus = tactic;
         data.tacticsnat = Math.floor(stats.Intelligence.mod + data.secondary.tactics.natural + Math.ceil(data.secondary.tactics.nat * stats.Intelligence.mod));
         if (data.tacticsnat < 100) {
             data.tacticsnatfinal = data.tacticsnat;
         } else {
             data.tacticsnatfinal = 100;
         }
-        data.tacticsfinal = Math.floor(data.secondary.tactics.temp + data.secondary.tactics.spec + data.secondary.tactics.base + data.tacticsbonus + data.tacticsnatfinal + data.aam);
+        data.tacticsfinal = Math.floor(data.secondary.tactics.temp + data.secondary.tactics.spec + data.secondary.tactics.base + data.tacticsbonus + data.tacticsnatfinal + data.aamFinal);
 
         // composure
+        data.composurebonus = comp;
         data.composurenat = Math.floor(stats.Willpower.mod + data.secondary.composure.natural + Math.ceil(data.secondary.composure.nat * stats.Willpower.mod));
         if (data.composurenat < 100) {
             data.composurenatfinal = data.composurenat;
         } else {
             data.composurenatfinal = 100;
         }
-        data.composurefinal = Math.floor(data.secondary.composure.temp + data.secondary.composure.spec + data.secondary.composure.base + data.composurebonus + data.composurenatfinal + data.aam);
+        data.composurefinal = Math.floor(data.secondary.composure.temp + data.secondary.composure.spec + data.secondary.composure.base + data.composurebonus + data.composurenatfinal + data.aamFinal);
 
         // featsofstr
+        data.featsofstrbonus = fos;
         data.featsofstrnat = Math.floor(stats.Strength.mod + data.secondary.featsofstr.natural + Math.ceil(data.secondary.featsofstr.nat * stats.Strength.mod));
         if (data.featsofstrnat < 100) {
             data.featsofstrnatfinal = data.featsofstrnat;
         } else {
             data.featsofstrnatfinal = 100;
         }
-        data.featsofstrfinal = Math.floor(data.secondary.featsofstr.temp + data.secondary.featsofstr.spec + data.secondary.featsofstr.base + data.featsofstrbonus + data.featsofstrnatfinal + data.aam);
+        data.featsofstrfinal = Math.floor(data.secondary.featsofstr.temp + data.secondary.featsofstr.spec + data.secondary.featsofstr.base + data.featsofstrbonus + data.featsofstrnatfinal + data.aamFinal - data.totalNatPen);
 
         // withstpain
+        data.withstpainbonus = wstp;
         data.withstpainnat = Math.floor(stats.Willpower.mod + data.secondary.withstpain.natural + Math.ceil(data.secondary.withstpain.nat * stats.Willpower.mod));
         if (data.withstpainnat < 100) {
             data.withstpainnatfinal = data.withstpainnat;
         } else {
             data.withstpainnatfinal = 100;
         }
-        data.withstpainfinal = Math.floor(data.secondary.withstpain.temp + data.secondary.withstpain.spec + data.secondary.withstpain.base + data.withstpainbonus + data.withstpainnatfinal + data.aam);
+        data.withstpainfinal = Math.floor(data.secondary.withstpain.temp + data.secondary.withstpain.spec + data.secondary.withstpain.base + data.withstpainbonus + data.withstpainnatfinal + data.aamFinal);
 
         // disguise
+        data.disguisebonus = disg;
         data.disguisenat = Math.floor(stats.Dexterity.mod + data.secondary.disguise.natural + Math.ceil(data.secondary.disguise.nat * stats.Dexterity.mod));
         if (data.disguisenat < 100) {
             data.disguisenatfinal = data.disguisenat;
         } else {
             data.disguisenatfinal = 100;
         }
-        data.disguisefinal = Math.floor(data.secondary.disguise.temp + data.secondary.disguise.spec + data.secondary.disguise.base + data.disguisebonus + data.disguisenatfinal + data.aam);
+        data.disguisefinal = Math.floor(data.secondary.disguise.temp + data.secondary.disguise.spec + data.secondary.disguise.base + data.disguisebonus + data.disguisenatfinal + data.aamFinal);
 
         // hide
+        data.hidebonus = hide;
         data.hidenat = Math.floor(stats.Perception.mod + data.secondary.hide.natural + Math.ceil(data.secondary.hide.nat * stats.Perception.mod));
         if (data.hidenat < 100) {
             data.hidenatfinal = data.hidenat;
         } else {
             data.hidenatfinal = 100;
         }
-        data.hidefinal = Math.floor(data.secondary.hide.temp + data.secondary.hide.spec + data.secondary.hide.base + data.hidebonus + data.hidenatfinal + data.aam);
+        data.hidefinal = Math.floor(data.secondary.hide.temp + data.secondary.hide.spec + data.secondary.hide.base + data.hidebonus + data.hidenatfinal + data.aamFinal - data.totalNatPen);
 
         // lockpicking
+        data.lockpickingbonus = lock;
         data.lockpickingnat = Math.floor(stats.Dexterity.mod + data.secondary.lockpicking.natural + Math.ceil(data.secondary.lockpicking.nat * stats.Dexterity.mod));
         if (data.lockpickingnat < 100) {
             data.lockpickingnatfinal = data.lockpickingnat;
         } else {
             data.lockpickingnatfinal = 100;
         }
-        data.lockpickingfinal = Math.floor(data.secondary.lockpicking.temp + data.secondary.lockpicking.spec + data.secondary.lockpicking.base + data.lockpickingbonus + data.lockpickingnatfinal + data.aam);
+        data.lockpickingfinal = Math.floor(data.secondary.lockpicking.temp + data.secondary.lockpicking.spec + data.secondary.lockpicking.base + data.lockpickingbonus + data.lockpickingnatfinal + data.aamFinal);
 
         // poisons
+        data.poisonsbonus = poisn;
         data.poisonsnat = Math.floor(stats.Intelligence.mod + data.secondary.poisons.natural + Math.ceil(data.secondary.poisons.nat * stats.Intelligence.mod));
         if (data.poisonsnat < 100) {
             data.poisonsnatfinal = data.poisonsnat;
         } else {
             data.poisonsnatfinal = 100;
         }
-        data.poisonsfinal = Math.floor(data.secondary.poisons.temp + data.secondary.poisons.spec + data.secondary.poisons.base + data.poisonsbonus + data.poisonsnatfinal + data.aam);
+        data.poisonsfinal = Math.floor(data.secondary.poisons.temp + data.secondary.poisons.spec + data.secondary.poisons.base + data.poisonsbonus + data.poisonsnatfinal + data.aamFinal);
 
         // stealth
+        data.stealthbonus = stealth;
         data.stealthnat = Math.floor(stats.Agility.mod + data.secondary.stealth.natural + Math.ceil(data.secondary.stealth.nat * stats.Agility.mod));
         if (data.stealthnat < 100) {
             data.stealthnatfinal = data.stealthnat;
         } else {
             data.stealthnatfinal = 100;
         }
-        data.stealthfinal = Math.floor(data.secondary.stealth.temp + data.secondary.stealth.spec + data.secondary.stealth.base + data.stealthbonus + data.stealthnatfinal + data.aam);
+        data.stealthfinal = Math.floor(data.secondary.stealth.temp + data.secondary.stealth.spec + data.secondary.stealth.base + data.stealthbonus + data.stealthnatfinal + data.aamFinal - data.totalNatPen);
 
         // theft
+        data.theftbonus = theft;
         data.theftnat = Math.floor(stats.Dexterity.mod + data.secondary.theft.natural + Math.ceil(data.secondary.theft.nat * stats.Dexterity.mod));
         if (data.theftnat < 100) {
             data.theftnatfinal = data.theftnat;
         } else {
             data.theftnatfinal = 100;
         }
-        data.theftfinal = Math.floor(data.secondary.theft.temp + data.secondary.theft.spec + data.secondary.theft.base + data.theftbonus + data.theftnatfinal + data.aam);
+        data.theftfinal = Math.floor(data.secondary.theft.temp + data.secondary.theft.spec + data.secondary.theft.base + data.theftbonus + data.theftnatfinal + data.aamFinal);
 
         // traplore
+        data.traplorebonus = trapl;
         data.traplorenat = Math.floor(stats.Dexterity.mod + data.secondary.traplore.natural + Math.ceil(data.secondary.traplore.nat * stats.Dexterity.mod));
         if (data.traplorenat < 100) {
             data.traplorenatfinal = data.traplorenat;
         } else {
             data.traplorenatfinal = 100;
         }
-        data.traplorefinal = Math.floor(data.secondary.traplore.temp + data.secondary.traplore.spec + data.secondary.traplore.base + data.traplorebonus + data.traplorenatfinal + data.aam);
+        data.traplorefinal = Math.floor(data.secondary.traplore.temp + data.secondary.traplore.spec + data.secondary.traplore.base + data.traplorebonus + data.traplorenatfinal + data.aamFinal);
 
         // alchemy
+        data.alchemybonus = alche;
         data.alchemynat = Math.floor(stats.Intelligence.mod + data.secondary.alchemy.natural + Math.ceil(data.secondary.alchemy.nat * stats.Intelligence.mod));
         if (data.alchemynat < 100) {
             data.alchemynatfinal = data.alchemynat;
         } else {
             data.alchemynatfinal = 100;
         }
-        data.alchemyfinal = Math.floor(data.secondary.alchemy.temp + data.secondary.alchemy.spec + data.secondary.alchemy.base + data.alchemybonus + data.alchemynatfinal + data.aam);
+        data.alchemyfinal = Math.floor(data.secondary.alchemy.temp + data.secondary.alchemy.spec + data.secondary.alchemy.base + data.alchemybonus + data.alchemynatfinal + data.aamFinal);
 
         // animism
+        data.animismbonus = anims;
         data.animismnat = Math.floor(stats.Power.mod + data.secondary.animism.natural + Math.ceil(data.secondary.animism.nat * stats.Power.mod));
         if (data.animismnat < 100) {
             data.animismnatfinal = data.animismnat;
         } else {
             data.animismnatfinal = 100;
         }
-        data.animismfinal = Math.floor(data.secondary.animism.temp + data.secondary.animism.spec + data.secondary.animism.base + data.animismbonus + data.animismnatfinal + data.aam);
+        data.animismfinal = Math.floor(data.secondary.animism.temp + data.secondary.animism.spec + data.secondary.animism.base + data.animismbonus + data.animismnatfinal + data.aamFinal);
 
         // art
+        data.artbonus = art;
         data.artnat = Math.floor(stats.Power.mod + data.secondary.art.natural + Math.ceil(data.secondary.art.nat * stats.Power.mod));
         if (data.artnat < 100) {
             data.artnatfinal = data.artnat;
         } else {
             data.artnatfinal = 100;
         }
-        data.artfinal = Math.floor(data.secondary.art.temp + data.secondary.art.spec + data.secondary.art.base + data.artbonus + data.artnatfinal + data.aam);
+        data.artfinal = Math.floor(data.secondary.art.temp + data.secondary.art.spec + data.secondary.art.base + data.artbonus + data.artnatfinal + data.aamFinal);
 
         // dance
+        data.dancebonus = dance;
         data.dancenat = Math.floor(stats.Agility.mod + data.secondary.dance.natural + Math.ceil(data.secondary.dance.nat * stats.Agility.mod));
         if (data.dancenat < 100) {
             data.dancenatfinal = data.dancenat;
         } else {
             data.dancenatfinal = 100;
         }
-        data.dancefinal = Math.floor(data.secondary.dance.temp + data.secondary.dance.spec + data.secondary.dance.base + data.dancebonus + data.dancenatfinal + data.aam);
+        data.dancefinal = Math.floor(data.secondary.dance.temp + data.secondary.dance.spec + data.secondary.dance.base + data.dancebonus + data.dancenatfinal + data.aamFinal - data.totalNatPen);
 
         // forging
+        data.forgingbonus = forgi;
         data.forgingnat = Math.floor(stats.Dexterity.mod + data.secondary.forging.natural + Math.ceil(data.secondary.forging.nat * stats.Dexterity.mod));
         if (data.forgingnat < 100) {
             data.forgingnatfinal = data.forgingnat;
         } else {
             data.forgingnatfinal = 100;
         }
-        data.forgingfinal = Math.floor(data.secondary.forging.temp + data.secondary.forging.spec + data.secondary.forging.base + data.forgingbonus + data.forgingnatfinal + data.aam);
+        data.forgingfinal = Math.floor(data.secondary.forging.temp + data.secondary.forging.spec + data.secondary.forging.base + data.forgingbonus + data.forgingnatfinal + data.aamFinal);
 
         // jewelry
+        data.jewelrybonus = jewel;
         data.jewelrynat = Math.floor(stats.Dexterity.mod + data.secondary.jewelry.natural + Math.ceil(data.secondary.jewelry.nat * stats.Dexterity.mod));
         if (data.jewelrynat < 100) {
             data.jewelrynatfinal = data.jewelrynat;
         } else {
             data.jewelrynatfinal = 100;
         }
-        data.jewelryfinal = Math.floor(data.secondary.jewelry.temp + data.secondary.jewelry.spec + data.secondary.jewelry.base + data.jewelrybonus + data.jewelrynatfinal + data.aam);
+        data.jewelryfinal = Math.floor(data.secondary.jewelry.temp + data.secondary.jewelry.spec + data.secondary.jewelry.base + data.jewelrybonus + data.jewelrynatfinal + data.aamFinal);
 
         // music
+        data.musicbonus = music;
         data.musicnat = Math.floor(stats.Power.mod + data.secondary.music.natural + Math.ceil(data.secondary.music.nat * stats.Power.mod));
         if (data.musicnat < 100) {
             data.musicnatfinal = data.musicnat;
         } else {
             data.musicnatfinal = 100;
         }
-        data.musicfinal = Math.floor(data.secondary.music.temp + data.secondary.music.spec + data.secondary.music.base + data.musicbonus + data.musicnatfinal + data.aam);
+        data.musicfinal = Math.floor(data.secondary.music.temp + data.secondary.music.spec + data.secondary.music.base + data.musicbonus + data.musicnatfinal + data.aamFinal);
 
         // runes
+        data.runesbonus = runes;
         data.runesnat = Math.floor(stats.Dexterity.mod + data.secondary.runes.natural + Math.ceil(data.secondary.runes.nat * stats.Dexterity.mod));
         if (data.runesnat < 100) {
             data.runesnatfinal = data.runesnat;
         } else {
             data.runesnatfinal = 100;
         }
-        data.runesfinal = Math.floor(data.secondary.runes.temp + data.secondary.runes.spec + data.secondary.runes.base + data.runesbonus + data.runesnatfinal + data.aam);
+        data.runesfinal = Math.floor(data.secondary.runes.temp + data.secondary.runes.spec + data.secondary.runes.base + data.runesbonus + data.runesnatfinal + data.aamFinal);
 
         // ritualcalig
+        data.ritualcaligbonus = ritcal;
         data.ritualcalignat = Math.floor(stats.Dexterity.mod + data.secondary.ritualcalig.natural + Math.ceil(data.secondary.ritualcalig.nat * stats.Dexterity.mod));
         if (data.ritualcalignat < 100) {
             data.ritualcalignatfinal = data.ritualcalignat;
         } else {
             data.ritualcalignatfinal = 100;
         }
-        data.ritualcaligfinal = Math.floor(data.secondary.ritualcalig.temp + data.secondary.ritualcalig.spec + data.secondary.ritualcalig.base + data.ritualcaligbonus + data.ritualcalignatfinal + data.aam);
+        data.ritualcaligfinal = Math.floor(data.secondary.ritualcalig.temp + data.secondary.ritualcalig.spec + data.secondary.ritualcalig.base + data.ritualcaligbonus + data.ritualcalignatfinal + data.aamFinal);
 
         // slofhand
+        data.slofhandbonus = soh;
         data.slofhandnat = Math.floor(stats.Dexterity.mod + data.secondary.slofhand.natural + Math.ceil(data.secondary.slofhand.nat * stats.Dexterity.mod));
         if (data.slofhandnat < 100) {
             data.slofhandnatfinal = data.slofhandnat;
         } else {
             data.slofhandnatfinal = 100;
         }
-        data.slofhandfinal = Math.floor(data.secondary.slofhand.temp + data.secondary.slofhand.spec + data.secondary.slofhand.base + data.slofhandbonus + data.slofhandnatfinal + data.aam);
+        data.slofhandfinal = Math.floor(data.secondary.slofhand.temp + data.secondary.slofhand.spec + data.secondary.slofhand.base + data.slofhandbonus + data.slofhandnatfinal + data.aamFinal);
 
         // tailoring
+        data.tailoringbonus = tailoring;
         data.tailoringnat = Math.floor(stats.Dexterity.mod + data.secondary.tailoring.natural + Math.ceil(data.secondary.tailoring.nat * stats.Dexterity.mod));
         if (data.tailoringnat < 100) {
             data.tailoringnatfinal = data.tailoringnat;
         } else {
             data.tailoringnatfinal = 100;
         }
-        data.tailoringfinal = Math.floor(data.secondary.tailoring.temp + data.secondary.tailoring.spec + data.secondary.tailoring.base + data.tailoringbonus + data.tailoringnatfinal + data.aam);
+        data.tailoringfinal = Math.floor(data.secondary.tailoring.temp + data.secondary.tailoring.spec + data.secondary.tailoring.base + data.tailoringbonus + data.tailoringnatfinal + data.aamFinal);
+
 
         /*
          * // z
@@ -1284,11 +1342,11 @@ export default class abfalterActor extends Actor {
         } else {
             data.znatfinal = 100;
         }
-        data.zfinal = Math.floor(data.secondary.z.temp + data.secondary.z.spec + data.secondary.z.base + data.zbonus + data.znatfinal + data.aam);
+        data.zfinal = Math.floor(data.secondary.z.temp + data.secondary.z.spec + data.secondary.z.base + data.zbonus + data.znatfinal + data.aamFinal);
          */
 
         // Magic Projection
-        data.mprojfinal = Math.floor(data.mproj.base + data.mproj.spec + data.mproj.temp + data.aam + data.stats.Dexterity.mod);
+        data.mprojfinal = Math.floor(data.mproj.base + data.mproj.spec + data.mproj.temp + data.aamFinal + data.stats.Dexterity.mod);
         data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.imbalance);
         data.mprojfinaldef = Math.floor(data.mprojfinal - data.mproj.imbalance);
 
@@ -1474,14 +1532,15 @@ export default class abfalterActor extends Actor {
                 data.mlevelint = 0;
                 break;
         }
+        data.mlLevels = pathLvl;
         data.mlevelfinal = Math.floor(data.mlevel.base + data.mlevel.spec + data.mlevel.temp + data.mlevelint);
-        data.mlevelused = Math.floor(data.mlevelfinal - 1);
+        data.mlevelused = Math.floor(data.mlLevels + 1);
 
         // Summoning Abilities
-        data.summonfinal = Math.floor(data.summoning.summon.base + data.summonbonus + data.summoning.summon.spec + data.stats.Power.mod + data.aam);
-        data.controlfinal = Math.floor(data.summoning.control.base + data.controlbonus + data.summoning.control.spec + data.stats.Willpower.mod + data.aam);
-        data.bindfinal = Math.floor(data.summoning.bind.base + data.bindbonus + data.summoning.bind.spec + data.stats.Power.mod + data.aam);
-        data.banishfinal = Math.floor(data.summoning.banish.base + data.banishbonus + data.summoning.banish.spec + data.stats.Power.mod + data.aam);
+        data.summonfinal = Math.floor(data.summoning.summon.base + data.summonbonus + data.summoning.summon.spec + data.stats.Power.mod + Math.min(0, data.aamFinal));
+        data.controlfinal = Math.floor(data.summoning.control.base + data.controlbonus + data.summoning.control.spec + data.stats.Willpower.mod + Math.min(0, data.aamFinal));
+        data.bindfinal = Math.floor(data.summoning.bind.base + data.bindbonus + data.summoning.bind.spec + data.stats.Power.mod + Math.min(0, data.aamFinal));
+        data.banishfinal = Math.floor(data.summoning.banish.base + data.banishbonus + data.summoning.banish.spec + data.stats.Power.mod + Math.min(0, data.aamFinal));
 
         // Psychic Potential
         if (data.stats.Willpower.final < 5) {
@@ -1491,7 +1550,7 @@ export default class abfalterActor extends Actor {
         } else if (data.stats.Willpower.final >= 15) {
             data.fromWP = Math.floor(((data.stats.Willpower.final - 14) * 20) + 100)
         }
-        data.finalPotential = Math.floor(data.ppotential.base + data.fromWP + +data.ppotential.spent + data.ppotential.spec + data.ppotential.temp + data.aam);
+        data.finalPotential = Math.floor(data.ppotential.base + data.fromWP + +data.ppotential.spent + data.ppotential.spec + data.ppotential.temp);
         switch (data.ppotential.spent) {
             case "10":
                 data.ppotentialpp = 1;
@@ -1534,45 +1593,9 @@ export default class abfalterActor extends Actor {
         data.maxFreepp = Math.floor(data.finalpp - (+usedpp + data.ppotentialpp + +matrixpp + data.innateSlotspp));
 
         // Psychic Projection
-        data.pprojfinal = Math.floor(data.pproj.base + data.pproj.spec + data.pproj.temp + data.stats.Dexterity.mod + data.aam);
+        data.pprojfinal = Math.floor(data.pproj.base + data.pproj.spec + data.pproj.temp + data.stats.Dexterity.mod + data.aamFinal);
 
-        // Wear Armor
-        data.wearArmorFinal = Math.floor(data.wearArmor.base + data.weararmorbonus + data.wearArmor.spec + data.wearArmor.temp + data.stats.Strength.mod);
 
-        // Armor Final AT
-        data.aCutFinal = Math.floor((aCutTot - ~~(aCutMax / 2)) + aCutMax);
-        data.aImpFinal = Math.floor((aImpTot - ~~(aImpMax / 2)) + aImpMax);
-        data.aThrFinal = Math.floor((aThrTot - ~~(aThrMax / 2)) + aThrMax);
-        data.aHeatFinal = Math.floor((aHeatTot - ~~(aHeatMax / 2)) + aHeatMax);
-        data.aColdFinal = Math.floor((aColdTot - ~~(aColdMax / 2)) + aColdMax);
-        data.aEleFinal = Math.floor((aEleTot - ~~(aEleMax / 2)) + aEleMax);
-        data.aEneFinal = Math.floor((aEneTot - ~~(aEneMax / 2)) + aEneMax);
-        data.aSptFinal = Math.floor((aSptTot - ~~(aSptMax / 2)) + aSptMax);
-
-        // Helmet Final AT
-        data.ahCutFinal = Math.floor((ahCutTot - ~~(ahCutMax / 2)) + ahCutMax);
-        data.ahImpFinal = Math.floor((ahImpTot - ~~(ahImpMax / 2)) + ahImpMax);
-        data.ahThrFinal = Math.floor((ahThrTot - ~~(ahThrMax / 2)) + ahThrMax);
-        data.ahHeatFinal = Math.floor((ahHeatTot - ~~(ahHeatMax / 2)) + ahHeatMax);
-        data.ahColdFinal = Math.floor((ahColdTot - ~~(ahColdMax / 2)) + ahColdMax);
-        data.ahEleFinal = Math.floor((ahEleTot - ~~(ahEleMax / 2)) + ahEleMax);
-        data.ahEneFinal = Math.floor((ahEneTot - ~~(ahEneMax / 2)) + ahEneMax);
-        data.ahSptFinal = Math.floor((ahSptTot - ~~(ahSptMax / 2)) + ahSptMax);
-
-        // Armor Stats
-        data.armorMod = Math.floor(data.wearArmorFinal - req);
-        if (natPen - data.armorMod < 0) {
-            data.totalNatPen = Math.max(0, Math.floor(((quantity - 1) * 20) + 0));
-        } else {
-            data.totalNatPen = Math.max(0, Math.floor(((quantity - 1) * 20) + (natPen - data.armorMod)));
-        }
-        data.movePenMod = Math.max(0, Math.floor(data.armorMod / 50));
-        if (movePen - data.movePenMod < 0) {
-            data.totalMovePen = movePen;
-        } else {
-            data.totalMovePen = movePen - data.movePenMod
-        }
-        data.totalPerPen = perPen;
 
         // Settings
         data.openRangeFinal = Math.floor(data.rollRange.base + data.rollRange.spec + data.rollRange.temp);

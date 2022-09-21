@@ -27,6 +27,26 @@
           "spec": 0,
           "temp": 0
         },
+        "itemToggle": {
+          "advantages": false,
+          "disadvantages": false,
+          "discipline": false,
+          "mentalPattern": false,
+          "psychicMatrix": false,
+          "maintPowers": false,
+          "arsMagnus": false,
+          "martialArt": false,
+          "kiSealCreature": false,
+          "kiTechnique": false,
+          "proficiency": false,
+          "weapon": false,
+          "currency": false,
+          "inventory": false,
+          "armor": false,
+          "armorHelmet": false,
+          "spellPath": false,
+          "spell": false
+        },
         "toggles": {
           "spiritDamageType": true,
           "psychicStrengthening": false,
@@ -42,49 +62,57 @@
             "base": 5,
             "spec": 0,
             "temp": 0,
-            "opposed": 0
+            "opposed": 0,
+            "status": false
           },
           "Constitution": {
             "base": 5,
             "spec": 0,
             "temp": 0,
-            "opposed": 0
+            "opposed": 0,
+            "status": false
           },
           "Strength": {
             "base": 5,
             "spec": 0,
             "temp": 0,
-            "opposed": 0
+            "opposed": 0,
+            "status": false
           },
           "Dexterity": {
             "base": 5,
             "spec": 0,
             "temp": 0,
-            "opposed": 0
+            "opposed": 0,
+            "status": false
           },
           "Intelligence": {
             "base": 5,
             "spec": 0,
             "temp": 0,
-            "opposed": 0
+            "opposed": 0,
+            "status": false
           },
           "Perception": {
             "base": 5,
             "spec": 0,
             "temp": 0,
-            "opposed": 0
+            "opposed": 0,
+            "status": false
           },
           "Power": {
             "base": 5,
             "spec": 0,
             "temp": 0,
-            "opposed": 0
+            "opposed": 0,
+            "status": false
           },
           "Willpower": {
             "base": 5,
             "spec": 0,
             "temp": 0,
-            "opposed": 0
+            "opposed": 0,
+            "status": false
           }
         },
         "resistances": {
@@ -149,13 +177,23 @@
           "spec": 0
         },
         "secondary": {
+          "main": {
+            "athletics": false,
+            "social": false,
+            "perceptive": false,
+            "intellectual": false,
+            "vigor": false,
+            "subterfuge": false,
+            "creative": false
+          },
           "acrobatics": {
             "base": 0,
             "spec": 0,
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "athleticism": {
             "base": 0,
@@ -163,7 +201,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "climb": {
             "base": 0,
@@ -171,7 +210,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "jump": {
             "base": 0,
@@ -179,7 +219,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "ride": {
             "base": 0,
@@ -187,7 +228,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "swim": {
             "base": 0,
@@ -195,7 +237,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "etiquette": {
             "base": 0,
@@ -203,7 +246,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "intimidate": {
             "base": 0,
@@ -211,7 +255,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "leadership": {
             "base": 0,
@@ -219,7 +264,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "persuasion": {
             "base": 0,
@@ -227,7 +273,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "streetwise": {
             "base": 0,
@@ -235,7 +282,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "style": {
             "base": 0,
@@ -243,7 +291,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "trading": {
             "base": 0,
@@ -251,7 +300,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "notice": {
             "base": 0,
@@ -259,7 +309,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "search": {
             "base": 0,
@@ -267,7 +318,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "track": {
             "base": 0,
@@ -275,7 +327,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "animals": {
             "base": 0,
@@ -283,7 +336,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "appraisal": {
             "base": 0,
@@ -291,7 +345,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "architecture": {
             "base": 0,
@@ -299,7 +354,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "herballore": {
             "base": 0,
@@ -307,7 +363,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "history": {
             "base": 0,
@@ -315,7 +372,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "law": {
             "base": 0,
@@ -323,7 +381,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "magicappr": {
             "base": 0,
@@ -331,7 +390,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "medicine": {
             "base": 0,
@@ -339,7 +399,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "memorize": {
             "base": 0,
@@ -347,7 +408,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "navigation": {
             "base": 0,
@@ -355,7 +417,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "occult": {
             "base": 0,
@@ -363,7 +426,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "science": {
             "base": 0,
@@ -371,7 +435,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "tactics": {
             "base": 0,
@@ -379,7 +444,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "composure": {
             "base": 0,
@@ -387,7 +453,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "featsofstr": {
             "base": 0,
@@ -395,7 +462,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "withstpain": {
             "base": 0,
@@ -403,7 +471,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "disguise": {
             "base": 0,
@@ -411,7 +480,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "hide": {
             "base": 0,
@@ -419,7 +489,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "lockpicking": {
             "base": 0,
@@ -427,7 +498,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "poisons": {
             "base": 0,
@@ -435,7 +507,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "stealth": {
             "base": 0,
@@ -443,7 +516,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "theft": {
             "base": 0,
@@ -451,7 +525,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "traplore": {
             "base": 0,
@@ -459,7 +534,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "alchemy": {
             "base": 0,
@@ -467,7 +543,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "animism": {
             "base": 0,
@@ -475,7 +552,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "art": {
             "base": 0,
@@ -483,7 +561,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "dance": {
             "base": 0,
@@ -491,7 +570,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "forging": {
             "base": 0,
@@ -499,7 +579,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "jewelry": {
             "base": 0,
@@ -507,7 +588,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "music": {
             "base": 0,
@@ -515,7 +597,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "runes": {
             "base": 0,
@@ -523,7 +606,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "ritualcalig": {
             "base": 0,
@@ -531,7 +615,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "slofhand": {
             "base": 0,
@@ -539,7 +624,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           },
           "tailoring": {
             "base": 0,
@@ -547,7 +633,8 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false
+            "mastery": false,
+            "status": false
           }
         },
         "aam": 0
@@ -560,32 +647,37 @@
           "temp": 0,
           "masteryOff": false,
           "masteryDef": false,
-          "mtheory": "Standard"
+          "mtheory": "Standard",
+          "status": false
         },
         "maccu": {
           "base": 0,
           "mult": 0,
           "spec": 0,
           "temp": 0,
-          "actual": 0
+          "actual": 0,
+          "status": false
         },
         "mregen": {
           "regenmult": 0,
           "spec": 0,
           "recoverymult": 1,
-          "temp": 0
+          "temp": 0,
+          "status": false
         },
         "zeon": {
           "base": 0,
           "spec": 0,
           "temp": 0,
           "actual": 0,
-          "minnate": 0
+          "minnate": 0,
+          "status": false
         },
         "mlevel": {
           "base": 0,
           "spec": 0,
-          "temp": 0
+          "temp": 0,
+          "status": false
         },
         "summoning": {
           "summon": {
@@ -1158,20 +1250,23 @@
           "base": 0,
           "spec": 0,
           "freepp": 0,
-          "desc": ""
+          "desc": "",
+          "status":  false
         },
         "ppotential": {
           "base": 0,
           "spent": 0,
           "spec": 0,
           "temp": 0,
-          "mastery": false
+          "mastery": false,
+          "status": false
         },
         "pproj": {
           "base": 0,
           "spec": 0,
           "temp": 0,
-          "mastery": false
+          "mastery": false,
+          "status": false
         },
         "other": {
           "innateSlots": 0,
@@ -1307,7 +1402,7 @@
     "spellPath": {
       "name": "",
       "level": 0,
-      "subPath": ""
+      "toggleItem": false
     },
     "spell": {
       "templates": [ "itemDescription" ],
@@ -1370,7 +1465,7 @@
       "expand": false,
       "quantity": 0,
       "price": "",
-      "quality": "",
+      "quality": "Common",
       "weight": 0,
       "fortitude": "",
       "presence": 0,
@@ -1441,14 +1536,17 @@
       }
     },
     "currency": {
-      "quantity": 0
+      "quantity": 0,
+      "toggleItem": false
     },
     "proficiency": {
-      "type": "",
-      "cost": 0
+      "type": "Starting",
+      "cost": 0,
+      "toggleItem": false
     },
     "discipline": {
-      "quantity": 1
+      "quantity": 1,
+      "toggleItem": false
     },
     "mentalPattern": {
       "templates": [ "itemDescription" ],

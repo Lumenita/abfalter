@@ -60,8 +60,10 @@ abfalter.basicInfo = {
     attack: "abfalter.basicInfo.attack",
     block: "abfalter.basicInfo.block",
     dodge: "abfalter.basicInfo.dodge",
-    defense: "abfalter.basicInfo.defense"
-    
+    defense: "abfalter.basicInfo.defense",
+    advInfo: "abfalter.basicInfo.advInfo",
+    disadvInfo: "abfalter.basicInfo.disadvInfo",    
+    extra: "abfalter.basicInfo.extra"
 }
 
 abfalter.generalTab = {
@@ -158,7 +160,9 @@ abfalter.sheet = {
     edit: "abfalter.sheet.edit",
     delete: "abfalter.sheet.delete",
     equip: "abfalter.sheet.equip",
-    addItem: "abfalter.sheet.addItem"
+    addItem: "abfalter.sheet.addItem",
+    modify: "abfalter.sheet.modify",
+    toggle: "abfalter.sheet.toggle"
 }
 
 abfalter.magicTab = {
@@ -256,7 +260,8 @@ abfalter.psychicTab = {
     maintInfo: "abfalter.psychicTab.maintInfo",
     cancelCost: "abfalter.psychicTab.cancelCost",
     oppPattern: "abfalter.psychicTab.oppPattern",
-    maint: "abfalter.psychicTab.maint"
+    maint: "abfalter.psychicTab.maint",
+    psychicPotential: "abfalter.psychicTab.psychicPotential"
 }
 
 abfalter.kiTab = {
@@ -471,6 +476,21 @@ abfalter.kiTab = {
     creatureName: "abfalter.kiTab.creatureName",
     sealType: "abfalter.kiTab.sealType",
     kiSealInfo: "abfalter.kiTab.kiSealInfo",
+    ki: "abfalter.kiTab.ki",
+    actionInfo: "abfalter.kiTab.actionInfo",
+    innatePowerUse: "abfalter.kiTab.innatePowerUse",
+    use: "abfalter.kiTab.use",
+    action: "abfalter.kiTab.action",
+    turn: "abfalter.kiTab.turn",
+    variable: "abfalter.kiTab.variable",
+    innatePowerMaint: "abfalter.kiTab.innatePowerMaint",
+    unifiedMaint: "abfalter.kiTab.unifiedMaint",
+    maint: "abfalter.kiTab.maint",
+    attack: "abfalter.kiTab.attack",
+    defense: "abfalter.kiTab.defense",
+    counterAttack: "abfalter.kiTab.counterAttack",
+    kiTechInfo: "abfalter.kiTab.kiTechInfo"
+
 }
 
 abfalter.armoryTab = {
