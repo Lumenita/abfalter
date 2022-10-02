@@ -1,21 +1,144 @@
 export default class abfalterActor extends Actor {
 
-
     prepareData() {
         super.prepareData();
     }
 
-    prepareDerivedData() {
-        const actorData = this.system;
-        this._prepareCharacterData(actorData);
+    prepareBaseData() {
+        const data = this.system;
+        //const stats = data.stats;
+        console.log("1");
+
+        //Main Characteristics
+        for (let [key, stat] of Object.entries(data.stats)) {
+            stat.final = Math.floor(~~stat.base + stat.spec + stat.temp);
+            switch (stat.final) {
+                case 0:
+                    stat.mod = -40;
+                    break;
+                case 1:
+                    stat.mod = -30;
+                    break;
+                case 2:
+                    stat.mod = -20;
+                    break;
+                case 3:
+                    stat.mod = -10;
+                    break;
+                case 4:
+                    stat.mod = -5;
+                    break;
+                case 5:
+                    stat.mod = 0;
+                    break;
+                case 6:
+                case 7:
+                    stat.mod = 5;
+                    break;
+                case 8:
+                case 9:
+                    stat.mod = 10;
+                    break;
+                case 10:
+                    stat.mod = 15;
+                    break;
+                case 11:
+                case 12:
+                    stat.mod = 20;
+                    break;
+                case 13:
+                case 14:
+                    stat.mod = 25;
+                    break;
+                case 15:
+                    stat.mod = 30;
+                    break;
+                case 16:
+                case 17:
+                    stat.mod = 35;
+                    break;
+                case 18:
+                case 19:
+                    stat.mod = 40;
+                    break;
+                case 20:
+                    stat.mod = 45;
+                    break;
+                case 21:
+                case 22:
+                    stat.mod = 50;
+                    break;
+                case 23:
+                case 24:
+                    stat.mod = 55;
+                    break;
+                case 25:
+                    stat.mod = 60;
+                    break;
+                case 26:
+                case 27:
+                    stat.mod = 65;
+                    break;
+                case 28:
+                case 29:
+                    stat.mod = 70;
+                    break;
+                case 30:
+                    stat.mod = 75;
+                    break;
+                default:
+                    stat.mod = 0;
+            }
+            if (30 < stat.final) {
+                stat.final = 30;
+                stat.mod = 75;
+            }
+            stat.opposedfinal = Math.floor((stat.final + stat.opposed) + ~~(data.aamFinal / 20));
+            //Ki Pools
+            if (stat != "Intelligence" && "Perception") {
+                if (stat.final >= 1 && stat.final <= 9) {
+                    stat.kiPoolAccuBase = 1;
+                } else if (stat.final >= 10 && stat.final <= 12) {
+                    stat.kiPoolAccuBase = 2;
+                } else if (stat.final >= 13 && stat.final <= 15) {
+                    stat.kiPoolAccuBase = 3;
+                } else if (stat.final >= 16) {
+                    stat.kiPoolAccuBase = 4;
+                } else {
+                    stat.kiPoolAccuBase = 0;
+                }
+                if (stat.final <= 10) {
+                    stat.kiPoolBase = Math.floor(stat.final);
+                } else if (stat.final > 10) {
+                    stat.kiPoolBase = Math.floor(((stat.final - 10) * 2) + 10);
+                } else {
+                    stat.kiPoolBase = 0;
+                }
+            }
+        }
+
+        //All Action Mod
+        data.aamFinal = data.aam
+
+        data.atkfinal = Math.floor(data.combatstats.atkbase + data.combatstats.atkspecial + data.combatstats.atktemp + data.stats.Dexterity.mod + data.aamFinal);
+
+        //Magic Projection
+        data.mprojfinal = Math.floor(data.mproj.base + data.mproj.spec + data.mproj.temp + data.aamFinal);
+        data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.imbalance);
+        data.mprojfinaldef = Math.floor(data.mprojfinal - data.mproj.imbalance);
     }
 
-    _prepareCharacterData(actorData) {
-        const data = actorData;
+    prepareEmbeddedDocuments() {
+        console.log("items are supposed to be loaded here");
+
+    }
+
+    prepareDerivedData() {
+        const data = this.system;
         const stats = data.stats;
+        console.log("3");
 
-
-        // Determine Item Values / Last used arr[107]  3
+        // Determine Item Values / Last used arr[109]  6
         const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish, acro,
             athle, climb, jump, ride, swim, etiq, intim, leader, persua, street, style, trading, notice, search, track,
             animals, appra, archi, herb, hist, law, magicapr, medic, mem, navi, occ, science, tactic, comp, fos,
@@ -23,7 +146,8 @@ export default class abfalterActor extends Actor {
             runes, ritcal, soh, tailoring, quantity, req, natPen, movePen, aCutMax, aCutTot, aImpMax, aImpTot, aThrMax, aThrTot, aHeatMax,
             aHeatTot, aColdMax, aColdTot, aEleMax, aEleTot, aEneMax, aEneTot, aSptMax, aSptTot, ahReq, ahCutMax, ahCutTot, ahImpMax, ahImpTot, ahThrMax,
             ahThrTot, ahHeatMax, ahHeatTot, ahColdMax, ahColdTot, ahEleMax, ahEleTot, ahEneMax, ahEneTot, ahSptMax, ahSptTot, perPen, usedpp, matrixpp, arsMk,
-            maMk, techMk, pathLvl] = this.items.reduce((arr, item) => {
+            maMk, techMk, pathLvl, turnMaint, dayMaint, spellCost] = this.items.reduce((arr, item) => {
+                console.log("im in hte items call calc");
                 if (item.type === "class") {
                     const classLevels = parseInt(item.system.main.levels) || 0;
                     arr[0] += classLevels;
@@ -192,17 +316,31 @@ export default class abfalterActor extends Actor {
                 if (item.type === "spellPath") {
                     arr[107] += parseInt(item.system.level) || 0;
                 }
+                if (item.type === "turnMaint") {
+                    if (item.system.equipped == true) {
+                        arr[108] += parseInt(item.system.zeon) || 0;
+                    }
+                }
+                if (item.type === "dailyMaint") {
+                    if (item.system.equipped == true) {
+                        arr[109] += parseInt(item.system.zeon) || 0;
+                    }
+                }
+                if (item.type === "spell") {
+                    if (item.system.bought == "Single") {
+                        arr[110] += parseInt(item.system.cost) || 0;
+                    }
+                }
             return arr;
             }, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0]);
+                0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0]);
 
         data.lpbonus = lpbonus;
         data.inibonus = ini;
-        data.attackbonus = atk;
         data.dodgebonus = dod;
         data.blockbonus = blk;
         data.weararmorbonus = weararm;
@@ -212,6 +350,9 @@ export default class abfalterActor extends Actor {
         data.controlbonus = control;
         data.bindbonus = bind;
         data.banishbonus = banish;
+
+        data.turnMaintRemove = turnMaint;
+        data.dayMaintRemove = dayMaint;
 
         //Stuff Xp, Presence, Next lvl Xp
         data.level = level;
@@ -225,137 +366,6 @@ export default class abfalterActor extends Actor {
 
         //Helmet Perception Penalty
         data.totalPerPen = perPen;
-
-        //All Action Mod
-        data.aamFinal = data.aam
-
-        //Characteristics & Mods
-        for (let [key, stat] of Object.entries(data.stats)) {
-            stat.final = Math.floor(~~stat.base + stat.spec + stat.temp);
-            switch (stat.final) {
-                case 0:
-                    stat.mod = -40;
-                    break;
-                case 1:
-                    stat.mod = -30;
-                    break;
-                case 2:
-                    stat.mod = -20;
-                    break;
-                case 3:
-                    stat.mod = -10;
-                    break;
-                case 4:
-                    stat.mod = -5;
-                    break;
-                case 5:
-                    stat.mod = 0;
-                    break;
-                case 6:
-                case 7:
-                    stat.mod = 5;
-                    break;
-                case 8:
-                case 9:
-                    stat.mod = 10;
-                    break;
-                case 10:
-                    stat.mod = 15;
-                    break;
-                case 11:
-                case 12:
-                    stat.mod = 20;
-                    break;
-                case 13:
-                case 14:
-                    stat.mod = 25;
-                    break;
-                case 15:
-                    stat.mod = 30;
-                    break;
-                case 16:
-                case 17:
-                    stat.mod = 35;
-                    break;
-                case 18:
-                case 19:
-                    stat.mod = 40;
-                    break;
-                case 20:
-                    stat.mod = 45;
-                    break;
-                case 21:
-                case 22:
-                    stat.mod = 50;
-                    break;
-                case 23:
-                case 24:
-                    stat.mod = 55;
-                    break;
-                case 25:
-                    stat.mod = 60;
-                    break;
-                case 26:
-                case 27:
-                    stat.mod = 65;
-                    break;
-                case 28:
-                case 29:
-                    stat.mod = 70;
-                    break;
-                case 30:
-                    stat.mod = 75;
-                    break;
-                default:
-                    stat.mod = 0;
-            }
-            if (30 < stat.final) {
-                stat.final = 30;
-                stat.mod = 75;
-            }
-            if (key == "Perception") {
-                stat.opposedfinal = Math.floor((stat.final + stat.opposed) + ~~(data.aamFinal / 20) - data.totalPerPen);
-            } else {
-                stat.opposedfinal = Math.floor((stat.final + stat.opposed) + ~~(data.aamFinal / 20));
-            }
-            //Ki Pools
-            if (stat != "Intelligence" && "Perception") {
-                if (stat.final >= 1 && stat.final <= 9) {
-                    stat.kiPoolAccuBase = 1;
-                } else if (stat.final >= 10 && stat.final <= 12) {
-                    stat.kiPoolAccuBase = 2;
-                } else if (stat.final >= 13 && stat.final <= 15) {
-                    stat.kiPoolAccuBase = 3;
-                } else if (stat.final >= 16) {
-                    stat.kiPoolAccuBase = 4;
-                } else {
-                    stat.kiPoolAccuBase = 0;
-                }
-                if (stat.final <= 10) {
-                    stat.kiPoolBase = Math.floor(stat.final);
-                } else if (stat.final > 10) {
-                    stat.kiPoolBase = Math.floor(((stat.final - 10) * 2) + 10);
-                } else {
-                    stat.kiPoolBase = 0;
-                }
-            }
-        }
-
-        //Unarmed Damage
-        switch (data.fistDamage.multOption) {
-            case "strength":
-                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Strength.mod));
-                break;
-            case "power":
-                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Power.mod));
-                break;
-            case "presence":
-                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * ((2 * data.presence) + data.stats.Power.mod)));
-                break;
-            default:
-                data.unarmedDmgFinal = data.fistDamage.base;
-                break;
-        }
 
         /*
          *  Mk Calculations
@@ -818,7 +828,9 @@ export default class abfalterActor extends Actor {
         }
 
         // Attack, Block, & Dodge
-        data.atkfinal = Math.floor(data.combatstats.atkbase + data.attackbonus + data.combatstats.atkspecial + data.combatstats.atktemp + data.stats.Dexterity.mod + data.aamFinal);
+        //data.atkfinal = Math.floor(data.combatstats.atkbase + data.attackbonus + data.combatstats.atkspecial + data.combatstats.atktemp + data.stats.Dexterity.mod + data.aamFinal);
+        data.attackbonus = atk;
+        data.atkfinal += data.attackbonus;
         data.blkfinal = Math.floor(data.combatstats.blkbase + data.blockbonus + data.combatstats.blkspecial + data.combatstats.blktemp + data.stats.Dexterity.mod + data.aamFinal);
         data.dodfinal = Math.floor(data.combatstats.dodbase + data.dodgebonus + data.combatstats.dodspecial + data.combatstats.dodtemp + data.stats.Agility.mod + data.aamFinal);
 
@@ -1346,9 +1358,10 @@ export default class abfalterActor extends Actor {
          */
 
         // Magic Projection
-        data.mprojfinal = Math.floor(data.mproj.base + data.mproj.spec + data.mproj.temp + data.aamFinal + data.stats.Dexterity.mod);
-        data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.imbalance);
-        data.mprojfinaldef = Math.floor(data.mprojfinal - data.mproj.imbalance);
+        //data.mprojfinal = Math.floor(data.mproj.base + data.mproj.spec + data.mproj.temp + data.aamFinal + data.stats.Dexterity.mod);
+        //data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.imbalance);
+        //data.mprojfinaldef = Math.floor(data.mprojfinal - data.mproj.imbalance);
+
 
         // Magic Accumulation
         switch (data.stats.Power.final) {
@@ -1533,8 +1546,9 @@ export default class abfalterActor extends Actor {
                 break;
         }
         data.mlLevels = pathLvl;
+        data.spellLevels = spellCost;
         data.mlevelfinal = Math.floor(data.mlevel.base + data.mlevel.spec + data.mlevel.temp + data.mlevelint);
-        data.mlevelused = Math.floor(data.mlLevels + 1);
+        data.mlevelused = Math.floor(data.mlLevels + data.spellLevels);
 
         // Summoning Abilities
         data.summonfinal = Math.floor(data.summoning.summon.base + data.summonbonus + data.summoning.summon.spec + data.stats.Power.mod + Math.min(0, data.aamFinal));

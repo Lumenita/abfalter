@@ -45,7 +45,6 @@ export default class abfalterItemSheet extends ItemSheet {
             data: baseData.item.system,
             config: CONFIG.abfalter
         };
-        console.log("Im here");
         return sheetData;
     }
 

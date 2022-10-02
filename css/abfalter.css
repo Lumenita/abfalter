@@ -927,6 +927,15 @@ h3 {
     justify-content: space-between;
     margin: 0 0 7px 0;
 }
+.s2,
+.summoning,
+.turnDayMaint,
+.spells,
+.metaMagic,
+.invocations,
+.incarnations {
+    margin: 0 0 7px 0;
+}
 .mproj {
     width: 29%;
 }
@@ -1191,6 +1200,12 @@ h3 {
     display: flex;
     place-content: space-between;
 }
+.spellPath > div:first-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+}
 .spellPath > div:first-of-type,
 .spellPath-item > div {
     display: flex;
@@ -1235,24 +1250,90 @@ h3 {
 .summoning > div > label {
     width: 13.5%;
 }
-
-
-
 /*
-    ----------------
-    Turn Maintenance
-    ----------------
+    ------------------------------------
+    Turn Maintenance & Daily Maintenance
+    ------------------------------------
 */
-
-
-/*
-    ------------------
-    Daily Maintenance
-    ------------------
-*/
-
-
-
+.turnDayMaint > div:nth-of-type(2) {
+    width: 95%;
+    margin: 0 0 0 2.5%;
+}
+.turnDayMaint > div:first-of-type,
+.turnDayMaint > div:nth-of-type(3),
+.turnMaint-item > div:first-of-type,
+.dailyMaint-item > div:first-of-type {
+    display: flex;
+    justify-content: flex-start;
+}
+.turnDayMaint > div:first-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+}
+.turnDayMaint > div:nth-of-type(3) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    border-top: 5px solid black;
+    margin-top: 3px;
+    padding-top: 3px;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+    font-weight: bold;
+}
+.turnDayMaint > div:nth-of-type(3) > button {
+    width: 30%;
+    margin: 0 0 0 1%;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
+}
+.turnDayMaint > div:nth-of-type(3) > span {
+    width: 63%;
+}
+.turnDayMaint > div:first-of-type > span:first-of-type {
+    width: 59.85%;
+    margin: 0 0 0 2.375%;
+}
+.turnDayMaint > div:first-of-type > span {
+    width: 14.25%;
+    margin: 0 0 0 0.95%;
+}
+.turnDayMaint > div:last-of-type {
+    display: flex;
+    place-content: space-between;
+}
+.turnMaint-item > div > input:first-of-type,
+.turnMaint-item > div > span:first-of-type,
+.dailyMaint-item > div > input:first-of-type,
+.dailyMaint-item > div > span:first-of-type {
+    width: 63%;
+    margin: 0px;
+}
+.turnMaint-item > div > input,
+.turnMaint-item > div > span,
+.dailyMaint-item > div > input,
+.dailyMaint-item > div > span {
+    width: 15%;
+    margin: 0 0 0 1%;
+}
+.turnMaint-item > div > a,
+.dailyMaint-item > div > a {
+    width: 5%;
+    font-size: 15px;
+}
+.turnMaint-item > div > a,
+.dailyMaint-item > div > a {
+    opacity: 0;
+}
+.turnMaint-item > div:hover > a,
+.dailyMaint-item > div:hover > a {
+    opacity: 1;
+}
+.turnDayMaint > div > div > textarea {
+    margin: 3px 0 0 0;
+}
 /*
     ----------
     Spell Book
@@ -1371,21 +1452,87 @@ h3 {
 
 
 /*
-    -----------
-    Invocations
-    -----------
+    --------------------------
+    Invocations & Incarnations
+    --------------------------
 */
-
-
-/*
-    ------------
-    Incarnations
-    ------------
-*/
-
-
-
-
+.invocations > div:nth-of-type(2),
+.incarnations > div:nth-of-type(2) {
+    width: 95%;
+    margin: 0 0 0 2.5%;
+}
+.invocations > div:first-of-type,
+.incarnations > div:first-of-type,
+.invocation-item > div:first-of-type,
+.incarnation-item > div:first-of-type {
+    display: flex;
+    justify-content: flex-start;
+}
+.invocations > div:first-of-type,
+.incarnations > div:first-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+}
+.invocation-item > div > a,
+.incarnation-item > div > a {
+    width: 5%;
+    font-size: 15px;
+}
+.invocation-item > div > a,
+.incarnation-item > div > a {
+    opacity: 0;
+}
+.invocation-item > div:hover > a,
+.incarnation-item > div:hover > a {
+    opacity: 1;
+}
+.invocations > div > div > textarea,
+.incarnations > div > div > textarea {
+    margin: 3px 0 0 0;
+}
+.invocations > div:last-of-type,
+.incarnations > div:last-of-type {
+    display: flex;
+    place-content: space-between;
+}
+.invocations > div:first-of-type > span:first-of-type {
+    width: 59.85%;
+    margin: 0 0 0 2.375%;
+}
+.invocations > div:first-of-type > span {
+    width: 14.25%;
+    margin: 0 0 0 0.95%;
+}
+.invocation-item > div > input:first-of-type,
+.invocation-item > div > span:first-of-type {
+    width: 63%;
+    margin: 0px;
+}
+.invocation-item > div > input,
+.invocation-item > div > span {
+    width: 15%;
+    margin: 0 0 0 1%;
+}
+.incarnations > div:first-of-type > span:first-of-type {
+    width: 44.65%;
+    margin: 0 0 0 2.375%;
+}
+.incarnations > div:first-of-type > span {
+    width: 14.25%;
+    margin: 0 0 0 0.95%;
+}
+.incarnation-item > div > input:first-of-type,
+.incarnation-item > div > span:first-of-type {
+    width: 47%;
+    margin: 0px;
+}
+.incarnation-item > div > input,
+.incarnation-item > div > span {
+    width: 15%;
+    margin: 0 0 0 1%;
+}
 /*
     ***************
     ---------------
@@ -1560,12 +1707,6 @@ h3 {
     Module & Disciplines
     --------------------
 */
-.pdisc > div:first-of-type > button {
-    display: grid;
-    margin: 0px;
-    border-radius: 0px;
-    border: 0px;
-}
 .pdisc > div:last-of-type {
     display: flex;
     place-content: space-between;
@@ -3299,10 +3440,10 @@ h3 {
     margin-bottom: 3px;
 }
 .secondarychatmsg > div:nth-of-type(2) > span:nth-of-type(1) {
-    padding-left: 5%;
+    padding-left: 10%;
 }
 .secondarychatmsg > div:nth-of-type(2) > span:nth-of-type(2) {
-    padding-right: 15%;
+    padding-right: 10%;
 }
 .openRollMod,
 .fumblerollmod {
@@ -3315,4 +3456,37 @@ h3 {
     display: initial;
     margin-left: 10%;
     background-color: #b5b3a4;
+}
+/*
+    --------
+    Fumble Roll
+    --------
+*/
+.fumbleChatMessage > div {
+    font-size: 17px;
+}
+.fumbleChatMessage > div:nth-of-type(1) {
+    font-size: 23px;
+    display: flex;
+    justify-content: center;
+}
+.fumbleChatMessage > div:nth-of-type(2) {
+    display: flex;
+    justify-content: space-between;
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    margin-top: 3px;
+}
+.fumbleChatMessage > div:nth-of-type(3) {
+    display: flex;
+    justify-content: center;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin-bottom: 3px;
+}
+.fumbleChatMessage > div:not(:nth-of-type(1)) > span:nth-of-type(1) {
+    padding-left: 10%;
+}
+.fumbleChatMessage > div:not(:nth-of-type(1)) > span:nth-of-type(2) {
+    padding-right: 10%;
 }

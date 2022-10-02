@@ -29,14 +29,32 @@
             <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mproj.temp" value="{{data.mproj.temp}}" /> </label>
             <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.mprojfinal" value="{{data.mprojfinal}}" readonly /> </label>
             <div class="mProjButton">
-                <button type="button" class="mystic rollable" data-roll="d100+@mprojfinaloff" data-label="Magic Proj. Offensive">
+                {{#if data.toggles.magicAtkModule}}
+                <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll" data-ability="{{data.combatstats.atkMastery}}">
+                    <span> {{localize "abfalter.basicInfo.attack"}} </span> <span> {{data.atkfinal}} </span>
+                </button>
+                {{else}}
+                <button type="button" class="combatRoll" data-roll="{{data.mprojfinaloff}}" data-label="Magic Proj. Offensive" data-type="combatRoll" data-ability="{{data.mproj.masteryOff}}"> 
                     <span> {{localize "abfalter.magicTab.offensive"}} </span> <span> {{data.mprojfinaloff}} </span>
                 </button>
+                {{/if}}
                 <!--
-                -->
-                <button type="button" class="mystic rollable" data-roll="d10+@mprojfinaldef" data-label="Magic Proj. Defensive">
+    -->
+                {{#if data.toggles.magicDefModule}}
+                {{#if data.toggles.magicDodgeModule}}
+                <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll" data-ability="{{data.combatstats.dodMastery}}">
+                    <span> {{localize "abfalter.basicInfo.dodge"}} </span> <span> {{data.dodfinal}} </span>
+                </button>
+                {{else}}
+                <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll" data-ability="{{data.combatstats.blkMastery}}">
+                    <span> {{localize "abfalter.basicInfo.block"}} </span> <span> {{data.blkfinal}} </span>
+                </button>
+                {{/if}}
+                {{else}}
+                <button type="button" class="combatRoll" data-roll="{{data.mprojfinaldef}}" data-label="Magic Proj. Defensive" data-type="combatRoll" data-ability="{{data.mproj.masteryDef}}">
                     <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{data.mprojfinaldef}} </span>
                 </button>
+                {{/if}}
             </div>
             <h3> {{localize "abfalter.magicTab.mtheory"}} </h3>
             <div class="csSelect2">
@@ -173,7 +191,7 @@
                     </div>
                     <div class="{{#if data.itemToggle.spellPath}}item-list{{/if}}">
                         {{#each spellPaths as |spellPath id|}}
-                        <div class="spellPath-item item" data-item-id="{{spellPath._id}}">
+                        <div class="spellPath-item item delete-item" data-item-id="{{spellPath._id}}">
                             {{#if system.toggleItem}}
                             <div>
                                 <input class="inline-edit" data-field="name" type="text" value="{{spellPath.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
@@ -262,50 +280,86 @@
                 </div>
             </div>
 
-            <div class="turnmaint">
+            <div class="turnDayMaint">
                 <h2> {{localize "abfalter.magicTab.turnMaint"}} </h2>
-                <div class="items-list">
+                <div>
+                    <span> {{localize "abfalter.basicInfo.name"}} </span>
+                    <span> {{localize "abfalter.magicTab.spellCost"}} </span>
+                    <span> {{localize "abfalter.magicTab.zeon"}} </span>
+                </div>
+                <div class="{{#if data.itemToggle.turnMaint}}item-list{{/if}}">
                     {{#each turnMaints as |turnMaint id|}}
-                    <div class="invocation-item item" data-item-id="{{turnMaint._id}}">
-                        <div class="item-name">
-                            <h4>{{turnMaint.name}}</h4>
+                    <div class="turnMaint-item item equip-item" data-item-id="{{turnMaint._id}}">
+                        {{#if system.expand}}
+                        <div>
+                            <input class="inline-edit" data-field="name" type="text" value="{{turnMaint.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="inline-edit" data-field="system.cost" type="number" value="{{turnMaint.system.cost}}" />
+                            <input class="inline-edit" data-field="system.zeon" type="number" value="{{turnMaint.system.zeon}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <div class="item-controls">
-                            <a class="item-control item-edit"><i class="fas fa-edit"></i></a>
-                            <a class="item-control item-delete"><i class="fas fa-trash"></i></a>
+                        <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.magicTab.maintInfo"}}">{{turnMaint.system.description}}</textarea>
+                        {{else}}
+                        <div class="{{#if system.equipped}}equipped{{else}}notEquipped{{/if}}">
+                            <span> {{turnMaint.name}} </span>
+                            <span> {{turnMaint.system.cost}} </span>
+                            <span> {{turnMaint.system.zeon}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
+                        {{/if}}
                     </div>
                     {{/each}}
                 </div>
-                <a class="item-control item-create" data-type="turnMaint"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addTurnMaint"}} </a>
-
-                <span> include a checkbox for active or not </span>
-                <span> include a total zeon cost </span>
-                <span> include a button to remove zeon from pool </span>
-                <span> include a way to delete item but not create </span>
+                <div>
+                    <span> {{localize "abfalter.magicTab.totalZeon"}} {{data.turnMaintRemove}} </span>
+                    <button type="button" class="removeMaint" data-ability="{{data.turnMaintRemove}}">
+                        <span> {{localize "abfalter.basicInfo.remove"}} </span>
+                    </button>
+                </div>
+                <div>
+                    <a class="item-create" data-type="turnMaint"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addTurnMaint"}} </a>
+                    <a class="toggleBoolean {{#if data.itemToggle.turnMaint}}armorpenalty{{/if}}" data-label="data.itemToggle.turnMaint" data-ability="{{data.itemToggle.turnMaint}}"><i class="{{#if data.itemToggle.turnMaint}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                </div>
             </div>
 
-            <div class="daymaint">
+            <div class="turnDayMaint">
                 <h2> {{localize "abfalter.magicTab.dailyMaint"}} </h2>
-                <div class="items-list">
+                <div>
+                    <span> {{localize "abfalter.basicInfo.name"}} </span>
+                    <span> {{localize "abfalter.magicTab.spellCost"}} </span>
+                    <span> {{localize "abfalter.magicTab.zeon"}} </span>
+                </div>
+                <div class="{{#if data.itemToggle.dailyMaint}}item-list{{/if}}">
                     {{#each dailyMaints as |dailyMaint id|}}
-                    <div class="invocation-item item" data-item-id="{{dailyMaint._id}}">
-                        <div class="item-name">
-                            <h4>{{dailyMaint.name}}</h4>
+                    <div class="dailyMaint-item item equip-item" data-item-id="{{dailyMaint._id}}">
+                        {{#if system.expand}}
+                        <div>
+                            <input class="inline-edit" data-field="name" type="text" value="{{dailyMaint.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="inline-edit" data-field="system.cost" type="number" value="{{turnMaint.system.cost}}" />
+                            <input class="inline-edit" data-field="system.zeon" type="number" value="{{dailyMaint.system.zeon}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <div class="item-controls">
-                            <a class="item-control item-edit"><i class="fas fa-edit"></i></a>
-                            <a class="item-control item-delete"><i class="fas fa-trash"></i></a>
+                        <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.magicTab.maintInfo"}}">{{dailyMaint.system.description}}</textarea>
+                        {{else}}
+                        <div class="{{#if system.equipped}}equipped{{else}}notEquipped{{/if}}">
+                            <span> {{dailyMaint.name}} </span>
+                            <span> {{turnMaint.system.cost}} </span>
+                            <span> {{dailyMaint.system.zeon}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
+                        {{/if}}
                     </div>
                     {{/each}}
                 </div>
-                <a class="item-control item-create" data-type="dailyMaint"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addDailyMaint"}} </a>
-
-                <span> include a checkbox for active or not </span>
-                <span> include a total zeon cost </span>
-                <span> include a button to remove zeon from pool </span>
-                <span> include a way to delete item but not create </span>
+                <div>
+                    <span> {{localize "abfalter.magicTab.totalZeon"}} {{data.dayMaintRemove}} </span>
+                    <button type="button" class="removeMaint" data-ability="{{data.dayMaintRemove}}">
+                        <span> {{localize "abfalter.basicInfo.remove"}} </span>
+                    </button>
+                </div>
+                <div>
+                    <a class="item-create" data-type="dailyMaint"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addDailyMaint"}} </a>
+                    <a class="toggleBoolean {{#if data.itemToggle.dailyMaint}}armorpenalty{{/if}}" data-label="data.itemToggle.dailyMaint" data-ability="{{data.itemToggle.dailyMaint}}"><i class="{{#if data.itemToggle.dailyMaint}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                </div>
             </div>
         </div>
 
@@ -444,73 +498,84 @@
                 </div>
             </div>
 
-            <div class="metamagic">
+            <div class="metaMagic">
                 <h2> {{localize "abfalter.magicTab.metaMagic"}} </h2>
-                <div class="items-list">
-                    {{#each metaMagics as |metaMagic id|}}
-                    <div class="invocation-item item" data-item-id="{{metaMagic._id}}">
-                        <div class="item-name">
-                            <h4>{{metaMagic.name}}</h4>
-                        </div>
-                        <div class="item-controls">
-                            <a class="item-control item-edit"><i class="fas fa-edit"></i></a>
-                            <a class="item-control item-delete"><i class="fas fa-trash"></i></a>
-                        </div>
-                    </div>
-                    {{/each}}
-                </div>
-                <a class="item-control item-create" data-type="metaMagic"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addMetaMagic"}} </a>
+                <span> Form Application method </span>
                 <span> Only 1 meta Magic Item Allowed, created with character sheet already </span>
             </div>
 
             <div class="invocations">
                 <h2> {{localize "abfalter.magicTab.invocation"}} </h2>
-                <div class="items-list">
+                <div>
+                    <span> {{localize "abfalter.basicInfo.name"}} </span>
+                    <span> {{localize "abfalter.basicInfo.cost"}} </span>
+                    <span> {{localize "abfalter.basicInfo.difficulty"}} </span>
+                </div>
+                <div class="{{#if data.itemToggle.invocation}}item-list{{/if}}">
                     {{#each invocations as |invocation id|}}
-                    <div class="invocation-item item" data-item-id="{{invocation._id}}">
-                        <div class="item-name">
-                            <h4>{{invocation.name}}</h4>
+                    <div class="invocation-item item normal-item" data-item-id="{{invocation._id}}">
+                        {{#if system.expand}}
+                        <div>
+                            <input class="inline-edit" data-field="name" type="text" value="{{invocation.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="inline-edit" data-field="system.cost" type="number" value="{{invocation.system.cost}}" />
+                            <input class="inline-edit" data-field="system.difficulty" type="number" value="{{invocation.system.difficulty}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <div class="item-controls">
-                            <a class="item-control item-edit"><i class="fas fa-edit"></i></a>
-                            <a class="item-control item-delete"><i class="fas fa-trash"></i></a>
+                        <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.magicTab.maintInfo"}}">{{invocation.system.description}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{invocation.name}} </span>
+                            <span> {{invocation.system.cost}} </span>
+                            <span> {{invocation.system.difficulty}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
+                        {{/if}}
                     </div>
                     {{/each}}
                 </div>
-                <a class="item-control item-create" data-type="invocation"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addInvocation"}} </a>
+                <div>
+                    <a class="item-create" data-type="invocation"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addInvocation"}} </a>
+                    <a class="toggleBoolean {{#if data.itemToggle.invocation}}armorpenalty{{/if}}" data-label="data.itemToggle.invocation" data-ability="{{data.itemToggle.invocation}}"><i class="{{#if data.itemToggle.invocation}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                </div>
             </div>
 
             <div class="incarnations">
                 <h2> {{localize "abfalter.magicTab.incarnation"}} </h2>
-                <div class="items-list">
+                <div>
+                    <span> {{localize "abfalter.basicInfo.name"}} </span>
+                    <span> {{localize "abfalter.basicInfo.level"}} </span>
+                    <span> {{localize "abfalter.basicInfo.cost"}} </span>
+                    <span> {{localize "abfalter.basicInfo.difficulty"}} </span>
+                </div>
+                <div class="{{#if data.itemToggle.incarnation}}item-list{{/if}}">
                     {{#each incarnations as |incarnation id|}}
-                    <div class="incarnation-item item" data-item-id="{{incarnation._id}}">
-                        <div class="item-name">
-                            <h4>{{incarnation.name}}</h4>
+                    <div class="incarnation-item item normal-item" data-item-id="{{incarnation._id}}">
+                        {{#if system.expand}}
+                        <div>
+                            <input class="inline-edit" data-field="name" type="text" value="{{incarnation.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="inline-edit" data-field="system.level" type="number" value="{{incarnation.system.level}}" />
+                            <input class="inline-edit" data-field="system.cost" type="number" value="{{incarnation.system.cost}}" />
+                            <input class="inline-edit" data-field="system.difficulty" type="number" value="{{incarnation.system.difficulty}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <div class="item-controls">
-                            <a class="item-control item-edit"><i class="fas fa-edit"></i></a>
-                            <a class="item-control item-delete"><i class="fas fa-trash"></i></a>
+                        <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.magicTab.maintInfo"}}">{{incarnation.system.description}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{incarnation.name}} </span>
+                            <span> {{incarnation.system.level}} </span>
+                            <span> {{incarnation.system.cost}} </span>
+                            <span> {{incarnation.system.difficulty}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
+                        {{/if}}
                     </div>
                     {{/each}}
                 </div>
-                <a class="item-control item-create" data-type="incarnation"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addIncarnation"}} </a>
+                <div>
+                    <a class="item-create" data-type="incarnation"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addSpellPath"}} </a>
+                    <a class="toggleBoolean {{#if data.itemToggle.incarnation}}armorpenalty{{/if}}" data-label="data.itemToggle.incarnation" data-ability="{{data.itemToggle.incarnation}}"><i class="{{#if data.itemToggle.incarnation}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-<!--
-                            <div class="item-name item-roll">
-                            <h4>{{spell.name}}</h4>
-                        </div>
-                        <div class="item-controls">
-                            <a class="item-control item-edit"><i class="fas fa-edit"></i></a>
-                            <a class="item-control item-delete"><i class="fas fa-trash"></i></a>
-                        </div>
-
--->

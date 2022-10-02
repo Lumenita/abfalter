@@ -87,16 +87,22 @@
             <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.pprojfinal" value="{{data.pprojfinal}}" readonly /> </label>
             {{#if data.other.moduleStatus}}
             <div class="pmodButton">
-                <button type="button" id="atkroll" class="combat rollable" data-roll="d100+@atkfinal" data-label="Attack">
-                    <span> Atk </span>
+                <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll" data-ability="{{data.combatstats.atkMastery}}">
+                    <span> {{data.atkfinal}} </span>
                 </button>
-                <button type="button" id="blkroll" class="combat rollable" data-roll="d100+@blkfinal" data-label="Block">
-                    <span> Def </span> 
+                {{#if data.toggles.psychicDodgeStatus}}
+                <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll" data-ability="{{data.combatstats.dodMastery}}">
+                    <span> {{data.dodfinal}} </span>
                 </button>
+                {{else}}
+                <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll" data-ability="{{data.combatstats.blkMastery}}">
+                    <span> {{data.blkfinal}} </span>
+                </button>
+                {{/if}}
             </div>
             {{else}}
             <div>
-                <button type="button" class="psychic rollable" data-roll="d100" data-label="Psychic Projection">
+                <button type="button" class="combatRoll" data-roll="{{data.pprojfinal}}" data-label="{{localize "abfalter.psychicTab.psyProj"}}" data-type="combatRoll" data-ability="{{data.pproj.mastery}}">
                     <span> <i class="fas fa-dice-d20"></i> </span>
                 </button>
             </div>
@@ -104,18 +110,6 @@
         </div>
 
         <div class="pdisc">
-            <h2> {{localize "abfalter.psychicTab.pmodule"}} </h2>
-            <div>
-                <button type="button" class="psychicModule toggleBoolean {{#if data.other.moduleStatus}}selected{{else}}notSelected{{/if}}" data-ability="{{data.other.moduleStatus}}" data-label="data.other.moduleStatus">
-                    <span> {{localize "abfalter.psychicTab.pmoduleText"}} </span>
-                    <span> {{localize "abfalter.psychicTab.pmoduleText2"}} </span>
-                    {{#if data.other.moduleStatus}}
-                    <div>
-                        <span> {{localize "abfalter.basicInfo.active"}}!! </span>
-                    </div>
-                    {{/if}}
-                </button>
-            </div>
             <h2> {{localize "abfalter.psychicTab.pdisc"}} </h2>
             <div class="{{#if data.itemToggle.discipline}}item-list{{/if}}">
                 {{#each disciplines as |discipline id|}}

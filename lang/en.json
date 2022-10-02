@@ -63,7 +63,8 @@
       "defense": "Defense",
       "advInfo": "Advatage information",
       "disadvInfo": "Disadvantage information",
-      "extra": "Extra"
+      "extra": "Extra",
+      "remove": "Remove From Pool"
     },
     "generalTab": {
       "characteristics": "Characteristics",
@@ -159,8 +160,32 @@
       "equip": "Toggle Equip",
       "addItem": "Add Item",
       "modify": "Modify",
-      "toggle": "Toggle"
-
+      "toggle": "Toggle",
+      "inventory": "New Item",
+      "weapon": "New weapon",
+      "armor": "New Armor",
+      "armorHelmet": "New Helmet",
+      "advantage": "New Advantage",
+      "disadvantage": "New Disadvantage",
+      "spell": "New Spell",
+      "class": "New Class",
+      "spellPath": "New Spell Path",
+      "incarnation": "New Incarnation",
+      "invocation": "New Invocation",
+      "metaMagic": "New Meta Magic",
+      "dailyMaint": "New Daily Maintenance",
+      "turnMaint": "New Turn Maintenance",
+      "currency": "New Currency",
+      "proficiency": "New Proficiency",
+      "weaponAttack": "New Weapon",
+      "discipline": "New Discipline",
+      "mentalPattern": "New Mental Pattern",
+      "psychicMatrix": "New Psychic Matrix",
+      "maintPower": "New maintained Power",
+      "kiSealCreature": "New Ki Seal Creature",
+      "kiTechnique": "New Ki Technique",
+      "martialArt": "New Martial Art",
+      "arsMagnus": "New Ars Magnus"
     },
     "magicTab": {
       "mproj": "Magic Projection",
@@ -197,9 +222,9 @@
       "fromInt": "From INT",
       "spellBook": "Spell Book",
       "addSpell": "Add Spell",
-      "invocation": "Invocation",
+      "invocation": "Invocations",
       "addInvocation": "Add Invocation",
-      "incarnation": "Incarnation",
+      "incarnation": "Incarnations",
       "addIncarnation": "Add Incarnation",
       "path": "Path",
       "spiritual": "Spiritual",
@@ -220,13 +245,14 @@
       "intermidiate": "Intermidiate",
       "advanced": "Advanced",
       "arcane": "Arcane",
-      "spellDesc": "Main description of the spell",
-      "basicDesc": "Short description of the basic version of the spell",
-      "intDesc": "Short description of the intermidiate version of the spell",
-      "advDesc": "Short description of the advanced version of the spell",
-      "arcDesc": "Short description of the arcane version of the spell"
-
-
+      "spellDesc": "Main description",
+      "basicDesc": "Description of the basic spell effects",
+      "intDesc": "Description of the intermidiate spell effects",
+      "advDesc": "Description of the advanced spell effects",
+      "arcDesc": "Description of the arcane spell effects",
+      "maintInfo": "Maintenance description",
+      "spellCost": "Spell Cost",
+      "totalZeon": "Total Zeon: "
     },
     "psychicTab": {
       "pp": "PP",
@@ -258,7 +284,8 @@
       "cancelCost": "Cancel Cost",
       "oppPattern": "Opposite Pattern",
       "maint": "Maint",
-      "psychicPotential": "Psychic Potential"
+      "psychicPotential": "Psychic Potential",
+      "psyProj": "Psychic Projection"
     },
     "kiTab": {
       "kiAbilities": "Ki Abilities",

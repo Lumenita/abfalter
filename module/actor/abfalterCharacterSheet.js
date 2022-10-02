@@ -107,7 +107,6 @@ export default class abfalterCharacterSheet extends ActorSheet {
         sheetData.spellPaths = baseData.items.filter(function (item) { return item.type == "spellPath" });
         sheetData.incarnations = baseData.items.filter(function (item) { return item.type == "incarnation" });
         sheetData.invocations = baseData.items.filter(function (item) { return item.type == "invocation" });
-        sheetData.metaMagics = baseData.items.filter(function (item) { return item.type == "metaMagic" });
         sheetData.dailyMaints = baseData.items.filter(function (item) { return item.type == "dailyMaint" });
         sheetData.turnMaints = baseData.items.filter(function (item) { return item.type == "turnMaint" });
         sheetData.currencies = baseData.items.filter(function (item) { return item.type == "currency" });
@@ -139,9 +138,6 @@ export default class abfalterCharacterSheet extends ActorSheet {
             new ContextMenu(html, ".delete-item", this.itemContextMenuDelete);
             new ContextMenu(html, ".onlyDelete-item", this.itemContextMenuOnlyDelete);
 
-
-            new ContextMenu(html, ".spellPath-item", this.itemContextMenuDelete);
-
             $("textarea").each(function () {
                 this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
             }).on("input", function () {
@@ -163,7 +159,11 @@ export default class abfalterCharacterSheet extends ActorSheet {
             html.find('.mregenFull').click(ev => {
                 const value = $(ev.currentTarget).attr("data-ability");
                 this.document.update({ "data.zeon.actual": Math.floor(this.document.system.zeon.actual + (value / 1)) });
-            }); 
+            });
+            html.find('.removeMaint').click(ev => {
+                const value = $(ev.currentTarget).attr("data-ability");
+                this.document.update({ "data.zeon.actual": Math.max(0, Math.floor(this.document.system.zeon.actual - value)) });
+            });
             html.find(".toggleBoolean").click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
                 let label = $(ev.currentTarget).attr("data-label");
@@ -205,6 +205,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
             html.find(".item-chat").click(this._onItemChatRoll.bind(this));
             html.find(".item-roll").click(this._onItemRoll.bind(this));
             html.find('.rollable').click(this._onRoll.bind(this));
+            html.find('.combatRoll').click(this._onAttackRoll.bind(this));
 
         }
 
@@ -219,13 +220,44 @@ export default class abfalterCharacterSheet extends ActorSheet {
         openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type, dataset.ability);
     }
 
+    _onAttackRoll(event) {
+        event.preventDefault();
+        const element = event.currentTarget;
+        const dataset = element.dataset;
+
+        openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type, dataset.ability);
+    }
+
     _onItemCreate(event) {
         event.preventDefault();
         let element = event.currentTarget;
         const type = element.dataset.type;
 
         const types = {
-            "inventory": "New item in inv",
+            "inventory": game.i18n.localize("abfalter.sheet.inventory"),
+            "weapon": game.i18n.localize("abfalter.sheet.weapon"),
+            "armor": game.i18n.localize("abfalter.sheet.armor"),
+            "armorHelmet": game.i18n.localize("abfalter.sheet.armorHelmet"),
+            "advantage": game.i18n.localize("abfalter.sheet.advantage"),
+            "disadvantage": game.i18n.localize("abfalter.sheet.disadvantage"),
+            "spell": game.i18n.localize("abfalter.sheet.spell"),
+            "class": game.i18n.localize("abfalter.sheet.class"),
+            "spellPath": game.i18n.localize("abfalter.sheet.spellPath"),
+            "incarnation": game.i18n.localize("abfalter.sheet.incarnation"),
+            "invocation": game.i18n.localize("abfalter.sheet.invocation"),
+            "dailyMaint": game.i18n.localize("abfalter.sheet.dailyMaint"),
+            "turnMaint": game.i18n.localize("abfalter.sheet.turnMaint"),
+            "currency": game.i18n.localize("abfalter.sheet.currency"),
+            "proficiency": game.i18n.localize("abfalter.sheet.proficiency"),
+            "weaponAttack": game.i18n.localize("abfalter.sheet.weaponAttack"),
+            "discipline": game.i18n.localize("abfalter.sheet.discipline"),
+            "mentalPattern": game.i18n.localize("abfalter.sheet.mentalPattern"),
+            "psychicMatrix": game.i18n.localize("abfalter.sheet.psychicMatrix"),
+            "maintPower": game.i18n.localize("abfalter.sheet.maintPower"),
+            "kiSealCreature": game.i18n.localize("abfalter.sheet.kiSealCreature"),
+            "kiTechnique": game.i18n.localize("abfalter.sheet.kiTechnique"),
+            "martialArt": game.i18n.localize("abfalter.sheet.martialArt"),
+            "arsMagnus": game.i18n.localize("abfalter.sheet.arsMagnus"),
             "default": game.i18n.localize("abfalter.sheet.newItem"),
         };
         const name = (types[type] || types["default"]);

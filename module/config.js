@@ -63,7 +63,8 @@ abfalter.basicInfo = {
     defense: "abfalter.basicInfo.defense",
     advInfo: "abfalter.basicInfo.advInfo",
     disadvInfo: "abfalter.basicInfo.disadvInfo",    
-    extra: "abfalter.basicInfo.extra"
+    extra: "abfalter.basicInfo.extra",
+    remove: "abfalter.basicInfo.remove",
 }
 
 abfalter.generalTab = {
@@ -162,7 +163,34 @@ abfalter.sheet = {
     equip: "abfalter.sheet.equip",
     addItem: "abfalter.sheet.addItem",
     modify: "abfalter.sheet.modify",
-    toggle: "abfalter.sheet.toggle"
+    toggle: "abfalter.sheet.toggle",
+    inventory: "abfalter.sheet.inventory",
+    weapon: "abfalter.sheet.weapon",
+    armor: "abfalter.sheet.armor",
+    armorHelmet: "abfalter.sheet.armorHelmet",
+    advantage: "abfalter.sheet.advantage",
+    disadvatange: "abfalter.sheet.disadvatange",
+    spell: "abfalter.sheet.spell",
+    class: "abfalter.sheet.class",
+    spellPath: "abfalter.sheet.spellPath",
+    incarnation: "abfalter.sheet.incarnation",
+    invocation: "abfalter.sheet.invocation",
+    metaMagic: "abfalter.sheet.metaMagic",
+    dailyMaint: "abfalter.sheet.dailyMaint",
+    turnMaint: "abfalter.sheet.turnMaint",
+    currency: "abfalter.sheet.currency",
+    proficiency: "abfalter.sheet.proficiency",
+    weaponAttack: "abfalter.sheet.weaponAttack",
+    discipline: "abfalter.sheet.discipline",
+    mentalPattern: "abfalter.sheet.mentalPattern",
+    psychicMatrix: "abfalter.sheet.psychicMatrix",
+    maintPower: "abfalter.sheet.maintPower",
+    kiSealCreature: "abfalter.sheet.kiSealCreature",
+    kiTechnique: "abfalter.sheet.kiTechnique",
+    martialArt: "abfalter.sheet.martialArt",
+    arsMagnus: "abfalter.sheet.arsMagnus",
+
+
 }
 
 abfalter.magicTab = {
@@ -227,8 +255,10 @@ abfalter.magicTab = {
     basicDesc: "abfalter.magicTab.basicDesc",
     intDesc: "abfalter.magicTab.intDesc",
     advDesc: "abfalter.magicTab.advDesc",
-    arcDesc: "abfalter.magicTab.arcDesc"
-
+    arcDesc: "abfalter.magicTab.arcDesc",
+    maintInfo: "abfalter.magicTab.maintInfo",
+    spellCost: "abfalter.magicTab.spellCost",
+    totalZeon: "abfalter.magicTab.totalZeon"
 }
 
 abfalter.psychicTab = {
@@ -261,7 +291,8 @@ abfalter.psychicTab = {
     cancelCost: "abfalter.psychicTab.cancelCost",
     oppPattern: "abfalter.psychicTab.oppPattern",
     maint: "abfalter.psychicTab.maint",
-    psychicPotential: "abfalter.psychicTab.psychicPotential"
+    psychicPotential: "abfalter.psychicTab.psychicPotential",
+    psyProj: "abfalter.psychicTab.psyProj"
 }
 
 abfalter.kiTab = {

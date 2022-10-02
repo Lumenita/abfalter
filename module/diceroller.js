@@ -33,6 +33,7 @@ export async function openModifierDialogue(actorData, finalValue, label, type, m
                     case "secondaryRoll":
                     case "potentialRoll":
                     case "summoningRoll":
+                    case "combatRoll":
                         rollSecondary(html, actorData, finalValue, label, mastery);
                         break;
                     case "resRoll":
@@ -100,6 +101,7 @@ async function rollSecondary(html, actorData, finalValue, label, mastery) {
     }
 
     rollResult.color = "";
+    rollResult.fumbleLevel = 0;
     rollResult.fumble = false;
     rollResult.explode = false;
     rollResult.doubles = false;
@@ -108,6 +110,10 @@ async function rollSecondary(html, actorData, finalValue, label, mastery) {
     if (rollResult.rolledDice <= fumbleRange) {
         rollResult.color = "fumbleRoll";
         rollResult.fumble = true;
+        while (fumbleRange > rollResult.rolledDice) {
+            rollResult.fumbleLevel += 15;
+            fumbleRange--;
+        }
     } else if (rollResult.rolledDice >= actorData.system.openRangeFinal) {
         rollResult.color = "openRoll";
         rollResult.explode = true;
@@ -180,11 +186,6 @@ export async function rollResistance(html, actorData, finalValue, label) {
     ChatMessage.create(chatData);
 }
 
-
-
-
-
-
 export async function openRollFunction(roll, total, doubles, openRange, label, name) {
 
     let baseDice = "1d100";
@@ -212,6 +213,26 @@ export async function openRollFunction(roll, total, doubles, openRange, label, n
     }
 
     const template = "systems/abfalter/templates/dialogues/secRoll.html"
+    const content = await renderTemplate(template, { rollResult: rollResult, label: label });
+    const chatData = {
+        user: game.user.id,
+        //speaker: ChatMessage.getSpeaker({ actorData: actorData }),
+        sound: CONFIG.sounds.dice,
+        content: content,
+        rolls: rollResult
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+    ChatMessage.create(chatData);
+}
+
+export async function fumbleRollFunction(total, fumble, label, name) {
+    let baseDice = "1d100";
+    let rollFormula = `${total} - ${baseDice} - ${fumble}`
+    let rollResult = await new Roll(rollFormula).roll({ async: true });
+    rollResult.rolledDice = rollResult.total - total;
+    rollResult.data.name = name;
+
+    const template = "systems/abfalter/templates/dialogues/fumbleRoll.html"
     const content = await renderTemplate(template, { rollResult: rollResult, label: label });
     const chatData = {
         user: game.user.id,

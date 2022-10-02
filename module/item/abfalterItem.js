@@ -1,10 +1,12 @@
 export default class abfalterItem extends Item {
-    prepareData() {
-        super.prepareData();
 
+    prepareData() {
+        console.log("ITEMS");
         let functionName = `prepare${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}`
         if (this[`${functionName}`])
             this[`${functionName}`]()
+        super.prepareData();
+
     }
 
     prepareArmor() {
@@ -90,7 +92,7 @@ export default class abfalterItem extends Item {
         if (this.parent != null) {
             if (this.parent) {
                 this.system.type = this.parent.system.other.moduleStatus;
-                this.system.newPotential = +this.parent.system.finalPotential + +this.system.bonus;
+                this.system.newPotential = this.parent.system.finalPotential + this.system.bonus;
             }
         }
     }

@@ -45,7 +45,8 @@
           "armor": false,
           "armorHelmet": false,
           "spellPath": false,
-          "spell": false
+          "spell": false,
+          "turnMaint": false
         },
         "toggles": {
           "spiritDamageType": true,
@@ -53,7 +54,11 @@
           "unifiedPools": false,
           "innatePower": false,
           "dragonSeals": false,
-          "currencyHide": false
+          "currencyHide": false,
+          "magicAtkModule": false,
+          "magicDefModule": false,
+          "magicDodgeModule": false,
+          "psychicDodgeStatus": false
         }
       },
       "stats": {
@@ -1305,7 +1310,6 @@
       "class",
       "discipline",
       "spellPath",
-      "metaMagic",
       "turnMaint",
       "dailyMaint",
       "maintPower",
@@ -1442,23 +1446,30 @@
     },
     "incarnation": {
       "templates": [ "itemDescription" ],
-      "level": 0
+      "level": 0,
+      "cost": 0,
+      "difficulty": 0,
+      "expand": false
     },
     "invocation": {
       "templates": [ "itemDescription" ],
-      "level": 0
-    },
-    "metaMagic": {
-      "templates": [ "itemDescription" ],
-      "cost": 0
+      "difficulty": 0,
+      "cost": 0,
+      "expand": false
     },
     "turnMaint": {
-      "status": false,
-      "zeon": 0
+      "templates": [ "itemDescription" ],
+      "expand": false,
+      "zeon": 0,
+      "cost": 0,
+      "equipped": false
     },
     "dailyMaint": {
-      "status": false,
-      "zeon": 0
+      "templates": [ "itemDescription" ],
+      "expand": false,
+      "zeon": 0,
+      "cost": 0,
+      "equipped": false
     },
     "inventory": {
       "templates": [ "itemDescription" ],

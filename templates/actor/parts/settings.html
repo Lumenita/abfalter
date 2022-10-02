@@ -3,6 +3,23 @@
     <div class="settingsOptions">
         <h2> Settings </h2>
         <div>
+            <h3> Mystic </h3>
+            <label>
+                <span> Magic Module for Attack </span>
+                <input type="checkbox" name="data.toggles.magicAtkModule" data-dtype="boolean" {{checked data.toggles.magicAtkModule}} />
+            </label>
+            <label class="{{#if data.toggles.magicDodgeModule}}checkLock{{/if}}">
+                <span> Magic Module for Defense </span>
+                <input type="checkbox" name="data.toggles.magicDefModule" data-dtype="boolean" {{checked data.toggles.magicDefModule}} />
+            </label>
+            {{#if data.toggles.magicDefModule}}
+            <label>
+                <span> Magic Module for Defense Using Dodge </span>
+                <input type="checkbox" name="data.toggles.magicDodgeModule" data-dtype="boolean" {{checked data.toggles.magicDodgeModule}} />
+            </label>
+            {{/if}}
+        </div>
+        <div>
             <h3> Ki </h3>
             <label class="{{#if data.toggles.innatePower}}checkLock{{/if}}">
                 <span> Unified Ki Pools </span>
@@ -22,10 +39,16 @@
 
         <div>
             <h3> Psychic </h3>
-            <label>
-                <span> Increased Strengthening </span>
-                <input type="checkbox" name="data.toggles.psychicStrengthening" data-dtype="boolean" {{checked data.toggles.psychicStrengthening}} />
+            <label class="{{#if data.toggles.psychicDodgeStatus}}checkLock{{/if}}">
+                <span> Psychic Module for Attack </span>
+                <input type="checkbox" name="data.other.moduleStatus" data-dtype="boolean" {{checked data.other.moduleStatus}} />
             </label>
+            {{#if data.other.moduleStatus}}
+            <label>
+                <span> Psychic Module Dodge over Block </span>
+                <input type="checkbox" name="data.toggles.psychicDodgeStatus" data-dtype="boolean" {{checked data.toggles.psychicDodgeStatus}} />
+            </label>
+            {{/if}}
         </div>
 
         <div>
@@ -100,10 +123,10 @@
                     <div class="class-item item normal-item" data-item-id="{{class._id}}">
                         <div>
                             <input class="item-name inline-edit" data-field="name" type="text" value="{{class.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
-                            <input class="inline-edit" data-field="data.main.levels" type="number" value="{{class.data.main.levels}}" />
-                            <a class="item-expand {{#if data.expand}}showOpacity{{/if}}"><i class="{{#if data.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                            <input class="inline-edit" data-field="system.main.levels" type="number" value="{{class.system.main.levels}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        {{#if data.expand}}
+                        {{#if system.expand}}
                         <span> SHow INfo Here</span>
                         {{/if}}
                     </div>
@@ -117,6 +140,10 @@
                 <label>
                     <span> Spirit Damage Type </span>
                     <input type="checkbox" name="data.toggles.spiritDamageType" data-dtype="boolean" {{checked data.toggles.spiritDamageType}} />
+                </label>
+                <label>
+                    <span> Increased Strengthening </span>
+                    <input type="checkbox" name="data.toggles.psychicStrengthening" data-dtype="boolean" {{checked data.toggles.psychicStrengthening}} />
                 </label>
             </div>
         </div>
