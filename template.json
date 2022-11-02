@@ -1406,7 +1406,7 @@
     "spellPath": {
       "name": "",
       "level": 0,
-      "toggleItem": false
+      "toggleItem": true
     },
     "spell": {
       "templates": [ "itemDescription" ],
@@ -1548,12 +1548,12 @@
     },
     "currency": {
       "quantity": 0,
-      "toggleItem": false
+      "toggleItem": true
     },
     "proficiency": {
       "type": "Starting",
       "cost": 0,
-      "toggleItem": false
+      "toggleItem": true
     },
     "discipline": {
       "quantity": 1,

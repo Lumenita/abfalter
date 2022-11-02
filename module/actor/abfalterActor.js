@@ -6,8 +6,6 @@ export default class abfalterActor extends Actor {
 
     prepareBaseData() {
         const data = this.system;
-        //const stats = data.stats;
-        console.log("1");
 
         //Main Characteristics
         for (let [key, stat] of Object.entries(data.stats)) {
@@ -129,14 +127,12 @@ export default class abfalterActor extends Actor {
     }
 
     prepareEmbeddedDocuments() {
-        console.log("items are supposed to be loaded here");
-
+        super.prepareEmbeddedDocuments();
     }
 
     prepareDerivedData() {
         const data = this.system;
         const stats = data.stats;
-        console.log("3");
 
         // Determine Item Values / Last used arr[109]  6
         const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish, acro,
@@ -147,7 +143,6 @@ export default class abfalterActor extends Actor {
             aHeatTot, aColdMax, aColdTot, aEleMax, aEleTot, aEneMax, aEneTot, aSptMax, aSptTot, ahReq, ahCutMax, ahCutTot, ahImpMax, ahImpTot, ahThrMax,
             ahThrTot, ahHeatMax, ahHeatTot, ahColdMax, ahColdTot, ahEleMax, ahEleTot, ahEneMax, ahEneTot, ahSptMax, ahSptTot, perPen, usedpp, matrixpp, arsMk,
             maMk, techMk, pathLvl, turnMaint, dayMaint, spellCost] = this.items.reduce((arr, item) => {
-                console.log("im in hte items call calc");
                 if (item.type === "class") {
                     const classLevels = parseInt(item.system.main.levels) || 0;
                     arr[0] += classLevels;
