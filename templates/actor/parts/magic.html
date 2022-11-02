@@ -1,168 +1,165 @@
 ﻿<div class="tab magic">
-    <div class="s">
-        <div>
-            <div class="mproj">
-                <h2>
-                    {{localize "abfalter.magicTab.mproj"}}
-                    <label class="expand-box">
-                        <a class="toggleBoolean {{#if data.mproj.status}}showOpacity{{/if}}" data-label="data.mproj.status" data-ability="{{data.mproj.status}}"><i class="{{#if data.mproj.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                    </label>
-                </h2>
-                {{#if data.mproj.status}}
+    <div>
+        <div class="mproj">
+            <h2>
+                {{localize "abfalter.magicTab.mproj"}}
+                <label class="expand-box">
+                    <a class="toggleBoolean {{#if data.mproj.status}}showOpacity{{/if}}" data-label="data.mproj.status" data-ability="{{data.mproj.status}}"><i class="{{#if data.mproj.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </label>
+            </h2>
+            {{#if data.mproj.status}}
+            <div>
+                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.mproj.base" value="{{data.mproj.base}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.mproj.spec" value="{{data.mproj.spec}}" /> </label>
+                <label> <span> {{localize "abfalter.magicTab.imbalance"}} </span> <input type="number" name="data.mproj.imbalance" value="{{data.mproj.imbalance}}" /> </label>
                 <div>
-                    <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.mproj.base" value="{{data.mproj.base}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.mproj.spec" value="{{data.mproj.spec}}" /> </label>
-                    <label> <span> {{localize "abfalter.magicTab.imbalance"}} </span> <input type="number" name="data.mproj.imbalance" value="{{data.mproj.imbalance}}" /> </label>
-                    <div>
-                        <label>
-                            <button type="button" class="mastery-box {{#if data.mproj.masteryOff}}mastered{{else}}notMastered{{/if}}" data-label="data.mproj.masteryOff" data-ability="{{data.mproj.masteryOff}}">
-                                <span> {{localize "abfalter.basicInfo.mastery"}} </span>
-                            </button>
-                        </label>
-                        <label>
-                            <button type="button" class="mastery-box {{#if data.mproj.masteryDef}}mastered{{else}}notMastered{{/if}}" data-label="data.mproj.masteryDef" data-ability="{{data.mproj.masteryDef}}">
-                                <span> {{localize "abfalter.basicInfo.mastery"}} </span>
-                            </button>
-                        </label>
-                    </div>
-                </div>
-                {{/if}}
-                <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mproj.temp" value="{{data.mproj.temp}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.mprojfinal" value="{{data.mprojfinal}}" readonly /> </label>
-                <div class="mProjButton">
-                    {{#if data.toggles.magicAtkModule}}
-                    <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll" data-ability="{{data.combatstats.atkMastery}}">
-                        <span> {{localize "abfalter.basicInfo.attack"}} </span> <span> {{data.atkfinal}} </span>
-                    </button>
-                    {{else}}
-                    <button type="button" class="combatRoll" data-roll="{{data.mprojfinaloff}}" data-label="Magic Proj. Offensive" data-type="combatRoll" data-ability="{{data.mproj.masteryOff}}">
-                        <span> {{localize "abfalter.magicTab.offensive"}} </span> <span> {{data.mprojfinaloff}} </span>
-                    </button>
-                    {{/if}}
-                    <!--
-                -->
-                    {{#if data.toggles.magicDefModule}}
-                    {{#if data.toggles.magicDodgeModule}}
-                    <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll" data-ability="{{data.combatstats.dodMastery}}">
-                        <span> {{localize "abfalter.basicInfo.dodge"}} </span> <span> {{data.dodfinal}} </span>
-                    </button>
-                    {{else}}
-                    <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll" data-ability="{{data.combatstats.blkMastery}}">
-                        <span> {{localize "abfalter.basicInfo.block"}} </span> <span> {{data.blkfinal}} </span>
-                    </button>
-                    {{/if}}
-                    {{else}}
-                    <button type="button" class="combatRoll" data-roll="{{data.mprojfinaldef}}" data-label="Magic Proj. Defensive" data-type="combatRoll" data-ability="{{data.mproj.masteryDef}}">
-                        <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{data.mprojfinaldef}} </span>
-                    </button>
-                    {{/if}}
-                </div>
-                <h3> {{localize "abfalter.magicTab.mtheory"}} </h3>
-                <div class="csSelect2">
                     <label>
-                        <select name="data.mproj.mtheory" data-dtype="String">
-                            {{#select data.mproj.mtheory}}
-                            <option value="Standard"> {{localize "abfalter.magicTab.standard"}} </option>
-                            <option value="Onmyodo"> Onmyodo </option>
-                            <option value="Vodoun"> Vodoun </option>
-                            <option value="Shamanism"> Shamanism </option>
-                            <option value="Natural Magic"> Natural Magic </option>
-                            {{/select}}
-                        </select>
+                        <button type="button" class="mastery-box {{#if data.mproj.masteryOff}}mastered{{else}}notMastered{{/if}}" data-label="data.mproj.masteryOff" data-ability="{{data.mproj.masteryOff}}">
+                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                        </button>
+                    </label>
+                    <label>
+                        <button type="button" class="mastery-box {{#if data.mproj.masteryDef}}mastered{{else}}notMastered{{/if}}" data-label="data.mproj.masteryDef" data-ability="{{data.mproj.masteryDef}}">
+                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                        </button>
                     </label>
                 </div>
-            </div><!--Magic Projection-->
-
-            <div class="maccu">
-                <h2> {{localize "abfalter.magicTab.maccu"}} </h2>
-                <div>
-                    <div class="maccu2">
-                        <h3>
-                            {{localize "abfalter.magicTab.maccua"}}
-                            <label class="expand-box">
-                                <a class="toggleBoolean {{#if data.maccu.status}}showOpacity{{/if}}" data-label="data.maccu.status" data-ability="{{data.maccu.status}}"><i class="{{#if data.maccu.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                            </label>
-                        </h3>
-                        {{#if data.maccu.status}}
-                        <div>
-                            <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.maccu.base" value="{{data.maccu.base}}" /> </label>
-                            <label> <span> {{localize "abfalter.magicTab.frompow"}} </span> <input type="number" name="data.maccupow" value="{{data.maccupow}}" readonly /> </label>
-                            <label> <span> {{localize "abfalter.basicInfo.mult"}} </span> <input type="number" name="data.maccu.mult" value="{{data.maccu.mult}}" /> </label>
-                            <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.maccu.spec" value="{{data.maccu.spec}}" /> </label>
-                        </div>
-                        {{/if}}
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.maccu.temp" value="{{data.maccu.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.maccufinal" value="{{data.maccufinal}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.maccu.actual" value="{{data.maccu.actual}}" /> </label>
-                        <div>
-                            <button type="button" class="maccuHalf" data-ability="{{data.maccuhalffinal}}">
-                                <span> {{localize "abfalter.basicInfo.half"}} </span>
-                            </button><!--
-                            --><button type="button" class="maccuFull" data-ability="{{data.maccufinal}}">
-                                <span> {{localize "abfalter.basicInfo.full"}} </span>
-                            </button>
-                        </div>
-                    </div><!--Accumulation-->
-                    <div class="mregen2">
-                        <h3>
-                            {{localize "abfalter.magicTab.maccur"}}
-                            <label class="expand-box">
-                                <a class="toggleBoolean {{#if data.mregen.status}}showOpacity{{/if}}" data-label="data.mregen.status" data-ability="{{data.mregen.status}}"><i class="{{#if data.mregen.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                            </label>
-                        </h3>
-                        {{#if data.mregen.status}}
-                        <div>
-                            <label> <span> {{localize "abfalter.magicTab.regenmult"}} </span> <input type="number" name="data.mregen.regenmult" value="{{data.mregen.regenmult}}" /> </label>
-                            <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.mregen.spec" value="{{data.mregen.spec}}" /> </label>
-                            <label> <span> {{localize "abfalter.magicTab.recoverymult"}} </span> <input type="number" name="data.mregen.recoverymult" value="{{data.mregen.recoverymult}}" /> </label>
-                        </div>
-                        {{/if}}
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mregen.temp" value="{{data.mregen.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.magicTab.finalregen"}} </span> <input type="number" name="data.mregenfinal" value="{{data.mregenfinal}}" readonly /> </label>
-                        <div>
-                            <button type="button" class="mregenFull" data-ability="{{data.mregenfinal}}" data-ability2="{{data.zeonfinal}}">
-                                <span> {{localize "abfalter.basicInfo.full"}} </span>
-                            </button>
-                        </div>
-                    </div><!--Regeneration-->
-                </div>
-            </div><!--Magic Accumulation-->
-
-            <div class="zeon">
-                <h2>
-                    {{localize "abfalter.magicTab.zeon"}}
-                    <label class="expand-box">
-                        <a class="toggleBoolean {{#if data.zeon.status}}showOpacity{{/if}}" data-label="data.zeon.status" data-ability="{{data.zeon.status}}"><i class="{{#if data.zeon.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                    </label>
-                </h2>
-                {{#if data.zeon.status}}
-                <div>
-                    <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.zeon.base" value="{{data.zeon.base}}" /> </label>
-                    <label> <span> {{localize "abfalter.magicTab.frompow"}} </span> <input type="number" name="data.zeonpow" value="{{data.zeonpow}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="data.zeonbonus" value="{{data.zeonbonus}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.zeon.spec" value="{{data.zeon.spec}}" /> </label>
-                </div>
+            </div>
+            {{/if}}
+            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mproj.temp" value="{{data.mproj.temp}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.mprojfinal" value="{{data.mprojfinal}}" readonly /> </label>
+            <div class="mProjButton">
+                {{#if data.toggles.magicAtkModule}}
+                <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll" data-ability="{{data.combatstats.atkMastery}}">
+                    <span> {{localize "abfalter.basicInfo.attack"}} </span> <span> {{data.atkfinal}} </span>
+                </button>
+                {{else}}
+                <button type="button" class="combatRoll" data-roll="{{data.mprojfinaloff}}" data-label="Magic Proj. Offensive" data-type="combatRoll" data-ability="{{data.mproj.masteryOff}}"> 
+                    <span> {{localize "abfalter.magicTab.offensive"}} </span> <span> {{data.mprojfinaloff}} </span>
+                </button>
                 {{/if}}
-                <label> <span> {{localize "abfalter.basicInfo.extra"}} </span> <input type="number" name="data.zeon.temp" value="{{data.zeon.temp}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.zeonfinal" value="{{data.zeonfinal}}" readonly /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.zeon.actual" value="{{data.zeon.actual}}" /> </label>
-                <div class="minnate">
-                    <h3> {{localize "abfalter.magicTab.minnate"}} </h3>
+                <!--
+    -->
+                {{#if data.toggles.magicDefModule}}
+                {{#if data.toggles.magicDodgeModule}}
+                <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll" data-ability="{{data.combatstats.dodMastery}}">
+                    <span> {{localize "abfalter.basicInfo.dodge"}} </span> <span> {{data.dodfinal}} </span>
+                </button>
+                {{else}}
+                <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll" data-ability="{{data.combatstats.blkMastery}}">
+                    <span> {{localize "abfalter.basicInfo.block"}} </span> <span> {{data.blkfinal}} </span>
+                </button>
+                {{/if}}
+                {{else}}
+                <button type="button" class="combatRoll" data-roll="{{data.mprojfinaldef}}" data-label="Magic Proj. Defensive" data-type="combatRoll" data-ability="{{data.mproj.masteryDef}}">
+                    <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{data.mprojfinaldef}} </span>
+                </button>
+                {{/if}}
+            </div>
+            <h3> {{localize "abfalter.magicTab.mtheory"}} </h3>
+            <div class="csSelect2">
+                <label>
+                    <select name="data.mproj.mtheory" data-dtype="String">
+                        {{#select data.mproj.mtheory}}
+                        <option value="Standard"> {{localize "abfalter.magicTab.standard"}} </option>
+                        <option value="Onmyodo"> Onmyodo </option>
+                        <option value="Vodoun"> Vodoun </option>
+                        <option value="Shamanism"> Shamanism </option>
+                        <option value="Natural Magic"> Natural Magic </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+        </div><!--Magic Projection-->
+
+        <div class="maccu">
+            <h2> {{localize "abfalter.magicTab.maccu"}} </h2>
+            <div>
+                <div class="maccu2">
+                    <h3>
+                        {{localize "abfalter.magicTab.maccua"}}
+                        <label class="expand-box">
+                            <a class="toggleBoolean {{#if data.maccu.status}}showOpacity{{/if}}" data-label="data.maccu.status" data-ability="{{data.maccu.status}}"><i class="{{#if data.maccu.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </label>
+                    </h3>
+                    {{#if data.maccu.status}}
                     <div>
-                        <div>
-                            <span> {{localize "abfalter.basicInfo.bonus"}} </span>
-                            <label> <input type="number" name="data.zeon.minnate" value="{{data.zeon.minnate}}" /> </label>
-                        </div>
-                        <div>
-                            <span> {{localize "abfalter.basicInfo.final"}} </span>
-                            <label> <input type="number" name="data.minnatefinal" value="{{data.minnatefinal}}" readonly /> </label>
-                        </div>
+                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.maccu.base" value="{{data.maccu.base}}" /> </label>
+                        <label> <span> {{localize "abfalter.magicTab.frompow"}} </span> <input type="number" name="data.maccupow" value="{{data.maccupow}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.mult"}} </span> <input type="number" name="data.maccu.mult" value="{{data.maccu.mult}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.maccu.spec" value="{{data.maccu.spec}}" /> </label>
+                    </div>
+                    {{/if}}
+                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.maccu.temp" value="{{data.maccu.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.maccufinal" value="{{data.maccufinal}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.maccu.actual" value="{{data.maccu.actual}}" /> </label>
+                    <div>
+                        <button type="button" class="maccuHalf" data-ability="{{data.maccuhalffinal}}">
+                            <span> {{localize "abfalter.basicInfo.half"}} </span>
+                        </button><!--
+                        --><button type="button" class="maccuFull" data-ability="{{data.maccufinal}}">
+                            <span> {{localize "abfalter.basicInfo.full"}} </span>
+                        </button>
+                    </div>
+                </div><!--Accumulation-->
+                <div class="mregen2">
+                    <h3>
+                        {{localize "abfalter.magicTab.maccur"}}
+                        <label class="expand-box">
+                            <a class="toggleBoolean {{#if data.mregen.status}}showOpacity{{/if}}" data-label="data.mregen.status" data-ability="{{data.mregen.status}}"><i class="{{#if data.mregen.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </label>
+                    </h3>
+                    {{#if data.mregen.status}}
+                    <div>
+                        <label> <span> {{localize "abfalter.magicTab.regenmult"}} </span> <input type="number" name="data.mregen.regenmult" value="{{data.mregen.regenmult}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.mregen.spec" value="{{data.mregen.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.magicTab.recoverymult"}} </span> <input type="number" name="data.mregen.recoverymult" value="{{data.mregen.recoverymult}}" /> </label>
+                    </div>
+                    {{/if}}
+                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mregen.temp" value="{{data.mregen.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.magicTab.finalregen"}} </span> <input type="number" name="data.mregenfinal" value="{{data.mregenfinal}}" readonly /> </label>
+                    <div>
+                        <button type="button" class="mregenFull" data-ability="{{data.mregenfinal}}">
+                            <span> {{localize "abfalter.basicInfo.full"}} </span>
+                        </button>
+                    </div>
+                </div><!--Regeneration-->
+            </div>
+        </div><!--Magic Accumulation-->
+
+        <div class="zeon">
+            <h2>
+                {{localize "abfalter.magicTab.zeon"}}
+                <label class="expand-box">
+                    <a class="toggleBoolean {{#if data.zeon.status}}showOpacity{{/if}}" data-label="data.zeon.status" data-ability="{{data.zeon.status}}"><i class="{{#if data.zeon.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </label>
+            </h2>
+            {{#if data.zeon.status}}
+            <div>
+                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.zeon.base" value="{{data.zeon.base}}" /> </label>
+                <label> <span> {{localize "abfalter.magicTab.frompow"}} </span> <input type="number" name="data.zeonpow" value="{{data.zeonpow}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="data.zeonbonus" value="{{data.zeonbonus}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.zeon.spec" value="{{data.zeon.spec}}" /> </label>
+            </div>
+            {{/if}}
+            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.zeon.temp" value="{{data.zeon.temp}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.zeonfinal" value="{{data.zeonfinal}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.zeon.actual" value="{{data.zeon.actual}}" /> </label>
+            <div class="minnate">
+                <h3> {{localize "abfalter.magicTab.minnate"}} </h3>
+                <div>
+                    <div>
+                        <span> {{localize "abfalter.basicInfo.bonus"}} </span>
+                        <label> <input type="number" name="data.zeon.minnate" value="{{data.zeon.minnate}}" /> </label>
+                    </div>
+                    <div>
+                        <span> {{localize "abfalter.basicInfo.final"}} </span>
+                        <label> <input type="number" name="data.minnatefinal" value="{{data.minnatefinal}}" readonly /> </label>
                     </div>
                 </div>
-            </div><!--Zeon-->
-        </div>
+            </div>
+        </div><!--Zeon-->
     </div>
-
 
     <div class="s1">
         <div>
@@ -337,7 +334,7 @@
                         {{#if system.expand}}
                         <div>
                             <input class="inline-edit" data-field="name" type="text" value="{{dailyMaint.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
-                            <input class="inline-edit" data-field="system.cost" type="number" value="{{dailyMaint.system.cost}}" />
+                            <input class="inline-edit" data-field="system.cost" type="number" value="{{turnMaint.system.cost}}" />
                             <input class="inline-edit" data-field="system.zeon" type="number" value="{{dailyMaint.system.zeon}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
@@ -345,7 +342,7 @@
                         {{else}}
                         <div class="{{#if system.equipped}}equipped{{else}}notEquipped{{/if}}">
                             <span> {{dailyMaint.name}} </span>
-                            <span> {{dailyMaint.system.cost}} </span>
+                            <span> {{turnMaint.system.cost}} </span>
                             <span> {{dailyMaint.system.zeon}} </span>
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>

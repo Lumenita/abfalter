@@ -922,7 +922,7 @@ h3 {
 .magic {
     flex-wrap: wrap;
 }
-.s > div{
+.magic > div:first-of-type {
     display: flex;
     justify-content: space-between;
     margin: 0 0 7px 0;
@@ -954,8 +954,7 @@ h3 {
 }
 .magic .s1 {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    display: contents;
 }
 .magic .s1 > div {
     width: 48.5%;
