@@ -35,5 +35,8 @@ Hooks.once("init", function () {
 
     return preloadHandlebarsTemplates();
 });
-
-Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));
+ 
+Hooks.on("renderChatMessage", (_app, html, _msg) => {
+    Chat.addChatListeners(html, _msg);
+    Chat.hideChatActionButtons(_app, html, _msg);
+});

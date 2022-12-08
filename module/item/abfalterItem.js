@@ -1,12 +1,10 @@
 export default class abfalterItem extends Item {
 
     prepareData() {
-        console.log("ITEMS");
         let functionName = `prepare${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}`
         if (this[`${functionName}`])
             this[`${functionName}`]()
         super.prepareData();
-
     }
 
     prepareArmor() {
