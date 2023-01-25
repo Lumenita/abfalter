@@ -159,20 +159,22 @@
                     {{#if system.toggleItem}}
                     <div>
                         <label> <input class="prof-name inline-edit" data-field="name" type="text" value="{{proficiency.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" /> </label>
-                        <select name="proficiency.system.type" class="inline-edit" data-field="data.type">
-                            {{#select proficiency.system.type}}
-                            <option value="Starting"> {{localize "abfalter.armoryTab.starting"}} </option>
-                            <option value="Similar"> {{localize "abfalter.armoryTab.similar"}} </option>
-                            <option value="Mixed Class"> {{localize "abfalter.armoryTab.mixedClass"}} </option>
-                            <option value="Different Type"> {{localize "abfalter.armoryTab.diffType"}} </option>
-                            <option value="Whole Class"> {{localize "abfalter.armoryTab.wholeClass"}} </option>
-                            <option value="Archetype"> {{localize "abfalter.armoryTab.archetype"}} </option>
-                            <option value="Style"> {{localize "abfalter.armoryTab.style"}} </option>
-                            <option value="Mystical"> {{localize "abfalter.armoryTab.mystical"}} </option>
-                            <option value="Psychic"> {{localize "abfalter.armoryTab.psychic"}} </option>
-                            <option value="Other"> {{localize "abfalter.armoryTab.other"}} </option>
-                            {{/select}}
-                        </select>
+                        <div class="csSelect">
+                            <select name="proficiency.system.type" class="inline-edit" data-field="data.type">
+                                {{#select proficiency.system.type}}
+                                <option value="Starting"> {{localize "abfalter.armoryTab.starting"}} </option>
+                                <option value="Similar"> {{localize "abfalter.armoryTab.similar"}} </option>
+                                <option value="Mixed Class"> {{localize "abfalter.armoryTab.mixedClass"}} </option>
+                                <option value="Different Type"> {{localize "abfalter.armoryTab.diffType"}} </option>
+                                <option value="Whole Class"> {{localize "abfalter.armoryTab.wholeClass"}} </option>
+                                <option value="Archetype"> {{localize "abfalter.armoryTab.archetype"}} </option>
+                                <option value="Style"> {{localize "abfalter.armoryTab.style"}} </option>
+                                <option value="Mystical"> {{localize "abfalter.armoryTab.mystical"}} </option>
+                                <option value="Psychic"> {{localize "abfalter.armoryTab.psychic"}} </option>
+                                <option value="Other"> {{localize "abfalter.armoryTab.other"}} </option>
+                                {{/select}}
+                            </select>
+                        </div>
                         <input class="prof-cost inline-edit" data-field="system.cost" type="number" value="{{proficiency.system.cost}}" />
                     </div>
                     {{else}}
@@ -194,24 +196,168 @@
         <div class="weapons">
             <h2> {{localize "abfalter.armoryTab.weapons"}}  </h2>
             <div>
-                <span> {{localize "abfalter.armoryTab.finalDmg"}} </span>
-                <span> {{localize "abfalter.basicInfo.name"}} </span>
                 <span> {{localize "abfalter.armoryTab.fortitude"}} </span>
+                <span> {{localize "abfalter.basicInfo.name"}} </span>
+                <span> {{localize "abfalter.armoryTab.finalDmg"}} </span>
             </div>
             <div class="{{#if data.itemToggle.weapon}}item-list{{/if}}">
                 {{#each weapons as |weapon id|}}
                 <div class="weapon-item item equip-item" data-item-id="{{weapon._id}}">
                     {{#if system.expand}}
                     <div>
+                        <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                         <input class="item-name inline-edit" data-field="name" type="text" value="{{weapon.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
+                    <div>
+                        <button> {{localize "abfalter.basicInfo.attack"}} </button>
+                        <span> {{localize "abfalter.armoryTab.shieldNorm"}} </span>
+                        <button> {{localize "abfalter.basicInfo.block"}} </button>
+                        <button> {{localize "abfalter.basicInfo.dodge"}} </button>
+                    </div>
+                    <div>
+                        <div>
+                            <input class="inline-edit" data-field="system.attack" type="number" value="{{weapon.system.attack}}" />
+                            <input class="inline-edit" data-field="system.finalAtk" type="number" value="{{weapon.system.finalAtk}}" readonly />
+                        </div>
+                        <div class="csSelect">
+                            <select class="inline-edit" data-field="system.shield" data-dtype="text">
+                                {{#select system.shield}}
+                                <option value="none"> {{localize "abfalter.armoryTab.shieldNone"}} </option>
+                                <option value="buckler"> {{localize "abfalter.armoryTab.shieldBuckler"}} </option>
+                                <option value="shield"> {{localize "abfalter.armoryTab.shieldNorm"}} </option>
+                                <option value="fShield"> {{localize "abfalter.armoryTab.shieldTower"}} </option>
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div>
+                            <input class="inline-edit" data-field="system.block" type="number" value="{{weapon.system.block}}" />
+                            <input class="inline-edit" data-field="system.finalBlk" type="number" value="{{weapon.system.finalBlk}}" readonly />
+                        </div>
+                        <div>
+                            <input class="inline-edit" data-field="system.dodge" type="number" value="{{weapon.system.dodge}}" />
+                            <input class="inline-edit" data-field="system.finalDod" type="number" value="{{weapon.system.finalDod}}" readonly />
+                        </div>
+                    </div>
+                    <div>
+                        <span> {{localize "abfalter.armoryTab.primary"}} </span>
+                        <span> {{localize "abfalter.armoryTab.secondary"}} </span>
+                        <span> {{localize "abfalter.armoryTab.damage"}} </span>
+                        <span> {{localize "abfalter.basicInfo.final"}} </span>
+                    </div>
+                    <div>
+                        <div class="csSelect">
+                            <select class="inline-edit" data-field="system.primDmgT" data-dtype="text">
+                                {{#select system.primDmgT}}
+                                <option value="CUT"> {{localize "abfalter.armoryTab.cut"}} </option>
+                                <option value="IMP"> {{localize "abfalter.armoryTab.imp"}} </option>
+                                <option value="THR"> {{localize "abfalter.armoryTab.thr"}} </option>
+                                <option value="HEAT"> {{localize "abfalter.armoryTab.heat"}} </option>
+                                <option value="COLD"> {{localize "abfalter.armoryTab.cold"}} </option>
+                                <option value="ELE"> {{localize "abfalter.armoryTab.ele"}} </option>
+                                <option value="ENE"> {{localize "abfalter.armoryTab.ene"}} </option>
+                                <option value="SPIRIT"> {{localize "abfalter.armoryTab.spirit"}} </option>
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="csSelect">
+                            <select class="inline-edit" data-field="system.secDmgT" data-dtype="text">
+                                {{#select system.secDmgT}}
+                                <option value="NONE"> {{localize "abfalter.armoryTab.na"}} </option>
+                                <option value="CUT"> {{localize "abfalter.armoryTab.cut"}} </option>
+                                <option value="IMP"> {{localize "abfalter.armoryTab.imp"}} </option>
+                                <option value="THR"> {{localize "abfalter.armoryTab.thr"}} </option>
+                                <option value="HEAT"> {{localize "abfalter.armoryTab.heat"}} </option>
+                                <option value="COLD"> {{localize "abfalter.armoryTab.cold"}} </option>
+                                <option value="ELE"> {{localize "abfalter.armoryTab.ele"}} </option>
+                                <option value="ENE"> {{localize "abfalter.armoryTab.ene"}} </option>
+                                <option value="SPIRIT"> {{localize "abfalter.armoryTab.spirit"}} </option>
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div>
+                            <input class="inline-edit" data-field="system.baseDmg" type="number" value="{{weapon.system.baseDmg}}" />
+                            <span> + </span>
+                            <div class="csSelect">
+                                <select class="inline-edit" data-field="system.dmgMod" data-dtype="text">
+                                    {{#select system.dmgMod}}
+                                    <option value="agi"> {{localize "abfalter.basicInfo.agility"}} </option>
+                                    <option value="con"> {{localize "abfalter.basicInfo.consti"}} </option>
+                                    <option value="str"> {{localize "abfalter.basicInfo.strength"}} </option>
+                                    <option value="dex"> {{localize "abfalter.basicInfo.dexerity"}} </option>
+                                    <option value="per"> {{localize "abfalter.basicInfo.perception"}} </option>
+                                    <option value="int"> {{localize "abfalter.basicInfo.intell"}} </option>
+                                    <option value="pow"> {{localize "abfalter.basicInfo.power"}} </option>
+                                    <option value="wp"> {{localize "abfalter.basicInfo.willPower"}} </option>
+                                    <option value="str2"> {{localize "abfalter.armoryTab.twoStr"}} </option>
+                                    <option value="presence"> {{localize "abfalter.armoryTab.twoPresPow"}} </option>
+                                    {{/select}}
+                                </select>
+                            </div>
+                            <button type="button" class="psychicModule item-toggle {{#if system.toggle}}selected{{else}}notSelected{{/if}}" data-label="system.toggle" data-ability="{{system.toggle}}">
+                                <span> {{localize "abfalter.armoryTab.twoHand"}} </span>
+                            </button>
+                            <span> = </span>
+                        </div>
+                        <div>
+                            <input class="inline-edit" data-field="system.finalDmg" type="number" value="{{weapon.system.finalDmg}}" readonly/>
+                        </div>
+                    </div>
+                    <div>
+                        <span> {{localize "abfalter.armoryTab.fortitude"}} </span>
+                        <span> {{localize "abfalter.armoryTab.atPen"}} </span>
+                        <span> {{localize "abfalter.armoryTab.breakage"}} </span>
+                        <span> {{localize "abfalter.basicInfo.str"}} </span>
+                        <button> {{localize "abfalter.armoryTab.finBreakage"}} </button>
+                    </div>
+                    <div>
+                        <div>
+                            <input class="inline-edit" data-field="system.fortitude" type="number" value="{{weapon.system.fortitude}}" />
+                            <input class="inline-edit" data-field="system.fortFinal" type="number" value="{{weapon.system.fortFinal}}" readonly />
+                        </div>
+                        <div>
+                            <input class="inline-edit" data-field="system.atPen" type="number" value="{{weapon.system.atPen}}" />
+                            <input class="inline-edit" data-field="system.atPenFinal" type="number" value="{{weapon.system.atPenFinal}}" readonly />
+                        </div>
+                        <input class="inline-edit" data-field="system.breakage" type="number" value="{{weapon.system.breakage}}" />
+                        <div>
+                            <span> + </span>
+                            <input class="inline-edit" data-field="system.breakageStr" type="number" value="{{weapon.system.breakageStr}}" readonly />
+                            <span> = </span>
+                        </div>
+                        <input class="inline-edit" data-field="system.finalBreakage" type="number" value="{{system.finalBreakage}}" readonly />
+                    </div>
+                    <div>
+                        <span> {{localize "abfalter.armoryTab.quality"}} </span>
+                        <span> {{localize "abfalter.armoryTab.presence"}} </span>
+                        <span> {{localize "abfalter.armoryTab.shieldSpd"}} </span>
+                        <span> {{localize "abfalter.armoryTab.finalSpd"}} </span>
+                    </div>
+                    <div>
+                        <input class="inline-edit" data-field="system.quality" type="number" value="{{weapon.system.quality}}" />
+                        <div>
+                            <input class="inline-edit" data-field="system.presence" type="number" value="{{weapon.system.presence}}" />
+                            <input class="inline-edit" data-field="system.preFinal" type="number" value="{{weapon.system.preFinal}}" readonly />
+                        </div>
+                        <div>
+                            <input class="inline-edit" data-field="system.shieldSpeed" type="number" value="{{weapon.system.shieldSpeed}}" />
+                            <input class="inline-edit" data-field="system.shieldFinalSpeed" type="number" value="{{weapon.system.shieldFinalSpeed}}" readonly />
+                        </div>
+                        <div>
+                            <input class="inline-edit" data-field="system.speed" type="number" value="{{weapon.system.speed}}" />
+                            <input class="inline-edit" data-field="system.FinalWeaponSpeed" type="number" value="{{weapon.system.FinalWeaponSpeed}}" readonly />
+                        </div>
+                        <button title="This does nothing atm">
+                            <span> {{localize "abfalter.armoryTab.complex"}} </span>
+                        </button>
+                    </div>
+                    <textarea class="inline-edit" data-field="system.description">{{weapon.system.description}}</textarea>
                     {{else}}
                     <div class="{{#if system.equipped}}equipped{{else}}notEquipped{{/if}}">
                         <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
-                        <span> {{weapon.system.quality}} </span>
+                        <span> {{weapon.system.fortFinal}} </span>
                         <span> {{weapon.name}} </span>
-                        <span> {{weapon.system.fortitude}} </span>
+                        <span> {{weapon.system.finalDmg}} </span>
                         <a class="item-expand"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     {{/if}}
@@ -278,7 +424,7 @@
                         <input class="inline-edit" data-field="system.quality" type="text" value="{{inventory.system.quality}}" />
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.basicInfo.itemDesc"}}">{{inventory.system.description}}</textarea>
+                    <textarea class="inline-edit" data-field="system.description">{{inventory.system.description}}</textarea>
                     {{else}}
                     <div>
                         <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>

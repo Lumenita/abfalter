@@ -1,25 +1,27 @@
 <form class="{{cssClass}}" autocomplete="off">
     <div class="itemStart">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
         <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
 
     <div class="invContent">
-        <h2> Item Description</h2>
+        <h2> {{localize "abfalter.armoryTab.itemDesc"}} </h2>
         <div>
-            <label> <span> Quantity </span> <input type="number" name="data.quantity" value="{{data.quantity}}" /> </label>
-            <label> <span> Quality </span> <input type="text" name="data.quality" value="{{data.quality}}" /> </label>
-            <label> <span> Price </span> <input type="text" name="data.price" value="{{data.price}}" /> </label>
-            <label> <span> Weight </span> <input type="number" name="data.weight" value="{{data.weight}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.quantity"}} </span> <input type="number" name="data.quantity" value="{{data.quantity}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.quality"}} </span> <input type="text" name="data.quality" value="{{data.quality}}" /> </label>
         </div>
-
         <div>
-            <label> <span> presence </span> <input type="number" name="data.presence" value="{{data.presence}}" /> </label>
-            <label> <span> fortitude </span> <input type="text" name="data.fortitude" value="{{data.fortitude}}" /> </label>
-            <label> <span> rarity </span> <input type="text" name="data.rarity" value="{{data.rarity}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.price"}} </span> <input type="text" name="data.price" value="{{data.price}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.weight"}} </span> <input type="number" name="data.weight" value="{{data.weight}}" /> </label>
         </div>
-
-        <h3> Info </h3>
-        <textarea name="data.description" rows="7" placeholder="{{localize "abfalter.psychicTab.patternInfoB"}}">{{data.description}}</textarea>
+        <div>
+            <label> <span> {{localize "abfalter.armoryTab.presence"}} </span> <input type="number" name="data.presence" value="{{data.presence}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.fortitude"}} </span> <input type="text" name="data.fortitude" value="{{data.fortitude}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.armoryTab.rarity"}} </span> <input type="text" name="data.rarity" value="{{data.rarity}}" /> </label>
+        </div>
+        <h2> {{localize "abfalter.basicInfo.description"}} </h2>
+        <textarea name="data.description" rows="7">{{data.description}}</textarea>
     </div>
 </form>

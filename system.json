@@ -5,11 +5,11 @@
   "version": "0.0.3",
   "compatibility": {
     "minimum": 10,
-    "verified": "10.284"
+    "verified": "10.291"
   },
   "authors": [
     {
-      "name": "Jesse Davis",
+      "name": "Jesse Davis (Luminita)",
       "email": "Davis.Jesse97@outlook.com",
       "discord": "Yúkí#1065"
     }
@@ -43,7 +43,7 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": "shield",
-  "initiative": "1d100 + @speed",
+  "initiative": "1d100 + @iniFinal",
   "url": "",
   "manifest": "",
   "download": "",

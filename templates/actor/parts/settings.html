@@ -99,13 +99,17 @@
 
             <div class="charOptions">
                 <h2> {{localize "abfalter.settingsTab.charOptions"}} </h2>
-                <span> whisper rolls </span>
-                <span> visible tabs </span>
                 <div>
                     <label> <span> {{localize "abfalter.settingsTab.levelMod"}} </span> <input type="number" name="data.levelinfo.levelmod" value="{{data.levelinfo.levelmod}}" /> </label>
                     <label> <span> {{localize "abfalter.settingsTab.presenceMod"}} </span> <input type="number" name="data.levelinfo.presencemod" value="{{data.levelinfo.presencemod}}" /> </label>
                 </div>
-                <span> stuff </span>
+                <div>
+                    <h2 title="There is a bug with weapons accepting the bonus attack from the claasses, this is a quick roundabout way to fix it. Just place the total bonus attack, block and dodge you have here. This only affects weapons."> Temp fix </h2>
+                    <label> <span> Bonus Attack </span> <input type="number" name="data.combatstats.atkClass" value="{{data.combatstats.atkClass}}" /> </label>
+                    <label> <span> Bonus Block </span> <input type="number" name="data.combatstats.blkClass" value="{{data.combatstats.blkClass}}" /> </label>
+                    <label> <span> Bonus Dodge </span> <input type="number" name="data.combatstats.dodClass" value="{{data.combatstats.dodClass}}" /> </label>
+                    <label> <span> Current Presence </span> <input type="number" name="data.combatstats.currentPres" value="{{data.combatstats.currentPres}}" /> </label>
+                </div>
             </div>
 
         </div>

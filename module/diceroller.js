@@ -40,6 +40,7 @@ export async function openModifierDialogue(actorData, finalValue, label, type, m
                         rollResistance(html, actorData, finalValue, label);
                         break;
                     default:
+                        console.log("No Roll Function Implemented for this type");
                         break;
                 }
             }
@@ -79,11 +80,13 @@ export async function rollCharacteristic(html, actorData, finalValue, label) {
         user: game.user.id,
         speaker: ChatMessage.getSpeaker({ actorData: actorData }),
         sound: CONFIG.sounds.dice,
-        content,
+        content: content
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     ChatMessage.create(chatData);
 }
+
+
 
 async function rollSecondary(html, actorData, finalValue, label, mastery) {
     let fatigueMod = parseInt(html.find('#fatiguemod').val()) || 0;
@@ -140,7 +143,6 @@ async function rollSecondary(html, actorData, finalValue, label, mastery) {
     }
 
     const rollData = [rollResult.rolledDice, rollResult._total, rollResult.doubles, rollResult.openRange, label];
-    console.log(rollResult);
 
     const template = "systems/abfalter/templates/dialogues/secRoll.html"
     const content = await renderTemplate(template, { rollResult: rollResult, label: label, actor: actorData });
@@ -150,11 +152,14 @@ async function rollSecondary(html, actorData, finalValue, label, mastery) {
         sound: CONFIG.sounds.dice,
         content: content,
         rolls: [rollResult],
-        flags: { rollData }
+        flags: { rollData, actorData }
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     ChatMessage.create(chatData);
 }
+
+
+
 
 export async function rollResistance(html, actorData, finalValue, label) {
     let mod = parseInt(html.find('#modifiermod').val()) || 0;
@@ -189,9 +194,10 @@ export async function rollResistance(html, actorData, finalValue, label) {
     ChatMessage.create(chatData);
 }
 
-export async function openRollFunction2(msg) {
-    //flags.rollData: roll, total, doubles, openRage, label
-    console.log(msg);
+export async function openRollFunction(msg) {
+    //flags.rollData: roll, total, doubles, openRange, label
+    let actorData = msg.flags.actorData;
+
     let baseDice = "1d100";
     let rollFormula = `${baseDice} + ${msg.flags.rollData[1]}`
     let rollResult = await new Roll(rollFormula).roll({ async: true });
@@ -219,63 +225,19 @@ export async function openRollFunction2(msg) {
     const rollData = [rollResult.rolledDice, rollResult._total, rollResult.doubles, rollResult.openRange, msg.flags.rollData[4]];
 
     const template = "systems/abfalter/templates/dialogues/secRoll.html"
-    const content = await renderTemplate(template, { rollResult: rollResult, label: msg.flags.rollData[4], actor: msg.speaker.actor });
+    const content = await renderTemplate(template, { rollResult: rollResult, label: msg.flags.rollData[4], actor: actorData });
     const chatData = {
         user: game.user.id,
-        speaker: ChatMessage.getSpeaker({ actorData: msg.speaker.actor }),
+        speaker: ChatMessage.getSpeaker({ actorData: actorData }),
         sound: CONFIG.sounds.dice,
         content: content,
         rolls: [rollResult],
-        flags: { rollData }
-    };
-    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
-    ChatMessage.create(chatData);
-
-
-
-}
-
-
-
-
-export async function openRollFunction(roll, total, doubles, openRange, label, name) {
-
-    let baseDice = "1d100";
-    let rollFormula = `${baseDice} + ${total}`
-    let rollResult = await new Roll(rollFormula).roll({ async: true });
-    rollResult.rolledDice = rollResult.total - total;
-    rollResult.openRange = openRange;
-    rollResult.data.name = name;
-
-    rollResult.color = "normalRoll";
-    if (rollResult.rolledDice > roll) {
-        if (doubles == "true") {
-            if (rollResult.rolledDice >= openRange || rollResult.rolledDice == 11 || rollResult.rolledDice == 22 || rollResult.rolledDice == 33 || rollResult.rolledDice == 44 || rollResult.rolledDice == 55 || rollResult.rolledDice == 66 || rollResult.rolledDice == 77 || rollResult.rolledDice == 88) {
-                rollResult.color = "openRoll";
-                rollResult.explode = true;
-            }
-        } else {
-            if (rollResult.rolledDice >= openRange) {
-                rollResult.color = "openRoll";
-                rollResult.explode = true;
-            }
-        }
-    } else {
-        rollResult.color = "normalRoll";
-    }
-
-    const template = "systems/abfalter/templates/dialogues/secRoll.html"
-    const content = await renderTemplate(template, { rollResult: rollResult, label: label });
-    const chatData = {
-        user: game.user.id,
-        //speaker: ChatMessage.getSpeaker({ actorData: actorData }),
-        sound: CONFIG.sounds.dice,
-        content: content,
-        rolls: rollResult
+        flags: { rollData, actorData }
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     ChatMessage.create(chatData);
 }
+
 
 export async function fumbleRollFunction(total, fumble, label, name) {
     let baseDice = "1d100";

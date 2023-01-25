@@ -201,9 +201,7 @@ h3 {
     Header Format
     -------------
 */
-.actor {
-    min-width: 775px;
-}
+
 .abfalter .sheet-header .profile-img {
     display: flex;
     width: 150px;
@@ -2713,9 +2711,12 @@ h3 {
 }
 .prof > div:first-of-type > span:nth-of-type(2),
 .prof-item > div > span:nth-of-type(2),
-.prof-item > div > select {
+.prof-item > div > div {
     width: 38%;
     margin: 0 0 0 1%;
+}
+.prof-item > div > div > select {
+    width: 100%;
 }
 .prof > div:first-of-type > span:nth-of-type(3),
 .prof-item > div > span:nth-of-type(3),
@@ -2733,7 +2734,7 @@ h3 {
     margin: 0 0 0 2.5%;
 }
 .weapons > div:first-of-type,
-.weapon-item > div:first-of-type {
+.weapon-item > div {
     display: flex;
     justify-content: flex-start;
 }
@@ -2751,23 +2752,23 @@ h3 {
     display: flex;
     place-content: space-between;
 }
-.weapon-item > div > span:first-of-type {
+.weapon-item > div:last-child > span:first-of-type {
     width: 15%;
 }
 .weapons > div:first-of-type > span:nth-of-type(2) {
-    width: 57.95%;
+    width: 55.1%;
     margin: 0 0 0 .95%;
 }
-.weapon-item > div > span:nth-of-type(2) {
-    width: 61%;
+.weapon-item > div:last-child > span:nth-of-type(2) {
+    width: 58%;
     margin: 0 0 0 1%;
 }
 .weapons > div:first-of-type > span:nth-of-type(3) {
-    width: 11.4%;
+    width: 14.25%;
     margin: 0 0 0 0.95%;
 }
-.weapon-item > div > span:nth-of-type(3) {
-    width: 12%;
+.weapon-item > div:last-child > span:nth-of-type(3) {
+    width: 15%;
     margin: 0 0 0 1%;
 }
 .weapon-item > div > a {
@@ -2780,13 +2781,131 @@ h3 {
 .weapon-item > div:hover > a {
     opacity: 1;
 }
+.weapon-item > div:nth-child(2),
+.weapon-item > div:nth-child(4),
+.weapon-item > div:nth-child(6) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    place-content: space-between;
+}
+.weapon-item > div:nth-child(2) > button {
+    height: 20px;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+}
+.weapon-item > div:nth-child(2) > button,
+.weapon-item > div:nth-child(3) > div {
+    width: 26%;
+}
+.weapon-item > div:nth-child(2) > span,
+.weapon-item > div:nth-child(3) > div:nth-child(2) {
+    width: 19%;
+}
+.weapon-item > div:nth-child(3),
+.weapon-item > div:nth-child(3) > div,
+.weapon-item > div:nth-child(5) > div,
+.weapon-item > div:nth-child(7),
+.weapon-item > div:nth-child(7) > div {
+    display: flex;
+    place-content: space-between;
+}
+.weapon-item > div:nth-child(3) > div:nth-child(2) {
+    justify-content: center;
+}
+.weapon-item > div:nth-child(3) > div:nth-child(2) > select {
+    width: 100%;
+}
+.weapon-item > div:nth-child(4) > span,
+.weapon-item > div:nth-child(5) > div {
+    width: 15%;
+}
+.weapon-item > div:nth-child(4) > span:nth-child(3),
+.weapon-item > div:nth-child(5) > div:nth-child(3) {
+    width: 55%;
+}
+.weapon-item > div:nth-child(4) > span:nth-child(4),
+.weapon-item > div:nth-child(5) > div:nth-child(4) {
+    width: 12%;
+}
+.weapon-item > div:nth-child(5),
+.weapon-item > div:nth-child(7) > input {
+    place-content: space-between;
+}
+.weapon-item > div:nth-child(5) > div > select,
+.weapon-item > div:nth-child(5) > div:nth-child(3) > div > select {
+    width: 100%;
+}
+.weapon-item > div:nth-child(5) > div:nth-child(3) > input {
+    width: 15%;
+}
+.weapon-item > div:nth-child(5) > div:nth-child(3) > span {
+    width: 3%;
+}
+.weapon-item > div:nth-child(5) > div:nth-child(3) > div {
+    width: 39%;
+}
+.weapon-item > div:nth-child(5) > div:nth-child(3) > button {
+    width: 35%;
+    height: 20px;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+}
+.weapon-item > div:nth-child(6) > span,
+.weapon-item > div:nth-child(7) > div,
+.weapon-item > div:nth-child(7) > input,
+.weapon-item > div:nth-child(6) > button {
+    width: 22%;
+}
+.weapon-item > div:nth-child(6) > button {
+    height: 20px;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+}
+.weapon-item > div:nth-child(6) > span:nth-child(4),
+.weapon-item > div:nth-child(7) > div:nth-child(4) {
+    width: 9%;
+}
+.weapon-item > div:nth-child(8) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+}
+.weapon-item > div:nth-child(9),
+.weapon-item > div:nth-child(9) > div {
+    display: flex;
+}
+.weapon-item > div:nth-child(9){
+    margin: 0 0 3px 0;
+}
+.weapon-item > div:nth-child(8) > span,
+.weapon-item > div:nth-child(9) > div {
+    width: 22%;
+    margin: 0 1% 0 0;
+}
+.weapon-item > div:nth-child(8) > span:nth-child(1),
+.weapon-item > div:nth-child(9) > input {
+    width: 14%;
+    margin: 0 1% 0 0;
+}
+.weapon-item > div:nth-child(9) > button {
+    width: 15%;
+    margin: 0 0 0 1%;
+    height: 20px;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+}
 /*
     --------
     Currency 
     --------
 */
 .currency > div > label,
-.currency-item > div { 
+.currency-item > div {
     display: flex;
 }
 .currency > div:first-of-type {
@@ -3206,22 +3325,125 @@ h3 {
 .armorContent > div > label > input {
     display: flex;
     width: 35%;
-    height: 20px;
-    text-align: center;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    border-bottom: 1px solid black;
 }
 .armorContent > div > label > span {
     display: flex;
     width: 50%;
+}
+/*
+    -----
+    Proficiency
+    -----
+*/
+.proficiencyContent > div > label {
+    display: flex;
     font-size: 13px;
     align-items: center;
     height: 20px;
 }
+.proficiencyContent > div > label > select,
+.proficiencyContent > div > label > input {
+    width: 20%;
+}
+.proficiencyContent > div > label > span {
+    width: 30%;
+}
+/*
+    -----
+    Weapons
+    -----
+*/
+.weaponContent > div,
+.weaponContent > div > div {
+    display: flex;
+}
+.weaponContent > div > label,
+.weaponContent > div > div > label {
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+    width: 100%;
+}
+.weaponContent > div:nth-of-type(3) > label,
+.weaponContent > div:nth-of-type(5) > label,
+.weaponContent > div:nth-of-type(6) > label,
+.weaponContent > div > div {
+    width: 50%;
+}
+.weaponContent > div:last-of-type,
+.weaponContent > div:nth-of-type(6) > div {
+    width: 24.5%;
+    margin: 0 0.5% 0 25%;
+}
+.weaponContent > div:nth-of-type(6) > div > button {
+    height: 20px;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+}
+.weaponContent > div > label > input,
+.weaponContent > div > label > span,
+.weaponContent > div > div > label > span,
+.weaponContent > div > div > label > select {
+    width: 49%;
+    margin: 0 1% 0 0;
+}
+.weaponContent > div:last-of-type > button {
+    height: 20px;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+}
+/*
+    -----
+    Currency
+    -----
+*/
+.currencyContent > div > label {
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+}
+.currencyContent > div > label > input {
+    width: 15%;
+}
+.currencyContent > div > label > span {
+    width: 35%;
+}
+/*
+    -----
+    Inventory
+    -----
+*/
+.invContent > div  {
+    display: flex;
+}
+.invContent > div > label {
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+    width: 100%;
+}
+.invContent > div > label > input,
+.invContent > div > label > span {
+    width: 49%;
+    margin: 0 1% 0 0;
+}
+.invContent > div:last-of-type > label > input,
+.invContent > div:last-of-type > label > span {
+    Width: 24.5%;
+    margin: 0 0.5% 0 0;
+}
+
+
+
+
+
+
+
 /*
     ------------------------
     Discipline & Maint Power

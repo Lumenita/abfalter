@@ -433,15 +433,15 @@
             <div>
                 <input type="text" name="data.initiative.name" value="{{data.initiative.name}}" />
                 <label> <span> {{localize "abfalter.armoryTab.armor"}} </span> <input type="number" name="data.totalNatPen" value="-{{data.totalNatPen}}" readonly /> </label>
-                <label> <span> {{localize "abfalter.generalTab.weapon"}} </span> <input type="number" name="2" value="2" readonly /> </label> <!-- WEAPONA -->
+                <label> <span> {{localize "abfalter.generalTab.weapon"}} </span> <input type="number" name="data.wepFinSpd" value="{{data.wepFinSpd}}" readonly /> </label>
                 <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="data.inibonus" value="{{data.inibonus}}" readonly /> </label>
                 <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.initiative.spec" value="{{data.initiative.spec}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="4" value="4" readonly /> </label> <!-- final -->
+                <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.iniFinal" value="{{data.iniFinal}}" readonly /> </label>
             </div>
             {{else}}
             <button type="button">
                 <span> {{data.initiative.name}} </span>
-                <span> Final ini </span> <!-- final -->
+                <span> {{data.iniFinal}} </span>
             </button>
             {{/if}}
             <label class="expand-box">

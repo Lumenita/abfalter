@@ -1,6 +1,30 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <div>
-        <span> Yo Proficiency Here </span>
+    <div class="itemStart">
+        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
 
+    <div class="proficiencyContent">
+        <h2> {{localize "abfalter.armoryTab.prof"}} </h2>
+        <div>
+            <label>
+                <span> {{localize "abfalter.basicInfo.type"}} </span>
+                <select name="data.type" data-field="data.type">
+                    {{#select data.type}}
+                    <option value="Starting"> {{localize "abfalter.armoryTab.starting"}} </option>
+                    <option value="Similar"> {{localize "abfalter.armoryTab.similar"}} </option>
+                    <option value="Mixed Class"> {{localize "abfalter.armoryTab.mixedClass"}} </option>
+                    <option value="Different Type"> {{localize "abfalter.armoryTab.diffType"}} </option>
+                    <option value="Whole Class"> {{localize "abfalter.armoryTab.wholeClass"}} </option>
+                    <option value="Archetype"> {{localize "abfalter.armoryTab.archetype"}} </option>
+                    <option value="Style"> {{localize "abfalter.armoryTab.style"}} </option>
+                    <option value="Mystical"> {{localize "abfalter.armoryTab.mystical"}} </option>
+                    <option value="Psychic"> {{localize "abfalter.armoryTab.psychic"}} </option>
+                    <option value="Other"> {{localize "abfalter.armoryTab.other"}} </option>
+                    {{/select}}
+                </select>
+            </label>
+            <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
+        </div>
+    </div>
 </form>

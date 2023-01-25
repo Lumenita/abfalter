@@ -174,7 +174,11 @@
           "dodspecial": 0,
           "dodtemp": 0,
           "dodStatus": false,
-          "dodMastery": false
+          "dodMastery": false,
+          "atkClass": 0,
+          "blkClass": 0,
+          "dodClass": 0,
+          "currentPres": 0
         },
         "initiative": {
           "status": false,
@@ -1495,13 +1499,16 @@
       "primDmgT": "CUT",
       "secDmgT": "NONE",
       "baseDmg": 0,
-      "dmgMod": "Strength",
-      "twoHanded": false,
+      "dmgMod": "str",
+      "toggle": false,
       "complex": false,
       "breakage": 0,
       "strBreak": "",
       "presence": 0,
-      "speed": 0
+      "speed": 0,
+      "atPen": 0,
+      "shieldSpeed": 0,
+      "rarity": ""
     },
     "armor": {
       "templates": [ "itemDescription" ],
@@ -1548,12 +1555,12 @@
     },
     "currency": {
       "quantity": 0,
-      "toggleItem": false
+      "toggleItem": true
     },
     "proficiency": {
       "type": "Starting",
       "cost": 0,
-      "toggleItem": false
+      "toggleItem": true
     },
     "discipline": {
       "quantity": 1,

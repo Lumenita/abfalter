@@ -7,6 +7,9 @@ export default class abfalterActor extends Actor {
     prepareBaseData() {
         const data = this.system;
 
+        //All Action Mod
+        data.aamFinal = data.aam
+
         //Main Characteristics
         for (let [key, stat] of Object.entries(data.stats)) {
             stat.final = Math.floor(~~stat.base + stat.spec + stat.temp);
@@ -115,15 +118,268 @@ export default class abfalterActor extends Actor {
             }
         }
 
-        //All Action Mod
-        data.aamFinal = data.aam
+        //Calculating Number of Actions
+        const actnumcalc = ~~data.stats.Agility.base + ~~data.stats.Dexterity.base;
+        switch (actnumcalc) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+                data.actionnumber = 1;
+                break;
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+                data.actionnumber = 2;
+                break;
+            case 15:
+            case 16:
+            case 17:
+            case 18:
+            case 19:
+                data.actionnumber = 3;
+                break;
+            case 20:
+            case 21:
+            case 22:
+                data.actionnumber = 4;
+                break;
+            case 23:
+            case 24:
+            case 25:
+                data.actionnumber = 5;
+                break;
+            case 26:
+            case 27:
+            case 28:
+                data.actionnumber = 6;
+                break;
+            case 29:
+            case 30:
+            case 31:
+                data.actionnumber = 8;
+                break;
+            default:
+                data.actionnumber = 10;
+                break;
+        }
 
+        //Lifepoint Calculation
+        data.lpbase = Math.floor(25 + 10 * data.stats.Constitution.final + data.stats.Constitution.mod - Math.ceil((data.stats.Constitution.final - 1) / data.stats.Constitution.final) * 5);
+        data.lpfinal = Math.floor(data.lpbase + data.lifepoints.spec + data.lifepoints.temp + Math.ceil(data.lifepoints.multiple * data.stats.Constitution.final));
+
+        //Fatigue Calculation
+        data.fatiguebase = data.stats.Constitution.final;
+        data.fatiguefinal = Math.floor(data.fatiguebase + data.fatigue.spec + data.fatigue.temp);
+
+        //Regeneration Calculation
+        switch (data.stats.Constitution.final) {
+            case 1:
+            case 2:
+                data.regenbase = 0;
+                break;
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                data.regenbase = 1;
+                break;
+            case 8:
+            case 9:
+                data.regenbase = 2;
+                break;
+            case 10:
+                data.regenbase = 3;
+                break;
+            case 11:
+                data.regenbase = 4;
+                break;
+            case 12:
+                data.regenbase = 5;
+                break;
+            case 13:
+                data.regenbase = 6;
+                break;
+            case 14:
+                data.regenbase = 7;
+                break;
+            case 15:
+                data.regenbase = 8;
+                break;
+            case 16:
+                data.regenbase = 9;
+                break;
+            case 17:
+                data.regenbase = 10;
+                break;
+            case 18:
+                data.regenbase = 11;
+                break;
+            case 19:
+            case 20:
+                data.regenbase = 12;
+                break;
+            default:
+                data.regenbase = 0;
+                break;
+        }
+        data.regenfinal = Math.floor(data.regenbase + data.regeneration.spec + data.regeneration.temp);
+        switch (data.regenfinal) {
+            case 1:
+                data.resting = "10/day";
+                data.notresting = "5/day";
+                data.redpenalty = "-5/day";
+                break;
+            case 2:
+                data.resting = "20/day";
+                data.notresting = "10/day";
+                data.redpenalty = "-5/day";
+                break;
+            case 3:
+                data.resting = "30/day";
+                data.notresting = "15/day";
+                data.redpenalty = "-5/day";
+                break;
+            case 4:
+                data.resting = "40/day";
+                data.notresting = "20/day";
+                data.redpenalty = "-10/day";
+                break;
+            case 5:
+                data.resting = "50/day";
+                data.notresting = "25/day";
+                data.redpenalty = "-10/day";
+                break;
+            case 6:
+                data.resting = "75/day";
+                data.notresting = "30/day";
+                data.redpenalty = "-15/day";
+                break;
+            case 7:
+                data.resting = "100/day";
+                data.notresting = "50/day";
+                data.redpenalty = "-20/day";
+                break;
+            case 8:
+                data.resting = "250/day";
+                data.notresting = "100/day";
+                data.redpenalty = "-25/day";
+                break;
+            case 9:
+                data.resting = "500/day";
+                data.notresting = "200/day";
+                data.redpenalty = "-30/day";
+                break;
+            case 10:
+                data.resting = "1/min";
+                data.notresting = "N/A";
+                data.redpenalty = "-40/day";
+                break;
+            case 11:
+                data.resting = "2/min";
+                data.notresting = "N/A";
+                data.redpenalty = "-50/day";
+                break;
+            case 12:
+                data.resting = "5/min";
+                data.notresting = "N/A";
+                data.redpenalty = "-5/hour";
+                break;
+            case 13:
+                data.resting = "10/min";
+                data.notresting = "N/A";
+                data.redpenalty = "-10/hour";
+                break;
+            case 14:
+                data.resting = "1/turn";
+                data.notresting = "N/A";
+                data.redpenalty = "-15/hour";
+                break;
+            case 15:
+                data.resting = "5/turn";
+                data.notresting = "N/A";
+                data.redpenalty = "-20/hour";
+                break;
+            case 16:
+                data.resting = "10/turn";
+                data.notresting = "N/A";
+                data.redpenalty = "-50/min";
+                break;
+            case 17:
+                data.resting = "25/turn";
+                data.notresting = "N/A";
+                data.redpenalty = "-10/turn";
+                break;
+            case 18:
+                data.resting = "50/turn";
+                data.notresting = "N/A";
+                data.redpenalty = "-25/turn";
+                break;
+            case 19:
+                data.resting = "100/turn";
+                data.notresting = "N/A";
+                data.redpenalty = "All/turn";
+                break;
+            case 20:
+                data.resting = "200/turn";
+                data.notresting = "N/A";
+                data.redpenalty = "All/turn";
+                break;
+            default:
+                data.resting = "0";
+                data.notresting = "0";
+                data.redpenalty = "0";
+                break;
+        }
+
+        //Initiative
+        data.iniBase = data.stats.Dexterity.mod + data.stats.Agility.mod + 20;
+
+        //Ki Pool
+        if (data.toggles.innatePower == false) {
+            data.kiPoolAgiAccumTot = Math.max(0, Math.floor(data.stats.Agility.kiPoolAccuBase + data.kiPool.agi.spec + data.kiPool.agi.temp + Math.min(0, ~~(data.aamFinal / 20)))); // Math.ceil(data.aam / 20));
+            data.kiPoolAgiTot = Math.floor(data.stats.Agility.kiPoolBase + data.kiPool.agi.specMax + data.kiPool.agi.tempMax);
+            data.kiPoolConAccumTot = Math.max(0, Math.floor(data.stats.Constitution.kiPoolAccuBase + data.kiPool.con.spec + data.kiPool.con.temp + Math.min(0, ~~(data.aamFinal / 20))));
+            data.kiPoolConTot = Math.floor(data.stats.Constitution.kiPoolBase + data.kiPool.con.specMax + data.kiPool.con.tempMax);
+            data.kiPoolDexAccumTot = Math.max(0, Math.floor(data.stats.Dexterity.kiPoolAccuBase + data.kiPool.dex.spec + data.kiPool.dex.temp + Math.min(0, ~~(data.aamFinal / 20))));
+            data.kiPoolDexTot = Math.floor(data.stats.Dexterity.kiPoolBase + data.kiPool.dex.specMax + data.kiPool.dex.tempMax);
+            data.kiPoolStrAccumTot = Math.max(0, Math.floor(data.stats.Strength.kiPoolAccuBase + data.kiPool.str.spec + data.kiPool.str.temp + Math.min(0, ~~(data.aamFinal / 20))));
+            data.kiPoolStrTot = Math.floor(data.stats.Strength.kiPoolBase + data.kiPool.str.specMax + data.kiPool.str.tempMax);
+            data.kiPoolPowAccumTot = Math.max(0, Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + Math.min(0, ~~(data.aamFinal / 20))));
+            data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax);
+            data.kiPoolWPAccumTot = Math.max(0, Math.floor(data.stats.Willpower.kiPoolAccuBase + data.kiPool.wp.spec + data.kiPool.wp.temp + Math.min(0, ~~(data.aamFinal / 20))));
+            data.kiPoolWPTot = Math.floor(data.stats.Willpower.kiPoolBase + data.kiPool.wp.specMax + data.kiPool.wp.tempMax);
+            if (data.toggles.unifiedPools == true) {
+                data.unifiedTotal = Math.floor(data.kiPoolAgiTot + data.kiPoolConTot + data.kiPoolDexTot + data.kiPoolStrTot + data.kiPoolPowTot + data.kiPoolWPTot);
+            }
+        } else {
+            data.stats.Power.kiPoolAccuBase = data.stats.Power.kiPoolAccuBase * 6;
+            data.stats.Power.kiPoolBase = data.stats.Power.kiPoolBase * 6;
+            data.kiPoolPowAccumTot = Math.max(0, Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + Math.min(0, ~~(data.aamFinal / 20))));
+            data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax);
+        }
+
+        //atk, blk, dodge
         data.atkfinal = Math.floor(data.combatstats.atkbase + data.combatstats.atkspecial + data.combatstats.atktemp + data.stats.Dexterity.mod + data.aamFinal);
+        data.blkfinal = Math.floor(data.combatstats.blkbase + data.combatstats.blkspecial + data.combatstats.blktemp + data.stats.Dexterity.mod + data.aamFinal);
+        data.dodfinal = Math.floor(data.combatstats.dodbase + data.combatstats.dodspecial + data.combatstats.dodtemp + data.stats.Agility.mod + data.aamFinal);
 
         //Magic Projection
         data.mprojfinal = Math.floor(data.mproj.base + data.mproj.spec + data.mproj.temp + data.aamFinal);
         data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.imbalance);
         data.mprojfinaldef = Math.floor(data.mprojfinal - data.mproj.imbalance);
+
+        // Wear Armor
+        data.wearArmorFinal = Math.floor(data.wearArmor.base + data.wearArmor.spec + data.wearArmor.temp + data.stats.Strength.mod);
     }
 
     prepareEmbeddedDocuments() {
@@ -135,7 +391,7 @@ export default class abfalterActor extends Actor {
         const data = this.system;
         const stats = data.stats;
 
-        // Determine Item Values / Last used arr[109]  6
+        // Determine Item Values / Last used arr[110]  11
         const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish, acro,
             athle, climb, jump, ride, swim, etiq, intim, leader, persua, street, style, trading, notice, search, track,
             animals, appra, archi, herb, hist, law, magicapr, medic, mem, navi, occ, science, tactic, comp, fos,
@@ -143,8 +399,7 @@ export default class abfalterActor extends Actor {
             runes, ritcal, soh, tailoring, quantity, req, natPen, movePen, aCutMax, aCutTot, aImpMax, aImpTot, aThrMax, aThrTot, aHeatMax,
             aHeatTot, aColdMax, aColdTot, aEleMax, aEleTot, aEneMax, aEneTot, aSptMax, aSptTot, ahReq, ahCutMax, ahCutTot, ahImpMax, ahImpTot, ahThrMax,
             ahThrTot, ahHeatMax, ahHeatTot, ahColdMax, ahColdTot, ahEleMax, ahEleTot, ahEneMax, ahEneTot, ahSptMax, ahSptTot, perPen, usedpp, matrixpp, arsMk,
-            maMk, techMk, pathLvl, turnMaint, dayMaint, spellCost] = this.items.reduce((arr, item) => {
-                console.log("im in hte items call calc");
+            maMk, techMk, pathLvl, turnMaint, dayMaint, spellCost, wepNum, wepSpd] = this.items.reduce((arr, item) => {
                 if (item.type === "class") {
                     const classLevels = parseInt(item.system.main.levels) || 0;
                     arr[0] += classLevels;
@@ -328,31 +583,26 @@ export default class abfalterActor extends Actor {
                         arr[110] += parseInt(item.system.cost) || 0;
                     }
                 }
+                if (item.type === "weapon") {
+                    if (item.system.equipped == true) {
+                        arr[111] += 1;
+                        if (arr[111] == 1) {
+                            arr[112] = item.system.speed;
+                        } else if (arr[112] > item.system.speed) {
+                            arr[112] = item.system.speed;
+                        }
+                    }
+                }
             return arr;
             }, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0]);
-
-        data.lpbonus = lpbonus;
-        data.inibonus = ini;
-        data.dodgebonus = dod;
-        data.blockbonus = blk;
-        data.weararmorbonus = weararm;
-        data.ppbonus = pp;
-        data.zeonbonus = zeon;
-        data.summonbonus = summon;
-        data.controlbonus = control;
-        data.bindbonus = bind;
-        data.banishbonus = banish;
-
-        data.turnMaintRemove = turnMaint;
-        data.dayMaintRemove = dayMaint;
+                0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0]);
 
         //Stuff Xp, Presence, Next lvl Xp
-        data.level = level;
+        data.level = level; //class Bonus
         if (data.level == 0) {
             data.dp = 400;
         } else {
@@ -361,12 +611,7 @@ export default class abfalterActor extends Actor {
         data.presence = Math.floor((data.dp / 20) + data.levelinfo.presencemod);
         data.nextlevel = Math.floor(((data.level + data.levelinfo.levelmod) * 25) + 75);
 
-        //Helmet Perception Penalty
-        data.totalPerPen = perPen;
-
-        /*
-         *  Mk Calculations
-         */
+        //Mk Calculations
         data.mkBonus = mk; //Class Mk
         data.kiThingMK = 0; //Ki Abilities Cost
         for (let [key, kiThing] of Object.entries(data.kiAbility)) {
@@ -398,32 +643,9 @@ export default class abfalterActor extends Actor {
         data.mkFinal = Math.floor(data.mk.base + data.mk.temp + data.mk.spec + data.mkBonus + data.mArtMk); //Total Final Mk
         data.mkUsed = Math.floor(data.limitsMK + data.kiThingMK + data.kiSealMk + data.arsMagMK + data.kiTechMk); //Total Used Mk
 
-        //Ki Pool
-        if (data.toggles.innatePower == false) {
-            data.kiPoolAgiAccumTot = Math.max(0, Math.floor(data.stats.Agility.kiPoolAccuBase + data.kiPool.agi.spec + data.kiPool.agi.temp + Math.min(0, ~~(data.aamFinal / 20)))); // Math.ceil(data.aam / 20));
-            data.kiPoolAgiTot = Math.floor(data.stats.Agility.kiPoolBase + data.kiPool.agi.specMax + data.kiPool.agi.tempMax);
-            data.kiPoolConAccumTot = Math.max(0, Math.floor(data.stats.Constitution.kiPoolAccuBase + data.kiPool.con.spec + data.kiPool.con.temp + Math.min(0, ~~(data.aamFinal / 20))));
-            data.kiPoolConTot = Math.floor(data.stats.Constitution.kiPoolBase + data.kiPool.con.specMax + data.kiPool.con.tempMax);
-            data.kiPoolDexAccumTot = Math.max(0, Math.floor(data.stats.Dexterity.kiPoolAccuBase + data.kiPool.dex.spec + data.kiPool.dex.temp + Math.min(0, ~~(data.aamFinal / 20))));
-            data.kiPoolDexTot = Math.floor(data.stats.Dexterity.kiPoolBase + data.kiPool.dex.specMax + data.kiPool.dex.tempMax);
-            data.kiPoolStrAccumTot = Math.max(0, Math.floor(data.stats.Strength.kiPoolAccuBase + data.kiPool.str.spec + data.kiPool.str.temp + Math.min(0, ~~(data.aamFinal / 20))));
-            data.kiPoolStrTot = Math.floor(data.stats.Strength.kiPoolBase + data.kiPool.str.specMax + data.kiPool.str.tempMax);
-            data.kiPoolPowAccumTot = Math.max(0, Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + Math.min(0, ~~(data.aamFinal / 20))));
-            data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax);
-            data.kiPoolWPAccumTot = Math.max(0, Math.floor(data.stats.Willpower.kiPoolAccuBase + data.kiPool.wp.spec + data.kiPool.wp.temp + Math.min(0, ~~(data.aamFinal / 20))));
-            data.kiPoolWPTot = Math.floor(data.stats.Willpower.kiPoolBase + data.kiPool.wp.specMax + data.kiPool.wp.tempMax);
-            if (data.toggles.unifiedPools == true) {
-                data.unifiedTotal = Math.floor(data.kiPoolAgiTot + data.kiPoolConTot + data.kiPoolDexTot + data.kiPoolStrTot + data.kiPoolPowTot + data.kiPoolWPTot);
-            }
-        } else {
-            data.stats.Power.kiPoolAccuBase = data.stats.Power.kiPoolAccuBase * 6;
-            data.stats.Power.kiPoolBase = data.stats.Power.kiPoolBase * 6;
-            data.kiPoolPowAccumTot = Math.max(0, Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + Math.min(0, ~~(data.aamFinal / 20))));
-            data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax);
-        }
-
         // Wear Armor
-        data.wearArmorFinal = Math.floor(data.wearArmor.base + data.weararmorbonus + data.wearArmor.spec + data.wearArmor.temp + data.stats.Strength.mod);
+        data.weararmorbonus = weararm;
+        data.wearArmorFinal += weararm;
 
         // Armor Final AT
         data.aCutFinal = Math.floor((aCutTot - ~~(aCutMax / 2)) + aCutMax);
@@ -446,6 +668,7 @@ export default class abfalterActor extends Actor {
         data.ahSptFinal = Math.floor((ahSptTot - ~~(ahSptMax / 2)) + ahSptMax);
 
         // Armor Stats
+        data.totalPerPen = perPen;
         data.armorMod = Math.floor(data.wearArmorFinal - req);
         if (natPen - data.armorMod < 0) {
             data.totalNatPen = Math.max(0, Math.floor(((quantity - 1) * 20) + 0));
@@ -454,9 +677,9 @@ export default class abfalterActor extends Actor {
         }
         data.movePenMod = Math.max(0, Math.floor(data.armorMod / 50));
         if (movePen - data.movePenMod < 0) {
-            data.totalMovePen = movePen;
+            data.totalMovePen = Math.floor(movePen + Math.max(0, data.totalNatPen / 50));
         } else {
-            data.totalMovePen = movePen - data.movePenMod
+            data.totalMovePen = Math.floor(movePen + Math.max(0, data.totalNatPen / 50) - data.movePenMod);
         }
 
         //Resistances
@@ -485,60 +708,6 @@ export default class abfalterActor extends Actor {
                 default:
                     break;
             }
-        }
-
-        //Calculating Number of Actions
-        const actnumcalc = ~~data.stats.Agility.base + ~~data.stats.Dexterity.base;
-        switch (actnumcalc) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-                data.actionnumber = 1;
-                break;
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-                data.actionnumber = 2;
-                break;
-            case 15:
-            case 16:
-            case 17:
-            case 18:
-            case 19:
-                data.actionnumber = 3;
-                break;
-            case 20:
-            case 21:
-            case 22:
-                data.actionnumber = 4;
-                break;
-            case 23:
-            case 24:
-            case 25:
-                data.actionnumber = 5;
-                break;
-            case 26:
-            case 27:
-            case 28:
-                data.actionnumber = 6;
-                break;
-            case 29:
-            case 30:
-            case 31:
-                data.actionnumber = 8;
-                break;
-            default:
-                data.actionnumber = 10;
-                break;
         }
 
         //Movement
@@ -656,187 +825,31 @@ export default class abfalterActor extends Actor {
             data.runningmove = "Special";
         }
         //Lifepoint Calculation
-        data.lpbase = Math.floor(25 + 10 * data.stats.Constitution.final + data.stats.Constitution.mod - Math.ceil((data.stats.Constitution.final - 1) / data.stats.Constitution.final) * 5);
-        data.lpfinal = Math.floor(data.lpbase + lpbonus + data.lifepoints.spec + data.lifepoints.temp + Math.ceil(data.lifepoints.multiple * data.stats.Constitution.final));
-
-        //Fatigue Calculation
-        data.fatiguebase = data.stats.Constitution.final;
-        data.fatiguefinal = Math.floor(data.fatiguebase + data.fatigue.spec + data.fatigue.temp);
-
-        //Regeneration Calculation
-        switch (data.stats.Constitution.final) {
-            case 1:
-            case 2:
-                data.regenbase = 0;
-                break;
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-                data.regenbase = 1;
-                break;
-            case 8:
-            case 9:
-                data.regenbase = 2;
-                break;
-            case 10:
-                data.regenbase = 3;
-                break;
-            case 11:
-                data.regenbase = 4;
-                break;
-            case 12:
-                data.regenbase = 5;
-                break;
-            case 13:
-                data.regenbase = 6;
-                break;
-            case 14:
-                data.regenbase = 7;
-                break;
-            case 15:
-                data.regenbase = 8;
-                break;
-            case 16:
-                data.regenbase = 9;
-                break;
-            case 17:
-                data.regenbase = 10;
-                break;
-            case 18:
-                data.regenbase = 11;
-                break;
-            case 19:
-            case 20:
-                data.regenbase = 12;
-                break;
-            default:
-                data.regenbase = 0;
-                break;
-        }
-        data.regenfinal = Math.floor(data.regenbase + data.regeneration.spec + data.regeneration.temp);
-        switch (data.regenfinal) {
-            case 1:
-                data.resting = "10/day";
-                data.notresting = "5/day";
-                data.redpenalty = "-5/day";
-                break;
-            case 2:
-                data.resting = "20/day";
-                data.notresting = "10/day";
-                data.redpenalty = "-5/day";
-                break;
-            case 3:
-                data.resting = "30/day";
-                data.notresting = "15/day";
-                data.redpenalty = "-5/day";
-                break;
-            case 4:
-                data.resting = "40/day";
-                data.notresting = "20/day";
-                data.redpenalty = "-10/day";
-                break;
-            case 5:
-                data.resting = "50/day";
-                data.notresting = "25/day";
-                data.redpenalty = "-10/day";
-                break;
-            case 6:
-                data.resting = "75/day";
-                data.notresting = "30/day";
-                data.redpenalty = "-15/day";
-                break;
-            case 7:
-                data.resting = "100/day";
-                data.notresting = "50/day";
-                data.redpenalty = "-20/day";
-                break;
-            case 8:
-                data.resting = "250/day";
-                data.notresting = "100/day";
-                data.redpenalty = "-25/day";
-                break;
-            case 9:
-                data.resting = "500/day";
-                data.notresting = "200/day";
-                data.redpenalty = "-30/day";
-                break;
-            case 10:
-                data.resting = "1/min";
-                data.notresting = "N/A";
-                data.redpenalty = "-40/day";
-                break;
-            case 11:
-                data.resting = "2/min";
-                data.notresting = "N/A";
-                data.redpenalty = "-50/day";
-                break;
-            case 12:
-                data.resting = "5/min";
-                data.notresting = "N/A";
-                data.redpenalty = "-5/hour";
-                break;
-            case 13:
-                data.resting = "10/min";
-                data.notresting = "N/A";
-                data.redpenalty = "-10/hour";
-                break;
-            case 14:
-                data.resting = "1/turn";
-                data.notresting = "N/A";
-                data.redpenalty = "-15/hour";
-                break;
-            case 15:
-                data.resting = "5/turn";
-                data.notresting = "N/A";
-                data.redpenalty = "-20/hour";
-                break;
-            case 16:
-                data.resting = "10/turn";
-                data.notresting = "N/A";
-                data.redpenalty = "-50/min";
-                break;
-            case 17:
-                data.resting = "25/turn";
-                data.notresting = "N/A";
-                data.redpenalty = "-10/turn";
-                break;
-            case 18:
-                data.resting = "50/turn";
-                data.notresting = "N/A";
-                data.redpenalty = "-25/turn";
-                break;
-            case 19:
-                data.resting = "100/turn";
-                data.notresting = "N/A";
-                data.redpenalty = "All/turn";
-                break;
-            case 20:
-                data.resting = "200/turn";
-                data.notresting = "N/A";
-                data.redpenalty = "All/turn";
-                break;
-            default:
-                data.resting = "0";
-                data.notresting = "0";
-                data.redpenalty = "0";
-                break;
-        }
-
-        // Attack, Block, & Dodge
-        //data.atkfinal = Math.floor(data.combatstats.atkbase + data.attackbonus + data.combatstats.atkspecial + data.combatstats.atktemp + data.stats.Dexterity.mod + data.aamFinal);
+        data.lpbonus = lpbonus;
+        data.lpfinal += lpbonus;
+        
+        // Attack, Block, & Dodge post class
         data.attackbonus = atk;
-        data.atkfinal += data.attackbonus;
-        data.blkfinal = Math.floor(data.combatstats.blkbase + data.blockbonus + data.combatstats.blkspecial + data.combatstats.blktemp + data.stats.Dexterity.mod + data.aamFinal);
-        data.dodfinal = Math.floor(data.combatstats.dodbase + data.dodgebonus + data.combatstats.dodspecial + data.combatstats.dodtemp + data.stats.Agility.mod + data.aamFinal);
+        data.atkfinal += atk;
+        data.blockbonus = blk;
+        data.blkfinal += blk;
+        data.dodgebonus = dod;
+        data.dodfinal += dod;
 
         // Initiative
-
-
-
-
-
+        data.inibonus = ini;
+        data.weaponNumber = wepNum;
+        data.weaponSpeed = wepSpd;
+        if (data.weaponNumber > 1 && data.weaponSpeed < 0) {
+            data.wepFinSpd = data.weaponSpeed - 20;
+        } else if (data.weaponNumber > 1 && data.weaponSpeed >= 0) {
+            data.wepFinSpd = data.weaponSpeed - 10;
+        } else if (data.weaponNumber == 0) {
+            data.wepFinSpd = 20;
+        } else {
+            data.wepFinSpd = data.weaponSpeed;
+        }
+        data.iniFinal = Math.floor(data.iniBase + data.inibonus + data.initiative.spec + data.wepFinSpd - data.totalNatPen); // Base + class + spec + weapon(if equipped) - armor.
 
         /*
             Secondaries
@@ -1359,6 +1372,16 @@ export default class abfalterActor extends Actor {
         //data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.imbalance);
         //data.mprojfinaldef = Math.floor(data.mprojfinal - data.mproj.imbalance);
 
+        //to place class bonuses
+        data.ppbonus = pp;
+        data.zeonbonus = zeon;
+        data.summonbonus = summon;
+        data.controlbonus = control;
+        data.bindbonus = bind;
+        data.banishbonus = banish;
+
+        data.turnMaintRemove = turnMaint;
+        data.dayMaintRemove = dayMaint;
 
         // Magic Accumulation
         switch (data.stats.Power.final) {

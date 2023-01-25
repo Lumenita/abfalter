@@ -77,6 +77,123 @@ export default class abfalterItem extends Item {
         }
     }
 
+    prepareWeapon() {
+        if (this.parent != null) {
+            this.system.atkClass = ~~this.parent.system.combatstats.atkClass;
+            this.system.blkClass = ~~this.parent.system.combatstats.blkClass;
+            this.system.dodClass = ~~this.parent.system.combatstats.dodClass;
+            this.system.atkParentFinal = ~~this.parent.system.atkfinal;
+            this.system.blkParentFinal = ~~this.parent.system.blkfinal;
+            this.system.dodParentFinal = ~~this.parent.system.dodfinal;
+            switch (this.system.dmgMod) {
+                case "agi":
+                    this.system.bonusDmgMod = this.parent.system.stats.Agility.mod;
+                    break;
+                case "con":
+                    this.system.bonusDmgMod = this.parent.system.stats.Constitution.mod;
+                    break;
+                case "str":
+                    this.system.bonusDmgMod = this.parent.system.stats.Strength.mod;
+                    break;
+                case "dex":
+                    this.system.bonusDmgMod = this.parent.system.stats.Dexterity.mod;
+                    break;
+                case "per":
+                    this.system.bonusDmgMod = this.parent.system.stats.Perception.mod;
+                    break;
+                case "int":
+                    this.system.bonusDmgMod = this.parent.system.stats.Intelligence.mod;
+                    break;
+                case "pow":
+                    this.system.bonusDmgMod = this.parent.system.stats.Power.mod;
+                    break;
+                case "wp":
+                    this.system.bonusDmgMod = this.parent.system.stats.Willpower.mod;
+                    break;
+                case "str2":
+                    this.system.bonusDmgMod = Math.floor(~~this.parent.system.stats.Strength.mod * 2);
+                    break;
+                case "presence":
+                    this.system.bonusDmgMod = Math.floor((this.parent.system.combatstats.currentPres * 2) + this.parent.system.stats.Power.mod);
+                    break;
+                default:
+                    break;
+            }
+            switch (this.parent.system.stats.Strength.final) {
+                case 8:
+                case 9:
+                    this.system.breakageStr = 1;
+                    break;
+                case 10:
+                    this.system.breakageStr = 2;
+                    break;
+                case 11:
+                case 12:
+                    this.system.breakageStr = 4;
+                    break;
+                case 13:
+                case 14:
+                    this.system.breakageStr = 6;
+                    break;
+                default:
+                    this.system.breakageStr = 0;
+                    break;
+            }
+            if (this.parent.system.stats.Strength.final >= 15) {
+                this.system.breakageStr = 8;
+            }
+        } else {
+            this.system.atkClass = 0;
+            this.system.blkClass = 0;
+            this.system.dodClass = 0;
+            this.system.bonusDmgMod = 0;
+            this.system.atkParentFinal = 0;
+            this.system.blkParentFinal = 0;
+            this.system.dodParentFinal = 0;
+            this.system.breakageStr = 0;
+        }
+
+        this.system.finalAtk = Math.floor(~~this.system.attack + ~~this.system.atkParentFinal + ~~this.system.atkClass + ~~this.system.quality);
+        switch (this.system.shield) {
+            case "none":
+                this.system.shieldBonus = 0;
+                this.system.shieldBonus2 = 0;
+                this.system.shieldTypeSpeed = 0;
+                break;
+            case "buckler":
+                this.system.shieldBonus = 10;
+                this.system.shieldBonus2 = 5;
+                this.system.shieldTypeSpeed = -15;
+                break;
+            case "shield":
+                this.system.shieldBonus = 20;
+                this.system.shieldBonus2 = 10;
+                this.system.shieldTypeSpeed = -25;
+                break;
+            case "fShield":
+                this.system.shieldBonus = 30;
+                this.system.shieldBonus2 = 15;
+                this.system.shieldTypeSpeed = -40;
+                break;
+            default:
+                break;
+        }
+        this.system.finalBlk = Math.floor(~~this.system.block + ~~this.system.blkParentFinal + ~~this.system.blkClass + ~~this.system.shieldBonus + ~~this.system.quality);
+        this.system.finalDod = Math.floor(~~this.system.dodge + ~~this.system.dodParentFinal + ~~this.system.dodClass + ~~this.system.shieldBonus2);
+
+
+        if (this.system.toggle == true) {
+            this.system.bonusDmgMod = Math.floor(this.system.bonusDmgMod * 2);
+        }
+        this.system.finalDmg = Math.floor(~~this.system.baseDmg + ~~this.system.bonusDmgMod + (~~this.system.quality * 2));
+        this.system.fortFinal = Math.floor(~~this.system.fortitude + (~~this.system.quality * 2));
+        this.system.atPenFinal = Math.floor(~~this.system.atPen + Math.floor(~~this.system.quality / 5));
+        this.system.finalBreakage = Math.floor(~~this.system.breakage + ~~this.system.breakageStr + ~~this.system.quality)
+        this.system.preFinal = Math.floor(~~this.system.presence + (~~this.system.quality * 10));
+        this.system.shieldFinalSpeed = Math.floor(~~this.system.shieldSpeed + ~~this.system.shieldTypeSpeed);
+        this.system.FinalWeaponSpeed = Math.floor(~~this.system.speed + ~~this.system.shieldFinalSpeed + ~~this.system.quality);
+    }
+
     prepareMentalPattern() {
         if (this.system.toggle == true) {
             this.system.finalCost = Math.floor(+this.system.cost + +this.system.cancelCost);

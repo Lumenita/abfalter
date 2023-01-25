@@ -1,4 +1,4 @@
-<div class="secondarychatmsg" data-actor-id="{{actor.id}}">
+<div class="abfalter secondarychatmsg" data-actor-id="{{actor._id}}">
     <div>
         <span> {{rollResult.data.name}} </span>
     </div>
@@ -6,12 +6,12 @@
         <span> {{label}} </span>
         <span class="{{rollResult.color}}"> {{rollResult.total}} </span>
     </div>
-</div>
-<div>
-    {{#if rollResult.explode}}
-    <button class="secOpenRoll" data-label="{{rollResult.rolledDice}}" data-label2="{{rollResult.total}}" data-label3="{{rollResult.doubles}}" data-label4="{{rollResult.openRange}}" data-label5="{{label}}" data-label6="{{rollResult.data.name}}" data-label7="{{actor.id}}"> Open Roll! </button>
-    {{/if}}
-    {{#if rollResult.fumble}}
-    <button class="secFumbleRoll" data-label="{{rollResult.total}}" data-label2="{{rollResult.fumbleLevel}}" data-label3="{{label}}" data-label4="{{rollResult.data.name}}"> Fumble Severity! </button>
-    {{/if}}
+    <div class="explodeButtons">
+        {{#if rollResult.explode}}
+        <button class="secOpenRoll" data-actor-id="{{actor._id}}"> Open Roll! </button>
+        {{/if}}
+        {{#if rollResult.fumble}}
+        <button class="secFumbleRoll" data-label="{{rollResult.total}}" data-label2="{{rollResult.fumbleLevel}}" data-label3="{{label}}" data-label4="{{rollResult.data.name}}"> Fumble Severity! </button>
+        {{/if}}
+    </div>
 </div>
