@@ -102,6 +102,26 @@
                 <div>
                     <label> <span> {{localize "abfalter.settingsTab.levelMod"}} </span> <input type="number" name="data.levelinfo.levelmod" value="{{data.levelinfo.levelmod}}" /> </label>
                     <label> <span> {{localize "abfalter.settingsTab.presenceMod"}} </span> <input type="number" name="data.levelinfo.presencemod" value="{{data.levelinfo.presencemod}}" /> </label>
+                    <label>
+                        <span> Hide background tab </span>
+                        <input type="checkbox" name="data.toggles.backgroundTab" data-dtype="boolean" {{checked data.toggles.backgroundTab}} />
+                    </label>
+                    <label>
+                        <span> Hide magic tab </span>
+                        <input type="checkbox" name="data.toggles.magicTab" data-dtype="boolean" {{checked data.toggles.magicTab}} />
+                    </label>
+                    <label>
+                        <span> hide psychic tab </span>
+                        <input type="checkbox" name="data.toggles.psychicTab" data-dtype="boolean" {{checked data.toggles.psychicTab}} />
+                    </label>
+                    <label>
+                        <span> hide ki tab </span>
+                        <input type="checkbox" name="data.toggles.kiTab" data-dtype="boolean" {{checked data.toggles.kiTab}} />
+                    </label>
+                    <label>
+                        <span> hide bio tab </span>
+                        <input type="checkbox" name="data.toggles.bioTab" data-dtype="boolean" {{checked data.toggles.bioTab}} />
+                    </label>
                 </div>
                 <div>
                     <h2 title="There is a bug with weapons accepting the bonus attack from the claasses, this is a quick roundabout way to fix it. Just place the total bonus attack, block and dodge you have here. This only affects weapons."> Temp fix </h2>

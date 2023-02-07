@@ -1,123 +1,126 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <div class="spellheader">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <div>
-            <label> <span> Name </span> <input type="text" name="name" value="{{item.name}}" placeholder="Name" /> </label>
-            <div>
-                <label> <span> Path </span> <input type="text" name="data.path" value="{{data.path}}" /> </label>
-                <label> <span> Level </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
-            </div>
-            <div>
-                <label>
-                    <span> Action </span>
-                    <select name="data.action" data-dtype="String">
-                        {{#select data.action}}
-                        <option value="Active"> Active </option>
-                        <option value="Passive"> Passive </option>
-                        {{/select}}
-                    </select>
-                </label>
-                <label>
-                    <span> Projection </span>
-                    <select name="data.projection" data-dtype="String">
-                        {{#select data.projection}}
-                        <option value="Offensive"> Offensive </option>
-                        <option value="Defensive"> Defensive </option>
-                        {{/select}}
-                    </select>
-                </label>
-            </div>
-            <div>
-                <label>
-                    <span> Type </span>
-                    <select name="data.type" data-dtype="String">
-                        {{#select data.type}}
-                        <option value="Attack"> Attack </option>
-                        <option value="Defense"> Defense </option>
-                        <option value="Spiritual"> Spiritual </option>
-                        <option value="Effect"> Effect </option>
-                        <option value="Automatic"> Automatic </option>
-                        <option value="Detection"> Detection </option>
-                        {{/select}}
-                    </select>
-                </label>
-                <label>
-                    <span> Maint. Type </span>
-                    <select name="data.mainttype" data-dtype="String">
-                        {{#select data.mainttype}}
-                        <option value="None"> None </option>
-                        <option value="Turn"> Turn </option>
-                        <option value="Daily"> Daily </option>
-                        {{/select}}
-                    </select>
-                </label>
-            </div>
-            <div>
-                <label>
-                    <span> Bought? </span>
-                    <select name="data.bought" data-dtype="String">
-                        {{#select data.bought}}
-                        <option value="SpellPath"> Spell Path </option>
-                        <option value="Single"> Single </option>
-                        <option value="Not Bought"> Not Bought </option>
-                        {{/select}}
-                    </select>
-                </label>
-                <label> <span> Cost </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
-            </div>
-        </div>
-
+    <div class="itemStart">
+        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
 
-    <div class="spellcontent">
-        <textarea class="inline-edit" name="data.description" placeholder="{{localize "abfalter.maginTab.mainInfo"}}">{{data.description}}</textarea>
-
+    <div class="spellContent">
+        <h2> {{localize "abfalter.magicTab.spellDetails"}} </h2>
         <div>
-            <span> Rank </span>
-            <span> Requirement </span>
-            <span> Zeon </span>
-            <span> Maint. </span>
+            <label> <span> {{localize "abfalter.magicTab.path"}} </span> <input type="text" name="data.path" value="{{data.path}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
+        </div>
+        <div>
+            <div class="csSelect">
+                <label>
+                    <span> {{localize "abfalter.basicInfo.action"}} </span>
+                    <select name="data.action" data-dtype="String">
+                        {{#select data.action}}
+                        <option value="Active"> {{localize "abfalter.basicInfo.active"}} </option>
+                        <option value="Passive"> {{localize "abfalter.basicInfo.passive"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+            <div class="csSelect">
+                <label>
+                    <span> {{localize "abfalter.psychicTab.pproj"}} </span>
+                    <select name="data.projection" data-dtype="String">
+                        {{#select data.projection}}
+                        <option value="Offensive"> {{localize "abfalter.magicTab.offensive1"}} </option>
+                        <option value="Defensive"> {{localize "abfalter.magicTab.defensive1"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div>
+            <div class="csSelect">
+                <label>
+                    <span> {{localize "abfalter.basicInfo.type"}} </span>
+                    <select name="data.type" data-dtype="String">
+                        {{#select data.type}}
+                        <option value="Attack"> {{localize "abfalter.basicInfo.attack"}} </option>
+                        <option value="Defense"> {{localize "abfalter.basicInfo.defense"}} </option>
+                        <option value="Spiritual"> {{localize "abfalter.magicTab.spiritual"}} </option>
+                        <option value="Effect"> {{localize "abfalter.magicTab.effect"}} </option>
+                        <option value="Automatic"> {{localize "abfalter.magicTab.automatic"}} </option>
+                        <option value="Detection"> {{localize "abfalter.magicTab.detection"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+            <div class="csSelect">
+                <label>
+                    <span> {{localize "abfalter.magicTab.maintType"}} </span>
+                    <select name="data.mainttype" data-dtype="String">
+                        {{#select data.mainttype}}
+                        <option value="None"> {{localize "abfalter.basicInfo.none"}} </option>
+                        <option value="Turn"> {{localize "abfalter.magicTab.turn"}} </option>
+                        <option value="Daily"> {{localize "abfalter.magicTab.daily"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div>
+            <div class="csSelect">
+                <label>
+                    <span> {{localize "abfalter.magicTab.bought"}} </span>
+                    <select name="data.bought" data-dtype="String">
+                        {{#select data.bought}}
+                        <option value="SpellPath"> {{localize "abfalter.magicTab.spellPath1"}} </option>
+                        <option value="Single"> {{localize "abfalter.magicTab.single"}} </option>
+                        <option value="Not Bought"> {{localize "abfalter.magicTab.notBought"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+            <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
+        </div>
+        <h3> {{localize "abfalter.basicInfo.description"}} </h3>
+        <textarea name="data.description" rows="5">{{data.description}}</textarea>
+    </div>
+    <div class="spellContentCont">
+        <div>
+            <span> {{localize "abfalter.magicTab.rank"}} </span>
+            <span> {{localize "abfalter.magicTab.req"}} </span>
+            <span> {{localize "abfalter.magicTab.zeon"}} </span>
+            <span> {{localize "abfalter.magicTab.maint"}} </span>
         </div>
 
         <div>
-            <button type="button" class="item-roll" data-roll="d51">
-                <span> Basic </span>
-            </button>
+            <span> {{localize "abfalter.magicTab.basic"}} </span>
             <input type="number" name="data.base.intreq" value="{{data.base.intreq}}" />
             <input type="number" name="data.base.zeoncost" value="{{data.base.zeoncost}}" />
             <input type="number" name="data.base.maint" value="{{data.base.maint}}" />
         </div>
-        <textarea class="inline-edit" name="data.basic.rollDesc" placeholder="{{localize "abfalter.maginTab.mainInfo"}}">{{data.basic.rollDesc}}</textarea>
+        <textarea name="data.basic.rollDesc" rows="5">{{data.basic.rollDesc}}</textarea>
 
         <div>
-            <button type="button" class="mystic rollable" data-roll="d52">
-                <span> Intermediate </span>
-            </button>
+            <span> {{localize "abfalter.magicTab.intermidiate"}} </span>
             <input type="number" name="data.intermediate.intreq" value="{{data.intermediate.intreq}}" />
             <input type="number" name="data.intermediate.zeoncost" value="{{data.intermediate.zeoncost}}" />
             <input type="number" name="data.intermediate.maint" value="{{data.intermediate.maint}}" />
         </div>
-        <textarea class="inline-edit" name="data.intermediate.rollDesc" placeholder="{{localize "abfalter.maginTab.mainInfo"}}">{{data.intermediate.rollDesc}}</textarea>
+        <textarea name="data.intermediate.rollDesc" rows="5">{{data.intermediate.rollDesc}}</textarea>
 
         <div>
-            <button type="button" class="mystic rollable" data-roll="d53">
-                <span> Advanced </span>
-            </button>
+            <span> {{localize "abfalter.magicTab.advanced"}} </span>
             <input type="number" name="data.advanced.intreq" value="{{data.advanced.intreq}}" />
             <input type="number" name="data.advanced.zeoncost" value="{{data.advanced.zeoncost}}" />
             <input type="number" name="data.advanced.maint" value="{{data.advanced.maint}}" />
         </div>
-        <textarea class="inline-edit" name="data.advanced.rollDesc" placeholder="{{localize "abfalter.maginTab.mainInfo"}}">{{data.advanced.rollDesc}}</textarea>
+        <textarea name="data.advanced.rollDesc" rows="5">{{data.advanced.rollDesc}}</textarea>
+
 
         <div>
-            <button type="button" class="mystic rollable" data-roll="d54">
-                <span> Arcane </span>
-            </button>
+            <span> {{localize "abfalter.magicTab.arcane"}} </span>
             <input type="number" name="data.arcane.intreq" value="{{data.arcane.intreq}}" />
             <input type="number" name="data.arcane.zeoncost" value="{{data.arcane.zeoncost}}" />
             <input type="number" name="data.arcane.maint" value="{{data.arcane.maint}}" />
         </div>
-        <textarea class="inline-edit" name="data.arcane.rollDesc" placeholder="{{localize "abfalter.maginTab.mainInfo"}}">{{data.arcane.rollDesc}}</textarea>
+        <textarea name="data.arcane.rollDesc" rows="5">{{data.arcane.rollDesc}}</textarea>
 
     </div>
 </form>

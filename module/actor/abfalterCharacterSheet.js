@@ -120,6 +120,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
         sheetData.kiTechniques = baseData.items.filter(function (item) { return item.type == "kiTechnique" });
         sheetData.martialArts = baseData.items.filter(function (item) { return item.type == "martialArt" });
         sheetData.arsMagnuses = baseData.items.filter(function (item) { return item.type == "arsMagnus" });
+        sheetData.elans = baseData.items.filter(function (item) { return item.type == "elan" });
 
         return sheetData;
     }
@@ -159,7 +160,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
             html.find('.mregenFull').click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
                 let max = $(ev.currentTarget).attr("data-ability2");
-                this.document.update({ "data.zeon.actual": Math.max(Math.floor(this.document.system.zeon.actual + (value / 1)), max) });
+                this.document.update({ "data.zeon.actual": Math.min(Math.floor(this.document.system.zeon.actual + (value / 1)), max) });
             });
             html.find('.removeMaint').click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
@@ -168,11 +169,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
             html.find(".toggleBoolean").click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
                 let label = $(ev.currentTarget).attr("data-label");
-                if (value == "false") {
-                    value = true;
-                } else {
-                    value = false;
-                }
+                value = !(value === 'true');
                 this.document.update({ [label]: value });
             });
             html.find(".mastery-box").click(ev => {
@@ -308,8 +305,10 @@ export default class abfalterCharacterSheet extends ActorSheet {
         let element = event.currentTarget;
         let itemId = element.closest(".item").dataset.itemId;
         let item = this.actor.items.get(itemId);
-        element.toggle = !item.system.toggle;
-        item.update({ "data.toggle": element.toggle });
+        let value = $(event.currentTarget).attr("data-ability");
+        let label = $(event.currentTarget).attr("data-label");
+        value = !(value === 'true');
+        item.update({ [label]: value });
     }
 
     _onItemChatRoll(event) {

@@ -187,6 +187,10 @@
         {{#if data.kiAbility.kiEnergyArmor.status}}
         <div>
             <span class="subKi3" title="{{localize "abfalter.kiTab.desckiGreaterArmor"}}"> {{localize "abfalter.kiTab.kiGreaterArmor"}} </span>
+            <button class="kiActiveButton1 toggleBoolean {{#if data.kiAbility.kiArcaneArmor.status}}hidden{{/if}} {{#if data.kiAbility.kiGreaterArmor.status}}{{else}}hidden{{/if}} {{#if data.toggles.greaterEnergyArmor}}kiBought{{/if}}"
+                    data-label="data.toggles.greaterEnergyArmor" data-ability="{{data.toggles.greaterEnergyArmor}}">
+                <span class="{{#if data.toggles.greaterEnergyArmor}}activeKiAbility{{/if}}"> {{localize "abfalter.basicInfo.active"}} </span>
+            </button>
             <button type="button" class="kiAbility {{#if data.kiAbility.kiGreaterArmor.status}}{{#if data.kiAbility.kiGreaterArmor.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                     data-label="data.kiAbility.kiGreaterArmor.status" data-label2="data.kiAbility.kiGreaterArmor.status2" data-ability="{{data.kiAbility.kiGreaterArmor.status}}" data-ability2="{{data.kiAbility.kiGreaterArmor.status2}}">
                 <span> {{data.kiAbility.kiGreaterArmor.cost}} </span>
@@ -195,6 +199,10 @@
         {{#if data.kiAbility.kiGreaterArmor.status}}
         <div>
             <span class="subKi4" title="{{localize "abfalter.kiTab.desckiArcaneArmor"}}"> {{localize "abfalter.kiTab.kiArcaneArmor"}} </span>
+            <button class="kiActiveButton toggleBoolean {{#if data.kiAbility.kiArcaneArmor.status}}{{else}}hidden{{/if}} {{#if data.toggles.arcaneEnergyArmor}}kiBought{{/if}}"
+                    data-label="data.toggles.arcaneEnergyArmor" data-ability="{{data.toggles.arcaneEnergyArmor}}">
+                <span class="{{#if data.toggles.arcaneEnergyArmor}}activeKiAbility{{/if}}"> {{localize "abfalter.basicInfo.active"}} </span>
+            </button>
             <button type="button" class="kiAbility {{#if data.kiAbility.kiArcaneArmor.status}}{{#if data.kiAbility.kiArcaneArmor.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                     data-label="data.kiAbility.kiArcaneArmor.status" data-label2="data.kiAbility.kiArcaneArmor.status2" data-ability="{{data.kiAbility.kiArcaneArmor.status}}" data-ability2="{{data.kiAbility.kiArcaneArmor.status2}}">
                 <span> {{data.kiAbility.kiArcaneArmor.cost}} </span>
@@ -651,8 +659,15 @@
                     <div class="csSelect">
                         <select name="data.fistDamage.multOption" data-dtype="text">
                             {{#select data.fistDamage.multOption}}
-                            <option value="strength"> {{localize "abfalter.basicInfo.strength"}} </option>
-                            <option value="power"> {{localize "abfalter.basicInfo.power"}} </option>
+                            <option value="agi"> {{localize "abfalter.basicInfo.agility"}} </option>
+                            <option value="con"> {{localize "abfalter.basicInfo.consti"}} </option>
+                            <option value="str"> {{localize "abfalter.basicInfo.strength"}} </option>
+                            <option value="dex"> {{localize "abfalter.basicInfo.dexerity"}} </option>
+                            <option value="per"> {{localize "abfalter.basicInfo.perception"}} </option>
+                            <option value="int"> {{localize "abfalter.basicInfo.intell"}} </option>
+                            <option value="pow"> {{localize "abfalter.basicInfo.power"}} </option>
+                            <option value="wp"> {{localize "abfalter.basicInfo.willPower"}} </option>
+                            <option value="str2"> {{localize "abfalter.armoryTab.twoStr"}} </option>
                             <option value="presence"> {{localize "abfalter.kiTab.presencexpow"}} </option>
                             {{/select}}
                         </select>
@@ -661,7 +676,7 @@
                 </div>
                 <input type="number" name="data.unarmedDmgFinal" value="{{data.unarmedDmgFinal}}" readonly />
             </div>
-            <textarea class="textarea-auto-resize" name="data.fistDamage.desc" placeholder="{{localize "abfalter.basicInfo.extraInfo"}}">{{data.fistDamage.desc}}</textarea>
+            <textarea class="textarea-auto-resize" name="data.fistDamage.desc"> {{data.fistDamage.desc}} </textarea>
             {{/if}}
         </div>
 
@@ -895,7 +910,7 @@
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
                         <div>
-                            <textarea class="inline-edit itemAuto-expand" data-field="system.description" placeholder="{{localize "abfalter.kiTab.arsMagInfo"}}">{{arsMagnus.system.description}}</textarea>
+                            <textarea class="inline-edit itemAuto-expand" data-field="system.description">{{arsMagnus.system.description}}</textarea>
                         </div>
                         {{else}}
                         <div>
@@ -974,7 +989,7 @@
                     <div>
                         <input class="item-name inline-edit" data-field="name" type="text" value="{{martialArt.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                         <div class="csSelect">
-                            <select class="inline-edit" data-field="system.degree" data-dtype="number">
+                            <select class="inline-edit" data-field="system.degree" data-dtype="text">
                                 {{#select system.degree}}
                                 <option value="Base"> {{localize "abfalter.basicInfo.base"}} </option>
                                 <option value="Advanced"> {{localize "abfalter.kiTab.advanced"}} </option>
@@ -988,7 +1003,7 @@
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     <div class="{{#if system.expand}}expand{{else}}notExpand{{/if}}">
-                        <textarea class="inline-edit itemAuto-expand" data-field="system.description" placeholder="{{localize "abfalter.kiTab.martialInfo"}}">{{martialArt.system.description}}</textarea>
+                        <textarea class="inline-edit itemAuto-expand" data-field="system.description">{{martialArt.system.description}}</textarea>
                     </div>
                     {{else}}
                     <div>
@@ -1115,7 +1130,7 @@
                                 <input class="inline-edit" data-field="system.major.water" type="number" value="{{kiSealCreature.system.major.water}}" />
                                 <input class="inline-edit" data-field="system.major.fire" type="number" value="{{kiSealCreature.system.major.fire}}" />
                             </div>
-                            <textarea class="inline-edit itemAuto-expand" data-field="system.description" placeholder="{{localize "abfalter.kiTab.kiSealInfo"}}">{{kiSealCreature.system.description}}</textarea>
+                            <textarea class="inline-edit itemAuto-expand" data-field="system.description">{{kiSealCreature.system.description}}</textarea>
                         </div>
                         {{else}}
                         <div>
@@ -1226,7 +1241,7 @@
                                 </select>
                             </div>
                         </div>
-                        <textarea class="inline-edit itemAuto-expand" data-field="system.description" placeholder="{{localize "abfalter.kiTab.kiTechInfo"}}">{{kiTechnique.system.description}}</textarea>
+                        <textarea class="inline-edit itemAuto-expand" data-field="system.description">{{kiTechnique.system.description}}</textarea>
                     </div>
                     {{else}}
                     <div>

@@ -14,21 +14,33 @@ export default class abfalterItemSheet extends ItemSheet {
             case "psychicMatrix":
                 this.options.height = this.position.height = 550;
                 break;
+            case "elan":
+                this.options.height = this.position.height = 625;
+                this.options.width = this.position.width = 515;
+                break;
+            case "weapon":
+                this.options.height = this.position.height = 615;
+                this.options.width = this.position.width = 550;
+                break;
             default:
                 this.options.height = this.position.height = 400;
                 break;
         }
     }
 
-
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        const options = super.defaultOptions
+        mergeObject(options, {
             classes: ["abfalter", "sheet", "item"],
             width: 500,
             height: 450,
             resizable: true,
-            tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
-        });
+            tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }],
+            //submitOnChange: true,
+            //submitOnClose: false,
+            //closeOnSubmit: false
+        })
+        return options
     }
 
     get template() {
@@ -43,7 +55,7 @@ export default class abfalterItemSheet extends ItemSheet {
             editable: this.isEditable,
             item: baseData.item,
             data: baseData.item.system,
-            config: CONFIG.abfalter
+            config: CONFIG.abfalter,
         };
         return sheetData;
     }
@@ -52,11 +64,7 @@ export default class abfalterItemSheet extends ItemSheet {
         html.find(".toggleBoolean").click(ev => {
             let value = $(ev.currentTarget).attr("data-ability");
             let label = $(ev.currentTarget).attr("data-label");
-            if (value == "false") {
-                value = true;
-            } else {
-                value = false;
-            }
+            value = !(value === 'true');
             this.document.update({ [label]: value });
         });
     }

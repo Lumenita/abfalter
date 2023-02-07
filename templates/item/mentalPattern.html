@@ -3,21 +3,19 @@
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
         <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
-    <div class="mentalPattern">
+
+    <div class="mentalpContent">
+        <h2> {{localize "abfalter.psychicTab.mentalPatternsOne"}} </h2>
         <div>
-            <label> <span> {{localize "abfalter.psychicTab.oppPattern"}} </span> <input type="text" name="data.opposite" value="{{data.opposite}}" placeholder="Name of Opposite Pattern" /> </label>
+            <label> <span> {{localize "abfalter.psychicTab.oppPattern"}} </span> <input type="text" name="data.opposite" value="{{data.opposite}}" /> </label>
         </div>
         <div>
             <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
             <label> <span> {{localize "abfalter.psychicTab.cancelCost"}} </span> <input type="number" name="data.cancelCost" value="{{data.cancelCost}}" /> </label>
         </div>
-        <div>
-            <span> {{localize "abfalter.basicInfo.bonus"}} </span>
-        </div>
-        <textarea name="data.description" rows="6" placeholder="{{localize "abfalter.psychicTab.patternInfoB"}}">{{data.description}}</textarea>
-        <div>
-            <span> {{localize "abfalter.armoryTab.penalty"}} </span>
-        </div>
-        <textarea name="data.penalty" rows="6" placeholder="{{localize "abfalter.psychicTab.patternInfoP"}}">{{data.penalty}}</textarea>
+        <h3> {{localize "abfalter.basicInfo.bonus"}} </h3>
+        <textarea name="data.description" rows="6">{{data.description}}</textarea>
+        <h3> {{localize "abfalter.armoryTab.penalty"}} </h3>
+        <textarea name="data.penalty" rows="6">{{data.penalty}}</textarea>
     </div>
 </form>

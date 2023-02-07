@@ -378,6 +378,54 @@ export default class abfalterActor extends Actor {
         data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.imbalance);
         data.mprojfinaldef = Math.floor(data.mprojfinal - data.mproj.imbalance);
 
+        // Psychic Potential
+        if (data.stats.Willpower.final < 5) {
+            data.fromWP = 0;
+        } else if (data.stats.Willpower.final >= 5 && data.stats.Willpower.final < 15) {
+            data.fromWP = Math.floor((data.stats.Willpower.final - 4) * 10);
+        } else if (data.stats.Willpower.final >= 15) {
+            data.fromWP = Math.floor(((data.stats.Willpower.final - 14) * 20) + 100)
+        }
+        data.finalPotential = Math.floor(data.ppotential.base + data.fromWP + +data.ppotential.spent + data.ppotential.spec + data.ppotential.temp);
+        switch (data.ppotential.spent) {
+            case "10":
+                data.ppotentialpp = 1;
+                break;
+            case "20":
+                data.ppotentialpp = 3;
+                break;
+            case "30":
+                data.ppotentialpp = 6;
+                break;
+            case "40":
+                data.ppotentialpp = 10;
+                break;
+            case "50":
+                data.ppotentialpp = 15;
+                break;
+            case "60":
+                data.ppotentialpp = 21;
+                break;
+            case "70":
+                data.ppotentialpp = 28;
+                break;
+            case "80":
+                data.ppotentialpp = 36;
+                break;
+            case "90":
+                data.ppotentialpp = 45;
+                break;
+            case "100":
+                data.ppotentialpp = 55;
+                break;
+            default:
+                data.ppotentialpp = 0;
+                break;
+        }
+
+        // Psychic Projection
+        data.pprojfinal = Math.floor(data.pproj.base + data.pproj.spec + data.pproj.temp + data.stats.Dexterity.mod + data.aamFinal);
+
         // Wear Armor
         data.wearArmorFinal = Math.floor(data.wearArmor.base + data.wearArmor.spec + data.wearArmor.temp + data.stats.Strength.mod);
     }
@@ -391,7 +439,7 @@ export default class abfalterActor extends Actor {
         const data = this.system;
         const stats = data.stats;
 
-        // Determine Item Values / Last used arr[110]  11
+        // Determine Item Values / Last used arr[121]  2
         const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish, acro,
             athle, climb, jump, ride, swim, etiq, intim, leader, persua, street, style, trading, notice, search, track,
             animals, appra, archi, herb, hist, law, magicapr, medic, mem, navi, occ, science, tactic, comp, fos,
@@ -399,7 +447,8 @@ export default class abfalterActor extends Actor {
             runes, ritcal, soh, tailoring, quantity, req, natPen, movePen, aCutMax, aCutTot, aImpMax, aImpTot, aThrMax, aThrTot, aHeatMax,
             aHeatTot, aColdMax, aColdTot, aEleMax, aEleTot, aEneMax, aEneTot, aSptMax, aSptTot, ahReq, ahCutMax, ahCutTot, ahImpMax, ahImpTot, ahThrMax,
             ahThrTot, ahHeatMax, ahHeatTot, ahColdMax, ahColdTot, ahEleMax, ahEleTot, ahEneMax, ahEneTot, ahSptMax, ahSptTot, perPen, usedpp, matrixpp, arsMk,
-            maMk, techMk, pathLvl, turnMaint, dayMaint, spellCost, wepNum, wepSpd] = this.items.reduce((arr, item) => {
+            maMk, techMk, pathLvl, turnMaint, dayMaint, spellCost, wepNum, wepSpd, maKiAtk, maKiBlk, maKiDod, pilot, techmagic, cook, toy,
+            kiDect, kiCon] = this.items.reduce((arr, item) => {
                 if (item.type === "class") {
                     const classLevels = parseInt(item.system.main.levels) || 0;
                     arr[0] += classLevels;
@@ -466,6 +515,12 @@ export default class abfalterActor extends Actor {
                     arr[61] += classLevels * (parseInt(item.system.secondary.ritualcalig) || 0);
                     arr[62] += classLevels * (parseInt(item.system.secondary.slofhand) || 0);
                     arr[63] += classLevels * (parseInt(item.system.secondary.tailoring) || 0);
+                    arr[116] += classLevels * (parseInt(item.system.secondary.piloting) || 0);
+                    arr[117] += classLevels * (parseInt(item.system.secondary.technomagic) || 0);
+                    arr[118] += classLevels * (parseInt(item.system.secondary.cooking) || 0);
+                    arr[119] += classLevels * (parseInt(item.system.secondary.toymaking) || 0);
+                    arr[120] += classLevels * (parseInt(item.system.secondary.kidetection) || 0);
+                    arr[121] += classLevels * (parseInt(item.system.secondary.kiconceal) || 0);
                 }
                 if (item.type === "armor") {
                     if (item.system.equipped == true) {
@@ -561,6 +616,9 @@ export default class abfalterActor extends Actor {
                 }
                 if (item.type === "martialArt") {
                     arr[105] += parseInt(item.system.mk) || 0;
+                    arr[113] += parseInt(item.system.bonusAtk) || 0;
+                    arr[114] += parseInt(item.system.bonusDef) || 0;
+                    arr[115] += parseInt(item.system.bonusDod) || 0;
                 }
                 if (item.type === "kiTechnique") {
                     arr[106] += parseInt(item.system.mk) || 0;
@@ -599,7 +657,8 @@ export default class abfalterActor extends Actor {
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0]);
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0]);
 
         //Stuff Xp, Presence, Next lvl Xp
         data.level = level; //class Bonus
@@ -647,6 +706,26 @@ export default class abfalterActor extends Actor {
         data.weararmorbonus = weararm;
         data.wearArmorFinal += weararm;
 
+        if (data.kiAbility.kiEnergyArmor.status == true) { //Energy armor add 2 energy AT for free
+            data.enArm = 2;
+            if (data.toggles.greaterEnergyArmor == true && data.kiAbility.kiArcaneArmor.status == false) { //Greater energy armor only if arcane is not bought
+                data.enArm = 4;
+            } else if (data.kiAbility.kiArcaneArmor.status == true) {
+                data.enArm = 4;
+                data.toggles.greaterEnergyArmor = false;
+                if (data.toggles.arcaneEnergyArmor == true) {
+                    data.enArm = 6;
+                }
+            }
+        } else {
+            data.enArm = 0;
+        }
+        if (data.kiAbility.kiGreaterArmor.status == false) {
+            data.toggles.greaterEnergyArmor = false;
+        }
+        if (data.kiAbility.kiArcaneArmor.status == false) {
+            data.toggles.arcaneEnergyArmor = false;
+        }
         // Armor Final AT
         data.aCutFinal = Math.floor((aCutTot - ~~(aCutMax / 2)) + aCutMax);
         data.aImpFinal = Math.floor((aImpTot - ~~(aImpMax / 2)) + aImpMax);
@@ -654,7 +733,7 @@ export default class abfalterActor extends Actor {
         data.aHeatFinal = Math.floor((aHeatTot - ~~(aHeatMax / 2)) + aHeatMax);
         data.aColdFinal = Math.floor((aColdTot - ~~(aColdMax / 2)) + aColdMax);
         data.aEleFinal = Math.floor((aEleTot - ~~(aEleMax / 2)) + aEleMax);
-        data.aEneFinal = Math.floor((aEneTot - ~~(aEneMax / 2)) + aEneMax);
+        data.aEneFinal = Math.floor((aEneTot - ~~(aEneMax / 2)) + aEneMax + data.enArm);
         data.aSptFinal = Math.floor((aSptTot - ~~(aSptMax / 2)) + aSptMax);
 
         // Helmet Final AT
@@ -683,27 +762,38 @@ export default class abfalterActor extends Actor {
         }
 
         //Resistances
+        if (data.kiAbility.kiPhysDom.status == true) { //Physical Dominion adds 10 PhR
+            data.phrDom = 10;
+        } else {
+            data.phrDom = 0;
+        }
+        if (data.kiAbility.nemiBodyEmpty.status == true) { //Physical Dominion adds 10 PhR
+            data.allEmpty = 20;
+        } else {
+            data.allEmpty = 0;
+        }
+
         for (let [key, res] of Object.entries(data.resistances)) {
             switch (key) {
                 case "Physical":
                     res.short = "PhR";
-                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod);
+                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.phrDom + data.allEmpty);
                     break;
                 case "Disease":
                     res.short = "DR";
-                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod);
+                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.allEmpty);
                     break;
                 case "Poison":
                     res.short = "PsnR";
-                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod);
+                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.allEmpty);
                     break;
                 case "Magic":
                     res.short = "MR";
-                    res.final = Math.floor(data.presence + res.mod + stats.Power.mod);
+                    res.final = Math.floor(data.presence + res.mod + stats.Power.mod + data.allEmpty);
                     break;
                 case "Psychic":
                     res.short = "PsyR";
-                    res.final = Math.floor(data.presence + res.mod + stats.Willpower.mod);
+                    res.final = Math.floor(data.presence + res.mod + stats.Willpower.mod + data.allEmpty);
                     break;
                 default:
                     break;
@@ -829,14 +919,29 @@ export default class abfalterActor extends Actor {
         data.lpfinal += lpbonus;
         
         // Attack, Block, & Dodge post class
-        data.attackbonus = atk;
+        //maKiAtk, maKiBlk, maKiDod
+        data.attackbonus = atk + maKiAtk;
+        if (data.attackbonus > 50) {
+            data.attackbonus = 50;
+        }
         data.atkfinal += atk;
-        data.blockbonus = blk;
+        data.blockbonus = blk + maKiBlk;
+        if (data.blockbonus > 50) {
+            data.blockbonus = 50;
+        }
         data.blkfinal += blk;
-        data.dodgebonus = dod;
+        data.dodgebonus = dod + maKiDod;
+        if (data.dodgebonus > 50) {
+            data.dodgebonus = 50;
+        }
         data.dodfinal += dod;
 
         // Initiative
+        if (data.kiAbility.kiIncreaseSpd.status == true) {
+            data.KiBonusSpd = 10;
+        } else {
+            data.KiBonusSpd = 0;
+        }
         data.inibonus = ini;
         data.weaponNumber = wepNum;
         data.weaponSpeed = wepSpd;
@@ -849,7 +954,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.wepFinSpd = data.weaponSpeed;
         }
-        data.iniFinal = Math.floor(data.iniBase + data.inibonus + data.initiative.spec + data.wepFinSpd - data.totalNatPen); // Base + class + spec + weapon(if equipped) - armor.
+        data.iniFinal = Math.floor(data.iniBase + data.inibonus + data.initiative.spec + data.KiBonusSpd + data.wepFinSpd - data.totalNatPen); // Base + class + spec + weapon(if equipped) - armor.
 
         /*
             Secondaries
@@ -1355,7 +1460,69 @@ export default class abfalterActor extends Actor {
         }
         data.tailoringfinal = Math.floor(data.secondary.tailoring.temp + data.secondary.tailoring.spec + data.secondary.tailoring.base + data.tailoringbonus + data.tailoringnatfinal + data.aamFinal);
 
+        // piloting
+        data.pilotingbonus = pilot;
+        data.pilotingnat = Math.floor(stats.Dexterity.mod + data.secondary.piloting.natural + Math.ceil(data.secondary.piloting.nat * stats.Dexterity.mod));
+        if (data.pilotingnat < 100) {
+            data.pilotingnatfinal = data.pilotingnat;
+        } else {
+            data.pilotingnatfinal = 100;
+        }
+        data.pilotingfinal = Math.floor(data.secondary.piloting.temp + data.secondary.piloting.spec + data.secondary.piloting.base + data.pilotingbonus + data.pilotingnatfinal + data.aamFinal);
 
+        // cooking
+        data.cookingbonus = cook;
+        data.cookingnat = Math.floor(stats.Power.mod + data.secondary.cooking.natural + Math.ceil(data.secondary.cooking.nat * stats.Power.mod));
+        if (data.cookingnat < 100) {
+            data.cookingnatfinal = data.cookingnat;
+        } else {
+            data.cookingnatfinal = 100;
+        }
+        data.cookingfinal = Math.floor(data.secondary.cooking.temp + data.secondary.cooking.spec + data.secondary.cooking.base + data.cookingbonus + data.cookingnatfinal + data.aamFinal);
+
+        // technomagic
+        data.technomagicbonus = techmagic;
+        data.technomagicnat = Math.floor(stats.Intelligence.mod + data.secondary.technomagic.natural + Math.ceil(data.secondary.technomagic.nat * stats.Intelligence.mod));
+        if (data.technomagicnat < 100) {
+            data.technomagicnatfinal = data.technomagicnat;
+        } else {
+            data.technomagicnatfinal = 100;
+        }
+        data.technomagicfinal = Math.floor(data.secondary.technomagic.temp + data.secondary.technomagic.spec + data.secondary.technomagic.base + data.technomagicbonus + data.technomagicnatfinal + data.aamFinal);
+
+        //toymaking
+        data.toymakingbonus = toy;
+        data.toymakingnat = Math.floor(stats.Power.mod + data.secondary.toymaking.natural + Math.ceil(data.secondary.toymaking.nat * stats.Power.mod));
+        if (data.toymakingnat < 100) {
+            data.toymakingnatfinal = data.toymakingnat;
+        } else {
+            data.toymakingnatfinal = 100;
+        }
+        data.toymakingfinal = Math.floor(data.secondary.toymaking.temp + data.secondary.toymaking.spec + data.secondary.toymaking.base + data.toymakingbonus + data.toymakingnatfinal + data.aamFinal);
+
+
+        //kidetection data.kidetectionbase
+        data.kidetectionbase = Math.floor((data.noticefinal + data.mkFinal) / 2);
+        data.kidetectionbonus = kiDect;
+        data.kidetectionnat = Math.floor(stats.Perception.mod + data.secondary.kidetection.natural + Math.ceil(data.secondary.kidetection.nat * stats.Perception.mod));
+        if (data.kidetectionnat < 100) {
+            data.kidetectionnatfinal = data.kidetectionnat;
+        } else {
+            data.kidetectionnatfinal = 100;
+        }
+        data.kidetectionfinal = Math.floor(data.secondary.kidetection.temp + data.secondary.kidetection.spec + data.kidetectionbase + data.kidetectionbonus + data.kidetectionnatfinal + data.aamFinal);
+
+
+        //kicoceal
+        data.kiconcealbase = Math.floor((data.hidefinal + data.mkFinal) / 2);
+        data.kiconcealbonus = kiCon;
+        data.kiconcealnat = Math.floor(stats.Perception.mod + data.secondary.kiconceal.natural + Math.ceil(data.secondary.kiconceal.nat * stats.Perception.mod));
+        if (data.kiconcealnat < 100) {
+            data.kiconcealnatfinal = data.kiconcealnat;
+        } else {
+            data.kiconcealnatfinal = 100;
+        }
+        data.kiconcealfinal = Math.floor(data.secondary.kiconceal.temp + data.secondary.kiconceal.spec + data.kiconcealbase + data.kiconcealbonus + data.kiconcealnatfinal + data.aamFinal);
         /*
          * // z
         data.znat = Math.floor(stats.x.mod + data.secondary.z.natural + Math.ceil(data.secondary.z.nat * stats.x.mod));
@@ -1367,13 +1534,23 @@ export default class abfalterActor extends Actor {
         data.zfinal = Math.floor(data.secondary.z.temp + data.secondary.z.spec + data.secondary.z.base + data.zbonus + data.znatfinal + data.aamFinal);
          */
 
+
+
         // Magic Projection
         //data.mprojfinal = Math.floor(data.mproj.base + data.mproj.spec + data.mproj.temp + data.aamFinal + data.stats.Dexterity.mod);
         //data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.imbalance);
         //data.mprojfinaldef = Math.floor(data.mprojfinal - data.mproj.imbalance);
 
+        //Ki Abilities Bonuses
+
+
+
+
+
+
+
+
         //to place class bonuses
-        data.ppbonus = pp;
         data.zeonbonus = zeon;
         data.summonbonus = summon;
         data.controlbonus = control;
@@ -1576,58 +1753,52 @@ export default class abfalterActor extends Actor {
         data.bindfinal = Math.floor(data.summoning.bind.base + data.bindbonus + data.summoning.bind.spec + data.stats.Power.mod + Math.min(0, data.aamFinal));
         data.banishfinal = Math.floor(data.summoning.banish.base + data.banishbonus + data.summoning.banish.spec + data.stats.Power.mod + Math.min(0, data.aamFinal));
 
-        // Psychic Potential
-        if (data.stats.Willpower.final < 5) {
-            data.fromWP = 0;
-        } else if (data.stats.Willpower.final >= 5 && data.stats.Willpower.final < 15) {
-            data.fromWP = Math.floor((data.stats.Willpower.final - 4) * 10);
-        } else if (data.stats.Willpower.final >= 15) {
-            data.fromWP = Math.floor(((data.stats.Willpower.final - 14) * 20) + 100)
-        }
-        data.finalPotential = Math.floor(data.ppotential.base + data.fromWP + +data.ppotential.spent + data.ppotential.spec + data.ppotential.temp);
-        switch (data.ppotential.spent) {
-            case "10":
-                data.ppotentialpp = 1;
+        //Unarmed
+        switch (data.fistDamage.multOption) {
+            case "agi":
+                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Agility.mod));
                 break;
-            case "20":
-                data.ppotentialpp = 3;
+            case "con":
+                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Constitution.mod));
                 break;
-            case "30":
-                data.ppotentialpp = 6;
+            case "str":
+                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult *  data.stats.Strength.mod));
                 break;
-            case "40":
-                data.ppotentialpp = 10;
+            case "dex":
+                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Dexterity.mod));
                 break;
-            case "50":
-                data.ppotentialpp = 15;
+            case "per":
+                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Perception.mod));
                 break;
-            case "60":
-                data.ppotentialpp = 21;
+            case "int":
+                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Intelligence.mod));
                 break;
-            case "70":
-                data.ppotentialpp = 28;
+            case "pow":
+                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Power.mod));
                 break;
-            case "80":
-                data.ppotentialpp = 36;
+            case "wp":
+                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Willpower.mod));
                 break;
-            case "90":
-                data.ppotentialpp = 45;
+            case "str2":
+                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * (data.stats.Strength.mod * 2)));
                 break;
-            case "100":
-                data.ppotentialpp = 55;
+            case "presence":
+                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * ((data.presence * 2) +  data.stats.Power.mod)));
                 break;
             default:
-                data.ppotentialpp = 0;
+                data.unarmedDmgFinal = 0;
                 break;
         }
 
+
+
         // Psychic Points
+        data.ppbonus = pp;
         data.finalpp = Math.floor(data.ppoint.base + data.ppoint.spec + data.ppbonus);
         data.innateSlotspp = Math.floor(data.other.innateSlots * 2);
         data.maxFreepp = Math.floor(data.finalpp - (+usedpp + data.ppotentialpp + +matrixpp + data.innateSlotspp));
 
-        // Psychic Projection
-        data.pprojfinal = Math.floor(data.pproj.base + data.pproj.spec + data.pproj.temp + data.stats.Dexterity.mod + data.aamFinal);
+
 
 
 

@@ -1,0 +1,182 @@
+<form class="{{cssClass}} elanWindow" autocomplete="off">
+    <div class="itemStart">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
+    </div>
+    
+    <nav class="sheet-tabs tabs elanTabs" data-group="primary">
+        <ul>
+            <li><a class="item" data-tab="main"><span>{{localize "abfalter.generalTab.elan"}}</span></a></li>
+            <li><a class="item" data-tab="others"><span>{{localize "abfalter.generalTab.addElan"}}</span></a></li>
+        </ul>       
+    </nav>
+
+    <section class="sheet-body">
+        <div class="tab main" data-group="primary" data-tab="main">
+            <div class="elanContent">
+                <div>
+                    <label> <span> {{localize "abfalter.generalTab.title"}} </span> <input type="text" name="data.title" value="{{data.title}}" /> </label>
+                    <label> <span> {{localize "abfalter.generalTab.elan"}} </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
+                </div>
+                <h3> {{localize "abfalter.basicInfo.description"}} </h3>
+                <textarea name="data.description" rows="5">{{data.description}}</textarea>
+                <h3> {{localize "abfalter.generalTab.gainElan"}} </h3>
+                <textarea name="data.gain" rows="5">{{data.gain}}</textarea>
+                <h3> {{localize "abfalter.generalTab.gainUpperElan"}} </h3>
+                <textarea name="data.gainUpper" rows="5">{{data.gainUpper}}</textarea>
+                <h3> {{localize "abfalter.generalTab.loseElan"}} </h3>
+                <textarea name="data.lose" rows="5">{{data.lose}}</textarea>
+            </div>
+        </div>
+
+        <div class="tab others" data-group="primary" data-tab="others">
+            <div class="elanContent2">
+                <div>
+                    <span> {{localize "abfalter.generalTab.elanEdit"}} </span>
+                    <label> <span> {{localize "abfalter.psychicTab.totalCost"}}: </span> <input type="number" name="{{data.totalCost}}" value="{{data.totalCost}}" readonly /> </label>
+                </div>
+                <div>
+                    <span> {{localize "abfalter.basicInfo.name"}} </span>
+                    <span> {{localize "abfalter.basicInfo.cost"}} </span>
+                    <span> {{localize "abfalter.magicTab.req"}} </span>
+                </div>
+                <div>
+                    <input type="text" name="data.gifts.one.name" value="{{data.gifts.one.name}}" />
+                    <input type="number" name="data.gifts.one.cost" value="{{data.gifts.one.cost}}" />
+                    <input type="number" name="data.gifts.one.req" value="{{data.gifts.one.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.one.expand}}showOpacity{{/if}}" data-label="data.gifts.one.expand" data-ability="{{data.gifts.one.expand}}"><i class="{{#if data.gifts.one.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.one.expand}}
+                <textarea name="data.gifts.one.desc" rows="5">{{data.gifts.one.desc}}</textarea>
+                {{/if}}
+                <div>
+                    <input type="text" name="data.gifts.two.name" value="{{data.gifts.two.name}}" />
+                    <input type="number" name="data.gifts.two.cost" value="{{data.gifts.two.cost}}" />
+                    <input type="number" name="data.gifts.two.req" value="{{data.gifts.two.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.two.expand}}showOpacity{{/if}}" data-label="data.gifts.two.expand" data-ability="{{data.gifts.two.expand}}"><i class="{{#if data.gifts.two.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.two.expand}}
+                <textarea name="data.gifts.two.desc" rows="5">{{data.gifts.two.desc}}</textarea>
+                {{/if}}
+                <div>
+                    <input type="text" name="data.gifts.three.name" value="{{data.gifts.three.name}}" />
+                    <input type="number" name="data.gifts.three.cost" value="{{data.gifts.three.cost}}" />
+                    <input type="number" name="data.gifts.three.req" value="{{data.gifts.three.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.three.expand}}showOpacity{{/if}}" data-label="data.gifts.three.expand" data-ability="{{data.gifts.three.expand}}"><i class="{{#if data.gifts.three.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.three.expand}}
+                <textarea name="data.gifts.three.desc" rows="5">{{data.gifts.three.desc}}</textarea>
+                {{/if}}
+                <div>
+                    <input type="text" name="data.gifts.four.name" value="{{data.gifts.four.name}}" />
+                    <input type="number" name="data.gifts.four.cost" value="{{data.gifts.four.cost}}" />
+                    <input type="number" name="data.gifts.four.req" value="{{data.gifts.four.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.four.expand}}showOpacity{{/if}}" data-label="data.gifts.four.expand" data-ability="{{data.gifts.four.expand}}"><i class="{{#if data.gifts.four.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.four.expand}}
+                <textarea name="data.gifts.four.desc" rows="5">{{data.gifts.four.desc}}</textarea>
+                {{/if}}
+                <div>
+                    <input type="text" name="data.gifts.five.name" value="{{data.gifts.five.name}}" />
+                    <input type="number" name="data.gifts.five.cost" value="{{data.gifts.five.cost}}" />
+                    <input type="number" name="data.gifts.five.req" value="{{data.gifts.five.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.five.expand}}showOpacity{{/if}}" data-label="data.gifts.five.expand" data-ability="{{data.gifts.five.expand}}"><i class="{{#if data.gifts.five.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.five.expand}}
+                <textarea name="data.gifts.five.desc" rows="5">{{data.gifts.five.desc}}</textarea>
+                {{/if}}
+
+                <div>
+                    <input type="text" name="data.gifts.six.name" value="{{data.gifts.six.name}}" />
+                    <input type="number" name="data.gifts.six.cost" value="{{data.gifts.six.cost}}" />
+                    <input type="number" name="data.gifts.six.req" value="{{data.gifts.six.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.six.expand}}showOpacity{{/if}}" data-label="data.gifts.six.expand" data-ability="{{data.gifts.six.expand}}"><i class="{{#if data.gifts.six.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.six.expand}}
+                <textarea name="data.gifts.six.desc" rows="5">{{data.gifts.six.desc}}</textarea>
+                {{/if}}
+                <div>
+                    <input type="text" name="data.gifts.seven.name" value="{{data.gifts.seven.name}}" />
+                    <input type="number" name="data.gifts.seven.cost" value="{{data.gifts.seven.cost}}" />
+                    <input type="number" name="data.gifts.seven.req" value="{{data.gifts.seven.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.seven.expand}}showOpacity{{/if}}" data-label="data.gifts.seven.expand" data-ability="{{data.gifts.seven.expand}}"><i class="{{#if data.gifts.seven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.seven.expand}}
+                <textarea name="data.gifts.seven.desc" rows="5">{{data.gifts.seven.desc}}</textarea>
+                {{/if}}
+                <div>
+                    <input type="text" name="data.gifts.eight.name" value="{{data.gifts.eight.name}}" />
+                    <input type="number" name="data.gifts.eight.cost" value="{{data.gifts.eight.cost}}" />
+                    <input type="number" name="data.gifts.eight.req" value="{{data.gifts.eight.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.eight.expand}}showOpacity{{/if}}" data-label="data.gifts.eight.expand" data-ability="{{data.gifts.eight.expand}}"><i class="{{#if data.gifts.eight.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.eight.expand}}
+                <textarea name="data.gifts.eight.desc" rows="5">{{data.gifts.eight.desc}}</textarea>
+                {{/if}}
+                <div>
+                    <input type="text" name="data.gifts.nine.name" value="{{data.gifts.nine.name}}" />
+                    <input type="number" name="data.gifts.nine.cost" value="{{data.gifts.nine.cost}}" />
+                    <input type="number" name="data.gifts.nine.req" value="{{data.gifts.nine.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.nine.expand}}showOpacity{{/if}}" data-label="data.gifts.nine.expand" data-ability="{{data.gifts.nine.expand}}"><i class="{{#if data.gifts.nine.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.nine.expand}}
+                <textarea name="data.gifts.nine.desc" rows="5">{{data.gifts.nine.desc}}</textarea>
+                {{/if}}
+                <div>
+                    <input type="text" name="data.gifts.ten.name" value="{{data.gifts.ten.name}}" />
+                    <input type="number" name="data.gifts.ten.cost" value="{{data.gifts.ten.cost}}" />
+                    <input type="number" name="data.gifts.ten.req" value="{{data.gifts.ten.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.ten.expand}}showOpacity{{/if}}" data-label="data.gifts.ten.expand" data-ability="{{data.gifts.ten.expand}}"><i class="{{#if data.gifts.ten.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.ten.expand}}
+                <textarea name="data.gifts.ten.desc" rows="5">{{data.gifts.ten.desc}}</textarea>
+                {{/if}}
+                <div>
+                    <input type="text" name="data.gifts.eleven.name" value="{{data.gifts.eleven.name}}" />
+                    <input type="number" name="data.gifts.eleven.cost" value="{{data.gifts.eleven.cost}}" />
+                    <input type="number" name="data.gifts.eleven.req" value="{{data.gifts.eleven.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.eleven.expand}}showOpacity{{/if}}" data-label="data.gifts.eleven.expand" data-ability="{{data.gifts.eleven.expand}}"><i class="{{#if data.gifts.eleven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.eleven.expand}}
+                <textarea name="data.gifts.eleven.desc" rows="5">{{data.gifts.eleven.desc}}</textarea>
+                {{/if}}
+                <div>
+                    <input type="text" name="data.gifts.twelve.name" value="{{data.gifts.twelve.name}}" />
+                    <input type="number" name="data.gifts.twelve.cost" value="{{data.gifts.twelve.cost}}" />
+                    <input type="number" name="data.gifts.twelve.req" value="{{data.gifts.twelve.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.twelve.expand}}showOpacity{{/if}}" data-label="data.gifts.twelve.expand" data-ability="{{data.gifts.twelve.expand}}"><i class="{{#if data.gifts.twelve.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.twelve.expand}}
+                <textarea name="data.gifts.twelve.desc" rows="5">{{data.gifts.twelve.desc}}</textarea>
+                {{/if}}
+                <div>
+                    <input type="text" name="data.gifts.thirteen.name" value="{{data.gifts.thirteen.name}}" />
+                    <input type="number" name="data.gifts.thirteen.cost" value="{{data.gifts.thirteen.cost}}" />
+                    <input type="number" name="data.gifts.thirteen.req" value="{{data.gifts.thirteen.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.thirteen.expand}}showOpacity{{/if}}" data-label="data.gifts.thirteen.expand" data-ability="{{data.gifts.thirteen.expand}}"><i class="{{#if data.gifts.thirteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.thirteen.expand}}
+                <textarea name="data.gifts.thirteen.desc" rows="5">{{data.gifts.thirteen.desc}}</textarea>
+                {{/if}}
+                <div>
+                    <input type="text" name="data.gifts.fourteen.name" value="{{data.gifts.fourteen.name}}" />
+                    <input type="number" name="data.gifts.fourteen.cost" value="{{data.gifts.fourteen.cost}}" />
+                    <input type="number" name="data.gifts.fourteen.req" value="{{data.gifts.fourteen.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.fourteen.expand}}showOpacity{{/if}}" data-label="data.gifts.fourteen.expand" data-ability="{{data.gifts.fourteen.expand}}"><i class="{{#if data.gifts.fourteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.fourteen.expand}}
+                <textarea name="data.gifts.fourteen.desc" rows="5">{{data.gifts.fourteen.desc}}</textarea>
+                {{/if}}
+                <div>
+                    <input type="text" name="data.gifts.fifteen.name" value="{{data.gifts.fifteen.name}}" />
+                    <input type="number" name="data.gifts.fifteen.cost" value="{{data.gifts.fifteen.cost}}" />
+                    <input type="number" name="data.gifts.fifteen.req" value="{{data.gifts.fifteen.req}}" />
+                    <a class="toggleBoolean {{#if data.gifts.fifteen.expand}}showOpacity{{/if}}" data-label="data.gifts.fifteen.expand" data-ability="{{data.gifts.fifteen.expand}}"><i class="{{#if data.gifts.fifteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                </div>
+                {{#if data.gifts.fifteen.expand}}
+                <textarea name="data.gifts.fifteen.desc" rows="5">{{data.gifts.fifteen.desc}}</textarea>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+</form>

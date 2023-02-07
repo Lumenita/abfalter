@@ -1,13 +1,13 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <div>
-        <span> Yo spell paths here </span>
+    <div class="itemStart">
+        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
 
-    <div>
-        <label> <span> Path </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
-
-    </div>
-    <div>
-        <span> No {{localize "abfalter.magicTab.mproj"}} </span>
+    <div class="maintPathContent">
+        <h2> {{localize "abfalter.magicTab.spellPathOne"}} </h2>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
+        </div>
     </div>
 </form>

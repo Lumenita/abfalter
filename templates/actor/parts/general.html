@@ -599,7 +599,7 @@
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.climb.natural" value="{{data.secondary.climb.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.climbnatfinal" value="{{data.climbnatfinal}}" readonly />
                 <label>
-                    <button type="button" class="mastery-box {{#if data.secondary.secondary.climb.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.climb.mastery" data-ability="{{data.secondary.climb.mastery}}">
+                    <button type="button" class="mastery-box {{#if data.secondary.climb.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.climb.mastery" data-ability="{{data.secondary.climb.mastery}}">
                         <span> {{localize "abfalter.basicInfo.mastery"}} </span>
                     </button>
                 </label>
@@ -625,6 +625,31 @@
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.jumpnatfinal" value="{{data.jumpnatfinal}}" readonly />
                 <label>
                     <button type="button" class="mastery-box {{#if data.secondary.jump.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.jump.mastery" data-ability="{{data.secondary.jump.mastery}}">
+                        <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                    </button>
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollable" data-roll="{{data.pilotingfinal}}" data-label="{{localize "abfalter.generalTab.piloting"}}" data-type="secondaryRoll" data-ability="{{data.secondary.piloting.mastery}}">
+                    <span class="armorpenalty"> {{localize "abfalter.generalTab.piloting"}} </span>
+                    <span> {{data.pilotingfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.piloting.temp" value="{{data.secondary.piloting.temp}}" />
+                <input type="number" name="data.secondary.piloting.spec" value="{{data.secondary.piloting.spec}}" />
+                <input type="number" name="data.pilotingbonus" value="{{data.pilotingbonus}}" readonly />
+                <input type="number" name="data.secondary.piloting.base" value="{{data.secondary.piloting.base}}" />
+                <span class="physical"> {{localize "abfalter.basicInfo.dex"}} </span>
+                <a class="toggleBoolean {{#if data.secondary.piloting.status}}showOpacity{{/if}}" data-label="data.secondary.piloting.status" data-ability="{{data.secondary.piloting.status}}"><i class="{{#if data.secondary.piloting.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
+            {{#if data.secondary.piloting.status}}
+            <div class="extend">
+                <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.piloting.nat" value="{{data.secondary.piloting.nat}}" />
+                <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.piloting.natural" value="{{data.secondary.piloting.natural}}" />
+                <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.pilotingnatfinal" value="{{data.pilotingnatfinal}}" readonly />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.piloting.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.piloting.mastery" data-ability="{{data.secondary.piloting.mastery}}">
                         <span> {{localize "abfalter.basicInfo.mastery"}} </span>
                     </button>
                 </label>
@@ -890,8 +915,40 @@
                 <a class="toggleBoolean {{#if data.secondary.main.perceptive}}showOpacity{{/if}}" data-label="data.secondary.main.perceptive" data-ability="{{data.secondary.main.perceptive}}"><i class="{{#if data.secondary.main.perceptive}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.main.perceptive}}
+
+            {{#if data.kiAbility.kiDetection.status}}
             <div>
-                <button type="button" class="rollable" data-roll="{{data.noticefinal}}" data-label="{{localize "abfalter.generalTab.notice"}}" data-type="secondaryRoll" data-ability="{{data.secondary.perceptive.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.kidetectionfinal}}" data-label="{{#if data.kiAbility.kiErudition.status}}{{localize "abfalter.kiTab.kiErudition"}}{{else}}{{localize "abfalter.kiTab.kiDetection"}}{{/if}}" data-type="secondaryRoll" data-ability="{{data.secondary.kidetection.mastery}}">
+                    {{#if data.kiAbility.kiErudition.status}}
+                    <span> {{localize "abfalter.kiTab.kiErudition"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.kiTab.kiDetection"}} </span>
+                    {{/if}}
+                    <span> {{data.kidetectionfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.kidetection.temp" value="{{data.secondary.kidetection.temp}}" />
+                <input type="number" name="data.secondary.kidetection.spec" value="{{data.secondary.kidetection.spec}}" />
+                <input type="number" name="data.kidetectionbonus" value="{{data.kidetectionbonus}}" readonly />
+                <input type="number" name="data.kidetectionbase" value="{{data.kidetectionbase}}" readonly />
+                <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span>
+                <a class="toggleBoolean {{#if data.secondary.kidetection.status}}showOpacity{{/if}}" data-label="data.secondary.kidetection.status" data-ability="{{data.secondary.kidetection.status}}"><i class="{{#if data.secondary.kidetection.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
+            {{#if data.secondary.kidetection.status}}
+            <div class="extend">
+                <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.kidetection.nat" value="{{data.secondary.kidetection.nat}}" />
+                <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.kidetection.natural" value="{{data.secondary.kidetection.natural}}" />
+                <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.kidetectionnatfinal" value="{{data.kidetectionnatfinal}}" readonly />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.kidetection.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.kidetection.mastery" data-ability="{{data.secondary.kidetection.mastery}}">
+                        <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                    </button>
+                </label>
+            </div>
+            {{/if}}
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollable" data-roll="{{data.noticefinal}}" data-label="{{localize "abfalter.generalTab.notice"}}" data-type="secondaryRoll" data-ability="{{data.secondary.notice.mastery}}">
                     <span> {{localize "abfalter.generalTab.notice"}} </span>
                     <span> {{data.noticefinal}} </span>
                 </button>
@@ -908,7 +965,7 @@
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.notice.natural" value="{{data.secondary.notice.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.noticenatfinal" value="{{data.noticenatfinal}}" readonly />
                 <label>
-                    <button type="button" class="mastery-box {{#if data.secondary.perceptive.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.perceptive.mastery" data-ability="{{data.secondary.perceptive.mastery}}">
+                    <button type="button" class="mastery-box {{#if data.secondary.notice.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.notice.mastery" data-ability="{{data.secondary.notice.mastery}}">
                         <span> {{localize "abfalter.basicInfo.mastery"}} </span>
                     </button>
                 </label>
@@ -1183,7 +1240,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.memorizefinal}}" data-label="{{localize "abfalter.generalTab.memorize"}}" data-type="secondaryRoll" data-ability="{{data.secondary.memorize.mastery}}"> 
+                <button type="button" class="rollable" data-roll="{{data.memorizefinal}}" data-label="{{localize "abfalter.generalTab.memorize"}}" data-type="secondaryRoll" data-ability="{{data.secondary.memorize.mastery}}">
                     <span> {{localize "abfalter.generalTab.memorize"}} </span>
                     <span> {{data.memorizefinal}} </span>
                 </button>
@@ -1301,6 +1358,31 @@
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.tacticsnatfinal" value="{{data.tacticsnatfinal}}" readonly />
                 <label>
                     <button type="button" class="mastery-box {{#if data.secondary.tactics.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.tactics.mastery" data-ability="{{data.secondary.tactics.mastery}}">
+                        <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                    </button>
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
+                <button type="button" class="rollable" data-roll="{{data.technomagicfinal}}" data-label="{{localize "abfalter.generalTab.technomagic"}}" data-type="secondaryRoll" data-ability="{{data.secondary.technomagic.mastery}}">
+                    <span> {{localize "abfalter.generalTab.technomagic"}} </span>
+                    <span> {{data.technomagicfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.technomagic.temp" value="{{data.secondary.technomagic.temp}}" />
+                <input type="number" name="data.secondary.technomagic.spec" value="{{data.secondary.technomagic.spec}}" />
+                <input type="number" name="data.technomagicbonus" value="{{data.technomagicbonus}}" readonly />
+                <input type="number" name="data.secondary.technomagic.base" value="{{data.secondary.technomagic.base}}" />
+                <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span>
+                <a class="toggleBoolean {{#if data.secondary.technomagic.status}}showOpacity{{/if}}" data-label="data.secondary.technomagic.status" data-ability="{{data.secondary.technomagic.status}}"><i class="{{#if data.secondary.technomagic.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
+            {{#if data.secondary.technomagic.status}}
+            <div class="extend">
+                <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.technomagic.nat" value="{{data.secondary.technomagic.nat}}" />
+                <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.technomagic.natural" value="{{data.secondary.technomagic.natural}}" />
+                <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.technomagicnatfinal" value="{{data.technomagicnatfinal}}" readonly />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.technomagic.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.technomagic.mastery" data-ability="{{data.secondary.technomagic.mastery}}">
                         <span> {{localize "abfalter.basicInfo.mastery"}} </span>
                     </button>
                 </label>
@@ -1425,7 +1507,7 @@
                 <input type="number" name="data.secondary.disguise.spec" value="{{data.secondary.disguise.spec}}" />
                 <input type="number" name="data.disguisebonus" value="{{data.disguisebonus}}" readonly />
                 <input type="number" name="data.secondary.disguise.base" value="{{data.secondary.disguise.base}}" />
-                <span class="physical"> {{localize "abfalter.basicInfo.wp"}} </span>
+                <span class="physical"> {{localize "abfalter.basicInfo.dex"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.disguise.status}}showOpacity{{/if}}" data-label="data.secondary.disguise.status" data-ability="{{data.secondary.disguise.status}}"><i class="{{#if data.secondary.disguise.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.disguise.status}}
@@ -1464,6 +1546,33 @@
                     </button>
                 </label>
             </div>
+            {{/if}}
+
+            {{#if data.kiAbility.kiConceal.status}}
+            <div>
+                <button type="button" class="rollable" data-roll="{{data.kiconcealfinal}}" data-label="{{localize "abfalter.kiTab.kiConceal"}}" data-type="secondaryRoll" data-ability="{{data.secondary.kiconceal.mastery}}">
+                    <span> {{localize "abfalter.kiTab.kiConceal"}} </span>
+                    <span> {{data.kiconcealfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.kiconceal.temp" value="{{data.secondary.kiconceal.temp}}" />
+                <input type="number" name="data.secondary.kiconceal.spec" value="{{data.secondary.kiconceal.spec}}" />
+                <input type="number" name="data.kiconcealbonus" value="{{data.kiconcealbonus}}" readonly />
+                <input type="number" name="data.kiconcealbase" value="{{data.kiconcealbase}}" readonly />
+                <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span>
+                <a class="toggleBoolean {{#if data.secondary.kiconceal.status}}showOpacity{{/if}}" data-label="data.secondary.kiconceal.status" data-ability="{{data.secondary.kiconceal.status}}"><i class="{{#if data.secondary.kiconceal.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
+            {{#if data.secondary.kiconceal.status}}
+            <div class="extend">
+                <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.kiconceal.nat" value="{{data.secondary.kiconceal.nat}}" />
+                <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.kiconceal.natural" value="{{data.secondary.kiconceal.natural}}" />
+                <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.kiconcealnatfinal" value="{{data.kiconcealnatfinal}}" readonly />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.kiconceal.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.kiconceal.mastery" data-ability="{{data.secondary.kiconceal.mastery}}">
+                        <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                    </button>
+                </label>
+            </div>
+            {{/if}}
             {{/if}}
 
             <div>
@@ -1684,6 +1793,31 @@
             {{/if}}
 
             <div>
+                <button type="button" class="rollable" data-roll="{{data.cookingfinal}}" data-label="{{localize "abfalter.generalTab.cooking"}}" data-type="secondaryRoll" data-ability="{{data.secondary.cooking.mastery}}">
+                    <span> {{localize "abfalter.generalTab.cooking"}} </span>
+                    <span> {{data.cookingfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.cooking.temp" value="{{data.secondary.cooking.temp}}" />
+                <input type="number" name="data.secondary.cooking.spec" value="{{data.secondary.cooking.spec}}" />
+                <input type="number" name="data.cookingbonus" value="{{data.cookingbonus}}" readonly />
+                <input type="number" name="data.secondary.cooking.base" value="{{data.secondary.cooking.base}}" />
+                <span class="mental"> {{localize "abfalter.basicInfo.pow"}} </span>
+                <a class="toggleBoolean {{#if data.secondary.cooking.status}}showOpacity{{/if}}" data-label="data.secondary.cooking.status" data-ability="{{data.secondary.cooking.status}}"><i class="{{#if data.secondary.cooking.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
+            {{#if data.secondary.cooking.status}}
+            <div class="extend">
+                <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.cooking.nat" value="{{data.secondary.cooking.nat}}" />
+                <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.cooking.natural" value="{{data.secondary.cooking.natural}}" />
+                <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.cookingnatfinal" value="{{data.cookingnatfinal}}" readonly />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.cooking.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.cooking.mastery" data-ability="{{data.secondary.cooking.mastery}}">
+                        <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                    </button>
+                </label>
+            </div>
+            {{/if}}
+
+            <div>
                 <button type="button" class="rollable" data-roll="{{data.dancefinal}}" data-label="{{localize "abfalter.generalTab.dance"}}" data-type="secondaryRoll" data-ability="{{data.secondary.dance.mastery}}">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.dance"}} </span>
                     <span> {{data.dancefinal}} </span>
@@ -1752,6 +1886,32 @@
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.jewelrynatfinal" value="{{data.jewelrynatfinal}}" readonly />
                 <label>
                     <button type="button" class="mastery-box {{#if data.secondary.jewelry.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.jewelry.mastery" data-ability="{{data.secondary.jewelry.mastery}}">
+                        <span> {{localize "abfalter.basicInfo.mastery"}} </span>
+                    </button>
+                </label>
+            </div>
+            {{/if}}
+
+
+            <div>
+                <button type="button" class="rollable" data-roll="{{data.toymakingfinal}}" data-label="{{localize "abfalter.generalTab.toymaking"}}" data-type="secondaryRoll" data-ability="{{data.secondary.toymaking.mastery}}">
+                    <span> {{localize "abfalter.generalTab.toymaking"}} </span>
+                    <span> {{data.toymakingfinal}} </span>
+                </button>
+                <input type="number" name="data.secondary.toymaking.temp" value="{{data.secondary.toymaking.temp}}" />
+                <input type="number" name="data.secondary.toymaking.spec" value="{{data.secondary.toymaking.spec}}" />
+                <input type="number" name="data.toymakingbonus" value="{{data.toymakingbonus}}" readonly />
+                <input type="number" name="data.secondary.toymaking.base" value="{{data.secondary.toymaking.base}}" />
+                <span class="mental"> {{localize "abfalter.basicInfo.pow"}} </span>
+                <a class="toggleBoolean {{#if data.secondary.toymaking.status}}showOpacity{{/if}}" data-label="data.secondary.toymaking.status" data-ability="{{data.secondary.toymaking.status}}"><i class="{{#if data.secondary.toymaking.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
+            {{#if data.secondary.toymaking.status}}
+            <div class="extend">
+                <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.toymaking.nat" value="{{data.secondary.toymaking.nat}}" />
+                <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.toymaking.natural" value="{{data.secondary.toymaking.natural}}" />
+                <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.toymakingnatfinal" value="{{data.toymakingnatfinal}}" readonly />
+                <label>
+                    <button type="button" class="mastery-box {{#if data.secondary.toymaking.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.secondary.toymaking.mastery" data-ability="{{data.secondary.toymaking.mastery}}">
                         <span> {{localize "abfalter.basicInfo.mastery"}} </span>
                     </button>
                 </label>

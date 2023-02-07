@@ -160,11 +160,11 @@
                             <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input class="inline-edit" data-field="system.cost" type="number" value="{{mentalPattern.system.cost}}"/> </label>
                             <label> <span> {{localize "abfalter.psychicTab.cancelCost"}} </span> <input class="inline-edit" data-field="system.cancelCost" type="number" value="{{mentalPattern.system.cancelCost}}"/> </label>
                         </div>
-                        <div class="patternInfo {{#if system.expand}}expand{{else}}notExpand{{/if}}">
+                        <div>
                             <span> {{localize "abfalter.basicInfo.bonus"}} </span>
-                            <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.psychicTab.patternInfoB"}}">{{mentalPattern.system.description}}</textarea>
+                            <textarea class="inline-edit" data-field="system.description">{{mentalPattern.system.description}}</textarea>
                             <span> {{localize "abfalter.armoryTab.penalty"}} </span>
-                            <textarea class="inline-edit" data-field="system.penalty" placeholder="{{localize "abfalter.psychicTab.patternInfoP"}}">{{mentalPattern.system.penalty}}</textarea>
+                            <textarea class="inline-edit" data-field="system.penalty">{{mentalPattern.system.penalty}}</textarea>
                         </div>
                         {{else}}
                         <div>
@@ -205,39 +205,45 @@
                         </div>
                         <div>
                             <div>
-                                <label>
-                                    <span> {{localize "abfalter.basicInfo.level"}} </span>
-                                    <select class="inline-edit" data-field="system.level" data-dtype="number">
-                                        {{#select psychicMatrix.system.level}}
-                                        <option value="1"> 1 </option>
-                                        <option value="2"> 2 </option>
-                                        <option value="3"> 3 </option>
-                                        {{/select}}
-                                    </select>
-                                </label>
-                                <label>
-                                    <span> {{localize "abfalter.basicInfo.action"}} </span>
-                                    <select class="inline-edit" data-field="system.action" data-dtype="number">
-                                        {{#select psychicMatrix.system.action}}
-                                        <option value="1"> {{localize "abfalter.basicInfo.active"}} </option>
-                                        <option value="0"> {{localize "abfalter.basicInfo.passive"}} </option>
-                                        {{/select}}
-                                    </select>
-                                </label>
-                                <label>
-                                    <span> {{localize "abfalter.psychicTab.maint"}} </span>
-                                    <select class="inline-edit" data-field="system.maint" data-dtype="text">
-                                        {{#select psychicMatrix.system.maint}}
-                                        <option value="No"> {{localize "abfalter.basicInfo.no"}} </option>
-                                        <option value="Yes"> {{localize "abfalter.basicInfo.yes"}} </option>
-                                        {{/select}}
-                                    </select>
-                                </label>
+                                <div class="csSelect">
+                                    <label>
+                                        <span> {{localize "abfalter.basicInfo.level"}} </span>
+                                        <select class="inline-edit" data-field="system.level" data-dtype="number">
+                                            {{#select psychicMatrix.system.level}}
+                                            <option value="1"> 1 </option>
+                                            <option value="2"> 2 </option>
+                                            <option value="3"> 3 </option>
+                                            {{/select}}
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="csSelect">
+                                    <label>
+                                        <span> {{localize "abfalter.basicInfo.action"}} </span>
+                                        <select class="inline-edit" data-field="system.action" data-dtype="number">
+                                            {{#select psychicMatrix.system.action}}
+                                            <option value="1"> {{localize "abfalter.basicInfo.active"}} </option>
+                                            <option value="0"> {{localize "abfalter.basicInfo.passive"}} </option>
+                                            {{/select}}
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="csSelect">
+                                    <label>
+                                        <span> {{localize "abfalter.psychicTab.maint"}} </span>
+                                        <select class="inline-edit" data-field="system.maint" data-dtype="text">
+                                            {{#select psychicMatrix.system.maint}}
+                                            <option value="No"> {{localize "abfalter.basicInfo.no"}} </option>
+                                            <option value="Yes"> {{localize "abfalter.basicInfo.yes"}} </option>
+                                            {{/select}}
+                                        </select>
+                                    </label>
+                                </div>
                             </div>
                             <div>
                                 <span> {{localize "abfalter.basicInfo.description"}} </span>
                             </div>
-                            <textarea class="inline-edit" data-field="system.description" placeholder="Description of matrix goes here">{{psychicMatrix.system.description}}</textarea>
+                            <textarea class="inline-edit" data-field="system.description">{{psychicMatrix.system.description}}</textarea>
                             <div>
                                 <span> {{localize "abfalter.basicInfo.difficulty"}} </span>
                                 <span> {{localize "abfalter.basicInfo.effect"}} </span>
@@ -293,7 +299,7 @@
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     <div>
-                        <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.psychicTab.maintInfo"}}">{{maintPower.system.description}}</textarea>
+                        <textarea class="inline-edit" data-field="system.description">{{maintPower.system.description}}</textarea>
                     </div>
                     {{else}}
                     <div>

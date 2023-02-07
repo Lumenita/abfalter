@@ -3,18 +3,13 @@
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
         <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
-    <div class="maintPower">
-        <div>
-            <p><span> This is the Maintained Matrices Item. </span></p>
-            <p><span> It shows the name, potency, & description of the item on the actor sheet. </span></p>
-            <p><span> This page cannot be opened unless you create the item as the GM </span></p>
-        </div>
+
+    <div class="maintpContent">
+        <h2>{{localize "abfalter.psychicTab.maintMatrixOne"}}</h2>
         <div>
             <label> <span> {{localize "abfalter.psychicTab.potency"}} </span> <input name="data.value" type="number" value="{{data.value}}" />  </label>
         </div>
-        <div>
-            <p><span> {{localize "abfalter.basicInfo.description"}} </span></p>
-            <textarea name="data.description" placeholder="{{localize "abfalter.psychicTab.maintInfo"}}">{{data.description}}</textarea>
-        </div>
+        <h3>{{localize "abfalter.basicInfo.description"}}</h3>
+        <textarea name="data.description" rows="5">{{data.description}}</textarea>
     </div>
 </form>

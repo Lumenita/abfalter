@@ -3,41 +3,49 @@
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
         <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
+
     <div class="psychicMatrix">
+        <h2> {{localize "abfalter.psychicTab.psychicMatricesOne"}} </h2>
         <div>
-            <label>
-                <span> {{localize "abfalter.basicInfo.level"}} </span>
-                <select name="data.level" data-dtype="number">
-                    {{#select data.level}}
-                    <option value="1"> 1 </option>
-                    <option value="2"> 2 </option>
-                    <option value="3"> 3 </option>
-                    {{/select}}
-                </select>
-            </label>
-            <label>
-                <span> {{localize "abfalter.basicInfo.action"}} </span>
-                <select name="data.action" data-dtype="number">
-                    {{#select data.action}}
-                    <option value="1"> {{localize "abfalter.basicInfo.active"}} </option>
-                    <option value="0"> {{localize "abfalter.basicInfo.passive"}} </option>
-                    {{/select}}
-                </select>
-            </label>
-            <label>
-                <span> {{localize "abfalter.psychicTab.maint"}} </span>
-                <select name="data.maint" data-dtype="text">
-                    {{#select data.maint}}
-                    <option value="No"> {{localize "abfalter.basicInfo.no"}} </option>
-                    <option value="Yes"> {{localize "abfalter.basicInfo.yes"}} </option>
-                    {{/select}}
-                </select>
-            </label>
+            <div class="csSelect">
+                <label>
+                    <span> {{localize "abfalter.basicInfo.level"}} </span>
+                    <select name="data.level" data-dtype="number">
+                        {{#select data.level}}
+                        <option value="1"> 1 </option>
+                        <option value="2"> 2 </option>
+                        <option value="3"> 3 </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+            <div class="csSelect">
+                <label>
+                    <span> {{localize "abfalter.basicInfo.action"}} </span>
+                    <select name="data.action" data-dtype="number">
+                        {{#select data.action}}
+                        <option value="1"> {{localize "abfalter.basicInfo.active"}} </option>
+                        <option value="0"> {{localize "abfalter.basicInfo.passive"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+            <div class="csSelect">
+                <label>
+                    <span> {{localize "abfalter.psychicTab.maint"}} </span>
+                    <select name="data.maint" data-dtype="text">
+                        {{#select data.maint}}
+                        <option value="No"> {{localize "abfalter.basicInfo.no"}} </option>
+                        <option value="Yes"> {{localize "abfalter.basicInfo.yes"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
         </div>
         <div>
             <span> {{localize "abfalter.basicInfo.description"}} </span>
         </div>
-        <textarea rows="7" name="data.description" placeholder="Description of matrix goes here">{{data.description}}</textarea>
+        <textarea rows="7" name="data.description">{{data.description}}</textarea>
         <div>
             <span> {{localize "abfalter.basicInfo.difficulty"}} </span>
             <span> {{localize "abfalter.basicInfo.effect"}} </span>
@@ -54,7 +62,6 @@
             <label> <span> 320 </span> <span> {{localize "abfalter.basicInfo.inhuman"}} </span> <input type="text" name="data.effect320" value="{{data.effect320}}" /> </label>
             <label> <span> 440 </span> <span> {{localize "abfalter.basicInfo.zen"}} </span> <input type="text" name="data.effect440" value="{{data.effect440}}" /> </label>
         </div>
-        <span> {{data.newPotential}} </span>
     </div>
 
 </form>

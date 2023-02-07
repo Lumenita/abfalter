@@ -85,6 +85,32 @@ export default class abfalterItem extends Item {
             this.system.atkParentFinal = ~~this.parent.system.atkfinal;
             this.system.blkParentFinal = ~~this.parent.system.blkfinal;
             this.system.dodParentFinal = ~~this.parent.system.dodfinal;
+            if (this.parent.system.kiAbility.kiAuraEx.status == true) {
+                this.system.kiBonus = 5;
+                this.system.kiBonus1 = 10;
+                this.system.kiBonusDmg = 10;
+            }
+            if (this.parent.system.kiAbility.kiEleFire.status == true && this.system.primDmgT =="HEAT") {
+                this.system.kiBonusDmg += 10;
+            }
+            if (this.parent.system.kiAbility.kiEleWater.status == true && this.system.primDmgT == "COLD") {
+                this.system.kiBonusDmg += 10;
+            }
+            if (this.parent.system.kiAbility.kiEleAir.status == true && this.system.primDmgT == "ELE") {
+                this.system.kiBonusDmg += 10;
+            }
+            if (this.parent.system.kiAbility.kiEleEarth.status == true && this.system.primDmgT == "IMP") {
+                this.system.kiBonusDmg += 10;
+            }
+            if (this.parent.system.kiAbility.kiEleLight.status == true && this.system.primDmgT == "ENE") {
+                this.system.kiBonusDmg += 10;
+            }
+            if (this.parent.system.kiAbility.kiEleDark.status == true && this.system.primDmgT == "ENE") {
+                this.system.kiBonusDmg += 10;
+            }
+            if (this.parent.system.kiAbility.kiIncreaseDmg.status == true) {
+                this.system.kiBonusDmg += 10;
+            }
             switch (this.system.dmgMod) {
                 case "agi":
                     this.system.bonusDmgMod = this.parent.system.stats.Agility.mod;
@@ -151,6 +177,8 @@ export default class abfalterItem extends Item {
             this.system.blkParentFinal = 0;
             this.system.dodParentFinal = 0;
             this.system.breakageStr = 0;
+            this.system.kiBonus = 0;
+            this.system.kiBonus1 = 0;
         }
 
         this.system.finalAtk = Math.floor(~~this.system.attack + ~~this.system.atkParentFinal + ~~this.system.atkClass + ~~this.system.quality);
@@ -185,10 +213,10 @@ export default class abfalterItem extends Item {
         if (this.system.toggle == true) {
             this.system.bonusDmgMod = Math.floor(this.system.bonusDmgMod * 2);
         }
-        this.system.finalDmg = Math.floor(~~this.system.baseDmg + ~~this.system.bonusDmgMod + (~~this.system.quality * 2));
-        this.system.fortFinal = Math.floor(~~this.system.fortitude + (~~this.system.quality * 2));
+        this.system.finalDmg = Math.floor(~~this.system.baseDmg + ~~this.system.bonusDmgMod + (~~this.system.quality * 2) + ~~this.system.kiBonusDmg);
+        this.system.fortFinal = Math.floor(~~this.system.fortitude + (~~this.system.quality * 2) + ~~this.system.kiBonus1);
         this.system.atPenFinal = Math.floor(~~this.system.atPen + Math.floor(~~this.system.quality / 5));
-        this.system.finalBreakage = Math.floor(~~this.system.breakage + ~~this.system.breakageStr + ~~this.system.quality)
+        this.system.finalBreakage = Math.floor(~~this.system.breakage + ~~this.system.breakageStr + ~~this.system.quality + ~~this.system.kiBonus)
         this.system.preFinal = Math.floor(~~this.system.presence + (~~this.system.quality * 10));
         this.system.shieldFinalSpeed = Math.floor(~~this.system.shieldSpeed + ~~this.system.shieldTypeSpeed);
         this.system.FinalWeaponSpeed = Math.floor(~~this.system.speed + ~~this.system.shieldFinalSpeed + ~~this.system.quality);
@@ -206,8 +234,7 @@ export default class abfalterItem extends Item {
 
         if (this.parent != null) {
             if (this.parent) {
-                this.system.type = this.parent.system.other.moduleStatus;
-                this.system.newPotential = this.parent.system.finalPotential + this.system.bonus;
+                this.system.newPotential = Math.floor(~~this.parent.system.finalPotential + ~~this.system.bonus);
             }
         }
     }
@@ -217,6 +244,25 @@ export default class abfalterItem extends Item {
             if (this.parent) {
                 this.system.unified = this.parent.system.toggles.unifiedPools;
                 this.system.innatePower = this.parent.system.toggles.innatePower;
+            }
+        }
+    }
+
+    prepareElan() {
+        this.system.totalCost = 0;
+        if (this.system.level >= 50) {
+            this.system.upper = true;
+        } else {
+            this.system.upper = false;
+        }
+        for (let [key, gift] of Object.entries(this.system.gifts)) {
+            if (this.system.level >= ~~gift.req && ~~gift.req != 0) {
+                gift.bought = true;
+            } else {
+                gift.bought = false;
+            }
+            if (gift.req != 0) {
+                this.system.totalCost += gift.cost;
             }
         }
     }

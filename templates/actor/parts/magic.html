@@ -297,7 +297,7 @@
                             <input class="inline-edit" data-field="system.zeon" type="number" value="{{turnMaint.system.zeon}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.magicTab.maintInfo"}}">{{turnMaint.system.description}}</textarea>
+                        <textarea class="inline-edit" data-field="system.description">{{turnMaint.system.description}}</textarea>
                         {{else}}
                         <div class="{{#if system.equipped}}equipped{{else}}notEquipped{{/if}}">
                             <span> {{turnMaint.name}} </span>
@@ -338,7 +338,7 @@
                             <input class="inline-edit" data-field="system.zeon" type="number" value="{{dailyMaint.system.zeon}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.magicTab.maintInfo"}}">{{dailyMaint.system.description}}</textarea>
+                        <textarea class="inline-edit" data-field="system.description">{{dailyMaint.system.description}}</textarea>
                         {{else}}
                         <div class="{{#if system.equipped}}equipped{{else}}notEquipped{{/if}}">
                             <span> {{dailyMaint.name}} </span>
@@ -439,7 +439,7 @@
                             </label>
                             <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" class="inline-edit" data-field="system.cost" value="{{system.cost}}" /> </label>
                         </div>
-                        <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.magicTab.spellDesc"}}">{{spell.system.description}}</textarea>
+                        <textarea class="inline-edit" data-field="system.description">{{spell.system.description}}</textarea>
                         <div>
                             <span> {{localize "abfalter.magicTab.rank"}} </span>
                             <span> {{localize "abfalter.magicTab.req"}} </span>
@@ -453,7 +453,7 @@
                             <input class="inline-edit" data-field="system.base.zeoncost" type="text" value="{{spell.system.base.zeoncost}}" />
                             <input class="inline-edit" data-field="system.base.maint" type="text" value="{{spell.system.base.maint}}" />
                         </div>
-                        <textarea class="inline-edit" data-field="system.basic.rollDesc" placeholder="{{localize "abfalter.magicTab.basicDesc"}}">{{spell.system.basic.rollDesc}}</textarea>
+                        <textarea class="inline-edit" data-field="system.basic.rollDesc">{{spell.system.basic.rollDesc}}</textarea>
                         <div>
                             <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.intermidiate"}} </span>
@@ -461,7 +461,7 @@
                             <input class="inline-edit" data-field="system.intermediate.zeoncost" type="text" value="{{spell.system.intermediate.zeoncost}}" />
                             <input class="inline-edit" data-field="system.intermediate.maint" type="text" value="{{spell.system.intermediate.maint}}" />
                         </div>
-                        <textarea class="inline-edit" data-field="system.intermediate.rollDesc" placeholder="{{localize "abfalter.magicTab.intDesc"}}">{{spell.system.intermediate.rollDesc}}</textarea>
+                        <textarea class="inline-edit" data-field="system.intermediate.rollDesc">{{spell.system.intermediate.rollDesc}}</textarea>
                         <div>
                             <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.advanced"}} </span>
@@ -469,7 +469,7 @@
                             <input class="inline-edit" data-field="system.advanced.zeoncost" type="text" value="{{spell.system.advanced.zeoncost}}" />
                             <input class="inline-edit" data-field="system.advanced.maint" type="text" value="{{spell.system.advanced.maint}}" />
                         </div>
-                        <textarea class="inline-edit" data-field="system.advanced.rollDesc" placeholder="{{localize "abfalter.magicTab.advDesc"}}">{{spell.system.advanced.rollDesc}}</textarea>
+                        <textarea class="inline-edit" data-field="system.advanced.rollDesc">{{spell.system.advanced.rollDesc}}</textarea>
                         <div>
                             <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.arcane"}} </span>
@@ -477,7 +477,7 @@
                             <input class="inline-edit" data-field="system.arcane.zeoncost" type="text" value="{{spell.system.arcane.zeoncost}}" />
                             <input class="inline-edit" data-field="system.arcane.maint" type="text" value="{{spell.system.arcane.maint}}" />
                         </div>
-                        <textarea class="inline-edit" data-field="system.arcane.rollDesc" placeholder="{{localize "abfalter.magicTab.arcDesc"}}">{{spell.system.arcane.rollDesc}}</textarea>
+                        <textarea class="inline-edit" data-field="system.arcane.rollDesc">{{spell.system.arcane.rollDesc}}</textarea>
                         {{else}}
                         <div>
                             <div>
@@ -500,8 +500,7 @@
 
             <div class="metaMagic">
                 <h2> {{localize "abfalter.magicTab.metaMagic"}} </h2>
-                <span> Form Application method </span>
-                <span> Only 1 meta Magic Item Allowed, created with character sheet already </span>
+                <textarea name="data.metaMagic.info">{{data.metaMagic.info}}</textarea>
             </div>
 
             <div class="invocations">
@@ -521,7 +520,7 @@
                             <input class="inline-edit" data-field="system.difficulty" type="number" value="{{invocation.system.difficulty}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.magicTab.maintInfo"}}">{{invocation.system.description}}</textarea>
+                        <textarea class="inline-edit" data-field="system.description">{{invocation.system.description}}</textarea>
                         {{else}}
                         <div>
                             <span> {{invocation.name}} </span>
@@ -558,7 +557,7 @@
                             <input class="inline-edit" data-field="system.difficulty" type="number" value="{{incarnation.system.difficulty}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.magicTab.maintInfo"}}">{{incarnation.system.description}}</textarea>
+                        <textarea class="inline-edit" data-field="system.description">{{incarnation.system.description}}</textarea>
                         {{else}}
                         <div>
                             <span> {{incarnation.name}} </span>

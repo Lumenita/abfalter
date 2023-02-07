@@ -1,10 +1,41 @@
 <form class="{{cssClass}}" autocomplete="off">
     <div class="itemStart">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
         <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
-    <div>
-        <span> Ki Seal Creatures </span>
-    </div>
 
+    <div class="kiSealCreature-item kiSealContent">
+        <h2> {{localize "abfalter.kiTab.kiSealsCre"}} </h2>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
+        </div>
+        <div>
+            <div>
+                <span> {{localize "abfalter.kiTab.sealType"}} </span>
+                <span> {{localize "abfalter.kiTab.sealWood"}} </span>
+                <span> {{localize "abfalter.kiTab.sealMetal"}} </span>
+                <span> {{localize "abfalter.kiTab.sealAir"}} </span>
+                <span> {{localize "abfalter.kiTab.sealWater"}} </span>
+                <span> {{localize "abfalter.kiTab.sealFire"}} </span>
+            </div>
+            <div>
+                <span> {{localize "abfalter.kiTab.minor"}} </span>
+                <input data-field="data.minor.wood" type="number" value="{{data.minor.wood}}" />
+                <input data-field="data.minor.metal" type="number" value="{{data.minor.metal}}" />
+                <input data-field="data.minor.air" type="number" value="{{data.minor.air}}" />
+                <input data-field="data.minor.water" type="number" value="{{data.minor.water}}" />
+                <input data-field="data.minor.fire" type="number" value="{{data.minor.fire}}" />
+            </div>
+            <div>
+                <span> {{localize "abfalter.kiTab.major"}} </span>
+                <input data-field="data.major.wood" type="number" value="{{data.major.wood}}" />
+                <input data-field="data.major.metal" type="number" value="{{data.major.metal}}" />
+                <input data-field="data.major.air" type="number" value="{{data.major.air}}" />
+                <input data-field="data.major.water" type="number" value="{{data.major.water}}" />
+                <input data-field="data.major.fire" type="number" value="{{data.major.fire}}" />
+            </div>
+            <h3> {{localize "abfalter.basicInfo.description"}} </h3>
+            <textarea name="data.description" rows="5">{{data.description}}</textarea>
+        </div>
+    </div>
 </form>

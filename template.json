@@ -4,6 +4,7 @@
     "templates": {
       "info": {
         "race": "",
+        "bio": "",
         "class": "",
         "gender": "",
         "height": "",
@@ -16,6 +17,10 @@
           "levelmod": 0,
           "presencemod": 0
         },
+        "notesOne": "",
+        "notesTwo": "",
+        "destiny": 0,
+        "gnosis": 0,
         "rollRange": {
           "base": 90,
           "spec": 0,
@@ -46,9 +51,12 @@
           "armorHelmet": false,
           "spellPath": false,
           "spell": false,
-          "turnMaint": false
+          "turnMaint": false,
+          "elan": false
         },
         "toggles": {
+          "greaterEnergyArmor": false,
+          "arcaneEnergyArmor": false,
           "spiritDamageType": true,
           "psychicStrengthening": false,
           "unifiedPools": false,
@@ -58,7 +66,12 @@
           "magicAtkModule": false,
           "magicDefModule": false,
           "magicDodgeModule": false,
-          "psychicDodgeStatus": false
+          "psychicDodgeStatus": false,
+          "backgroundTab": false,
+          "magicTab": false,
+          "psychicTab": false,
+          "kiTab": false,
+          "bioTab": false
         }
       },
       "stats": {
@@ -644,6 +657,58 @@
             "natural": 0,
             "mastery": false,
             "status": false
+          },
+          "piloting": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0,
+            "mastery": false,
+            "status": false
+          },
+          "cooking": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0,
+            "mastery": false,
+            "status": false
+          },
+          "technomagic": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0,
+            "mastery": false,
+            "status": false
+          },
+          "toymaking": {
+            "base": 0,
+            "spec": 0,
+            "temp": -30,
+            "nat": 0,
+            "natural": 0,
+            "mastery": false,
+            "status": false
+          },
+          "kidetection": {
+            "spec": 0,
+            "temp": 0,
+            "nat": 0,
+            "natural": 0,
+            "mastery": false,
+            "status": false
+          },
+          "kiconceal": {
+            "spec": 0,
+            "temp": 0,
+            "nat": 0,
+            "natural": 0,
+            "mastery": false,
+            "status": false
           }
         },
         "aam": 0
@@ -709,6 +774,9 @@
             "spec": 0,
             "mastery": false
           }
+        },
+        "metaMagic": {
+          "info": ""
         }
       },
       "ki": {
@@ -1119,7 +1187,7 @@
           "mult": 0,
           "descNum": 3,
           "desc": "",
-          "multOption": "strength",
+          "multOption": "str",
           "status": false
         },
         "kiPool": {
@@ -1310,6 +1378,7 @@
       "kiSealCreature",
       "incarnation",
       "invocation",
+      "elan",
       "mentalPattern",
       "class",
       "discipline",
@@ -1319,15 +1388,29 @@
       "maintPower",
       "currency",
       "proficiency"
-
     ],
     "templates": {
       "itemDescription": {
         "description": ""
+      },
+      "elanGift": {
+        "name": "",
+        "req": 0,
+        "cost": 0,
+        "desc": "",
+        "expand": false,
+        "bought": false
       }
     },
     "class": {
       "expand": false,
+      "athletics": false,
+      "social": false,
+      "perceptive": false,
+      "intellectual": false,
+      "vigor": false,
+      "subterfuge": false,
+      "creative": false,
       "main": {
         "levels": 0,
         "lp": 0,
@@ -1394,7 +1477,13 @@
         "runes": 0,
         "ritualcalig": 0,
         "slofhand": 0,
-        "tailoring": 0
+        "tailoring": 0,
+        "cooking": 0,
+        "technomagic": 0,
+        "piloting": 0,
+        "toymaking": 0,
+        "kiDetection": 0,
+        "kiconceal": 0
       }
     },
     "advantage": {
@@ -1410,7 +1499,7 @@
     "spellPath": {
       "name": "",
       "level": 0,
-      "toggleItem": false
+      "toggleItem": true
     },
     "spell": {
       "templates": [ "itemDescription" ],
@@ -1658,7 +1747,64 @@
       "bonusDod": 0,
       "dp": 0,
       "mk": 0,
-      "degree": "base"
+      "degree": "Base"
+    },
+    "elan": {
+      "templates": [ "itemDescription" ],
+      "expand": false,
+      "upper": false,
+      "title": "",
+      "gain": "",
+      "gainUpper": "",
+      "lose": "",
+      "level": 0,
+      "gifts": {
+        "one": {
+          "templates": [ "elanGift" ]
+        },
+        "two": {
+          "templates": [ "elanGift" ]
+        },
+        "three": {
+          "templates": [ "elanGift" ]
+        },
+        "four": {
+          "templates": [ "elanGift" ]
+        },
+        "five": {
+          "templates": [ "elanGift" ]
+        },
+        "six": {
+          "templates": [ "elanGift" ]
+        },
+        "seven": {
+          "templates": [ "elanGift" ]
+        },
+        "eight": {
+          "templates": [ "elanGift" ]
+        },
+        "nine": {
+          "templates": [ "elanGift" ]
+        },
+        "ten": {
+          "templates": [ "elanGift" ]
+        },
+        "eleven": {
+          "templates": [ "elanGift" ]
+        },
+        "twelve": {
+          "templates": [ "elanGift" ]
+        },
+        "thirteen": {
+          "templates": [ "elanGift" ]
+        },
+        "fourteen": {
+          "templates": [ "elanGift" ]
+        },
+        "fifteen": {
+          "templates": [ "elanGift" ]
+        }
+      }
     }
   }
 }

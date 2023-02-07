@@ -1,1 +1,12 @@
-<span> This is my life, and Ill play as I want it </span>
+<div class="tab bio">
+    <div>
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+    </div>
+    <div>
+        <img class="profile-img" src="{{actor.token}}" data-edit="img" />
+
+    </div>
+    <div>
+        {{editor abfalter.bio target="system.bio" button=true editable=editable}}
+    </div>
+</div>

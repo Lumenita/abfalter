@@ -1,9 +1,36 @@
 <form class="{{cssClass}}" autocomplete="off">
     <div class="itemStart">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
         <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
-    <div>
-        <span> Martial ARts Here </span>
+
+    <div class="maContent">
+        <h2> {{localize "abfalter.kiTab.martialArts"}} </h2>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.dp"}} </span> <input type="number" name="data.dp" value="{{data.dp}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.mk"}} </span> <input type="number" name="data.mk" value="{{data.mk}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.attack"}} </span> <input type="number" name="data.bonusAtk" value="{{data.bonusAtk}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.block"}} </span> <input type="number" name="data.bonusDef" value="{{data.bonusDef}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.dodge"}} </span> <input type="number" name="data.bonusDod" value="{{data.bonusDod}}" /> </label>
+            <div class="csSelect">
+                <label>
+                    <span> {{localize "abfalter.kiTab.degree"}} </span>
+                    <select name="data.degree" data-dtype="text">
+                        {{#select data.degree}}
+                        <option value="Base"> {{localize "abfalter.basicInfo.base"}} </option>
+                        <option value="Advanced"> {{localize "abfalter.kiTab.advanced"}} </option>
+                        <option value="Supreme"> {{localize "abfalter.kiTab.supreme"}} </option>
+                        <option value="Arcane"> {{localize "abfalter.kiTab.arcane"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+        </div>
+        <h3> {{localize "abfalter.basicInfo.description"}} </h3>
+        <textarea name="data.description" rows="5"> {{data.description}} </textarea>
     </div>
 </form>

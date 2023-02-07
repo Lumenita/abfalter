@@ -1,4 +1,391 @@
 ﻿<div class="tab background">
-    <label> <span> Background BABABABABABABAB</span></label>
+    <div class="e2">
+        <div class="elan">
+            <h2> {{localize "abfalter.generalTab.elan"}} </h2>
+            <div>
+                <span> {{localize "abfalter.basicInfo.name"}} </span>
+                <span> {{localize "abfalter.generalTab.title"}} </span>
+                <span> {{localize "abfalter.generalTab.elan"}} </span>
+            </div>
+            <div class="{{#if data.itemToggle.elan}}item-list{{/if}}">
+                {{#each elans as |elan id|}}
+                <div class="elan-item item normal-item" data-item-id="{{elan._id}}">
+                    {{#if system.expand}}
+                    <div>
+                        <input class="item-name inline-edit" data-field="name" type="text" value="{{elan.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
+                        <input class="inline-edit" data-field="system.title" type="text" value="{{elan.system.title}}" />
+                        <input class="inline-edit" data-field="system.level" type="number" value="{{elan.system.level}}" />
+                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </div>
+                    <textarea class="inline-edit" data-field="system.description">{{elan.system.description}}</textarea>
+                    <div>
+                        <div>
+                            {{#if system.upper}}
+                            <h3> {{localize "abfalter.generalTab.gainUpperElan"}} </h3>
+                            <textarea class="inline-edit" data-field="system.gainUpper">{{elan.system.gainUpper}}</textarea>
+                            {{else}}
+                            <h3> {{localize "abfalter.generalTab.gainElan"}} </h3>
+                            <textarea class="inline-edit" data-field="system.gain">{{elan.system.gain}}</textarea>
+                            {{/if}}
+                        </div>
+                        <div>
+                            <h3> {{localize "abfalter.generalTab.loseElan"}} </h3>
+                            <textarea class="inline-edit" data-field="system.lose">{{elan.system.lose}}</textarea>
+                        </div>
+                    </div>
+                    {{else}}
+                    <div>
+                        <span> {{elan.name}} </span>
+                        <span> {{elan.system.title}} </span>
+                        <input class="inline-edit" data-field="system.level" type="number" value="{{elan.system.level}}" />
+                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+            <div class="itemControls">
+                <a class="item-control item-create" data-type="elan"><i class="fas fa-plus"></i> {{localize "abfalter.generalTab.addElan"}} </a>
+                <a class="toggleBoolean {{#if data.itemToggle.elan}}armorpenalty{{/if}}" data-label="data.itemToggle.elan" data-ability="{{data.itemToggle.elan}}"><i class="{{#if data.itemToggle.elan}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+            </div>
+        </div>
+
+        <div class="natura">
+            <h2> {{localize "abfalter.basicInfo.natura"}} </h2>
+            <label> <span> {{localize "abfalter.basicInfo.gnosis"}} </span> <input type="number" name="data.gnosis" value="{{data.gnosis}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.destiny"}} </span> <input type="number" name="data.destiny" value="{{data.destiny}}" /> </label>
+        </div>
+    </div>
+
+    <div class="e2">
+        <div class="elan">
+            <h2> {{localize "abfalter.generalTab.addElan"}} </h2>
+            <div>
+                <span> {{localize "abfalter.generalTab.deity"}} </span>
+                <span> {{localize "abfalter.generalTab.giftName"}} </span>
+                <span> {{localize "abfalter.generalTab.elan"}} </span>
+            </div>
+            <div class="{{#if data.itemToggle.elan}}item-list{{/if}}">
+                {{#each elans as |elan id|}}
+                <div class="elan-item2 item" data-item-id="{{elan._id}}">
+                    {{#if system.gifts.one.bought}}
+                    <div>
+                        {{#if system.gifts.one.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.one.name" type="text" value="{{elan.system.gifts.one.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.one.req" type="text" value="{{elan.system.gifts.one.req}}" />
+                            <a class="item-toggle {{#if system.gifts.one.expand}}showOpacity{{/if}}" data-label="system.gifts.one.expand" data-ability="{{system.gifts.one.expand}}"><i class="{{#if system.gifts.one.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.one.desc" rows="2">{{elan.system.gifts.one.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.one.name}} </span>
+                            <span> {{elan.system.gifts.one.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.one.expand}}showOpacity{{/if}}" data-label="system.gifts.one.expand" data-ability="{{system.gifts.one.expand}}"><i class="{{#if system.gifts.one.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.two.bought}}
+                    <div>
+                        {{#if system.gifts.two.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.two.name" type="text" value="{{elan.system.gifts.two.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.two.req" type="text" value="{{elan.system.gifts.two.req}}" />
+                            <a class="item-toggle {{#if system.gifts.two.expand}}showOpacity{{/if}}" data-label="system.gifts.two.expand" data-ability="{{system.gifts.two.expand}}"><i class="{{#if system.gifts.two.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.two.desc" rows="2">{{elan.system.gifts.two.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.two.name}} </span>
+                            <span> {{elan.system.gifts.two.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.two.expand}}showOpacity{{/if}}" data-label="system.gifts.two.expand" data-ability="{{system.gifts.two.expand}}"><i class="{{#if system.gifts.two.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.three.bought}}
+                    <div>
+                        {{#if system.gifts.three.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.three.name" type="text" value="{{elan.system.gifts.three.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.three.req" type="text" value="{{elan.system.gifts.three.req}}" />
+                            <a class="item-toggle {{#if system.gifts.three.expand}}showOpacity{{/if}}" data-label="system.gifts.three.expand" data-ability="{{system.gifts.three.expand}}"><i class="{{#if system.gifts.three.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.three.desc" rows="2">{{elan.system.gifts.three.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.three.name}} </span>
+                            <span> {{elan.system.gifts.three.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.three.expand}}showOpacity{{/if}}" data-label="system.gifts.three.expand" data-ability="{{system.gifts.three.expand}}"><i class="{{#if system.gifts.three.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.four.bought}}
+                    <div>
+                        {{#if system.gifts.four.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.four.name" type="text" value="{{elan.system.gifts.four.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.four.req" type="text" value="{{elan.system.gifts.four.req}}" />
+                            <a class="item-toggle {{#if system.gifts.four.expand}}showOpacity{{/if}}" data-label="system.gifts.four.expand" data-ability="{{system.gifts.four.expand}}"><i class="{{#if system.gifts.four.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.four.desc" rows="2">{{elan.system.gifts.four.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.four.name}} </span>
+                            <span> {{elan.system.gifts.four.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.four.expand}}showOpacity{{/if}}" data-label="system.gifts.four.expand" data-ability="{{system.gifts.four.expand}}"><i class="{{#if system.gifts.four.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.five.bought}}
+                    <div>
+                        {{#if system.gifts.five.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.five.name" type="text" value="{{elan.system.gifts.five.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.five.req" type="text" value="{{elan.system.gifts.five.req}}" />
+                            <a class="item-toggle {{#if system.gifts.five.expand}}showOpacity{{/if}}" data-label="system.gifts.five.expand" data-ability="{{system.gifts.five.expand}}"><i class="{{#if system.gifts.five.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.five.desc" rows="2">{{elan.system.gifts.five.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.five.name}} </span>
+                            <span> {{elan.system.gifts.five.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.five.expand}}showOpacity{{/if}}" data-label="system.gifts.five.expand" data-ability="{{system.gifts.five.expand}}"><i class="{{#if system.gifts.five.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.six.bought}}
+                    <div>
+                        {{#if system.gifts.six.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.six.name" type="text" value="{{elan.system.gifts.six.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.six.req" type="text" value="{{elan.system.gifts.six.req}}" />
+                            <a class="item-toggle {{#if system.gifts.six.expand}}showOpacity{{/if}}" data-label="system.gifts.six.expand" data-ability="{{system.gifts.six.expand}}"><i class="{{#if system.gifts.six.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.six.desc" rows="2">{{elan.system.gifts.six.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.six.name}} </span>
+                            <span> {{elan.system.gifts.six.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.six.expand}}showOpacity{{/if}}" data-label="system.gifts.six.expand" data-ability="{{system.gifts.six.expand}}"><i class="{{#if system.gifts.six.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.seven.bought}}
+                    <div>
+                        {{#if system.gifts.seven.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.seven.name" type="text" value="{{elan.system.gifts.seven.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.seven.req" type="text" value="{{elan.system.gifts.seven.req}}" />
+                            <a class="item-toggle {{#if system.gifts.seven.expand}}showOpacity{{/if}}" data-label="system.gifts.seven.expand" data-ability="{{system.gifts.seven.expand}}"><i class="{{#if system.gifts.seven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.seven.desc" rows="2">{{elan.system.gifts.seven.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.seven.name}} </span>
+                            <span> {{elan.system.gifts.seven.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.seven.expand}}showOpacity{{/if}}" data-label="system.gifts.seven.expand" data-ability="{{system.gifts.seven.expand}}"><i class="{{#if system.gifts.seven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.eight.bought}}
+                    <div>
+                        {{#if system.gifts.eight.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.eight.name" type="text" value="{{elan.system.gifts.eight.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.eight.req" type="text" value="{{elan.system.gifts.eight.req}}" />
+                            <a class="item-toggle {{#if system.gifts.eight.expand}}showOpacity{{/if}}" data-label="system.gifts.eight.expand" data-ability="{{system.gifts.eight.expand}}"><i class="{{#if system.gifts.eight.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.eight.desc" rows="2">{{elan.system.gifts.eight.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.eight.name}} </span>
+                            <span> {{elan.system.gifts.eight.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.eight.expand}}showOpacity{{/if}}" data-label="system.gifts.eight.expand" data-ability="{{system.gifts.eight.expand}}"><i class="{{#if system.gifts.eight.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.nine.bought}}
+                    <div>
+                        {{#if system.gifts.nine.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.nine.name" type="text" value="{{elan.system.gifts.nine.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.nine.req" type="text" value="{{elan.system.gifts.nine.req}}" />
+                            <a class="item-toggle {{#if system.gifts.nine.expand}}showOpacity{{/if}}" data-label="system.gifts.nine.expand" data-ability="{{system.gifts.nine.expand}}"><i class="{{#if system.gifts.nine.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.nine.desc" rows="2">{{elan.system.gifts.nine.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.nine.name}} </span>
+                            <span> {{elan.system.gifts.nine.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.nine.expand}}showOpacity{{/if}}" data-label="system.gifts.nine.expand" data-ability="{{system.gifts.nine.expand}}"><i class="{{#if system.gifts.nine.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.ten.bought}}
+                    <div>
+                        {{#if system.gifts.ten.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.ten.name" type="text" value="{{elan.system.gifts.ten.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.ten.req" type="text" value="{{elan.system.gifts.ten.req}}" />
+                            <a class="item-toggle {{#if system.gifts.ten.expand}}showOpacity{{/if}}" data-label="system.gifts.ten.expand" data-ability="{{system.gifts.ten.expand}}"><i class="{{#if system.gifts.ten.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.ten.desc" rows="2">{{elan.system.gifts.ten.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.ten.name}} </span>
+                            <span> {{elan.system.gifts.ten.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.ten.expand}}showOpacity{{/if}}" data-label="system.gifts.ten.expand" data-ability="{{system.gifts.ten.expand}}"><i class="{{#if system.gifts.ten.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.eleven.bought}}
+                    <div>
+                        {{#if system.gifts.eleven.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.eleven.name" type="text" value="{{elan.system.gifts.eleven.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.eleven.req" type="text" value="{{elan.system.gifts.eleven.req}}" />
+                            <a class="item-toggle {{#if system.gifts.eleven.expand}}showOpacity{{/if}}" data-label="system.gifts.eleven.expand" data-ability="{{system.gifts.eleven.expand}}"><i class="{{#if system.gifts.eleven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.eleven.desc" rows="2">{{elan.system.gifts.eleven.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.eleven.name}} </span>
+                            <span> {{elan.system.gifts.eleven.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.eleven.expand}}showOpacity{{/if}}" data-label="system.gifts.eleven.expand" data-ability="{{system.gifts.eleven.expand}}"><i class="{{#if system.gifts.eleven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.twelve.bought}}
+                    <div>
+                        {{#if system.gifts.twelve.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.twelve.name" type="text" value="{{elan.system.gifts.twelve.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.twelve.req" type="text" value="{{elan.system.gifts.twelve.req}}" />
+                            <a class="item-toggle {{#if system.gifts.twelve.expand}}showOpacity{{/if}}" data-label="system.gifts.twelve.expand" data-ability="{{system.gifts.twelve.expand}}"><i class="{{#if system.gifts.twelve.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.twelve.desc" rows="2">{{elan.system.gifts.twelve.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.twelve.name}} </span>
+                            <span> {{elan.system.gifts.twelve.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.twelve.expand}}showOpacity{{/if}}" data-label="system.gifts.twelve.expand" data-ability="{{system.gifts.twelve.expand}}"><i class="{{#if system.gifts.twelve.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.thirteen.bought}}
+                    <div>
+                        {{#if system.gifts.thirteen.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.thirteen.name" type="text" value="{{elan.system.gifts.thirteen.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.thirteen.req" type="text" value="{{elan.system.gifts.thirteen.req}}" />
+                            <a class="item-toggle {{#if system.gifts.thirteen.expand}}showOpacity{{/if}}" data-label="system.gifts.thirteen.expand" data-ability="{{system.gifts.thirteen.expand}}"><i class="{{#if system.gifts.thirteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.thirteen.desc" rows="2">{{elan.system.gifts.thirteen.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.thirteen.name}} </span>
+                            <span> {{elan.system.gifts.thirteen.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.thirteen.expand}}showOpacity{{/if}}" data-label="system.gifts.thirteen.expand" data-ability="{{system.gifts.thirteen.expand}}"><i class="{{#if system.gifts.thirteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.fourteen.bought}}
+                    <div>
+                        {{#if system.gifts.fourteen.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.fourteen.name" type="text" value="{{elan.system.gifts.fourteen.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.fourteen.req" type="text" value="{{elan.system.gifts.fourteen.req}}" />
+                            <a class="item-toggle {{#if system.gifts.fourteen.expand}}showOpacity{{/if}}" data-label="system.gifts.fourteen.expand" data-ability="{{system.gifts.fourteen.expand}}"><i class="{{#if system.gifts.fourteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.fourteen.desc" rows="2">{{elan.system.gifts.fourteen.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.fourteen.name}} </span>
+                            <span> {{elan.system.gifts.fourteen.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.fourteen.expand}}showOpacity{{/if}}" data-label="system.gifts.fourteen.expand" data-ability="{{system.gifts.fourteen.expand}}"><i class="{{#if system.gifts.fourteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if system.gifts.fifteen.bought}}
+                    <div>
+                        {{#if system.gifts.fifteen.expand}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <input class="inline-edit" data-field="system.gifts.fifteen.name" type="text" value="{{elan.system.gifts.fifteen.name}}" />
+                            <input class="inline-edit" data-field="system.gifts.fifteen.req" type="text" value="{{elan.system.gifts.fifteen.req}}" />
+                            <a class="item-toggle {{#if system.gifts.fifteen.expand}}showOpacity{{/if}}" data-label="system.gifts.fifteen.expand" data-ability="{{system.gifts.fifteen.expand}}"><i class="{{#if system.gifts.fifteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <textarea class="inline-edit" data-field="system.gifts.fifteen.desc" rows="2">{{elan.system.gifts.fifteen.desc}}</textarea>
+                        {{else}}
+                        <div>
+                            <span> {{elan.name}} </span>
+                            <span> {{elan.system.gifts.fifteen.name}} </span>
+                            <span> {{elan.system.gifts.fifteen.req}} </span>
+                            <a class="item-toggle {{#if system.gifts.fifteen.expand}}showOpacity{{/if}}" data-label="system.gifts.fifteen.expand" data-ability="{{system.gifts.fifteen.expand}}"><i class="{{#if system.gifts.fifteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <div>
+            <h2> placeholder </h2>
+        </div>
+    </div>
+
+    <div class="e3">
+        <div>
+            <h2> {{localize "abfalter.basicInfo.note"}} </h2>
+            <textarea name="data.notesOne" rows="5">{{data.notesOne}}</textarea>
+        </div>
+        <div>
+            <h2> {{localize "abfalter.basicInfo.note"}} </h2>
+            <textarea name="data.notesTwo" rows="5">{{data.notesTwo}}</textarea>
+        </div>
+    </div>
 </div>
 

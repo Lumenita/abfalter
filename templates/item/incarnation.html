@@ -1,6 +1,16 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <div>
-        <span> Yo Incarnations Here </span>
+    <div class="itemStart">
+        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
 
+    <div class="invocationContent">
+        <h2> {{localize "abfalter.magicTab.incarnationOne"}} </h2>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.difficulty"}} </span> <input type="number" name="data.difficulty" value="{{data.difficulty}}" /> </label>
+        </div>
+        <h3> {{localize "abfalter.basicInfo.description"}} </h3>
+        <textarea name="data.description" rows="5">{{data.description}}</textarea>
+    </div>
 </form>

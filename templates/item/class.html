@@ -38,25 +38,26 @@
             <label> <span> Bind/Level </span> <input type="number" name="data.main.bind" value="{{data.main.bind}}" /> </label>
             <label> <span> Banish/Level </span> <input type="number" name="data.main.banish" value="{{data.main.banish}}" /> </label>
             <h3> Secondary abilities </h3>
-            <label> <span> Athletics </span></label>
-            <label class="athletics-box">
-                <input type="checkbox" name="data.athletics.status" data-dtype="boolean" {{checked data.athletics.status}} />
-            </label>
-            {{#if data.athletics.status}}
+            <div>
+                <span> Athletics </span>
+                <a class="toggleBoolean {{#if data.athletics}}showOpacity{{/if}}" data-label="data.athletics" data-ability="{{data.athletics}}"><i class="{{#if data.athletics}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
+            {{#if data.athletics}}
             <div>
                 <label> <span> Acrobatics/Level </span> <input type="number" name="data.secondary.acro" value="{{data.secondary.acro}}" /> </label>
                 <label> <span> Athleticism/Level </span> <input type="number" name="data.secondary.athleticism" value="{{data.secondary.athleticism}}" /> </label>
                 <label> <span> Climb/Level </span> <input type="number" name="data.secondary.climb" value="{{data.secondary.climb}}" /> </label>
                 <label> <span> Jump/Level </span> <input type="number" name="data.secondary.jump" value="{{data.secondary.jump}}" /> </label>
+                <label> <span> piloting/Level </span> <input type="number" name="data.secondary.piloting" value="{{data.secondary.piloting}}" /> </label>
                 <label> <span> Ride/Level </span> <input type="number" name="data.secondary.ride" value="{{data.secondary.ride}}" /> </label>
                 <label> <span> Swim/Level </span> <input type="number" name="data.secondary.swim" value="{{data.secondary.swim}}" /> </label>
             </div>
             {{/if}}
-            <label> <span> Social </span></label>
-            <label class="social-box">
-                <input type="checkbox" name="data.social.status" data-dtype="boolean" {{checked data.social.status}} />
-            </label>
-            {{#if data.social.status}}
+            <div>
+                <span> Social </span>
+                <a class="toggleBoolean {{#if data.social}}showOpacity{{/if}}" data-label="data.social" data-ability="{{data.social}}"><i class="{{#if data.social}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
+            {{#if data.social}}
             <div>
                 <label> <span> Etiquette/Level </span> <input type="number" name="data.secondary.etiquette" value="{{data.secondary.etiquette}}" /> </label>
                 <label> <span> Intimidate/Level </span> <input type="number" name="data.secondary.intimidate" value="{{data.secondary.intimidate}}" /> </label>
@@ -67,22 +68,22 @@
                 <label> <span> Trading/Level </span> <input type="number" name="data.secondary.trading" value="{{data.secondary.trading}}" /> </label>
             </div>
             {{/if}}
-            <label> <span> Perceptive </span></label>
-            <label class="perceptive-box">
-                <input type="checkbox" name="data.perceptive.status" data-dtype="boolean" {{checked data.perceptive.status}} />
-            </label>
-            {{#if data.perceptive.status}}
+            <div>
+                <span> Perceptive </span>
+                <a class="toggleBoolean {{#if data.perceptive}}showOpacity{{/if}}" data-label="data.perceptive" data-ability="{{data.perceptive}}"><i class="{{#if data.perceptive}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
+            {{#if data.perceptive}}
             <div>
                 <label> <span> Notice/Level </span> <input type="number" name="data.secondary.notice" value="{{data.secondary.notice}}" /> </label>
                 <label> <span> Search/Level </span> <input type="number" name="data.secondary.search" value="{{data.secondary.search}}" /> </label>
                 <label> <span> Track/Level </span> <input type="number" name="data.secondary.track" value="{{data.secondary.track}}" /> </label>
             </div>
             {{/if}}
-            <label> <span> Intellectual </span></label>
-            <label class="intellectual-box">
-                <input type="checkbox" name="data.intellectual.status" data-dtype="boolean" {{checked data.intellectual.status}} />
-            </label>
-            {{#if data.intellectual.status}}
+            <div>
+                <span> intellectual </span>
+                <a class="toggleBoolean {{#if data.intellectual}}showOpacity{{/if}}" data-label="data.intellectual" data-ability="{{data.intellectual}}"><i class="{{#if data.intellectual}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
+            {{#if data.intellectual}}
             <div>
                 <label> <span> Animals/Level </span> <input type="number" name="data.secondary.animals" value="{{data.secondary.animals}}" /> </label>
                 <label> <span> Appraisal/Level </span> <input type="number" name="data.secondary.appraisal" value="{{data.secondary.appraisal}}" /> </label>
@@ -97,24 +98,25 @@
                 <label> <span> Occult/Level </span> <input type="number" name="data.secondary.occult" value="{{data.secondary.occult}}" /> </label>
                 <label> <span> Science/Level </span> <input type="number" name="data.secondary.science" value="{{data.secondary.science}}" /> </label>
                 <label> <span> Tactics/Level </span> <input type="number" name="data.secondary.tactics" value="{{data.secondary.tactics}}" /> </label>
+                <label> <span> technomagic/Level </span> <input type="number" name="data.secondary.technomagic" value="{{data.secondary.technomagic}}" /> </label>
             </div>
             {{/if}}
-            <label> <span> Vigor </span></label>
-            <label class="vigor-box">
-                <input type="checkbox" name="data.vigor.status" data-dtype="boolean" {{checked data.vigor.status}} />
-            </label>
-            {{#if data.vigor.status}}
+            <div>
+                <span> Vigor </span>
+                <a class="toggleBoolean {{#if data.vigor}}showOpacity{{/if}}" data-label="data.vigor" data-ability="{{data.vigor}}"><i class="{{#if data.vigor}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
+            {{#if data.vigor}}
             <div>
                 <label> <span> Composure/Level </span> <input type="number" name="data.secondary.composure" value="{{data.secondary.composure}}" /> </label>
                 <label> <span> Feats of Str./Level </span> <input type="number" name="data.secondary.featsofstr" value="{{data.secondary.featsofstr}}" /> </label>
                 <label> <span> Withst. Pain/Level </span> <input type="number" name="data.secondary.withstpain" value="{{data.secondary.withstpain}}" /> </label>
             </div>
             {{/if}}
-            <label> <span> Subterfuge </span></label>
-            <label class="subterfuge-box">
-                <input type="checkbox" name="data.subterfuge.status" data-dtype="boolean" {{checked data.subterfuge.status}} />
-            </label>
-            {{#if data.subterfuge.status}}
+            <div>
+                <span> Subterfuge </span>
+                <a class="toggleBoolean {{#if data.subterfuge}}showOpacity{{/if}}" data-label="data.subterfuge" data-ability="{{data.subterfuge}}"><i class="{{#if data.subterfuge}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
+            {{#if data.subterfuge}}
             <div>
                 <label> <span> Disguise/Level </span> <input type="number" name="data.secondary.disguise" value="{{data.secondary.disguise}}" /> </label>
                 <label> <span> Hide/Level </span> <input type="number" name="data.secondary.hide" value="{{data.secondary.hide}}" /> </label>
@@ -125,15 +127,17 @@
                 <label> <span> Trap Lore/Level </span> <input type="number" name="data.secondary.traplore" value="{{data.secondary.traplore}}" /> </label>
             </div>
             {{/if}}
-            <label> <span> Creative </span></label>
-            <label class="creative-box">
-                <input type="checkbox" name="data.creative.status" data-dtype="boolean" {{checked data.creative.status}} />
-            </label>
-            {{#if data.creative.status}}
+            <div>
+                <span> Creative </span>
+                <a class="toggleBoolean {{#if data.creative}}showOpacity{{/if}}" data-label="data.creative" data-ability="{{data.creative}}"><i class="{{#if data.creative}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
+            {{#if data.creative}}
             <div>
                 <label> <span> Alchemy/Level </span> <input type="number" name="data.secondary.alchemy" value="{{data.secondary.alchemy}}" /> </label>
                 <label> <span> Animism/Level </span> <input type="number" name="data.secondary.animism" value="{{data.secondary.animism}}" /> </label>
                 <label> <span> Art/Level </span> <input type="number" name="data.secondary.art" value="{{data.secondary.art}}" /> </label>
+                <label> <span> Construct Marionattes/Level </span> <input type="number" name="data.secondary.toymaking" value="{{data.secondary.toymaking}}" /> </label>
+                <label> <span> cooking/Level </span> <input type="number" name="data.secondary.cooking" value="{{data.secondary.cooking}}" /> </label>
                 <label> <span> Dance/Level </span> <input type="number" name="data.secondary.dance" value="{{data.secondary.dance}}" /> </label>
                 <label> <span> Forging/Level </span> <input type="number" name="data.secondary.forging" value="{{data.secondary.forging}}" /> </label>
                 <label> <span> Jewelry/Level </span> <input type="number" name="data.secondary.jewelry" value="{{data.secondary.jewelry}}" /> </label>
