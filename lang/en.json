@@ -165,10 +165,12 @@
       "gainUpperElan": "Positive Bonuses Over 50",
       "loseElan": "Negative Bonuses",
       "addElan": "Add Elan",
-      "elanEdit": "If Req = 0, gift will not show",
+      "elanEdit": "If Req = 0, gift will not show or count towards cost",
       "elanGifts": "Elan Gifts",
       "giftName": "Gift Name",
-      "deity": "Deity"
+      "deity": "Deity",
+      "perLevel": "/Level",
+      "lifePoints": "LifePoints"
     },
     "sheet": {
       "newItem": "New Item",
@@ -634,6 +636,15 @@
       "charOptions": "Character Options",
       "presenceMod": "Presence Mod",
       "levelMod": "Level Mod"
+    },
+    "dialogs": {
+      "noAtkSelf": "You cannot attack yourself",
+      "noActor": "The target token does not have an actor associated with it",
+      "mustTarget": "Must have at least one target selected",
+      "noMultiSelect": "Must have only one token selected as an attacker",
+      "noSelectToken": "Must have one token selected as an attacker",
+      "wrongScene": "Not in the active scene",
+      "aoeAttack": "You have initiated an AOE attack which has not been implemented yet"
     }
   }
 }

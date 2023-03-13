@@ -1,158 +1,218 @@
-﻿<form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+﻿<form class="{{cssClass}} itemWindow" autocomplete="off">
+    <div class="itemStart">
+        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
+    </div>
 
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-            <label> <span> Level </span> <input type="number" name="data.main.levels" value="{{data.main.levels}}" /> </label>
+    <div class="classContent">
+        <h2> {{localize "abfalter.basicInfo.class"}} </h2>
+        <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.main.levels" value="{{data.main.levels}}" /> </label>
+        <textarea name="data.description" rows="3" placeholder="Extra Class Information">{{data.description}}</textarea>
+
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.lifePoints"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.lp" value="{{data.main.lp}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.initiative"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.initiative" value="{{data.main.initiative}}" /> </label>
         </div>
-    </header>
-
-    {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="main">Main Stats</a>
-        <a class="item" data-tab="others">Extra Abilities</a>
-    </nav>
-
-    {{!-- Sheet Body --}}
-    <section class="sheet-body">
-
-        {{!-- Main Stats Tab --}}
-        <div class="classtab" data-group="primary" data-tab="main">
-            <div>
-                <label> <span> Lifepoint/Level </span> <input type="number" name="data.main.lp" value="{{data.main.lp}}" /> </label>
-                <label> <span> Initiative/Level </span> <input type="number" name="data.main.initiative" value="{{data.main.initiative}}" /> </label>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.attack"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.attack" value="{{data.main.attack}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.dodge"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.dodge" value="{{data.main.dodge}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.block"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.block" value="{{data.main.block}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.wearArmor"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.weararmor" value="{{data.main.weararmor}}" /> </label>
+        </div>
+        <div class="ppClass">
+            <label> <span> {{localize "abfalter.basicInfo.mk"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.mk" value="{{data.main.mk}}" /> </label>
+            <div class="csSelect">
+                <label>
+                    <span> {{localize "abfalter.psychicTab.pp"}}{{localize "abfalter.generalTab.perLevel"}} </span>
+                    <select name="data.main.pp" data-dtype="number">
+                        {{#select data.main.pp}}
+                        <option value="3"> +1 PP /3 lvls </option>
+                        <option value="2"> +1 PP /2 lvls  </option>
+                        <option value="1"> +1 PP /1 lvls  </option>
+                        {{/select}}
+                    </select>
+                </label>
             </div>
-            <div>
-                <label> <span> Attack/Level </span> <input type="number" name="data.main.attack" value="{{data.main.attack}}" /> </label>
-                <label> <span> Dodge/Level </span> <input type="number" name="data.main.dodge" value="{{data.main.dodge}}" /> </label>
-            </div>
-            <label> <span> Block/Level </span> <input type="number" name="data.main.block" value="{{data.main.block}}" /> </label>
-            <label> <span> Wear Armor/Level </span> <input type="number" name="data.main.weararmor" value="{{data.main.weararmor}}" /> </label>
-            <label> <span> MK/Level </span> <input type="number" name="data.main.mk" value="{{data.main.mk}}" /> </label>
-            <label> <span> PP/Level </span> <input type="number" name="data.main.pp" value="{{data.main.pp}}" /> </label>
-            <label> <span> Zeon/Level </span> <input type="number" name="data.main.zeon" value="{{data.main.zeon}}" /> </label>
-            <h3> Summoning abilities </h3>
-            <label> <span> Summon/Level </span> <input type="number" name="data.main.summon" value="{{data.main.summon}}" /> </label>
-            <label> <span> Control/Level </span> <input type="number" name="data.main.control" value="{{data.main.control}}" /> </label>
-            <label> <span> Bind/Level </span> <input type="number" name="data.main.bind" value="{{data.main.bind}}" /> </label>
-            <label> <span> Banish/Level </span> <input type="number" name="data.main.banish" value="{{data.main.banish}}" /> </label>
-            <h3> Secondary abilities </h3>
-            <div>
-                <span> Athletics </span>
-                <a class="toggleBoolean {{#if data.athletics}}showOpacity{{/if}}" data-label="data.athletics" data-ability="{{data.athletics}}"><i class="{{#if data.athletics}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-            </div>
-            {{#if data.athletics}}
-            <div>
-                <label> <span> Acrobatics/Level </span> <input type="number" name="data.secondary.acro" value="{{data.secondary.acro}}" /> </label>
-                <label> <span> Athleticism/Level </span> <input type="number" name="data.secondary.athleticism" value="{{data.secondary.athleticism}}" /> </label>
-                <label> <span> Climb/Level </span> <input type="number" name="data.secondary.climb" value="{{data.secondary.climb}}" /> </label>
-                <label> <span> Jump/Level </span> <input type="number" name="data.secondary.jump" value="{{data.secondary.jump}}" /> </label>
-                <label> <span> piloting/Level </span> <input type="number" name="data.secondary.piloting" value="{{data.secondary.piloting}}" /> </label>
-                <label> <span> Ride/Level </span> <input type="number" name="data.secondary.ride" value="{{data.secondary.ride}}" /> </label>
-                <label> <span> Swim/Level </span> <input type="number" name="data.secondary.swim" value="{{data.secondary.swim}}" /> </label>
-            </div>
-            {{/if}}
-            <div>
-                <span> Social </span>
-                <a class="toggleBoolean {{#if data.social}}showOpacity{{/if}}" data-label="data.social" data-ability="{{data.social}}"><i class="{{#if data.social}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-            </div>
-            {{#if data.social}}
-            <div>
-                <label> <span> Etiquette/Level </span> <input type="number" name="data.secondary.etiquette" value="{{data.secondary.etiquette}}" /> </label>
-                <label> <span> Intimidate/Level </span> <input type="number" name="data.secondary.intimidate" value="{{data.secondary.intimidate}}" /> </label>
-                <label> <span> Leadership/Level </span> <input type="number" name="data.secondary.leadership" value="{{data.secondary.leadership}}" /> </label>
-                <label> <span> Persuasion/Level </span> <input type="number" name="data.secondary.persuasion" value="{{data.secondary.persuasion}}" /> </label>
-                <label> <span> Streetwise/Level </span> <input type="number" name="data.secondary.streetwise" value="{{data.secondary.streetwise}}" /> </label>
-                <label> <span> Style/Level </span> <input type="number" name="data.secondary.style" value="{{data.secondary.style}}" /> </label>
-                <label> <span> Trading/Level </span> <input type="number" name="data.secondary.trading" value="{{data.secondary.trading}}" /> </label>
-            </div>
-            {{/if}}
-            <div>
-                <span> Perceptive </span>
-                <a class="toggleBoolean {{#if data.perceptive}}showOpacity{{/if}}" data-label="data.perceptive" data-ability="{{data.perceptive}}"><i class="{{#if data.perceptive}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-            </div>
-            {{#if data.perceptive}}
-            <div>
-                <label> <span> Notice/Level </span> <input type="number" name="data.secondary.notice" value="{{data.secondary.notice}}" /> </label>
-                <label> <span> Search/Level </span> <input type="number" name="data.secondary.search" value="{{data.secondary.search}}" /> </label>
-                <label> <span> Track/Level </span> <input type="number" name="data.secondary.track" value="{{data.secondary.track}}" /> </label>
-            </div>
-            {{/if}}
-            <div>
-                <span> intellectual </span>
-                <a class="toggleBoolean {{#if data.intellectual}}showOpacity{{/if}}" data-label="data.intellectual" data-ability="{{data.intellectual}}"><i class="{{#if data.intellectual}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-            </div>
-            {{#if data.intellectual}}
-            <div>
-                <label> <span> Animals/Level </span> <input type="number" name="data.secondary.animals" value="{{data.secondary.animals}}" /> </label>
-                <label> <span> Appraisal/Level </span> <input type="number" name="data.secondary.appraisal" value="{{data.secondary.appraisal}}" /> </label>
-                <label> <span> Architecture/Level </span> <input type="number" name="data.secondary.architecture" value="{{data.secondary.architecture}}" /> </label>
-                <label> <span> Herbal Lore/Level </span> <input type="number" name="data.secondary.herballore" value="{{data.secondary.herballore}}" /> </label>
-                <label> <span> History/Level </span> <input type="number" name="data.secondary.history" value="{{data.secondary.history}}" /> </label>
-                <label> <span> Law/Level </span> <input type="number" name="data.secondary.law" value="{{data.secondary.law}}" /> </label>
-                <label> <span> Magic Appr./Level </span> <input type="number" name="data.secondary.magicappr" value="{{data.secondary.magicappr}}" /> </label>
-                <label> <span> Medicine/Level </span> <input type="number" name="data.secondary.medicine" value="{{data.secondary.medicine}}" /> </label>
-                <label> <span> Memorize/Level </span> <input type="number" name="data.secondary.memorize" value="{{data.secondary.memorize}}" /> </label>
-                <label> <span> Navigation/Level </span> <input type="number" name="data.secondary.navigation" value="{{data.secondary.navigation}}" /> </label>
-                <label> <span> Occult/Level </span> <input type="number" name="data.secondary.occult" value="{{data.secondary.occult}}" /> </label>
-                <label> <span> Science/Level </span> <input type="number" name="data.secondary.science" value="{{data.secondary.science}}" /> </label>
-                <label> <span> Tactics/Level </span> <input type="number" name="data.secondary.tactics" value="{{data.secondary.tactics}}" /> </label>
-                <label> <span> technomagic/Level </span> <input type="number" name="data.secondary.technomagic" value="{{data.secondary.technomagic}}" /> </label>
-            </div>
-            {{/if}}
-            <div>
-                <span> Vigor </span>
-                <a class="toggleBoolean {{#if data.vigor}}showOpacity{{/if}}" data-label="data.vigor" data-ability="{{data.vigor}}"><i class="{{#if data.vigor}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-            </div>
-            {{#if data.vigor}}
-            <div>
-                <label> <span> Composure/Level </span> <input type="number" name="data.secondary.composure" value="{{data.secondary.composure}}" /> </label>
-                <label> <span> Feats of Str./Level </span> <input type="number" name="data.secondary.featsofstr" value="{{data.secondary.featsofstr}}" /> </label>
-                <label> <span> Withst. Pain/Level </span> <input type="number" name="data.secondary.withstpain" value="{{data.secondary.withstpain}}" /> </label>
-            </div>
-            {{/if}}
-            <div>
-                <span> Subterfuge </span>
-                <a class="toggleBoolean {{#if data.subterfuge}}showOpacity{{/if}}" data-label="data.subterfuge" data-ability="{{data.subterfuge}}"><i class="{{#if data.subterfuge}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-            </div>
-            {{#if data.subterfuge}}
-            <div>
-                <label> <span> Disguise/Level </span> <input type="number" name="data.secondary.disguise" value="{{data.secondary.disguise}}" /> </label>
-                <label> <span> Hide/Level </span> <input type="number" name="data.secondary.hide" value="{{data.secondary.hide}}" /> </label>
-                <label> <span> Lockpicking/Level </span> <input type="number" name="data.secondary.lockpicking" value="{{data.secondary.lockpicking}}" /> </label>
-                <label> <span> Poisons/Level </span> <input type="number" name="data.secondary.poisons" value="{{data.secondary.poisons}}" /> </label>
-                <label> <span> Stealth/Level </span> <input type="number" name="data.secondary.stealth" value="{{data.secondary.stealth}}" /> </label>
-                <label> <span> Theft/Level </span> <input type="number" name="data.secondary.theft" value="{{data.secondary.theft}}" /> </label>
-                <label> <span> Trap Lore/Level </span> <input type="number" name="data.secondary.traplore" value="{{data.secondary.traplore}}" /> </label>
-            </div>
-            {{/if}}
-            <div>
-                <span> Creative </span>
-                <a class="toggleBoolean {{#if data.creative}}showOpacity{{/if}}" data-label="data.creative" data-ability="{{data.creative}}"><i class="{{#if data.creative}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-            </div>
-            {{#if data.creative}}
-            <div>
-                <label> <span> Alchemy/Level </span> <input type="number" name="data.secondary.alchemy" value="{{data.secondary.alchemy}}" /> </label>
-                <label> <span> Animism/Level </span> <input type="number" name="data.secondary.animism" value="{{data.secondary.animism}}" /> </label>
-                <label> <span> Art/Level </span> <input type="number" name="data.secondary.art" value="{{data.secondary.art}}" /> </label>
-                <label> <span> Construct Marionattes/Level </span> <input type="number" name="data.secondary.toymaking" value="{{data.secondary.toymaking}}" /> </label>
-                <label> <span> cooking/Level </span> <input type="number" name="data.secondary.cooking" value="{{data.secondary.cooking}}" /> </label>
-                <label> <span> Dance/Level </span> <input type="number" name="data.secondary.dance" value="{{data.secondary.dance}}" /> </label>
-                <label> <span> Forging/Level </span> <input type="number" name="data.secondary.forging" value="{{data.secondary.forging}}" /> </label>
-                <label> <span> Jewelry/Level </span> <input type="number" name="data.secondary.jewelry" value="{{data.secondary.jewelry}}" /> </label>
-                <label> <span> Music/Level </span> <input type="number" name="data.secondary.music" value="{{data.secondary.music}}" /> </label>
-                <label> <span> Runes/Level </span> <input type="number" name="data.secondary.runes" value="{{data.secondary.runes}}" /> </label>
-                <label> <span> Ritual Calligraphy/Level </span> <input type="number" name="data.secondary.ritualcalig" value="{{data.secondary.ritualcalig}}" /> </label>
-                <label> <span> Sl. of Hand/Level </span> <input type="number" name="data.secondary.slofhand" value="{{data.secondary.slofhand}}" /> </label>
-                <label> <span> Tailoring/Level </span> <input type="number" name="data.secondary.tailoring" value="{{data.secondary.tailoring}}" /> </label>
-            </div>
-            {{/if}}
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.magicTab.zeon"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.zeon" value="{{data.main.zeon}}" /> </label>
         </div>
 
-        {{!-- Extra Tab --}}
-        <div class="tab others" data-group="primary" data-tab="others">
-            {{!-- As you add new fields, add them in here! --}}
+        <h3> {{localize "abfalter.magicTab.summoning"}} </h3>
+
+        <div>
+            <label> <span> {{localize "abfalter.magicTab.summon"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.summon" value="{{data.main.summon}}" /> </label>
+            <label> <span> {{localize "abfalter.magicTab.control"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.control" value="{{data.main.control}}" /> </label>
         </div>
-    </section>
+        <div>
+            <label> <span> {{localize "abfalter.magicTab.bind"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.bind" value="{{data.main.bind}}" /> </label>
+            <label> <span> {{localize "abfalter.magicTab.banish"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.banish" value="{{data.main.banish}}" /> </label>
+        </div>
+
+        <h3> {{localize "abfalter.generalTab.secAbility"}} </h3>
+        <div class="classHeader">
+            <span> {{localize "abfalter.generalTab.athletics"}} </span>
+            <a class="toggleBoolean {{#if data.athletics}}showOpacity{{/if}}" data-label="data.athletics" data-ability="{{data.athletics}}"><i class="{{#if data.athletics}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if data.athletics}}
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.acrobatic"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.acro" value="{{data.secondary.acro}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.athleticism"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.athleticism" value="{{data.secondary.athleticism}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.climb"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.climb" value="{{data.secondary.climb}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.jump"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.jump" value="{{data.secondary.jump}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.piloting"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.piloting" value="{{data.secondary.piloting}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.ride"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.ride" value="{{data.secondary.ride}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.swim"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.swim" value="{{data.secondary.swim}}" /> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader">
+            <span> {{localize "abfalter.generalTab.social"}} </span>
+            <a class="toggleBoolean {{#if data.social}}showOpacity{{/if}}" data-label="data.social" data-ability="{{data.social}}"><i class="{{#if data.social}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if data.social}}
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.etiquette"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.etiquette" value="{{data.secondary.etiquette}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.intimidate"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.intimidate" value="{{data.secondary.intimidate}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.leadership"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.leadership" value="{{data.secondary.leadership}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.persuasion"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.persuasion" value="{{data.secondary.persuasion}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.streetwise"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.streetwise" value="{{data.secondary.streetwise}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.style"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.style" value="{{data.secondary.style}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.trading"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.trading" value="{{data.secondary.trading}}" /> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader">
+            <span> {{localize "abfalter.generalTab.perceptive"}} </span>
+            <a class="toggleBoolean {{#if data.perceptive}}showOpacity{{/if}}" data-label="data.perceptive" data-ability="{{data.perceptive}}"><i class="{{#if data.perceptive}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if data.perceptive}}
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.notice"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.notice" value="{{data.secondary.notice}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.search"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.search" value="{{data.secondary.search}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.track"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.track" value="{{data.secondary.track}}" /> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader">
+            <span> {{localize "abfalter.generalTab.intellectual"}} </span>
+            <a class="toggleBoolean {{#if data.intellectual}}showOpacity{{/if}}" data-label="data.intellectual" data-ability="{{data.intellectual}}"><i class="{{#if data.intellectual}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if data.intellectual}}
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.animals"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.animals" value="{{data.secondary.animals}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.appraisal"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.appraisal" value="{{data.secondary.appraisal}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.architecture"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.architecture" value="{{data.secondary.architecture}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.herballore"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.herballore" value="{{data.secondary.herballore}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.history"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.history" value="{{data.secondary.history}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.law"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.law" value="{{data.secondary.law}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.magicAppr"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.magicappr" value="{{data.secondary.magicappr}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.medicine"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.medicine" value="{{data.secondary.medicine}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.memorize"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.memorize" value="{{data.secondary.memorize}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.navigation"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.navigation" value="{{data.secondary.navigation}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.occult"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.occult" value="{{data.secondary.occult}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.science"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.science" value="{{data.secondary.science}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.tactics"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.tactics" value="{{data.secondary.tactics}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.technomagic"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.technomagic" value="{{data.secondary.technomagic}}" /> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader">
+            <span> {{localize "abfalter.generalTab.vigor"}} </span>
+            <a class="toggleBoolean {{#if data.vigor}}showOpacity{{/if}}" data-label="data.vigor" data-ability="{{data.vigor}}"><i class="{{#if data.vigor}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if data.vigor}}
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.composure"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.composure" value="{{data.secondary.composure}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.featsOfStr"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.featsofstr" value="{{data.secondary.featsofstr}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.withstPain"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.withstpain" value="{{data.secondary.withstpain}}" /> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader">
+            <span> {{localize "abfalter.generalTab.subterfuge"}} </span>
+            <a class="toggleBoolean {{#if data.subterfuge}}showOpacity{{/if}}" data-label="data.subterfuge" data-ability="{{data.subterfuge}}"><i class="{{#if data.subterfuge}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if data.subterfuge}}
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.disguise"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.disguise" value="{{data.secondary.disguise}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.hide"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.hide" value="{{data.secondary.hide}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.lockpicking"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.lockpicking" value="{{data.secondary.lockpicking}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.poisons"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.poisons" value="{{data.secondary.poisons}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.stealth"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.stealth" value="{{data.secondary.stealth}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.theft"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.theft" value="{{data.secondary.theft}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.traplore"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.traplore" value="{{data.secondary.traplore}}" /> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader">
+            <span> {{localize "abfalter.generalTab.creative"}} </span>
+            <a class="toggleBoolean {{#if data.creative}}showOpacity{{/if}}" data-label="data.creative" data-ability="{{data.creative}}"><i class="{{#if data.creative}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if data.creative}}
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.alchemy"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.alchemy" value="{{data.secondary.alchemy}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.animism"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.animism" value="{{data.secondary.animism}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.art"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.art" value="{{data.secondary.art}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.toymaking"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.toymaking" value="{{data.secondary.toymaking}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.cooking"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.cooking" value="{{data.secondary.cooking}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.dance"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.dance" value="{{data.secondary.dance}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.forging"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.forging" value="{{data.secondary.forging}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.jewelry"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.jewelry" value="{{data.secondary.jewelry}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.music"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.music" value="{{data.secondary.music}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.runes"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.runes" value="{{data.secondary.runes}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.ritualCal"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.ritualcalig" value="{{data.secondary.ritualcalig}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.soh"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.slofhand" value="{{data.secondary.slofhand}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.generalTab.tailoring"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.secondary.tailoring" value="{{data.secondary.tailoring}}" /> </label>
+        </div>
+        {{/if}}
+    </div>
 </form>

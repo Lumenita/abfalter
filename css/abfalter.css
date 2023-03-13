@@ -269,7 +269,7 @@ h3 {
 .abfalter .tabs .item {
     font-weight: bold;
 }
-.sheet-tabs {
+.navTabsYes {
     max-height: 37px;
     min-width: 878px;
 }
@@ -2093,13 +2093,13 @@ h3 {
     width: 28%;
 }
 .kiNotBought {
-    background-color: #38373e;
+    background-color: #c4c2b7;
 }
 .kiBought {
-    background-color: #0064cb !important;
+    background-color: #b5b3f3 !important;
 }
 .kiFree {
-    background-color: #127212;
+    background-color: #a8e7a8;
 }
 .mk > div,
 .limits > div,
@@ -2124,7 +2124,6 @@ h3 {
     border-radius: 0px;
     border: 0px;
     width: 15%;
-    color: #fffbe4;
 }
 .kiAbilities > div {
     display: flex;
@@ -2146,16 +2145,14 @@ h3 {
 .subKi5 {
     margin-left: 90px;
 }
-.activeKiAbility {
-    color: white;
-}
+
 .kiActiveButton {
     width: 17%;
     margin: 0 0 0 7px;
     height: 20px;
     border-radius: 0px;
     border: 0px;
-    background-color: black;
+    background-color: #c4c2b7;
 }
 .kiActiveButton1 {
     width: 17%;
@@ -2163,7 +2160,7 @@ h3 {
     height: 20px;
     border-radius: 0px;
     border: 0px;
-    background-color: black;
+    background-color: #c4c2b7;
 }
 /*
     --------------
@@ -2845,14 +2842,14 @@ h3 {
     display: flex;
     place-content: space-between;
 }
-.weapon-item > div:last-child > span:first-of-type {
+.weapon-item > div:last-of-type > span:first-of-type {
     width: 15%;
 }
 .weapons > div:first-of-type > span:nth-of-type(2) {
     width: 55.1%;
     margin: 0 0 0 .95%;
 }
-.weapon-item > div:last-child > span:nth-of-type(2) {
+.weapon-item > div:last-of-type > span:nth-of-type(2) {
     width: 58%;
     margin: 0 0 0 1%;
 }
@@ -2860,7 +2857,7 @@ h3 {
     width: 14.25%;
     margin: 0 0 0 0.95%;
 }
-.weapon-item > div:last-child > span:nth-of-type(3) {
+.weapon-item > div:last-of-type > span:nth-of-type(3) {
     width: 15%;
     margin: 0 0 0 1%;
 }
@@ -3303,6 +3300,12 @@ h3 {
     font-size: 25px;
     border-bottom: 1px solid black;
 }
+.itemWindow {
+    min-width: 475px;
+}
+.itemWindowSmall {
+    min-width: 375px;
+}
 /*
     ----
     Elan
@@ -3313,6 +3316,7 @@ h3 {
 }
 .elanTabs {
     min-width: 515px;
+    max-height: 37px;
 }
 .elanTabs > ul > li {
     width: 25%;
@@ -3344,7 +3348,7 @@ h3 {
 }
 .elanContent2 > div:first-of-type > label {
     display: flex;
-    width: 58%;
+    width: 28%;
     margin: 0 0 0 2%;
 }
 .elanContent2 > div:first-of-type > label > span {
@@ -3356,7 +3360,7 @@ h3 {
     width: 25%;
 }
 .elanContent2 > div:first-of-type > span {
-    width: 40%;
+    width: 70%;
     font-style: italic;
 }
 .elanContent2 > div:nth-of-type(2) {
@@ -3399,30 +3403,76 @@ h3 {
     Class
     -----
 */
-.classtab {
-    width: 100%;
-    flex-wrap: wrap;
-    font-size: 16px;
+.classContent > div {
+    display: flex;
 }
-.classtab > div > label > span {
-    width: 20%
+.classContent > div > label {
+    display: flex;
+    justify-content: flex-start;
+    width: 50%;
 }
-.classtab > div > label > input {
-    width: 30%
+.classContent > div > label > span {
+    width: 68%;
+    margin: 0 2% 0 0;
 }
-.classtab > label > span {
-    font-weight: normal;
-    width: 20%;
-    align-items: flex-end;
-    height: 19px;
-    padding-top: 4px;
-    position: sticky;
-}
-.classtab > label > input[type="number"] {
+.classContent > div > label > input {
     width: 30%;
-    align-items: end;
 }
-
+.classHeader {
+    justify-content: flex-start;
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.classHeader > span {
+    width: 95%;
+}
+.classHeader > a {
+    width: 5%;
+    font-size: 15px;
+}
+.classContent > label {
+    display: flex;
+    justify-content: flex-end;
+}
+.classContent > textarea {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    margin: 5px 0 3px 0;
+    padding-bottom: 3px;
+}
+.classContent > label > span {
+    width: 34%;
+    margin: 0 1% 0 0;
+}
+.classContent > label > input {
+    width: 15%;
+}
+.classContent > h3:nth-of-type(1) {
+    margin-top: 5px;
+}
+.classContent > h3:nth-of-type(2) {
+    border: none;
+    margin: 5px 0 0 0;
+    padding: 0;
+}
+.ppClass > div {
+    width: 50%;
+}
+.ppClass > div > label {
+    display: flex;
+    width: 100%;
+}
+.ppClass > div > label > span {
+    width: 60%;
+}
+.ppClass > div > label > select {
+    width: 40%;
+}
 /*
     -----
     SpellPath & Turn/Daily Maint
@@ -3696,6 +3746,9 @@ h3 {
     Armor
     -----
 */
+.armorWindow {
+    min-width: 500px;
+}
 .armorContent > div {
     display: flex;
     justify-content: space-evenly;
@@ -3831,7 +3884,25 @@ h3 {
     Width: 24.5%;
     margin: 0 0.5% 0 0;
 }
-
+/*
+    -------------
+    adv & dis-adv
+    -------------
+*/
+.advantages > div > label {
+    display: flex;
+    justify-content: flex-start;
+}
+.advantages > div > label > span {
+    width: 34%;
+    margin: 0 1% 0 0;
+}
+.advantages > div > label > input {
+    width: 15%;
+}
+.advantages > div {
+    margin: 0 0 5px 0;
+}
 
 
 
@@ -3928,4 +3999,68 @@ h3 {
 }
 .fumbleChatMessage > div:not(:nth-of-type(1)) > span:nth-of-type(2) {
     padding-right: 10%;
+}
+
+/*
+    ***************
+    ---------------
+      Auto Combat
+    ---------------
+    ***************
+*/
+/*
+    ---------
+    Macro Bar
+    ---------
+*/
+.customActionBar {
+  z-index: 70;
+  position: fixed;
+  bottom: 100px;
+  left: 240px;
+  height: 52px;
+}
+.customActionBar .macros {
+  display: flex;
+}
+.customActionBar .macros .customMacro {
+  position: relative;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  width: 3.2rem;
+  height: 3.2rem;
+}
+.customActionBar .macros .customMacro:hover img, .customActionBar .macros .customMacro.hover img {
+  filter: invert(1);
+}
+.customActionBar .macros .customMacro:hover .shortcut, .customActionBar .macros .customMacro.hover .shortcut {
+  background-color: black;
+  color: white;
+  opacity: 1;
+}
+.customActionBar .macros .customMacro img {
+  transition: all 0.3s ease-in-out;
+}
+.customActionBar .macros .customMacro .shortcut {
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  background-color: white;
+  font-weight: bold;
+  font-size: 0.75rem;
+  color: #6e2917;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  opacity: 0.8;
+}
+/*
+    ***************
+    ---------------
+         Other
+    ---------------
+    ***************
+*/
+.compendium-footer > span {
+    display: initial;
 }

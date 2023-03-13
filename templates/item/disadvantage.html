@@ -1,14 +1,15 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="{{cssClass}} itemWindow" autocomplete="off">
     <div class="itemStart">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
         <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
 
-    <div>
+    <div class="advantages">
+        <h2> {{localize "abfalter.generalTab.disAdvant"}} </h2>
         <div>
-            <label> <span> Benefit </span> <input type="number" name="data.benefit" value="{{data.benefit}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.benefit"}} </span> <input type="number" name="data.benefit" value="{{data.benefit}}" /> </label>
         </div>
-        <h3> Description </h3>
-        <textarea name="data.description" rows="5" placeholder="{{localize "abfalter.psychicTab.patternInfoB"}}">{{data.description}}</textarea>
+        <h3> {{localize "abfalter.basicInfo.description"}} </h3>
+        <textarea name="data.description" rows="7">{{data.description}}</textarea>
     </div>
 </form>

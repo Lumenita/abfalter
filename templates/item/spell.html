@@ -1,4 +1,4 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="{{cssClass}} itemWindow" autocomplete="off">
     <div class="itemStart">
         <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
         <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
@@ -53,8 +53,8 @@
             <div class="csSelect">
                 <label>
                     <span> {{localize "abfalter.magicTab.maintType"}} </span>
-                    <select name="data.mainttype" data-dtype="String">
-                        {{#select data.mainttype}}
+                    <select name="data.maintType" data-dtype="String">
+                        {{#select data.maintType}}
                         <option value="None"> {{localize "abfalter.basicInfo.none"}} </option>
                         <option value="Turn"> {{localize "abfalter.magicTab.turn"}} </option>
                         <option value="Daily"> {{localize "abfalter.magicTab.daily"}} </option>
@@ -91,24 +91,24 @@
 
         <div>
             <span> {{localize "abfalter.magicTab.basic"}} </span>
-            <input type="number" name="data.base.intreq" value="{{data.base.intreq}}" />
-            <input type="number" name="data.base.zeoncost" value="{{data.base.zeoncost}}" />
-            <input type="number" name="data.base.maint" value="{{data.base.maint}}" />
+            <input type="number" name="data.basic.intReq" value="{{data.basic.intReq}}" />
+            <input type="number" name="data.basic.zeonCost" value="{{data.basic.zeonCost}}" />
+            <input type="number" name="data.basic.maint" value="{{data.basic.maint}}" />
         </div>
         <textarea name="data.basic.rollDesc" rows="5">{{data.basic.rollDesc}}</textarea>
 
         <div>
             <span> {{localize "abfalter.magicTab.intermidiate"}} </span>
-            <input type="number" name="data.intermediate.intreq" value="{{data.intermediate.intreq}}" />
-            <input type="number" name="data.intermediate.zeoncost" value="{{data.intermediate.zeoncost}}" />
+            <input type="number" name="data.intermediate.intReq" value="{{data.intermediate.intReq}}" />
+            <input type="number" name="data.intermediate.zeonCost" value="{{data.intermediate.zeonCost}}" />
             <input type="number" name="data.intermediate.maint" value="{{data.intermediate.maint}}" />
         </div>
         <textarea name="data.intermediate.rollDesc" rows="5">{{data.intermediate.rollDesc}}</textarea>
 
         <div>
             <span> {{localize "abfalter.magicTab.advanced"}} </span>
-            <input type="number" name="data.advanced.intreq" value="{{data.advanced.intreq}}" />
-            <input type="number" name="data.advanced.zeoncost" value="{{data.advanced.zeoncost}}" />
+            <input type="number" name="data.advanced.intReq" value="{{data.advanced.intReq}}" />
+            <input type="number" name="data.advanced.zeonCost" value="{{data.advanced.zeonCost}}" />
             <input type="number" name="data.advanced.maint" value="{{data.advanced.maint}}" />
         </div>
         <textarea name="data.advanced.rollDesc" rows="5">{{data.advanced.rollDesc}}</textarea>
@@ -116,8 +116,8 @@
 
         <div>
             <span> {{localize "abfalter.magicTab.arcane"}} </span>
-            <input type="number" name="data.arcane.intreq" value="{{data.arcane.intreq}}" />
-            <input type="number" name="data.arcane.zeoncost" value="{{data.arcane.zeoncost}}" />
+            <input type="number" name="data.arcane.intReq" value="{{data.arcane.intReq}}" />
+            <input type="number" name="data.arcane.zeonCost" value="{{data.arcane.zeonCost}}" />
             <input type="number" name="data.arcane.maint" value="{{data.arcane.maint}}" />
         </div>
         <textarea name="data.arcane.rollDesc" rows="5">{{data.arcane.rollDesc}}</textarea>

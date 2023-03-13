@@ -169,7 +169,9 @@ abfalter.generalTab = {
     elanEdit: "abfalter.generalTab.elanEdit",
     elanGifts: "abfalter.generalTab.elanGifts",
     giftName: "abfalter.generalTab.giftName",
-    deity: "abfalter.generalTab.deity"
+    deity: "abfalter.generalTab.deity",
+    perLevel: "abfalter.generalTab.perLevel",
+    lifePoints: "abfalter.generalTab.lifePoints"
 }
 
 abfalter.sheet = {
@@ -642,4 +644,14 @@ abfalter.settingsTab = {
     charOptions: "abfalter.settingsTab.charOptions",
     presenceMod: "abfalter.settingsTab.presenceMod",
     levelMod: "abfalter.settingsTab.levelMod",
+}
+
+abfalter.dialogs = {
+    noAtkSelf: "abfalter.dialogs.noAtkSelf",
+    noActor: "abfalter.dialogs.noActor",
+    mustTarget: "abfalter.dialogs.mustTarget",
+    noMultiSelect: "abfalter.dialogs.noMultiSelect",
+    noSelectToken: "abfalter.dialogs.noSelectToken",
+    wrongScene: "abfalter.dialogs.wrongScene",
+    aoeAttack: "abfalter.dialogs.aoeAttack"
 }

@@ -187,11 +187,7 @@
           "dodspecial": 0,
           "dodtemp": 0,
           "dodStatus": false,
-          "dodMastery": false,
-          "atkClass": 0,
-          "blkClass": 0,
-          "dodClass": 0,
-          "currentPres": 0
+          "dodMastery": false
         },
         "initiative": {
           "status": false,
@@ -1403,6 +1399,7 @@
       }
     },
     "class": {
+      "templates": [ "itemDescription" ],
       "expand": false,
       "athletics": false,
       "social": false,
@@ -1420,7 +1417,7 @@
         "block": 0,
         "weararmor": 0,
         "mk": 0,
-        "pp": 0,
+        "pp": 3,
         "zeon": 0,
         "summon": 0,
         "control": 0,

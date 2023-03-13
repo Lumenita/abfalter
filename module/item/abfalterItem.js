@@ -78,13 +78,38 @@ export default class abfalterItem extends Item {
     }
 
     prepareWeapon() {
+        switch (this.system.shield) {
+            case "none":
+                this.system.shieldBonus = 0;
+                this.system.shieldBonus2 = 0;
+                this.system.shieldTypeSpeed = 0;
+                break;
+            case "buckler":
+                this.system.shieldBonus = 10;
+                this.system.shieldBonus2 = 5;
+                this.system.shieldTypeSpeed = -15;
+                break;
+            case "shield":
+                this.system.shieldBonus = 20;
+                this.system.shieldBonus2 = 10;
+                this.system.shieldTypeSpeed = -25;
+                break;
+            case "fShield":
+                this.system.shieldBonus = 30;
+                this.system.shieldBonus2 = 15;
+                this.system.shieldTypeSpeed = -40;
+                break;
+            default:
+                break;
+        }
+
         if (this.parent != null) {
-            this.system.atkClass = ~~this.parent.system.combatstats.atkClass;
-            this.system.blkClass = ~~this.parent.system.combatstats.blkClass;
-            this.system.dodClass = ~~this.parent.system.combatstats.dodClass;
-            this.system.atkParentFinal = ~~this.parent.system.atkfinal;
-            this.system.blkParentFinal = ~~this.parent.system.blkfinal;
-            this.system.dodParentFinal = ~~this.parent.system.dodfinal;
+            this.system.finalAtk = Math.floor(this.parent.system.atkfinal + ~~this.system.attack + ~~this.system.quality);
+            this.system.finalBlk = Math.floor(this.parent.system.blkfinal + ~~this.system.block + ~~this.system.shieldBonus + ~~this.system.quality);
+            this.system.finalDod = Math.floor(this.parent.system.dodfinal + ~~this.system.dodge + ~~this.system.shieldBonus2);
+
+            //this.system.atkClass = ~~this.parent.system.atkfinal || 0;
+
             if (this.parent.system.kiAbility.kiAuraEx.status == true) {
                 this.system.kiBonus = 5;
                 this.system.kiBonus1 = 10;
@@ -140,7 +165,7 @@ export default class abfalterItem extends Item {
                     this.system.bonusDmgMod = Math.floor(~~this.parent.system.stats.Strength.mod * 2);
                     break;
                 case "presence":
-                    this.system.bonusDmgMod = Math.floor((this.parent.system.combatstats.currentPres * 2) + this.parent.system.stats.Power.mod);
+                    this.system.bonusDmgMod = Math.floor((this.parent.system.presence * 2) + this.parent.system.stats.Power.mod);
                     break;
                 default:
                     break;
@@ -169,46 +194,11 @@ export default class abfalterItem extends Item {
                 this.system.breakageStr = 8;
             }
         } else {
-            this.system.atkClass = 0;
-            this.system.blkClass = 0;
-            this.system.dodClass = 0;
             this.system.bonusDmgMod = 0;
-            this.system.atkParentFinal = 0;
-            this.system.blkParentFinal = 0;
-            this.system.dodParentFinal = 0;
             this.system.breakageStr = 0;
             this.system.kiBonus = 0;
             this.system.kiBonus1 = 0;
         }
-
-        this.system.finalAtk = Math.floor(~~this.system.attack + ~~this.system.atkParentFinal + ~~this.system.atkClass + ~~this.system.quality);
-        switch (this.system.shield) {
-            case "none":
-                this.system.shieldBonus = 0;
-                this.system.shieldBonus2 = 0;
-                this.system.shieldTypeSpeed = 0;
-                break;
-            case "buckler":
-                this.system.shieldBonus = 10;
-                this.system.shieldBonus2 = 5;
-                this.system.shieldTypeSpeed = -15;
-                break;
-            case "shield":
-                this.system.shieldBonus = 20;
-                this.system.shieldBonus2 = 10;
-                this.system.shieldTypeSpeed = -25;
-                break;
-            case "fShield":
-                this.system.shieldBonus = 30;
-                this.system.shieldBonus2 = 15;
-                this.system.shieldTypeSpeed = -40;
-                break;
-            default:
-                break;
-        }
-        this.system.finalBlk = Math.floor(~~this.system.block + ~~this.system.blkParentFinal + ~~this.system.blkClass + ~~this.system.shieldBonus + ~~this.system.quality);
-        this.system.finalDod = Math.floor(~~this.system.dodge + ~~this.system.dodParentFinal + ~~this.system.dodClass + ~~this.system.shieldBonus2);
-
 
         if (this.system.toggle == true) {
             this.system.bonusDmgMod = Math.floor(this.system.bonusDmgMod * 2);
@@ -267,6 +257,9 @@ export default class abfalterItem extends Item {
         }
     }
 
+    prepareClass() {
+        this.system.totalPP = Math.floor(~~this.system.main.levels / ~~this.system.main.pp);
+    }
 
 
 

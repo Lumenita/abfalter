@@ -432,12 +432,12 @@ export default class abfalterActor extends Actor {
 
     prepareEmbeddedDocuments() {
         super.prepareEmbeddedDocuments();
-
     }
 
     prepareDerivedData() {
         const data = this.system;
         const stats = data.stats;
+
 
         // Determine Item Values / Last used arr[121]  2
         const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish, acro,
@@ -459,7 +459,7 @@ export default class abfalterActor extends Actor {
                     arr[5] += classLevels * (parseInt(item.system.main.block) || 0);
                     arr[6] += classLevels * (parseInt(item.system.main.weararmor) || 0);
                     arr[7] += classLevels * (parseInt(item.system.main.mk) || 0);
-                    arr[8] += classLevels * (parseInt(item.system.main.pp) || 0);
+                    arr[8] += (parseInt(item.system.totalPP) || 0);
                     arr[9] += classLevels * (parseInt(item.system.main.zeon) || 0);
                     arr[10] += classLevels * (parseInt(item.system.main.summon) || 0);
                     arr[11] += classLevels * (parseInt(item.system.main.control) || 0);
@@ -645,9 +645,9 @@ export default class abfalterActor extends Actor {
                     if (item.system.equipped == true) {
                         arr[111] += 1;
                         if (arr[111] == 1) {
-                            arr[112] = item.system.speed;
-                        } else if (arr[112] > item.system.speed) {
-                            arr[112] = item.system.speed;
+                            arr[112] = item.system.FinalWeaponSpeed;
+                        } else if (arr[112] > item.system.FinalWeaponSpeed) {
+                            arr[112] = item.system.FinalWeaponSpeed;
                         }
                     }
                 }
@@ -954,7 +954,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.wepFinSpd = data.weaponSpeed;
         }
-        data.iniFinal = Math.floor(data.iniBase + data.inibonus + data.initiative.spec + data.KiBonusSpd + data.wepFinSpd - data.totalNatPen); // Base + class + spec + weapon(if equipped) - armor.
+        data.iniFinal = Math.floor(data.iniBase + data.inibonus + data.initiative.spec + data.KiBonusSpd + ~~data.wepFinSpd - data.totalNatPen); // Base + class + spec + weapon(if equipped) - armor.
 
         /*
             Secondaries
@@ -1809,6 +1809,10 @@ export default class abfalterActor extends Actor {
 
 
 
-
+        this.items.reduce((arr, item) => {
+            if (item.type === "weapon") {
+                item.prepareData();
+            }
+        });
     }
 }

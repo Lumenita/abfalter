@@ -210,10 +210,16 @@
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     <div>
-                        <button> {{localize "abfalter.basicInfo.attack"}} </button>
+                        <button type="button" class="combatRoll" data-roll="{{weapon.system.finalAtk}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="weaponCombatRoll" data-ability="{{system.complex}}">
+                            {{localize "abfalter.basicInfo.attack"}}
+                        </button>
                         <span> {{localize "abfalter.armoryTab.shieldNorm"}} </span>
-                        <button> {{localize "abfalter.basicInfo.block"}} </button>
-                        <button> {{localize "abfalter.basicInfo.dodge"}} </button>
+                        <button type="button" class="combatRoll" data-roll="{{weapon.system.finalBlk}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="weaponCombatRoll" data-ability="{{system.complex}}">
+                            {{localize "abfalter.basicInfo.block"}}
+                        </button>
+                        <button type="button" class="combatRoll" data-roll="{{weapon.system.finalDod}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="weaponCombatRoll" data-ability="{{system.complex}}">
+                            {{localize "abfalter.basicInfo.dodge"}}
+                        </button>
                     </div>
                     <div>
                         <div>
@@ -308,7 +314,9 @@
                         <span> {{localize "abfalter.armoryTab.atPen"}} </span>
                         <span> {{localize "abfalter.armoryTab.breakage"}} </span>
                         <span> {{localize "abfalter.basicInfo.str"}} </span>
-                        <button> {{localize "abfalter.armoryTab.finBreakage"}} </button>
+                        <button type="button" class="combatRoll" data-roll="{{weapon.system.finalBreakage}}" data-label="{{localize "abfalter.armoryTab.finBreakage"}}" data-type="breakageRoll">
+                            {{localize "abfalter.armoryTab.finBreakage"}}
+                        </button>
                     </div>
                     <div>
                         <div>
@@ -347,7 +355,7 @@
                             <input class="inline-edit" data-field="system.speed" type="number" value="{{weapon.system.speed}}" />
                             <input class="inline-edit" data-field="system.FinalWeaponSpeed" type="number" value="{{weapon.system.FinalWeaponSpeed}}" readonly />
                         </div>
-                        <button title="This does nothing atm">
+                        <button type="button" class="psychicModule item-toggle {{#if system.complex}}selected{{else}}notSelected{{/if}}" data-label="system.complex" data-ability="{{system.complex}}">
                             <span> {{localize "abfalter.armoryTab.complex"}} </span>
                         </button>
                     </div>

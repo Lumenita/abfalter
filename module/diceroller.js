@@ -1,3 +1,5 @@
+
+
 const diceDialog = class extends Dialog {
     activateListeners(html) {
         super.activateListeners(html);
@@ -12,7 +14,7 @@ export async function openModifierDialogue(actorData, finalValue, label, type, m
     const template = "systems/abfalter/templates/dialogues/basicModifiers.html";
     let confirmed = false;
     let fatMod = false;
-    if (type == "resRoll" || type == "potentialRoll" || type == "summoningRoll") {
+    if (type == "resRoll" || type == "potentialRoll" || type == "summoningRoll" || type == "breakageRoll") {
         fatMod = true;
     }
 
@@ -36,8 +38,14 @@ export async function openModifierDialogue(actorData, finalValue, label, type, m
                     case "combatRoll":
                         rollSecondary(html, actorData, finalValue, label, mastery);
                         break;
+                    case "weaponCombatRoll":
+                        rollCombatWeapon(html, actorData, finalValue, label, mastery);
+                        break;
                     case "resRoll":
                         rollResistance(html, actorData, finalValue, label);
+                        break;
+                    case 'breakageRoll':
+                        rollBreakage(html, actorData, finalValue, label);
                         break;
                     default:
                         console.log("No Roll Function Implemented for this type");
@@ -92,7 +100,6 @@ async function rollSecondary(html, actorData, finalValue, label, mastery) {
     let fatigueMod = parseInt(html.find('#fatiguemod').val()) || 0;
     let mod = parseInt(html.find('#modifiermod').val()) || 0;
     let fatigueFinal = Math.floor(fatigueMod * 15);
-
     let baseDice = "1d100";
     let rollFormula = `${baseDice} + ${finalValue} + ${fatigueFinal} + ${mod}`
     const rollResult = await new Roll(rollFormula, actorData).roll({ async: true });
@@ -158,6 +165,94 @@ async function rollSecondary(html, actorData, finalValue, label, mastery) {
     ChatMessage.create(chatData);
 }
 
+async function rollCombatWeapon(html, actorData, finalValue, label, complex) {
+    let fatigueMod = parseInt(html.find('#fatiguemod').val()) || 0;
+    let mod = parseInt(html.find('#modifiermod').val()) || 0;
+    let fatigueFinal = Math.floor(fatigueMod * 15);
+    let baseDice = "1d100";
+    let rollFormula = `${baseDice} + ${finalValue} + ${fatigueFinal} + ${mod}`
+    const rollResult = await new Roll(rollFormula, actorData).roll({ async: true });
+    rollResult.rolledDice = rollResult.total - finalValue - fatigueFinal - mod;
+
+    let fumbleRange = actorData.system.fumbleRangeFinal;
+
+    let mastery = false;
+    switch (label) {
+        case "Attack":
+            mastery = actorData.system.combatstats.atkMastery;
+            break;
+        case "Block":
+            mastery = actorData.system.combatstats.blkMastery;
+            break;
+        case "Dodge":
+            mastery = actorData.system.combatstats.dodMastery;
+            break;
+        default:
+            break;
+    }
+    if (complex == "true") {
+        fumbleRange += 2;
+    }
+    if (mastery == true && fumbleRange > 1) {
+        fumbleRange -= 1;
+    }
+
+    rollResult.color = "";
+    rollResult.fumbleLevel = 0;
+    rollResult.fumble = false;
+    rollResult.explode = false;
+    rollResult.doubles = false;
+    rollResult.openRange = actorData.system.openRangeFinal;
+
+    if (rollResult.rolledDice <= fumbleRange) {
+        rollResult.color = "fumbleRoll";
+        rollResult.fumble = true;
+        while (fumbleRange > rollResult.rolledDice) {
+            rollResult.fumbleLevel += 15;
+            fumbleRange--;
+        }
+    } else if (rollResult.rolledDice >= actorData.system.openRangeFinal) {
+        rollResult.color = "openRoll";
+        rollResult.explode = true;
+    } else {
+        rollResult.color = "normalRoll";
+    }
+    if (actorData.system.rollRange.doubles == "true") {
+        rollResult.doubles = true;
+        switch (rollResult.rolledDice) {
+            case 11:
+            case 22:
+            case 22:
+            case 33:
+            case 44:
+            case 55:
+            case 66:
+            case 77:
+            case 88:
+                rollResult.color = "openRoll"
+                break;
+            default:
+                break;
+        }
+    }
+
+    console.log(fumbleRange);
+
+    const rollData = [rollResult.rolledDice, rollResult._total, rollResult.doubles, rollResult.openRange, label];
+
+    const template = "systems/abfalter/templates/dialogues/secRoll.html"
+    const content = await renderTemplate(template, { rollResult: rollResult, label: label, actor: actorData });
+    const chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({ actorData: actorData }),
+        sound: CONFIG.sounds.dice,
+        content: content,
+        rolls: [rollResult],
+        flags: { rollData, actorData }
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+    ChatMessage.create(chatData);
+}
 
 
 
@@ -258,3 +353,31 @@ export async function fumbleRollFunction(total, fumble, label, name) {
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     ChatMessage.create(chatData);
 }
+
+
+
+export async function rollBreakage(html, actorData, finalValue, label) {
+    let mod = parseInt(html.find('#modifiermod').val()) || 0;
+
+    let baseDice = "1d10";
+    let rollFormula = `${baseDice} + ${finalValue} + ${mod}`;
+    let rollResult = await new Roll(rollFormula, actorData).roll({ async: true });
+    rollResult.rolledDice = rollResult.total - finalValue - mod;
+
+    const template = "systems/abfalter/templates/dialogues/breakRoll.html"
+    const content = await renderTemplate(template, { rollResult: rollResult, label: label });
+    const chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({ actorData: actorData }),
+        sound: CONFIG.sounds.dice,
+        content: content
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+    ChatMessage.create(chatData);
+}
+
+
+
+
+
+
