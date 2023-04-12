@@ -62,3 +62,12 @@ export const getTargetToken = (attackerToken, targetTokens) => {
     }
     return target;
 };
+
+export const canOwnerReceiveMessage = (actor) => {
+    const gameCopy = game;
+    if (!actor.hasPlayerOwner || !actor.id) {
+        return false;
+    }
+    const activePlayers = gameCopy.users.players.filter(u => u.active);
+    return activePlayers.filter(u => actor.testUserPermission(u, 'OWNER')).length === 1;
+};

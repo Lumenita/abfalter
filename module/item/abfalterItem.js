@@ -167,6 +167,9 @@ export default class abfalterItem extends Item {
                 case "presence":
                     this.system.bonusDmgMod = Math.floor((this.parent.system.presence * 2) + this.parent.system.stats.Power.mod);
                     break;
+                case "none":
+                    this.system.bonusDmgMod = 0;
+                    break;
                 default:
                     break;
             }
@@ -261,33 +264,49 @@ export default class abfalterItem extends Item {
         this.system.totalPP = Math.floor(~~this.system.main.levels / ~~this.system.main.pp);
     }
 
-
-
-
-
-
-
-
-
     chatTemplate = {
-        "spell": "systems/abfalter/templates/item/spell.html",
+        "spell": "systems/abfalter/templates/chatItem/spellChat.html",
     }
 
-    async roll() {
+    async roll(label) {
+
+        let cardData = {
+            ...this,
+            owner: this.actor.id,
+        };
+        cardData.actorName = this.actor.name;
+
+        //Specialized attributes per item
+        switch (this.type) {
+            case "spell":
+                switch (label) {
+                    case "basic":
+                        cardData.basic = true;
+                        break;
+                    case "int":
+                        cardData.int = true;
+                        break;
+                    case "adv":
+                        cardData.adv = true;
+                        break;
+                    case "arc":
+                        cardData.arc = true;
+                        break;
+                    default:
+                        cardData.expand = true;
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+
         let chatData = {
             user: game.user.id,
             speaker: ChatMessage.getSpeaker(),
+            flags: { cardData }
         };
-
-        let cardData = {
-            ...this.data,
-            owner: this.actor.id
-        };
-
         chatData.content = await renderTemplate(this.chatTemplate[this.type], cardData);
-
-        chatData.roll = true;
-
         return ChatMessage.create(chatData);
     }
 

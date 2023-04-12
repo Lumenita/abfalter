@@ -37,7 +37,7 @@ export class gmCombatDialog extends FormApplication {
     }
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            classes: ['abf-dialog gm-combat-dialog'],
+            classes: ['gmCombatDialog'],
             submitOnChange: true,
             closeOnSubmit: false,
             height: 600,
@@ -47,10 +47,10 @@ export class gmCombatDialog extends FormApplication {
         });
     }
     get attackerActor() {
-        return this.data.attacker.actor;
+        return this.data.attacker.token.actor;
     }
     get defenderActor() {
-        return this.data.defender.actor;
+        return this.data.defender.token.actor;
     }
     get attackerToken() {
         return this.data.attacker.token;
@@ -66,7 +66,30 @@ export class gmCombatDialog extends FormApplication {
     }
     activateListeners(html) {
         super.activateListeners(html);
-
+        html.find('.cancelButton').click(() => {
+            this.close();
+        });
     }
+
+
+
+
+
+    updateAttackerData(result) {
+        this.data.attacker.result = result;
+        //if combat/mystic/psychic
+        this.render();
+    }
+    updateDefenderData(result) {
+        result.values.total = Math.max(0, result.values.total);
+        this.data.defender.result = result;
+        // if shield or marial
+        this.render();
+    }
+
+
+
+
+
 
 }

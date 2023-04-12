@@ -1,12 +1,15 @@
 <div class="tab bio">
-    <div>
-        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+    <div class="bioPictures">
+        <div>
+            <img class="profile-img" src="{{actor.prototypeToken.texture.src}}" title="{{actor.name}} Token" />
+        </div>
+        <div>
+            <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+        </div>
     </div>
-    <div>
-        <img class="profile-img" src="{{actor.prototypeToken.texture.src}}" data-edit="img" />
-
-    </div>
-    <div>
-        {{editor abfalter.bio target="system.bio" button=true editable=editable}}
+    <div class="bioInfo">
+        {{editor data.system.bio target="system.system.bio" button=true editable=editable engine="prosemirror"}}
     </div>
 </div>
+
+

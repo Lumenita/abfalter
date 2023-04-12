@@ -68,7 +68,10 @@
       "note": "Notes",
       "natura": "Natura",
       "gnosis": "Gnosis",
-      "destiny": "Destiny Tokens"
+      "destiny": "Destiny Tokens",
+      "archeType": "Archetype",
+      "shield": "Shield",
+      "shieldMax": "Shield Max"
     },
     "generalTab": {
       "characteristics": "Characteristics",
@@ -79,7 +82,7 @@
       "aam": "All Action Modifier",
       "noa": "Number of Actions",
       "resistances": "Resistances",
-      "movement": "Moevement",
+      "movement": "Movement",
       "pen": "Pen.",
       "fourthMove": "1/4 Move",
       "running": "Running",

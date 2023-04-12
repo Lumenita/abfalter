@@ -1,5 +1,5 @@
-import { gmCombatManager } from "./gmCombatManager.js";
-import { playerCombatManager } from "./playerCombatManager.js";
+import { gmCombatManager } from "./gm/gmCombatManager.js";
+import { playerCombatManager } from "./player/playerCombatManager.js";
 
 
 export const registerCustomMacros = () => {

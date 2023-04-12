@@ -1,3 +1,33 @@
+.flexBetween {
+    display: flex;
+    justify-content: space-between;
+}
+.flexCenter {
+    display: flex;
+    justify-content: center;
+}
+.flexStart {
+    display: flex;
+    justify-content: flex-start;
+}
+.borderTop {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    margin: 3px 0 0 0;
+}
+.borderBottom {
+    border-image: url(../img/border.png) 10 stretch;
+    margin: 0 0 3px 0;
+    border-bottom: 5px solid black;
+}
+.borderBoth {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin: 3px 0 3px 0;
+}
+
+
 /* Global Style */
 label {
     margin: 0px;
@@ -34,6 +64,8 @@ select {
     padding-right: 0px;
     border-bottom: 1px solid black;
     text-align: center;
+}
+.abfalter select {
     appearance: none;
 }
 a {
@@ -48,6 +80,8 @@ textarea {
     text-align: justify;
     border-radius: 0px;
     margin: 0px;
+    /*font-family: serif;
+    font-size: 14px;*/
 }
 button {
     line-height: normal;
@@ -1424,6 +1458,13 @@ h3 {
 .spells > div:last-of-type {
     display: flex;
     place-content: space-between;
+}
+.spell-item {
+    background: linear-gradient( 180deg, #cfcdc5, #d8d6ca);
+}
+.spell-item > div:not(:first-of-type) > label,
+.spell-item > div > div {
+    background: inherit;
 }
 .spell-item > div:not(:first-of-type),
 .spell-item > div:not(:first-of-type) > label,
@@ -3085,6 +3126,35 @@ h3 {
     margin: 3px 0 0 0;
 }
 /*
+    *****************
+    -----------------
+    BIO & INFO LAYOUT
+    -----------------
+    *****************
+*/
+.bioPictures {
+    display: flex;
+    min-width: 878px;
+    width: 100%;
+    justify-content: space-between;
+}
+.bioPictures > div:first-of-type{
+    width: 30%;
+    height: 30%;
+}
+.bioPictures > div:last-of-type {
+    max-width: 68%;
+}
+.bioPictures > div:last-of-type > img {
+    max-height: 500px;
+}
+.bioPictures > div:first-of-type > img {
+    border: none;
+}
+.bioInfo > div {
+    min-height: 500px;
+}
+/*
     ***************
     ---------------
     SETTINGS LAYOUT
@@ -3210,12 +3280,6 @@ h3 {
     opacity: 1;
 }
 
-
-
-
-
-
-
 /*
     ---------
     Homebrew Stuffs
@@ -3225,33 +3289,6 @@ h3 {
     display: flex;
     padding: 0 10px 0 10px;
 }
-
-
-
-
-
-
-
-
-
-
-/*
-    ****************
-    ----------------
-       Background
-    ----------------
-    ****************
-*/
-
-/*
-    -----
-    x
-    -----
-*/
-
-
-
-
 
 
 
@@ -3412,11 +3449,40 @@ h3 {
     width: 50%;
 }
 .classContent > div > label > span {
-    width: 68%;
-    margin: 0 2% 0 0;
+    width: 64%;
+    margin: 0 2% 0 4%;
+    justify-content: flex-start;
 }
 .classContent > div > label > input {
     width: 30%;
+}
+
+.classContent > div:first-of-type > label:first-of-type {
+    display: flex;
+    justify-content: flex-start;
+    width: 50%;
+}
+.classContent > div:first-of-type > label:first-of-type > span {
+    width: 44%;
+    margin: 0 2% 0 4%;
+    justify-content: flex-start;
+}
+.classContent > div:first-of-type > label:first-of-type > input {
+    width: 50%;
+}
+
+.classContent > div:first-of-type > label:last-of-type {
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
+}
+.classContent > div:first-of-type > label:last-of-type > span {
+    width: 74%;
+    margin: 0 4% 0 2%;
+    justify-content: flex-end;
+}
+.classContent > div:first-of-type > label:last-of-type > input {
+    width: 20%;
 }
 .classHeader {
     justify-content: flex-start;
@@ -3435,23 +3501,13 @@ h3 {
     width: 5%;
     font-size: 15px;
 }
-.classContent > label {
-    display: flex;
-    justify-content: flex-end;
-}
 .classContent > textarea {
     border-image: url(../img/border.png) 10 stretch;
     border-bottom: 5px solid black;
     margin: 5px 0 3px 0;
     padding-bottom: 3px;
 }
-.classContent > label > span {
-    width: 34%;
-    margin: 0 1% 0 0;
-}
-.classContent > label > input {
-    width: 15%;
-}
+
 .classContent > h3:nth-of-type(1) {
     margin-top: 5px;
 }
@@ -3468,7 +3524,9 @@ h3 {
     width: 100%;
 }
 .ppClass > div > label > span {
-    width: 60%;
+    width: 56%;
+    margin: 0 0 0 4%;
+    justify-content: flex-start;
 }
 .ppClass > div > label > select {
     width: 40%;
@@ -3544,14 +3602,9 @@ h3 {
     padding: 1px 0 3px 0;
 }
 /*
-    -----
-    Invocations
-    -----
-*/
-/*
-    -----
-    Incarnations
-    -----
+    --------------------------
+    Invocations & Incarnations
+    --------------------------
 */
 .invocationContent > div,
 .incarnationContent > div {
@@ -3579,9 +3632,9 @@ h3 {
 }
 
 /*
-    --------------
+    -----------------------------
     Mental Pattern & Maint Matrix
-    --------------
+    -----------------------------
 */
 .maintpContent > div > label,
 .mentalpContent > div > label {
@@ -3670,9 +3723,9 @@ h3 {
     height: 20px;
 }
 /*
-    -----
+    ------------
     Martial Arts
-    -----
+    ------------
 */
 .arsContent > div,
 .maContent > div,
@@ -3903,16 +3956,6 @@ h3 {
 .advantages > div {
     margin: 0 0 5px 0;
 }
-
-
-
-
-
-
-
-
-
-
 /*
     ***************
     ---------------
@@ -4000,6 +4043,31 @@ h3 {
 .fumbleChatMessage > div:not(:nth-of-type(1)) > span:nth-of-type(2) {
     padding-right: 10%;
 }
+/*
+    --------
+    Spell Chat
+    --------
+*/
+
+.spellChat > span:nth-child(4),
+.spellChatDiff > span:nth-child(3) {
+    height: inherit;
+    text-align: start;
+}
+.spellChat > div > span {
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /*
     ***************
@@ -4016,9 +4084,8 @@ h3 {
 .customActionBar {
   z-index: 70;
   position: fixed;
-  bottom: 100px;
-  left: 240px;
-  height: 52px;
+  bottom: 18px;
+  left: 780px;
 }
 .customActionBar .macros {
   display: flex;
@@ -4030,21 +4097,27 @@ h3 {
   width: 3.2rem;
   height: 3.2rem;
 }
-.customActionBar .macros .customMacro:hover img, .customActionBar .macros .customMacro.hover img {
-  filter: invert(1);
+.img-top {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
 }
-.customActionBar .macros .customMacro:hover .shortcut, .customActionBar .macros .customMacro.hover .shortcut {
-  background-color: black;
-  color: white;
-  opacity: 1;
+.customMacro.hover .img-bottom {
+    display: none;
+}
+.customMacro.hover .img-top {
+    display: inline;
 }
 .customActionBar .macros .customMacro img {
   transition: all 0.3s ease-in-out;
+  border: none;
 }
 .customActionBar .macros .customMacro .shortcut {
   transition: all 0.3s ease-in-out;
   position: absolute;
-  bottom: 0;
+  bottom: 40px;
   background-color: white;
   font-weight: bold;
   font-size: 0.75rem;
@@ -4054,6 +4127,17 @@ h3 {
   margin: 0;
   opacity: 0.8;
 }
+/** Combat **/
+.combat,
+.mystic {
+    display:flex;
+}
+
+
+
+
+
+
 /*
     ***************
     ---------------
@@ -4063,4 +4147,7 @@ h3 {
 */
 .compendium-footer > span {
     display: initial;
+}
+.page-title, .page-number, chat-message {
+    height: inherit;
 }

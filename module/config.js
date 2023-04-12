@@ -68,7 +68,10 @@ abfalter.basicInfo = {
     note: "abfalter.basicInfo.note",
     natura: "abfalter.basicInfo.natura",
     gnosis: "abfalter.basicInfo.gnosis",
-    destiny: "abfalter.basicInfo.destiny"
+    destiny: "abfalter.basicInfo.destiny",
+    archeType: "abfalter.basicInfo.archeType",
+    shield: "abfalter.basicInfo.shield",
+    shieldMax: "abfalter.basicInfo.shieldMax"
 }
 
 abfalter.generalTab = {

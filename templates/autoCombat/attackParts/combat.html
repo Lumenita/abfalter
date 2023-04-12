@@ -1,0 +1,22 @@
+<div>
+    <span> this is the combat html </span>
+    <span> {{ui.hasFatiguePoints}} </span>
+    <span> where you set how you attack physically </span>
+
+    <select name="attacker.combat.weaponUsed">
+        {{#each attacker.combat.weaponsList}}
+        <option value="{{this._id}}" {{#if (eq this._id ../attacker.combat.weaponUsed)}}selected{{/if}}> {{this.name}} </option>
+        {{/each}}
+    </select>
+
+
+    {{#if this.attackSent}}
+    <div>
+        <span> the attack has been sent </span>
+    </div>
+    {{else}}
+    <button class="sendNormAttack">
+        ATTACK THE HOLLOWS
+    </button>
+    {{/if}}
+</div>

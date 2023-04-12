@@ -6,7 +6,10 @@
 
     <div class="classContent">
         <h2> {{localize "abfalter.basicInfo.class"}} </h2>
-        <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.main.levels" value="{{data.main.levels}}" /> </label>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.archeType"}} </span> <input type="text" name="data.main.archeType" value="{{data.main.archeType}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.main.levels" value="{{data.main.levels}}" /> </label>
+        </div>
         <textarea name="data.description" rows="3" placeholder="Extra Class Information">{{data.description}}</textarea>
 
         <div>

@@ -1,4 +1,5 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
+    {{#if owner}}
     {{!-- Sheet Header --}}
     <header class="sheet-header">
         <div class="charInfo">
@@ -28,7 +29,6 @@
                         <label> <span> Class </span> <input type="text" name="data.class" value="{{data.class}}" /> </label>
                     </div>
                 </div>
-                {{#if owner}}
                 <div>
                     <div>
                         <label> <span> Size </span> <input type="number" name="data.size" value="{{data.size}}" /> </label>
@@ -43,12 +43,10 @@
                         <label> <span> Presence </span> <input type="number" name="data.presence" value="{{data.presence}}" readonly /> </label>
                     </div>
                 </div>
-                {{/if}}
             </div>
         </div>
     </header>
 
-    {{#if owner}}
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs navTabsYes" data-group="primary">
         <ul>

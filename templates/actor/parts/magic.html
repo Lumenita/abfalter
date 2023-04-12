@@ -334,7 +334,7 @@
                         {{#if system.expand}}
                         <div>
                             <input class="inline-edit" data-field="name" type="text" value="{{dailyMaint.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
-                            <input class="inline-edit" data-field="system.cost" type="number" value="{{turnMaint.system.cost}}" />
+                            <input class="inline-edit" data-field="system.cost" type="number" value="{{dailyMaint.system.cost}}" />
                             <input class="inline-edit" data-field="system.zeon" type="number" value="{{dailyMaint.system.zeon}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
@@ -342,7 +342,7 @@
                         {{else}}
                         <div class="{{#if system.equipped}}equipped{{else}}notEquipped{{/if}}">
                             <span> {{dailyMaint.name}} </span>
-                            <span> {{turnMaint.system.cost}} </span>
+                            <span> {{dailyMaint.system.cost}} </span>
                             <span> {{dailyMaint.system.zeon}} </span>
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
@@ -439,7 +439,7 @@
                             </label>
                             <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" class="inline-edit" data-field="system.cost" value="{{system.cost}}" /> </label>
                         </div>
-                        <textarea class="inline-edit" data-field="system.description">{{spell.system.description}}</textarea>
+                        <textarea class="inline-edit" data-field="system.description">{{~spell.system.description}}</textarea>
                         <div>
                             <span> {{localize "abfalter.magicTab.rank"}} </span>
                             <span> {{localize "abfalter.magicTab.req"}} </span>
@@ -447,7 +447,7 @@
                             <span> {{localize "abfalter.magicTab.maint"}} </span>
                         </div>
                         <div>
-                            <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
+                            <a class="item-control item-chat" data-label="basic"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.basic"}} </span>
                             <input class="inline-edit" data-field="system.basic.intReq" type="text" value="{{spell.system.basic.intReq}}" />
                             <input class="inline-edit" data-field="system.basic.zeonCost" type="text" value="{{spell.system.basic.zeonCost}}" />
@@ -455,7 +455,7 @@
                         </div>
                         <textarea class="inline-edit" data-field="system.basic.rollDesc">{{spell.system.basic.rollDesc}}</textarea>
                         <div>
-                            <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
+                            <a class="item-control item-chat" data-label="int"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.intermidiate"}} </span>
                             <input class="inline-edit" data-field="system.intermediate.intReq" type="text" value="{{spell.system.intermediate.intReq}}" />
                             <input class="inline-edit" data-field="system.intermediate.zeonCost" type="text" value="{{spell.system.intermediate.zeonCost}}" />
@@ -463,7 +463,7 @@
                         </div>
                         <textarea class="inline-edit" data-field="system.intermediate.rollDesc">{{spell.system.intermediate.rollDesc}}</textarea>
                         <div>
-                            <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
+                            <a class="item-control item-chat" data-label="adv"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.advanced"}} </span>
                             <input class="inline-edit" data-field="system.advanced.intReq" type="text" value="{{spell.system.advanced.intReq}}" />
                             <input class="inline-edit" data-field="system.advanced.zeonCost" type="text" value="{{spell.system.advanced.zeonCost}}" />
@@ -471,7 +471,7 @@
                         </div>
                         <textarea class="inline-edit" data-field="system.advanced.rollDesc">{{spell.system.advanced.rollDesc}}</textarea>
                         <div>
-                            <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
+                            <a class="item-control item-chat" data-label="arc"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.arcane"}} </span>
                             <input class="inline-edit" data-field="system.arcane.intReq" type="text" value="{{spell.system.arcane.intReq}}" />
                             <input class="inline-edit" data-field="system.arcane.zeonCost" type="text" value="{{spell.system.arcane.zeonCost}}" />

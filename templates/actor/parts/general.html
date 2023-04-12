@@ -306,8 +306,8 @@
                     </div>
                     {{/if}}
                     <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.lifepoints.temp" value="{{data.lifepoints.temp}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.lpfinal" value="{{data.lpfinal}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.lifepoints.actual" value="{{data.lifepoints.actual}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.lp.max" value="{{data.lp.max}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.lp.value" value="{{data.lp.value}}" /> </label>
                 </div>
                 <!--Fatigue-->
                 <div class="fatigue">
@@ -464,7 +464,7 @@
                         <input class="inline-edit" data-field="system.cost" type="number" value="{{advantage.system.cost}}" />
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.basicInfo.advInfo"}}">{{advantage.system.description}}</textarea>
+                    <textarea class="inline-edit" data-field="system.description">{{advantage.system.description}}</textarea>
                     {{else}}
                     <div class="{{#if system.expand}}expand{{else}}notExpand{{/if}}">
                         <span> {{advantage.name}} </span>
@@ -496,7 +496,7 @@
                         <input class="inline-edit" data-field="system.benefit" type="number" value="{{disadvantage.system.benefit}}" />
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <textarea class="inline-edit" data-field="system.description" placeholder="{{localize "abfalter.basicInfo.disadvInfo"}}">{{disadvantage.system.description}}</textarea>
+                    <textarea class="inline-edit" data-field="system.description">{{disadvantage.system.description}}</textarea>
                     {{else}}
                     <div class="{{#if system.expand}}expand{{else}}notExpand{{/if}}">
                         <span> {{disadvantage.name}} </span>

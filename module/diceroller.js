@@ -142,7 +142,8 @@ async function rollSecondary(html, actorData, finalValue, label, mastery) {
             case 66:
             case 77:
             case 88:
-                rollResult.color = "openRoll"
+                rollResult.color = "openRoll";
+                rollResult.explode = true;
                 break;
             default:
                 break;
@@ -230,6 +231,7 @@ async function rollCombatWeapon(html, actorData, finalValue, label, complex) {
             case 77:
             case 88:
                 rollResult.color = "openRoll"
+                rollResult.explode = true;
                 break;
             default:
                 break;
@@ -303,7 +305,9 @@ export async function openRollFunction(msg) {
     rollResult.color = "normalRoll";
     if (rollResult.rolledDice > msg.flags.rollData[0]) {
         if (msg.flags.rollData[2] == "true") {
-            if (rollResult.rolledDice >= rollResult.openRange || rollResult.rolledDice == 11 || rollResult.rolledDice == 22 || rollResult.rolledDice == 33 || rollResult.rolledDice == 44 || rollResult.rolledDice == 55 || rollResult.rolledDice == 66 || rollResult.rolledDice == 77 || rollResult.rolledDice == 88) {
+            if (rollResult.rolledDice >= rollResult.openRange || rollResult.rolledDice == 11 || rollResult.rolledDice == 22 ||
+                    rollResult.rolledDice == 33 || rollResult.rolledDice == 44 || rollResult.rolledDice == 55 || rollResult.rolledDice == 66 ||
+                    rollResult.rolledDice == 77 || rollResult.rolledDice == 88) {
                 rollResult.color = "openRoll";
                 rollResult.explode = true;
             }

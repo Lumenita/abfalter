@@ -1,4 +1,4 @@
-import { combatManager } from "./combatManager.js"
+import { combatManager } from "../combatManager.js"
 
 export class playerCombatManager extends combatManager {
     constructor(game) {

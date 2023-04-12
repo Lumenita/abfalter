@@ -119,7 +119,7 @@ export default class abfalterActor extends Actor {
         }
 
         //Calculating Number of Actions
-        const actnumcalc = ~~data.stats.Agility.base + ~~data.stats.Dexterity.base;
+        const actnumcalc = ~~data.stats.Agility.final + ~~data.stats.Dexterity.final;
         switch (actnumcalc) {
             case 0:
             case 1:
@@ -174,7 +174,7 @@ export default class abfalterActor extends Actor {
 
         //Lifepoint Calculation
         data.lpbase = Math.floor(25 + 10 * data.stats.Constitution.final + data.stats.Constitution.mod - Math.ceil((data.stats.Constitution.final - 1) / data.stats.Constitution.final) * 5);
-        data.lpfinal = Math.floor(data.lpbase + data.lifepoints.spec + data.lifepoints.temp + Math.ceil(data.lifepoints.multiple * data.stats.Constitution.final));
+        data.lp.max = Math.floor(data.lpbase + data.lifepoints.spec + data.lifepoints.temp + Math.ceil(data.lifepoints.multiple * data.stats.Constitution.final));
 
         //Fatigue Calculation
         data.fatiguebase = data.stats.Constitution.final;
@@ -374,7 +374,7 @@ export default class abfalterActor extends Actor {
         data.dodfinal = Math.floor(data.combatstats.dodbase + data.combatstats.dodspecial + data.combatstats.dodtemp + data.stats.Agility.mod + data.aamFinal);
 
         //Magic Projection
-        data.mprojfinal = Math.floor(data.mproj.base + data.mproj.spec + data.mproj.temp + data.aamFinal);
+        data.mprojfinal = Math.floor(data.mproj.base + data.mproj.spec + data.mproj.temp + data.stats.Dexterity.mod + data.aamFinal);
         data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.imbalance);
         data.mprojfinaldef = Math.floor(data.mprojfinal - data.mproj.imbalance);
 
@@ -439,7 +439,7 @@ export default class abfalterActor extends Actor {
         const stats = data.stats;
 
 
-        // Determine Item Values / Last used arr[121]  2
+        // Determine Item Values / Last used arr[121]  2                    *Look at js map
         const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish, acro,
             athle, climb, jump, ride, swim, etiq, intim, leader, persua, street, style, trading, notice, search, track,
             animals, appra, archi, herb, hist, law, magicapr, medic, mem, navi, occ, science, tactic, comp, fos,
@@ -916,25 +916,23 @@ export default class abfalterActor extends Actor {
         }
         //Lifepoint Calculation
         data.lpbonus = lpbonus;
-        data.lpfinal += lpbonus;
-        
+        data.lp.max += lpbonus;
         // Attack, Block, & Dodge post class
-        //maKiAtk, maKiBlk, maKiDod
         data.attackbonus = atk + maKiAtk;
         if (data.attackbonus > 50) {
             data.attackbonus = 50;
         }
-        data.atkfinal += atk;
+        data.atkfinal += data.attackbonus;
         data.blockbonus = blk + maKiBlk;
         if (data.blockbonus > 50) {
             data.blockbonus = 50;
         }
-        data.blkfinal += blk;
+        data.blkfinal += data.blockbonus;
         data.dodgebonus = dod + maKiDod;
         if (data.dodgebonus > 50) {
             data.dodgebonus = 50;
         }
-        data.dodfinal += dod;
+        data.dodfinal += data.dodgebonus;
 
         // Initiative
         if (data.kiAbility.kiIncreaseSpd.status == true) {
@@ -1559,7 +1557,6 @@ export default class abfalterActor extends Actor {
 
         data.turnMaintRemove = turnMaint;
         data.dayMaintRemove = dayMaint;
-
         // Magic Accumulation
         switch (data.stats.Power.final) {
             case 5:
@@ -1598,7 +1595,7 @@ export default class abfalterActor extends Actor {
         }
         data.maccufinal = Math.floor(data.maccu.base + data.maccupow + (data.maccu.mult * data.maccupow) + data.maccu.spec + data.maccu.temp);
         data.maccuhalffinal = Math.floor(data.maccufinal / 2);
-        data.mregenfinal = Math.floor(((data.maccufinal * data.mregen.regenmult) + data.mregen.spec + data.mregen.temp + data.maccufinal) * data.mregen.recoverymult);
+        data.mregenfinal = Math.floor(((data.maccupow * data.mregen.regenmult) + data.mregen.spec + data.mregen.temp + data.maccufinal) * data.mregen.recoverymult);
 
         // Zeon
         switch (data.stats.Power.final) {
@@ -1805,7 +1802,6 @@ export default class abfalterActor extends Actor {
         // Settings
         data.openRangeFinal = Math.floor(data.rollRange.base + data.rollRange.spec + data.rollRange.temp);
         data.fumbleRangeFinal = Math.floor(data.fumleRange.base + data.fumleRange.spec + data.fumleRange.temp);
-
 
 
 

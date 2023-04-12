@@ -4,6 +4,9 @@ export const preloadHandlebarsTemplates = () => {
     const templatePaths = [
         templates.CustomHotBar,
         templates.dialog.generic,
+        templates.dialog.combat.combatAttackDialog.main,
+        templates.dialog.combat.combatAttackDialog.parts.combat,
+        templates.dialog.combat.combatAttackDialog.parts.mystic,
         // actor sheets
         "systems/abfalter/templates/actor/parts/bio.html",
         "systems/abfalter/templates/actor/parts/general.html",

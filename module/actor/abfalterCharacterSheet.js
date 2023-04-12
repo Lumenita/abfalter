@@ -201,7 +201,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
             });
 
             html.find(".item-chat").click(this._onItemChatRoll.bind(this));
-            html.find(".item-roll").click(this._onItemRoll.bind(this));
+
             html.find('.rollable').click(this._onRoll.bind(this));
             html.find('.combatRoll').click(this._onAttackRoll.bind(this));
 
@@ -312,18 +312,12 @@ export default class abfalterCharacterSheet extends ActorSheet {
     }
 
     _onItemChatRoll(event) {
+        event.preventDefault();
         const itemID = event.currentTarget.closest(".item").dataset.itemId;
         const item = this.actor.items.get(itemID);
+        let label = $(event.currentTarget).attr("data-label");
 
-        item.roll();
-    }
-
-    _onItemRoll(event) {
-        event.preventDefault();
-        const itemId = event.currentTarget.closest(".item").dataset.itemId;
-        const item = this.actor.items.get(itemId);
-
-        item.roll();
+        item.roll(label);
     }
 
 

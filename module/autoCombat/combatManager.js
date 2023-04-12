@@ -1,5 +1,4 @@
 import { genericDialogs } from "../dialogs.js";
-
 export class combatManager {
 	constructor(game) {
 		this.game = game

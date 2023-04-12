@@ -72,6 +72,14 @@
           "psychicTab": false,
           "kiTab": false,
           "bioTab": false
+        },
+        "lp": {
+          "value": 0,
+          "max": 0
+        },
+        "shield": {
+          "value": 0,
+          "max": 0
         }
       },
       "stats": {
@@ -1410,6 +1418,7 @@
       "creative": false,
       "main": {
         "levels": 0,
+        "archeType": "",
         "lp": 0,
         "initiative": 0,
         "attack": 0,
