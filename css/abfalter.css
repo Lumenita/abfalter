@@ -819,6 +819,28 @@ h3 {
     margin: 3px 0 0 0;
 }
 /*
+    -------------------
+    All Action Modifier
+    -------------------
+*/
+.aamContainer {
+    margin: 0 0 5px 0;
+}
+.aamContainer > div:first-of-type {
+    border: none !important;
+}
+.aamContainer > div > label {
+    display: flex;
+    width: 50%;
+}
+.aamContainer > div > label > span {
+    width: 48%;
+    padding: 0 2% 0 0;
+}
+.aamContainer > div > label > input {
+    width: 40%;
+}
+/*
     ---------------------------
     Secondary Abilities Drawing
     ---------------------------
@@ -2563,23 +2585,11 @@ h3 {
     Ki techniques
     -------------
 */
-.kiTech > div:first-of-type,
+/*
 .kiTechnique-item > div:first-of-type,
 .kiTechnique-item > div:last-of-type > div {
     display: flex;
     justify-content: flex-start;
-}
-.kiTech > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-}
-.kiTech > div > span:first-of-type {
-    width: 64.7%;
-    margin: 0 0 0 7.25%;
-}
-.kiTech > div > span {
-    width: 9.5%;
-    margin: 0 0 0 1%;
 }
 .kiTech > div:last-of-type {
     display: flex;
@@ -2640,6 +2650,41 @@ h3 {
 }
 .techExpand > input {
     width: 30%;
+}
+*/
+.kiTechMinContainer > div,
+.kiTechMaxContainer > div {
+    display: flex;
+}
+.kiTechMainInfo > span:first-of-type,
+.kiTechMainInfo > input:first-of-type {
+    width: 68%;
+    margin: 0;
+}
+.kiTechMainInfo > span,
+.kiTechMainInfo > input {
+    width: 10%;
+    margin: 0 0 0 1%;
+}
+.kiTechMainInfo > a {
+    width: 5%;
+}
+.kiTechSideInfo > span {
+    width: 36%;
+    margin: 0 1% 0 0;
+    text-align: left;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+.kiTechSideInfo > span:nth-of-type(3) {
+    width: 10%;
+    margin: 0 1% 0 0;
+    text-align: center;
+}
+.kiTechSideInfo > span:nth-of-type(4) {
+    width: 10%;
+    margin: 0;
+    text-align: center;
 }
 /*
     *************
@@ -2729,14 +2774,19 @@ h3 {
 }
 .armor-item > div > a,
 .armorHelmet-item > div > a {
-    position: absolute;
+    width: 3%;
 }
 .armor > div > span:first-of-type,
 .armor-item > div > span:first-of-type,
 .armor-item2 > div > span:first-of-type,
 .armorHelmet-item > div > span:first-of-type,
 .armorHelmet-item2 > div > span:first-of-type {
-    width: 26%;
+    width: 23%;
+}
+.armor > div > span:first-of-type,
+.armor-item2 > div > span:first-of-type,
+.armorHelmet-item2 > div > span:first-of-type {
+    margin: 0 0 0 3%;
 }
 .armor > div:first-of-type > span:not(:first-of-type),
 .armor-item > div > span:not(:first-of-type),
@@ -4150,4 +4200,7 @@ h3 {
 }
 .page-title, .page-number, chat-message {
     height: inherit;
+}
+.editor-content > img {
+    border: none;
 }

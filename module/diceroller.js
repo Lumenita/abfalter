@@ -1,5 +1,3 @@
-
-
 const diceDialog = class extends Dialog {
     activateListeners(html) {
         super.activateListeners(html);

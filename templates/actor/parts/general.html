@@ -269,7 +269,7 @@
                 </div>
                 {{/each}}
                 <div class="modactions">
-                    <label> <span> {{localize "abfalter.generalTab.aam"}} </span> <input type="number" name="data.aam" value="{{data.aam}}" /> </label>
+                    <label> <span> {{localize "abfalter.generalTab.aam"}} </span> <input type="number" name="data.aamFinal" value="{{data.aamFinal}}" readonly /> </label>
                     <label> <span> {{localize "abfalter.generalTab.noa"}} </span> <input type="number" name="data.actionumber" value="{{data.actionnumber}}" readonly /> </label>
                 </div>
             </div><!--Resistances-->
@@ -515,6 +515,18 @@
     </div>
 
     <div class="secondary">
+        <div class="aamContainer">
+            <h2> {{localize "abfalter.generalTab.aam"}} </h2>
+            <div>
+                <label><span>{{localize "abfalter.basicInfo.base"}}</span><input type="number" name="data.aam" value="{{data.aam}}" /></label>
+                <label><span>{{localize "abfalter.basicInfo.boons"}}</span><input type="number" name="data.aamBoon" value="{{data.aamBoon}}" /></label>
+            </div>
+            <div>
+                <label><span>{{localize "abfalter.basicInfo.critical"}}</span><input type="number" name="data.aamCrit" value="{{data.aamCrit}}" /></label>
+                <label><span>{{localize "abfalter.armoryTab.other"}}</span><input type="number" name="data.aamOther" value="{{data.aamOther}}" /></label>
+            </div>
+        </div>
+
         <h2> {{localize "abfalter.generalTab.secAbility"}} </h2>
         <!--Athletics Fields-->
         <div>

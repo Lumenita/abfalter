@@ -8,11 +8,13 @@ export default class abfalterActor extends Actor {
         const data = this.system;
 
         //All Action Mod
-        data.aamFinal = data.aam
-
+        data.aamFinal = data.aam + data.aamBoon + data.aamOther - data.aamCrit;
         //Main Characteristics
         for (let [key, stat] of Object.entries(data.stats)) {
             stat.final = Math.floor(~~stat.base + stat.spec + stat.temp);
+            if (30 < stat.final) {
+                stat.final = 30;
+            }
             switch (stat.final) {
                 case 0:
                     stat.mod = -40;
@@ -88,12 +90,9 @@ export default class abfalterActor extends Actor {
                     stat.mod = 75;
                     break;
                 default:
-                    stat.mod = 0;
+                    stat.mod = -40;
             }
-            if (30 < stat.final) {
-                stat.final = 30;
-                stat.mod = 75;
-            }
+
             stat.opposedfinal = Math.floor((stat.final + stat.opposed) + ~~(data.aamFinal / 20));
             //Ki Pools
             if (stat != "Intelligence" && "Perception") {
@@ -120,6 +119,9 @@ export default class abfalterActor extends Actor {
 
         //Calculating Number of Actions
         const actnumcalc = ~~data.stats.Agility.final + ~~data.stats.Dexterity.final;
+        if (actnumcalc < 0) {
+            actnumcalc = 0;
+        }
         switch (actnumcalc) {
             case 0:
             case 1:
@@ -232,7 +234,10 @@ export default class abfalterActor extends Actor {
                 data.regenbase = 0;
                 break;
         }
-        data.regenfinal = Math.floor(data.regenbase + data.regeneration.spec + data.regeneration.temp);
+        if (data.stats.Constitution.final > 20) {
+            data.regenbase = 12;
+        }
+        data.regenfinal = Math.min(Math.floor(data.regenbase + data.regeneration.spec + data.regeneration.temp), 20);
         switch (data.regenfinal) {
             case 1:
                 data.resting = "10/day";
@@ -342,7 +347,8 @@ export default class abfalterActor extends Actor {
         }
 
         //Initiative
-        data.iniBase = data.stats.Dexterity.mod + data.stats.Agility.mod + 20;
+        data.iniBase = Math.floor(data.stats.Dexterity.mod + data.stats.Agility.mod + 20); // Work here - initiative due to aam penalty
+
 
         //Ki Pool
         if (data.toggles.innatePower == false) {
@@ -1532,137 +1538,102 @@ export default class abfalterActor extends Actor {
         data.zfinal = Math.floor(data.secondary.z.temp + data.secondary.z.spec + data.secondary.z.base + data.zbonus + data.znatfinal + data.aamFinal);
          */
 
-
-
-        // Magic Projection
-        //data.mprojfinal = Math.floor(data.mproj.base + data.mproj.spec + data.mproj.temp + data.aamFinal + data.stats.Dexterity.mod);
-        //data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.imbalance);
-        //data.mprojfinaldef = Math.floor(data.mprojfinal - data.mproj.imbalance);
-
-        //Ki Abilities Bonuses
-
-
-
-
-
-
-
-
-        //to place class bonuses
-        data.zeonbonus = zeon;
-        data.summonbonus = summon;
-        data.controlbonus = control;
-        data.bindbonus = bind;
-        data.banishbonus = banish;
-
+        // Magic Accumulation & Zeon
         data.turnMaintRemove = turnMaint;
         data.dayMaintRemove = dayMaint;
-        // Magic Accumulation
-        switch (data.stats.Power.final) {
-            case 5:
-            case 6:
-            case 7:
-                data.maccupow = 5;
-                break;
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-                data.maccupow = 10;
-                break;
-            case 12:
-            case 13:
-            case 14:
-                data.maccupow = 15;
-                break;
-            case 15:
-                data.maccupow = 20;
-                break;
-            case 16:
-            case 17:
-                data.maccupow = 25;
-                break;
-            case 18:
-            case 19:
-                data.maccupow = 30;
-                break;
-            case 20:
-                data.maccupow = 35;
-                break;
-            default:
-                data.maccupow = 0;
-                break;
-        }
-        data.maccufinal = Math.floor(data.maccu.base + data.maccupow + (data.maccu.mult * data.maccupow) + data.maccu.spec + data.maccu.temp);
-        data.maccuhalffinal = Math.floor(data.maccufinal / 2);
-        data.mregenfinal = Math.floor(((data.maccupow * data.mregen.regenmult) + data.mregen.spec + data.mregen.temp + data.maccufinal) * data.mregen.recoverymult);
-
-        // Zeon
+        data.zeonbonus = zeon;
         switch (data.stats.Power.final) {
             case 1:
+                data.maccupow = 0;
                 data.zeonpow = 5;
                 break;
             case 2:
+                data.maccupow = 0;
                 data.zeonpow = 20;
                 break;
             case 3:
+                data.maccupow = 0;
                 data.zeonpow = 40;
                 break;
             case 4:
+                data.maccupow = 0;
                 data.zeonpow = 55;
                 break;
             case 5:
+                data.maccupow = 5;
                 data.zeonpow = 70;
                 break;
             case 6:
+                data.maccupow = 5;
                 data.zeonpow = 85;
                 break;
             case 7:
+                data.maccupow = 5;
                 data.zeonpow = 95;
                 break;
             case 8:
+                data.maccupow = 10;
                 data.zeonpow = 110;
                 break;
             case 9:
+                data.maccupow = 10;
                 data.zeonpow = 120;
                 break;
             case 10:
+                data.maccupow = 10;
                 data.zeonpow = 135;
                 break;
             case 11:
+                data.maccupow = 10;
                 data.zeonpow = 150;
                 break;
             case 12:
+                data.maccupow = 15;
                 data.zeonpow = 160;
                 break;
             case 13:
+                data.maccupow = 15;
                 data.zeonpow = 175;
                 break;
             case 14:
+                data.maccupow = 15;
                 data.zeonpow = 185;
                 break;
             case 15:
+                data.maccupow = 20;
                 data.zeonpow = 200;
                 break;
             case 16:
+                data.maccupow = 25;
                 data.zeonpow = 215;
                 break;
             case 17:
+                data.maccupow = 25;
                 data.zeonpow = 225;
                 break;
             case 18:
+                data.maccupow = 30;
                 data.zeonpow = 240;
                 break;
             case 19:
+                data.maccupow = 30;
                 data.zeonpow = 250;
                 break;
             case 20:
+                data.maccupow = 35;
                 data.zeonpow = 260;
                 break;
             default:
                 data.zeonpow = 0;
                 break;
         }
+        if (data.stats.Power.final > 20) {
+            data.maccupow = 35;
+            data.zeonpow = 260;
+        }
+        data.maccufinal = Math.floor(data.maccu.base + data.maccupow + (data.maccu.mult * data.maccupow) + data.maccu.spec + data.maccu.temp);
+        data.maccuhalffinal = Math.floor(data.maccufinal / 2);
+        data.mregenfinal = Math.floor(((data.maccupow * data.mregen.regenmult) + data.mregen.spec + data.mregen.temp + data.maccufinal) * data.mregen.recoverymult);
         data.zeonfinal = Math.floor(data.zeon.base + data.zeonpow + data.zeonbonus + data.zeon.spec + data.zeon.temp);
 
         // Innate Magic
@@ -1739,12 +1710,19 @@ export default class abfalterActor extends Actor {
                 data.mlevelint = 0;
                 break;
         }
+        if (data.stats.Intelligence.final > 20) {
+            data.mlevelint = 800;
+        }
         data.mlLevels = pathLvl;
         data.spellLevels = spellCost;
         data.mlevelfinal = Math.floor(data.mlevel.base + data.mlevel.spec + data.mlevel.temp + data.mlevelint);
         data.mlevelused = Math.floor(data.mlLevels + data.spellLevels);
 
         // Summoning Abilities
+        data.summonbonus = summon;
+        data.controlbonus = control;
+        data.bindbonus = bind;
+        data.banishbonus = banish;
         data.summonfinal = Math.floor(data.summoning.summon.base + data.summonbonus + data.summoning.summon.spec + data.stats.Power.mod + Math.min(0, data.aamFinal));
         data.controlfinal = Math.floor(data.summoning.control.base + data.controlbonus + data.summoning.control.spec + data.stats.Willpower.mod + Math.min(0, data.aamFinal));
         data.bindfinal = Math.floor(data.summoning.bind.base + data.bindbonus + data.summoning.bind.spec + data.stats.Power.mod + Math.min(0, data.aamFinal));
@@ -1804,7 +1782,7 @@ export default class abfalterActor extends Actor {
         data.fumbleRangeFinal = Math.floor(data.fumleRange.base + data.fumleRange.spec + data.fumleRange.temp);
 
 
-
+        // Reload Items to get Atk/Def
         this.items.reduce((arr, item) => {
             if (item.type === "weapon") {
                 item.prepareData();

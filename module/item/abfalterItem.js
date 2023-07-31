@@ -266,6 +266,13 @@ export default class abfalterItem extends Item {
 
     chatTemplate = {
         "spell": "systems/abfalter/templates/chatItem/spellChat.html",
+        "psychicMatrix": "systems/abfalter/templates/chatItem/psyMatrixChat.html",
+        "kiSealCreature": "systems/abfalter/templates/chatItem/kiSealChat.html",
+        "kiTechnique": "systems/abfalter/templates/chatItem/kitechChat.html",
+        "armor": "systems/abfalter/templates/chatItem/armorChat.html",
+        "armorHelmet": "systems/abfalter/templates/chatItem/armorHelmChat.html",
+        "weapon": "systems/abfalter/templates/chatItem/weaponChat.html",
+        "inventory": "systems/abfalter/templates/chatItem/invChat.html",
     }
 
     async roll(label) {

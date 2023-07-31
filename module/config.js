@@ -71,7 +71,9 @@ abfalter.basicInfo = {
     destiny: "abfalter.basicInfo.destiny",
     archeType: "abfalter.basicInfo.archeType",
     shield: "abfalter.basicInfo.shield",
-    shieldMax: "abfalter.basicInfo.shieldMax"
+    shieldMax: "abfalter.basicInfo.shieldMax",
+    boons: "abfalter.basicInfo.boons",
+    critical: "abfalter.basicInfo.critical"
 }
 
 abfalter.generalTab = {

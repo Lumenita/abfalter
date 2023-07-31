@@ -902,7 +902,7 @@
                 <div class="{{#if data.itemToggle.arsMagnus}}item-list{{/if}}">
                     {{#each arsMagnuses as |arsMagnus id|}}
                     <div class="arsMagnus-item item normal-item" data-item-id="{{arsMagnus._id}}">
-                        {{#if system.expand}}                        
+                        {{#if system.expand}}
                         <div>
                             <input class="item-name inline-edit" data-field="name" type="text" value="{{arsMagnus.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                             <input class="inline-edit" data-field="system.dp" type="number" value="{{arsMagnus.system.dp}}" />
@@ -1152,24 +1152,24 @@
 
         <div class="kiTech">
             <h2> {{localize "abfalter.kiTab.kiTechnique"}} </h2>
-            <div>
-                <span> {{localize "abfalter.basicInfo.name"}} </span>
-                <span> {{localize "abfalter.basicInfo.level"}} </span>
-                <span> {{localize "abfalter.basicInfo.mk"}} </span>
-            </div>
             <div class="{{#if data.itemToggle.kiTechnique}}item-list{{/if}}">
                 {{#each kiTechniques as |kiTechnique id|}}
                 <div class="kiTechnique-item item normal-item" data-item-id="{{kiTechnique._id}}">
                     {{#if system.expand}}
-                    <div>
-                        <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
-                        <input class="item-name inline-edit" data-field="name" type="text" value="{{kiTechnique.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
-                        <input class="inline-edit" data-field="system.level" type="number" value="{{kiTechnique.system.level}}" />
-                        <input class="inline-edit" data-field="system.mk" type="number" value="{{kiTechnique.system.mk}}" />
-                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    <div class="kiTechMaxContainer">
+                        <div class="kiTechMainInfo">
+                            <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{kiTechnique.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="inline-edit" data-field="system.level" type="number" value="{{kiTechnique.system.level}}" />
+                            <input class="inline-edit" data-field="system.mk" type="number" value="{{kiTechnique.system.mk}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
                     </div>
+
+
+
                     <div>
-                        <div>
+                        <div class="kitechType">
                             {{#if system.innatePower}}
                             <div class="techExpand techExpandFirst">
                                 <span> {{localize "abfalter.kiTab.ki"}} </span>
@@ -1184,9 +1184,9 @@
                             <span> {{localize "abfalter.basicInfo.pow"}} </span>
                             <span> {{localize "abfalter.basicInfo.wp"}} </span>
                             {{/if}}
-                        <span> {{localize "abfalter.kiTab.actionInfo"}} </span>
+                            <span> {{localize "abfalter.kiTab.actionInfo"}} </span>
                         </div>
-                        <div>
+                        <div class="kiTechUse">
                             {{#if system.innatePower}}
                             <div class="techExpand">
                                 <span> {{localize "abfalter.kiTab.innatePowerUse"}} </span>
@@ -1204,14 +1204,14 @@
                             <div class="csSelect techSelect">
                                 <select class="inline-edit" data-field="system.frequency" data-dtype="number">
                                     {{#select system.frequency}}
-                                    <option value="1"> {{localize "abfalter.kiTab.action"}} </option>
-                                    <option value="2"> {{localize "abfalter.kiTab.turn"}} </option>
-                                    <option value="3"> {{localize "abfalter.kiTab.variable"}} </option>
+                                    <option value="{{localize "abfalter.kiTab.action"}}"> {{localize "abfalter.kiTab.action"}} </option>
+                                    <option value="{{localize "abfalter.kiTab.turn"}}"> {{localize "abfalter.kiTab.turn"}} </option>
+                                    <option value="{{localize "abfalter.kiTab.variable"}}"> {{localize "abfalter.kiTab.variable"}} </option>
                                     {{/select}}
                                 </select>
                             </div>
                         </div>
-                        <div>
+                        <div class="kiTechMaint">
                             {{#if system.unified}}
                             <div class="techExpand">
                                 {{#if system.innatePower}}
@@ -1222,7 +1222,7 @@
                                 <input class="inline-edit" data-field="system.maint.unified" type="number" value="{{kiTechnique.system.maint.unified}}" />
                             </div>
                             {{else}}
-                        <span> {{localize "abfalter.kiTab.maint"}} </span>
+                            <span> {{localize "abfalter.kiTab.maint"}} </span>
                             <input class="inline-edit" data-field="system.maint.agi" type="number" value="{{kiTechnique.system.maint.agi}}" />
                             <input class="inline-edit" data-field="system.maint.con" type="number" value="{{kiTechnique.system.maint.con}}" />
                             <input class="inline-edit" data-field="system.maint.dex" type="number" value="{{kiTechnique.system.maint.dex}}" />
@@ -1233,10 +1233,10 @@
                             <div class="csSelect techSelect">
                                 <select class="inline-edit" data-field="system.actionType" data-dtype="number">
                                     {{#select system.actionType}}
-                                    <option value="1"> {{localize "abfalter.kiTab.attack"}} </option>
-                                    <option value="2"> {{localize "abfalter.kiTab.defense"}} </option>
-                                    <option value="3"> {{localize "abfalter.kiTab.counterAttack"}} </option>
-                                    <option value="4"> {{localize "abfalter.kiTab.variable"}} </option>
+                                    <option value="{{localize "abfalter.kiTab.attack"}}"> {{localize "abfalter.kiTab.attack"}} </option>
+                                    <option value="{{localize "abfalter.kiTab.defense"}}"> {{localize "abfalter.kiTab.defense"}} </option>
+                                    <option value="{{localize "abfalter.kiTab.counterAttack"}}"> {{localize "abfalter.kiTab.counterAttack"}} </option>
+                                    <option value="{{localize "abfalter.kiTab.variable"}}"> {{localize "abfalter.kiTab.variable"}} </option>
                                     {{/select}}
                                 </select>
                             </div>
@@ -1244,20 +1244,84 @@
                         <textarea class="inline-edit itemAuto-expand" data-field="system.description">{{kiTechnique.system.description}}</textarea>
                     </div>
                     {{else}}
-                    <div>
-                        <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
-                        <span> {{kiTechnique.name}} </span>
-                        <span> {{kiTechnique.system.level}} </span>
-                        <span> {{kiTechnique.system.mk}} </span>
-                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+
+
+
+                    <div class="kiTechMinContainer">
+                        <div class="kiTechMainInfo">
+                            <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
+                            <span> {{kiTechnique.name}} </span>
+                            <span> {{kiTechnique.system.level}} </span>
+                            <span> {{kiTechnique.system.mk}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <div class="kiTechSideInfo">
+                            <span> Frequency : {{kiTechnique.system.frequency}} </span>
+                            <span> Action Type : {{kiTechnique.system.actionType}} </span>
+                            <span> level </span>
+                            <span> MK </span>
+                        </div>
+                        <div class="kitechType">
+                            {{#if system.innatePower}}
+                            <div class="techExpand techExpandFirst">
+                                <span> {{localize "abfalter.kiTab.ki"}} </span>
+                                <span> {{localize "abfalter.basicInfo.pow"}} </span>
+                            </div>
+                            {{else}}
+                            <span> {{localize "abfalter.kiTab.ki"}} </span>
+                            <span> {{localize "abfalter.basicInfo.agi"}} </span>
+                            <span> {{localize "abfalter.basicInfo.con"}} </span>
+                            <span> {{localize "abfalter.basicInfo.dex"}} </span>
+                            <span> {{localize "abfalter.basicInfo.str"}} </span>
+                            <span> {{localize "abfalter.basicInfo.pow"}} </span>
+                            <span> {{localize "abfalter.basicInfo.wp"}} </span>
+                            {{/if}}
+                            <span> {{localize "abfalter.kiTab.actionInfo"}} </span>
+                        </div>
+                        <div class="kiTechUse">
+                            {{#if system.innatePower}}
+                            <div class="techExpand">
+                                <span> {{localize "abfalter.kiTab.innatePowerUse"}} </span>
+                                <input class="inline-edit" data-field="system.use.unified" type="number" value="{{kiTechnique.system.use.unified}}" />
+                            </div>
+                            {{else}}
+                            <span> {{localize "abfalter.kiTab.use"}} </span>
+                            <input class="inline-edit" data-field="system.use.agi" type="number" value="{{kiTechnique.system.use.agi}}" />
+                            <input class="inline-edit" data-field="system.use.con" type="number" value="{{kiTechnique.system.use.con}}" />
+                            <input class="inline-edit" data-field="system.use.dex" type="number" value="{{kiTechnique.system.use.dex}}" />
+                            <input class="inline-edit" data-field="system.use.str" type="number" value="{{kiTechnique.system.use.str}}" />
+                            <input class="inline-edit" data-field="system.use.pow" type="number" value="{{kiTechnique.system.use.pow}}" />
+                            <input class="inline-edit" data-field="system.use.wp" type="number" value="{{kiTechnique.system.use.wp}}" />
+                            {{/if}}
+                        </div>
+                        <div class="kiTechMaint">
+                            {{#if system.unified}}
+                            <div class="techExpand">
+                                {{#if system.innatePower}}
+                                <span> {{localize "abfalter.kiTab.innatePowerMaint"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.kiTab.unifiedMaint"}} </span>
+                                {{/if}}
+                                <input class="inline-edit" data-field="system.maint.unified" type="number" value="{{kiTechnique.system.maint.unified}}" />
+                            </div>
+                            {{else}}
+                            <span> {{localize "abfalter.kiTab.maint"}} </span>
+                            <input class="inline-edit" data-field="system.maint.agi" type="number" value="{{kiTechnique.system.maint.agi}}" />
+                            <input class="inline-edit" data-field="system.maint.con" type="number" value="{{kiTechnique.system.maint.con}}" />
+                            <input class="inline-edit" data-field="system.maint.dex" type="number" value="{{kiTechnique.system.maint.dex}}" />
+                            <input class="inline-edit" data-field="system.maint.str" type="number" value="{{kiTechnique.system.maint.str}}" />
+                            <input class="inline-edit" data-field="system.maint.pow" type="number" value="{{kiTechnique.system.maint.pow}}" />
+                            <input class="inline-edit" data-field="system.maint.wp" type="number" value="{{kiTechnique.system.maint.wp}}" />
+                            {{/if}}
+                        </div>
+                        {{/if}}
                     </div>
-                    {{/if}}
+                    {{/each}}
                 </div>
-                {{/each}}
-            </div>
-            <div>
-                <a class="item-control item-create" data-type="kiTechnique"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addKiTechnique"}} </a>
-                <a class="toggleBoolean {{#if data.itemToggle.kiTechnique}}armorpenalty{{/if}}" data-label="data.itemToggle.kiTechnique" data-ability="{{data.itemToggle.kiTechnique}}"><i class="{{#if data.itemToggle.kiTechnique}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                <div>
+                    <a class="item-control item-create" data-type="kiTechnique"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addKiTechnique"}} </a>
+                    <a class="toggleBoolean {{#if data.itemToggle.kiTechnique}}armorpenalty{{/if}}" data-label="data.itemToggle.kiTechnique" data-ability="{{data.itemToggle.kiTechnique}}"><i class="{{#if data.itemToggle.kiTechnique}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                </div>
             </div>
         </div>
     </div>

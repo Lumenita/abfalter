@@ -57,7 +57,7 @@
         "toggles": {
           "greaterEnergyArmor": false,
           "arcaneEnergyArmor": false,
-          "spiritDamageType": true,
+          "spiritDamageType": false,
           "psychicStrengthening": false,
           "unifiedPools": false,
           "innatePower": false,
@@ -715,7 +715,10 @@
             "status": false
           }
         },
-        "aam": 0
+        "aam": 0,
+        "aamBoon": 0,
+        "aamCrit": 0,
+        "aamOther": 0
       },
       "mystic": {
         "mproj": {
@@ -1718,8 +1721,8 @@
       "expand": false,
       "level": 0,
       "mk": 0,
-      "actionType": 1,
-      "frequency": 1,
+      "actionType": "Attack",
+      "frequency": "Action",
       "use": {
         "unified": 0,
         "agi": 0,
