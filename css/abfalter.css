@@ -97,8 +97,6 @@ h2 {
     margin-bottom: 3px;
 }
 h3 {
-    display: flex;
-    width: 100%;
     font-size: 12pt;
     justify-content: center;
     border-image: url(../img/border.png) 10 stretch;
@@ -926,9 +924,6 @@ h3 {
     --------------
     **************
 */
-.background {
-    min-width: 878px;
-}
 .e1, .e2, .e3 {
     display: flex;
     justify-content: flex-start;
