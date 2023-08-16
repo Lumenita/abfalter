@@ -1,3 +1,171 @@
+/* Global Actor Styles */
+.window-app .window-content {
+    overflow-x: auto;
+    background: #313744;
+    color: #adb2bd; /* Color */
+}
+.baseAbfalter label {
+    margin: 0px;
+    padding: 0px;
+}
+.baseAbfalter span {
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+    text-align: center;
+    display: grid;
+    color: #adb2bd; /* Color */
+}
+.baseAbfalter input {
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    text-align: center;
+    border: 0px;
+    height: 20px;
+    border-bottom: 1px solid black;
+    color: #adb2bd; /* Color */
+}
+.baseAbfalter input:read-only {
+    background-color: transparent;
+    padding: 1px 0 0 0;
+    border: 0;
+}
+.baseAbfalter select {
+    height: 20px;
+    font-size: 13px;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-bottom: 1px solid black;
+    text-align: center;
+    appearance: none;
+}
+.baseAbfalter a {
+    text-align: center;
+    align-self: center;
+}
+.baseAbfalter textarea {
+    border: none;
+    width: 100%;
+    resize: none;
+    padding: 0px;
+    text-align: justify;
+    border-radius: 0px;
+    margin: 0px;
+}
+
+
+
+
+
+
+
+/* Header */
+.actorHeader1 {
+    display: flex;
+    height: 175px;
+    width: 100%;
+}
+.actorToken {
+    height: 175px;
+    min-width: 175px;
+}
+.actorToken > img {
+    max-height: 100%;
+    max-width: 100%;
+    border: none;
+}
+.subHeader1 {
+    height: 175px;
+    width: inherit;
+    min-width: 703px;
+}
+.subHeaderRow1 {
+    display: flex;
+    height: 50px;
+    width: 100%;
+}
+.subHeaderRow1 > div:nth-of-type(1) { /* Name */
+    width: 40%;
+}
+.subHeaderRow1 > div:nth-of-type(1) > input{ /* Name */
+    height: 50px;
+    font-size: 30px;
+    text-align: left;
+    padding: 0 0 0 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.subHeaderRow2 {
+    background: gray;
+    height: 50px;
+    width: 100%;
+}
+.subHeaderRow3 {
+    background: black;
+    height: 75px;
+    width: 100%;
+}
+
+
+
+
+.actorHeader2 {
+    display: flex;
+    background: green;
+    height: 100px;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .flexBetween {
     display: flex;
     justify-content: space-between;
@@ -28,61 +196,9 @@
 }
 
 
-/* Global Style */
-label {
-    margin: 0px;
-    padding: 0px;
-}
-span {
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-    text-align: center;
-    display: grid;
-}
-input[type=number], input[type=text] {
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    text-align: center;
-    border: 0px;
-    height: 20px;
-    border-bottom: 1px solid black;
-}
-input:read-only {
-    background-color: transparent;
-    padding: 1px 0 0 0;
-    border: 0;
-}
-select {
-    height: 20px;
-    font-size: 13px;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    border-bottom: 1px solid black;
-    text-align: center;
-}
-.abfalter select {
-    appearance: none;
-}
-a {
-    text-align: center;
-    align-self: center;
-}
-textarea {
-    border: none;
-    width: 100%;
-    resize: none;
-    padding: 0px;
-    text-align: justify;
-    border-radius: 0px;
-    margin: 0px;
-    /*font-family: serif;
-    font-size: 14px;*/
-}
+
+
+
 button {
     line-height: normal;
 }

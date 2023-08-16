@@ -1,6 +1,41 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<form class="baseAbfalter" autocomplete="off">
     {{#if owner}}
     {{!-- Sheet Header --}}
+    <header>
+        <div class="actorHeader1">
+            <div class="actorToken">
+                <img class="profile-img" src="{{actor.prototypeToken.texture.src}}" title="{{actor.name}} Token" />
+            </div>
+            <div class="subHeader1">
+                <div class="subHeaderRow1">
+                    <div>
+                        <input type="text" name="name" value="{{actor.name}}" placeholder="Name" />
+                    </div>
+                </div>
+
+                <div class="subHeaderRow2">
+                    <div>
+                        <label> <span> Gender </span> <input type="text" name="data.gender" value="{{data.gender}}" /> </label>
+                    </div>
+                </div>
+
+                <div class="subHeaderRow3">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="actorHeader2">
+
+        </div>
+
+    </header>
+
+
+
+
+
+    <!--
     <header class="sheet-header">
         <div class="charInfo">
             <img src="systems/abfalter/img/animaLogo.png" />
@@ -46,7 +81,7 @@
             </div>
         </div>
     </header>
-
+    -->
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs navTabsYes" data-group="primary">
         <ul>
@@ -65,32 +100,32 @@
     <section class="sheet-body">
         {{!-- Sheet Location Tab --}}
         <div class="tab general" data-group="primary" data-tab="general">
-{{> systems/abfalter/templates/actor/parts/general.html }}
+            {{> systems/abfalter/templates/actor/parts/general.html }}
         </div>
         <div class="tab bio" data-group="primary" data-tab="bio">
-{{> systems/abfalter/templates/actor/parts/bio.html }}
+            {{> systems/abfalter/templates/actor/parts/bio.html }}
         </div>
         <div class="tab magic" data-group="primary" data-tab="magic">
-{{> systems/abfalter/templates/actor/parts/magic.html }}
+            {{> systems/abfalter/templates/actor/parts/magic.html }}
         </div>
         <div class="tab psychic" data-group="primary" data-tab="psychic">
-{{> systems/abfalter/templates/actor/parts/psychic.html }}
+            {{> systems/abfalter/templates/actor/parts/psychic.html }}
         </div>
         <div class="tab ki" data-group="primary" data-tab="ki">
-{{> systems/abfalter/templates/actor/parts/ki.html }}
+            {{> systems/abfalter/templates/actor/parts/ki.html }}
         </div>
         <div class="tab armory" data-group="primary" data-tab="armory">
-{{> systems/abfalter/templates/actor/parts/armory.html }}
+            {{> systems/abfalter/templates/actor/parts/armory.html }}
         </div>
         <div class="tab background" data-group="primary" data-tab="background">
-{{> systems/abfalter/templates/actor/parts/background.html }}
+            {{> systems/abfalter/templates/actor/parts/background.html }}
         </div>
         <div class="tab settings" data-group="primary" data-tab="settings">
-{{> systems/abfalter/templates/actor/parts/settings.html }}
+            {{> systems/abfalter/templates/actor/parts/settings.html }}
         </div>
     </section>
     {{else}}
-{{> systems/abfalter/templates/actor/parts/bio.html }}
+    {{> systems/abfalter/templates/actor/parts/bio.html }}
     {{/if}}
 </form>
 
