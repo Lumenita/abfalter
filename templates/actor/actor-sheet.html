@@ -6,20 +6,67 @@
             <div class="actorToken">
                 <img class="profile-img" src="{{actor.prototypeToken.texture.src}}" title="{{actor.name}} Token" />
             </div>
+
             <div class="subHeader1">
-                <div class="subHeaderRow1">
-                    <div>
-                        <input type="text" name="name" value="{{actor.name}}" placeholder="Name" />
+                <div class="containerHeader">
+                    <div class="SubHeaderLeft">
+                        <div class="subHeaderRow1">
+                            <div>
+                                <input type="text" name="name" value="{{actor.name}}" placeholder="Name" />
+                            </div>
+                        </div>
+
+                        <div class="subHeaderRow2">
+                            <label> <input type="text" name="data.gender" value="{{data.gender}}" placeholder="Gender" /> </label>
+                            <label> <input type="text" name="data.race" value="{{data.race}}" placeholder="Race" /> </label>
+                            <label> <input type="text" name="data.class" value="{{data.class}}" placeholder="Class" /> </label>
+                            <label> <input type="number" name="data.level" value="{{data.level}}" readonly placeholder="Level" /> </label>
+                        </div>
+
+                        <div class="subHeaderRow3">
+                            <label> <input type="number" name="data.experience" value="{{data.experience}}" placeholder="0" /> </label>
+                            <span> / </span>
+                            <label> <input type="number" name="data.nextlevel" value="{{data.nextlevel}}" readonly /> <span> Exp </span> </label>
+                            <label class="levelUpBox">
+                                <a> <i class="fas fa-caret-down"></i> </a>
+                            </label>
+                            <label> <input type="number" name="data.dp" value="{{data.dp}}" readonly /> </label>
+                            <span> DP </span>
+                        </div>
+                    </div>
+
+                    <div class="SubHeaderRight">
+
                     </div>
                 </div>
 
-                <div class="subHeaderRow2">
-                    <div>
-                        <label> <span> Gender </span> <input type="text" name="data.gender" value="{{data.gender}}" /> </label>
-                    </div>
-                </div>
 
-                <div class="subHeaderRow3">
+
+                <div class="subHeaderRow4">
+                    <div class="agiChars">
+
+                    </div>
+                    <div class="conChars">
+
+                    </div>
+                    <div class="strChars">
+
+                    </div>
+                    <div class="agiChars">
+
+                    </div>
+                    <div class="conChars">
+
+                    </div>
+                    <div class="strChars">
+
+                    </div>
+                    <div class="agiChars">
+
+                    </div>
+                    <div class="conChars">
+
+                    </div>
 
                 </div>
             </div>
@@ -42,46 +89,26 @@
             <div>
                 <div>
                     <div>
-                        <label> <span> Name </span> <input type="text" name="name" value="{{actor.name}}" placeholder="Name" /> </label>
-                    </div>
-                    <div>
                         <label> <span> Height </span> <input type="text" name="data.height" value="{{data.height}}" /> </label>
                         <label> <span> Weight </span> <input type="text" name="data.weight" value="{{data.weight}}" /> </label>
                     </div>
                     <div>
                         <label> <span> Appear. </span> <input type="number" name="data.appearance" value="{{data.appearance}}" /> </label>
                         <label> <span> Age </span> <input type="text" name="data.age" value="{{data.age}}" /> </label>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <label> <span> Gender </span> <input type="text" name="data.gender" value="{{data.gender}}" /> </label>
-                    </div>
-                    <div>
-                        <label> <span> Race </span> <input type="text" name="data.race" value="{{data.race}}" /> </label>
-                    </div>
-                    <div>
-                        <label> <span> Class </span> <input type="text" name="data.class" value="{{data.class}}" /> </label>
-                    </div>
-                </div>
-                <div>
-                    <div>
                         <label> <span> Size </span> <input type="number" name="data.size" value="{{data.size}}" /> </label>
-                        <label> <span> Level </span> <input type="number" name="data.level" value="{{data.level}}" readonly /> </label>
                     </div>
                     <div>
-                        <label> <span> XP </span> <input type="number" name="data.experience" value="{{data.experience}}" /> </label>
-                        <label> <span> Next Level </span> <input type="number" name="data.nextlevel" value="{{data.nextlevel}}" readonly /> </label>
+                            <label> <span> Presence </span> <input type="number" name="data.presence" value="{{data.presence}}" readonly /> </label>
                     </div>
                     <div>
-                        <label> <span> DP </span> <input type="number" name="data.dp" value="{{data.dp}}" readonly /> </label>
-                        <label> <span> Presence </span> <input type="number" name="data.presence" value="{{data.presence}}" readonly /> </label>
+
                     </div>
                 </div>
             </div>
         </div>
     </header>
     -->
+
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs navTabsYes" data-group="primary">
         <ul>

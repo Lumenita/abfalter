@@ -60,9 +60,6 @@
 
 
 
-
-
-
 /* Header */
 .actorHeader1 {
     display: flex;
@@ -83,13 +80,13 @@
     width: inherit;
     min-width: 703px;
 }
-.subHeaderRow1 {
-    display: flex;
-    height: 50px;
+.containerHeader {
+    height: 100px;
     width: 100%;
+    display: flex;
 }
-.subHeaderRow1 > div:nth-of-type(1) { /* Name */
-    width: 40%;
+.SubHeaderLeft {
+    width: 45%;
 }
 .subHeaderRow1 > div:nth-of-type(1) > input{ /* Name */
     height: 50px;
@@ -97,30 +94,144 @@
     text-align: left;
     padding: 0 0 0 3px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.subHeaderRow2 {
-    background: gray;
-    height: 50px;
+.subHeaderRow2 { /* Gender, Race, Class, Level */
+    display: flex;
+    height: 25px;
     width: 100%;
+    justify-content: space-between;
 }
-.subHeaderRow3 {
+.subHeaderRow2 > label > input,
+.subHeaderRow3 > label > input {
+    height: 25px;
+    border: none;
+    background: none;
+    font-size: 15px;
+}
+.subHeaderRow2 > label > input:placeholder-shown,
+.subHeaderRow3 > label > input:placeholder-shown {
+    border: 1px solid red;
+}
+.subHeaderRow2 > label > input::placeholder,
+.subHeaderRow3 > label > input::placeholder{
+    color: #c33333;
+}
+.subHeaderRow2 > label:nth-of-type(1) {
+    width: 21%;
+}
+.subHeaderRow2 > label:nth-of-type(2) {
+    width: 32%;
+}
+.subHeaderRow2 > label:nth-of-type(3) {
+    width: 35%;
+}
+.subHeaderRow2 > label:nth-of-type(3) > input {
+    text-align: end;
+}
+.subHeaderRow2 > label:nth-of-type(4) {
+    width: 10%;
+}
+.subHeaderRow3 { /* Exp, next lvl exp, lvl up box, DP */
+    display: flex;
+    height: 25px;
+    width: 100%;
+    justify-content: flex-start;
+}
+.subHeaderRow3 > span {
+    height: 26px;
+    font-size: 15px;
+}
+.subHeaderRow3 > label:nth-of-type(1) { /* exp number */
+    display: flex;
+    width: 11%;
+}
+.subHeaderRow3 > label:nth-of-type(1) > input { 
+    text-align: end;
+}
+.subHeaderRow3 > span:nth-of-type(1) { /* / */
+    display: flex;
+    width: 5%;
+    justify-content: center;
+}
+.subHeaderRow3 > label:nth-of-type(2) { /* next lvl exp number*/
+    display: flex;
+    width: 22%;
+}
+.subHeaderRow3 > label:nth-of-type(2) > input { 
+    text-align: start;
+    width: 55%; 
+}
+.subHeaderRow3 > label:nth-of-type(2) > span { 
+    text-align: start;
+    width: inherit;
+    height: 26px;
+    font-size: 15px;
+}
+.subHeaderRow3 > label:nth-of-type(3) { /* lvl up box */
+    display: flex;
+    width: 15%;
+}
+.subHeaderRow3 > label:nth-of-type(4) { /* dp number */
+    display: flex;
+    width: 20%;
+    margin: 0 0 0 18%;
+}
+.subHeaderRow3 > span:nth-of-type(2) { /* dp */
+    display: flex;
+    width: 7%;
+    justify-content: center;
+}
+
+.SubHeaderRight {
+    background: green;
+    width: 55%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.subHeaderRow4 {
     background: black;
     height: 75px;
     width: 100%;
+    display: flex;
 }
+
+.agiChars {
+    width: 8%;
+    height: 75px;
+    background: orange;
+}
+.conChars {
+    width: 8%;
+    height: 75px;
+    background: yellow;
+}
+.strChars {
+    width: 8%;
+    height: 75px;
+    background: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
