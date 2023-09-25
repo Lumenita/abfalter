@@ -2681,6 +2681,19 @@ h3 {
     margin: 0;
     text-align: center;
 }
+
+
+
+.kitechType > span,
+.kiTechUse > span,
+.kiTechUse > input {
+    width: 10%;
+}
+
+.kitechType {
+    display: flex;
+}
+
 /*
     *************
     -------------
