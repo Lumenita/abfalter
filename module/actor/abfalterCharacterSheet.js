@@ -200,6 +200,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 this.document.update({ [label]: value, [label2]: value2 });
             });
 
+
             html.find(".item-chat").click(this._onItemChatRoll.bind(this));
 
             html.find('.rollable').click(this._onRoll.bind(this));

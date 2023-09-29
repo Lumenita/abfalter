@@ -55,6 +55,7 @@
           "elan": false
         },
         "toggles": {
+          "actorHeaderInfo1": false,
           "greaterEnergyArmor": false,
           "arcaneEnergyArmor": false,
           "spiritDamageType": false,
@@ -718,7 +719,8 @@
         "aam": 0,
         "aamBoon": 0,
         "aamCrit": 0,
-        "aamOther": 0
+        "aamOther": 0,
+        "aamStatus": false
       },
       "mystic": {
         "mproj": {

@@ -1,8 +1,40 @@
+/* Global */
+:root {
+    --textColor: #bbbbbb;
+    --buttonBg: #00000026;
+    --boxColor: #687591;
+    --physical: #429f42;
+    --mental: #4389df;
+}
+h5 {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0 0 -3px 0;
+    font-weight: normal;
+    font-size: 25px;
+    color: var(--boxColor);
+}
+h6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-weight: normal;
+    font-size: 17px;
+}
+.physical {
+    color: var(--physical) !important;
+}
+.mental {
+    color: var(--mental) !important;
+}
+
 /* Global Actor Styles */
 .window-app .window-content {
     overflow-x: auto;
-    background: #313744;
-    color: #adb2bd; /* Color */
+    background: #232832;
+    color: var(--textColor);
 }
 .baseAbfalter label {
     margin: 0px;
@@ -14,7 +46,7 @@
     height: 20px;
     text-align: center;
     display: grid;
-    color: #adb2bd; /* Color */
+    color: var(--textColor);
 }
 .baseAbfalter input {
     padding-bottom: 0px;
@@ -25,7 +57,7 @@
     border: 0px;
     height: 20px;
     border-bottom: 1px solid black;
-    color: #adb2bd; /* Color */
+    color: var(--textColor);
 }
 .baseAbfalter input:read-only {
     background-color: transparent;
@@ -56,19 +88,18 @@
     border-radius: 0px;
     margin: 0px;
 }
-
-
-
+.baseAbfalter button {
+    background: var(--buttonBg);
+}
 
 /* Header */
 .actorHeader1 {
     display: flex;
-    height: 175px;
     width: 100%;
 }
 .actorToken {
-    height: 175px;
-    min-width: 175px;
+    height: 125px;
+    min-width: 125px;
 }
 .actorToken > img {
     max-height: 100%;
@@ -76,42 +107,61 @@
     border: none;
 }
 .subHeader1 {
-    height: 175px;
     width: inherit;
-    min-width: 703px;
+    min-width: 753px;
 }
 .containerHeader {
-    height: 100px;
     width: 100%;
     display: flex;
 }
 .SubHeaderLeft {
     width: 45%;
 }
-.subHeaderRow1 > div:nth-of-type(1) > input{ /* Name */
+.subHeaderRow1 > div:nth-of-type(1) {
+    display: flex;
+}
+.subHeaderRow1 > div:nth-of-type(1) > span,
+.subHeaderRow1 > div:nth-of-type(1) > input { /* Name */
     height: 50px;
     font-size: 30px;
     text-align: left;
     padding: 0 0 0 3px;
+    background: none;
+    border: none;
+    width: 90%;
+}
+.subHeaderRow1 > div:nth-of-type(1) > a {
+    width: 10%;
+    font-size: 30px;
 }
 .subHeaderRow2 { /* Gender, Race, Class, Level */
     display: flex;
     height: 25px;
     width: 100%;
     justify-content: space-between;
+    padding: 0 0 0 3px;
 }
+.subHeaderRow2 > span,
 .subHeaderRow2 > label > input,
+.subHeaderRow2Half > span,
+.subHeaderRow2Half > label > input,
 .subHeaderRow3 > label > input {
     height: 25px;
     border: none;
-    background: none;
     font-size: 15px;
 }
+.subHeaderRow1 > div:nth-of-type(1) > input,
+.subHeaderRow2 > label > input,
+.subHeaderRow2Half > label > input {
+    border-bottom: 1px solid red;
+}
 .subHeaderRow2 > label > input:placeholder-shown,
+.subHeaderRow2Half > label > input:placeholder-shown,
 .subHeaderRow3 > label > input:placeholder-shown {
     border: 1px solid red;
 }
 .subHeaderRow2 > label > input::placeholder,
+.subHeaderRow2Half > label > input::placeholder,
 .subHeaderRow3 > label > input::placeholder{
     color: #c33333;
 }
@@ -124,11 +174,18 @@
 .subHeaderRow2 > label:nth-of-type(3) {
     width: 35%;
 }
-.subHeaderRow2 > label:nth-of-type(3) > input {
-    text-align: end;
-}
 .subHeaderRow2 > label:nth-of-type(4) {
     width: 10%;
+}
+.subHeaderRow2Half { /* height, weight, age */
+    display: flex;
+    height: 25px;
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0 0 0 3px;
+}
+.subHeaderRow2Half > label {
+    width: 32%;
 }
 .subHeaderRow3 { /* Exp, next lvl exp, lvl up box, DP */
     display: flex;
@@ -140,6 +197,12 @@
     height: 26px;
     font-size: 15px;
 }
+.subHeaderRow3 > span:nth-of-type(1) { /* dp & Presence */
+    display: flex;
+    width: 59%;
+    justify-content: start;
+    padding: 0 0 0 3px;
+}
 .subHeaderRow3 > label:nth-of-type(1) { /* exp number */
     display: flex;
     width: 11%;
@@ -147,118 +210,697 @@
 .subHeaderRow3 > label:nth-of-type(1) > input { 
     text-align: end;
 }
-.subHeaderRow3 > span:nth-of-type(1) { /* / */
+.subHeaderRow3 > span:nth-of-type(2) { /* / */
     display: flex;
     width: 5%;
     justify-content: center;
 }
-.subHeaderRow3 > label:nth-of-type(2) { /* next lvl exp number*/
-    display: flex;
-    width: 22%;
-}
-.subHeaderRow3 > label:nth-of-type(2) > input { 
+.subHeaderRow3 > span:nth-of-type(3) { /* next lvl exp number*/
+    width: 10%;
     text-align: start;
-    width: 55%; 
-}
-.subHeaderRow3 > label:nth-of-type(2) > span { 
-    text-align: start;
-    width: inherit;
     height: 26px;
     font-size: 15px;
 }
-.subHeaderRow3 > label:nth-of-type(3) { /* lvl up box */
-    display: flex;
-    width: 15%;
+.subHeaderRow3 > span:nth-of-type(4) { 
+    width: 10%;
+    text-align: start;
+    height: 26px;
+    font-size: 15px;
 }
-.subHeaderRow3 > label:nth-of-type(4) { /* dp number */
+.subHeaderRow3 > label:nth-of-type(2) { /* lvl up box */
     display: flex;
-    width: 20%;
-    margin: 0 0 0 18%;
-}
-.subHeaderRow3 > span:nth-of-type(2) { /* dp */
-    display: flex;
-    width: 7%;
+    width: 5%;
     justify-content: center;
 }
-
 .SubHeaderRight {
-    background: green;
     width: 55%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-.subHeaderRow4 {
-    background: black;
-    height: 75px;
-    width: 100%;
+.SubHeaderRight  > div {
     display: flex;
 }
-
-.agiChars {
-    width: 8%;
-    height: 75px;
-    background: orange;
-}
-.conChars {
-    width: 8%;
-    height: 75px;
-    background: yellow;
-}
-.strChars {
-    width: 8%;
-    height: 75px;
-    background: red;
+.subRightHeader1 {
+    height: 25px;
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.actorHeader2 {
+.subRightLeft { /* initiative */
+    width: 30%;
+}
+.subRightLeft > div {
+    width: 90%;
+    margin: 0 5%;
+    justify-content: center;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.subRightLeft > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.subRightLeft > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+.headerIni > span {
+    display: block;
+    padding: 3px 0 0 0;
+    height: 20px;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.headerIni > div {
+    height: 50px;
+    font-size: 14px;
     display: flex;
-    background: green;
-    height: 100px;
+    align-items: center;
+    justify-content: center;
+}
+.headerIni > div > button {
+    height: 40px;
+    width: 90%;
+    font-size: 14px;
+    border: none;
+}
+.headerIni > div > button > span {
+    font-size: 25px;
+    height: 30px;
+}
+.headerIniDets {
+}
+
+
+
+
+
+
+
+.subRightMid {
+    width: 30%;
+}
+
+
+
+
+
+
+
+
+
+.subRightRight {
+    width: 40%;
+}
+.headerAam {
+    margin: 0 5%;
+    border: 3px solid var(--boxColor);
+}
+.headerAam > label {
+    display: flex;
+    padding: 0 5%;
+}
+.headerAam > label:last-of-type {
+    border-top: 1px solid var(--boxColor);
+}
+.headerAam > label:last-of-type > span:first-of-type {
+    width: 60%;
+}
+.headerAam > label:last-of-type> span:last-of-type  {
+    width: 40%;
+    text-align: center;
+}
+.headerAam > label > span {
+    width: 60%;
+    text-align: start;
+}
+.headerAam > label > input {
+    width: 40%;
+}
+/* Navigation Tabs */
+.sheet-tabs > ul > li > .active {
+    background-color: #236e8f;
+    transform: inherit;
+}
+.abfalter .tabs .item.active {
+    text-decoration: underline;
+    text-shadow: none;
+}
+.abfalter .tabs .item {
+    font-weight: bold;
+}
+.navTabsYes {
+    max-height: 37px;
+    min-width: 878px;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+.sheet-tabs > ul {
+    transform: skew(-25deg);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.sheet-tabs > ul > li {
+    background-color: #333a7e;
+    float: left;
+    border-right: 1px solid #333a7e;
+    height: 35px;
+    width: 12%;
+}
+.sheet-tabs > ul > li:hover {
+    background-color: #2a7bc9;
+}
+.sheet-tabs > ul > li:first-child > .active,
+.sheet-tabs > ul > li:first-child {
+    border-radius: 7px 0 0 7px;
+}
+.sheet-tabs > ul > li:last-child > .active,
+.sheet-tabs > ul > li:last-child {
+    border-right: none;
+    border-radius: 0 7px 7px 0;
+}
+.sheet-tabs > ul > li > a { 
+    display:block;
+}
+.sheet-tabs > ul > li > a > span { 
+    transform: skew(25deg);
+    text-shadow: none;
+}
+/*
+    **************
+    --------------
+    GENERAL LAYOUT
+    --------------
+    **************
+*/
+.general {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    min-width: 878px;
+}
+.g1,
+.secondary,
+.characteristics,
+.resistances {
+    width: 49%
+}
+.g1 > div:first-of-type {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.g1 > div:nth-of-type(2),
+.g1 > div:nth-of-type(3) {
+    display: flex;
+    justify-content: space-between;
+}
+.movement {
+    width: 33%;
+}
+.g2 {
+    width: 28%;
+}
+.regeneration {
+    width: 35%;
+}
+/* Characteristics */
+.characteristics > div {
+    display: flex;
+    justify-content: flex-start;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.characteristics > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);    
+}
+.characteristics > div:first-of-type {
+    border-bottom: 1px solid var(--boxColor);    
+    border-top: 3px solid var(--boxColor);
+}
+.characteristics > div:first-of-type > span:last-of-type {
+    margin-right: 10%;
+}
+.characteristics > div > span {
+    width: 33.33%;
+    text-align: center;
+}
+.characteristics > div > span:nth-of-type(2) {
+    border-right: 1px solid var(--boxColor);
+}
+.characteristics > div > .compact {
+    width: 90%;
+    display: flex;
+}
+.characteristics > div > .compact > button:first-of-type {
+    width: 66.66%;
+    border-right: 1px solid var(--boxColor);
+}
+.characteristics > div > .compact > button{
+    width: 33.33%;
+    border: 0px;
+}
+.characteristics > div > .compact > button:first-of-type > span {
+    padding: 0px;
+    width: 50%;
+}
+.characteristics > div > .compact > button:last-of-type > span {
+    padding: 0px;
     width: 100%;
 }
+.characteristics > div > .compact > button {
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    display: flex;
+}
+.characteristics > div > label > a {
+    margin-left: 5px;
+    font-size: 15px;
+    opacity: 0;
+}
+.characteristics > div:hover > label > a {
+    opacity: 1;
+}
+.characteristics > div > .extend {
+    width: 80%;
+    margin: 0 0 5px 10%;
+}
+.characteristics > div > .extend > h6 {
+    border-bottom: 1px solid var(--boxColor);
+    margin: 1px 0 0 0;
+    padding-bottom: 1px;
+}
+.characteristics > div > .extend  > label {
+    display: flex;
+    border-right: 1px solid var(--boxColor);
+    border-left: 1px solid var(--boxColor);
 
+}
+.characteristics > div > .extend  > label > span {
+    width: 45%;
+    text-align: start;
+    margin: 0 0 0 10%;
+}
+.characteristics > div > .extend > label > input {
+    width: 35%;
+    margin: 0 10% 0 0;
+}
+.characteristics > div > .extend > label:nth-of-type(4) {
+    border-top: 1px solid var(--boxColor);
+    padding-top: 3px;
+}
+.characteristics > div > .extend > label:nth-of-type(4) > span,
+.characteristics > div > .extend > label:nth-of-type(5) > span,
+.characteristics > div > .extend > label:nth-of-type(7) > span {
+    font-weight: bold;
+}
+.characteristics > div > .extend > label:nth-of-type(6) {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.characteristics > div > .extend > label:nth-of-type(7) {
+    border-bottom: 1px solid var(--boxColor);
+}
+/* Resistance */
+.resistances > div {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.resistances > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+}
+.resistances > div > span {
+    display: flex;
+    width: 33.33%;
+    justify-content: center;
+}
+.resistances > div > div {
+    display: flex;
+    width: 100%;
+    height: 20px;
+}
+.resistances > div > div > button {
+    width: 66.66%;
+    padding: 0px;
+    display: flex;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+}
+.resistances > div > div > button > span {
+    width: 50%;
+}
+.resistances > div > div > input {
+    width: 33%;
+}
+/* All Action Modifier */
+.modactions {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+    margin-bottom: 3px;
+    padding-top: 3px;
+}
+.modactions > label {
+    display: flex;
+    width: 100%;
+}
+.modactions > label:not(:last-of-type) {
+    margin-bottom: 5px;
+}
+.modactions > label > span:first-of-type {
+    display: flex;
+    font-weight: bold;
+    width: 65%;
+    margin: 0 0 0 5%;
+}
+.modactions > label > span:last-of-type {
+    width: 25%;
+}
+.modactions > label > input {
+    width: 25%;
+}
+/* Movement */
+.movement > div {
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+}
+.movement > div > label {
+    display : flex;
+    width: 100%;
+    padding: 0 10px 0 10px;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.movement > div > label:nth-of-type(5) {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.movement > div > label > span {
+    display: flex;
+    width: 55%;
+}
+.movement > div > label:nth-of-type(1) > span:last-of-type, 
+.movement > div > label:nth-of-type(5) > span:last-of-type, 
+.movement > div > label:nth-of-type(6) > span:last-of-type, 
+.movement > div > label:nth-of-type(7) > span:last-of-type, 
+.movement > div > label:nth-of-type(8) > span:last-of-type, 
+.movement > div > label > input {
+    width: 45%;
+    justify-content: center;
+}
+.movement > div > label:nth-of-type(5) > span,
+.movement > div > label:nth-of-type(6) > span,
+.movement > div > label:nth-of-type(7) > span,
+.movement > div > label:nth-of-type(8) > span {
+    font-weight: bold;
+}
+/* LP, Fatigue & Regen */
+.lifepoints > div:first-of-type ,
+.fatigue > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.lifepoints > div > label,
+.fatigue > div > label {
+    display: flex;
+    padding: 0 10px 0 10px;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.regeneration > label {
+    display: flex;
+    padding: 0 5px 0 5px;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.lifepoints > div > label > span,
+.fatigue > div > label > span {
+    display: flex;
+    width: 55%;
+}
+.lifepoints > h5 > label > a {
+    opacity: 0;
+}
+.lifepoints:hover > h5 > label > a {
+    opacity: 1;
+}
+.fatigue > h5 > label > a {
+    opacity: 0;
+}
+.fatigue:hover > h5 > label > a {
+    opacity: 1;
+}
+.regeneration > label > span {
+    display: flex;
+    width: 60%;
+}
+.lifepoints > div > label > input,
+.fatigue > div > label > input {
+    width: 45%;
+}
+.regeneration > label > input {
+    width: 40%;
+}
+.regeneration > label:nth-of-type(4) {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.lpCompact > label:nth-of-type(3),
+.fatCompact > label:nth-of-type(3) {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.lifepoints > label:nth-of-type(2) > span,
+.lifepoints > label:nth-of-type(3) > span,
+.fatigue > label:nth-of-type(2) > span,
+.fatigue > label:nth-of-type(3) > span,
+.regeneration > label:nth-of-type(4) > span,
+.regeneration > label:nth-of-type(5) > span,
+.regeneration > label:nth-of-type(6) > span,
+.regeneration > label:nth-of-type(7) > span {
+    font-weight: bold;
+}
+.regeneration > label:nth-of-type(1) {
+    border-top: 3px solid var(--boxColor);
+}
+.regeneration > label:nth-of-type(7) {
+    border-bottom: 3px solid var(--boxColor);
+}
+/* Attack, Block, & Dodge */
+.atkdef {
+    width: 30%;
+}
+.atkdef > h5 > label > a {
+    opacity: 0;
+}
+.atkdef:hover > h5 > label > a {
+    opacity: 1;
+}
+.atkdef > div > label {
+    display: flex;
+    padding: 0 10px 0 10px;
+}
+.atkdef > div > label > span {
+    width: 55%;
+    text-align: start;
+}
+.atkdef > div > label > input {
+    width: 45%;
+}
+.atkdef > div:last-of-type > label:last-of-type {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-weight: bold;
+}
+.atkdef > div > button {
+    margin: 0px;
+    width: 100%;
+    height: 25px;
+    border-radius: 0px;
+    border: 0px;
 
+}
+.atkdef > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.atkdef > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.atkdef > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+/* Advantages & Dis-advantages */
+.advdis > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.advdis > div:nth-of-type(2) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+.advantage-item,
+.disadvantage-item {
+    padding: 0 2.5%;
+}
+.advdis > div:last-of-type {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+}
+.advdis > div:first-of-type,
+.advantage-item > div:first-of-type,
+.disadvantage-item > div:first-of-type {
+    display: flex;
+    justify-content: flex-start;
+}
+.advdis > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+}
+.advdis > div:first-of-type > span:first-of-type {
+    width: 75.05%;
+    margin: 0 0 0 2.375%;
+}
+.advdis > div:first-of-type > span:nth-of-type(2){
+    width: 14.25%;
+    margin: 0 0 0 0.95%;
+}
+.advdis > div:last-of-type {
+    display: flex;
+    place-content: space-between;
+}
+.advantage-item > div > input:first-of-type,
+.advantage-item > div > span:first-of-type,
+.disadvantage-item > div > input:first-of-type,
+.disadvantage-item > div > span:first-of-type {
+    width: 79%;
+    margin: 0px;
+}
+.advantage-item > div > input:nth-of-type(2),
+.advantage-item > div > span:nth-of-type(2),
+.disadvantage-item > div > input:nth-of-type(2),
+.disadvantage-item > div > span:nth-of-type(2) {
+    width: 15%;
+    margin: 0 0 0 1%;
+}
+.advantage-item > div > a,
+.disadvantage-item > div > a {
+    width: 5%;
+    font-size: 15px;
+}
+.advantage-item > div > a,
+.disadvantage-item > div > a {
+    opacity: 0;
+}
+.advantage-item > div:hover > a,
+.disadvantage-item > div:hover > a {
+    opacity: 1;
+}
+.advdis > div > div > textarea {
+    margin: 3px 0 0 0;
+}
+.advdis > div:nth-of-type(2) > div:nth-child(2n) {
+    background: #3d435e;
+}
+/* Secondary Abilities Drawing */
+.secondary > div > div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.secondary > div:first-of-type > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.secondary > div:last-of-type > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+.secondary > div > div:first-of-type {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+}
+.secondary > div > div > a {
+    width: 5%;
+    font-size: 15px;
+    opacity: 0;
+}
+.secondary > div > div:hover > a {
+    opacity: 1;
+}
+.secondary > div > div:first-of-type > div {
+    display: flex;
+    justify-content: space-between;
+    width: 35%;
+}
+.secondary > div > div:first-of-type > div > span:first-of-type {
+    padding: 0 0 0 4%;
+}
+.secondary > div > div:first-of-type > div > span:last-of-type,
+.secondary > div > div > button > span:nth-of-type(2) {
+    padding: 0 10% 0 0;
+}
+.secondary > div > div:first-of-type > span,
+.secondary > div > div > input {
+    width: 11.5%;
+    margin: 0 0 0 1%;
+}
+.secondary > div > div:first-of-type > span:nth-of-type(5),
+.secondary > div > div > span {
+    width: 9%;
+    margin: 0 0 0 1%;
+}
+.secondary > div > div > button {
+    height: 20px;
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+}
+.secondary > div > .extend {
+    padding-left: 15px;
+}
+.secondary > div > .extend  > span:first-of-type {
+    width: 10%;
+    text-align: end;
+}
+.secondary > div > .extend  > span:nth-of-type(2) {
+    width: 10%;
+    text-align: end;
+}
+.secondary > div > .extend  > span:last-of-type {
+    width: 22%;
+    text-align: end;
+    padding: 0 0 0 5%;
+}
+.secondary > div > .extend > input[type="number"] {
+    width: 12%;
+}
+.secondary > div > .extend > input[type="number"]:last-of-type {
+    width: 8%;
+}
+.secondary > div > .extend > label {
+    padding-right: 15px;
+    padding-left: 15px;
+}
 
 
 
@@ -305,11 +947,6 @@
     border-bottom: 5px solid black;
     margin: 3px 0 3px 0;
 }
-
-
-
-
-
 button {
     line-height: normal;
 }
@@ -347,12 +984,7 @@ h3 {
 .normalRoll {
     color: black;
 }
-.physical {
-    text-shadow: 1px 1px 1px #00CC00;
-}
-.mental {
-    text-shadow: 1px 1px 1px #0000CC;
-}
+
 .armorpenalty {
     text-shadow: 1px 1px 1px lightcoral;
 }
@@ -453,697 +1085,16 @@ h3 {
 .editor {
     height: 200px;
 }
-/* 
-    -------------
-    Header Layout
-    -------------
-*/
-.abfalter .sheet-header {
-    flex: 0 0 75px;
-    overflow: hidden;
-    width: 100%;
-    min-width: 878px;
-}
-.charInfo {
-    display: flex;
-}
-.charInfo > img {
-    background-image: url(../img/animaLogo.png);
-    border: none;
-    width: 15%;
-}
-.charInfo > div > div,
-.charInfo > div > div > div,
-.charInfo > div > div > div > label {
-    display:flex;
-    justify-content: flex-start;
-}
-.charInfo > div > div > div > label > span, 
-.charInfo > div > div > div > label > input {
-    font-size: 14px;
-    height: 22px;
-}
-.charInfo > div > div > div {
-    width: 33%;
-}
-.charInfo > div > div > div:not(:first-of-type) {
-    margin: 0 0.5% 0 0;
-}
-.charInfo > div > div > div > label {
-    width: 50%;
-}
-.charInfo > div > div:first-of-type > div:first-of-type > label:first-of-type,
-.charInfo > div > div:nth-of-type(2) > div > label {
-    width: 100%;
-}
-.charInfo > div > div:first-of-type > div:first-of-type > label:first-of-type > span,
-.charInfo > div > div:nth-of-type(2) > div > label > span {
-    width: 28%;
-}
-.charInfo > div > div:first-of-type > div:first-of-type > label:first-of-type > input,
-.charInfo > div > div:nth-of-type(2) > div > label > input{
-    width: 69.5%;
-    margin: 0 2.5% 0 0;
-}
-.charInfo > div > div > div > label > span {
-    width: 56%;
-}
-.charInfo > div > div > div > label > input {
-    width: 39%;
-    margin: 0 5% 0 0;
-}
-/*
-    ------------
-    Menu Drawing
-    ------------
-*/
-.sheet-tabs > ul > li > .active {
-    background-color: #b5b3f3;
-    transform: inherit;
-}
-.abfalter .tabs .item.active {
-    text-decoration: underline;
-    text-shadow: none;
-}
-.abfalter .tabs .item {
-    font-weight: bold;
-}
-.navTabsYes {
-    max-height: 37px;
-    min-width: 878px;
-}
-.sheet-tabs > ul {
-    transform: skew(-25deg);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    width: 90%;
-    display: flex;
-    justify-content: space-evenly;
-}
-.sheet-tabs > ul > li {
-    background-color: #c4c2b7;
-    float: left;
-    border-right: 1px solid #eee;
-    height: 35px;
-    width: 12%;
-}
-.sheet-tabs > ul > li:hover {
-    background-color: #d8d6ff;
-}
-.sheet-tabs > ul > li:first-child > .active,
-.sheet-tabs > ul > li:first-child {
-    border-radius: 7px 0 0 7px;
-}
-.sheet-tabs > ul > li:last-child > .active,
-.sheet-tabs > ul > li:last-child {
-    border-right: none;
-    border-radius: 0 7px 7px 0;
-}
-.sheet-tabs > ul > li > a { 
-    display:block;
-}
-.sheet-tabs > ul > li > a > span { 
-    transform: skew(25deg);
-    text-shadow: none;
-}
-/*
-    **************
-    --------------
-    GENERAL LAYOUT
-    --------------
-    **************
-*/
-/*
-    -------------------
-    General Page Layout
-    -------------------
-*/
-.general {
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-between;
-    min-width: 878px;
-}
-.g1,
-.secondary,
-.characteristics,
-.resistances {
-    width: 49%
-}
-.g1 > div:first-of-type {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-.g1 > div:nth-of-type(2),
-.g1 > div:nth-of-type(3) {
-    display: flex;
-    justify-content: space-between;
-}
-.movement {
-    width: 33%;
-}
-.g2 {
-    width: 28%;
-}
-.regeneration {
-    width: 35%;
-}
-/*
-    ---------------
-    Characteristics
-    ---------------
-*/
-.characteristics > div {
-    display: flex;
-    justify-content: flex-start;
-}
-.characteristics > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-}
-.characteristics > div:first-of-type > span:last-of-type {
-    margin-right: 12%;
-}
-.characteristics > div > span {
-    width: 33.33%;
-    text-align: center;
-}
-.characteristics > div > span:nth-of-type(2) {
-    border-right: 1px solid black;
-}
-.characteristics > div > .compact {
-    width: 88%;
-    display: flex;
-}
-.characteristics > div > .compact > button:first-of-type {
-    width: 66.66%;
-    border-right: 1px solid 
-}
-.characteristics > div > .compact > button{
-    width: 33.33%;
-    border: 0px;
-}
-.characteristics > div > .compact > button:first-of-type > span {
-    padding: 0px;
-    width: 50%;
-}
-.characteristics > div > .compact > button:last-of-type > span {
-    padding: 0px;
-    width: 100%;
-}
-.characteristics > div > .compact > button {
-    padding: 0px;
-    margin: 0px;
-    border-radius: 0px;
-    display: flex;
-}
-.characteristics > div > label > a{
-    margin-left: 5px;
-    font-size: 15px;
-    opacity: 0;
-}
-.characteristics > div:hover > label > a {
-    opacity: 1;
-}
-.characteristics > div > .extend {
-    margin-bottom: 5px;
-    width: 88%;
-}
-.characteristics > div > .extend > h3 {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-    padding-bottom: 3px;
-}
-.characteristics > div > .extend  > label {
-    display: flex
-}
-.characteristics > div > .extend  > label > span {
-    width: 45%;
-    text-align: start;
-    margin: 0 0 0 10%;
-}
-.characteristics > div > .extend > label > input {
-    width: 35%;
-    margin: 0 10% 0 0;
-}
-.characteristics > div > .extend > label:nth-of-type(4) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    margin-top: 3px;
-    padding-top: 3px;
-}
-.characteristics > div > .extend > label:nth-of-type(4) > span,
-.characteristics > div > .extend > label:nth-of-type(5) > span,
-.characteristics > div > .extend > label:nth-of-type(7) > span {
-    font-weight: bold;
-}
-.characteristics > div > .extend > label:nth-of-type(6) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-}
-/* 
-    ----------
-    Resistance
-    ----------
-*/
-.resistances > div {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
 
-.resistances > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-}
-.resistances > div > span {
-    display: flex;
-    width: 33.33%;
-    justify-content: center;
-}
-.resistances > div > div {
-    display: flex;
-    width: 100%;
-    height: 20px;
-}
-.resistances > div > div > button {
-    width: 66.66%;
-    padding: 0px;
-    display: flex;
-    margin: 0px;
-    border-radius: 0px;
-    border: 0px;
-}
-.resistances > div > div > button > span {
-    width: 50%;
-}
-.resistances > div > div > input {
-    width: 33%;
-}
-/*
-    -------------------
-    All Action Modifier
-    -------------------
-*/
-.modactions {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-top: 3px;
-}
-.modactions > label {
-    display: flex;
-}
-.modactions > label:not(:last-of-type) {
-    margin-bottom: 5px;
-}
-.modactions > label > span {
-    display: flex;
-    font-weight: bold;
-    width: 70%;
-}
-.modactions > label > input {
-    width: 25%;
-}
-/*
-    --------
-    Movement
-    --------
-*/
-.movement > label {
-    display : flex;
-    padding: 0 10px 0 10px;
-}
-.movement > label:nth-of-type(5) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-}
-.movement > label > span {
-    display: flex;
-    width: 55%;
-}
-.movement > label > input {
-    width: 45%;
-}
-.movement > label:nth-of-type(5) > span,
-.movement > label:nth-of-type(6) > span,
-.movement > label:nth-of-type(7) > span,
-.movement > label:nth-of-type(8) > span {
-    font-weight: bold;
-}
-/*
-    -------------------
-    LP, Fatigue & Regen
-    -------------------
-*/
 
-.lifepoints > label,
-.lifepoints > div > label,
-.fatigue > label,
-.fatigue > div > label,
-.regeneration > label {
-    display : flex;
-    padding: 0 10px 0 10px;
-}
-.lifepoints > label > span,
-.lifepoints > div > label > span,
-.fatigue > label > span,
-.fatigue > div > label > span {
-    display: flex;
-    width: 55%;
-}
-.lifepoints > h2 > label > a {
-    opacity: 0;
-}
-.lifepoints:hover > h2 > label > a {
-    opacity: 1;
-}
-.fatigue > h2 > label > a {
-    opacity: 0;
-}
-.fatigue:hover > h2 > label > a {
-    opacity: 1;
-}
-.regeneration > label > span {
-    display: flex;
-    width: 60%;
-}
-.lifepoints > label > input,
-.lifepoints > div > label > input,
-.fatigue > label > input,
-.fatigue > div > label > input {
-    width: 45%;
-}
-.regeneration > label > input {
-    width: 40%;
-}
-.lifepoints > label:nth-of-type(3),
-.regeneration > label:nth-of-type(4),
-.fatigue > label:nth-of-type(3) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-}
-.lifepoints > label:nth-of-type(2) > span,
-.lifepoints > label:nth-of-type(3) > span,
-.fatigue > label:nth-of-type(2) > span,
-.fatigue > label:nth-of-type(3) > span,
-.regeneration > label:nth-of-type(4) > span,
-.regeneration > label:nth-of-type(5) > span,
-.regeneration > label:nth-of-type(6) > span,
-.regeneration > label:nth-of-type(7) > span {
-    font-weight: bold;
-}
-/*
-    ----------------------
-    Attack, Block, & Dodge
-    ----------------------
-*/
-.atkdef {
-    width: 30%;
-}
-.atkdef > h2 > label > a {
-    opacity: 0;
-}
-.atkdef:hover > h2 > label > a {
-    opacity: 1;
-}
-.atkdef > label,
-.atkdef > div > label {
-    display: flex;
-    padding: 0 10px 0 10px;
-}
-.atkdef > label > span,
-.atkdef > div > label > span {
-    width: 55%;
-    text-align: start;
-}
-.atkdef > label > input,
-.atkdef > div > label > input {
-    width: 45%;
-}
-.atkdef > label:last-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    font-weight: bold;
-}
-.atkdef > button {
-    margin: 0px;
-    width: 100%;
-    height: 25px;
-    border-radius: 0px;
-    border: 0px;
-}
-.atkdef > div:last-of-type {
-    display: grid;
-    justify-content: center;
-    padding-top: 3px;
-    padding-bottom: 3px;
-}
-/*
-    ----------
-    Initiative
-    ----------
-*/
-.initiative {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-.initiative > div {
-    display: flex;
-    width: 94%;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-.initiative > button {
-    display: flex;
-    width: 94%;
-    justify-content: space-between;
-    height: 25px;
-    margin: 0px;
-    padding-right: 5%;
-    border: 0px;
-    align-items: center;
-}
-.initiative > label > a {
-    margin-left: -19px;
-    font-size: 19px;
-    opacity: 0;
-}
-.initiative:hover > label > a {
-    opacity: 1;
-}
-.initiative > div > input {
-    font-size: 15px;
-}
-.initiative > div > label {
-    display: flex;
-    width: 19%;
-    flex-wrap: wrap;
-}
-.initiative > div > label > span {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin-top: 3px;
-}
-.initiative > div > label > input {
-    width: 100%;
-}
-/*
-    ---------------------------
-    Advantages & Dis-advantages
-    ---------------------------
-*/
-.advdis > div:nth-of-type(2) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
-}
-.advdis > div:first-of-type,
-.advantage-item > div:first-of-type,
-.disadvantage-item > div:first-of-type {
-    display: flex;
-    justify-content: flex-start;
-}
-.advdis > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-    padding-bottom: 3px;
-}
-.advdis > div:first-of-type > span:first-of-type {
-    width: 75.05%;
-    margin: 0 0 0 2.375%;
-}
-.advdis > div:first-of-type > span:nth-of-type(2){
-    width: 14.25%;
-    margin: 0 0 0 0.95%;
-}
-.advdis > div:last-of-type {
-    display: flex;
-    place-content: space-between;
-}
-.advantage-item > div > input:first-of-type,
-.advantage-item > div > span:first-of-type,
-.disadvantage-item > div > input:first-of-type,
-.disadvantage-item > div > span:first-of-type {
-    width: 79%;
-    margin: 0px;
-}
-.advantage-item > div > input:nth-of-type(2),
-.advantage-item > div > span:nth-of-type(2),
-.disadvantage-item > div > input:nth-of-type(2),
-.disadvantage-item > div > span:nth-of-type(2) {
-    width: 15%;
-    margin: 0 0 0 1%;
-}
-.advantage-item > div > a,
-.disadvantage-item > div > a {
-    width: 5%;
-    font-size: 15px;
-}
-.advantage-item > div > a,
-.disadvantage-item > div > a {
-    opacity: 0;
-}
-.advantage-item > div:hover > a,
-.disadvantage-item > div:hover > a {
-    opacity: 1;
-}
-.advdis > div > div > textarea {
-    margin: 3px 0 0 0;
-}
-/*
-    -------------------
-    All Action Modifier
-    -------------------
-*/
-.aamContainer {
-    margin: 0 0 5px 0;
-}
-.aamContainer > div:first-of-type {
-    border: none !important;
-}
-.aamContainer > div > label {
-    display: flex;
-    width: 50%;
-}
-.aamContainer > div > label > span {
-    width: 48%;
-    padding: 0 2% 0 0;
-}
-.aamContainer > div > label > input {
-    width: 40%;
-}
-/*
-    ---------------------------
-    Secondary Abilities Drawing
-    ---------------------------
-*/
-.secondary > div > div {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-.secondary > div > div:first-of-type {   
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-}
-.secondary > div > div > a {
-    width: 5%;
-    font-size: 15px;
-    opacity: 0;
-}
-.secondary > div > div:hover > a {
-    opacity: 1;
-}
-.secondary > div > div:first-of-type > div {
-    display: flex;
-    justify-content: space-between;
-    width: 35%;
-}
-.secondary > div > div:first-of-type > div > span:first-of-type {
-    padding: 0 0 0 4%;
-}
-.secondary > div > div:first-of-type > div > span:last-of-type,
-.secondary > div > div > button > span:nth-of-type(2) {
-    padding: 0 10% 0 0;
-}
-.secondary > div > div:first-of-type > span,
-.secondary > div > div > input {
-    width: 11.5%;
-    margin: 0 0 0 1%;
-}
-.secondary > div > div:first-of-type > span:nth-of-type(5),
-.secondary > div > div > span {
-    width: 9%;
-    margin: 0 0 0 1%;
-}
-.secondary > div > div > button {
-    height: 20px;
-    width: 35%;
-    display: flex;
-    justify-content: space-between;
-    margin: 0px;
-    border-radius: 0px;
-    border: 0px;
-}
-.secondary > div > .extend {
-    padding-left: 15px;
-}
-.secondary > div > .extend  > span:first-of-type {
-    width: 10%;
-    text-align: end;
-}
-.secondary > div > .extend  > span:nth-of-type(2) {
-    width: 10%;
-    text-align: end;
-}
-.secondary > div > .extend  > span:last-of-type {
-    width: 22%;
-    text-align: end;
-    padding: 0 0 0 5%;
-}
-.secondary > div > .extend > input[type="number"] {
-    width: 12%;
-}
-.secondary > div > .extend > input[type="number"]:last-of-type {
-    width: 8%;
-}
-.secondary > div > .extend > label {
-    padding-right: 15px;
-    padding-left: 15px;
-}
+
+
+
+
+
+
+
+
 /*
     **************
     --------------
@@ -3870,7 +3821,7 @@ h3 {
 .spellContentCont > div:nth-of-type(n + 3) {
     border-image: url(../img/border.png) 10 stretch;
     border-top: 5px solid black;
-    margin: 1px 0 px 0;
+    margin: 1px 0 3px 0;
     padding: 1px 0 3px 0;
 }
 /*

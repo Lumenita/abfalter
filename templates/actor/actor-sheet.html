@@ -12,102 +12,122 @@
                     <div class="SubHeaderLeft">
                         <div class="subHeaderRow1">
                             <div>
+                                {{#if data.toggles.actorHeaderInfo1}}
                                 <input type="text" name="name" value="{{actor.name}}" placeholder="Name" />
+                                {{else}}
+                                <span>{{actor.name}}</span>
+                                {{/if}}
+                                <a class="toggleBoolean {{#if data.toggles.actorHeaderInfo1}}showOpacity{{/if}}" data-label="data.toggles.actorHeaderInfo1" data-ability="{{data.toggles.actorHeaderInfo1}}"><i class="{{#if data.toggles.actorHeaderInfo1}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                             </div>
                         </div>
 
                         <div class="subHeaderRow2">
+                            {{#if data.toggles.actorHeaderInfo1}}
                             <label> <input type="text" name="data.gender" value="{{data.gender}}" placeholder="Gender" /> </label>
                             <label> <input type="text" name="data.race" value="{{data.race}}" placeholder="Race" /> </label>
                             <label> <input type="text" name="data.class" value="{{data.class}}" placeholder="Class" /> </label>
-                            <label> <input type="number" name="data.level" value="{{data.level}}" readonly placeholder="Level" /> </label>
+                            <label> <input type="number" name="data.level" value="{{data.level}}" readonly /> </label>
+                            {{else}}
+                            <span>{{data.gender}} | {{data.race}} | {{data.class}} | Level: {{data.level}} </span>
+                            {{/if}}
+                        </div>
+
+                        <div class="subHeaderRow2Half">
+                            {{#if data.toggles.actorHeaderInfo1}}
+                            <label> <input type="text" name="data.height" value="{{data.height}}" placeholder="Height" /> </label>
+                            <label> <input type="text" name="data.weight" value="{{data.weight}}" placeholder="Weight" /> </label>
+                            <label> <input type="text" name="data.age" value="{{data.age}}" placeholder="Age" /> </label>
+                            {{else}}
+                            <span>Height: {{data.height}} | Weight: {{data.weight}} | Age: {{data.age}} </span>
+                            {{/if}}
                         </div>
 
                         <div class="subHeaderRow3">
-                            <label> <input type="number" name="data.experience" value="{{data.experience}}" placeholder="0" /> </label>
+                            <span>Presence: {{data.presence}} | DP: {{data.dp}}</span>
+                            <label> <input type="number" name="data.experience" value="{{data.experience}}" placeholder="XP" /> </label>
                             <span> / </span>
-                            <label> <input type="number" name="data.nextlevel" value="{{data.nextlevel}}" readonly /> <span> Exp </span> </label>
+                            <span> {{data.nextlevel}} </span>
+                            <span> Exp </span>
                             <label class="levelUpBox">
-                                <a> <i class="fas fa-caret-down"></i> </a>
+                                <a> <i class="fas fa-cog"></i> </a>
                             </label>
-                            <label> <input type="number" name="data.dp" value="{{data.dp}}" readonly /> </label>
-                            <span> DP </span>
                         </div>
                     </div>
 
                     <div class="SubHeaderRight">
+                        <div class="subRightHeader1">
+                            <div>
+                                <button>
+                                    Rest
+                                </button>
+                            </div>
+                            <div>
+                                <button>
+                                    Meditation
+                                </button>
+                            </div>
+                            {{#if data.toggles.actorHeaderInfo1}}
+                            <label> <input type="text" name="data.appearance" value="{{data.appearance}}" placeholder="Appearance" /> </label>
+                            <label> <input type="text" name="data.size" value="{{data.size}}" placeholder="Size" /> </label>
+                            {{else}}
+                            <span>Size: {{data.size}} | Appear: {{data.appearance}} </span>
+                            {{/if}}
+                        </div>
 
+                        <div class="subRightHeader2">
+                            <div class="subRightLeft">
+                                <h5>
+                                    {{localize "abfalter.generalTab.initiative"}}
+                                    <label>
+                                        <a class="toggleBoolean {{#if data.initiative.status}}showOpacity{{/if}}" data-label="data.initiative.status" data-ability="{{data.initiative.status}}"><i class="{{#if data.initiative.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                                    </label>
+                                </h5>
+                                {{#if data.initiative.status}}
+                                <div class="headerIniDets">
+                                    <label> <span> {{localize "abfalter.armoryTab.armor"}} </span> <input type="number" name="data.totalNatPen" value="-{{data.totalNatPen}}" readonly /> </label>
+                                    <label> <span> {{localize "abfalter.generalTab.weapon"}} </span> <input type="number" name="data.wepFinSpd" value="{{data.wepFinSpd}}" readonly /> </label>
+                                    <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="data.inibonus" value="{{data.inibonus}}" readonly /> </label>
+                                    <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.initiative.spec" value="{{data.initiative.spec}}" /> </label>
+                                </div>
+                                {{else}}
+                                <div class="headerIni">
+                                    <span> Unarmed </span>
+                                    <div>
+                                        <button>
+                                            <span> 55 </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                {{/if}}
+                            </div>
+
+                            <div class="subRightMid">
+                                <h5>
+                                    Shield
+                                </h5>
+                                <div>
+                                    <span> shield max: x </span>
+                                    <span> actual: 0 </span>
+                                </div>
+                            </div>
+
+                            <div class="subRightRight">
+                                <h5>
+                                    AAM
+                                </h5>
+                                <div class="headerAam">
+                                    <label><span>{{localize "abfalter.basicInfo.base"}}</span><input type="number" name="data.aam" value="{{data.aam}}" /></label>
+                                    <label><span>{{localize "abfalter.basicInfo.boons"}}</span><input type="number" name="data.aamBoon" value="{{data.aamBoon}}" /></label>
+                                    <label><span>{{localize "abfalter.basicInfo.critical"}}</span><input type="number" name="data.aamCrit" value="{{data.aamCrit}}" /></label>
+                                    <label><span>AAM: </span> <span>{{data.aamFinal}} </span></label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-
-
-                <div class="subHeaderRow4">
-                    <div class="agiChars">
-
-                    </div>
-                    <div class="conChars">
-
-                    </div>
-                    <div class="strChars">
-
-                    </div>
-                    <div class="agiChars">
-
-                    </div>
-                    <div class="conChars">
-
-                    </div>
-                    <div class="strChars">
-
-                    </div>
-                    <div class="agiChars">
-
-                    </div>
-                    <div class="conChars">
-
-                    </div>
-
                 </div>
             </div>
         </div>
-
-        <div class="actorHeader2">
-
-        </div>
-
     </header>
-
-
-
-
-
-    <!--
-    <header class="sheet-header">
-        <div class="charInfo">
-            <img src="systems/abfalter/img/animaLogo.png" />
-            <div>
-                <div>
-                    <div>
-                        <label> <span> Height </span> <input type="text" name="data.height" value="{{data.height}}" /> </label>
-                        <label> <span> Weight </span> <input type="text" name="data.weight" value="{{data.weight}}" /> </label>
-                    </div>
-                    <div>
-                        <label> <span> Appear. </span> <input type="number" name="data.appearance" value="{{data.appearance}}" /> </label>
-                        <label> <span> Age </span> <input type="text" name="data.age" value="{{data.age}}" /> </label>
-                        <label> <span> Size </span> <input type="number" name="data.size" value="{{data.size}}" /> </label>
-                    </div>
-                    <div>
-                            <label> <span> Presence </span> <input type="number" name="data.presence" value="{{data.presence}}" readonly /> </label>
-                    </div>
-                    <div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    -->
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs navTabsYes" data-group="primary">
@@ -127,32 +147,32 @@
     <section class="sheet-body">
         {{!-- Sheet Location Tab --}}
         <div class="tab general" data-group="primary" data-tab="general">
-            {{> systems/abfalter/templates/actor/parts/general.html }}
+{{> systems/abfalter/templates/actor/parts/general.html }}
         </div>
         <div class="tab bio" data-group="primary" data-tab="bio">
-            {{> systems/abfalter/templates/actor/parts/bio.html }}
+{{> systems/abfalter/templates/actor/parts/bio.html }}
         </div>
         <div class="tab magic" data-group="primary" data-tab="magic">
-            {{> systems/abfalter/templates/actor/parts/magic.html }}
+{{> systems/abfalter/templates/actor/parts/magic.html }}
         </div>
         <div class="tab psychic" data-group="primary" data-tab="psychic">
-            {{> systems/abfalter/templates/actor/parts/psychic.html }}
+{{> systems/abfalter/templates/actor/parts/psychic.html }}
         </div>
         <div class="tab ki" data-group="primary" data-tab="ki">
-            {{> systems/abfalter/templates/actor/parts/ki.html }}
+{{> systems/abfalter/templates/actor/parts/ki.html }}
         </div>
         <div class="tab armory" data-group="primary" data-tab="armory">
-            {{> systems/abfalter/templates/actor/parts/armory.html }}
+{{> systems/abfalter/templates/actor/parts/armory.html }}
         </div>
         <div class="tab background" data-group="primary" data-tab="background">
-            {{> systems/abfalter/templates/actor/parts/background.html }}
+{{> systems/abfalter/templates/actor/parts/background.html }}
         </div>
         <div class="tab settings" data-group="primary" data-tab="settings">
-            {{> systems/abfalter/templates/actor/parts/settings.html }}
+{{> systems/abfalter/templates/actor/parts/settings.html }}
         </div>
     </section>
     {{else}}
-    {{> systems/abfalter/templates/actor/parts/bio.html }}
+{{> systems/abfalter/templates/actor/parts/bio.html }}
     {{/if}}
 </form>
 

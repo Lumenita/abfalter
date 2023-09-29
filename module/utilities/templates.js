@@ -2,6 +2,9 @@ export const templates = {
     CustomHotBar: 'systems/abfalter/templates/autoCombat/customMacroBar.html',
     dialog: {
         generic: 'systems/abfalter/templates/dialogues/generic.html',
+        edits: {
+            header: 'systems/abfalter/templates/editDetails/headerEdit.html'
+        },
         combat: {
             combatAttackDialog: {
                 main: 'systems/abfalter/templates/autoCombat/attackCombatDialog.html',
