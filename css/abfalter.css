@@ -2682,7 +2682,10 @@ h3 {
     text-align: center;
 }
 
-
+.kiTechUse,
+.kitechType {
+    display: flex;
+}
 
 .kitechType > span,
 .kiTechUse > span,
@@ -2690,9 +2693,18 @@ h3 {
     width: 10%;
 }
 
-.kitechType {
-    display: flex;
+.kiTechUse > select {
+    width: 20%;
 }
+
+.techExpand {
+    display: flex;
+    width: 70%;
+}
+.techExpand > span {
+    width: 40%;
+}
+
 
 /*
     *************

@@ -348,6 +348,9 @@ export default class abfalterActor extends Actor {
 
         //Initiative
         data.iniBase = Math.floor(data.stats.Dexterity.mod + data.stats.Agility.mod + 20); // Work here - initiative due to aam penalty
+        if (data.aamFinal < 0) {
+            data.iniBase = Math.floor(data.iniBase + ~~(data.aamFinal / 2));
+        }
 
 
         //Ki Pool
