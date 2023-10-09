@@ -1,12 +1,12 @@
 ﻿<div class="tab magic">
     <div>
         <div class="mproj">
-            <h2>
+            <h5>
                 {{localize "abfalter.magicTab.mproj"}}
                 <label class="expand-box">
                     <a class="toggleBoolean {{#if data.mproj.status}}showOpacity{{/if}}" data-label="data.mproj.status" data-ability="{{data.mproj.status}}"><i class="{{#if data.mproj.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
-            </h2>
+            </h5>
             {{#if data.mproj.status}}
             <div>
                 <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.mproj.base" value="{{data.mproj.base}}" /> </label>
@@ -38,8 +38,6 @@
                     <span> {{localize "abfalter.magicTab.offensive"}} </span> <span> {{data.mprojfinaloff}} </span>
                 </button>
                 {{/if}}
-                <!--
-    -->
                 {{#if data.toggles.magicDefModule}}
                 {{#if data.toggles.magicDodgeModule}}
                 <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll" data-ability="{{data.combatstats.dodMastery}}">
@@ -56,7 +54,7 @@
                 </button>
                 {{/if}}
             </div>
-            <h3> {{localize "abfalter.magicTab.mtheory"}} </h3>
+            <h6> {{localize "abfalter.magicTab.mtheory"}} </h6>
             <div class="csSelect2">
                 <label>
                     <select name="data.mproj.mtheory" data-dtype="String">
@@ -73,15 +71,15 @@
         </div><!--Magic Projection-->
 
         <div class="maccu">
-            <h2> {{localize "abfalter.magicTab.maccu"}} </h2>
+            <h5> {{localize "abfalter.magicTab.maccu"}} </h5>
             <div>
                 <div class="maccu2">
-                    <h3>
+                    <h6>
                         {{localize "abfalter.magicTab.maccua"}}
                         <label class="expand-box">
                             <a class="toggleBoolean {{#if data.maccu.status}}showOpacity{{/if}}" data-label="data.maccu.status" data-ability="{{data.maccu.status}}"><i class="{{#if data.maccu.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </label>
-                    </h3>
+                    </h6>
                     {{#if data.maccu.status}}
                     <div>
                         <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.maccu.base" value="{{data.maccu.base}}" /> </label>
@@ -103,12 +101,12 @@
                     </div>
                 </div><!--Accumulation-->
                 <div class="mregen2">
-                    <h3>
+                    <h6>
                         {{localize "abfalter.magicTab.maccur"}}
                         <label class="expand-box">
                             <a class="toggleBoolean {{#if data.mregen.status}}showOpacity{{/if}}" data-label="data.mregen.status" data-ability="{{data.mregen.status}}"><i class="{{#if data.mregen.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </label>
-                    </h3>
+                    </h6>
                     {{#if data.mregen.status}}
                     <div>
                         <label> <span> {{localize "abfalter.magicTab.regenmult"}} </span> <input type="number" name="data.mregen.regenmult" value="{{data.mregen.regenmult}}" /> </label>
@@ -128,12 +126,12 @@
         </div><!--Magic Accumulation-->
 
         <div class="zeon">
-            <h2>
+            <h5>
                 {{localize "abfalter.magicTab.zeon"}}
                 <label class="expand-box">
                     <a class="toggleBoolean {{#if data.zeon.status}}showOpacity{{/if}}" data-label="data.zeon.status" data-ability="{{data.zeon.status}}"><i class="{{#if data.zeon.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
-            </h2>
+            </h5>
             {{#if data.zeon.status}}
             <div>
                 <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.zeon.base" value="{{data.zeon.base}}" /> </label>
@@ -146,7 +144,7 @@
             <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.zeonfinal" value="{{data.zeonfinal}}" readonly /> </label>
             <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.zeon.actual" value="{{data.zeon.actual}}" /> </label>
             <div class="minnate">
-                <h3> {{localize "abfalter.magicTab.minnate"}} </h3>
+                <h6> {{localize "abfalter.magicTab.minnate"}} </h6>
                 <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.bonus"}} </span>
@@ -165,12 +163,12 @@
         <div>
             <div class="s2">
                 <div class="mlevels">
-                    <h2>
+                    <h5>
                         {{localize "abfalter.magicTab.mLevels"}}
                         <label class="expand-box">
                             <a class="toggleBoolean {{#if data.mlevel.status}}showOpacity{{/if}}" data-label="data.mlevel.status" data-ability="{{data.mlevel.status}}"><i class="{{#if data.mlevel.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </label>
-                    </h2>
+                    </h5>
                     {{#if data.mlevel.status}}
                     <div>
                         <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.mlevel.base" value="{{data.mlevel.base}}" /> </label>
@@ -184,7 +182,7 @@
                 </div>
 
                 <div class="spellPath">
-                    <h2> {{localize "abfalter.magicTab.spellPath"}} </h2>
+                    <h5> {{localize "abfalter.magicTab.spellPath"}} </h5>
                     <div>
                         <span> {{localize "abfalter.magicTab.spellPath"}} </span>
                         <span> {{localize "abfalter.basicInfo.level"}} </span>
@@ -214,7 +212,7 @@
             </div>
 
             <div class="summoning">
-                <h2> {{localize "abfalter.magicTab.summoning"}} </h2>
+                <h5> {{localize "abfalter.magicTab.summoning"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.ability"}} </span>
                     <span> {{localize "abfalter.basicInfo.base"}} </span>
@@ -281,7 +279,7 @@
             </div>
 
             <div class="turnDayMaint">
-                <h2> {{localize "abfalter.magicTab.turnMaint"}} </h2>
+                <h5> {{localize "abfalter.magicTab.turnMaint"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.name"}} </span>
                     <span> {{localize "abfalter.magicTab.spellCost"}} </span>
@@ -322,7 +320,7 @@
             </div>
 
             <div class="turnDayMaint">
-                <h2> {{localize "abfalter.magicTab.dailyMaint"}} </h2>
+                <h5> {{localize "abfalter.magicTab.dailyMaint"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.name"}} </span>
                     <span> {{localize "abfalter.magicTab.spellCost"}} </span>
@@ -365,7 +363,7 @@
 
         <div>
             <div class="spells">
-                <h2> {{localize "abfalter.magicTab.spellBook"}} </h2>
+                <h5> {{localize "abfalter.magicTab.spellBook"}} </h5>
                 <div class="{{#if data.itemToggle.spell}}item-list{{/if}}">
                     {{#each spells as |spell id|}}
                     <div class="spell-item item normal-item" data-item-id="{{spell._id}}">
@@ -499,12 +497,12 @@
             </div>
 
             <div class="metaMagic">
-                <h2> {{localize "abfalter.magicTab.metaMagic"}} </h2>
+                <h5> {{localize "abfalter.magicTab.metaMagic"}} </h5>
                 <textarea name="data.metaMagic.info">{{data.metaMagic.info}}</textarea>
             </div>
 
             <div class="invocations">
-                <h2> {{localize "abfalter.magicTab.invocation"}} </h2>
+                <h5> {{localize "abfalter.magicTab.invocation"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.name"}} </span>
                     <span> {{localize "abfalter.basicInfo.cost"}} </span>
@@ -539,7 +537,7 @@
             </div>
 
             <div class="incarnations">
-                <h2> {{localize "abfalter.magicTab.incarnation"}} </h2>
+                <h5> {{localize "abfalter.magicTab.incarnation"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.name"}} </span>
                     <span> {{localize "abfalter.basicInfo.level"}} </span>

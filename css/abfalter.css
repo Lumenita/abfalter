@@ -1,10 +1,141 @@
+.borderTop {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    margin: 3px 0 0 0;
+}
+.borderBottom {
+    border-image: url(../img/border.png) 10 stretch;
+    margin: 0 0 3px 0;
+    border-bottom: 5px solid black;
+}
+.borderBoth {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin: 3px 0 3px 0;
+}
+button {
+    line-height: normal;
+}
+h2 {
+    display: flex;
+    width: 100%;
+    font-size: 19pt;
+    justify-content: center;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    z-index: 1;
+    margin-bottom: 3px;
+}
+h3 {
+    font-size: 12pt;
+    justify-content: center;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+    z-index: 1;
+    align-items: center;
+}
+#context-menu li.context-item {
+    text-align: center;
+}
+/* Colors */
+
+.notExpand {
+    display: none;
+}
+.expand-down {
+    text-align: center;
+}
+.expand-box {
+    width: 0%;
+}
+.showOpacity {
+    opacity: 1 !important;
+}
+.expand-box > input {
+    height: 18px;
+    width: 18px;
+}
+.mastery-box {
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
+    background-color: #a5a5a5;
+}
+.mastered {
+    color: #48ed12;
+}
+.notMastered {
+    color: black;
+}
+.checkLock {
+    pointer-events: none;
+}
+.fa-comment-dots:before {
+    color: #4e4e4e;
+}
+
+/* Select Box Custom Arrow & Center Contents */
+.csSelect::after,
+.csSelect1::after,
+.csSelect2::after {
+    content: "\203A"
+}
+.csSelect,
+.csSelect1,
+.csSelect2 {
+    position: relative
+}
+.csSelect::after {
+    position: absolute;
+    top: -3px;
+    right: 5px;
+    pointer-events: none;
+    font-size: 20px;
+    transform: rotate(90deg);
+}
+.csSelect1::after {
+    position: absolute;
+    top: -3px;
+    right: 20px;
+    pointer-events: none;
+    font-size: 20px;
+    transform: rotate(90deg);
+}
+.csSelect2::after {
+    position: absolute;
+    top: -3px;
+    right: 45px;
+    pointer-events: none;
+    font-size: 20px;
+    transform: rotate(90deg);
+}
+/* Text Area Auto Resize */
+.editor-box {
+    height: 200px;
+    border: 1px solid black;
+    background-color: aliceblue;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.editor {
+    height: 200px;
+}
+
+
+
+
+
 /* Global */
 :root {
     --textColor: #bbbbbb;
     --buttonBg: #00000026;
     --boxColor: #687591;
+    --itemOffSet: #363b52;
     --physical: #429f42;
     --mental: #4389df;
+    --armorPen: #d37e27;
 }
 h5 {
     display: flex;
@@ -28,6 +159,40 @@ h6 {
 }
 .mental {
     color: var(--mental) !important;
+}
+.armorpenalty {
+    color: var(--armorPen) !important;
+}
+
+
+.hidden {
+    display: none;
+}
+.fumbleRoll {
+    color: red;
+}
+.openRoll {
+    color: forestgreen;
+}
+.normalRoll {
+    color: black;
+}
+
+
+.natemph {
+    text-shadow: 1px 1px 1px orange;
+}
+.equipped > span {
+    color: darkblue;
+}
+.notEquipped > span {
+    color: #878787;
+}
+.selected {
+    background-color: #b5b3f3;
+}
+.notSelected {
+    background-color: #c3c3b8;
 }
 
 /* Global Actor Styles */
@@ -74,6 +239,7 @@ h6 {
     border-bottom: 1px solid black;
     text-align: center;
     appearance: none;
+    color: var(--textColor);
 }
 .baseAbfalter a {
     text-align: center;
@@ -87,6 +253,7 @@ h6 {
     text-align: justify;
     border-radius: 0px;
     margin: 0px;
+    color: var(--textColor);
 }
 .baseAbfalter button {
     background: var(--buttonBg);
@@ -241,9 +408,6 @@ h6 {
 .subRightHeader1 {
     height: 25px;
 }
-
-
-
 .subRightLeft { /* initiative */
     width: 30%;
 }
@@ -816,7 +980,7 @@ h6 {
     margin: 3px 0 0 0;
 }
 .advdis > div:nth-of-type(2) > div:nth-child(2n) {
-    background: #3d435e;
+    background: var(--itemOffSet);
 }
 /* Secondary Abilities Drawing */
 .secondary > div > div {
@@ -901,200 +1065,6 @@ h6 {
     padding-right: 15px;
     padding-left: 15px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.flexBetween {
-    display: flex;
-    justify-content: space-between;
-}
-.flexCenter {
-    display: flex;
-    justify-content: center;
-}
-.flexStart {
-    display: flex;
-    justify-content: flex-start;
-}
-.borderTop {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    margin: 3px 0 0 0;
-}
-.borderBottom {
-    border-image: url(../img/border.png) 10 stretch;
-    margin: 0 0 3px 0;
-    border-bottom: 5px solid black;
-}
-.borderBoth {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-}
-button {
-    line-height: normal;
-}
-h2 {
-    display: flex;
-    width: 100%;
-    font-size: 19pt;
-    justify-content: center;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    z-index: 1;
-    margin-bottom: 3px;
-}
-h3 {
-    font-size: 12pt;
-    justify-content: center;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    z-index: 1;
-    align-items: center;
-}
-#context-menu li.context-item {
-    text-align: center;
-}
-/* Colors */
-.hidden {
-    display: none;
-}
-.fumbleRoll {
-    color: red;
-}
-.openRoll {
-    color: forestgreen;
-}
-.normalRoll {
-    color: black;
-}
-
-.armorpenalty {
-    text-shadow: 1px 1px 1px lightcoral;
-}
-.natemph {
-    text-shadow: 1px 1px 1px orange;
-}
-.equipped > span {
-    color: darkblue;
-}
-.notEquipped > span {
-    color: #878787;
-}
-.selected {
-    background-color: #b5b3f3;
-}
-.notSelected {
-    background-color: #c3c3b8;
-}
-.notExpand {
-    display: none;
-}
-.expand-down {
-    text-align: center;
-}
-.expand-box {
-    width: 0%;
-}
-.showOpacity {
-    opacity: 1 !important;
-}
-.expand-box > input {
-    height: 18px;
-    width: 18px;
-}
-.mastery-box {
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: 0px;
-    background-color: #a5a5a5;
-}
-.mastered {
-    color: #48ed12;
-}
-.notMastered {
-    color: black;
-}
-.checkLock {
-    pointer-events: none;
-}
-.fa-comment-dots:before {
-    color: #4e4e4e;
-}
-
-/* Select Box Custom Arrow & Center Contents */
-.csSelect::after,
-.csSelect1::after,
-.csSelect2::after {
-    content: "\203A"
-}
-.csSelect,
-.csSelect1,
-.csSelect2 {
-    position: relative
-}
-.csSelect::after {
-    position: absolute;
-    top: -3px;
-    right: 5px;
-    pointer-events: none;
-    font-size: 20px;
-    transform: rotate(90deg);
-}
-.csSelect1::after {
-    position: absolute;
-    top: -3px;
-    right: 20px;
-    pointer-events: none;
-    font-size: 20px;
-    transform: rotate(90deg);
-}
-.csSelect2::after {
-    position: absolute;
-    top: -3px;
-    right: 45px;
-    pointer-events: none;
-    font-size: 20px;
-    transform: rotate(90deg);
-}
-/* Text Area Auto Resize */
-.editor-box {
-    height: 200px;
-    border: 1px solid black;
-    background-color: aliceblue;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-.editor {
-    height: 200px;
-}
-
-
-
-
-
-
-
-
-
-
 /*
     **************
     --------------
@@ -1128,11 +1098,7 @@ h3 {
 .e2, .e3 {
     margin: 5px 0 0 0;
 }
-/*
-    ----
-    Elan
-    ----
-*/
+/* Elan */
 .elan > div:first-of-type,
 .elan-item2 > div > div,
 .elan-item > div:first-of-type,
@@ -1140,15 +1106,22 @@ h3 {
     display: flex;
     justify-content: flex-start;
 }
-.elan > div:not(:first-of-type) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+.elan-item,
+.elan-item2 > div {
+    padding: 0 2.5%;
 }
 .elan > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
-
+.elan > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.elan > div:last-of-type {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+}
 .elan > div:first-of-type > span:first-of-type {
     width: 19.95%;
     margin: 0 0.95% 0 2.5%;
@@ -1191,8 +1164,7 @@ h3 {
 .elan-item > div:hover > a {
     opacity: 1;
 }
-.elan-item > div:first-of-type,
-.elan-item > div > div > h3 {
+.elan-item > div > div > h6 {
     margin: 0 0 3px 0;
 }
 .elan-item > div > div {
@@ -1205,22 +1177,30 @@ h3 {
     display: flex;
     justify-content: space-between;
 }
-/*
-    ------
-    Natura
-    ------
-*/
-.natura > label {
+.elan-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.elan-item2 > div:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+/* Natura */
+.natura > div {
+    border: 3px solid var(--boxColor);
+}
+.natura > div > label {
     display: flex;
 }
-.natura > label > span {
+.natura > div > label > span {
     width: 75%;
     margin: 0 2% 0 0;
 }
-.natura > label > input {
+.natura > div > label > input {
     width: 23%;
 }
-
+/* Notes */
+.e3 > div > div {
+    border: 3px solid var(--boxColor);
+}
 /*
     ***************
     ---------------
@@ -1283,15 +1263,11 @@ h3 {
     display: flex;
     justify-content: space-between;
 }
-/*
-    ----------------
-    Magic Projection
-    ----------------
-*/
-.mproj > h2 > label > a {
+/* Magic Projection */
+.mproj > h5 > label > a {
     opacity: 0;
 }
-.mproj:hover > h2 > label > a {
+.mproj:hover > h5 > label > a {
     opacity: 1;
 }
 .mproj > label,
@@ -1309,10 +1285,8 @@ h3 {
     width: 35%;
 }
 .mproj > label:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding: 3px 10px 3px 10px;
     font-weight: bold;
 }
@@ -1355,17 +1329,36 @@ h3 {
     text-align: center;
     width: 70%;
 }
+.mproj > div,
+.mproj > label {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.mproj > :nth-child(2) {
+    border-top: 3px solid var(--boxColor);
+}
+
+
+
+
+
+
+
+
+
+
+
 /*
     ------------------
     Magic Accumulation
     ------------------
 */
-.maccu2 > h3 > label > a,
-.mregen2 > h3 > label > a {
+.maccu2 > h6 > label > a,
+.mregen2 > h6 > label > a {
     opacity: 0;
 }
-.maccu2:hover > h3 > label > a,
-.mregen2:hover > h3 > label > a {
+.maccu2:hover > h6 > label > a,
+.mregen2:hover > h6 > label > a {
     opacity: 1;
 }
 .maccu > div > div > label,
@@ -1413,10 +1406,10 @@ h3 {
     Zeon
     ----
 */
-.zeon > h2 > label > a {
+.zeon > h5 > label > a {
     opacity: 0;
 }
-.zeon:hover > h2 > label > a {
+.zeon:hover > h5 > label > a {
     opacity: 1;
 }
 .zeon > label,
@@ -1449,7 +1442,7 @@ h3 {
     Innate Magic
     ------------
 */
-.minnate > h3 {
+.minnate > h6 {
     padding-top: 5px;
     margin-bottom: 0px;
 }
@@ -1471,10 +1464,10 @@ h3 {
     Magic Levels
     ------------
 */
-.mlevels > h2 > label > a {
+.mlevels > h5 > label > a {
     opacity: 0;
 }
-.mlevels:hover > h2 > label > a {
+.mlevels:hover > h5 > label > a {
     opacity: 1;
 }
 .mlevels > label,
@@ -1908,10 +1901,10 @@ h3 {
 .ppoint > label:nth-of-type(3) {
     font-weight: bold;
 }
-.ppoint > h2 > label > a {
+.ppoint > h5 > label > a {
     opacity: 0;
 }
-.ppoint:hover > h2 > label > a {
+.ppoint:hover > h5 > label > a {
     opacity: 1;
 }
 /*
@@ -1949,10 +1942,10 @@ h3 {
     margin: 3px 0 3px 0;
     justify-content: center;
 }
-.ppotential > h2 > label > a {
+.ppotential > h5 > label > a {
     opacity: 0;
 }
-.ppotential:hover > h2 > label > a {
+.ppotential:hover > h5 > label > a {
     opacity: 1;
 }
 .ppotential > div > button {
@@ -1995,10 +1988,10 @@ h3 {
 .pproj > div > label:nth-of-type(3) > button {
     width: 40%;
 }
-.pproj > h2 > label > a {
+.pproj > h5 > label > a {
     opacity: 0;
 }
-.pproj:hover > h2 > label > a {
+.pproj:hover > h5 > label > a {
     opacity: 1;
 }
 .pproj > div > button {
