@@ -12,18 +12,6 @@
                 <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.mproj.base" value="{{data.mproj.base}}" /> </label>
                 <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.mproj.spec" value="{{data.mproj.spec}}" /> </label>
                 <label> <span> {{localize "abfalter.magicTab.imbalance"}} </span> <input type="number" name="data.mproj.imbalance" value="{{data.mproj.imbalance}}" /> </label>
-                <div>
-                    <label>
-                        <button type="button" class="mastery-box {{#if data.mproj.masteryOff}}mastered{{else}}notMastered{{/if}}" data-label="data.mproj.masteryOff" data-ability="{{data.mproj.masteryOff}}">
-                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
-                        </button>
-                    </label>
-                    <label>
-                        <button type="button" class="mastery-box {{#if data.mproj.masteryDef}}mastered{{else}}notMastered{{/if}}" data-label="data.mproj.masteryDef" data-ability="{{data.mproj.masteryDef}}">
-                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
-                        </button>
-                    </label>
-                </div>
             </div>
             {{/if}}
             <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mproj.temp" value="{{data.mproj.temp}}" /> </label>
@@ -228,11 +216,6 @@
                     <input type="number" name="data.summonbonus" value="{{data.summonbonus}}" readonly />
                     <input type="number" name="data.summoning.summon.spec" value="{{data.summoning.summon.spec}}" />
                     <input type="number" name="data.summonfinal" value="{{data.summonfinal}}" readonly />
-                    <label>
-                        <button type="button" class="mastery-box {{#if data.summoning.summon.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.summoning.summon.mastery" data-ability="{{data.summoning.summon.mastery}}">
-                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
-                        </button>
-                    </label>
                 </div>
                 <div>
                     <button type="button" class="rollable" data-roll="{{data.controlfinal}}" data-label="{{localize "abfalter.magicTab.control"}}" data-type="summoningRoll" data-ability="{{data.summoning.control.mastery}}">
@@ -242,11 +225,6 @@
                     <input type="number" name="data.controlbonus" value="{{data.controlbonus}}" readonly />
                     <input type="number" name="data.summoning.control.spec" value="{{data.summoning.control.spec}}" />
                     <input type="number" name="data.controlfinal" value="{{data.controlfinal}}" readonly />
-                    <label>
-                        <button type="button" class="mastery-box {{#if data.summoning.control.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.summoning.control.mastery" data-ability="{{data.summoning.control.mastery}}">
-                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
-                        </button>
-                    </label>
                 </div>
                 <div>
                     <button type="button" class="rollable" data-roll="{{data.bindfinal}}" data-label="{{localize "abfalter.magicTab.bind"}}" data-type="summoningRoll" data-ability="{{data.summoning.bind.mastery}}">
@@ -256,11 +234,6 @@
                     <input type="number" name="data.bindbonus" value="{{data.bindbonus}}" readonly />
                     <input type="number" name="data.summoning.bind.spec" value="{{data.summoning.bind.spec}}" />
                     <input type="number" name="data.bindfinal" value="{{data.bindfinal}}" readonly />
-                    <label>
-                        <button type="button" class="mastery-box {{#if data.summoning.bind.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.summoning.bind.mastery" data-ability="{{data.summoning.bind.mastery}}">
-                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
-                        </button>
-                    </label>
                 </div>
                 <div>
                     <button type="button" class="rollable" data-roll="{{data.banishfinal}}" data-label="{{localize "abfalter.magicTab.banish"}}" data-type="summoningRoll" data-ability="{{data.summoning.banish.mastery}}">
@@ -270,11 +243,6 @@
                     <input type="number" name="data.banishbonus" value="{{data.banishbonus}}" readonly />
                     <input type="number" name="data.summoning.banish.spec" value="{{data.summoning.banish.spec}}" />
                     <input type="number" name="data.banishfinal" value="{{data.banishfinal}}" readonly />
-                    <label>
-                        <button type="button" class="mastery-box {{#if data.summoning.banish.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.summoning.banish.mastery" data-ability="{{data.summoning.banish.mastery}}">
-                            <span> {{localize "abfalter.basicInfo.mastery"}} </span>
-                        </button>
-                    </label>
                 </div>
             </div>
 

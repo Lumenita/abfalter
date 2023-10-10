@@ -131,6 +131,7 @@ h3 {
 :root {
     --textColor: #bbbbbb;
     --buttonBg: #00000026;
+    --inputBorder: #747493;
     --boxColor: #687591;
     --itemOffSet: #363b52;
     --physical: #429f42;
@@ -153,6 +154,7 @@ h6 {
     margin: 0;
     font-weight: normal;
     font-size: 17px;
+    color: var(--boxColor);
 }
 .physical {
     color: var(--physical) !important;
@@ -221,7 +223,9 @@ h6 {
     text-align: center;
     border: 0px;
     height: 20px;
-    border-bottom: 1px solid black;
+    background: var(--buttonBg);
+    border-radius: 0px;
+    border-bottom: 1px solid var(--inputBorder);
     color: var(--textColor);
 }
 .baseAbfalter input:read-only {
@@ -253,6 +257,7 @@ h6 {
     text-align: justify;
     border-radius: 0px;
     margin: 0px;
+    background: var(--buttonBg);
     color: var(--textColor);
 }
 .baseAbfalter button {
@@ -720,6 +725,7 @@ h6 {
     margin: 0px;
     border-radius: 0px;
     border: 0px;
+    border-right: 1px solid var(--boxColor);
 }
 .resistances > div > div > button > span {
     width: 50%;
@@ -849,10 +855,10 @@ h6 {
     padding-top: 3px;
     padding-bottom: 3px;
 }
-.lifepoints > label:nth-of-type(2) > span,
-.lifepoints > label:nth-of-type(3) > span,
-.fatigue > label:nth-of-type(2) > span,
-.fatigue > label:nth-of-type(3) > span,
+.lifepoints > div > label:nth-of-type(2) > span,
+.lifepoints > div > label:nth-of-type(3) > span,
+.fatigue > div > label:nth-of-type(2) > span,
+.fatigue > div > label:nth-of-type(3) > span,
 .regeneration > label:nth-of-type(4) > span,
 .regeneration > label:nth-of-type(5) > span,
 .regeneration > label:nth-of-type(6) > span,
@@ -1239,6 +1245,7 @@ h6 {
 }
 .maccu > div > div {
     width: 48%;
+    height: fit-content;
 }
 .zeon {
     width: 19%;
@@ -1302,10 +1309,9 @@ h6 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
 }
 .mproj > div > button:first-of-type {
-    border-right: 1px solid;
+    border-right: 1px solid var(--boxColor);
 }
 .mproj > div > button > span:first-of-type {
     padding-left: 20%;
@@ -1337,22 +1343,31 @@ h6 {
 .mproj > :nth-child(2) {
     border-top: 3px solid var(--boxColor);
 }
-
-
-
-
-
-
-
-
-
-
-
-/*
-    ------------------
-    Magic Accumulation
-    ------------------
-*/
+.mProjButton {
+    border-bottom: 3px solid var(--boxColor);
+}
+.mproj > h6 {
+    margin: 10px 0 0 0;
+}
+.mproj > div:last-of-type {
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+}
+/* Magic Accumulation */
+.maccu2,
+.mregen2 {
+    border-right: 3px solid var(--boxColor);
+    border-top: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.maccu2 > div:last-of-type,
+.mregen2 > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+.maccu2 > :nth-child(2),
+.mregen2 > :nth-child(2) {
+    border-top: 1px solid var(--boxColor);
+}
 .maccu2 > h6 > label > a,
 .mregen2 > h6 > label > a {
     opacity: 0;
@@ -1377,11 +1392,9 @@ h6 {
 }
 .maccu > div > div > label:nth-of-type(3),
 .mregen2 > label:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 10px 3px 10px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 0 10px 0 10px;
 }
 .maccu > div > div > label:nth-of-type(2),
 .maccu > div > div > label:nth-of-type(3) {
@@ -1395,17 +1408,13 @@ h6 {
     border: 0px;
 }
 .maccu2 > div > button:first-of-type {
-    border-right: 1px solid;
+    border-right: 1px solid var(--boxColor);
 }
 .mregen2 > div:last-of-type {
     display: flex;
     justify-content: end;
 }
-/*
-    ----
-    Zeon
-    ----
-*/
+/* Zeon */
 .zeon > h5 > label > a {
     opacity: 0;
 }
@@ -1416,6 +1425,8 @@ h6 {
 .zeon > div > label {
     display: flex;
     padding: 0 10px 0 10px;
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
 }
 .zeon > label > span,
 .zeon > div > label > span {
@@ -1427,24 +1438,27 @@ h6 {
     width: 40%;
 }
 .zeon > label:nth-of-type(3) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 10px 3px 10px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+    padding: 0 10px;
 }
 .zeon > label:nth-of-type(2),
 .zeon > label:nth-of-type(3) {
     font-weight: bold;
 }
-/*
-    ------------
-    Innate Magic
-    ------------
-*/
+.zeon > :nth-child(2) {
+    border-top: 3px solid var(--boxColor);
+}
+/* Innate Magic */
 .minnate > h6 {
     padding-top: 5px;
     margin-bottom: 0px;
+}
+.minnate > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .minnate > div > div > span {
     justify-content: center;
@@ -1459,11 +1473,7 @@ h6 {
 .minnate > div > div:last-of-type > span {
     font-weight: bold;
 }
-/*
-    ------------
-    Magic Levels
-    ------------
-*/
+/* Magic Levels */
 .mlevels > h5 > label > a {
     opacity: 0;
 }
@@ -1473,7 +1483,9 @@ h6 {
 .mlevels > label,
 .mlevels > div > label {
     display: flex;
-    padding: 0 10px 0 10px;
+    padding: 0 10px;
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
 }
 .mlevels > label > span,
 .mlevels > div > label > span {
@@ -1485,30 +1497,31 @@ h6 {
     width: 40%;
 }
 .mlevels > label:nth-of-type(3) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 10px 3px 10px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+    padding: 0 10px;
 }
 .mlevels > label:nth-of-type(2),
 .mlevels > label:nth-of-type(3) {
     font-weight: bold;
 }
-/*
-    -----------
-    Spell Paths
-    -----------
-*/
+.mlevels > :nth-child(2) {
+    border-top: 3px solid var(--boxColor);
+}
+/* Spell Paths */
+.spellPath > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .spellPath > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .spellPath > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-    padding-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .spellPath > div:first-of-type,
 .spellPath-item > div {
@@ -1526,42 +1539,58 @@ h6 {
     width: 20%;
     margin: 0 0 0 1%;
 }
-/*
-    ------------------
-    Sumoning Abilities
-    ------------------
-*/
+.spellPath-item:nth-child(2n){
+    background: var(--itemOffSet);
+}
+/* Sumoning Abilities */
 .summoning > div {
     display: flex;
     justify-content: flex-start;
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.summoning > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+}
+.summoning > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
 }
 .summoning > div:first-of-type > span:first-of-type {
-    width: 23%;
+    width: 31%;
     margin: 0 1.5% 0 0;
 }
 .summoning > div > button {
-    width: 23%;
+    width: 31%;
     margin: 0 1.5% 0 0;
     height: 20px;
     border-radius: 0px;
     border: 0px;
+    border-right: 1px solid var(--boxColor);
 }
 .summoning > div:first-of-type > span,
 .summoning > div > input {
-    width: 14%;
+    width: 21%;
     margin: 0 1.5% 0 0;
 }
-.summoning > div > label {
-    width: 13.5%;
+.summoning > div:first-of-type > span:last-of-type,
+.summoning > div > input:last-of-type {
+    margin: 0;
 }
-/*
-    ------------------------------------
-    Turn Maintenance & Daily Maintenance
-    ------------------------------------
-*/
+/* Turn Maintenance & Daily Maintenance */
+.turnDayMaint > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .turnDayMaint > div:nth-of-type(2) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+    width: 100%;
+    min-height: 5px;
+}
+.turnDayMaint > div:nth-of-type(2) > div {
+    padding: 0 2.5%;
+}
+.turnDayMaint > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
 }
 .turnDayMaint > div:first-of-type,
 .turnDayMaint > div:nth-of-type(3),
@@ -1571,18 +1600,13 @@ h6 {
     justify-content: flex-start;
 }
 .turnDayMaint > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
+    border-bottom: 1px solid var(--boxColor);
     padding-bottom: 3px;
 }
 .turnDayMaint > div:nth-of-type(3) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    border-top: 5px solid black;
-    margin-top: 3px;
+    border-bottom: 1px solid var(--boxColor);
+    border-top: 1px solid var(--boxColor);
     padding-top: 3px;
-    margin-bottom: 3px;
     padding-bottom: 3px;
     font-weight: bold;
 }
@@ -1607,6 +1631,7 @@ h6 {
 .turnDayMaint > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-bottom: 3px solid var(--boxColor);
 }
 .turnMaint-item > div > input:first-of-type,
 .turnMaint-item > div > span:first-of-type,
@@ -1638,6 +1663,9 @@ h6 {
 .turnDayMaint > div > div > textarea {
     margin: 3px 0 0 0;
 }
+.turnDayMaint > div > div:nth-child(2n) {
+    background: var(--itemOffSet);
+}
 /*
     ----------
     Spell Book
@@ -1647,8 +1675,8 @@ h6 {
     display: flex;
     place-content: space-between;
 }
-.spell-item {
-    background: linear-gradient( 180deg, #cfcdc5, #d8d6ca);
+.spell-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .spell-item > div:not(:first-of-type) > label,
 .spell-item > div > div {
@@ -1737,15 +1765,13 @@ h6 {
     margin: 0 0 0 1%;
 }
 .spell-item > div:nth-of-type(3) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-bottom: 1px solid var(--boxColor);
     margin-bottom: 3px;
     padding-bottom: 3px;
 }
 .spell-item > div:nth-of-type(4) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
+    border-bottom: 1px solid var(--boxColor);
+    border-top: 1px solid var(--boxColor);
     margin: 3px 0 3px 0;
     padding: 3px 0 3px 0;
 }
@@ -1781,8 +1807,7 @@ h6 {
 }
 .invocations > div:first-of-type,
 .incarnations > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-bottom: 1px solid var(--boxColor);
     margin-bottom: 3px;
     padding-bottom: 3px;
 }
