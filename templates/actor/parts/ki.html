@@ -1,688 +1,649 @@
 ﻿<div class="tab ki">
     <div class="kiAbilities">
-        <h2> {{localize "abfalter.kiTab.kiAbilities"}} </h2>
-        <div>
-            <span title="{{localize "abfalter.kiTab.descUseOfKi"}}"> {{localize "abfalter.kiTab.useOfKi"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.useOfKi.status}}{{#if data.kiAbility.useOfKi.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.useOfKi.status" data-label2="data.kiAbility.useOfKi.status2" data-ability="{{data.kiAbility.useOfKi.status}}" data-ability2="{{data.kiAbility.useOfKi.status2}}">
-                <span> {{data.kiAbility.useOfKi.cost}} </span>
-            </button>
+        <h5> {{localize "abfalter.kiTab.kiAbilities"}} </h5>
+        <div class="kiSubsection">
+            <div>
+                <span title="{{localize "abfalter.kiTab.descUseOfKi"}}"> {{localize "abfalter.kiTab.useOfKi"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.useOfKi.status}}{{#if data.kiAbility.useOfKi.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.useOfKi.status" data-label2="data.kiAbility.useOfKi.status2" data-ability="{{data.kiAbility.useOfKi.status}}" data-ability2="{{data.kiAbility.useOfKi.status2}}">
+                    <span> {{data.kiAbility.useOfKi.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.useOfKi.status}}
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.desckiControl"}}"> {{localize "abfalter.kiTab.kiControl"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiControl.status}}{{#if data.kiAbility.kiControl.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiControl.status" data-label2="data.kiAbility.kiControl.status2" data-ability="{{data.kiAbility.kiControl.status}}" data-ability2="{{data.kiAbility.kiControl.status2}}">
+                    <span> {{data.kiAbility.kiControl.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiControl.status}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiDetection"}}"> {{localize "abfalter.kiTab.kiDetection"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiDetection.status}}{{#if data.kiAbility.kiDetection.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiDetection.status" data-label2="data.kiAbility.kiDetection.status2" data-ability="{{data.kiAbility.kiDetection.status}}" data-ability2="{{data.kiAbility.kiDetection.status2}}">
+                    <span> {{data.kiAbility.kiDetection.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiDetection.status}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiErudition"}}"> {{localize "abfalter.kiTab.kiErudition"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiErudition.status}}{{#if data.kiAbility.kiErudition.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiErudition.status" data-label2="data.kiAbility.kiErudition.status2" data-ability="{{data.kiAbility.kiErudition.status}}" data-ability2="{{data.kiAbility.kiErudition.status2}}">
+                    <span> {{data.kiAbility.kiErudition.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiCombatAura"}}"> {{localize "abfalter.kiTab.kiCombatAura"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiCombatAura.status}}{{#if data.kiAbility.kiCombatAura.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiCombatAura.status" data-label2="data.kiAbility.kiCombatAura.status2" data-ability="{{data.kiAbility.kiCombatAura.status}}" data-ability2="{{data.kiAbility.kiCombatAura.status2}}">
+                    <span> {{data.kiAbility.kiCombatAura.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiPhysDom"}}"> {{localize "abfalter.kiTab.kiPhysDom"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiPhysDom.status}}{{#if data.kiAbility.kiPhysDom.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiPhysDom.status" data-label2="data.kiAbility.kiPhysDom.status2" data-ability="{{data.kiAbility.kiPhysDom.status}}" data-ability2="{{data.kiAbility.kiPhysDom.status2}}">
+                    <span> {{data.kiAbility.kiPhysDom.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiPhysDom.status}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiPhysChange"}}"> {{localize "abfalter.kiTab.kiPhysChange"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiPhysChange.status}}{{#if data.kiAbility.kiPhysChange.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiPhysChange.status" data-label2="data.kiAbility.kiPhysChange.status2" data-ability="{{data.kiAbility.kiPhysChange.status}}" data-ability2="{{data.kiAbility.kiPhysChange.status2}}">
+                    <span> {{data.kiAbility.kiPhysChange.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiPhysChange.status}}
+            <div>
+                <span class="subKi4" title="{{localize "abfalter.kiTab.desckiSuperiorChange"}}"> {{localize "abfalter.kiTab.kiSuperiorChange"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiSuperiorChange.status}}{{#if data.kiAbility.kiSuperiorChange.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiSuperiorChange.status" data-label2="data.kiAbility.kiSuperiorChange.status2" data-ability="{{data.kiAbility.kiSuperiorChange.status}}" data-ability2="{{data.kiAbility.kiSuperiorChange.status2}}">
+                    <span> {{data.kiAbility.kiSuperiorChange.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiMultBodies"}}"> {{localize "abfalter.kiTab.kiMultBodies"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiMultBodies.status}}{{#if data.kiAbility.kiMultBodies.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiMultBodies.status" data-label2="data.kiAbility.kiMultBodies.status2" data-ability="{{data.kiAbility.kiMultBodies.status}}" data-ability2="{{data.kiAbility.kiMultBodies.status2}}">
+                    <span> {{data.kiAbility.kiMultBodies.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiMultBodies.status}}
+            <div>
+                <span class="subKi4" title="{{localize "abfalter.kiTab.desckiGreaterMult"}}"> {{localize "abfalter.kiTab.kiGreaterMult"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiGreaterMult.status}}{{#if data.kiAbility.kiGreaterMult.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiGreaterMult.status" data-label2="data.kiAbility.kiGreaterMult.status2" data-ability="{{data.kiAbility.kiGreaterMult.status}}" data-ability2="{{data.kiAbility.kiGreaterMult.status2}}">
+                    <span> {{data.kiAbility.kiGreaterMult.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiGreaterMult.status}}
+            <div>
+                <span class="subKi5" title="{{localize "abfalter.kiTab.desckiArcaneMult"}}"> {{localize "abfalter.kiTab.kiArcaneMult"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiArcaneMult.status}}{{#if data.kiAbility.kiArcaneMult.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiArcaneMult.status" data-label2="data.kiAbility.kiArcaneMult.status2" data-ability="{{data.kiAbility.kiArcaneMult.status}}" data-ability2="{{data.kiAbility.kiArcaneMult.status2}}">
+                    <span> {{data.kiAbility.kiArcaneMult.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi4" title="{{localize "abfalter.kiTab.desckiMagnitude"}}"> {{localize "abfalter.kiTab.kiMagnitude"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiMagnitude.status}}{{#if data.kiAbility.kiMagnitude.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiMagnitude.status" data-label2="data.kiAbility.kiMagnitude.status2" data-ability="{{data.kiAbility.kiMagnitude.status}}" data-ability2="{{data.kiAbility.kiMagnitude.status2}}">
+                    <span> {{data.kiAbility.kiMagnitude.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiMagnitude.status}}
+            <div>
+                <span class="subKi5" title="{{localize "abfalter.kiTab.desckiArcaneMagn"}}"> {{localize "abfalter.kiTab.kiArcaneMagn"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiArcaneMagn.status}}{{#if data.kiAbility.kiArcaneMagn.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiArcaneMagn.status" data-label2="data.kiAbility.kiArcaneMagn.status2" data-ability="{{data.kiAbility.kiArcaneMagn.status}}" data-ability2="{{data.kiAbility.kiArcaneMagn.status2}}">
+                    <span> {{data.kiAbility.kiArcaneMagn.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            {{/if}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiAgeControl"}}"> {{localize "abfalter.kiTab.kiAgeControl"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiAgeControl.status}}{{#if data.kiAbility.kiAgeControl.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiAgeControl.status" data-label2="data.kiAbility.kiAgeControl.status2" data-ability="{{data.kiAbility.kiAgeControl.status}}" data-ability2="{{data.kiAbility.kiAgeControl.status2}}">
+                    <span> {{data.kiAbility.kiAgeControl.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiTechImi"}}"> {{localize "abfalter.kiTab.kiTechImi"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiTechImi.status}}{{#if data.kiAbility.kiTechImi.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiTechImi.status" data-label2="data.kiAbility.kiTechImi.status2" data-ability="{{data.kiAbility.kiTechImi.status}}" data-ability2="{{data.kiAbility.kiTechImi.status2}}">
+                    <span> {{data.kiAbility.kiTechImi.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiTechPush"}}"> {{localize "abfalter.kiTab.kiTechPush"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiTechPush.status}}{{#if data.kiAbility.kiTechPush.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiTechPush.status" data-label2="data.kiAbility.kiTechPush.status2" data-ability="{{data.kiAbility.kiTechPush.status}}" data-ability2="{{data.kiAbility.kiTechPush.status2}}">
+                    <span> {{data.kiAbility.kiTechPush.cost}} </span>
+                </button>
+            </div>
+            {{/if}} <!--End of Ki Control IF Statement-->
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.descweightElimination"}}"> {{localize "abfalter.kiTab.weightElimination"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.weightElimination.status}}{{#if data.kiAbility.weightElimination.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.weightElimination.status" data-label2="data.kiAbility.weightElimination.status2" data-ability="{{data.kiAbility.weightElimination.status}}" data-ability2="{{data.kiAbility.weightElimination.status2}}">
+                    <span> {{data.kiAbility.weightElimination.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.weightElimination.status}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiLevitation"}}"> {{localize "abfalter.kiTab.kiLevitation"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiLevitation.status}}{{#if data.kiAbility.kiLevitation.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiLevitation.status" data-label2="data.kiAbility.kiLevitation.status2" data-ability="{{data.kiAbility.kiLevitation.status}}" data-ability2="{{data.kiAbility.kiLevitation.status2}}">
+                    <span> {{data.kiAbility.kiLevitation.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiLevitation.status}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiObjectMotion"}}"> {{localize "abfalter.kiTab.kiObjectMotion"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiObjectMotion.status}}{{#if data.kiAbility.kiObjectMotion.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiObjectMotion.status" data-label2="data.kiAbility.kiObjectMotion.status2" data-ability="{{data.kiAbility.kiObjectMotion.status}}" data-ability2="{{data.kiAbility.kiObjectMotion.status2}}">
+                    <span> {{data.kiAbility.kiObjectMotion.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiObjectMotion.status}}
+            <div>
+                <span class="subKi4" title="{{localize "abfalter.kiTab.desckiMassMove"}}"> {{localize "abfalter.kiTab.kiMassMove"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiMassMove.status}}{{#if data.kiAbility.kiMassMove.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiMassMove.status" data-label2="data.kiAbility.kiMassMove.status2" data-ability="{{data.kiAbility.kiMassMove.status}}" data-ability2="{{data.kiAbility.kiMassMove.status2}}">
+                    <span> {{data.kiAbility.kiMassMove.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiFlight"}}"> {{localize "abfalter.kiTab.kiFlight"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiFlight.status}}{{#if data.kiAbility.kiFlight.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiFlight.status" data-label2="data.kiAbility.kiFlight.status2" data-ability="{{data.kiAbility.kiFlight.status}}" data-ability2="{{data.kiAbility.kiFlight.status2}}">
+                    <span> {{data.kiAbility.kiFlight.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            {{/if}}<!--End of Weight Elimination If Statement-->
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.desckiPresenceEx"}}"> {{localize "abfalter.kiTab.kiPresenceEx"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiPresenceEx.status}}{{#if data.kiAbility.kiPresenceEx.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiPresenceEx.status" data-label2="data.kiAbility.kiPresenceEx.status2" data-ability="{{data.kiAbility.kiPresenceEx.status}}" data-ability2="{{data.kiAbility.kiPresenceEx.status2}}">
+                    <span> {{data.kiAbility.kiPresenceEx.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiPresenceEx.status}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiEnergyArmor"}}"> {{localize "abfalter.kiTab.kiEnergyArmor"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiEnergyArmor.status}}{{#if data.kiAbility.kiEnergyArmor.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiEnergyArmor.status" data-label2="data.kiAbility.kiEnergyArmor.status2" data-ability="{{data.kiAbility.kiEnergyArmor.status}}" data-ability2="{{data.kiAbility.kiEnergyArmor.status2}}">
+                    <span> {{data.kiAbility.kiEnergyArmor.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiEnergyArmor.status}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiGreaterArmor"}}"> {{localize "abfalter.kiTab.kiGreaterArmor"}} </span>
+                <button class="kiActiveButton1 toggleBoolean {{#if data.kiAbility.kiArcaneArmor.status}}hidden{{/if}} {{#if data.kiAbility.kiGreaterArmor.status}}{{else}}hidden{{/if}} {{#if data.toggles.greaterEnergyArmor}}kiBought{{/if}}"
+                        data-label="data.toggles.greaterEnergyArmor" data-ability="{{data.toggles.greaterEnergyArmor}}">
+                    <span class="{{#if data.toggles.greaterEnergyArmor}}activeKiAbility{{/if}}"> {{localize "abfalter.basicInfo.active"}} </span>
+                </button>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiGreaterArmor.status}}{{#if data.kiAbility.kiGreaterArmor.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiGreaterArmor.status" data-label2="data.kiAbility.kiGreaterArmor.status2" data-ability="{{data.kiAbility.kiGreaterArmor.status}}" data-ability2="{{data.kiAbility.kiGreaterArmor.status2}}">
+                    <span> {{data.kiAbility.kiGreaterArmor.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiGreaterArmor.status}}
+            <div>
+                <span class="subKi4" title="{{localize "abfalter.kiTab.desckiArcaneArmor"}}"> {{localize "abfalter.kiTab.kiArcaneArmor"}} </span>
+                <button class="kiActiveButton toggleBoolean {{#if data.kiAbility.kiArcaneArmor.status}}{{else}}hidden{{/if}} {{#if data.toggles.arcaneEnergyArmor}}kiBought{{/if}}"
+                        data-label="data.toggles.arcaneEnergyArmor" data-ability="{{data.toggles.arcaneEnergyArmor}}">
+                    <span class="{{#if data.toggles.arcaneEnergyArmor}}activeKiAbility{{/if}}"> {{localize "abfalter.basicInfo.active"}} </span>
+                </button>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiArcaneArmor.status}}{{#if data.kiAbility.kiArcaneArmor.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiArcaneArmor.status" data-label2="data.kiAbility.kiArcaneArmor.status2" data-ability="{{data.kiAbility.kiArcaneArmor.status}}" data-ability2="{{data.kiAbility.kiArcaneArmor.status2}}">
+                    <span> {{data.kiAbility.kiArcaneArmor.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            {{/if}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiAuraEx"}}"> {{localize "abfalter.kiTab.kiAuraEx"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiAuraEx.status}}{{#if data.kiAbility.kiAuraEx.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiAuraEx.status" data-label2="data.kiAbility.kiAuraEx.status2" data-ability="{{data.kiAbility.kiAuraEx.status}}" data-ability2="{{data.kiAbility.kiAuraEx.status2}}">
+                    <span> {{data.kiAbility.kiAuraEx.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiAuraEx.status}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleFire"}}"> {{localize "abfalter.kiTab.kiEleFire"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiEleFire.status}}{{#if data.kiAbility.kiEleFire.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiEleFire.status" data-label2="data.kiAbility.kiEleFire.status2" data-ability="{{data.kiAbility.kiEleFire.status}}" data-ability2="{{data.kiAbility.kiEleFire.status2}}">
+                    <span> {{data.kiAbility.kiEleFire.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleWater"}}"> {{localize "abfalter.kiTab.kiEleWater"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiEleWater.status}}{{#if data.kiAbility.kiEleWater.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiEleWater.status" data-label2="data.kiAbility.kiEleWater.status2" data-ability="{{data.kiAbility.kiEleWater.status}}" data-ability2="{{data.kiAbility.kiEleWater.status2}}">
+                    <span> {{data.kiAbility.kiEleWater.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleAir"}}"> {{localize "abfalter.kiTab.kiEleAir"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiEleAir.status}}{{#if data.kiAbility.kiEleAir.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiEleAir.status" data-label2="data.kiAbility.kiEleAir.status2" data-ability="{{data.kiAbility.kiEleAir.status}}" data-ability2="{{data.kiAbility.kiEleAir.status2}}">
+                    <span> {{data.kiAbility.kiEleAir.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleEarth"}}"> {{localize "abfalter.kiTab.kiEleEarth"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiEleEarth.status}}{{#if data.kiAbility.kiEleEarth.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiEleEarth.status" data-label2="data.kiAbility.kiEleEarth.status2" data-ability="{{data.kiAbility.kiEleEarth.status}}" data-ability2="{{data.kiAbility.kiEleEarth.status2}}">
+                    <span> {{data.kiAbility.kiEleEarth.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleLight"}}"> {{localize "abfalter.kiTab.kiEleLight"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiEleLight.status}}{{#if data.kiAbility.kiEleLight.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiEleLight.status" data-label2="data.kiAbility.kiEleLight.status2" data-ability="{{data.kiAbility.kiEleLight.status}}" data-ability2="{{data.kiAbility.kiEleLight.status2}}">
+                    <span> {{data.kiAbility.kiEleLight.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleDark"}}"> {{localize "abfalter.kiTab.kiEleDark"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiEleDark.status}}{{#if data.kiAbility.kiEleDark.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiEleDark.status" data-label2="data.kiAbility.kiEleDark.status2" data-ability="{{data.kiAbility.kiEleDark.status}}" data-ability2="{{data.kiAbility.kiEleDark.status2}}">
+                    <span> {{data.kiAbility.kiEleDark.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiIncreaseDmg"}}"> {{localize "abfalter.kiTab.kiIncreaseDmg"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiIncreaseDmg.status}}{{#if data.kiAbility.kiIncreaseDmg.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiIncreaseDmg.status" data-label2="data.kiAbility.kiIncreaseDmg.status2" data-ability="{{data.kiAbility.kiIncreaseDmg.status}}" data-ability2="{{data.kiAbility.kiIncreaseDmg.status2}}">
+                    <span> {{data.kiAbility.kiIncreaseDmg.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiIncreaseReach"}}"> {{localize "abfalter.kiTab.kiIncreaseReach"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiIncreaseReach.status}}{{#if data.kiAbility.kiIncreaseReach.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiIncreaseReach.status" data-label2="data.kiAbility.kiIncreaseReach.status2" data-ability="{{data.kiAbility.kiIncreaseReach.status}}" data-ability2="{{data.kiAbility.kiIncreaseReach.status2}}">
+                    <span> {{data.kiAbility.kiIncreaseReach.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiIncreaseSpd"}}"> {{localize "abfalter.kiTab.kiIncreaseSpd"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiIncreaseSpd.status}}{{#if data.kiAbility.kiIncreaseSpd.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiIncreaseSpd.status" data-label2="data.kiAbility.kiIncreaseSpd.status2" data-ability="{{data.kiAbility.kiIncreaseSpd.status}}" data-ability2="{{data.kiAbility.kiIncreaseSpd.status2}}">
+                    <span> {{data.kiAbility.kiIncreaseSpd.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiDestruction"}}"> {{localize "abfalter.kiTab.kiDestruction"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiDestruction.status}}{{#if data.kiAbility.kiDestruction.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiDestruction.status" data-label2="data.kiAbility.kiDestruction.status2" data-ability="{{data.kiAbility.kiDestruction.status}}" data-ability2="{{data.kiAbility.kiDestruction.status2}}">
+                    <span> {{data.kiAbility.kiDestruction.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiAbsorbtion"}}"> {{localize "abfalter.kiTab.kiAbsorbtion"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiAbsorbtion.status}}{{#if data.kiAbility.kiAbsorbtion.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiAbsorbtion.status" data-label2="data.kiAbility.kiAbsorbtion.status2" data-ability="{{data.kiAbility.kiAbsorbtion.status}}" data-ability2="{{data.kiAbility.kiAbsorbtion.status2}}">
+                    <span> {{data.kiAbility.kiAbsorbtion.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiPhysShield"}}"> {{localize "abfalter.kiTab.kiPhysShield"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiPhysShield.status}}{{#if data.kiAbility.kiPhysShield.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiPhysShield.status" data-label2="data.kiAbility.kiPhysShield.status2" data-ability="{{data.kiAbility.kiPhysShield.status}}" data-ability2="{{data.kiAbility.kiPhysShield.status2}}">
+                    <span> {{data.kiAbility.kiPhysShield.cost}} </span>
+                </button>
+            </div>
+            {{/if}}<!--End of Presence Extrusion If Statement-->
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.desckiTrans"}}"> {{localize "abfalter.kiTab.kiTrans"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiTrans.status}}{{#if data.kiAbility.kiTrans.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiTrans.status" data-label2="data.kiAbility.kiTrans.status2" data-ability="{{data.kiAbility.kiTrans.status}}" data-ability2="{{data.kiAbility.kiTrans.status2}}">
+                    <span> {{data.kiAbility.kiTrans.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiTrans.status}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiHeal"}}"> {{localize "abfalter.kiTab.kiHeal"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiHeal.status}}{{#if data.kiAbility.kiHeal.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiHeal.status" data-label2="data.kiAbility.kiHeal.status2" data-ability="{{data.kiAbility.kiHeal.status}}" data-ability2="{{data.kiAbility.kiHeal.status2}}">
+                    <span> {{data.kiAbility.kiHeal.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiHeal.status}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiSupHeal"}}"> {{localize "abfalter.kiTab.kiSupHeal"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiSupHeal.status}}{{#if data.kiAbility.kiSupHeal.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiSupHeal.status" data-label2="data.kiAbility.kiSupHeal.status2" data-ability="{{data.kiAbility.kiSupHeal.status}}" data-ability2="{{data.kiAbility.kiSupHeal.status2}}">
+                    <span> {{data.kiAbility.kiSupHeal.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiStabil"}}"> {{localize "abfalter.kiTab.kiStabil"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiStabil.status}}{{#if data.kiAbility.kiStabil.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiStabil.status" data-label2="data.kiAbility.kiStabil.status2" data-ability="{{data.kiAbility.kiStabil.status}}" data-ability2="{{data.kiAbility.kiStabil.status2}}">
+                    <span> {{data.kiAbility.kiStabil.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiLifeSac"}}"> {{localize "abfalter.kiTab.kiLifeSac"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiLifeSac.status}}{{#if data.kiAbility.kiLifeSac.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiLifeSac.status" data-label2="data.kiAbility.kiLifeSac.status2" data-ability="{{data.kiAbility.kiLifeSac.status}}" data-ability2="{{data.kiAbility.kiLifeSac.status2}}">
+                    <span> {{data.kiAbility.kiLifeSac.cost}} </span>
+                </button>
+            </div>
+            {{/if}}<!--End of Ki Transmission If Statement-->
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.desckiUseOfEne"}}"> {{localize "abfalter.kiTab.kiUseOfEne"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiUseOfEne.status}}{{#if data.kiAbility.kiUseOfEne.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiUseOfEne.status" data-label2="data.kiAbility.kiUseOfEne.status2" data-ability="{{data.kiAbility.kiUseOfEne.status}}" data-ability2="{{data.kiAbility.kiUseOfEne.status2}}">
+                    <span> {{data.kiAbility.kiUseOfEne.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiUseOfEne.status}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiConceal"}}"> {{localize "abfalter.kiTab.kiConceal"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiConceal.status}}{{#if data.kiAbility.kiConceal.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiConceal.status" data-label2="data.kiAbility.kiConceal.status2" data-ability="{{data.kiAbility.kiConceal.status}}" data-ability2="{{data.kiAbility.kiConceal.status2}}">
+                    <span> {{data.kiAbility.kiConceal.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiConceal.status}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiAuraConceal"}}"> {{localize "abfalter.kiTab.kiAuraConceal"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiAuraConceal.status}}{{#if data.kiAbility.kiAuraConceal.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiAuraConceal.status" data-label2="data.kiAbility.kiAuraConceal.status2" data-ability="{{data.kiAbility.kiAuraConceal.status}}" data-ability2="{{data.kiAbility.kiAuraConceal.status2}}">
+                    <span> {{data.kiAbility.kiAuraConceal.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiFalseDeath"}}"> {{localize "abfalter.kiTab.kiFalseDeath"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiFalseDeath.status}}{{#if data.kiAbility.kiFalseDeath.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiFalseDeath.status" data-label2="data.kiAbility.kiFalseDeath.status2" data-ability="{{data.kiAbility.kiFalseDeath.status}}" data-ability2="{{data.kiAbility.kiFalseDeath.status2}}">
+                    <span> {{data.kiAbility.kiFalseDeath.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiEleminationOfNec"}}"> {{localize "abfalter.kiTab.kiEleminationOfNec"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiEleminationOfNec.status}}{{#if data.kiAbility.kiEleminationOfNec.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiEleminationOfNec.status" data-label2="data.kiAbility.kiEleminationOfNec.status2" data-ability="{{data.kiAbility.kiEleminationOfNec.status}}" data-ability2="{{data.kiAbility.kiEleminationOfNec.status2}}">
+                    <span> {{data.kiAbility.kiEleminationOfNec.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiEleminationOfNec.status}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleImmHeat"}}"> {{localize "abfalter.kiTab.kiEleImmHeat"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiEleImmHeat.status}}{{#if data.kiAbility.kiEleImmHeat.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiEleImmHeat.status" data-label2="data.kiAbility.kiEleImmHeat.status2" data-ability="{{data.kiAbility.kiEleImmHeat.status}}" data-ability2="{{data.kiAbility.kiEleImmHeat.status2}}">
+                    <span> {{data.kiAbility.kiEleImmHeat.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleImmCold"}}"> {{localize "abfalter.kiTab.kiEleImmCold"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiEleImmCold.status}}{{#if data.kiAbility.kiEleImmCold.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiEleImmCold.status" data-label2="data.kiAbility.kiEleImmCold.status2" data-ability="{{data.kiAbility.kiEleImmCold.status}}" data-ability2="{{data.kiAbility.kiEleImmCold.status2}}">
+                    <span> {{data.kiAbility.kiEleImmCold.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleImmEle"}}"> {{localize "abfalter.kiTab.kiEleImmEle"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiEleImmEle.status}}{{#if data.kiAbility.kiEleImmEle.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiEleImmEle.status" data-label2="data.kiAbility.kiEleImmEle.status2" data-ability="{{data.kiAbility.kiEleImmEle.status}}" data-ability2="{{data.kiAbility.kiEleImmEle.status2}}">
+                    <span> {{data.kiAbility.kiEleImmEle.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiPenRed"}}"> {{localize "abfalter.kiTab.kiPenRed"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiPenRed.status}}{{#if data.kiAbility.kiPenRed.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiPenRed.status" data-label2="data.kiAbility.kiPenRed.status2" data-ability="{{data.kiAbility.kiPenRed.status}}" data-ability2="{{data.kiAbility.kiPenRed.status2}}">
+                    <span> {{data.kiAbility.kiPenRed.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiPenRed.status}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiRecovery"}}"> {{localize "abfalter.kiTab.kiRecovery"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiRecovery.status}}{{#if data.kiAbility.kiRecovery.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiRecovery.status" data-label2="data.kiAbility.kiRecovery.status2" data-ability="{{data.kiAbility.kiRecovery.status}}" data-ability2="{{data.kiAbility.kiRecovery.status2}}">
+                    <span> {{data.kiAbility.kiRecovery.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiRestoreOther"}}"> {{localize "abfalter.kiTab.kiRestoreOther"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiRestoreOther.status}}{{#if data.kiAbility.kiRestoreOther.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiRestoreOther.status" data-label2="data.kiAbility.kiRestoreOther.status2" data-ability="{{data.kiAbility.kiRestoreOther.status}}" data-ability2="{{data.kiAbility.kiRestoreOther.status2}}">
+                    <span> {{data.kiAbility.kiRestoreOther.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiCharacAug"}}"> {{localize "abfalter.kiTab.kiCharacAug"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiCharacAug.status}}{{#if data.kiAbility.kiCharacAug.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiCharacAug.status" data-label2="data.kiAbility.kiCharacAug.status2" data-ability="{{data.kiAbility.kiCharacAug.status}}" data-ability2="{{data.kiAbility.kiCharacAug.status2}}">
+                    <span> {{data.kiAbility.kiCharacAug.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiCharacAug.status}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.desckiSupCharacAug"}}"> {{localize "abfalter.kiTab.kiSupCharacAug"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiSupCharacAug.status}}{{#if data.kiAbility.kiSupCharacAug.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiSupCharacAug.status" data-label2="data.kiAbility.kiSupCharacAug.status2" data-ability="{{data.kiAbility.kiSupCharacAug.status}}" data-ability2="{{data.kiAbility.kiSupCharacAug.status2}}">
+                    <span> {{data.kiAbility.kiSupCharacAug.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            {{/if}}<!--End of Use of Necessary Energy If Statement-->
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.desckiImpovTech"}}"> {{localize "abfalter.kiTab.kiImpovTech"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiImpovTech.status}}{{#if data.kiAbility.kiImpovTech.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiImpovTech.status" data-label2="data.kiAbility.kiImpovTech.status2" data-ability="{{data.kiAbility.kiImpovTech.status}}" data-ability2="{{data.kiAbility.kiImpovTech.status2}}">
+                    <span> {{data.kiAbility.kiImpovTech.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.desckiInhumanity"}}"> {{localize "abfalter.kiTab.kiInhumanity"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiInhumanity.status}}{{#if data.kiAbility.kiInhumanity.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiInhumanity.status" data-label2="data.kiAbility.kiInhumanity.status2" data-ability="{{data.kiAbility.kiInhumanity.status}}" data-ability2="{{data.kiAbility.kiInhumanity.status2}}">
+                    <span> {{data.kiAbility.kiInhumanity.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.kiInhumanity.status}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiZen"}}"> {{localize "abfalter.kiTab.kiZen"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.kiZen.status}}{{#if data.kiAbility.kiZen.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.kiZen.status" data-label2="data.kiAbility.kiZen.status2" data-ability="{{data.kiAbility.kiZen.status}}" data-ability2="{{data.kiAbility.kiZen.status2}}">
+                    <span> {{data.kiAbility.kiZen.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            {{/if}}
+        </div>
+        <h5> Nemesis Abilities </h5>
+        <div class="kiSubsection">
+            <div>
+                <span title="{{localize "abfalter.kiTab.descuseOfNemesis"}}"> {{localize "abfalter.kiTab.useOfNemesis"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.useOfNemesis.status}}{{#if data.kiAbility.useOfNemesis.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.useOfNemesis.status" data-label2="data.kiAbility.useOfNemesis.status2" data-ability="{{data.kiAbility.useOfNemesis.status}}" data-ability2="{{data.kiAbility.useOfNemesis.status2}}">
+                    <span> {{data.kiAbility.useOfNemesis.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.useOfNemesis.status}}
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiArmor"}}"> {{localize "abfalter.kiTab.nemiArmor"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiArmor.status}}{{#if data.kiAbility.nemiArmor.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiArmor.status" data-label2="data.kiAbility.nemiArmor.status2" data-ability="{{data.kiAbility.nemiArmor.status}}" data-ability2="{{data.kiAbility.nemiArmor.status2}}">
+                    <span> {{data.kiAbility.nemiArmor.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.nemiArmor.status}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiNoht"}}"> {{localize "abfalter.kiTab.nemiNoht"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiNoht.status}}{{#if data.kiAbility.nemiNoht.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiNoht.status" data-label2="data.kiAbility.nemiNoht.status2" data-ability="{{data.kiAbility.nemiNoht.status}}" data-ability2="{{data.kiAbility.nemiNoht.status2}}">
+                    <span> {{data.kiAbility.nemiNoht.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiKiCancel"}}"> {{localize "abfalter.kiTab.nemiKiCancel"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiKiCancel.status}}{{#if data.kiAbility.nemiKiCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiKiCancel.status" data-label2="data.kiAbility.nemiKiCancel.status2" data-ability="{{data.kiAbility.nemiKiCancel.status}}" data-ability2="{{data.kiAbility.nemiKiCancel.status2}}">
+                    <span> {{data.kiAbility.nemiKiCancel.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.nemiKiCancel.status}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiGreaterKiCancel"}}"> {{localize "abfalter.kiTab.nemiGreaterKiCancel"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiGreaterKiCancel.status}}{{#if data.kiAbility.nemiGreaterKiCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiGreaterKiCancel.status" data-label2="data.kiAbility.nemiGreaterKiCancel.status2" data-ability="{{data.kiAbility.nemiGreaterKiCancel.status}}" data-ability2="{{data.kiAbility.nemiGreaterKiCancel.status2}}">
+                    <span> {{data.kiAbility.nemiGreaterKiCancel.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiMysticCancel"}}"> {{localize "abfalter.kiTab.nemiMysticCancel"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiMysticCancel.status}}{{#if data.kiAbility.nemiMysticCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiMysticCancel.status" data-label2="data.kiAbility.nemiMysticCancel.status2" data-ability="{{data.kiAbility.nemiMysticCancel.status}}" data-ability2="{{data.kiAbility.nemiMysticCancel.status2}}">
+                    <span> {{data.kiAbility.nemiMysticCancel.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.nemiMysticCancel.status}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiGreaterMysticCancel"}}"> {{localize "abfalter.kiTab.nemiGreaterMysticCancel"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiGreaterMysticCancel.status}}{{#if data.kiAbility.nemiGreaterMysticCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiGreaterMysticCancel.status" data-label2="data.kiAbility.nemiGreaterMysticCancel.status2" data-ability="{{data.kiAbility.nemiGreaterMysticCancel.status}}" data-ability2="{{data.kiAbility.nemiGreaterMysticCancel.status2}}">
+                    <span> {{data.kiAbility.nemiGreaterMysticCancel.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiMatrixCancel"}}"> {{localize "abfalter.kiTab.nemiMatrixCancel"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiMatrixCancel.status}}{{#if data.kiAbility.nemiMatrixCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiMatrixCancel.status" data-label2="data.kiAbility.nemiMatrixCancel.status2" data-ability="{{data.kiAbility.nemiMatrixCancel.status}}" data-ability2="{{data.kiAbility.nemiMatrixCancel.status2}}">
+                    <span> {{data.kiAbility.nemiMatrixCancel.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.nemiMatrixCancel.status}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiGreaterMatrixCancel"}}"> {{localize "abfalter.kiTab.nemiGreaterMatrixCancel"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiGreaterMatrixCancel.status}}{{#if data.kiAbility.nemiGreaterMatrixCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiGreaterMatrixCancel.status" data-label2="data.kiAbility.nemiGreaterMatrixCancel.status2" data-ability="{{data.kiAbility.nemiGreaterMatrixCancel.status}}" data-ability2="{{data.kiAbility.nemiGreaterMatrixCancel.status2}}">
+                    <span> {{data.kiAbility.nemiGreaterMatrixCancel.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiBindCancel"}}"> {{localize "abfalter.kiTab.nemiBindCancel"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiBindCancel.status}}{{#if data.kiAbility.nemiBindCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiBindCancel.status" data-label2="data.kiAbility.nemiBindCancel.status2" data-ability="{{data.kiAbility.nemiBindCancel.status}}" data-ability2="{{data.kiAbility.nemiBindCancel.status2}}">
+                    <span> {{data.kiAbility.nemiBindCancel.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiEmptyExt"}}"> {{localize "abfalter.kiTab.nemiEmptyExt"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiEmptyExt.status}}{{#if data.kiAbility.nemiEmptyExt.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiEmptyExt.status" data-label2="data.kiAbility.nemiEmptyExt.status2" data-ability="{{data.kiAbility.nemiEmptyExt.status}}" data-ability2="{{data.kiAbility.nemiEmptyExt.status2}}">
+                    <span> {{data.kiAbility.nemiEmptyExt.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.nemiEmptyExt.status}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiFormOfEmpty"}}"> {{localize "abfalter.kiTab.nemiFormOfEmpty"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiFormOfEmpty.status}}{{#if data.kiAbility.nemiFormOfEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiFormOfEmpty.status" data-label2="data.kiAbility.nemiFormOfEmpty.status2" data-ability="{{data.kiAbility.nemiFormOfEmpty.status}}" data-ability2="{{data.kiAbility.nemiFormOfEmpty.status2}}">
+                    <span> {{data.kiAbility.nemiFormOfEmpty.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiBodyEmpty"}}"> {{localize "abfalter.kiTab.nemiBodyEmpty"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiBodyEmpty.status}}{{#if data.kiAbility.nemiBodyEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiBodyEmpty.status" data-label2="data.kiAbility.nemiBodyEmpty.status2" data-ability="{{data.kiAbility.nemiBodyEmpty.status}}" data-ability2="{{data.kiAbility.nemiBodyEmpty.status2}}">
+                    <span> {{data.kiAbility.nemiBodyEmpty.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.nemiBodyEmpty.status}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiNoNeeds"}}"> {{localize "abfalter.kiTab.nemiNoNeeds"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiNoNeeds.status}}{{#if data.kiAbility.nemiNoNeeds.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiNoNeeds.status" data-label2="data.kiAbility.nemiNoNeeds.status2" data-ability="{{data.kiAbility.nemiNoNeeds.status}}" data-ability2="{{data.kiAbility.nemiNoNeeds.status2}}">
+                    <span> {{data.kiAbility.nemiNoNeeds.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiMoveEmpty"}}"> {{localize "abfalter.kiTab.nemiMoveEmpty"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiMoveEmpty.status}}{{#if data.kiAbility.nemiMoveEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiMoveEmpty.status" data-label2="data.kiAbility.nemiMoveEmpty.status2" data-ability="{{data.kiAbility.nemiMoveEmpty.status}}" data-ability2="{{data.kiAbility.nemiMoveEmpty.status2}}">
+                    <span> {{data.kiAbility.nemiMoveEmpty.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiEssenceEmpty"}}"> {{localize "abfalter.kiTab.nemiEssenceEmpty"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiEssenceEmpty.status}}{{#if data.kiAbility.nemiEssenceEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiEssenceEmpty.status" data-label2="data.kiAbility.nemiEssenceEmpty.status2" data-ability="{{data.kiAbility.nemiEssenceEmpty.status}}" data-ability2="{{data.kiAbility.nemiEssenceEmpty.status2}}">
+                    <span> {{data.kiAbility.nemiEssenceEmpty.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.nemiEssenceEmpty.status}}
+            <div>
+                <span class="subKi3" title="{{localize "abfalter.kiTab.descnemiOneNothing"}}"> {{localize "abfalter.kiTab.nemiOneNothing"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiOneNothing.status}}{{#if data.kiAbility.nemiOneNothing.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiOneNothing.status" data-label2="data.kiAbility.nemiOneNothing.status2" data-ability="{{data.kiAbility.nemiOneNothing.status}}" data-ability2="{{data.kiAbility.nemiOneNothing.status2}}">
+                    <span> {{data.kiAbility.nemiOneNothing.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            {{/if}}
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiAuraEmpty"}}"> {{localize "abfalter.kiTab.nemiAuraEmpty"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiAuraEmpty.status}}{{#if data.kiAbility.nemiAuraEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiAuraEmpty.status" data-label2="data.kiAbility.nemiAuraEmpty.status2" data-ability="{{data.kiAbility.nemiAuraEmpty.status}}" data-ability2="{{data.kiAbility.nemiAuraEmpty.status2}}">
+                    <span> {{data.kiAbility.nemiAuraEmpty.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiUndetectable"}}"> {{localize "abfalter.kiTab.nemiUndetectable"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiUndetectable.status}}{{#if data.kiAbility.nemiUndetectable.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiUndetectable.status" data-label2="data.kiAbility.nemiUndetectable.status2" data-ability="{{data.kiAbility.nemiUndetectable.status}}" data-ability2="{{data.kiAbility.nemiUndetectable.status2}}">
+                    <span> {{data.kiAbility.nemiUndetectable.cost}} </span>
+                </button>
+            </div>
+            <div>
+                <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiInhumanity"}}"> {{localize "abfalter.kiTab.nemiInhumanity"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiInhumanity.status}}{{#if data.kiAbility.nemiInhumanity.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiInhumanity.status" data-label2="data.kiAbility.nemiInhumanity.status2" data-ability="{{data.kiAbility.nemiInhumanity.status}}" data-ability2="{{data.kiAbility.nemiInhumanity.status2}}">
+                    <span> {{data.kiAbility.nemiInhumanity.cost}} </span>
+                </button>
+            </div>
+            {{#if data.kiAbility.nemiInhumanity.status}}
+            <div>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiZen"}}"> {{localize "abfalter.kiTab.nemiZen"}} </span>
+                <button type="button" class="kiAbility {{#if data.kiAbility.nemiZen.status}}{{#if data.kiAbility.nemiZen.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-label="data.kiAbility.nemiZen.status" data-label2="data.kiAbility.nemiZen.status2" data-ability="{{data.kiAbility.nemiZen.status}}" data-ability2="{{data.kiAbility.nemiZen.status2}}">
+                    <span> {{data.kiAbility.nemiZen.cost}} </span>
+                </button>
+            </div>
+            {{/if}}
+            {{/if}}<!--End of Use of Nemesis If Statement-->
         </div>
-        {{#if data.kiAbility.useOfKi.status}}
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.desckiControl"}}"> {{localize "abfalter.kiTab.kiControl"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiControl.status}}{{#if data.kiAbility.kiControl.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiControl.status" data-label2="data.kiAbility.kiControl.status2" data-ability="{{data.kiAbility.kiControl.status}}" data-ability2="{{data.kiAbility.kiControl.status2}}">
-                <span> {{data.kiAbility.kiControl.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiControl.status}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiDetection"}}"> {{localize "abfalter.kiTab.kiDetection"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiDetection.status}}{{#if data.kiAbility.kiDetection.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiDetection.status" data-label2="data.kiAbility.kiDetection.status2" data-ability="{{data.kiAbility.kiDetection.status}}" data-ability2="{{data.kiAbility.kiDetection.status2}}">
-                <span> {{data.kiAbility.kiDetection.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiDetection.status}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiErudition"}}"> {{localize "abfalter.kiTab.kiErudition"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiErudition.status}}{{#if data.kiAbility.kiErudition.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiErudition.status" data-label2="data.kiAbility.kiErudition.status2" data-ability="{{data.kiAbility.kiErudition.status}}" data-ability2="{{data.kiAbility.kiErudition.status2}}">
-                <span> {{data.kiAbility.kiErudition.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiCombatAura"}}"> {{localize "abfalter.kiTab.kiCombatAura"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiCombatAura.status}}{{#if data.kiAbility.kiCombatAura.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiCombatAura.status" data-label2="data.kiAbility.kiCombatAura.status2" data-ability="{{data.kiAbility.kiCombatAura.status}}" data-ability2="{{data.kiAbility.kiCombatAura.status2}}">
-                <span> {{data.kiAbility.kiCombatAura.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiPhysDom"}}"> {{localize "abfalter.kiTab.kiPhysDom"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiPhysDom.status}}{{#if data.kiAbility.kiPhysDom.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiPhysDom.status" data-label2="data.kiAbility.kiPhysDom.status2" data-ability="{{data.kiAbility.kiPhysDom.status}}" data-ability2="{{data.kiAbility.kiPhysDom.status2}}">
-                <span> {{data.kiAbility.kiPhysDom.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiPhysDom.status}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiPhysChange"}}"> {{localize "abfalter.kiTab.kiPhysChange"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiPhysChange.status}}{{#if data.kiAbility.kiPhysChange.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiPhysChange.status" data-label2="data.kiAbility.kiPhysChange.status2" data-ability="{{data.kiAbility.kiPhysChange.status}}" data-ability2="{{data.kiAbility.kiPhysChange.status2}}">
-                <span> {{data.kiAbility.kiPhysChange.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiPhysChange.status}}
-        <div>
-            <span class="subKi4" title="{{localize "abfalter.kiTab.desckiSuperiorChange"}}"> {{localize "abfalter.kiTab.kiSuperiorChange"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiSuperiorChange.status}}{{#if data.kiAbility.kiSuperiorChange.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiSuperiorChange.status" data-label2="data.kiAbility.kiSuperiorChange.status2" data-ability="{{data.kiAbility.kiSuperiorChange.status}}" data-ability2="{{data.kiAbility.kiSuperiorChange.status2}}">
-                <span> {{data.kiAbility.kiSuperiorChange.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiMultBodies"}}"> {{localize "abfalter.kiTab.kiMultBodies"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiMultBodies.status}}{{#if data.kiAbility.kiMultBodies.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiMultBodies.status" data-label2="data.kiAbility.kiMultBodies.status2" data-ability="{{data.kiAbility.kiMultBodies.status}}" data-ability2="{{data.kiAbility.kiMultBodies.status2}}">
-                <span> {{data.kiAbility.kiMultBodies.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiMultBodies.status}}
-        <div>
-            <span class="subKi4" title="{{localize "abfalter.kiTab.desckiGreaterMult"}}"> {{localize "abfalter.kiTab.kiGreaterMult"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiGreaterMult.status}}{{#if data.kiAbility.kiGreaterMult.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiGreaterMult.status" data-label2="data.kiAbility.kiGreaterMult.status2" data-ability="{{data.kiAbility.kiGreaterMult.status}}" data-ability2="{{data.kiAbility.kiGreaterMult.status2}}">
-                <span> {{data.kiAbility.kiGreaterMult.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiGreaterMult.status}}
-        <div>
-            <span class="subKi5" title="{{localize "abfalter.kiTab.desckiArcaneMult"}}"> {{localize "abfalter.kiTab.kiArcaneMult"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiArcaneMult.status}}{{#if data.kiAbility.kiArcaneMult.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiArcaneMult.status" data-label2="data.kiAbility.kiArcaneMult.status2" data-ability="{{data.kiAbility.kiArcaneMult.status}}" data-ability2="{{data.kiAbility.kiArcaneMult.status2}}">
-                <span> {{data.kiAbility.kiArcaneMult.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi4" title="{{localize "abfalter.kiTab.desckiMagnitude"}}"> {{localize "abfalter.kiTab.kiMagnitude"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiMagnitude.status}}{{#if data.kiAbility.kiMagnitude.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiMagnitude.status" data-label2="data.kiAbility.kiMagnitude.status2" data-ability="{{data.kiAbility.kiMagnitude.status}}" data-ability2="{{data.kiAbility.kiMagnitude.status2}}">
-                <span> {{data.kiAbility.kiMagnitude.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiMagnitude.status}}
-        <div>
-            <span class="subKi5" title="{{localize "abfalter.kiTab.desckiArcaneMagn"}}"> {{localize "abfalter.kiTab.kiArcaneMagn"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiArcaneMagn.status}}{{#if data.kiAbility.kiArcaneMagn.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiArcaneMagn.status" data-label2="data.kiAbility.kiArcaneMagn.status2" data-ability="{{data.kiAbility.kiArcaneMagn.status}}" data-ability2="{{data.kiAbility.kiArcaneMagn.status2}}">
-                <span> {{data.kiAbility.kiArcaneMagn.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        {{/if}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiAgeControl"}}"> {{localize "abfalter.kiTab.kiAgeControl"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiAgeControl.status}}{{#if data.kiAbility.kiAgeControl.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiAgeControl.status" data-label2="data.kiAbility.kiAgeControl.status2" data-ability="{{data.kiAbility.kiAgeControl.status}}" data-ability2="{{data.kiAbility.kiAgeControl.status2}}">
-                <span> {{data.kiAbility.kiAgeControl.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiTechImi"}}"> {{localize "abfalter.kiTab.kiTechImi"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiTechImi.status}}{{#if data.kiAbility.kiTechImi.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiTechImi.status" data-label2="data.kiAbility.kiTechImi.status2" data-ability="{{data.kiAbility.kiTechImi.status}}" data-ability2="{{data.kiAbility.kiTechImi.status2}}">
-                <span> {{data.kiAbility.kiTechImi.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiTechPush"}}"> {{localize "abfalter.kiTab.kiTechPush"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiTechPush.status}}{{#if data.kiAbility.kiTechPush.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiTechPush.status" data-label2="data.kiAbility.kiTechPush.status2" data-ability="{{data.kiAbility.kiTechPush.status}}" data-ability2="{{data.kiAbility.kiTechPush.status2}}">
-                <span> {{data.kiAbility.kiTechPush.cost}} </span>
-            </button>
-        </div>
-        {{/if}} <!--End of Ki Control IF Statement-->
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.descweightElimination"}}"> {{localize "abfalter.kiTab.weightElimination"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.weightElimination.status}}{{#if data.kiAbility.weightElimination.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.weightElimination.status" data-label2="data.kiAbility.weightElimination.status2" data-ability="{{data.kiAbility.weightElimination.status}}" data-ability2="{{data.kiAbility.weightElimination.status2}}">
-                <span> {{data.kiAbility.weightElimination.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.weightElimination.status}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiLevitation"}}"> {{localize "abfalter.kiTab.kiLevitation"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiLevitation.status}}{{#if data.kiAbility.kiLevitation.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiLevitation.status" data-label2="data.kiAbility.kiLevitation.status2" data-ability="{{data.kiAbility.kiLevitation.status}}" data-ability2="{{data.kiAbility.kiLevitation.status2}}">
-                <span> {{data.kiAbility.kiLevitation.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiLevitation.status}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiObjectMotion"}}"> {{localize "abfalter.kiTab.kiObjectMotion"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiObjectMotion.status}}{{#if data.kiAbility.kiObjectMotion.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiObjectMotion.status" data-label2="data.kiAbility.kiObjectMotion.status2" data-ability="{{data.kiAbility.kiObjectMotion.status}}" data-ability2="{{data.kiAbility.kiObjectMotion.status2}}">
-                <span> {{data.kiAbility.kiObjectMotion.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiObjectMotion.status}}
-        <div>
-            <span class="subKi4" title="{{localize "abfalter.kiTab.desckiMassMove"}}"> {{localize "abfalter.kiTab.kiMassMove"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiMassMove.status}}{{#if data.kiAbility.kiMassMove.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiMassMove.status" data-label2="data.kiAbility.kiMassMove.status2" data-ability="{{data.kiAbility.kiMassMove.status}}" data-ability2="{{data.kiAbility.kiMassMove.status2}}">
-                <span> {{data.kiAbility.kiMassMove.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiFlight"}}"> {{localize "abfalter.kiTab.kiFlight"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiFlight.status}}{{#if data.kiAbility.kiFlight.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiFlight.status" data-label2="data.kiAbility.kiFlight.status2" data-ability="{{data.kiAbility.kiFlight.status}}" data-ability2="{{data.kiAbility.kiFlight.status2}}">
-                <span> {{data.kiAbility.kiFlight.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        {{/if}}<!--End of Weight Elimination If Statement-->
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.desckiPresenceEx"}}"> {{localize "abfalter.kiTab.kiPresenceEx"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiPresenceEx.status}}{{#if data.kiAbility.kiPresenceEx.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiPresenceEx.status" data-label2="data.kiAbility.kiPresenceEx.status2" data-ability="{{data.kiAbility.kiPresenceEx.status}}" data-ability2="{{data.kiAbility.kiPresenceEx.status2}}">
-                <span> {{data.kiAbility.kiPresenceEx.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiPresenceEx.status}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiEnergyArmor"}}"> {{localize "abfalter.kiTab.kiEnergyArmor"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiEnergyArmor.status}}{{#if data.kiAbility.kiEnergyArmor.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiEnergyArmor.status" data-label2="data.kiAbility.kiEnergyArmor.status2" data-ability="{{data.kiAbility.kiEnergyArmor.status}}" data-ability2="{{data.kiAbility.kiEnergyArmor.status2}}">
-                <span> {{data.kiAbility.kiEnergyArmor.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiEnergyArmor.status}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiGreaterArmor"}}"> {{localize "abfalter.kiTab.kiGreaterArmor"}} </span>
-            <button class="kiActiveButton1 toggleBoolean {{#if data.kiAbility.kiArcaneArmor.status}}hidden{{/if}} {{#if data.kiAbility.kiGreaterArmor.status}}{{else}}hidden{{/if}} {{#if data.toggles.greaterEnergyArmor}}kiBought{{/if}}"
-                    data-label="data.toggles.greaterEnergyArmor" data-ability="{{data.toggles.greaterEnergyArmor}}">
-                <span class="{{#if data.toggles.greaterEnergyArmor}}activeKiAbility{{/if}}"> {{localize "abfalter.basicInfo.active"}} </span>
-            </button>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiGreaterArmor.status}}{{#if data.kiAbility.kiGreaterArmor.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiGreaterArmor.status" data-label2="data.kiAbility.kiGreaterArmor.status2" data-ability="{{data.kiAbility.kiGreaterArmor.status}}" data-ability2="{{data.kiAbility.kiGreaterArmor.status2}}">
-                <span> {{data.kiAbility.kiGreaterArmor.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiGreaterArmor.status}}
-        <div>
-            <span class="subKi4" title="{{localize "abfalter.kiTab.desckiArcaneArmor"}}"> {{localize "abfalter.kiTab.kiArcaneArmor"}} </span>
-            <button class="kiActiveButton toggleBoolean {{#if data.kiAbility.kiArcaneArmor.status}}{{else}}hidden{{/if}} {{#if data.toggles.arcaneEnergyArmor}}kiBought{{/if}}"
-                    data-label="data.toggles.arcaneEnergyArmor" data-ability="{{data.toggles.arcaneEnergyArmor}}">
-                <span class="{{#if data.toggles.arcaneEnergyArmor}}activeKiAbility{{/if}}"> {{localize "abfalter.basicInfo.active"}} </span>
-            </button>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiArcaneArmor.status}}{{#if data.kiAbility.kiArcaneArmor.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiArcaneArmor.status" data-label2="data.kiAbility.kiArcaneArmor.status2" data-ability="{{data.kiAbility.kiArcaneArmor.status}}" data-ability2="{{data.kiAbility.kiArcaneArmor.status2}}">
-                <span> {{data.kiAbility.kiArcaneArmor.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        {{/if}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiAuraEx"}}"> {{localize "abfalter.kiTab.kiAuraEx"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiAuraEx.status}}{{#if data.kiAbility.kiAuraEx.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiAuraEx.status" data-label2="data.kiAbility.kiAuraEx.status2" data-ability="{{data.kiAbility.kiAuraEx.status}}" data-ability2="{{data.kiAbility.kiAuraEx.status2}}">
-                <span> {{data.kiAbility.kiAuraEx.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiAuraEx.status}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleFire"}}"> {{localize "abfalter.kiTab.kiEleFire"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiEleFire.status}}{{#if data.kiAbility.kiEleFire.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiEleFire.status" data-label2="data.kiAbility.kiEleFire.status2" data-ability="{{data.kiAbility.kiEleFire.status}}" data-ability2="{{data.kiAbility.kiEleFire.status2}}">
-                <span> {{data.kiAbility.kiEleFire.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleWater"}}"> {{localize "abfalter.kiTab.kiEleWater"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiEleWater.status}}{{#if data.kiAbility.kiEleWater.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiEleWater.status" data-label2="data.kiAbility.kiEleWater.status2" data-ability="{{data.kiAbility.kiEleWater.status}}" data-ability2="{{data.kiAbility.kiEleWater.status2}}">
-                <span> {{data.kiAbility.kiEleWater.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleAir"}}"> {{localize "abfalter.kiTab.kiEleAir"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiEleAir.status}}{{#if data.kiAbility.kiEleAir.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiEleAir.status" data-label2="data.kiAbility.kiEleAir.status2" data-ability="{{data.kiAbility.kiEleAir.status}}" data-ability2="{{data.kiAbility.kiEleAir.status2}}">
-                <span> {{data.kiAbility.kiEleAir.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleEarth"}}"> {{localize "abfalter.kiTab.kiEleEarth"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiEleEarth.status}}{{#if data.kiAbility.kiEleEarth.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiEleEarth.status" data-label2="data.kiAbility.kiEleEarth.status2" data-ability="{{data.kiAbility.kiEleEarth.status}}" data-ability2="{{data.kiAbility.kiEleEarth.status2}}">
-                <span> {{data.kiAbility.kiEleEarth.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleLight"}}"> {{localize "abfalter.kiTab.kiEleLight"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiEleLight.status}}{{#if data.kiAbility.kiEleLight.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiEleLight.status" data-label2="data.kiAbility.kiEleLight.status2" data-ability="{{data.kiAbility.kiEleLight.status}}" data-ability2="{{data.kiAbility.kiEleLight.status2}}">
-                <span> {{data.kiAbility.kiEleLight.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleDark"}}"> {{localize "abfalter.kiTab.kiEleDark"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiEleDark.status}}{{#if data.kiAbility.kiEleDark.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiEleDark.status" data-label2="data.kiAbility.kiEleDark.status2" data-ability="{{data.kiAbility.kiEleDark.status}}" data-ability2="{{data.kiAbility.kiEleDark.status2}}">
-                <span> {{data.kiAbility.kiEleDark.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiIncreaseDmg"}}"> {{localize "abfalter.kiTab.kiIncreaseDmg"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiIncreaseDmg.status}}{{#if data.kiAbility.kiIncreaseDmg.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiIncreaseDmg.status" data-label2="data.kiAbility.kiIncreaseDmg.status2" data-ability="{{data.kiAbility.kiIncreaseDmg.status}}" data-ability2="{{data.kiAbility.kiIncreaseDmg.status2}}">
-                <span> {{data.kiAbility.kiIncreaseDmg.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiIncreaseReach"}}"> {{localize "abfalter.kiTab.kiIncreaseReach"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiIncreaseReach.status}}{{#if data.kiAbility.kiIncreaseReach.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiIncreaseReach.status" data-label2="data.kiAbility.kiIncreaseReach.status2" data-ability="{{data.kiAbility.kiIncreaseReach.status}}" data-ability2="{{data.kiAbility.kiIncreaseReach.status2}}">
-                <span> {{data.kiAbility.kiIncreaseReach.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiIncreaseSpd"}}"> {{localize "abfalter.kiTab.kiIncreaseSpd"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiIncreaseSpd.status}}{{#if data.kiAbility.kiIncreaseSpd.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiIncreaseSpd.status" data-label2="data.kiAbility.kiIncreaseSpd.status2" data-ability="{{data.kiAbility.kiIncreaseSpd.status}}" data-ability2="{{data.kiAbility.kiIncreaseSpd.status2}}">
-                <span> {{data.kiAbility.kiIncreaseSpd.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiDestruction"}}"> {{localize "abfalter.kiTab.kiDestruction"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiDestruction.status}}{{#if data.kiAbility.kiDestruction.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiDestruction.status" data-label2="data.kiAbility.kiDestruction.status2" data-ability="{{data.kiAbility.kiDestruction.status}}" data-ability2="{{data.kiAbility.kiDestruction.status2}}">
-                <span> {{data.kiAbility.kiDestruction.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiAbsorbtion"}}"> {{localize "abfalter.kiTab.kiAbsorbtion"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiAbsorbtion.status}}{{#if data.kiAbility.kiAbsorbtion.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiAbsorbtion.status" data-label2="data.kiAbility.kiAbsorbtion.status2" data-ability="{{data.kiAbility.kiAbsorbtion.status}}" data-ability2="{{data.kiAbility.kiAbsorbtion.status2}}">
-                <span> {{data.kiAbility.kiAbsorbtion.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiPhysShield"}}"> {{localize "abfalter.kiTab.kiPhysShield"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiPhysShield.status}}{{#if data.kiAbility.kiPhysShield.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiPhysShield.status" data-label2="data.kiAbility.kiPhysShield.status2" data-ability="{{data.kiAbility.kiPhysShield.status}}" data-ability2="{{data.kiAbility.kiPhysShield.status2}}">
-                <span> {{data.kiAbility.kiPhysShield.cost}} </span>
-            </button>
-        </div>
-        {{/if}}<!--End of Presence Extrusion If Statement-->
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.desckiTrans"}}"> {{localize "abfalter.kiTab.kiTrans"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiTrans.status}}{{#if data.kiAbility.kiTrans.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiTrans.status" data-label2="data.kiAbility.kiTrans.status2" data-ability="{{data.kiAbility.kiTrans.status}}" data-ability2="{{data.kiAbility.kiTrans.status2}}">
-                <span> {{data.kiAbility.kiTrans.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiTrans.status}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiHeal"}}"> {{localize "abfalter.kiTab.kiHeal"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiHeal.status}}{{#if data.kiAbility.kiHeal.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiHeal.status" data-label2="data.kiAbility.kiHeal.status2" data-ability="{{data.kiAbility.kiHeal.status}}" data-ability2="{{data.kiAbility.kiHeal.status2}}">
-                <span> {{data.kiAbility.kiHeal.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiHeal.status}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiSupHeal"}}"> {{localize "abfalter.kiTab.kiSupHeal"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiSupHeal.status}}{{#if data.kiAbility.kiSupHeal.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiSupHeal.status" data-label2="data.kiAbility.kiSupHeal.status2" data-ability="{{data.kiAbility.kiSupHeal.status}}" data-ability2="{{data.kiAbility.kiSupHeal.status2}}">
-                <span> {{data.kiAbility.kiSupHeal.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiStabil"}}"> {{localize "abfalter.kiTab.kiStabil"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiStabil.status}}{{#if data.kiAbility.kiStabil.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiStabil.status" data-label2="data.kiAbility.kiStabil.status2" data-ability="{{data.kiAbility.kiStabil.status}}" data-ability2="{{data.kiAbility.kiStabil.status2}}">
-                <span> {{data.kiAbility.kiStabil.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiLifeSac"}}"> {{localize "abfalter.kiTab.kiLifeSac"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiLifeSac.status}}{{#if data.kiAbility.kiLifeSac.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiLifeSac.status" data-label2="data.kiAbility.kiLifeSac.status2" data-ability="{{data.kiAbility.kiLifeSac.status}}" data-ability2="{{data.kiAbility.kiLifeSac.status2}}">
-                <span> {{data.kiAbility.kiLifeSac.cost}} </span>
-            </button>
-        </div>
-        {{/if}}<!--End of Ki Transmission If Statement-->
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.desckiUseOfEne"}}"> {{localize "abfalter.kiTab.kiUseOfEne"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiUseOfEne.status}}{{#if data.kiAbility.kiUseOfEne.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiUseOfEne.status" data-label2="data.kiAbility.kiUseOfEne.status2" data-ability="{{data.kiAbility.kiUseOfEne.status}}" data-ability2="{{data.kiAbility.kiUseOfEne.status2}}">
-                <span> {{data.kiAbility.kiUseOfEne.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiUseOfEne.status}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiConceal"}}"> {{localize "abfalter.kiTab.kiConceal"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiConceal.status}}{{#if data.kiAbility.kiConceal.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiConceal.status" data-label2="data.kiAbility.kiConceal.status2" data-ability="{{data.kiAbility.kiConceal.status}}" data-ability2="{{data.kiAbility.kiConceal.status2}}">
-                <span> {{data.kiAbility.kiConceal.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiConceal.status}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiAuraConceal"}}"> {{localize "abfalter.kiTab.kiAuraConceal"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiAuraConceal.status}}{{#if data.kiAbility.kiAuraConceal.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiAuraConceal.status" data-label2="data.kiAbility.kiAuraConceal.status2" data-ability="{{data.kiAbility.kiAuraConceal.status}}" data-ability2="{{data.kiAbility.kiAuraConceal.status2}}">
-                <span> {{data.kiAbility.kiAuraConceal.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiFalseDeath"}}"> {{localize "abfalter.kiTab.kiFalseDeath"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiFalseDeath.status}}{{#if data.kiAbility.kiFalseDeath.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiFalseDeath.status" data-label2="data.kiAbility.kiFalseDeath.status2" data-ability="{{data.kiAbility.kiFalseDeath.status}}" data-ability2="{{data.kiAbility.kiFalseDeath.status2}}">
-                <span> {{data.kiAbility.kiFalseDeath.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiEleminationOfNec"}}"> {{localize "abfalter.kiTab.kiEleminationOfNec"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiEleminationOfNec.status}}{{#if data.kiAbility.kiEleminationOfNec.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiEleminationOfNec.status" data-label2="data.kiAbility.kiEleminationOfNec.status2" data-ability="{{data.kiAbility.kiEleminationOfNec.status}}" data-ability2="{{data.kiAbility.kiEleminationOfNec.status2}}">
-                <span> {{data.kiAbility.kiEleminationOfNec.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiEleminationOfNec.status}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleImmHeat"}}"> {{localize "abfalter.kiTab.kiEleImmHeat"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiEleImmHeat.status}}{{#if data.kiAbility.kiEleImmHeat.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiEleImmHeat.status" data-label2="data.kiAbility.kiEleImmHeat.status2" data-ability="{{data.kiAbility.kiEleImmHeat.status}}" data-ability2="{{data.kiAbility.kiEleImmHeat.status2}}">
-                <span> {{data.kiAbility.kiEleImmHeat.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleImmCold"}}"> {{localize "abfalter.kiTab.kiEleImmCold"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiEleImmCold.status}}{{#if data.kiAbility.kiEleImmCold.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiEleImmCold.status" data-label2="data.kiAbility.kiEleImmCold.status2" data-ability="{{data.kiAbility.kiEleImmCold.status}}" data-ability2="{{data.kiAbility.kiEleImmCold.status2}}">
-                <span> {{data.kiAbility.kiEleImmCold.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiEleImmEle"}}"> {{localize "abfalter.kiTab.kiEleImmEle"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiEleImmEle.status}}{{#if data.kiAbility.kiEleImmEle.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiEleImmEle.status" data-label2="data.kiAbility.kiEleImmEle.status2" data-ability="{{data.kiAbility.kiEleImmEle.status}}" data-ability2="{{data.kiAbility.kiEleImmEle.status2}}">
-                <span> {{data.kiAbility.kiEleImmEle.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiPenRed"}}"> {{localize "abfalter.kiTab.kiPenRed"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiPenRed.status}}{{#if data.kiAbility.kiPenRed.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiPenRed.status" data-label2="data.kiAbility.kiPenRed.status2" data-ability="{{data.kiAbility.kiPenRed.status}}" data-ability2="{{data.kiAbility.kiPenRed.status2}}">
-                <span> {{data.kiAbility.kiPenRed.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiPenRed.status}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiRecovery"}}"> {{localize "abfalter.kiTab.kiRecovery"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiRecovery.status}}{{#if data.kiAbility.kiRecovery.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiRecovery.status" data-label2="data.kiAbility.kiRecovery.status2" data-ability="{{data.kiAbility.kiRecovery.status}}" data-ability2="{{data.kiAbility.kiRecovery.status2}}">
-                <span> {{data.kiAbility.kiRecovery.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiRestoreOther"}}"> {{localize "abfalter.kiTab.kiRestoreOther"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiRestoreOther.status}}{{#if data.kiAbility.kiRestoreOther.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiRestoreOther.status" data-label2="data.kiAbility.kiRestoreOther.status2" data-ability="{{data.kiAbility.kiRestoreOther.status}}" data-ability2="{{data.kiAbility.kiRestoreOther.status2}}">
-                <span> {{data.kiAbility.kiRestoreOther.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiCharacAug"}}"> {{localize "abfalter.kiTab.kiCharacAug"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiCharacAug.status}}{{#if data.kiAbility.kiCharacAug.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiCharacAug.status" data-label2="data.kiAbility.kiCharacAug.status2" data-ability="{{data.kiAbility.kiCharacAug.status}}" data-ability2="{{data.kiAbility.kiCharacAug.status2}}">
-                <span> {{data.kiAbility.kiCharacAug.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiCharacAug.status}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.desckiSupCharacAug"}}"> {{localize "abfalter.kiTab.kiSupCharacAug"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiSupCharacAug.status}}{{#if data.kiAbility.kiSupCharacAug.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiSupCharacAug.status" data-label2="data.kiAbility.kiSupCharacAug.status2" data-ability="{{data.kiAbility.kiSupCharacAug.status}}" data-ability2="{{data.kiAbility.kiSupCharacAug.status2}}">
-                <span> {{data.kiAbility.kiSupCharacAug.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        {{/if}}<!--End of Use of Necessary Energy If Statement-->
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.desckiImpovTech"}}"> {{localize "abfalter.kiTab.kiImpovTech"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiImpovTech.status}}{{#if data.kiAbility.kiImpovTech.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiImpovTech.status" data-label2="data.kiAbility.kiImpovTech.status2" data-ability="{{data.kiAbility.kiImpovTech.status}}" data-ability2="{{data.kiAbility.kiImpovTech.status2}}">
-                <span> {{data.kiAbility.kiImpovTech.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.desckiInhumanity"}}"> {{localize "abfalter.kiTab.kiInhumanity"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiInhumanity.status}}{{#if data.kiAbility.kiInhumanity.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiInhumanity.status" data-label2="data.kiAbility.kiInhumanity.status2" data-ability="{{data.kiAbility.kiInhumanity.status}}" data-ability2="{{data.kiAbility.kiInhumanity.status2}}">
-                <span> {{data.kiAbility.kiInhumanity.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.kiInhumanity.status}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.desckiZen"}}"> {{localize "abfalter.kiTab.kiZen"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.kiZen.status}}{{#if data.kiAbility.kiZen.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.kiZen.status" data-label2="data.kiAbility.kiZen.status2" data-ability="{{data.kiAbility.kiZen.status}}" data-ability2="{{data.kiAbility.kiZen.status2}}">
-                <span> {{data.kiAbility.kiZen.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        {{/if}}
-        <h2> Nemesis Abilities </h2>
-        <div>
-            <span title="{{localize "abfalter.kiTab.descuseOfNemesis"}}"> {{localize "abfalter.kiTab.useOfNemesis"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.useOfNemesis.status}}{{#if data.kiAbility.useOfNemesis.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.useOfNemesis.status" data-label2="data.kiAbility.useOfNemesis.status2" data-ability="{{data.kiAbility.useOfNemesis.status}}" data-ability2="{{data.kiAbility.useOfNemesis.status2}}">
-                <span> {{data.kiAbility.useOfNemesis.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.useOfNemesis.status}}
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiArmor"}}"> {{localize "abfalter.kiTab.nemiArmor"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiArmor.status}}{{#if data.kiAbility.nemiArmor.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiArmor.status" data-label2="data.kiAbility.nemiArmor.status2" data-ability="{{data.kiAbility.nemiArmor.status}}" data-ability2="{{data.kiAbility.nemiArmor.status2}}">
-                <span> {{data.kiAbility.nemiArmor.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.nemiArmor.status}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiNoht"}}"> {{localize "abfalter.kiTab.nemiNoht"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiNoht.status}}{{#if data.kiAbility.nemiNoht.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiNoht.status" data-label2="data.kiAbility.nemiNoht.status2" data-ability="{{data.kiAbility.nemiNoht.status}}" data-ability2="{{data.kiAbility.nemiNoht.status2}}">
-                <span> {{data.kiAbility.nemiNoht.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiKiCancel"}}"> {{localize "abfalter.kiTab.nemiKiCancel"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiKiCancel.status}}{{#if data.kiAbility.nemiKiCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiKiCancel.status" data-label2="data.kiAbility.nemiKiCancel.status2" data-ability="{{data.kiAbility.nemiKiCancel.status}}" data-ability2="{{data.kiAbility.nemiKiCancel.status2}}">
-                <span> {{data.kiAbility.nemiKiCancel.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.nemiKiCancel.status}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiGreaterKiCancel"}}"> {{localize "abfalter.kiTab.nemiGreaterKiCancel"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiGreaterKiCancel.status}}{{#if data.kiAbility.nemiGreaterKiCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiGreaterKiCancel.status" data-label2="data.kiAbility.nemiGreaterKiCancel.status2" data-ability="{{data.kiAbility.nemiGreaterKiCancel.status}}" data-ability2="{{data.kiAbility.nemiGreaterKiCancel.status2}}">
-                <span> {{data.kiAbility.nemiGreaterKiCancel.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiMysticCancel"}}"> {{localize "abfalter.kiTab.nemiMysticCancel"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiMysticCancel.status}}{{#if data.kiAbility.nemiMysticCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiMysticCancel.status" data-label2="data.kiAbility.nemiMysticCancel.status2" data-ability="{{data.kiAbility.nemiMysticCancel.status}}" data-ability2="{{data.kiAbility.nemiMysticCancel.status2}}">
-                <span> {{data.kiAbility.nemiMysticCancel.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.nemiMysticCancel.status}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiGreaterMysticCancel"}}"> {{localize "abfalter.kiTab.nemiGreaterMysticCancel"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiGreaterMysticCancel.status}}{{#if data.kiAbility.nemiGreaterMysticCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiGreaterMysticCancel.status" data-label2="data.kiAbility.nemiGreaterMysticCancel.status2" data-ability="{{data.kiAbility.nemiGreaterMysticCancel.status}}" data-ability2="{{data.kiAbility.nemiGreaterMysticCancel.status2}}">
-                <span> {{data.kiAbility.nemiGreaterMysticCancel.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiMatrixCancel"}}"> {{localize "abfalter.kiTab.nemiMatrixCancel"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiMatrixCancel.status}}{{#if data.kiAbility.nemiMatrixCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiMatrixCancel.status" data-label2="data.kiAbility.nemiMatrixCancel.status2" data-ability="{{data.kiAbility.nemiMatrixCancel.status}}" data-ability2="{{data.kiAbility.nemiMatrixCancel.status2}}">
-                <span> {{data.kiAbility.nemiMatrixCancel.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.nemiMatrixCancel.status}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiGreaterMatrixCancel"}}"> {{localize "abfalter.kiTab.nemiGreaterMatrixCancel"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiGreaterMatrixCancel.status}}{{#if data.kiAbility.nemiGreaterMatrixCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiGreaterMatrixCancel.status" data-label2="data.kiAbility.nemiGreaterMatrixCancel.status2" data-ability="{{data.kiAbility.nemiGreaterMatrixCancel.status}}" data-ability2="{{data.kiAbility.nemiGreaterMatrixCancel.status2}}">
-                <span> {{data.kiAbility.nemiGreaterMatrixCancel.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiBindCancel"}}"> {{localize "abfalter.kiTab.nemiBindCancel"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiBindCancel.status}}{{#if data.kiAbility.nemiBindCancel.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiBindCancel.status" data-label2="data.kiAbility.nemiBindCancel.status2" data-ability="{{data.kiAbility.nemiBindCancel.status}}" data-ability2="{{data.kiAbility.nemiBindCancel.status2}}">
-                <span> {{data.kiAbility.nemiBindCancel.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiEmptyExt"}}"> {{localize "abfalter.kiTab.nemiEmptyExt"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiEmptyExt.status}}{{#if data.kiAbility.nemiEmptyExt.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiEmptyExt.status" data-label2="data.kiAbility.nemiEmptyExt.status2" data-ability="{{data.kiAbility.nemiEmptyExt.status}}" data-ability2="{{data.kiAbility.nemiEmptyExt.status2}}">
-                <span> {{data.kiAbility.nemiEmptyExt.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.nemiEmptyExt.status}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiFormOfEmpty"}}"> {{localize "abfalter.kiTab.nemiFormOfEmpty"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiFormOfEmpty.status}}{{#if data.kiAbility.nemiFormOfEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiFormOfEmpty.status" data-label2="data.kiAbility.nemiFormOfEmpty.status2" data-ability="{{data.kiAbility.nemiFormOfEmpty.status}}" data-ability2="{{data.kiAbility.nemiFormOfEmpty.status2}}">
-                <span> {{data.kiAbility.nemiFormOfEmpty.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiBodyEmpty"}}"> {{localize "abfalter.kiTab.nemiBodyEmpty"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiBodyEmpty.status}}{{#if data.kiAbility.nemiBodyEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiBodyEmpty.status" data-label2="data.kiAbility.nemiBodyEmpty.status2" data-ability="{{data.kiAbility.nemiBodyEmpty.status}}" data-ability2="{{data.kiAbility.nemiBodyEmpty.status2}}">
-                <span> {{data.kiAbility.nemiBodyEmpty.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.nemiBodyEmpty.status}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiNoNeeds"}}"> {{localize "abfalter.kiTab.nemiNoNeeds"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiNoNeeds.status}}{{#if data.kiAbility.nemiNoNeeds.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiNoNeeds.status" data-label2="data.kiAbility.nemiNoNeeds.status2" data-ability="{{data.kiAbility.nemiNoNeeds.status}}" data-ability2="{{data.kiAbility.nemiNoNeeds.status2}}">
-                <span> {{data.kiAbility.nemiNoNeeds.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiMoveEmpty"}}"> {{localize "abfalter.kiTab.nemiMoveEmpty"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiMoveEmpty.status}}{{#if data.kiAbility.nemiMoveEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiMoveEmpty.status" data-label2="data.kiAbility.nemiMoveEmpty.status2" data-ability="{{data.kiAbility.nemiMoveEmpty.status}}" data-ability2="{{data.kiAbility.nemiMoveEmpty.status2}}">
-                <span> {{data.kiAbility.nemiMoveEmpty.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiEssenceEmpty"}}"> {{localize "abfalter.kiTab.nemiEssenceEmpty"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiEssenceEmpty.status}}{{#if data.kiAbility.nemiEssenceEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiEssenceEmpty.status" data-label2="data.kiAbility.nemiEssenceEmpty.status2" data-ability="{{data.kiAbility.nemiEssenceEmpty.status}}" data-ability2="{{data.kiAbility.nemiEssenceEmpty.status2}}">
-                <span> {{data.kiAbility.nemiEssenceEmpty.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.nemiEssenceEmpty.status}}
-        <div>
-            <span class="subKi3" title="{{localize "abfalter.kiTab.descnemiOneNothing"}}"> {{localize "abfalter.kiTab.nemiOneNothing"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiOneNothing.status}}{{#if data.kiAbility.nemiOneNothing.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiOneNothing.status" data-label2="data.kiAbility.nemiOneNothing.status2" data-ability="{{data.kiAbility.nemiOneNothing.status}}" data-ability2="{{data.kiAbility.nemiOneNothing.status2}}">
-                <span> {{data.kiAbility.nemiOneNothing.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        {{/if}}
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiAuraEmpty"}}"> {{localize "abfalter.kiTab.nemiAuraEmpty"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiAuraEmpty.status}}{{#if data.kiAbility.nemiAuraEmpty.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiAuraEmpty.status" data-label2="data.kiAbility.nemiAuraEmpty.status2" data-ability="{{data.kiAbility.nemiAuraEmpty.status}}" data-ability2="{{data.kiAbility.nemiAuraEmpty.status2}}">
-                <span> {{data.kiAbility.nemiAuraEmpty.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiUndetectable"}}"> {{localize "abfalter.kiTab.nemiUndetectable"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiUndetectable.status}}{{#if data.kiAbility.nemiUndetectable.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiUndetectable.status" data-label2="data.kiAbility.nemiUndetectable.status2" data-ability="{{data.kiAbility.nemiUndetectable.status}}" data-ability2="{{data.kiAbility.nemiUndetectable.status2}}">
-                <span> {{data.kiAbility.nemiUndetectable.cost}} </span>
-            </button>
-        </div>
-        <div>
-            <span class="subKi1" title="{{localize "abfalter.kiTab.descnemiInhumanity"}}"> {{localize "abfalter.kiTab.nemiInhumanity"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiInhumanity.status}}{{#if data.kiAbility.nemiInhumanity.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiInhumanity.status" data-label2="data.kiAbility.nemiInhumanity.status2" data-ability="{{data.kiAbility.nemiInhumanity.status}}" data-ability2="{{data.kiAbility.nemiInhumanity.status2}}">
-                <span> {{data.kiAbility.nemiInhumanity.cost}} </span>
-            </button>
-        </div>
-        {{#if data.kiAbility.nemiInhumanity.status}}
-        <div>
-            <span class="subKi2" title="{{localize "abfalter.kiTab.descnemiZen"}}"> {{localize "abfalter.kiTab.nemiZen"}} </span>
-            <button type="button" class="kiAbility {{#if data.kiAbility.nemiZen.status}}{{#if data.kiAbility.nemiZen.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
-                    data-label="data.kiAbility.nemiZen.status" data-label2="data.kiAbility.nemiZen.status2" data-ability="{{data.kiAbility.nemiZen.status}}" data-ability2="{{data.kiAbility.nemiZen.status2}}">
-                <span> {{data.kiAbility.nemiZen.cost}} </span>
-            </button>
-        </div>
-        {{/if}}
-        {{/if}}<!--End of Use of Nemesis If Statement-->
     </div>
 
     <div class="s5">
-        <div class="unarmed">
-            <h2>
-                {{localize "abfalter.kiTab.unarmedDmg"}}
-                <label class="expand-box">
-                    <a class="toggleBoolean {{#if data.fistDamage.status}}showOpacity{{/if}}" data-label="data.fistDamage.status" data-ability="{{data.fistDamage.status}}"><i class="{{#if data.fistDamage.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                </label>
-            </h2>
-            {{#if data.fistDamage.status}}
-            <div>
-                <span> {{localize "abfalter.kiTab.baseDmg"}} </span>
-                <span> {{localize "abfalter.kiTab.multiplier"}} </span>
-                <span> {{localize "abfalter.kiTab.finalDmg"}} </span>
-            </div>
-            <div>
-                <input type="number" name="data.fistDamage.base" value="{{data.fistDamage.base}}" />
-                <div>
-                    <span> + </span>
-                    <input type="number" name="data.fistDamage.mult" value="{{data.fistDamage.mult}}" />
-                    <span> * </span>
-                    <div class="csSelect">
-                        <select name="data.fistDamage.multOption" data-dtype="text">
-                            {{#select data.fistDamage.multOption}}
-                            <option value="agi"> {{localize "abfalter.basicInfo.agility"}} </option>
-                            <option value="con"> {{localize "abfalter.basicInfo.consti"}} </option>
-                            <option value="str"> {{localize "abfalter.basicInfo.strength"}} </option>
-                            <option value="dex"> {{localize "abfalter.basicInfo.dexerity"}} </option>
-                            <option value="per"> {{localize "abfalter.basicInfo.perception"}} </option>
-                            <option value="int"> {{localize "abfalter.basicInfo.intell"}} </option>
-                            <option value="pow"> {{localize "abfalter.basicInfo.power"}} </option>
-                            <option value="wp"> {{localize "abfalter.basicInfo.willPower"}} </option>
-                            <option value="str2"> {{localize "abfalter.armoryTab.twoStr"}} </option>
-                            <option value="presence"> {{localize "abfalter.kiTab.presencexpow"}} </option>
-                            {{/select}}
-                        </select>
-                    </div>
-                    <span> = </span>
-                </div>
-                <input type="number" name="data.unarmedDmgFinal" value="{{data.unarmedDmgFinal}}" readonly />
-            </div>
-            <textarea class="textarea-auto-resize" name="data.fistDamage.desc"> {{data.fistDamage.desc}} </textarea>
-            {{/if}}
-        </div>
-
         <div>
             <div class="kipool">
-                <h2> {{localize "abfalter.kiTab.kiPool"}} </h2>
+                <h5> {{localize "abfalter.kiTab.kiPool"}} </h5>
                 <div>
                     <span> {{localize "abfalter.kiTab.accu"}} </span>
                     <span> {{localize "abfalter.kiTab.max"}} </span>
@@ -792,7 +753,7 @@
                     </div>
                     {{/if}}
                 </div>
-                <div>
+                <div class="{{#if data.toggles.innatePower}}innatePowBorder{{/if}}">
                     <div>
                         <span> {{localize "abfalter.basicInfo.pow"}} </span>
                         <input type="number" name="data.kiPoolPowAccumTot" value="{{data.kiPoolPowAccumTot}}" readonly />
@@ -856,12 +817,12 @@
             </div>
 
             <div class="mk">
-                <h2>
+                <h5>
                     {{localize "abfalter.kiTab.martialKnow"}}
                     <label class="expand-box">
                         <a class="toggleBoolean {{#if data.mk.status}}showOpacity{{/if}}" data-label="data.mk.status" data-ability="{{data.mk.status}}"><i class="{{#if data.mk.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
-                </h2>
+                </h5>
                 <div>
                     <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.mk.base" value="{{data.mk.base}}" /> </label>
                     <label> <span> {{localize "abfalter.basicInfo.extra"}} </span> <input type="number" name="data.mk.temp" value="{{data.mk.temp}}" /> </label>
@@ -893,7 +854,7 @@
 
         <div>
             <div class="arsMagnus">
-                <h2> {{localize "abfalter.kiTab.arsMagnus"}} </h2>
+                <h5> {{localize "abfalter.kiTab.arsMagnus"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.name"}} </span>
                     <span> {{localize "abfalter.basicInfo.dp"}} </span>
@@ -928,6 +889,7 @@
                     <a class="toggleBoolean {{#if data.itemToggle.arsMagnus}}armorpenalty{{/if}}" data-label="data.itemToggle.arsMagnus" data-ability="{{data.itemToggle.arsMagnus}}"><i class="{{#if data.itemToggle.arsMagnus}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
                 </div>
                 {{#if data.toggles.dragonSeals}}
+                <h6> Dragon Seals </h6>
                 <div>
                     <span> {{localize "abfalter.kiTab.specialMag"}} </span>
                     <span> {{localize "abfalter.kiTab.seals"}} </span>
@@ -942,7 +904,7 @@
             </div>
 
             <div class="limits">
-                <h2> {{localize "abfalter.kiTab.limits"}} </h2>
+                <h5> {{localize "abfalter.kiTab.limits"}} </h5>
                 <div class="csSelect">
                     <select name="data.limits.limitOne" data-dtype="number">
                         {{#select data.limits.limitOne}}
@@ -975,7 +937,7 @@
         </div>
 
         <div class="martialarts">
-            <h2> {{localize "abfalter.kiTab.martialArts"}} </h2>
+            <h5> {{localize "abfalter.kiTab.martialArts"}} </h5>
             <div>
                 <span> {{localize "abfalter.kiTab.martialArtName"}} </span>
                 <span> {{localize "abfalter.kiTab.degree"}} </span>
@@ -1024,16 +986,54 @@
             </div>
         </div>
 
+        <div class="unarmed">
+            <h5> {{localize "abfalter.kiTab.unarmedDmg"}} </h5>
+            <div>
+                <span> {{localize "abfalter.kiTab.baseDmg"}} </span>
+                <span> {{localize "abfalter.kiTab.multiplier"}} </span>
+                <span> {{localize "abfalter.kiTab.finalDmg"}} </span>
+            </div>
+            <div>
+                <input type="number" name="data.fistDamage.base" value="{{data.fistDamage.base}}" />
+                <div>
+                    <span> + </span>
+                    <input type="number" name="data.fistDamage.mult" value="{{data.fistDamage.mult}}" />
+                    <span> * </span>
+                    <div class="csSelect">
+                        <select name="data.fistDamage.multOption" data-dtype="text">
+                            {{#select data.fistDamage.multOption}}
+                            <option value="agi"> {{localize "abfalter.basicInfo.agility"}} </option>
+                            <option value="con"> {{localize "abfalter.basicInfo.consti"}} </option>
+                            <option value="str"> {{localize "abfalter.basicInfo.strength"}} </option>
+                            <option value="dex"> {{localize "abfalter.basicInfo.dexerity"}} </option>
+                            <option value="per"> {{localize "abfalter.basicInfo.perception"}} </option>
+                            <option value="int"> {{localize "abfalter.basicInfo.intell"}} </option>
+                            <option value="pow"> {{localize "abfalter.basicInfo.power"}} </option>
+                            <option value="wp"> {{localize "abfalter.basicInfo.willPower"}} </option>
+                            <option value="str2"> {{localize "abfalter.armoryTab.twoStr"}} </option>
+                            <option value="presence"> {{localize "abfalter.kiTab.presencexpow"}} </option>
+                            {{/select}}
+                        </select>
+                    </div>
+                    <span> = </span>
+                </div>
+                <input type="number" name="data.unarmedDmgFinal" value="{{data.unarmedDmgFinal}}" readonly />
+            </div>
+            <div>
+                <textarea name="data.fistDamage.desc">{{data.fistDamage.desc}}</textarea>
+            </div>
+        </div>
+
         <div class="kiseals">
-            <h2>
+            <h5>
                 {{localize "abfalter.kiTab.kiSeals"}}
                 <label class="expand-box">
                     <a class="toggleBoolean {{#if data.kiSeal.status}}showOpacity{{/if}}" data-label="data.kiSeal.status" data-ability="{{data.kiSeal.status}}"><i class="{{#if data.kiSeal.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
-            </h2>
+            </h5>
             {{#if data.kiSeal.status}}
             <div class="kisealmast">
-                <h3> {{localize "abfalter.kiTab.kiSealMaster"}} </h3>
+                <h6> {{localize "abfalter.kiTab.kiSealMaster"}} </h6>
                 <div>
                     <span> {{localize "abfalter.basicInfo.cost"}} </span>
                     <span> {{localize "abfalter.kiTab.sealWood"}} </span>
@@ -1151,7 +1151,7 @@
         </div>
 
         <div class="kiTech">
-            <h2> {{localize "abfalter.kiTab.kiTechnique"}} </h2>
+            <h5> {{localize "abfalter.kiTab.kiTechnique"}} </h5>
             <div class="{{#if data.itemToggle.kiTechnique}}item-list{{/if}}">
                 {{#each kiTechniques as |kiTechnique id|}}
                 <div class="kiTechnique-item item normal-item" data-item-id="{{kiTechnique._id}}">
@@ -1164,12 +1164,14 @@
                             <input class="inline-edit" data-field="system.mk" type="number" value="{{kiTechnique.system.mk}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                    </div>
 
+                        <div class="kiTechSideInfoMax">
+                            <span> Name </span>
+                            <span> Level </span>
+                            <span> MK </span>
+                        </div>
 
-
-                    <div>
-                        <div class="kitechType">
+                        <div class="kiTechTypeMax">
                             {{#if system.innatePower}}
                             <div class="techExpand techExpandFirst">
                                 <span> {{localize "abfalter.kiTab.ki"}} </span>
@@ -1186,6 +1188,7 @@
                             {{/if}}
                             <span> {{localize "abfalter.kiTab.actionInfo"}} </span>
                         </div>
+
                         <div class="kiTechUse">
                             {{#if system.innatePower}}
                             <div class="techExpand">
@@ -1211,6 +1214,7 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="kiTechMaint">
                             {{#if system.unified}}
                             <div class="techExpand">
@@ -1241,12 +1245,10 @@
                                 </select>
                             </div>
                         </div>
+
                         <textarea class="inline-edit itemAuto-expand" data-field="system.description">{{kiTechnique.system.description}}</textarea>
                     </div>
                     {{else}}
-
-
-
                     <div class="kiTechMinContainer">
                         <div class="kiTechMainInfo">
                             <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
@@ -1255,13 +1257,15 @@
                             <span> {{kiTechnique.system.mk}} </span>
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
+
                         <div class="kiTechSideInfo">
                             <span> Frequency : {{kiTechnique.system.frequency}} </span>
                             <span> Action Type : {{kiTechnique.system.actionType}} </span>
-                            <span> level </span>
+                            <span> Level </span>
                             <span> MK </span>
                         </div>
-                        <div class="kitechType">
+
+                        <div class="kiTechType">
                             {{#if system.innatePower}}
                             <div class="techExpand techExpandFirst">
                                 <span> {{localize "abfalter.kiTab.ki"}} </span>
@@ -1276,8 +1280,8 @@
                             <span> {{localize "abfalter.basicInfo.pow"}} </span>
                             <span> {{localize "abfalter.basicInfo.wp"}} </span>
                             {{/if}}
-                            <span> {{localize "abfalter.kiTab.actionInfo"}} </span>
                         </div>
+
                         <div class="kiTechUse">
                             {{#if system.innatePower}}
                             <div class="techExpand">
@@ -1286,14 +1290,15 @@
                             </div>
                             {{else}}
                             <span> {{localize "abfalter.kiTab.use"}} </span>
-                            <input class="inline-edit" data-field="system.use.agi" type="number" value="{{kiTechnique.system.use.agi}}" />
-                            <input class="inline-edit" data-field="system.use.con" type="number" value="{{kiTechnique.system.use.con}}" />
-                            <input class="inline-edit" data-field="system.use.dex" type="number" value="{{kiTechnique.system.use.dex}}" />
-                            <input class="inline-edit" data-field="system.use.str" type="number" value="{{kiTechnique.system.use.str}}" />
-                            <input class="inline-edit" data-field="system.use.pow" type="number" value="{{kiTechnique.system.use.pow}}" />
-                            <input class="inline-edit" data-field="system.use.wp" type="number" value="{{kiTechnique.system.use.wp}}" />
+                            <span> {{kiTechnique.system.use.agi}} </span>
+                            <span> {{kiTechnique.system.use.con}} </span>
+                            <span> {{kiTechnique.system.use.dex}} </span>
+                            <span> {{kiTechnique.system.use.str}} </span>
+                            <span> {{kiTechnique.system.use.pow}} </span>
+                            <span> {{kiTechnique.system.use.wp}} </span>
                             {{/if}}
                         </div>
+
                         <div class="kiTechMaint">
                             {{#if system.unified}}
                             <div class="techExpand">
@@ -1306,22 +1311,26 @@
                             </div>
                             {{else}}
                             <span> {{localize "abfalter.kiTab.maint"}} </span>
-                            <input class="inline-edit" data-field="system.maint.agi" type="number" value="{{kiTechnique.system.maint.agi}}" />
-                            <input class="inline-edit" data-field="system.maint.con" type="number" value="{{kiTechnique.system.maint.con}}" />
-                            <input class="inline-edit" data-field="system.maint.dex" type="number" value="{{kiTechnique.system.maint.dex}}" />
-                            <input class="inline-edit" data-field="system.maint.str" type="number" value="{{kiTechnique.system.maint.str}}" />
-                            <input class="inline-edit" data-field="system.maint.pow" type="number" value="{{kiTechnique.system.maint.pow}}" />
-                            <input class="inline-edit" data-field="system.maint.wp" type="number" value="{{kiTechnique.system.maint.wp}}" />
+                            <span>{{kiTechnique.system.maint.agi}}</span>
+                            <span>{{kiTechnique.system.maint.con}}</span>
+                            <span>{{kiTechnique.system.maint.dex}}</span>
+                            <span>{{kiTechnique.system.maint.str}}</span>
+                            <span>{{kiTechnique.system.maint.pow}}</span>
+                            <span>{{kiTechnique.system.maint.wp}}</span>
                             {{/if}}
+                        </div>
+
+                        <div class="kiTechInfo">
+                            <textarea class="inline-edit itemAuto-expand" data-field="system.description" readonly>{{kiTechnique.system.description}}</textarea>
                         </div>
                         {{/if}}
                     </div>
-                    {{/each}}
                 </div>
-                <div>
-                    <a class="item-control item-create" data-type="kiTechnique"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addKiTechnique"}} </a>
-                    <a class="toggleBoolean {{#if data.itemToggle.kiTechnique}}armorpenalty{{/if}}" data-label="data.itemToggle.kiTechnique" data-ability="{{data.itemToggle.kiTechnique}}"><i class="{{#if data.itemToggle.kiTechnique}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
-                </div>
+                {{/each}}
+            </div>
+            <div>
+                <a class="item-control item-create" data-type="kiTechnique"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addKiTechnique"}} </a>
+                <a class="toggleBoolean {{#if data.itemToggle.kiTechnique}}armorpenalty{{/if}}" data-label="data.itemToggle.kiTechnique" data-ability="{{data.itemToggle.kiTechnique}}"><i class="{{#if data.itemToggle.kiTechnique}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
             </div>
         </div>
     </div>

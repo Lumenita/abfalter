@@ -127,16 +127,20 @@ h3 {
 
 
 
-/* Global */
+/* Global #121d32 */
 :root {
+    --color-shadow-primary: #5c9be9;
     --textColor: #bbbbbb;
     --buttonBg: #00000026;
     --inputBorder: #747493;
     --boxColor: #687591;
     --itemOffSet: #363b52;
     --physical: #429f42;
-    --mental: #4389df;
+    --mental: #375fd1;
     --armorPen: #d37e27;
+    --equipped: #56e36e;
+    --kiBought: #4b47b7;
+    --kiFree: #106810;
 }
 h5 {
     display: flex;
@@ -165,6 +169,16 @@ h6 {
 .armorpenalty {
     color: var(--armorPen) !important;
 }
+.equipped > span {
+    color: var(--equipped) !important;
+}
+.kiBought {
+    background-color: var(--kiBought) !important;
+}
+.kiFree {
+    background-color: var(--kiFree) !important;
+}
+
 
 
 .hidden {
@@ -179,13 +193,8 @@ h6 {
 .normalRoll {
     color: black;
 }
-
-
 .natemph {
     text-shadow: 1px 1px 1px orange;
-}
-.equipped > span {
-    color: darkblue;
 }
 .notEquipped > span {
     color: #878787;
@@ -196,7 +205,6 @@ h6 {
 .notSelected {
     background-color: #c3c3b8;
 }
-
 /* Global Actor Styles */
 .window-app .window-content {
     overflow-x: auto;
@@ -244,6 +252,10 @@ h6 {
     text-align: center;
     appearance: none;
     color: var(--textColor);
+    background-color: var(--buttonBg);
+}
+.baseAbfalter select option {
+    background: #252944;
 }
 .baseAbfalter a {
     text-align: center;
@@ -1671,9 +1683,18 @@ h6 {
     Spell Book
     ----------
 */
+.spells > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .spells > div:last-of-type {
     display: flex;
+    border-top: 1px solid var(--boxColor);
     place-content: space-between;
+    border-bottom: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
 }
 .spell-item:nth-child(2n) {
     background: var(--itemOffSet);
@@ -1786,17 +1807,23 @@ h6 {
     Metamagic
     ---------
 */
-
-
+.metaMagic > textarea {
+    border: 3px solid var(--boxColor);
+}
 /*
     --------------------------
     Invocations & Incarnations
     --------------------------
 */
+
 .invocations > div:nth-of-type(2),
 .incarnations > div:nth-of-type(2) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+    width: 100%;
+}
+.invocations > div,
+.incarnations > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
 }
 .invocations > div:first-of-type,
 .incarnations > div:first-of-type,
@@ -1807,9 +1834,17 @@ h6 {
 }
 .invocations > div:first-of-type,
 .incarnations > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
-    margin-bottom: 3px;
     padding-bottom: 3px;
+}
+.invocation-item,
+.incarnation-item {
+    padding: 0 2.5%;
+}
+.invocation-item:nth-child(2n),
+.incarnation-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .invocation-item > div > a,
 .incarnation-item > div > a {
@@ -1826,12 +1861,13 @@ h6 {
 }
 .invocations > div > div > textarea,
 .incarnations > div > div > textarea {
-    margin: 3px 0 0 0;
+    margin: 3px 0;
 }
 .invocations > div:last-of-type,
 .incarnations > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-bottom: 3px solid var(--boxColor);
 }
 .invocations > div:first-of-type > span:first-of-type {
     width: 59.85%;
@@ -1902,6 +1938,17 @@ h6 {
     PP
     --
 */
+.ppoint > div,
+.ppoint > label {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.ppoint > :nth-child(2) {
+    border-top: 3px solid var(--boxColor);
+}
+.ppoint > label:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
 .ppoint > label,
 .ppoint > div > label {
     display: flex;
@@ -1917,10 +1964,9 @@ h6 {
     width: 40%;
 }
 .ppoint > label:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    margin: 3px 0 0 0;
-    padding: 3px 10px 0 10px;
+    border-bottom: 1px solid var(--boxColor);
+    border-top: 1px solid var(--boxColor);
+    padding: 0 10px;
     font-weight: bold;
 }
 .ppoint > label:nth-of-type(3) {
@@ -1937,11 +1983,22 @@ h6 {
     Potential
     ---------
 */
+.ppotential > :nth-child(2) {
+    border-top: 3px solid var(--boxColor);
+}
+.ppotential > div,
+.ppotential > label {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.ppotential > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
 .ppotential > label,
 .ppotential > div > label,
 .ppotential > div > div > label {
     display: flex;
-    padding: 0 10px 0 10px;
+    padding: 0 10px;
 }
 .ppotential > label > span,
 .ppotential > div > label > span,
@@ -1951,21 +2008,14 @@ h6 {
 }
 .ppotential > label > input,
 .ppotential > div > label > input,
-.ppotential > div > div > label > select,
-.ppotential > div > label:nth-of-type(4) > button {
+.ppotential > div > div > label > select {
     width: 40%;
 }
 .ppotential > label:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 10px 3px 10px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 10px;
     font-weight: bold;
-}
-.ppotential > div > label:nth-of-type(4) {
-    margin: 3px 0 3px 0;
-    justify-content: center;
 }
 .ppotential > h5 > label > a {
     opacity: 0;
@@ -1984,10 +2034,21 @@ h6 {
     Projection
     ----------
 */
+.pproj > :nth-child(2) {
+    border-top: 3px solid var(--boxColor);
+}
+.pproj > div,
+.pproj > label {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.pproj > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
 .pproj > label,
 .pproj > div > label {
     display: flex;
-    padding: 0 10px 0 10px;
+    padding: 0 10px;
 }
 .pproj > label > span,
 .pproj > div > label > span {
@@ -1999,19 +2060,10 @@ h6 {
     width: 40%;
 }
 .pproj > label:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 10px 3px 10px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 10px;
     font-weight: bold;
-}
-.pproj > div > label:nth-of-type(3) {
-    margin: 3px 0 3px 0;
-    justify-content: center;
-}
-.pproj > div > label:nth-of-type(3) > button {
-    width: 40%;
 }
 .pproj > h5 > label > a {
     opacity: 0;
@@ -2039,20 +2091,33 @@ h6 {
     Module & Disciplines
     --------------------
 */
+.discipline-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.pdisc > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.pdisc > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
 .pdisc > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 /*
     ---------------
     Mental Patterns
     ---------------
 */
-.ppaterns > div:not(:first-of-type),
-.ppowers > div:not(:first-of-type),
-.pmaint > div:last-of-type { 
-    width: 95%;
-    margin: 0 0 0 2.5%;
+.mentalPattern-item {
+    padding: 0 2.5%;
+}
+.ppaterns > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
 }
 .ppaterns > div:first-of-type,
 .mentalPattern-item > div:first-of-type {
@@ -2060,10 +2125,8 @@ h6 {
     justify-content: flex-start;
 }
 .ppaterns > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin: 0 0 3px 0;
-    padding: 0 0 3px 0;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .ppaterns > div > span:first-of-type {
     width: 52.25%;
@@ -2079,6 +2142,11 @@ h6 {
 .ppaterns > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+}
+.mentalPattern-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .mentalPattern-item > div > input:first-of-type,
 .mentalPattern-item > div:nth-of-type(1) > span:first-of-type {
@@ -2124,34 +2192,37 @@ h6 {
     width: 25%;
 }
 .mentalPattern-item > div:nth-of-type(3) > span {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding: 3px 0 17px 0;
 }
 .mentalPattern-item > div:nth-of-type(3) {
     text-align: center;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin: 0 0 3px 0;
-    padding: 0 0 3px 0;
+    border-bottom: 1px solid var(--boxColor);
 }
 /*
     ----------------
     Psychic Matrices
     ----------------
 */
+.psychicMatrix-item {
+    padding: 0 2.5%;
+}
+.psychicMatrix-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.ppowers > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
 .ppowers > div:first-of-type,
 .psychicMatrix-item > div:first-of-type {
     display: flex;
     justify-content: flex-start;
 }
 .ppowers > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin: 0 0 3px 0;
-    padding: 0 0 3px 0;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .ppowers > div:first-of-type > span:first-of-type {
     width: 70.3%;
@@ -2164,6 +2235,8 @@ h6 {
 .ppowers > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .psychicMatrix-item > div > input:first-of-type,
 .psychicMatrix-item > div:nth-of-type(1) > span:first-of-type {
@@ -2207,19 +2280,15 @@ h6 {
     width: 55%;
 }
 .psychicMatrix-item > div > div:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 0 3px 0;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 0;
 }
 .psychicMatrix-item > div > div:nth-of-type(3) {
     display: flex;
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 0 3px 0;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 0;
 }
 .psychicMatrix-item > div > div:nth-of-type(3) > span:first-of-type {
     width: 25%;
@@ -2229,7 +2298,7 @@ h6 {
 }
 .psychicMatrix-item > div > div:nth-of-type(4) > label > span:first-of-type {
     width: 7%;
-    border-right: 1px solid black;
+    border-right: 1px solid var(--boxColor);
 }
 .psychicMatrix-item > div > div:nth-of-type(4) > label > span:last-of-type {
     width: 18%;
@@ -2238,9 +2307,7 @@ h6 {
     width: 75%;
 }
 .psychicMatrix-item > div:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin: 0 0 3px 0;
+    border-bottom: 1px solid var(--boxColor);
     padding: 0 0 3px 0;
 }
 /*
@@ -2248,6 +2315,19 @@ h6 {
     Maintained Matrices
     -------------------
 */
+.maintPower-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.pmaint > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.pmaint > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.maintPower-item {
+    padding: 0 2.5%;
+}
 .pmaint > div:not(:nth-of-type(3)),
 .maintPower-item > div:first-of-type {
     display: flex;
@@ -2275,15 +2355,15 @@ h6 {
     margin: 0 0 0 1%;
 }
 .pmaint > div:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 0 3px 0;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 0;
 }
 .pmaint > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .maintPower-item > div > input:first-of-type,
 .maintPower-item > div:nth-of-type(1) > span:first-of-type {
@@ -2328,8 +2408,8 @@ h6 {
     width: 63.5%;
     flex-wrap: wrap;
 }
-.s5 > div:nth-of-type(2),
-.s5 > div:nth-of-type(3) {
+.s5 > div:nth-of-type(1),
+.s5 > div:nth-of-type(2) {
     flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
@@ -2346,24 +2426,8 @@ h6 {
 .limits {
     width: 28%;
 }
-.kiNotBought {
-    background-color: #c4c2b7;
-}
-.kiBought {
-    background-color: #b5b3f3 !important;
-}
-.kiFree {
-    background-color: #a8e7a8;
-}
 .mk > div,
-.limits > div,
-.kiTech > div:not(:first-of-type),
-.kipool > div:not(:first-of-type),
-.kiseals > div:not(:first-of-type),
-.unarmed > div:not(:first-of-type),
-.kiSealsCreatures > div:not(:first-of-type),
-.martialarts > div:not(:first-of-type),
-.arsMagnus > div:not(:first-of-type) {
+.limits > div {
     width: 95%;
     margin: 0 0 0 2.5%;
 }
@@ -2372,6 +2436,9 @@ h6 {
     Ki Abilities
     ---------
 */
+.kiAbilities > div {
+    border: 3px solid var(--boxColor);
+}
 .kiAbility {
     margin: 0px;
     height: 20px;
@@ -2379,10 +2446,13 @@ h6 {
     border: 0px;
     width: 15%;
 }
-.kiAbilities > div {
+.kiSubsection > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.kiSubsection > div:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .subKi1 {
     margin-left: 10px;
@@ -2406,7 +2476,6 @@ h6 {
     height: 20px;
     border-radius: 0px;
     border: 0px;
-    background-color: #c4c2b7;
 }
 .kiActiveButton1 {
     width: 17%;
@@ -2414,73 +2483,26 @@ h6 {
     height: 20px;
     border-radius: 0px;
     border: 0px;
-    background-color: #c4c2b7;
-}
-/*
-    --------------
-    Unarmed Damage
-    --------------
-*/
-.unarmed > div,
-.unarmed > div > div {
-    display: flex;
-    justify-content: flex-start;
-}
-.unarmed > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-}
-.unarmed > div:nth-of-type(2) {
-    margin: 3px 0 0 2.5%;
-}
-.unarmed > div:first-of-type > span:first-of-type {
-    margin-left: 2.5%;
-}
-.unarmed > div > span:not(:nth-of-type(2)) {
-    width: 14.25%
-}
-.unarmed > div > input:first-of-type {
-    width: 15%;
-}
-.unarmed > div > span:nth-of-type(2) {
-    width: 66.5%
-}
-.unarmed > div > div {
-    width: 70%;
-}
-.unarmed > div > div > input {
-    width: 15%;
-}
-.unarmed > div > div > span {
-    width: 4%;
-}
-.unarmed > div > div > div {
-    width: 100%;
-}
-.unarmed > div > div > div > select {
-    width: 100%;
-}
-.unarmed > div > input:nth-of-type(2) {
-    width: 15%;
-}
-.unarmed > textarea {
-    margin: 5px 0 0 2.5%;
-    width: 95%;
-}
-.unarmed > h2 > label > a {
-    opacity: 0;
-}
-.unarmed:hover > h2 > label > a {
-    opacity: 1;
 }
 /*
     --------
     Ki Pools
     --------
 */
+.kipool > div:not(:first-of-type) > div {
+    padding: 0 2.5%;
+}
+.kipool > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.kipool > div:last-of-type,
+.innatePowBorder {
+    border-bottom: 3px solid var(--boxColor);
+}
 .kipool > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .kipool > div:first-of-type > span:first-of-type {
     margin: 0 0 0 27.2%;
@@ -2513,7 +2535,6 @@ h6 {
 }
 .kipool > div > div:not(:first-of-type) > span {
     font-size: 11px;
-    color: #2c2c2c;
     font-style: italic;
     padding: 0 0 0 8px;
 }
@@ -2525,6 +2546,13 @@ h6 {
     MK 
     --
 */
+.mk > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.mk > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .mk > div,
 .mk > div > label {
     display: flex;
@@ -2536,22 +2564,21 @@ h6 {
 .mk > div > label > span {
     width: 60%;
     display: flex;
-    padding: 0 0 0 9%;
+    padding: 0 0 0 4.5%;
 }
 .mk > div > label > input {
     width: 35%;
+    margin: 0 4.5% 0 0;
 }
 .mk > div:last-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 2.5%;
-    padding: 3px 0 3px 0;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+    padding: 3px 0;
 }
-.mk > h2 > label > a {
+.mk > h5 > label > a {
     opacity: 0;
 }
-.mk:hover > h2 > label > a {
+.mk:hover > h5 > label > a {
     opacity: 1;
 }
 /*
@@ -2559,13 +2586,17 @@ h6 {
     Ars Magnus
     ----------
 */
+.arsMagnus > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .arsMagnus > div:not(:nth-of-type(2)),
 .arsMagnus-item > div:first-of-type {
     display: flex;
 }
 .arsMagnus > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .arsMagnus > div > span:first-of-type {
     width: 69.35%;
@@ -2578,10 +2609,19 @@ h6 {
 .arsMagnus > div:nth-of-type(3) {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+    margin: 0 0 15px 0;
 }
 .arsMagnus-item > div > a {
     width: 5%;
     font-size: 15px;
+}
+.arsMagnus-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.arsMagnus-item > div {
+    padding: 0 2.5%;
 }
 .arsMagnus-item > div > a {
     opacity: 0;
@@ -2603,17 +2643,16 @@ h6 {
     margin: 3px 0 0 0;
 }
 .arsMagnus > div:nth-of-type(4) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 2.5%;
-    padding: 3px 0 3px 0;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+}
+.arsMagnus > div:nth-of-type(5) {
+    border-bottom: 3px solid var(--boxColor);
 }
 .arsMagnus > div:nth-of-type(5) > input {
     width: 9.5%;
     margin: 0 0 0 1%;
 }
-
 /*
     ------
     Limits
@@ -2621,6 +2660,16 @@ h6 {
 */
 .limits > div > select {
     width: 100%;
+}
+.limits > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.limits > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.limits > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
 }
 /*
     ------------
@@ -2633,8 +2682,18 @@ h6 {
     justify-content: flex-start;
 }
 .martialarts > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-bottom: 1px solid var(--boxColor);
+    border-top: 3px solid var(--boxColor);
+}
+.martialarts > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.martialArt-item > div {
+    padding: 0 2.5%;
+}
+.martialArt-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .martialarts > div > span:first-of-type {
     width: 53.2%;
@@ -2650,6 +2709,8 @@ h6 {
 .martialarts > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-bottom: 3px solid var(--boxColor);
+    border-top: 1px solid var(--boxColor);
 }
 .martialArt-item > div > a {
     width: 5%;
@@ -2683,14 +2744,72 @@ h6 {
     margin: 3px 0 0 0;
 }
 /*
+    --------------
+    Unarmed Damage
+    --------------
+*/
+.unarmed > div,
+.unarmed > div > div {
+    display: flex;
+    justify-content: flex-start;
+}
+.unarmed > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.unarmed > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+.unarmed > div:first-of-type {
+    border-bottom: 1px solid var(--boxColor);
+    border-top: 3px solid var(--boxColor);
+}
+.unarmed > div:first-of-type > span:first-of-type {
+    margin-left: 2.5%;
+}
+.unarmed > div > span:not(:nth-of-type(2)) {
+    width: 14.25%
+}
+.unarmed > div > input:first-of-type {
+    width: 15%;
+}
+.unarmed > div > span:nth-of-type(2) {
+    width: 66.5%
+}
+.unarmed > div > div {
+    width: 70%;
+}
+.unarmed > div > div > input {
+    width: 15%;
+}
+.unarmed > div > div > span {
+    width: 4%;
+}
+.unarmed > div > div > div {
+    width: 100%;
+}
+.unarmed > div > div > div > select {
+    width: 100%;
+}
+.unarmed > div > input:nth-of-type(2) {
+    width: 15%;
+}
+.unarmed > h5 > label > a {
+    opacity: 0;
+}
+.unarmed:hover > h5 > label > a {
+    opacity: 1;
+}
+/*
     -----------------
     Ki Seal Creatures
     -----------------
-*/
-.kiseals > h2 > label > a {
+}*/
+
+.kiseals > h5 > label > a {
     opacity: 0;
 }
-.kiseals:hover > h2 > label > a {
+.kiseals:hover > h5 > label > a {
     opacity: 1;
 }
 .kisealmast > div {
@@ -2704,21 +2823,37 @@ h6 {
     margin: 0 2.5% 0 0;
 }
 .kisealmast > div:not(:first-of-type) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+    padding: 0 2.5%;
 }
 .kisealmast > div > span,
 .kisealmast > div > button {
     width: 15%;
 }
+.kisealmast > div:first-of-type {
+    border-top: 1px solid var(--boxColor);
+}
+.kisealmast > h6 {
+    border-top: 3px solid var(--boxColor);
+}
+.kiSealsCreatures > div,
+.kisealmast > div,
+.kisealmast > h6 {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .kisealmast > div:last-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    padding: 0 0 5px 0;
+    border-bottom: 1px solid var(--boxColor);
+    padding: 0 2.5% 5px 2.5%;
 }
 .kiSealsCreatures > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-bottom: 1px solid var(--boxColor);
+    border-top: 3px solid var(--boxColor);
+}
+.kiSealCreature-item {
+    padding: 0 2.5%;
+}
+.kiSealCreature-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .kiSealsCreatures > div:first-of-type,
 .kiSealCreature-item > div:first-of-type {
@@ -2736,6 +2871,8 @@ h6 {
 .kiSealsCreatures > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .kiSealCreature-item > div > a {
     width: 5%;
@@ -2771,81 +2908,37 @@ h6 {
 .kiSealCreature-item > div:last-of-type > textarea {
     margin: 3px 0 0 0;
 }
+
+
 /*
     -------------
     Ki techniques
     -------------
 */
-/*
-.kiTechnique-item > div:first-of-type,
-.kiTechnique-item > div:last-of-type > div {
-    display: flex;
-    justify-content: flex-start;
+.kiTech > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.kiTech > div:first-of-type {
+    border-top: 1px solid var(--boxColor);
 }
 .kiTech > div:last-of-type {
-    display: flex;
-    place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
-.kiTechnique-item > div > span:first-of-type,
-.kiTechnique-item > div > input:first-of-type {
-    width: 68%;
-    margin: 0;
+.kiTechnique-item {
+    padding: 0 2.5%;
 }
-.kiTechnique-item > div > span,
-.kiTechnique-item > div > input {
-    width: 10%;
-    margin: 0 0 0 1%;
+.kiTech > div > div:nth-child(2n) {
+    background: var(--itemOffSet);
 }
-.kiTechnique-item > div > a {
-    width: 5%;
-    font-size: 15px;
-}
-.kiTechnique-item > div > a {
-    opacity: 0;
-}
-.kiTechnique-item > div:hover > a {
-    opacity: 1;
-}
-.kiTechnique-item > div:last-of-type > div > span:first-of-type {
-    margin: 0%;
-}
-.kiTechnique-item > div:last-of-type > div > span,
-.kiTechnique-item > div:last-of-type > div > input {
-    width: 10%;
-    margin: 0 0 0 1%;
-}
-.kiTechnique-item > div:last-of-type > div:first-of-type > span:last-of-type,
-.techSelect {
-    width: 23%;
-    margin: 0 0 0 1%;
-    border-left: 1px solid black;
-}
-.kiTechnique-item > div:last-of-type > div > div > select {
-    width: 100%;
-}
-.kiTechnique-item > div:last-of-type > textarea {
-    margin: 3px 0 0 0;
-}
-.kiTechnique-item > div:last-of-type > div > div > span:nth-of-type(2) {
-    width: 30%;
-    justify-content: center;
-}
-.techExpand {
-    width: 46%;
-    display: flex;
-    margin: 0 15% 0 15%;
-}
-.techExpand > span {
-    width: 70%;
-    justify-content: flex-start;
-}
-.techExpand > input {
-    width: 30%;
-}
-*/
 .kiTechMinContainer > div,
 .kiTechMaxContainer > div {
     display: flex;
+}
+.kiTechMinContainer .kiTechMainInfo > span,
+.kiTechMinContainer .kiTechMainInfo > a:first-of-type {
+    border-bottom: 1px solid var(--boxColor);
 }
 .kiTechMainInfo > span:first-of-type,
 .kiTechMainInfo > input:first-of-type {
@@ -2859,24 +2952,84 @@ h6 {
 }
 .kiTechMainInfo > a {
     width: 5%;
+    height: 20px;
 }
-.kiTechSideInfo > span {
-    width: 36%;
-    margin: 0 1% 0 0;
+.kiTechnique-item > div > div > a {
+    width: 5%;
+    font-size: 15px;
+}
+.kiTechnique-item > div > div > a {
+    opacity: 0;
+}
+.kiTechnique-item > div:hover > div > a {
+    opacity: 1;
+}
+.kiTechSideInfo > span:first-of-type,
+.kiTechSideInfo > span:nth-of-type(2) {
+    width: 36.5%;
     text-align: left;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
+    padding: 0 0 0 5%;
+    border-bottom: 1px solid var(--boxColor);
+    border-right: 1px solid var(--boxColor);
 }
-.kiTechSideInfo > span:nth-of-type(3) {
-    width: 10%;
-    margin: 0 1% 0 0;
+.kiTechSideInfo > span:nth-of-type(3),
+.kiTechSideInfo > span:nth-of-type(4) {
+    width: 11%;
+    padding: 0 0 0 1%;
+    border-bottom: 1px solid var(--boxColor);
     text-align: center;
 }
 .kiTechSideInfo > span:nth-of-type(4) {
-    width: 10%;
-    margin: 0;
-    text-align: center;
+    width: 16%;
+    padding: 0 5% 0 1%;
 }
+.kiTechSideInfoMax > span:first-of-type {
+    width: 73%;
+    padding: 0 0 0 5%;
+}
+.kiTechSideInfoMax > span {
+    width: 11%;
+    padding: 0 0 0 1%;
+}
+/*
+.kiTechMaint,
+.kiTechType,
+.kiTechUse {
+    border-right: 1px solid var(--boxColor);
+    border-left: 1px solid var(--boxColor);
+}
+*/
+.kiTechMaint > span:first-of-type,
+.kiTechType > span:first-of-type,
+.kiTechUse > span:first-of-type {
+    width: 22%;
+}
+.kiTechMaint > span,
+.kiTechType > span,
+.kiTechUse > span {
+    text-align: center;
+    width: 13%;
+}
+.kiTechMaint {
+    border-bottom: 1px solid var(--boxColor);
+}
+
+.kiTechMinContainer .kiTechInfo > textarea {
+    background: none;
+    cursor: default;
+}
+.kiTechInfo {
+    border-right: 1px solid var(--boxColor);
+    border-left: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+}
+
+
+
+
+
+
+
 /*
     *************
     -------------

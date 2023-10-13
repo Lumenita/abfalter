@@ -1,12 +1,12 @@
 ﻿<div class="tab psychic">
     <div class="s3">
         <div class="ppoint">
-            <h2>
+            <h5>
                 {{localize "abfalter.psychicTab.pp"}}
                 <label class="expand-box"> 
                     <a class="toggleBoolean {{#if data.ppoint.status}}showOpacity{{/if}}" data-label="data.ppoint.status" data-ability="{{data.ppoint.status}}"><i class="{{#if data.ppoint.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
-            </h2>
+            </h5>
             {{#if data.ppoint.status}}
             <div>
                 <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.ppoint.base" value="{{data.ppoint.base}}" /> </label>
@@ -20,12 +20,12 @@
         </div>
 
         <div class="ppotential">
-            <h2>
+            <h5>
                 {{localize "abfalter.psychicTab.ppotential"}}
                 <label class="expand-box">
                     <a class="toggleBoolean {{#if data.ppotential.status}}showOpacity{{/if}}" data-label="data.ppotential.status" data-ability="{{data.ppotential.status}}"><i class="{{#if data.ppotential.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
-            </h2>
+            </h5>
             {{#if data.ppotential.status}}
             <div>
                 <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.ppotential.base" value="{{data.ppotential.base}}" /> </label>
@@ -51,10 +51,6 @@
                     </label>
                 </div>
                 <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.ppotential.spec" value="{{data.ppotential.spec}}" /> </label>
-                <label>
-                    <button type="button" class="mastery-box {{#if data.ppotential.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.ppotential.mastery" data-ability="{{data.ppotential.mastery}}">
-                    <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
-                </label>
             </div>
             {{/if}}
             <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.ppotential.temp" value="{{data.ppotential.temp}}" /> </label>
@@ -67,20 +63,16 @@
         </div>
 
         <div class="pproj">
-            <h2>
+            <h5>
                 {{localize "abfalter.psychicTab.pproj"}}
                 <label class="expand-box">
                     <a class="toggleBoolean {{#if data.pproj.status}}showOpacity{{/if}}" data-label="data.pproj.status" data-ability="{{data.pproj.status}}"><i class="{{#if data.pproj.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
-            </h2>
+            </h5>
             {{#if data.pproj.status}}
             <div>
                 <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.pproj.base" value="{{data.pproj.base}}" /> </label>
                 <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.pproj.spec" value="{{data.pproj.spec}}" /> </label>
-                <label>
-                    <button type="button" class="mastery-box {{#if data.pproj.mastery}}mastered{{else}}notMastered{{/if}}" data-label="data.pproj.mastery" data-ability="{{data.pproj.mastery}}">
-                    <span> {{localize "abfalter.basicInfo.mastery"}} </span> </button>
-                </label>
             </div>
             {{/if}}
             <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.pproj.temp" value="{{data.pproj.temp}}" /> </label>
@@ -110,7 +102,7 @@
         </div>
 
         <div class="pdisc">
-            <h2> {{localize "abfalter.psychicTab.pdisc"}} </h2>
+            <h5> {{localize "abfalter.psychicTab.pdisc"}} </h5>
             <div class="{{#if data.itemToggle.discipline}}item-list{{/if}}">
                 {{#each disciplines as |discipline id|}}
                 <div class="discipline-item item delete-item" data-item-id="{{discipline._id}}">
@@ -134,7 +126,7 @@
     <div class="s4">
         <div>
             <div class="ppaterns">
-                <h2> {{localize "abfalter.psychicTab.mentalPatterns"}} </h2>
+                <h5> {{localize "abfalter.psychicTab.mentalPatterns"}} </h5>
                 <div>
                     <span> {{localize "abfalter.psychicTab.patternName"}} </span>
                     <span> {{localize "abfalter.psychicTab.totalCost"}} </span>
@@ -188,7 +180,7 @@
             </div>
 
             <div class="ppowers">
-                <h2> {{localize "abfalter.psychicTab.psychicMatrices"}} </h2>
+                <h5> {{localize "abfalter.psychicTab.psychicMatrices"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.name"}} </span>
                     <span> {{localize "abfalter.basicInfo.bonus"}} </span>
@@ -280,7 +272,7 @@
         </div>
 
         <div class="pmaint">
-            <h2> {{localize "abfalter.psychicTab.maintMatrix"}} </h2>
+            <h5> {{localize "abfalter.psychicTab.maintMatrix"}} </h5>
             <div>
                 <label> <span> {{localize "abfalter.psychicTab.numOfSlots"}} </span> <input type="number" name="data.other.innateSlots" value="{{data.other.innateSlots}}" /> </label>
                 <label> <span> {{localize "abfalter.psychicTab.totalppSlots"}}  </span> <input type="number" name="data.innateSlotspp" value="{{data.innateSlotspp}}" readonly /> </label>

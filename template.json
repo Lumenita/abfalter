@@ -1196,8 +1196,7 @@
           "mult": 0,
           "descNum": 3,
           "desc": "",
-          "multOption": "str",
-          "status": false
+          "multOption": "str"
         },
         "kiPool": {
           "agi": {
