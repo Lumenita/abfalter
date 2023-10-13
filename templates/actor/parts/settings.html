@@ -1,26 +1,49 @@
 ﻿<div class="tab settings">
 
     <div class="settingsOptions">
-        <h2> Settings </h2>
-        <div>
-            <h3> Mystic </h3>
-            <label>
+        <div class="settingsSubsection">
+            <h5> Mystic Settings </h5>
+            <div>
                 <span> Magic Module for Attack </span>
-                <input type="checkbox" name="data.toggles.magicAtkModule" data-dtype="boolean" {{checked data.toggles.magicAtkModule}} />
-            </label>
-            <label class="{{#if data.toggles.magicDodgeModule}}checkLock{{/if}}">
+                <button type="button" class="toggleBoolean"
+                        data-label="data.toggles.magicAtkModule" data-ability="{{data.toggles.magicAtkModule}}">
+                    {{#if data.toggles.magicAtkModule}}
+                    <span> Active </span>
+                    {{else}}
+                    <span> Not Active </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div>
                 <span> Magic Module for Defense </span>
-                <input type="checkbox" name="data.toggles.magicDefModule" data-dtype="boolean" {{checked data.toggles.magicDefModule}} />
-            </label>
+                <button type="button" class="toggleBoolean"
+                        data-label="data.toggles.magicDefModule" data-ability="{{data.toggles.magicDefModule}}">
+                    {{#if data.toggles.magicDefModule}}
+                    <span> Active </span>
+                    {{else}}
+                    <span> Not Active </span>
+                    {{/if}}
+                </button>
+            </div>
             {{#if data.toggles.magicDefModule}}
-            <label>
+            <div>
                 <span> Magic Module for Defense Using Dodge </span>
-                <input type="checkbox" name="data.toggles.magicDodgeModule" data-dtype="boolean" {{checked data.toggles.magicDodgeModule}} />
-            </label>
+                <button type="button" class="toggleBoolean"
+                        data-label="data.toggles.magicDodgeModule" data-ability="{{data.toggles.magicDodgeModule}}">
+                    {{#if data.toggles.magicDodgeModule}}
+                    <span> Active </span>
+                    {{else}}
+                    <span> Not Active </span>
+                    {{/if}}
+                </button>
+            </div>
             {{/if}}
         </div>
+
+
+
         <div>
-            <h3> Ki </h3>
+            <h5> Ki </h5>
             <label class="{{#if data.toggles.innatePower}}checkLock{{/if}}">
                 <span> Unified Ki Pools </span>
                 <input type="checkbox" name="data.toggles.unifiedPools" data-dtype="boolean" {{checked data.toggles.unifiedPools}} />
@@ -38,7 +61,7 @@
         </div>
 
         <div>
-            <h3> Psychic </h3>
+            <h5> Psychic </h5>
             <label class="{{#if data.toggles.psychicDodgeStatus}}checkLock{{/if}}">
                 <span> Psychic Module for Attack </span>
                 <input type="checkbox" name="data.other.moduleStatus" data-dtype="boolean" {{checked data.other.moduleStatus}} />
@@ -52,7 +75,7 @@
         </div>
 
         <div>
-            <h3> Homebrew </h3>
+            <h5> Homebrew </h5>
             <label>
                 <span> Hide Normal Currency </span>
                 <input type="checkbox" name="data.toggles.currencyHide" data-dtype="boolean" {{checked data.toggles.currencyHide}} />
@@ -64,7 +87,7 @@
         <div>
             <div>
                 <div class="rollRange">
-                    <h2> {{localize "abfalter.settingsTab.openRoll"}} </h2>
+                    <h5> {{localize "abfalter.settingsTab.openRoll"}} </h5>
                     <div>
                         <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.rollRange.base" value="{{data.rollRange.base}}" /> </label>
                         <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.rollRange.spec" value="{{data.rollRange.spec}}" /> </label>
@@ -85,7 +108,7 @@
                 </div>
 
                 <div class="rollRange">
-                    <h2> {{localize "abfalter.settingsTab.fumbleRoll"}} </h2>
+                    <h5> {{localize "abfalter.settingsTab.fumbleRoll"}} </h5>
                     <div>
                         <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.fumleRange.base" value="{{data.fumleRange.base}}" /> </label>
                         <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.fumleRange.spec" value="{{data.fumleRange.spec}}" /> </label>
@@ -98,12 +121,8 @@
             </div>
 
             <div class="charOptions">
-                <h2> {{localize "abfalter.basicInfo.shield"}}</h2>
-                <div>
-                    <label> <span> {{localize "abfalter.basicInfo.shieldMax"}} </span> <input type="number" name="data.shield.max" value="{{data.shield.max}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.shield"}} </span> <input type="number" name="data.shield.value" value="{{data.shield.value}}" /> </label>
-                </div>
-                <h2> {{localize "abfalter.settingsTab.charOptions"}} </h2>
+
+                <h5> {{localize "abfalter.settingsTab.charOptions"}} </h5>
                 <div>
                     <label> <span> {{localize "abfalter.settingsTab.levelMod"}} </span> <input type="number" name="data.levelinfo.levelmod" value="{{data.levelinfo.levelmod}}" /> </label>
                     <label> <span> {{localize "abfalter.settingsTab.presenceMod"}} </span> <input type="number" name="data.levelinfo.presencemod" value="{{data.levelinfo.presencemod}}" /> </label>
@@ -128,13 +147,18 @@
                         <input type="checkbox" name="data.toggles.bioTab" data-dtype="boolean" {{checked data.toggles.bioTab}} />
                     </label>
                 </div>
+                <h5> {{localize "abfalter.basicInfo.shield"}}</h5>
+                <div>
+                    <label> <span> {{localize "abfalter.basicInfo.shieldMax"}} </span> <input type="number" name="data.shield.max" value="{{data.shield.max}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.shield"}} </span> <input type="number" name="data.shield.value" value="{{data.shield.value}}" /> </label>
+                </div>
             </div>
 
         </div>
 
         <div>
             <div class="innateBonuses">
-                <h2> Innate Classes </h2>
+                <h5> Innate Classes </h5>
                 <div>
                     <span> Class </span>
                     <span> Level </span>
@@ -158,7 +182,7 @@
             </div>
 
             <div class="homebrew">
-                <h2> Homebrew Settings / WIP </h2>
+                <h5> Homebrew Settings / WIP </h5>
                 <label>
                     <span> Spirit Damage Type </span>
                     <input type="checkbox" name="data.toggles.spiritDamageType" data-dtype="boolean" {{checked data.toggles.spiritDamageType}} />

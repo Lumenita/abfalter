@@ -1189,7 +1189,7 @@
                             <span> {{localize "abfalter.kiTab.actionInfo"}} </span>
                         </div>
 
-                        <div class="kiTechUse">
+                        <div class="kiTechUseMax">
                             {{#if system.innatePower}}
                             <div class="techExpand">
                                 <span> {{localize "abfalter.kiTab.innatePowerUse"}} </span>
@@ -1215,7 +1215,7 @@
                             </div>
                         </div>
 
-                        <div class="kiTechMaint">
+                        <div class="kiTechMaintMax">
                             {{#if system.unified}}
                             <div class="techExpand">
                                 {{#if system.innatePower}}
@@ -1323,8 +1323,8 @@
                         <div class="kiTechInfo">
                             <textarea class="inline-edit itemAuto-expand" data-field="system.description" readonly>{{kiTechnique.system.description}}</textarea>
                         </div>
-                        {{/if}}
                     </div>
+                    {{/if}}
                 </div>
                 {{/each}}
             </div>

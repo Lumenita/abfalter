@@ -178,9 +178,6 @@ h6 {
 .kiFree {
     background-color: var(--kiFree) !important;
 }
-
-
-
 .hidden {
     display: none;
 }
@@ -199,12 +196,7 @@ h6 {
 .notEquipped > span {
     color: #878787;
 }
-.selected {
-    background-color: #b5b3f3;
-}
-.notSelected {
-    background-color: #c3c3b8;
-}
+
 /* Global Actor Styles */
 .window-app .window-content {
     overflow-x: auto;
@@ -274,6 +266,7 @@ h6 {
 }
 .baseAbfalter button {
     background: var(--buttonBg);
+    color: var(--textColor);
 }
 
 /* Header */
@@ -2908,8 +2901,6 @@ h6 {
 .kiSealCreature-item > div:last-of-type > textarea {
     margin: 3px 0 0 0;
 }
-
-
 /*
     -------------
     Ki techniques
@@ -2923,13 +2914,15 @@ h6 {
     border-top: 1px solid var(--boxColor);
 }
 .kiTech > div:last-of-type {
+    display: flex;
+    place-content: space-between;
     border-top: 1px solid var(--boxColor);
     border-bottom: 3px solid var(--boxColor);
 }
 .kiTechnique-item {
-    padding: 0 2.5%;
+    padding: 0 2.5% 10px 2.5%;
 }
-.kiTech > div > div:nth-child(2n) {
+.kiTechnique-item:nth-child(2n) {
     background: var(--itemOffSet);
 }
 .kiTechMinContainer > div,
@@ -3013,7 +3006,6 @@ h6 {
 .kiTechMaint {
     border-bottom: 1px solid var(--boxColor);
 }
-
 .kiTechMinContainer .kiTechInfo > textarea {
     background: none;
     cursor: default;
@@ -3023,11 +3015,25 @@ h6 {
     border-left: 1px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
 }
-
-
-
-
-
+.kiTechTypeMax > span:first-of-type,
+.kiTechUseMax > span:first-of-type,
+.kiTechMaintMax > span:first-of-type {
+    width: 15%;
+}
+.kiTechTypeMax > span,
+.kiTechUseMax > input,
+.kiTechMaintMax > input {
+    text-align: center;
+    width: 10%;
+    margin: 0 1% 0 0;
+}
+.kiTechTypeMax > span:last-of-type,
+.techSelect {
+    width: 18%;
+}
+.techSelect > select {
+    width: 100%;
+}
 
 
 /*
@@ -3073,7 +3079,19 @@ h6 {
 */
 .wearArmor > label {
     display: flex;
-    padding: 0 10px 0 10px
+    padding: 0 10px;
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.wearArmor > label:nth-of-type(1),
+.wearArmor > label:nth-of-type(6) {
+    border-top: 3px solid var(--boxColor);
+}
+.wearArmor > label:nth-of-type(10) {
+    border-bottom: 3px solid var(--boxColor);
+}
+.wearArmor > label:nth-of-type(9) {
+    border-top: 1px solid var(--boxColor);
 }
 .wearArmor > label > span  {
     width: 60%;
@@ -3083,11 +3101,10 @@ h6 {
     width: 40%;
 }
 .wearArmor > label:nth-of-type(5) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 10px 3px 10px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+    margin: 0 0 5px 0;
+    padding: 0 10px;
     font-weight: bold;
 }
 .wearArmor > label:nth-of-type(6) > span,
@@ -3111,10 +3128,8 @@ h6 {
 */
 .armor > div:first-of-type {
     display: flex;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin: 0 0 3px 0;
-    padding: 0 0 3px 0;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .armor-item > div > a,
 .armorHelmet-item > div > a {
@@ -3137,11 +3152,11 @@ h6 {
 .armorHelmet-item > div > span:not(:first-of-type) {
     width: 15.2%;
 }
-.armor-item,
-.armor-item2,
-.armorHelmet-item,
-.armorHelmet-item2 {
-    border-bottom: 1px solid black;
+.armor-item:nth-child(2n),
+.armor-item2:nth-child(2n),
+.armorHelmet-item:nth-child(2n),
+.armorHelmet-item2:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .armor-item > div,
 .armor-item2 > div,
@@ -3158,41 +3173,35 @@ h6 {
 .armor-item > div:hover > a {
     opacity: 1;
 }
+.armor > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .armor > div:nth-of-type(4) {
     display: flex;
     justify-content: space-between;
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 0 0 0;
 }
 .armor > div:nth-of-type(2),
 .armor > div:nth-of-type(5) {
-    margin-bottom: 2px;
-    padding-bottom: 2px;
+    border-bottom: 1px dashed var(--boxColor);
+    padding: 0 0 5px 0;
 }
 .armor > div:nth-of-type(3),
 .armor > div:nth-of-type(6) {
-    margin-top: 7px;
-    padding-top: 7px;
+    padding: 5px 0 0 0;
 }
 .armor > div:nth-of-type(8) {
     display: flex;
     justify-content: space-between;
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    margin-top: 3px;
     padding-top: 3px;
 }
 .armor > div:nth-of-type(9) {
     display: flex;
     justify-content: space-between;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
+    border-bottom: 3px solid var(--boxColor);
     padding-bottom: 3px;
 }
 .armor > div:nth-of-type(4) > span:not(:first-of-type),
@@ -3203,9 +3212,11 @@ h6 {
     width: 9.25%;
 }
 .armor > div:nth-of-type(7) {
-    padding-top: 3px;
+    padding: 3px 0;
     display: flex;
     justify-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 /*
     -----------
@@ -3214,17 +3225,25 @@ h6 {
 */
 .prof > div:first-of-type {
     display: flex;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding-bottom: 3px;
 }
 .prof > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+}
+.prof > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
 }
 .prof-item > div {
     display: flex;
+}
+.prof-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .prof > div:first-of-type > span,
 .prof-item > div > span:first-of-type,
@@ -3254,9 +3273,15 @@ h6 {
     Weapon
     ------
 */
-.weapons > div:not(:first-of-type) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+.weapon-item {
+    padding: 0 2.5%;
+}
+.weapon-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.weapons > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
 }
 .weapons > div:first-of-type,
 .weapon-item > div {
@@ -3264,9 +3289,8 @@ h6 {
     justify-content: flex-start;
 }
 .weapons > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding-bottom: 3px;
 }
 .weapons > div:first-of-type > span:nth-of-type(1) {
@@ -3276,6 +3300,8 @@ h6 {
 .weapons > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .weapon-item > div:last-of-type > span:first-of-type {
     width: 15%;
@@ -3306,13 +3332,24 @@ h6 {
 .weapon-item > div:hover > a {
     opacity: 1;
 }
+.weapon-item > div:not(:first-of-type) {
+    border-right: 2px solid var(--boxColor);
+    border-left: 2px solid var(--boxColor);
+}
 .weapon-item > div:nth-child(2),
 .weapon-item > div:nth-child(4),
-.weapon-item > div:nth-child(6) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
+.weapon-item > div:nth-child(6),
+.weapon-item > div:nth-child(8) {
+    border-top: 2px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     place-content: space-between;
+}
+.weapon-item > div:nth-child(3),
+.weapon-item > div:nth-child(5),
+.weapon-item > div:nth-child(7),
+.weapon-item > div:nth-child(7),
+.weapon-item > div:nth-child(9) {
+    padding: 0 0 3px 0;
 }
 .weapon-item > div:nth-child(2) > button {
     height: 20px;
@@ -3394,17 +3431,9 @@ h6 {
 .weapon-item > div:nth-child(7) > div:nth-child(4) {
     width: 9%;
 }
-.weapon-item > div:nth-child(8) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-}
 .weapon-item > div:nth-child(9),
 .weapon-item > div:nth-child(9) > div {
     display: flex;
-}
-.weapon-item > div:nth-child(9){
-    margin: 0 0 3px 0;
 }
 .weapon-item > div:nth-child(8) > span,
 .weapon-item > div:nth-child(9) > div {
@@ -3424,25 +3453,32 @@ h6 {
     border-radius: 0px;
     border: 0px;
 }
+.weapon-item > textarea {
+    border: 2px solid var(--boxColor);
+}
 /*
     --------
     Currency 
     --------
 */
+.currency > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .currency > div > label,
 .currency-item > div {
     display: flex;
 }
 .currency > div:first-of-type {
     display: flex;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-    padding-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .currency > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .currency > div > span:first-of-type,
 .currency > div > label > span,
@@ -3456,19 +3492,27 @@ h6 {
     width: 30%;
     margin: 0 0 0 1%;
 }
+.currency-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
 /*
     ---------
     Invnetory
     ---------
 */
-.inventory > div:not(:first-of-type) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+.inventory > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.inventory-item {
+    padding: 0 2.5%;
+}
+.inventory-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .inventory > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding-bottom: 3px;
 }
 .inventory > div:first-of-type,
@@ -3487,6 +3531,8 @@ h6 {
 .inventory > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .inventory-item > div:first-of-type > span:first-of-type,
 .inventory-item > div:first-of-type > input:first-of-type {
@@ -3582,11 +3628,26 @@ h6 {
     Settings
     ---------
 */
-.settingsOptions > div > label {
+.settingsSubsection > div {
     display: flex;
-    padding: 0 10px 0 10px;
 }
-
+.settingsSubsection > div > button {
+    width: 35%;
+}
+.settingsSubsection > div > span {
+    width: 65%;
+    text-align: start;
+}
+.settingsSubsection > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.settingsSubsection > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.settingsSubsection > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
 /*
     ---------
     RollRange
@@ -3596,6 +3657,15 @@ h6 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.rollRange > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.rollRange > div:last-of-type {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .rollRange > div > label {
     display: flex;
