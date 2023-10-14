@@ -52,9 +52,11 @@
           "spellPath": false,
           "spell": false,
           "turnMaint": false,
-          "elan": false
+          "elan": false,
+          "class": false
         },
         "toggles": {
+          "actorHeaderInfo1": false,
           "greaterEnergyArmor": false,
           "arcaneEnergyArmor": false,
           "spiritDamageType": false,
@@ -71,7 +73,8 @@
           "magicTab": false,
           "psychicTab": false,
           "kiTab": false,
-          "bioTab": false
+          "bioTab": false,
+          "shield": false
         },
         "lp": {
           "value": 0,
@@ -718,7 +721,8 @@
         "aam": 0,
         "aamBoon": 0,
         "aamCrit": 0,
-        "aamOther": 0
+        "aamOther": 0,
+        "aamStatus": false
       },
       "mystic": {
         "mproj": {
@@ -1194,8 +1198,7 @@
           "mult": 0,
           "descNum": 3,
           "desc": "",
-          "multOption": "str",
-          "status": false
+          "multOption": "str"
         },
         "kiPool": {
           "agi": {

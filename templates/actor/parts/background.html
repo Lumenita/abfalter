@@ -1,7 +1,7 @@
 ﻿<div class="tab background">
     <div class="e2">
         <div class="elan">
-            <h2> {{localize "abfalter.generalTab.elan"}} </h2>
+            <h5> {{localize "abfalter.generalTab.elan"}} </h5>
             <div>
                 <span> {{localize "abfalter.basicInfo.name"}} </span>
                 <span> {{localize "abfalter.generalTab.title"}} </span>
@@ -21,15 +21,15 @@
                     <div>
                         <div>
                             {{#if system.upper}}
-                            <h3> {{localize "abfalter.generalTab.gainUpperElan"}} </h3>
+                            <h6> {{localize "abfalter.generalTab.gainUpperElan"}} </h6>
                             <textarea class="inline-edit" data-field="system.gainUpper">{{elan.system.gainUpper}}</textarea>
                             {{else}}
-                            <h3> {{localize "abfalter.generalTab.gainElan"}} </h3>
+                            <h6> {{localize "abfalter.generalTab.gainElan"}} </h6>
                             <textarea class="inline-edit" data-field="system.gain">{{elan.system.gain}}</textarea>
                             {{/if}}
                         </div>
                         <div>
-                            <h3> {{localize "abfalter.generalTab.loseElan"}} </h3>
+                            <h6> {{localize "abfalter.generalTab.loseElan"}} </h6>
                             <textarea class="inline-edit" data-field="system.lose">{{elan.system.lose}}</textarea>
                         </div>
                     </div>
@@ -51,15 +51,17 @@
         </div>
 
         <div class="natura">
-            <h2> {{localize "abfalter.basicInfo.natura"}} </h2>
-            <label> <span> {{localize "abfalter.basicInfo.gnosis"}} </span> <input type="number" name="data.gnosis" value="{{data.gnosis}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.destiny"}} </span> <input type="number" name="data.destiny" value="{{data.destiny}}" /> </label>
+            <h5> {{localize "abfalter.basicInfo.natura"}} </h5>
+            <div>
+                <label> <span> {{localize "abfalter.basicInfo.gnosis"}} </span> <input type="number" name="data.gnosis" value="{{data.gnosis}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.destiny"}} </span> <input type="number" name="data.destiny" value="{{data.destiny}}" /> </label>
+            </div>
         </div>
     </div>
 
     <div class="e2">
         <div class="elan">
-            <h2> {{localize "abfalter.generalTab.addElan"}} </h2>
+            <h5> {{localize "abfalter.generalTab.gifts"}} </h5>
             <div>
                 <span> {{localize "abfalter.generalTab.deity"}} </span>
                 <span> {{localize "abfalter.generalTab.giftName"}} </span>
@@ -373,18 +375,22 @@
             </div>
         </div>
         <div>
-            <h2> placeholder </h2>
+            <h5> placeholder </h5>
         </div>
     </div>
 
     <div class="e3">
         <div>
-            <h2> {{localize "abfalter.basicInfo.note"}} </h2>
-            <textarea name="data.notesOne" rows="5">{{data.notesOne}}</textarea>
+            <h5> {{localize "abfalter.basicInfo.note"}} </h5>
+            <div>
+                <textarea name="data.notesOne">{{data.notesOne}}</textarea>
+            </div>
         </div>
         <div>
-            <h2> {{localize "abfalter.basicInfo.note"}} </h2>
-            <textarea name="data.notesTwo" rows="5">{{data.notesTwo}}</textarea>
+            <h5> {{localize "abfalter.basicInfo.note"}} </h5>
+            <div>
+                <textarea name="data.notesTwo">{{data.notesTwo}}</textarea>
+            </div>
         </div>
     </div>
 </div>

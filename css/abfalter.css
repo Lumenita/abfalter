@@ -1,15 +1,3 @@
-.flexBetween {
-    display: flex;
-    justify-content: space-between;
-}
-.flexCenter {
-    display: flex;
-    justify-content: center;
-}
-.flexStart {
-    display: flex;
-    justify-content: flex-start;
-}
 .borderTop {
     border-image: url(../img/border.png) 10 stretch;
     border-top: 5px solid black;
@@ -25,63 +13,6 @@
     border-top: 5px solid black;
     border-bottom: 5px solid black;
     margin: 3px 0 3px 0;
-}
-
-
-/* Global Style */
-label {
-    margin: 0px;
-    padding: 0px;
-}
-span {
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-    text-align: center;
-    display: grid;
-}
-input[type=number], input[type=text] {
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    text-align: center;
-    border: 0px;
-    height: 20px;
-    border-bottom: 1px solid black;
-}
-input:read-only {
-    background-color: transparent;
-    padding: 1px 0 0 0;
-    border: 0;
-}
-select {
-    height: 20px;
-    font-size: 13px;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    border-bottom: 1px solid black;
-    text-align: center;
-}
-.abfalter select {
-    appearance: none;
-}
-a {
-    text-align: center;
-    align-self: center;
-}
-textarea {
-    border: none;
-    width: 100%;
-    resize: none;
-    padding: 0px;
-    text-align: justify;
-    border-radius: 0px;
-    margin: 0px;
-    /*font-family: serif;
-    font-size: 14px;*/
 }
 button {
     line-height: normal;
@@ -108,42 +39,7 @@ h3 {
     text-align: center;
 }
 /* Colors */
-.hidden {
-    display: none;
-}
-.fumbleRoll {
-    color: red;
-}
-.openRoll {
-    color: forestgreen;
-}
-.normalRoll {
-    color: black;
-}
-.physical {
-    text-shadow: 1px 1px 1px #00CC00;
-}
-.mental {
-    text-shadow: 1px 1px 1px #0000CC;
-}
-.armorpenalty {
-    text-shadow: 1px 1px 1px lightcoral;
-}
-.natemph {
-    text-shadow: 1px 1px 1px orange;
-}
-.equipped > span {
-    color: darkblue;
-}
-.notEquipped > span {
-    color: #878787;
-}
-.selected {
-    background-color: #b5b3f3;
-}
-.notSelected {
-    background-color: #c3c3b8;
-}
+
 .notExpand {
     display: none;
 }
@@ -226,72 +122,426 @@ h3 {
 .editor {
     height: 200px;
 }
-/* 
-    -------------
-    Header Layout
-    -------------
-*/
-.abfalter .sheet-header {
-    flex: 0 0 75px;
-    overflow: hidden;
-    width: 100%;
-    min-width: 878px;
+
+
+
+
+
+/* Global #121d32 */
+:root {
+    --color-shadow-primary: #5c9be9;
+    --textColor: #bbbbbb;
+    --buttonBg: #00000026;
+    --inputBorder: #747493;
+    --boxColor: #687591;
+    --itemOffSet: #363b52;
+    --physical: #429f42;
+    --mental: #375fd1;
+    --armorPen: #d37e27;
+    --equipped: #56e36e;
+    --kiBought: #4b47b7;
+    --kiFree: #106810;
 }
-.charInfo {
+h5 {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0 0 -3px 0;
+    font-weight: normal;
+    font-size: 25px;
+    color: var(--boxColor);
+}
+h6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-weight: normal;
+    font-size: 17px;
+    color: var(--boxColor);
+}
+.physical {
+    color: var(--physical) !important;
+}
+.mental {
+    color: var(--mental) !important;
+}
+.armorpenalty {
+    color: var(--armorPen) !important;
+}
+.equipped > span {
+    color: var(--equipped) !important;
+}
+.kiBought {
+    background-color: var(--kiBought) !important;
+}
+.kiFree {
+    background-color: var(--kiFree) !important;
+}
+.hidden {
+    display: none;
+}
+.fumbleRoll {
+    color: red;
+}
+.openRoll {
+    color: forestgreen;
+}
+.normalRoll {
+    color: black;
+}
+.natemph {
+    text-shadow: 1px 1px 1px orange;
+}
+.notEquipped > span {
+    color: #878787;
+}
+
+/* Global Actor Styles */
+.window-app .window-content {
+    overflow-x: auto;
+    background: #232832;
+    color: var(--textColor);
+}
+.baseAbfalter label {
+    margin: 0px;
+    padding: 0px;
+}
+.baseAbfalter span {
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+    text-align: center;
+    display: grid;
+    color: var(--textColor);
+}
+.baseAbfalter input {
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    text-align: center;
+    border: 0px;
+    height: 20px;
+    background: var(--buttonBg);
+    border-radius: 0px;
+    border-bottom: 1px solid var(--inputBorder);
+    color: var(--textColor);
+}
+.baseAbfalter input:read-only {
+    background-color: transparent;
+    padding: 1px 0 0 0;
+    border: 0;
+}
+.baseAbfalter select {
+    height: 20px;
+    font-size: 13px;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-bottom: 1px solid var(--inputBorder);
+    text-align: center;
+    appearance: none;
+    color: var(--textColor);
+    background-color: var(--buttonBg);
+}
+.baseAbfalter select option {
+    background: #252944;
+}
+.baseAbfalter a {
+    text-align: center;
+    align-self: center;
+}
+.baseAbfalter textarea {
+    border: none;
+    width: 100%;
+    resize: none;
+    padding: 0px;
+    text-align: justify;
+    border-radius: 0px;
+    margin: 0px;
+    background: var(--buttonBg);
+    color: var(--textColor);
+}
+.baseAbfalter button {
+    background: var(--buttonBg);
+    color: var(--textColor);
+}
+
+/* Header */
+.actorHeader1 {
+    display: flex;
+    width: 100%;
+}
+.actorToken {
+    height: 125px;
+    min-width: 125px;
+}
+.actorToken > img {
+    max-height: 100%;
+    max-width: 100%;
+    border: none;
+}
+.subHeader1 {
+    width: inherit;
+    min-width: 753px;
+}
+.containerHeader {
+    width: 100%;
     display: flex;
 }
-.charInfo > img {
-    background-image: url(../img/animaLogo.png);
-    border: none;
-    width: 15%;
+.SubHeaderLeft {
+    width: 45%;
 }
-.charInfo > div > div,
-.charInfo > div > div > div,
-.charInfo > div > div > div > label {
-    display:flex;
+.subHeaderRow1 > div:nth-of-type(1) {
+    display: flex;
+}
+.subHeaderRow1 > div:nth-of-type(1) > span,
+.subHeaderRow1 > div:nth-of-type(1) > input { /* Name */
+    height: 50px;
+    font-size: 30px;
+    text-align: left;
+    padding: 0 0 0 3px;
+    background: none;
+    border: none;
+    width: 90%;
+}
+.subHeaderRow1 > div:nth-of-type(1) > a {
+    width: 10%;
+    font-size: 30px;
+}
+.subHeaderRow2 { /* Gender, Race, Class, Level */
+    display: flex;
+    height: 25px;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 0 0 3px;
+}
+.subHeaderRow2 > span,
+.subHeaderRow2 > label > input,
+.subHeaderRow2Half > span,
+.subHeaderRow2Half > label > input,
+.subHeaderRow3 > label > input {
+    height: 25px;
+    font-size: 15px;
+}
+.subHeaderRow1 > div:nth-of-type(1) > input,
+.subHeaderRow2 > label > input,
+.subHeaderRow2Half > label > input {
+    border-bottom: 1px solid red;
+}
+.subHeaderRow2 > label > input:placeholder-shown,
+.subHeaderRow2Half > label > input:placeholder-shown,
+.subHeaderRow3 > label > input:placeholder-shown {
+    border: 1px solid red;
+}
+.subHeaderRow2 > label > input::placeholder,
+.subHeaderRow2Half > label > input::placeholder,
+.subHeaderRow3 > label > input::placeholder{
+    color: #c33333;
+}
+.subHeaderRow2 > label:nth-of-type(1) {
+    width: 21%;
+}
+.subHeaderRow2 > label:nth-of-type(2) {
+    width: 32%;
+}
+.subHeaderRow2 > label:nth-of-type(3) {
+    width: 35%;
+}
+.subHeaderRow2 > label:nth-of-type(4) {
+    width: 10%;
+}
+.subHeaderRow2Half { /* height, weight, age */
+    display: flex;
+    height: 25px;
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0 0 0 3px;
+}
+.subHeaderRow2Half > label {
+    width: 32%;
+}
+.subHeaderRow3 { /* Exp, next lvl exp, lvl up box, DP */
+    display: flex;
+    height: 25px;
+    width: 100%;
     justify-content: flex-start;
 }
-.charInfo > div > div > div > label > span, 
-.charInfo > div > div > div > label > input {
+.subHeaderRow3 > span {
+    height: 26px;
+    font-size: 15px;
+}
+.subHeaderRow3 > span:nth-of-type(1) { /* dp & Presence */
+    display: flex;
+    width: 59%;
+    justify-content: start;
+    padding: 0 0 0 3px;
+}
+.subHeaderRow3 > label:nth-of-type(1) { /* exp number */
+    display: flex;
+    width: 11%;
+}
+.subHeaderRow3 > label:nth-of-type(1) > input { 
+    text-align: end;
+}
+.subHeaderRow3 > span:nth-of-type(2) { /* / */
+    display: flex;
+    width: 5%;
+    justify-content: center;
+}
+.subHeaderRow3 > span:nth-of-type(3) { /* next lvl exp number*/
+    width: 10%;
+    text-align: start;
+    height: 26px;
+    font-size: 15px;
+}
+.subHeaderRow3 > span:nth-of-type(4) { 
+    width: 10%;
+    text-align: start;
+    height: 26px;
+    font-size: 15px;
+}
+.subHeaderRow3 > label:nth-of-type(2) { /* lvl up box */
+    display: flex;
+    width: 5%;
+    justify-content: center;
+}
+.SubHeaderRight {
+    width: 55%;
+}
+.SubHeaderRight > div {
+    display: flex;
+}
+.subRightHeader1 {
+    height: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.subRightHeader2 {
+    justify-content: space-around;
+}
+
+.subRightLeft { /* initiative */
+    width: 30%;
+}
+.subRightLeft > div {
+    width: 90%;
+    margin: 0 5%;
+    justify-content: center;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.subRightLeft > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.subRightLeft > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+.headerIni > span {
+    display: block;
+    padding: 3px 0 0 0;
+    height: 20px;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.headerIni > div {
+    height: 50px;
     font-size: 14px;
-    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.charInfo > div > div > div {
-    width: 33%;
+.headerIni > div > button {
+    height: 40px;
+    width: 90%;
+    font-size: 14px;
+    border: none;
 }
-.charInfo > div > div > div:not(:first-of-type) {
-    margin: 0 0.5% 0 0;
+.headerIni > div > button > span {
+    font-size: 25px;
+    height: 30px;
 }
-.charInfo > div > div > div > label {
-    width: 50%;
+.headerIniDets > label {
+    display: flex;
+    padding: 0 5px;
 }
-.charInfo > div > div:first-of-type > div:first-of-type > label:first-of-type,
-.charInfo > div > div:nth-of-type(2) > div > label {
-    width: 100%;
+.headerIniDets > label:last-of-type {
+    border-top: 1px solid var(--boxColor);
 }
-.charInfo > div > div:first-of-type > div:first-of-type > label:first-of-type > span,
-.charInfo > div > div:nth-of-type(2) > div > label > span {
-    width: 28%;
+.headerIniDets > label > span {
+    width: 65%;
+    text-align: start;
 }
-.charInfo > div > div:first-of-type > div:first-of-type > label:first-of-type > input,
-.charInfo > div > div:nth-of-type(2) > div > label > input{
-    width: 69.5%;
-    margin: 0 2.5% 0 0;
+.headerIniDets > label > input {
+    width: 35%;
 }
-.charInfo > div > div > div > label > span {
-    width: 56%;
+.subRightMid {
+    width: 30%;
 }
-.charInfo > div > div > div > label > input {
-    width: 39%;
-    margin: 0 5% 0 0;
+.subRightMid > div {
+    border: 3px solid var(--boxColor);
 }
-/*
-    ------------
-    Menu Drawing
-    ------------
-*/
+.subRightMid > div > label {
+    display: flex;
+    padding: 0 5px;
+}
+.subRightMid > div > label > span {
+    width: 65%;
+    text-align: start;
+}
+.subRightMid > div > label > input{
+    width: 35%;
+}
+.subRightRight {
+    width: 40%;
+}
+.headerAam {
+    margin: 0 5%;
+    border: 3px solid var(--boxColor);
+}
+.headerAam > label {
+    display: flex;
+    padding: 0 5px;
+}
+.headerAam > label:last-of-type {
+    border-top: 1px solid var(--boxColor);
+}
+.headerAam > label:last-of-type > span:first-of-type {
+    width: 60%;
+}
+.headerAam > label:last-of-type> span:last-of-type  {
+    width: 40%;
+    text-align: center;
+}
+.headerAam > label > span {
+    width: 60%;
+    text-align: start;
+}
+.headerAam > label > input {
+    width: 40%;
+}
+/* Navigation Tabs */
 .sheet-tabs > ul > li > .active {
-    background-color: #b5b3f3;
+    background-color: #236e8f;
     transform: inherit;
 }
 .abfalter .tabs .item.active {
@@ -304,6 +554,9 @@ h3 {
 .navTabsYes {
     max-height: 37px;
     min-width: 878px;
+    margin: 8px 0 0 0 !important;
+    border-top: none !important;
+    border-bottom: none !important;
 }
 .sheet-tabs > ul {
     transform: skew(-25deg);
@@ -315,14 +568,14 @@ h3 {
     justify-content: space-evenly;
 }
 .sheet-tabs > ul > li {
-    background-color: #c4c2b7;
+    background-color: #333a7e;
     float: left;
-    border-right: 1px solid #eee;
+    border-right: 1px solid #333a7e;
     height: 35px;
     width: 12%;
 }
 .sheet-tabs > ul > li:hover {
-    background-color: #d8d6ff;
+    background-color: #2a7bc9;
 }
 .sheet-tabs > ul > li:first-child > .active,
 .sheet-tabs > ul > li:first-child {
@@ -346,11 +599,6 @@ h3 {
     GENERAL LAYOUT
     --------------
     **************
-*/
-/*
-    -------------------
-    General Page Layout
-    -------------------
 */
 .general {
     flex-wrap: wrap;
@@ -383,37 +631,37 @@ h3 {
 .regeneration {
     width: 35%;
 }
-/*
-    ---------------
-    Characteristics
-    ---------------
-*/
+/* Characteristics */
 .characteristics > div {
     display: flex;
     justify-content: flex-start;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.characteristics > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);    
 }
 .characteristics > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
+    border-bottom: 1px solid var(--boxColor);    
+    border-top: 3px solid var(--boxColor);
 }
 .characteristics > div:first-of-type > span:last-of-type {
-    margin-right: 12%;
+    margin-right: 10%;
 }
 .characteristics > div > span {
     width: 33.33%;
     text-align: center;
 }
 .characteristics > div > span:nth-of-type(2) {
-    border-right: 1px solid black;
+    border-right: 1px solid var(--boxColor);
 }
 .characteristics > div > .compact {
-    width: 88%;
+    width: 90%;
     display: flex;
 }
 .characteristics > div > .compact > button:first-of-type {
     width: 66.66%;
-    border-right: 1px solid 
+    border-right: 1px solid var(--boxColor);
 }
 .characteristics > div > .compact > button{
     width: 33.33%;
@@ -433,7 +681,7 @@ h3 {
     border-radius: 0px;
     display: flex;
 }
-.characteristics > div > label > a{
+.characteristics > div > label > a {
     margin-left: 5px;
     font-size: 15px;
     opacity: 0;
@@ -442,17 +690,19 @@ h3 {
     opacity: 1;
 }
 .characteristics > div > .extend {
-    margin-bottom: 5px;
-    width: 88%;
+    width: 80%;
+    margin: 0 0 5px 10%;
 }
-.characteristics > div > .extend > h3 {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-    padding-bottom: 3px;
+.characteristics > div > .extend > h6 {
+    border-bottom: 1px solid var(--boxColor);
+    margin: 1px 0 0 0;
+    padding-bottom: 1px;
 }
 .characteristics > div > .extend  > label {
-    display: flex
+    display: flex;
+    border-right: 1px solid var(--boxColor);
+    border-left: 1px solid var(--boxColor);
+
 }
 .characteristics > div > .extend  > label > span {
     width: 45%;
@@ -464,9 +714,7 @@ h3 {
     margin: 0 10% 0 0;
 }
 .characteristics > div > .extend > label:nth-of-type(4) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    margin-top: 3px;
+    border-top: 1px solid var(--boxColor);
     padding-top: 3px;
 }
 .characteristics > div > .extend > label:nth-of-type(4) > span,
@@ -475,30 +723,26 @@ h3 {
     font-weight: bold;
 }
 .characteristics > div > .extend > label:nth-of-type(6) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding-top: 3px;
     padding-bottom: 3px;
 }
-/* 
-    ----------
-    Resistance
-    ----------
-*/
+.characteristics > div > .extend > label:nth-of-type(7) {
+    border-bottom: 1px solid var(--boxColor);
+}
+/* Resistance */
 .resistances > div {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
     justify-content: space-between;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
 }
-
 .resistances > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .resistances > div > span {
     display: flex;
@@ -517,6 +761,7 @@ h3 {
     margin: 0px;
     border-radius: 0px;
     border: 0px;
+    border-right: 1px solid var(--boxColor);
 }
 .resistances > div > div > button > span {
     width: 50%;
@@ -524,243 +769,205 @@ h3 {
 .resistances > div > div > input {
     width: 33%;
 }
-/*
-    -------------------
-    All Action Modifier
-    -------------------
-*/
+/* All Action Modifier */
 .modactions {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
     margin-bottom: 3px;
     padding-top: 3px;
 }
 .modactions > label {
     display: flex;
+    width: 100%;
 }
 .modactions > label:not(:last-of-type) {
     margin-bottom: 5px;
 }
-.modactions > label > span {
+.modactions > label > span:first-of-type {
     display: flex;
     font-weight: bold;
-    width: 70%;
+    width: 65%;
+    margin: 0 0 0 5%;
+}
+.modactions > label > span:last-of-type {
+    width: 25%;
 }
 .modactions > label > input {
     width: 25%;
 }
-/*
-    --------
-    Movement
-    --------
-*/
-.movement > label {
-    display : flex;
-    padding: 0 10px 0 10px;
+/* Movement */
+.movement > div {
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
-.movement > label:nth-of-type(5) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
+.movement > div > label {
+    display : flex;
+    width: 100%;
+    padding: 0 10px 0 10px;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.movement > div > label:nth-of-type(5) {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding-top: 3px;
     padding-bottom: 3px;
 }
-.movement > label > span {
+.movement > div > label > span {
     display: flex;
     width: 55%;
 }
-.movement > label > input {
+.movement > div > label:nth-of-type(1) > span:last-of-type, 
+.movement > div > label:nth-of-type(5) > span:last-of-type, 
+.movement > div > label:nth-of-type(6) > span:last-of-type, 
+.movement > div > label:nth-of-type(7) > span:last-of-type, 
+.movement > div > label:nth-of-type(8) > span:last-of-type, 
+.movement > div > label > input {
     width: 45%;
+    justify-content: center;
 }
-.movement > label:nth-of-type(5) > span,
-.movement > label:nth-of-type(6) > span,
-.movement > label:nth-of-type(7) > span,
-.movement > label:nth-of-type(8) > span {
+.movement > div > label:nth-of-type(5) > span,
+.movement > div > label:nth-of-type(6) > span,
+.movement > div > label:nth-of-type(7) > span,
+.movement > div > label:nth-of-type(8) > span {
     font-weight: bold;
 }
-/*
-    -------------------
-    LP, Fatigue & Regen
-    -------------------
-*/
-
-.lifepoints > label,
-.lifepoints > div > label,
-.fatigue > label,
-.fatigue > div > label,
-.regeneration > label {
-    display : flex;
-    padding: 0 10px 0 10px;
+/* LP, Fatigue & Regen */
+.lifepoints > div:first-of-type ,
+.fatigue > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
 }
-.lifepoints > label > span,
+.lifepoints > div > label,
+.fatigue > div > label {
+    display: flex;
+    padding: 0 10px 0 10px;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.regeneration > label {
+    display: flex;
+    padding: 0 5px 0 5px;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
 .lifepoints > div > label > span,
-.fatigue > label > span,
 .fatigue > div > label > span {
     display: flex;
     width: 55%;
 }
-.lifepoints > h2 > label > a {
+.lifepoints > h5 > label > a {
     opacity: 0;
 }
-.lifepoints:hover > h2 > label > a {
+.lifepoints:hover > h5 > label > a {
     opacity: 1;
 }
-.fatigue > h2 > label > a {
+.fatigue > h5 > label > a {
     opacity: 0;
 }
-.fatigue:hover > h2 > label > a {
+.fatigue:hover > h5 > label > a {
     opacity: 1;
 }
 .regeneration > label > span {
     display: flex;
     width: 60%;
 }
-.lifepoints > label > input,
 .lifepoints > div > label > input,
-.fatigue > label > input,
 .fatigue > div > label > input {
     width: 45%;
 }
 .regeneration > label > input {
     width: 40%;
 }
-.lifepoints > label:nth-of-type(3),
-.regeneration > label:nth-of-type(4),
-.fatigue > label:nth-of-type(3) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
+.regeneration > label:nth-of-type(4) {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding-top: 3px;
     padding-bottom: 3px;
 }
-.lifepoints > label:nth-of-type(2) > span,
-.lifepoints > label:nth-of-type(3) > span,
-.fatigue > label:nth-of-type(2) > span,
-.fatigue > label:nth-of-type(3) > span,
+.lpCompact > label:nth-of-type(3),
+.fatCompact > label:nth-of-type(3) {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.lifepoints > div > label:nth-of-type(2) > span,
+.lifepoints > div > label:nth-of-type(3) > span,
+.fatigue > div > label:nth-of-type(2) > span,
+.fatigue > div > label:nth-of-type(3) > span,
 .regeneration > label:nth-of-type(4) > span,
 .regeneration > label:nth-of-type(5) > span,
 .regeneration > label:nth-of-type(6) > span,
 .regeneration > label:nth-of-type(7) > span {
     font-weight: bold;
 }
-/*
-    ----------------------
-    Attack, Block, & Dodge
-    ----------------------
-*/
+.regeneration > label:nth-of-type(1) {
+    border-top: 3px solid var(--boxColor);
+}
+.regeneration > label:nth-of-type(7) {
+    border-bottom: 3px solid var(--boxColor);
+}
+/* Attack, Block, & Dodge */
 .atkdef {
     width: 30%;
 }
-.atkdef > h2 > label > a {
+.atkdef > h5 > label > a {
     opacity: 0;
 }
-.atkdef:hover > h2 > label > a {
+.atkdef:hover > h5 > label > a {
     opacity: 1;
 }
-.atkdef > label,
 .atkdef > div > label {
     display: flex;
     padding: 0 10px 0 10px;
 }
-.atkdef > label > span,
 .atkdef > div > label > span {
     width: 55%;
     text-align: start;
 }
-.atkdef > label > input,
 .atkdef > div > label > input {
     width: 45%;
 }
-.atkdef > label:last-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
+.atkdef > div:last-of-type > label:last-of-type {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding-top: 3px;
     padding-bottom: 3px;
     font-weight: bold;
 }
-.atkdef > button {
+.atkdef > div > button {
     margin: 0px;
     width: 100%;
     height: 25px;
     border-radius: 0px;
     border: 0px;
+
+}
+.atkdef > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.atkdef > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
 }
 .atkdef > div:last-of-type {
-    display: grid;
-    justify-content: center;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    border-bottom: 3px solid var(--boxColor);
 }
-/*
-    ----------
-    Initiative
-    ----------
-*/
-.initiative {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+/* Advantages & Dis-advantages */
+.advdis > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
 }
-.initiative > div {
-    display: flex;
-    width: 94%;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-.initiative > button {
-    display: flex;
-    width: 94%;
-    justify-content: space-between;
-    height: 25px;
-    margin: 0px;
-    padding-right: 5%;
-    border: 0px;
-    align-items: center;
-}
-.initiative > label > a {
-    margin-left: -19px;
-    font-size: 19px;
-    opacity: 0;
-}
-.initiative:hover > label > a {
-    opacity: 1;
-}
-.initiative > div > input {
-    font-size: 15px;
-}
-.initiative > div > label {
-    display: flex;
-    width: 19%;
-    flex-wrap: wrap;
-}
-.initiative > div > label > span {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin-top: 3px;
-}
-.initiative > div > label > input {
-    width: 100%;
-}
-/*
-    ---------------------------
-    Advantages & Dis-advantages
-    ---------------------------
-*/
 .advdis > div:nth-of-type(2) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+
+}
+.advantage-item,
+.disadvantage-item {
+    padding: 0 2.5%;
+}
+.advdis > div:last-of-type {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .advdis > div:first-of-type,
 .advantage-item > div:first-of-type,
@@ -769,10 +976,8 @@ h3 {
     justify-content: flex-start;
 }
 .advdis > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-    padding-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .advdis > div:first-of-type > span:first-of-type {
     width: 75.05%;
@@ -816,41 +1021,26 @@ h3 {
 .advdis > div > div > textarea {
     margin: 3px 0 0 0;
 }
-/*
-    -------------------
-    All Action Modifier
-    -------------------
-*/
-.aamContainer {
-    margin: 0 0 5px 0;
+.advdis > div:nth-of-type(2) > div:nth-child(2n) {
+    background: var(--itemOffSet);
 }
-.aamContainer > div:first-of-type {
-    border: none !important;
-}
-.aamContainer > div > label {
-    display: flex;
-    width: 50%;
-}
-.aamContainer > div > label > span {
-    width: 48%;
-    padding: 0 2% 0 0;
-}
-.aamContainer > div > label > input {
-    width: 40%;
-}
-/*
-    ---------------------------
-    Secondary Abilities Drawing
-    ---------------------------
-*/
+/* Secondary Abilities Drawing */
 .secondary > div > div {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
 }
-.secondary > div > div:first-of-type {   
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+.secondary > div:first-of-type > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.secondary > div:last-of-type > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+.secondary > div > div:first-of-type {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .secondary > div > div > a {
     width: 5%;
@@ -950,11 +1140,7 @@ h3 {
 .e2, .e3 {
     margin: 5px 0 0 0;
 }
-/*
-    ----
-    Elan
-    ----
-*/
+/* Elan */
 .elan > div:first-of-type,
 .elan-item2 > div > div,
 .elan-item > div:first-of-type,
@@ -962,15 +1148,22 @@ h3 {
     display: flex;
     justify-content: flex-start;
 }
-.elan > div:not(:first-of-type) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+.elan-item,
+.elan-item2 > div {
+    padding: 0 2.5%;
 }
 .elan > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
-
+.elan > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.elan > div:last-of-type {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+}
 .elan > div:first-of-type > span:first-of-type {
     width: 19.95%;
     margin: 0 0.95% 0 2.5%;
@@ -1013,8 +1206,7 @@ h3 {
 .elan-item > div:hover > a {
     opacity: 1;
 }
-.elan-item > div:first-of-type,
-.elan-item > div > div > h3 {
+.elan-item > div > div > h6 {
     margin: 0 0 3px 0;
 }
 .elan-item > div > div {
@@ -1027,22 +1219,30 @@ h3 {
     display: flex;
     justify-content: space-between;
 }
-/*
-    ------
-    Natura
-    ------
-*/
-.natura > label {
+.elan-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.elan-item2 > div:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+/* Natura */
+.natura > div {
+    border: 3px solid var(--boxColor);
+}
+.natura > div > label {
     display: flex;
 }
-.natura > label > span {
+.natura > div > label > span {
     width: 75%;
     margin: 0 2% 0 0;
 }
-.natura > label > input {
+.natura > div > label > input {
     width: 23%;
 }
-
+/* Notes */
+.e3 > div > div {
+    border: 3px solid var(--boxColor);
+}
 /*
     ***************
     ---------------
@@ -1081,6 +1281,7 @@ h3 {
 }
 .maccu > div > div {
     width: 48%;
+    height: fit-content;
 }
 .zeon {
     width: 19%;
@@ -1105,15 +1306,11 @@ h3 {
     display: flex;
     justify-content: space-between;
 }
-/*
-    ----------------
-    Magic Projection
-    ----------------
-*/
-.mproj > h2 > label > a {
+/* Magic Projection */
+.mproj > h5 > label > a {
     opacity: 0;
 }
-.mproj:hover > h2 > label > a {
+.mproj:hover > h5 > label > a {
     opacity: 1;
 }
 .mproj > label,
@@ -1131,10 +1328,8 @@ h3 {
     width: 35%;
 }
 .mproj > label:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding: 3px 10px 3px 10px;
     font-weight: bold;
 }
@@ -1150,10 +1345,9 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
 }
 .mproj > div > button:first-of-type {
-    border-right: 1px solid;
+    border-right: 1px solid var(--boxColor);
 }
 .mproj > div > button > span:first-of-type {
     padding-left: 20%;
@@ -1177,17 +1371,45 @@ h3 {
     text-align: center;
     width: 70%;
 }
-/*
-    ------------------
-    Magic Accumulation
-    ------------------
-*/
-.maccu2 > h3 > label > a,
-.mregen2 > h3 > label > a {
+.mproj > div,
+.mproj > label {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.mproj > :nth-child(2) {
+    border-top: 3px solid var(--boxColor);
+}
+.mProjButton {
+    border-bottom: 3px solid var(--boxColor);
+}
+.mproj > h6 {
+    margin: 10px 0 0 0;
+}
+.mproj > div:last-of-type {
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+}
+/* Magic Accumulation */
+.maccu2,
+.mregen2 {
+    border-right: 3px solid var(--boxColor);
+    border-top: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.maccu2 > div:last-of-type,
+.mregen2 > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+.maccu2 > :nth-child(2),
+.mregen2 > :nth-child(2) {
+    border-top: 1px solid var(--boxColor);
+}
+.maccu2 > h6 > label > a,
+.mregen2 > h6 > label > a {
     opacity: 0;
 }
-.maccu2:hover > h3 > label > a,
-.mregen2:hover > h3 > label > a {
+.maccu2:hover > h6 > label > a,
+.mregen2:hover > h6 > label > a {
     opacity: 1;
 }
 .maccu > div > div > label,
@@ -1206,11 +1428,9 @@ h3 {
 }
 .maccu > div > div > label:nth-of-type(3),
 .mregen2 > label:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 10px 3px 10px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 0 10px 0 10px;
 }
 .maccu > div > div > label:nth-of-type(2),
 .maccu > div > div > label:nth-of-type(3) {
@@ -1224,27 +1444,25 @@ h3 {
     border: 0px;
 }
 .maccu2 > div > button:first-of-type {
-    border-right: 1px solid;
+    border-right: 1px solid var(--boxColor);
 }
 .mregen2 > div:last-of-type {
     display: flex;
     justify-content: end;
 }
-/*
-    ----
-    Zeon
-    ----
-*/
-.zeon > h2 > label > a {
+/* Zeon */
+.zeon > h5 > label > a {
     opacity: 0;
 }
-.zeon:hover > h2 > label > a {
+.zeon:hover > h5 > label > a {
     opacity: 1;
 }
 .zeon > label,
 .zeon > div > label {
     display: flex;
     padding: 0 10px 0 10px;
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
 }
 .zeon > label > span,
 .zeon > div > label > span {
@@ -1256,24 +1474,27 @@ h3 {
     width: 40%;
 }
 .zeon > label:nth-of-type(3) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 10px 3px 10px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+    padding: 0 10px;
 }
 .zeon > label:nth-of-type(2),
 .zeon > label:nth-of-type(3) {
     font-weight: bold;
 }
-/*
-    ------------
-    Innate Magic
-    ------------
-*/
-.minnate > h3 {
+.zeon > :nth-child(2) {
+    border-top: 3px solid var(--boxColor);
+}
+/* Innate Magic */
+.minnate > h6 {
     padding-top: 5px;
     margin-bottom: 0px;
+}
+.minnate > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .minnate > div > div > span {
     justify-content: center;
@@ -1288,21 +1509,19 @@ h3 {
 .minnate > div > div:last-of-type > span {
     font-weight: bold;
 }
-/*
-    ------------
-    Magic Levels
-    ------------
-*/
-.mlevels > h2 > label > a {
+/* Magic Levels */
+.mlevels > h5 > label > a {
     opacity: 0;
 }
-.mlevels:hover > h2 > label > a {
+.mlevels:hover > h5 > label > a {
     opacity: 1;
 }
 .mlevels > label,
 .mlevels > div > label {
     display: flex;
-    padding: 0 10px 0 10px;
+    padding: 0 10px;
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
 }
 .mlevels > label > span,
 .mlevels > div > label > span {
@@ -1314,30 +1533,31 @@ h3 {
     width: 40%;
 }
 .mlevels > label:nth-of-type(3) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 10px 3px 10px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+    padding: 0 10px;
 }
 .mlevels > label:nth-of-type(2),
 .mlevels > label:nth-of-type(3) {
     font-weight: bold;
 }
-/*
-    -----------
-    Spell Paths
-    -----------
-*/
+.mlevels > :nth-child(2) {
+    border-top: 3px solid var(--boxColor);
+}
+/* Spell Paths */
+.spellPath > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .spellPath > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .spellPath > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-    padding-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .spellPath > div:first-of-type,
 .spellPath-item > div {
@@ -1355,42 +1575,58 @@ h3 {
     width: 20%;
     margin: 0 0 0 1%;
 }
-/*
-    ------------------
-    Sumoning Abilities
-    ------------------
-*/
+.spellPath-item:nth-child(2n){
+    background: var(--itemOffSet);
+}
+/* Sumoning Abilities */
 .summoning > div {
     display: flex;
     justify-content: flex-start;
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.summoning > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+}
+.summoning > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
 }
 .summoning > div:first-of-type > span:first-of-type {
-    width: 23%;
+    width: 31%;
     margin: 0 1.5% 0 0;
 }
 .summoning > div > button {
-    width: 23%;
+    width: 31%;
     margin: 0 1.5% 0 0;
     height: 20px;
     border-radius: 0px;
     border: 0px;
+    border-right: 1px solid var(--boxColor);
 }
 .summoning > div:first-of-type > span,
 .summoning > div > input {
-    width: 14%;
+    width: 21%;
     margin: 0 1.5% 0 0;
 }
-.summoning > div > label {
-    width: 13.5%;
+.summoning > div:first-of-type > span:last-of-type,
+.summoning > div > input:last-of-type {
+    margin: 0;
 }
-/*
-    ------------------------------------
-    Turn Maintenance & Daily Maintenance
-    ------------------------------------
-*/
+/* Turn Maintenance & Daily Maintenance */
+.turnDayMaint > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .turnDayMaint > div:nth-of-type(2) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+    width: 100%;
+    min-height: 5px;
+}
+.turnDayMaint > div:nth-of-type(2) > div {
+    padding: 0 2.5%;
+}
+.turnDayMaint > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
 }
 .turnDayMaint > div:first-of-type,
 .turnDayMaint > div:nth-of-type(3),
@@ -1400,18 +1636,13 @@ h3 {
     justify-content: flex-start;
 }
 .turnDayMaint > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
+    border-bottom: 1px solid var(--boxColor);
     padding-bottom: 3px;
 }
 .turnDayMaint > div:nth-of-type(3) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    border-top: 5px solid black;
-    margin-top: 3px;
+    border-bottom: 1px solid var(--boxColor);
+    border-top: 1px solid var(--boxColor);
     padding-top: 3px;
-    margin-bottom: 3px;
     padding-bottom: 3px;
     font-weight: bold;
 }
@@ -1436,6 +1667,7 @@ h3 {
 .turnDayMaint > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-bottom: 3px solid var(--boxColor);
 }
 .turnMaint-item > div > input:first-of-type,
 .turnMaint-item > div > span:first-of-type,
@@ -1467,17 +1699,29 @@ h3 {
 .turnDayMaint > div > div > textarea {
     margin: 3px 0 0 0;
 }
+.turnDayMaint > div > div:nth-child(2n) {
+    background: var(--itemOffSet);
+}
 /*
     ----------
     Spell Book
     ----------
 */
+.spells > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .spells > div:last-of-type {
     display: flex;
+    border-top: 1px solid var(--boxColor);
     place-content: space-between;
+    border-bottom: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
 }
-.spell-item {
-    background: linear-gradient( 180deg, #cfcdc5, #d8d6ca);
+.spell-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .spell-item > div:not(:first-of-type) > label,
 .spell-item > div > div {
@@ -1566,15 +1810,13 @@ h3 {
     margin: 0 0 0 1%;
 }
 .spell-item > div:nth-of-type(3) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-bottom: 1px solid var(--boxColor);
     margin-bottom: 3px;
     padding-bottom: 3px;
 }
 .spell-item > div:nth-of-type(4) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
+    border-bottom: 1px solid var(--boxColor);
+    border-top: 1px solid var(--boxColor);
     margin: 3px 0 3px 0;
     padding: 3px 0 3px 0;
 }
@@ -1589,17 +1831,23 @@ h3 {
     Metamagic
     ---------
 */
-
-
+.metaMagic > textarea {
+    border: 3px solid var(--boxColor);
+}
 /*
     --------------------------
     Invocations & Incarnations
     --------------------------
 */
+
 .invocations > div:nth-of-type(2),
 .incarnations > div:nth-of-type(2) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+    width: 100%;
+}
+.invocations > div,
+.incarnations > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
 }
 .invocations > div:first-of-type,
 .incarnations > div:first-of-type,
@@ -1610,10 +1858,17 @@ h3 {
 }
 .invocations > div:first-of-type,
 .incarnations > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding-bottom: 3px;
+}
+.invocation-item,
+.incarnation-item {
+    padding: 0 2.5%;
+}
+.invocation-item:nth-child(2n),
+.incarnation-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .invocation-item > div > a,
 .incarnation-item > div > a {
@@ -1630,12 +1885,13 @@ h3 {
 }
 .invocations > div > div > textarea,
 .incarnations > div > div > textarea {
-    margin: 3px 0 0 0;
+    margin: 3px 0;
 }
 .invocations > div:last-of-type,
 .incarnations > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-bottom: 3px solid var(--boxColor);
 }
 .invocations > div:first-of-type > span:first-of-type {
     width: 59.85%;
@@ -1706,6 +1962,17 @@ h3 {
     PP
     --
 */
+.ppoint > div,
+.ppoint > label {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.ppoint > :nth-child(2) {
+    border-top: 3px solid var(--boxColor);
+}
+.ppoint > label:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
 .ppoint > label,
 .ppoint > div > label {
     display: flex;
@@ -1721,19 +1988,18 @@ h3 {
     width: 40%;
 }
 .ppoint > label:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    margin: 3px 0 0 0;
-    padding: 3px 10px 0 10px;
+    border-bottom: 1px solid var(--boxColor);
+    border-top: 1px solid var(--boxColor);
+    padding: 0 10px;
     font-weight: bold;
 }
 .ppoint > label:nth-of-type(3) {
     font-weight: bold;
 }
-.ppoint > h2 > label > a {
+.ppoint > h5 > label > a {
     opacity: 0;
 }
-.ppoint:hover > h2 > label > a {
+.ppoint:hover > h5 > label > a {
     opacity: 1;
 }
 /*
@@ -1741,11 +2007,22 @@ h3 {
     Potential
     ---------
 */
+.ppotential > :nth-child(2) {
+    border-top: 3px solid var(--boxColor);
+}
+.ppotential > div,
+.ppotential > label {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.ppotential > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
 .ppotential > label,
 .ppotential > div > label,
 .ppotential > div > div > label {
     display: flex;
-    padding: 0 10px 0 10px;
+    padding: 0 10px;
 }
 .ppotential > label > span,
 .ppotential > div > label > span,
@@ -1755,26 +2032,19 @@ h3 {
 }
 .ppotential > label > input,
 .ppotential > div > label > input,
-.ppotential > div > div > label > select,
-.ppotential > div > label:nth-of-type(4) > button {
+.ppotential > div > div > label > select {
     width: 40%;
 }
 .ppotential > label:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 10px 3px 10px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 10px;
     font-weight: bold;
 }
-.ppotential > div > label:nth-of-type(4) {
-    margin: 3px 0 3px 0;
-    justify-content: center;
-}
-.ppotential > h2 > label > a {
+.ppotential > h5 > label > a {
     opacity: 0;
 }
-.ppotential:hover > h2 > label > a {
+.ppotential:hover > h5 > label > a {
     opacity: 1;
 }
 .ppotential > div > button {
@@ -1788,10 +2058,21 @@ h3 {
     Projection
     ----------
 */
+.pproj > :nth-child(2) {
+    border-top: 3px solid var(--boxColor);
+}
+.pproj > div,
+.pproj > label {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.pproj > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
 .pproj > label,
 .pproj > div > label {
     display: flex;
-    padding: 0 10px 0 10px;
+    padding: 0 10px;
 }
 .pproj > label > span,
 .pproj > div > label > span {
@@ -1803,24 +2084,15 @@ h3 {
     width: 40%;
 }
 .pproj > label:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 10px 3px 10px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 10px;
     font-weight: bold;
 }
-.pproj > div > label:nth-of-type(3) {
-    margin: 3px 0 3px 0;
-    justify-content: center;
-}
-.pproj > div > label:nth-of-type(3) > button {
-    width: 40%;
-}
-.pproj > h2 > label > a {
+.pproj > h5 > label > a {
     opacity: 0;
 }
-.pproj:hover > h2 > label > a {
+.pproj:hover > h5 > label > a {
     opacity: 1;
 }
 .pproj > div > button {
@@ -1843,20 +2115,33 @@ h3 {
     Module & Disciplines
     --------------------
 */
+.discipline-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.pdisc > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.pdisc > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
 .pdisc > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 /*
     ---------------
     Mental Patterns
     ---------------
 */
-.ppaterns > div:not(:first-of-type),
-.ppowers > div:not(:first-of-type),
-.pmaint > div:last-of-type { 
-    width: 95%;
-    margin: 0 0 0 2.5%;
+.mentalPattern-item {
+    padding: 0 2.5%;
+}
+.ppaterns > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
 }
 .ppaterns > div:first-of-type,
 .mentalPattern-item > div:first-of-type {
@@ -1864,10 +2149,8 @@ h3 {
     justify-content: flex-start;
 }
 .ppaterns > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin: 0 0 3px 0;
-    padding: 0 0 3px 0;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .ppaterns > div > span:first-of-type {
     width: 52.25%;
@@ -1883,6 +2166,11 @@ h3 {
 .ppaterns > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+}
+.mentalPattern-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .mentalPattern-item > div > input:first-of-type,
 .mentalPattern-item > div:nth-of-type(1) > span:first-of-type {
@@ -1928,34 +2216,37 @@ h3 {
     width: 25%;
 }
 .mentalPattern-item > div:nth-of-type(3) > span {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding: 3px 0 17px 0;
 }
 .mentalPattern-item > div:nth-of-type(3) {
     text-align: center;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin: 0 0 3px 0;
-    padding: 0 0 3px 0;
+    border-bottom: 1px solid var(--boxColor);
 }
 /*
     ----------------
     Psychic Matrices
     ----------------
 */
+.psychicMatrix-item {
+    padding: 0 2.5%;
+}
+.psychicMatrix-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.ppowers > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
 .ppowers > div:first-of-type,
 .psychicMatrix-item > div:first-of-type {
     display: flex;
     justify-content: flex-start;
 }
 .ppowers > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin: 0 0 3px 0;
-    padding: 0 0 3px 0;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .ppowers > div:first-of-type > span:first-of-type {
     width: 70.3%;
@@ -1968,6 +2259,8 @@ h3 {
 .ppowers > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .psychicMatrix-item > div > input:first-of-type,
 .psychicMatrix-item > div:nth-of-type(1) > span:first-of-type {
@@ -2011,19 +2304,15 @@ h3 {
     width: 55%;
 }
 .psychicMatrix-item > div > div:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 0 3px 0;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 0;
 }
 .psychicMatrix-item > div > div:nth-of-type(3) {
     display: flex;
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 0 3px 0;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 0;
 }
 .psychicMatrix-item > div > div:nth-of-type(3) > span:first-of-type {
     width: 25%;
@@ -2033,7 +2322,7 @@ h3 {
 }
 .psychicMatrix-item > div > div:nth-of-type(4) > label > span:first-of-type {
     width: 7%;
-    border-right: 1px solid black;
+    border-right: 1px solid var(--boxColor);
 }
 .psychicMatrix-item > div > div:nth-of-type(4) > label > span:last-of-type {
     width: 18%;
@@ -2042,9 +2331,7 @@ h3 {
     width: 75%;
 }
 .psychicMatrix-item > div:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin: 0 0 3px 0;
+    border-bottom: 1px solid var(--boxColor);
     padding: 0 0 3px 0;
 }
 /*
@@ -2052,6 +2339,19 @@ h3 {
     Maintained Matrices
     -------------------
 */
+.maintPower-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.pmaint > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.pmaint > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.maintPower-item {
+    padding: 0 2.5%;
+}
 .pmaint > div:not(:nth-of-type(3)),
 .maintPower-item > div:first-of-type {
     display: flex;
@@ -2079,15 +2379,15 @@ h3 {
     margin: 0 0 0 1%;
 }
 .pmaint > div:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 0 3px 0;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 0;
 }
 .pmaint > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .maintPower-item > div > input:first-of-type,
 .maintPower-item > div:nth-of-type(1) > span:first-of-type {
@@ -2132,8 +2432,8 @@ h3 {
     width: 63.5%;
     flex-wrap: wrap;
 }
-.s5 > div:nth-of-type(2),
-.s5 > div:nth-of-type(3) {
+.s5 > div:nth-of-type(1),
+.s5 > div:nth-of-type(2) {
     flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
@@ -2150,24 +2450,8 @@ h3 {
 .limits {
     width: 28%;
 }
-.kiNotBought {
-    background-color: #c4c2b7;
-}
-.kiBought {
-    background-color: #b5b3f3 !important;
-}
-.kiFree {
-    background-color: #a8e7a8;
-}
 .mk > div,
-.limits > div,
-.kiTech > div:not(:first-of-type),
-.kipool > div:not(:first-of-type),
-.kiseals > div:not(:first-of-type),
-.unarmed > div:not(:first-of-type),
-.kiSealsCreatures > div:not(:first-of-type),
-.martialarts > div:not(:first-of-type),
-.arsMagnus > div:not(:first-of-type) {
+.limits > div {
     width: 95%;
     margin: 0 0 0 2.5%;
 }
@@ -2176,6 +2460,9 @@ h3 {
     Ki Abilities
     ---------
 */
+.kiAbilities > div {
+    border: 3px solid var(--boxColor);
+}
 .kiAbility {
     margin: 0px;
     height: 20px;
@@ -2183,10 +2470,13 @@ h3 {
     border: 0px;
     width: 15%;
 }
-.kiAbilities > div {
+.kiSubsection > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.kiSubsection > div:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .subKi1 {
     margin-left: 10px;
@@ -2210,7 +2500,6 @@ h3 {
     height: 20px;
     border-radius: 0px;
     border: 0px;
-    background-color: #c4c2b7;
 }
 .kiActiveButton1 {
     width: 17%;
@@ -2218,73 +2507,26 @@ h3 {
     height: 20px;
     border-radius: 0px;
     border: 0px;
-    background-color: #c4c2b7;
-}
-/*
-    --------------
-    Unarmed Damage
-    --------------
-*/
-.unarmed > div,
-.unarmed > div > div {
-    display: flex;
-    justify-content: flex-start;
-}
-.unarmed > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-}
-.unarmed > div:nth-of-type(2) {
-    margin: 3px 0 0 2.5%;
-}
-.unarmed > div:first-of-type > span:first-of-type {
-    margin-left: 2.5%;
-}
-.unarmed > div > span:not(:nth-of-type(2)) {
-    width: 14.25%
-}
-.unarmed > div > input:first-of-type {
-    width: 15%;
-}
-.unarmed > div > span:nth-of-type(2) {
-    width: 66.5%
-}
-.unarmed > div > div {
-    width: 70%;
-}
-.unarmed > div > div > input {
-    width: 15%;
-}
-.unarmed > div > div > span {
-    width: 4%;
-}
-.unarmed > div > div > div {
-    width: 100%;
-}
-.unarmed > div > div > div > select {
-    width: 100%;
-}
-.unarmed > div > input:nth-of-type(2) {
-    width: 15%;
-}
-.unarmed > textarea {
-    margin: 5px 0 0 2.5%;
-    width: 95%;
-}
-.unarmed > h2 > label > a {
-    opacity: 0;
-}
-.unarmed:hover > h2 > label > a {
-    opacity: 1;
 }
 /*
     --------
     Ki Pools
     --------
 */
+.kipool > div:not(:first-of-type) > div {
+    padding: 0 2.5%;
+}
+.kipool > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.kipool > div:last-of-type,
+.innatePowBorder {
+    border-bottom: 3px solid var(--boxColor);
+}
 .kipool > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .kipool > div:first-of-type > span:first-of-type {
     margin: 0 0 0 27.2%;
@@ -2317,7 +2559,6 @@ h3 {
 }
 .kipool > div > div:not(:first-of-type) > span {
     font-size: 11px;
-    color: #2c2c2c;
     font-style: italic;
     padding: 0 0 0 8px;
 }
@@ -2329,6 +2570,13 @@ h3 {
     MK 
     --
 */
+.mk > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.mk > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .mk > div,
 .mk > div > label {
     display: flex;
@@ -2340,22 +2588,21 @@ h3 {
 .mk > div > label > span {
     width: 60%;
     display: flex;
-    padding: 0 0 0 9%;
+    padding: 0 0 0 4.5%;
 }
 .mk > div > label > input {
     width: 35%;
+    margin: 0 4.5% 0 0;
 }
 .mk > div:last-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 2.5%;
-    padding: 3px 0 3px 0;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+    padding: 3px 0;
 }
-.mk > h2 > label > a {
+.mk > h5 > label > a {
     opacity: 0;
 }
-.mk:hover > h2 > label > a {
+.mk:hover > h5 > label > a {
     opacity: 1;
 }
 /*
@@ -2363,13 +2610,17 @@ h3 {
     Ars Magnus
     ----------
 */
+.arsMagnus > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .arsMagnus > div:not(:nth-of-type(2)),
 .arsMagnus-item > div:first-of-type {
     display: flex;
 }
 .arsMagnus > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .arsMagnus > div > span:first-of-type {
     width: 69.35%;
@@ -2382,10 +2633,19 @@ h3 {
 .arsMagnus > div:nth-of-type(3) {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+    margin: 0 0 15px 0;
 }
 .arsMagnus-item > div > a {
     width: 5%;
     font-size: 15px;
+}
+.arsMagnus-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.arsMagnus-item > div {
+    padding: 0 2.5%;
 }
 .arsMagnus-item > div > a {
     opacity: 0;
@@ -2407,17 +2667,16 @@ h3 {
     margin: 3px 0 0 0;
 }
 .arsMagnus > div:nth-of-type(4) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 2.5%;
-    padding: 3px 0 3px 0;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+}
+.arsMagnus > div:nth-of-type(5) {
+    border-bottom: 3px solid var(--boxColor);
 }
 .arsMagnus > div:nth-of-type(5) > input {
     width: 9.5%;
     margin: 0 0 0 1%;
 }
-
 /*
     ------
     Limits
@@ -2425,6 +2684,16 @@ h3 {
 */
 .limits > div > select {
     width: 100%;
+}
+.limits > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.limits > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.limits > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
 }
 /*
     ------------
@@ -2437,8 +2706,18 @@ h3 {
     justify-content: flex-start;
 }
 .martialarts > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-bottom: 1px solid var(--boxColor);
+    border-top: 3px solid var(--boxColor);
+}
+.martialarts > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.martialArt-item > div {
+    padding: 0 2.5%;
+}
+.martialArt-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .martialarts > div > span:first-of-type {
     width: 53.2%;
@@ -2454,6 +2733,8 @@ h3 {
 .martialarts > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-bottom: 3px solid var(--boxColor);
+    border-top: 1px solid var(--boxColor);
 }
 .martialArt-item > div > a {
     width: 5%;
@@ -2487,14 +2768,72 @@ h3 {
     margin: 3px 0 0 0;
 }
 /*
+    --------------
+    Unarmed Damage
+    --------------
+*/
+.unarmed > div,
+.unarmed > div > div {
+    display: flex;
+    justify-content: flex-start;
+}
+.unarmed > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.unarmed > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+.unarmed > div:first-of-type {
+    border-bottom: 1px solid var(--boxColor);
+    border-top: 3px solid var(--boxColor);
+}
+.unarmed > div:first-of-type > span:first-of-type {
+    margin-left: 2.5%;
+}
+.unarmed > div > span:not(:nth-of-type(2)) {
+    width: 14.25%
+}
+.unarmed > div > input:first-of-type {
+    width: 15%;
+}
+.unarmed > div > span:nth-of-type(2) {
+    width: 66.5%
+}
+.unarmed > div > div {
+    width: 70%;
+}
+.unarmed > div > div > input {
+    width: 15%;
+}
+.unarmed > div > div > span {
+    width: 4%;
+}
+.unarmed > div > div > div {
+    width: 100%;
+}
+.unarmed > div > div > div > select {
+    width: 100%;
+}
+.unarmed > div > input:nth-of-type(2) {
+    width: 15%;
+}
+.unarmed > h5 > label > a {
+    opacity: 0;
+}
+.unarmed:hover > h5 > label > a {
+    opacity: 1;
+}
+/*
     -----------------
     Ki Seal Creatures
     -----------------
-*/
-.kiseals > h2 > label > a {
+}*/
+
+.kiseals > h5 > label > a {
     opacity: 0;
 }
-.kiseals:hover > h2 > label > a {
+.kiseals:hover > h5 > label > a {
     opacity: 1;
 }
 .kisealmast > div {
@@ -2508,21 +2847,37 @@ h3 {
     margin: 0 2.5% 0 0;
 }
 .kisealmast > div:not(:first-of-type) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+    padding: 0 2.5%;
 }
 .kisealmast > div > span,
 .kisealmast > div > button {
     width: 15%;
 }
+.kisealmast > div:first-of-type {
+    border-top: 1px solid var(--boxColor);
+}
+.kisealmast > h6 {
+    border-top: 3px solid var(--boxColor);
+}
+.kiSealsCreatures > div,
+.kisealmast > div,
+.kisealmast > h6 {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .kisealmast > div:last-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    padding: 0 0 5px 0;
+    border-bottom: 1px solid var(--boxColor);
+    padding: 0 2.5% 5px 2.5%;
 }
 .kiSealsCreatures > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-bottom: 1px solid var(--boxColor);
+    border-top: 3px solid var(--boxColor);
+}
+.kiSealCreature-item {
+    padding: 0 2.5%;
+}
+.kiSealCreature-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .kiSealsCreatures > div:first-of-type,
 .kiSealCreature-item > div:first-of-type {
@@ -2540,6 +2895,8 @@ h3 {
 .kiSealsCreatures > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .kiSealCreature-item > div > a {
     width: 5%;
@@ -2580,76 +2937,32 @@ h3 {
     Ki techniques
     -------------
 */
-/*
-.kiTechnique-item > div:first-of-type,
-.kiTechnique-item > div:last-of-type > div {
-    display: flex;
-    justify-content: flex-start;
+.kiTech > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.kiTech > div:first-of-type {
+    border-top: 1px solid var(--boxColor);
 }
 .kiTech > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
-.kiTechnique-item > div > span:first-of-type,
-.kiTechnique-item > div > input:first-of-type {
-    width: 68%;
-    margin: 0;
+.kiTechnique-item {
+    padding: 0 2.5% 10px 2.5%;
 }
-.kiTechnique-item > div > span,
-.kiTechnique-item > div > input {
-    width: 10%;
-    margin: 0 0 0 1%;
+.kiTechnique-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
-.kiTechnique-item > div > a {
-    width: 5%;
-    font-size: 15px;
-}
-.kiTechnique-item > div > a {
-    opacity: 0;
-}
-.kiTechnique-item > div:hover > a {
-    opacity: 1;
-}
-.kiTechnique-item > div:last-of-type > div > span:first-of-type {
-    margin: 0%;
-}
-.kiTechnique-item > div:last-of-type > div > span,
-.kiTechnique-item > div:last-of-type > div > input {
-    width: 10%;
-    margin: 0 0 0 1%;
-}
-.kiTechnique-item > div:last-of-type > div:first-of-type > span:last-of-type,
-.techSelect {
-    width: 23%;
-    margin: 0 0 0 1%;
-    border-left: 1px solid black;
-}
-.kiTechnique-item > div:last-of-type > div > div > select {
-    width: 100%;
-}
-.kiTechnique-item > div:last-of-type > textarea {
-    margin: 3px 0 0 0;
-}
-.kiTechnique-item > div:last-of-type > div > div > span:nth-of-type(2) {
-    width: 30%;
-    justify-content: center;
-}
-.techExpand {
-    width: 46%;
-    display: flex;
-    margin: 0 15% 0 15%;
-}
-.techExpand > span {
-    width: 70%;
-    justify-content: flex-start;
-}
-.techExpand > input {
-    width: 30%;
-}
-*/
 .kiTechMinContainer > div,
 .kiTechMaxContainer > div {
     display: flex;
+}
+.kiTechMinContainer .kiTechMainInfo > span,
+.kiTechMinContainer .kiTechMainInfo > a:first-of-type {
+    border-bottom: 1px solid var(--boxColor);
 }
 .kiTechMainInfo > span:first-of-type,
 .kiTechMainInfo > input:first-of-type {
@@ -2663,23 +2976,130 @@ h3 {
 }
 .kiTechMainInfo > a {
     width: 5%;
+    height: 20px;
 }
-.kiTechSideInfo > span {
-    width: 36%;
-    margin: 0 1% 0 0;
+.kiTechnique-item > div > div > a {
+    width: 5%;
+    font-size: 15px;
+}
+.kiTechnique-item > div > div > a {
+    opacity: 0;
+}
+.kiTechnique-item > div:hover > div > a {
+    opacity: 1;
+}
+.kiTechSideInfo > span:first-of-type,
+.kiTechSideInfo > span:nth-of-type(2) {
+    width: 36.5%;
     text-align: left;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
+    padding: 0 0 0 15px;
+    border-bottom: 1px solid var(--boxColor);
+    border-right: 1px solid var(--boxColor);
 }
-.kiTechSideInfo > span:nth-of-type(3) {
-    width: 10%;
-    margin: 0 1% 0 0;
+.kiTechSideInfo > span:nth-of-type(3),
+.kiTechSideInfo > span:nth-of-type(4) {
+    width: 11%;
+    padding: 0 0 0 1%;
+    border-bottom: 1px solid var(--boxColor);
     text-align: center;
 }
 .kiTechSideInfo > span:nth-of-type(4) {
-    width: 10%;
-    margin: 0;
+    width: 16%;
+    padding: 0 5% 0 1%;
+}
+.kiTechSideInfoMax > span:first-of-type {
+    width: 73%;
+    padding: 0 0 0 5%;
+}
+.kiTechSideInfoMax > span {
+    width: 11%;
+    padding: 0 0 0 1%;
+}
+/*
+.kiTechMaint,
+.kiTechType,
+.kiTechUse {
+    border-right: 1px solid var(--boxColor);
+    border-left: 1px solid var(--boxColor);
+}
+*/
+.kiTechMaint > span:first-of-type,
+.kiTechType > span:first-of-type,
+.kiTechUse > span:first-of-type {
+    width: 22%;
+}
+.kiTechMaint > span,
+.kiTechType > span,
+.kiTechUse > span {
     text-align: center;
+    width: 13%;
+}
+.kiTechMaint {
+    border-bottom: 1px solid var(--boxColor);
+}
+
+.kiTechMinContainer .kiTechInfo > textarea {
+    background: none;
+    cursor: default;
+}
+.kiTechInfo {
+    border-right: 1px solid var(--boxColor);
+    border-left: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+}
+.kiTechTypeMax > span:first-of-type,
+.kiTechUseMax > span:first-of-type,
+.kiTechMaintMax > span:first-of-type {
+    width: 15%;
+}
+.kiTechTypeMax > span,
+.kiTechUseMax > input,
+.kiTechMaintMax > input {
+    text-align: center;
+    width: 10%;
+    margin: 0 1% 0 0;
+}
+.kiTechTypeMax > span:last-of-type,
+.techSelect {
+    width: 18%;
+}
+.techSelect > select {
+    width: 100%;
+}
+.techExpandMax,
+.techExpand {
+    width: 81%;
+    display: flex;
+}
+.kiTechMaintMax > div > span,
+.kiTechMaint > div > span:first-of-type,
+.kiTechUseMax > div > span,
+.kiTechUse > div > span:first-of-type {
+    width: 33%;
+    text-align: start;
+    margin: 0 0 0 29px;
+}
+.kiTechMaintMax > div > input,
+.kiTechMaint > div > span,
+.kiTechUseMax > div > input,
+.kiTechUse > div > span {
+    width: 15%;
+}
+.kiTechType > div > span:first-of-type,
+.kiTechTypeMax > div > span:first-of-type {
+    width: 33%;
+    margin: 0 0 0 29px;
+}
+.kiTechType > div > span,
+.kiTechTypeMax > div > span {
+    width: 15%;
+}
+.kiTechType,
+.kiTechTypeMax {
+    border-bottom: 1px dashed var(--boxColor);
+}
+.kiTechSideInfoMax > span {
+    font-size: 12px;
 }
 
 .kiTechUse,
@@ -2749,7 +3169,19 @@ h3 {
 */
 .wearArmor > label {
     display: flex;
-    padding: 0 10px 0 10px
+    padding: 0 10px;
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.wearArmor > label:nth-of-type(1),
+.wearArmor > label:nth-of-type(6) {
+    border-top: 3px solid var(--boxColor);
+}
+.wearArmor > label:nth-of-type(10) {
+    border-bottom: 3px solid var(--boxColor);
+}
+.wearArmor > label:nth-of-type(9) {
+    border-top: 1px solid var(--boxColor);
 }
 .wearArmor > label > span  {
     width: 60%;
@@ -2759,11 +3191,10 @@ h3 {
     width: 40%;
 }
 .wearArmor > label:nth-of-type(5) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 10px 3px 10px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+    margin: 0 0 5px 0;
+    padding: 0 10px;
     font-weight: bold;
 }
 .wearArmor > label:nth-of-type(6) > span,
@@ -2787,10 +3218,8 @@ h3 {
 */
 .armor > div:first-of-type {
     display: flex;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin: 0 0 3px 0;
-    padding: 0 0 3px 0;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .armor-item > div > a,
 .armorHelmet-item > div > a {
@@ -2813,11 +3242,11 @@ h3 {
 .armorHelmet-item > div > span:not(:first-of-type) {
     width: 15.2%;
 }
-.armor-item,
-.armor-item2,
-.armorHelmet-item,
-.armorHelmet-item2 {
-    border-bottom: 1px solid black;
+.armor-item:nth-child(2n),
+.armor-item2:nth-child(2n),
+.armorHelmet-item:nth-child(2n),
+.armorHelmet-item2:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .armor-item > div,
 .armor-item2 > div,
@@ -2834,41 +3263,35 @@ h3 {
 .armor-item > div:hover > a {
     opacity: 1;
 }
+.armor > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .armor > div:nth-of-type(4) {
     display: flex;
     justify-content: space-between;
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 0 0 0;
 }
 .armor > div:nth-of-type(2),
 .armor > div:nth-of-type(5) {
-    margin-bottom: 2px;
-    padding-bottom: 2px;
+    border-bottom: 1px dashed var(--boxColor);
+    padding: 0 0 5px 0;
 }
 .armor > div:nth-of-type(3),
 .armor > div:nth-of-type(6) {
-    margin-top: 7px;
-    padding-top: 7px;
+    padding: 5px 0 0 0;
 }
 .armor > div:nth-of-type(8) {
     display: flex;
     justify-content: space-between;
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    margin-top: 3px;
     padding-top: 3px;
 }
 .armor > div:nth-of-type(9) {
     display: flex;
     justify-content: space-between;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
+    border-bottom: 3px solid var(--boxColor);
     padding-bottom: 3px;
 }
 .armor > div:nth-of-type(4) > span:not(:first-of-type),
@@ -2879,9 +3302,11 @@ h3 {
     width: 9.25%;
 }
 .armor > div:nth-of-type(7) {
-    padding-top: 3px;
+    padding: 3px 0;
     display: flex;
     justify-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 /*
     -----------
@@ -2890,17 +3315,25 @@ h3 {
 */
 .prof > div:first-of-type {
     display: flex;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding-bottom: 3px;
 }
 .prof > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
+}
+.prof > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
 }
 .prof-item > div {
     display: flex;
+}
+.prof-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .prof > div:first-of-type > span,
 .prof-item > div > span:first-of-type,
@@ -2930,9 +3363,15 @@ h3 {
     Weapon
     ------
 */
-.weapons > div:not(:first-of-type) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+.weapon-item {
+    padding: 0 2.5%;
+}
+.weapon-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.weapons > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
 }
 .weapons > div:first-of-type,
 .weapon-item > div {
@@ -2940,9 +3379,8 @@ h3 {
     justify-content: flex-start;
 }
 .weapons > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding-bottom: 3px;
 }
 .weapons > div:first-of-type > span:nth-of-type(1) {
@@ -2952,6 +3390,8 @@ h3 {
 .weapons > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .weapon-item > div:last-of-type > span:first-of-type {
     width: 15%;
@@ -2982,13 +3422,24 @@ h3 {
 .weapon-item > div:hover > a {
     opacity: 1;
 }
+.weapon-item > div:not(:first-of-type) {
+    border-right: 2px solid var(--boxColor);
+    border-left: 2px solid var(--boxColor);
+}
 .weapon-item > div:nth-child(2),
 .weapon-item > div:nth-child(4),
-.weapon-item > div:nth-child(6) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
+.weapon-item > div:nth-child(6),
+.weapon-item > div:nth-child(8) {
+    border-top: 2px solid var(--boxColor);
+    border-bottom: 1px dashed var(--boxColor);
     place-content: space-between;
+}
+.weapon-item > div:nth-child(3),
+.weapon-item > div:nth-child(5),
+.weapon-item > div:nth-child(7),
+.weapon-item > div:nth-child(7),
+.weapon-item > div:nth-child(9) {
+    padding: 0 0 3px 0;
 }
 .weapon-item > div:nth-child(2) > button {
     height: 20px;
@@ -3070,17 +3521,9 @@ h3 {
 .weapon-item > div:nth-child(7) > div:nth-child(4) {
     width: 9%;
 }
-.weapon-item > div:nth-child(8) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-}
 .weapon-item > div:nth-child(9),
 .weapon-item > div:nth-child(9) > div {
     display: flex;
-}
-.weapon-item > div:nth-child(9){
-    margin: 0 0 3px 0;
 }
 .weapon-item > div:nth-child(8) > span,
 .weapon-item > div:nth-child(9) > div {
@@ -3100,25 +3543,32 @@ h3 {
     border-radius: 0px;
     border: 0px;
 }
+.weapon-item > textarea {
+    border: 2px solid var(--boxColor);
+}
 /*
     --------
     Currency 
     --------
 */
+.currency > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
 .currency > div > label,
 .currency-item > div {
     display: flex;
 }
 .currency > div:first-of-type {
     display: flex;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-    padding-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
 }
 .currency > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .currency > div > span:first-of-type,
 .currency > div > label > span,
@@ -3132,19 +3582,27 @@ h3 {
     width: 30%;
     margin: 0 0 0 1%;
 }
+.currency-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
 /*
     ---------
     Invnetory
     ---------
 */
-.inventory > div:not(:first-of-type) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+.inventory > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.inventory-item {
+    padding: 0 2.5%;
+}
+.inventory-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .inventory > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding-bottom: 3px;
 }
 .inventory > div:first-of-type,
@@ -3163,6 +3621,8 @@ h3 {
 .inventory > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .inventory-item > div:first-of-type > span:first-of-type,
 .inventory-item > div:first-of-type > input:first-of-type {
@@ -3258,11 +3718,34 @@ h3 {
     Settings
     ---------
 */
-.settingsOptions > div > label {
+.settingsSubsection > div {
     display: flex;
-    padding: 0 10px 0 10px;
 }
-
+.settingsSubsection > div > button {
+    width: 30%;
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
+}
+.settingsSubsection > div > span {
+    width: 70%;
+    text-align: start;
+    padding: 0 0 0 5px;
+}
+.settingsSubsectionIndent {
+    padding: 0 0 0 15px !important;
+}
+.settingsSubsection > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.settingsSubsection > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.settingsSubsection > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
 /*
     ---------
     RollRange
@@ -3272,6 +3755,15 @@ h3 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.rollRange > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.rollRange > div:last-of-type {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .rollRange > div > label {
     display: flex;
@@ -3296,7 +3788,10 @@ h3 {
 */
 .charOptions > div > label {
     display: flex;
-    padding: 0 10px 0 10px;
+    padding: 0 10px;
+}
+.charOptions > div {
+    border: 3px solid var(--boxColor);
 }
 .charOptions > div > label > span {
     width: 60%;
@@ -3304,25 +3799,60 @@ h3 {
 .charOptions > div > label > input {
     width: 40%;
 }
+.charOptions > div > div {
+    display: flex;
+}
+.charOptions > div > div:first-of-type {
+    border-top: 1px dashed var(--boxColor);
+    margin: 3px 0 0 0;
+    padding: 3px 0 0 0;
+}
+.charOptions > div > div:nth-of-type(6) {
+    border-top: 1px dashed var(--boxColor);
+    margin: 3px 0 0 0;
+    padding: 3px 0 0 0;
+}
+.charOptions > div > div > button {
+    width: 30%;
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
+}
+.charOptions > div > div > span {
+    width: 70%;
+    text-align: start;
+    padding: 0 0 0 5px;
+}
 /*
     ---------
     Innate Bonuses
     ---------
 */
-.innateBonuses > div:not(:first-of-type) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+.class-item {
+    padding: 0 2.5%;
+}
+.class-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .innateBonuses > div:first-of-type,
 .class-item > div:first-of-type {
     display: flex;
     justify-content: flex-start;
 }
+.innateBonuses > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
 .innateBonuses > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-    padding-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+}
+.innateBonuses > div:last-of-type {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .innateBonuses > div:first-of-type > span:first-of-type {
     width: 79.8%;
@@ -3668,7 +4198,7 @@ h3 {
 .spellContentCont > div:nth-of-type(n + 3) {
     border-image: url(../img/border.png) 10 stretch;
     border-top: 5px solid black;
-    margin: 1px 0 px 0;
+    margin: 1px 0 3px 0;
     padding: 1px 0 3px 0;
 }
 /*

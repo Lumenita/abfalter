@@ -75,7 +75,6 @@ export class promptDialog extends genericDialog {
     }
 }
 
-
 export class confirmationDialog extends genericDialog {
     constructor(title, body, { onConfirm, onCancel } = {
         onConfirm: () => {
