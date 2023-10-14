@@ -3101,6 +3101,31 @@ h6 {
 .kiTechSideInfoMax > span {
     font-size: 12px;
 }
+
+.kiTechUse,
+.kitechType {
+    display: flex;
+}
+
+.kitechType > span,
+.kiTechUse > span,
+.kiTechUse > input {
+    width: 10%;
+}
+
+.kiTechUse > select {
+    width: 20%;
+}
+
+.techExpand {
+    display: flex;
+    width: 70%;
+}
+.techExpand > span {
+    width: 40%;
+}
+
+
 /*
     *************
     -------------
