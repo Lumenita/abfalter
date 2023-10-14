@@ -240,7 +240,7 @@ h6 {
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--inputBorder);
     text-align: center;
     appearance: none;
     color: var(--textColor);
@@ -324,7 +324,6 @@ h6 {
 .subHeaderRow2Half > label > input,
 .subHeaderRow3 > label > input {
     height: 25px;
-    border: none;
     font-size: 15px;
 }
 .subHeaderRow1 > div:nth-of-type(1) > input,
@@ -412,12 +411,33 @@ h6 {
 .SubHeaderRight {
     width: 55%;
 }
-.SubHeaderRight  > div {
+.SubHeaderRight > div {
     display: flex;
 }
 .subRightHeader1 {
     height: 25px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.subRightHeader2 {
+    justify-content: space-around;
+}
+
 .subRightLeft { /* initiative */
     width: 30%;
 }
@@ -460,27 +480,37 @@ h6 {
     font-size: 25px;
     height: 30px;
 }
-.headerIniDets {
+.headerIniDets > label {
+    display: flex;
+    padding: 0 5px;
 }
-
-
-
-
-
-
-
+.headerIniDets > label:last-of-type {
+    border-top: 1px solid var(--boxColor);
+}
+.headerIniDets > label > span {
+    width: 65%;
+    text-align: start;
+}
+.headerIniDets > label > input {
+    width: 35%;
+}
 .subRightMid {
     width: 30%;
 }
-
-
-
-
-
-
-
-
-
+.subRightMid > div {
+    border: 3px solid var(--boxColor);
+}
+.subRightMid > div > label {
+    display: flex;
+    padding: 0 5px;
+}
+.subRightMid > div > label > span {
+    width: 65%;
+    text-align: start;
+}
+.subRightMid > div > label > input{
+    width: 35%;
+}
 .subRightRight {
     width: 40%;
 }
@@ -490,7 +520,7 @@ h6 {
 }
 .headerAam > label {
     display: flex;
-    padding: 0 5%;
+    padding: 0 5px;
 }
 .headerAam > label:last-of-type {
     border-top: 1px solid var(--boxColor);
@@ -524,6 +554,7 @@ h6 {
 .navTabsYes {
     max-height: 37px;
     min-width: 878px;
+    margin: 8px 0 0 0 !important;
     border-top: none !important;
     border-bottom: none !important;
 }
@@ -2961,7 +2992,7 @@ h6 {
 .kiTechSideInfo > span:nth-of-type(2) {
     width: 36.5%;
     text-align: left;
-    padding: 0 0 0 5%;
+    padding: 0 0 0 15px;
     border-bottom: 1px solid var(--boxColor);
     border-right: 1px solid var(--boxColor);
 }
@@ -3006,6 +3037,7 @@ h6 {
 .kiTechMaint {
     border-bottom: 1px solid var(--boxColor);
 }
+
 .kiTechMinContainer .kiTechInfo > textarea {
     background: none;
     cursor: default;
@@ -3034,8 +3066,41 @@ h6 {
 .techSelect > select {
     width: 100%;
 }
-
-
+.techExpandMax,
+.techExpand {
+    width: 81%;
+    display: flex;
+}
+.kiTechMaintMax > div > span,
+.kiTechMaint > div > span:first-of-type,
+.kiTechUseMax > div > span,
+.kiTechUse > div > span:first-of-type {
+    width: 33%;
+    text-align: start;
+    margin: 0 0 0 29px;
+}
+.kiTechMaintMax > div > input,
+.kiTechMaint > div > span,
+.kiTechUseMax > div > input,
+.kiTechUse > div > span {
+    width: 15%;
+}
+.kiTechType > div > span:first-of-type,
+.kiTechTypeMax > div > span:first-of-type {
+    width: 33%;
+    margin: 0 0 0 29px;
+}
+.kiTechType > div > span,
+.kiTechTypeMax > div > span {
+    width: 15%;
+}
+.kiTechType,
+.kiTechTypeMax {
+    border-bottom: 1px dashed var(--boxColor);
+}
+.kiTechSideInfoMax > span {
+    font-size: 12px;
+}
 /*
     *************
     -------------
@@ -3341,7 +3406,7 @@ h6 {
 .weapon-item > div:nth-child(6),
 .weapon-item > div:nth-child(8) {
     border-top: 2px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
+    border-bottom: 1px dashed var(--boxColor);
     place-content: space-between;
 }
 .weapon-item > div:nth-child(3),
@@ -3632,11 +3697,19 @@ h6 {
     display: flex;
 }
 .settingsSubsection > div > button {
-    width: 35%;
+    width: 30%;
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
 }
 .settingsSubsection > div > span {
-    width: 65%;
+    width: 70%;
     text-align: start;
+    padding: 0 0 0 5px;
+}
+.settingsSubsectionIndent {
+    padding: 0 0 0 15px !important;
 }
 .settingsSubsection > div {
     border-right: 3px solid var(--boxColor);
@@ -3690,7 +3763,10 @@ h6 {
 */
 .charOptions > div > label {
     display: flex;
-    padding: 0 10px 0 10px;
+    padding: 0 10px;
+}
+.charOptions > div {
+    border: 3px solid var(--boxColor);
 }
 .charOptions > div > label > span {
     width: 60%;
@@ -3698,25 +3774,60 @@ h6 {
 .charOptions > div > label > input {
     width: 40%;
 }
+.charOptions > div > div {
+    display: flex;
+}
+.charOptions > div > div:first-of-type {
+    border-top: 1px dashed var(--boxColor);
+    margin: 3px 0 0 0;
+    padding: 3px 0 0 0;
+}
+.charOptions > div > div:nth-of-type(6) {
+    border-top: 1px dashed var(--boxColor);
+    margin: 3px 0 0 0;
+    padding: 3px 0 0 0;
+}
+.charOptions > div > div > button {
+    width: 30%;
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
+}
+.charOptions > div > div > span {
+    width: 70%;
+    text-align: start;
+    padding: 0 0 0 5px;
+}
 /*
     ---------
     Innate Bonuses
     ---------
 */
-.innateBonuses > div:not(:first-of-type) {
-    width: 95%;
-    margin: 0 0 0 2.5%;
+.class-item {
+    padding: 0 2.5%;
+}
+.class-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
 .innateBonuses > div:first-of-type,
 .class-item > div:first-of-type {
     display: flex;
     justify-content: flex-start;
 }
+.innateBonuses > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
 .innateBonuses > div:first-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-    padding-bottom: 3px;
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+}
+.innateBonuses > div:last-of-type {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
 .innateBonuses > div:first-of-type > span:first-of-type {
     width: 79.8%;

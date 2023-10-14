@@ -445,7 +445,7 @@ export default class abfalterActor extends Actor {
         const stats = data.stats;
 
 
-        // Determine Item Values / Last used arr[121]  2                    *Look at js map
+        // Determine Item Values / Last used arr[122]  2                    *Look at js map
         const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish, acro,
             athle, climb, jump, ride, swim, etiq, intim, leader, persua, street, style, trading, notice, search, track,
             animals, appra, archi, herb, hist, law, magicapr, medic, mem, navi, occ, science, tactic, comp, fos,
@@ -454,7 +454,7 @@ export default class abfalterActor extends Actor {
             aHeatTot, aColdMax, aColdTot, aEleMax, aEleTot, aEneMax, aEneTot, aSptMax, aSptTot, ahReq, ahCutMax, ahCutTot, ahImpMax, ahImpTot, ahThrMax,
             ahThrTot, ahHeatMax, ahHeatTot, ahColdMax, ahColdTot, ahEleMax, ahEleTot, ahEneMax, ahEneTot, ahSptMax, ahSptTot, perPen, usedpp, matrixpp, arsMk,
             maMk, techMk, pathLvl, turnMaint, dayMaint, spellCost, wepNum, wepSpd, maKiAtk, maKiBlk, maKiDod, pilot, techmagic, cook, toy,
-            kiDect, kiCon] = this.items.reduce((arr, item) => {
+            kiDect, kiCon, wepName] = this.items.reduce((arr, item) => {
                 if (item.type === "class") {
                     const classLevels = parseInt(item.system.main.levels) || 0;
                     arr[0] += classLevels;
@@ -652,6 +652,7 @@ export default class abfalterActor extends Actor {
                         arr[111] += 1;
                         if (arr[111] == 1) {
                             arr[112] = item.system.FinalWeaponSpeed;
+                            arr[122] = item.name;
                         } else if (arr[112] > item.system.FinalWeaponSpeed) {
                             arr[112] = item.system.FinalWeaponSpeed;
                         }
@@ -664,7 +665,7 @@ export default class abfalterActor extends Actor {
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0]);
+                0, 0, 0]);
 
         //Stuff Xp, Presence, Next lvl Xp
         data.level = level; //class Bonus
@@ -949,12 +950,16 @@ export default class abfalterActor extends Actor {
         data.inibonus = ini;
         data.weaponNumber = wepNum;
         data.weaponSpeed = wepSpd;
+        data.weaponName = wepName;
         if (data.weaponNumber > 1 && data.weaponSpeed < 0) {
             data.wepFinSpd = data.weaponSpeed - 20;
+            data.weaponName = "Multi-Wield";
         } else if (data.weaponNumber > 1 && data.weaponSpeed >= 0) {
             data.wepFinSpd = data.weaponSpeed - 10;
+            data.weaponName = "Multi-Wield";
         } else if (data.weaponNumber == 0) {
             data.wepFinSpd = 20;
+            data.weaponName = "Unarmed";
         } else {
             data.wepFinSpd = data.weaponSpeed;
         }

@@ -52,7 +52,8 @@
           "spellPath": false,
           "spell": false,
           "turnMaint": false,
-          "elan": false
+          "elan": false,
+          "class": false
         },
         "toggles": {
           "actorHeaderInfo1": false,
@@ -72,7 +73,8 @@
           "magicTab": false,
           "psychicTab": false,
           "kiTab": false,
-          "bioTab": false
+          "bioTab": false,
+          "shield": false
         },
         "lp": {
           "value": 0,

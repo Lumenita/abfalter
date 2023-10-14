@@ -5,7 +5,7 @@
             <h5> Mystic Settings </h5>
             <div>
                 <span> Magic Module for Attack </span>
-                <button type="button" class="toggleBoolean"
+                <button type="button" class="toggleBoolean {{#if data.toggles.magicAtkModule}}kiBought{{/if}}" 
                         data-label="data.toggles.magicAtkModule" data-ability="{{data.toggles.magicAtkModule}}">
                     {{#if data.toggles.magicAtkModule}}
                     <span> Active </span>
@@ -14,9 +14,9 @@
                     {{/if}}
                 </button>
             </div>
-            <div>
+            <div class="{{#if data.toggles.magicDodgeModule}}checkLock{{/if}}">
                 <span> Magic Module for Defense </span>
-                <button type="button" class="toggleBoolean"
+                <button type="button" class="toggleBoolean {{#if data.toggles.magicDefModule}}kiBought{{/if}}"
                         data-label="data.toggles.magicDefModule" data-ability="{{data.toggles.magicDefModule}}">
                     {{#if data.toggles.magicDefModule}}
                     <span> Active </span>
@@ -27,8 +27,8 @@
             </div>
             {{#if data.toggles.magicDefModule}}
             <div>
-                <span> Magic Module for Defense Using Dodge </span>
-                <button type="button" class="toggleBoolean"
+                <span class="settingsSubsectionIndent"> Dodge over Block</span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.magicDodgeModule}}kiBought{{/if}}"
                         data-label="data.toggles.magicDodgeModule" data-ability="{{data.toggles.magicDodgeModule}}">
                     {{#if data.toggles.magicDodgeModule}}
                     <span> Active </span>
@@ -40,46 +40,86 @@
             {{/if}}
         </div>
 
-
-
-        <div>
-            <h5> Ki </h5>
-            <label class="{{#if data.toggles.innatePower}}checkLock{{/if}}">
+        <div class="settingsSubsection">
+            <h5> Ki Settings </h5>
+            <div class="{{#if data.toggles.innatePower}}checkLock{{/if}}">
                 <span> Unified Ki Pools </span>
-                <input type="checkbox" name="data.toggles.unifiedPools" data-dtype="boolean" {{checked data.toggles.unifiedPools}} />
-            </label>
+                <button type="button" class="toggleBoolean {{#if data.toggles.unifiedPools}}kiBought{{/if}}"
+                        data-label="data.toggles.unifiedPools" data-ability="{{data.toggles.unifiedPools}}">
+                    {{#if data.toggles.unifiedPools}}
+                    <span> Active </span>
+                    {{else}}
+                    <span> Not Active </span>
+                    {{/if}}
+                </button>
+            </div>
             {{#if data.toggles.unifiedPools}}
-            <label>
-                <span> Innate Power </span>
-                <input type="checkbox" name="data.toggles.innatePower" data-dtype="boolean" {{checked data.toggles.innatePower}} />
-            </label>
+            <div>
+                <span class="settingsSubsectionIndent"> Innate Power </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.innatePower}}kiBought{{/if}}"
+                        data-label="data.toggles.innatePower" data-ability="{{data.toggles.innatePower}}">
+                    {{#if data.toggles.innatePower}}
+                    <span> Active </span>
+                    {{else}}
+                    <span> Not Active </span>
+                    {{/if}}
+                </button>
+            </div>
             {{/if}}
-            <label>
+            <div>
                 <span> Dragon Seals </span>
-                <input type="checkbox" name="data.toggles.dragonSeals" data-dtype="boolean" {{checked data.toggles.dragonSeals}} />
-            </label>
+                <button type="button" class="toggleBoolean {{#if data.toggles.dragonSeals}}kiBought{{/if}}"
+                        data-label="data.toggles.dragonSeals" data-ability="{{data.toggles.dragonSeals}}">
+                    {{#if data.toggles.dragonSeals}}
+                    <span> Active </span>
+                    {{else}}
+                    <span> Not Active </span>
+                    {{/if}}
+                </button>
+            </div>
         </div>
 
-        <div>
-            <h5> Psychic </h5>
-            <label class="{{#if data.toggles.psychicDodgeStatus}}checkLock{{/if}}">
+        <div class="settingsSubsection">
+            <h5> Psychic Settings </h5>
+            <div class="{{#if data.toggles.psychicDodgeStatus}}checkLock{{/if}}">
                 <span> Psychic Module for Attack </span>
-                <input type="checkbox" name="data.other.moduleStatus" data-dtype="boolean" {{checked data.other.moduleStatus}} />
-            </label>
-            {{#if data.other.moduleStatus}}
-            <label>
-                <span> Psychic Module Dodge over Block </span>
-                <input type="checkbox" name="data.toggles.psychicDodgeStatus" data-dtype="boolean" {{checked data.toggles.psychicDodgeStatus}} />
-            </label>
+                <button type="button" class="toggleBoolean {{#if data.toggles.moduleStatus}}kiBought{{/if}}"
+                        data-label="data.toggles.moduleStatus" data-ability="{{data.toggles.moduleStatus}}">
+                    {{#if data.toggles.moduleStatus}}
+                    <span> Active </span>
+                    {{else}}
+                    <span> Not Active </span>
+                    {{/if}}
+                </button>
+            </div>
+            {{#if data.toggles.moduleStatus}}
+            <div>
+                <span class="settingsSubsectionIndent"> Dodge over Block </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.psychicDodgeStatus}}kiBought{{/if}}"
+                        data-label="data.toggles.psychicDodgeStatus" data-ability="{{data.toggles.psychicDodgeStatus}}">
+                    {{#if data.toggles.psychicDodgeStatus}}
+                    <span> Active </span>
+                    {{else}}
+                    <span> Not Active </span>
+                    {{/if}}
+                </button>
+            </div>
             {{/if}}
         </div>
 
-        <div>
-            <h5> Homebrew </h5>
-            <label>
+        <div class="settingsSubsection">
+            <h5> Homebrew Settings </h5>
+            <div>
                 <span> Hide Normal Currency </span>
-                <input type="checkbox" name="data.toggles.currencyHide" data-dtype="boolean" {{checked data.toggles.currencyHide}} />
-            </label>
+                <button type="button" class="toggleBoolean {{#if data.toggles.currencyHide}}kiBought{{/if}}"
+                        data-label="data.toggles.currencyHide" data-ability="{{data.toggles.currencyHide}}">
+                    {{#if data.toggles.currencyHide}}
+                    <span> Active </span>
+                    {{else}}
+                    <span> Not Active </span>
+                    {{/if}}
+                </button>
+            </div>
         </div>
     </div>
 
@@ -126,72 +166,116 @@
                 <div>
                     <label> <span> {{localize "abfalter.settingsTab.levelMod"}} </span> <input type="number" name="data.levelinfo.levelmod" value="{{data.levelinfo.levelmod}}" /> </label>
                     <label> <span> {{localize "abfalter.settingsTab.presenceMod"}} </span> <input type="number" name="data.levelinfo.presencemod" value="{{data.levelinfo.presencemod}}" /> </label>
-                    <label>
-                        <span> Hide background tab </span>
-                        <input type="checkbox" name="data.toggles.backgroundTab" data-dtype="boolean" {{checked data.toggles.backgroundTab}} />
-                    </label>
-                    <label>
-                        <span> Hide magic tab </span>
-                        <input type="checkbox" name="data.toggles.magicTab" data-dtype="boolean" {{checked data.toggles.magicTab}} />
-                    </label>
-                    <label>
-                        <span> hide psychic tab </span>
-                        <input type="checkbox" name="data.toggles.psychicTab" data-dtype="boolean" {{checked data.toggles.psychicTab}} />
-                    </label>
-                    <label>
-                        <span> hide ki tab </span>
-                        <input type="checkbox" name="data.toggles.kiTab" data-dtype="boolean" {{checked data.toggles.kiTab}} />
-                    </label>
-                    <label>
-                        <span> hide bio tab </span>
-                        <input type="checkbox" name="data.toggles.bioTab" data-dtype="boolean" {{checked data.toggles.bioTab}} />
-                    </label>
-                </div>
-                <h5> {{localize "abfalter.basicInfo.shield"}}</h5>
-                <div>
-                    <label> <span> {{localize "abfalter.basicInfo.shieldMax"}} </span> <input type="number" name="data.shield.max" value="{{data.shield.max}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.shield"}} </span> <input type="number" name="data.shield.value" value="{{data.shield.value}}" /> </label>
+                    <div>
+                        <span> Hide Background Tab </span>
+                        <button type="button" class="toggleBoolean {{#if data.toggles.backgroundTab}}kiBought{{/if}}"
+                                data-label="data.toggles.backgroundTab" data-ability="{{data.toggles.backgroundTab}}">
+                            {{#if data.toggles.backgroundTab}}
+                            <span> Hidden </span>
+                            {{else}}
+                            <span> Not Hidden </span>
+                            {{/if}}
+                        </button>
+                    </div>
+                    <div>
+                        <span> Hide Magic Tab </span>
+                        <button type="button" class="toggleBoolean {{#if data.toggles.magicTab}}kiBought{{/if}}"
+                                data-label="data.toggles.magicTab" data-ability="{{data.toggles.magicTab}}">
+                            {{#if data.toggles.magicTab}}
+                            <span> Hidden </span>
+                            {{else}}
+                            <span> Not Hidden </span>
+                            {{/if}}
+                        </button>
+                    </div>
+                    <div>
+                        <span> Hide Psychic Tab </span>
+                        <button type="button" class="toggleBoolean {{#if data.toggles.psychicTab}}kiBought{{/if}}"
+                                data-label="data.toggles.psychicTab" data-ability="{{data.toggles.psychicTab}}">
+                            {{#if data.toggles.psychicTab}}
+                            <span> Hidden </span>
+                            {{else}}
+                            <span> Not Hidden </span>
+                            {{/if}}
+                        </button>
+                    </div>
+                    <div>
+                        <span> Hide Ki Tab </span>
+                        <button type="button" class="toggleBoolean {{#if data.toggles.kiTab}}kiBought{{/if}}"
+                                data-label="data.toggles.kiTab" data-ability="{{data.toggles.kiTab}}">
+                            {{#if data.toggles.kiTab}}
+                            <span> Hidden </span>
+                            {{else}}
+                            <span> Not Hidden </span>
+                            {{/if}}
+                        </button>
+                    </div>
+                    <div>
+                        <span> Hide Bio Tab </span>
+                        <button type="button" class="toggleBoolean {{#if data.toggles.bioTab}}kiBought{{/if}}"
+                                data-label="data.toggles.bioTab" data-ability="{{data.toggles.bioTab}}">
+                            {{#if data.toggles.bioTab}}
+                            <span> Hidden </span>
+                            {{else}}
+                            <span> Not Hidden </span>
+                            {{/if}}
+                        </button>
+                    </div>
+
+                    <div>
+                        <span> Activate Shield </span>
+                        <button type="button" class="toggleBoolean {{#if data.toggles.shield}}kiBought{{/if}}"
+                                data-label="data.toggles.shield" data-ability="{{data.toggles.shield}}">
+                            {{#if data.toggles.shield}}
+                            <span> Active </span>
+                            {{else}}
+                            <span> Not Active </span>
+                            {{/if}}
+                        </button>
+                    </div>
                 </div>
             </div>
-
         </div>
 
-        <div>
-            <div class="innateBonuses">
-                <h5> Innate Classes </h5>
-                <div>
-                    <span> Class </span>
-                    <span> Level </span>
-                </div>
+        <div class="innateBonuses">
+            <h5> Classes & Levels </h5>
+            <div>
+                <span> Class </span>
+                <span> Level </span>
+            </div>
 
-                <div class="items-list">
-                    {{#each classes as |class id|}}
-                    <div class="class-item item normal-item" data-item-id="{{class._id}}">
-                        <div>
-                            <input class="item-name inline-edit" data-field="name" type="text" value="{{class.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
-                            <input class="inline-edit" data-field="system.main.levels" type="number" value="{{class.system.main.levels}}" />
-                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{#if system.expand}}
-                        <span> SHow INfo Here</span>
-                        {{/if}}
+            <div class="{{#if data.itemToggle.class}}item-list{{/if}}">
+                {{#each classes as |class id|}}
+                <div class="class-item item normal-item" data-item-id="{{class._id}}">
+                    <div>
+                        <input class="item-name inline-edit" data-field="name" type="text" value="{{class.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                        <input class="inline-edit" data-field="system.main.levels" type="number" value="{{class.system.main.levels}}" />
+                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    {{/each}}
+                    {{#if system.expand}}
+                    <span> SHow Info Here</span>
+                    {{/if}}
                 </div>
-                <a class="item-control item-create" data-type="class"><i class="fas fa-plus"></i> Add item </a>
+                {{/each}}
             </div>
 
-            <div class="homebrew">
-                <h5> Homebrew Settings / WIP </h5>
-                <label>
-                    <span> Spirit Damage Type </span>
-                    <input type="checkbox" name="data.toggles.spiritDamageType" data-dtype="boolean" {{checked data.toggles.spiritDamageType}} />
-                </label>
-                <label>
-                    <span> Increased Strengthening </span>
-                    <input type="checkbox" name="data.toggles.psychicStrengthening" data-dtype="boolean" {{checked data.toggles.psychicStrengthening}} />
-                </label>
+            <div>
+                <a class="item-control item-create" data-type="class"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addClass"}} </a>
+                <a class="toggleBoolean {{#if data.itemToggle.class}}armorpenalty{{/if}}" data-label="data.itemToggle.class" data-ability="{{data.itemToggle.class}}"><i class="{{#if data.itemToggle.class}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
             </div>
+        </div>
+
+
+        <div class="homebrew">
+            <h5> Homebrew Settings / WIP </h5>
+            <label>
+                <span> Spirit Damage Type </span>
+                <input type="checkbox" name="data.toggles.spiritDamageType" data-dtype="boolean" {{checked data.toggles.spiritDamageType}} />
+            </label>
+            <label>
+                <span> Increased Strengthening </span>
+                <input type="checkbox" name="data.toggles.psychicStrengthening" data-dtype="boolean" {{checked data.toggles.psychicStrengthening}} />
+            </label>
         </div>
 
     </div>

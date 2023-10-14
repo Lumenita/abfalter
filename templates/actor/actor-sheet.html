@@ -91,23 +91,24 @@
                                 </div>
                                 {{else}}
                                 <div class="headerIni">
-                                    <span> Unarmed </span>
+                                    <span> {{data.weaponName}} </span>
                                     <div>
                                         <button>
-                                            <span> 55 </span>
+                                            <span> {{data.iniFinal}} </span>
                                         </button>
+
                                     </div>
                                 </div>
                                 {{/if}}
                             </div>
 
-                            <div class="subRightMid">
+                            <div class="subRightMid {{#if data.toggles.shield}}{{else}}hidden{{/if}}">
                                 <h5>
-                                    Shield
+                                    {{localize "abfalter.basicInfo.shield"}}
                                 </h5>
                                 <div>
-                                    <span> shield max: x </span>
-                                    <span> actual: 0 </span>
+                                    <label> <span> Maximum: </span> <input type="number" name="data.shield.max" value="{{data.shield.max}}" /> </label>
+                                    <label> <span> Actual: </span> <input type="number" name="data.shield.value" value="{{data.shield.value}}" /> </label>
                                 </div>
                             </div>
 

@@ -1191,7 +1191,7 @@
 
                         <div class="kiTechUseMax">
                             {{#if system.innatePower}}
-                            <div class="techExpand">
+                            <div class="techExpandMax">
                                 <span> {{localize "abfalter.kiTab.innatePowerUse"}} </span>
                                 <input class="inline-edit" data-field="system.use.unified" type="number" value="{{kiTechnique.system.use.unified}}" />
                             </div>
@@ -1217,7 +1217,7 @@
 
                         <div class="kiTechMaintMax">
                             {{#if system.unified}}
-                            <div class="techExpand">
+                            <div class="techExpandMax">
                                 {{#if system.innatePower}}
                                 <span> {{localize "abfalter.kiTab.innatePowerMaint"}} </span>
                                 {{else}}
@@ -1286,7 +1286,7 @@
                             {{#if system.innatePower}}
                             <div class="techExpand">
                                 <span> {{localize "abfalter.kiTab.innatePowerUse"}} </span>
-                                <input class="inline-edit" data-field="system.use.unified" type="number" value="{{kiTechnique.system.use.unified}}" />
+                                <span> {{kiTechnique.system.use.unified}} </span>
                             </div>
                             {{else}}
                             <span> {{localize "abfalter.kiTab.use"}} </span>
@@ -1307,7 +1307,7 @@
                                 {{else}}
                                 <span> {{localize "abfalter.kiTab.unifiedMaint"}} </span>
                                 {{/if}}
-                                <input class="inline-edit" data-field="system.maint.unified" type="number" value="{{kiTechnique.system.maint.unified}}" />
+                                <span> {{kiTechnique.system.maint.unified}} </span>
                             </div>
                             {{else}}
                             <span> {{localize "abfalter.kiTab.maint"}} </span>
