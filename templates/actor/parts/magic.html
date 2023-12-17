@@ -18,26 +18,26 @@
             <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.mprojfinal" value="{{data.mprojfinal}}" readonly /> </label>
             <div class="mProjButton">
                 {{#if data.toggles.magicAtkModule}}
-                <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll" data-ability="{{data.combatstats.atkMastery}}">
+                <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
                     <span> {{localize "abfalter.basicInfo.attack"}} </span> <span> {{data.atkfinal}} </span>
                 </button>
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{data.mprojfinaloff}}" data-label="Magic Proj. Offensive" data-type="combatRoll" data-ability="{{data.mproj.masteryOff}}"> 
+                <button type="button" class="combatRoll" data-roll="{{data.mprojfinaloff}}" data-label="Magic Proj. Offensive" data-type="combatRoll"> 
                     <span> {{localize "abfalter.magicTab.offensive"}} </span> <span> {{data.mprojfinaloff}} </span>
                 </button>
                 {{/if}}
                 {{#if data.toggles.magicDefModule}}
                 {{#if data.toggles.magicDodgeModule}}
-                <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll" data-ability="{{data.combatstats.dodMastery}}">
+                <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
                     <span> {{localize "abfalter.basicInfo.dodge"}} </span> <span> {{data.dodfinal}} </span>
                 </button>
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll" data-ability="{{data.combatstats.blkMastery}}">
+                <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
                     <span> {{localize "abfalter.basicInfo.block"}} </span> <span> {{data.blkfinal}} </span>
                 </button>
                 {{/if}}
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{data.mprojfinaldef}}" data-label="Magic Proj. Defensive" data-type="combatRoll" data-ability="{{data.mproj.masteryDef}}">
+                <button type="button" class="combatRoll" data-roll="{{data.mprojfinaldef}}" data-label="Magic Proj. Defensive" data-type="combatRoll">
                     <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{data.mprojfinaldef}} </span>
                 </button>
                 {{/if}}
@@ -209,7 +209,7 @@
                     <span> {{localize "abfalter.basicInfo.final"}} </span>
                 </div>
                 <div>
-                    <button type="button" class="rollable" data-roll="{{data.summonfinal}}" data-label="{{localize "abfalter.magicTab.summon"}}" data-type="summoningRoll" data-ability="{{data.summoning.summon.mastery}}">
+                    <button type="button" class="rollable" data-roll="{{data.summonfinal}}" data-label="{{localize "abfalter.magicTab.summon"}}" data-type="summoningRoll">
                         <span> {{localize "abfalter.magicTab.summon"}} </span>
                     </button>
                     <input type="number" name="data.summoning.summon.base" value="{{data.summoning.summon.base}}" />
@@ -218,7 +218,7 @@
                     <input type="number" name="data.summonfinal" value="{{data.summonfinal}}" readonly />
                 </div>
                 <div>
-                    <button type="button" class="rollable" data-roll="{{data.controlfinal}}" data-label="{{localize "abfalter.magicTab.control"}}" data-type="summoningRoll" data-ability="{{data.summoning.control.mastery}}">
+                    <button type="button" class="rollable" data-roll="{{data.controlfinal}}" data-label="{{localize "abfalter.magicTab.control"}}" data-type="summoningRoll">
                         <span> {{localize "abfalter.magicTab.control"}} </span>
                     </button>
                     <input type="number" name="data.summoning.control.base" value="{{data.summoning.control.base}}" />
@@ -227,7 +227,7 @@
                     <input type="number" name="data.controlfinal" value="{{data.controlfinal}}" readonly />
                 </div>
                 <div>
-                    <button type="button" class="rollable" data-roll="{{data.bindfinal}}" data-label="{{localize "abfalter.magicTab.bind"}}" data-type="summoningRoll" data-ability="{{data.summoning.bind.mastery}}">
+                    <button type="button" class="rollable" data-roll="{{data.bindfinal}}" data-label="{{localize "abfalter.magicTab.bind"}}" data-type="summoningRoll">
                         <span> {{localize "abfalter.magicTab.bind"}} </span>
                     </button>
                     <input type="number" name="data.summoning.bind.base" value="{{data.summoning.bind.base}}" />
@@ -236,7 +236,7 @@
                     <input type="number" name="data.bindfinal" value="{{data.bindfinal}}" readonly />
                 </div>
                 <div>
-                    <button type="button" class="rollable" data-roll="{{data.banishfinal}}" data-label="{{localize "abfalter.magicTab.banish"}}" data-type="summoningRoll" data-ability="{{data.summoning.banish.mastery}}">
+                    <button type="button" class="rollable" data-roll="{{data.banishfinal}}" data-label="{{localize "abfalter.magicTab.banish"}}" data-type="summoningRoll">
                         <span> {{localize "abfalter.magicTab.banish"}} </span>
                     </button>
                     <input type="number" name="data.summoning.banish.base" value="{{data.summoning.banish.base}}" />

@@ -8,7 +8,7 @@ const diceDialog = class extends Dialog {
     }
 }
 
-export async function openModifierDialogue(actorData, finalValue, label, type, mastery) {
+export async function openModifierDialogue(actorData, finalValue, label, type, complex) {
     const template = "systems/abfalter/templates/dialogues/basicModifiers.html";
     let confirmed = false;
     let fatMod = false;
@@ -34,10 +34,10 @@ export async function openModifierDialogue(actorData, finalValue, label, type, m
                     case "potentialRoll":
                     case "summoningRoll":
                     case "combatRoll":
-                        rollSecondary(html, actorData, finalValue, label, mastery);
+                        rollSecondary(html, actorData, finalValue, label);
                         break;
                     case "weaponCombatRoll":
-                        rollCombatWeapon(html, actorData, finalValue, label, mastery);
+                        rollCombatWeapon(html, actorData, finalValue, label, complex);
                         break;
                     case "resRoll":
                         rollResistance(html, actorData, finalValue, label);
@@ -94,7 +94,7 @@ export async function rollCharacteristic(html, actorData, finalValue, label) {
 
 
 
-async function rollSecondary(html, actorData, finalValue, label, mastery) {
+async function rollSecondary(html, actorData, finalValue, label) {
     let fatigueMod = parseInt(html.find('#fatiguemod').val()) || 0;
     let mod = parseInt(html.find('#modifiermod').val()) || 0;
     let fatigueFinal = Math.floor(fatigueMod * 15);
@@ -104,7 +104,9 @@ async function rollSecondary(html, actorData, finalValue, label, mastery) {
     rollResult.rolledDice = rollResult.total - finalValue - fatigueFinal - mod;
 
     let fumbleRange = actorData.system.fumbleRangeFinal;
-    if (mastery == "true" && fumbleRange > 1) {
+
+   
+    if (finalValue > 199 && fumbleRange > 1) {
         fumbleRange -= 1;
     }
 
@@ -175,16 +177,16 @@ async function rollCombatWeapon(html, actorData, finalValue, label, complex) {
 
     let fumbleRange = actorData.system.fumbleRangeFinal;
 
-    let mastery = false;
+    let mastery = 0;
     switch (label) {
         case "Attack":
-            mastery = actorData.system.combatstats.atkMastery;
+            mastery = actorData.system.atkfinal;
             break;
         case "Block":
-            mastery = actorData.system.combatstats.blkMastery;
+            mastery = actorData.system.blkfinal;
             break;
         case "Dodge":
-            mastery = actorData.system.combatstats.dodMastery;
+            mastery = actorData.system.dodfinal;
             break;
         default:
             break;
@@ -192,7 +194,7 @@ async function rollCombatWeapon(html, actorData, finalValue, label, complex) {
     if (complex == "true") {
         fumbleRange += 2;
     }
-    if (mastery == true && fumbleRange > 1) {
+    if (mastery > 199 && fumbleRange > 1) {
         fumbleRange -= 1;
     }
 
@@ -236,7 +238,7 @@ async function rollCombatWeapon(html, actorData, finalValue, label, complex) {
         }
     }
 
-    console.log(fumbleRange);
+
 
     const rollData = [rollResult.rolledDice, rollResult._total, rollResult.doubles, rollResult.openRange, label];
 

@@ -172,16 +172,6 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 value = !(value === 'true');
                 this.document.update({ [label]: value });
             });
-            html.find(".mastery-box").click(ev => {
-                let value = $(ev.currentTarget).attr("data-ability");
-                let label = $(ev.currentTarget).attr("data-label");
-                if (value == "false") {
-                    value = true;
-                } else {
-                    value = false;
-                }                
-                this.document.update({ [label]: value });
-            });
             html.find(".kiAbility").click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
                 let value2 = $(ev.currentTarget).attr("data-ability2");
@@ -216,7 +206,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
         const element = event.currentTarget;
         const dataset = element.dataset;
 
-        openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type, dataset.ability);
+        openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type);
     }
 
     _onAttackRoll(event) {

@@ -371,7 +371,7 @@
                 <div>
                     <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.combatstats.atktemp" value="{{data.combatstats.atktemp}}" /> </label>
                     <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.atkfinal" value="{{data.atkfinal}}" readonly /> </label>
-                    <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll" data-ability="{{data.combatstats.atkMastery}}">
+                    <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
                         <span> <i class="fas fa-dice-d20"></i> </span>
                     </button>
                 </div>
@@ -394,7 +394,7 @@
                 <div>
                     <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.combatstats.blktemp" value="{{data.combatstats.blktemp}}" /> </label>
                     <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.blkfinal" value="{{data.blkfinal}}" readonly /> </label>
-                    <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll" data-ability="{{data.combatstats.blkMastery}}">
+                    <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
                         <span> <i class="fas fa-dice-d20"></i> </span>
                     </button>
                 </div>
@@ -417,7 +417,7 @@
                 <div>
                     <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.combatstats.dodtemp" value="{{data.combatstats.dodtemp}}" /> </label>
                     <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.dodfinal" value="{{data.dodfinal}}" readonly /> </label>
-                    <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll" data-ability="{{data.combatstats.dodMastery}}">
+                    <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
                         <span> <i class="fas fa-dice-d20"> </i> </span>
                     </button>
                 </div>
@@ -508,7 +508,7 @@
             </div>
             {{#if data.secondary.main.athletics}}
             <div>
-                <button type="button" class="rollable" data-roll="{{data.acrofinal}}" data-label="{{localize "abfalter.generalTab.acrobatic"}}" data-type="secondaryRoll" data-ability="{{data.secondary.acrobatics.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.acrofinal}}" data-label="{{localize "abfalter.generalTab.acrobatic"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.acrobatic"}} </span>
                     <span> {{data.acrofinal}} </span>
                 </button>
@@ -528,7 +528,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.athleticismfinal}}" data-label="{{localize "abfalter.generalTab.athleticism"}}" data-type="secondaryRoll" data-ability="{{data.secondary.athleticism.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.athleticismfinal}}" data-label="{{localize "abfalter.generalTab.athleticism"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.athleticism"}} </span>
                     <span> {{data.athleticismfinal}} </span>
                 </button>
@@ -548,7 +548,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.climbfinal}}" data-label="{{localize "abfalter.generalTab.climb"}}" data-type="secondaryRoll" data-ability="{{data.secondary.climb.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.climbfinal}}" data-label="{{localize "abfalter.generalTab.climb"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.climb"}} </span>
                     <span> {{data.climbfinal}} </span>
                 </button>
@@ -568,7 +568,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.jumpfinal}}" data-label="{{localize "abfalter.generalTab.jump"}}" data-type="secondaryRoll" data-ability="{{data.secondary.jump.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.jumpfinal}}" data-label="{{localize "abfalter.generalTab.jump"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.jump"}} </span>
                     <span> {{data.jumpfinal}} </span>
                 </button>
@@ -588,7 +588,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.pilotingfinal}}" data-label="{{localize "abfalter.generalTab.piloting"}}" data-type="secondaryRoll" data-ability="{{data.secondary.piloting.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.pilotingfinal}}" data-label="{{localize "abfalter.generalTab.piloting"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.piloting"}} </span>
                     <span> {{data.pilotingfinal}} </span>
                 </button>
@@ -608,7 +608,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.ridefinal}}" data-label="{{localize "abfalter.generalTab.ride"}}" data-type="secondaryRoll" data-ability="{{data.secondary.ride.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.ridefinal}}" data-label="{{localize "abfalter.generalTab.ride"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.ride"}} </span>
                     <span> {{data.ridefinal}} </span>
                 </button>
@@ -628,7 +628,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.swimfinal}}" data-label="{{localize "abfalter.generalTab.swim"}}" data-type="secondaryRoll" data-ability="{{data.secondary.swim.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.swimfinal}}" data-label="{{localize "abfalter.generalTab.swim"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.swim"}} </span>
                     <span> {{data.swimfinal}} </span>
                 </button>
@@ -665,7 +665,7 @@
             </div>
             {{#if data.secondary.main.social}}
             <div>
-                <button type="button" class="rollable" data-roll="{{data.etiquettefinal}}" data-label="{{localize "abfalter.generalTab.etiquette"}}" data-type="secondaryRoll" data-ability="{{data.secondary.etiquette.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.etiquettefinal}}" data-label="{{localize "abfalter.generalTab.etiquette"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.etiquette"}} </span>
                     <span> {{data.etiquettefinal}} </span>
                 </button>
@@ -685,7 +685,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.intimidatefinal}}" data-label="{{localize "abfalter.generalTab.intimidate"}}" data-type="secondaryRoll" data-ability="{{data.secondary.intimidate.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.intimidatefinal}}" data-label="{{localize "abfalter.generalTab.intimidate"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.intimidate"}} </span>
                     <span> {{data.intimidatefinal}} </span>
                 </button>
@@ -705,7 +705,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.leadershipfinal}}" data-label="{{localize "abfalter.generalTab.leadership"}}" data-type="secondaryRoll" data-ability="{{data.secondary.leadership.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.leadershipfinal}}" data-label="{{localize "abfalter.generalTab.leadership"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.leadership"}} </span>
                     <span> {{data.leadershipfinal}} </span>
                 </button>
@@ -725,7 +725,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.persuasionfinal}}" data-label="{{localize "abfalter.generalTab.persuasion"}}" data-type="secondaryRoll" data-ability="{{data.secondary.persuasion.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.persuasionfinal}}" data-label="{{localize "abfalter.generalTab.persuasion"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.persuasion"}} </span>
                     <span> {{data.persuasionfinal}} </span>
                 </button>
@@ -745,7 +745,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.streetwisefinal}}" data-label="{{localize "abfalter.generalTab.streetwise"}}" data-type="secondaryRoll" data-ability="{{data.secondary.streetwise.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.streetwisefinal}}" data-label="{{localize "abfalter.generalTab.streetwise"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.streetwise"}} </span>
                     <span> {{data.streetwisefinal}} </span>
                 </button>
@@ -765,7 +765,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.stylefinal}}" data-label="{{localize "abfalter.generalTab.style"}}" data-type="secondaryRoll" data-ability="{{data.secondary.style.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.stylefinal}}" data-label="{{localize "abfalter.generalTab.style"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.style"}} </span>
                     <span> {{data.stylefinal}} </span>
                 </button>
@@ -785,7 +785,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.tradingfinal}}" data-label="{{localize "abfalter.generalTab.trading"}}" data-type="secondaryRoll" data-ability="{{data.secondary.trading.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.tradingfinal}}" data-label="{{localize "abfalter.generalTab.trading"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.trading"}} </span>
                     <span> {{data.tradingfinal}} </span>
                 </button>
@@ -824,7 +824,7 @@
 
             {{#if data.kiAbility.kiDetection.status}}
             <div>
-                <button type="button" class="rollable" data-roll="{{data.kidetectionfinal}}" data-label="{{#if data.kiAbility.kiErudition.status}}{{localize "abfalter.kiTab.kiErudition"}}{{else}}{{localize "abfalter.kiTab.kiDetection"}}{{/if}}" data-type="secondaryRoll" data-ability="{{data.secondary.kidetection.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.kidetectionfinal}}" data-label="{{#if data.kiAbility.kiErudition.status}}{{localize "abfalter.kiTab.kiErudition"}}{{else}}{{localize "abfalter.kiTab.kiDetection"}}{{/if}}" data-type="secondaryRoll">
                     {{#if data.kiAbility.kiErudition.status}}
                     <span> {{localize "abfalter.kiTab.kiErudition"}} </span>
                     {{else}}
@@ -849,7 +849,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.noticefinal}}" data-label="{{localize "abfalter.generalTab.notice"}}" data-type="secondaryRoll" data-ability="{{data.secondary.notice.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.noticefinal}}" data-label="{{localize "abfalter.generalTab.notice"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.notice"}} </span>
                     <span> {{data.noticefinal}} </span>
                 </button>
@@ -869,7 +869,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.searchfinal}}" data-label="{{localize "abfalter.generalTab.search"}}" data-type="secondaryRoll" data-ability="{{data.secondary.search.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.searchfinal}}" data-label="{{localize "abfalter.generalTab.search"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.search"}} </span>
                     <span> {{data.searchfinal}} </span>
                 </button>
@@ -889,7 +889,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.trackfinal}}" data-label="{{localize "abfalter.generalTab.track"}}" data-type="secondaryRoll" data-ability="{{data.secondary.track.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.trackfinal}}" data-label="{{localize "abfalter.generalTab.track"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.track"}} </span>
                     <span> {{data.trackfinal}} </span>
                 </button>
@@ -926,7 +926,7 @@
             </div>
             {{#if data.secondary.main.intellectual}}
             <div>
-                <button type="button" class="rollable" data-roll="{{data.animalsfinal}}" data-label="{{localize "abfalter.generalTab.animals"}}" data-type="secondaryRoll" data-ability="{{data.secondary.animals.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.animalsfinal}}" data-label="{{localize "abfalter.generalTab.animals"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.animals"}} </span>
                     <span> {{data.animalsfinal}} </span>
                 </button>
@@ -946,7 +946,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.appraisalfinal}}" data-label="{{localize "abfalter.generalTab.appraisal"}}" data-type="secondaryRoll" data-ability="{{data.secondary.appraisal.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.appraisalfinal}}" data-label="{{localize "abfalter.generalTab.appraisal"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.appraisal"}} </span>
                     <span> {{data.appraisalfinal}} </span>
                 </button>
@@ -966,7 +966,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.architecturefinal}}" data-label="{{localize "abfalter.generalTab.architecture"}}" data-type="secondaryRoll" data-ability="{{data.secondary.architecture.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.architecturefinal}}" data-label="{{localize "abfalter.generalTab.architecture"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.architecture"}} </span>
                     <span> {{data.architecturefinal}} </span>
                 </button>
@@ -986,7 +986,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.herballorefinal}}" data-label="{{localize "abfalter.generalTab.herballore"}}" data-type="secondaryRoll" data-ability="{{data.secondary.herballore.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.herballorefinal}}" data-label="{{localize "abfalter.generalTab.herballore"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.herballore"}} </span>
                     <span> {{data.herballorefinal}} </span>
                 </button>
@@ -1006,7 +1006,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.historyfinal}}" data-label="{{localize "abfalter.generalTab.history"}}" data-type="secondaryRoll" data-ability="{{data.secondary.history.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.historyfinal}}" data-label="{{localize "abfalter.generalTab.history"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.history"}} </span>
                     <span> {{data.historyfinal}} </span>
                 </button>
@@ -1026,7 +1026,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.lawfinal}}" data-label="{{localize "abfalter.generalTab.law"}}" data-type="secondaryRoll" data-ability="{{data.secondary.law.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.lawfinal}}" data-label="{{localize "abfalter.generalTab.law"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.law"}} </span>
                     <span> {{data.lawfinal}} </span>
                 </button>
@@ -1046,7 +1046,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.magicapprfinal}}" data-label="{{localize "abfalter.generalTab.magicAppr"}}" data-type="secondaryRoll" data-ability="{{data.secondary.magicappr.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.magicapprfinal}}" data-label="{{localize "abfalter.generalTab.magicAppr"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.magicAppr"}} </span>
                     <span> {{data.magicapprfinal}} </span>
                 </button>
@@ -1066,7 +1066,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.medicinefinal}}" data-label="{{localize "abfalter.generalTab.medicine"}}" data-type="secondaryRoll" data-ability="{{data.secondary.medicine.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.medicinefinal}}" data-label="{{localize "abfalter.generalTab.medicine"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.medicine"}} </span>
                     <span> {{data.medicinefinal}} </span>
                 </button>
@@ -1086,7 +1086,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.memorizefinal}}" data-label="{{localize "abfalter.generalTab.memorize"}}" data-type="secondaryRoll" data-ability="{{data.secondary.memorize.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.memorizefinal}}" data-label="{{localize "abfalter.generalTab.memorize"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.memorize"}} </span>
                     <span> {{data.memorizefinal}} </span>
                 </button>
@@ -1106,7 +1106,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.navigationfinal}}" data-label="{{localize "abfalter.generalTab.navigation"}}" data-type="secondaryRoll" data-ability="{{data.secondary.navigation.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.navigationfinal}}" data-label="{{localize "abfalter.generalTab.navigation"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.navigation"}} </span>
                     <span> {{data.navigationfinal}} </span>
                 </button>
@@ -1126,7 +1126,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.occultfinal}}" data-label="{{localize "abfalter.generalTab.occult"}}" data-type="secondaryRoll" data-ability="{{data.secondary.occult.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.occultfinal}}" data-label="{{localize "abfalter.generalTab.occult"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.occult"}} </span>
                     <span> {{data.occultfinal}} </span>
                 </button>
@@ -1146,7 +1146,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.sciencefinal}}" data-label="{{localize "abfalter.generalTab.science"}}" data-type="secondaryRoll" data-ability="{{data.secondary.science.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.sciencefinal}}" data-label="{{localize "abfalter.generalTab.science"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.science"}} </span>
                     <span> {{data.sciencefinal}} </span>
                 </button>
@@ -1166,7 +1166,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.tacticsfinal}}" data-label="{{localize "abfalter.generalTab.tactics"}}" data-type="secondaryRoll" data-ability="{{data.secondary.tactics.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.tacticsfinal}}" data-label="{{localize "abfalter.generalTab.tactics"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.tactics"}} </span>
                     <span> {{data.tacticsfinal}} </span>
                 </button>
@@ -1186,7 +1186,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.technomagicfinal}}" data-label="{{localize "abfalter.generalTab.technomagic"}}" data-type="secondaryRoll" data-ability="{{data.secondary.technomagic.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.technomagicfinal}}" data-label="{{localize "abfalter.generalTab.technomagic"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.technomagic"}} </span>
                     <span> {{data.technomagicfinal}} </span>
                 </button>
@@ -1223,7 +1223,7 @@
             </div>
             {{#if data.secondary.main.vigor}}
             <div>
-                <button type="button" class="rollable" data-roll="{{data.composurefinal}}" data-label="{{localize "abfalter.generalTab.composure"}}" data-type="secondaryRoll" data-ability="{{data.secondary.composure.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.composurefinal}}" data-label="{{localize "abfalter.generalTab.composure"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.composure"}} </span>
                     <span> {{data.composurefinal}} </span>
                 </button>
@@ -1243,7 +1243,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.featsofstrfinal}}" data-label="{{localize "abfalter.generalTab.featsOfStr"}}" data-type="secondaryRoll" data-ability="{{data.secondary.featsofstr.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.featsofstrfinal}}" data-label="{{localize "abfalter.generalTab.featsOfStr"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.featsOfStr"}} </span>
                     <span> {{data.featsofstrfinal}} </span>
                 </button>
@@ -1263,7 +1263,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.withstpainfinal}}" data-label="{{localize "abfalter.generalTab.withstPain"}}" data-type="secondaryRoll" data-ability="{{data.secondary.withstpain.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.withstpainfinal}}" data-label="{{localize "abfalter.generalTab.withstPain"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.withstPain"}} </span>
                     <span> {{data.withstpainfinal}} </span>
                 </button>
@@ -1300,7 +1300,7 @@
             </div>
             {{#if data.secondary.main.subterfuge}}
             <div>
-                <button type="button" class="rollable" data-roll="{{data.disguisefinal}}" data-label="{{localize "abfalter.generalTab.disguise"}}" data-type="secondaryRoll" data-ability="{{data.secondary.disguise.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.disguisefinal}}" data-label="{{localize "abfalter.generalTab.disguise"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.disguise"}} </span>
                     <span> {{data.disguisefinal}} </span>
                 </button>
@@ -1320,7 +1320,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.hidefinal}}" data-label="{{localize "abfalter.generalTab.hide"}}" data-type="secondaryRoll" data-ability="{{data.secondary.hide.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.hidefinal}}" data-label="{{localize "abfalter.generalTab.hide"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.hide"}} </span>
                     <span> {{data.hidefinal}} </span>
                 </button>
@@ -1341,7 +1341,7 @@
 
             {{#if data.kiAbility.kiConceal.status}}
             <div>
-                <button type="button" class="rollable" data-roll="{{data.kiconcealfinal}}" data-label="{{localize "abfalter.kiTab.kiConceal"}}" data-type="secondaryRoll" data-ability="{{data.secondary.kiconceal.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.kiconcealfinal}}" data-label="{{localize "abfalter.kiTab.kiConceal"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.kiTab.kiConceal"}} </span>
                     <span> {{data.kiconcealfinal}} </span>
                 </button>
@@ -1362,7 +1362,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.lockpickingfinal}}" data-label="{{localize "abfalter.generalTab.lockpicking"}}" data-type="secondaryRoll" data-ability="{{data.secondary.lockpicking.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.lockpickingfinal}}" data-label="{{localize "abfalter.generalTab.lockpicking"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.lockpicking"}} </span>
                     <span> {{data.lockpickingfinal}} </span>
                 </button>
@@ -1382,7 +1382,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.poisonsfinal}}" data-label="{{localize "abfalter.generalTab.poisons"}}" data-type="secondaryRoll" data-ability="{{data.secondary.poisons.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.poisonsfinal}}" data-label="{{localize "abfalter.generalTab.poisons"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.poisons"}} </span>
                     <span> {{data.poisonsfinal}} </span>
                 </button>
@@ -1402,7 +1402,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.stealthfinal}}" data-label="{{localize "abfalter.generalTab.stealth"}}" data-type="secondaryRoll" data-ability="{{data.secondary.stealth.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.stealthfinal}}" data-label="{{localize "abfalter.generalTab.stealth"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.stealth"}} </span>
                     <span> {{data.stealthfinal}} </span>
                 </button>
@@ -1422,7 +1422,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.theftfinal}}" data-label="{{localize "abfalter.generalTab.theft"}}" data-type="secondaryRoll" data-ability="{{data.secondary.theft.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.theftfinal}}" data-label="{{localize "abfalter.generalTab.theft"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.theft"}} </span>
                     <span> {{data.theftfinal}} </span>
                 </button>
@@ -1442,7 +1442,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.traplorefinal}}" data-label="{{localize "abfalter.generalTab.traplore"}}" data-type="secondaryRoll" data-ability="{{data.secondary.traplore.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.traplorefinal}}" data-label="{{localize "abfalter.generalTab.traplore"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.traplore"}} </span>
                     <span> {{data.traplorefinal}} </span>
                 </button>
@@ -1479,7 +1479,7 @@
             </div>
             {{#if data.secondary.main.creative}}
             <div>
-                <button type="button" class="rollable" data-roll="{{data.alchemyfinal}}" data-label="{{localize "abfalter.generalTab.alchemy"}}" data-type="secondaryRoll" data-ability="{{data.secondary.alchemy.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.alchemyfinal}}" data-label="{{localize "abfalter.generalTab.alchemy"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.alchemy"}} </span>
                     <span> {{data.alchemyfinal}} </span>
                 </button>
@@ -1499,7 +1499,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.animismfinal}}" data-label="{{localize "abfalter.generalTab.animism"}}" data-type="secondaryRoll" data-ability="{{data.secondary.animism.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.animismfinal}}" data-label="{{localize "abfalter.generalTab.animism"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.animism"}} </span>
                     <span> {{data.animismfinal}} </span>
                 </button>
@@ -1519,7 +1519,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.artfinal}}" data-label="{{localize "abfalter.generalTab.art"}}" data-type="secondaryRoll" data-ability="{{data.secondary.art.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.artfinal}}" data-label="{{localize "abfalter.generalTab.art"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.art"}} </span>
                     <span> {{data.artfinal}} </span>
                 </button>
@@ -1539,7 +1539,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.cookingfinal}}" data-label="{{localize "abfalter.generalTab.cooking"}}" data-type="secondaryRoll" data-ability="{{data.secondary.cooking.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.cookingfinal}}" data-label="{{localize "abfalter.generalTab.cooking"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.cooking"}} </span>
                     <span> {{data.cookingfinal}} </span>
                 </button>
@@ -1559,7 +1559,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.dancefinal}}" data-label="{{localize "abfalter.generalTab.dance"}}" data-type="secondaryRoll" data-ability="{{data.secondary.dance.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.dancefinal}}" data-label="{{localize "abfalter.generalTab.dance"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.dance"}} </span>
                     <span> {{data.dancefinal}} </span>
                 </button>
@@ -1579,7 +1579,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.forgingfinal}}" data-label="{{localize "abfalter.generalTab.forging"}}" data-type="secondaryRoll" data-ability="{{data.secondary.forging.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.forgingfinal}}" data-label="{{localize "abfalter.generalTab.forging"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.forging"}} </span>
                     <span> {{data.forgingfinal}} </span>
                 </button>
@@ -1599,7 +1599,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.jewelryfinal}}" data-label="{{localize "abfalter.generalTab.jewelry"}}" data-type="secondaryRoll" data-ability="{{data.secondary.jewelry.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.jewelryfinal}}" data-label="{{localize "abfalter.generalTab.jewelry"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.jewelry"}} </span>
                     <span> {{data.jewelryfinal}} </span>
                 </button>
@@ -1620,7 +1620,7 @@
 
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.toymakingfinal}}" data-label="{{localize "abfalter.generalTab.toymaking"}}" data-type="secondaryRoll" data-ability="{{data.secondary.toymaking.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.toymakingfinal}}" data-label="{{localize "abfalter.generalTab.toymaking"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.toymaking"}} </span>
                     <span> {{data.toymakingfinal}} </span>
                 </button>
@@ -1640,7 +1640,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.musicfinal}}" data-label="{{localize "abfalter.generalTab.music"}}" data-type="secondaryRoll" data-ability="{{data.secondary.music.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.musicfinal}}" data-label="{{localize "abfalter.generalTab.music"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.music"}} </span>
                     <span> {{data.musicfinal}} </span>
                 </button>
@@ -1660,7 +1660,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.runesfinal}}" data-label="{{localize "abfalter.generalTab.runes"}}" data-type="secondaryRoll" data-ability="{{data.secondary.runes.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.runesfinal}}" data-label="{{localize "abfalter.generalTab.runes"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.runes"}} </span>
                     <span> {{data.runesfinal}} </span>
                 </button>
@@ -1680,7 +1680,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.ritualcaligfinal}}" data-label="{{localize "abfalter.generalTab.ritualCal"}}" data-type="secondaryRoll" data-ability="{{data.secondary.ritualcalig.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.ritualcaligfinal}}" data-label="{{localize "abfalter.generalTab.ritualCal"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.ritualCal"}} </span>
                     <span> {{data.ritualcaligfinal}} </span>
                 </button>
@@ -1700,7 +1700,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.slofhandfinal}}" data-label="{{localize "abfalter.generalTab.soh"}}" data-type="secondaryRoll" data-ability="{{data.secondary.slofhand.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.slofhandfinal}}" data-label="{{localize "abfalter.generalTab.soh"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.soh"}} </span>
                     <span> {{data.slofhandfinal}} </span>
                 </button>
@@ -1720,7 +1720,7 @@
             {{/if}}
 
             <div>
-                <button type="button" class="rollable" data-roll="{{data.tailoringfinal}}" data-label="{{localize "abfalter.generalTab.tailoring"}}" data-type="secondaryRoll" data-ability="{{data.secondary.tailoring.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.tailoringfinal}}" data-label="{{localize "abfalter.generalTab.tailoring"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.tailoring"}} </span>
                     <span> {{data.tailoringfinal}} </span>
                 </button>

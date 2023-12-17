@@ -8,7 +8,7 @@ export default class abfalterActor extends Actor {
         const data = this.system;
 
         //All Action Mod
-        data.aamFinal = data.aam + data.aamBoon + data.aamOther - data.aamCrit;
+        data.aamFinal = data.aam + data.aamBoon - data.aamCrit;
         //Main Characteristics
         for (let [key, stat] of Object.entries(data.stats)) {
             stat.final = Math.floor(~~stat.base + stat.spec + stat.temp);

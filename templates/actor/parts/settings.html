@@ -158,7 +158,26 @@
                         <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.fumbleRangeFinal" value="{{data.fumbleRangeFinal}}" readonly /> </label>
                     </div>
                 </div>
+
+                <!--
+                <div class="rollOptions">
+                    <h5>Roll Option</h5>
+                    <div>
+                        <label>
+                            <span> Voice </span>
+                            <select name="data.actorVoice">
+                                {{#select data.actorVoice}}
+                                <option value="false"> {{localize "abfalter.basicInfo.no"}} </option>
+                                <option value="true"> {{localize "abfalter.basicInfo.yes"}} </option>
+                                {{/select}}
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                -->
             </div>
+
+
 
             <div class="charOptions">
 
@@ -260,7 +279,7 @@
             </div>
 
             <div>
-                <a class="item-control item-create" data-type="class"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addClass"}} </a>
+                <a class="item-control item-create" data-type="class"><i class="fas fa-plus"></i> {{localize "abfalter.settingsTab.addClass"}} </a>
                 <a class="toggleBoolean {{#if data.itemToggle.class}}armorpenalty{{/if}}" data-label="data.itemToggle.class" data-ability="{{data.itemToggle.class}}"><i class="{{#if data.itemToggle.class}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
             </div>
         </div>

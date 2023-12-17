@@ -649,6 +649,7 @@ abfalter.settingsTab = {
     charOptions: "abfalter.settingsTab.charOptions",
     presenceMod: "abfalter.settingsTab.presenceMod",
     levelMod: "abfalter.settingsTab.levelMod",
+    addClass: "abfalter.settingsTab.addClass"
 }
 
 abfalter.dialogs = {

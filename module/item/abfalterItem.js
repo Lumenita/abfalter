@@ -304,6 +304,26 @@ export default class abfalterItem extends Item {
                         break;
                 }
                 break;
+            case "kiTechnique":
+                if (cardData.system.use.agi == 0) {
+                    cardData.agi = true;
+                }
+                if (cardData.system.use.con == 0) {
+                    cardData.con = true;
+                }
+                if (cardData.system.use.dex == 0) {
+                    cardData.dex = true;
+                }
+                if (cardData.system.use.str == 0) {
+                    cardData.str = true;
+                }
+                if (cardData.system.use.pow == 0) {
+                    cardData.pow = true;
+                }
+                if (cardData.system.use.wp == 0) {
+                    cardData.wp = true;
+                }
+                break;
             default:
                 break;
         }

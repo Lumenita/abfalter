@@ -1,3 +1,75 @@
 <div class="kiTechChat">
-    <span> This is the Ki Technique Card (WIP) </span>
+    <div class="itemChatTitle">
+        <span> {{actorName}} Activates: </span>
+        <span> {{name}} </span>
+    </div>
+
+    <div class="kiChatInfo">
+        <span> Frequency : {{system.frequency}}</span>
+        <span> | </span>
+        <span> Action Type : {{system.actionType}} </span>
+    </div>
+
+    <div>
+        {{#if system.innatePower}}
+        <div class="kiChatTypes">
+            <span> {{localize "abfalter.basicInfo.pow"}} </span>
+        </div>
+        {{else}}
+        <div class="kiChatTypes">
+            <span class="{{#if agi}}hidden{{/if}}"> {{localize "abfalter.basicInfo.agi"}} </span>
+            <span class="{{#if con}}hidden{{/if}}"> {{localize "abfalter.basicInfo.con"}} </span>
+            <span class="{{#if dex}}hidden{{/if}}"> {{localize "abfalter.basicInfo.dex"}} </span>
+            <span class="{{#if str}}hidden{{/if}}"> {{localize "abfalter.basicInfo.str"}} </span>
+            <span class="{{#if pow}}hidden{{/if}}"> {{localize "abfalter.basicInfo.pow"}} </span>
+            <span class="{{#if wp}}hidden{{/if}}"> {{localize "abfalter.basicInfo.wp"}} </span>
+        </div>
+        {{/if}}
+    </div>
+
+    <div>
+        {{#if system.innatePower}}
+        <div class="kiChatTypes">
+            <span> {{system.use.unified}} </span>
+        </div>
+        {{else}}
+        <div class="kiChatTypes">
+            <span class="{{#if agi}}hidden{{/if}}"> {{system.use.agi}} </span>
+            <span class="{{#if con}}hidden{{/if}}"> {{system.use.con}} </span>
+            <span class="{{#if dex}}hidden{{/if}}"> {{system.use.dex}} </span>
+            <span class="{{#if str}}hidden{{/if}}"> {{system.use.str}} </span>
+            <span class="{{#if pow}}hidden{{/if}}"> {{system.use.pow}} </span>
+            <span class="{{#if wp}}hidden{{/if}}"> {{system.use.wp}} </span>
+        </div>
+        {{/if}}
+
+    </div>
+    <div class="kiChatBorderHere">
+        {{#if system.unified}}
+        <div>
+            {{#if system.innatePower}}
+            <div class="kiChatTypes">
+                <span> {{system.maint.unified}} </span>
+            </div>
+            {{else}}
+            <div class="kiChatTypes2">
+                <span> {{localize "abfalter.kiTab.unifiedMaint"}} {{system.maint.unified}}</span>
+            </div>
+            {{/if}}
+        </div>
+        {{else}}
+        <div class="kiChatTypes">
+            <span class="{{#if agi}}hidden{{/if}}">{{system.maint.agi}}</span>
+            <span class="{{#if con}}hidden{{/if}}">{{system.maint.con}}</span>
+            <span class="{{#if dex}}hidden{{/if}}">{{system.maint.dex}}</span>
+            <span class="{{#if str}}hidden{{/if}}">{{system.maint.str}}</span>
+            <span class="{{#if pow}}hidden{{/if}}" >{{system.maint.pow}}</span>
+            <span class="{{#if wp}}hidden{{/if}}">{{system.maint.wp}}</span>
+        </div>
+        {{/if}}
+    </div>
+
+    <div class="kiChatDesc">
+        <span>{{system.description}}</span>
+    </div>
 </div>

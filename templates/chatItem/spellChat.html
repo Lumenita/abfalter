@@ -1,18 +1,27 @@
 <div class="spellChat">
-    <span class="flexCenter borderTop"> {{actorName}} Casts: </span>
-    <span class="flexCenter borderBottom"> {{name}} </span>
-    <div class="flexBetween">
+    <div class="itemChatTitle">
+        <span> {{actorName}} Casts: </span>
+        <span> {{name}} </span>
+    </div>
+
+    <div class="spellChatInfo">
         <span> Action: {{system.action}} </span>
+        <span> | </span>
         <span> Type: {{system.type}} </span>
+        <span> | </span>
         <span> Proj: {{system.projection}} </span>
     </div>
-    <span class="borderBoth"> {{system.description}} </span>
+
+    <div class="spellChatDesc">
+        <span > {{system.description}} </span>
+    </div>
+
     {{#if expand}}
-    <div>
+    <div class="spellChatButtons">
         <button class="spellDifficulty" data-label="basic"> Basic </button>
         <button class="spellDifficulty" data-label="int"> Intermidiate </button>
     </div>
-    <div>
+    <div class="spellChatButtons">
         <button class="spellDifficulty" data-label="adv"> Advanced </button>
         <button class="spellDifficulty" data-label="arc"> Arcane </button>
     </div>
@@ -20,10 +29,12 @@
 
     {{#if basic}}
     <div class="spellChatDiff">
-        <span class="flexCenter"> Basic </span>
-        <div class="borderBoth flexBetween">
+        <span> Basic </span>
+        <div>
             <span> Req: {{system.basic.intReq}}</span>
+            <span> | </span>
             <span> Cost: {{system.basic.zeonCost}} Zeon </span>
+            <span> | </span>
             <span> Maint: {{system.basic.maint}} ({{system.maintType}})</span>
         </div>
         <span> {{system.basic.rollDesc}} </span>
@@ -31,10 +42,12 @@
     {{/if}}
     {{#if int}}
     <div class="spellChatDiff">
-        <span class="flexCenter"> Intermediate </span>
-        <div class="borderBoth flexBetween">
+        <span> Intermediate </span>
+        <div>
             <span> Req: {{system.intermediate.intReq}}</span>
+            <span> | </span>
             <span> Cost: {{system.intermediate.zeonCost}} Zeon </span>
+            <span> | </span>
             <span> Maint: {{system.intermediate.maint}} ({{system.maintType}})</span>
         </div>
         <span> {{system.intermediate.rollDesc}} </span>
@@ -42,10 +55,12 @@
     {{/if}}
     {{#if adv}}
     <div class="spellChatDiff">
-        <span class="flexCenter"> Advanced </span>
-        <div class="borderBoth flexBetween">
+        <span> Advanced </span>
+        <div>
             <span> Req: {{system.advanced.intReq}}</span>
+            <span> | </span>
             <span> Cost: {{system.advanced.zeonCost}} Zeon </span>
+            <span> | </span>
             <span> Maint: {{system.advanced.maint}} ({{system.maintType}})</span>
         </div>
         <span> {{system.advanced.rollDesc}} </span>
@@ -53,10 +68,12 @@
     {{/if}}
     {{#if arc}}
     <div class="spellChatDiff">
-        <span class="flexCenter"> Arcane </span>
-        <div class="borderBoth flexBetween">
+        <span> Arcane </span>
+        <div>
             <span> Req: {{system.arcane.intReq}}</span>
+            <span> | </span>
             <span> Cost: {{system.arcane.zeonCost}} Zeon </span>
+            <span> | </span>
             <span> Maint: {{system.arcane.maint}} ({{system.maintType}})</span>
         </div>
         <span> {{system.arcane.rollDesc}} </span>

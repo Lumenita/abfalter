@@ -56,7 +56,7 @@
             <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.ppotential.temp" value="{{data.ppotential.temp}}" /> </label>
             <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.finalPotential" value="{{data.finalPotential}}" readonly/> </label>
             <div>
-                <button type="button" class="rollable" data-roll="{{data.acrofinal}}" data-label="{{localize "abfalter.psychicTab.psychicPotential"}}" data-type="potentialRoll" data-ability="{{data.ppotential.mastery}}">
+                <button type="button" class="rollable" data-roll="{{data.finalPotential}}" data-label="{{localize "abfalter.psychicTab.psychicPotential"}}" data-type="potentialRoll">
                     <span> <i class="fas fa-dice-d20"></i> </span>
                 </button>
             </div>
@@ -79,22 +79,22 @@
             <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.pprojfinal" value="{{data.pprojfinal}}" readonly /> </label>
             {{#if data.other.moduleStatus}}
             <div class="pmodButton">
-                <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll" data-ability="{{data.combatstats.atkMastery}}">
+                <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
                     <span> {{data.atkfinal}} </span>
                 </button>
                 {{#if data.toggles.psychicDodgeStatus}}
-                <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll" data-ability="{{data.combatstats.dodMastery}}">
+                <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
                     <span> {{data.dodfinal}} </span>
                 </button>
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll" data-ability="{{data.combatstats.blkMastery}}">
+                <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
                     <span> {{data.blkfinal}} </span>
                 </button>
                 {{/if}}
             </div>
             {{else}}
             <div>
-                <button type="button" class="combatRoll" data-roll="{{data.pprojfinal}}" data-label="{{localize "abfalter.psychicTab.psyProj"}}" data-type="combatRoll" data-ability="{{data.pproj.mastery}}">
+                <button type="button" class="combatRoll" data-roll="{{data.pprojfinal}}" data-label="{{localize "abfalter.psychicTab.psyProj"}}" data-type="combatRoll">
                     <span> <i class="fas fa-dice-d20"></i> </span>
                 </button>
             </div>

@@ -1,39 +1,5 @@
-.borderTop {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    margin: 3px 0 0 0;
-}
-.borderBottom {
-    border-image: url(../img/border.png) 10 stretch;
-    margin: 0 0 3px 0;
-    border-bottom: 5px solid black;
-}
-.borderBoth {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-}
 button {
     line-height: normal;
-}
-h2 {
-    display: flex;
-    width: 100%;
-    font-size: 19pt;
-    justify-content: center;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    z-index: 1;
-    margin-bottom: 3px;
-}
-h3 {
-    font-size: 12pt;
-    justify-content: center;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    z-index: 1;
-    align-items: center;
 }
 #context-menu li.context-item {
     text-align: center;
@@ -62,12 +28,6 @@ h3 {
     border-radius: 0px;
     border: 0px;
     background-color: #a5a5a5;
-}
-.mastered {
-    color: #48ed12;
-}
-.notMastered {
-    color: black;
 }
 .checkLock {
     pointer-events: none;
@@ -122,14 +82,13 @@ h3 {
 .editor {
     height: 200px;
 }
-
-
-
-
-
+/* Scrollbar */
+::-webkit-scrollbar-thumb {
+    background: #555595;
+    border: 1px solid #6d879f;
+}
 /* Global #121d32 */
 :root {
-    --color-shadow-primary: #5c9be9;
     --textColor: #bbbbbb;
     --buttonBg: #00000026;
     --inputBorder: #747493;
@@ -138,9 +97,27 @@ h3 {
     --physical: #429f42;
     --mental: #375fd1;
     --armorPen: #d37e27;
-    --equipped: #56e36e;
+    --equipped: #1bb936;
     --kiBought: #4b47b7;
     --kiFree: #106810;
+    --colot-border-dark: #8aa9cb;
+    --color-border-dark-5: #12172ee8;
+    --color-border-light-tertiary: #618e9f;
+    --color-border-highlight: #152cc1;
+    --color-border-highlight-alt: #152cc1;
+    --color-shadow-highlight: #1f6cc5;
+    --color-bg-btn-minor-active: #9aabcb;
+    --color-bg-btn-minor-inactive: #354766;
+    --color-shadow-primary: #5c9be9;
+}
+#hotbar .macro,
+#hotbar .bar-controls,
+#hotbar #hotbar-page-controls,
+#controls ol.control-tools > li,
+#navigation #scene-list .scene.view, #navigation #scene-list .scene.context
+#navigation #nav-toggle,
+.app {
+    background: #081426c2;
 }
 h5 {
     display: flex;
@@ -178,6 +155,9 @@ h6 {
 .kiFree {
     background-color: var(--kiFree) !important;
 }
+.natemph {
+    color: var(--armorPen) !important;
+}
 .hidden {
     display: none;
 }
@@ -190,19 +170,45 @@ h6 {
 .normalRoll {
     color: black;
 }
-.natemph {
-    text-shadow: 1px 1px 1px orange;
-}
 .notEquipped > span {
     color: #878787;
 }
-
 /* Global Actor Styles */
 .window-app .window-content {
     overflow-x: auto;
     background: #232832;
     color: var(--textColor);
 }
+.prosemirror menu button:hover, 
+.prosemirror menu button.active,
+.window-app .window-content button {
+    color: var(--textColor);
+}
+.directory .directory-header .header-search input,
+.prosemirror menu .pm-dropdown,
+.window-app .window-content input,
+.window-app .window-content select {
+    color: var(--textColor);
+    background-color: var(--buttonBg);
+}
+.directory .directory-header .header-search input::placeholder,
+.window-app .window-content input::placeholder {
+    color: #919191;
+}
+.prosemirror menu .pm-dropdown ul,
+.window-app .window-content option {
+    background: #252944;
+}
+a.content-link {
+    background-color: var(--buttonBg);
+    border: 1px solid #0080ffb0;
+}
+.prosemirror menu .pm-dropdown ul li:hover,
+.prosemirror menu button.active,
+.prosemirror menu button:hover {
+    background: #5c69c1;
+}
+
 .baseAbfalter label {
     margin: 0px;
     padding: 0px;
@@ -211,7 +217,16 @@ h6 {
     font-size: 13px;
     align-items: center;
     height: 20px;
-    text-align: center;
+}
+.baseAbfalter .general span,
+.baseAbfalter .actorHeader1 span,
+.baseAbfalter .navTabsYes span,
+.baseAbfalter .armory span,
+.baseAbfalter .background span,
+.baseAbfalter .ki span,
+.baseAbfalter .settings span,
+.baseAbfalter .psychic span,
+.baseAbfalter .magic span {
     display: grid;
     color: var(--textColor);
 }
@@ -264,11 +279,15 @@ h6 {
     background: var(--buttonBg);
     color: var(--textColor);
 }
+.settings-sidebar button,
+.directory .action-buttons button,
 .baseAbfalter button {
     background: var(--buttonBg);
     color: var(--textColor);
 }
-
+.baseAbfalter hr {
+    border-bottom: 1px solid #5c9be9;
+}
 /* Header */
 .actorHeader1 {
     display: flex;
@@ -417,27 +436,9 @@ h6 {
 .subRightHeader1 {
     height: 25px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .subRightHeader2 {
     justify-content: space-around;
 }
-
 .subRightLeft { /* initiative */
     width: 30%;
 }
@@ -460,6 +461,7 @@ h6 {
     height: 20px;
     font-size: 12px;
     white-space: nowrap;
+    text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -991,6 +993,11 @@ h6 {
     display: flex;
     place-content: space-between;
 }
+.advantage-item > div > span,
+.disadvantage-item > div > span,
+.advdis > div:first-of-type > span {
+    text-align: center;
+}
 .advantage-item > div > input:first-of-type,
 .advantage-item > div > span:first-of-type,
 .disadvantage-item > div > input:first-of-type,
@@ -1057,6 +1064,10 @@ h6 {
 }
 .secondary > div > div:first-of-type > div > span:first-of-type {
     padding: 0 0 0 4%;
+}
+.secondary > div > div:first-of-type > div > span:last-of-type,
+.secondary > div > div > span{
+    text-align: center;
 }
 .secondary > div > div:first-of-type > div > span:last-of-type,
 .secondary > div > div > button > span:nth-of-type(2) {
@@ -1163,6 +1174,11 @@ h6 {
 .elan > div:last-of-type {
     border-top: 1px solid var(--boxColor);
     border-bottom: 3px solid var(--boxColor);
+}
+.elan > div:first-of-type > span,
+.elan-item > div:first-of-type > span,
+.elan-item2 > div > div > span {
+    text-align: center;
 }
 .elan > div:first-of-type > span:first-of-type {
     width: 19.95%;
@@ -1564,6 +1580,10 @@ h6 {
     display: flex;
     justify-content: flex-start;
 }
+.spellPath > div > span,
+.spellPath-item > div > span{
+    text-align: center;
+}
 .spellPath > div > span:first-of-type,
 .spellPath-item > div > input:first-of-type,
 .spellPath-item > div:nth-of-type(1) > span:first-of-type {
@@ -1591,6 +1611,9 @@ h6 {
 }
 .summoning > div:last-of-type {
     border-bottom: 3px solid var(--boxColor);
+}
+.summoning > div:first-of-type > span {
+    text-align: center;
 }
 .summoning > div:first-of-type > span:first-of-type {
     width: 31%;
@@ -1634,6 +1657,11 @@ h6 {
 .dailyMaint-item > div:first-of-type {
     display: flex;
     justify-content: flex-start;
+}
+.turnDayMaint > div > span,
+.turnMaint-item > div > span,
+.dailyMaint-item > div > span {
+    text-align: center;
 }
 .turnDayMaint > div:first-of-type {
     border-bottom: 1px solid var(--boxColor);
@@ -1739,6 +1767,9 @@ h6 {
 .spell-item > div > div > input:first-of-type {
     margin: 0 0 0 5%;
 }
+.spell-item > div > div > span {
+    text-align: center;
+}
 .spell-item > div > div > input:first-of-type,
 .spell-item > div > div > span:first-of-type {
     width: 62%;
@@ -1768,6 +1799,7 @@ h6 {
 }
 .spell-item > div:not(:first-of-type) > label > span {
     width: 49%;
+    text-align: center;
 }
 .spell-item > div:not(:first-of-type) > label > select,
 .spell-item > div:not(:first-of-type) > label > input {
@@ -1775,6 +1807,7 @@ h6 {
     margin: 0 0 0 1%;
 }
 .spell-item > div:nth-of-type(4) > span {
+    text-align: center;
     width: 23%;
     margin: 0 0 0 1%;
 }
@@ -1801,6 +1834,7 @@ h6 {
 .spell-item > div:nth-of-type(7) > span,
 .spell-item > div:nth-of-type(8) > span {
     width: 18%;
+    text-align: center;
 }
 .spell-item > div:nth-of-type(5) > input,
 .spell-item > div:nth-of-type(6) > input,
@@ -1860,7 +1894,6 @@ h6 {
 .incarnations > div:first-of-type {
     border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
-    padding-bottom: 3px;
 }
 .invocation-item,
 .incarnation-item {
@@ -1891,7 +1924,14 @@ h6 {
 .incarnations > div:last-of-type {
     display: flex;
     place-content: space-between;
+    border-top: 1px solid var(--boxColor);
     border-bottom: 3px solid var(--boxColor);
+}
+.invocations > div:first-of-type > span,
+.incarnations > div:first-of-type > span,
+.invocation-item > div > span,
+.incarnation-item > div > span {
+    text-align: center;
 }
 .invocations > div:first-of-type > span:first-of-type {
     width: 59.85%;
@@ -2111,12 +2151,15 @@ h6 {
     border-right: 1px solid black;
 }
 /*
-    --------------------
-    Module & Disciplines
-    --------------------
+    -----------
+    Disciplines
+    -----------
 */
 .discipline-item:nth-child(2n) {
     background: var(--itemOffSet);
+}
+.discipline-item > div > span {
+    text-align: center;
 }
 .pdisc > div:first-of-type {
     border-top: 3px solid var(--boxColor);
@@ -2151,6 +2194,10 @@ h6 {
 .ppaterns > div:first-of-type {
     border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
+}
+.ppaterns > div > span,
+.mentalPattern-item > div:nth-of-type(1) > span {
+    text-align: center;
 }
 .ppaterns > div > span:first-of-type {
     width: 52.25%;
@@ -2211,6 +2258,7 @@ h6 {
 }
 .mentalPattern-item > div:nth-of-type(2) > label > span {
     width: 40%;
+    text-align: center;
 }
 .mentalPattern-item > div:nth-of-type(2) > label > input {
     width: 25%;
@@ -2247,6 +2295,12 @@ h6 {
 .ppowers > div:first-of-type {
     border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
+}
+.ppowers > div:first-of-type > span,
+.psychicMatrix-item > div:nth-of-type(1) > span,
+.psychicMatrix-item > div > div:not(:first-of-type) > span,
+.psychicMatrix-item > div > div:not(:first-of-type) > label > span {
+    text-align: center;
 }
 .ppowers > div:first-of-type > span:first-of-type {
     width: 70.3%;
@@ -2370,6 +2424,10 @@ h6 {
     width: 15%;
     margin: 0 0 0 5px;
 }
+.pmaint > div:nth-of-type(2) > span,
+.maintPower-item > div:nth-of-type(1) > span {
+    text-align: center;
+}
 .pmaint > div:nth-of-type(2) > span:first-of-type {
     width: 75.05%;
     margin: 0 0 0 2.5%;
@@ -2381,7 +2439,6 @@ h6 {
 .pmaint > div:nth-of-type(2) {
     border-top: 1px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
-    padding: 3px 0;
 }
 .pmaint > div:last-of-type {
     display: flex;
@@ -2637,6 +2694,10 @@ h6 {
     border-bottom: 3px solid var(--boxColor);
     margin: 0 0 15px 0;
 }
+.arsMagnus > div > span,
+.arsMagnus-item > div > span {
+    text-align: center;
+}
 .arsMagnus-item > div > a {
     width: 5%;
     font-size: 15px;
@@ -2719,6 +2780,10 @@ h6 {
 .martialArt-item:nth-child(2n) {
     background: var(--itemOffSet);
 }
+.martialarts > div > span,
+.martialArt-item > div > span {
+    text-align: center;
+}
 .martialarts > div > span:first-of-type {
     width: 53.2%;
     margin: 0 0 0 2.5%;
@@ -2788,6 +2853,9 @@ h6 {
     border-bottom: 1px solid var(--boxColor);
     border-top: 3px solid var(--boxColor);
 }
+.unarmed > div > span {
+    text-align: center;
+}
 .unarmed > div:first-of-type > span:first-of-type {
     margin-left: 2.5%;
 }
@@ -2839,6 +2907,12 @@ h6 {
 .kisealmast > div {
     display: flex;
     justify-content: space-evenly;
+}
+.kisealmast > div > span,
+.kiSealsCreatures > div > span,
+.kiSealCreature-item > div > span,
+.kiSealCreature-item > div:last-of-type > div > span{
+    text-align: center;
 }
 .kisealmast > div:first-of-type > span:first-of-type {
     margin: 0 0 0 2.5%;
@@ -2961,6 +3035,15 @@ h6 {
     display: flex;
 }
 .kiTechMinContainer .kiTechMainInfo > span,
+.kiTechSideInfoMax > span,
+.kiTechUseMax > span,
+.kiTechMaint > div > span,
+.kiTechUse > div > span,
+.kiTechType > div > span:not(:first-of-type),
+.kiTechTypeMax > div > span:not(:first-of-type) {
+    text-align: center;
+}
+.kiTechMinContainer .kiTechMainInfo > span,
 .kiTechMinContainer .kiTechMainInfo > a:first-of-type {
     border-bottom: 1px solid var(--boxColor);
 }
@@ -3015,14 +3098,6 @@ h6 {
     width: 11%;
     padding: 0 0 0 1%;
 }
-/*
-.kiTechMaint,
-.kiTechType,
-.kiTechUse {
-    border-right: 1px solid var(--boxColor);
-    border-left: 1px solid var(--boxColor);
-}
-*/
 .kiTechMaint > span:first-of-type,
 .kiTechType > span:first-of-type,
 .kiTechUse > span:first-of-type {
@@ -3037,7 +3112,6 @@ h6 {
 .kiTechMaint {
     border-bottom: 1px solid var(--boxColor);
 }
-
 .kiTechMinContainer .kiTechInfo > textarea {
     background: none;
     cursor: default;
@@ -3101,31 +3175,6 @@ h6 {
 .kiTechSideInfoMax > span {
     font-size: 12px;
 }
-
-.kiTechUse,
-.kitechType {
-    display: flex;
-}
-
-.kitechType > span,
-.kiTechUse > span,
-.kiTechUse > input {
-    width: 10%;
-}
-
-.kiTechUse > select {
-    width: 20%;
-}
-
-.techExpand {
-    display: flex;
-    width: 70%;
-}
-.techExpand > span {
-    width: 40%;
-}
-
-
 /*
     *************
     -------------
@@ -3224,6 +3273,13 @@ h6 {
 .armor-item > div > a,
 .armorHelmet-item > div > a {
     width: 3%;
+}
+.armor > div > span,
+.armor-item > div > span,
+.armor-item2 > div > span,
+.armorHelmet-item > div > span,
+.armorHelmet-item2 > div > span {
+    text-align: center;
 }
 .armor > div > span:first-of-type,
 .armor-item > div > span:first-of-type,
@@ -3336,6 +3392,10 @@ h6 {
     background: var(--itemOffSet);
 }
 .prof > div:first-of-type > span,
+.prof-item > div > span {
+    text-align: center;
+}
+.prof > div:first-of-type > span,
 .prof-item > div > span:first-of-type,
 .prof-item > div > label:first-of-type {
     width: 50%;
@@ -3383,6 +3443,10 @@ h6 {
     border-bottom: 1px solid var(--boxColor);
     padding-bottom: 3px;
 }
+.weapons > div:first-of-type > span,
+.weapon-item > div > span {
+    text-align: center;
+}
 .weapons > div:first-of-type > span:nth-of-type(1) {
     width: 14.25%;
     margin: 0 0 0 7.25%;
@@ -3428,11 +3492,14 @@ h6 {
 }
 .weapon-item > div:nth-child(2),
 .weapon-item > div:nth-child(4),
-.weapon-item > div:nth-child(6),
-.weapon-item > div:nth-child(8) {
+.weapon-item > div:nth-child(6) {
     border-top: 2px solid var(--boxColor);
     border-bottom: 1px dashed var(--boxColor);
     place-content: space-between;
+}
+.weapon-item > div:nth-child(8) {
+    border-top: 2px solid var(--boxColor);
+    border-bottom: 1px dashed var(--boxColor);
 }
 .weapon-item > div:nth-child(3),
 .weapon-item > div:nth-child(5),
@@ -3570,6 +3637,11 @@ h6 {
     border-top: 1px solid var(--boxColor);
     border-bottom: 3px solid var(--boxColor);
 }
+.currency > div > span,
+.currency > div > label > span,
+.currency-item > div > span {
+    text-align: center;
+}
 .currency > div > span:first-of-type,
 .currency > div > label > span,
 .currency-item > div > span:first-of-type,
@@ -3613,6 +3685,10 @@ h6 {
 .inventory-item > div > a {
     font-size: 15px;
     width: 5%;
+}
+.inventory > div:first-of-type > span,
+.inventory-item > div:first-of-type > span {
+    text-align: center;
 }
 .inventory > div:first-of-type > span:nth-of-type(1) {
     width: 8.55%;
@@ -3662,6 +3738,9 @@ h6 {
     -----------------
     *****************
 */
+.bio {
+    margin: 15px 0 0 0;
+}
 .bioPictures {
     display: flex;
     min-width: 878px;
@@ -4559,10 +4638,92 @@ h6 {
 /*
     ***************
     ---------------
+         Temp
+    ---------------
+    ***************
+*/
+.dialog .dialog-buttons button {
+    background: var(--buttonBg);
+    color: var(--textColor);
+    border: none;
+}
+.form-fields > input,
+.journal-header > input {
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 13px;
+    text-align: center;
+    border: 0px;
+    height: 20px;
+    background: var(--buttonBg);
+    border-radius: 0px;
+    border-bottom: 1px solid var(--inputBorder);
+    color: var(--textColor);
+}
+.form-fields > select {
+    height: 20px;
+    font-size: 13px;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-bottom: 1px solid var(--inputBorder);
+    color: var(--textColor);
+    background-color: var(--buttonBg);
+}
+.form-fields > select option {
+    background: #252944;
+}
+.sheet.journal-entry .journal-entry-content {
+    background: #232832;
+}
+
+
+/*
+    ***************
+    ---------------
          Chat
     ---------------
     ***************
 */
+/*
+    --------
+    General Stuffs
+    --------
+*/
+.itemChatTitle > span {
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+}
+.itemChatTitle > span:nth-of-type(2) {
+    font-size: 20px;
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+}
+
+/*
+    --------
+    Other Stuffs
+    --------
+*/
+.diceRollingTemp > label {
+    display: flex;
+    padding: 0 15%;
+}
+.diceRollingTemp > label:last-of-type {
+    border-bottom: 1px dashed var(--boxColor);
+    padding: 0 15% 5px 15%;
+    margin: 0 0 5px 0;
+}
+.diceRollingTemp > label > span {
+    width: 55%;
+}
+.diceRollingTemp > label > input {
+    width: 35%;
+}
 .message-content {
     display: flex;
     flex-direction: column;
@@ -4643,23 +4804,71 @@ h6 {
 .fumbleChatMessage > div:not(:nth-of-type(1)) > span:nth-of-type(2) {
     padding-right: 10%;
 }
+
+
+
+
+
 /*
     --------
     Spell Chat
     --------
 */
-
-.spellChat > span:nth-child(4),
-.spellChatDiff > span:nth-child(3) {
-    height: inherit;
-    text-align: start;
+.spellChatInfo {
+    font-size: 13px;
+    display: flex;
+    justify-content: space-evenly;
 }
-.spellChat > div > span {
-
+.spellChatDesc {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
 }
-
-
-
+.spellChatDesc > span {
+    white-space: pre-wrap;
+}
+.spellChatDiff > span:first-of-type {
+    display: flex;
+    justify-content: center;
+    font-size: 17px;
+}
+.spellChatDiff > div {
+    display: flex;
+    justify-content: space-evenly;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+}
+.spellChatDiff > span:last-of-type {
+    white-space: pre-wrap;
+}
+/*
+    --------
+    Ki Technique Chat Chat
+    --------
+*/
+.kiChatInfo {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 13px;
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+}
+.kiChatBorderHere {
+    border-image: url(../img/border.png) 10 stretch;
+    border-bottom: 5px solid black;
+}
+.kiChatTypes2,
+.kiChatTypes {
+    display: flex;
+    justify-content: space-evenly;
+}
+.kiChatTypes > span {
+    width: 15%;
+    text-align: center;
+}
+.kiChatDesc > span{
+    white-space: pre-wrap;
+}
 
 
 
@@ -4684,8 +4893,8 @@ h6 {
 .customActionBar {
   z-index: 70;
   position: fixed;
-  bottom: 18px;
-  left: 780px;
+  bottom: 75px;
+  left: 200px;
 }
 .customActionBar .macros {
   display: flex;

@@ -640,7 +640,8 @@
       "fumbleRoll": "Fumble Roll Range",
       "charOptions": "Character Options",
       "presenceMod": "Presence Mod",
-      "levelMod": "Level Mod"
+      "levelMod": "Level Mod",
+      "addClass": "Add Class"
     },
     "dialogs": {
       "noAtkSelf": "You cannot attack yourself",
