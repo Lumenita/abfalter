@@ -3,7 +3,7 @@ Anima Beyond Fantasy Alter System for Foundry VTT, Thank you Anima Project Studi
 
 I bring you a mix of styles for an Anima Beyond Fantasy character sheet. I am a single developer working on this, so please be patient with the update and bugfixes.
 As a long time DM for Anima, I used to play on roll20, but when I found out of foundry at the time, there was no Anima system. With time a group of very talented people started working on a page, but at that time I was already working on this one.
-On top of that, I personally did not like their astethic, however, they were kind enough to let me use their auto combat calculator as reference, Thank you Linkaynn and the other members who are developing the other Anima Beyond Fanatasy page for allowing me to use your idea for the combat calculator.
+They were kind enough to let me use their auto combat calculator as reference, Thank you Linkaynn and the other members who are developing the other Anima Beyond Fanatasy page for allowing me to use your idea for the combat calculator.
 
 I've been working on this page for a few years now, but I never posted it because I felt like it was not ready, but now here it is.
 The system follows the Anima Beyond Fantasy, although some features are more tailored for my table, for example; the fumbling system (I kept the -15 per for any fumbles below the fumble level).
