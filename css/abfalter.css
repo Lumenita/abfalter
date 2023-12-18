@@ -22,20 +22,142 @@ button {
     height: 18px;
     width: 18px;
 }
-.mastery-box {
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: 0px;
-    background-color: #a5a5a5;
-}
 .checkLock {
     pointer-events: none;
 }
 .fa-comment-dots:before {
     color: #4e4e4e;
 }
+/* Color Theme */
+:root {
+    --textColor: #bbbbbb;
+    --buttonBg: #00000026;
+    --inputBorder: #747493;
+    --boxColor: #687591;
+    --itemOffSet: #363b52;
+    --physical: #429f42;
+    --mental: #375fd1;
+    --armorPen: #d37e27;
+    --equipped: #1bb936;
+    --kiBought: #4b47b7;
+    --kiFree: #106810;
+    --colot-border-dark: #8aa9cb;
+    --color-border-dark-5: #12172ee8;
+    --color-text-dark-secondary: #979797;
+    --color-border-light-tertiary: #618e9f;
+    --color-border-highlight: #152cc1;
+    --color-border-highlight-alt: #152cc1;
+    --color-shadow-highlight: #1f6cc5;
+    --color-bg-btn-minor-active: #9aabcb;
+    --color-bg-btn-minor-inactive: #354766;
+    --color-shadow-primary: #5c9be9;
+}
+.window-app .window-content {
+    overflow-x: auto;
+    background: #15202B;
+    color: var(--textColor);
+}
+.sheet.journal-entry .journal-entry-content {
+    background: #15202B;
+}
+#hotbar .macro,
+#hotbar .bar-controls,
+#hotbar #hotbar-page-controls,
+#controls ol.control-tools > li,
+#navigation #scene-list .scene.view, #navigation #scene-list .scene.context,
+#navigation #nav-toggle,
+.app {
+    background: #081426c2;
+}
+.editor-box {
+    background-color: aliceblue;
+}
+.sheet-tabs > ul > li > .active {
+    background-color: #1c69c1;
+}
+/* Global Actor Styles */
+.prosemirror menu button:hover, 
+.prosemirror menu button.active,
+.window-app .window-content button {
+    color: var(--textColor);
+}
+.directory .directory-header .header-search input,
+.prosemirror menu .pm-dropdown,
+.window-app .window-content input,
+.window-app .window-content select {
+    color: var(--textColor);
+    background-color: var(--buttonBg);
+}
+.directory .directory-header .header-search input::placeholder,
+.window-app .window-content input::placeholder {
+    color: #919191;
+}
+.prosemirror menu .pm-dropdown ul,
+.window-app .window-content option {
+    background: #252944;
+}
+a.content-link {
+    background-color: var(--buttonBg);
+    border: 1px solid #0080ffb0;
+}
+.prosemirror menu .pm-dropdown ul li:hover,
+.prosemirror menu button.active,
+.prosemirror menu button:hover {
+    background: #5c69c1;
+}
+#keybindings .binding .key.uneditable {
+    background: inherit;
+}
+#module-management .package-list .package-title, #module-management .package-list .package-metadata, #module-management .package-list .package-description {
+    color: inherit;
+}
+.form-fields > select option {
+    background: #252944;
+}
 
+
+.baseAbfalter .general span,
+.baseAbfalter .actorHeader1 span,
+.baseAbfalter .navTabsYes span,
+.baseAbfalter .armory span,
+.baseAbfalter .background span,
+.baseAbfalter .ki span,
+.baseAbfalter .settings span,
+.baseAbfalter .psychic span,
+.baseAbfalter .magic span {
+    color: var(--textColor);
+}
+baseAbfalter input {
+    background: var(--buttonBg);
+}
+.baseAbfalter input:read-only {
+    background-color: transparent;
+}
+.baseAbfalter select {
+    color: var(--textColor);
+    background-color: var(--buttonBg);
+}
+.baseAbfalter select option {
+    background: #252944;
+}
+.baseAbfalter textarea {
+    background: var(--buttonBg);
+    color: var(--textColor);
+}
+.settings-sidebar button,
+.directory .action-buttons button,
+.baseAbfalter button {
+    background: var(--buttonBg);
+    color: var(--textColor);
+}
+.baseAbfalter hr {
+    border-bottom: 1px solid #5c9be9;
+}
+/* Scrollbar */
+::-webkit-scrollbar-thumb {
+    background: #555595;
+    border: 1px solid #6d879f;
+}
 /* Select Box Custom Arrow & Center Contents */
 .csSelect::after,
 .csSelect1::after,
@@ -75,50 +197,13 @@ button {
 .editor-box {
     height: 200px;
     border: 1px solid black;
-    background-color: aliceblue;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 .editor {
     height: 200px;
 }
-/* Scrollbar */
-::-webkit-scrollbar-thumb {
-    background: #555595;
-    border: 1px solid #6d879f;
-}
 /* Global #121d32 */
-:root {
-    --textColor: #bbbbbb;
-    --buttonBg: #00000026;
-    --inputBorder: #747493;
-    --boxColor: #687591;
-    --itemOffSet: #363b52;
-    --physical: #429f42;
-    --mental: #375fd1;
-    --armorPen: #d37e27;
-    --equipped: #1bb936;
-    --kiBought: #4b47b7;
-    --kiFree: #106810;
-    --colot-border-dark: #8aa9cb;
-    --color-border-dark-5: #12172ee8;
-    --color-border-light-tertiary: #618e9f;
-    --color-border-highlight: #152cc1;
-    --color-border-highlight-alt: #152cc1;
-    --color-shadow-highlight: #1f6cc5;
-    --color-bg-btn-minor-active: #9aabcb;
-    --color-bg-btn-minor-inactive: #354766;
-    --color-shadow-primary: #5c9be9;
-}
-#hotbar .macro,
-#hotbar .bar-controls,
-#hotbar #hotbar-page-controls,
-#controls ol.control-tools > li,
-#navigation #scene-list .scene.view, #navigation #scene-list .scene.context
-#navigation #nav-toggle,
-.app {
-    background: #081426c2;
-}
 h5 {
     display: flex;
     width: 100%;
@@ -173,42 +258,6 @@ h6 {
 .notEquipped > span {
     color: #878787;
 }
-/* Global Actor Styles */
-.window-app .window-content {
-    overflow-x: auto;
-    background: #232832;
-    color: var(--textColor);
-}
-.prosemirror menu button:hover, 
-.prosemirror menu button.active,
-.window-app .window-content button {
-    color: var(--textColor);
-}
-.directory .directory-header .header-search input,
-.prosemirror menu .pm-dropdown,
-.window-app .window-content input,
-.window-app .window-content select {
-    color: var(--textColor);
-    background-color: var(--buttonBg);
-}
-.directory .directory-header .header-search input::placeholder,
-.window-app .window-content input::placeholder {
-    color: #919191;
-}
-.prosemirror menu .pm-dropdown ul,
-.window-app .window-content option {
-    background: #252944;
-}
-a.content-link {
-    background-color: var(--buttonBg);
-    border: 1px solid #0080ffb0;
-}
-.prosemirror menu .pm-dropdown ul li:hover,
-.prosemirror menu button.active,
-.prosemirror menu button:hover {
-    background: #5c69c1;
-}
-
 .baseAbfalter label {
     margin: 0px;
     padding: 0px;
@@ -228,7 +277,6 @@ a.content-link {
 .baseAbfalter .psychic span,
 .baseAbfalter .magic span {
     display: grid;
-    color: var(--textColor);
 }
 .baseAbfalter input {
     padding-bottom: 0px;
@@ -238,13 +286,10 @@ a.content-link {
     text-align: center;
     border: 0px;
     height: 20px;
-    background: var(--buttonBg);
     border-radius: 0px;
     border-bottom: 1px solid var(--inputBorder);
-    color: var(--textColor);
 }
 .baseAbfalter input:read-only {
-    background-color: transparent;
     padding: 1px 0 0 0;
     border: 0;
 }
@@ -258,11 +303,6 @@ a.content-link {
     border-bottom: 1px solid var(--inputBorder);
     text-align: center;
     appearance: none;
-    color: var(--textColor);
-    background-color: var(--buttonBg);
-}
-.baseAbfalter select option {
-    background: #252944;
 }
 .baseAbfalter a {
     text-align: center;
@@ -276,14 +316,6 @@ a.content-link {
     text-align: justify;
     border-radius: 0px;
     margin: 0px;
-    background: var(--buttonBg);
-    color: var(--textColor);
-}
-.settings-sidebar button,
-.directory .action-buttons button,
-.baseAbfalter button {
-    background: var(--buttonBg);
-    color: var(--textColor);
 }
 .baseAbfalter hr {
     border-bottom: 1px solid #5c9be9;
@@ -543,7 +575,6 @@ a.content-link {
 }
 /* Navigation Tabs */
 .sheet-tabs > ul > li > .active {
-    background-color: #236e8f;
     transform: inherit;
 }
 .abfalter .tabs .item.active {
@@ -4672,12 +4703,7 @@ a.content-link {
     color: var(--textColor);
     background-color: var(--buttonBg);
 }
-.form-fields > select option {
-    background: #252944;
-}
-.sheet.journal-entry .journal-entry-content {
-    background: #232832;
-}
+
 
 
 /*
