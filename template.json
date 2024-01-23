@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": [ "character", "npc", "monster" ],
+    "types": [ "character"],
     "templates": {
       "info": {
         "race": "",
@@ -59,7 +59,6 @@
           "actorHeaderInfo1": false,
           "greaterEnergyArmor": false,
           "arcaneEnergyArmor": false,
-          "spiritDamageType": false,
           "psychicStrengthening": false,
           "unifiedPools": false,
           "innatePower": false,
@@ -74,7 +73,21 @@
           "psychicTab": false,
           "kiTab": false,
           "bioTab": false,
-          "shield": false
+          "shield": false,
+          "magicTheoryVis": false,
+          "innateMagicVis": false,
+          "summoningVis": false,
+          "invocationsVis": false,
+          "incarnationsVis": false,
+          "spellcastingVis": false,
+          "turnMaintVis": false,
+          "mentalPatternsvis": false,
+          "arsMagVis": false,
+          "maVis": false,
+          "unarmedVis": false,
+          "nemesisVis": false,
+          "kiSealsVis": false,
+          "kiTech": false
         },
         "lp": {
           "value": 0,
@@ -168,7 +181,7 @@
         },
         "lifepoints": {
           "status": false,
-          "multiple": 1,
+          "multiple": 0,
           "spec": 0,
           "temp": 0,
           "actual": 0
@@ -188,17 +201,14 @@
           "atkspecial": 0,
           "atktemp": 0,
           "atkStatus": false,
-          "atkMastery": false,
           "blkbase": 0,
           "blkspecial": 0,
           "blktemp": 0,
           "blkStatus": false,
-          "blkMastery": false,
           "dodbase": 0,
           "dodspecial": 0,
           "dodtemp": 0,
-          "dodStatus": false,
-          "dodMastery": false
+          "dodStatus": false
         },
         "initiative": {
           "status": false,
@@ -221,7 +231,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "athleticism": {
@@ -230,7 +239,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "climb": {
@@ -239,7 +247,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "jump": {
@@ -248,7 +255,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "ride": {
@@ -257,7 +263,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "swim": {
@@ -266,7 +271,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "etiquette": {
@@ -275,7 +279,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "intimidate": {
@@ -284,7 +287,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "leadership": {
@@ -293,7 +295,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "persuasion": {
@@ -302,7 +303,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "streetwise": {
@@ -311,7 +311,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "style": {
@@ -320,7 +319,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "trading": {
@@ -329,7 +327,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "notice": {
@@ -338,7 +335,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "search": {
@@ -347,7 +343,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "track": {
@@ -356,7 +351,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "animals": {
@@ -365,7 +359,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "appraisal": {
@@ -374,7 +367,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "architecture": {
@@ -383,7 +375,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "herballore": {
@@ -392,7 +383,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "history": {
@@ -401,7 +391,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "law": {
@@ -410,7 +399,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "magicappr": {
@@ -419,7 +407,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "medicine": {
@@ -428,7 +415,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "memorize": {
@@ -437,7 +423,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "navigation": {
@@ -446,7 +431,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "occult": {
@@ -455,7 +439,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "science": {
@@ -464,7 +447,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "tactics": {
@@ -473,7 +455,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "composure": {
@@ -482,7 +463,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "featsofstr": {
@@ -491,7 +471,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "withstpain": {
@@ -500,7 +479,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "disguise": {
@@ -509,7 +487,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "hide": {
@@ -518,7 +495,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "lockpicking": {
@@ -527,7 +503,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "poisons": {
@@ -536,7 +511,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "stealth": {
@@ -545,7 +519,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "theft": {
@@ -554,7 +527,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "traplore": {
@@ -563,7 +535,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "alchemy": {
@@ -572,7 +543,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "animism": {
@@ -581,7 +551,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "art": {
@@ -590,7 +559,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "dance": {
@@ -599,7 +567,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "forging": {
@@ -608,7 +575,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "jewelry": {
@@ -617,7 +583,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "music": {
@@ -626,7 +591,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "runes": {
@@ -635,7 +599,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "ritualcalig": {
@@ -644,7 +607,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "slofhand": {
@@ -653,7 +615,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "tailoring": {
@@ -662,7 +623,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "piloting": {
@@ -671,7 +631,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "cooking": {
@@ -680,7 +639,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "technomagic": {
@@ -689,7 +647,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "toymaking": {
@@ -698,7 +655,6 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "kidetection": {
@@ -706,7 +662,6 @@
             "temp": 0,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           },
           "kiconceal": {
@@ -714,7 +669,6 @@
             "temp": 0,
             "nat": 0,
             "natural": 0,
-            "mastery": false,
             "status": false
           }
         },
@@ -730,8 +684,6 @@
           "spec": 0,
           "imbalance": 0,
           "temp": 0,
-          "masteryOff": false,
-          "masteryDef": false,
           "mtheory": "Standard",
           "status": false
         },
@@ -767,23 +719,19 @@
         "summoning": {
           "summon": {
             "base": 0,
-            "spec": 0,
-            "mastery": false
+            "spec": 0
           },
           "control": {
             "base": 0,
-            "spec": 0,
-            "mastery": false
+            "spec": 0
           },
           "bind": {
             "base": 0,
-            "spec": 0,
-            "mastery": false
+            "spec": 0
           },
           "banish": {
             "base": 0,
-            "spec": 0,
-            "mastery": false
+            "spec": 0
           }
         },
         "metaMagic": {
@@ -1249,8 +1197,16 @@
             "actual": 0,
             "status": false
           },
-          "unified": 0
-
+          "unified": 0,
+          "innate": {
+            "type": "POW",
+            "spec": 0,
+            "specMax": 0,
+            "temp": 0,
+            "tempMax": 0,
+            "actual": 0,
+            "status": false
+          }
         },
         "mk": {
           "base": 0,
@@ -1345,14 +1301,12 @@
           "spent": 0,
           "spec": 0,
           "temp": 0,
-          "mastery": false,
           "status": false
         },
         "pproj": {
           "base": 0,
           "spec": 0,
           "temp": 0,
-          "mastery": false,
           "status": false
         },
         "other": {
@@ -1364,12 +1318,6 @@
     },
     "character": {
       "templates": [ "info", "stats", "mystic", "armory", "psychic", "ki" ]
-    },
-    "npc": {
-      "templates": [ "info" ]
-    },
-    "monster": {
-      "templates": [ "info", "stats" ]
     }
   },
   "Item": {
@@ -1500,12 +1448,12 @@
     },
     "advantage": {
       "templates": [ "itemDescription" ],
-      "expand": false,
+      "expand": true,
       "cost": 0
     },
     "disadvantage": {
       "templates": [ "itemDescription" ],
-      "expand": false,
+      "expand": true,
       "benefit": 0
     },
     "spellPath": {

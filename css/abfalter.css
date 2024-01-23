@@ -26,15 +26,15 @@ button {
     pointer-events: none;
 }
 .fa-comment-dots:before {
-    color: #4e4e4e;
+    color: #728ca3;
 }
 /* Color Theme */
 :root {
     --textColor: #bbbbbb;
-    --buttonBg: #00000026;
+    --buttonBg: #5859872e;
     --inputBorder: #747493;
     --boxColor: #687591;
-    --itemOffSet: #363b52;
+    --itemOffSet: #2b3046;
     --physical: #429f42;
     --mental: #375fd1;
     --armorPen: #d37e27;
@@ -59,6 +59,9 @@ button {
 }
 .sheet.journal-entry .journal-entry-content {
     background: #15202B;
+}
+.macro-sheet .form-group.command textarea {
+    color: var(--textColor);
 }
 #hotbar .macro,
 #hotbar .bar-controls,
@@ -141,6 +144,8 @@ baseAbfalter input {
     background: #252944;
 }
 .baseAbfalter textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
     background: var(--buttonBg);
     color: var(--textColor);
 }
@@ -244,7 +249,7 @@ h6 {
     color: var(--armorPen) !important;
 }
 .hidden {
-    display: none;
+    display: none !important;
 }
 .fumbleRoll {
     color: red;
@@ -467,6 +472,14 @@ h6 {
 }
 .subRightHeader1 {
     height: 25px;
+}
+.subRightHeader1 > label {
+    width: 20%;
+}
+.subRightHeader1 > span {
+    height: 40%;
+    font-size: 15px;
+    margin: 0 15% 0 5%;
 }
 .subRightHeader2 {
     justify-content: space-around;
@@ -2650,7 +2663,7 @@ h6 {
     font-style: italic;
     padding: 0 0 0 8px;
 }
-.kipool > div:nth-of-type(8) > div > span {
+.kipool > div:nth-of-type(9) > div > span {
     width: 49%
 }
 /*
@@ -3156,6 +3169,8 @@ h6 {
 .kiTechUseMax > span:first-of-type,
 .kiTechMaintMax > span:first-of-type {
     width: 15%;
+    justify-content: center;
+    display: flex;
 }
 .kiTechTypeMax > span,
 .kiTechUseMax > input,
@@ -4064,6 +4079,7 @@ h6 {
 .elanTabs {
     min-width: 515px;
     max-height: 37px;
+    border: none !important;
 }
 .elanTabs > ul > li {
     width: 25%;
@@ -4075,6 +4091,7 @@ h6 {
 }
 .elanContent > div > label {
     display: flex;
+    padding: 0 10px;
     width: 35%
 }
 .elanContent > div > label:first-of-type {
@@ -4112,11 +4129,7 @@ h6 {
 }
 .elanContent2 > div:nth-of-type(2) {
     justify-content: flex-start;
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
+    border-top: 2px solid var(--boxColor);
     padding-top: 3px;
     padding-bottom: 3px;
 }
@@ -4124,6 +4137,7 @@ h6 {
 .elanContent2 > div > input {
     width: 59%;
     margin: 0 2% 0 0;
+    text-align: center;
 }
 .elanContent2 > div:nth-of-type(2) > span:nth-of-type(2),
 .elanContent2 > div > input:nth-of-type(2) {
@@ -4145,6 +4159,9 @@ h6 {
 .elanContent2 > textarea {
     margin: 3px 0 0 0;
 }
+.elanContent > div {
+    border: 3px solid var(--boxColor);
+}
 /*
     -----
     Class
@@ -4156,6 +4173,7 @@ h6 {
 .classContent > div > label {
     display: flex;
     justify-content: flex-start;
+    padding: 0 10px;
     width: 50%;
 }
 .classContent > div > label > span {
@@ -4166,7 +4184,6 @@ h6 {
 .classContent > div > label > input {
     width: 30%;
 }
-
 .classContent > div:first-of-type > label:first-of-type {
     display: flex;
     justify-content: flex-start;
@@ -4180,29 +4197,11 @@ h6 {
 .classContent > div:first-of-type > label:first-of-type > input {
     width: 50%;
 }
-
-.classContent > div:first-of-type > label:last-of-type {
-    display: flex;
-    justify-content: flex-end;
-    width: 50%;
-}
-.classContent > div:first-of-type > label:last-of-type > span {
-    width: 74%;
-    margin: 0 4% 0 2%;
-    justify-content: flex-end;
-}
-.classContent > div:first-of-type > label:last-of-type > input {
-    width: 20%;
-}
 .classHeader {
     justify-content: flex-start;
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 0;
 }
 .classHeader > span {
     width: 95%;
@@ -4211,13 +4210,11 @@ h6 {
     width: 5%;
     font-size: 15px;
 }
-.classContent > textarea {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin: 5px 0 3px 0;
-    padding-bottom: 3px;
+.classContent > div > textarea {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 0;
 }
-
 .classContent > h3:nth-of-type(1) {
     margin-top: 5px;
 }
@@ -4228,18 +4225,36 @@ h6 {
 }
 .ppClass > div {
     width: 50%;
+    padding: 0 10px;
+}
+.ppClass > div::after {
+    right: 15px;
 }
 .ppClass > div > label {
     display: flex;
     width: 100%;
 }
 .ppClass > div > label > span {
-    width: 56%;
+    width: 46%;
     margin: 0 0 0 4%;
     justify-content: flex-start;
 }
 .ppClass > div > label > select {
-    width: 40%;
+    width: 50%;
+}
+.classContent > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.classContent > div:first-of-type,
+.classContent > div:nth-of-type(8),
+.classContent > div:nth-of-type(10) {
+    border-top: 3px solid var(--boxColor);
+}
+.classContent > div:last-of-type,
+.classContent > div:nth-of-type(7),
+.classContent > div:nth-of-type(9) {
+    border-bottom: 3px solid var(--boxColor);
 }
 /*
     -----
@@ -4251,15 +4266,19 @@ h6 {
 }
 .maintPathContent > div > label {
     display: flex;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-    width: 100%;
+    padding: 0 10px;
+    width: 50%;
 }
 .maintPathContent > div > label > input,
 .maintPathContent > div > label > span {
     width: 49%;
     margin: 0 1% 0 0;
+}
+.maintPathContent > div > label > span {
+    display: grid;
+}
+.maintPathContent > div {
+    border: 3px solid var(--boxColor);
 }
 /*
     -----
@@ -4270,16 +4289,21 @@ h6 {
 .spellContent > div > div {
     display: flex;
 }
-.spellContent > div > label,
+.spellContent > div > label {
+    display: flex;
+    padding: 0 10px;
+    width: 50%;
+}
 .spellContent > div > div > label {
     display: flex;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
+    padding: 0 10px;
     width: 100%;
 }
 .spellContent > div > div {
-    width: 100%;
+    width: 50%;
+}
+.spellContent > div > div::after {
+    right: 15px;
 }
 .spellContent > div > label > span,
 .spellContent > div > div > label > span,
@@ -4288,28 +4312,47 @@ h6 {
     width: 49%;
     margin: 0 1% 0 0;
 }
+
+
+
+
+.spellContent > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.spellContent > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.spellContent > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
 .spellContentCont > div:first-of-type {
-    display:flex;
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin: 3px 0 3px 0;
-    padding: 3px 0 3px 0;
+    display: flex;
+    border-top: 3px solid var(--boxColor);
+    padding: 3px 0;
     width: 100%;
 }
 .spellContentCont > div {
     display: flex;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
 }
 .spellContentCont > div > input,
 .spellContentCont > div > span {
     width: 24.5%;
     margin: 0 0.5% 0 0;
 }
-.spellContentCont > div:nth-of-type(n + 3) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    margin: 1px 0 3px 0;
-    padding: 1px 0 3px 0;
+.spellContentCont > div > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.spellContentCont > div:nth-of-type(2n) {
+    border-top: 2px solid var(--boxColor);
+    padding: 3px 0;
+}
+.spellContentCont > div:last-of-type {
+    border-bottom: 2px solid var(--boxColor);
 }
 /*
     --------------------------
@@ -4323,10 +4366,9 @@ h6 {
 .invocationContent > div > label,
 .incarnationContent > div > label {
     display: flex;
-    font-size: 13px;
     align-items: center;
-    height: 20px;
-    width: 100%;
+    padding: 0 10px;
+    width: 50%;
 }
 .invocationContent > div > label > input,
 .invocationContent > div > label > span,
@@ -4337,30 +4379,60 @@ h6 {
 }
 .incarnationContent > div:last-of-type > label > input,
 .incarnationContent > div:last-of-type > label > span {
-    Width: 24.5%;
-    margin: 0 0.5% 0 0;
+    width: 49%;
+    margin: 0 1% 0 0;
 }
-
+.incarnationContent > div {
+    border: 3px solid var(--boxColor);
+}
+.invocationContent > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.invocationContent > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.invocationContent > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
 /*
     -----------------------------
     Mental Pattern & Maint Matrix
     -----------------------------
 */
+.mentalpContent > div {
+    display: flex;
+}
 .maintpContent > div > label,
 .mentalpContent > div > label {
     display: flex;
     font-size: 13px;
     align-items: center;
     height: 20px;
-    width: 100%;
+    width: 50%;
+    padding: 0 10px;
 }
 .maintpContent > div > label > input,
 .mentalpContent > div > label > input {
-    width: 30%;
+    width: 50%;
 }
 .maintpContent > div > label > span,
 .mentalpContent > div > label > span {
     width: 50%;
+    display: grid;
+}
+.maintpContent > div {
+    border: 3px solid var(--boxColor);
+}
+.mentalpContent > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.mentalpContent > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.mentalpContent > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
 }
 /*
     --------------
@@ -4388,23 +4460,17 @@ h6 {
     width: 50%;
 }
 .psychicMatrix > div:nth-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     text-align: center;
-    margin-bottom: 3px;
     padding-top: 3px;
     padding-bottom: 3px;
 }
 .psychicMatrix > div:nth-of-type(3) {
     display: flex;
     text-align: center;
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
+    border-top: 1px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
     padding-top: 3px;
 }
 .psychicMatrix > div:nth-of-type(3) > span:first-of-type {
@@ -4418,7 +4484,7 @@ h6 {
 }
 .psychicMatrix > div:nth-of-type(4) > label > span:first-of-type {
     width: 7%;
-    border-right: 1px solid black;
+    border-right: 1px solid var(--boxColor);
 }
 .psychicMatrix > div:nth-of-type(4) > label > span:last-of-type {
     width: 18%;
@@ -4432,6 +4498,16 @@ h6 {
     align-items: center;
     height: 20px;
 }
+.psychicMatrix > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.psychicMatrix > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.psychicMatrix > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
 /*
     ------------
     Martial Arts
@@ -4442,16 +4518,24 @@ h6 {
 .maContent > div > div {
     display: flex;
 }
-.maContent > div > label,
-.maContent > div > div > label {
+.maContent > div > label {
     display: flex;
     font-size: 13px;
     align-items: center;
     height: 20px;
+    width: 50%;
+    padding: 0 10px;
+}
+.maContent > div > div > label {
+    display: flex;
     width: 100%;
 }
 .maContent > div > div {
-    width: 100%;
+    width: 50%;
+    padding: 0 10px;
+}
+.maContent > div > div::after {
+    right: 15px;
 }
 .maContent > div > label > span,
 .maContent > div > div > label > span,
@@ -4460,15 +4544,63 @@ h6 {
     width: 49%;
     margin: 0 1% 0 0;
 }
+.maContent > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.maContent > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.maContent > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+/*
+    -----------------
+    Ki Technique
+    -----------------
+*/
+.kiTechContent > div {
+    display: flex;
+}
+.kiTechContent > div:nth-of-type(1) {
+    border-top: 3px solid var(--boxColor);
+}
+.kiTechContent > div:nth-of-type(1) > label {
+    display: flex;
+    width: 50%;
+    padding: 0 10px;
+}
+.kiTechContent > div:nth-of-type(1) > label > input,
+.kiTechContent > div:nth-of-type(1) > label > span {
+    width: 49%;
+    margin: 0 1% 0 0;
+}
+.kiTechContent > div:nth-of-type(2) {
+    border-bottom: 1px dashed var(--boxColor);
+}
+.kiTechContent > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.kiTechContent > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
 /*
     -----------------
     Ki Seals Creature
     -----------------
 */
+.kiSealContent {
+    background: none !important;
+}
+.kiSealContent > div:first-of-type {
+    margin: 0 !important;
+}
 .kiSealContent > div:first-of-type > label {
     display: flex;
     font-size: 13px;
     align-items: start;
+    padding: 0 10px;
     height: 20px;
     width: 100%;
 }
@@ -4479,30 +4611,39 @@ h6 {
 .kiSealContent > div:first-of-type > label > span {
     width: 20%;
 }
-.kiSealContent > div:first-of-type,
-.kiTechContent > div:first-of-type {
+.kiSealContent > div:first-of-type {
     margin: 0 0 3px 0;
+}
+.kiSealContent > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.kiSealContent > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.kiSealContent > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
 }
 /*
     --------------------------
     Ki Techniques & Ars Magnus
     --------------------------
 */
-.arsContent > div > label,
-.kiTechContent > div:first-of-type > label {
+.arsContent > div > label {
     display: flex;
-    font-size: 13px;
     align-items: center;
-    height: 20px;
+    padding: 0 10px;
     width: 100%;
 }
-.arsContent > div > label > input,
-.kiTechContent > div:first-of-type > label > input {
-    width: 30%;
-}
-.arsContent > div > label > span,
-.kiTechContent > div:first-of-type > label > span {
+.arsContent > div > label > input {
     width: 50%;
+}
+.arsContent > div > label > span{
+    display: grid;
+    width: 50%;
+}
+.arsContent > div {
+    border: 3px solid var(--boxColor);
 }
 /*
     -----
@@ -4512,33 +4653,39 @@ h6 {
 .armorWindow {
     min-width: 500px;
 }
-.armorContent > div {
+.armorContent > div > div {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: start;
 }
-.armorContent > div > label {
+.armorContent > div:nth-of-type(1) > div > label {
     display: flex;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-}
-.armorContent > div:nth-of-type(1) > label,
-.armorContent > div:nth-of-type(2) > label,
-.armorContent > div:nth-of-type(3) > label {
+    padding: 0 10px;
+    margin: 0 1%;
     width: 48%;
 }
-.armorContent > div:nth-of-type(4) > label,
-.armorContent > div:nth-of-type(5) > label,
-.armorContent > div:nth-of-type(6) > label {
+.armorContent > div:nth-of-type(2) > div > label {
+    display: flex;
+    padding: 0 10px;
+    margin: 0 4.15%;
     width: 25%;
 }
-.armorContent > div > label > input {
+.armorContent > div > div > label > input {
     display: flex;
     width: 35%;
 }
-.armorContent > div > label > span {
+.armorContent > div > div > label > span {
     display: flex;
     width: 50%;
+}
+.armorContent > div > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.armorContent > div > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.armorContent > div > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
 }
 /*
     -----------
@@ -4550,60 +4697,75 @@ h6 {
     font-size: 13px;
     align-items: center;
     height: 20px;
+    width: 50%;
+    padding: 0 10px;
 }
 .proficiencyContent > div > label > select,
 .proficiencyContent > div > label > input {
-    width: 20%;
+    width: 50%;
 }
 .proficiencyContent > div > label > span {
-    width: 30%;
+    width: 50%;
+}
+.proficiencyContent > div {
+    border: 3px solid var(--boxColor);
 }
 /*
     -------
     Weapons
     -------
 */
-.weaponContent > div,
 .weaponContent > div > div {
     display: flex;
 }
-.weaponContent > div > label,
-.weaponContent > div > div > label {
-    display: flex;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-    width: 100%;
-}
-.weaponContent > div:nth-of-type(3) > label,
-.weaponContent > div:nth-of-type(5) > label,
-.weaponContent > div:nth-of-type(6) > label,
-.weaponContent > div > div {
+.weaponContent > div > div > div {
     width: 50%;
 }
-.weaponContent > div:last-of-type,
-.weaponContent > div:nth-of-type(6) > div {
-    width: 24.5%;
-    margin: 0 0.5% 0 25%;
+.weaponContent > div > div > label {
+    display: flex;
+    width: 50%;
+    padding: 0 10px;
 }
-.weaponContent > div:nth-of-type(6) > div > button {
-    height: 20px;
-    margin: 0px;
-    border-radius: 0px;
-    border: 0px;
+.weaponContent > div > div > div > label { 
+    display: flex;
+    width: 100%;
+    padding: 0 10px
 }
-.weaponContent > div > label > input,
-.weaponContent > div > label > span,
+.weaponContent > div > div > label > input,
 .weaponContent > div > div > label > span,
-.weaponContent > div > div > label > select {
+.weaponContent > div > div > div > label > span,
+.weaponContent > div > div > div > label > select {
     width: 49%;
     margin: 0 1% 0 0;
 }
-.weaponContent > div:last-of-type > button {
+.weaponContent > div > div > div::after { 
+    right: 15px;
+}
+.weaponContent > div > div > button,
+.weaponContent > div > div > div > button {
     height: 20px;
     margin: 0px;
     border-radius: 0px;
     border: 0px;
+}
+.weapContentButton {
+    padding: 0 10px;
+    display: flex;
+    justify-content: end;
+}
+.weapContentButton > button {
+    margin: 0 1% 0 0 !important;
+    width: 49.1%;
+}
+.weaponContent > div > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.weaponContent > div > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.weaponContent > div > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
 }
 /*
     --------
@@ -4612,15 +4774,17 @@ h6 {
 */
 .currencyContent > div > label {
     display: flex;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
+    padding: 0 10px;
 }
 .currencyContent > div > label > input {
     width: 15%;
 }
 .currencyContent > div > label > span {
+    display: grid;
     width: 35%;
+}
+.currencyContent > div {
+    border: 3px solid var(--boxColor);
 }
 /*
     ---------
@@ -4632,20 +4796,23 @@ h6 {
 }
 .invContent > div > label {
     display: flex;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-    width: 100%;
+    padding: 0 10px;
+    width: 50%;
 }
 .invContent > div > label > input,
 .invContent > div > label > span {
-    width: 49%;
-    margin: 0 1% 0 0;
+    width: 98%;
+    margin: 0 2% 0 0;
 }
-.invContent > div:last-of-type > label > input,
-.invContent > div:last-of-type > label > span {
-    Width: 24.5%;
-    margin: 0 0.5% 0 0;
+.invContent > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.invContent > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.invContent > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
 }
 /*
     -------------
@@ -4655,6 +4822,7 @@ h6 {
 .advantages > div > label {
     display: flex;
     justify-content: flex-start;
+    padding: 0 10px;
 }
 .advantages > div > label > span {
     width: 34%;
@@ -4665,6 +4833,10 @@ h6 {
 }
 .advantages > div {
     margin: 0 0 5px 0;
+}
+
+.advantages > div {
+    border: 3px solid var(--boxColor);
 }
 /*
     ***************
@@ -4869,7 +5041,28 @@ h6 {
 }
 /*
     --------
-    Ki Technique Chat Chat
+    Psychic Matrix Chat #112542
+    --------
+*/
+.psychicChatInfo {
+    font-size: 13px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.psychicChatDesc {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+}
+.psychicChatDesc > span {
+    white-space: pre-wrap;
+}
+.psyMatrixChat > div > h6 {
+    color: black;
+}
+/*
+    --------
+    Ki Technique Chat
     --------
 */
 .kiChatInfo {

@@ -4,13 +4,13 @@
         <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
 
-    <div class="invocationContent">
-        <h2> {{localize "abfalter.magicTab.incarnationOne"}} </h2>
+    <div class="incarnationContent">
+        <h5> {{localize "abfalter.magicTab.incarnationOne"}} </h5>
         <div>
             <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
             <label> <span> {{localize "abfalter.basicInfo.difficulty"}} </span> <input type="number" name="data.difficulty" value="{{data.difficulty}}" /> </label>
         </div>
-        <h3> {{localize "abfalter.basicInfo.description"}} </h3>
+        <h6> {{localize "abfalter.basicInfo.description"}} </h6>
         <textarea name="data.description" rows="5">{{data.description}}</textarea>
     </div>
 </form>

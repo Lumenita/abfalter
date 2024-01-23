@@ -470,8 +470,8 @@
             {{/if}}
             {{/if}}
         </div>
-        <h5> Nemesis Abilities </h5>
-        <div class="kiSubsection">
+        <h5 class="{{#if data.toggles.nemesisVis}}hidden{{/if}}"> Nemesis Abilities </h5>
+        <div class="kiSubsection {{#if data.toggles.nemesisVis}}hidden{{/if}}">
             <div>
                 <span title="{{localize "abfalter.kiTab.descuseOfNemesis"}}"> {{localize "abfalter.kiTab.useOfNemesis"}} </span>
                 <button type="button" class="kiAbility {{#if data.kiAbility.useOfNemesis.status}}{{#if data.kiAbility.useOfNemesis.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
@@ -753,7 +753,7 @@
                     </div>
                     {{/if}}
                 </div>
-                <div class="{{#if data.toggles.innatePower}}innatePowBorder{{/if}}">
+                <div class="{{#if data.toggles.innatePower}}hidden{{/if}}">
                     <div>
                         <span> {{localize "abfalter.basicInfo.pow"}} </span>
                         <input type="number" name="data.kiPoolPowAccumTot" value="{{data.kiPoolPowAccumTot}}" readonly />
@@ -776,6 +776,32 @@
                         <span> {{localize "abfalter.basicInfo.extra"}} </span>
                         <input type="number" name="data.kiPool.pow.temp" value="{{data.kiPool.pow.temp}}" />
                         <input type="number" name="data.kiPool.pow.tempMax" value="{{data.kiPool.pow.tempMax}}" />
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="{{#if data.toggles.innatePower}}innatePowBorder{{else}}hidden{{/if}}">
+                    <div>
+                        <span> {{data.kiPool.innate.type}} </span>
+                        <input type="number" name="data.kiPoolInnateAccumTot" value="{{data.kiPoolInnateAccumTot}}" readonly />
+                        <input type="number" name="data.kiPoolInnateTot" value="{{data.kiPoolInnateTot}}" readonly />
+                        <input type="number" name="data.kiPool.innate.actual" value="{{data.kiPool.innate.actual}}" />
+                        <a class="toggleBoolean {{#if data.kiPool.innate.status}}showOpacity{{/if}}" data-label="data.kiPool.innate.status" data-ability="{{data.kiPool.innate.status}}"><i class="{{#if data.kiPool.innate.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </div>
+                    {{#if data.kiPool.innate.status}}
+                    <div>
+                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <input type="number" name="data.kiPoolInnateAccumBase" value="{{data.kiPoolInnateAccumBase}}" readonly />
+                        <input type="number" name="data.kiPoolInnateBase" value="{{data.kiPoolInnateBase}}" readonly />
+                    </div>
+                    <div>
+                        <span> {{localize "abfalter.basicInfo.spec"}} </span>
+                        <input type="number" name="data.kiPool.innate.spec" value="{{data.kiPool.innate.spec}}" />
+                        <input type="number" name="data.kiPool.innate.specMax" value="{{data.kiPool.innate.specMax}}" />
+                    </div>
+                    <div>
+                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
+                        <input type="number" name="data.kiPool.innate.temp" value="{{data.kiPool.innate.temp}}" />
+                        <input type="number" name="data.kiPool.innate.tempMax" value="{{data.kiPool.innate.tempMax}}" />
                     </div>
                     {{/if}}
                 </div>
@@ -853,7 +879,7 @@
         </div>
 
         <div>
-            <div class="arsMagnus">
+            <div class="arsMagnus {{#if data.toggles.arsMagVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.kiTab.arsMagnus"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.name"}} </span>
@@ -903,7 +929,7 @@
                 {{/if}}
             </div>
 
-            <div class="limits">
+            <div class="limits {{#if data.toggles.arsMagVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.kiTab.limits"}} </h5>
                 <div class="csSelect">
                     <select name="data.limits.limitOne" data-dtype="number">
@@ -936,7 +962,7 @@
             </div>
         </div>
 
-        <div class="martialarts">
+        <div class="martialarts {{#if data.toggles.maVis}}hidden{{/if}}">
             <h5> {{localize "abfalter.kiTab.martialArts"}} </h5>
             <div>
                 <span> {{localize "abfalter.kiTab.martialArtName"}} </span>
@@ -986,7 +1012,7 @@
             </div>
         </div>
 
-        <div class="unarmed">
+        <div class="unarmed {{#if data.toggles.unarmedVis}}hidden{{/if}}">
             <h5> {{localize "abfalter.kiTab.unarmedDmg"}} </h5>
             <div>
                 <span> {{localize "abfalter.kiTab.baseDmg"}} </span>
@@ -1024,7 +1050,7 @@
             </div>
         </div>
 
-        <div class="kiseals">
+        <div class="kiseals {{#if data.toggles.kiSealsVis}}hidden{{/if}}">
             <h5>
                 {{localize "abfalter.kiTab.kiSeals"}}
                 <label class="expand-box">
@@ -1150,7 +1176,7 @@
             </div>
         </div>
 
-        <div class="kiTech">
+        <div class="kiTech {{#if data.toggles.kiTech}}hidden{{/if}}">
             <h5> {{localize "abfalter.kiTab.kiTechnique"}} </h5>
             <div class="{{#if data.itemToggle.kiTechnique}}item-list{{/if}}">
                 {{#each kiTechniques as |kiTechnique id|}}

@@ -1,3 +1,41 @@
 <div class="psyMatrixChat">
-    <span> This is the Psychic Matrix Card (WIP) </span>
+    <div class="itemChatTitle">
+        <span> {{actorName}} Casts: </span>
+        <span> {{name}} </span>
+    </div>
+
+    <div class="psychicChatInfo">
+        <span> Action: {{system.action}} </span>
+        <span> | </span>
+        <span> Level: {{system.level}} </span>
+        <span> | </span>
+        <span> Maint: {{system.maint}} </span>
+    </div>
+
+    <div class="psychicChatDesc">
+        <span> {{system.description}} </span>
+    </div>
+
+    {{#if expand}}
+    <div>
+        <h6> Rolled Potential </h6>
+    </div>
+    <div class="psychicChatButtons">
+        <button class="psychicDifficulty" data-label="20"> 20 </button>
+        <button class="psychicDifficulty" data-label="40"> 40 </button>
+        <button class="psychicDifficulty" data-label="80"> 80 </button>
+        <button class="psychicDifficulty" data-label="120"> 120 </button>
+        <button class="psychicDifficulty" data-label="140"> 140 </button>
+        <button class="psychicDifficulty" data-label="180"> 180 </button>
+        <button class="psychicDifficulty" data-label="240"> 240 </button>
+        <button class="psychicDifficulty" data-label="280"> 280 </button>
+        <button class="psychicDifficulty" data-label="320"> 320 </button>
+        <button class="psychicDifficulty" data-label="440"> 440 </button>
+    </div>
+    {{else}}
+    <div>
+        <h6> Achievied Difficulty - {{diff}}</h6>
+        <span> Effect: {{effect}} </span>
+    </div>
+    {{/if}}
 </div>

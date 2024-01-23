@@ -5,7 +5,7 @@
             <h5> Mystic Settings </h5>
             <div>
                 <span> Magic Module for Attack </span>
-                <button type="button" class="toggleBoolean {{#if data.toggles.magicAtkModule}}kiBought{{/if}}" 
+                <button type="button" class="toggleBoolean {{#if data.toggles.magicAtkModule}}kiBought{{/if}}"
                         data-label="data.toggles.magicAtkModule" data-ability="{{data.toggles.magicAtkModule}}">
                     {{#if data.toggles.magicAtkModule}}
                     <span> Active </span>
@@ -66,6 +66,25 @@
                 </button>
             </div>
             {{/if}}
+            {{#if data.toggles.unifiedPools}}
+            <div>
+                <span class="settingsSubsectionIndent"> Innate Type </span>
+                <div class="csSelect">
+                    <label>
+                        <select name="data.kiPool.innate.type" data-dtype="String">
+                            {{#select data.kiPool.innate.type}}
+                            <option value="AGI"> {{localize "abfalter.basicInfo.agility"}} </option>
+                            <option value="CON"> {{localize "abfalter.basicInfo.consti"}} </option>
+                            <option value="DEX"> {{localize "abfalter.basicInfo.dexerity"}} </option>
+                            <option value="STR"> {{localize "abfalter.basicInfo.strength"}} </option>
+                            <option value="POW"> {{localize "abfalter.basicInfo.power"}} </option>
+                            <option value="WP"> {{localize "abfalter.basicInfo.willPower"}} </option>
+                            {{/select}}
+                        </select>
+                    </label>
+                </div>
+            </div>
+            {{/if}}
             <div>
                 <span> Dragon Seals </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.dragonSeals}}kiBought{{/if}}"
@@ -120,6 +139,168 @@
                     {{/if}}
                 </button>
             </div>
+        </div>
+
+        <div class="settingsSubsection">
+            <h5> Hide Page Objects </h5>
+            <div></div>
+            <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
+                <span> Magic: Magic Thoery </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.magicTheoryVis}}kiBought{{/if}}"
+                        data-label="data.toggles.magicTheoryVis" data-ability="{{data.toggles.magicTheoryVis}}">
+                    {{#if data.toggles.magicTheoryVis}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
+                <span> Magic: Innate Magic </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.innateMagicVis}}kiBought{{/if}}"
+                        data-label="data.toggles.innateMagicVis" data-ability="{{data.toggles.innateMagicVis}}">
+                    {{#if data.toggles.innateMagicVis}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
+                <span> Magic: Summoning Abilities</span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.summoningVis}}kiBought{{/if}}"
+                        data-label="data.toggles.summoningVis" data-ability="{{data.toggles.summoningVis}}">
+                    {{#if data.toggles.summoningVis}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
+                <span> Magic: Invocations </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.invocationsVis}}kiBought{{/if}}"
+                        data-label="data.toggles.invocationsVis" data-ability="{{data.toggles.invocationsVis}}">
+                    {{#if data.toggles.invocationsVis}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
+                <span> Magic: Incarnations </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.incarnationsVis}}kiBought{{/if}}"
+                        data-label="data.toggles.incarnationsVis" data-ability="{{data.toggles.incarnationsVis}}">
+                    {{#if data.toggles.incarnationsVis}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
+                <span> Magic: Spellcasting Abilities </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.spellcastingVis}}kiBought{{/if}}"
+                        data-label="data.toggles.spellcastingVis" data-ability="{{data.toggles.spellcastingVis}}">
+                    {{#if data.toggles.spellcastingVis}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
+                <span> Magic: Turn Maintenance </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.turnMaintVis}}kiBought{{/if}}"
+                        data-label="data.toggles.turnMaintVis" data-ability="{{data.toggles.turnMaintVis}}">
+                    {{#if data.toggles.turnMaintVis}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+
+            <div class="{{#if data.toggles.psychicTab}}hidden{{/if}}">
+                <span> Psychic: Mental Patterns </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.mentalPatternsvis}}kiBought{{/if}}"
+                        data-label="data.toggles.mentalPatternsvis" data-ability="{{data.toggles.mentalPatternsvis}}">
+                    {{#if data.toggles.mentalPatternsvis}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+
+            <div class="{{#if data.toggles.kiTab}}hidden{{/if}}">
+                <span> Ki: Ars Magnus & Limits </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.arsMagVis}}kiBought{{/if}}"
+                        data-label="data.toggles.arsMagVis" data-ability="{{data.toggles.arsMagVis}}">
+                    {{#if data.toggles.arsMagVis}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div class="{{#if data.toggles.kiTab}}hidden{{/if}}">
+                <span> Ki: Martial Arts </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.maVis}}kiBought{{/if}}"
+                        data-label="data.toggles.maVis" data-ability="{{data.toggles.maVis}}">
+                    {{#if data.toggles.maVis}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div class="{{#if data.toggles.kiTab}}hidden{{/if}}">
+                <span> Ki: Unarmed Damage </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.unarmedVis}}kiBought{{/if}}"
+                        data-label="data.toggles.unarmedVis" data-ability="{{data.toggles.unarmedVis}}">
+                    {{#if data.toggles.unarmedVis}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div class="{{#if data.toggles.kiTab}}hidden{{/if}}">
+                <span> Ki: Nemesis Abilities </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.nemesisVis}}kiBought{{/if}}"
+                        data-label="data.toggles.nemesisVis" data-ability="{{data.toggles.nemesisVis}}">
+                    {{#if data.toggles.nemesisVis}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div class="{{#if data.toggles.kiTab}}hidden{{/if}}">
+                <span> Ki: Ki Seals </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.kiSealsVis}}kiBought{{/if}}"
+                        data-label="data.toggles.kiSealsVis" data-ability="{{data.toggles.kiSealsVis}}">
+                    {{#if data.toggles.kiSealsVis}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div class="{{#if data.toggles.kiTab}}hidden{{/if}}">
+                <span> Ki: Ki Techniques </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.kiTech}}kiBought{{/if}}"
+                        data-label="data.toggles.kiTech" data-ability="{{data.toggles.kiTech}}">
+                    {{#if data.toggles.kiTech}}
+                    <span> Hidden </span>
+                    {{else}}
+                    <span> Not Hidden </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div></div>
         </div>
     </div>
 
@@ -272,7 +453,7 @@
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     {{#if system.expand}}
-                    <span> SHow Info Here</span>
+                    <span> Show Class Info Here (WIP) [Right click -> Edit to change class info] </span>
                     {{/if}}
                 </div>
                 {{/each}}
@@ -287,10 +468,6 @@
 
         <div class="homebrew">
             <h5> Homebrew Settings / WIP </h5>
-            <label>
-                <span> Spirit Damage Type </span>
-                <input type="checkbox" name="data.toggles.spiritDamageType" data-dtype="boolean" {{checked data.toggles.spiritDamageType}} />
-            </label>
             <label>
                 <span> Increased Strengthening </span>
                 <input type="checkbox" name="data.toggles.psychicStrengthening" data-dtype="boolean" {{checked data.toggles.psychicStrengthening}} />

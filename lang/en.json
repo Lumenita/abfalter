@@ -175,7 +175,9 @@
       "giftName": "Gift Name",
       "deity": "Deity",
       "perLevel": "/Level",
-      "lifePoints": "LifePoints"
+      "lifePoints": "LifePoints",
+      "addAdvantage": "Add Advantage",
+      "addDisadvantage": "Add Disadvantage"
     },
     "sheet": {
       "newItem": "New Item",

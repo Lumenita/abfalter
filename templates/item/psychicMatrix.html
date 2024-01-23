@@ -5,7 +5,7 @@
     </div>
 
     <div class="psychicMatrix">
-        <h2> {{localize "abfalter.psychicTab.psychicMatricesOne"}} </h2>
+        <h5> {{localize "abfalter.psychicTab.psychicMatricesOne"}} </h5>
         <div>
             <div class="csSelect">
                 <label>
@@ -43,9 +43,9 @@
             </div>
         </div>
         <div>
-            <span> {{localize "abfalter.basicInfo.description"}} </span>
+            <h6> {{localize "abfalter.basicInfo.description"}} </h6>
+            <textarea rows="7" name="data.description">{{data.description}}</textarea>
         </div>
-        <textarea rows="7" name="data.description">{{data.description}}</textarea>
         <div>
             <span> {{localize "abfalter.basicInfo.difficulty"}} </span>
             <span> {{localize "abfalter.basicInfo.effect"}} </span>

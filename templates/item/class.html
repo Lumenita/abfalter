@@ -5,13 +5,14 @@
     </div>
 
     <div class="classContent">
-        <h2> {{localize "abfalter.basicInfo.class"}} </h2>
+        <h5> {{localize "abfalter.basicInfo.class"}} </h5>
         <div>
             <label> <span> {{localize "abfalter.basicInfo.archeType"}} </span> <input type="text" name="data.main.archeType" value="{{data.main.archeType}}" /> </label>
             <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.main.levels" value="{{data.main.levels}}" /> </label>
         </div>
-        <textarea name="data.description" rows="3" placeholder="Extra Class Information">{{data.description}}</textarea>
-
+        <div>
+            <textarea name="data.description" rows="3" placeholder="Extra Class Information">{{data.description}}</textarea>
+        </div>
         <div>
             <label> <span> {{localize "abfalter.generalTab.lifePoints"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.lp" value="{{data.main.lp}}" /> </label>
             <label> <span> {{localize "abfalter.generalTab.initiative"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.initiative" value="{{data.main.initiative}}" /> </label>
@@ -43,7 +44,7 @@
             <label> <span> {{localize "abfalter.magicTab.zeon"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.zeon" value="{{data.main.zeon}}" /> </label>
         </div>
 
-        <h3> {{localize "abfalter.magicTab.summoning"}} </h3>
+        <h6> {{localize "abfalter.magicTab.summoning"}} </h6>
 
         <div>
             <label> <span> {{localize "abfalter.magicTab.summon"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.summon" value="{{data.main.summon}}" /> </label>
@@ -54,7 +55,7 @@
             <label> <span> {{localize "abfalter.magicTab.banish"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.banish" value="{{data.main.banish}}" /> </label>
         </div>
 
-        <h3> {{localize "abfalter.generalTab.secAbility"}} </h3>
+        <h6> {{localize "abfalter.generalTab.secAbility"}} </h6>
         <div class="classHeader">
             <span> {{localize "abfalter.generalTab.athletics"}} </span>
             <a class="toggleBoolean {{#if data.athletics}}showOpacity{{/if}}" data-label="data.athletics" data-ability="{{data.athletics}}"><i class="{{#if data.athletics}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>

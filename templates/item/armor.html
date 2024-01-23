@@ -5,35 +5,43 @@
     </div>
 
     <div class="armorContent">
-        <h2> {{localize "abfalter.armoryTab.bodyArmor"}} </h2>
         <div>
-            <label> <span> {{localize "abfalter.armoryTab.quality"}} </span> <input type="number" name="data.quality" value="{{data.quality}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.presence"}} </span> <input type="number" name="data.presence" value="{{data.presence}}" /> </label>
+            <h5> {{localize "abfalter.armoryTab.bodyArmor"}} </h5>
+            <div>
+                <label> <span> {{localize "abfalter.armoryTab.quality"}} </span> <input type="number" name="data.quality" value="{{data.quality}}" /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.presence"}} </span> <input type="number" name="data.presence" value="{{data.presence}}" /> </label>
+            </div>
+            <div>
+                <label> <span> {{localize "abfalter.armoryTab.fortitude"}} </span> <input type="number" name="data.fortitude" value="{{data.fortitude}}" /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.requir"}} </span> <input type="number" name="data.requirement" value="{{data.requirement}}" /> </label>
+            </div>
+            <div>
+                <label> <span> {{localize "abfalter.armoryTab.natPen"}} </span> <input type="number" name="data.natPenalty" value="{{data.natPenalty}}" /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.movePen"}} </span> <input type="number" name="data.movePenalty" value="{{data.movePenalty}}" /> </label>
+            </div>
         </div>
+        
         <div>
-            <label> <span> {{localize "abfalter.armoryTab.fortitude"}} </span> <input type="number" name="data.fortitude" value="{{data.fortitude}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.requir"}} </span> <input type="number" name="data.requirement" value="{{data.requirement}}" /> </label>
+            <h6> {{localize "abfalter.armoryTab.armorValues"}} </h6>
+            <div>
+                <label> <span> {{localize "abfalter.armoryTab.cut"}} </span> <input type="number" name="data.AT.cut" value="{{data.AT.cut}}" /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.imp"}} </span> <input type="number" name="data.AT.imp" value="{{data.AT.imp}}" /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.thr"}} </span> <input type="number" name="data.AT.thr" value="{{data.AT.thr}}" /> </label>
+            </div>
+            <div>
+                <label> <span> {{localize "abfalter.armoryTab.heat"}} </span> <input type="number" name="data.AT.heat" value="{{data.AT.heat}}" /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.cold"}} </span> <input type="number" name="data.AT.cold" value="{{data.AT.cold}}" /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.ele"}} </span> <input type="number" name="data.AT.ele" value="{{data.AT.ele}}" /> </label>
+            </div>
+            <div>
+                <label> <span> {{localize "abfalter.armoryTab.ene"}} </span> <input type="number" name="data.AT.ene" value="{{data.AT.ene}}" /> </label>
+                {{#if data.spiritHomebrew}}
+                <label> <span> {{localize "abfalter.armoryTab.spirit"}} </span> <input type="number" name="data.AT.spt" value="{{data.AT.spt}}" /> </label>
+                {{/if}}
+            </div>
         </div>
-        <div>
-            <label> <span> {{localize "abfalter.armoryTab.natPen"}} </span> <input type="number" name="data.natPenalty" value="{{data.natPenalty}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.movePen"}} </span> <input type="number" name="data.movePenalty" value="{{data.movePenalty}}" /> </label>
-        </div>
-        <h3> {{localize "abfalter.armoryTab.armorValues"}} </h3>
-        <div>
-            <label> <span> {{localize "abfalter.armoryTab.cut"}} </span> <input type="number" name="data.AT.cut" value="{{data.AT.cut}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.imp"}} </span> <input type="number" name="data.AT.imp" value="{{data.AT.imp}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.thr"}} </span> <input type="number" name="data.AT.thr" value="{{data.AT.thr}}" /> </label>
-        </div>
-        <div>
-            <label> <span> {{localize "abfalter.armoryTab.heat"}} </span> <input type="number" name="data.AT.heat" value="{{data.AT.heat}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.cold"}} </span> <input type="number" name="data.AT.cold" value="{{data.AT.cold}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.ele"}} </span> <input type="number" name="data.AT.ele" value="{{data.AT.ele}}" /> </label>
-        </div>
-        <div>
-            <label> <span> {{localize "abfalter.armoryTab.ene"}} </span> <input type="number" name="data.AT.ene" value="{{data.AT.ene}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.spirit"}} </span> <input type="number" name="data.AT.spt" value="{{data.AT.spt}}" /> </label>
-        </div>
-        <h3> {{localize "abfalter.basicInfo.description"}} </h3>
+
+        <h6> {{localize "abfalter.basicInfo.description"}} </h6>
         <textarea name="data.description" rows="5">{{data.description}}</textarea>
     </div>
 </form>

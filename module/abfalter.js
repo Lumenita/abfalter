@@ -1,14 +1,14 @@
-import { abfalter } from "./config.js"
-import { preloadHandlebarsTemplates } from "./utilities/preloadTemplates.js"
-import * as Chat from "./chat.js"
-import abfalterCombat from "./combat.js"
-import abfalterItem from "./item/abfalterItem.js"
-import abfalterItemSheet from "./item/abfalterItemSheet.js"
-import abfalterActor from "./actor/abfalterActor.js"
-import abfalterCharacterSheet from "./actor/abfalterCharacterSheet.js"
+import { abfalter } from "./config.js";
+import { preloadHandlebarsTemplates } from "./utilities/preloadTemplates.js";
+import * as Chat from "./chat.js";
+import abfalterCombat from "./combat.js";
+import abfalterItem from "./item/abfalterItem.js";
+import abfalterItemSheet from "./item/abfalterItemSheet.js";
+import abfalterActor from "./actor/abfalterActor.js";
+import abfalterCharacterSheet from "./actor/abfalterCharacterSheet.js";
 import { registerCustomMacros } from "./autoCombat/registerCustomMacros.js";
-import { customMacroBar } from "./autoCombat/customMacroBar.js"
-
+import { customMacroBar } from "./autoCombat/customMacroBar.js";
+import { abfalterSettings } from "./utilities/abfalterSettings.js";
 
 
 Hooks.once("init", async () => {
@@ -18,6 +18,7 @@ Hooks.once("init", async () => {
     CONFIG.Item.documentClass = abfalterItem;
     CONFIG.abfalter = abfalter;
     CONFIG.Combat.documentClass = abfalterCombat;
+    abfalterSettings();
 
     await preloadHandlebarsTemplates();
     // Custom Sheets

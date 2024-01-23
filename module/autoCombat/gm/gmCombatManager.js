@@ -7,11 +7,26 @@ import { gmCombatDialog } from "../dialogs/gmCombatDialog.js"
 import { combatAttackDialog} from "../dialogs/combatAttackDialog.js"
 import { combatDefenseDialog } from "../dialogs/combatDefenseDialog.js"
 
-
 export class gmCombatManager extends combatManager {
     constructor(game) {
         super(game);
     }
+    receive(msg) {
+        switch (msg.type) {
+            case playerCombatType.RequestToAttack:
+                this.managePlayerAttackRequest(msg);
+                break;
+            case playerCombatType.Attack:
+                this.managePlayerAttack(msg);
+                break;
+            case playerCombatType.Defend:
+                this.managePlayerDefense(msg);
+                break;
+            default:
+                Log.warn('Unknown message', msg);
+        }
+    }
+
     endCombat() {
         console.log("combat closed/ended");
         if (this.combat) {
@@ -30,31 +45,6 @@ export class gmCombatManager extends combatManager {
             this.attackDialog = undefined;
         }
         */
-    }
-
-    async sendAttack() {
-        assertCurrentScene(); // Checks if the token is in the current scene.
-        const { user } = this.game;
-        if (!user) return;
-        const attackerToken = getSelectedToken(this.game); // makes the selected token the attacker, there can only be 1 attacker.
-        const { targets } = user;
-        const targetToken = getTargetToken(attackerToken, targets);
-
-        if (targetToken.length === undefined) {
-            console.log("Single Attack");
-            if (attackerToken?.id) {
-                await genericDialogs.confirm(this.game.i18n.format('macros.combat.dialog.attackConfirm.title'), this.game.i18n.format('macros.combat.dialog.attackConfirm.body.title', { target: targetToken.name }), {
-                    onConfirm: () => {
-                        if (attackerToken?.id && targetToken?.id) {
-                            this.combat = this.createNewCombat(attackerToken, targetToken);
-                            this.manageAttack(attackerToken, targetToken);
-                        }
-                    }
-                });
-            }
-        } else {
-            console.log("Aoe Attack"); //not implemented
-        }
     }
 
     createNewCombat(attacker, defender) {
@@ -87,6 +77,38 @@ export class gmCombatManager extends combatManager {
         console.log("I did it: Created New Combat Ending");
 
     }
+
+    async sendAttack() {
+        assertCurrentScene(); // Checks if the token is in the current scene.
+        const { user } = this.game;
+        if (!user) return;
+        const attackerToken = getSelectedToken(this.game); // makes the selected token the attacker, there can only be 1 attacker.
+        const { targets } = user;
+        const targetToken = getTargetToken(attackerToken, targets);
+
+        if (targetToken.length === undefined) {
+            console.log("Single Attack");
+            if (attackerToken?.id) {
+                await genericDialogs.confirm(this.game.i18n.format('macros.combat.dialog.attackConfirm.title'), this.game.i18n.format('macros.combat.dialog.attackConfirm.body.title', { target: targetToken.name }), {
+                    onConfirm: () => {
+                        if (attackerToken?.id && targetToken?.id) {
+                            this.combat = this.createNewCombat(attackerToken, targetToken);
+                            this.manageAttack(attackerToken, targetToken);
+                        }
+                    }
+                });
+            }
+        } else {
+            console.log("Aoe Attack"); //not implemented
+        }
+    }
+
+
+
+
+
+
+
 
     manageAttack(attacker, defender, bonus) {
         this.attackDialog = new combatAttackDialog(attacker, defender, {
@@ -133,21 +155,7 @@ export class gmCombatManager extends combatManager {
     }
 
 
-    receive(msg) {
-        switch (msg.type) {
-            case playerCombatType.RequestToAttack:
-                this.managePlayerAttackRequest(msg);
-                break;
-            case playerCombatType.Attack:
-                this.managePlayerAttack(msg);
-                break;
-            case playerCombatType.Defend:
-                this.managePlayerDefense(msg);
-                break;
-            default:
-                Log.warn('Unknown message', msg);
-        }
-    }
+
        /*
     async managePlayerAttack(msg) {
         if (this.combat) {

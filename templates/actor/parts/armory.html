@@ -64,7 +64,7 @@
                 <span> {{localize "abfalter.armoryTab.cold"}} </span>
                 <span> {{localize "abfalter.armoryTab.ele"}} </span>
                 <span> {{localize "abfalter.armoryTab.ene"}} </span>
-                {{#if data.toggles.spiritDamageType}}
+                {{#if data.spiritSettings}}
                 <span> {{localize "abfalter.armoryTab.spirit"}} </span>
                 {{/if}}
             </div>
@@ -125,7 +125,7 @@
                 <span> {{data.ahColdFinal}} </span>
                 <span> {{data.ahEleFinal}} </span>
                 <span> {{data.ahEneFinal}} </span>
-                {{#if data.toggles.spiritDamageType}}
+                {{#if data.spiritSettings}}
                 <span> {{data.ahSptFinal}} </span>
                 {{/if}}
             </div>
@@ -138,7 +138,7 @@
                 <span> {{data.aColdFinal}} </span>
                 <span> {{data.aEleFinal}} </span>
                 <span> {{data.aEneFinal}} </span>
-                {{#if data.toggles.spiritDamageType}}
+                {{#if data.spiritSettings}}
                 <span> {{data.aSptFinal}} </span>
                 {{/if}}
             </div>
@@ -262,7 +262,9 @@
                                 <option value="COLD"> {{localize "abfalter.armoryTab.cold"}} </option>
                                 <option value="ELE"> {{localize "abfalter.armoryTab.ele"}} </option>
                                 <option value="ENE"> {{localize "abfalter.armoryTab.ene"}} </option>
+                                {{#if system.spiritHomebrew}}
                                 <option value="SPIRIT"> {{localize "abfalter.armoryTab.spirit"}} </option>
+                                {{/if}}
                                 {{/select}}
                             </select>
                         </div>
@@ -277,7 +279,9 @@
                                 <option value="COLD"> {{localize "abfalter.armoryTab.cold"}} </option>
                                 <option value="ELE"> {{localize "abfalter.armoryTab.ele"}} </option>
                                 <option value="ENE"> {{localize "abfalter.armoryTab.ene"}} </option>
+                                {{#if system.spiritHomebrew}}
                                 <option value="SPIRIT"> {{localize "abfalter.armoryTab.spirit"}} </option>
+                                {{/if}}
                                 {{/select}}
                             </select>
                         </div>
@@ -301,7 +305,7 @@
                                     {{/select}}
                                 </select>
                             </div>
-                            <button type="button" class="psychicModule item-toggle {{#if system.toggle}}kiBought{{/if}}" data-label="system.toggle" data-ability="{{system.toggle}}">
+                            <button type="button" class="item-toggle {{#if system.toggle}}kiBought{{/if}}" data-label="system.toggle" data-ability="{{system.toggle}}">
                                 <span> {{localize "abfalter.armoryTab.twoHand"}} </span>
                             </button>
                             <span> = </span>

@@ -1,3 +1,5 @@
+import { abfalterSettingsKeys } from "../utilities/abfalterSettings.js";
+
 export default class abfalterActor extends Actor {
 
     prepareData() {
@@ -7,8 +9,11 @@ export default class abfalterActor extends Actor {
     prepareBaseData() {
         const data = this.system;
 
+        //Global Settings
+        data.spiritSettings = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
+
         //All Action Mod
-        data.aamFinal = data.aam + data.aamBoon - data.aamCrit;
+        data.aamFinal = data.aam + data.aamBoon + data.aamCrit;
         //Main Characteristics
         for (let [key, stat] of Object.entries(data.stats)) {
             stat.final = Math.floor(~~stat.base + stat.spec + stat.temp);
@@ -352,7 +357,6 @@ export default class abfalterActor extends Actor {
             data.iniBase = Math.floor(data.iniBase + ~~(data.aamFinal / 2));
         }
 
-
         //Ki Pool
         if (data.toggles.innatePower == false) {
             data.kiPoolAgiAccumTot = Math.max(0, Math.floor(data.stats.Agility.kiPoolAccuBase + data.kiPool.agi.spec + data.kiPool.agi.temp + Math.min(0, ~~(data.aamFinal / 20)))); // Math.ceil(data.aam / 20));
@@ -371,10 +375,50 @@ export default class abfalterActor extends Actor {
                 data.unifiedTotal = Math.floor(data.kiPoolAgiTot + data.kiPoolConTot + data.kiPoolDexTot + data.kiPoolStrTot + data.kiPoolPowTot + data.kiPoolWPTot);
             }
         } else {
-            data.stats.Power.kiPoolAccuBase = data.stats.Power.kiPoolAccuBase * 6;
-            data.stats.Power.kiPoolBase = data.stats.Power.kiPoolBase * 6;
-            data.kiPoolPowAccumTot = Math.max(0, Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + Math.min(0, ~~(data.aamFinal / 20))));
-            data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax);
+            switch (data.kiPool.innate.type) {
+                case "AGI":
+                    data.kiPoolInnateAccumBase = data.stats.Agility.kiPoolAccuBase * 6;
+                    data.kiPoolInnateBase = data.stats.Agility.kiPoolBase * 6;
+                    data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
+                    data.kiPoolInnateTot = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    break;
+                case "CON":
+                    data.kiPoolInnateAccumBase = data.stats.Constitution.kiPoolAccuBase * 6;
+                    data.kiPoolInnateBase = data.stats.Constitution.kiPoolBase * 6;
+                    data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
+                    data.kiPoolInnateTot = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    break;
+                case "DEX":
+                    data.kiPoolInnateAccumBase = data.stats.Dexterity.kiPoolAccuBase * 6;
+                    data.kiPoolInnateBase = data.stats.Dexterity.kiPoolBase * 6;
+                    data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
+                    data.kiPoolInnateTot = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    break;
+                case "STR":
+                    data.kiPoolInnateAccumBase = data.stats.Strength.kiPoolAccuBase * 6;
+                    data.kiPoolInnateBase = data.stats.Strength.kiPoolBase * 6;
+                    data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
+                    data.kiPoolInnateTot = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    break;
+                case "POW":
+                    data.kiPoolInnateAccumBase = data.stats.Power.kiPoolAccuBase * 6;
+                    data.kiPoolInnateBase = data.stats.Power.kiPoolBase * 6;
+                    data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
+                    data.kiPoolInnateTot = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    break;
+                case "WP":
+                    data.kiPoolInnateAccumBase = data.stats.Willpower.kiPoolAccuBase * 6;
+                    data.kiPoolInnateBase = data.stats.Willpower.kiPoolBase * 6;
+                    data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
+                    data.kiPoolInnateTot = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    break;
+                default:
+                    data.kiPoolInnateAccumBase = 0;
+                    data.kiPoolInnateBase = 0;
+                    data.kiPoolInnateAccumTot = 0;
+                    data.kiPoolInnateTot = 0;
+                    break;
+            }
         }
 
         //atk, blk, dodge
@@ -437,6 +481,14 @@ export default class abfalterActor extends Actor {
 
         // Wear Armor
         data.wearArmorFinal = Math.floor(data.wearArmor.base + data.wearArmor.spec + data.wearArmor.temp + data.stats.Strength.mod);
+
+        //Dragon Seals
+        data.aamFinal += data.arsMagnus.dragonSeal * 5 || 0;
+        data.stats.Agility.final += data.arsMagnus.dragonDoor || 0;
+        data.stats.Constitution.final += data.arsMagnus.dragonDoor || 0;
+        data.stats.Strength.final += data.arsMagnus.dragonDoor || 0;
+        data.stats.Dexterity.final += data.arsMagnus.dragonDoor || 0;
+        data.stats.Perception.final += data.arsMagnus.dragonDoor || 0;
     }
 
     prepareEmbeddedDocuments() {

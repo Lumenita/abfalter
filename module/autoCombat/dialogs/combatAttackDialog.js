@@ -23,7 +23,10 @@ const getInitialData = (attacker, defender, options = {}) => {
                 weaponsList: undefined,
                 weaponUsed: undefined,
                 weapon: undefined,
-                damage: 0
+                damage: {
+                    base: 0,
+                    final: 0
+                }
             }/*,
             mystic: {
                 modifier: 0,
@@ -47,8 +50,7 @@ const getInitialData = (attacker, defender, options = {}) => {
             actor: defenderActor
         },
         attackSent: false,
-        allowed: false//,
-        //config: ABFConfig
+        allowed: false
     };
 };
 export class combatAttackDialog extends FormApplication {
@@ -64,7 +66,6 @@ export class combatAttackDialog extends FormApplication {
             this.data.attacker.combat.unarmed = true;
         }
         this.data.allowed = game.user?.isGm || (options.allowed ?? false);
-        console.log(this);
         this.render(true);
     }
     static get defaultOptions() {

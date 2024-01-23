@@ -5,7 +5,7 @@
     </div>
 
     <div class="spellContent">
-        <h2> {{localize "abfalter.magicTab.spellDetails"}} </h2>
+        <h5> {{localize "abfalter.magicTab.spellDetails"}} </h5>
         <div>
             <label> <span> {{localize "abfalter.magicTab.path"}} </span> <input type="text" name="data.path" value="{{data.path}}" /> </label>
             <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
@@ -78,10 +78,11 @@
             </div>
             <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
         </div>
-        <h3> {{localize "abfalter.basicInfo.description"}} </h3>
+        <h6> {{localize "abfalter.basicInfo.description"}} </h6>
         <textarea name="data.description" rows="5">{{data.description}}</textarea>
     </div>
     <div class="spellContentCont">
+        <h6> Spell Content </h6>
         <div>
             <span> {{localize "abfalter.magicTab.rank"}} </span>
             <span> {{localize "abfalter.magicTab.req"}} </span>
@@ -95,7 +96,9 @@
             <input type="number" name="data.basic.zeonCost" value="{{data.basic.zeonCost}}" />
             <input type="number" name="data.basic.maint" value="{{data.basic.maint}}" />
         </div>
-        <textarea name="data.basic.rollDesc" rows="5">{{data.basic.rollDesc}}</textarea>
+        <div>
+            <textarea name="data.basic.rollDesc" rows="5">{{data.basic.rollDesc}}</textarea>
+        </div>
 
         <div>
             <span> {{localize "abfalter.magicTab.intermidiate"}} </span>
@@ -103,7 +106,9 @@
             <input type="number" name="data.intermediate.zeonCost" value="{{data.intermediate.zeonCost}}" />
             <input type="number" name="data.intermediate.maint" value="{{data.intermediate.maint}}" />
         </div>
-        <textarea name="data.intermediate.rollDesc" rows="5">{{data.intermediate.rollDesc}}</textarea>
+        <div>
+            <textarea name="data.intermediate.rollDesc" rows="5">{{data.intermediate.rollDesc}}</textarea>
+        </div>
 
         <div>
             <span> {{localize "abfalter.magicTab.advanced"}} </span>
@@ -111,8 +116,9 @@
             <input type="number" name="data.advanced.zeonCost" value="{{data.advanced.zeonCost}}" />
             <input type="number" name="data.advanced.maint" value="{{data.advanced.maint}}" />
         </div>
-        <textarea name="data.advanced.rollDesc" rows="5">{{data.advanced.rollDesc}}</textarea>
-
+        <div>
+            <textarea name="data.advanced.rollDesc" rows="5">{{data.advanced.rollDesc}}</textarea>
+        </div>
 
         <div>
             <span> {{localize "abfalter.magicTab.arcane"}} </span>
@@ -120,7 +126,8 @@
             <input type="number" name="data.arcane.zeonCost" value="{{data.arcane.zeonCost}}" />
             <input type="number" name="data.arcane.maint" value="{{data.arcane.maint}}" />
         </div>
-        <textarea name="data.arcane.rollDesc" rows="5">{{data.arcane.rollDesc}}</textarea>
-
+        <div>
+            <textarea name="data.arcane.rollDesc" rows="5">{{data.arcane.rollDesc}}</textarea>
+        </div>
     </div>
 </form>

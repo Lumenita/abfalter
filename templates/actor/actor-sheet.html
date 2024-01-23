@@ -56,22 +56,22 @@
 
                     <div class="SubHeaderRight">
                         <div class="subRightHeader1">
-                            <div>
+                            {{#if data.toggles.actorHeaderInfo1}}
+                            <label> <input type="text" name="data.size" value="{{data.size}}" placeholder="Size" /> </label>
+                            <label> <input type="text" name="data.appearance" value="{{data.appearance}}" placeholder="Appearance" /> </label>
+                            {{else}}
+                            <span>Size: {{data.size}} | Appear: {{data.appearance}} </span>
+                            {{/if}}
+                            <div class="hidden">
                                 <button>
                                     Rest
                                 </button>
                             </div>
-                            <div>
+                            <div class="hidden">
                                 <button>
                                     Meditation
                                 </button>
                             </div>
-                            {{#if data.toggles.actorHeaderInfo1}}
-                            <label> <input type="text" name="data.appearance" value="{{data.appearance}}" placeholder="Appearance" /> </label>
-                            <label> <input type="text" name="data.size" value="{{data.size}}" placeholder="Size" /> </label>
-                            {{else}}
-                            <span>Size: {{data.size}} | Appear: {{data.appearance}} </span>
-                            {{/if}}
                         </div>
 
                         <div class="subRightHeader2">

@@ -1,3 +1,5 @@
+import { renderTemplates } from './utilities/renderTemplates.js';
+import { templates } from './utilities/templates.js';
 export default class abfalterCombat extends Combat {
 
  
@@ -6,26 +8,65 @@ export default class abfalterCombat extends Combat {
         return super.nextRound();
     }
 
-    async rollInitiative(ids, formulaopt, updateTurnopt, messageOptionsopt) {
-        await super.rollInitiative(ids, formulaopt, updateTurnopt, messageOptionsopt);
-        return this.update({ turn: 0 });
-    }
-
-    /* Modify rollInitiative so that it asks for modifiers
     async rollInitiative(ids, { updateTurn = false, messageOptions } = {}) {
-        const mod = await openModDialog();
+        const mod = await openInitiativeDialog() || 0;
+
         if (typeof ids === 'string') {
             ids = [ids];
         }
+
         for (const id of ids) {
-            const combatant = this.data.combatants.get(id);
+            const combatant = this.combatants.get(id);
+
             await super.rollInitiative(id, {
-                formula: `1d100Initiative + ${combatant?.actor?.data.data.characteristics.secondaries.initiative.final.value} + ${mod}`,
+                formula: `1d100 + ${combatant?.actor?.system.iniFinal} + ${mod}`,
                 updateTurn,
                 messageOptions
             });
-        }
-        return this;
-    }*/
 
+        }
+        return this.update({ turn: 0 });
+    }
+}
+
+/* async rollInitiative(ids, formulaopt, updateTurnopt, messageOptionsopt) {
+    const mod = await openModDialog();
+    console.log(this.combatants);
+
+    await super.rollInitiative(ids, formulaopt, updateTurnopt, messageOptionsopt);
+    return this.update({ turn: 0 });
+}*/
+
+export const openInitiativeDialog = async () => {
+    return initiativeDialog({
+        content: "Modifier",
+        placeholder: '0'
+    });
+}
+
+export const initiativeDialog = async ({ content, placeholder = '' }) => {
+    const html = await renderTemplates({
+        name: templates.dialog.initiative,
+        context: {
+            content,
+            placeholder
+        }
+    });
+    return new Promise(resolve => {
+        new Dialog({
+            title: 'Initiative Roller',
+            content: html,
+            buttons: {
+                submit: {
+                    label: 'Continue',
+                    callback: html => {
+                        const results = new FormDataExtended(html.find('form')[0], {}).object;
+                        resolve(results['dialog-input']);
+                    }
+                }
+            },
+            default: 'submit',
+            render: () => $('#dialog-input').focus()
+        }).render(true);
+    });
 }

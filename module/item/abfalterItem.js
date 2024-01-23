@@ -1,3 +1,5 @@
+import { abfalterSettingsKeys } from "../utilities/abfalterSettings.js";
+
 export default class abfalterItem extends Item {
 
     prepareData() {
@@ -38,11 +40,8 @@ export default class abfalterItem extends Item {
         this.system.AT.newEne = Math.floor(+this.system.AT.ene + +this.system.qualityValue);
         this.system.AT.newSpt = Math.floor(+this.system.AT.spt + +this.system.qualityValue);
 
-        if (this.parent != null) {
-            if (this.parent) {
-                this.system.spiritHomebrew = this.parent.system.toggles.spiritDamageType;
-            }
-        }
+        //Global Setting
+        this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
     }
 
     prepareArmorHelmet() {
@@ -70,11 +69,8 @@ export default class abfalterItem extends Item {
         this.system.AT.newEne = Math.floor(+this.system.AT.ene + +this.system.qualityValue);
         this.system.AT.newSpt = Math.floor(+this.system.AT.spt + +this.system.qualityValue);
 
-        if (this.parent != null) {
-            if (this.parent) {
-                this.system.spiritHomebrew = this.parent.system.toggles.spiritDamageType;
-            }
-        }
+        //Global Setting
+        this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
     }
 
     prepareWeapon() {
@@ -107,8 +103,6 @@ export default class abfalterItem extends Item {
             this.system.finalAtk = Math.floor(this.parent.system.atkfinal + ~~this.system.attack + ~~this.system.quality);
             this.system.finalBlk = Math.floor(this.parent.system.blkfinal + ~~this.system.block + ~~this.system.shieldBonus + ~~this.system.quality);
             this.system.finalDod = Math.floor(this.parent.system.dodfinal + ~~this.system.dodge + ~~this.system.shieldBonus2);
-
-            //this.system.atkClass = ~~this.parent.system.atkfinal || 0;
 
             if (this.parent.system.kiAbility.kiAuraEx.status == true) {
                 this.system.kiBonus = 5;
@@ -213,6 +207,9 @@ export default class abfalterItem extends Item {
         this.system.preFinal = Math.floor(~~this.system.presence + (~~this.system.quality * 10));
         this.system.shieldFinalSpeed = Math.floor(~~this.system.shieldSpeed + ~~this.system.shieldTypeSpeed);
         this.system.FinalWeaponSpeed = Math.floor(~~this.system.speed + ~~this.system.shieldFinalSpeed + ~~this.system.quality);
+
+        //Global Setting
+        this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
     }
 
     prepareMentalPattern() {
@@ -285,6 +282,11 @@ export default class abfalterItem extends Item {
 
         //Specialized attributes per item
         switch (this.type) {
+            case "psychicMatrix":
+                cardData.expand = true;
+                cardData.diff = "";
+                cardData.effect = "";
+                break;
             case "spell":
                 switch (label) {
                     case "basic":

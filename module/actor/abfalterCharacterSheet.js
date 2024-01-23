@@ -145,7 +145,6 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 this.style.height = "auto";
                 this.style.height = (this.scrollHeight) + "px";
             });
-
         }
 
         if (this.actor.isOwner) {

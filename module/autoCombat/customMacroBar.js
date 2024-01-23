@@ -6,12 +6,7 @@ const gmMacro = [
         macroSelectorId: '#sendAttack',
         hotkey: e => e.ctrlKey && e.key === '1',
         fn: () => window.Websocket.sendAttack?.()
-    }/*,
-    {
-        macroSelectorId: '#custom-hotbar-damage-calculator',
-        hotkey: e => e.ctrlKey && e.key === '2',
-        fn: () => ABFMacros.damageCalculator()
-    }*/
+    }
 ];
 const playerMacro = [
     {

@@ -42,8 +42,8 @@
                 </button>
                 {{/if}}
             </div>
-            <h6> {{localize "abfalter.magicTab.mtheory"}} </h6>
-            <div class="csSelect2">
+            <h6 class="{{#if data.toggles.magicTheoryVis}}hidden{{/if}}"> {{localize "abfalter.magicTab.mtheory"}} </h6>
+            <div class="csSelect2 {{#if data.toggles.magicTheoryVis}}hidden{{/if}}">
                 <label>
                     <select name="data.mproj.mtheory" data-dtype="String">
                         {{#select data.mproj.mtheory}}
@@ -131,7 +131,7 @@
             <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.zeon.temp" value="{{data.zeon.temp}}" /> </label>
             <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.zeonfinal" value="{{data.zeonfinal}}" readonly /> </label>
             <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.zeon.actual" value="{{data.zeon.actual}}" /> </label>
-            <div class="minnate">
+            <div class="minnate {{#if data.toggles.innateMagicVis}}hidden{{/if}}">
                 <h6> {{localize "abfalter.magicTab.minnate"}} </h6>
                 <div>
                     <div>
@@ -150,7 +150,7 @@
     <div class="s1">
         <div>
             <div class="s2">
-                <div class="mlevels">
+                <div class="mlevels {{#if data.toggles.spellcastingVis}}hidden{{/if}}">
                     <h5>
                         {{localize "abfalter.magicTab.mLevels"}}
                         <label class="expand-box">
@@ -169,7 +169,7 @@
                     <label> <span> {{localize "abfalter.basicInfo.used"}} </span> <input type="number" name="data.mlevelused" value="{{data.mlevelused}}" readonly /> </label>
                 </div>
 
-                <div class="spellPath">
+                <div class="spellPath {{#if data.toggles.spellcastingVis}}hidden{{/if}}">
                     <h5> {{localize "abfalter.magicTab.spellPath"}} </h5>
                     <div>
                         <span> {{localize "abfalter.magicTab.spellPath"}} </span>
@@ -199,7 +199,7 @@
                 </div>
             </div>
 
-            <div class="summoning">
+            <div class="summoning {{#if data.toggles.summoningVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.summoning"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.ability"}} </span>
@@ -246,7 +246,7 @@
                 </div>
             </div>
 
-            <div class="turnDayMaint">
+            <div class="turnDayMaint {{#if data.toggles.turnMaintVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.turnMaint"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.name"}} </span>
@@ -330,7 +330,7 @@
         </div>
 
         <div>
-            <div class="spells">
+            <div class="spells {{#if data.toggles.spellcastingVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.spellBook"}} </h5>
                 <div class="{{#if data.itemToggle.spell}}item-list{{/if}}">
                     {{#each spells as |spell id|}}
@@ -464,12 +464,12 @@
                 </div>
             </div>
 
-            <div class="metaMagic">
+            <div class="metaMagic {{#if data.toggles.spellcastingVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.metaMagic"}} </h5>
                 <textarea name="data.metaMagic.info">{{data.metaMagic.info}}</textarea>
             </div>
 
-            <div class="invocations">
+            <div class="invocations {{#if data.toggles.invocationsVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.invocation"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.name"}} </span>
@@ -504,7 +504,7 @@
                 </div>
             </div>
 
-            <div class="incarnations">
+            <div class="incarnations {{#if data.toggles.incarnationsVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.incarnation"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.name"}} </span>

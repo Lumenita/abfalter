@@ -176,7 +176,9 @@ abfalter.generalTab = {
     giftName: "abfalter.generalTab.giftName",
     deity: "abfalter.generalTab.deity",
     perLevel: "abfalter.generalTab.perLevel",
-    lifePoints: "abfalter.generalTab.lifePoints"
+    lifePoints: "abfalter.generalTab.lifePoints",
+    addAdvantage: "abfalter.generalTab.addAdvantage",
+    addDisadvantage: "abfalter.generalTab.addDisadvantage"
 }
 
 abfalter.sheet = {

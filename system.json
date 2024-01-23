@@ -2,10 +2,10 @@
   "id": "abfalter",
   "title": "Anima Beyond Fantasy Altered",
   "description": "Engligh Version of 'Fantasy Flight Games' Anima Beyond Fantasy System altered by some house rules.",
-  "version": "0.0.3",
+  "version": "0.0.9",
   "compatibility": {
-    "minimum": 10,
-    "verified": "10.306"
+    "minimum": 11,
+    "verified": "11.315"
   },
   "authors": [
     {
@@ -14,18 +14,7 @@
       "discord": "lumenita"
     }
   ],
-  "requires": [
-    {
-      "id": "libWrapper",
-      "type": "module",
-      "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json"
-    },
-    {
-      "id": "Compendium Folders",
-      "type": "module",
-      "manifest": "https://raw.githubusercontent.com/earlSt1/vtt-compendium-folders/09x-update/module.json"
-    }
-  ],
+  "requires": [],
   "esmodules": [
     "module/abfalter.js"
   ],
@@ -39,11 +28,29 @@
       "path": "lang/en.json"
     }
   ],
+  "packs": [
+    {
+      "name": "spells",
+      "label": "Spell Book",
+      "system": "abfalter",
+      "path": "./packs/spells",
+      "type": "Item",
+      "private": false
+    },
+    {
+      "name": "classes",
+      "label": "Classes",
+      "system": "abfalter",
+      "path": "./packs/classes",
+      "type": "Item",
+      "private": false
+    }
+  ],
+  "primaryTokenAttribute": "lp",
   "gridDistance": 5,
   "gridUnits": "ft",
-  "initiative": "1d100 + @iniFinal",
-  "url": "",
-  "manifest": "",
-  "download": "",
-  "license": "LICENSE.txt"
+  "license": "LICENSE.txt",
+  "url": "https://github.com/Lumenita/abfalter",
+  "manifest": "https://raw.githubusercontent.com/Lumenita/abfalter/main/system.json",
+  "download": ""
 }
