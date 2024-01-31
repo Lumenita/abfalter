@@ -73,7 +73,26 @@ abfalter.basicInfo = {
     shield: "abfalter.basicInfo.shield",
     shieldMax: "abfalter.basicInfo.shieldMax",
     boons: "abfalter.basicInfo.boons",
-    critical: "abfalter.basicInfo.critical"
+    critical: "abfalter.basicInfo.critical",
+    token: "abfalter.basicInfo.token",
+    gender: "abfalter.basicInfo.gender",
+    race: "abfalter.basicInfo.race",
+    height: "abfalter.basicInfo.height",
+    weight: "abfalter.basicInfo.weight",
+    age: "abfalter.basicInfo.age",
+    exp: "abfalter.basicInfo.exp",
+    size: "abfalter.basicInfo.size",
+    appear: "abfalter.basicInfo.appear",
+    maximum: "abfalter.basicInfo.maximum",
+    aamShort: "abfalter.basicInfo.aamShort",
+    magic: "abfalter.basicInfo.magic",
+    background: "abfalter.basicInfo.background",
+    psychic: "abfalter.basicInfo.psychic",
+    ki: "abfalter.basicInfo.ki",
+    armory: "abfalter.basicInfo.armory",
+    bio: "abfalter.basicInfo.bio",
+    settings: "abfalter.basicInfo.settings",
+    general: "abfalter.basicInfo.general"
 }
 
 abfalter.generalTab = {
@@ -178,7 +197,12 @@ abfalter.generalTab = {
     perLevel: "abfalter.generalTab.perLevel",
     lifePoints: "abfalter.generalTab.lifePoints",
     addAdvantage: "abfalter.generalTab.addAdvantage",
-    addDisadvantage: "abfalter.generalTab.addDisadvantage"
+    addDisadvantage: "abfalter.generalTab.addDisadvantage",
+    phr: "abfalter.generalTab.phr",
+    dr: "abfalter.generalTab.dr",
+    psnr: "abfalter.generalTab.psnr",
+    mr: "abfalter.generalTab.mr",
+    psyr: "abfalter.generalTab.psyr"
 }
 
 abfalter.sheet = {
@@ -290,6 +314,10 @@ abfalter.magicTab = {
     dailySpellMaint: "abfalter.magicTab.dailySpellMaint",
     turnSpellMaint: "abfalter.magicTab.turnSpellMaint",
     spellDetails: "abfalter.magicTab.spellDetails",
+    onmyodo: "abfalter.magicTab.onmyodo",
+    vodoun: "abfalter.magicTab.vodoun",
+    shamanism: "abfalter.magicTab.shamanism",
+    naturalMagic: "abfalter.magicTab.naturalMagic"
 }
 
 abfalter.psychicTab = {

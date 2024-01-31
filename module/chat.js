@@ -6,7 +6,9 @@ export function addChatListeners(html, _msg) {
         openRollFunction(_msg.message);
     });
 
-    html.on('click', 'button.secFumbleRoll', fumbleRoll);
+    html.find('button.secFumbleRoll').click(ev => {
+        fumbleRollFunction(_msg.message);
+    });
 
     //Items to Chat
     html.find('button.spellDifficulty').click(ev => {
@@ -18,15 +20,6 @@ export function addChatListeners(html, _msg) {
         let label = $(ev.currentTarget).attr("data-label");
         psychicChatUpdate(_msg.message, label);
     });
-}
-
-
-function fumbleRoll(event) {
-    let total = $(event.currentTarget).attr("data-label");
-    let fumble = $(event.currentTarget).attr("data-label2");
-    let label = $(event.currentTarget).attr("data-label3");
-    let name = $(event.currentTarget).attr("data-label4");
-    fumbleRollFunction(total, fumble, label, name);
 }
 
 export const hideChatActionButtons = function (message, html, data) {
@@ -43,6 +36,9 @@ export const hideChatActionButtons = function (message, html, data) {
         }
     }
 }
+
+
+
 
 async function spellChatUpdate(msg, label) {
     const template = "systems/abfalter/templates/chatItem/spellChat.html";

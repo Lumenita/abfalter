@@ -77,18 +77,18 @@
             {{/if}}
             <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.pproj.temp" value="{{data.pproj.temp}}" /> </label>
             <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.pprojfinal" value="{{data.pprojfinal}}" readonly /> </label>
-            {{#if data.other.moduleStatus}}
+            {{#if data.toggles.moduleStatus}}
             <div class="pmodButton">
                 <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
-                    <span> {{data.atkfinal}} </span>
+                    <span> Atk: {{data.atkfinal}} </span>
                 </button>
                 {{#if data.toggles.psychicDodgeStatus}}
                 <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
-                    <span> {{data.dodfinal}} </span>
+                    <span> Def: {{data.dodfinal}} </span>
                 </button>
                 {{else}}
                 <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
-                    <span> {{data.blkfinal}} </span>
+                    <span> Def: {{data.blkfinal}} </span>
                 </button>
                 {{/if}}
             </div>

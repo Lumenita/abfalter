@@ -11,7 +11,7 @@
         <button class="secOpenRoll" data-actor-id="{{actor._id}}"> Open Roll! </button>
         {{/if}}
         {{#if rollResult.fumble}}
-        <button class="secFumbleRoll" data-label="{{rollResult.total}}" data-label2="{{rollResult.fumbleLevel}}" data-label3="{{label}}" data-label4="{{rollResult.data.name}}"> Fumble Severity! </button>
+        <button class="secFumbleRoll" data-actor-id="{{actor._id}}"> Fumble Severity! </button>
         {{/if}}
     </div>
 </div>

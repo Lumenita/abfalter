@@ -1,3 +1,5 @@
+import { abfalterSettingsKeys } from "./utilities/abfalterSettings.js";
+
 const diceDialog = class extends Dialog {
     activateListeners(html) {
         super.activateListeners(html);
@@ -150,7 +152,7 @@ async function rollSecondary(html, actorData, finalValue, label) {
         }
     }
 
-    const rollData = [rollResult.rolledDice, rollResult._total, rollResult.doubles, rollResult.openRange, label];
+    const rollData = [rollResult.rolledDice, rollResult._total, rollResult.doubles, rollResult.openRange, label, rollResult.fumbleLevel];
 
     const template = "systems/abfalter/templates/dialogues/secRoll.html"
     const content = await renderTemplate(template, { rollResult: rollResult, label: label, actor: actorData });
@@ -240,7 +242,7 @@ async function rollCombatWeapon(html, actorData, finalValue, label, complex) {
 
 
 
-    const rollData = [rollResult.rolledDice, rollResult._total, rollResult.doubles, rollResult.openRange, label];
+    const rollData = [rollResult.rolledDice, rollResult._total, rollResult.doubles, rollResult.openRange, label, rollResult.fumbleLevel];
 
     const template = "systems/abfalter/templates/dialogues/secRoll.html"
     const content = await renderTemplate(template, { rollResult: rollResult, label: label, actor: actorData });
@@ -291,6 +293,29 @@ export async function rollResistance(html, actorData, finalValue, label) {
     ChatMessage.create(chatData);
 }
 
+
+
+export async function rollBreakage(html, actorData, finalValue, label) {
+    let mod = parseInt(html.find('#modifiermod').val()) || 0;
+
+    let baseDice = "1d10";
+    let rollFormula = `${baseDice} + ${finalValue} + ${mod}`;
+    let rollResult = await new Roll(rollFormula, actorData).roll({ async: true });
+    rollResult.rolledDice = rollResult.total - finalValue - mod;
+
+    const template = "systems/abfalter/templates/dialogues/breakRoll.html"
+    const content = await renderTemplate(template, { rollResult: rollResult, label: label });
+    const chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({ actorData: actorData }),
+        sound: CONFIG.sounds.dice,
+        content: content
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+    ChatMessage.create(chatData);
+}
+
+
 export async function openRollFunction(msg) {
     //flags.rollData: roll, total, doubles, openRange, label
     let actorData = msg.flags.actorData;
@@ -337,51 +362,35 @@ export async function openRollFunction(msg) {
     ChatMessage.create(chatData);
 }
 
+export async function fumbleRollFunction(msg) {
+    //flags.rollData: roll, total, doubles, openRange, label, fumble
+    //total, fumble, label, name
+    let actorData = msg.flags.actorData;
+    let fumbleSettings = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_Fumble);
 
-export async function fumbleRollFunction(total, fumble, label, name) {
     let baseDice = "1d100";
-    let rollFormula = `${total} - ${baseDice} - ${fumble}`
+    let rollFormula = ``
+
+    if (fumbleSettings == true) {
+        rollFormula = `${msg.flags.rollData[1]} - ${baseDice}`
+
+    } else {
+        rollFormula = `${msg.flags.rollData[1]} - ${baseDice} - ${msg.flags.rollData[5]}`
+    };
     let rollResult = await new Roll(rollFormula).roll({ async: true });
-    rollResult.rolledDice = rollResult.total - total;
-    rollResult.data.name = name;
+    rollResult.rolledDice = rollResult.total - msg.flags.rollData[1];
+    rollResult.data.name = msg.speaker.alias;
 
     const template = "systems/abfalter/templates/dialogues/fumbleRoll.html"
-    const content = await renderTemplate(template, { rollResult: rollResult, label: label });
-    const chatData = {
-        user: game.user.id,
-        //speaker: ChatMessage.getSpeaker({ actorData: actorData }),
-        sound: CONFIG.sounds.dice,
-        content: content,
-        rolls: rollResult
-    };
-    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
-    ChatMessage.create(chatData);
-}
-
-
-
-export async function rollBreakage(html, actorData, finalValue, label) {
-    let mod = parseInt(html.find('#modifiermod').val()) || 0;
-
-    let baseDice = "1d10";
-    let rollFormula = `${baseDice} + ${finalValue} + ${mod}`;
-    let rollResult = await new Roll(rollFormula, actorData).roll({ async: true });
-    rollResult.rolledDice = rollResult.total - finalValue - mod;
-
-    const template = "systems/abfalter/templates/dialogues/breakRoll.html"
-    const content = await renderTemplate(template, { rollResult: rollResult, label: label });
+    const content = await renderTemplate(template, { rollResult: rollResult, label: msg.flags.rollData[4] });
     const chatData = {
         user: game.user.id,
         speaker: ChatMessage.getSpeaker({ actorData: actorData }),
         sound: CONFIG.sounds.dice,
-        content: content
+        content: content,
+        rolls: [rollResult]
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     ChatMessage.create(chatData);
 }
-
-
-
-
-
 

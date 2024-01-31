@@ -11,6 +11,7 @@ export default class abfalterActor extends Actor {
 
         //Global Settings
         data.spiritSettings = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
+        data.fumbleSettings = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_Fumble);
 
         //All Action Mod
         data.aamFinal = data.aam + data.aamBoon + data.aamCrit;
@@ -829,7 +830,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.phrDom = 0;
         }
-        if (data.kiAbility.nemiBodyEmpty.status == true) { //Physical Dominion adds 10 PhR
+        if (data.kiAbility.nemiBodyEmpty.status == true) { //Physical Dominion adds 20 PhR
             data.allEmpty = 20;
         } else {
             data.allEmpty = 0;

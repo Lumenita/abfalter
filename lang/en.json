@@ -73,7 +73,26 @@
       "shield": "Shield",
       "shieldMax": "Shield Max",
       "boons": "Buffs",
-      "critical": "Critical"
+      "critical": "Critical",
+      "token": "Token",
+      "gender": "Gender",
+      "race": "Race",
+      "height": "Height",
+      "weight": "Weight",
+      "age": "Age",
+      "exp": "Exp",
+      "size": "Size",
+      "appear": "Appear",
+      "maximum": "Maximum",
+      "aamShort": "AAM",
+      "magic": "Magic",
+      "background": "Background",
+      "psychic": "Psychic",
+      "ki": "Ki",
+      "armory": "Armory",
+      "bio": "Bio",
+      "settings": "Settings",
+      "general": "General"
     },
     "generalTab": {
       "characteristics": "Characteristics",
@@ -213,7 +232,12 @@
       "kiTechnique": "New Ki Technique",
       "martialArt": "New Martial Art",
       "arsMagnus": "New Ars Magnus",
-      "elan": "New Elan"
+      "elan": "New Elan",
+      "phr": "PhR",
+      "dr": "DR",
+      "psnr": "PsnR",
+      "mr": "MR",
+      "psyr": "PsyR"
     },
     "magicTab": {
       "mproj": "Magic Projection",
@@ -286,7 +310,11 @@
       "spellPathOne": "Spell Path",
       "dailySpellMaint": "Daily Spell Maintenance",
       "turnSpellMaint": "Turn Spell Maintenance",
-      "spellDetails": "Spell Details"
+      "spellDetails": "Spell Details",
+      "onmyodo": "Onmyodo",
+      "vodoun": "Vodoun",
+      "shamanism": "Shamanism",
+      "naturalMagic": "Natural Magic"
     },
     "psychicTab": {
       "pp": "PP",
@@ -330,7 +358,7 @@
       "useOfKi": "Use of Ki",
       "descUseOfKi": "Permits use of Ki Abilities.",
       "kiControl": "Ki Control",
-      "desckiControl": "Permits the use Dominion techniques.",
+      "desckiControl": "Permits the use of Dominion techniques.",
       "kiDetection": "Ki Detection",
       "desckiDetection": "Allows for the Detection the energy of beings in the surrounding area, however, the form, size or intensity cannot be detemined. [Ability = (Notice + MK total) / 2]",
       "kiErudition": "Ki Erudition",
