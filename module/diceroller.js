@@ -11,6 +11,8 @@ const diceDialog = class extends Dialog {
 }
 
 export async function openModifierDialogue(actorData, finalValue, label, type, complex) {
+    const gameCopy = game;
+    
     const template = "systems/abfalter/templates/dialogues/basicModifiers.html";
     let confirmed = false;
     let fatMod = false;
@@ -20,11 +22,11 @@ export async function openModifierDialogue(actorData, finalValue, label, type, c
 
     const html = await renderTemplate(template, { fatMod: fatMod });
     new diceDialog({
-        title: `Dice Roller`,
+        title: gameCopy.i18n.localize('abfalter.dialogs.diceRoller'),
         content: html,
         buttons: {
-            roll: { label: "Roll", callback: () => confirmed = true },
-            cancel: { label: "Cancel", callback: () => confirmed = false }
+            roll: { label: gameCopy.i18n.localize('abfalter.dialogs.roll'), callback: () => confirmed = true },
+            cancel: { label: gameCopy.i18n.localize('abfalter.dialogs.cancel'), callback: () => confirmed = false }
         },
         close: html => {
             if (confirmed) {

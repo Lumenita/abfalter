@@ -92,7 +92,13 @@ abfalter.basicInfo = {
     armory: "abfalter.basicInfo.armory",
     bio: "abfalter.basicInfo.bio",
     settings: "abfalter.basicInfo.settings",
-    general: "abfalter.basicInfo.general"
+    general: "abfalter.basicInfo.general",
+    minute: "abfalter.basicInfo.minute",
+    hour: "abfalter.basicInfo.hour",
+    day: "abfalter.basicInfo.day",
+    multiWield: "abfalter.basicInfo.multiWield",
+    unarmed: "abfalter.basicInfo.unarmed",
+    special: "abfalter.basicInfo.special"
 }
 
 abfalter.generalTab = {
@@ -202,7 +208,12 @@ abfalter.generalTab = {
     dr: "abfalter.generalTab.dr",
     psnr: "abfalter.generalTab.psnr",
     mr: "abfalter.generalTab.mr",
-    psyr: "abfalter.generalTab.psyr"
+    psyr: "abfalter.generalTab.psyr",
+    physicalRes: "abfalter.generalTab.physicalRes",
+    diseaseRes: "abfalter.generalTab.diseaseRes",
+    poisonRes: "abfalter.generalTab.poisonRes",
+    magicRes: "abfalter.generalTab.magicRes",
+    psychicRes: "abfalter.generalTab.psychicRes"
 }
 
 abfalter.sheet = {
@@ -584,7 +595,8 @@ abfalter.kiTab = {
     defense: "abfalter.kiTab.defense",
     counterAttack: "abfalter.kiTab.counterAttack",
     kiTechInfo: "abfalter.kiTab.kiTechInfo",
-    kiSealsCre: "abfalter.kiTab.kiSealsCre"
+    kiSealsCre: "abfalter.kiTab.kiSealsCre",
+    frequency: "abfalter.kiTab.frequency"
 
 }
 
@@ -679,15 +691,77 @@ abfalter.settingsTab = {
     charOptions: "abfalter.settingsTab.charOptions",
     presenceMod: "abfalter.settingsTab.presenceMod",
     levelMod: "abfalter.settingsTab.levelMod",
-    addClass: "abfalter.settingsTab.addClass"
+    addClass: "abfalter.settingsTab.addClass",
+    active: "abfalter.settingsTab.active",
+    notActive: "abfalter.settingsTab.notActive",
+    hidden: "abfalter.settingsTab.hidden",
+    notHidden: "abfalter.settingsTab.notHidden",
+    mysticSettings: "abfalter.settingsTab.mysticSettings",
+    magicAttackModule: "abfalter.settingsTab.magicAttackModule",
+    magicDefenseModule: "abfalter.settingsTab.magicDefenseModule",
+    magicDodgeModule: "abfalter.settingsTab.magicDodgeModule",
+    kiSettings: "abfalter.settingsTab.kiSettings",
+    unifiedKi: "abfalter.settingsTab.unifiedKi",
+    innatePower: "abfalter.settingsTab.innatePower",
+    innateType: "abfalter.settingsTab.innateType",
+    dragonSeals: "abfalter.settingsTab.dragonSeals",
+    psychicSettings: "abfalter.settingsTab.psychicSettings",
+    psyAttackModule: "abfalter.settingsTab.psyAttackModule",
+    homebrewSettings: "abfalter.settingsTab.homebrewSettings",
+    hideCurrency: "abfalter.settingsTab.hideCurrency",
+    hidePageObjects: "abfalter.settingsTab.hidePageObjects",
+    magicTheory: "abfalter.settingsTab.magicTheory",
+    innateMagic: "abfalter.settingsTab.innateMagic",
+    summoning: "abfalter.settingsTab.summoning",
+    invocation: "abfalter.settingsTab.invocation",
+    incarnation: "abfalter.settingsTab.incarnation",
+    spellcasting: "abfalter.settingsTab.spellcasting",
+    turnMaint: "abfalter.settingsTab.turnMaint",
+    mentalPattern: "abfalter.settingsTab.mentalPattern",
+    arsMag: "abfalter.settingsTab.arsMag",
+    martialArt: "abfalter.settingsTab.martialArt",
+    unarmedDmg: "abfalter.settingsTab.unarmedDmg",
+    nemesis: "abfalter.settingsTab.nemesis",
+    kiSeals: "abfalter.settingsTab.kiSeals",
+    kiTechniq: "abfalter.settingsTab.kiTechniq",
+    doubles: "abfalter.settingsTab.doubles",
+    hideBack: "abfalter.settingsTab.hideBack",
+    hideMagic: "abfalter.settingsTab.hideMagic",
+    hidePsy: "abfalter.settingsTab.hidePsy",
+    hideKi: "abfalter.settingsTab.hideKi",
+    hideBio: "abfalter.settingsTab.hideBio",
+    activateShield: "abfalter.settingsTab.activateShield",
+    classLevels: "abfalter.settingsTab.classLevels",
+    settingsWip: "abfalter.settingsTab.settingsWip",
+    increasedStr: "abfalter.settingsTab.increasedStr",
+    tempWip: "abfalter.settingsTab.tempWip"
 }
 
 abfalter.dialogs = {
+    roll: "abfalter.dialogs.roll",
+    cancel: "abfalter.dialogs.cancel",
+    diceRoller: "abfalter.dialogs.diceRoller",
     noAtkSelf: "abfalter.dialogs.noAtkSelf",
     noActor: "abfalter.dialogs.noActor",
     mustTarget: "abfalter.dialogs.mustTarget",
     noMultiSelect: "abfalter.dialogs.noMultiSelect",
     noSelectToken: "abfalter.dialogs.noSelectToken",
     wrongScene: "abfalter.dialogs.wrongScene",
-    aoeAttack: "abfalter.dialogs.aoeAttack"
+    aoeAttack: "abfalter.dialogs.aoeAttack",
+    modifier: "abfalter.dialogs.modifier",
+    openRoll: "abfalter.dialogs.openRoll",
+    fumble: "abfalter.dialogs.fumble",
+    fumbleSeverity: "abfalter.dialogs.fumbleSeverity",
+    fumbleSeverity2: "abfalter.dialogs.fumbleSeverity2",
+    success: "abfalter.dialogs.success",
+    failure: "abfalter.dialogs.failure"
+}
+
+abfalter.globalSettings = {
+    spiritDmg: "abfalter.globalSettings.spiritDmg",
+    spiritDetail: "abfalter.globalSettings.spiritDetail",
+    fumbleName: "abfalter.globalSettings.fumbleName",
+    fumbleDetail: "abfalter.globalSettings.fumbleDetail",
+    meterName: "abfalter.globalSettings.meterName",
+    meterDetail: "abfalter.globalSettings.meterDetail"
 }

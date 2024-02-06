@@ -9,7 +9,7 @@ import abfalterCharacterSheet from "./actor/abfalterCharacterSheet.js";
 import { registerCustomMacros } from "./autoCombat/registerCustomMacros.js";
 import { customMacroBar } from "./autoCombat/customMacroBar.js";
 import { abfalterSettings } from "./utilities/abfalterSettings.js";
-
+import { migrateWorld } from "./utilities/migration.js";
 
 Hooks.once("init", async () => {
     console.log("abfalter | Initializing Anima Beyond Fantasy Alter System");
@@ -37,3 +37,18 @@ Hooks.once('ready', () => {
     registerCustomMacros();
     customMacroBar();
 });
+
+Hooks.once("ready", function () {
+    if (!game.user.isGM) {
+        return;
+    }
+
+    const currentVersion = game.settings.get("abfalter", "systemMigrationVersion");
+    const NEEDS_MIGRATION_VERSION = "1.0.1";
+
+    const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
+
+    if (needsMigration) {
+        migrateWorld();
+    }
+})

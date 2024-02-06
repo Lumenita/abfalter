@@ -159,11 +159,11 @@ export default class abfalterCharacterSheet extends ActorSheet {
             html.find('.mregenFull').click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
                 let max = $(ev.currentTarget).attr("data-ability2");
-                this.document.update({ "data.zeon.actual": Math.min(Math.floor(this.document.system.zeon.actual + (value / 1)), max) });
+                this.document.update({ "data.zeon.value": Math.min(Math.floor(this.document.system.zeon.value + (value / 1)), max) });
             });
             html.find('.removeMaint').click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
-                this.document.update({ "data.zeon.actual": Math.max(0, Math.floor(this.document.system.zeon.actual - value)) });
+                this.document.update({ "data.zeon.value": Math.max(0, Math.floor(this.document.system.zeon.value - value)) });
             });
             html.find(".toggleBoolean").click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");

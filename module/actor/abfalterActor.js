@@ -12,12 +12,25 @@ export default class abfalterActor extends Actor {
         //Global Settings
         data.spiritSettings = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
         data.fumbleSettings = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_Fumble);
+        data.useMeters = game.settings.get('abfalter', abfalterSettingsKeys.Use_Meters);
 
         //All Action Mod
         data.aamFinal = data.aam + data.aamBoon + data.aamCrit;
-        //Main Characteristics
+
+        //Main Characteristics & Dragon Seals
+        data.aamFinal += data.arsMagnus.dragonSeal * 5 || 0;
+
         for (let [key, stat] of Object.entries(data.stats)) {
             stat.final = Math.floor(~~stat.base + stat.spec + stat.temp);
+        }
+
+        data.stats.Agility.final += data.arsMagnus.dragonDoor || 0;
+        data.stats.Constitution.final += data.arsMagnus.dragonDoor || 0;
+        data.stats.Strength.final += data.arsMagnus.dragonDoor || 0;
+        data.stats.Dexterity.final += data.arsMagnus.dragonDoor || 0;
+        data.stats.Perception.final += data.arsMagnus.dragonDoor || 0;
+
+        for (let [key, stat] of Object.entries(data.stats)) {
             if (30 < stat.final) {
                 stat.final = 30;
             }
@@ -186,8 +199,8 @@ export default class abfalterActor extends Actor {
 
         //Fatigue Calculation
         data.fatiguebase = data.stats.Constitution.final;
-        data.fatiguefinal = Math.floor(data.fatiguebase + data.fatigue.spec + data.fatigue.temp);
-
+        data.fatigue.max = Math.floor(data.fatiguebase + data.fatigue.spec + data.fatigue.temp);
+        
         //Regeneration Calculation
         switch (data.stats.Constitution.final) {
             case 1:
@@ -246,104 +259,104 @@ export default class abfalterActor extends Actor {
         data.regenfinal = Math.min(Math.floor(data.regenbase + data.regeneration.spec + data.regeneration.temp), 20);
         switch (data.regenfinal) {
             case 1:
-                data.resting = "10/day";
-                data.notresting = "5/day";
-                data.redpenalty = "-5/day";
+                data.resting = "10/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "5/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
                 break;
             case 2:
-                data.resting = "20/day";
-                data.notresting = "10/day";
-                data.redpenalty = "-5/day";
+                data.resting = "20/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "10/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
                 break;
             case 3:
-                data.resting = "30/day";
-                data.notresting = "15/day";
-                data.redpenalty = "-5/day";
+                data.resting = "30/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "15/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
                 break;
             case 4:
-                data.resting = "40/day";
-                data.notresting = "20/day";
-                data.redpenalty = "-10/day";
+                data.resting = "40/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "20/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.day');
                 break;
             case 5:
-                data.resting = "50/day";
-                data.notresting = "25/day";
-                data.redpenalty = "-10/day";
+                data.resting = "50/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "25/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.day');
                 break;
             case 6:
-                data.resting = "75/day";
-                data.notresting = "30/day";
-                data.redpenalty = "-15/day";
+                data.resting = "75/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "30/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-15/" + game.i18n.localize('abfalter.basicInfo.day');
                 break;
             case 7:
-                data.resting = "100/day";
-                data.notresting = "50/day";
-                data.redpenalty = "-20/day";
+                data.resting = "100/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "50/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-20/" + game.i18n.localize('abfalter.basicInfo.day');
                 break;
             case 8:
-                data.resting = "250/day";
-                data.notresting = "100/day";
-                data.redpenalty = "-25/day";
+                data.resting = "250/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "100/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-25/" + game.i18n.localize('abfalter.basicInfo.day');
                 break;
             case 9:
-                data.resting = "500/day";
-                data.notresting = "200/day";
-                data.redpenalty = "-30/day";
+                data.resting = "500/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "200/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-30/" + game.i18n.localize('abfalter.basicInfo.day');
                 break;
             case 10:
-                data.resting = "1/min";
+                data.resting = "1/" + game.i18n.localize('abfalter.basicInfo.minute');
                 data.notresting = "N/A";
-                data.redpenalty = "-40/day";
+                data.redpenalty = "-40/" + game.i18n.localize('abfalter.basicInfo.day');
                 break;
             case 11:
-                data.resting = "2/min";
+                data.resting = "2/" + game.i18n.localize('abfalter.basicInfo.minute');
                 data.notresting = "N/A";
-                data.redpenalty = "-50/day";
+                data.redpenalty = "-50/" + game.i18n.localize('abfalter.basicInfo.day');
                 break;
             case 12:
-                data.resting = "5/min";
+                data.resting = "5/" + game.i18n.localize('abfalter.basicInfo.minute');
                 data.notresting = "N/A";
-                data.redpenalty = "-5/hour";
+                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.hour');
                 break;
             case 13:
-                data.resting = "10/min";
+                data.resting = "10/" + game.i18n.localize('abfalter.basicInfo.minute');
                 data.notresting = "N/A";
-                data.redpenalty = "-10/hour";
+                data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.hour');
                 break;
             case 14:
-                data.resting = "1/turn";
+                data.resting = "1/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
-                data.redpenalty = "-15/hour";
+                data.redpenalty = "-15/" + game.i18n.localize('abfalter.basicInfo.hour');
                 break;
             case 15:
-                data.resting = "5/turn";
+                data.resting = "5/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
-                data.redpenalty = "-20/hour";
+                data.redpenalty = "-20/" + game.i18n.localize('abfalter.basicInfo.hour');
                 break;
             case 16:
-                data.resting = "10/turn";
+                data.resting = "10/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
-                data.redpenalty = "-50/min";
+                data.redpenalty = "-50/" + game.i18n.localize('abfalter.basicInfo.minute');
                 break;
             case 17:
-                data.resting = "25/turn";
+                data.resting = "25/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
-                data.redpenalty = "-10/turn";
+                data.redpenalty = "-10/" + game.i18n.localize('abfalter.magicTab.turn');
                 break;
             case 18:
-                data.resting = "50/turn";
+                data.resting = "50/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
-                data.redpenalty = "-25/turn";
+                data.redpenalty = "-25/" + game.i18n.localize('abfalter.magicTab.turn');
                 break;
             case 19:
-                data.resting = "100/turn";
+                data.resting = "100/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
-                data.redpenalty = "All/turn";
+                data.redpenalty = "All/" + game.i18n.localize('abfalter.magicTab.turn');
                 break;
             case 20:
-                data.resting = "200/turn";
+                data.resting = "200/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
-                data.redpenalty = "All/turn";
+                data.redpenalty = "All/" + game.i18n.localize('abfalter.magicTab.turn');
                 break;
             default:
                 data.resting = "0";
@@ -373,7 +386,7 @@ export default class abfalterActor extends Actor {
             data.kiPoolWPAccumTot = Math.max(0, Math.floor(data.stats.Willpower.kiPoolAccuBase + data.kiPool.wp.spec + data.kiPool.wp.temp + Math.min(0, ~~(data.aamFinal / 20))));
             data.kiPoolWPTot = Math.floor(data.stats.Willpower.kiPoolBase + data.kiPool.wp.specMax + data.kiPool.wp.tempMax);
             if (data.toggles.unifiedPools == true) {
-                data.unifiedTotal = Math.floor(data.kiPoolAgiTot + data.kiPoolConTot + data.kiPoolDexTot + data.kiPoolStrTot + data.kiPoolPowTot + data.kiPoolWPTot);
+                data.unifiedKi.max = Math.floor(data.kiPoolAgiTot + data.kiPoolConTot + data.kiPoolDexTot + data.kiPoolStrTot + data.kiPoolPowTot + data.kiPoolWPTot);
             }
         } else {
             switch (data.kiPool.innate.type) {
@@ -381,43 +394,50 @@ export default class abfalterActor extends Actor {
                     data.kiPoolInnateAccumBase = data.stats.Agility.kiPoolAccuBase * 6;
                     data.kiPoolInnateBase = data.stats.Agility.kiPoolBase * 6;
                     data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
-                    data.kiPoolInnateTot = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.innatePowerKi.max = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.agi');
                     break;
                 case "CON":
                     data.kiPoolInnateAccumBase = data.stats.Constitution.kiPoolAccuBase * 6;
                     data.kiPoolInnateBase = data.stats.Constitution.kiPoolBase * 6;
                     data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
-                    data.kiPoolInnateTot = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.innatePowerKi.max = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.con');
                     break;
                 case "DEX":
                     data.kiPoolInnateAccumBase = data.stats.Dexterity.kiPoolAccuBase * 6;
                     data.kiPoolInnateBase = data.stats.Dexterity.kiPoolBase * 6;
                     data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
-                    data.kiPoolInnateTot = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.innatePowerKi.max = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.dex');
                     break;
                 case "STR":
                     data.kiPoolInnateAccumBase = data.stats.Strength.kiPoolAccuBase * 6;
                     data.kiPoolInnateBase = data.stats.Strength.kiPoolBase * 6;
                     data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
-                    data.kiPoolInnateTot = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.innatePowerKi.max = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.str');
                     break;
                 case "POW":
                     data.kiPoolInnateAccumBase = data.stats.Power.kiPoolAccuBase * 6;
                     data.kiPoolInnateBase = data.stats.Power.kiPoolBase * 6;
                     data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
-                    data.kiPoolInnateTot = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.innatePowerKi.max = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.pow');
                     break;
                 case "WP":
                     data.kiPoolInnateAccumBase = data.stats.Willpower.kiPoolAccuBase * 6;
                     data.kiPoolInnateBase = data.stats.Willpower.kiPoolBase * 6;
                     data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
-                    data.kiPoolInnateTot = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.innatePowerKi.max = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.wp');
                     break;
                 default:
                     data.kiPoolInnateAccumBase = 0;
                     data.kiPoolInnateBase = 0;
                     data.kiPoolInnateAccumTot = 0;
-                    data.kiPoolInnateTot = 0;
+                    data.innatePowerKi.max = 0;
+                    data.kiPool.innate.tag = "Error";
                     break;
             }
         }
@@ -482,14 +502,6 @@ export default class abfalterActor extends Actor {
 
         // Wear Armor
         data.wearArmorFinal = Math.floor(data.wearArmor.base + data.wearArmor.spec + data.wearArmor.temp + data.stats.Strength.mod);
-
-        //Dragon Seals
-        data.aamFinal += data.arsMagnus.dragonSeal * 5 || 0;
-        data.stats.Agility.final += data.arsMagnus.dragonDoor || 0;
-        data.stats.Constitution.final += data.arsMagnus.dragonDoor || 0;
-        data.stats.Strength.final += data.arsMagnus.dragonDoor || 0;
-        data.stats.Dexterity.final += data.arsMagnus.dragonDoor || 0;
-        data.stats.Perception.final += data.arsMagnus.dragonDoor || 0;
     }
 
     prepareEmbeddedDocuments() {
@@ -839,23 +851,28 @@ export default class abfalterActor extends Actor {
         for (let [key, res] of Object.entries(data.resistances)) {
             switch (key) {
                 case "Physical":
-                    res.short = "PhR";
+                    res.name = game.i18n.localize('abfalter.sheet.physicalRes');
+                    res.short = game.i18n.localize('abfalter.sheet.phr');
                     res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.phrDom + data.allEmpty);
                     break;
                 case "Disease":
-                    res.short = "DR";
+                    res.name = game.i18n.localize('abfalter.sheet.diseaseRes');
+                    res.short = game.i18n.localize('abfalter.sheet.dr');
                     res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.allEmpty);
                     break;
                 case "Poison":
-                    res.short = "PsnR";
+                    res.name = game.i18n.localize('abfalter.sheet.poisonRes');
+                    res.short = game.i18n.localize('abfalter.sheet.psnr');
                     res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.allEmpty);
                     break;
                 case "Magic":
-                    res.short = "MR";
+                    res.name = game.i18n.localize('abfalter.sheet.magicRes');
+                    res.short = game.i18n.localize('abfalter.sheet.mr');
                     res.final = Math.floor(data.presence + res.mod + stats.Power.mod + data.allEmpty);
                     break;
                 case "Psychic":
-                    res.short = "PsyR";
+                    res.name = game.i18n.localize('abfalter.sheet.psychicRes');
+                    res.short = game.i18n.localize('abfalter.sheet.psyr');
                     res.final = Math.floor(data.presence + res.mod + stats.Willpower.mod + data.allEmpty);
                     break;
                 default:
@@ -867,115 +884,229 @@ export default class abfalterActor extends Actor {
         data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp - data.movement.pen + Math.min(0, Math.ceil(data.aamFinal / 20)) - data.totalMovePen);
         switch (data.finalmove) {
             case 1:
-                data.fullmove = "3 ft";
-                data.fourthmove = "1 ft";
-                data.runningmove = "2 ft";
+                if (data.useMeters) {
+                    data.fullmove = "<1 m.";
+                    data.fourthmove = "<1 m.";
+                    data.runningmove = "<1 m.";
+                } else {
+                    data.fullmove = "3 ft";
+                    data.fourthmove = "1 ft";
+                    data.runningmove = "N/A";
+                }
                 break;
             case 2:
-                data.fullmove = "15 ft";
-                data.fourthmove = "3 ft";
-                data.runningmove = "7 ft";
+                if (data.useMeters) {
+                    data.fullmove = "4 m.";
+                    data.fourthmove = "1 m.";
+                    data.runningmove = "2 m.";
+                } else {
+                    data.fullmove = "15 ft";
+                    data.fourthmove = "3 ft";
+                    data.runningmove = "7 ft";
+                }
                 break;
             case 3:
-                data.fullmove = "25 ft";
-                data.fourthmove = "6 ft";
-                data.runningmove = "12 ft";
+                if (data.useMeters) {
+                    data.fullmove = "8 m.";
+                    data.fourthmove = "2 m.";
+                    data.runningmove = "4 m.";
+                } else {
+                    data.fullmove = "25 ft";
+                    data.fourthmove = "6 ft";
+                    data.runningmove = "12 ft";
+                }
                 break;
             case 4:
-                data.fullmove = "50 ft";
-                data.fourthmove = "12 ft";
-                data.runningmove = "25 ft";
+                if (data.useMeters) {
+                    data.fullmove = "15 m.";
+                    data.fourthmove = "4 m.";
+                    data.runningmove = "8 m.";
+                } else {
+                    data.fullmove = "50 ft";
+                    data.fourthmove = "12 ft";
+                    data.runningmove = "15 ft";
+                }
                 break;
             case 5:
-                data.fullmove = "65 ft";
-                data.fourthmove = "16 ft";
-                data.runningmove = "32 ft";
+                if (data.useMeters) {
+                    data.fullmove = "20 m.";
+                    data.fourthmove = "5 m.";
+                    data.runningmove = "8 m.";
+                } else {
+                    data.fullmove = "65 ft";
+                    data.fourthmove = "16 ft";
+                    data.runningmove = "25 ft";
+                }
                 break;
             case 6:
-                data.fullmove = "70 ft";
-                data.fourthmove = "17 ft";
-                data.runningmove = "35 ft";
+                if (data.useMeters) {
+                    data.fullmove = "22 m.";
+                    data.fourthmove = "5 m.";
+                    data.runningmove = "15 m.";
+                } else {
+                    data.fullmove = "70 ft";
+                    data.fourthmove = "17 ft";
+                    data.runningmove = "50 ft";
+                }
                 break;
             case 7:
-                data.fullmove = "80 ft";
-                data.fourthmove = "20 ft";
-                data.runningmove = "40 ft";
+                if (data.useMeters) {
+                    data.fullmove = "25 m.";
+                    data.fourthmove = "6 m.";
+                    data.runningmove = "20 m.";
+                } else {
+                    data.fullmove = "80 ft";
+                    data.fourthmove = "20 ft";
+                    data.runningmove = "65 ft";
+                }
                 break;
             case 8:
-                data.fullmove = "90 ft";
-                data.fourthmove = "22 ft";
-                data.runningmove = "45 ft";
+                if (data.useMeters) {
+                    data.fullmove = "28 m.";
+                    data.fourthmove = "7 m.";
+                    data.runningmove = "22 m.";
+                } else {
+                    data.fullmove = "90 ft";
+                    data.fourthmove = "22 ft";
+                    data.runningmove = "70 ft";
+                }
                 break;
             case 9:
-                data.fullmove = "105 ft";
-                data.fourthmove = "26 ft";
-                data.runningmove = "52 ft";
+                if (data.useMeters) {
+                    data.fullmove = "32 m.";
+                    data.fourthmove = "8 m.";
+                    data.runningmove = "25 m.";
+                } else {
+                    data.fullmove = "105 ft";
+                    data.fourthmove = "26 ft";
+                    data.runningmove = "80 ft";
+                }
                 break;
             case 10:
-                data.fullmove = "115 ft";
-                data.fourthmove = "28 ft";
-                data.runningmove = "57 ft";
+                if (data.useMeters) {
+                    data.fullmove = "35 m.";
+                    data.fourthmove = "9 m.";
+                    data.runningmove = "28 m.";
+                } else {
+                    data.fullmove = "115 ft";
+                    data.fourthmove = "28 ft";
+                    data.runningmove = "90 ft";
+                }
                 break;
             case 11:
-                data.fullmove = "130 ft";
-                data.fourthmove = "32 ft";
-                data.runningmove = "65 ft";
+                if (data.useMeters) {
+                    data.fullmove = "40 m.";
+                    data.fourthmove = "10 m.";
+                    data.runningmove = "32 m.";
+                } else {
+                    data.fullmove = "130 ft";
+                    data.fourthmove = "32 ft";
+                    data.runningmove = "105 ft";
+                }
                 break;
             case 12:
-                data.fullmove = "160 ft";
-                data.fourthmove = "40 ft";
-                data.runningmove = "80 ft";
+                if (data.useMeters) {
+                    data.fullmove = "50 m.";
+                    data.fourthmove = "12 m.";
+                    data.runningmove = "35 m.";
+                } else {
+                    data.fullmove = "160 ft";
+                    data.fourthmove = "40 ft";
+                    data.runningmove = "115 ft";
+                }
                 break;
             case 13:
-                data.fullmove = "250 ft";
-                data.fourthmove = "62 ft";
-                data.runningmove = "125 ft";
+                if (data.useMeters) {
+                    data.fullmove = "80 m.";
+                    data.fourthmove = "20 m.";
+                    data.runningmove = "40 m.";
+                } else {
+                    data.fullmove = "250 ft";
+                    data.fourthmove = "62 ft";
+                    data.runningmove = "130 ft";
+                }
                 break;
             case 14:
-                data.fullmove = "500 ft";
-                data.fourthmove = "125 ft";
-                data.runningmove = "250 ft";
+                if (data.useMeters) {
+                    data.fullmove = "150 m.";
+                    data.fourthmove = "37 m.";
+                    data.runningmove = "50 m.";
+                } else {
+                    data.fullmove = "500 ft";
+                    data.fourthmove = "125 ft";
+                    data.runningmove = "160 ft";
+                }
                 break;
             case 15:
-                data.fullmove = "800 ft";
-                data.fourthmove = "200 ft";
-                data.runningmove = "400 ft";
+                if (data.useMeters) {
+                    data.fullmove = "250 m.";
+                    data.fourthmove = "62 m.";
+                    data.runningmove = "80 m.";
+                } else {
+                    data.fullmove = "800 ft";
+                    data.fourthmove = "200 ft";
+                    data.runningmove = "250 ft";
+                }
                 break;
             case 16:
-                data.fullmove = "1500 ft";
-                data.fourthmove = "375 ft";
-                data.runningmove = "750 ft";
+                if (data.useMeters) {
+                    data.fullmove = "500 m.";
+                    data.fourthmove = "125 m.";
+                    data.runningmove = "150 m.";
+                } else {
+                    data.fullmove = "1500 ft";
+                    data.fourthmove = "375 ft";
+                    data.runningmove = "500 ft";
+                }
                 break;
             case 17:
-                data.fullmove = "3000 ft";
-                data.fourthmove = "750 ft";
-                data.runningmove = "1500 ft";
+                if (data.useMeters) {
+                    data.fullmove = "1 Km.";
+                    data.fourthmove = "250 m.";
+                    data.runningmove = "500 m.";
+                } else {
+                    data.fullmove = "3000 ft";
+                    data.fourthmove = "750 ft";
+                    data.runningmove = "1500 ft";
+                }
                 break;
             case 18:
-                data.fullmove = "3 miles";
-                data.fourthmove = "3960 ft";
-                data.runningmove = "1.5 miles";
+                if (data.useMeters) {
+                    data.fullmove = "5 Km.";
+                    data.fourthmove = "1.2 Km.";
+                    data.runningmove = "2.5 Km.";
+                } else {
+                    data.fullmove = "3 miles";
+                    data.fourthmove = "3960 ft";
+                    data.runningmove = "1.5 miles";
+                }
                 break;
             case 19:
-                data.fullmove = "15 miles";
-                data.fourthmove = "3.75 miles";
-                data.runningmove = "7.5 miles";
+                if (data.useMeters) {
+                    data.fullmove = "25 Km.";
+                    data.fourthmove = "6.2 Km.";
+                    data.runningmove = "12.5 Km.";
+                } else {
+                    data.fullmove = "15 miles";
+                    data.fourthmove = "3.75 miles";
+                    data.runningmove = "7.5 miles";
+                }
                 break;
             case 20:
-                data.fullmove = "Special";
-                data.fourthmove = "Special";
-                data.runningmove = "Special";
+                    data.fullmove = game.i18n.localize('abfalter.basicInfo.special');
+                    data.fourthmove = game.i18n.localize('abfalter.basicInfo.special');
+                    data.runningmove = game.i18n.localize('abfalter.basicInfo.special');
                 break;
             default:
-                data.fullmove = "0";
-                data.fourthmove = "0";
-                data.runningmove = "0";
+                    data.fullmove = "0";
+                    data.fourthmove = "0";
+                    data.runningmove = "0";
                 break;
         }
         if (data.finalmove > 20) {
-            data.fullmove = "Special";
-            data.fourthmove = "Special";
-            data.runningmove = "Special";
+            data.fullmove = game.i18n.localize('abfalter.basicInfo.special');
+            data.fourthmove = game.i18n.localize('abfalter.basicInfo.special');
+            data.runningmove = game.i18n.localize('abfalter.basicInfo.special');
         }
         //Lifepoint Calculation
         data.lpbonus = lpbonus;
@@ -1009,13 +1140,13 @@ export default class abfalterActor extends Actor {
         data.weaponName = wepName;
         if (data.weaponNumber > 1 && data.weaponSpeed < 0) {
             data.wepFinSpd = data.weaponSpeed - 20;
-            data.weaponName = "Multi-Wield";
+            data.weaponName = game.i18n.localize('abfalter.basicInfo.multiWield');
         } else if (data.weaponNumber > 1 && data.weaponSpeed >= 0) {
             data.wepFinSpd = data.weaponSpeed - 10;
-            data.weaponName = "Multi-Wield";
+            data.weaponName = game.i18n.localize('abfalter.basicInfo.multiWield');
         } else if (data.weaponNumber == 0) {
             data.wepFinSpd = 20;
-            data.weaponName = "Unarmed";
+            data.weaponName = game.i18n.localize('abfalter.basicInfo.unarmed');
         } else {
             data.wepFinSpd = data.weaponSpeed;
         }
@@ -1695,7 +1826,7 @@ export default class abfalterActor extends Actor {
         data.maccufinal = Math.floor(data.maccu.base + data.maccupow + (data.maccu.mult * data.maccupow) + data.maccu.spec + data.maccu.temp);
         data.maccuhalffinal = Math.floor(data.maccufinal / 2);
         data.mregenfinal = Math.floor(((data.maccupow * data.mregen.regenmult) + data.mregen.spec + data.mregen.temp + data.maccufinal) * data.mregen.recoverymult);
-        data.zeonfinal = Math.floor(data.zeon.base + data.zeonpow + data.zeonbonus + data.zeon.spec + data.zeon.temp);
+        data.zeon.max = Math.floor(data.zeon.base + data.zeonpow + data.zeonbonus + data.zeon.spec + data.zeon.temp);
 
         // Innate Magic
         if (data.maccufinal >= 10 && data.maccufinal <= 50) {
@@ -1832,7 +1963,7 @@ export default class abfalterActor extends Actor {
         data.ppbonus = pp;
         data.finalpp = Math.floor(data.ppoint.base + data.ppoint.spec + data.ppbonus);
         data.innateSlotspp = Math.floor(data.other.innateSlots * 2);
-        data.maxFreepp = Math.floor(data.finalpp - (+usedpp + data.ppotentialpp + +matrixpp + data.innateSlotspp));
+        data.psychicPoint.max = Math.floor(data.finalpp - (+usedpp + data.ppotentialpp + +matrixpp + data.innateSlotspp));
 
 
 

@@ -96,6 +96,18 @@
         "shield": {
           "value": 0,
           "max": 0
+        },
+        "unifiedKi": {
+          "value": 0,
+          "max": 0
+        },
+        "psychicPoint": {
+          "value": 0,
+          "max": 0
+        },
+        "innatePowerKi": {
+          "value": 0,
+          "max": 0
         }
       },
       "stats": {
@@ -190,7 +202,9 @@
           "status": false,
           "spec": 0,
           "temp": 0,
-          "actual": 0
+          "actual": 0,
+          "value": 0,
+          "max": 0
         },
         "regeneration": {
           "spec": 0,
@@ -707,6 +721,8 @@
           "spec": 0,
           "temp": 0,
           "actual": 0,
+          "value": 0,
+          "max": 0,
           "minnate": 0,
           "status": false
         },
@@ -1200,6 +1216,7 @@
           "unified": 0,
           "innate": {
             "type": "POW",
+            "tag": "POW",
             "spec": 0,
             "specMax": 0,
             "temp": 0,

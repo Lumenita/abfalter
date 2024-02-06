@@ -781,10 +781,10 @@
                 </div>
                 <div class="{{#if data.toggles.innatePower}}innatePowBorder{{else}}hidden{{/if}}">
                     <div>
-                        <span> {{data.kiPool.innate.type}} </span>
+                        <span> {{data.kiPool.innate.tag}} </span>
                         <input type="number" name="data.kiPoolInnateAccumTot" value="{{data.kiPoolInnateAccumTot}}" readonly />
-                        <input type="number" name="data.kiPoolInnateTot" value="{{data.kiPoolInnateTot}}" readonly />
-                        <input type="number" name="data.kiPool.innate.actual" value="{{data.kiPool.innate.actual}}" />
+                        <input type="number" name="data.innatePowerKi.max" value="{{data.innatePowerKi.max}}" readonly />
+                        <input type="number" name="data.innatePowerKi.value" value="{{data.innatePowerKi.value}}" />
                         <a class="toggleBoolean {{#if data.kiPool.innate.status}}showOpacity{{/if}}" data-label="data.kiPool.innate.status" data-ability="{{data.kiPool.innate.status}}"><i class="{{#if data.kiPool.innate.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     {{#if data.kiPool.innate.status}}
@@ -835,8 +835,8 @@
                 <div class="{{#if data.toggles.innatePower}}hidden{{/if}}">
                     <div>
                         <span> {{localize "abfalter.kiTab.unified"}} </span>
-                        <input type="number" name="data.unifiedTotal" value="{{data.unifiedTotal}}" readonly />
-                        <input type="number" name="data.kiPool.unified" value="{{data.kiPool.unified}}" />
+                        <input type="number" name="data.unifiedKi.max" value="{{data.unifiedKi.max}}" readonly />
+                        <input type="number" name="data.unifiedKi.value" value="{{data.unifiedKi.value}}" />
                     </div>
                 </div>
                 {{/if}}
@@ -1201,7 +1201,7 @@
                             {{#if system.innatePower}}
                             <div class="techExpand techExpandFirst">
                                 <span> {{localize "abfalter.kiTab.ki"}} </span>
-                                <span> {{localize "abfalter.basicInfo.pow"}} </span>
+                                <span> {{kiTechnique.system.tag}} </span>
                             </div>
                             {{else}}
                             <span> {{localize "abfalter.kiTab.ki"}} </span>
@@ -1285,17 +1285,17 @@
                         </div>
 
                         <div class="kiTechSideInfo">
-                            <span> Frequency : {{kiTechnique.system.frequency}} </span>
-                            <span> Action Type : {{kiTechnique.system.actionType}} </span>
-                            <span> Level </span>
-                            <span> MK </span>
+                            <span> {{localize "abfalter.kiTab.frequency"}}: {{kiTechnique.system.frequency}} </span>
+                            <span> {{localize "abfalter.kiTab.actionType"}}: {{kiTechnique.system.actionType}} </span>
+                            <span> {{localize "abfalter.basicInfo.level"}} </span>
+                            <span> {{localize "abfalter.basicInfo.mk"}} </span>
                         </div>
 
                         <div class="kiTechType">
                             {{#if system.innatePower}}
                             <div class="techExpand techExpandFirst">
                                 <span> {{localize "abfalter.kiTab.ki"}} </span>
-                                <span> {{localize "abfalter.basicInfo.pow"}} </span>
+                                <span> {{kiTechnique.system.tag}} </span>
                             </div>
                             {{else}}
                             <span> {{localize "abfalter.kiTab.ki"}} </span>

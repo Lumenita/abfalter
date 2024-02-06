@@ -15,8 +15,8 @@
             </div>
             {{/if}}
             <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.finalpp" value="{{data.finalpp}}" readonly /> </label>
-            <label> <span> {{localize "abfalter.psychicTab.freeppMax"}} </span> <input type="number" name="data.maxFreepp" value="{{data.maxFreepp}}" readonly /> </label>
-            <label> <span> {{localize "abfalter.psychicTab.freepp"}} </span> <input type="number" name="data.ppoint.freepp" value="{{data.ppoint.freepp}}" /> </label>
+            <label> <span> {{localize "abfalter.psychicTab.freeppMax"}} </span> <input type="number" name="data.psychicPoint.max" value="{{data.psychicPoint.max}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.psychicTab.freepp"}} </span> <input type="number" name="data.psychicPoint.value" value="{{data.psychicPoint.value}}" /> </label>
         </div>
 
         <div class="ppotential">
@@ -80,15 +80,15 @@
             {{#if data.toggles.moduleStatus}}
             <div class="pmodButton">
                 <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
-                    <span> Atk: {{data.atkfinal}} </span>
+                    <span> {{localize "abfalter.basicInfo.attack"}}: {{data.atkfinal}} </span>
                 </button>
                 {{#if data.toggles.psychicDodgeStatus}}
                 <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
-                    <span> Def: {{data.dodfinal}} </span>
+                    <span> {{localize "abfalter.basicInfo.dodge"}}: {{data.dodfinal}} </span>
                 </button>
                 {{else}}
                 <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
-                    <span> Def: {{data.blkfinal}} </span>
+                    <span> {{localize "abfalter.basicInfo.block"}}: {{data.blkfinal}} </span>
                 </button>
                 {{/if}}
             </div>

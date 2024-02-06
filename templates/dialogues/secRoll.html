@@ -8,10 +8,10 @@
     </div>
     <div class="explodeButtons">
         {{#if rollResult.explode}}
-        <button class="secOpenRoll" data-actor-id="{{actor._id}}"> Open Roll! </button>
+        <button class="secOpenRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
         {{/if}}
         {{#if rollResult.fumble}}
-        <button class="secFumbleRoll" data-actor-id="{{actor._id}}"> Fumble Severity! </button>
+        <button class="secFumbleRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
         {{/if}}
     </div>
 </div>

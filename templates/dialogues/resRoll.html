@@ -10,10 +10,10 @@
     </div>
     <div>
         {{#if rollResult.explode}}
-        <span> Unconditional Success! </span>
+        <span> {{localize "abfalter.dialogs.success"}} </span>
         {{/if}}
         {{#if rollResult.fumble}}
-        <span> Failure! </span>
+        <span> {{localize "abfalter.dialogs.failure"}} </span>
         {{/if}}
     </div>
 </div>

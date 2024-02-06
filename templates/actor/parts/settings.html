@@ -2,38 +2,38 @@
 
     <div class="settingsOptions">
         <div class="settingsSubsection">
-            <h5> Mystic Settings </h5>
+            <h5> {{localize "abfalter.settingsTab.mysticSettings"}} </h5>
             <div>
-                <span> Magic Module for Attack </span>
+                <span> {{localize "abfalter.settingsTab.magicAttackModule"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.magicAtkModule}}kiBought{{/if}}"
                         data-label="data.toggles.magicAtkModule" data-ability="{{data.toggles.magicAtkModule}}">
                     {{#if data.toggles.magicAtkModule}}
-                    <span> Active </span>
+                    <span> {{localize "abfalter.settingsTab.active"}} </span>
                     {{else}}
-                    <span> Not Active </span>
+                <span> {{localize "abfalter.settingsTab.notActive"}} </span>
                     {{/if}}
                 </button>
             </div>
             <div class="{{#if data.toggles.magicDodgeModule}}checkLock{{/if}}">
-                <span> Magic Module for Defense </span>
+                <span> {{localize "abfalter.settingsTab.magicDefenseModule"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.magicDefModule}}kiBought{{/if}}"
                         data-label="data.toggles.magicDefModule" data-ability="{{data.toggles.magicDefModule}}">
                     {{#if data.toggles.magicDefModule}}
-                    <span> Active </span>
+                    <span> {{localize "abfalter.settingsTab.active"}} </span>
                     {{else}}
-                    <span> Not Active </span>
+                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
                     {{/if}}
                 </button>
             </div>
             {{#if data.toggles.magicDefModule}}
             <div>
-                <span class="settingsSubsectionIndent"> Dodge over Block</span>
+                <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.magicDodgeModule"}}</span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.magicDodgeModule}}kiBought{{/if}}"
                         data-label="data.toggles.magicDodgeModule" data-ability="{{data.toggles.magicDodgeModule}}">
                     {{#if data.toggles.magicDodgeModule}}
-                    <span> Active </span>
+                    <span> {{localize "abfalter.settingsTab.active"}} </span>
                     {{else}}
-                    <span> Not Active </span>
+                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
                     {{/if}}
                 </button>
             </div>
@@ -41,34 +41,34 @@
         </div>
 
         <div class="settingsSubsection">
-            <h5> Ki Settings </h5>
+            <h5> {{localize "abfalter.settingsTab.kiSettings"}} </h5>
             <div class="{{#if data.toggles.innatePower}}checkLock{{/if}}">
-                <span> Unified Ki Pools </span>
+                <span> {{localize "abfalter.settingsTab.unifiedKi"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.unifiedPools}}kiBought{{/if}}"
                         data-label="data.toggles.unifiedPools" data-ability="{{data.toggles.unifiedPools}}">
                     {{#if data.toggles.unifiedPools}}
-                    <span> Active </span>
+                    <span> {{localize "abfalter.settingsTab.active"}} </span>
                     {{else}}
-                    <span> Not Active </span>
+                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
                     {{/if}}
                 </button>
             </div>
             {{#if data.toggles.unifiedPools}}
             <div>
-                <span class="settingsSubsectionIndent"> Innate Power </span>
+                <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.innatePower"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.innatePower}}kiBought{{/if}}"
                         data-label="data.toggles.innatePower" data-ability="{{data.toggles.innatePower}}">
                     {{#if data.toggles.innatePower}}
-                    <span> Active </span>
+                    <span> {{localize "abfalter.settingsTab.active"}} </span>
                     {{else}}
-                    <span> Not Active </span>
+                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
                     {{/if}}
                 </button>
             </div>
             {{/if}}
             {{#if data.toggles.unifiedPools}}
             <div>
-                <span class="settingsSubsectionIndent"> Innate Type </span>
+                <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.innateType"}} </span>
                 <div class="csSelect">
                     <label>
                         <select name="data.kiPool.innate.type" data-dtype="String">
@@ -86,40 +86,40 @@
             </div>
             {{/if}}
             <div>
-                <span> Dragon Seals </span>
+                <span> {{localize "abfalter.settingsTab.dragonSeals"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.dragonSeals}}kiBought{{/if}}"
                         data-label="data.toggles.dragonSeals" data-ability="{{data.toggles.dragonSeals}}">
                     {{#if data.toggles.dragonSeals}}
-                    <span> Active </span>
+                    <span> {{localize "abfalter.settingsTab.active"}} </span>
                     {{else}}
-                    <span> Not Active </span>
+                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
                     {{/if}}
                 </button>
             </div>
         </div>
 
         <div class="settingsSubsection">
-            <h5> Psychic Settings </h5>
+            <h5> {{localize "abfalter.settingsTab.psychicSettings"}} </h5>
             <div class="{{#if data.toggles.psychicDodgeStatus}}checkLock{{/if}}">
-                <span> Psychic Module for Attack </span>
+                <span> {{localize "abfalter.settingsTab.psyAttackModule"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.moduleStatus}}kiBought{{/if}}"
                         data-label="data.toggles.moduleStatus" data-ability="{{data.toggles.moduleStatus}}">
                     {{#if data.toggles.moduleStatus}}
-                    <span> Active </span>
+                    <span> {{localize "abfalter.settingsTab.active"}} </span>
                     {{else}}
-                    <span> Not Active </span>
+                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
                     {{/if}}
                 </button>
             </div>
             {{#if data.toggles.moduleStatus}}
             <div>
-                <span class="settingsSubsectionIndent"> Dodge over Block </span>
+                <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.magicDodgeModule"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.psychicDodgeStatus}}kiBought{{/if}}"
                         data-label="data.toggles.psychicDodgeStatus" data-ability="{{data.toggles.psychicDodgeStatus}}">
                     {{#if data.toggles.psychicDodgeStatus}}
-                    <span> Active </span>
+                    <span> {{localize "abfalter.settingsTab.active"}} </span>
                     {{else}}
-                    <span> Not Active </span>
+                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
                     {{/if}}
                 </button>
             </div>
@@ -127,176 +127,176 @@
         </div>
 
         <div class="settingsSubsection">
-            <h5> Homebrew Settings </h5>
+            <h5> {{localize "abfalter.settingsTab.homebrewSettings"}} </h5>
             <div>
-                <span> Hide Normal Currency </span>
+                <span> {{localize "abfalter.settingsTab.hideCurrency"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.currencyHide}}kiBought{{/if}}"
                         data-label="data.toggles.currencyHide" data-ability="{{data.toggles.currencyHide}}">
                     {{#if data.toggles.currencyHide}}
-                    <span> Active </span>
+                    <span> {{localize "abfalter.settingsTab.active"}} </span>
                     {{else}}
-                    <span> Not Active </span>
+                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
                     {{/if}}
                 </button>
             </div>
         </div>
 
         <div class="settingsSubsection">
-            <h5> Hide Page Objects </h5>
+            <h5> {{localize "abfalter.settingsTab.hidePageObjects"}} </h5>
             <div></div>
             <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
-                <span> Magic: Magic Thoery </span>
+                <span> {{localize "abfalter.settingsTab.magicTheory"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.magicTheoryVis}}kiBought{{/if}}"
                         data-label="data.toggles.magicTheoryVis" data-ability="{{data.toggles.magicTheoryVis}}">
                     {{#if data.toggles.magicTheoryVis}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
             <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
-                <span> Magic: Innate Magic </span>
+                <span> {{localize "abfalter.settingsTab.innateMagic"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.innateMagicVis}}kiBought{{/if}}"
                         data-label="data.toggles.innateMagicVis" data-ability="{{data.toggles.innateMagicVis}}">
                     {{#if data.toggles.innateMagicVis}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
             <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
-                <span> Magic: Summoning Abilities</span>
+                <span> {{localize "abfalter.settingsTab.summoning"}}</span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.summoningVis}}kiBought{{/if}}"
                         data-label="data.toggles.summoningVis" data-ability="{{data.toggles.summoningVis}}">
                     {{#if data.toggles.summoningVis}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
             <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
-                <span> Magic: Invocations </span>
+                <span> {{localize "abfalter.settingsTab.invocation"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.invocationsVis}}kiBought{{/if}}"
                         data-label="data.toggles.invocationsVis" data-ability="{{data.toggles.invocationsVis}}">
                     {{#if data.toggles.invocationsVis}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
             <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
-                <span> Magic: Incarnations </span>
+                <span> {{localize "abfalter.settingsTab.incarnation"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.incarnationsVis}}kiBought{{/if}}"
                         data-label="data.toggles.incarnationsVis" data-ability="{{data.toggles.incarnationsVis}}">
                     {{#if data.toggles.incarnationsVis}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
             <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
-                <span> Magic: Spellcasting Abilities </span>
+                <span> {{localize "abfalter.settingsTab.spellcasting"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.spellcastingVis}}kiBought{{/if}}"
                         data-label="data.toggles.spellcastingVis" data-ability="{{data.toggles.spellcastingVis}}">
                     {{#if data.toggles.spellcastingVis}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
             <div class="{{#if data.toggles.magicTab}}hidden{{/if}}">
-                <span> Magic: Turn Maintenance </span>
+                <span> {{localize "abfalter.settingsTab.turnMaint"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.turnMaintVis}}kiBought{{/if}}"
                         data-label="data.toggles.turnMaintVis" data-ability="{{data.toggles.turnMaintVis}}">
                     {{#if data.toggles.turnMaintVis}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
 
             <div class="{{#if data.toggles.psychicTab}}hidden{{/if}}">
-                <span> Psychic: Mental Patterns </span>
+                <span> {{localize "abfalter.settingsTab.mentalPattern"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.mentalPatternsvis}}kiBought{{/if}}"
                         data-label="data.toggles.mentalPatternsvis" data-ability="{{data.toggles.mentalPatternsvis}}">
                     {{#if data.toggles.mentalPatternsvis}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
 
             <div class="{{#if data.toggles.kiTab}}hidden{{/if}}">
-                <span> Ki: Ars Magnus & Limits </span>
+                <span> {{localize "abfalter.settingsTab.arsMag"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.arsMagVis}}kiBought{{/if}}"
                         data-label="data.toggles.arsMagVis" data-ability="{{data.toggles.arsMagVis}}">
                     {{#if data.toggles.arsMagVis}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
             <div class="{{#if data.toggles.kiTab}}hidden{{/if}}">
-                <span> Ki: Martial Arts </span>
+                <span> {{localize "abfalter.settingsTab.martialArt"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.maVis}}kiBought{{/if}}"
                         data-label="data.toggles.maVis" data-ability="{{data.toggles.maVis}}">
                     {{#if data.toggles.maVis}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
             <div class="{{#if data.toggles.kiTab}}hidden{{/if}}">
-                <span> Ki: Unarmed Damage </span>
+                <span> {{localize "abfalter.settingsTab.unarmedDmg"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.unarmedVis}}kiBought{{/if}}"
                         data-label="data.toggles.unarmedVis" data-ability="{{data.toggles.unarmedVis}}">
                     {{#if data.toggles.unarmedVis}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
             <div class="{{#if data.toggles.kiTab}}hidden{{/if}}">
-                <span> Ki: Nemesis Abilities </span>
+                <span> {{localize "abfalter.settingsTab.nemesis"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.nemesisVis}}kiBought{{/if}}"
                         data-label="data.toggles.nemesisVis" data-ability="{{data.toggles.nemesisVis}}">
                     {{#if data.toggles.nemesisVis}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
             <div class="{{#if data.toggles.kiTab}}hidden{{/if}}">
-                <span> Ki: Ki Seals </span>
+                <span> {{localize "abfalter.settingsTab.kiSeals"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.kiSealsVis}}kiBought{{/if}}"
                         data-label="data.toggles.kiSealsVis" data-ability="{{data.toggles.kiSealsVis}}">
                     {{#if data.toggles.kiSealsVis}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
             <div class="{{#if data.toggles.kiTab}}hidden{{/if}}">
-                <span> Ki: Ki Techniques </span>
+                <span> {{localize "abfalter.settingsTab.kiTechniq"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.kiTech}}kiBought{{/if}}"
                         data-label="data.toggles.kiTech" data-ability="{{data.toggles.kiTech}}">
                     {{#if data.toggles.kiTech}}
-                    <span> Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
-                    <span> Not Hidden </span>
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                     {{/if}}
                 </button>
             </div>
@@ -314,7 +314,7 @@
                         <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.rollRange.spec" value="{{data.rollRange.spec}}" /> </label>
                         <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.rollRange.temp" value="{{data.rollRange.temp}}" /> </label>
                         <label>
-                            <span> doubles? </span>
+                            <span> {{localize "abfalter.settingsTab.doubles"}} </span>
                             <select name="data.rollRange.doubles" data-dtype="boolean">
                                 {{#select data.rollRange.doubles}}
                                 <option value="false"> {{localize "abfalter.basicInfo.no"}} </option>
@@ -361,75 +361,73 @@
 
 
             <div class="charOptions">
-
                 <h5> {{localize "abfalter.settingsTab.charOptions"}} </h5>
                 <div>
                     <label> <span> {{localize "abfalter.settingsTab.levelMod"}} </span> <input type="number" name="data.levelinfo.levelmod" value="{{data.levelinfo.levelmod}}" /> </label>
                     <label> <span> {{localize "abfalter.settingsTab.presenceMod"}} </span> <input type="number" name="data.levelinfo.presencemod" value="{{data.levelinfo.presencemod}}" /> </label>
                     <div>
-                        <span> Hide Background Tab </span>
+                        <span> {{localize "abfalter.settingsTab.hideBack"}} </span>
                         <button type="button" class="toggleBoolean {{#if data.toggles.backgroundTab}}kiBought{{/if}}"
                                 data-label="data.toggles.backgroundTab" data-ability="{{data.toggles.backgroundTab}}">
                             {{#if data.toggles.backgroundTab}}
-                            <span> Hidden </span>
+                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                             {{else}}
-                            <span> Not Hidden </span>
+                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                             {{/if}}
                         </button>
                     </div>
                     <div>
-                        <span> Hide Magic Tab </span>
+                        <span> {{localize "abfalter.settingsTab.hideMagic"}} </span>
                         <button type="button" class="toggleBoolean {{#if data.toggles.magicTab}}kiBought{{/if}}"
                                 data-label="data.toggles.magicTab" data-ability="{{data.toggles.magicTab}}">
                             {{#if data.toggles.magicTab}}
-                            <span> Hidden </span>
+                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                             {{else}}
-                            <span> Not Hidden </span>
+                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                             {{/if}}
                         </button>
                     </div>
                     <div>
-                        <span> Hide Psychic Tab </span>
+                        <span> {{localize "abfalter.settingsTab.hidePsy"}} </span>
                         <button type="button" class="toggleBoolean {{#if data.toggles.psychicTab}}kiBought{{/if}}"
                                 data-label="data.toggles.psychicTab" data-ability="{{data.toggles.psychicTab}}">
                             {{#if data.toggles.psychicTab}}
-                            <span> Hidden </span>
+                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                             {{else}}
-                            <span> Not Hidden </span>
+                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                             {{/if}}
                         </button>
                     </div>
                     <div>
-                        <span> Hide Ki Tab </span>
+                        <span> {{localize "abfalter.settingsTab.hideKi"}} </span>
                         <button type="button" class="toggleBoolean {{#if data.toggles.kiTab}}kiBought{{/if}}"
                                 data-label="data.toggles.kiTab" data-ability="{{data.toggles.kiTab}}">
                             {{#if data.toggles.kiTab}}
-                            <span> Hidden </span>
+                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                             {{else}}
-                            <span> Not Hidden </span>
+                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                             {{/if}}
                         </button>
                     </div>
                     <div>
-                        <span> Hide Bio Tab </span>
+                        <span> {{localize "abfalter.settingsTab.hideBio"}} </span>
                         <button type="button" class="toggleBoolean {{#if data.toggles.bioTab}}kiBought{{/if}}"
                                 data-label="data.toggles.bioTab" data-ability="{{data.toggles.bioTab}}">
                             {{#if data.toggles.bioTab}}
-                            <span> Hidden </span>
+                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                             {{else}}
-                            <span> Not Hidden </span>
+                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                             {{/if}}
                         </button>
                     </div>
-
                     <div>
-                        <span> Activate Shield </span>
+                        <span> {{localize "abfalter.settingsTab.activateShield"}} </span>
                         <button type="button" class="toggleBoolean {{#if data.toggles.shield}}kiBought{{/if}}"
                                 data-label="data.toggles.shield" data-ability="{{data.toggles.shield}}">
                             {{#if data.toggles.shield}}
-                            <span> Active </span>
+                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                             {{else}}
-                            <span> Not Active </span>
+                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
                             {{/if}}
                         </button>
                     </div>
@@ -438,10 +436,10 @@
         </div>
 
         <div class="innateBonuses">
-            <h5> Classes & Levels </h5>
+            <h5> {{localize "abfalter.settingsTab.classLevels"}} </h5>
             <div>
-                <span> Class </span>
-                <span> Level </span>
+                <span> {{localize "abfalter.basicInfo.class"}} </span>
+                <span> {{localize "abfalter.basicInfo.level"}} </span>
             </div>
 
             <div class="{{#if data.itemToggle.class}}item-list{{/if}}">
@@ -453,7 +451,7 @@
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     {{#if system.expand}}
-                    <span> Show Class Info Here (WIP) [Right click -> Edit to change class info] </span>
+                    <span> {{localize "abfalter.settingsTab.tempWip"}} </span>
                     {{/if}}
                 </div>
                 {{/each}}
@@ -467,9 +465,9 @@
 
 
         <div class="homebrew">
-            <h5> Homebrew Settings / WIP </h5>
+            <h5> {{localize "abfalter.settingsTab.settingsWip"}} </h5>
             <label>
-                <span> Increased Strengthening </span>
+                <span> {{localize "abfalter.settingsTab.increasedStr"}} </span>
                 <input type="checkbox" name="data.toggles.psychicStrengthening" data-dtype="boolean" {{checked data.toggles.psychicStrengthening}} />
             </label>
         </div>

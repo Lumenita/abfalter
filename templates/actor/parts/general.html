@@ -260,7 +260,7 @@
                 {{#each data.resistances as |res key|}}
                 <div>
                     <div>
-                        <button type="button" class="rollable" data-roll="{{res.final}}" data-label="{{key}} Resist" data-type="resRoll">
+                        <button type="button" class="rollable" data-roll="{{res.final}}" data-label="{{res.name}}" data-type="resRoll">
                             <span> {{res.short}} </span>
                             <span> {{res.final}} </span>
                         </button>
@@ -335,8 +335,8 @@
                     {{/if}}
                     <div class="fatCompact">
                         <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.fatigue.temp" value="{{data.fatigue.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.fatiguefinal" value="{{data.fatiguefinal}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.fatigue.actual" value="{{data.fatigue.actual}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.fatigue.max" value="{{data.fatigue.max}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.fatigue.value" value="{{data.fatigue.value}}" /> </label>
                     </div>
                 </div>
             </div> <!--Lifepoints & Fatigue-->

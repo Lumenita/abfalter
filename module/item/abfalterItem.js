@@ -234,6 +234,7 @@ export default class abfalterItem extends Item {
             if (this.parent) {
                 this.system.unified = this.parent.system.toggles.unifiedPools;
                 this.system.innatePower = this.parent.system.toggles.innatePower;
+                this.system.tag = this.parent.system.kiPool.innate.tag;
             }
         }
     }

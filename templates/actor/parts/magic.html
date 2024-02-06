@@ -105,7 +105,7 @@
                     <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mregen.temp" value="{{data.mregen.temp}}" /> </label>
                     <label> <span> {{localize "abfalter.magicTab.finalregen"}} </span> <input type="number" name="data.mregenfinal" value="{{data.mregenfinal}}" readonly /> </label>
                     <div>
-                        <button type="button" class="mregenFull" data-ability="{{data.mregenfinal}}" data-ability2="{{data.zeonfinal}}">
+                        <button type="button" class="mregenFull" data-ability="{{data.mregenfinal}}" data-ability2="{{data.zeon.max}}">
                             <span> {{localize "abfalter.basicInfo.full"}} </span>
                         </button>
                     </div>
@@ -129,8 +129,8 @@
             </div>
             {{/if}}
             <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.zeon.temp" value="{{data.zeon.temp}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.zeonfinal" value="{{data.zeonfinal}}" readonly /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.zeon.actual" value="{{data.zeon.actual}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.zeon.max" value="{{data.zeon.max}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.zeon.value" value="{{data.zeon.value}}" /> </label>
             <div class="minnate {{#if data.toggles.innateMagicVis}}hidden{{/if}}">
                 <h6> {{localize "abfalter.magicTab.minnate"}} </h6>
                 <div>
