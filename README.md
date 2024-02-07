@@ -32,6 +32,7 @@ The system has about 70% localization, if there is enough demand, I will go thro
 
 # Contributions
 I would love support from the community! I am open to any feedback, whether its suggestions, bug reports, or critiques.
+- Thank you @Shairin for the spanish translations!
 
 # Me
 You can reach me on discord: @Lumenita 
