@@ -658,6 +658,7 @@ abfalter.armoryTab = {
     armorValues: "abfalter.armoryTab.armorValues",
     helmet: "abfalter.armoryTab.helmet",
     bodyArmor: "abfalter.armoryTab.bodyArmor",
+    armorLocation: "abfalter.armoryTab.armorLocation",
     itemDesc: "abfalter.armoryTab.itemDesc",
     price: "abfalter.armoryTab.price",
     weight: "abfalter.armoryTab.weight",

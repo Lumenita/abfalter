@@ -17,7 +17,17 @@
             </div>
             <div>
                 <label> <span> {{localize "abfalter.armoryTab.perPen"}} </span> <input type="number" name="data.natPenalty" value="{{data.natPenalty}}" /> </label>
+                <label>
+                    <span> {{localize "abfalter.armoryTab.armorClass"}} </span>
+                    <select name="data.class" data-dtype="String">
+                        {{#select data.class}}
+                        <option value="Soft"> {{localize "abfalter.armoryTab.soft"}} </option>
+                        <option value="Hard"> {{localize "abfalter.armoryTab.hard"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
             </div>
+
         </div>
 
         <div>
@@ -34,7 +44,9 @@
             </div>
             <div>
                 <label> <span> {{localize "abfalter.armoryTab.ene"}} </span> <input type="number" name="data.AT.ene" value="{{data.AT.ene}}" /> </label>
+                {{#if data.spiritHomebrew}}
                 <label> <span> {{localize "abfalter.armoryTab.spirit"}} </span> <input type="number" name="data.AT.spt" value="{{data.AT.spt}}" /> </label>
+                {{/if}}
             </div>
         </div>
 

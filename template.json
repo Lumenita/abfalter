@@ -1585,6 +1585,8 @@
       "requirement": 0,
       "natPenalty": 0,
       "movePenalty": 0,
+      "location": "Shirt",
+      "class": "Soft",
       "natural": false,
       "equipped": false,
       "AT": {
@@ -1606,6 +1608,7 @@
       "fortitude": 0,
       "requirement": 0,
       "natPenalty": 0,
+      "class": "Soft",
       "natural": false,
       "equipped": false,
       "AT": {

@@ -49,6 +49,14 @@
       "path": "./packs/classes",
       "type": "Item",
       "private": false
+    },
+    {
+      "name": "equipment",
+      "label": "Equipment",
+      "system": "abfalter",
+      "path": "./packs/equipment",
+      "type": "Item",
+      "private": false
     }
   ],
   "primaryTokenAttribute": "lp",

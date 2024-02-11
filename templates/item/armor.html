@@ -19,6 +19,28 @@
                 <label> <span> {{localize "abfalter.armoryTab.natPen"}} </span> <input type="number" name="data.natPenalty" value="{{data.natPenalty}}" /> </label>
                 <label> <span> {{localize "abfalter.armoryTab.movePen"}} </span> <input type="number" name="data.movePenalty" value="{{data.movePenalty}}" /> </label>
             </div>
+            <div>
+                <label>
+                    <span> {{localize "abfalter.armoryTab.armorLocation"}} </span>
+                    <select name="data.location" data-dtype="String">
+                        {{#select data.location}}
+                        <option value="Shirt"> {{localize "abfalter.armoryTab.armorShirt"}} </option>
+                        <option value="Full Plate"> {{localize "abfalter.armoryTab.armorFplate"}} </option>
+                        <option value="Breastplate"> {{localize "abfalter.armoryTab.armorBplate"}} </option>
+                        <option value="Complete"> {{localize "abfalter.armoryTab.armorComplete"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+                <label>
+                    <span> {{localize "abfalter.armoryTab.armorClass"}} </span>
+                    <select name="data.class" data-dtype="String">
+                        {{#select data.class}}
+                        <option value="Soft"> {{localize "abfalter.armoryTab.soft"}} </option>
+                        <option value="Hard"> {{localize "abfalter.armoryTab.hard"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
         </div>
         
         <div>
