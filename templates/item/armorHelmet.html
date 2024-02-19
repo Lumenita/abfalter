@@ -34,7 +34,9 @@
             </div>
             <div>
                 <label> <span> {{localize "abfalter.armoryTab.ene"}} </span> <input type="number" name="data.AT.ene" value="{{data.AT.ene}}" /> </label>
+                {{#if data.spiritHomebrew}}
                 <label> <span> {{localize "abfalter.armoryTab.spirit"}} </span> <input type="number" name="data.AT.spt" value="{{data.AT.spt}}" /> </label>
+                {{/if}}
             </div>
         </div>
 

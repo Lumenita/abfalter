@@ -29,14 +29,6 @@ export default class abfalterCombat extends Combat {
     }
 }
 
-/* async rollInitiative(ids, formulaopt, updateTurnopt, messageOptionsopt) {
-    const mod = await openModDialog();
-    console.log(this.combatants);
-
-    await super.rollInitiative(ids, formulaopt, updateTurnopt, messageOptionsopt);
-    return this.update({ turn: 0 });
-}*/
-
 export const openInitiativeDialog = async () => {
     return initiativeDialog({
         content: "Modifier",

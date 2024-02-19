@@ -1698,7 +1698,8 @@ export default class abfalterActor extends Actor {
 
 
         //kidetection data.kidetectionbase
-        data.kidetectionbase = Math.floor((data.noticefinal + data.mkFinal) / 2);
+        data.noticeDection = Math.floor(data.secondary.notice.temp + data.secondary.notice.spec + data.secondary.notice.base + data.noticebonus + data.noticenatfinal);
+        data.kidetectionbase = Math.floor((data.noticeDection + data.mkFinal) / 2);
         data.kidetectionbonus = kiDect;
         data.kidetectionnat = Math.floor(stats.Perception.mod + data.secondary.kidetection.natural + Math.ceil(data.secondary.kidetection.nat * stats.Perception.mod));
         if (data.kidetectionnat < 100) {
@@ -1710,7 +1711,8 @@ export default class abfalterActor extends Actor {
 
 
         //kicoceal
-        data.kiconcealbase = Math.floor((data.hidefinal + data.mkFinal) / 2);
+        data.hideConceal = Math.floor(data.secondary.hide.temp + data.secondary.hide.spec + data.secondary.hide.base + data.hidebonus + data.hidenatfinal - data.totalNatPen);
+        data.kiconcealbase = Math.floor((data.hideConceal + data.mkFinal) / 2);
         data.kiconcealbonus = kiCon;
         data.kiconcealnat = Math.floor(stats.Perception.mod + data.secondary.kiconceal.natural + Math.ceil(data.secondary.kiconceal.nat * stats.Perception.mod));
         if (data.kiconcealnat < 100) {

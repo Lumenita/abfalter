@@ -1,4 +1,5 @@
 import { openModifierDialogue } from "../diceroller.js";
+import { changeSecondaryTemps, changeSecondarySpecs } from "./actorFunctions.js";
 
 export default class abfalterCharacterSheet extends ActorSheet {
     static get defaultOptions() {
@@ -189,9 +190,9 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 this.document.update({ [label]: value, [label2]: value2 });
             });
 
+            html.find(".changeSecondaryNums").click(this._changeSecNums.bind(this));
 
             html.find(".item-chat").click(this._onItemChatRoll.bind(this));
-
             html.find('.rollable').click(this._onRoll.bind(this));
             html.find('.combatRoll').click(this._onAttackRoll.bind(this));
 
@@ -214,6 +215,23 @@ export default class abfalterCharacterSheet extends ActorSheet {
         const dataset = element.dataset;
 
         openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type, dataset.ability);
+    }
+
+    _changeSecNums(event) {
+        event.preventDefault();
+        let element = event.currentTarget;
+        const type = element.dataset.ability;
+
+        switch (type) {
+            case "temp":
+                changeSecondaryTemps(this.actor);
+                break;
+            case "spec":
+                changeSecondarySpecs(this.actor);
+                break;
+            default:
+                break;
+        }
     }
 
     _onItemCreate(event) {
@@ -309,7 +327,5 @@ export default class abfalterCharacterSheet extends ActorSheet {
 
         item.roll(label);
     }
-
-
 }
 

@@ -734,7 +734,10 @@ abfalter.settingsTab = {
     classLevels: "abfalter.settingsTab.classLevels",
     settingsWip: "abfalter.settingsTab.settingsWip",
     increasedStr: "abfalter.settingsTab.increasedStr",
-    tempWip: "abfalter.settingsTab.tempWip"
+    tempWip: "abfalter.settingsTab.tempWip",
+    changeTemp: "abfalter.settingsTab.changeTemp",
+    changeSpec: "abfalter.settingsTab.changeSpec",
+    open: "abfalter.settingsTab.open"
 }
 
 abfalter.dialogs = {

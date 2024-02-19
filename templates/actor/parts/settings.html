@@ -139,6 +139,20 @@
                     {{/if}}
                 </button>
             </div>
+
+            <div>
+                <span> {{localize "abfalter.settingsTab.changeTemp"}} </span>
+                <button type="button" class="changeSecondaryNums" data-ability="temp">
+                    <span> {{localize "abfalter.settingsTab.open"}} </span>
+                </button>
+            </div>
+
+            <div>
+                <span> {{localize "abfalter.settingsTab.changeSpec"}} </span>
+                <button type="button" class="changeSecondaryNums" data-ability="spec">
+                    <span> {{localize "abfalter.settingsTab.open"}} </span>
+                </button>
+            </div>
         </div>
 
         <div class="settingsSubsection">
@@ -425,9 +439,9 @@
                         <button type="button" class="toggleBoolean {{#if data.toggles.shield}}kiBought{{/if}}"
                                 data-label="data.toggles.shield" data-ability="{{data.toggles.shield}}">
                             {{#if data.toggles.shield}}
-                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                            {{else}}
                             <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                            {{else}}
+                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                             {{/if}}
                         </button>
                     </div>
