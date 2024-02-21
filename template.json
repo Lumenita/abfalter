@@ -1574,7 +1574,14 @@
       "speed": 0,
       "atPen": 0,
       "shieldSpeed": 0,
-      "rarity": ""
+      "rarity": "",
+      "size": "",
+      "rangedType": "",
+      "munitionType": "",
+      "rateOfFire": 0,
+      "reload": 0,
+      "range": 0
+
     },
     "armor": {
       "templates": [ "itemDescription" ],

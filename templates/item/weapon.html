@@ -9,7 +9,18 @@
             <h5> {{localize "abfalter.armoryTab.wepDetails"}} </h5>
             <div>
                 <label> <span> {{localize "abfalter.armoryTab.quality"}} </span> <input type="number" name="data.quality" value="{{data.quality}}" /> </label>
-                <label> <span> {{localize "abfalter.armoryTab.rarity"}} </span> <input type="text" name="data.rarity" value="{{data.rarity}}" /> </label>
+                            <div class="csSelect">
+                                <label>
+                                    <span> {{localize "abfalter.armoryTab.size"}} </span>
+                                    <select name="data.weaponSize" data-dtype="text">
+                                        {{#select data.weaponSize}}
+                                        <option value="normal"> {{localize "abfalter.armoryTab.normal"}} </option>
+                                        <option value="enormous"> {{localize "abfalter.armoryTab.enormous"}} </option>
+                                        <option value="throwable"> {{localize "abfalter.armoryTab.giant"}} </option>
+                                        {{/select}}
+                                    </select>
+                                </label>
+                            </div>
             </div>
             <div>
                 <label> <span> {{localize "abfalter.basicInfo.attack"}} </span> <input type="number" name="data.attack" value="{{data.attack}}" /> </label>
@@ -104,11 +115,67 @@
                     <button type="button" class="toggleBoolean {{#if data.toggle}}kiBought{{/if}}" data-label="data.toggle" data-ability="{{data.toggle}}">
                         <span> {{localize "abfalter.armoryTab.twoHand"}} </span>
                     </button>
+                    <button type="button" class="toggleBoolean {{#if data.complex}}kiBought{{/if}}" data-label="data.complex"
+                        data-ability="{{data.complex}}">
+                        <span> {{localize "abfalter.armoryTab.complex"}} </span>
+                    </button>
                 </div>
                 <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.damage"}} </span> <input type="number" name="data.finalDmg" value="{{data.finalDmg}}" readonly /> </label>
             </div>
         </div>
+    <div>
+        <h6> Ranged Details </h6>
+        <div>
+            <!-- ROF -->
+            <label> <span> {{localize "abfalter.armoryTab.rateOfFire"}} </span> <input type="number" name="data.rateOfFire"
+                    value="{{data.rateOfFire}}" /> </label>
+            <!-- Reload -->
+            <label> <span> {{localize "abfalter.armoryTab.reload"}}</span>
+                <input type="number" name="data.reload" value="{{data.reload}}"/> </label>
+        </div>
+        <div>
+            <!-- Range -->
+            <label> <span> {{localize "abfalter.armoryTab.range"}} </span> <input type="number" name="data.range"
+                    value="{{data.range}}" /> </label>
+        </div>
+        <div>
+            <!-- Type -->
+            <div class="csSelect">
+                <label>
+                    <span> {{localize "abfalter.armoryTab.rangedType"}} </span>
+                    <select name="data.rangedType" data-dtype="text">
+                        {{#select data.rangedType}}
+                        <option value="None"> {{localize "abfalter.armoryTab.na"}} </option>
+                        <option value="Firing"> {{localize "abfalter.armoryTab.firing"}} </option>
+                        <option value="Throwable"> {{localize "abfalter.armoryTab.throwable"}} </option>
+                        <option value="Projectile"> {{localize "abfalter.armoryTab.projectile"}} </option>
+                        <option value="Munition"> {{localize "abfalter.armoryTab.munition"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+            <!-- Type -->
+            <div class="csSelect">
+                <label>
+                    <span> {{localize "abfalter.armoryTab.munitionType"}} </span>
+                    <select name="data.munitionType" data-dtype="text">
+                        {{#select data.munitionType}}
+                        <option value="None"> {{localize "abfalter.armoryTab.na"}} </option>
+                        <option value="Bow"> {{localize "abfalter.armoryTab.bow"}} </option>
+                        <option value="L. Crossbow"> {{localize "abfalter.armoryTab.lightCrossbow"}} </option>
+                        <option value="H. Crossbow"> {{localize "abfalter.armoryTab.heavyCrossbow"}} </option>
+                        <option value="Pistol"> {{localize "abfalter.armoryTab.pistol"}} </option>
+                        <option value="Sling"> {{localize "abfalter.armoryTab.sling"}} </option>
+                        <option value="L. Ballista"> {{localize "abfalter.armoryTab.lightBallista"}} </option>
+                        <option value="H. Ballista"> {{localize "abfalter.armoryTab.heavyBallista"}} </option>
+                        <option value="Cannon"> {{localize "abfalter.armoryTab.cannon"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+        </div>
 
+    </div>
         <div>
             <h6> Extra </h6>
             <div>
@@ -134,13 +201,6 @@
             <div>
                 <label> <span> {{localize "abfalter.armoryTab.speed"}} </span> <input type="number" name="data.speed" value="{{data.speed}}" /> </label>
                 <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.speed"}} </span> <input type="number" name="data.FinalWeaponSpeed" value="{{data.FinalWeaponSpeed}}" readonly /> </label>
-            </div>
-            <div>
-                <div class="weapContentButton">
-                    <button type="button" class="toggleBoolean {{#if data.complex}}kiBought{{/if}}" data-label="data.complex" data-ability="{{data.complex}}">
-                        <span> {{localize "abfalter.armoryTab.complex"}} </span>
-                    </button>
-                </div>
             </div>
         </div>
 
