@@ -11,9 +11,15 @@
             <label> <span> {{localize "abfalter.basicInfo.difficulty"}} </span> <input type="number" name="data.difficulty" value="{{data.difficulty}}" /> </label>
         </div>
         <div>
-            <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.attack"}} </span> <input type="text" name="data.atk" value="{{data.atk}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.defense"}} </span> <input type="text" name="data.def" value="{{data.def}}" /> </label>
         </div>
-        <h6> {{localize "abfalter.basicInfo.description"}} </h6>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.action"}} </span> <input type="text" name="data.action" value="{{data.action}}" /> </label>
+        </div>
+        <h6> {{localize "abfalter.magicTab.pact"}} </h6>
+        <textarea name="data.pact" rows="5">{{data.pact}}</textarea>
+        <h6> {{localize "abfalter.magicTab.effDuration"}} </h6>
         <textarea name="data.description" rows="5">{{data.description}}</textarea>
     </div>
 </form>

@@ -27,7 +27,6 @@ export default class abfalterItemSheet extends ItemSheet {
                 this.options.width = this.position.width = 400;
                 this.options.height = this.position.height = 155;
                 break;
-            case "proficiency":
             case "spellPath":
                 this.options.height = this.position.height = 195;
                 break;
@@ -57,7 +56,7 @@ export default class abfalterItemSheet extends ItemSheet {
             case "kiTechnique":
                 this.options.height = this.position.height = 375;
                 break;
-            case "invocation":
+            case "proficiency":
                 this.options.height = this.position.height = 310;
                 break;
             case "martialArt":

@@ -10,16 +10,24 @@
             {{#if data.mproj.status}}
             <div>
                 <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.mproj.base" value="{{data.mproj.base}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.mproj.spec" value="{{data.mproj.spec}}" /> </label>
-                <label> <span> {{localize "abfalter.magicTab.imbalance"}} </span> <input type="number" name="data.mproj.imbalance" value="{{data.mproj.imbalance}}" /> </label>
+                <label> 
+                    <span> {{localize "abfalter.basicInfo.spec"}} </span>
+                    <input type="number" name="data.mproj.spec" value="{{data.mproj.spec}}" />
+                    <input type="number" name="data.mproj.spec2" value="{{data.mproj.spec2}}" /> 
+                </label>
+                <label class="{{#if data.toggles.magicAtkModule}}hidden{{/if}}"> <span> {{localize "abfalter.magicTab.imbalance"}} </span> <input type="number" name="data.mproj.imbalance" value="{{data.mproj.imbalance}}" /> </label>
             </div>
             {{/if}}
-            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mproj.temp" value="{{data.mproj.temp}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.mprojfinal" value="{{data.mprojfinal}}" readonly /> </label>
+            <label>
+                <span> {{localize "abfalter.basicInfo.temp"}} </span>
+                <input type="number" name="data.mproj.temp" value="{{data.mproj.temp}}" />
+                <input type="number" name="data.mproj.temp2" value="{{data.mproj.temp2}}" />
+            </label>
+            
             <div class="mProjButton">
                 {{#if data.toggles.magicAtkModule}}
                 <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.basicInfo.attack"}} </span> <span> {{data.atkfinal}} </span>
+                    <span> {{localize "abfalter.magicTab.offensive"}} </span> <span> {{data.mprojAtkModule}} </span>
                 </button>
                 {{else}}
                 <button type="button" class="combatRoll" data-roll="{{data.mprojfinaloff}}" data-label="Magic Proj. Offensive" data-type="combatRoll"> 
@@ -29,11 +37,11 @@
                 {{#if data.toggles.magicDefModule}}
                 {{#if data.toggles.magicDodgeModule}}
                 <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.basicInfo.dodge"}} </span> <span> {{data.dodfinal}} </span>
+                    <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{data.mprojDodModule}} </span>
                 </button>
                 {{else}}
                 <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.basicInfo.block"}} </span> <span> {{data.blkfinal}} </span>
+                    <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{data.mprojDefModule}} </span>
                 </button>
                 {{/if}}
                 {{else}}
@@ -42,6 +50,7 @@
                 </button>
                 {{/if}}
             </div>
+
             <h6 class="{{#if data.toggles.magicTheoryVis}}hidden{{/if}}"> {{localize "abfalter.magicTab.mtheory"}} </h6>
             <div class="csSelect2 {{#if data.toggles.magicTheoryVis}}hidden{{/if}}">
                 <label>
@@ -466,7 +475,259 @@
 
             <div class="metaMagic {{#if data.toggles.spellcastingVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.metaMagic"}} </h5>
-                <textarea name="data.metaMagic.info">{{data.metaMagic.info}}</textarea>
+                <div>
+                    <span> {{localize "abfalter.metaMagic.totalCost"}} {{data.metaCost}} </span>
+                    <label> <span> {{localize "abfalter.metaMagic.extraCost"}} </span> <input type="number" name="data.metaMagic.extraCost" value="{{data.metaMagic.extraCost}}" /> </label>
+                    <button type="button" class="openMetaMagic">
+                        <span> {{localize "abfalter.metaMagic.openTree"}} </span>
+                    </button>
+                </div>
+
+                <div class="metaMagicDesc">
+                    <h6> {{localize "abfalter.metaMagic.metaMaster"}} </h6>
+                    {{#if data.metaMagic.doubleDmg.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.doubleDmg"}} - </span>
+                        <span> {{data.doubleDamageDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.highMagic.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.highMagic"}} - </span>
+                        <span> {{data.highMagicDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.natMaint.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.natMaint"}} - </span>
+                        <span> {{data.natMaintDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.unlimitedZeon.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.unlimitedZeon"}} - </span>
+                        <span> {{data.unlimitedZeonDesc}} </span>
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="metaMagicDesc">
+                    <h6> {{localize "abfalter.metaMagic.arcWarfare"}} </h6>
+                    {{#if data.defenseExpertise}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.defExper"}} - </span>
+                        <span> {{data.defenseExpertiseDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.empShields}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.empShields"}} - </span>
+                        <span> {{data.empShieldsDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.expandArea}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.expArea"}} - </span>
+                        <span> {{data.expandAreaDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.incDestruction}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.incStrength"}} - </span>
+                        <span> {{data.incDestructionDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.mysticAccu}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.defExper"}} - </span>
+                        <span> {{data.mysticAccuDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.offExpertise}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.offeExper"}} - </span>
+                        <span> {{data.offExpertiseDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.removeProtection}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.remProtect"}} - </span>
+                        <span> {{data.removeProtectionDesc}} </span>
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="metaMagicDesc">
+                    <h6> {{localize "abfalter.metaMagic.arcEsoterica"}} </h6>
+                    {{#if data.metaMagic.controlSpace.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.controlSpace"}} - </span>
+                        <span> {{data.controlSpaceDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.doubleInnate.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.doubleInnate"}} - </span>
+                        <span> {{data.doubleInnateDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.endureDamage.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.endureDamage"}} - </span>
+                        <span> {{data.endureDamageDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.eneControl.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.eneControl"}} - </span>
+                        <span> {{data.eneControlDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.feelMagic.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.feelMagic"}} - </span>
+                        <span> {{data.feelMagicDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.forceSpeed}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.forceSpeed"}} - </span>
+                        <span> {{data.forceSpeedDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.hiddenMagic.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.hiddenMagic"}} - </span>
+                        <span> {{data.hiddenMagicDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.lifeMagic}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.lifeMagic"}} - </span>
+                        <span> {{data.lifeMagicDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.secDefense.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.secDefense"}} - </span>
+                        <span> {{data.secureDefenseDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.spiritLoop}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.spiritLoop"}} - </span>
+                        <span> {{data.spiritLoopDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.transferMagic.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.transferMagic"}} - </span>
+                        <span> {{data.transferMagicDesc}} </span>
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="metaMagicDesc">
+                    <h6> {{localize "abfalter.metaMagic.arcPower"}} </h6>
+                    {{#if data.advnacedRegen}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.advZeonRegen"}} - </span>
+                        <span> {{data.advnacedRegenDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.avatar.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.avatar"}} - </span>
+                        <span> {{data.avatarDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.combinedMagic.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.combMagic"}} - </span>
+                        <span> {{data.combinedMagicDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.definedMagicProj}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.definedProject"}} - </span>
+                        <span> {{data.defMagProjDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.elevation.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.elevation"}} - </span>
+                        <span> {{data.elevationDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.exploitEnergy}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.exploitEne"}} - </span>
+                        <span> {{data.exploitEnergyDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.persisEffects.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.perEffe"}} - </span>
+                        <span> {{data.persisEffectDesc}} </span>
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="metaMagicDesc">
+                    <h6> {{localize "abfalter.metaMagic.arcKnowledge"}} </h6>
+                    {{#if data.metaMagic.bindSpells.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.bindSpell"}} - </span>
+                        <span> {{data.bindSpellDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.doubleSpell.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.doubleSpell"}} - </span>
+                        <span> {{data.doubleSpellDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.increRange}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.increRange"}} - </span>
+                        <span> {{data.increRangeDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.maxSpells.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.maxSpells"}} - </span>
+                        <span> {{data.maxSpellsDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.mysticConcen.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.mysticCon"}} - </span>
+                        <span> {{data.mysticConceDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.pierceRes}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.pierceRes"}} - </span>
+                        <span> {{data.pierceResDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.spellSpecialization}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.spellSpec"}} - </span>
+                        <span> {{data.spellSpecializationDesc}} </span>
+                    </div>
+                    {{/if}}
+                    {{#if data.metaMagic.supInnateSpell.bought}}
+                    <div>
+                        <span> {{localize "abfalter.metaMagic.supInnate"}} - </span>
+                        <span> {{data.supInnateDesc}} </span>
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div>
+                    <textarea name="data.metaMagic.info">{{data.metaMagic.info}}</textarea>
+                </div>
             </div>
 
             <div class="invocations {{#if data.toggles.invocationsVis}}hidden{{/if}}">

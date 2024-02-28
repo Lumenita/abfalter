@@ -1,4 +1,5 @@
 import { openModifierDialogue } from "../diceroller.js";
+import { metaMagicSheet } from "./metaMagicSheet.js";
 import { changeSecondaryTemps, changeSecondarySpecs } from "./actorFunctions.js";
 
 export default class abfalterCharacterSheet extends ActorSheet {
@@ -191,6 +192,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
             });
 
             html.find(".changeSecondaryNums").click(this._changeSecNums.bind(this));
+            html.find(".openMetaMagic").click(this._openMetaMagic.bind(this));
 
             html.find(".item-chat").click(this._onItemChatRoll.bind(this));
             html.find('.rollable').click(this._onRoll.bind(this));
@@ -232,6 +234,11 @@ export default class abfalterCharacterSheet extends ActorSheet {
             default:
                 break;
         }
+    }
+
+    _openMetaMagic(event) {
+        event.preventDefault();
+        new metaMagicSheet(this.document).render(true);
     }
 
     _onItemCreate(event) {

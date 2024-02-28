@@ -696,8 +696,10 @@
         "mproj": {
           "base": 0,
           "spec": 0,
+          "spec2": 0,
           "imbalance": 0,
           "temp": 0,
+          "temp2": 0,
           "mtheory": "Standard",
           "status": false
         },
@@ -751,7 +753,281 @@
           }
         },
         "metaMagic": {
-          "info": ""
+          "info": "",
+          "cost": 0,
+          "extraCost": 0,
+          "incDestro": {
+            "bought": false,
+            "free": false
+          },
+          "incDestro2": {
+            "bought": false,
+            "free": false
+          },
+          "empShield": {
+            "bought": false,
+            "free": false
+          },
+          "empShield2": {
+            "bought": false,
+            "free": false
+          },
+          "remProtection": {
+            "bought": false,
+            "free": false
+          },
+          "remProtection2": {
+            "bought": false,
+            "free": false
+          },
+          "remProtection3": {
+            "bought": false,
+            "free": false
+          },
+          "defExper": {
+            "bought": false,
+            "free": false
+          },
+          "defExper2": {
+            "bought": false,
+            "free": false
+          },
+          "defExper3": {
+            "bought": false,
+            "free": false
+          },
+          "mysticAcc": {
+            "bought": false,
+            "free": false
+          },
+          "mysticAcc2": {
+            "bought": false,
+            "free": false
+          },
+          "expArea": {
+            "bought": false,
+            "free": false
+          },
+          "expArea2": {
+            "bought": false,
+            "free": false
+          },
+          "offExper": {
+            "bought": false,
+            "free": false
+          },
+          "offExper2": {
+            "bought": false,
+            "free": false
+          },
+          "offExper3": {
+            "bought": false,
+            "free": false
+          },
+          "doubleDmg": {
+            "bought": false,
+            "free": false
+          },
+          "secDefense": {
+            "bought": false,
+            "free": false
+          },
+          "lifeMagic": {
+            "bought": false,
+            "free": false
+          },
+          "lifeMagic2": {
+            "bought": false,
+            "free": false
+          },
+          "feelMagic": {
+            "bought": false,
+            "free": false
+          },
+          "hiddenMagic": {
+            "bought": false,
+            "free": false
+          },
+          "spiritLoop": {
+            "bought": false,
+            "free": false
+          },
+          "spiritLoop2": {
+            "bought": false,
+            "free": false
+          },
+          "controlSpace": {
+            "bought": false,
+            "free": false
+          },
+          "eneControl": {
+            "bought": false,
+            "free": false
+          },
+          "endureDamage": {
+            "bought": false,
+            "free": false
+          },
+          "transferMagic": {
+            "bought": false,
+            "free": false
+          },
+          "forceSpeed": {
+            "bought": false,
+            "free": false
+          },
+          "forceSpeed2": {
+            "bought": false,
+            "free": false
+          },
+          "forceSpeed3": {
+            "bought": false,
+            "free": false
+          },
+          "doubleInnate": {
+            "bought": false,
+            "free": false
+          },
+          "natMaint": {
+            "bought": false,
+            "free": false
+          },
+          "combinedMagic": {
+            "bought": false,
+            "free": false
+          },
+          "persisEffects": {
+            "bought": false,
+            "free": false
+          },
+          "defMagicProj": {
+            "bought": false,
+            "free": false
+          },
+          "defMagicProj2": {
+            "bought": false,
+            "free": false
+          },
+          "defMagicProj3": {
+            "bought": false,
+            "free": false
+          },
+          "defMagicProj4": {
+            "bought": false,
+            "free": false
+          },
+          "defMagicProj5": {
+            "bought": false,
+            "free": false
+          },
+          "defMagicProj6": {
+            "bought": false,
+            "free": false
+          },
+          "defMagicProj7": {
+            "bought": false,
+            "free": false
+          },
+          "exploitEne": {
+            "bought": false,
+            "free": false
+          },
+          "exploitEne2": {
+            "bought": false,
+            "free": false
+          },
+          "advZeonRegen": {
+            "bought": false,
+            "free": false
+          },
+          "advZeonRegen2": {
+            "bought": false,
+            "free": false
+          },
+          "advZeonRegen3": {
+            "bought": false,
+            "free": false
+          },
+          "elevation": {
+            "bought": false,
+            "free": false
+          },
+          "avatar": {
+            "bought": false,
+            "free": false
+          },
+          "unlimitedZeon": {
+            "bought": false,
+            "free": false
+          },
+          "mysticConcen": {
+            "bought": false,
+            "free": false
+          },
+          "spellSpec30": {
+            "bought": false,
+            "free": false
+          },
+          "spellSpec30x": {
+            "bought": false,
+            "free": false
+          },
+          "spellSpec50": {
+            "bought": false,
+            "free": false
+          },
+          "spellSpec60": {
+            "bought": false,
+            "free": false
+          },
+          "spellSpec60x": {
+            "bought": false,
+            "free": false
+          },
+          "spellSpec70": {
+            "bought": false,
+            "free": false
+          },
+          "spellSpec80": {
+            "bought": false,
+            "free": false
+          },
+          "pierceRes": {
+            "bought": false,
+            "free": false
+          },
+          "pierceRes2": {
+            "bought": false,
+            "free": false
+          },
+          "incRange": {
+            "bought": false,
+            "free": false
+          },
+          "incRange2": {
+            "bought": false,
+            "free": false
+          },
+          "bindSpells": {
+            "bought": false,
+            "free": false
+          },
+          "maxSpells": {
+            "bought": false,
+            "free": false
+          },
+          "doubleSpell": {
+            "bought": false,
+            "free": false
+          },
+          "supInnateSpell": {
+            "bought": false,
+            "free": false
+          },
+          "highMagic": {
+            "bought": false,
+            "free": false
+          }
         }
       },
       "ki": {
@@ -1311,7 +1587,7 @@
           "spec": 0,
           "freepp": 0,
           "desc": "",
-          "status":  false
+          "status": false
         },
         "ppotential": {
           "base": 0,
@@ -1331,7 +1607,6 @@
           "moduleStatus": false
         }
       }
-
     },
     "character": {
       "templates": [ "info", "stats", "mystic", "armory", "psychic", "ki" ]
@@ -1525,6 +1800,10 @@
       "templates": [ "itemDescription" ],
       "difficulty": 0,
       "cost": 0,
+      "atk": "N/A",
+      "def": "N/A",
+      "action": "",
+      "pact": "",
       "expand": false
     },
     "turnMaint": {
@@ -1624,6 +1903,7 @@
       "toggleItem": true
     },
     "proficiency": {
+      "templates": [ "itemDescription" ],
       "type": "Starting",
       "cost": 0,
       "toggleItem": true

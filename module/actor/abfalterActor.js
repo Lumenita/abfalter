@@ -447,10 +447,14 @@ export default class abfalterActor extends Actor {
         data.blkfinal = Math.floor(data.combatstats.blkbase + data.combatstats.blkspecial + data.combatstats.blktemp + data.stats.Dexterity.mod + data.aamFinal);
         data.dodfinal = Math.floor(data.combatstats.dodbase + data.combatstats.dodspecial + data.combatstats.dodtemp + data.stats.Agility.mod + data.aamFinal);
 
-        //Magic Projection
-        data.mprojfinal = Math.floor(data.mproj.base + data.mproj.spec + data.mproj.temp + data.stats.Dexterity.mod + data.aamFinal);
-        data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.imbalance);
-        data.mprojfinaldef = Math.floor(data.mprojfinal - data.mproj.imbalance);
+        //Magic Projection data.mproj.spec + data.mproj.temp
+        data.mprojfinal = Math.floor(data.mproj.base + data.stats.Dexterity.mod + data.aamFinal);
+        data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.spec + data.mproj.temp + data.mproj.imbalance);
+        data.mprojfinaldef = Math.floor(data.mprojfinal + data.mproj.spec2 + data.mproj.temp2 - data.mproj.imbalance);
+
+        data.mprojAtkModule = Math.floor(data.combatstats.atkbase + data.mproj.spec + data.mproj.temp + data.stats.Dexterity.mod + data.aamFinal);
+        data.mprojDefModule = Math.floor(data.combatstats.blkbase + data.mproj.spec2 + data.mproj.temp2 + data.stats.Dexterity.mod + data.aamFinal);
+        data.mprojDodModule = Math.floor(data.combatstats.dodbase + data.mproj.spec2 + data.mproj.temp2 + data.stats.Dexterity.mod + data.aamFinal);
 
         // Psychic Potential
         if (data.stats.Willpower.final < 5) {
@@ -502,6 +506,296 @@ export default class abfalterActor extends Actor {
 
         // Wear Armor
         data.wearArmorFinal = Math.floor(data.wearArmor.base + data.wearArmor.spec + data.wearArmor.temp + data.stats.Strength.mod);
+
+        //MetaMagic Capstones
+        data.doubleDamageDesc = game.i18n.localize('abfalter.metaMagic.doubleDmgDesc');
+        data.highMagicDesc = game.i18n.localize('abfalter.metaMagic.highMagicDesc');
+        data.natMaintDesc = game.i18n.localize('abfalter.metaMagic.natMaintDesc');
+        data.unlimitedZeonDesc = game.i18n.localize('abfalter.metaMagic.unlimitedZeonDesc');
+
+        //MetaMagic Desc Arcane Warfare
+        //empowered shields
+        if (!data.metaMagic.empShield.bought && !data.metaMagic.empShield2.bought) {
+            data.empShields = false;
+            data.empShieldsDesc = "";
+        } else if (data.metaMagic.empShield.bought && data.metaMagic.empShield2.bought) {
+            data.empShields = true;
+            data.empShieldsDesc = game.i18n.localize('abfalter.metaMagic.empShieldDesc2');
+        } else {
+            data.empShields = true;
+            data.empShieldsDesc = game.i18n.localize('abfalter.metaMagic.empShieldDesc1');
+        }
+        //mystic accuracy
+        if (!data.metaMagic.mysticAcc.bought && !data.metaMagic.mysticAcc2.bought) {
+            data.mysticAccu = false;
+            data.mysticAccuDesc = "";
+        } else if (data.metaMagic.mysticAcc.bought && data.metaMagic.mysticAcc2.bought) {
+            data.mysticAccu = true;
+            data.mysticAccuDesc = game.i18n.localize('abfalter.metaMagic.mysticAccuDesc2');
+        } else {
+            data.mysticAccu = true;
+            data.mysticAccuDesc = game.i18n.localize('abfalter.metaMagic.mysticAccuDesc1');
+        }
+        //increased destruction
+        if (!data.metaMagic.incDestro.bought && !data.metaMagic.incDestro2.bought) {
+            data.incDestruction = false;
+            data.incDestructionDesc = "";
+        } else if (data.metaMagic.incDestro.bought && data.metaMagic.incDestro2.bought) {
+            data.incDestruction = true;
+            data.incDestructionDesc = game.i18n.localize('abfalter.metaMagic.incDestroDesc2');
+        } else {
+            data.incDestruction = true;
+            data.incDestructionDesc = game.i18n.localize('abfalter.metaMagic.incDestroDesc1');
+        }
+        //expanded area
+        if (!data.metaMagic.expArea.bought && !data.metaMagic.expArea2.bought) {
+            data.expandArea = false;
+            data.expandAreaDesc = "";
+        } else if (data.metaMagic.expArea.bought && data.metaMagic.expArea2.bought) {
+            data.expandArea = true;
+            data.expandAreaDesc = game.i18n.localize('abfalter.metaMagic.expAreaDesc2');
+        } else {
+            data.expandArea = true;
+            data.expandAreaDesc = game.i18n.localize('abfalter.metaMagic.expAreaDesc1');
+        }
+        //remove protection
+        if (!data.metaMagic.remProtection.bought && !data.metaMagic.remProtection2.bought && !data.metaMagic.remProtection3.bought) {
+            data.removeProtection = false;
+            data.removeProtectionDesc = "";
+        } else if (data.metaMagic.remProtection.bought && data.metaMagic.remProtection2.bought && data.metaMagic.remProtection3.bought) {
+            data.removeProtection = true;
+            data.removeProtectionDesc = game.i18n.localize('abfalter.metaMagic.remProtectDesc3');
+        } else if ((data.metaMagic.remProtection.bought && data.metaMagic.remProtection2.bought) ||
+            (data.metaMagic.remProtection2.bought && data.metaMagic.remProtection3.bought) ||
+            (data.metaMagic.remProtection.bought && data.metaMagic.remProtection3.bought)) {
+            data.removeProtection = true;
+            data.removeProtectionDesc = game.i18n.localize('abfalter.metaMagic.remProtectDesc2');
+        } else {
+            data.removeProtection = true;
+            data.removeProtectionDesc = game.i18n.localize('abfalter.metaMagic.remProtectDesc1');
+        }
+        //defensive expertise
+        if (!data.metaMagic.defExper.bought && !data.metaMagic.defExper2.bought && !data.metaMagic.defExper3.bought) {
+            data.defenseExpertise = false;
+            data.defenseExpertiseDesc = "";
+        } else if (data.metaMagic.defExper.bought && data.metaMagic.defExper2.bought && data.metaMagic.defExper3.bought) {
+            data.defenseExpertise = true;
+            data.defenseExpertiseDesc = game.i18n.localize('abfalter.metaMagic.defExperDesc3');
+        } else if ((data.metaMagic.defExper.bought && data.metaMagic.defExper2.bought) ||
+            (data.metaMagic.defExper2.bought && data.metaMagic.defExper3.bought) ||
+            (data.metaMagic.defExper.bought && data.metaMagic.defExper3.bought)) {
+            data.defenseExpertise = true;
+            data.defenseExpertiseDesc = game.i18n.localize('abfalter.metaMagic.defExperDesc2');
+        } else {
+            data.defenseExpertise = true;
+            data.defenseExpertiseDesc = game.i18n.localize('abfalter.metaMagic.defExperDesc1');
+        }
+        //offensive expertise
+        if (!data.metaMagic.offExper.bought && !data.metaMagic.offExper2.bought && !data.metaMagic.offExper3.bought) {
+            data.offExpertise = false;
+            data.offExpertiseDesc = "";
+        } else if (data.metaMagic.offExper.bought && data.metaMagic.offExper2.bought && data.metaMagic.offExper3.bought) {
+            data.offExpertise = true;
+            data.offExpertiseDesc = game.i18n.localize('abfalter.metaMagic.offExperDesc3');
+        } else if ((data.metaMagic.offExper.bought && data.metaMagic.offExper2.bought) ||
+            (data.metaMagic.offExper2.bought && data.metaMagic.offExper3.bought) ||
+            (data.metaMagic.offExper.bought && data.metaMagic.offExper3.bought)) {
+            data.offExpertise = true;
+            data.offExpertiseDesc = game.i18n.localize('abfalter.metaMagic.offExperDesc2');
+        } else {
+            data.offExpertise = true;
+            data.offExpertiseDesc = game.i18n.localize('abfalter.metaMagic.offExperDesc1');
+        }
+
+        //MetaMagic Desc Arcane Esoterica
+        //secure defense
+        data.secureDefenseDesc = game.i18n.localize('abfalter.metaMagic.secDefenseDesc');
+        //life magic
+        if (!data.metaMagic.lifeMagic.bought && !data.metaMagic.lifeMagic2.bought) {
+            data.lifeMagic = false;
+            data.lifeMagicDesc = "";
+        } else if (data.metaMagic.lifeMagic.bought && data.metaMagic.lifeMagic2.bought) {
+            data.lifeMagic = true;
+            data.lifeMagicDesc = game.i18n.localize('abfalter.metaMagic.lifeMagicDesc2');
+        } else {
+            data.lifeMagic = true;
+            data.lifeMagicDesc = game.i18n.localize('abfalter.metaMagic.lifeMagicDesc1');
+        }
+        //feel magic
+        data.feelMagicDesc = game.i18n.localize('abfalter.metaMagic.feelMagicDesc');
+        //hidden magic
+        data.hiddenMagicDesc = game.i18n.localize('abfalter.metaMagic.hiddenMagicDesc');
+        //spiritual loop
+        if (!data.metaMagic.spiritLoop.bought && !data.metaMagic.spiritLoop2.bought) {
+            data.spiritLoop = false;
+            data.spiritLoopDesc = "";
+        } else if (data.metaMagic.spiritLoop.bought && data.metaMagic.spiritLoop2.bought) {
+            data.spiritLoop = true;
+            data.spiritLoopDesc = game.i18n.localize('abfalter.metaMagic.spiritLoopDesc2');
+        } else {
+            data.spiritLoop = true;
+            data.spiritLoopDesc = game.i18n.localize('abfalter.metaMagic.spiritLoopDesc1');
+        }
+        //control space
+        data.controlSpaceDesc = game.i18n.localize('abfalter.metaMagic.controlSpaceDesc');
+        //energy control
+        data.eneControlDesc = game.i18n.localize('abfalter.metaMagic.eneControlDesc');
+        //endure supernatural damage
+        data.endureDamageDesc = game.i18n.localize('abfalter.metaMagic.endureDamageDesc');
+        //transfer magic
+        data.transferMagicDesc = game.i18n.localize('abfalter.metaMagic.transferMagicDesc');
+        //force speed
+        if (!data.metaMagic.forceSpeed.bought && !data.metaMagic.forceSpeed2.bought && !data.metaMagic.forceSpeed3.bought) {
+            data.forceSpeed = false;
+            data.forceSpeedDesc = "";
+        } else if (data.metaMagic.forceSpeed.bought && data.metaMagic.forceSpeed2.bought && data.metaMagic.forceSpeed3.bought) {
+            data.forceSpeed = true;
+            data.forceSpeedDesc = game.i18n.localize('abfalter.metaMagic.forceSpeed3');
+        } else if ((data.metaMagic.forceSpeed.bought && data.metaMagic.forceSpeed2.bought) ||
+            (data.metaMagic.forceSpeed2.bought && data.metaMagic.forceSpeed3.bought) ||
+            (data.metaMagic.forceSpeed.bought && data.metaMagic.forceSpeed3.bought)) {
+            data.forceSpeed = true;
+            data.forceSpeedDesc = game.i18n.localize('abfalter.metaMagic.forceSpeed2');
+        } else {
+            data.forceSpeed = true;
+            data.forceSpeedDesc = game.i18n.localize('abfalter.metaMagic.forceSpeed1');
+        }
+        //double innate spells
+        data.doubleInnateDesc = game.i18n.localize('abfalter.metaMagic.doubleInnateDesc');
+
+        //MetaMagic Desc Arcane Power
+        //advanced zeon regen
+        if (!data.metaMagic.advZeonRegen.bought && !data.metaMagic.advZeonRegen2.bought && !data.metaMagic.advZeonRegen3.bought) {
+            data.advnacedRegen = false;
+            data.advnacedRegenDesc = "";
+        } else if (data.metaMagic.advZeonRegen.bought && data.metaMagic.advZeonRegen2.bought && data.metaMagic.advZeonRegen3.bought) {
+            data.advnacedRegen = true;
+            data.advnacedRegenDesc = game.i18n.localize('abfalter.metaMagic.advZeonRegenDesc3');
+        } else if ((data.metaMagic.advZeonRegen.bought && data.metaMagic.advZeonRegen2.bought) ||
+            (data.metaMagic.advZeonRegen2.bought && data.metaMagic.advZeonRegen3.bought) ||
+            (data.metaMagic.advZeonRegen.bought && data.metaMagic.advZeonRegen3.bought)) {
+            data.advnacedRegen = true;
+            data.advnacedRegenDesc = game.i18n.localize('abfalter.metaMagic.advZeonRegenDesc2');
+        } else {
+            data.advnacedRegen = true;
+            data.advnacedRegenDesc = game.i18n.localize('abfalter.metaMagic.advZeonRegenDesc1');
+        }
+        //avatar
+        data.avatarDesc = game.i18n.localize('abfalter.metaMagic.avatarDesc');
+        //combined magic
+        data.combinedMagicDesc = game.i18n.localize('abfalter.metaMagic.combinedMagicDesc');
+        //define magic projection
+        data.definedProjNumber = data.metaMagic.defMagicProj.bought + data.metaMagic.defMagicProj2.bought + data.metaMagic.defMagicProj3.bought
+            + data.metaMagic.defMagicProj4.bought + data.metaMagic.defMagicProj5.bought
+            + data.metaMagic.defMagicProj6.bought + data.metaMagic.defMagicProj7.bought;
+        switch (data.definedProjNumber) {
+            case 1:
+                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc1');
+                data.definedMagicProj = true;
+                break;
+            case 2:
+                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc2');
+                data.definedMagicProj = true;
+                break;
+            case 3:
+                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc3');
+                data.definedMagicProj = true;
+                break;
+            case 4:
+                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc4');
+                data.definedMagicProj = true;
+                break;
+            case 5:
+                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc5');
+                data.definedMagicProj = true;
+                break;
+            case 6:
+                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc6');
+                data.definedMagicProj = true;
+                break;
+            case 7:
+                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc7');
+                data.definedMagicProj = true;
+                break;
+            default:
+                data.defMagProjDesc = "";
+                data.definedMagicProj = false;
+                break;
+        }
+        //elevation
+        data.elevationDesc = game.i18n.localize('abfalter.metaMagic.elevationDesc');
+        //exploit energy
+        if (!data.metaMagic.exploitEne.bought && !data.metaMagic.exploitEne2.bought) {
+            data.exploitEnergy = false;
+            data.exploitEnergyDesc = "";
+        } else if (data.metaMagic.exploitEne.bought && data.metaMagic.exploitEne2.bought) {
+            data.exploitEnergy = true;
+            data.exploitEnergyDesc = game.i18n.localize('abfalter.metaMagic.exploitEneDesc2');
+        } else {
+            data.exploitEnergy = true;
+            data.exploitEnergyDesc = game.i18n.localize('abfalter.metaMagic.exploitEneDesc1');
+        }
+        //persistent effects
+        data.persisEffectDesc = game.i18n.localize('abfalter.metaMagic.persisEffectDesc');
+
+        //MetaMagic Desc Arcane Knowledge
+        //mystic concentration
+        data.mysticConceDesc = game.i18n.localize('abfalter.metaMagic.mysticConceDesc');
+        //mystic concentration
+        if (!data.metaMagic.spellSpec80.bought && !data.metaMagic.spellSpec70.bought && !data.metaMagic.spellSpec60.bought
+            && !data.metaMagic.spellSpec60x.bought && !data.metaMagic.spellSpec50.bought && !data.metaMagic.spellSpec30.bought
+            && !data.metaMagic.spellSpec30x.bought) {
+            data.spellSpecialization = false;
+            data.spellSpecializationDesc = "";
+        } else if (data.metaMagic.spellSpec80.bought) {
+            data.spellSpecialization = true;
+            data.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec80Desc');
+        } else if (data.metaMagic.spellSpec70.bought) {
+            data.spellSpecialization = true;
+            data.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec70Desc');
+        } else if (data.metaMagic.spellSpec60.bought || data.metaMagic.spellSpec60x.bought) {
+            data.spellSpecialization = true;
+            data.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec60Desc');
+        } else if (data.metaMagic.spellSpec50.bought) {
+            data.spellSpecialization = true;
+            data.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec50Desc');
+        } else {
+            data.spellSpecialization = true;
+            data.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec30Desc');
+        }
+        //pierce resistances
+        if (!data.metaMagic.pierceRes.bought && !data.metaMagic.pierceRes2.bought) {
+            data.pierceRes = false;
+            data.pierceResDesc = "";
+        } else if (data.metaMagic.pierceRes.bought && data.metaMagic.pierceRes2.bought) {
+            data.pierceRes = true;
+            data.pierceResDesc = game.i18n.localize('abfalter.metaMagic.pierceResDesc2');
+        } else {
+            data.pierceRes = true;
+            data.pierceResDesc = game.i18n.localize('abfalter.metaMagic.pierceResDesc1');
+        }
+        //increase range
+        if (!data.metaMagic.incRange.bought && !data.metaMagic.incRange2.bought) {
+            data.increRange = false;
+            data.increRangeDesc = "";
+        } else if (data.metaMagic.incRange.bought && data.metaMagic.incRange2.bought) {
+            data.increRange = true;
+            data.increRangeDesc = game.i18n.localize('abfalter.metaMagic.increRangeDesc2');
+        } else {
+            data.increRange = true;
+            data.increRangeDesc = game.i18n.localize('abfalter.metaMagic.increRangeDesc1');
+        }
+        //bind spells
+        data.bindSpellDesc = game.i18n.localize('abfalter.metaMagic.bindSpellDesc');
+        //maximize spells
+        data.maxSpellsDesc = game.i18n.localize('abfalter.metaMagic.maxSpellsDesc');
+        //double spells
+        data.doubleSpellDesc = game.i18n.localize('abfalter.metaMagic.doubleSpellDesc');
+        //superior innate spell
+        data.supInnateDesc = game.i18n.localize('abfalter.metaMagic.supInnateDesc');
+
+        //ML Calculation
+        data.metaCost = data.metaMagic.cost + data.metaMagic.extraCost;
     }
 
     prepareEmbeddedDocuments() {
@@ -1910,7 +2204,7 @@ export default class abfalterActor extends Actor {
         data.mlLevels = pathLvl;
         data.spellLevels = spellCost;
         data.mlevelfinal = Math.floor(data.mlevel.base + data.mlevel.spec + data.mlevel.temp + data.mlevelint);
-        data.mlevelused = Math.floor(data.mlLevels + data.spellLevels);
+        data.mlevelused = Math.floor(data.mlLevels + data.spellLevels + data.metaCost);
 
         // Summoning Abilities
         data.summonbonus = summon;

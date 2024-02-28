@@ -44,7 +44,7 @@ Hooks.once("ready", function () {
     }
 
     const currentVersion = game.settings.get("abfalter", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "1.0.1";
+    const NEEDS_MIGRATION_VERSION = "1.1.1";
 
     const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
 

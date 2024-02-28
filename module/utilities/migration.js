@@ -1,21 +1,23 @@
 function migrateActorData(actor) {
     let updateData = {};
 
-    console.log(actor);
-    if (actor.fatigue) {
-        updateData["system.fatigue.value"] = actor.fatigue.actual;
+    if (actor.metaMagic) {
+        updateData["system.metaMagic.cost"] = 0;
+        updateData["system.metaMagic.extraCost"] = 0;
+        for (let [key, meta] of Object.entries(actor.metaMagic)) {
+            if (key !== "info" && key !== "cost" && key !== "extraCost") {
+                let path = "system.metaMagic." + key + ".bought";
+                let path2 = "system.metaMagic." + key + ".free";
+                updateData[path] = false;
+                updateData[path2] = false;
+            }
+        }
     }
-    if (actor.kiPool) {
-        updateData["system.unifiedKi.value"] = actor.kiPool.unified;
-    }
-    if (actor.zeon) {
-        updateData["system.zeon.value"] = actor.zeon.actual;
-    }
-    if (actor.ppoint) {
-        updateData["system.psychicPoint.value"] = actor.ppoint.freepp;
-    }
-    if (actor.innate) {
-        updateData["system.innatePowerKi.value"] = actor.innate.actual;
+
+    if (actor.mproj) {
+        updateData["system.mproj.spec2"] = 0;
+        updateData["system.mproj.temp2"] = 0;
+
     }
     return updateData;
 }

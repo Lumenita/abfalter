@@ -1,0 +1,952 @@
+<form class="baseAbfalter" autocomplete="off">
+    <div class="metaMagicGUI">
+        <div class="arcanaTitle" style="grid-column:2/9; grid-row:1">
+            <h5> {{localize "abfalter.metaMagic.arcTitle"}} </h5>
+        </div>
+        <div class="arcanaTip" style="grid-column:2/9; grid-row:2">
+            <h6> {{localize "abfalter.metaMagic.arcTip"}} </h6>
+        </div>
+        <!-- Start of Top Column -->
+        <div class="bubble {{#if data.metaMagic.incDestro.bought}}{{#if data.metaMagic.incDestro.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 12; grid-row: 1;"
+             data-label="data.metaMagic.incDestro.bought" data-label2="data.metaMagic.incDestro.free" data-ability="{{data.metaMagic.incDestro.bought}}"
+             data-ability2="{{data.metaMagic.incDestro.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.incStrength"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.incDestro.bought}}bubbleBought{{/if}} {{#if data.metaMagic.empShield.bought}}bubbleBought{{/if}}"
+             style="grid-column: 11; grid-row: 1; transform: rotate(-35deg); border-bottom: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.incDestro.bought}}bubbleBought{{/if}} {{#if data.metaMagic.remProtection.bought}}bubbleBought{{/if}}"
+             style="grid-column: 13; grid-row: 1; transform: rotate(35deg); border-bottom: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.incDestro.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defExper.bought}}bubbleBought{{/if}}"
+             style="grid-column: 12; grid-row: 2/3; width: 45px; border-right: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetWide {{#if data.metaMagic.empShield.bought}}{{#if data.metaMagic.empShield.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 10 / 12; grid-row: 2;"
+             data-label="data.metaMagic.empShield.bought" data-label2="data.metaMagic.empShield.free" data-ability="{{data.metaMagic.empShield.bought}}"
+             data-ability2="{{data.metaMagic.empShield.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.empShields"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.empShield.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defExper.bought}}bubbleBought{{/if}}"
+             style="grid-column: 11; grid-row: 3; transform: rotate(35deg); border-top: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.empShield.bought}}bubbleBought{{/if}} {{#if data.metaMagic.expArea.bought}}bubbleBought{{/if}}"
+             style="grid-column: 10; grid-row: 3/4; transform: rotate(-90deg); border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetWide {{#if data.metaMagic.remProtection.bought}}{{#if data.metaMagic.remProtection.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 13 / 15; grid-row: 2;"
+             data-label="data.metaMagic.remProtection.bought" data-label2="data.metaMagic.remProtection.free" data-ability="{{data.metaMagic.remProtection.bought}}"
+             data-ability2="{{data.metaMagic.remProtection.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.remProtect"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.remProtection.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defExper.bought}}bubbleBought{{/if}}"
+             style="grid-column: 13; grid-row: 3; transform: rotate(-35deg); border-top: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.remProtection.bought}}bubbleBought{{/if}} {{#if data.metaMagic.mysticAcc.bought}}bubbleBought{{/if}}"
+             style="grid-column: 14; grid-row: 3; transform: rotate(-90deg); border-top: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.defExper.bought}}{{#if data.metaMagic.defExper.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 12; grid-row: 3;"
+             data-label="data.metaMagic.defExper.bought" data-label2="data.metaMagic.defExper.free" data-ability="{{data.metaMagic.defExper.bought}}"
+             data-ability2="{{data.metaMagic.defExper.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.defExper"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.defExper.bought}}bubbleBought{{/if}} {{#if data.metaMagic.expArea.bought}}bubbleBought{{/if}}"
+             style="grid-column: 11; grid-row: 3; transform: rotate(-35deg); border-bottom: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.defExper.bought}}bubbleBought{{/if}} {{#if data.metaMagic.mysticAcc.bought}}bubbleBought{{/if}}"
+             style="grid-column: 13; grid-row: 3; transform: rotate(35deg); border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetWide {{#if data.metaMagic.expArea.bought}}{{#if data.metaMagic.expArea.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 10 / 12; grid-row: 4;"
+             data-label="data.metaMagic.expArea.bought" data-label2="data.metaMagic.expArea.free" data-ability="{{data.metaMagic.expArea.bought}}"
+             data-ability2="{{data.metaMagic.expArea.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> 3 </span>
+                <span> {{localize "abfalter.metaMagic.expArea"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.expArea.bought}}bubbleBought{{/if}} {{#if data.metaMagic.offExper.bought}}bubbleBought{{/if}}"
+             style="grid-column: 11; grid-row: 5; transform: rotate(35deg); border-top: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.expArea.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defExper2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 10; grid-row: 5/8; border-right: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetWide {{#if data.metaMagic.mysticAcc.bought}}{{#if data.metaMagic.mysticAcc.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 13 / 15; grid-row: 4;"
+             data-label="data.metaMagic.mysticAcc.bought" data-label2="data.metaMagic.mysticAcc.free" data-ability="{{data.metaMagic.mysticAcc.bought}}"
+             data-ability2="{{data.metaMagic.mysticAcc.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 2 </span>
+                <span> {{localize "abfalter.metaMagic.mysticAccu"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.mysticAcc.bought}}bubbleBought{{/if}} {{#if data.metaMagic.offExper.bought}}bubbleBought{{/if}}"
+             style="grid-column: 13; grid-row: 5; transform: rotate(-35deg); border-top: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.mysticAcc.bought}}bubbleBought{{/if}} {{#if data.metaMagic.expArea2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 14; grid-row: 5/8; border-left: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.offExper.bought}}{{#if data.metaMagic.offExper.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 12; grid-row: 5;"
+             data-label="data.metaMagic.offExper.bought" data-label2="data.metaMagic.offExper.free" data-ability="{{data.metaMagic.offExper.bought}}"
+             data-ability2="{{data.metaMagic.offExper.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> 4 </span>
+                <span> {{localize "abfalter.metaMagic.offeExper"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.offExper.bought}}bubbleBought{{/if}} {{#if data.metaMagic.mysticAcc2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 12; grid-row: 6/7; width: 45px; border-right: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.mysticAcc2.bought}}{{#if data.metaMagic.mysticAcc2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 12; grid-row: 7;"
+             data-label="data.metaMagic.mysticAcc2.bought" data-label2="data.metaMagic.mysticAcc2.free" data-ability="{{data.metaMagic.mysticAcc2.bought}}"
+             data-ability2="{{data.metaMagic.mysticAcc2.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> 6 </span>
+                <span> {{localize "abfalter.metaMagic.mysticAccu"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+
+        <div class="bubble bubbleOffsetWide {{#if data.metaMagic.defExper2.bought}}{{#if data.metaMagic.defExper2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 10 / 12; grid-row: 8;"
+             data-label="data.metaMagic.defExper2.bought" data-label2="data.metaMagic.defExper2.free" data-ability="{{data.metaMagic.defExper2.bought}}"
+             data-ability2="{{data.metaMagic.defExper2.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> 6 </span>
+                <span> {{localize "abfalter.metaMagic.defExper"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.defExper2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.offExper2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 11; grid-row: 9; transform: rotate(35deg); border-top: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetWide {{#if data.metaMagic.expArea2.bought}}{{#if data.metaMagic.expArea2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 13 / 15; grid-row: 8;"
+             data-label="data.metaMagic.expArea2.bought" data-label2="data.metaMagic.expArea2.free" data-ability="{{data.metaMagic.expArea2.bought}}"
+             data-ability2="{{data.metaMagic.expArea2.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> 6 </span>
+                <span> {{localize "abfalter.metaMagic.expArea"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.expArea2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.offExper2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 13; grid-row: 9; transform: rotate(-35deg); border-top: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.offExper2.bought}}{{#if data.metaMagic.offExper2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 12; grid-row: 9;"
+             data-label="data.metaMagic.offExper2.bought" data-label2="data.metaMagic.offExper2.free" data-ability="{{data.metaMagic.offExper2.bought}}"
+             data-ability2="{{data.metaMagic.offExper2.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> 7 </span>
+                <span> {{localize "abfalter.metaMagic.offeExper"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.offExper2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.doubleDmg.bought}}bubbleBought{{/if}}"
+             style="grid-column: 11/13; grid-row: 10; transform: rotate(-35deg); border-top: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetCapstone {{#if data.metaMagic.doubleDmg.bought}}{{#if data.metaMagic.doubleDmg.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 10 / 12; grid-row: 10 / 12;"
+             data-label="data.metaMagic.doubleDmg.bought" data-label2="data.metaMagic.doubleDmg.free" data-ability="{{data.metaMagic.doubleDmg.bought}}"
+             data-ability2="{{data.metaMagic.doubleDmg.free}}" data-value="20">
+            <div class="bubbleInfoCap">
+                <span> 10 </span>
+                <span> {{localize "abfalter.metaMagic.doubleDmg"}} </span>
+                <span> 20 </span>
+            </div>
+        </div>
+        <!-- End of Top Column -->
+        <!-- Start of Top-Left Block -->
+        <div class="bubble {{#if data.metaMagic.remProtection2.bought}}{{#if data.metaMagic.remProtection2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 7; grid-row: 4;"
+             data-label="data.metaMagic.remProtection2.bought" data-label2="data.metaMagic.remProtection2.free" data-ability="{{data.metaMagic.remProtection2.bought}}"
+             data-ability2="{{data.metaMagic.remProtection2.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.remProtect"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.remProtection2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.expArea.bought}}bubbleBought{{/if}}"
+             style="grid-column: 8/11; grid-row: 4; height: 45px; border-bottom: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.remProtection2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.empShield2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 4/7; grid-row: 4; height: 45px; border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.empShield2.bought}}{{#if data.metaMagic.empShield2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 3; grid-row: 4;"
+             data-label="data.metaMagic.empShield2.bought" data-label2="data.metaMagic.empShield2.free" data-ability="{{data.metaMagic.empShield2.bought}}"
+             data-ability2="{{data.metaMagic.empShield2.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 4 </span>
+                <span> {{localize "abfalter.metaMagic.empShields"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.empShield2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defExper3.bought}}bubbleBought{{/if}}"
+             style="grid-column: 3/6; grid-row: 5; transform: rotate(45deg); height: 40px; border-bottom: 5px solid #383838; "></div>
+
+        <div class="bubble {{#if data.metaMagic.defExper3.bought}}{{#if data.metaMagic.defExper3.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 5; grid-row: 6;"
+             data-label="data.metaMagic.defExper3.bought" data-label2="data.metaMagic.defExper3.free" data-ability="{{data.metaMagic.defExper3.bought}}"
+             data-ability2="{{data.metaMagic.defExper3.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> 5 </span>
+                <span> {{localize "abfalter.metaMagic.defExper"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.defExper3.bought}}bubbleBought{{/if}} {{#if data.metaMagic.forceSpeed2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 5/8; grid-row: 7; transform: rotate(45deg); height: 40px; border-bottom: 5px solid #383838; "></div>
+
+        <div class="bubble {{#if data.metaMagic.forceSpeed2.bought}}{{#if data.metaMagic.forceSpeed2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 7; grid-row: 8;"
+             data-label="data.metaMagic.forceSpeed2.bought" data-label2="data.metaMagic.forceSpeed2.free" data-ability="{{data.metaMagic.forceSpeed2.bought}}"
+             data-ability2="{{data.metaMagic.forceSpeed2.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 2 </span>
+                <span> {{localize "abfalter.metaMagic.forceSpeed"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.forceSpeed2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.feelMagic.bought}}bubbleBought{{/if}}"
+             style="grid-column: 4/7; grid-row: 8; height: 45px; border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.feelMagic.bought}}{{#if data.metaMagic.feelMagic.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 3; grid-row: 8;"
+             data-label="data.metaMagic.feelMagic.bought" data-label2="data.metaMagic.feelMagic.free" data-ability="{{data.metaMagic.feelMagic.bought}}"
+             data-ability2="{{data.metaMagic.feelMagic.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.feelMagic"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.feelMagic.bought}}bubbleBought{{/if}} {{#if data.metaMagic.transferMagic.bought}}bubbleBought{{/if}}"
+             style="grid-column: 4; grid-row: 8/11; transform: rotate(-25deg); border-left: 5px solid #383838;"></div>
+
+        <!-- End of Top-Left Block -->
+        <!-- Start of Left Column Block -->
+        <div class="bubble {{#if data.metaMagic.lifeMagic.bought}}{{#if data.metaMagic.lifeMagic.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 1; grid-row: 12;"
+             data-label="data.metaMagic.lifeMagic.bought" data-label2="data.metaMagic.lifeMagic.free" data-ability="{{data.metaMagic.lifeMagic.bought}}"
+             data-ability2="{{data.metaMagic.lifeMagic.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.lifeMagic"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.lifeMagic.bought}}bubbleBought{{/if}} {{#if data.metaMagic.secDefense.bought}}bubbleBought{{/if}}"
+             style="grid-column: 1; grid-row: 11; transform: rotate(35deg); border-right: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.lifeMagic.bought}}bubbleBought{{/if}} {{#if data.metaMagic.forceSpeed.bought}}bubbleBought{{/if}}"
+             style="grid-column: 1; grid-row: 13; transform: rotate(-35deg); border-right: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.lifeMagic.bought}}bubbleBought{{/if}} {{#if data.metaMagic.eneControl.bought}}bubbleBought{{/if}}"
+             style="grid-column: 2; grid-row: 12/14; transform: rotate(90deg); border-left: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetTall {{#if data.metaMagic.secDefense.bought}}{{#if data.metaMagic.secDefense.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 2; grid-row: 10 / 12;"
+             data-label="data.metaMagic.secDefense.bought" data-label2="data.metaMagic.secDefense.free" data-ability="{{data.metaMagic.secDefense.bought}}"
+             data-ability2="{{data.metaMagic.secDefense.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.secDefense"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.secDefense.bought}}bubbleBought{{/if}} {{#if data.metaMagic.eneControl.bought}}bubbleBought{{/if}}"
+             style="grid-column: 3; grid-row: 11; transform: rotate(-35deg); border-left: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.secDefense.bought}}bubbleBought{{/if}} {{#if data.metaMagic.transferMagic.bought}}bubbleBought{{/if}}"
+             style="grid-column: 3; grid-row: 10; transform: rotate(90deg); border-right: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetTall {{#if data.metaMagic.forceSpeed.bought}}{{#if data.metaMagic.forceSpeed.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 2; grid-row: 13 / 15;"
+             data-label="data.metaMagic.forceSpeed.bought" data-label2="data.metaMagic.forceSpeed.free" data-ability="{{data.metaMagic.forceSpeed.bought}}"
+             data-ability2="{{data.metaMagic.forceSpeed.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.forceSpeed"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.forceSpeed.bought}}bubbleBought{{/if}} {{#if data.metaMagic.eneControl.bought}}bubbleBought{{/if}}"
+             style="grid-column: 3; grid-row: 13; transform: rotate(35deg); border-left: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.forceSpeed.bought}}bubbleBought{{/if}} {{#if data.metaMagic.endureDamage.bought}}bubbleBought{{/if}}"
+             style="grid-column: 3; grid-row: 14; transform: rotate(90deg); border-left: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.eneControl.bought}}{{#if data.metaMagic.eneControl.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 3; grid-row: 12;"
+             data-label="data.metaMagic.eneControl.bought" data-label2="data.metaMagic.eneControl.free" data-ability="{{data.metaMagic.eneControl.bought}}"
+             data-ability2="{{data.metaMagic.eneControl.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.eneControl"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.eneControl.bought}}bubbleBought{{/if}} {{#if data.metaMagic.transferMagic.bought}}bubbleBought{{/if}}"
+             style="grid-column: 3; grid-row: 11; transform: rotate(35deg); border-right: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.eneControl.bought}}bubbleBought{{/if}} {{#if data.metaMagic.endureDamage.bought}}bubbleBought{{/if}}"
+             style="grid-column: 3; grid-row: 13; transform: rotate(-35deg); border-right: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetTall {{#if data.metaMagic.transferMagic.bought}}{{#if data.metaMagic.transferMagic.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 4; grid-row: 10 / 12;"
+             data-label="data.metaMagic.transferMagic.bought" data-label2="data.metaMagic.transferMagic.free" data-ability="{{data.metaMagic.transferMagic.bought}}"
+             data-ability2="{{data.metaMagic.transferMagic.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> 3 </span>
+                <span> {{localize "abfalter.metaMagic.transferMagic"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.transferMagic.bought}}bubbleBought{{/if}} {{#if data.metaMagic.lifeMagic2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 5; grid-row: 11; transform: rotate(-35deg); border-left: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.transferMagic.bought}}bubbleBought{{/if}} {{#if data.metaMagic.controlSpace.bought}}bubbleBought{{/if}}"
+             style="grid-column: 5/8; grid-row: 10; border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetTall {{#if data.metaMagic.endureDamage.bought}}{{#if data.metaMagic.endureDamage.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 4; grid-row: 13 / 15;"
+             data-label="data.metaMagic.endureDamage.bought" data-label2="data.metaMagic.endureDamage.free" data-ability="{{data.metaMagic.endureDamage.bought}}"
+             data-ability2="{{data.metaMagic.endureDamage.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> 3 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.endureDamage"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.endureDamage.bought}}bubbleBought{{/if}} {{#if data.metaMagic.lifeMagic2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 5; grid-row: 13; transform: rotate(35deg); border-left: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.endureDamage.bought}}bubbleBought{{/if}} {{#if data.metaMagic.spiritLoop2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 5/8; grid-row: 14; border-top: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.lifeMagic2.bought}}{{#if data.metaMagic.lifeMagic2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 5; grid-row: 12;"
+             data-label="data.metaMagic.lifeMagic2.bought" data-label2="data.metaMagic.lifeMagic2.free" data-ability="{{data.metaMagic.lifeMagic2.bought}}"
+             data-ability2="{{data.metaMagic.lifeMagic2.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 3 </span>
+                <span> {{localize "abfalter.metaMagic.lifeMagic"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.lifeMagic2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.spiritLoop.bought}}bubbleBought{{/if}}"
+             style="grid-column: 6; grid-row: 12/14; transform: rotate(90deg); border-left: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.spiritLoop.bought}}{{#if data.metaMagic.spiritLoop.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 7; grid-row: 12;"
+             data-label="data.metaMagic.spiritLoop.bought" data-label2="data.metaMagic.spiritLoop.free" data-ability="{{data.metaMagic.spiritLoop.bought}}"
+             data-ability2="{{data.metaMagic.spiritLoop.free}}" data-value="15">
+            <div class="bubbleInfo">
+                <span> 6 </span>
+                <span> {{localize "abfalter.metaMagic.spiritLoop"}} </span>
+                <span> 15 </span>
+            </div>
+        </div>
+
+        <div class="bubble bubbleOffsetTall {{#if data.metaMagic.controlSpace.bought}}{{#if data.metaMagic.controlSpace.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 8; grid-row: 10 / 12;"
+             data-label="data.metaMagic.controlSpace.bought" data-label2="data.metaMagic.controlSpace.free" data-ability="{{data.metaMagic.controlSpace.bought}}"
+             data-ability2="{{data.metaMagic.controlSpace.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> 6 </span>
+                <span> {{localize "abfalter.metaMagic.controlSpace"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.controlSpace.bought}}bubbleBought{{/if}} {{#if data.metaMagic.doubleInnate.bought}}bubbleBought{{/if}}"
+             style="grid-column: 9; grid-row: 11; transform: rotate(-35deg); border-left: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetTall {{#if data.metaMagic.spiritLoop2.bought}}{{#if data.metaMagic.spiritLoop2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 8; grid-row: 13 / 15;"
+             data-label="data.metaMagic.spiritLoop2.bought" data-label2="data.metaMagic.spiritLoop2.free" data-ability="{{data.metaMagic.spiritLoop2.bought}}"
+             data-ability2="{{data.metaMagic.spiritLoop2.free}}" data-value="25">
+            <div class="bubbleInfo">
+                <span> 9 </span>
+                <span> {{localize "abfalter.metaMagic.spiritLoop"}} </span>
+                <span> 25 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.spiritLoop2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.doubleInnate.bought}}bubbleBought{{/if}}"
+             style="grid-column: 9; grid-row: 13; transform: rotate(35deg); border-left: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.doubleInnate.bought}}{{#if data.metaMagic.doubleInnate.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 9; grid-row: 12;"
+             data-label="data.metaMagic.doubleInnate.bought" data-label2="data.metaMagic.doubleInnate.free" data-ability="{{data.metaMagic.doubleInnate.bought}}"
+             data-ability2="{{data.metaMagic.doubleInnate.free}}" data-value="20">
+            <div class="bubbleInfo">
+                <span> 7 </span>
+                <span> {{localize "abfalter.metaMagic.doubleInnate"}} </span>
+                <span> 20 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.doubleInnate.bought}}bubbleBought{{/if}} {{#if data.metaMagic.natMaint.bought}}bubbleBought{{/if}}"
+             style="grid-column: 10; grid-row: 12/14; transform: rotate(-35deg); border-left: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetCapstone {{#if data.metaMagic.natMaint.bought}}{{#if data.metaMagic.natMaint.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 10 / 12; grid-row: 13 / 15;"
+             data-label="data.metaMagic.natMaint.bought" data-label2="data.metaMagic.natMaint.free" data-ability="{{data.metaMagic.natMaint.bought}}"
+             data-ability2="{{data.metaMagic.natMaint.free}}" data-value="20">
+            <div class="bubbleInfoCap">
+                <span> 10 </span>
+                <span> {{localize "abfalter.metaMagic.natMaint"}} </span>
+                <span> 20 </span>
+            </div>
+        </div>
+        <!-- End of Left Column Block -->
+        <!-- Start of Bottom-Left Block -->
+        <div class="bubble {{#if data.metaMagic.hiddenMagic.bought}}{{#if data.metaMagic.hiddenMagic.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 3; grid-row: 16;"
+             data-label="data.metaMagic.hiddenMagic.bought" data-label2="data.metaMagic.hiddenMagic.free" data-ability="{{data.metaMagic.hiddenMagic.bought}}"
+             data-ability2="{{data.metaMagic.hiddenMagic.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.hiddenMagic"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.hiddenMagic.bought}}bubbleBought{{/if}} {{#if data.metaMagic.endureDamage.bought}}bubbleBought{{/if}}"
+             style="grid-column: 4; grid-row: 14/17; transform: rotate(25deg); border-left: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.hiddenMagic.bought}}bubbleBought{{/if}} {{#if data.metaMagic.forceSpeed3.bought}}bubbleBought{{/if}}"
+             style="grid-column: 4/7; grid-row: 16; height: 45px; border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.forceSpeed3.bought}}{{#if data.metaMagic.forceSpeed3.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 7; grid-row: 16;"
+             data-label="data.metaMagic.forceSpeed3.bought" data-label2="data.metaMagic.forceSpeed3.free" data-ability="{{data.metaMagic.forceSpeed3.bought}}"
+             data-ability2="{{data.metaMagic.forceSpeed3.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 2 </span>
+                <span> {{localize "abfalter.metaMagic.forceSpeed"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.forceSpeed3.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defMagicProj6.bought}}bubbleBought{{/if}}"
+             style="grid-column: 5/8; grid-row: 17; transform: rotate(-45deg); height: 40px; border-bottom: 5px solid #383838; "></div>
+
+        <div class="bubble {{#if data.metaMagic.defMagicProj6.bought}}{{#if data.metaMagic.defMagicProj6.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 5; grid-row: 18;"
+             data-label="data.metaMagic.defMagicProj6.bought" data-label2="data.metaMagic.defMagicProj6.free" data-ability="{{data.metaMagic.defMagicProj6.bought}}"
+             data-ability2="{{data.metaMagic.defMagicProj6.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 5 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.definedProject"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.defMagicProj6.bought}}bubbleBought{{/if}} {{#if data.metaMagic.advZeonRegen3.bought}}bubbleBought{{/if}}"
+             style="grid-column: 3/6; grid-row: 19; transform: rotate(-45deg); height: 40px; border-bottom: 5px solid #383838; "></div>
+
+        <div class="bubble {{#if data.metaMagic.advZeonRegen3.bought}}{{#if data.metaMagic.advZeonRegen3.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 3; grid-row: 20;"
+             data-label="data.metaMagic.advZeonRegen3.bought" data-label2="data.metaMagic.advZeonRegen3.free" data-ability="{{data.metaMagic.advZeonRegen3.bought}}"
+             data-ability2="{{data.metaMagic.advZeonRegen3.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 5 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.advZeonRegen"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.advZeonRegen3.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defMagicProj5.bought}}bubbleBought{{/if}}"
+             style="grid-column: 4/7; grid-row: 20; height: 45px; border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.defMagicProj5.bought}}{{#if data.metaMagic.defMagicProj5.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 7; grid-row: 20;"
+             data-label="data.metaMagic.defMagicProj5.bought" data-label2="data.metaMagic.defMagicProj5.free" data-ability="{{data.metaMagic.defMagicProj5.bought}}"
+             data-ability2="{{data.metaMagic.defMagicProj5.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 4 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.definedProject"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.defMagicProj5.bought}}bubbleBought{{/if}} {{#if data.metaMagic.combinedMagic.bought}}bubbleBought{{/if}}"
+             style="grid-column: 8/11; grid-row: 20; height: 45px; border-bottom: 5px solid #383838;"></div>
+        <!-- End of Bottom-Left Block -->
+        <!-- Start of Bottom Column Block -->
+        <div class="bubble {{#if data.metaMagic.defMagicProj.bought}}{{#if data.metaMagic.defMagicProj.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 12; grid-row: 23;"
+             data-label="data.metaMagic.defMagicProj.bought" data-label2="data.metaMagic.defMagicProj.free" data-ability="{{data.metaMagic.defMagicProj.bought}}"
+             data-ability2="{{data.metaMagic.defMagicProj.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.definedProject"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.defMagicProj.bought}}bubbleBought{{/if}} {{#if data.metaMagic.advZeonRegen.bought}}bubbleBought{{/if}}"
+             style="grid-column: 11; grid-row: 23; transform: rotate(35deg); border-top: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.defMagicProj.bought}}bubbleBought{{/if}} {{#if data.metaMagic.exploitEne.bought}}bubbleBought{{/if}}"
+             style="grid-column: 13; grid-row: 23; transform: rotate(-35deg); border-top: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.defMagicProj.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defMagicProj2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 12; grid-row: 22/23; width: 45px; border-right: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetWide {{#if data.metaMagic.advZeonRegen.bought}}{{#if data.metaMagic.advZeonRegen.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 10 / 12; grid-row: 22;"
+             data-label="data.metaMagic.advZeonRegen.bought" data-label2="data.metaMagic.advZeonRegen.free" data-ability="{{data.metaMagic.advZeonRegen.bought}}"
+             data-ability2="{{data.metaMagic.advZeonRegen.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.advZeonRegen"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.advZeonRegen.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defMagicProj2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 11; grid-row: 21; transform: rotate(-35deg); border-bottom: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.advZeonRegen.bought}}bubbleBought{{/if}} {{#if data.metaMagic.combinedMagic.bought}}bubbleBought{{/if}}"
+             style="grid-column: 10; grid-row: 21/22; transform: rotate(-90deg); border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetWide {{#if data.metaMagic.exploitEne.bought}}{{#if data.metaMagic.exploitEne.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 13 / 15; grid-row: 22;"
+             data-label="data.metaMagic.exploitEne.bought" data-label2="data.metaMagic.exploitEne.free" data-ability="{{data.metaMagic.exploitEne.bought}}"
+             data-ability2="{{data.metaMagic.exploitEne.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.exploitEne"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.exploitEne.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defMagicProj2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 13; grid-row: 21; transform: rotate(35deg); border-bottom: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.exploitEne.bought}}bubbleBought{{/if}} {{#if data.metaMagic.persisEffects.bought}}bubbleBought{{/if}}"
+             style="grid-column: 14; grid-row: 21/22; transform: rotate(-90deg); border-top: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.defMagicProj2.bought}}{{#if data.metaMagic.defMagicProj2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 12; grid-row: 21;"
+             data-label="data.metaMagic.defMagicProj2.bought" data-label2="data.metaMagic.defMagicProj2.free" data-ability="{{data.metaMagic.defMagicProj2.bought}}"
+             data-ability2="{{data.metaMagic.defMagicProj2.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.definedProject"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.defMagicProj2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.combinedMagic.bought}}bubbleBought{{/if}}"
+             style="grid-column: 11; grid-row: 21; transform: rotate(35deg); border-top: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.defMagicProj2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.persisEffects.bought}}bubbleBought{{/if}}"
+             style="grid-column: 13; grid-row: 21; transform: rotate(-35deg); border-top: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetWide {{#if data.metaMagic.combinedMagic.bought}}{{#if data.metaMagic.combinedMagic.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 10 / 12; grid-row: 20;"
+             data-label="data.metaMagic.combinedMagic.bought" data-label2="data.metaMagic.combinedMagic.free" data-ability="{{data.metaMagic.combinedMagic.bought}}"
+             data-ability2="{{data.metaMagic.combinedMagic.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 3 </span>
+                <span> {{localize "abfalter.metaMagic.combMagic"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.combinedMagic.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defMagicProj3.bought}}bubbleBought{{/if}}"
+             style="grid-column: 11; grid-row: 19; transform: rotate(-35deg); border-bottom: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.combinedMagic.bought}}bubbleBought{{/if}} {{#if data.metaMagic.advZeonRegen2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 10; grid-row: 17/20; border-right: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetWide {{#if data.metaMagic.persisEffects.bought}}{{#if data.metaMagic.persisEffects.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 13 / 15; grid-row: 20;"
+             data-label="data.metaMagic.persisEffects.bought" data-label2="data.metaMagic.persisEffects.free" data-ability="{{data.metaMagic.persisEffects.bought}}"
+             data-ability2="{{data.metaMagic.persisEffects.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 3 </span>
+                <span> {{localize "abfalter.metaMagic.perEffe"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.persisEffects.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defMagicProj3.bought}}bubbleBought{{/if}}"
+             style="grid-column: 13; grid-row: 19; transform: rotate(35deg); border-bottom: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.persisEffects.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defMagicProj4.bought}}bubbleBought{{/if}}"
+             style="grid-column: 14; grid-row: 17/20; border-left: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.defMagicProj3.bought}}{{#if data.metaMagic.defMagicProj3.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 12; grid-row: 19;"
+             data-label="data.metaMagic.defMagicProj3.bought" data-label2="data.metaMagic.defMagicProj3.free" data-ability="{{data.metaMagic.defMagicProj3.bought}}"
+             data-ability2="{{data.metaMagic.defMagicProj3.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 6 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.definedProject"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.defMagicProj3.bought}}bubbleBought{{/if}} {{#if data.metaMagic.elevation.bought}}bubbleBought{{/if}}"
+             style="grid-column: 12; grid-row: 18/19; width: 45px; border-right: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.elevation.bought}}{{#if data.metaMagic.elevation.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 12; grid-row: 17;"
+             data-label="data.metaMagic.elevation.bought" data-label2="data.metaMagic.elevation.free" data-ability="{{data.metaMagic.elevation.bought}}"
+             data-ability2="{{data.metaMagic.elevation.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 6 </span>
+                <span> {{localize "abfalter.metaMagic.elevation"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+
+        <div class="bubble bubbleOffsetWide {{#if data.metaMagic.advZeonRegen2.bought}}{{#if data.metaMagic.advZeonRegen2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 10 / 12; grid-row: 16;"
+             data-label="data.metaMagic.advZeonRegen2.bought" data-label2="data.metaMagic.advZeonRegen2.free" data-ability="{{data.metaMagic.advZeonRegen2.bought}}"
+             data-ability2="{{data.metaMagic.advZeonRegen2.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 8 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.advZeonRegen"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.advZeonRegen2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.avatar.bought}}bubbleBought{{/if}}"
+             style="grid-column: 11; grid-row: 15; transform: rotate(-35deg); border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetWide {{#if data.metaMagic.defMagicProj4.bought}}{{#if data.metaMagic.defMagicProj4.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 13 / 15; grid-row: 16;"
+             data-label="data.metaMagic.defMagicProj4.bought" data-label2="data.metaMagic.defMagicProj4.free" data-ability="{{data.metaMagic.defMagicProj4.bought}}"
+             data-ability2="{{data.metaMagic.defMagicProj4.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 10 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.definedProject"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.defMagicProj4.bought}}bubbleBought{{/if}} {{#if data.metaMagic.avatar.bought}}bubbleBought{{/if}}"
+             style="grid-column: 13; grid-row: 15; transform: rotate(35deg); border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.avatar.bought}}{{#if data.metaMagic.avatar.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 12; grid-row: 15;"
+             data-label="data.metaMagic.avatar.bought" data-label2="data.metaMagic.avatar.free" data-ability="{{data.metaMagic.avatar.bought}}"
+             data-ability2="{{data.metaMagic.avatar.free}}" data-value="20">
+            <div class="bubbleInfo">
+                <span> 9 </span>
+                <span> {{localize "abfalter.metaMagic.avatar"}} </span>
+                <span> 20 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.avatar.bought}}bubbleBought{{/if}} {{#if data.metaMagic.unlimitedZeon.bought}}bubbleBought{{/if}}"
+             style="grid-column: 12/14; grid-row: 14; transform: rotate(-35deg); border-bottom: 5px solid #383838; "></div>
+
+        <div class="bubble bubbleOffsetCapstone {{#if data.metaMagic.unlimitedZeon.bought}}{{#if data.metaMagic.unlimitedZeon.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 13 / 15; grid-row: 13 / 15;"
+             data-label="data.metaMagic.unlimitedZeon.bought" data-label2="data.metaMagic.unlimitedZeon.free" data-ability="{{data.metaMagic.unlimitedZeon.bought}}"
+             data-ability2="{{data.metaMagic.unlimitedZeon.free}}" data-value="20">
+            <div class="bubbleInfoCap">
+                <span> 10 </span>
+                <span> {{localize "abfalter.metaMagic.unlimitedZeon"}} </span>
+                <span> 20 </span>
+            </div>
+        </div>
+        <!-- End of Bottom Column Block -->
+        <!-- Start of Bottom-Right Block -->
+        <div class="bubble {{#if data.metaMagic.exploitEne2.bought}}{{#if data.metaMagic.exploitEne2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 17; grid-row: 20;"
+             data-label="data.metaMagic.exploitEne2.bought" data-label2="data.metaMagic.exploitEne2.free" data-ability="{{data.metaMagic.exploitEne2.bought}}"
+             data-ability2="{{data.metaMagic.exploitEne2.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 3 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.exploitEne"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.exploitEne2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.persisEffects.bought}}bubbleBought{{/if}}"
+             style="grid-column: 14/17; grid-row: 20; height: 45px; border-bottom: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.exploitEne2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.defMagicProj7.bought}}bubbleBought{{/if}}"
+             style="grid-column: 18/21; grid-row: 20; height: 45px; border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.defMagicProj7.bought}}{{#if data.metaMagic.defMagicProj7.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 21; grid-row: 20;"
+             data-label="data.metaMagic.defMagicProj7.bought" data-label2="data.metaMagic.defMagicProj7.free" data-ability="{{data.metaMagic.defMagicProj7.bought}}"
+             data-ability2="{{data.metaMagic.defMagicProj7.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 3 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.definedProject"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.defMagicProj7.bought}}bubbleBought{{/if}} {{#if data.metaMagic.spellSpec70.bought}}bubbleBought{{/if}}"
+             style="grid-column: 19/22; grid-row: 19; transform: rotate(45deg); height: 40px; border-bottom: 5px solid #383838; "></div>
+
+        <div class="bubble {{#if data.metaMagic.spellSpec70.bought}}{{#if data.metaMagic.spellSpec70.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 19; grid-row: 18;"
+             data-label="data.metaMagic.spellSpec70.bought" data-label2="data.metaMagic.spellSpec70.free" data-ability="{{data.metaMagic.spellSpec70.bought}}"
+             data-ability2="{{data.metaMagic.spellSpec70.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 5 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.spellSpec"}} 70 </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.spellSpec70.bought}}bubbleBought{{/if}} {{#if data.metaMagic.pierceRes2.bought}}bubbleBought{{/if}}"
+             style="grid-column: 17/20; grid-row: 17; transform: rotate(45deg); height: 40px; border-bottom: 5px solid #383838; "></div>
+
+        <div class="bubble {{#if data.metaMagic.pierceRes2.bought}}{{#if data.metaMagic.pierceRes2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 17; grid-row: 16;"
+             data-label="data.metaMagic.pierceRes2.bought" data-label2="data.metaMagic.pierceRes2.free" data-ability="{{data.metaMagic.pierceRes2.bought}}"
+             data-ability2="{{data.metaMagic.pierceRes2.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 4 </span>
+                <span> {{localize "abfalter.metaMagic.pierceRes"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.pierceRes2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.spellSpec60x.bought}}bubbleBought{{/if}}"
+             style="grid-column: 18/21; grid-row: 16; height: 45px; border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.spellSpec60x.bought}}{{#if data.metaMagic.spellSpec60x.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 21; grid-row: 16;"
+             data-label="data.metaMagic.spellSpec60x.bought" data-label2="data.metaMagic.spellSpec60x.free" data-ability="{{data.metaMagic.spellSpec60x.bought}}"
+             data-ability2="{{data.metaMagic.spellSpec60x.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 3 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.spellSpec"}} 60 </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.spellSpec60x.bought}}bubbleBought{{/if}} {{#if data.metaMagic.pierceRes.bought}}bubbleBought{{/if}}"
+             style="grid-column: 21; grid-row: 14/16; transform: rotate(-25deg); border-left: 5px solid #383838;"></div>
+        <!-- End of Bottom-Right Block -->
+        <!-- Start of Right Column Block -->
+        <div class="bubble {{#if data.metaMagic.mysticConcen.bought}}{{#if data.metaMagic.mysticConcen.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 23; grid-row: 12;"
+             data-label="data.metaMagic.mysticConcen.bought" data-label2="data.metaMagic.mysticConcen.free" data-ability="{{data.metaMagic.mysticConcen.bought}}"
+             data-ability2="{{data.metaMagic.mysticConcen.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.mysticCon"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.mysticConcen.bought}}bubbleBought{{/if}} {{#if data.metaMagic.spellSpec30.bought}}bubbleBought{{/if}}"
+             style="grid-column: 23; grid-row: 11; transform: rotate(-35deg); border-left: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.mysticConcen.bought}}bubbleBought{{/if}} {{#if data.metaMagic.spellSpec30x.bought}}bubbleBought{{/if}}"
+             style="grid-column: 23; grid-row: 13; transform: rotate(35deg); border-left: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.mysticConcen.bought}}bubbleBought{{/if}} {{#if data.metaMagic.incRange.bought}}bubbleBought{{/if}}"
+             style="grid-column: 22; grid-row: 12/14; transform: rotate(90deg); border-left: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetTall {{#if data.metaMagic.spellSpec30.bought}}{{#if data.metaMagic.spellSpec30.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 22; grid-row: 10 / 12;"
+             data-label="data.metaMagic.spellSpec30.bought" data-label2="data.metaMagic.spellSpec30.free" data-ability="{{data.metaMagic.spellSpec30.bought}}"
+             data-ability2="{{data.metaMagic.spellSpec30.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.spellSpec"}} 30 </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.spellSpec30.bought}}bubbleBought{{/if}} {{#if data.metaMagic.incRange.bought}}bubbleBought{{/if}}"
+             style="grid-column: 21; grid-row: 11; transform: rotate(35deg); border-right: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.spellSpec30.bought}}bubbleBought{{/if}} {{#if data.metaMagic.spellSpec60.bought}}bubbleBought{{/if}}"
+             style="grid-column: 21; grid-row: 10; transform: rotate(90deg); border-right: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetTall {{#if data.metaMagic.spellSpec30x.bought}}{{#if data.metaMagic.spellSpec30x.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 22; grid-row: 13 / 15;"
+             data-label="data.metaMagic.spellSpec30x.bought" data-label2="data.metaMagic.spellSpec30x.free" data-ability="{{data.metaMagic.spellSpec30x.bought}}"
+             data-ability2="{{data.metaMagic.spellSpec30x.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.spellSpec"}} 30 </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.spellSpec30x.bought}}bubbleBought{{/if}} {{#if data.metaMagic.incRange.bought}}bubbleBought{{/if}}"
+             style="grid-column: 21; grid-row: 13; transform: rotate(-35deg); border-right: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.spellSpec30x.bought}}bubbleBought{{/if}} {{#if data.metaMagic.pierceRes.bought}}bubbleBought{{/if}}"
+             style="grid-column: 21; grid-row: 14; transform: rotate(90deg); border-left: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.incRange.bought}}{{#if data.metaMagic.incRange.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 21; grid-row: 12;"
+             data-label="data.metaMagic.incRange.bought" data-label2="data.metaMagic.incRange.free" data-ability="{{data.metaMagic.incRange.bought}}"
+             data-ability2="{{data.metaMagic.incRange.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.increRange"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.incRange.bought}}bubbleBought{{/if}} {{#if data.metaMagic.spellSpec60.bought}}bubbleBought{{/if}}"
+             style="grid-column: 21; grid-row: 11; transform: rotate(-35deg); border-left: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.incRange.bought}}bubbleBought{{/if}} {{#if data.metaMagic.pierceRes.bought}}bubbleBought{{/if}}"
+             style="grid-column: 21; grid-row: 13; transform: rotate(35deg); border-left: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetTall {{#if data.metaMagic.spellSpec60.bought}}{{#if data.metaMagic.spellSpec60.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 20; grid-row: 10 / 12;"
+             data-label="data.metaMagic.spellSpec60.bought" data-label2="data.metaMagic.spellSpec60.free" data-ability="{{data.metaMagic.spellSpec60.bought}}"
+             data-ability2="{{data.metaMagic.spellSpec60.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 3 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.spellSpec"}} 60 </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.spellSpec60.bought}}bubbleBought{{/if}} {{#if data.metaMagic.maxSpells.bought}}bubbleBought{{/if}}"
+             style="grid-column: 19; grid-row: 11; transform: rotate(35deg); border-right: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.spellSpec60.bought}}bubbleBought{{/if}} {{#if data.metaMagic.doubleSpell.bought}}bubbleBought{{/if}}"
+             style="grid-column: 16/20; grid-row: 10; border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetTall {{#if data.metaMagic.pierceRes.bought}}{{#if data.metaMagic.pierceRes.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 20; grid-row: 13 / 15;"
+             data-label="data.metaMagic.pierceRes.bought" data-label2="data.metaMagic.pierceRes.free" data-ability="{{data.metaMagic.pierceRes.bought}}"
+             data-ability2="{{data.metaMagic.pierceRes.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 2 </span>
+                <span> {{localize "abfalter.metaMagic.pierceRes"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.pierceRes.bought}}bubbleBought{{/if}} {{#if data.metaMagic.maxSpells.bought}}bubbleBought{{/if}}"
+             style="grid-column: 19; grid-row: 13; transform: rotate(-35deg); border-right: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.pierceRes.bought}}bubbleBought{{/if}} {{#if data.metaMagic.bindSpells.bought}}bubbleBought{{/if}}"
+             style="grid-column: 16/20; grid-row: 14; border-top: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.maxSpells.bought}}{{#if data.metaMagic.maxSpells.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 19; grid-row: 12;"
+             data-label="data.metaMagic.maxSpells.bought" data-label2="data.metaMagic.maxSpells.free" data-ability="{{data.metaMagic.maxSpells.bought}}"
+             data-ability2="{{data.metaMagic.maxSpells.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> 5 </span>
+                <span> {{localize "abfalter.metaMagic.maxSpells"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.maxSpells.bought}}bubbleBought{{/if}} {{#if data.metaMagic.spellSpec80.bought}}bubbleBought{{/if}}"
+             style="grid-column: 18; grid-row: 12/14; transform: rotate(90deg); border-left: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.spellSpec80.bought}}{{#if data.metaMagic.spellSpec80.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 17; grid-row: 12;"
+             data-label="data.metaMagic.spellSpec80.bought" data-label2="data.metaMagic.spellSpec80.free" data-ability="{{data.metaMagic.spellSpec80.bought}}"
+             data-ability2="{{data.metaMagic.spellSpec80.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 8 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.spellSpec"}} 80 </span>
+                <span> 5 </span>
+            </div>
+        </div>
+
+        <div class="bubble bubbleOffsetTall {{#if data.metaMagic.doubleSpell.bought}}{{#if data.metaMagic.doubleSpell.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 16; grid-row: 10 / 12;"
+             data-label="data.metaMagic.doubleSpell.bought" data-label2="data.metaMagic.doubleSpell.free" data-ability="{{data.metaMagic.doubleSpell.bought}}"
+             data-ability2="{{data.metaMagic.doubleSpell.free}}" data-value="20">
+            <div class="bubbleInfo">
+                <span> 7 </span>
+                <span> {{localize "abfalter.metaMagic.doubleSpell"}} </span>
+                <span> 20 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.doubleSpell.bought}}bubbleBought{{/if}} {{#if data.metaMagic.supInnateSpell.bought}}bubbleBought{{/if}}"
+             style="grid-column: 15; grid-row: 11; transform: rotate(35deg); border-right: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetTall {{#if data.metaMagic.bindSpells.bought}}{{#if data.metaMagic.bindSpells.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 16; grid-row: 13 / 15;"
+             data-label="data.metaMagic.bindSpells.bought" data-label2="data.metaMagic.bindSpells.free" data-ability="{{data.metaMagic.bindSpells.bought}}"
+             data-ability2="{{data.metaMagic.bindSpells.free}}" data-value="25">
+            <div class="bubbleInfo">
+                <span> 8 </span>
+                <span> {{localize "abfalter.metaMagic.bindSpell"}} </span>
+                <span> 25 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.bindSpells.bought}}bubbleBought{{/if}} {{#if data.metaMagic.supInnateSpell.bought}}bubbleBought{{/if}}"
+             style="grid-column: 15; grid-row: 13; transform: rotate(-35deg); border-right: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.supInnateSpell.bought}}{{#if data.metaMagic.supInnateSpell.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 15; grid-row: 12;"
+             data-label="data.metaMagic.supInnateSpell.bought" data-label2="data.metaMagic.supInnateSpell.free" data-ability="{{data.metaMagic.supInnateSpell.bought}}"
+             data-ability2="{{data.metaMagic.supInnateSpell.free}}" data-value="20">
+            <div class="bubbleInfo">
+                <span> 9 </span>
+                <span> {{localize "abfalter.metaMagic.supInnate"}} </span>
+                <span> 20 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.supInnateSpell.bought}}bubbleBought{{/if}} {{#if data.metaMagic.highMagic.bought}}bubbleBought{{/if}}"
+             style="grid-column: 14; grid-row: 11/13; transform: rotate(-35deg); border-right: 5px solid #383838;"></div>
+
+        <div class="bubble bubbleOffsetCapstone {{#if data.metaMagic.highMagic.bought}}{{#if data.metaMagic.highMagic.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 13 / 15; grid-row: 10 / 12;"
+             data-label="data.metaMagic.highMagic.bought" data-label2="data.metaMagic.highMagic.free" data-ability="{{data.metaMagic.highMagic.bought}}"
+             data-ability2="{{data.metaMagic.highMagic.free}}" data-value="20">
+            <div class="bubbleInfoCap">
+                <span> 10 </span>
+                <span> {{localize "abfalter.metaMagic.highMagic"}} </span>
+                <span> 20 </span>
+            </div>
+        </div>
+        <!-- End of Right Column Block -->
+        <!-- Start of Top-Right Block -->
+        <div class="bubble {{#if data.metaMagic.incRange2.bought}}{{#if data.metaMagic.incRange2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 21; grid-row: 8;"
+             data-label="data.metaMagic.incRange2.bought" data-label2="data.metaMagic.incRange2.free" data-ability="{{data.metaMagic.incRange2.bought}}"
+             data-ability2="{{data.metaMagic.incRange2.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.increRange"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.incRange2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.spellSpec60.bought}}bubbleBought{{/if}}""
+             style="grid-column: 21; grid-row: 9/11; transform: rotate(25deg); border-left: 5px solid #383838;"></div>
+        <div class="bubbleLine {{#if data.metaMagic.incRange2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.spellSpec50.bought}}bubbleBought{{/if}}""
+             style="grid-column: 18/21; grid-row: 8; height: 45px; border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.spellSpec50.bought}}{{#if data.metaMagic.spellSpec50.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 17; grid-row: 8;"
+             data-label="data.metaMagic.spellSpec50.bought" data-label2="data.metaMagic.spellSpec50.free" data-ability="{{data.metaMagic.spellSpec50.bought}}"
+             data-ability2="{{data.metaMagic.spellSpec50.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> 2 </span>
+                <span style="width:160%;"> {{localize "abfalter.metaMagic.spellSpec"}} 50 </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.spellSpec50.bought}}bubbleBought{{/if}} {{#if data.metaMagic.offExper3.bought}}bubbleBought{{/if}}""
+             style="grid-column: 17/20; grid-row: 7; transform: rotate(-45deg); height: 40px; border-bottom: 5px solid #383838; "></div>
+
+        <div class="bubble {{#if data.metaMagic.offExper3.bought}}{{#if data.metaMagic.offExper3.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 19; grid-row: 6;"
+             data-label="data.metaMagic.offExper3.bought" data-label2="data.metaMagic.offExper3.free" data-ability="{{data.metaMagic.offExper3.bought}}"
+             data-ability2="{{data.metaMagic.offExper3.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> 5 </span>
+                <span> {{localize "abfalter.metaMagic.offeExper"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.offExper3.bought}}bubbleBought{{/if}} {{#if data.metaMagic.remProtection3.bought}}bubbleBought{{/if}}""
+             style="grid-column: 19/22; grid-row: 5; transform: rotate(-45deg); height: 40px; border-bottom: 5px solid #383838; "></div>
+
+        <div class="bubble {{#if data.metaMagic.remProtection3.bought}}{{#if data.metaMagic.remProtection3.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 21; grid-row: 4;"
+             data-label="data.metaMagic.remProtection3.bought" data-label2="data.metaMagic.remProtection3.free" data-ability="{{data.metaMagic.remProtection3.bought}}"
+             data-ability2="{{data.metaMagic.remProtection3.free}}" data-value="5">
+            <div class="bubbleInfo">
+                <span> </span>
+                <span> {{localize "abfalter.metaMagic.remProtect"}} </span>
+                <span> 5 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.remProtection3.bought}}bubbleBought{{/if}} {{#if data.metaMagic.incDestro2.bought}}bubbleBought{{/if}}""
+             style="grid-column: 18/21; grid-row: 4; height: 45px; border-bottom: 5px solid #383838;"></div>
+
+        <div class="bubble {{#if data.metaMagic.incDestro2.bought}}{{#if data.metaMagic.incDestro2.free}}bubbleFree{{else}}bubbleBought{{/if}}{{/if}}"
+             style="grid-column: 17; grid-row: 4;"
+             data-label="data.metaMagic.incDestro2.bought" data-label2="data.metaMagic.incDestro2.free" data-ability="{{data.metaMagic.incDestro2.bought}}"
+             data-ability2="{{data.metaMagic.incDestro2.free}}" data-value="10">
+            <div class="bubbleInfo">
+                <span> 5 </span>
+                <span> {{localize "abfalter.metaMagic.incStrength"}} </span>
+                <span> 10 </span>
+            </div>
+        </div>
+        <div class="bubbleLine {{#if data.metaMagic.incDestro2.bought}}bubbleBought{{/if}} {{#if data.metaMagic.mysticAcc.bought}}bubbleBought{{/if}}""
+             style="grid-column: 14/17; grid-row: 4; height: 45px; border-bottom: 5px solid #383838;"></div>
+
+        <!-- End of Top-Right Block -->
+    </div>
+</form>
