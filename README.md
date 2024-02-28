@@ -14,14 +14,11 @@ I plan to incorporate plenty more of QoL mechanisms into the character pages and
 If there is anything you want to see added, please let me know.
 If I ever get my hands on the Core 2.0, I will also work on a system for that.
 
-The system has about 70% localization, if there is enough demand, I will go through and localize what I missed or skipped so that it can be played in other languages as well.
-
 # Planned Updates
 - Combat calculator is still in development.
 - Active effects.
 - Certain items don't have a chat card.
 - using power over agility as movement when movement of emptyness is bought.
-- Metamagic hui overhaul.
 - Psychic potential button on matrices that will count the added bonus from pp.
 - adding titles(hovering shows description) to limits.
 - add toggle to movement for flight movement.
@@ -33,6 +30,7 @@ The system has about 70% localization, if there is enough demand, I will go thro
 # Contributions
 I would love support from the community! I am open to any feedback, whether its suggestions, bug reports, or critiques.
 - Thank you @Shairin for the spanish translations!
+- Elis (@Elisianthus) sacrificed her sanity for many evenings to bring a plethora of compendiums with this system into the community!
 
 # Me
 You can reach me on discord: @Lumenita 
