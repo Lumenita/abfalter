@@ -25,7 +25,6 @@ If I ever get my hands on the Core 2.0, I will also work on a system for that.
   
 # Known Issues
 - When editing fields of items, you have to click off of it before being able to click a new field to edit.
-- Description boxes reset in size when first opening the character sheet.
 
 # Contributions
 I would love support from the community! I am open to any feedback, whether its suggestions, bug reports, or critiques.
