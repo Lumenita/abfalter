@@ -14,8 +14,14 @@
             <label> <span> {{localize "abfalter.psychicTab.cancelCost"}} </span> <input type="number" name="data.cancelCost" value="{{data.cancelCost}}" /> </label>
         </div>
         <h6> {{localize "abfalter.basicInfo.bonus"}} </h6>
-        <textarea name="data.description" rows="6">{{data.description}}</textarea>
+        <div style="display: grid;">
+            <textarea class="textarea-auto-resize" rows="5" name="data.description" style="grid-area: 1 / 1 / 2/ 2;">{{data.description}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.description}}</div>
+        </div>
         <h6> {{localize "abfalter.armoryTab.penalty"}} </h6>
-        <textarea name="data.penalty" rows="6">{{data.penalty}}</textarea>
+        <div style="display: grid;">
+            <textarea class="textarea-auto-resize" rows="5" name="data.penalty" style="grid-area: 1 / 1 / 2/ 2;">{{data.penalty}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.penalty}}</div>
+        </div>
     </div>
 </form>

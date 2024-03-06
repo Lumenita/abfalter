@@ -440,7 +440,10 @@
                         <input class="inline-edit" data-field="system.cost" type="number" value="{{advantage.system.cost}}" />
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <textarea class="inline-edit" data-field="system.description">{{advantage.system.description}}</textarea>
+                    <div class="textarea-div" style="display: grid;">
+                        <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{advantage.system.description}}</textarea>
+                        <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{advantage.system.description}}</div>
+                    </div>
                     {{else}}
                     <div class="{{#if system.expand}}expand{{else}}notExpand{{/if}}">
                         <span> {{advantage.name}} </span>
@@ -472,7 +475,10 @@
                         <input class="inline-edit" data-field="system.benefit" type="number" value="{{disadvantage.system.benefit}}" />
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <textarea class="inline-edit" data-field="system.description">{{disadvantage.system.description}}</textarea>
+                    <div class="textarea-div" style="display: grid;">
+                        <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{disadvantage.system.description}}</textarea>
+                        <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{disadvantage.system.description}}</div>
+                    </div>
                     {{else}}
                     <div class="{{#if system.expand}}expand{{else}}notExpand{{/if}}">
                         <span> {{disadvantage.name}} </span>

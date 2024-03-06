@@ -647,21 +647,32 @@
                 <div>
                     <span> {{localize "abfalter.kiTab.accu"}} </span>
                     <span> {{localize "abfalter.kiTab.max"}} </span>
-                    <span> {{localize "abfalter.basicInfo.actual"}} </span>
+                    <span> {{localize "abfalter.kiTab.reserve"}} </span>
+                    <span> {{localize "abfalter.kiTab.acquired"}} </span>
                 </div>
-                <div class="{{#if data.toggles.innatePower}}hidden{{/if}}">
+                <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.agi"}} </span>
                         <input type="number" name="data.kiPoolAgiAccumTot" value="{{data.kiPoolAgiAccumTot}}" readonly />
                         <input type="number" name="data.kiPoolAgiTot" value="{{data.kiPoolAgiTot}}" readonly />
+                        {{#if data.toggles.unifiedPools}}
+                        <span></span>
+                        {{else}}
                         <input type="number" name="data.kiPool.agi.actual" value="{{data.kiPool.agi.actual}}" />
+                        {{/if}}
+                        <input type="number" name="data.kiPool.agi.current" value="{{data.kiPool.agi.current}}" />
                         <a class="toggleBoolean {{#if data.kiPool.agi.status}}showOpacity{{/if}}" data-label="data.kiPool.agi.status" data-ability="{{data.kiPool.agi.status}}"><i class="{{#if data.kiPool.agi.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     {{#if data.kiPool.agi.status}}
                     <div>
-                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <span> {{localize "abfalter.basicInfo.innate"}} </span>
                         <input type="number" name="data.stats.Agility.kiPoolAccuBase" value="{{data.stats.Agility.kiPoolAccuBase}}" readonly />
                         <input type="number" name="data.stats.Agility.kiPoolBase" value="{{data.stats.Agility.kiPoolBase}}" readonly />
+                    </div>
+                    <div>
+                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <input type="number" name="data.kiPool.agi.default" value="{{data.kiPool.agi.default}}" />
+                        <input type="number" name="data.kiPool.agi.defaultMax" value="{{data.kiPool.agi.defaultMax}}" />
                     </div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.spec"}} </span>
@@ -675,19 +686,29 @@
                     </div>
                     {{/if}}
                 </div>
-                <div class="{{#if data.toggles.innatePower}}hidden{{/if}}">
+                <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.con"}} </span>
                         <input type="number" name="data.kiPoolConAccumTot" value="{{data.kiPoolConAccumTot}}" readonly />
                         <input type="number" name="data.kiPoolConTot" value="{{data.kiPoolConTot}}" readonly />
+                        {{#if data.toggles.unifiedPools}}
+                        <span></span>
+                        {{else}}
                         <input type="number" name="data.kiPool.con.actual" value="{{data.kiPool.con.actual}}" />
+                        {{/if}}
+                        <input type="number" name="data.kiPool.con.current" value="{{data.kiPool.con.current}}" />
                         <a class="toggleBoolean {{#if data.kiPool.con.status}}showOpacity{{/if}}" data-label="data.kiPool.con.status" data-ability="{{data.kiPool.con.status}}"><i class="{{#if data.kiPool.con.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     {{#if data.kiPool.con.status}}
                     <div>
-                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <span> {{localize "abfalter.basicInfo.innate"}} </span>
                         <input type="number" name="data.stats.Constitution.kiPoolAccuBase" value="{{data.stats.Constitution.kiPoolAccuBase}}" readonly />
                         <input type="number" name="data.stats.Constitution.kiPoolBase" value="{{data.stats.Constitution.kiPoolBase}}" readonly />
+                    </div>
+                    <div>
+                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <input type="number" name="data.kiPool.con.default" value="{{data.kiPool.con.default}}" />
+                        <input type="number" name="data.kiPool.con.defaultMax" value="{{data.kiPool.con.defaultMax}}" />
                     </div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.spec"}} </span>
@@ -701,19 +722,29 @@
                     </div>
                     {{/if}}
                 </div>
-                <div class="{{#if data.toggles.innatePower}}hidden{{/if}}">
+                <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.dex"}} </span>
                         <input type="number" name="data.kiPoolDexAccumTot" value="{{data.kiPoolDexAccumTot}}" readonly />
                         <input type="number" name="data.kiPoolDexTot" value="{{data.kiPoolDexTot}}" readonly />
+                        {{#if data.toggles.unifiedPools}}
+                        <span></span>
+                        {{else}}
                         <input type="number" name="data.kiPool.dex.actual" value="{{data.kiPool.dex.actual}}" />
+                        {{/if}}
+                        <input type="number" name="data.kiPool.dex.current" value="{{data.kiPool.dex.current}}" />
                         <a class="toggleBoolean {{#if data.kiPool.dex.status}}showOpacity{{/if}}" data-label="data.kiPool.dex.status" data-ability="{{data.kiPool.dex.status}}"><i class="{{#if data.kiPool.dex.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     {{#if data.kiPool.dex.status}}
                     <div>
-                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <span> {{localize "abfalter.basicInfo.innate"}} </span>
                         <input type="number" name="data.stats.Dexterity.kiPoolAccuBase" value="{{data.stats.Dexterity.kiPoolAccuBase}}" readonly />
                         <input type="number" name="data.stats.Dexterity.kiPoolBase" value="{{data.stats.Dexterity.kiPoolBase}}" readonly />
+                    </div>
+                    <div>
+                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <input type="number" name="data.kiPool.dex.default" value="{{data.kiPool.dex.default}}" />
+                        <input type="number" name="data.kiPool.dex.defaultMax" value="{{data.kiPool.dex.defaultMax}}" />
                     </div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.spec"}} </span>
@@ -727,19 +758,29 @@
                     </div>
                     {{/if}}
                 </div>
-                <div class="{{#if data.toggles.innatePower}}hidden{{/if}}">
+                <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.str"}} </span>
                         <input type="number" name="data.kiPoolStrAccumTot" value="{{data.kiPoolStrAccumTot}}" readonly />
                         <input type="number" name="data.kiPoolStrTot" value="{{data.kiPoolStrTot}}" readonly />
+                        {{#if data.toggles.unifiedPools}}
+                        <span></span>
+                        {{else}}
                         <input type="number" name="data.kiPool.str.actual" value="{{data.kiPool.str.actual}}" />
+                        {{/if}}
+                        <input type="number" name="data.kiPool.str.current" value="{{data.kiPool.str.current}}" />
                         <a class="toggleBoolean {{#if data.kiPool.str.status}}showOpacity{{/if}}" data-label="data.kiPool.str.status" data-ability="{{data.kiPool.str.status}}"><i class="{{#if data.kiPool.str.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     {{#if data.kiPool.str.status}}
                     <div>
-                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <span> {{localize "abfalter.basicInfo.innate"}} </span>
                         <input type="number" name="data.stats.Strength.kiPoolAccuBase" value="{{data.stats.Strength.kiPoolAccuBase}}" readonly />
                         <input type="number" name="data.stats.Strength.kiPoolBase" value="{{data.stats.Strength.kiPoolBase}}" readonly />
+                    </div>
+                    <div>
+                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <input type="number" name="data.kiPool.str.default" value="{{data.kiPool.str.default}}" />
+                        <input type="number" name="data.kiPool.str.defaultMax" value="{{data.kiPool.str.defaultMax}}" />
                     </div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.spec"}} </span>
@@ -753,19 +794,29 @@
                     </div>
                     {{/if}}
                 </div>
-                <div class="{{#if data.toggles.innatePower}}hidden{{/if}}">
+                <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.pow"}} </span>
                         <input type="number" name="data.kiPoolPowAccumTot" value="{{data.kiPoolPowAccumTot}}" readonly />
                         <input type="number" name="data.kiPoolPowTot" value="{{data.kiPoolPowTot}}" readonly />
+                        {{#if data.toggles.unifiedPools}}
+                        <span></span>
+                        {{else}}
                         <input type="number" name="data.kiPool.pow.actual" value="{{data.kiPool.pow.actual}}" />
+                        {{/if}}
+                        <input type="number" name="data.kiPool.pow.current" value="{{data.kiPool.pow.current}}" />
                         <a class="toggleBoolean {{#if data.kiPool.pow.status}}showOpacity{{/if}}" data-label="data.kiPool.pow.status" data-ability="{{data.kiPool.pow.status}}"><i class="{{#if data.kiPool.pow.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     {{#if data.kiPool.pow.status}}
                     <div>
-                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <span> {{localize "abfalter.basicInfo.innate"}} </span>
                         <input type="number" name="data.stats.Power.kiPoolAccuBase" value="{{data.stats.Power.kiPoolAccuBase}}" readonly />
                         <input type="number" name="data.stats.Power.kiPoolBase" value="{{data.stats.Power.kiPoolBase}}" readonly />
+                    </div>
+                    <div>
+                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <input type="number" name="data.kiPool.pow.default" value="{{data.kiPool.pow.default}}" />
+                        <input type="number" name="data.kiPool.pow.defaultMax" value="{{data.kiPool.pow.defaultMax}}" />
                     </div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.spec"}} </span>
@@ -779,45 +830,29 @@
                     </div>
                     {{/if}}
                 </div>
-                <div class="{{#if data.toggles.innatePower}}innatePowBorder{{else}}hidden{{/if}}">
-                    <div>
-                        <span> {{data.kiPool.innate.tag}} </span>
-                        <input type="number" name="data.kiPoolInnateAccumTot" value="{{data.kiPoolInnateAccumTot}}" readonly />
-                        <input type="number" name="data.innatePowerKi.max" value="{{data.innatePowerKi.max}}" readonly />
-                        <input type="number" name="data.innatePowerKi.value" value="{{data.innatePowerKi.value}}" />
-                        <a class="toggleBoolean {{#if data.kiPool.innate.status}}showOpacity{{/if}}" data-label="data.kiPool.innate.status" data-ability="{{data.kiPool.innate.status}}"><i class="{{#if data.kiPool.innate.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                    </div>
-                    {{#if data.kiPool.innate.status}}
-                    <div>
-                        <span> {{localize "abfalter.basicInfo.base"}} </span>
-                        <input type="number" name="data.kiPoolInnateAccumBase" value="{{data.kiPoolInnateAccumBase}}" readonly />
-                        <input type="number" name="data.kiPoolInnateBase" value="{{data.kiPoolInnateBase}}" readonly />
-                    </div>
-                    <div>
-                        <span> {{localize "abfalter.basicInfo.spec"}} </span>
-                        <input type="number" name="data.kiPool.innate.spec" value="{{data.kiPool.innate.spec}}" />
-                        <input type="number" name="data.kiPool.innate.specMax" value="{{data.kiPool.innate.specMax}}" />
-                    </div>
-                    <div>
-                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
-                        <input type="number" name="data.kiPool.innate.temp" value="{{data.kiPool.innate.temp}}" />
-                        <input type="number" name="data.kiPool.innate.tempMax" value="{{data.kiPool.innate.tempMax}}" />
-                    </div>
-                    {{/if}}
-                </div>
-                <div class="{{#if data.toggles.innatePower}}hidden{{/if}}">
+                <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.wp"}} </span>
                         <input type="number" name="data.kiPoolWPAccumTot" value="{{data.kiPoolWPAccumTot}}" readonly />
                         <input type="number" name="data.kiPoolWPTot" value="{{data.kiPoolWPTot}}" readonly />
+                        {{#if data.toggles.unifiedPools}}
+                        <span></span>
+                        {{else}}
                         <input type="number" name="data.kiPool.wp.actual" value="{{data.kiPool.wp.actual}}" />
+                        {{/if}}
+                        <input type="number" name="data.kiPool.wp.current" value="{{data.kiPool.wp.current}}" />
                         <a class="toggleBoolean {{#if data.kiPool.wp.status}}showOpacity{{/if}}" data-label="data.kiPool.wp.status" data-ability="{{data.kiPool.wp.status}}"><i class="{{#if data.kiPool.wp.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     {{#if data.kiPool.wp.status}}
                     <div>
-                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <span> {{localize "abfalter.basicInfo.innate"}} </span>
                         <input type="number" name="data.stats.Willpower.kiPoolAccuBase" value="{{data.stats.Willpower.kiPoolAccuBase}}" readonly />
                         <input type="number" name="data.stats.Willpower.kiPoolBase" value="{{data.stats.Willpower.kiPoolBase}}" readonly />
+                    </div>
+                    <div>
+                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <input type="number" name="data.kiPool.wp.default" value="{{data.kiPool.wp.default}}" />
+                        <input type="number" name="data.kiPool.wp.defaultMax" value="{{data.kiPool.wp.defaultMax}}" />
                     </div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.spec"}} </span>
@@ -832,12 +867,20 @@
                     {{/if}}
                 </div>
                 {{#if data.toggles.unifiedPools}}
-                <div class="{{#if data.toggles.innatePower}}hidden{{/if}}">
+                <div>
+                    {{#if data.toggles.innatePower}}
+                    <div>
+                        <span> {{localize "abfalter.kiTab.unified"}} {{data.kiPool.innate.tag}} </span>
+                        <input type="number" name="data.unifiedKi.max" value="{{data.unifiedKi.max}}" readonly />
+                        <input type="number" name="data.unifiedKi.value" value="{{data.unifiedKi.value}}" />
+                    </div>
+                    {{else}}
                     <div>
                         <span> {{localize "abfalter.kiTab.unified"}} </span>
                         <input type="number" name="data.unifiedKi.max" value="{{data.unifiedKi.max}}" readonly />
                         <input type="number" name="data.unifiedKi.value" value="{{data.unifiedKi.value}}" />
                     </div>
+                    {{/if}}
                 </div>
                 {{/if}}
             </div>
@@ -871,9 +914,33 @@
                     <label> <span> {{localize "abfalter.kiTab.kiTechnique"}} </span> <input type="number" name="data.kiTechMk" value="{{data.kiTechMk}}" readonly /> </label>
                 </div>
                 {{/if}}
-                <div>
+                <div class="lastMK">
                     <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.mkFinal" value="{{data.mkFinal}}" readonly /> </label>
                     <label> <span> {{localize "abfalter.basicInfo.used"}} </span> <input type="number" name="data.mkUsed" value="{{data.mkUsed}}" readonly /> </label>
+                </div>
+
+                <div class="kiPoolButtons">
+                    <div>
+                        <h5> Ki Accu. </h5>
+                        <div>
+                            <button type="button" class="kiAccuHalf" data-ability="{{data.maccuhalffinal}}">
+                                <span> {{localize "abfalter.basicInfo.half"}} </span>
+                            </button>
+                            <button type="button" class="kiAccuFull" data-ability="{{data.maccufinal}}">
+                                <span> {{localize "abfalter.basicInfo.full"}} </span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="hidden">
+                        <h5> Spend Ki </h5>
+                        <div>
+                            <button type="button" class="spendKiButton">
+                                <span> {{localize "abfalter.settingsTab.open"}} </span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -896,8 +963,9 @@
                             <input class="inline-edit" data-field="system.mk" type="number" value="{{arsMagnus.system.mk}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <div>
-                            <textarea class="inline-edit itemAuto-expand" data-field="system.description">{{arsMagnus.system.description}}</textarea>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{arsMagnus.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{arsMagnus.system.description}}</div>
                         </div>
                         {{else}}
                         <div>
@@ -990,8 +1058,9 @@
                         <input class="inline-edit" data-field="system.mk" type="number" value="{{martialArt.system.mk}}" />
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <div class="{{#if system.expand}}expand{{else}}notExpand{{/if}}">
-                        <textarea class="inline-edit itemAuto-expand" data-field="system.description">{{martialArt.system.description}}</textarea>
+                    <div class="textarea-div" style="display: grid;">
+                        <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{martialArt.system.description}}</textarea>
+                        <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{martialArt.system.description}}</div>
                     </div>
                     {{else}}
                     <div>
@@ -1045,8 +1114,10 @@
                 </div>
                 <input type="number" name="data.unarmedDmgFinal" value="{{data.unarmedDmgFinal}}" readonly />
             </div>
-            <div>
-                <textarea name="data.fistDamage.desc">{{data.fistDamage.desc}}</textarea>
+
+            <div class="textarea-div" style="display: grid;">
+                <textarea class="textarea-auto-resize" name="data.fistDamage.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.fistDamage.desc}}</textarea>
+                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.fistDamage.desc}}</div>
             </div>
         </div>
 
@@ -1156,7 +1227,10 @@
                                 <input class="inline-edit" data-field="system.major.water" type="number" value="{{kiSealCreature.system.major.water}}" />
                                 <input class="inline-edit" data-field="system.major.fire" type="number" value="{{kiSealCreature.system.major.fire}}" />
                             </div>
-                            <textarea class="inline-edit itemAuto-expand" data-field="system.description">{{kiSealCreature.system.description}}</textarea>
+                            <div class="textarea-div" style="display: grid;">
+                                <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{kiSealCreature.system.description}}</textarea>
+                                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{kiSealCreature.system.description}}</div>
+                            </div>
                         </div>
                         {{else}}
                         <div>
@@ -1198,12 +1272,6 @@
                         </div>
 
                         <div class="kiTechTypeMax">
-                            {{#if system.innatePower}}
-                            <div class="techExpand techExpandFirst">
-                                <span> {{localize "abfalter.kiTab.ki"}} </span>
-                                <span> {{kiTechnique.system.tag}} </span>
-                            </div>
-                            {{else}}
                             <span> {{localize "abfalter.kiTab.ki"}} </span>
                             <span> {{localize "abfalter.basicInfo.agi"}} </span>
                             <span> {{localize "abfalter.basicInfo.con"}} </span>
@@ -1211,17 +1279,10 @@
                             <span> {{localize "abfalter.basicInfo.str"}} </span>
                             <span> {{localize "abfalter.basicInfo.pow"}} </span>
                             <span> {{localize "abfalter.basicInfo.wp"}} </span>
-                            {{/if}}
                             <span> {{localize "abfalter.kiTab.actionInfo"}} </span>
                         </div>
 
                         <div class="kiTechUseMax">
-                            {{#if system.innatePower}}
-                            <div class="techExpandMax">
-                                <span> {{localize "abfalter.kiTab.innatePowerUse"}} </span>
-                                <input class="inline-edit" data-field="system.use.unified" type="number" value="{{kiTechnique.system.use.unified}}" />
-                            </div>
-                            {{else}}
                             <span> {{localize "abfalter.kiTab.use"}} </span>
                             <input class="inline-edit" data-field="system.use.agi" type="number" value="{{kiTechnique.system.use.agi}}" />
                             <input class="inline-edit" data-field="system.use.con" type="number" value="{{kiTechnique.system.use.con}}" />
@@ -1229,10 +1290,10 @@
                             <input class="inline-edit" data-field="system.use.str" type="number" value="{{kiTechnique.system.use.str}}" />
                             <input class="inline-edit" data-field="system.use.pow" type="number" value="{{kiTechnique.system.use.pow}}" />
                             <input class="inline-edit" data-field="system.use.wp" type="number" value="{{kiTechnique.system.use.wp}}" />
-                            {{/if}}
                             <div class="csSelect techSelect">
                                 <select class="inline-edit" data-field="system.frequency" data-dtype="number">
                                     {{#select system.frequency}}
+                                    <option value="">  </option>
                                     <option value="{{localize "abfalter.kiTab.action"}}"> {{localize "abfalter.kiTab.action"}} </option>
                                     <option value="{{localize "abfalter.kiTab.turn"}}"> {{localize "abfalter.kiTab.turn"}} </option>
                                     <option value="{{localize "abfalter.kiTab.variable"}}"> {{localize "abfalter.kiTab.variable"}} </option>
@@ -1263,6 +1324,7 @@
                             <div class="csSelect techSelect">
                                 <select class="inline-edit" data-field="system.actionType" data-dtype="number">
                                     {{#select system.actionType}}
+                                    <option value=""> </option>
                                     <option value="{{localize "abfalter.kiTab.attack"}}"> {{localize "abfalter.kiTab.attack"}} </option>
                                     <option value="{{localize "abfalter.kiTab.defense"}}"> {{localize "abfalter.kiTab.defense"}} </option>
                                     <option value="{{localize "abfalter.kiTab.counterAttack"}}"> {{localize "abfalter.kiTab.counterAttack"}} </option>
@@ -1271,8 +1333,10 @@
                                 </select>
                             </div>
                         </div>
-
-                        <textarea class="inline-edit itemAuto-expand" data-field="system.description">{{kiTechnique.system.description}}</textarea>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{kiTechnique.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{kiTechnique.system.description}}</div>
+                        </div>
                     </div>
                     {{else}}
                     <div class="kiTechMinContainer">
@@ -1292,12 +1356,6 @@
                         </div>
 
                         <div class="kiTechType">
-                            {{#if system.innatePower}}
-                            <div class="techExpand techExpandFirst">
-                                <span> {{localize "abfalter.kiTab.ki"}} </span>
-                                <span> {{kiTechnique.system.tag}} </span>
-                            </div>
-                            {{else}}
                             <span> {{localize "abfalter.kiTab.ki"}} </span>
                             <span> {{localize "abfalter.basicInfo.agi"}} </span>
                             <span> {{localize "abfalter.basicInfo.con"}} </span>
@@ -1305,16 +1363,9 @@
                             <span> {{localize "abfalter.basicInfo.str"}} </span>
                             <span> {{localize "abfalter.basicInfo.pow"}} </span>
                             <span> {{localize "abfalter.basicInfo.wp"}} </span>
-                            {{/if}}
                         </div>
 
                         <div class="kiTechUse">
-                            {{#if system.innatePower}}
-                            <div class="techExpand">
-                                <span> {{localize "abfalter.kiTab.innatePowerUse"}} </span>
-                                <span> {{kiTechnique.system.use.unified}} </span>
-                            </div>
-                            {{else}}
                             <span> {{localize "abfalter.kiTab.use"}} </span>
                             <span> {{kiTechnique.system.use.agi}} </span>
                             <span> {{kiTechnique.system.use.con}} </span>
@@ -1322,7 +1373,6 @@
                             <span> {{kiTechnique.system.use.str}} </span>
                             <span> {{kiTechnique.system.use.pow}} </span>
                             <span> {{kiTechnique.system.use.wp}} </span>
-                            {{/if}}
                         </div>
 
                         <div class="kiTechMaint">
@@ -1346,8 +1396,9 @@
                             {{/if}}
                         </div>
 
-                        <div class="kiTechInfo">
-                            <textarea class="inline-edit itemAuto-expand" data-field="system.description" readonly>{{kiTechnique.system.description}}</textarea>
+                        <div class="textarea-div kiTechInfo" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;" readonly>{{kiTechnique.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{kiTechnique.system.description}}</div>
                         </div>
                     </div>
                     {{/if}}

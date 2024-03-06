@@ -10,8 +10,9 @@
             <label> <span> {{localize "abfalter.basicInfo.archeType"}} </span> <input type="text" name="data.main.archeType" value="{{data.main.archeType}}" /> </label>
             <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.main.levels" value="{{data.main.levels}}" /> </label>
         </div>
-        <div>
-            <textarea name="data.description" rows="3" placeholder="Extra Class Information">{{data.description}}</textarea>
+        <div style="display: grid;">
+            <textarea class="textarea-auto-resize" rows="5" name="data.description" style="grid-area: 1 / 1 / 2/ 2;">{{data.description}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.description}}</div>
         </div>
         <div>
             <label> <span> {{localize "abfalter.generalTab.lifePoints"}}{{localize "abfalter.generalTab.perLevel"}} </span> <input type="number" name="data.main.lp" value="{{data.main.lp}}" /> </label>

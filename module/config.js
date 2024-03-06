@@ -98,7 +98,8 @@ abfalter.basicInfo = {
     day: "abfalter.basicInfo.day",
     multiWield: "abfalter.basicInfo.multiWield",
     unarmed: "abfalter.basicInfo.unarmed",
-    special: "abfalter.basicInfo.special"
+    special: "abfalter.basicInfo.special",
+    innate: "abfalter.basicInfo.innate"
 }
 
 abfalter.generalTab = {
@@ -598,8 +599,9 @@ abfalter.kiTab = {
     counterAttack: "abfalter.kiTab.counterAttack",
     kiTechInfo: "abfalter.kiTab.kiTechInfo",
     kiSealsCre: "abfalter.kiTab.kiSealsCre",
-    frequency: "abfalter.kiTab.frequency"
-
+    frequency: "abfalter.kiTab.frequency",
+    acquired: "abfalter.kiTab.acquired",
+    reserve: "abfalter.kiTab.reserve"
 }
 
 abfalter.armoryTab = {
@@ -739,7 +741,8 @@ abfalter.settingsTab = {
     tempWip: "abfalter.settingsTab.tempWip",
     changeTemp: "abfalter.settingsTab.changeTemp",
     changeSpec: "abfalter.settingsTab.changeSpec",
-    open: "abfalter.settingsTab.open"
+    open: "abfalter.settingsTab.open",
+    generalSettings: "abfalter.settingsTab.generalSettings"
 }
 
 abfalter.metaMagic = {

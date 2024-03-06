@@ -117,8 +117,6 @@ a.content-link {
 .form-fields > select option {
     background: #252944;
 }
-
-
 .baseAbfalter .general span,
 .baseAbfalter .actorHeader1 span,
 .baseAbfalter .navTabsYes span,
@@ -207,6 +205,23 @@ baseAbfalter input {
 }
 .editor {
     height: 200px;
+}
+.textarea-auto-resize, .textarea-auto-resize-sibling {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+    overflow-x: auto;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 3px;
+    margin: 0 0 1px 0;
+}
+.textarea-auto-resize::-webkit-scrollbar {
+    display: none; 
+}
+.textarea-div {
+    justify-content: initial !important;
+    padding: 3px 0;
 }
 /* Global #121d32 */
 h5 {
@@ -317,7 +332,7 @@ h6 {
     border: none;
     width: 100%;
     resize: none;
-    padding: 0px;
+    padding: 3px;
     text-align: justify;
     border-radius: 0px;
     margin: 0px;
@@ -378,18 +393,21 @@ h6 {
 .subHeaderRow2 > label > input,
 .subHeaderRow2Half > span,
 .subHeaderRow2Half > label > input,
-.subHeaderRow3 > label > input {
+.subHeaderRow3 > label > input,
+.subRightHeader1 > label > input {
     height: 25px;
     font-size: 15px;
 }
 .subHeaderRow1 > div:nth-of-type(1) > input,
 .subHeaderRow2 > label > input,
-.subHeaderRow2Half > label > input {
+.subHeaderRow2Half > label > input,
+.subRightHeader1 > label > input {
     border-bottom: 1px solid red;
 }
 .subHeaderRow2 > label > input:placeholder-shown,
 .subHeaderRow2Half > label > input:placeholder-shown,
-.subHeaderRow3 > label > input:placeholder-shown {
+.subHeaderRow3 > label > input:placeholder-shown,
+.subRightHeader1 > label > input:placeholder-shown {
     border: 1px solid red;
 }
 .subHeaderRow2 > label > input::placeholder,
@@ -1004,9 +1022,6 @@ h6 {
     border-left: 3px solid var(--boxColor);
     border-right: 3px solid var(--boxColor);
 }
-.advdis > div:nth-of-type(2) {
-
-}
 .advantage-item,
 .disadvantage-item {
     padding: 0 2.5%;
@@ -1069,8 +1084,9 @@ h6 {
 .disadvantage-item > div:hover > a {
     opacity: 1;
 }
-.advdis > div > div > textarea {
-    margin: 3px 0 0 0;
+.advantage-item > div:nth-of-type(2),
+.disadvantage-item > div:nth-of-type(2) {
+    padding: 3px 0;
 }
 .advdis > div:nth-of-type(2) > div:nth-child(2n) {
     background: var(--itemOffSet);
@@ -1197,11 +1213,13 @@ h6 {
 }
 /* Elan */
 .elan > div:first-of-type,
-.elan-item2 > div > div,
 .elan-item > div:first-of-type,
-.elan-item > div:nth-of-type(2) {
+.elan-item > div:nth-of-type(3) {
     display: flex;
     justify-content: flex-start;
+}
+.elan-item2 > div > div {
+    display: flex;
 }
 .elan-item,
 .elan-item2 > div {
@@ -1814,9 +1832,6 @@ h6 {
 .spell-item > div > div > a {
     width: 5%;
 }
-.spell-item > div > div > input:first-of-type {
-    margin: 0 0 0 5%;
-}
 .spell-item > div > div > span {
     text-align: center;
 }
@@ -1856,49 +1871,48 @@ h6 {
     width: 50%;
     margin: 0 0 0 1%;
 }
-.spell-item > div:nth-of-type(4) > span {
+.spell-item > div:nth-of-type(5) > span {
     text-align: center;
     width: 23%;
     margin: 0 0 0 1%;
 }
-.spell-item > div:nth-of-type(4) > span:first-of-type {
+.spell-item > div:nth-of-type(5) > span:first-of-type {
     width: 18%;
     margin: 0 0 0 10%;
 }
 .spell-item > div:nth-of-type(3),
-.spell-item > div:nth-of-type(5),
 .spell-item > div:nth-of-type(6),
-.spell-item > div:nth-of-type(7),
-.spell-item > div:nth-of-type(8) {
-    padding: 0 0 5px 0;
+.spell-item > div:nth-of-type(8),
+.spell-item > div:nth-of-type(10),
+.spell-item > div:nth-of-type(12) {
+    padding: 3px 0 0 0;
 }
-.spell-item > div:nth-of-type(5) > a,
 .spell-item > div:nth-of-type(6) > a,
-.spell-item > div:nth-of-type(7) > a,
-.spell-item > div:nth-of-type(8) > a {
+.spell-item > div:nth-of-type(8) > a,
+.spell-item > div:nth-of-type(10) > a,
+.spell-item > div:nth-of-type(12) > a {
     width: 5%;
     margin: 0 0 0 5%;
 }
-.spell-item > div:nth-of-type(5) > span,
 .spell-item > div:nth-of-type(6) > span,
-.spell-item > div:nth-of-type(7) > span,
-.spell-item > div:nth-of-type(8) > span {
+.spell-item > div:nth-of-type(8) > span,
+.spell-item > div:nth-of-type(10) > span,
+.spell-item > div:nth-of-type(12) > span {
     width: 18%;
     text-align: center;
 }
-.spell-item > div:nth-of-type(5) > input,
 .spell-item > div:nth-of-type(6) > input,
-.spell-item > div:nth-of-type(7) > input,
-.spell-item > div:nth-of-type(8) > input {
+.spell-item > div:nth-of-type(8) > input,
+.spell-item > div:nth-of-type(10) > input,
+.spell-item > div:nth-of-type(12) > input {
     width: 23%;
     margin: 0 0 0 1%;
 }
 .spell-item > div:nth-of-type(3) {
     border-bottom: 1px solid var(--boxColor);
-    margin-bottom: 3px;
     padding-bottom: 3px;
 }
-.spell-item > div:nth-of-type(4) {
+.spell-item > div:nth-of-type(5) {
     border-bottom: 1px solid var(--boxColor);
     border-top: 1px solid var(--boxColor);
     margin: 3px 0 3px 0;
@@ -2335,7 +2349,7 @@ h6 {
 .mentalPattern-item > div > a {
     opacity: 0;
 }
-.mentalPattern-item > div:hover > a {
+.mentalPattern-item:hover > div > a {
     opacity: 1;
 }
 .mentalPattern-item > div > button {
@@ -2458,26 +2472,26 @@ h6 {
     border-bottom: 1px solid var(--boxColor);
     padding: 3px 0;
 }
-.psychicMatrix-item > div > div:nth-of-type(3) {
+.psychicMatrix-item > div > div:nth-of-type(4) {
     display: flex;
     border-top: 1px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
     padding: 3px 0;
 }
-.psychicMatrix-item > div > div:nth-of-type(3) > span:first-of-type {
+.psychicMatrix-item > div > div:nth-of-type(4) > span:first-of-type {
     width: 25%;
 }
-.psychicMatrix-item > div > div:nth-of-type(3) > span:last-of-type {
+.psychicMatrix-item > div > div:nth-of-type(4) > span:last-of-type {
     width: 75%;
 }
-.psychicMatrix-item > div > div:nth-of-type(4) > label > span:first-of-type {
+.psychicMatrix-item > div > div:nth-of-type(5) > label > span:first-of-type {
     width: 7%;
     border-right: 1px solid var(--boxColor);
 }
-.psychicMatrix-item > div > div:nth-of-type(4) > label > span:last-of-type {
+.psychicMatrix-item > div > div:nth-of-type(5) > label > span:last-of-type {
     width: 18%;
 }
-.psychicMatrix-item > div > div:nth-of-type(4) > label > input {
+.psychicMatrix-item > div > div:nth-of-type(5) > label > input {
     width: 75%;
 }
 .psychicMatrix-item > div:nth-of-type(2) {
@@ -2592,10 +2606,10 @@ h6 {
     justify-content: space-between;
 }
 .kipool {
-    width: 38%;
+    width: 44%;
 }
 .mk {
-    width: 58%;
+    width: 55%;
 }
 .arsMagnus {
     width: 68%;
@@ -2646,7 +2660,6 @@ h6 {
 .subKi5 {
     margin-left: 90px;
 }
-
 .kiActiveButton {
     width: 17%;
     margin: 0 0 0 7px;
@@ -2680,9 +2693,10 @@ h6 {
 .kipool > div:first-of-type {
     border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
+    padding: 0 2.5%;
 }
 .kipool > div:first-of-type > span:first-of-type {
-    margin: 0 0 0 27.2%;
+    margin: 0 2.5% 0 19%;
 }
 .kipool > div:first-of-type,
 .kipool > div:nth-of-type(8) > div,
@@ -2691,14 +2705,21 @@ h6 {
     justify-content: flex-start;
 }
 .kipool > div > div > span {
-    width: 26%;
+    width: 19%;
+    justify-content: center;
 }
 .kipool > div > span {
-    width: 21.85%;
+    justify-content: center;
+    margin: 0 2% 0 0;
+    width: 17%;
 }
+.kipool > div > div > input {
+    margin: 0 2% 0 0;
+}
+
 .kipool > div > div > input,
 .kipool > div:nth-of-type(8) > div > input {
-    width: 23%;
+    width: 17%;
 }
 .kipool > div > div > a {
     width: 5%;
@@ -2715,8 +2736,38 @@ h6 {
     font-style: italic;
     padding: 0 0 0 8px;
 }
-.kipool > div:nth-of-type(9) > div > span {
-    width: 49%
+.kipool > div:nth-of-type(8) > div > span {
+    width: 36%;
+    margin: 0 2% 0 0;
+}
+.mk .kiPoolButtons {
+    margin: 5% 2.5% 0 2.5%;
+    border: none;
+}
+.mk .kiPoolButtons > div {
+    width: 46%;
+}
+.mk .kiPoolButtons > div > div {
+    display: flex;
+}
+.mk .kiPoolButtons > div > div > button {
+    width: 50%;
+    margin: 0px;
+    height: 25px;
+    border-radius: 0px;
+    border: 0px;
+}
+.mk .kiPoolButtons > div > div {
+    border: 2px solid var(--boxColor);
+}
+.mk .kiPoolButtons > div:first-of-type > div > button {
+    width: 50%;
+}
+.mk .kiPoolButtons > div:first-of-type > div > button:first-of-type {
+    border-right: 1px solid var(--boxColor);
+}
+.mk .kiPoolButtons > div:last-of-type > div > button {
+    width: 100%;
 }
 /*
     --
@@ -2747,7 +2798,7 @@ h6 {
     width: 35%;
     margin: 0 4.5% 0 0;
 }
-.mk > div:last-of-type {
+.lastMK {
     border-top: 1px solid var(--boxColor);
     border-bottom: 3px solid var(--boxColor);
     padding: 3px 0;
@@ -2820,8 +2871,8 @@ h6 {
     width: 10%;
     margin: 0 0 0 1%;
 }
-.arsMagnus-item > div > textarea {
-    margin: 3px 0 0 0;
+.arsMagnus-item > div:nth-of-type(2) {
+    padding: 3px 2.5%;
 }
 .arsMagnus > div:nth-of-type(4) {
     border-top: 3px solid var(--boxColor);
@@ -2913,7 +2964,7 @@ h6 {
     margin: 0;
 }
 .martialArt-item > div > span:nth-of-type(2),
-.martialArt-item > div > div {
+.martialArt-item > div:first-of-type > div {
     width: 20%;
     margin: 0 0 0 1%;
 }
@@ -2925,8 +2976,8 @@ h6 {
     width: 8%;
     margin: 0 0 0 1%;
 }
-.martialArt-item > div > textarea {
-    margin: 3px 0 0 0;
+.martialArt-item > div:nth-of-type(2) {
+    padding: 3px 2.5%;
 }
 /*
     --------------
@@ -3135,7 +3186,6 @@ h6 {
 .kiTechUseMax > span,
 .kiTechMaint > div > span,
 .kiTechUse > div > span,
-.kiTechType > div > span:not(:first-of-type),
 .kiTechTypeMax > div > span:not(:first-of-type) {
     text-align: center;
 }
@@ -3224,45 +3274,51 @@ h6 {
     justify-content: center;
     display: flex;
 }
-.kiTechTypeMax > span,
+.kiTechTypeMax > span:last-of-type {
+    justify-content: center;
+    display: flex;
+}
+.kiTechTypeMax > span:not(:first-of-type):not(:last-of-type),
 .kiTechUseMax > input,
 .kiTechMaintMax > input {
+    justify-content: center;
     text-align: center;
-    width: 10%;
+    display: flex;
+    width: 9%;
     margin: 0 1% 0 0;
 }
 .kiTechTypeMax > span:last-of-type,
 .techSelect {
-    width: 18%;
+    width: 25%;
 }
 .techSelect > select {
     width: 100%;
 }
 .techExpandMax,
 .techExpand {
-    width: 81%;
+    width: 75%;
     display: flex;
 }
 .kiTechMaintMax > div > span,
-.kiTechMaint > div > span:first-of-type,
 .kiTechUseMax > div > span,
 .kiTechUse > div > span:first-of-type {
-    width: 33%;
-    text-align: start;
-    margin: 0 0 0 29px;
+    width: 33.3%;
+    justify-content: center;
+}
+.kiTechMaint > div > span:first-of-type {
+    width: 32%;
+    justify-content: center;
 }
 .kiTechMaintMax > div > input,
 .kiTechMaint > div > span,
 .kiTechUseMax > div > input,
 .kiTechUse > div > span {
-    width: 15%;
+    width: 12%;
 }
-.kiTechType > div > span:first-of-type,
 .kiTechTypeMax > div > span:first-of-type {
     width: 33%;
     margin: 0 0 0 29px;
 }
-.kiTechType > div > span,
 .kiTechTypeMax > div > span {
     width: 15%;
 }
@@ -3826,9 +3882,6 @@ h6 {
 .inventory-item > div:hover > a {
     opacity: 1;
 }
-.inventory-item > textarea {
-    margin: 3px 0 0 0;
-}
 /*
     *****************
     -----------------
@@ -3922,6 +3975,12 @@ h6 {
 }
 .settingsSubsection > div:last-of-type {
     border-bottom: 3px solid var(--boxColor);
+}
+.innatePowerSetting > div {
+    width: 30%;
+}
+.innatePowerSetting > div > label > select {
+    width: 100%;
 }
 /*
     ---------
@@ -4065,8 +4124,18 @@ h6 {
 .homebrew > label {
     display: flex;
     padding: 0 10px 0 10px;
+    width: 49%;
 }
-
+.homebrew > label > span {
+    width: 60%
+}
+.homebrew > label > button {
+    width: 30%;
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
+}
 /*
     ***************
     ---------------
@@ -4452,18 +4521,14 @@ h6 {
     width: 49%;
     margin: 0 1% 0 0;
 }
-
-
-
-
-.spellContent > div {
+.spellContent > div:not(:last-of-type) {
     border-left: 3px solid var(--boxColor);
     border-right: 3px solid var(--boxColor);
 }
 .spellContent > div:first-of-type {
     border-top: 3px solid var(--boxColor);
 }
-.spellContent > div:last-of-type {
+.spellContent > div:nth-of-type(4) {
     border-bottom: 3px solid var(--boxColor);
 }
 .spellContentCont > div:first-of-type {
@@ -4522,8 +4587,8 @@ h6 {
     width: 49%;
     margin: 0 1% 0 0;
 }
-.incarnationContent > div,
-.invocationContent > div {
+.incarnationContent > div:not(:last-of-type),
+.invocationContent > div:not(:last-of-type) {
     border-left: 3px solid var(--boxColor);
     border-right: 3px solid var(--boxColor);
 }
@@ -4531,8 +4596,8 @@ h6 {
 .invocationContent > div:first-of-type {
     border-top: 3px solid var(--boxColor);
 }
-.incarnationContent > div:last-of-type,
-.invocationContent > div:last-of-type {
+.incarnationContent > div:nth-of-type(2),
+.invocationContent > div:nth-of-type(3) {
     border-bottom: 3px solid var(--boxColor);
 }
 /*
@@ -4564,15 +4629,15 @@ h6 {
 .maintpContent > div {
     border: 3px solid var(--boxColor);
 }
-.mentalpContent > div {
+.mentalpContent > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
     border-left: 3px solid var(--boxColor);
     border-right: 3px solid var(--boxColor);
 }
-.mentalpContent > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.mentalpContent > div:last-of-type {
+.mentalpContent > div:nth-of-type(2) {
     border-bottom: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
 }
 /*
     --------------
@@ -4670,7 +4735,7 @@ h6 {
     display: flex;
     width: 100%;
 }
-.maContent > div > div {
+.maContent > div:nth-of-type(3)> div {
     width: 50%;
     padding: 0 10px;
 }
@@ -4684,14 +4749,14 @@ h6 {
     width: 49%;
     margin: 0 1% 0 0;
 }
-.maContent > div {
+.maContent > div:not(:last-of-type) {
     border-left: 3px solid var(--boxColor);
     border-right: 3px solid var(--boxColor);
 }
 .maContent > div:first-of-type {
     border-top: 3px solid var(--boxColor);
 }
-.maContent > div:last-of-type {
+.maContent > div:nth-of-type(3) {
     border-bottom: 3px solid var(--boxColor);
 }
 /*
@@ -4699,7 +4764,8 @@ h6 {
     Ki Technique
     -----------------
 */
-.kiTechContent > div {
+.kiTechMaintMaxContent > div,
+.kiTechContent > div:not(:nth-of-type(4)) {
     display: flex;
 }
 .kiTechContent > div:nth-of-type(1) {
@@ -4710,20 +4776,54 @@ h6 {
     width: 50%;
     padding: 0 10px;
 }
-.kiTechContent > div:nth-of-type(1) > label > input,
+.kiTechContent > div:nth-of-type(1) > label > input{
+    width: 25%;
+    margin: 0 1% 0 0;
+    display: flex;
+    justify-content: center;
+}
 .kiTechContent > div:nth-of-type(1) > label > span {
     width: 49%;
     margin: 0 1% 0 0;
+    display: flex;
+    justify-content: center;
 }
 .kiTechContent > div:nth-of-type(2) {
+    padding: 3px 0 0 0;
     border-bottom: 1px dashed var(--boxColor);
 }
-.kiTechContent > div {
+.kiTechContent > div:not(:last-of-type) {
     border-left: 3px solid var(--boxColor);
     border-right: 3px solid var(--boxColor);
 }
-.kiTechContent > div:last-of-type {
+.kiTechContent > div:nth-of-type(4) {
     border-bottom: 3px solid var(--boxColor);
+}
+.kiTechMaintMaxContent > div > span:first-of-type {
+    width: 15%;
+    justify-content: center;
+    display: flex;
+}
+.kiTechMaintMaxContent > div > input {
+    text-align: center;
+    width: 9%;
+    margin: 0 1% 0 0;
+}
+.kiTechMaintMaxContent > div:nth-of-type(2) > span {
+    width: 25%;
+}
+.techExpandContent {
+    display: flex;
+    width: 75%;
+}
+.techExpandContent > span {
+    width: 33.3%;
+    justify-content: center;
+    display: flex;
+}
+.techExpandContent > input {
+    display: flex;
+    width: 12%;
 }
 /*
     -----------------
@@ -4732,9 +4832,6 @@ h6 {
 */
 .kiSealContent {
     background: none !important;
-}
-.kiSealContent > div:first-of-type {
-    margin: 0 !important;
 }
 .kiSealContent > div:first-of-type > label {
     display: flex;
@@ -4751,23 +4848,39 @@ h6 {
 .kiSealContent > div:first-of-type > label > span {
     width: 20%;
 }
-.kiSealContent > div:first-of-type {
-    margin: 0 0 3px 0;
+.kiSealContent > div > div {
+    display: flex; 
 }
-.kiSealContent > div {
+.kiSealContent > div > div > span {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+.kiSealContent > div > div:nth-of-type(2) > span:first-of-type,
+.kiSealContent > div > div:nth-of-type(3) > span:first-of-type,
+.kiSealContent > div > div:first-of-type > span:first-of-type {
+    width: 20%;
+    margin: 0;
+}
+.kiSealContent > div > div > input,
+.kiSealContent > div > div:first-of-type > span {
+    width: 15%;
+    margin: 0 0 0 1%;
+}
+.kiSealContent > div:not(:last-of-type) {
     border-left: 3px solid var(--boxColor);
     border-right: 3px solid var(--boxColor);
 }
 .kiSealContent > div:first-of-type {
     border-top: 3px solid var(--boxColor);
 }
-.kiSealContent > div:last-of-type {
+.kiSealContent > div:nth-of-type(2) {
     border-bottom: 3px solid var(--boxColor);
 }
 /*
-    --------------------------
-    Ki Techniques & Ars Magnus
-    --------------------------
+    -----------
+     Ars Magnus
+    -----------
 */
 .arsContent > div > label {
     display: flex;
@@ -4944,14 +5057,14 @@ h6 {
     width: 98%;
     margin: 0 2% 0 0;
 }
-.invContent > div {
+.invContent > div:not(:last-of-type) {
     border-left: 3px solid var(--boxColor);
     border-right: 3px solid var(--boxColor);
 }
 .invContent > div:first-of-type {
     border-top: 3px solid var(--boxColor);
 }
-.invContent > div:last-of-type {
+.invContent > div:nth-of-type(4) {
     border-bottom: 3px solid var(--boxColor);
 }
 /*

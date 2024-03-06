@@ -231,7 +231,9 @@ export default class abfalterItem extends Item {
 
     prepareKiTechnique() {
         if (this.parent != null) {
+            this.system.actor = false;
             if (this.parent) {
+                this.system.actor = true;
                 this.system.unified = this.parent.system.toggles.unifiedPools;
                 this.system.innatePower = this.parent.system.toggles.innatePower;
                 this.system.tag = this.parent.system.kiPool.innate.tag;

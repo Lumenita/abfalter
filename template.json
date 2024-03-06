@@ -9,9 +9,9 @@
         "gender": "",
         "height": "",
         "weight": "",
-        "size": 10,
-        "age": "18",
-        "appearance": 5,
+        "size": "",
+        "age": "",
+        "appearance": "",
         "experience": 0,
         "levelinfo": {
           "levelmod": 0,
@@ -1446,15 +1446,21 @@
             "specMax": 0,
             "temp": 0,
             "tempMax": 0,
+            "default": 0,
+            "defaultMax": 0,
             "actual": 0,
-            "status":  false
+            "current": 0,
+            "status": false
           },
           "con": {
             "spec": 0,
             "specMax": 0,
             "temp": 0,
             "tempMax": 0,
+            "default": 0,
+            "defaultMax": 0,
             "actual": 0,
+            "current": 0,
             "status": false
           },
           "dex": {
@@ -1462,7 +1468,10 @@
             "specMax": 0,
             "temp": 0,
             "tempMax": 0,
+            "default": 0,
+            "defaultMax": 0,
             "actual": 0,
+            "current": 0,
             "status": false
           },
           "str": {
@@ -1470,7 +1479,10 @@
             "specMax": 0,
             "temp": 0,
             "tempMax": 0,
+            "default": 0,
+            "defaultMax": 0,
             "actual": 0,
+            "current": 0,
             "status": false
           },
           "pow": {
@@ -1478,7 +1490,10 @@
             "specMax": 0,
             "temp": 0,
             "tempMax": 0,
+            "default": 0,
+            "defaultMax": 0,
             "actual": 0,
+            "current": 0,
             "status": false
           },
           "wp": {
@@ -1486,7 +1501,10 @@
             "specMax": 0,
             "temp": 0,
             "tempMax": 0,
+            "default": 0,
+            "defaultMax": 0,
             "actual": 0,
+            "current": 0,
             "status": false
           },
           "unified": 0,
@@ -1494,9 +1512,7 @@
             "type": "POW",
             "tag": "POW",
             "spec": 0,
-            "specMax": 0,
             "temp": 0,
-            "tempMax": 0,
             "actual": 0,
             "status": false
           }
@@ -1966,11 +1982,12 @@
     },
     "kiTechnique": {
       "templates": [ "itemDescription" ],
-      "expand": false,
+      "expand": true,
+      "actor": false,
       "level": 0,
       "mk": 0,
-      "actionType": "Attack",
-      "frequency": "Action",
+      "actionType": "",
+      "frequency": "",
       "use": {
         "unified": 0,
         "agi": 0,

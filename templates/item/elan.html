@@ -19,13 +19,25 @@
                     <label> <span> {{localize "abfalter.generalTab.elan"}} </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
                 </div>
                 <h5> {{localize "abfalter.basicInfo.description"}} </h5>
-                <textarea name="data.description" rows="5">{{data.description}}</textarea>
+                <div style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.description" style="grid-area: 1 / 1 / 2/ 2;">{{data.description}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.description}}</div>
+                </div>
                 <h5> {{localize "abfalter.generalTab.gainElan"}} </h5>
-                <textarea name="data.gain" rows="5">{{data.gain}}</textarea>
+                <div style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gain" style="grid-area: 1 / 1 / 2/ 2;">{{data.gain}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gain}}</div>
+                </div>
                 <h5> {{localize "abfalter.generalTab.gainUpperElan"}} </h5>
-                <textarea name="data.gainUpper" rows="5">{{data.gainUpper}}</textarea>
+                <div style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gainUpper" style="grid-area: 1 / 1 / 2/ 2;">{{data.gainUpper}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gainUpper}}</div>
+                </div>
                 <h5> {{localize "abfalter.generalTab.loseElan"}} </h5>
-                <textarea name="data.lose" rows="5">{{data.lose}}</textarea>
+                <div style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.lose" style="grid-area: 1 / 1 / 2/ 2;">{{data.lose}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.lose}}</div>
+                </div>
             </div>
         </div>
 
@@ -47,7 +59,10 @@
                     <a class="toggleBoolean {{#if data.gifts.one.expand}}showOpacity{{/if}}" data-label="data.gifts.one.expand" data-ability="{{data.gifts.one.expand}}"><i class="{{#if data.gifts.one.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.one.expand}}
-                <textarea name="data.gifts.one.desc" rows="5">{{data.gifts.one.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.one.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.one.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.one.desc}}</div>
+                </div>
                 {{/if}}
                 <div>
                     <input type="text" name="data.gifts.two.name" value="{{data.gifts.two.name}}" />
@@ -56,7 +71,10 @@
                     <a class="toggleBoolean {{#if data.gifts.two.expand}}showOpacity{{/if}}" data-label="data.gifts.two.expand" data-ability="{{data.gifts.two.expand}}"><i class="{{#if data.gifts.two.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.two.expand}}
-                <textarea name="data.gifts.two.desc" rows="5">{{data.gifts.two.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.two.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.two.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.two.desc}}</div>
+                </div>
                 {{/if}}
                 <div>
                     <input type="text" name="data.gifts.three.name" value="{{data.gifts.three.name}}" />
@@ -65,7 +83,10 @@
                     <a class="toggleBoolean {{#if data.gifts.three.expand}}showOpacity{{/if}}" data-label="data.gifts.three.expand" data-ability="{{data.gifts.three.expand}}"><i class="{{#if data.gifts.three.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.three.expand}}
-                <textarea name="data.gifts.three.desc" rows="5">{{data.gifts.three.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.three.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.three.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.three.desc}}</div>
+                </div>
                 {{/if}}
                 <div>
                     <input type="text" name="data.gifts.four.name" value="{{data.gifts.four.name}}" />
@@ -74,7 +95,10 @@
                     <a class="toggleBoolean {{#if data.gifts.four.expand}}showOpacity{{/if}}" data-label="data.gifts.four.expand" data-ability="{{data.gifts.four.expand}}"><i class="{{#if data.gifts.four.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.four.expand}}
-                <textarea name="data.gifts.four.desc" rows="5">{{data.gifts.four.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.four.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.four.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.four.desc}}</div>
+                </div>
                 {{/if}}
                 <div>
                     <input type="text" name="data.gifts.five.name" value="{{data.gifts.five.name}}" />
@@ -83,7 +107,10 @@
                     <a class="toggleBoolean {{#if data.gifts.five.expand}}showOpacity{{/if}}" data-label="data.gifts.five.expand" data-ability="{{data.gifts.five.expand}}"><i class="{{#if data.gifts.five.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.five.expand}}
-                <textarea name="data.gifts.five.desc" rows="5">{{data.gifts.five.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.five.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.five.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.five.desc}}</div>
+                </div>
                 {{/if}}
 
                 <div>
@@ -93,7 +120,10 @@
                     <a class="toggleBoolean {{#if data.gifts.six.expand}}showOpacity{{/if}}" data-label="data.gifts.six.expand" data-ability="{{data.gifts.six.expand}}"><i class="{{#if data.gifts.six.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.six.expand}}
-                <textarea name="data.gifts.six.desc" rows="5">{{data.gifts.six.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.six.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.six.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.six.desc}}</div>
+                </div>
                 {{/if}}
                 <div>
                     <input type="text" name="data.gifts.seven.name" value="{{data.gifts.seven.name}}" />
@@ -102,7 +132,10 @@
                     <a class="toggleBoolean {{#if data.gifts.seven.expand}}showOpacity{{/if}}" data-label="data.gifts.seven.expand" data-ability="{{data.gifts.seven.expand}}"><i class="{{#if data.gifts.seven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.seven.expand}}
-                <textarea name="data.gifts.seven.desc" rows="5">{{data.gifts.seven.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.seven.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.seven.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.seven.desc}}</div>
+                </div>
                 {{/if}}
                 <div>
                     <input type="text" name="data.gifts.eight.name" value="{{data.gifts.eight.name}}" />
@@ -111,7 +144,10 @@
                     <a class="toggleBoolean {{#if data.gifts.eight.expand}}showOpacity{{/if}}" data-label="data.gifts.eight.expand" data-ability="{{data.gifts.eight.expand}}"><i class="{{#if data.gifts.eight.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.eight.expand}}
-                <textarea name="data.gifts.eight.desc" rows="5">{{data.gifts.eight.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.eight.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.eight.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.eight.desc}}</div>
+                </div>
                 {{/if}}
                 <div>
                     <input type="text" name="data.gifts.nine.name" value="{{data.gifts.nine.name}}" />
@@ -120,7 +156,10 @@
                     <a class="toggleBoolean {{#if data.gifts.nine.expand}}showOpacity{{/if}}" data-label="data.gifts.nine.expand" data-ability="{{data.gifts.nine.expand}}"><i class="{{#if data.gifts.nine.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.nine.expand}}
-                <textarea name="data.gifts.nine.desc" rows="5">{{data.gifts.nine.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.nine.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.nine.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.nine.desc}}</div>
+                </div>
                 {{/if}}
                 <div>
                     <input type="text" name="data.gifts.ten.name" value="{{data.gifts.ten.name}}" />
@@ -129,7 +168,10 @@
                     <a class="toggleBoolean {{#if data.gifts.ten.expand}}showOpacity{{/if}}" data-label="data.gifts.ten.expand" data-ability="{{data.gifts.ten.expand}}"><i class="{{#if data.gifts.ten.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.ten.expand}}
-                <textarea name="data.gifts.ten.desc" rows="5">{{data.gifts.ten.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.ten.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.ten.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.ten.desc}}</div>
+                </div>
                 {{/if}}
                 <div>
                     <input type="text" name="data.gifts.eleven.name" value="{{data.gifts.eleven.name}}" />
@@ -138,7 +180,10 @@
                     <a class="toggleBoolean {{#if data.gifts.eleven.expand}}showOpacity{{/if}}" data-label="data.gifts.eleven.expand" data-ability="{{data.gifts.eleven.expand}}"><i class="{{#if data.gifts.eleven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.eleven.expand}}
-                <textarea name="data.gifts.eleven.desc" rows="5">{{data.gifts.eleven.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.eleven.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.eleven.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.eleven.desc}}</div>
+                </div>
                 {{/if}}
                 <div>
                     <input type="text" name="data.gifts.twelve.name" value="{{data.gifts.twelve.name}}" />
@@ -147,7 +192,10 @@
                     <a class="toggleBoolean {{#if data.gifts.twelve.expand}}showOpacity{{/if}}" data-label="data.gifts.twelve.expand" data-ability="{{data.gifts.twelve.expand}}"><i class="{{#if data.gifts.twelve.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.twelve.expand}}
-                <textarea name="data.gifts.twelve.desc" rows="5">{{data.gifts.twelve.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.twelve.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.twelve.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.twelve.desc}}</div>
+                </div>
                 {{/if}}
                 <div>
                     <input type="text" name="data.gifts.thirteen.name" value="{{data.gifts.thirteen.name}}" />
@@ -156,7 +204,10 @@
                     <a class="toggleBoolean {{#if data.gifts.thirteen.expand}}showOpacity{{/if}}" data-label="data.gifts.thirteen.expand" data-ability="{{data.gifts.thirteen.expand}}"><i class="{{#if data.gifts.thirteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.thirteen.expand}}
-                <textarea name="data.gifts.thirteen.desc" rows="5">{{data.gifts.thirteen.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.thirteen.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.thirteen.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.thirteen.desc}}</div>
+                </div>
                 {{/if}}
                 <div>
                     <input type="text" name="data.gifts.fourteen.name" value="{{data.gifts.fourteen.name}}" />
@@ -165,7 +216,10 @@
                     <a class="toggleBoolean {{#if data.gifts.fourteen.expand}}showOpacity{{/if}}" data-label="data.gifts.fourteen.expand" data-ability="{{data.gifts.fourteen.expand}}"><i class="{{#if data.gifts.fourteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.fourteen.expand}}
-                <textarea name="data.gifts.fourteen.desc" rows="5">{{data.gifts.fourteen.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.fourteen.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.fourteen.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.fourteen.desc}}</div>
+                </div>
                 {{/if}}
                 <div>
                     <input type="text" name="data.gifts.fifteen.name" value="{{data.gifts.fifteen.name}}" />
@@ -174,7 +228,10 @@
                     <a class="toggleBoolean {{#if data.gifts.fifteen.expand}}showOpacity{{/if}}" data-label="data.gifts.fifteen.expand" data-ability="{{data.gifts.fifteen.expand}}"><i class="{{#if data.gifts.fifteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </div>
                 {{#if data.gifts.fifteen.expand}}
-                <textarea name="data.gifts.fifteen.desc" rows="5">{{data.gifts.fifteen.desc}}</textarea>
+                <div class="textarea-div" style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.gifts.fifteen.desc" style="grid-area: 1 / 1 / 2/ 2;">{{data.gifts.fifteen.desc}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.gifts.fifteen.desc}}</div>
+                </div>
                 {{/if}}
             </div>
         </div>

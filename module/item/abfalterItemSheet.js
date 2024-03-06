@@ -53,7 +53,10 @@ export default class abfalterItemSheet extends ItemSheet {
                 this.options.height = this.position.height = 615;
                 break;
             case "inventory":
+                this.options.height = this.position.height = 375;
+                break;
             case "kiTechnique":
+                this.options.width = this.position.width = 550;
                 this.options.height = this.position.height = 375;
                 break;
             case "proficiency":
@@ -112,11 +115,8 @@ export default class abfalterItemSheet extends ItemSheet {
             this.document.update({ [label]: value });
         });
 
-        $("textarea").each(function () {
-            this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
-        }).on("input", function () {
-            this.style.height = "auto";
-            this.style.height = (this.scrollHeight) + "px";
+        $("textarea.textarea-auto-resize").on("input", function () {
+            this.nextElementSibling.textContent = this.value;
         });
         super.activateListeners(html);
     }

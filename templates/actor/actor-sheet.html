@@ -48,7 +48,7 @@
                             <span> / </span>
                             <span> {{data.nextlevel}} </span>
                             <span> {{localize "abfalter.basicInfo.exp"}} </span>
-                            <label class="levelUpBox">
+                            <label class="levelUpBox hidden">
                                 <a> <i class="fas fa-cog"></i> </a>
                             </label>
                         </div>
@@ -57,8 +57,8 @@
                     <div class="SubHeaderRight">
                         <div class="subRightHeader1">
                             {{#if data.toggles.actorHeaderInfo1}}
-                            <label> <input type="text" name="data.size" value="{{data.size}}" placeholder="{{localize "abfalter.basicInfo.size"}}" /> </label>
-                            <label> <input type="text" name="data.appearance" value="{{data.appearance}}" placeholder="{{localize "abfalter.basicInfo.appear"}}" /> </label>
+                            <label> <input type="number" name="data.size" value="{{data.size}}" placeholder="{{localize "abfalter.basicInfo.size"}}" /> </label>
+                            <label> <input type="number" name="data.appearance" value="{{data.appearance}}" placeholder="{{localize "abfalter.basicInfo.appear"}}" /> </label>
                             {{else}}
                             <span>{{localize "abfalter.basicInfo.size"}}: {{data.size}} | {{localize "abfalter.basicInfo.appear"}}: {{data.appearance}} </span>
                             {{/if}}

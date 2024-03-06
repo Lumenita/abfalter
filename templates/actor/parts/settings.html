@@ -66,8 +66,8 @@
                 </button>
             </div>
             {{/if}}
-            {{#if data.toggles.unifiedPools}}
-            <div>
+            {{#if data.toggles.innatePower}}
+            <div class="innatePowerSetting">
                 <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.innateType"}} </span>
                 <div class="csSelect">
                     <label>
@@ -127,7 +127,7 @@
         </div>
 
         <div class="settingsSubsection">
-            <h5> {{localize "abfalter.settingsTab.homebrewSettings"}} </h5>
+            <h5> {{localize "abfalter.settingsTab.generalSettings"}} </h5>
             <div>
                 <span> {{localize "abfalter.settingsTab.hideCurrency"}} </span>
                 <button type="button" class="toggleBoolean {{#if data.toggles.currencyHide}}kiBought{{/if}}"
@@ -479,10 +479,17 @@
 
 
         <div class="homebrew">
-            <h5> {{localize "abfalter.settingsTab.settingsWip"}} </h5>
+            <h5> {{localize "abfalter.settingsTab.homebrewSettings"}} </h5>
             <label>
                 <span> {{localize "abfalter.settingsTab.increasedStr"}} </span>
-                <input type="checkbox" name="data.toggles.psychicStrengthening" data-dtype="boolean" {{checked data.toggles.psychicStrengthening}} />
+                <button type="button" class="toggleBoolean {{#if data.toggles.psychicStrengthening}}kiBought{{/if}}"
+                        data-label="data.toggles.psychicStrengthening" data-ability="{{data.toggles.psychicStrengthening}}">
+                    {{#if data.toggles.psychicStrengthening}}
+                    <span> {{localize "abfalter.settingsTab.active"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
+                    {{/if}}
+                </button>
             </label>
         </div>
 

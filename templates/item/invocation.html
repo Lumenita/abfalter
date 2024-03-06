@@ -20,6 +20,9 @@
         <h6> {{localize "abfalter.magicTab.pact"}} </h6>
         <textarea name="data.pact" rows="5">{{data.pact}}</textarea>
         <h6> {{localize "abfalter.magicTab.effDuration"}} </h6>
-        <textarea name="data.description" rows="5">{{data.description}}</textarea>
+        <div style="display: grid;">
+            <textarea class="textarea-auto-resize" rows="5" name="data.description" style="grid-area: 1 / 1 / 2/ 2;">{{data.description}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.description}}</div>
+        </div>
     </div>
 </form>

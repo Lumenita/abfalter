@@ -154,9 +154,15 @@
                         </div>
                         <div>
                             <span> {{localize "abfalter.basicInfo.bonus"}} </span>
-                            <textarea class="inline-edit" data-field="system.description">{{mentalPattern.system.description}}</textarea>
+                            <div style="display: grid;">
+                                <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{mentalPattern.system.description}}</textarea>
+                                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{mentalPattern.system.description}}</div>
+                            </div>
                             <span> {{localize "abfalter.armoryTab.penalty"}} </span>
-                            <textarea class="inline-edit" data-field="system.penalty">{{mentalPattern.system.penalty}}</textarea>
+                            <div style="display: grid;">
+                                <textarea class="inline-edit textarea-auto-resize" data-field="system.penalty" style="grid-area: 1 / 1 / 2/ 2;">{{mentalPattern.system.penalty}}</textarea>
+                                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{mentalPattern.system.penalty}}</div>
+                            </div>
                         </div>
                         {{else}}
                         <div>
@@ -235,7 +241,10 @@
                             <div>
                                 <span> {{localize "abfalter.basicInfo.description"}} </span>
                             </div>
-                            <textarea class="inline-edit" data-field="system.description">{{psychicMatrix.system.description}}</textarea>
+                            <div style="display: grid;">
+                                <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{psychicMatrix.system.description}}</textarea>
+                                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{psychicMatrix.system.description}}</div>
+                            </div>
                             <div>
                                 <span> {{localize "abfalter.basicInfo.difficulty"}} </span>
                                 <span> {{localize "abfalter.basicInfo.effect"}} </span>
@@ -290,8 +299,9 @@
                         <input class="inline-edit" data-field="system.value" type="number" value="{{maintPower.system.value}}" />
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <div>
-                        <textarea class="inline-edit" data-field="system.description">{{maintPower.system.description}}</textarea>
+                    <div style="display: grid;">
+                        <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{maintPower.system.description}}</textarea>
+                        <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{maintPower.system.description}}</div>
                     </div>
                     {{else}}
                     <div>

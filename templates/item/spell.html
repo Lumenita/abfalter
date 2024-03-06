@@ -79,8 +79,12 @@
             <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
         </div>
         <h6> {{localize "abfalter.basicInfo.description"}} </h6>
-        <textarea name="data.description" rows="5">{{data.description}}</textarea>
+        <div style="display: grid;">
+            <textarea class="textarea-auto-resize" rows="5" name="data.description" style="grid-area: 1 / 1 / 2/ 2;">{{data.description}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.description}}</div>
+        </div>
     </div>
+
     <div class="spellContentCont">
         <h6> Spell Content </h6>
         <div>
@@ -96,8 +100,9 @@
             <input type="number" name="data.basic.zeonCost" value="{{data.basic.zeonCost}}" />
             <input type="number" name="data.basic.maint" value="{{data.basic.maint}}" />
         </div>
-        <div>
-            <textarea name="data.basic.rollDesc" rows="5">{{data.basic.rollDesc}}</textarea>
+        <div style="display: grid;">
+            <textarea class="textarea-auto-resize" rows="5" name="data.basic.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{data.basic.rollDesc}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.basic.rollDesc}}</div>
         </div>
 
         <div>
@@ -106,8 +111,9 @@
             <input type="number" name="data.intermediate.zeonCost" value="{{data.intermediate.zeonCost}}" />
             <input type="number" name="data.intermediate.maint" value="{{data.intermediate.maint}}" />
         </div>
-        <div>
-            <textarea name="data.intermediate.rollDesc" rows="5">{{data.intermediate.rollDesc}}</textarea>
+        <div style="display: grid;">
+            <textarea class="textarea-auto-resize" rows="5" name="data.intermediate.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{data.intermediate.rollDesc}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.intermediate.rollDesc}}</div>
         </div>
 
         <div>
@@ -116,8 +122,9 @@
             <input type="number" name="data.advanced.zeonCost" value="{{data.advanced.zeonCost}}" />
             <input type="number" name="data.advanced.maint" value="{{data.advanced.maint}}" />
         </div>
-        <div>
-            <textarea name="data.advanced.rollDesc" rows="5">{{data.advanced.rollDesc}}</textarea>
+        <div style="display: grid;">
+            <textarea class="textarea-auto-resize" rows="5" name="data.advanced.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{data.advanced.rollDesc}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.advanced.rollDesc}}</div>
         </div>
 
         <div>
@@ -126,8 +133,9 @@
             <input type="number" name="data.arcane.zeonCost" value="{{data.arcane.zeonCost}}" />
             <input type="number" name="data.arcane.maint" value="{{data.arcane.maint}}" />
         </div>
-        <div>
-            <textarea name="data.arcane.rollDesc" rows="5">{{data.arcane.rollDesc}}</textarea>
+        <div style="display: grid;">
+            <textarea class="textarea-auto-resize" rows="5" name="data.arcane.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{data.arcane.rollDesc}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.arcane.rollDesc}}</div>
         </div>
     </div>
 </form>

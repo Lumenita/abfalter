@@ -311,7 +311,7 @@
                             <span> = </span>
                         </div>
                         <div>
-                            <input class="inline-edit" data-field="system.finalDmg" type="number" value="{{weapon.system.finalDmg}}" readonly/>
+                            <input class="inline-edit" data-field="system.finalDmg" type="number" value="{{weapon.system.finalDmg}}" readonly />
                         </div>
                     </div>
                     <div>
@@ -364,7 +364,10 @@
                             <span> {{localize "abfalter.armoryTab.complex"}} </span>
                         </button>
                     </div>
-                    <textarea class="inline-edit" data-field="system.description">{{weapon.system.description}}</textarea>
+                    <div class="textarea-div" style="display: grid;">
+                        <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{weapon.system.description}}</textarea>
+                        <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{weapon.system.description}}</div>
+                    </div>
                     {{else}}
                     <div class="{{#if system.equipped}}equipped{{else}}notEquipped{{/if}}">
                         <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
@@ -437,7 +440,10 @@
                         <input class="inline-edit" data-field="system.quality" type="text" value="{{inventory.system.quality}}" />
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <textarea class="inline-edit" data-field="system.description">{{inventory.system.description}}</textarea>
+                    <div class="textarea-div" style="display: grid;">
+                        <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{inventory.system.description}}</textarea>
+                        <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{inventory.system.description}}</div>
+                    </div>
                     {{else}}
                     <div>
                         <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>

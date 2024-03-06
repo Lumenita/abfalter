@@ -272,7 +272,10 @@
                             <input class="inline-edit" data-field="system.zeon" type="number" value="{{turnMaint.system.zeon}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.description">{{turnMaint.system.description}}</textarea>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{turnMaint.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{turnMaint.system.description}}</div>
+                        </div>
                         {{else}}
                         <div class="{{#if system.equipped}}equipped{{else}}notEquipped{{/if}}">
                             <span> {{turnMaint.name}} </span>
@@ -313,7 +316,10 @@
                             <input class="inline-edit" data-field="system.zeon" type="number" value="{{dailyMaint.system.zeon}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.description">{{dailyMaint.system.description}}</textarea>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{dailyMaint.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{dailyMaint.system.description}}</div>
+                        </div>
                         {{else}}
                         <div class="{{#if system.equipped}}equipped{{else}}notEquipped{{/if}}">
                             <span> {{dailyMaint.name}} </span>
@@ -347,6 +353,7 @@
                         {{#if system.expand}}
                         <div>
                             <div>
+                                <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                                 <input class="item-name inline-edit" data-field="name" type="text" value="{{spell.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
                                 <input class="inline-edit" data-field="system.path" type="text" value="{{spell.system.path}}" />
                                 <input class="inline-edit" data-field="system.level" type="number" value="{{spell.system.level}}" />
@@ -414,7 +421,10 @@
                             </label>
                             <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" class="inline-edit" data-field="system.cost" value="{{system.cost}}" /> </label>
                         </div>
-                        <textarea class="inline-edit" data-field="system.description">{{~spell.system.description}}</textarea>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{spell.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{spell.system.description}}</div>
+                        </div>
                         <div>
                             <span> {{localize "abfalter.magicTab.rank"}} </span>
                             <span> {{localize "abfalter.magicTab.req"}} </span>
@@ -428,7 +438,10 @@
                             <input class="inline-edit" data-field="system.basic.zeonCost" type="text" value="{{spell.system.basic.zeonCost}}" />
                             <input class="inline-edit" data-field="system.basic.maint" type="text" value="{{spell.system.basic.maint}}" />
                         </div>
-                        <textarea class="inline-edit" data-field="system.basic.rollDesc">{{spell.system.basic.rollDesc}}</textarea>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.basic.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{spell.system.basic.rollDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{spell.system.basic.rollDesc}}</div>
+                        </div>
                         <div>
                             <a class="item-control item-chat" data-label="int"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.intermidiate"}} </span>
@@ -436,7 +449,10 @@
                             <input class="inline-edit" data-field="system.intermediate.zeonCost" type="text" value="{{spell.system.intermediate.zeonCost}}" />
                             <input class="inline-edit" data-field="system.intermediate.maint" type="text" value="{{spell.system.intermediate.maint}}" />
                         </div>
-                        <textarea class="inline-edit" data-field="system.intermediate.rollDesc">{{spell.system.intermediate.rollDesc}}</textarea>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.intermediate.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{spell.system.intermediate.rollDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{spell.system.intermediate.rollDesc}}</div>
+                        </div>
                         <div>
                             <a class="item-control item-chat" data-label="adv"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.advanced"}} </span>
@@ -444,7 +460,10 @@
                             <input class="inline-edit" data-field="system.advanced.zeonCost" type="text" value="{{spell.system.advanced.zeonCost}}" />
                             <input class="inline-edit" data-field="system.advanced.maint" type="text" value="{{spell.system.advanced.maint}}" />
                         </div>
-                        <textarea class="inline-edit" data-field="system.advanced.rollDesc">{{spell.system.advanced.rollDesc}}</textarea>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.advanced.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{spell.system.advanced.rollDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{spell.system.advanced.rollDesc}}</div>
+                        </div>
                         <div>
                             <a class="item-control item-chat" data-label="arc"><i class="fas fa-comment-dots"></i></a>
                             <span> {{localize "abfalter.magicTab.arcane"}} </span>
@@ -452,7 +471,10 @@
                             <input class="inline-edit" data-field="system.arcane.zeonCost" type="text" value="{{spell.system.arcane.zeonCost}}" />
                             <input class="inline-edit" data-field="system.arcane.maint" type="text" value="{{spell.system.arcane.maint}}" />
                         </div>
-                        <textarea class="inline-edit" data-field="system.arcane.rollDesc">{{spell.system.arcane.rollDesc}}</textarea>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.arcane.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{spell.system.arcane.rollDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{spell.system.arcane.rollDesc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <div>
@@ -539,7 +561,7 @@
                     {{/if}}
                     {{#if data.mysticAccu}}
                     <div>
-                        <span> {{localize "abfalter.metaMagic.defExper"}} - </span>
+                        <span> {{localize "abfalter.metaMagic.mysticAccu"}} - </span>
                         <span> {{data.mysticAccuDesc}} </span>
                     </div>
                     {{/if}}
@@ -725,8 +747,9 @@
                     {{/if}}
                 </div>
 
-                <div>
-                    <textarea name="data.metaMagic.info">{{data.metaMagic.info}}</textarea>
+                <div style="display: grid;">
+                    <textarea class="textarea-auto-resize" name="data.metaMagic.info" style="grid-area: 1 / 1 / 2/ 2;">{{data.metaMagic.info}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.metaMagic.info}}</div>
                 </div>
             </div>
 
@@ -747,7 +770,10 @@
                             <input class="inline-edit" data-field="system.difficulty" type="number" value="{{invocation.system.difficulty}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.description">{{invocation.system.description}}</textarea>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{invocation.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{invocation.system.description}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{invocation.name}} </span>
@@ -784,7 +810,10 @@
                             <input class="inline-edit" data-field="system.difficulty" type="number" value="{{incarnation.system.difficulty}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.description">{{incarnation.system.description}}</textarea>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{incarnation.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{incarnation.system.description}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{incarnation.name}} </span>

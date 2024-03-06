@@ -79,3 +79,7 @@ export async function changeSecondarySpecs(actorData) {
         "data.secondary.technomagic.spec": mod, "data.secondary.toymaking.spec": mod, "data.secondary.kidetection.spec": mod, "data.secondary.kiconceal.spec": mod
     })
 }
+
+export async function openSpendKiWindow(actorData) {
+
+}

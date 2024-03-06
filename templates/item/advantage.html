@@ -10,6 +10,9 @@
             <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
         </div>
         <h6> {{localize "abfalter.basicInfo.description"}} </h6>
-        <textarea name="data.description" rows="7">{{data.description}}</textarea>
+        <div style="display: grid;">
+            <textarea class="textarea-auto-resize" name="data.description" style="grid-area: 1 / 1 / 2/ 2;">{{data.description}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.description}}</div>
+        </div>
     </div>
 </form>

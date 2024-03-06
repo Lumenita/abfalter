@@ -17,20 +17,32 @@
                         <input class="inline-edit" data-field="system.level" type="number" value="{{elan.system.level}}" />
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
-                    <textarea class="inline-edit" data-field="system.description">{{elan.system.description}}</textarea>
+                    <div style="display: grid;">
+                        <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.description}}</textarea>
+                        <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.description}}</div>
+                    </div>
                     <div>
                         <div>
                             {{#if system.upper}}
                             <h6> {{localize "abfalter.generalTab.gainUpperElan"}} </h6>
-                            <textarea class="inline-edit" data-field="system.gainUpper">{{elan.system.gainUpper}}</textarea>
+                            <div style="display: grid;">
+                                <textarea class="inline-edit textarea-auto-resize" data-field="system.gainUpper" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gainUpper}}</textarea>
+                                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gainUpper}}</div>
+                            </div>
                             {{else}}
                             <h6> {{localize "abfalter.generalTab.gainElan"}} </h6>
-                            <textarea class="inline-edit" data-field="system.gain">{{elan.system.gain}}</textarea>
+                            <div style="display: grid;">
+                                <textarea class="inline-edit textarea-auto-resize" data-field="system.gain" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gain}}</textarea>
+                                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gain}}</div>
+                            </div>
                             {{/if}}
                         </div>
                         <div>
                             <h6> {{localize "abfalter.generalTab.loseElan"}} </h6>
-                            <textarea class="inline-edit" data-field="system.lose">{{elan.system.lose}}</textarea>
+                            <div style="display: grid;">
+                                <textarea class="inline-edit textarea-auto-resize" data-field="system.lose" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.lose}}</textarea>
+                                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.lose}}</div>
+                            </div>
                         </div>
                     </div>
                     {{else}}
@@ -79,7 +91,10 @@
                             <input class="inline-edit" data-field="system.gifts.one.req" type="text" value="{{elan.system.gifts.one.req}}" />
                             <a class="item-toggle {{#if system.gifts.one.expand}}showOpacity{{/if}}" data-label="system.gifts.one.expand" data-ability="{{system.gifts.one.expand}}"><i class="{{#if system.gifts.one.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.one.desc" rows="2">{{elan.system.gifts.one.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.one.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.one.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.one.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -99,7 +114,10 @@
                             <input class="inline-edit" data-field="system.gifts.two.req" type="text" value="{{elan.system.gifts.two.req}}" />
                             <a class="item-toggle {{#if system.gifts.two.expand}}showOpacity{{/if}}" data-label="system.gifts.two.expand" data-ability="{{system.gifts.two.expand}}"><i class="{{#if system.gifts.two.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.two.desc" rows="2">{{elan.system.gifts.two.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.two.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.two.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.two.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -119,7 +137,10 @@
                             <input class="inline-edit" data-field="system.gifts.three.req" type="text" value="{{elan.system.gifts.three.req}}" />
                             <a class="item-toggle {{#if system.gifts.three.expand}}showOpacity{{/if}}" data-label="system.gifts.three.expand" data-ability="{{system.gifts.three.expand}}"><i class="{{#if system.gifts.three.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.three.desc" rows="2">{{elan.system.gifts.three.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.three.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.three.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.three.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -139,7 +160,10 @@
                             <input class="inline-edit" data-field="system.gifts.four.req" type="text" value="{{elan.system.gifts.four.req}}" />
                             <a class="item-toggle {{#if system.gifts.four.expand}}showOpacity{{/if}}" data-label="system.gifts.four.expand" data-ability="{{system.gifts.four.expand}}"><i class="{{#if system.gifts.four.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.four.desc" rows="2">{{elan.system.gifts.four.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.four.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.four.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.four.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -159,7 +183,10 @@
                             <input class="inline-edit" data-field="system.gifts.five.req" type="text" value="{{elan.system.gifts.five.req}}" />
                             <a class="item-toggle {{#if system.gifts.five.expand}}showOpacity{{/if}}" data-label="system.gifts.five.expand" data-ability="{{system.gifts.five.expand}}"><i class="{{#if system.gifts.five.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.five.desc" rows="2">{{elan.system.gifts.five.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.five.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.five.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.five.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -179,7 +206,10 @@
                             <input class="inline-edit" data-field="system.gifts.six.req" type="text" value="{{elan.system.gifts.six.req}}" />
                             <a class="item-toggle {{#if system.gifts.six.expand}}showOpacity{{/if}}" data-label="system.gifts.six.expand" data-ability="{{system.gifts.six.expand}}"><i class="{{#if system.gifts.six.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.six.desc" rows="2">{{elan.system.gifts.six.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.six.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.six.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.six.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -199,7 +229,10 @@
                             <input class="inline-edit" data-field="system.gifts.seven.req" type="text" value="{{elan.system.gifts.seven.req}}" />
                             <a class="item-toggle {{#if system.gifts.seven.expand}}showOpacity{{/if}}" data-label="system.gifts.seven.expand" data-ability="{{system.gifts.seven.expand}}"><i class="{{#if system.gifts.seven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.seven.desc" rows="2">{{elan.system.gifts.seven.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.seven.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.seven.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.seven.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -219,7 +252,10 @@
                             <input class="inline-edit" data-field="system.gifts.eight.req" type="text" value="{{elan.system.gifts.eight.req}}" />
                             <a class="item-toggle {{#if system.gifts.eight.expand}}showOpacity{{/if}}" data-label="system.gifts.eight.expand" data-ability="{{system.gifts.eight.expand}}"><i class="{{#if system.gifts.eight.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.eight.desc" rows="2">{{elan.system.gifts.eight.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.eight.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.eight.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.eight.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -239,7 +275,10 @@
                             <input class="inline-edit" data-field="system.gifts.nine.req" type="text" value="{{elan.system.gifts.nine.req}}" />
                             <a class="item-toggle {{#if system.gifts.nine.expand}}showOpacity{{/if}}" data-label="system.gifts.nine.expand" data-ability="{{system.gifts.nine.expand}}"><i class="{{#if system.gifts.nine.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.nine.desc" rows="2">{{elan.system.gifts.nine.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.nine.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.nine.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.nine.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -259,7 +298,10 @@
                             <input class="inline-edit" data-field="system.gifts.ten.req" type="text" value="{{elan.system.gifts.ten.req}}" />
                             <a class="item-toggle {{#if system.gifts.ten.expand}}showOpacity{{/if}}" data-label="system.gifts.ten.expand" data-ability="{{system.gifts.ten.expand}}"><i class="{{#if system.gifts.ten.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.ten.desc" rows="2">{{elan.system.gifts.ten.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.ten.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.ten.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.ten.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -279,7 +321,10 @@
                             <input class="inline-edit" data-field="system.gifts.eleven.req" type="text" value="{{elan.system.gifts.eleven.req}}" />
                             <a class="item-toggle {{#if system.gifts.eleven.expand}}showOpacity{{/if}}" data-label="system.gifts.eleven.expand" data-ability="{{system.gifts.eleven.expand}}"><i class="{{#if system.gifts.eleven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.eleven.desc" rows="2">{{elan.system.gifts.eleven.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.eleven.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.eleven.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.eleven.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -299,7 +344,10 @@
                             <input class="inline-edit" data-field="system.gifts.twelve.req" type="text" value="{{elan.system.gifts.twelve.req}}" />
                             <a class="item-toggle {{#if system.gifts.twelve.expand}}showOpacity{{/if}}" data-label="system.gifts.twelve.expand" data-ability="{{system.gifts.twelve.expand}}"><i class="{{#if system.gifts.twelve.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.twelve.desc" rows="2">{{elan.system.gifts.twelve.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.twelve.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.twelve.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.twelve.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -319,7 +367,10 @@
                             <input class="inline-edit" data-field="system.gifts.thirteen.req" type="text" value="{{elan.system.gifts.thirteen.req}}" />
                             <a class="item-toggle {{#if system.gifts.thirteen.expand}}showOpacity{{/if}}" data-label="system.gifts.thirteen.expand" data-ability="{{system.gifts.thirteen.expand}}"><i class="{{#if system.gifts.thirteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.thirteen.desc" rows="2">{{elan.system.gifts.thirteen.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.thirteen.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.thirteen.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.thirteen.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -339,7 +390,10 @@
                             <input class="inline-edit" data-field="system.gifts.fourteen.req" type="text" value="{{elan.system.gifts.fourteen.req}}" />
                             <a class="item-toggle {{#if system.gifts.fourteen.expand}}showOpacity{{/if}}" data-label="system.gifts.fourteen.expand" data-ability="{{system.gifts.fourteen.expand}}"><i class="{{#if system.gifts.fourteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.fourteen.desc" rows="2">{{elan.system.gifts.fourteen.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.fourteen.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.fourteen.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.fourteen.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -359,7 +413,10 @@
                             <input class="inline-edit" data-field="system.gifts.fifteen.req" type="text" value="{{elan.system.gifts.fifteen.req}}" />
                             <a class="item-toggle {{#if system.gifts.fifteen.expand}}showOpacity{{/if}}" data-label="system.gifts.fifteen.expand" data-ability="{{system.gifts.fifteen.expand}}"><i class="{{#if system.gifts.fifteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
-                        <textarea class="inline-edit" data-field="system.gifts.fifteen.desc" rows="2">{{elan.system.gifts.fifteen.desc}}</textarea>
+                        <div style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.fifteen.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.fifteen.desc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.fifteen.desc}}</div>
+                        </div>
                         {{else}}
                         <div>
                             <span> {{elan.name}} </span>
@@ -382,14 +439,17 @@
     <div class="e3">
         <div>
             <h5> {{localize "abfalter.basicInfo.note"}} </h5>
-            <div>
-                <textarea name="data.notesOne">{{data.notesOne}}</textarea>
+            <div style="display: grid;">
+                <textarea class="textarea-auto-resize" name="data.notesOne" style="grid-area: 1 / 1 / 2/ 2;">{{data.notesOne}}</textarea>
+                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.notesOne}}</div>
             </div>
         </div>
+
         <div>
             <h5> {{localize "abfalter.basicInfo.note"}} </h5>
-            <div>
-                <textarea name="data.notesTwo">{{data.notesTwo}}</textarea>
+            <div style="display: grid;">
+                <textarea class="textarea-auto-resize" name="data.notesTwo" style="grid-area: 1 / 1 / 2/ 2;">{{data.notesTwo}}</textarea>
+                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.notesTwo}}</div>
             </div>
         </div>
     </div>

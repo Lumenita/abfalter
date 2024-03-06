@@ -1,6 +1,6 @@
 import { openModifierDialogue } from "../diceroller.js";
 import { metaMagicSheet } from "./metaMagicSheet.js";
-import { changeSecondaryTemps, changeSecondarySpecs } from "./actorFunctions.js";
+import * as actorFunctions from "./actorFunctions.js";
 
 export default class abfalterCharacterSheet extends ActorSheet {
     static get defaultOptions() {
@@ -141,11 +141,8 @@ export default class abfalterCharacterSheet extends ActorSheet {
             new ContextMenu(html, ".delete-item", this.itemContextMenuDelete);
             new ContextMenu(html, ".onlyDelete-item", this.itemContextMenuOnlyDelete);
 
-            $("textarea").each(function () {
-                this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
-            }).on("input", function () {
-                this.style.height = "auto";
-                this.style.height = (this.scrollHeight) + "px";
+            $("textarea.textarea-auto-resize").on("input", function () {
+                this.nextElementSibling.textContent = this.value;
             });
         }
 
@@ -162,6 +159,29 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 let value = $(ev.currentTarget).attr("data-ability");
                 let max = $(ev.currentTarget).attr("data-ability2");
                 this.document.update({ "data.zeon.value": Math.min(Math.floor(this.document.system.zeon.value + (value / 1)), max) });
+            });
+            html.find('.kiAccuHalf').click(ev => {
+                let value = this.document.system.kiPool.agi.current + Math.max(1, Math.floor(this.document.system.kiPoolAgiAccumTot / 2));
+                let value2 = this.document.system.kiPool.con.current + Math.max(1, Math.floor(this.document.system.kiPoolConAccumTot / 2));
+                let value3 = this.document.system.kiPool.dex.current + Math.max(1, Math.floor(this.document.system.kiPoolDexAccumTot / 2));
+                let value4 = this.document.system.kiPool.str.current + Math.max(1, Math.floor(this.document.system.kiPoolStrAccumTot / 2));
+                let value5 = this.document.system.kiPool.pow.current + Math.max(1, Math.floor(this.document.system.kiPoolPowAccumTot / 2));
+                let value6 = this.document.system.kiPool.wp.current + Math.max(1, Math.floor(this.document.system.kiPoolWPAccumTot / 2));
+                this.document.update({
+                    "data.kiPool.agi.current": value, "data.kiPool.con.current": value2, "data.kiPool.dex.current": value3,
+                    "data.kiPool.str.current": value4, "data.kiPool.pow.current": value5, "data.kiPool.wp.current": value6 });
+            });
+            html.find('.kiAccuFull').click(ev => {
+                let value = this.document.system.kiPool.agi.current + this.document.system.kiPoolAgiAccumTot;
+                let value2 = this.document.system.kiPool.con.current + this.document.system.kiPoolConAccumTot;
+                let value3 = this.document.system.kiPool.dex.current + this.document.system.kiPoolDexAccumTot;
+                let value4 = this.document.system.kiPool.str.current + this.document.system.kiPoolStrAccumTot;
+                let value5 = this.document.system.kiPool.pow.current + this.document.system.kiPoolPowAccumTot;
+                let value6 = this.document.system.kiPool.wp.current + this.document.system.kiPoolWPAccumTot;
+                this.document.update({
+                    "data.kiPool.agi.current": value, "data.kiPool.con.current": value2, "data.kiPool.dex.current": value3,
+                    "data.kiPool.str.current": value4, "data.kiPool.pow.current": value5, "data.kiPool.wp.current": value6
+                });
             });
             html.find('.removeMaint').click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
@@ -193,6 +213,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
 
             html.find(".changeSecondaryNums").click(this._changeSecNums.bind(this));
             html.find(".openMetaMagic").click(this._openMetaMagic.bind(this));
+            html.find(".spendKiButton").click(this._openSpendKi.bind(this));
 
             html.find(".item-chat").click(this._onItemChatRoll.bind(this));
             html.find('.rollable').click(this._onRoll.bind(this));
@@ -226,10 +247,10 @@ export default class abfalterCharacterSheet extends ActorSheet {
 
         switch (type) {
             case "temp":
-                changeSecondaryTemps(this.actor);
+                actorFunctions.changeSecondaryTemps(this.actor);
                 break;
             case "spec":
-                changeSecondarySpecs(this.actor);
+                actorFunctions.changeSecondarySpecs(this.actor);
                 break;
             default:
                 break;
@@ -239,6 +260,11 @@ export default class abfalterCharacterSheet extends ActorSheet {
     _openMetaMagic(event) {
         event.preventDefault();
         new metaMagicSheet(this.document).render(true);
+    }
+
+    _openSpendKi(event) {
+        event.preventDefault();
+        actorFunctions.openSpendKiWindow(this.actor);
     }
 
     _onItemCreate(event) {

@@ -366,79 +366,117 @@ export default class abfalterActor extends Actor {
         }
 
         //Initiative
-        data.iniBase = Math.floor(data.stats.Dexterity.mod + data.stats.Agility.mod + 20); // Work here - initiative due to aam penalty
+        data.iniBase = Math.floor(data.stats.Dexterity.mod + data.stats.Agility.mod + 20); 
         if (data.aamFinal < 0) {
             data.iniBase = Math.floor(data.iniBase + ~~(data.aamFinal / 2));
         }
 
+        //Ki Accumulation
+        data.kiPoolAgiAccumTot = Math.max(0, Math.floor(data.stats.Agility.kiPoolAccuBase + data.kiPool.agi.spec + data.kiPool.agi.temp + data.kiPool.agi.default + Math.min(0, ~~(data.aamFinal / 20))));
+        data.kiPoolConAccumTot = Math.max(0, Math.floor(data.stats.Constitution.kiPoolAccuBase + data.kiPool.con.spec + data.kiPool.con.temp + data.kiPool.con.default + Math.min(0, ~~(data.aamFinal / 20))));
+        data.kiPoolDexAccumTot = Math.max(0, Math.floor(data.stats.Dexterity.kiPoolAccuBase + data.kiPool.dex.spec + data.kiPool.dex.temp + data.kiPool.dex.default + Math.min(0, ~~(data.aamFinal / 20))));
+        data.kiPoolStrAccumTot = Math.max(0, Math.floor(data.stats.Strength.kiPoolAccuBase + data.kiPool.str.spec + data.kiPool.str.temp + data.kiPool.str.default + Math.min(0, ~~(data.aamFinal / 20))));
+        data.kiPoolPowAccumTot = Math.max(0, Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + data.kiPool.pow.default + Math.min(0, ~~(data.aamFinal / 20))));
+        data.kiPoolWPAccumTot = Math.max(0, Math.floor(data.stats.Willpower.kiPoolAccuBase + data.kiPool.wp.spec + data.kiPool.wp.temp + data.kiPool.wp.default + Math.min(0, ~~(data.aamFinal / 20))));
+
         //Ki Pool
-        if (data.toggles.innatePower == false) {
-            data.kiPoolAgiAccumTot = Math.max(0, Math.floor(data.stats.Agility.kiPoolAccuBase + data.kiPool.agi.spec + data.kiPool.agi.temp + Math.min(0, ~~(data.aamFinal / 20)))); // Math.ceil(data.aam / 20));
-            data.kiPoolAgiTot = Math.floor(data.stats.Agility.kiPoolBase + data.kiPool.agi.specMax + data.kiPool.agi.tempMax);
-            data.kiPoolConAccumTot = Math.max(0, Math.floor(data.stats.Constitution.kiPoolAccuBase + data.kiPool.con.spec + data.kiPool.con.temp + Math.min(0, ~~(data.aamFinal / 20))));
-            data.kiPoolConTot = Math.floor(data.stats.Constitution.kiPoolBase + data.kiPool.con.specMax + data.kiPool.con.tempMax);
-            data.kiPoolDexAccumTot = Math.max(0, Math.floor(data.stats.Dexterity.kiPoolAccuBase + data.kiPool.dex.spec + data.kiPool.dex.temp + Math.min(0, ~~(data.aamFinal / 20))));
-            data.kiPoolDexTot = Math.floor(data.stats.Dexterity.kiPoolBase + data.kiPool.dex.specMax + data.kiPool.dex.tempMax);
-            data.kiPoolStrAccumTot = Math.max(0, Math.floor(data.stats.Strength.kiPoolAccuBase + data.kiPool.str.spec + data.kiPool.str.temp + Math.min(0, ~~(data.aamFinal / 20))));
-            data.kiPoolStrTot = Math.floor(data.stats.Strength.kiPoolBase + data.kiPool.str.specMax + data.kiPool.str.tempMax);
-            data.kiPoolPowAccumTot = Math.max(0, Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + Math.min(0, ~~(data.aamFinal / 20))));
-            data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax);
-            data.kiPoolWPAccumTot = Math.max(0, Math.floor(data.stats.Willpower.kiPoolAccuBase + data.kiPool.wp.spec + data.kiPool.wp.temp + Math.min(0, ~~(data.aamFinal / 20))));
-            data.kiPoolWPTot = Math.floor(data.stats.Willpower.kiPoolBase + data.kiPool.wp.specMax + data.kiPool.wp.tempMax);
-            if (data.toggles.unifiedPools == true) {
-                data.unifiedKi.max = Math.floor(data.kiPoolAgiTot + data.kiPoolConTot + data.kiPoolDexTot + data.kiPoolStrTot + data.kiPoolPowTot + data.kiPoolWPTot);
-            }
-        } else {
+        if (data.toggles.innatePower == true) {
             switch (data.kiPool.innate.type) {
                 case "AGI":
-                    data.kiPoolInnateAccumBase = data.stats.Agility.kiPoolAccuBase * 6;
-                    data.kiPoolInnateBase = data.stats.Agility.kiPoolBase * 6;
-                    data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
-                    data.innatePowerKi.max = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.stats.Agility.kiPoolBase = data.stats.Agility.kiPoolBase * 6;
                     data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.agi');
                     break;
                 case "CON":
-                    data.kiPoolInnateAccumBase = data.stats.Constitution.kiPoolAccuBase * 6;
-                    data.kiPoolInnateBase = data.stats.Constitution.kiPoolBase * 6;
-                    data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
-                    data.innatePowerKi.max = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.stats.Constitution.kiPoolBase = data.stats.Constitution.kiPoolBase * 6;
                     data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.con');
                     break;
                 case "DEX":
-                    data.kiPoolInnateAccumBase = data.stats.Dexterity.kiPoolAccuBase * 6;
-                    data.kiPoolInnateBase = data.stats.Dexterity.kiPoolBase * 6;
-                    data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
-                    data.innatePowerKi.max = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.stats.Dexterity.kiPoolBase = data.stats.Dexterity.kiPoolBase * 6;
                     data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.dex');
                     break;
                 case "STR":
-                    data.kiPoolInnateAccumBase = data.stats.Strength.kiPoolAccuBase * 6;
-                    data.kiPoolInnateBase = data.stats.Strength.kiPoolBase * 6;
-                    data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
-                    data.innatePowerKi.max = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.stats.Strength.kiPoolBase = data.stats.Strength.kiPoolBase * 6;
                     data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.str');
                     break;
                 case "POW":
-                    data.kiPoolInnateAccumBase = data.stats.Power.kiPoolAccuBase * 6;
-                    data.kiPoolInnateBase = data.stats.Power.kiPoolBase * 6;
-                    data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
-                    data.innatePowerKi.max = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.stats.Power.kiPoolBase = data.stats.Power.kiPoolBase * 6;
                     data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.pow');
                     break;
                 case "WP":
-                    data.kiPoolInnateAccumBase = data.stats.Willpower.kiPoolAccuBase * 6;
-                    data.kiPoolInnateBase = data.stats.Willpower.kiPoolBase * 6;
-                    data.kiPoolInnateAccumTot = Math.max(0, Math.floor(data.kiPoolInnateAccumBase + data.kiPool.innate.spec + data.kiPool.innate.temp + Math.min(0, ~~(data.aamFinal / 20))));
-                    data.innatePowerKi.max = Math.floor(data.kiPoolInnateBase + data.kiPool.innate.specMax + data.kiPool.innate.tempMax);
+                    data.stats.Willpower.kiPoolBase = data.stats.Willpower.kiPoolBase * 6;
                     data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.wp');
                     break;
                 default:
-                    data.kiPoolInnateAccumBase = 0;
-                    data.kiPoolInnateBase = 0;
-                    data.kiPoolInnateAccumTot = 0;
-                    data.innatePowerKi.max = 0;
                     data.kiPool.innate.tag = "Error";
                     break;
+            }
+        }
+
+        data.kiPoolAgiTot = Math.floor(data.stats.Agility.kiPoolBase + data.kiPool.agi.specMax + data.kiPool.agi.tempMax + data.kiPool.agi.defaultMax);
+        data.kiPoolConTot = Math.floor(data.stats.Constitution.kiPoolBase + data.kiPool.con.specMax + data.kiPool.con.tempMax + data.kiPool.con.defaultMax);
+        data.kiPoolDexTot = Math.floor(data.stats.Dexterity.kiPoolBase + data.kiPool.dex.specMax + data.kiPool.dex.tempMax + data.kiPool.dex.defaultMax);
+        data.kiPoolStrTot = Math.floor(data.stats.Strength.kiPoolBase + data.kiPool.str.specMax + data.kiPool.str.tempMax + data.kiPool.str.defaultMax);
+        data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax + data.kiPool.pow.defaultMax);
+        data.kiPoolWPTot = Math.floor(data.stats.Willpower.kiPoolBase + data.kiPool.wp.specMax + data.kiPool.wp.tempMax + data.kiPool.wp.defaultMax);
+
+        if (data.toggles.unifiedPools == true) {
+            if (data.toggles.innatePower == true) {
+                switch (data.kiPool.innate.type) {
+                    case "AGI":
+                        data.unifiedKi.max = data.kiPoolAgiTot;
+                        data.kiPoolConTot = 0;
+                        data.kiPoolDexTot = 0;
+                        data.kiPoolStrTot = 0;
+                        data.kiPoolPowTot = 0;
+                        data.kiPoolWPTot = 0;
+                        data.innateAgi = true;
+                        break;
+                    case "CON":
+                        data.unifiedKi.max = data.kiPoolConTot;
+                        data.kiPoolAgiTot = 0;
+                        data.kiPoolDexTot = 0;
+                        data.kiPoolStrTot = 0;
+                        data.kiPoolPowTot = 0;
+                        data.kiPoolWPTot = 0;
+                        break;
+                    case "DEX":
+                        data.unifiedKi.max = data.kiPoolDexTot;
+                        data.kiPoolAgiTot = 0;
+                        data.kiPoolConTot = 0;
+                        data.kiPoolStrTot = 0;
+                        data.kiPoolPowTot = 0;
+                        data.kiPoolWPTot = 0;
+                        break;
+                    case "STR":
+                        data.unifiedKi.max = data.kiPoolStrTot;
+                        data.kiPoolAgiTot = 0;
+                        data.kiPoolConTot = 0;
+                        data.kiPoolDexTot = 0;
+                        data.kiPoolPowTot = 0;
+                        data.kiPoolWPTot = 0;
+                        break;
+                    case "POW":
+                        data.unifiedKi.max = data.kiPoolPowTot;
+                        data.kiPoolAgiTot = 0;
+                        data.kiPoolConTot = 0;
+                        data.kiPoolDexTot = 0;
+                        data.kiPoolStrTot = 0;
+                        data.kiPoolWPTot = 0;
+                        break;
+                    case "WP":
+                        data.unifiedKi.max = data.kiPoolWPTot;
+                        data.kiPoolAgiTot = 0;
+                        data.kiPoolConTot = 0;
+                        data.kiPoolDexTot = 0;
+                        data.kiPoolStrTot = 0;
+                        data.kiPoolPowTot = 0;
+                        break;
+                    default:
+                        data.kiPool.innate.tag = "Error";
+                        break;
+                }
+            } else {
+                data.unifiedKi.max = Math.floor(data.kiPoolAgiTot + data.kiPoolConTot + data.kiPoolDexTot + data.kiPoolStrTot + data.kiPoolPowTot + data.kiPoolWPTot);
             }
         }
 
