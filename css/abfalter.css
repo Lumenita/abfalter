@@ -4508,7 +4508,7 @@ h6 {
     padding: 0 10px;
     width: 100%;
 }
-.spellContent > div > div {
+.spellContent > div:not(:last-of-type) > div {
     width: 50%;
 }
 .spellContent > div > div::after {
