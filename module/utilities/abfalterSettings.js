@@ -3,6 +3,7 @@ export var abfalterSettingsKeys;
     abfalterSettingsKeys["Spirit_Damage"] = "Spirit_Damage";
     abfalterSettingsKeys["Corrected_Fumble"] = "Corrected_Fumble";
     abfalterSettingsKeys["Use_Meters"] = "Use_Meters";
+    abfalterSettingsKeys["Change_Theme"] = "Change_Theme";
 })(abfalterSettingsKeys || (abfalterSettingsKeys = {}));
 export const abfalterSettings = () => {
     game.settings.register('abfalter', "systemMigrationVersion", {
@@ -15,6 +16,14 @@ export const abfalterSettings = () => {
     game.settings.register('abfalter', abfalterSettingsKeys.Spirit_Damage, {
         name: game.i18n.localize('abfalter.globalSettings.spiritDmg'),
         hint: game.i18n.localize('abfalter.globalSettings.spiritDetail'),
+        scope: 'client',
+        config: true,
+        default: false,
+        type: Boolean
+    });
+    game.settings.register('abfalter', abfalterSettingsKeys.Change_Theme, {
+        name: game.i18n.localize('abfalter.globalSettings.changeThemeName'),
+        hint: game.i18n.localize('abfalter.globalSettings.changeThemeDetails'),
         scope: 'client',
         config: true,
         default: false,
@@ -34,6 +43,16 @@ export const abfalterSettings = () => {
         scope: 'client',
         config: true,
         default: false,
-        type: Boolean
+        type: Boolean,
+        onChange: value => {
+            updateGridUnits(value);
+        }
     });
 };
+function updateGridUnits(value) {
+    const units = value ? 'm' : 'ft';
+    const scenes = game.scenes.contents;
+    for (let scene of scenes) {
+        scene.update({ gridUnits: units });
+    }
+}

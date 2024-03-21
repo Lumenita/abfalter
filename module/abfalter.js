@@ -10,6 +10,7 @@ import { registerCustomMacros } from "./autoCombat/registerCustomMacros.js";
 import { customMacroBar } from "./autoCombat/customMacroBar.js";
 import { abfalterSettings } from "./utilities/abfalterSettings.js";
 import { migrateWorld } from "./utilities/migration.js";
+import { abfalterSettingsKeys } from "./utilities/abfalterSettings.js";
 
 Hooks.once("init", async () => {
     console.log("abfalter | Initializing Anima Beyond Fantasy Alter System");
@@ -36,9 +37,14 @@ Hooks.on("renderChatMessage", (_app, html, _msg) => {
 Hooks.once('ready', () => {
     registerCustomMacros();
     customMacroBar();
+    if (game.settings.get('abfalter', abfalterSettingsKeys.Change_Theme) == true) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        console.log("dark theme is gone")
+    }
 });
 
 Hooks.once("ready", function () {
+
     if (!game.user.isGM) {
         return;
     }

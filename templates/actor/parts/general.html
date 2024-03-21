@@ -512,8 +512,8 @@
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.main.athletics}}showOpacity{{/if}}" data-label="data.secondary.main.athletics" data-ability="{{data.secondary.main.athletics}}"><i class="{{#if data.secondary.main.athletics}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.secondary.main.athletics}}
-            <div>
+
+            <div class="{{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.acrobatics.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.acrofinal}}" data-label="{{localize "abfalter.generalTab.acrobatic"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.acrobatic"}} </span>
                     <span> {{data.acrofinal}} </span>
@@ -526,14 +526,16 @@
                 <a class="toggleBoolean {{#if data.secondary.acrobatics.status}}showOpacity{{/if}}" data-label="data.secondary.acrobatics.status" data-ability="{{data.secondary.acrobatics.status}}"><i class="{{#if data.secondary.acrobatics.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.acrobatics.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.acrobatics.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.acrobatics.nat" value="{{data.secondary.acrobatics.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.acrobatics.natural" value="{{data.secondary.acrobatics.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.acrobaticsnatfinal" value="{{data.acrobaticsnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.acrobatics.fav}}showOpacity{{/if}}" data-label="data.secondary.acrobatics.fav"
+                   data-ability="{{data.secondary.acrobatics.fav}}"><i class="{{#if data.secondary.acrobatics.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.athleticism.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.athleticismfinal}}" data-label="{{localize "abfalter.generalTab.athleticism"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.athleticism"}} </span>
                     <span> {{data.athleticismfinal}} </span>
@@ -546,14 +548,16 @@
                 <a class="toggleBoolean {{#if data.secondary.athleticism.status}}showOpacity{{/if}}" data-label="data.secondary.athleticism.status" data-ability="{{data.secondary.athleticism.status}}"><i class="{{#if data.secondary.athleticism.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.athleticism.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.athleticism.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.athleticism.nat" value="{{data.secondary.athleticism.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.athleticism.natural" value="{{data.secondary.athleticism.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.athleticismnatfinal" value="{{data.athleticismnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.athleticism.fav}}showOpacity{{/if}}" data-label="data.secondary.athleticism.fav"
+                   data-ability="{{data.secondary.athleticism.fav}}"><i class="{{#if data.secondary.athleticism.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.climb.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.climbfinal}}" data-label="{{localize "abfalter.generalTab.climb"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.climb"}} </span>
                     <span> {{data.climbfinal}} </span>
@@ -566,14 +570,16 @@
                 <a class="toggleBoolean {{#if data.secondary.climb.status}}showOpacity{{/if}}" data-label="data.secondary.climb.status" data-ability="{{data.secondary.climb.status}}"><i class="{{#if data.secondary.climb.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.climb.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.climb.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.climb.nat" value="{{data.secondary.climb.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.climb.natural" value="{{data.secondary.climb.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.climbnatfinal" value="{{data.climbnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.climb.fav}}showOpacity{{/if}}" data-label="data.secondary.climb.fav"
+                   data-ability="{{data.secondary.climb.fav}}"><i class="{{#if data.secondary.climb.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.jump.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.jumpfinal}}" data-label="{{localize "abfalter.generalTab.jump"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.jump"}} </span>
                     <span> {{data.jumpfinal}} </span>
@@ -586,14 +592,16 @@
                 <a class="toggleBoolean {{#if data.secondary.jump.status}}showOpacity{{/if}}" data-label="data.secondary.jump.status" data-ability="{{data.secondary.jump.status}}"><i class="{{#if data.secondary.jump.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.jump.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.jump.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.jump.nat" value="{{data.secondary.jump.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.jump.natural" value="{{data.secondary.jump.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.jumpnatfinal" value="{{data.jumpnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.jump.fav}}showOpacity{{/if}}" data-label="data.secondary.jump.fav"
+                   data-ability="{{data.secondary.jump.fav}}"><i class="{{#if data.secondary.jump.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.piloting.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.pilotingfinal}}" data-label="{{localize "abfalter.generalTab.piloting"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.piloting"}} </span>
                     <span> {{data.pilotingfinal}} </span>
@@ -606,14 +614,16 @@
                 <a class="toggleBoolean {{#if data.secondary.piloting.status}}showOpacity{{/if}}" data-label="data.secondary.piloting.status" data-ability="{{data.secondary.piloting.status}}"><i class="{{#if data.secondary.piloting.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.piloting.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.piloting.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.piloting.nat" value="{{data.secondary.piloting.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.piloting.natural" value="{{data.secondary.piloting.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.pilotingnatfinal" value="{{data.pilotingnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.piloting.fav}}showOpacity{{/if}}" data-label="data.secondary.piloting.fav"
+                   data-ability="{{data.secondary.piloting.fav}}"><i class="{{#if data.secondary.piloting.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.ride.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.ridefinal}}" data-label="{{localize "abfalter.generalTab.ride"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.ride"}} </span>
                     <span> {{data.ridefinal}} </span>
@@ -626,14 +636,16 @@
                 <a class="toggleBoolean {{#if data.secondary.ride.status}}showOpacity{{/if}}" data-label="data.secondary.ride.status" data-ability="{{data.secondary.ride.status}}"><i class="{{#if data.secondary.ride.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.ride.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.ride.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.ride.nat" value="{{data.secondary.ride.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.ride.natural" value="{{data.secondary.ride.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.ridenatfinal" value="{{data.ridenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.ride.fav}}showOpacity{{/if}}" data-label="data.secondary.ride.fav"
+                   data-ability="{{data.secondary.ride.fav}}"><i class="{{#if data.secondary.ride.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.swim.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.swimfinal}}" data-label="{{localize "abfalter.generalTab.swim"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.swim"}} </span>
                     <span> {{data.swimfinal}} </span>
@@ -646,14 +658,15 @@
                 <a class="toggleBoolean {{#if data.secondary.swim.status}}showOpacity{{/if}}" data-label="data.secondary.swim.status" data-ability="{{data.secondary.swim.status}}"><i class="{{#if data.secondary.swim.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.swim.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.athletics}}{{else}}{{#if data.secondary.swim.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.swim.nat" value="{{data.secondary.swim.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.swim.natural" value="{{data.secondary.swim.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.swimnatfinal" value="{{data.swimnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.swim.fav}}showOpacity{{/if}}" data-label="data.secondary.swim.fav"
+                   data-ability="{{data.secondary.swim.fav}}"><i class="{{#if data.secondary.swim.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            {{/if}}
         </div>
         <!--Social Fields-->
         <div>
@@ -669,8 +682,8 @@
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.main.social}}showOpacity{{/if}}" data-label="data.secondary.main.social" data-ability="{{data.secondary.main.social}}"><i class="{{#if data.secondary.main.social}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.secondary.main.social}}
-            <div>
+
+            <div class="{{#if data.secondary.main.social}}{{else}}{{#if data.secondary.etiquette.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.etiquettefinal}}" data-label="{{localize "abfalter.generalTab.etiquette"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.etiquette"}} </span>
                     <span> {{data.etiquettefinal}} </span>
@@ -683,14 +696,16 @@
                 <a class="toggleBoolean {{#if data.secondary.etiquette.status}}showOpacity{{/if}}" data-label="data.secondary.etiquette.status" data-ability="{{data.secondary.etiquette.status}}"><i class="{{#if data.secondary.etiquette.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.etiquette.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.social}}{{else}}{{#if data.secondary.etiquette.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.etiquette.nat" value="{{data.secondary.etiquette.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.etiquette.natural" value="{{data.secondary.etiquette.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.etiquettenatfinal" value="{{data.etiquettenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.etiquette.fav}}showOpacity{{/if}}" data-label="data.secondary.etiquette.fav"
+                   data-ability="{{data.secondary.etiquette.fav}}"><i class="{{#if data.secondary.etiquette.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.social}}{{else}}{{#if data.secondary.intimidate.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.intimidatefinal}}" data-label="{{localize "abfalter.generalTab.intimidate"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.intimidate"}} </span>
                     <span> {{data.intimidatefinal}} </span>
@@ -703,14 +718,16 @@
                 <a class="toggleBoolean {{#if data.secondary.intimidate.status}}showOpacity{{/if}}" data-label="data.secondary.intimidate.status" data-ability="{{data.secondary.intimidate.status}}"><i class="{{#if data.secondary.intimidate.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.intimidate.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.social}}{{else}}{{#if data.secondary.intimidate.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.intimidate.nat" value="{{data.secondary.intimidate.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.intimidate.natural" value="{{data.secondary.intimidate.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.intimidatenatfinal" value="{{data.intimidatenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.intimidate.fav}}showOpacity{{/if}}" data-label="data.secondary.intimidate.fav"
+                   data-ability="{{data.secondary.intimidate.fav}}"><i class="{{#if data.secondary.intimidate.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.social}}{{else}}{{#if data.secondary.leadership.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.leadershipfinal}}" data-label="{{localize "abfalter.generalTab.leadership"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.leadership"}} </span>
                     <span> {{data.leadershipfinal}} </span>
@@ -723,14 +740,16 @@
                 <a class="toggleBoolean {{#if data.secondary.leadership.status}}showOpacity{{/if}}" data-label="data.secondary.leadership.status" data-ability="{{data.secondary.leadership.status}}"><i class="{{#if data.secondary.leadership.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.leadership.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.social}}{{else}}{{#if data.secondary.leadership.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.leadership.nat" value="{{data.secondary.leadership.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.leadership.natural" value="{{data.secondary.leadership.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.leadershipnatfinal" value="{{data.leadershipnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.leadership.fav}}showOpacity{{/if}}" data-label="data.secondary.leadership.fav"
+                   data-ability="{{data.secondary.leadership.fav}}"><i class="{{#if data.secondary.leadership.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.social}}{{else}}{{#if data.secondary.persuasion.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.persuasionfinal}}" data-label="{{localize "abfalter.generalTab.persuasion"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.persuasion"}} </span>
                     <span> {{data.persuasionfinal}} </span>
@@ -743,14 +762,16 @@
                 <a class="toggleBoolean {{#if data.secondary.persuasion.status}}showOpacity{{/if}}" data-label="data.secondary.persuasion.status" data-ability="{{data.secondary.persuasion.status}}"><i class="{{#if data.secondary.persuasion.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.persuasion.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.social}}{{else}}{{#if data.secondary.persuasion.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.persuasion.nat" value="{{data.secondary.persuasion.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.persuasion.natural" value="{{data.secondary.persuasion.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.persuasionnatfinal" value="{{data.persuasionnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.persuasion.fav}}showOpacity{{/if}}" data-label="data.secondary.persuasion.fav"
+                   data-ability="{{data.secondary.persuasion.fav}}"><i class="{{#if data.secondary.persuasion.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.social}}{{else}}{{#if data.secondary.streetwise.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.streetwisefinal}}" data-label="{{localize "abfalter.generalTab.streetwise"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.streetwise"}} </span>
                     <span> {{data.streetwisefinal}} </span>
@@ -763,14 +784,16 @@
                 <a class="toggleBoolean {{#if data.secondary.streetwise.status}}showOpacity{{/if}}" data-label="data.secondary.streetwise.status" data-ability="{{data.secondary.streetwise.status}}"><i class="{{#if data.secondary.streetwise.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.streetwise.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.social}}{{else}}{{#if data.secondary.streetwise.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.streetwise.nat" value="{{data.secondary.streetwise.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.streetwise.natural" value="{{data.secondary.streetwise.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.streetwisenatfinal" value="{{data.streetwisenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.streetwise.fav}}showOpacity{{/if}}" data-label="data.secondary.streetwise.fav"
+                   data-ability="{{data.secondary.streetwise.fav}}"><i class="{{#if data.secondary.streetwise.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.social}}{{else}}{{#if data.secondary.style.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.stylefinal}}" data-label="{{localize "abfalter.generalTab.style"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.style"}} </span>
                     <span> {{data.stylefinal}} </span>
@@ -783,14 +806,16 @@
                 <a class="toggleBoolean {{#if data.secondary.style.status}}showOpacity{{/if}}" data-label="data.secondary.style.status" data-ability="{{data.secondary.style.status}}"><i class="{{#if data.secondary.style.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.style.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.social}}{{else}}{{#if data.secondary.style.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.style.nat" value="{{data.secondary.style.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.style.natural" value="{{data.secondary.style.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.stylenatfinal" value="{{data.stylenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.style.fav}}showOpacity{{/if}}" data-label="data.secondary.style.fav"
+                   data-ability="{{data.secondary.style.fav}}"><i class="{{#if data.secondary.style.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.social}}{{else}}{{#if data.secondary.trading.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.tradingfinal}}" data-label="{{localize "abfalter.generalTab.trading"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.trading"}} </span>
                     <span> {{data.tradingfinal}} </span>
@@ -803,13 +828,13 @@
                 <a class="toggleBoolean {{#if data.secondary.trading.status}}showOpacity{{/if}}" data-label="data.secondary.trading.status" data-ability="{{data.secondary.trading.status}}"><i class="{{#if data.secondary.trading.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.trading.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.social}}{{else}}{{#if data.secondary.trading.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.trading.nat" value="{{data.secondary.trading.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.trading.natural" value="{{data.secondary.trading.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.tradingnatfinal" value="{{data.tradingnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.trading.fav}}showOpacity{{/if}}" data-label="data.secondary.trading.fav"
+                   data-ability="{{data.secondary.trading.fav}}"><i class="{{#if data.secondary.trading.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
-            {{/if}}
-
             {{/if}}
         </div>
         <!--Perceptive Fields-->
@@ -826,10 +851,9 @@
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.main.perceptive}}showOpacity{{/if}}" data-label="data.secondary.main.perceptive" data-ability="{{data.secondary.main.perceptive}}"><i class="{{#if data.secondary.main.perceptive}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.secondary.main.perceptive}}
 
             {{#if data.kiAbility.kiDetection.status}}
-            <div>
+            <div class="{{#if data.secondary.main.perceptive}}{{else}}{{#if data.secondary.kidetection.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.kidetectionfinal}}" data-label="{{#if data.kiAbility.kiErudition.status}}{{localize "abfalter.kiTab.kiErudition"}}{{else}}{{localize "abfalter.kiTab.kiDetection"}}{{/if}}" data-type="secondaryRoll">
                     {{#if data.kiAbility.kiErudition.status}}
                     <span> {{localize "abfalter.kiTab.kiErudition"}} </span>
@@ -846,15 +870,17 @@
                 <a class="toggleBoolean {{#if data.secondary.kidetection.status}}showOpacity{{/if}}" data-label="data.secondary.kidetection.status" data-ability="{{data.secondary.kidetection.status}}"><i class="{{#if data.secondary.kidetection.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.kidetection.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.perceptive}}{{else}}{{#if data.secondary.kidetection.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.kidetection.nat" value="{{data.secondary.kidetection.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.kidetection.natural" value="{{data.secondary.kidetection.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.kidetectionnatfinal" value="{{data.kidetectionnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.kidetection.fav}}showOpacity{{/if}}" data-label="data.secondary.kidetection.fav"
+                   data-ability="{{data.secondary.kidetection.fav}}"><i class="{{#if data.secondary.kidetection.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.perceptive}}{{else}}{{#if data.secondary.notice.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.noticefinal}}" data-label="{{localize "abfalter.generalTab.notice"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.notice"}} </span>
                     <span> {{data.noticefinal}} </span>
@@ -867,14 +893,16 @@
                 <a class="toggleBoolean {{#if data.secondary.notice.status}}showOpacity{{/if}}" data-label="data.secondary.notice.status" data-ability="{{data.secondary.notice.status}}"><i class="{{#if data.secondary.notice.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.notice.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.perceptive}}{{else}}{{#if data.secondary.notice.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.notice.nat" value="{{data.secondary.notice.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.notice.natural" value="{{data.secondary.notice.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.noticenatfinal" value="{{data.noticenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.notice.fav}}showOpacity{{/if}}" data-label="data.secondary.notice.fav"
+                   data-ability="{{data.secondary.notice.fav}}"><i class="{{#if data.secondary.notice.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.perceptive}}{{else}}{{#if data.secondary.search.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.searchfinal}}" data-label="{{localize "abfalter.generalTab.search"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.search"}} </span>
                     <span> {{data.searchfinal}} </span>
@@ -887,14 +915,16 @@
                 <a class="toggleBoolean {{#if data.secondary.search.status}}showOpacity{{/if}}" data-label="data.secondary.search.status" data-ability="{{data.secondary.search.status}}"><i class="{{#if data.secondary.search.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.search.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.perceptive}}{{else}}{{#if data.secondary.search.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.search.nat" value="{{data.secondary.search.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.search.natural" value="{{data.secondary.search.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.searchnatfinal" value="{{data.searchnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.search.fav}}showOpacity{{/if}}" data-label="data.secondary.search.fav"
+                   data-ability="{{data.secondary.search.fav}}"><i class="{{#if data.secondary.search.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.perceptive}}{{else}}{{#if data.secondary.track.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.trackfinal}}" data-label="{{localize "abfalter.generalTab.track"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.track"}} </span>
                     <span> {{data.trackfinal}} </span>
@@ -907,13 +937,13 @@
                 <a class="toggleBoolean {{#if data.secondary.track.status}}showOpacity{{/if}}" data-label="data.secondary.track.status" data-ability="{{data.secondary.track.status}}"><i class="{{#if data.secondary.track.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.track.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.perceptive}}{{else}}{{#if data.secondary.track.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.track.nat" value="{{data.secondary.track.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.track.natural" value="{{data.secondary.track.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.tracknatfinal" value="{{data.tracknatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.track.fav}}showOpacity{{/if}}" data-label="data.secondary.track.fav"
+                   data-ability="{{data.secondary.track.fav}}"><i class="{{#if data.secondary.track.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
-            {{/if}}
-
             {{/if}}
         </div>
         <!--Intellectual Fields-->
@@ -930,8 +960,8 @@
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.main.intellectual}}showOpacity{{/if}}" data-label="data.secondary.main.intellectual" data-ability="{{data.secondary.main.intellectual}}"><i class="{{#if data.secondary.main.intellectual}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.secondary.main.intellectual}}
-            <div>
+
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.animals.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.animalsfinal}}" data-label="{{localize "abfalter.generalTab.animals"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.animals"}} </span>
                     <span> {{data.animalsfinal}} </span>
@@ -944,14 +974,16 @@
                 <a class="toggleBoolean {{#if data.secondary.animals.status}}showOpacity{{/if}}" data-label="data.secondary.animals.status" data-ability="{{data.secondary.animals.status}}"><i class="{{#if data.secondary.animals.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.animals.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.animals.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.animals.nat" value="{{data.secondary.animals.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.animals.natural" value="{{data.secondary.animals.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.animalsnatfinal" value="{{data.animalsnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.animals.fav}}showOpacity{{/if}}" data-label="data.secondary.animals.fav"
+                   data-ability="{{data.secondary.animals.fav}}"><i class="{{#if data.secondary.animals.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.appraisal.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.appraisalfinal}}" data-label="{{localize "abfalter.generalTab.appraisal"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.appraisal"}} </span>
                     <span> {{data.appraisalfinal}} </span>
@@ -964,14 +996,16 @@
                 <a class="toggleBoolean {{#if data.secondary.appraisal.status}}showOpacity{{/if}}" data-label="data.secondary.appraisal.status" data-ability="{{data.secondary.appraisal.status}}"><i class="{{#if data.secondary.appraisal.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.appraisal.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.appraisal.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.appraisal.nat" value="{{data.secondary.appraisal.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.appraisal.natural" value="{{data.secondary.appraisal.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.appraisalnatfinal" value="{{data.appraisalnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.appraisal.fav}}showOpacity{{/if}}" data-label="data.secondary.appraisal.fav"
+                   data-ability="{{data.secondary.appraisal.fav}}"><i class="{{#if data.secondary.appraisal.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.architecture.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.architecturefinal}}" data-label="{{localize "abfalter.generalTab.architecture"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.architecture"}} </span>
                     <span> {{data.architecturefinal}} </span>
@@ -984,14 +1018,16 @@
                 <a class="toggleBoolean {{#if data.secondary.architecture.status}}showOpacity{{/if}}" data-label="data.secondary.architecture.status" data-ability="{{data.secondary.architecture.status}}"><i class="{{#if data.secondary.architecture.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.architecture.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.architecture.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.architecture.nat" value="{{data.secondary.architecture.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.architecture.natural" value="{{data.secondary.architecture.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.architecturenatfinal" value="{{data.architecturenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.architecture.fav}}showOpacity{{/if}}" data-label="data.secondary.architecture.fav"
+                   data-ability="{{data.secondary.architecture.fav}}"><i class="{{#if data.secondary.architecture.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.herballore.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.herballorefinal}}" data-label="{{localize "abfalter.generalTab.herballore"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.herballore"}} </span>
                     <span> {{data.herballorefinal}} </span>
@@ -1004,14 +1040,16 @@
                 <a class="toggleBoolean {{#if data.secondary.herballore.status}}showOpacity{{/if}}" data-label="data.secondary.herballore.status" data-ability="{{data.secondary.herballore.status}}"><i class="{{#if data.secondary.herballore.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.herballore.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.herballore.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.herballore.nat" value="{{data.secondary.herballore.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.herballore.natural" value="{{data.secondary.herballore.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.herballorenatfinal" value="{{data.herballorenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.herballore.fav}}showOpacity{{/if}}" data-label="data.secondary.herballore.fav"
+                   data-ability="{{data.secondary.herballore.fav}}"><i class="{{#if data.secondary.herballore.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.history.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.historyfinal}}" data-label="{{localize "abfalter.generalTab.history"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.history"}} </span>
                     <span> {{data.historyfinal}} </span>
@@ -1024,14 +1062,16 @@
                 <a class="toggleBoolean {{#if data.secondary.history.status}}showOpacity{{/if}}" data-label="data.secondary.history.status" data-ability="{{data.secondary.history.status}}"><i class="{{#if data.secondary.history.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.history.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.history.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.history.nat" value="{{data.secondary.history.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.history.natural" value="{{data.secondary.history.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.historynatfinal" value="{{data.historynatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.history.fav}}showOpacity{{/if}}" data-label="data.secondary.history.fav"
+                   data-ability="{{data.secondary.history.fav}}"><i class="{{#if data.secondary.history.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.law.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.lawfinal}}" data-label="{{localize "abfalter.generalTab.law"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.law"}} </span>
                     <span> {{data.lawfinal}} </span>
@@ -1044,14 +1084,16 @@
                 <a class="toggleBoolean {{#if data.secondary.law.status}}showOpacity{{/if}}" data-label="data.secondary.law.status" data-ability="{{data.secondary.law.status}}"><i class="{{#if data.secondary.law.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.law.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.law.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.law.nat" value="{{data.secondary.law.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.law.natural" value="{{data.secondary.law.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.lawnatfinal" value="{{data.lawnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.law.fav}}showOpacity{{/if}}" data-label="data.secondary.law.fav"
+                   data-ability="{{data.secondary.law.fav}}"><i class="{{#if data.secondary.law.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.magicappr.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.magicapprfinal}}" data-label="{{localize "abfalter.generalTab.magicAppr"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.magicAppr"}} </span>
                     <span> {{data.magicapprfinal}} </span>
@@ -1064,14 +1106,16 @@
                 <a class="toggleBoolean {{#if data.secondary.magicappr.status}}showOpacity{{/if}}" data-label="data.secondary.magicappr.status" data-ability="{{data.secondary.magicappr.status}}"><i class="{{#if data.secondary.magicappr.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.magicappr.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.magicappr.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.magicappr.nat" value="{{data.secondary.magicappr.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.magicappr.natural" value="{{data.secondary.magicappr.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.magicapprnatfinal" value="{{data.magicapprnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.magicappr.fav}}showOpacity{{/if}}" data-label="data.secondary.magicappr.fav"
+                   data-ability="{{data.secondary.magicappr.fav}}"><i class="{{#if data.secondary.magicappr.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.medicine.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.medicinefinal}}" data-label="{{localize "abfalter.generalTab.medicine"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.medicine"}} </span>
                     <span> {{data.medicinefinal}} </span>
@@ -1084,14 +1128,16 @@
                 <a class="toggleBoolean {{#if data.secondary.medicine.status}}showOpacity{{/if}}" data-label="data.secondary.medicine.status" data-ability="{{data.secondary.medicine.status}}"><i class="{{#if data.secondary.medicine.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.medicine.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.medicine.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.medicine.nat" value="{{data.secondary.medicine.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.medicine.natural" value="{{data.secondary.medicine.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.medicinenatfinal" value="{{data.medicinenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.medicine.fav}}showOpacity{{/if}}" data-label="data.secondary.medicine.fav"
+                   data-ability="{{data.secondary.medicine.fav}}"><i class="{{#if data.secondary.medicine.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.memorize.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.memorizefinal}}" data-label="{{localize "abfalter.generalTab.memorize"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.memorize"}} </span>
                     <span> {{data.memorizefinal}} </span>
@@ -1104,14 +1150,16 @@
                 <a class="toggleBoolean {{#if data.secondary.memorize.status}}showOpacity{{/if}}" data-label="data.secondary.memorize.status" data-ability="{{data.secondary.memorize.status}}"><i class="{{#if data.secondary.memorize.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.memorize.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.memorize.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.memorize.nat" value="{{data.secondary.memorize.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.memorize.natural" value="{{data.secondary.memorize.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.memorizenatfinal" value="{{data.memorizenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.memorize.fav}}showOpacity{{/if}}" data-label="data.secondary.memorize.fav"
+                   data-ability="{{data.secondary.memorize.fav}}"><i class="{{#if data.secondary.memorize.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.navigation.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.navigationfinal}}" data-label="{{localize "abfalter.generalTab.navigation"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.navigation"}} </span>
                     <span> {{data.navigationfinal}} </span>
@@ -1124,14 +1172,16 @@
                 <a class="toggleBoolean {{#if data.secondary.navigation.status}}showOpacity{{/if}}" data-label="data.secondary.navigation.status" data-ability="{{data.secondary.navigation.status}}"><i class="{{#if data.secondary.navigation.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.navigation.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.navigation.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.navigation.nat" value="{{data.secondary.navigation.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.navigation.natural" value="{{data.secondary.navigation.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.navigationnatfinal" value="{{data.navigationnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.navigation.fav}}showOpacity{{/if}}" data-label="data.secondary.navigation.fav"
+                   data-ability="{{data.secondary.navigation.fav}}"><i class="{{#if data.secondary.navigation.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.occult.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.occultfinal}}" data-label="{{localize "abfalter.generalTab.occult"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.occult"}} </span>
                     <span> {{data.occultfinal}} </span>
@@ -1144,14 +1194,16 @@
                 <a class="toggleBoolean {{#if data.secondary.occult.status}}showOpacity{{/if}}" data-label="data.secondary.occult.status" data-ability="{{data.secondary.occult.status}}"><i class="{{#if data.secondary.occult.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.occult.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.occult.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.occult.nat" value="{{data.secondary.occult.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.occult.natural" value="{{data.secondary.occult.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.occultnatfinal" value="{{data.occultnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.occult.fav}}showOpacity{{/if}}" data-label="data.secondary.occult.fav"
+                   data-ability="{{data.secondary.occult.fav}}"><i class="{{#if data.secondary.occult.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.science.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.sciencefinal}}" data-label="{{localize "abfalter.generalTab.science"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.science"}} </span>
                     <span> {{data.sciencefinal}} </span>
@@ -1164,14 +1216,16 @@
                 <a class="toggleBoolean {{#if data.secondary.science.status}}showOpacity{{/if}}" data-label="data.secondary.science.status" data-ability="{{data.secondary.science.status}}"><i class="{{#if data.secondary.science.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.science.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.science.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.science.nat" value="{{data.secondary.science.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.science.natural" value="{{data.secondary.science.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.sciencenatfinal" value="{{data.sciencenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.science.fav}}showOpacity{{/if}}" data-label="data.secondary.science.fav"
+                   data-ability="{{data.secondary.science.fav}}"><i class="{{#if data.secondary.science.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.tactics.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.tacticsfinal}}" data-label="{{localize "abfalter.generalTab.tactics"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.tactics"}} </span>
                     <span> {{data.tacticsfinal}} </span>
@@ -1184,14 +1238,16 @@
                 <a class="toggleBoolean {{#if data.secondary.tactics.status}}showOpacity{{/if}}" data-label="data.secondary.tactics.status" data-ability="{{data.secondary.tactics.status}}"><i class="{{#if data.secondary.tactics.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.tactics.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.tactics.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.tactics.nat" value="{{data.secondary.tactics.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.tactics.natural" value="{{data.secondary.tactics.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.tacticsnatfinal" value="{{data.tacticsnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.tactics.fav}}showOpacity{{/if}}" data-label="data.secondary.tactics.fav"
+                   data-ability="{{data.secondary.tactics.fav}}"><i class="{{#if data.secondary.tactics.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.technomagic.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.technomagicfinal}}" data-label="{{localize "abfalter.generalTab.technomagic"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.technomagic"}} </span>
                     <span> {{data.technomagicfinal}} </span>
@@ -1204,13 +1260,13 @@
                 <a class="toggleBoolean {{#if data.secondary.technomagic.status}}showOpacity{{/if}}" data-label="data.secondary.technomagic.status" data-ability="{{data.secondary.technomagic.status}}"><i class="{{#if data.secondary.technomagic.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.technomagic.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.intellectual}}{{else}}{{#if data.secondary.technomagic.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.technomagic.nat" value="{{data.secondary.technomagic.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.technomagic.natural" value="{{data.secondary.technomagic.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.technomagicnatfinal" value="{{data.technomagicnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.technomagic.fav}}showOpacity{{/if}}" data-label="data.secondary.technomagic.fav"
+                   data-ability="{{data.secondary.technomagic.fav}}"><i class="{{#if data.secondary.technomagic.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
-            {{/if}}
-
             {{/if}}
         </div>
         <!--Vigor Fields-->
@@ -1227,8 +1283,8 @@
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.main.vigor}}showOpacity{{/if}}" data-label="data.secondary.main.vigor" data-ability="{{data.secondary.main.vigor}}"><i class="{{#if data.secondary.main.vigor}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.secondary.main.vigor}}
-            <div>
+
+            <div class="{{#if data.secondary.main.vigor}}{{else}}{{#if data.secondary.composure.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.composurefinal}}" data-label="{{localize "abfalter.generalTab.composure"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.composure"}} </span>
                     <span> {{data.composurefinal}} </span>
@@ -1241,14 +1297,16 @@
                 <a class="toggleBoolean {{#if data.secondary.composure.status}}showOpacity{{/if}}" data-label="data.secondary.composure.status" data-ability="{{data.secondary.composure.status}}"><i class="{{#if data.secondary.composure.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.composure.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.vigor}}{{else}}{{#if data.secondary.composure.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.composure.nat" value="{{data.secondary.composure.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.composure.natural" value="{{data.secondary.composure.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.composurenatfinal" value="{{data.composurenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.composure.fav}}showOpacity{{/if}}" data-label="data.secondary.composure.fav"
+                   data-ability="{{data.secondary.composure.fav}}"><i class="{{#if data.secondary.composure.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.vigor}}{{else}}{{#if data.secondary.featsofstr.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.featsofstrfinal}}" data-label="{{localize "abfalter.generalTab.featsOfStr"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.featsOfStr"}} </span>
                     <span> {{data.featsofstrfinal}} </span>
@@ -1261,14 +1319,16 @@
                 <a class="toggleBoolean {{#if data.secondary.featsofstr.status}}showOpacity{{/if}}" data-label="data.secondary.featsofstr.status" data-ability="{{data.secondary.featsofstr.status}}"><i class="{{#if data.secondary.featsofstr.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.featsofstr.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.vigor}}{{else}}{{#if data.secondary.featsofstr.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.featsofstr.nat" value="{{data.secondary.featsofstr.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.featsofstr.natural" value="{{data.secondary.featsofstr.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.featsofstrnatfinal" value="{{data.featsofstrnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.featsofstr.fav}}showOpacity{{/if}}" data-label="data.secondary.featsofstr.fav"
+                   data-ability="{{data.secondary.featsofstr.fav}}"><i class="{{#if data.secondary.featsofstr.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.vigor}}{{else}}{{#if data.secondary.withstpain.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.withstpainfinal}}" data-label="{{localize "abfalter.generalTab.withstPain"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.withstPain"}} </span>
                     <span> {{data.withstpainfinal}} </span>
@@ -1281,13 +1341,13 @@
                 <a class="toggleBoolean {{#if data.secondary.withstpain.status}}showOpacity{{/if}}" data-label="data.secondary.withstpain.status" data-ability="{{data.secondary.withstpain.status}}"><i class="{{#if data.secondary.withstpain.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.withstpain.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.vigor}}{{else}}{{#if data.secondary.withstpain.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.withstpain.nat" value="{{data.secondary.withstpain.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.withstpain.natural" value="{{data.secondary.withstpain.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.withstpainnatfinal" value="{{data.withstpainnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.withstpain.fav}}showOpacity{{/if}}" data-label="data.secondary.withstpain.fav"
+                   data-ability="{{data.secondary.withstpain.fav}}"><i class="{{#if data.secondary.withstpain.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
-            {{/if}}
-
             {{/if}}
         </div>
         <!--Subterfuge Fields-->
@@ -1304,8 +1364,7 @@
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.main.subterfuge}}showOpacity{{/if}}" data-label="data.secondary.main.subterfuge" data-ability="{{data.secondary.main.subterfuge}}"><i class="{{#if data.secondary.main.subterfuge}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.secondary.main.subterfuge}}
-            <div>
+            <div class="{{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.disguise.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.disguisefinal}}" data-label="{{localize "abfalter.generalTab.disguise"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.disguise"}} </span>
                     <span> {{data.disguisefinal}} </span>
@@ -1318,14 +1377,16 @@
                 <a class="toggleBoolean {{#if data.secondary.disguise.status}}showOpacity{{/if}}" data-label="data.secondary.disguise.status" data-ability="{{data.secondary.disguise.status}}"><i class="{{#if data.secondary.disguise.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.disguise.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.disguise.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.disguise.nat" value="{{data.secondary.disguise.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.disguise.natural" value="{{data.secondary.disguise.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.disguisenatfinal" value="{{data.disguisenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.disguise.fav}}showOpacity{{/if}}" data-label="data.secondary.disguise.fav"
+                   data-ability="{{data.secondary.disguise.fav}}"><i class="{{#if data.secondary.disguise.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.hide.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.hidefinal}}" data-label="{{localize "abfalter.generalTab.hide"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.hide"}} </span>
                     <span> {{data.hidefinal}} </span>
@@ -1338,15 +1399,17 @@
                 <a class="toggleBoolean {{#if data.secondary.hide.status}}showOpacity{{/if}}" data-label="data.secondary.hide.status" data-ability="{{data.secondary.hide.status}}"><i class="{{#if data.secondary.hide.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.hide.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.hide.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.hide.nat" value="{{data.secondary.hide.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.hide.natural" value="{{data.secondary.hide.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.hidenatfinal" value="{{data.hidenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.hide.fav}}showOpacity{{/if}}" data-label="data.secondary.hide.fav"
+                   data-ability="{{data.secondary.hide.fav}}"><i class="{{#if data.secondary.hide.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
             {{#if data.kiAbility.kiConceal.status}}
-            <div>
+            <div class="{{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.kiconceal.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.kiconcealfinal}}" data-label="{{localize "abfalter.kiTab.kiConceal"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.kiTab.kiConceal"}} </span>
                     <span> {{data.kiconcealfinal}} </span>
@@ -1359,15 +1422,17 @@
                 <a class="toggleBoolean {{#if data.secondary.kiconceal.status}}showOpacity{{/if}}" data-label="data.secondary.kiconceal.status" data-ability="{{data.secondary.kiconceal.status}}"><i class="{{#if data.secondary.kiconceal.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.kiconceal.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.kiconceal.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.kiconceal.nat" value="{{data.secondary.kiconceal.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.kiconceal.natural" value="{{data.secondary.kiconceal.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.kiconcealnatfinal" value="{{data.kiconcealnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.kiconceal.fav}}showOpacity{{/if}}" data-label="data.secondary.kiconceal.fav"
+                   data-ability="{{data.secondary.kiconceal.fav}}"><i class="{{#if data.secondary.kiconceal.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.lockpicking.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.lockpickingfinal}}" data-label="{{localize "abfalter.generalTab.lockpicking"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.lockpicking"}} </span>
                     <span> {{data.lockpickingfinal}} </span>
@@ -1380,14 +1445,16 @@
                 <a class="toggleBoolean {{#if data.secondary.lockpicking.status}}showOpacity{{/if}}" data-label="data.secondary.lockpicking.status" data-ability="{{data.secondary.lockpicking.status}}"><i class="{{#if data.secondary.lockpicking.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.lockpicking.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.lockpicking.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.lockpicking.nat" value="{{data.secondary.lockpicking.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.lockpicking.natural" value="{{data.secondary.lockpicking.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.lockpickingnatfinal" value="{{data.lockpickingnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.lockpicking.fav}}showOpacity{{/if}}" data-label="data.secondary.lockpicking.fav"
+                   data-ability="{{data.secondary.lockpicking.fav}}"><i class="{{#if data.secondary.lockpicking.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.poisons.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.poisonsfinal}}" data-label="{{localize "abfalter.generalTab.poisons"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.poisons"}} </span>
                     <span> {{data.poisonsfinal}} </span>
@@ -1400,14 +1467,16 @@
                 <a class="toggleBoolean {{#if data.secondary.poisons.status}}showOpacity{{/if}}" data-label="data.secondary.poisons.status" data-ability="{{data.secondary.poisons.status}}"><i class="{{#if data.secondary.poisons.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.poisons.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.poisons.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.poisons.nat" value="{{data.secondary.poisons.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.poisons.natural" value="{{data.secondary.poisons.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.poisonsnatfinal" value="{{data.poisonsnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.poisons.fav}}showOpacity{{/if}}" data-label="data.secondary.poisons.fav"
+                   data-ability="{{data.secondary.poisons.fav}}"><i class="{{#if data.secondary.poisons.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.stealth.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.stealthfinal}}" data-label="{{localize "abfalter.generalTab.stealth"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.stealth"}} </span>
                     <span> {{data.stealthfinal}} </span>
@@ -1420,14 +1489,16 @@
                 <a class="toggleBoolean {{#if data.secondary.stealth.status}}showOpacity{{/if}}" data-label="data.secondary.stealth.status" data-ability="{{data.secondary.stealth.status}}"><i class="{{#if data.secondary.stealth.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.stealth.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.stealth.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.stealth.nat" value="{{data.secondary.stealth.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.stealth.natural" value="{{data.secondary.stealth.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.stealthnatfinal" value="{{data.stealthnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.stealth.fav}}showOpacity{{/if}}" data-label="data.secondary.stealth.fav"
+                   data-ability="{{data.secondary.stealth.fav}}"><i class="{{#if data.secondary.stealth.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.theft.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.theftfinal}}" data-label="{{localize "abfalter.generalTab.theft"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.theft"}} </span>
                     <span> {{data.theftfinal}} </span>
@@ -1440,14 +1511,16 @@
                 <a class="toggleBoolean {{#if data.secondary.theft.status}}showOpacity{{/if}}" data-label="data.secondary.theft.status" data-ability="{{data.secondary.theft.status}}"><i class="{{#if data.secondary.theft.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.theft.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.theft.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.theft.nat" value="{{data.secondary.theft.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.theft.natural" value="{{data.secondary.theft.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.theftnatfinal" value="{{data.theftnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.theft.fav}}showOpacity{{/if}}" data-label="data.secondary.theft.fav"
+                   data-ability="{{data.secondary.theft.fav}}"><i class="{{#if data.secondary.theft.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.traplore.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.traplorefinal}}" data-label="{{localize "abfalter.generalTab.traplore"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.traplore"}} </span>
                     <span> {{data.traplorefinal}} </span>
@@ -1460,13 +1533,13 @@
                 <a class="toggleBoolean {{#if data.secondary.traplore.status}}showOpacity{{/if}}" data-label="data.secondary.traplore.status" data-ability="{{data.secondary.traplore.status}}"><i class="{{#if data.secondary.traplore.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.traplore.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.subterfuge}}{{else}}{{#if data.secondary.traplore.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.traplore.nat" value="{{data.secondary.traplore.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.traplore.natural" value="{{data.secondary.traplore.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.traplorenatfinal" value="{{data.traplorenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.traplore.fav}}showOpacity{{/if}}" data-label="data.secondary.traplore.fav"
+                   data-ability="{{data.secondary.traplore.fav}}"><i class="{{#if data.secondary.traplore.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
-            {{/if}}
-
             {{/if}}
         </div>
         <!--Creative Fields-->
@@ -1483,8 +1556,8 @@
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.main.creative}}showOpacity{{/if}}" data-label="data.secondary.main.creative" data-ability="{{data.secondary.main.creative}}"><i class="{{#if data.secondary.main.creative}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
-            {{#if data.secondary.main.creative}}
-            <div>
+
+            <div class="{{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.alchemy.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.alchemyfinal}}" data-label="{{localize "abfalter.generalTab.alchemy"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.alchemy"}} </span>
                     <span> {{data.alchemyfinal}} </span>
@@ -1497,14 +1570,16 @@
                 <a class="toggleBoolean {{#if data.secondary.alchemy.status}}showOpacity{{/if}}" data-label="data.secondary.alchemy.status" data-ability="{{data.secondary.alchemy.status}}"><i class="{{#if data.secondary.alchemy.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.alchemy.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.alchemy.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.alchemy.nat" value="{{data.secondary.alchemy.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.alchemy.natural" value="{{data.secondary.alchemy.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.alchemynatfinal" value="{{data.alchemynatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.alchemy.fav}}showOpacity{{/if}}" data-label="data.secondary.alchemy.fav"
+                   data-ability="{{data.secondary.alchemy.fav}}"><i class="{{#if data.secondary.alchemy.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.animism.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.animismfinal}}" data-label="{{localize "abfalter.generalTab.animism"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.animism"}} </span>
                     <span> {{data.animismfinal}} </span>
@@ -1517,14 +1592,16 @@
                 <a class="toggleBoolean {{#if data.secondary.animism.status}}showOpacity{{/if}}" data-label="data.secondary.animism.status" data-ability="{{data.secondary.animism.status}}"><i class="{{#if data.secondary.animism.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.animism.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.animism.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.animism.nat" value="{{data.secondary.animism.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.animism.natural" value="{{data.secondary.animism.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.animismnatfinal" value="{{data.animismnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.animism.fav}}showOpacity{{/if}}" data-label="data.secondary.animism.fav"
+                   data-ability="{{data.secondary.animism.fav}}"><i class="{{#if data.secondary.animism.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.art.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.artfinal}}" data-label="{{localize "abfalter.generalTab.art"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.art"}} </span>
                     <span> {{data.artfinal}} </span>
@@ -1537,14 +1614,16 @@
                 <a class="toggleBoolean {{#if data.secondary.art.status}}showOpacity{{/if}}" data-label="data.secondary.art.status" data-ability="{{data.secondary.art.status}}"><i class="{{#if data.secondary.art.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.art.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.art.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.art.nat" value="{{data.secondary.art.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.art.natural" value="{{data.secondary.art.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.artnatfinal" value="{{data.artnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.art.fav}}showOpacity{{/if}}" data-label="data.secondary.art.fav"
+                   data-ability="{{data.secondary.art.fav}}"><i class="{{#if data.secondary.art.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.cooking.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.cookingfinal}}" data-label="{{localize "abfalter.generalTab.cooking"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.cooking"}} </span>
                     <span> {{data.cookingfinal}} </span>
@@ -1557,14 +1636,16 @@
                 <a class="toggleBoolean {{#if data.secondary.cooking.status}}showOpacity{{/if}}" data-label="data.secondary.cooking.status" data-ability="{{data.secondary.cooking.status}}"><i class="{{#if data.secondary.cooking.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.cooking.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.cooking.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.cooking.nat" value="{{data.secondary.cooking.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.cooking.natural" value="{{data.secondary.cooking.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.cookingnatfinal" value="{{data.cookingnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.cooking.fav}}showOpacity{{/if}}" data-label="data.secondary.cooking.fav"
+                   data-ability="{{data.secondary.cooking.fav}}"><i class="{{#if data.secondary.cooking.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.dance.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.dancefinal}}" data-label="{{localize "abfalter.generalTab.dance"}}" data-type="secondaryRoll">
                     <span class="armorpenalty"> {{localize "abfalter.generalTab.dance"}} </span>
                     <span> {{data.dancefinal}} </span>
@@ -1577,14 +1658,16 @@
                 <a class="toggleBoolean {{#if data.secondary.dance.status}}showOpacity{{/if}}" data-label="data.secondary.dance.status" data-ability="{{data.secondary.dance.status}}"><i class="{{#if data.secondary.dance.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.dance.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.dance.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.dance.nat" value="{{data.secondary.dance.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.dance.natural" value="{{data.secondary.dance.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.dancenatfinal" value="{{data.dancenatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.dance.fav}}showOpacity{{/if}}" data-label="data.secondary.dance.fav"
+                   data-ability="{{data.secondary.dance.fav}}"><i class="{{#if data.secondary.dance.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.forging.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.forgingfinal}}" data-label="{{localize "abfalter.generalTab.forging"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.forging"}} </span>
                     <span> {{data.forgingfinal}} </span>
@@ -1597,14 +1680,16 @@
                 <a class="toggleBoolean {{#if data.secondary.forging.status}}showOpacity{{/if}}" data-label="data.secondary.forging.status" data-ability="{{data.secondary.forging.status}}"><i class="{{#if data.secondary.forging.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.forging.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.forging.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.forging.nat" value="{{data.secondary.forging.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.forging.natural" value="{{data.secondary.forging.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.forgingnatfinal" value="{{data.forgingnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.forging.fav}}showOpacity{{/if}}" data-label="data.secondary.forging.fav"
+                   data-ability="{{data.secondary.forging.fav}}"><i class="{{#if data.secondary.forging.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.jewelry.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.jewelryfinal}}" data-label="{{localize "abfalter.generalTab.jewelry"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.jewelry"}} </span>
                     <span> {{data.jewelryfinal}} </span>
@@ -1617,15 +1702,17 @@
                 <a class="toggleBoolean {{#if data.secondary.jewelry.status}}showOpacity{{/if}}" data-label="data.secondary.jewelry.status" data-ability="{{data.secondary.jewelry.status}}"><i class="{{#if data.secondary.jewelry.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.jewelry.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.jewelry.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.jewelry.nat" value="{{data.secondary.jewelry.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.jewelry.natural" value="{{data.secondary.jewelry.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.jewelrynatfinal" value="{{data.jewelrynatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.jewelry.fav}}showOpacity{{/if}}" data-label="data.secondary.jewelry.fav"
+                   data-ability="{{data.secondary.jewelry.fav}}"><i class="{{#if data.secondary.jewelry.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
 
-            <div>
+            <div class="{{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.toymaking.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.toymakingfinal}}" data-label="{{localize "abfalter.generalTab.toymaking"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.toymaking"}} </span>
                     <span> {{data.toymakingfinal}} </span>
@@ -1638,14 +1725,16 @@
                 <a class="toggleBoolean {{#if data.secondary.toymaking.status}}showOpacity{{/if}}" data-label="data.secondary.toymaking.status" data-ability="{{data.secondary.toymaking.status}}"><i class="{{#if data.secondary.toymaking.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.toymaking.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.toymaking.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.toymaking.nat" value="{{data.secondary.toymaking.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.toymaking.natural" value="{{data.secondary.toymaking.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.toymakingnatfinal" value="{{data.toymakingnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.toymaking.fav}}showOpacity{{/if}}" data-label="data.secondary.toymaking.fav"
+                   data-ability="{{data.secondary.toymaking.fav}}"><i class="{{#if data.secondary.toymaking.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.music.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.musicfinal}}" data-label="{{localize "abfalter.generalTab.music"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.music"}} </span>
                     <span> {{data.musicfinal}} </span>
@@ -1658,14 +1747,16 @@
                 <a class="toggleBoolean {{#if data.secondary.music.status}}showOpacity{{/if}}" data-label="data.secondary.music.status" data-ability="{{data.secondary.music.status}}"><i class="{{#if data.secondary.music.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.music.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.music.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.music.nat" value="{{data.secondary.music.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.music.natural" value="{{data.secondary.music.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.musicnatfinal" value="{{data.musicnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.music.fav}}showOpacity{{/if}}" data-label="data.secondary.music.fav"
+                   data-ability="{{data.secondary.music.fav}}"><i class="{{#if data.secondary.music.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.runes.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.runesfinal}}" data-label="{{localize "abfalter.generalTab.runes"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.runes"}} </span>
                     <span> {{data.runesfinal}} </span>
@@ -1678,14 +1769,16 @@
                 <a class="toggleBoolean {{#if data.secondary.runes.status}}showOpacity{{/if}}" data-label="data.secondary.runes.status" data-ability="{{data.secondary.runes.status}}"><i class="{{#if data.secondary.runes.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.runes.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.runes.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.runes.nat" value="{{data.secondary.runes.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.runes.natural" value="{{data.secondary.runes.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.runesnatfinal" value="{{data.runesnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.runes.fav}}showOpacity{{/if}}" data-label="data.secondary.runes.fav"
+                   data-ability="{{data.secondary.runes.fav}}"><i class="{{#if data.secondary.runes.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.ritualcalig.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.ritualcaligfinal}}" data-label="{{localize "abfalter.generalTab.ritualCal"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.ritualCal"}} </span>
                     <span> {{data.ritualcaligfinal}} </span>
@@ -1698,14 +1791,16 @@
                 <a class="toggleBoolean {{#if data.secondary.ritualcalig.status}}showOpacity{{/if}}" data-label="data.secondary.ritualcalig.status" data-ability="{{data.secondary.ritualcalig.status}}"><i class="{{#if data.secondary.ritualcalig.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.ritualcalig.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.ritualcalig.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.ritualcalig.nat" value="{{data.secondary.ritualcalig.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.ritualcalig.natural" value="{{data.secondary.ritualcalig.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.ritualcalignatfinal" value="{{data.ritualcalignatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.ritualcalig.fav}}showOpacity{{/if}}" data-label="data.secondary.ritualcalig.fav"
+                   data-ability="{{data.secondary.ritualcalig.fav}}"><i class="{{#if data.secondary.ritualcalig.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.slofhand.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.slofhandfinal}}" data-label="{{localize "abfalter.generalTab.soh"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.soh"}} </span>
                     <span> {{data.slofhandfinal}} </span>
@@ -1718,14 +1813,16 @@
                 <a class="toggleBoolean {{#if data.secondary.slofhand.status}}showOpacity{{/if}}" data-label="data.secondary.slofhand.status" data-ability="{{data.secondary.slofhand.status}}"><i class="{{#if data.secondary.slofhand.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.slofhand.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.slofhand.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.slofhand.nat" value="{{data.secondary.slofhand.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.slofhand.natural" value="{{data.secondary.slofhand.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.slofhandnatfinal" value="{{data.slofhandnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.slofhand.fav}}showOpacity{{/if}}" data-label="data.secondary.slofhand.fav"
+                   data-ability="{{data.secondary.slofhand.fav}}"><i class="{{#if data.secondary.slofhand.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
 
-            <div>
+            <div class="{{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.tailoring.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <button type="button" class="rollable" data-roll="{{data.tailoringfinal}}" data-label="{{localize "abfalter.generalTab.tailoring"}}" data-type="secondaryRoll">
                     <span> {{localize "abfalter.generalTab.tailoring"}} </span>
                     <span> {{data.tailoringfinal}} </span>
@@ -1738,15 +1835,89 @@
                 <a class="toggleBoolean {{#if data.secondary.tailoring.status}}showOpacity{{/if}}" data-label="data.secondary.tailoring.status" data-ability="{{data.secondary.tailoring.status}}"><i class="{{#if data.secondary.tailoring.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.tailoring.status}}
-            <div class="extend">
+            <div class="extend {{#if data.secondary.main.creative}}{{else}}{{#if data.secondary.tailoring.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.secondary.tailoring.nat" value="{{data.secondary.tailoring.nat}}" />
                 <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.secondary.tailoring.natural" value="{{data.secondary.tailoring.natural}}" />
                 <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span> <input type="number" name="data.tailoringnatfinal" value="{{data.tailoringnatfinal}}" readonly />
+                <a class="toggleBoolean {{#if data.secondary.tailoring.fav}}showOpacity{{/if}}" data-label="data.secondary.tailoring.fav"
+                   data-ability="{{data.secondary.tailoring.fav}}"><i class="{{#if data.secondary.tailoring.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
             </div>
             {{/if}}
-
-            {{/if}}
         </div>
+        <!--Custom Fields-->
+        <div>
+            <div>
+                <div>
+                    <span> {{localize "abfalter.generalTab.custom"}} </span>
+                    <span> {{localize "abfalter.basicInfo.final"}} </span>
+                </div>
+                <span> {{localize "abfalter.basicInfo.temp"}} </span>
+                <span> {{localize "abfalter.basicInfo.spec"}} </span>
+                <span> {{localize "abfalter.basicInfo.extra"}} </span>
+                <span> {{localize "abfalter.basicInfo.base"}} </span>
+                <span> {{localize "abfalter.generalTab.atr"}} </span>
+                <a class="toggleBoolean {{#if data.toggles.customSecondary}}showOpacity{{/if}}" data-label="data.toggles.customSecondary" data-ability="{{data.toggles.customSecondary}}"><i class="{{#if data.toggles.customSecondary}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </div>
 
+            <div class="{{#if data.itemToggle.secondaries}}item-list{{/if}} customSecondaryListArea">
+                {{#each secondaries as |secondary id|}}
+                <div class="secondary-item item normal-item {{#if system.collapse}}{{else}}{{#if system.fav}}{{else}}hidden{{/if}}{{/if}}" data-item-id="{{secondary._id}}">
+                    {{#if system.expand}}
+                    <div class="secondaryEdit">
+                        <input class="item-name inline-edit" data-field="name" type="text" value="{{secondary.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                        <input class="inline-edit" data-field="system.temp" type="number" value="{{secondary.system.temp}}" />
+                        <input class="inline-edit" data-field="system.spec" type="number" value="{{secondary.system.spec}}" />
+                        <input class="inline-edit" data-field="system.extra" type="number" value="{{secondary.system.extra}}" />
+                        <input class="inline-edit" data-field="system.base" type="number" value="{{secondary.system.base}}" />
+                        <select class="inline-edit" data-field="system.atr" data-dtype="String">
+                            {{#select system.atr}}
+                            <option value=""> </option>
+                            <option value="{{localize "abfalter.basicInfo.agi"}}"> {{localize "abfalter.basicInfo.agi"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.con"}}"> {{localize "abfalter.basicInfo.con"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.str"}}"> {{localize "abfalter.basicInfo.str"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.dex"}}"> {{localize "abfalter.basicInfo.dex"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.per"}}"> {{localize "abfalter.basicInfo.per"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.int"}}"> {{localize "abfalter.basicInfo.int"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.pow"}}"> {{localize "abfalter.basicInfo.pow"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.wp"}}"> {{localize "abfalter.basicInfo.wp"}} </option>
+                            {{/select}}
+                        </select>
+                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </div>
+
+                    <div class="secondaryEditExtend">
+                        <span> {{localize "abfalter.generalTab.natNum"}} </span>
+                        <input class="inline-edit" type="number" data-field="system.nat" value="{{secondary.system.nat}}" />
+                        <span> {{localize "abfalter.generalTab.na"}} </span>
+                        <input class="inline-edit" type="number" data-field="system.natural" value="{{secondary.system.natural}}" />
+                        <span class="natemph"> {{localize "abfalter.generalTab.totalNat"}} </span>
+                        <input class="inline-edit" type="number" data-field="secondary.system.natFinal" value="{{secondary.system.natFinal}}" readonly />
+                        <a class="item-toggle {{#if system.fav}}showOpacity{{/if}}" data-label="system.fav"
+                           data-ability="{{system.fav}}"><i class="{{#if system.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
+                    </div>
+                    {{else}}
+                    <div>
+                        <button type="button" class="rollable" data-roll="123" data-label="{{secondary.name}}" data-type="secondaryRoll">
+                            <span> {{secondary.name}} </span>
+                            <span> {{this.system.finalValue}} </span>
+                        </button>
+                        <input class="inline-edit" data-field="system.temp" type="number" value="{{secondary.system.temp}}" />
+                        <input class="inline-edit" data-field="system.spec" type="number" value="{{secondary.system.spec}}" />
+                        <input class="inline-edit" data-field="system.extra" type="number" value="{{secondary.system.extra}}" />
+                        <input class="inline-edit" data-field="system.base" type="number" value="{{secondary.system.base}}" />
+                        <span class="{{secondary.system.tag}}"> {{secondary.system.atr}} </span>
+                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+
+            <div class="customSecAddArea {{#if data.toggles.customSecondary}}{{else}}hidden{{/if}}">
+                <a class="item-control item-create" data-type="secondary"><i class="fas fa-plus"></i> {{localize "abfalter.generalTab.addAdvantage"}} </a>
+                <a class="toggleBoolean {{#if data.itemToggle.secondary}}armorpenalty{{/if}}" data-label="data.itemToggle.secondary" data-ability="{{data.itemToggle.secondary}}"><i class="{{#if data.itemToggle.secondary}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+            </div>
+            <div></div>
+        </div>
     </div>
 </div>

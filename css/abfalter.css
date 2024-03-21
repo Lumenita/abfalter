@@ -30,6 +30,10 @@ button {
 }
 /* Color Theme */
 :root {
+    --backgroundColor: #15202B;
+    --otherBackgrounds: #081426c2;
+    --dropdownColor: #252944;
+    --navbarColor: #333a7e;
     --textColor: #bbbbbb;
     --buttonBg: #5859872e;
     --inputBorder: #747493;
@@ -52,13 +56,40 @@ button {
     --color-bg-btn-minor-inactive: #354766;
     --color-shadow-primary: #5c9be9;
 }
+[data-theme="light"] {
+    --backgroundColor: url(../img/parchment.jpg);
+    --otherBackgrounds: url(../img/denim.jpg);
+    --dropdownColor: #e7e7e7;
+    --navbarColor: #b1b1a7;
+    --textColor: black;
+    --buttonBg: #bbb9aa;
+    --inputBorder: black;
+    --boxColor: black;
+    --itemOffSet: #c1c5c9;
+    --physical: #10ad10;
+    --mental: #0043ff;
+    --armorPen: #d1681f;
+    --equipped: #00a11b;
+    --kiBought: #8581e3;
+    --kiFree: #1da71d;
+    --colot-border-dark: inherit;
+    --color-border-dark-5: inherit;
+    --color-text-dark-secondary: inherit;
+    --color-border-light-tertiary: inherit;
+    --color-border-highlight: inherit;
+    --color-border-highlight-alt: inherit;
+    --color-shadow-highlight: inherit;
+    --color-bg-btn-minor-active: inherit;
+    --color-bg-btn-minor-inactive: inherit;
+    --color-shadow-primary: inherit;
+}
 .window-app .window-content {
     overflow-x: auto;
-    background: #15202B;
+    background: var(--backgroundColor);
     color: var(--textColor);
 }
 .sheet.journal-entry .journal-entry-content {
-    background: #15202B;
+    background: var(--backgroundColor);
 }
 .macro-sheet .form-group.command textarea {
     color: var(--textColor);
@@ -70,7 +101,7 @@ button {
 #navigation #scene-list .scene.view, #navigation #scene-list .scene.context,
 #navigation #nav-toggle,
 .app {
-    background: #081426c2;
+    background: var(--otherBackgrounds);
 }
 .editor-box {
     background-color: aliceblue;
@@ -97,7 +128,7 @@ button {
 }
 .prosemirror menu .pm-dropdown ul,
 .window-app .window-content option {
-    background: #252944;
+    background: var(--dropdownColor);
 }
 a.content-link {
     background-color: var(--buttonBg);
@@ -632,9 +663,9 @@ h6 {
     justify-content: space-evenly;
 }
 .sheet-tabs > ul > li {
-    background-color: #333a7e;
+    background-color: var(--navbarColor);
     float: left;
-    border-right: 1px solid #333a7e;
+    border-right: 1px solid var(--navbarColor);
     height: 35px;
     width: 12%;
 }
@@ -1174,9 +1205,86 @@ h6 {
 .secondary > div > .extend > input[type="number"]:last-of-type {
     width: 8%;
 }
-.secondary > div > .extend > label {
-    padding-right: 15px;
+.secondary > div > .extend > a {
+    margin: 0 0 0 10px;
+}
+.secondary > div > .extend > a {
+    opacity: 1;
+}
+.secondary-item > div {
+    display: flex;
+}
+.secondary-item > div > span {
+    text-align: center;
+}
+.secondary-item .secondaryEdit > input:first-of-type {
+    width: 35%;
+    margin: 0;
+}
+.secondary-item > div > button > span:nth-of-type(2) {
+    padding: 0 10% 0 0;
+}
+.secondary-item > div > input {
+    width: 11.5%;
+    margin: 0 0 0 1%;
+}
+.secondary-item > div:first-of-type > span:nth-of-type(5),
+.secondary-item > div > select,
+.secondary-item > div > span {
+    width: 9%;
+    margin: 0 0 0 1%;
+}
+.secondary-item > div > button {
+    height: 20px;
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+}
+.secondary-item .secondaryEditExtend {
     padding-left: 15px;
+}
+.secondary-item .secondaryEditExtend  > span:first-of-type {
+    width: 10%;
+    text-align: end;
+}
+.secondary-item .secondaryEditExtend  > span:nth-of-type(2) {
+    width: 10%;
+    text-align: end;
+}
+.secondary-item .secondaryEditExtend  > span:last-of-type {
+    width: 22%;
+    text-align: end;
+    padding: 0 0 0 5%;
+}
+.secondary-item .secondaryEditExtend > input[type="number"] {
+    width: 12%;
+}
+.secondary-item .secondaryEditExtend > input[type="number"]:last-of-type {
+    width: 8%;
+}
+.secondary-item .secondaryEditExtend > a {
+    margin: 0 0 0 10px;
+}
+.secondary-item .secondaryEditExtend > a {
+    opacity: 1;
+}
+.secondary .customSecAddArea {
+    display: flex;
+    place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+}
+.secondary .customSecAddArea > a {
+    text-align: center;
+    align-self: center;
+    width: inherit;
+    opacity: 1;
+    font-size: inherit;
+}
+.secondary .customSecondaryListArea {
+    display: inherit;
 }
 /*
     **************
@@ -5090,6 +5198,54 @@ h6 {
 
 .advantages > div {
     border: 3px solid var(--boxColor);
+}
+
+/*
+    ---------
+    Secondary
+    ---------
+*/
+.secondaryContent > div {
+    display: flex;
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.secondaryContent > div > div > label {
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+    width: 100%;
+    padding: 0 10px;
+}
+.secondaryContent > div > label {
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+    width: 50%;
+    padding: 0 10px;
+}
+.secondaryContent > div > div {
+    width: 50%;
+}
+.secondaryContent > div > div > label > select,
+.secondaryContent > div > label > input {
+    width: 50%;
+}
+.secondaryContent > div > div::after {
+    right: 15px;
+}
+.secondaryContent > div > div > label > span,
+.secondaryContent > div > label > span {
+    width: 50%;
+    display: grid;
+}
+.secondaryContent > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.secondaryContent > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
 }
 /*
     ***************

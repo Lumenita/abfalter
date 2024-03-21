@@ -1097,6 +1097,27 @@
                     <div class="csSelect">
                         <select name="data.fistDamage.multOption" data-dtype="text">
                             {{#select data.fistDamage.multOption}}
+                            <option value=""> </option>
+                            <option value="agi"> {{localize "abfalter.basicInfo.agility"}} </option>
+                            <option value="con"> {{localize "abfalter.basicInfo.consti"}} </option>
+                            <option value="str"> {{localize "abfalter.basicInfo.strength"}} </option>
+                            <option value="dex"> {{localize "abfalter.basicInfo.dexerity"}} </option>
+                            <option value="per"> {{localize "abfalter.basicInfo.perception"}} </option>
+                            <option value="int"> {{localize "abfalter.basicInfo.intell"}} </option>
+                            <option value="pow"> {{localize "abfalter.basicInfo.power"}} </option>
+                            <option value="wp"> {{localize "abfalter.basicInfo.willPower"}} </option>
+                            <option value="str2"> {{localize "abfalter.armoryTab.twoStr"}} </option>
+                            <option value="presence"> {{localize "abfalter.kiTab.presencexpow"}} </option>
+                            {{/select}}
+                        </select>
+                    </div>
+                    <span> + </span>
+                    <input type="number" name="data.fistDamage.mult2" value="{{data.fistDamage.mult2}}" />
+                    <span> * </span>
+                    <div class="csSelect">
+                        <select name="data.fistDamage.multOption2" data-dtype="text">
+                            {{#select data.fistDamage.multOption2}}
+                            <option value=""> </option>
                             <option value="agi"> {{localize "abfalter.basicInfo.agility"}} </option>
                             <option value="con"> {{localize "abfalter.basicInfo.consti"}} </option>
                             <option value="str"> {{localize "abfalter.basicInfo.strength"}} </option>

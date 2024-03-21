@@ -262,106 +262,127 @@ export default class abfalterActor extends Actor {
                 data.resting = "10/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.notresting = "5/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 10;
                 break;
             case 2:
                 data.resting = "20/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.notresting = "10/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 20;
                 break;
             case 3:
                 data.resting = "30/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.notresting = "15/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 30;
                 break;
             case 4:
                 data.resting = "40/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.notresting = "20/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 40;
                 break;
             case 5:
                 data.resting = "50/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.notresting = "25/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 50;
                 break;
             case 6:
                 data.resting = "75/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.notresting = "30/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.redpenalty = "-15/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 75;
                 break;
             case 7:
                 data.resting = "100/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.notresting = "50/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.redpenalty = "-20/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 100;
                 break;
             case 8:
                 data.resting = "250/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.notresting = "100/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.redpenalty = "-25/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 250;
                 break;
             case 9:
                 data.resting = "500/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.notresting = "200/" + game.i18n.localize('abfalter.basicInfo.day');
                 data.redpenalty = "-30/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 500;
                 break;
             case 10:
                 data.resting = "1/" + game.i18n.localize('abfalter.basicInfo.minute');
                 data.notresting = "N/A";
                 data.redpenalty = "-40/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 1440;
                 break;
             case 11:
                 data.resting = "2/" + game.i18n.localize('abfalter.basicInfo.minute');
                 data.notresting = "N/A";
                 data.redpenalty = "-50/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 2880;
                 break;
             case 12:
                 data.resting = "5/" + game.i18n.localize('abfalter.basicInfo.minute');
                 data.notresting = "N/A";
                 data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.hour');
+                data.regenValue = 7200;
                 break;
             case 13:
                 data.resting = "10/" + game.i18n.localize('abfalter.basicInfo.minute');
                 data.notresting = "N/A";
                 data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.hour');
+                data.regenValue = 10000;
                 break;
             case 14:
                 data.resting = "1/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
                 data.redpenalty = "-15/" + game.i18n.localize('abfalter.basicInfo.hour');
+                data.regenValue = 20000;
                 break;
             case 15:
                 data.resting = "5/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
                 data.redpenalty = "-20/" + game.i18n.localize('abfalter.basicInfo.hour');
+                data.regenValue = 50000;
                 break;
             case 16:
                 data.resting = "10/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
                 data.redpenalty = "-50/" + game.i18n.localize('abfalter.basicInfo.minute');
+                data.regenValue = 100000;
                 break;
             case 17:
                 data.resting = "25/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
                 data.redpenalty = "-10/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.regenValue = 100000;
                 break;
             case 18:
                 data.resting = "50/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
                 data.redpenalty = "-25/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.regenValue = 100000;
                 break;
             case 19:
                 data.resting = "100/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
                 data.redpenalty = "All/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.regenValue = 100000;
                 break;
             case 20:
                 data.resting = "200/" + game.i18n.localize('abfalter.magicTab.turn');
                 data.notresting = "N/A";
                 data.redpenalty = "All/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.regenValue = 100000;
                 break;
             default:
                 data.resting = "0";
                 data.notresting = "0";
                 data.redpenalty = "0";
+                data.regenValue = 0;
                 break;
         }
 
@@ -1070,9 +1091,9 @@ export default class abfalterActor extends Actor {
         //Stuff Xp, Presence, Next lvl Xp
         data.level = level; //class Bonus
         if (data.level == 0) {
-            data.dp = 400;
+            data.dp = 400 + data.levelinfo.dpmod;
         } else {
-            data.dp = Math.floor((data.level * 100) + 500);
+            data.dp = Math.floor((data.level * 100) + 500 + data.levelinfo.dpmod);
         }
         data.presence = Math.floor((data.dp / 20) + data.levelinfo.presencemod);
         data.nextlevel = Math.floor(((data.level + data.levelinfo.levelmod) * 25) + 75);
@@ -2257,41 +2278,75 @@ export default class abfalterActor extends Actor {
         //Unarmed
         switch (data.fistDamage.multOption) {
             case "agi":
-                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Agility.mod));
+                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Agility.mod);
                 break;
             case "con":
-                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Constitution.mod));
+                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Constitution.mod);
                 break;
             case "str":
-                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult *  data.stats.Strength.mod));
+                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Strength.mod);
                 break;
             case "dex":
-                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Dexterity.mod));
+                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Dexterity.mod);
                 break;
             case "per":
-                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Perception.mod));
+                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Perception.mod);
                 break;
             case "int":
-                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Intelligence.mod));
+                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Intelligence.mod);
                 break;
             case "pow":
-                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Power.mod));
+                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Power.mod);
                 break;
             case "wp":
-                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * data.stats.Willpower.mod));
+                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Willpower.mod);
                 break;
             case "str2":
-                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * (data.stats.Strength.mod * 2)));
+                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * (data.stats.Strength.mod * 2));
                 break;
             case "presence":
-                data.unarmedDmgFinal = Math.floor(data.fistDamage.base + (data.fistDamage.mult * ((data.presence * 2) +  data.stats.Power.mod)));
+                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * ((data.presence * 2) +  data.stats.Power.mod));
                 break;
             default:
-                data.unarmedDmgFinal = 0;
+                data.unarmedDmgMult1 = 0;
                 break;
         }
-
-
+        switch (data.fistDamage.multOption2) {
+            case "agi":
+                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Agility.mod);
+                break;
+            case "con":
+                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Constitution.mod);
+                break;
+            case "str":
+                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Strength.mod);
+                break;
+            case "dex":
+                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Dexterity.mod);
+                break;
+            case "per":
+                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Perception.mod);
+                break;
+            case "int":
+                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Intelligence.mod);
+                break;
+            case "pow":
+                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Power.mod);
+                break;
+            case "wp":
+                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Willpower.mod);
+                break;
+            case "str2":
+                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * (data.stats.Strength.mod * 2));
+                break;
+            case "presence":
+                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * ((data.presence * 2) + data.stats.Power.mod));
+                break;
+            default:
+                data.unarmedDmgMult2 = 0;
+                break;
+        }
+        data.unarmedDmgFinal = Math.floor(data.fistDamage.base + data.unarmedDmgMult1 + data.unarmedDmgMult2);
 
         // Psychic Points
         data.ppbonus = pp;

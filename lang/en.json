@@ -203,7 +203,8 @@
       "perLevel": "/Level",
       "lifePoints": "LifePoints",
       "addAdvantage": "Add Advantage",
-      "addDisadvantage": "Add Disadvantage"
+      "addDisadvantage": "Add Disadvantage",
+      "custom": "Custom"
     },
     "sheet": {
       "newItem": "New Item",
@@ -736,7 +737,8 @@
       "changeTemp": "Change Temp Sec Values",
       "changeSpec": "Change Spec Sec Values",
       "open": "Open",
-      "generalSettings": "General Settings"
+      "generalSettings": "General Settings",
+      "dpMod": "DP Mod"
     },
     "metaMagic": {
       "arcTitle": "Arcana Shepirah",
@@ -878,7 +880,9 @@
       "fumbleName": "Core Exxet Correction Fumble",
       "fumbleDetail": "Switches the method fumbles are calculated away from the core book and instead uses the core exxet correction. This means that all rolls under the fumble range are failures and a 1d100 is rolled to calculate the degree of failure.",
       "meterName": "Use Meters over Feet",
-      "meterDetail": "Switches the movement calculation from feet to meters, requires refresh (f5) to take effect."
+      "meterDetail": "Switches the movement calculation from feet to meters, requires refresh (f5) to take effect.",
+      "changeThemeName": "Change Color Theme",
+      "changeThemeDetails": "Changes the color theme for everything to a light version, requires refresh (f5) to take effect."
     }
   }
 }

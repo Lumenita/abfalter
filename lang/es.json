@@ -203,7 +203,8 @@
       "perLevel": "/Nivel",
       "lifePoints": "Puntos de Vida",
       "addAdvantage": "Añadir ventaja",
-      "addDisadvantage": "Añadir Desventaja"
+      "addDisadvantage": "Añadir Desventaja",
+      "custom": "Custom"
     },
     "sheet": {
       "newItem": "Deidad Nueva",
@@ -736,7 +737,8 @@
       "changeTemp": "Cambiar Valores de Temp Sec",
       "changeSpec": "Cambiar Valores de Spec Sec",
       "open": "Abrir",
-      "generalSettings": "General Settings"
+      "generalSettings": "General Settings",
+      "dpMod": "DP Mod"
     },
     "metaMagic": {
       "arcTitle": "Arcana Shepirah",
@@ -878,7 +880,9 @@
       "fumbleName": "Core Exxet Corrección de Pifias",
       "fumbleDetail": "Intercambia el método en que son calculadas las pifias entre la versión antigua del Core y el Core Exxet Esto significa que cada vez que se produce un resultado de pifia en una tirada, automáticamente se lance 1D100 para calcular el rango de pifia.",
       "meterName": "Usar metros en lugar de pies",
-      "meterDetail": "Permite cambiar la medida del movimiento pasando de pies a metros. Requiere refrescar (f5) para que tenga efecto."
+      "meterDetail": "Permite cambiar la medida del movimiento pasando de pies a metros. Requiere refrescar (f5) para que tenga efecto.",
+      "changeThemeName": "Change Color Theme",
+      "changeThemeDetails": "Changes the color theme for everything to a light version, requires refresh (f5) to take effect."
     }
   }
 }

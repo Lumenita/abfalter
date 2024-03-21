@@ -15,7 +15,8 @@
         "experience": 0,
         "levelinfo": {
           "levelmod": 0,
-          "presencemod": 0
+          "presencemod": 0,
+          "dpmod": 0
         },
         "notesOne": "",
         "notesTwo": "",
@@ -53,7 +54,8 @@
           "spell": false,
           "turnMaint": false,
           "elan": false,
-          "class": false
+          "class": false,
+          "secondary": false
         },
         "toggles": {
           "actorHeaderInfo1": false,
@@ -87,7 +89,8 @@
           "unarmedVis": false,
           "nemesisVis": false,
           "kiSealsVis": false,
-          "kiTech": false
+          "kiTech": false,
+          "customSecondary": false
         },
         "lp": {
           "value": 0,
@@ -208,7 +211,8 @@
         },
         "regeneration": {
           "spec": 0,
-          "temp": 0
+          "temp": 0,
+          "value": 0
         },
         "combatstats": {
           "atkbase": 0,
@@ -245,6 +249,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "athleticism": {
@@ -253,6 +258,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "climb": {
@@ -261,6 +267,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "jump": {
@@ -269,6 +276,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "ride": {
@@ -277,6 +285,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "swim": {
@@ -285,6 +294,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "etiquette": {
@@ -293,6 +303,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "intimidate": {
@@ -301,6 +312,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "leadership": {
@@ -309,6 +321,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "persuasion": {
@@ -317,6 +330,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "streetwise": {
@@ -325,6 +339,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "style": {
@@ -333,6 +348,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "trading": {
@@ -341,6 +357,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "notice": {
@@ -349,6 +366,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "search": {
@@ -357,6 +375,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "track": {
@@ -365,6 +384,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "animals": {
@@ -373,6 +393,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "appraisal": {
@@ -381,6 +402,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "architecture": {
@@ -389,6 +411,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "herballore": {
@@ -397,6 +420,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "history": {
@@ -405,6 +429,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "law": {
@@ -413,6 +438,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "magicappr": {
@@ -421,6 +447,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "medicine": {
@@ -429,6 +456,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "memorize": {
@@ -437,6 +465,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "navigation": {
@@ -445,6 +474,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "occult": {
@@ -453,6 +483,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "science": {
@@ -461,6 +492,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "tactics": {
@@ -469,6 +501,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "composure": {
@@ -477,6 +510,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "featsofstr": {
@@ -485,6 +519,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "withstpain": {
@@ -493,6 +528,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "disguise": {
@@ -501,6 +537,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "hide": {
@@ -509,6 +546,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "lockpicking": {
@@ -517,6 +555,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "poisons": {
@@ -525,6 +564,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "stealth": {
@@ -533,6 +573,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "theft": {
@@ -541,6 +582,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "traplore": {
@@ -549,6 +591,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "alchemy": {
@@ -557,6 +600,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "animism": {
@@ -565,6 +609,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "art": {
@@ -573,6 +618,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "dance": {
@@ -581,6 +627,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "forging": {
@@ -589,6 +636,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "jewelry": {
@@ -597,6 +645,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "music": {
@@ -605,6 +654,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "runes": {
@@ -613,6 +663,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "ritualcalig": {
@@ -621,6 +672,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "slofhand": {
@@ -629,6 +681,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "tailoring": {
@@ -637,6 +690,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "piloting": {
@@ -645,6 +699,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "cooking": {
@@ -653,6 +708,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "technomagic": {
@@ -661,6 +717,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "toymaking": {
@@ -669,6 +726,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "kidetection": {
@@ -676,6 +734,7 @@
             "temp": 0,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           },
           "kiconceal": {
@@ -683,6 +742,7 @@
             "temp": 0,
             "nat": 0,
             "natural": 0,
+            "fav": false,
             "status": false
           }
         },
@@ -1436,9 +1496,11 @@
         "fistDamage": {
           "base": 0,
           "mult": 0,
+          "mult2": 0,
           "descNum": 3,
           "desc": "",
-          "multOption": "str"
+          "multOption": "",
+          "multOption2": ""
         },
         "kiPool": {
           "agi": {
@@ -1636,6 +1698,7 @@
       "armorHelmet",
       "advantage",
       "disadvantage",
+      "secondary",
       "spell",
       "kiTechnique",
       "arsMagnus",
@@ -1763,6 +1826,18 @@
       "templates": [ "itemDescription" ],
       "expand": true,
       "benefit": 0
+    },
+    "secondary": {
+      "templates": [ "itemDescription" ],
+      "base": 0,
+      "spec": 0,
+      "extra": 0,
+      "temp": 0,
+      "nat": 0,
+      "natural": 0,
+      "atr":  "",
+      "expand": true,
+      "fav": false
     },
     "spellPath": {
       "name": "",

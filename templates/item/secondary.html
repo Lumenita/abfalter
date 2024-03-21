@@ -1,0 +1,43 @@
+<form class="{{cssClass}} baseAbfalter itemWindow" autocomplete="off">
+    <div class="itemStart">
+        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
+    </div>
+
+    <div class="secondaryContent">
+        <h5> {{localize "abfalter.generalTab.secAbility"}} </h5>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.base" value="{{data.base}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.nat" value="{{data.nat}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.spec" value="{{data.spec}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.natural" value="{{data.natural}}" /> </label>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.extra"}} </span> <input type="number" name="data.extra" value="{{data.extra}}" /> </label>
+            <div class="csSelect">
+                <label>
+                    <span> {{localize "abfalter.generalTab.atr"}} </span>
+                    <select name="data.atr" data-dtype="String">
+                        {{#select data.atr}}
+                            <option value=""> </option>
+                            <option value="{{localize "abfalter.basicInfo.agi"}}"> {{localize "abfalter.basicInfo.agi"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.con"}}"> {{localize "abfalter.basicInfo.con"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.str"}}"> {{localize "abfalter.basicInfo.str"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.dex"}}"> {{localize "abfalter.basicInfo.dex"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.per"}}"> {{localize "abfalter.basicInfo.per"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.int"}}"> {{localize "abfalter.basicInfo.int"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.pow"}}"> {{localize "abfalter.basicInfo.pow"}} </option>
+                            <option value="{{localize "abfalter.basicInfo.wp"}}"> {{localize "abfalter.basicInfo.wp"}} </option>
+                        {{/select}}
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div>
+            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.temp" value="{{data.temp}}" /> </label>
+            <label></label>
+        </div>
+    </div>
+</form>

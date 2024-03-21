@@ -106,6 +106,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
         sheetData.disadvantages = baseData.items.filter(function (item) { return item.type == "disadvantage" });
         sheetData.spells = baseData.items.filter(function (item) { return item.type == "spell" });
         sheetData.classes = baseData.items.filter(function (item) { return item.type == "class" });
+        sheetData.secondaries = baseData.items.filter(function (item) { return item.type == "secondary" });//here
         sheetData.spellPaths = baseData.items.filter(function (item) { return item.type == "spellPath" });
         sheetData.incarnations = baseData.items.filter(function (item) { return item.type == "incarnation" });
         sheetData.invocations = baseData.items.filter(function (item) { return item.type == "invocation" });

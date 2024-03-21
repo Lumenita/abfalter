@@ -264,6 +264,62 @@ export default class abfalterItem extends Item {
         this.system.totalPP = Math.floor(~~this.system.main.levels / ~~this.system.main.pp);
     }
 
+    prepareSecondary() {
+        if (this.parent != null) {
+            this.system.aam = this.parent.system.aamFinal;
+            this.system.collapse = this.parent.system.toggles.customSecondary;
+            switch (this.system.atr) {
+                case game.i18n.localize('abfalter.basicInfo.agi'):
+                    this.system.mod = this.parent.system.stats.Agility.mod;
+                    break;
+                case game.i18n.localize('abfalter.basicInfo.con'):
+                    this.system.mod = this.parent.system.stats.Constitution.mod;
+                    break;
+                case game.i18n.localize('abfalter.basicInfo.str'):
+                    this.system.mod = this.parent.system.stats.Strength.mod;
+                    break;
+                case game.i18n.localize('abfalter.basicInfo.dex'):
+                    this.system.mod = this.parent.system.stats.Dexterity.mod;
+                    break;
+                case game.i18n.localize('abfalter.basicInfo.per'):
+                    this.system.mod = this.parent.system.stats.Perception.mod;
+                    break;
+                case game.i18n.localize('abfalter.basicInfo.int'):
+                    this.system.mod = this.parent.system.stats.Intelligence.mod;
+                    break;
+                case game.i18n.localize('abfalter.basicInfo.pow'):
+                    this.system.mod = this.parent.system.stats.Power.mod;
+                    break;
+                case game.i18n.localize('abfalter.basicInfo.wp'):
+                    this.system.mod = this.parent.system.stats.Willpower.mod;
+                    break;
+                default:
+                    this.system.mod = 0;
+                    break;
+            }
+        } else {
+            this.system.mod = 0;
+            this.system.aam = 0;
+            this.system.collapse = false;
+        }
+
+        if (this.system.atr == game.i18n.localize('abfalter.basicInfo.agi') || this.system.atr == game.i18n.localize('abfalter.basicInfo.con') ||
+            this.system.atr == game.i18n.localize('abfalter.basicInfo.str') || this.system.atr == game.i18n.localize('abfalter.basicInfo.dex')) {
+            this.system.tag = "physical";
+        } else if (this.system.atr == game.i18n.localize('abfalter.basicInfo.per') || this.system.atr == game.i18n.localize('abfalter.basicInfo.int') ||
+            this.system.atr == game.i18n.localize('abfalter.basicInfo.pow') || this.system.atr == game.i18n.localize('abfalter.basicInfo.wp')) {
+            this.system.tag = "mental";
+        } else {
+            this.system.tag = ""
+        }
+
+        this.system.natFinal = Math.floor(this.system.mod + ~~this.system.natural + Math.ceil(this.system.nat * this.system.mod));
+        if (this.system.natFinal > 100) {
+            this.system.natFinal = 100;
+        }
+        this.system.finalValue = Math.floor(~~this.system.base + ~~this.system.extra + ~~this.system.spec + ~~this.system.temp + this.system.natFinal + ~~this.system.aam);
+    }
+
     chatTemplate = {
         "spell": "systems/abfalter/templates/chatItem/spellChat.html",
         "psychicMatrix": "systems/abfalter/templates/chatItem/psyMatrixChat.html",

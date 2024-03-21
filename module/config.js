@@ -214,7 +214,9 @@ abfalter.generalTab = {
     diseaseRes: "abfalter.generalTab.diseaseRes",
     poisonRes: "abfalter.generalTab.poisonRes",
     magicRes: "abfalter.generalTab.magicRes",
-    psychicRes: "abfalter.generalTab.psychicRes"
+    psychicRes: "abfalter.generalTab.psychicRes",
+    favorite: "abfalter.generalTab.favorite",
+    custom: "abfalter.generalTab.custom"
 }
 
 abfalter.sheet = {
@@ -742,7 +744,8 @@ abfalter.settingsTab = {
     changeTemp: "abfalter.settingsTab.changeTemp",
     changeSpec: "abfalter.settingsTab.changeSpec",
     open: "abfalter.settingsTab.open",
-    generalSettings: "abfalter.settingsTab.generalSettings"
+    generalSettings: "abfalter.settingsTab.generalSettings",
+    dpMod: "abfalter.settingsTab.dpMod"
 }
 
 abfalter.metaMagic = {
@@ -887,6 +890,8 @@ abfalter.globalSettings = {
     fumbleName: "abfalter.globalSettings.fumbleName",
     fumbleDetail: "abfalter.globalSettings.fumbleDetail",
     meterName: "abfalter.globalSettings.meterName",
-    meterDetail: "abfalter.globalSettings.meterDetail"
+    meterDetail: "abfalter.globalSettings.meterDetail",
+    changeThemeName: "abfalter.globalSettings.changeThemeName",
+    changeThemeDetails: "abfalter.globalSettings.changeThemeDetails"
 }
 
