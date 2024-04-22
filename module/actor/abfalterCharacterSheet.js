@@ -106,7 +106,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
         sheetData.disadvantages = baseData.items.filter(function (item) { return item.type == "disadvantage" });
         sheetData.spells = baseData.items.filter(function (item) { return item.type == "spell" });
         sheetData.classes = baseData.items.filter(function (item) { return item.type == "class" });
-        sheetData.secondaries = baseData.items.filter(function (item) { return item.type == "secondary" });//here
+        sheetData.secondaries = baseData.items.filter(function (item) { return item.type == "secondary" });
         sheetData.spellPaths = baseData.items.filter(function (item) { return item.type == "spellPath" });
         sheetData.incarnations = baseData.items.filter(function (item) { return item.type == "incarnation" });
         sheetData.invocations = baseData.items.filter(function (item) { return item.type == "invocation" });
@@ -124,6 +124,8 @@ export default class abfalterCharacterSheet extends ActorSheet {
         sheetData.martialArts = baseData.items.filter(function (item) { return item.type == "martialArt" });
         sheetData.arsMagnuses = baseData.items.filter(function (item) { return item.type == "arsMagnus" });
         sheetData.elans = baseData.items.filter(function (item) { return item.type == "elan" });
+        sheetData.monsterPowers = baseData.items.filter(function (item) { return item.type == "monsterPower" });
+        sheetData.effects = baseData.items.filter(function (item) { return item.type == "effect" });
 
         return sheetData;
     }

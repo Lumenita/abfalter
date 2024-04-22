@@ -29,6 +29,7 @@
       "action": "Acción",
       "difficulty": "Dificultad",
       "effect": "Efecto",
+      "effects": "Efectos",
       "routine": "Rutinario",
       "easy": "Fácil",
       "average": "Media",
@@ -99,7 +100,9 @@
       "multiWield": "Ambidestría",
       "unarmed": "Desarmado",
       "special": "Especial",
-      "innate": "Innate"
+      "innate": "Innate",
+      "shortDesc": "Short Desc.",
+      "monster": "Creature"
     },
     "generalTab": {
       "characteristics": "Características",
@@ -738,7 +741,9 @@
       "changeSpec": "Cambiar Valores de Spec Sec",
       "open": "Abrir",
       "generalSettings": "General Settings",
-      "dpMod": "DP Mod"
+      "dpMod": "DP Mod",
+      "hideMonster": "Hide Creature Tab",
+      "hideEffect": "Hide Effect Tab"
     },
     "metaMagic": {
       "arcTitle": "Arcana Shepirah",
@@ -883,6 +888,41 @@
       "meterDetail": "Permite cambiar la medida del movimiento pasando de pies a metros. Requiere refrescar (f5) para que tenga efecto.",
       "changeThemeName": "Change Color Theme",
       "changeThemeDetails": "Changes the color theme for everything to a light version, requires refresh (f5) to take effect."
+    },
+    "monsterPowers": {
+      "essentialAbi": "Essential Abilities",
+      "disadvAbi": "Disadvantages",
+      "miscAbi": "Misc Powers",
+      "divineAbi": "Divine Powers",
+      "combatAbi": "Combat Powers",
+      "defenseAbi": "Defensive Powers",
+      "otherAbi": "Other Powers",
+      "hpMonster": "Monst",
+      "addMonsterPower": "Add Monster Power",
+      "info": "Info",
+      "natWep": "Do I have natural weapons?",
+      "natWepDmg": "Natural weapons base dmg",
+      "natWepFort": "Natural weapons fortitude",
+      "NatWepBreak": "Natural weapons breakage",
+      "physDmg": "Physical attack base dmg",
+      "actionArea": "Monster action area",
+      "dmgRes": "Are I dmg resistance?",
+      "baseArmor": "base armor value",
+      "healthMult": "Health multiple",
+      "dpHP": "DP spent for LP",
+      "totalAddHP": "Total additive LP",
+      "additional": "Additional",
+      "dpCost": "Dp Cost",
+      "monstChar": "Monst Base",
+      "monstCharacteristic": "Monster Characteristics",
+      "replaceChar": "Replace base char w/ monster char?",
+      "showShortDesc": "Show short desc. of powers",
+      "hideDis": "Hide disadvantages",
+      "hideDivine": "Hide divine powers",
+      "hideDef": "Hide defensive powers",
+      "totalCharDp": "Total Char. DP Spent",
+      "totalPowDp": "Total Powers DP Spent",
+      "totalDpSpent": "Total DP Spent"
     }
   }
 }

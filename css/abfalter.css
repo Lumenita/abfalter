@@ -188,9 +188,18 @@ baseAbfalter input {
     border-bottom: 1px solid #5c9be9;
 }
 /* Scrollbar */
+* {
+    scrollbar-color: initial;
+}
 ::-webkit-scrollbar-thumb {
     background: #555595;
     border: 1px solid #6d879f;
+}
+@-moz-document url-prefix() {
+    * {
+        scrollbar-color: #782e22 transparent;
+        scrollbar-width: thin;
+    }
 }
 /* Select Box Custom Arrow & Center Contents */
 .csSelect::after,
@@ -658,7 +667,7 @@ h6 {
     margin: 0;
     padding: 0;
     list-style: none;
-    width: 90%;
+    width: 95%;
     display: flex;
     justify-content: space-evenly;
 }
@@ -902,30 +911,47 @@ h6 {
     border-left: 3px solid var(--boxColor);
     border-right: 3px solid var(--boxColor);
 }
-.movement > div > label:nth-of-type(5) {
+.movement > div > div {
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
+}
+.movement > div > div > label {
+    display : flex;
+    width: 100%;
+    padding: 0 10px 0 10px;
+}
+.movement > div > label:nth-of-type(3) {
     border-top: 1px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
     padding-top: 3px;
     padding-bottom: 3px;
 }
+.movement > div > div > label > span,
 .movement > div > label > span {
     display: flex;
     width: 55%;
 }
 .movement > div > label:nth-of-type(1) > span:last-of-type, 
+.movement > div > label:nth-of-type(3) > span:last-of-type, 
+.movement > div > label:nth-of-type(4) > span:last-of-type, 
 .movement > div > label:nth-of-type(5) > span:last-of-type, 
 .movement > div > label:nth-of-type(6) > span:last-of-type, 
-.movement > div > label:nth-of-type(7) > span:last-of-type, 
-.movement > div > label:nth-of-type(8) > span:last-of-type, 
+.movement > div > div > label > input,
 .movement > div > label > input {
     width: 45%;
     justify-content: center;
 }
+.movement > div > label:nth-of-type(3) > span,
+.movement > div > label:nth-of-type(4) > span,
 .movement > div > label:nth-of-type(5) > span,
-.movement > div > label:nth-of-type(6) > span,
-.movement > div > label:nth-of-type(7) > span,
-.movement > div > label:nth-of-type(8) > span {
+.movement > div > label:nth-of-type(6) > span {
     font-weight: bold;
+}
+.movement > h5 > label > a {
+    opacity: 0;
+}
+.movement:hover > h5 > label > a {
+    opacity: 1;
 }
 /* LP, Fatigue & Regen */
 .lifepoints > div:first-of-type ,
@@ -4151,7 +4177,7 @@ h6 {
     margin: 3px 0 0 0;
     padding: 3px 0 0 0;
 }
-.charOptions > div > div:nth-of-type(6) {
+.charOptions > div > div:nth-of-type(8) {
     border-top: 1px dashed var(--boxColor);
     margin: 3px 0 0 0;
     padding: 3px 0 0 0;
@@ -4338,11 +4364,218 @@ h6 {
 .metaMagicGUI .arcanaTitle > h5 {
     font-size: 50px;
 }
-
-
-
-
-
+/*
+    ****************
+    ----------------
+     Monster Powers
+    ----------------
+    ****************
+*/
+.monster .monsterTopContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 17px 0 0 0;
+}
+.monsterChar {
+    width: 32%;
+}
+.monsterChar > div {
+    display: flex;
+    justify-content: space-between;
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.monsterChar > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+}
+.monsterChar > div:last-of-type {
+    border-bottom: 1px solid var(--boxColor);
+}
+.monsterChar > div > span {
+    text-align: center;
+    display: grid;
+}
+.monsterChar > div > span,
+.monsterChar > div > label {
+    width: 15%;
+}
+.monsterChar > div > label > select {
+    width: 100%;
+}
+.monsterChar > div:first-of-type > span:nth-of-type(4) {
+    width: 23%;
+}
+.monsterChar > div > input {
+    width: 15%;
+    margin: 0 4%
+}
+.monsterChar > div:first-of-type > span:nth-of-type(5),
+.monsterChar > div:not(:first-of-type) > span:nth-of-type(3) {
+    width: 20%;
+}
+.monsterChar > div:not(:first-of-type) > span:nth-of-type(2) {
+    border-right: 1px solid var(--boxColor);
+}
+.monsterInfo {
+    width: 32%;
+}
+.monsterInfo > div {
+    display: flex;
+    padding: 0 0 0 3px;
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.monsterInfo > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.monsterInfo > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+.monsterInfo > div:nth-of-type(2),
+.monsterInfo > div:nth-of-type(4) {
+    display: block;
+}
+.monsterInfo > div:nth-of-type(2) > label,
+.monsterInfo > div:nth-of-type(4) > label {
+    display: flex;
+    width: 100%;
+}
+.monsterInfo > div > span,
+.monsterInfo > div > label > span {
+    display: grid;
+    width: 75%;
+}
+.monsterInfo > div > label > input,
+.monsterInfo > div > label > span:nth-of-type(2) {
+    text-align: center;
+    width: 25%;
+}
+.monsterInfo > div > button {
+    width: 25%;
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
+}
+.monsterInfo > div:nth-of-type(2) {
+    border-bottom: 1px dashed var(--boxColor);
+}
+.monsterSettings {
+    width: 32%;
+}
+.monsterSettings > div {
+    display: flex;
+    padding: 0 0 0 3px;
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.monsterSettings > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.monsterSettings > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+.monsterSettings > div > label > span,
+.monsterSettings > div > span {
+    display: grid;
+    width: 75%;
+}
+.monsterSettings > div > button {
+    width: 25%;
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
+}
+.monsterSettings > div > label > input,
+.monsterSettings > div > label > span:nth-of-type(2) {
+    width: 25%;
+    text-align: center;
+}
+.monsterSettings > div:nth-of-type(6) {
+    display: block;
+}
+.monsterSettings > div:nth-of-type(6) > label {
+    display: flex;
+}
+.monsterSettings > div:nth-of-type(2), 
+.monsterSettings > div:nth-of-type(5) {
+    border-bottom: 1px dashed var(--boxColor);
+}
+.monsterSettings > div:last-of-type {
+    border-top: 1px solid var(--boxColor);
+    justify-content: space-between;
+}
+.monster .monsterBotContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 0 0;
+}
+.monsterSubContainer {
+    width: 49%;
+}
+.monsterSubContainer > div {
+    margin: 0 0 10px 0;
+}
+.monsterSubContainer > div > div:first-of-type {
+    display: flex;
+    justify-content: start;
+    border-bottom: 1px solid var(--boxColor);
+    padding: 0 2.5%;
+}
+.monsterPower-item {
+    padding: 0 2.5% 0 2.5%;
+}
+.monsterPower-item > div > input:first-of-type,
+.monsterPower-item > div > span:first-of-type,
+.monsterSubContainer > div > div:first-of-type > span:first-of-type {
+    width: 67%;
+    margin: 0%;
+}
+.monsterPower-item > div > input,
+.monsterPower-item > div > span,
+.monsterSubContainer > div > div:first-of-type > span {
+    width: 12%;
+    margin: 0 0 0 2%;
+    text-align: center;
+    display: grid;
+}
+.monsterPower-item > div > a {
+    width: 5%;
+}
+.monsterPower-item > div {
+    display: flex;
+}
+.monsterSubContainer > div > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.monsterSubContainer > div > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.monsterSubContainer > div > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+.monstPowerInfo > textarea {
+    background: none;
+    border: 1px solid var(--boxColor);
+    cursor: default;
+}
+.monstPowerLongDesc,
+.monstPowerInfo {
+    padding: 0 0 10px 0;
+}
+.monsterPower-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+/*
+    ****************
+    ----------------
+     Active Effects
+    ----------------
+    ****************
+*/
 /*
     ***************
     ---------------

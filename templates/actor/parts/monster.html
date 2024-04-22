@@ -1,0 +1,513 @@
+<div class="tab monster">
+    <div class="monsterTopContainer">
+        <div class="monsterChar">
+            <h5>{{localize "abfalter.monsterPowers.monstCharacteristic"}}</h5>
+            <div>
+                <span>{{localize "abfalter.generalTab.atr"}}</span>
+                <span>{{localize "abfalter.basicInfo.final"}}</span>
+                <span>{{localize "abfalter.basicInfo.base"}}</span>
+                <span>{{localize "abfalter.monsterPowers.additional"}}</span>
+                <span>{{localize "abfalter.monsterPowers.dpCost"}}</span>
+            </div>
+            {{#each data.monsterChar as |atr key|}}
+            <div>
+                <span class="{{atr.type}}">{{atr.name}}</span>
+                <span>{{atr.charBaseTotal}}</span>
+                <label>
+                    <select name="data.monsterChar.{{key}}.base" data-dtype="number">
+                        {{#select atr.base}}
+                        <option value="0"> 0 </option>
+                        <option value="1"> 1 </option>
+                        <option value="2"> 2 </option>
+                        <option value="3"> 3 </option>
+                        <option value="4"> 4 </option>
+                        <option value="5"> 5 </option>
+                        <option value="6"> 6 </option>
+                        <option value="7"> 7 </option>
+                        <option value="8"> 8 </option>
+                        <option value="9"> 9 </option>
+                        <option value="10"> 10 </option>
+                        <option value="11"> 11 </option>
+                        <option value="12"> 12 </option>
+                        <option value="13"> 13 </option>
+                        <option value="14"> 14 </option>
+                        <option value="15"> 15 </option>
+                        {{/select}}
+                    </select>
+                </label>
+                <input type="number" name="data.monsterChar.{{key}}.additional" value="{{atr.additional}}" />
+                <span>{{atr.charBaseCostTotal}}</span>
+            </div>
+            {{/each}}
+        </div>
+
+        <div class="monsterInfo">
+            <h5>{{localize "abfalter.monsterPowers.info"}}</h5>
+            <div>
+                <span> {{localize "abfalter.monsterPowers.natWep"}} </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.monsterNatWep}}kiBought{{/if}}"
+                        data-label="data.toggles.monsterNatWep" data-ability="{{data.toggles.monsterNatWep}}">
+                    {{#if data.toggles.monsterNatWep}}
+                    <span> {{localize "abfalter.basicInfo.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.basicInfo.no"}} </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div>
+                {{#if data.toggles.monsterNatWep}}
+                <label><span>{{localize "abfalter.monsterPowers.natWepDmg"}}</span> <span>{{data.monsterNaturalDmg}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.natWepFort"}}</span> <span>{{data.monsternatFort}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.NatWepBreak"}}</span> <span>{{data.monsterNatBreak}}</span></label>
+                {{else}}
+                <label><span>{{localize "abfalter.monsterPowers.physDmg"}}</span> <span>{{data.monsterPhysicalDmg}}</span></label>
+                {{/if}}
+                <label><span>{{localize "abfalter.monsterPowers.actionArea"}}</span> <span>{{data.monsterActionArea}}</span></label>
+            </div>
+            <div>
+                <span> {{localize "abfalter.monsterPowers.dmgRes"}} </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.dmgRes}}kiBought{{/if}}"
+                        data-label="data.toggles.dmgRes" data-ability="{{data.toggles.dmgRes}}">
+                    {{#if data.toggles.dmgRes}}
+                    <span> {{localize "abfalter.basicInfo.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.basicInfo.no"}} </span>
+                    {{/if}}
+                </button>
+            </div>
+            {{#if data.toggles.dmgRes}}
+            <div>
+                <label><span>{{localize "abfalter.monsterPowers.baseArmor"}}</span> <span>{{data.monsterArmor}}</span></label>                
+                <label><span>{{localize "abfalter.monsterPowers.healthMult"}}</span> <span>{{data.lifepoints.hpMult}}</span></label>                
+                <label><span>{{localize "abfalter.monsterPowers.dpHP"}}</span> <input type="number" name="data.monsterStats.hpDp" value="{{data.monsterStats.hpDp}}" /></label>
+                <label><span>{{localize "abfalter.monsterPowers.totalAddHP"}}</span> <span>{{data.lifepoints.hpDmgRes}}</span></label>                
+            </div>
+            {{/if}}
+        </div>
+
+        <div class="monsterSettings">
+            <h5>{{localize "abfalter.basicInfo.settings"}}</h5>
+            <div>
+                <span> {{localize "abfalter.monsterPowers.replaceChar"}} </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.monsterChar}}kiBought{{/if}}"
+                        data-label="data.toggles.monsterChar" data-ability="{{data.toggles.monsterChar}}">
+                    {{#if data.toggles.monsterChar}}
+                    <span> {{localize "abfalter.basicInfo.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.basicInfo.no"}} </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div>
+                <span> {{localize "abfalter.monsterPowers.showShortDesc"}} </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.monsterPowerShortDesc}}kiBought{{/if}}"
+                        data-label="data.toggles.monsterPowerShortDesc" data-ability="{{data.toggles.monsterPowerShortDesc}}">
+                    {{#if data.toggles.monsterPowerShortDesc}}
+                    <span> {{localize "abfalter.basicInfo.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.basicInfo.no"}} </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div>
+                <span> {{localize "abfalter.monsterPowers.hideDis"}} </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.monsterdisadvVis}}kiBought{{/if}}"
+                        data-label="data.toggles.monsterdisadvVis" data-ability="{{data.toggles.monsterdisadvVis}}">
+                    {{#if data.toggles.monsterdisadvVis}}
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div>
+                <span> {{localize "abfalter.monsterPowers.hideDivine"}} </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.monsterdivineVis}}kiBought{{/if}}"
+                        data-label="data.toggles.monsterdivineVis" data-ability="{{data.toggles.monsterdivineVis}}">
+                    {{#if data.toggles.monsterdivineVis}}
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div>
+                <span> {{localize "abfalter.monsterPowers.hideDef"}} </span>
+                <button type="button" class="toggleBoolean {{#if data.toggles.monsterdefVis}}kiBought{{/if}}"
+                        data-label="data.toggles.monsterdefVis" data-ability="{{data.toggles.monsterdefVis}}">
+                    {{#if data.toggles.monsterdefVis}}
+                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                    {{/if}}
+                </button>
+            </div>
+            <div>
+                <label> <span>{{localize "abfalter.basicInfo.gnosis"}}</span> <input type="number" name="data.gnosis" value="{{data.gnosis}}" /> </label>
+                <label><span>{{localize "abfalter.monsterPowers.totalCharDp"}}</span> <span>{{data.monsterCharCombCost}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.totalPowDp"}}</span> <span>{{data.monsterPowerCost}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.totalDpSpent"}}</span> <span>{{data.monstTotDP}}</span></label>
+            </div>
+            <div>
+                <a class="item-control item-create" data-type="monsterPower"><i class="fas fa-plus"></i> {{localize "abfalter.monsterPowers.addMonsterPower"}} </a>
+                <a class="toggleBoolean {{#if data.itemToggle.monsterPowers}}armorpenalty{{/if}}" data-label="data.itemToggle.monsterPowers" data-ability="{{data.itemToggle.monsterPowers}}"><i class="{{#if data.itemToggle.monsterPowers}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="monsterBotContainer">
+        <div class="monsterSubContainer">
+            <div>
+                <h5>{{localize "abfalter.monsterPowers.essentialAbi"}}</h5>
+
+                <div>
+                    <span>{{localize "abfalter.basicInfo.name"}}</span>
+                    <span>{{localize "abfalter.basicInfo.cost"}}</span>
+                    <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
+                </div>
+
+                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                    {{#each monsterPowers as |monsterPower id|}}
+                    {{#ifEquals system.type "1"}}
+                    <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
+                        {{#if system.expand}}
+                        <div>
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
+                            <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <h6>{{localize "abfalter.basicInfo.shortDesc"}}</h6>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        <h6> {{localize "abfalter.basicInfo.description"}} </h6>
+                        <div class="textarea-div monstPowerLongDesc" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.description}}</div>
+                        </div>
+                        {{else}}
+                        <div>
+                            <span> {{monsterPower.name}} </span>
+                            <span> {{monsterPower.system.cost}} </span>
+                            <span> {{monsterPower.system.gnosis}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{#if system.shortDescToggle}}
+                        <div class="textarea-div monstPowerInfo" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;" readonly>{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        {{/if}}
+                        {{/if}}
+                    </div>
+                    {{/ifEquals}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="{{#if data.toggles.monsterdisadvVis}}hidden{{/if}}">
+                <h5>{{localize "abfalter.monsterPowers.disadvAbi"}}</h5>
+
+                <div>
+                    <span>{{localize "abfalter.basicInfo.name"}}</span>
+                    <span>{{localize "abfalter.basicInfo.cost"}}</span>
+                    <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
+                </div>
+
+                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                    {{#each monsterPowers as |monsterPower id|}}
+                    {{#ifEquals system.type "2"}}
+                    <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
+                        {{#if system.expand}}
+                        <div>
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
+                            <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <h6>{{localize "abfalter.basicInfo.shortDesc"}}</h6>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        <h6> {{localize "abfalter.basicInfo.description"}} </h6>
+                        <div class="textarea-div monstPowerLongDesc" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.description}}</div>
+                        </div>
+                        {{else}}
+                        <div>
+                            <span> {{monsterPower.name}} </span>
+                            <span> {{monsterPower.system.cost}} </span>
+                            <span> {{monsterPower.system.gnosis}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{#if system.shortDescToggle}}
+                        <div class="textarea-div monstPowerInfo" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;" readonly>{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        {{/if}}
+                        {{/if}}
+                    </div>
+                    {{/ifEquals}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <div>
+                <h5>{{localize "abfalter.monsterPowers.miscAbi"}}</h5>
+
+                <div>
+                    <span>{{localize "abfalter.basicInfo.name"}}</span>
+                    <span>{{localize "abfalter.basicInfo.cost"}}</span>
+                    <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
+                </div>
+
+                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                    {{#each monsterPowers as |monsterPower id|}}
+                    {{#ifEquals system.type "5"}}
+                    <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
+                        {{#if system.expand}}
+                        <div>
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
+                            <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <h6>{{localize "abfalter.basicInfo.shortDesc"}}</h6>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        <h6> {{localize "abfalter.basicInfo.description"}} </h6>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.description}}</div>
+                        </div>
+                        {{else}}
+                        <div>
+                            <span> {{monsterPower.name}} </span>
+                            <span> {{monsterPower.system.cost}} </span>
+                            <span> {{monsterPower.system.gnosis}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{#if system.shortDescToggle}}
+                        <div class="textarea-div monstPowerInfo" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;" readonly>{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        {{/if}}
+                        {{/if}}
+                    </div>
+                    {{/ifEquals}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="{{#if data.toggles.monsterdivineVis}}hidden{{/if}}">
+                <h5>{{localize "abfalter.monsterPowers.divineAbi"}}</h5>
+
+                <div>
+                    <span>{{localize "abfalter.basicInfo.name"}}</span>
+                    <span>{{localize "abfalter.basicInfo.cost"}}</span>
+                    <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
+                </div>
+
+                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                    {{#each monsterPowers as |monsterPower id|}}
+                    {{#ifEquals system.type "6"}}
+                    <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
+                        {{#if system.expand}}
+                        <div>
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
+                            <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <h6>{{localize "abfalter.basicInfo.shortDesc"}}</h6>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        <h6>{{localize "abfalter.basicInfo.description"}}</h6>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.description}}</div>
+                        </div>
+                        {{else}}
+                        <div>
+                            <span> {{monsterPower.name}} </span>
+                            <span> {{monsterPower.system.cost}} </span>
+                            <span> {{monsterPower.system.gnosis}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{#if system.shortDescToggle}}
+                        <div class="textarea-div monstPowerInfo" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;" readonly>{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        {{/if}}
+                        {{/if}}
+                    </div>
+                    {{/ifEquals}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="monsterSubContainer">
+            <div>
+                <h5>{{localize "abfalter.monsterPowers.combatAbi"}}</h5>
+
+                <div>
+                    <span>{{localize "abfalter.basicInfo.name"}}</span>
+                    <span>{{localize "abfalter.basicInfo.cost"}}</span>
+                    <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
+                </div>
+
+                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                    {{#each monsterPowers as |monsterPower id|}}
+                    {{#ifEquals system.type "3"}}
+                    <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
+                        {{#if system.expand}}
+                        <div>
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
+                            <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <h6>{{localize "abfalter.basicInfo.shortDesc"}}</h6>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        <h6>{{localize "abfalter.basicInfo.description"}}</h6>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.description}}</div>
+                        </div>
+                        {{else}}
+                        <div>
+                            <span> {{monsterPower.name}} </span>
+                            <span> {{monsterPower.system.cost}} </span>
+                            <span> {{monsterPower.system.gnosis}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{#if system.shortDescToggle}}
+                        <div class="textarea-div monstPowerInfo" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;" readonly>{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        {{/if}}
+                        {{/if}}
+                    </div>
+                    {{/ifEquals}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="{{#if data.toggles.monsterdefVis}}hidden{{/if}}">
+                <h5>{{localize "abfalter.monsterPowers.defenseAbi"}}</h5>
+
+                <div>
+                    <span>{{localize "abfalter.basicInfo.name"}}</span>
+                    <span>{{localize "abfalter.basicInfo.cost"}}</span>
+                    <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
+                </div>
+
+                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                    {{#each monsterPowers as |monsterPower id|}}
+                    {{#ifEquals system.type "4"}}
+                    <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
+                        {{#if system.expand}}
+                        <div>
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
+                            <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <h6>{{localize "abfalter.basicInfo.shortDesc"}}</h6>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        <h6>{{localize "abfalter.basicInfo.description"}}</h6>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.description}}</div>
+                        </div>
+                        {{else}}
+                        <div>
+                            <span> {{monsterPower.name}} </span>
+                            <span> {{monsterPower.system.cost}} </span>
+                            <span> {{monsterPower.system.gnosis}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{#if system.shortDescToggle}}
+                        <div class="textarea-div monstPowerInfo" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;" readonly>{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        {{/if}}
+                        {{/if}}
+                    </div>
+                    {{/ifEquals}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <div>
+                <h5>{{localize "abfalter.monsterPowers.otherAbi"}}</h5>
+
+                <div>
+                    <span>{{localize "abfalter.basicInfo.name"}}</span>
+                    <span>{{localize "abfalter.basicInfo.cost"}}</span>
+                    <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
+                </div>
+
+                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                    {{#each monsterPowers as |monsterPower id|}}
+                    {{#ifEquals system.type ""}}
+                    <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
+                        {{#if system.expand}}
+                        <div>
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
+                            <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <h6>{{localize "abfalter.basicInfo.shortDesc"}}</h6>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        <h6>{{localize "abfalter.basicInfo.description"}}</h6>
+                        <div class="textarea-div" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{monsterPower.system.description}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.description}}</div>
+                        </div>
+                        {{else}}
+                        <div>
+                            <span> {{monsterPower.name}} </span>
+                            <span> {{monsterPower.system.cost}} </span>
+                            <span> {{monsterPower.system.gnosis}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{#if system.shortDescToggle}}
+                        <div class="textarea-div monstPowerInfo" style="display: grid;">
+                            <textarea class="inline-edit textarea-auto-resize" data-field="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;" readonly>{{monsterPower.system.shortDesc}}</textarea>
+                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{monsterPower.system.shortDesc}}</div>
+                        </div>
+                        {{/if}}
+                        {{/if}}
+                    </div>
+                    {{/ifEquals}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

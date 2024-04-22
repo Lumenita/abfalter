@@ -14,8 +14,13 @@
                     <div class="extend">
                         <h6 class="physical"> {{localize "abfalter.basicInfo.agility"}} </h6>
                         <label>
+                            {{#if data.toggles.monsterChar}}
+                            <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
+                            <input type="number" name="data.monsterChar.agi.charBaseTotal" value="{{data.monsterChar.agi.charBaseTotal}}" data-dtype="number" readonly/>
+                            {{else}}
                             <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Agility.base" value="{{data.stats.Agility.base}}" data-dtype="number" />
+                            {{/if}}
                         </label>
                         <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.stats.Agility.spec" value="{{data.stats.Agility.spec}}" /> </label>
                         <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Agility.temp" value="{{data.stats.Agility.temp}}" /> </label>
@@ -44,8 +49,13 @@
                     <div class="extend">
                         <h6 class="physical"> {{localize "abfalter.basicInfo.consti"}} </h6>
                         <label>
+                            {{#if data.toggles.monsterChar}}
+                            <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
+                            <input type="number" name="data.monsterChar.con.charBaseTotal" value="{{data.monsterChar.con.charBaseTotal}}" data-dtype="number" readonly />
+                            {{else}}
                             <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Constitution.base" value="{{data.stats.Constitution.base}}" data-dtype="number" />
+                            {{/if}}
                         </label>
                         <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.stats.Constitution.spec" value="{{data.stats.Constitution.spec}}" /> </label>
                         <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Constitution.temp" value="{{data.stats.Constitution.temp}}" /> </label>
@@ -74,8 +84,13 @@
                     <div class="extend">
                         <h6 class="physical"> {{localize "abfalter.basicInfo.strength"}} </h6>
                         <label>
+                            {{#if data.toggles.monsterChar}}
+                            <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
+                            <input type="number" name="data.monsterChar.str.charBaseTotal" value="{{data.monsterChar.str.charBaseTotal}}" data-dtype="number" readonly />
+                            {{else}}
                             <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Strength.base" value="{{data.stats.Strength.base}}" data-dtype="number" />
+                            {{/if}}
                         </label>
                         <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.stats.Strength.spec" value="{{data.stats.Strength.spec}}" /> </label>
                         <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Strength.temp" value="{{data.stats.Strength.temp}}" /> </label>
@@ -104,8 +119,13 @@
                     <div class="extend">
                         <h6 class="physical"> {{localize "abfalter.basicInfo.dexerity"}} </h6>
                         <label>
+                            {{#if data.toggles.monsterChar}}
+                            <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
+                            <input type="number" name="data.monsterChar.dex.charBaseTotal" value="{{data.monsterChar.dex.charBaseTotal}}" data-dtype="number" readonly />
+                            {{else}}
                             <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Dexterity.base" value="{{data.stats.Dexterity.base}}" data-dtype="number" />
+                            {{/if}}
                         </label>
                         <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.stats.Dexterity.spec" value="{{data.stats.Dexterity.spec}}" /> </label>
                         <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Dexterity.temp" value="{{data.stats.Dexterity.temp}}" /> </label>
@@ -132,10 +152,15 @@
                 <div>
                     {{#if data.stats.Perception.status}}
                     <div class="extend">
-                        <h6 class="physical"> {{localize "abfalter.basicInfo.perception"}} </h6>
+                        <h6 class="mental"> {{localize "abfalter.basicInfo.perception"}} </h6>
                         <label>
+                            {{#if data.toggles.monsterChar}}
+                            <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
+                            <input type="number" name="data.monsterChar.per.charBaseTotal" value="{{data.monsterChar.per.charBaseTotal}}" data-dtype="number" readonly />
+                            {{else}}
                             <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Perception.base" value="{{data.stats.Perception.base}}" data-dtype="number" />
+                            {{/if}}
                         </label>
                         <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.stats.Perception.spec" value="{{data.stats.Perception.spec}}" /> </label>
                         <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Perception.temp" value="{{data.stats.Perception.temp}}" /> </label>
@@ -147,7 +172,7 @@
                     {{else}}
                     <div class="compact">
                         <button type="button" class="rollable" data-roll="{{data.stats.Perception.final}}" data-label="{{localize "abfalter.basicInfo.perception"}}" data-type="characteristicRoll">
-                            <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span> <span> {{data.stats.Perception.final}} </span>
+                            <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span> <span> {{data.stats.Perception.final}} </span>
                         </button>
                         <button type="button" class="rollable" data-roll="{{data.stats.Perception.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.basicInfo.perception"}}" data-type="characteristicRoll">
                             <span> {{data.stats.Perception.opposedfinal}} </span>
@@ -164,8 +189,13 @@
                     <div class="extend">
                         <h6 class="mental"> {{localize "abfalter.basicInfo.intell"}} </h6>
                         <label>
+                            {{#if data.toggles.monsterChar}}
+                            <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
+                            <input type="number" name="data.monsterChar.int.charBaseTotal" value="{{data.monsterChar.int.charBaseTotal}}" data-dtype="number" readonly />
+                            {{else}}
                             <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Intelligence.base" value="{{data.stats.Intelligence.base}}" data-dtype="number" />
+                            {{/if}}
                         </label>
                         <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.stats.Intelligence.spec" value="{{data.stats.Intelligence.spec}}" /> </label>
                         <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Intelligence.temp" value="{{data.stats.Intelligence.temp}}" /> </label>
@@ -194,8 +224,13 @@
                     <div class="extend">
                         <h6 class="mental"> {{localize "abfalter.basicInfo.power"}} </h6>
                         <label>
+                            {{#if data.toggles.monsterChar}}
+                            <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
+                            <input type="number" name="data.monsterChar.pow.charBaseTotal" value="{{data.monsterChar.pow.charBaseTotal}}" data-dtype="number" readonly />
+                            {{else}}
                             <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Power.base" value="{{data.stats.Power.base}}" data-dtype="number" />
+                            {{/if}}
                         </label>
                         <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.stats.Power.spec" value="{{data.stats.Power.spec}}" /> </label>
                         <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Power.temp" value="{{data.stats.Power.temp}}" /> </label>
@@ -224,8 +259,13 @@
                     <div class="extend">
                         <h6 class="mental"> {{localize "abfalter.basicInfo.willPower"}} </h6>
                         <label>
+                            {{#if data.toggles.monsterChar}}
+                            <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
+                            <input type="number" name="data.monsterChar.wp.charBaseTotal" value="{{data.monsterChar.wp.charBaseTotal}}" data-dtype="number" readonly />
+                            {{else}}
                             <span> {{localize "abfalter.basicInfo.base"}} </span>
                             <input type="number" name="data.stats.Willpower.base" value="{{data.stats.Willpower.base}}" data-dtype="number" />
+                            {{/if}}
                         </label>
                         <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.stats.Willpower.spec" value="{{data.stats.Willpower.spec}}" /> </label>
                         <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.stats.Willpower.temp" value="{{data.stats.Willpower.temp}}" /> </label>
@@ -283,11 +323,22 @@
 
         <div>
             <div class="movement">
-                <h5> {{localize "abfalter.generalTab.movement"}} </h5>
+                <h5>
+                    {{localize "abfalter.generalTab.movement"}}
+                    <label class="expand-box">
+                        <a class="toggleBoolean {{#if data.toggles.movementInfo}}showOpacity{{/if}}" data-label="data.toggles.movementInfo" data-ability="{{data.toggles.movementInfo}}"><i class="{{#if data.toggles.movementInfo}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </label>
+                </h5>
                 <div>
                     <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <span> {{data.stats.Agility.final}} </span> </label>
-                    <label> <span> {{localize "abfalter.generalTab.pen"}} </span> <input type="number" name="data.movement.pen" value="{{data.movement.pen}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.movement.spec" value="{{data.movement.spec}}" /> </label>
+                    {{#if data.toggles.movementInfo}}
+                    <div>
+                        <label> <span> {{localize "abfalter.basicInfo.size"}} </span> <input type="number" name="data.movement.sizeBase" value="{{data.movement.sizeBase}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.armoryTab.armor"}} </span> <input type="number" name="data.totalMovePen" value="{{data.totalMovePen}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.movement.spec" value="{{data.movement.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.generalTab.pen"}} </span> <input type="number" name="data.movement.pen" value="{{data.movement.pen}}" /> </label>
+                    </div>
+                    {{/if}}
                     <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.movement.temp" value="{{data.movement.temp}}" /> </label>
                     <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <span> {{data.finalmove}} </span> </label>
                     <label> <span> {{localize "abfalter.basicInfo.full"}} </span> <span> {{data.fullmove}} </span> </label>
@@ -308,7 +359,11 @@
                     {{#if data.lifepoints.status}}
                     <div>
                         <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.lpbase" value="{{data.lpbase}}" readonly /> </label>
+                        {{#if data.toggles.dmgRes}}
+                        <label> <span> {{localize "abfalter.monsterPowers.hpMonster"}} </span> <input type="number" name="data.lifepoints.hpDmgRes" value="{{data.lifepoints.hpDmgRes}}" readonly/> </label>
+                        {{else}}
                         <label> <span> {{localize "abfalter.basicInfo.mult"}} </span> <input type="number" name="data.lifepoints.multiple" value="{{data.lifepoints.multiple}}" /> </label>
+                        {{/if}}
                         <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="data.lpbonus" value="{{data.lpbonus}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.lifepoints.spec" value="{{data.lifepoints.spec}}" /> </label>
                     </div>
@@ -866,7 +921,7 @@
                 <input type="number" name="data.secondary.kidetection.spec" value="{{data.secondary.kidetection.spec}}" />
                 <input type="number" name="data.kidetectionbonus" value="{{data.kidetectionbonus}}" readonly />
                 <input type="number" name="data.kidetectionbase" value="{{data.kidetectionbase}}" readonly />
-                <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span>
+                <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.kidetection.status}}showOpacity{{/if}}" data-label="data.secondary.kidetection.status" data-ability="{{data.secondary.kidetection.status}}"><i class="{{#if data.secondary.kidetection.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.kidetection.status}}
@@ -889,7 +944,7 @@
                 <input type="number" name="data.secondary.notice.spec" value="{{data.secondary.notice.spec}}" />
                 <input type="number" name="data.noticebonus" value="{{data.noticebonus}}" readonly />
                 <input type="number" name="data.secondary.notice.base" value="{{data.secondary.notice.base}}" />
-                <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span>
+                <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.notice.status}}showOpacity{{/if}}" data-label="data.secondary.notice.status" data-ability="{{data.secondary.notice.status}}"><i class="{{#if data.secondary.notice.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.notice.status}}
@@ -911,7 +966,7 @@
                 <input type="number" name="data.secondary.search.spec" value="{{data.secondary.search.spec}}" />
                 <input type="number" name="data.searchbonus" value="{{data.searchbonus}}" readonly />
                 <input type="number" name="data.secondary.search.base" value="{{data.secondary.search.base}}" />
-                <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span>
+                <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.search.status}}showOpacity{{/if}}" data-label="data.secondary.search.status" data-ability="{{data.secondary.search.status}}"><i class="{{#if data.secondary.search.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.search.status}}
@@ -933,7 +988,7 @@
                 <input type="number" name="data.secondary.track.spec" value="{{data.secondary.track.spec}}" />
                 <input type="number" name="data.trackbonus" value="{{data.trackbonus}}" readonly />
                 <input type="number" name="data.secondary.track.base" value="{{data.secondary.track.base}}" />
-                <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span>
+                <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.track.status}}showOpacity{{/if}}" data-label="data.secondary.track.status" data-ability="{{data.secondary.track.status}}"><i class="{{#if data.secondary.track.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.track.status}}
@@ -1395,7 +1450,7 @@
                 <input type="number" name="data.secondary.hide.spec" value="{{data.secondary.hide.spec}}" />
                 <input type="number" name="data.hidebonus" value="{{data.hidebonus}}" readonly />
                 <input type="number" name="data.secondary.hide.base" value="{{data.secondary.hide.base}}" />
-                <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span>
+                <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.hide.status}}showOpacity{{/if}}" data-label="data.secondary.hide.status" data-ability="{{data.secondary.hide.status}}"><i class="{{#if data.secondary.hide.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.hide.status}}
@@ -1418,7 +1473,7 @@
                 <input type="number" name="data.secondary.kiconceal.spec" value="{{data.secondary.kiconceal.spec}}" />
                 <input type="number" name="data.kiconcealbonus" value="{{data.kiconcealbonus}}" readonly />
                 <input type="number" name="data.kiconcealbase" value="{{data.kiconcealbase}}" readonly />
-                <span class="physical"> {{localize "abfalter.basicInfo.per"}} </span>
+                <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span>
                 <a class="toggleBoolean {{#if data.secondary.kiconceal.status}}showOpacity{{/if}}" data-label="data.secondary.kiconceal.status" data-ability="{{data.secondary.kiconceal.status}}"><i class="{{#if data.secondary.kiconceal.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
             {{#if data.secondary.kiconceal.status}}

@@ -20,8 +20,190 @@ export default class abfalterActor extends Actor {
         //Main Characteristics & Dragon Seals
         data.aamFinal += data.arsMagnus.dragonSeal * 5 || 0;
 
-        for (let [key, stat] of Object.entries(data.stats)) {
-            stat.final = Math.floor(~~stat.base + stat.spec + stat.temp);
+        //Monster Powers Prep
+        for (let [key, atr] of Object.entries(data.monsterChar)) {
+            switch (key) {
+                case "agi":
+                    atr.name = game.i18n.localize('abfalter.basicInfo.agi');
+                    break;
+                case "con":
+                    atr.name = game.i18n.localize('abfalter.basicInfo.con');
+                    break;
+                case "str":
+                    atr.name = game.i18n.localize('abfalter.basicInfo.str');
+                    break;
+                case "dex":
+                    atr.name = game.i18n.localize('abfalter.basicInfo.dex');
+                    break;
+                case "per":
+                    atr.name = game.i18n.localize('abfalter.basicInfo.per');
+                    break;
+                case "int":
+                    atr.name = game.i18n.localize('abfalter.basicInfo.int');
+                    break;
+                case "pow":
+                    atr.name = game.i18n.localize('abfalter.basicInfo.pow');
+                    break;
+                case "wp":
+                    atr.name = game.i18n.localize('abfalter.basicInfo.wp');
+                    break;
+                default:
+                    break;
+            }
+            switch (atr.base) {
+                case "1":
+                    atr.costBase = 1;
+                    break;
+                case "2":
+                    atr.costBase = 2;
+                    break;
+                case "3":
+                    atr.costBase = 3;
+                    break;
+                case "4":
+                    atr.costBase = 4;
+                    break;
+                case "5":
+                    atr.costBase = 5;
+                    break;
+                case "6":
+                    atr.costBase = 6;
+                    break;
+                case "7":
+                    atr.costBase = 7;
+                    break;
+                case "8":
+                    atr.costBase = 8;
+                    break;
+                case "9":
+                    atr.costBase = 10;
+                    break;
+                case "10":
+                    atr.costBase = 15;
+                    break;
+                case "11":
+                    atr.costBase = 20;
+                    break;
+                case "12":
+                    atr.costBase = 30;
+                    break;
+                case "13":
+                    atr.costBase = 40;
+                    break;
+                case "14":
+                    atr.costBase = 50;
+                    break;
+                case "15":
+                    atr.costBase = 60;
+                    break;
+                default:
+                    atr.costBase = 0;
+                    break;
+            }
+            atr.costAdditional = Math.floor(atr.additional * 20);
+            atr.charBaseCostTotal = Math.floor(atr.costBase + atr.costAdditional);
+            atr.charBaseTotal = Math.floor(~~atr.base + ~~atr.additional);
+        }
+        data.monsterCharCombCost = Math.floor(data.monsterChar.agi.charBaseCostTotal + data.monsterChar.con.charBaseCostTotal + data.monsterChar.str.charBaseCostTotal +
+            data.monsterChar.dex.charBaseCostTotal + data.monsterChar.per.charBaseCostTotal + data.monsterChar.int.charBaseCostTotal + data.monsterChar.pow.charBaseCostTotal +
+            data.monsterChar.wp.charBaseCostTotal);
+        //Size Base Values
+        if (data.size >= 9 && data.size <= 22) {
+            data.initiative.sizeBase = 20;
+            data.movement.sizeBase = 0;
+            data.lifepoints.hpMult = 5;
+            data.monsterArmor = 3;
+            data.monsterPhysicalDmg = 10;
+            data.monsterNaturalDmg = 40;
+            data.monsterActionArea = "0";
+            data.monsterNatBreak = 0;
+            data.monsternatFort = 12;
+        } else if (data.size >= 1 && data.size <= 3) {
+            data.initiative.sizeBase = 40;
+            data.movement.sizeBase = -4;
+            data.lifepoints.hpMult = 1;
+            data.monsterArmor = 1;
+            data.monsterPhysicalDmg = 5;
+            data.monsterNaturalDmg = 20;
+            data.monsterActionArea = "0";
+            data.monsterNatBreak = -4;
+            data.monsternatFort = 4;
+        } else if (data.size >= 4 && data.size <= 8) {
+            data.initiative.sizeBase = 30;
+            data.movement.sizeBase = -2;
+            data.lifepoints.hpMult = 2;
+            data.monsterArmor = 2;
+            data.monsterPhysicalDmg = 10;
+            data.monsterNaturalDmg = 30;
+            data.monsterActionArea = "0";
+            data.monsterNatBreak = -2;
+            data.monsternatFort = 8;
+        } else if (data.size >= 23 && data.size <= 24) {
+            data.initiative.sizeBase = 10;
+            data.movement.sizeBase = 0;
+            data.lifepoints.hpMult = 5;
+            data.monsterArmor = 4;
+            data.monsterPhysicalDmg = 20;
+            data.monsterNaturalDmg = 60;
+            data.monsterActionArea = "0";
+            data.monsterNatBreak = 4;
+            data.monsternatFort = 16;
+        } else if (data.size >= 25 && data.size <= 28) {
+            data.initiative.sizeBase = 0;
+            data.movement.sizeBase = 1;
+            data.lifepoints.hpMult = 10;
+            data.monsterArmor = 6;
+            data.monsterPhysicalDmg = 30;
+            data.monsterNaturalDmg = 100;
+            data.monsterActionArea = "5ft / 1.5m";
+            data.monsterNatBreak = 8;
+            data.monsternatFort = 20;
+        } else if (data.size >= 29 && data.size <= 33) {
+            data.initiative.sizeBase = -10;
+            data.movement.sizeBase = 2;
+            data.lifepoints.hpMult = 15;
+            data.monsterArmor = 8;
+            data.monsterPhysicalDmg = 40;
+            data.monsterNaturalDmg = 120;
+            data.monsterActionArea = "15ft / 4.5m";
+            data.monsterNatBreak = 12;
+            data.monsternatFort = 28;
+        } else if (data.size >= 34) {
+            data.initiative.sizeBase = -20;
+            data.movement.sizeBase = 3;
+            data.lifepoints.hpMult = 20;
+            data.monsterArmor = 10;
+            data.monsterPhysicalDmg = 60;
+            data.monsterNaturalDmg = 140;
+            data.monsterActionArea = "60ft / 18m";
+            data.monsterNatBreak = 16;
+            data.monsternatFort = 34;
+        } else {
+            data.initiative.sizeBase = 0;
+            data.movement.sizeBase = 0;
+            data.lifepoints.hpMult = 0;
+            data.monsterArmor = 0;
+            data.monsterPhysicalDmg = 0;
+            data.monsterNaturalDmg = 0;
+            data.monsterActionArea = "N/A";
+            data.monsterNatBreak = 0;
+            data.monsternatFort = 0;
+        }
+
+        //Main Char Calc
+        if (data.toggles.monsterChar == false) {
+            for (let [key, stat] of Object.entries(data.stats)) {
+                stat.final = Math.floor(~~stat.base + stat.spec + stat.temp);
+            }
+        } else {
+            data.stats.Agility.final = Math.floor(data.monsterChar.agi.charBaseTotal + data.stats.Agility.spec + data.stats.Agility.temp);
+            data.stats.Constitution.final = Math.floor(data.monsterChar.con.charBaseTotal + data.stats.Constitution.spec + data.stats.Constitution.temp);
+            data.stats.Strength.final = Math.floor(data.monsterChar.str.charBaseTotal + data.stats.Strength.spec + data.stats.Strength.temp);
+            data.stats.Dexterity.final = Math.floor(data.monsterChar.dex.charBaseTotal + data.stats.Dexterity.spec + data.stats.Dexterity.temp);
+            data.stats.Perception.final = Math.floor(data.monsterChar.per.charBaseTotal + data.stats.Perception.spec + data.stats.Perception.temp);
+            data.stats.Intelligence.final = Math.floor(data.monsterChar.int.charBaseTotal + data.stats.Intelligence.spec + data.stats.Intelligence.temp);
+            data.stats.Power.final = Math.floor(data.monsterChar.pow.charBaseTotal + data.stats.Power.spec + data.stats.Power.temp);
+            data.stats.Willpower.final = Math.floor(data.monsterChar.wp.charBaseTotal + data.stats.Willpower.spec + data.stats.Willpower.temp);
         }
 
         data.stats.Agility.final += data.arsMagnus.dragonDoor || 0;
@@ -195,7 +377,16 @@ export default class abfalterActor extends Actor {
 
         //Lifepoint Calculation
         data.lpbase = Math.floor(25 + 10 * data.stats.Constitution.final + data.stats.Constitution.mod - Math.ceil((data.stats.Constitution.final - 1) / data.stats.Constitution.final) * 5);
-        data.lp.max = Math.floor(data.lpbase + data.lifepoints.spec + data.lifepoints.temp + Math.ceil(data.lifepoints.multiple * data.stats.Constitution.final));
+        if (data.toggles.dmgRes == false) {
+            data.lp.max = Math.floor(data.lpbase + data.lifepoints.spec + data.lifepoints.temp + Math.ceil(data.lifepoints.multiple * data.stats.Constitution.final));
+        } else {
+            if (data.monsterStats.hpDp == null) {
+                data.monsterStats.hpDp = 0;
+            }
+            data.lifepoints.hpDmgRes = Math.floor(data.lifepoints.hpMult * data.monsterStats.hpDp);
+            data.lp.max = Math.floor(data.lpbase + data.lifepoints.spec + data.lifepoints.temp + data.lifepoints.hpDmgRes);
+
+        }
 
         //Fatigue Calculation
         data.fatiguebase = data.stats.Constitution.final;
@@ -386,8 +577,11 @@ export default class abfalterActor extends Actor {
                 break;
         }
 
+
+
         //Initiative
-        data.iniBase = Math.floor(data.stats.Dexterity.mod + data.stats.Agility.mod + 20); 
+        data.initiative.extraStats = Math.floor(data.stats.Dexterity.mod + data.stats.Agility.mod);
+        data.iniBase = Math.floor(data.stats.Dexterity.mod + data.stats.Agility.mod + data.initiative.sizeBase);
         if (data.aamFinal < 0) {
             data.iniBase = Math.floor(data.iniBase + ~~(data.aamFinal / 2));
         }
@@ -855,6 +1049,7 @@ export default class abfalterActor extends Actor {
 
         //ML Calculation
         data.metaCost = data.metaMagic.cost + data.metaMagic.extraCost;
+
     }
 
     prepareEmbeddedDocuments() {
@@ -866,7 +1061,7 @@ export default class abfalterActor extends Actor {
         const stats = data.stats;
 
 
-        // Determine Item Values / Last used arr[122]  2                    *Look at js map
+        // Determine Item Values / Last used arr[123]  2                    *Look at js map
         const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish, acro,
             athle, climb, jump, ride, swim, etiq, intim, leader, persua, street, style, trading, notice, search, track,
             animals, appra, archi, herb, hist, law, magicapr, medic, mem, navi, occ, science, tactic, comp, fos,
@@ -875,7 +1070,7 @@ export default class abfalterActor extends Actor {
             aHeatTot, aColdMax, aColdTot, aEleMax, aEleTot, aEneMax, aEneTot, aSptMax, aSptTot, ahReq, ahCutMax, ahCutTot, ahImpMax, ahImpTot, ahThrMax,
             ahThrTot, ahHeatMax, ahHeatTot, ahColdMax, ahColdTot, ahEleMax, ahEleTot, ahEneMax, ahEneTot, ahSptMax, ahSptTot, perPen, usedpp, matrixpp, arsMk,
             maMk, techMk, pathLvl, turnMaint, dayMaint, spellCost, wepNum, wepSpd, maKiAtk, maKiBlk, maKiDod, pilot, techmagic, cook, toy,
-            kiDect, kiCon, wepName] = this.items.reduce((arr, item) => {
+            kiDect, kiCon, wepName, monsterCost] = this.items.reduce((arr, item) => {
                 if (item.type === "class") {
                     const classLevels = parseInt(item.system.main.levels) || 0;
                     arr[0] += classLevels;
@@ -1079,6 +1274,9 @@ export default class abfalterActor extends Actor {
                         }
                     }
                 }
+                if (item.type === "monsterPower") {
+                    arr[123] += parseInt(item.system.cost) || 0;
+                }
             return arr;
             }, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -1086,7 +1284,7 @@ export default class abfalterActor extends Actor {
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0]);
+                0, 0, 0, 0]);
 
         //Stuff Xp, Presence, Next lvl Xp
         data.level = level; //class Bonus
@@ -1184,9 +1382,9 @@ export default class abfalterActor extends Actor {
         }
         data.movePenMod = Math.max(0, Math.floor(data.armorMod / 50));
         if (movePen - data.movePenMod < 0) {
-            data.totalMovePen = Math.floor(movePen + Math.max(0, data.totalNatPen / 50));
+            data.totalMovePen = -Math.floor(movePen + Math.max(0, data.totalNatPen / 50));
         } else {
-            data.totalMovePen = Math.floor(movePen + Math.max(0, data.totalNatPen / 50) - data.movePenMod);
+            data.totalMovePen = -Math.floor(movePen + Math.max(0, data.totalNatPen / 50) - data.movePenMod);
         }
 
         //Resistances
@@ -1234,7 +1432,7 @@ export default class abfalterActor extends Actor {
         }
 
         //Movement
-        data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp - data.movement.pen + Math.min(0, Math.ceil(data.aamFinal / 20)) - data.totalMovePen);
+        data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp + data.movement.sizeBase - data.movement.pen + Math.min(0, Math.ceil(data.aamFinal / 20)) + data.totalMovePen);
         switch (data.finalmove) {
             case 1:
                 if (data.useMeters) {
@@ -1498,12 +1696,12 @@ export default class abfalterActor extends Actor {
             data.wepFinSpd = data.weaponSpeed - 10;
             data.weaponName = game.i18n.localize('abfalter.basicInfo.multiWield');
         } else if (data.weaponNumber == 0) {
-            data.wepFinSpd = 20;
+            data.wepFinSpd = 0;
             data.weaponName = game.i18n.localize('abfalter.basicInfo.unarmed');
         } else {
             data.wepFinSpd = data.weaponSpeed;
         }
-        data.iniFinal = Math.floor(data.iniBase + data.inibonus + data.initiative.spec + data.KiBonusSpd + ~~data.wepFinSpd - data.totalNatPen); // Base + class + spec + weapon(if equipped) - armor.
+        data.iniFinal = Math.floor(data.iniBase + data.inibonus + data.initiative.spec + data.KiBonusSpd + ~~data.wepFinSpd - data.totalNatPen);
 
         /*
             Secondaries
@@ -2354,7 +2552,9 @@ export default class abfalterActor extends Actor {
         data.innateSlotspp = Math.floor(data.other.innateSlots * 2);
         data.psychicPoint.max = Math.floor(data.finalpp - (+usedpp + data.ppotentialpp + +matrixpp + data.innateSlotspp));
 
-
+        //Monster
+        data.monsterPowerCost = monsterCost;
+        data.monstTotDP = Math.floor(data.monsterCharCombCost + data.monsterPowerCost + data.monsterStats.hpDp);
 
 
 

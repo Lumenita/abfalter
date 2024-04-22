@@ -320,6 +320,14 @@ export default class abfalterItem extends Item {
         this.system.finalValue = Math.floor(~~this.system.base + ~~this.system.extra + ~~this.system.spec + ~~this.system.temp + this.system.natFinal + ~~this.system.aam);
     }
 
+    prepareMonsterPower() {
+        if (this.parent != null) {
+            this.system.shortDescToggle = this.parent.system.toggles.monsterPowerShortDesc;
+        } else {
+            this.system.shortDescToggle = false;
+        }
+    }
+
     chatTemplate = {
         "spell": "systems/abfalter/templates/chatItem/spellChat.html",
         "psychicMatrix": "systems/abfalter/templates/chatItem/psyMatrixChat.html",

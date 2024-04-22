@@ -1,0 +1,30 @@
+<form class="{{cssClass}} baseAbfalter monsterPowerWindow" autocomplete="off">
+    <div class="itemStart">
+        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
+    </div>
+
+    <div>
+        <div class="csSelect">
+            <label>
+                <span> Type </span>
+                <select name="data.type" data-dtype="String">
+                    {{#select data.type}}
+                    <option value=""> </option>
+                    <option value="1"> Essential </option>
+                    <option value="2"> Dis-advantage </option>
+                    <option value="3"> Combat </option>
+                    <option value="4"> Defensive </option>
+                    <option value="5"> Misc </option>
+                    <option value="6"> Divine </option>
+                    {{/select}}
+                </select>
+            </label>
+        </div>
+
+        <div style="display: grid;">
+            <textarea class="textarea-auto-resize" rows="5" name="data.shortDesc" style="grid-area: 1 / 1 / 2/ 2;">{{data.shortDesc}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.shortDesc}}</div>
+        </div>
+    </div>
+</form>

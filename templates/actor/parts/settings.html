@@ -392,6 +392,17 @@
                         </button>
                     </div>
                     <div>
+                        <span> {{localize "abfalter.settingsTab.hideMonster"}} </span>
+                        <button type="button" class="toggleBoolean {{#if data.toggles.monsterTab}}kiBought{{/if}}"
+                                data-label="data.toggles.monsterTab" data-ability="{{data.toggles.monsterTab}}">
+                            {{#if data.toggles.monsterTab}}
+                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                            {{else}}
+                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                            {{/if}}
+                        </button>
+                    </div>
+                    <div>
                         <span> {{localize "abfalter.settingsTab.hideMagic"}} </span>
                         <button type="button" class="toggleBoolean {{#if data.toggles.magicTab}}kiBought{{/if}}"
                                 data-label="data.toggles.magicTab" data-ability="{{data.toggles.magicTab}}">
@@ -418,6 +429,17 @@
                         <button type="button" class="toggleBoolean {{#if data.toggles.kiTab}}kiBought{{/if}}"
                                 data-label="data.toggles.kiTab" data-ability="{{data.toggles.kiTab}}">
                             {{#if data.toggles.kiTab}}
+                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                            {{else}}
+                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                            {{/if}}
+                        </button>
+                    </div>
+                    <div>
+                        <span> {{localize "abfalter.settingsTab.hideEffect"}} </span>
+                        <button type="button" class="toggleBoolean {{#if data.toggles.effectTab}}kiBought{{/if}}"
+                                data-label="data.toggles.effectTab" data-ability="{{data.toggles.effectTab}}">
+                            {{#if data.toggles.effectTab}}
                             <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                             {{else}}
                             <span> {{localize "abfalter.settingsTab.notHidden"}} </span>

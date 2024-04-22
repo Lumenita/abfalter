@@ -55,7 +55,8 @@
           "turnMaint": false,
           "elan": false,
           "class": false,
-          "secondary": false
+          "secondary": false,
+          "monsterPowers": false
         },
         "toggles": {
           "actorHeaderInfo1": false,
@@ -90,7 +91,17 @@
           "nemesisVis": false,
           "kiSealsVis": false,
           "kiTech": false,
-          "customSecondary": false
+          "customSecondary": false,
+          "monsterPowerShortDesc": false,
+          "dmgRes": false,
+          "monsterChar": false,
+          "movementInfo": false,
+          "monsterNatWep": false,
+          "monsterdisadvVis": false,
+          "monsterdefVis": false,
+          "monsterdivineVis": false,
+          "monsterTab": true,
+          "effectTab": false
         },
         "lp": {
           "value": 0,
@@ -751,6 +762,53 @@
         "aamCrit": 0,
         "aamOther": 0,
         "aamStatus": false
+      },
+      "monsterPowers": {
+        "monsterChar": {
+          "agi": {
+            "base": 0,
+            "additional": 0,
+            "type": "physical"
+          },
+          "con": {
+            "base": 0,
+            "additional": 0,
+            "type": "physical"
+          },
+          "str": {
+            "base": 0,
+            "additional": 0,
+            "type": "physical"
+          },
+          "dex": {
+            "base": 0,
+            "additional": 0,
+            "type": "physical"
+          },
+          "per": {
+            "base": 0,
+            "additional": 0,
+            "type": "mental"
+          },
+          "int": {
+            "base": 0,
+            "additional": 0,
+            "type": "mental"
+          },
+          "pow": {
+            "base": 0,
+            "additional": 0,
+            "type": "mental"
+          },
+          "wp": {
+            "base": 0,
+            "additional": 0,
+            "type": "mental"
+          }
+        },
+        "monsterStats": {
+          "hpDp": 0
+        }
       },
       "mystic": {
         "mproj": {
@@ -1687,7 +1745,7 @@
       }
     },
     "character": {
-      "templates": [ "info", "stats", "mystic", "armory", "psychic", "ki" ]
+      "templates": [ "info", "stats", "monsterPowers", "mystic", "armory", "psychic", "ki" ]
     }
   },
   "Item": {
@@ -1704,6 +1762,8 @@
       "arsMagnus",
       "martialArt",
       "psychicMatrix",
+      "monsterPower",
+      "effect",
       "kiSealCreature",
       "incarnation",
       "invocation",
@@ -1835,7 +1895,7 @@
       "temp": 0,
       "nat": 0,
       "natural": 0,
-      "atr":  "",
+      "atr": "",
       "expand": true,
       "fav": false
     },
@@ -2030,6 +2090,19 @@
       "effect280": "",
       "effect320": "",
       "effect440": ""
+    },
+    "monsterPower": {
+      "templates": [ "itemDescription" ],
+      "shortDesc": "",
+      "type": "",
+      "expand": false,
+      "power": "",
+      "cost": "",
+      "gnosis": ""
+    },
+    "effect": {
+      "templates": [ "itemDescription" ],
+      "expand": false
     },
     "maintPower": {
       "templates": [ "itemDescription" ],

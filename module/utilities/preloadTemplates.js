@@ -17,8 +17,9 @@ export const preloadHandlebarsTemplates = () => {
         "systems/abfalter/templates/actor/parts/ki.html",
         "systems/abfalter/templates/actor/parts/armory.html",
         "systems/abfalter/templates/actor/parts/settings.html",
-        "systems/abfalter/templates/actor/parts/metaMagic.html"
-
+        "systems/abfalter/templates/actor/parts/metaMagic.html",
+        "systems/abfalter/templates/actor/parts/monster.html",
+        "systems/abfalter/templates/actor/parts/effect.html"
     ];
     return loadTemplates(templatePaths);
 };

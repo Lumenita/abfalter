@@ -29,6 +29,7 @@ abfalter.basicInfo = {
     action: "abfalter.basicInfo.action",
     difficulty: "abfalter.basicInfo.difficulty",
     effect: "abfalter.basicInfo.effect",
+    effects: "abfalter.basicInfo.effects",
     routine: "abfalter.basicInfo.routine",
     easy: "abfalter.basicInfo.easy",
     average: "abfalter.basicInfo.average",
@@ -99,7 +100,9 @@ abfalter.basicInfo = {
     multiWield: "abfalter.basicInfo.multiWield",
     unarmed: "abfalter.basicInfo.unarmed",
     special: "abfalter.basicInfo.special",
-    innate: "abfalter.basicInfo.innate"
+    innate: "abfalter.basicInfo.innate",
+    shortDesc: "abfalter.basicInfo.shortDesc",
+    monster: "abfalter.basicInfo.monster"
 }
 
 abfalter.generalTab = {
@@ -745,7 +748,9 @@ abfalter.settingsTab = {
     changeSpec: "abfalter.settingsTab.changeSpec",
     open: "abfalter.settingsTab.open",
     generalSettings: "abfalter.settingsTab.generalSettings",
-    dpMod: "abfalter.settingsTab.dpMod"
+    dpMod: "abfalter.settingsTab.dpMod",
+    hideMonster: "abfalter.settingsTab.hideMonster",
+    hideEffect: "abfalter.settingsTab.hideEffect"
 }
 
 abfalter.metaMagic = {
@@ -895,3 +900,38 @@ abfalter.globalSettings = {
     changeThemeDetails: "abfalter.globalSettings.changeThemeDetails"
 }
 
+abfalter.monsterPowers = {
+    essentialAbi: "abfalter.monsterPowers.essentialAbi",
+    disadvAbi: "abfalter.monsterPowers.disadvAbi",
+    miscAbi: "abfalter.monsterPowers.miscAbi",
+    divineAbi: "abfalter.monsterPowers.divineAbi",
+    combatAbi: "abfalter.monsterPowers.combatAbi",
+    defenseAbi: "abfalter.monsterPowers.defenseAbi",
+    otherAbi: "abfalter.monsterPowers.otherAbi",
+    hpMonster: "abfalter.monsterPowers.hpMonster",
+    addMonsterPower: "abfalter.monsterPowers.addMonsterPower",
+    info: "abfalter.monsterPowers.info",
+    natWep: "abfalter.monsterPowers.natWep",
+    natWepDmg: "abfalter.monsterPowers.natWepDmg",
+    natWepFort: "abfalter.monsterPowers.natWepFort",
+    NatWepBreak: "abfalter.monsterPowers.NatWepBreak",
+    physDmg: "abfalter.monsterPowers.physDmg",
+    actionArea: "abfalter.monsterPowers.actionArea",
+    dmgRes: "abfalter.monsterPowers.dmgRes",
+    baseArmor: "abfalter.monsterPowers.baseArmor",
+    healthMult: "abfalter.monsterPowers.healthMult",
+    dpHP: "abfalter.monsterPowers.dpHP",
+    totalAddHP: "abfalter.monsterPowers.totalAddHP",
+    additional: "abfalter.monsterPowers.additional",
+    dpCost: "abfalter.monsterPowers.dpCost",
+    monstChar: "abfalter.monsterPowers.monstChar",
+    monstCharacteristic: "abfalter.monsterPowers.monstCharacteristic",
+    replaceChar: "abfalter.monsterPowers.replaceChar",
+    showShortDesc: "abfalter.monsterPowers.showShortDesc",
+    hideDis: "abfalter.monsterPowers.hideDis",
+    hideDivine: "abfalter.monsterPowers.hideDivine",
+    hideDef: "abfalter.monsterPowers.hideDef",
+    totalCharDp: "abfalter.monsterPowers.totalCharDp",
+    totalPowDp: "abfalter.monsterPowers.totalPowDp",
+    totalDpSpent: "abfalter.monsterPowers.totalDpSpent"
+}
