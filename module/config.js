@@ -935,3 +935,8 @@ abfalter.monsterPowers = {
     totalPowDp: "abfalter.monsterPowers.totalPowDp",
     totalDpSpent: "abfalter.monsterPowers.totalDpSpent"
 }
+
+abfalter.activeEffectChanges = {
+    atk: "abfalter.activeEffectChanges.atk",
+    blk: "abfalter.activeEffectChanges.blk"
+}

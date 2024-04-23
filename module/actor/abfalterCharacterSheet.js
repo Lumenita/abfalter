@@ -1,6 +1,7 @@
 import { openModifierDialogue } from "../diceroller.js";
 import { metaMagicSheet } from "./metaMagicSheet.js";
 import * as actorFunctions from "./actorFunctions.js";
+import { onManageActiveEffect, prepareActiveEffectCategories } from '../helpers/effects.js';
 
 export default class abfalterCharacterSheet extends ActorSheet {
     static get defaultOptions() {
@@ -94,6 +95,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
             editable: this.isEditable,
             actor: baseData.actor,
             data: baseData.actor.system,
+            effects: prepareActiveEffectCategories(this.actor.allApplicableEffects()),
             config: CONFIG.abfalter
         }
 
@@ -125,7 +127,6 @@ export default class abfalterCharacterSheet extends ActorSheet {
         sheetData.arsMagnuses = baseData.items.filter(function (item) { return item.type == "arsMagnus" });
         sheetData.elans = baseData.items.filter(function (item) { return item.type == "elan" });
         sheetData.monsterPowers = baseData.items.filter(function (item) { return item.type == "monsterPower" });
-        sheetData.effects = baseData.items.filter(function (item) { return item.type == "effect" });
 
         return sheetData;
     }
@@ -222,6 +223,17 @@ export default class abfalterCharacterSheet extends ActorSheet {
             html.find('.rollable').click(this._onRoll.bind(this));
             html.find('.combatRoll').click(this._onAttackRoll.bind(this));
 
+            html.on('click', '.effect-control', (ev) => {
+                const row = ev.currentTarget.closest('li');
+                //Bypass undefined when creating active effect on Actor sheet
+                //Im expecting it to cause issues
+                //will be looked at if it breaks
+                if (row.dataset.parentId === undefined) {
+                    row.dataset.parentId = this.actor.id;
+                }
+                const document = row.dataset.parentId === this.actor.id ? this.actor : this.actor.items.get(row.dataset.parentId);
+                onManageActiveEffect(ev, document);
+            });
         }
 
         super.activateListeners(html);

@@ -11,22 +11,28 @@ import { customMacroBar } from "./autoCombat/customMacroBar.js";
 import { abfalterSettings } from "./utilities/abfalterSettings.js";
 import { migrateWorld } from "./utilities/migration.js";
 import { abfalterSettingsKeys } from "./utilities/abfalterSettings.js";
+import abfalterEffectConfig from "./sheets/abfalterEffectConfig.js";
 
 Hooks.once("init", async () => {
     console.log("abfalter | Initializing Anima Beyond Fantasy Alter System");
     // Custom Classes
+    CONFIG.abfalter = abfalter;
     CONFIG.Actor.documentClass = abfalterActor;
     CONFIG.Item.documentClass = abfalterItem;
-    CONFIG.abfalter = abfalter;
     CONFIG.Combat.documentClass = abfalterCombat;
+    DocumentSheetConfig.registerSheet(ActiveEffect, "abfalter", abfalterEffectConfig, { makeDefault: true });
+    CONFIG.ActiveEffect.legacyTransferral = false;
     abfalterSettings();
 
-    await preloadHandlebarsTemplates();
+    CONFIG.time.roundTime = 6;
+
     // Custom Sheets
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("abfalter", abfalterCharacterSheet, { makeDefault: true });
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("abfalter", abfalterItemSheet, { makeDefault: true });
+
+    return preloadHandlebarsTemplates();
 });
  
 Hooks.on("renderChatMessage", (_app, html, _msg) => {
@@ -57,6 +63,11 @@ Hooks.once("ready", function () {
     if (needsMigration) {
         migrateWorld();
     }
+})
+
+Hooks.once('setup', function () {
+    // Set active effect keys-labels
+    abfalterEffectConfig.initializeChangeKeys();
 })
 
 Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {

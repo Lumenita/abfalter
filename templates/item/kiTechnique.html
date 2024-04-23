@@ -1,113 +1,142 @@
-<form class="{{cssClass}} baseAbfalter itemWindow" autocomplete="off">
-    <div class="itemStart">
-        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
-    </div>
+<form class="{{cssClass}} baseAbfalter" autocomplete="off">
 
-    <div class="kiTechContent">
-        <h5> {{localize "abfalter.kiTab.kiTechnique"}} </h5>
-        <div>
-            <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.mk"}} </span> <input type="number" name="data.mk" value="{{data.mk}}" /> </label>
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header">
+        <div class="itemStart">
+            <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+            <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
         </div>
+    </header>
 
-        <div class="kiTechTypeMax">
-            <span> {{localize "abfalter.kiTab.ki"}} </span>
-            <span> {{localize "abfalter.basicInfo.agi"}} </span>
-            <span> {{localize "abfalter.basicInfo.con"}} </span>
-            <span> {{localize "abfalter.basicInfo.dex"}} </span>
-            <span> {{localize "abfalter.basicInfo.str"}} </span>
-            <span> {{localize "abfalter.basicInfo.pow"}} </span>
-            <span> {{localize "abfalter.basicInfo.wp"}} </span>
-            <span> {{localize "abfalter.kiTab.actionInfo"}} </span>
-        </div>
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "Details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "Effects" }}</a>
+    </nav>
 
-        <div class="kiTechUseMax">
-            <span> {{localize "abfalter.kiTab.use"}} </span>
-            <input name="data.use.agi" type="number" value="{{data.use.agi}}" />
-            <input name="data.use.con" type="number" value="{{data.use.con}}" />
-            <input name="data.use.dex" type="number" value="{{data.use.dex}}" />
-            <input name="data.use.str" type="number" value="{{data.use.str}}" />
-            <input name="data.use.pow" type="number" value="{{data.use.pow}}" />
-            <input name="data.use.wp" type="number" value="{{data.use.wp}}" />
-            <div class="csSelect techSelect">
-                <select name="data.frequency" data-dtype="number">
-                    {{#select data.frequency}}
-                    <option value="">  </option>
-                    <option value="{{localize "abfalter.kiTab.action"}}"> {{localize "abfalter.kiTab.action"}} </option>
-                    <option value="{{localize "abfalter.kiTab.turn"}}"> {{localize "abfalter.kiTab.turn"}} </option>
-                    <option value="{{localize "abfalter.kiTab.variable"}}"> {{localize "abfalter.kiTab.variable"}} </option>
-                    {{/select}}
-                </select>
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        <div class="tab description flexcol" data-group="primary" data-tab="description">
+            <h6> {{localize "abfalter.basicInfo.description"}} </h6>
+            <div style="display: grid;">
+                <textarea class="textarea-auto-resize" rows="5" name="data.description" style="grid-area: 1 / 1 / 2/ 2;">{{data.description}}</textarea>
+                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.description}}</div>
             </div>
         </div>
 
-        <div class="kiTechMaintMaxContent">
-            {{#if data.actor}}
-            <div>
-                {{#if data.unified}}
-                <div class="techExpandContent">
-                    {{#if data.innatePower}}
-                    <span> {{localize "abfalter.kiTab.innatePowerMaint"}} </span>
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <div class="kiTechContent">
+                <h5> {{localize "abfalter.kiTab.kiTechnique"}} </h5>
+                <div>
+                    <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.mk"}} </span> <input type="number" name="data.mk" value="{{data.mk}}" /> </label>
+                </div>
+
+                <div class="kiTechTypeMax">
+                    <span> {{localize "abfalter.kiTab.ki"}} </span>
+                    <span> {{localize "abfalter.basicInfo.agi"}} </span>
+                    <span> {{localize "abfalter.basicInfo.con"}} </span>
+                    <span> {{localize "abfalter.basicInfo.dex"}} </span>
+                    <span> {{localize "abfalter.basicInfo.str"}} </span>
+                    <span> {{localize "abfalter.basicInfo.pow"}} </span>
+                    <span> {{localize "abfalter.basicInfo.wp"}} </span>
+                    <span> {{localize "abfalter.kiTab.actionInfo"}} </span>
+                </div>
+
+                <div class="kiTechUseMax">
+                    <span> {{localize "abfalter.kiTab.use"}} </span>
+                    <input name="data.use.agi" type="number" value="{{data.use.agi}}" />
+                    <input name="data.use.con" type="number" value="{{data.use.con}}" />
+                    <input name="data.use.dex" type="number" value="{{data.use.dex}}" />
+                    <input name="data.use.str" type="number" value="{{data.use.str}}" />
+                    <input name="data.use.pow" type="number" value="{{data.use.pow}}" />
+                    <input name="data.use.wp" type="number" value="{{data.use.wp}}" />
+                    <div class="csSelect techSelect">
+                        <select name="data.frequency" data-dtype="number">
+                            {{#select data.frequency}}
+                            <option value="">  </option>
+                            <option value="{{localize "abfalter.kiTab.action"}}"> {{localize "abfalter.kiTab.action"}} </option>
+                            <option value="{{localize "abfalter.kiTab.turn"}}"> {{localize "abfalter.kiTab.turn"}} </option>
+                            <option value="{{localize "abfalter.kiTab.variable"}}"> {{localize "abfalter.kiTab.variable"}} </option>
+                            {{/select}}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="kiTechMaintMaxContent">
+                    {{#if data.actor}}
+                    <div>
+                        {{#if data.unified}}
+                        <div class="techExpandContent">
+                            {{#if data.innatePower}}
+                            <span> {{localize "abfalter.kiTab.innatePowerMaint"}} </span>
+                            {{else}}
+                            <span> {{localize "abfalter.kiTab.unifiedMaint"}} </span>
+                            {{/if}}
+                            <input name="data.maint.unified" type="number" value="{{data.maint.unified}}" />
+                        </div>
+                        {{else}}
+                        <span> {{localize "abfalter.kiTab.maint"}} </span>
+                        <input name="data.maint.agi" type="number" value="{{data.maint.agi}}" />
+                        <input name="data.maint.con" type="number" value="{{data.maint.con}}" />
+                        <input name="data.maint.dex" type="number" value="{{data.maint.dex}}" />
+                        <input name="data.maint.str" type="number" value="{{data.maint.str}}" />
+                        <input name="data.maint.pow" type="number" value="{{data.maint.pow}}" />
+                        <input name="data.maint.wp" type="number" value="{{data.maint.wp}}" />
+                        {{/if}}
+                        <div class="csSelect techSelect">
+                            <select name="data.actionType" data-dtype="number">
+                                {{#select data.actionType}}
+                                <option value="">  </option>
+                                <option value="{{localize "abfalter.kiTab.attack"}}"> {{localize "abfalter.kiTab.attack"}} </option>
+                                <option value="{{localize "abfalter.kiTab.defense"}}"> {{localize "abfalter.kiTab.defense"}} </option>
+                                <option value="{{localize "abfalter.kiTab.counterAttack"}}"> {{localize "abfalter.kiTab.counterAttack"}} </option>
+                                <option value="{{localize "abfalter.kiTab.variable"}}"> {{localize "abfalter.kiTab.variable"}} </option>
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
                     {{else}}
-                    <span> {{localize "abfalter.kiTab.unifiedMaint"}} </span>
+                    <div>
+                        <span> {{localize "abfalter.kiTab.maint"}} </span>
+                        <input name="data.maint.agi" type="number" value="{{data.maint.agi}}" />
+                        <input name="data.maint.con" type="number" value="{{data.maint.con}}" />
+                        <input name="data.maint.dex" type="number" value="{{data.maint.dex}}" />
+                        <input name="data.maint.str" type="number" value="{{data.maint.str}}" />
+                        <input name="data.maint.pow" type="number" value="{{data.maint.pow}}" />
+                        <input name="data.maint.wp" type="number" value="{{data.maint.wp}}" />
+                        <div class="csSelect techSelect">
+                            <select name="data.actionType" data-dtype="number">
+                                {{#select data.actionType}}
+                                <option value="">  </option>
+                                <option value="{{localize "abfalter.kiTab.attack"}}"> {{localize "abfalter.kiTab.attack"}} </option>
+                                <option value="{{localize "abfalter.kiTab.defense"}}"> {{localize "abfalter.kiTab.defense"}} </option>
+                                <option value="{{localize "abfalter.kiTab.counterAttack"}}"> {{localize "abfalter.kiTab.counterAttack"}} </option>
+                                <option value="{{localize "abfalter.kiTab.variable"}}"> {{localize "abfalter.kiTab.variable"}} </option>
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span> {{localize "abfalter.kiTab.unifiedMaint"}} </span>
+                        <input name="data.maint.unified" type="number" value="{{data.maint.unified}}" />
+                    </div>
                     {{/if}}
-                    <input name="data.maint.unified" type="number" value="{{data.maint.unified}}" />
                 </div>
-                {{else}}
-                <span> {{localize "abfalter.kiTab.maint"}} </span>
-                <input name="data.maint.agi" type="number" value="{{data.maint.agi}}" />
-                <input name="data.maint.con" type="number" value="{{data.maint.con}}" />
-                <input name="data.maint.dex" type="number" value="{{data.maint.dex}}" />
-                <input name="data.maint.str" type="number" value="{{data.maint.str}}" />
-                <input name="data.maint.pow" type="number" value="{{data.maint.pow}}" />
-                <input name="data.maint.wp" type="number" value="{{data.maint.wp}}" />
-                {{/if}}
-                <div class="csSelect techSelect">
-                    <select name="data.actionType" data-dtype="number">
-                        {{#select data.actionType}}
-                        <option value="">  </option>
-                        <option value="{{localize "abfalter.kiTab.attack"}}"> {{localize "abfalter.kiTab.attack"}} </option>
-                        <option value="{{localize "abfalter.kiTab.defense"}}"> {{localize "abfalter.kiTab.defense"}} </option>
-                        <option value="{{localize "abfalter.kiTab.counterAttack"}}"> {{localize "abfalter.kiTab.counterAttack"}} </option>
-                        <option value="{{localize "abfalter.kiTab.variable"}}"> {{localize "abfalter.kiTab.variable"}} </option>
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
-            {{else}}
-            <div>
-                <span> {{localize "abfalter.kiTab.maint"}} </span>
-                <input name="data.maint.agi" type="number" value="{{data.maint.agi}}" />
-                <input name="data.maint.con" type="number" value="{{data.maint.con}}" />
-                <input name="data.maint.dex" type="number" value="{{data.maint.dex}}" />
-                <input name="data.maint.str" type="number" value="{{data.maint.str}}" />
-                <input name="data.maint.pow" type="number" value="{{data.maint.pow}}" />
-                <input name="data.maint.wp" type="number" value="{{data.maint.wp}}" />
-                <div class="csSelect techSelect">
-                    <select name="data.actionType" data-dtype="number">
-                        {{#select data.actionType}}
-                        <option value="">  </option>
-                        <option value="{{localize "abfalter.kiTab.attack"}}"> {{localize "abfalter.kiTab.attack"}} </option>
-                        <option value="{{localize "abfalter.kiTab.defense"}}"> {{localize "abfalter.kiTab.defense"}} </option>
-                        <option value="{{localize "abfalter.kiTab.counterAttack"}}"> {{localize "abfalter.kiTab.counterAttack"}} </option>
-                        <option value="{{localize "abfalter.kiTab.variable"}}"> {{localize "abfalter.kiTab.variable"}} </option>
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
 
-            <div>
-                <span> {{localize "abfalter.kiTab.unifiedMaint"}} </span>
-                <input name="data.maint.unified" type="number" value="{{data.maint.unified}}" />
+                <div></div>
             </div>
-            {{/if}}
         </div>
 
-        <h6> {{localize "abfalter.basicInfo.description"}} </h6>
-        <div style="display: grid;">
-            <textarea class="textarea-auto-resize" rows="5" name="data.description" style="grid-area: 1 / 1 / 2/ 2;">{{data.description}}</textarea>
-            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.description}}</div>
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> systems/abfalter/templates/actor/parts/active-effects.html }}
         </div>
-    </div>
+    </section>
+
 </form>

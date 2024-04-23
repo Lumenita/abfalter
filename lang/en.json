@@ -923,6 +923,10 @@
       "totalCharDp": "Total Char. DP Spent",
       "totalPowDp": "Total Powers DP Spent",
       "totalDpSpent": "Total DP Spent"
+    },
+    "activeEffectChanges": {
+      "atk": "Attack",
+      "blk": "Block"
     }
   }
 }

@@ -8,7 +8,7 @@ export const preloadHandlebarsTemplates = () => {
         templates.dialog.combat.combatAttackDialog.main,
         templates.dialog.combat.combatAttackDialog.parts.combat,
         templates.dialog.combat.combatAttackDialog.parts.mystic,
-        // actor sheets
+        //actor tabs
         "systems/abfalter/templates/actor/parts/bio.html",
         "systems/abfalter/templates/actor/parts/general.html",
         "systems/abfalter/templates/actor/parts/background.html",
@@ -17,9 +17,11 @@ export const preloadHandlebarsTemplates = () => {
         "systems/abfalter/templates/actor/parts/ki.html",
         "systems/abfalter/templates/actor/parts/armory.html",
         "systems/abfalter/templates/actor/parts/settings.html",
-        "systems/abfalter/templates/actor/parts/metaMagic.html",
         "systems/abfalter/templates/actor/parts/monster.html",
-        "systems/abfalter/templates/actor/parts/effect.html"
+        "systems/abfalter/templates/actor/parts/effect.html",
+        //partials
+        "systems/abfalter/templates/actor/parts/metaMagic.html",
+        "systems/abfalter/templates/actor/parts/active-effects.html"
     ];
     return loadTemplates(templatePaths);
 };

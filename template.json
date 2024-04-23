@@ -2101,8 +2101,9 @@
       "gnosis": ""
     },
     "effect": {
-      "templates": [ "itemDescription" ],
-      "expand": false
+      "combat": {
+        "attack": 0
+      }
     },
     "maintPower": {
       "templates": [ "itemDescription" ],

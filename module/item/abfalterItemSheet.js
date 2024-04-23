@@ -1,3 +1,5 @@
+import { onManageActiveEffect, prepareActiveEffectCategories } from '../helpers/effects.js';
+
 export default class abfalterItemSheet extends ItemSheet {
 
     constructor(...args) {
@@ -101,12 +103,21 @@ export default class abfalterItemSheet extends ItemSheet {
             editable: this.isEditable,
             item: baseData.item,
             data: baseData.item.system,
+            effects: prepareActiveEffectCategories(this.item.effects),
             config: CONFIG.abfalter,
         };
         return sheetData;
     }
 
     activateListeners(html) {
+        super.activateListeners(html);
+
+        $("textarea.textarea-auto-resize").on("input", function () {
+            this.nextElementSibling.textContent = this.value;
+        });
+
+        // Everything below here is only needed if the sheet is editable
+        if (!this.isEditable) return;
 
         html.find(".toggleBoolean").click(ev => {
             let value = $(ev.currentTarget).attr("data-ability");
@@ -114,10 +125,9 @@ export default class abfalterItemSheet extends ItemSheet {
             value = !(value === 'true');
             this.document.update({ [label]: value });
         });
-
-        $("textarea.textarea-auto-resize").on("input", function () {
-            this.nextElementSibling.textContent = this.value;
+        html.on('click', '.effect-control', (ev) => {
+            onManageActiveEffect(ev, this.item);
         });
-        super.activateListeners(html);
     }
 }
+
