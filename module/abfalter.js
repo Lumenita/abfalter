@@ -11,7 +11,7 @@ import { customMacroBar } from "./autoCombat/customMacroBar.js";
 import { abfalterSettings } from "./utilities/abfalterSettings.js";
 import { migrateWorld } from "./utilities/migration.js";
 import { abfalterSettingsKeys } from "./utilities/abfalterSettings.js";
-import abfalterEffectConfig from "./sheets/abfalterEffectConfig.js";
+import abfalterEffectConfig from "./helpers/abfalterEffectConfig.js";
 
 Hooks.once("init", async () => {
     console.log("abfalter | Initializing Anima Beyond Fantasy Alter System");

@@ -1,4 +1,3 @@
-
 export class metaMagicSheet extends ActorSheet {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {

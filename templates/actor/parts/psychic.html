@@ -79,16 +79,16 @@
             <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.pprojfinal" value="{{data.pprojfinal}}" readonly /> </label>
             {{#if data.toggles.moduleStatus}}
             <div class="pmodButton">
-                <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.basicInfo.attack"}}: {{data.atkfinal}} </span>
+                <button type="button" class="combatRoll" data-roll="{{data.pprojAtkModule}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
+                    <span> {{localize "abfalter.basicInfo.attack"}}: {{data.pprojAtkModule}} </span>
                 </button>
                 {{#if data.toggles.psychicDodgeStatus}}
-                <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.basicInfo.dodge"}}: {{data.dodfinal}} </span>
+                <button type="button" class="combatRoll" data-roll="{{data.pprojDodModule}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
+                    <span> {{localize "abfalter.basicInfo.dodge"}}: {{data.pprojDodModule}} </span>
                 </button>
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.basicInfo.block"}}: {{data.blkfinal}} </span>
+                <button type="button" class="combatRoll" data-roll="{{data.pprojDefModule}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
+                    <span> {{localize "abfalter.basicInfo.block"}}: {{data.pprojDefModule}} </span>
                 </button>
                 {{/if}}
             </div>

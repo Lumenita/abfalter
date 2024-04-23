@@ -1,6 +1,6 @@
 import { openModifierDialogue } from "../diceroller.js";
-import { metaMagicSheet } from "./metaMagicSheet.js";
-import * as actorFunctions from "./actorFunctions.js";
+import { metaMagicSheet } from "../helpers/metaMagicSheet.js";
+import * as actorFunctions from "../helpers/actorFunctions.js";
 import { onManageActiveEffect, prepareActiveEffectCategories } from '../helpers/effects.js';
 
 export default class abfalterCharacterSheet extends ActorSheet {

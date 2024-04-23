@@ -212,554 +212,6 @@ export default class abfalterActor extends Actor {
         data.stats.Dexterity.final += data.arsMagnus.dragonDoor || 0;
         data.stats.Perception.final += data.arsMagnus.dragonDoor || 0;
 
-        for (let [key, stat] of Object.entries(data.stats)) {
-            if (30 < stat.final) {
-                stat.final = 30;
-            }
-            switch (stat.final) {
-                case 0:
-                    stat.mod = -40;
-                    break;
-                case 1:
-                    stat.mod = -30;
-                    break;
-                case 2:
-                    stat.mod = -20;
-                    break;
-                case 3:
-                    stat.mod = -10;
-                    break;
-                case 4:
-                    stat.mod = -5;
-                    break;
-                case 5:
-                    stat.mod = 0;
-                    break;
-                case 6:
-                case 7:
-                    stat.mod = 5;
-                    break;
-                case 8:
-                case 9:
-                    stat.mod = 10;
-                    break;
-                case 10:
-                    stat.mod = 15;
-                    break;
-                case 11:
-                case 12:
-                    stat.mod = 20;
-                    break;
-                case 13:
-                case 14:
-                    stat.mod = 25;
-                    break;
-                case 15:
-                    stat.mod = 30;
-                    break;
-                case 16:
-                case 17:
-                    stat.mod = 35;
-                    break;
-                case 18:
-                case 19:
-                    stat.mod = 40;
-                    break;
-                case 20:
-                    stat.mod = 45;
-                    break;
-                case 21:
-                case 22:
-                    stat.mod = 50;
-                    break;
-                case 23:
-                case 24:
-                    stat.mod = 55;
-                    break;
-                case 25:
-                    stat.mod = 60;
-                    break;
-                case 26:
-                case 27:
-                    stat.mod = 65;
-                    break;
-                case 28:
-                case 29:
-                    stat.mod = 70;
-                    break;
-                case 30:
-                    stat.mod = 75;
-                    break;
-                default:
-                    stat.mod = -40;
-            }
-
-            stat.opposedfinal = Math.floor((stat.final + stat.opposed) + ~~(data.aamFinal / 20));
-            //Ki Pools
-            if (stat != "Intelligence" && "Perception") {
-                if (stat.final >= 1 && stat.final <= 9) {
-                    stat.kiPoolAccuBase = 1;
-                } else if (stat.final >= 10 && stat.final <= 12) {
-                    stat.kiPoolAccuBase = 2;
-                } else if (stat.final >= 13 && stat.final <= 15) {
-                    stat.kiPoolAccuBase = 3;
-                } else if (stat.final >= 16) {
-                    stat.kiPoolAccuBase = 4;
-                } else {
-                    stat.kiPoolAccuBase = 0;
-                }
-                if (stat.final <= 10) {
-                    stat.kiPoolBase = Math.floor(stat.final);
-                } else if (stat.final > 10) {
-                    stat.kiPoolBase = Math.floor(((stat.final - 10) * 2) + 10);
-                } else {
-                    stat.kiPoolBase = 0;
-                }
-            }
-        }
-
-        //Calculating Number of Actions
-        const actnumcalc = ~~data.stats.Agility.final + ~~data.stats.Dexterity.final;
-        if (actnumcalc < 0) {
-            actnumcalc = 0;
-        }
-        switch (actnumcalc) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-                data.actionnumber = 1;
-                break;
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-                data.actionnumber = 2;
-                break;
-            case 15:
-            case 16:
-            case 17:
-            case 18:
-            case 19:
-                data.actionnumber = 3;
-                break;
-            case 20:
-            case 21:
-            case 22:
-                data.actionnumber = 4;
-                break;
-            case 23:
-            case 24:
-            case 25:
-                data.actionnumber = 5;
-                break;
-            case 26:
-            case 27:
-            case 28:
-                data.actionnumber = 6;
-                break;
-            case 29:
-            case 30:
-            case 31:
-                data.actionnumber = 8;
-                break;
-            default:
-                data.actionnumber = 10;
-                break;
-        }
-
-        //Lifepoint Calculation
-        data.lpbase = Math.floor(25 + 10 * data.stats.Constitution.final + data.stats.Constitution.mod - Math.ceil((data.stats.Constitution.final - 1) / data.stats.Constitution.final) * 5);
-        if (data.toggles.dmgRes == false) {
-            data.lp.max = Math.floor(data.lpbase + data.lifepoints.spec + data.lifepoints.temp + Math.ceil(data.lifepoints.multiple * data.stats.Constitution.final));
-        } else {
-            if (data.monsterStats.hpDp == null) {
-                data.monsterStats.hpDp = 0;
-            }
-            data.lifepoints.hpDmgRes = Math.floor(data.lifepoints.hpMult * data.monsterStats.hpDp);
-            data.lp.max = Math.floor(data.lpbase + data.lifepoints.spec + data.lifepoints.temp + data.lifepoints.hpDmgRes);
-
-        }
-
-        //Fatigue Calculation
-        data.fatiguebase = data.stats.Constitution.final;
-        data.fatigue.max = Math.floor(data.fatiguebase + data.fatigue.spec + data.fatigue.temp);
-        
-        //Regeneration Calculation
-        switch (data.stats.Constitution.final) {
-            case 1:
-            case 2:
-                data.regenbase = 0;
-                break;
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-                data.regenbase = 1;
-                break;
-            case 8:
-            case 9:
-                data.regenbase = 2;
-                break;
-            case 10:
-                data.regenbase = 3;
-                break;
-            case 11:
-                data.regenbase = 4;
-                break;
-            case 12:
-                data.regenbase = 5;
-                break;
-            case 13:
-                data.regenbase = 6;
-                break;
-            case 14:
-                data.regenbase = 7;
-                break;
-            case 15:
-                data.regenbase = 8;
-                break;
-            case 16:
-                data.regenbase = 9;
-                break;
-            case 17:
-                data.regenbase = 10;
-                break;
-            case 18:
-                data.regenbase = 11;
-                break;
-            case 19:
-            case 20:
-                data.regenbase = 12;
-                break;
-            default:
-                data.regenbase = 0;
-                break;
-        }
-        if (data.stats.Constitution.final > 20) {
-            data.regenbase = 12;
-        }
-        data.regenfinal = Math.min(Math.floor(data.regenbase + data.regeneration.spec + data.regeneration.temp), 20);
-        switch (data.regenfinal) {
-            case 1:
-                data.resting = "10/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "5/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 10;
-                break;
-            case 2:
-                data.resting = "20/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "10/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 20;
-                break;
-            case 3:
-                data.resting = "30/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "15/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 30;
-                break;
-            case 4:
-                data.resting = "40/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "20/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 40;
-                break;
-            case 5:
-                data.resting = "50/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "25/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 50;
-                break;
-            case 6:
-                data.resting = "75/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "30/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-15/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 75;
-                break;
-            case 7:
-                data.resting = "100/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "50/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-20/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 100;
-                break;
-            case 8:
-                data.resting = "250/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "100/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-25/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 250;
-                break;
-            case 9:
-                data.resting = "500/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "200/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-30/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 500;
-                break;
-            case 10:
-                data.resting = "1/" + game.i18n.localize('abfalter.basicInfo.minute');
-                data.notresting = "N/A";
-                data.redpenalty = "-40/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 1440;
-                break;
-            case 11:
-                data.resting = "2/" + game.i18n.localize('abfalter.basicInfo.minute');
-                data.notresting = "N/A";
-                data.redpenalty = "-50/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 2880;
-                break;
-            case 12:
-                data.resting = "5/" + game.i18n.localize('abfalter.basicInfo.minute');
-                data.notresting = "N/A";
-                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.hour');
-                data.regenValue = 7200;
-                break;
-            case 13:
-                data.resting = "10/" + game.i18n.localize('abfalter.basicInfo.minute');
-                data.notresting = "N/A";
-                data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.hour');
-                data.regenValue = 10000;
-                break;
-            case 14:
-                data.resting = "1/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "-15/" + game.i18n.localize('abfalter.basicInfo.hour');
-                data.regenValue = 20000;
-                break;
-            case 15:
-                data.resting = "5/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "-20/" + game.i18n.localize('abfalter.basicInfo.hour');
-                data.regenValue = 50000;
-                break;
-            case 16:
-                data.resting = "10/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "-50/" + game.i18n.localize('abfalter.basicInfo.minute');
-                data.regenValue = 100000;
-                break;
-            case 17:
-                data.resting = "25/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "-10/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.regenValue = 100000;
-                break;
-            case 18:
-                data.resting = "50/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "-25/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.regenValue = 100000;
-                break;
-            case 19:
-                data.resting = "100/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "All/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.regenValue = 100000;
-                break;
-            case 20:
-                data.resting = "200/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "All/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.regenValue = 100000;
-                break;
-            default:
-                data.resting = "0";
-                data.notresting = "0";
-                data.redpenalty = "0";
-                data.regenValue = 0;
-                break;
-        }
-
-
-
-        //Initiative
-        data.initiative.extraStats = Math.floor(data.stats.Dexterity.mod + data.stats.Agility.mod);
-        data.iniBase = Math.floor(data.stats.Dexterity.mod + data.stats.Agility.mod + data.initiative.sizeBase);
-        if (data.aamFinal < 0) {
-            data.iniBase = Math.floor(data.iniBase + ~~(data.aamFinal / 2));
-        }
-
-        //Ki Accumulation
-        data.kiPoolAgiAccumTot = Math.max(0, Math.floor(data.stats.Agility.kiPoolAccuBase + data.kiPool.agi.spec + data.kiPool.agi.temp + data.kiPool.agi.default + Math.min(0, ~~(data.aamFinal / 20))));
-        data.kiPoolConAccumTot = Math.max(0, Math.floor(data.stats.Constitution.kiPoolAccuBase + data.kiPool.con.spec + data.kiPool.con.temp + data.kiPool.con.default + Math.min(0, ~~(data.aamFinal / 20))));
-        data.kiPoolDexAccumTot = Math.max(0, Math.floor(data.stats.Dexterity.kiPoolAccuBase + data.kiPool.dex.spec + data.kiPool.dex.temp + data.kiPool.dex.default + Math.min(0, ~~(data.aamFinal / 20))));
-        data.kiPoolStrAccumTot = Math.max(0, Math.floor(data.stats.Strength.kiPoolAccuBase + data.kiPool.str.spec + data.kiPool.str.temp + data.kiPool.str.default + Math.min(0, ~~(data.aamFinal / 20))));
-        data.kiPoolPowAccumTot = Math.max(0, Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + data.kiPool.pow.default + Math.min(0, ~~(data.aamFinal / 20))));
-        data.kiPoolWPAccumTot = Math.max(0, Math.floor(data.stats.Willpower.kiPoolAccuBase + data.kiPool.wp.spec + data.kiPool.wp.temp + data.kiPool.wp.default + Math.min(0, ~~(data.aamFinal / 20))));
-
-        //Ki Pool
-        if (data.toggles.innatePower == true) {
-            switch (data.kiPool.innate.type) {
-                case "AGI":
-                    data.stats.Agility.kiPoolBase = data.stats.Agility.kiPoolBase * 6;
-                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.agi');
-                    break;
-                case "CON":
-                    data.stats.Constitution.kiPoolBase = data.stats.Constitution.kiPoolBase * 6;
-                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.con');
-                    break;
-                case "DEX":
-                    data.stats.Dexterity.kiPoolBase = data.stats.Dexterity.kiPoolBase * 6;
-                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.dex');
-                    break;
-                case "STR":
-                    data.stats.Strength.kiPoolBase = data.stats.Strength.kiPoolBase * 6;
-                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.str');
-                    break;
-                case "POW":
-                    data.stats.Power.kiPoolBase = data.stats.Power.kiPoolBase * 6;
-                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.pow');
-                    break;
-                case "WP":
-                    data.stats.Willpower.kiPoolBase = data.stats.Willpower.kiPoolBase * 6;
-                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.wp');
-                    break;
-                default:
-                    data.kiPool.innate.tag = "Error";
-                    break;
-            }
-        }
-
-        data.kiPoolAgiTot = Math.floor(data.stats.Agility.kiPoolBase + data.kiPool.agi.specMax + data.kiPool.agi.tempMax + data.kiPool.agi.defaultMax);
-        data.kiPoolConTot = Math.floor(data.stats.Constitution.kiPoolBase + data.kiPool.con.specMax + data.kiPool.con.tempMax + data.kiPool.con.defaultMax);
-        data.kiPoolDexTot = Math.floor(data.stats.Dexterity.kiPoolBase + data.kiPool.dex.specMax + data.kiPool.dex.tempMax + data.kiPool.dex.defaultMax);
-        data.kiPoolStrTot = Math.floor(data.stats.Strength.kiPoolBase + data.kiPool.str.specMax + data.kiPool.str.tempMax + data.kiPool.str.defaultMax);
-        data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax + data.kiPool.pow.defaultMax);
-        data.kiPoolWPTot = Math.floor(data.stats.Willpower.kiPoolBase + data.kiPool.wp.specMax + data.kiPool.wp.tempMax + data.kiPool.wp.defaultMax);
-
-        if (data.toggles.unifiedPools == true) {
-            if (data.toggles.innatePower == true) {
-                switch (data.kiPool.innate.type) {
-                    case "AGI":
-                        data.unifiedKi.max = data.kiPoolAgiTot;
-                        data.kiPoolConTot = 0;
-                        data.kiPoolDexTot = 0;
-                        data.kiPoolStrTot = 0;
-                        data.kiPoolPowTot = 0;
-                        data.kiPoolWPTot = 0;
-                        data.innateAgi = true;
-                        break;
-                    case "CON":
-                        data.unifiedKi.max = data.kiPoolConTot;
-                        data.kiPoolAgiTot = 0;
-                        data.kiPoolDexTot = 0;
-                        data.kiPoolStrTot = 0;
-                        data.kiPoolPowTot = 0;
-                        data.kiPoolWPTot = 0;
-                        break;
-                    case "DEX":
-                        data.unifiedKi.max = data.kiPoolDexTot;
-                        data.kiPoolAgiTot = 0;
-                        data.kiPoolConTot = 0;
-                        data.kiPoolStrTot = 0;
-                        data.kiPoolPowTot = 0;
-                        data.kiPoolWPTot = 0;
-                        break;
-                    case "STR":
-                        data.unifiedKi.max = data.kiPoolStrTot;
-                        data.kiPoolAgiTot = 0;
-                        data.kiPoolConTot = 0;
-                        data.kiPoolDexTot = 0;
-                        data.kiPoolPowTot = 0;
-                        data.kiPoolWPTot = 0;
-                        break;
-                    case "POW":
-                        data.unifiedKi.max = data.kiPoolPowTot;
-                        data.kiPoolAgiTot = 0;
-                        data.kiPoolConTot = 0;
-                        data.kiPoolDexTot = 0;
-                        data.kiPoolStrTot = 0;
-                        data.kiPoolWPTot = 0;
-                        break;
-                    case "WP":
-                        data.unifiedKi.max = data.kiPoolWPTot;
-                        data.kiPoolAgiTot = 0;
-                        data.kiPoolConTot = 0;
-                        data.kiPoolDexTot = 0;
-                        data.kiPoolStrTot = 0;
-                        data.kiPoolPowTot = 0;
-                        break;
-                    default:
-                        data.kiPool.innate.tag = "Error";
-                        break;
-                }
-            } else {
-                data.unifiedKi.max = Math.floor(data.kiPoolAgiTot + data.kiPoolConTot + data.kiPoolDexTot + data.kiPoolStrTot + data.kiPoolPowTot + data.kiPoolWPTot);
-            }
-        }
-
-        //atk, blk, dodge
-        data.atkfinal = Math.floor(data.combatstats.atkbase + data.combatstats.atkspecial + data.combatstats.atktemp + data.stats.Dexterity.mod + data.aamFinal);
-        data.blkfinal = Math.floor(data.combatstats.blkbase + data.combatstats.blkspecial + data.combatstats.blktemp + data.stats.Dexterity.mod + data.aamFinal);
-        data.dodfinal = Math.floor(data.combatstats.dodbase + data.combatstats.dodspecial + data.combatstats.dodtemp + data.stats.Agility.mod + data.aamFinal);
-
-        //Magic Projection data.mproj.spec + data.mproj.temp
-        data.mprojfinal = Math.floor(data.mproj.base + data.stats.Dexterity.mod + data.aamFinal);
-        data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.spec + data.mproj.temp + data.mproj.imbalance);
-        data.mprojfinaldef = Math.floor(data.mprojfinal + data.mproj.spec2 + data.mproj.temp2 - data.mproj.imbalance);
-
-        data.mprojAtkModule = Math.floor(data.combatstats.atkbase + data.mproj.spec + data.mproj.temp + data.stats.Dexterity.mod + data.aamFinal);
-        data.mprojDefModule = Math.floor(data.combatstats.blkbase + data.mproj.spec2 + data.mproj.temp2 + data.stats.Dexterity.mod + data.aamFinal);
-        data.mprojDodModule = Math.floor(data.combatstats.dodbase + data.mproj.spec2 + data.mproj.temp2 + data.stats.Dexterity.mod + data.aamFinal);
-
-        // Psychic Potential
-        if (data.stats.Willpower.final < 5) {
-            data.fromWP = 0;
-        } else if (data.stats.Willpower.final >= 5 && data.stats.Willpower.final < 15) {
-            data.fromWP = Math.floor((data.stats.Willpower.final - 4) * 10);
-        } else if (data.stats.Willpower.final >= 15) {
-            data.fromWP = Math.floor(((data.stats.Willpower.final - 14) * 20) + 100)
-        }
-        data.finalPotential = Math.floor(data.ppotential.base + data.fromWP + +data.ppotential.spent + data.ppotential.spec + data.ppotential.temp);
-        switch (data.ppotential.spent) {
-            case "10":
-                data.ppotentialpp = 1;
-                break;
-            case "20":
-                data.ppotentialpp = 3;
-                break;
-            case "30":
-                data.ppotentialpp = 6;
-                break;
-            case "40":
-                data.ppotentialpp = 10;
-                break;
-            case "50":
-                data.ppotentialpp = 15;
-                break;
-            case "60":
-                data.ppotentialpp = 21;
-                break;
-            case "70":
-                data.ppotentialpp = 28;
-                break;
-            case "80":
-                data.ppotentialpp = 36;
-                break;
-            case "90":
-                data.ppotentialpp = 45;
-                break;
-            case "100":
-                data.ppotentialpp = 55;
-                break;
-            default:
-                data.ppotentialpp = 0;
-                break;
-        }
-
-        // Psychic Projection
-        data.pprojfinal = Math.floor(data.pproj.base + data.pproj.spec + data.pproj.temp + data.stats.Dexterity.mod + data.aamFinal);
-
-        // Wear Armor
-        data.wearArmorFinal = Math.floor(data.wearArmor.base + data.wearArmor.spec + data.wearArmor.temp + data.stats.Strength.mod);
-
         //MetaMagic Capstones
         data.doubleDamageDesc = game.i18n.localize('abfalter.metaMagic.doubleDmgDesc');
         data.highMagicDesc = game.i18n.localize('abfalter.metaMagic.highMagicDesc');
@@ -1060,6 +512,556 @@ export default class abfalterActor extends Actor {
         const data = this.system;
         const stats = data.stats;
 
+        data.aamFinal += data.aamBonus;
+
+        for (let [key, stat] of Object.entries(data.stats)) {
+            if (30 < stat.final) {
+                stat.final = 30;
+            }
+            switch (stat.final) {
+                case 0:
+                    stat.mod = -40;
+                    break;
+                case 1:
+                    stat.mod = -30;
+                    break;
+                case 2:
+                    stat.mod = -20;
+                    break;
+                case 3:
+                    stat.mod = -10;
+                    break;
+                case 4:
+                    stat.mod = -5;
+                    break;
+                case 5:
+                    stat.mod = 0;
+                    break;
+                case 6:
+                case 7:
+                    stat.mod = 5;
+                    break;
+                case 8:
+                case 9:
+                    stat.mod = 10;
+                    break;
+                case 10:
+                    stat.mod = 15;
+                    break;
+                case 11:
+                case 12:
+                    stat.mod = 20;
+                    break;
+                case 13:
+                case 14:
+                    stat.mod = 25;
+                    break;
+                case 15:
+                    stat.mod = 30;
+                    break;
+                case 16:
+                case 17:
+                    stat.mod = 35;
+                    break;
+                case 18:
+                case 19:
+                    stat.mod = 40;
+                    break;
+                case 20:
+                    stat.mod = 45;
+                    break;
+                case 21:
+                case 22:
+                    stat.mod = 50;
+                    break;
+                case 23:
+                case 24:
+                    stat.mod = 55;
+                    break;
+                case 25:
+                    stat.mod = 60;
+                    break;
+                case 26:
+                case 27:
+                    stat.mod = 65;
+                    break;
+                case 28:
+                case 29:
+                    stat.mod = 70;
+                    break;
+                case 30:
+                    stat.mod = 75;
+                    break;
+                default:
+                    stat.mod = -40;
+            }
+
+            stat.opposedfinal = Math.floor((stat.final + stat.opposed) + ~~(data.aamFinal / 20) + stat.opposedBonus);
+            //Ki Pools
+            if (stat != "Intelligence" && "Perception") {
+                if (stat.final >= 1 && stat.final <= 9) {
+                    stat.kiPoolAccuBase = 1;
+                } else if (stat.final >= 10 && stat.final <= 12) {
+                    stat.kiPoolAccuBase = 2;
+                } else if (stat.final >= 13 && stat.final <= 15) {
+                    stat.kiPoolAccuBase = 3;
+                } else if (stat.final >= 16) {
+                    stat.kiPoolAccuBase = 4;
+                } else {
+                    stat.kiPoolAccuBase = 0;
+                }
+                if (stat.final <= 10) {
+                    stat.kiPoolBase = Math.floor(stat.final);
+                } else if (stat.final > 10) {
+                    stat.kiPoolBase = Math.floor(((stat.final - 10) * 2) + 10);
+                } else {
+                    stat.kiPoolBase = 0;
+                }
+            }
+        }
+
+        //Calculating Number of Actions
+        const actnumcalc = ~~data.stats.Agility.final + ~~data.stats.Dexterity.final;
+        if (actnumcalc < 0) {
+            actnumcalc = 0;
+        }
+        switch (actnumcalc) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+                data.actionnumber = 1;
+                break;
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+                data.actionnumber = 2;
+                break;
+            case 15:
+            case 16:
+            case 17:
+            case 18:
+            case 19:
+                data.actionnumber = 3;
+                break;
+            case 20:
+            case 21:
+            case 22:
+                data.actionnumber = 4;
+                break;
+            case 23:
+            case 24:
+            case 25:
+                data.actionnumber = 5;
+                break;
+            case 26:
+            case 27:
+            case 28:
+                data.actionnumber = 6;
+                break;
+            case 29:
+            case 30:
+            case 31:
+                data.actionnumber = 8;
+                break;
+            default:
+                data.actionnumber = 10;
+                break;
+        }
+
+        //Lifepoint Calculation
+        data.lpbase = Math.floor(25 + 10 * data.stats.Constitution.final + data.stats.Constitution.mod - Math.ceil((data.stats.Constitution.final - 1) / data.stats.Constitution.final) * 5);
+        if (data.toggles.dmgRes == false) {
+            data.lp.max = Math.floor(data.lpbase + data.lifepoints.spec + data.lifepoints.temp + data.lifepoints.bonus + Math.ceil(data.lifepoints.multiple * data.stats.Constitution.final));
+        } else {
+            if (data.monsterStats.hpDp == null) {
+                data.monsterStats.hpDp = 0;
+            }
+            data.lifepoints.hpDmgRes = Math.floor(data.lifepoints.hpMult * data.monsterStats.hpDp);
+            data.lp.max = Math.floor(data.lpbase + data.lifepoints.spec + data.lifepoints.temp + data.lifepoints.hpDmgRes + data.lifepoints.bonus);
+        }
+
+        //Fatigue Calculation
+        data.fatiguebase = data.stats.Constitution.final;
+        data.fatigue.max = Math.floor(data.fatiguebase + data.fatigue.spec + data.fatigue.temp + data.fatigue.bonus);
+        
+        //Regeneration Calculation
+        switch (data.stats.Constitution.final) {
+            case 1:
+            case 2:
+                data.regenbase = 0;
+                break;
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                data.regenbase = 1;
+                break;
+            case 8:
+            case 9:
+                data.regenbase = 2;
+                break;
+            case 10:
+                data.regenbase = 3;
+                break;
+            case 11:
+                data.regenbase = 4;
+                break;
+            case 12:
+                data.regenbase = 5;
+                break;
+            case 13:
+                data.regenbase = 6;
+                break;
+            case 14:
+                data.regenbase = 7;
+                break;
+            case 15:
+                data.regenbase = 8;
+                break;
+            case 16:
+                data.regenbase = 9;
+                break;
+            case 17:
+                data.regenbase = 10;
+                break;
+            case 18:
+                data.regenbase = 11;
+                break;
+            case 19:
+            case 20:
+                data.regenbase = 12;
+                break;
+            default:
+                data.regenbase = 0;
+                break;
+        }
+        if (data.stats.Constitution.final > 20) {
+            data.regenbase = 12;
+        }
+        data.regenfinal = Math.min(Math.floor(data.regenbase + data.regeneration.spec + data.regeneration.temp + data.regeneration.bonus), 20);
+        switch (data.regenfinal) {
+            case 1:
+                data.resting = "10/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "5/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 10;
+                break;
+            case 2:
+                data.resting = "20/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "10/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 20;
+                break;
+            case 3:
+                data.resting = "30/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "15/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 30;
+                break;
+            case 4:
+                data.resting = "40/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "20/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 40;
+                break;
+            case 5:
+                data.resting = "50/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "25/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 50;
+                break;
+            case 6:
+                data.resting = "75/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "30/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-15/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 75;
+                break;
+            case 7:
+                data.resting = "100/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "50/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-20/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 100;
+                break;
+            case 8:
+                data.resting = "250/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "100/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-25/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 250;
+                break;
+            case 9:
+                data.resting = "500/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.notresting = "200/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.redpenalty = "-30/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 500;
+                break;
+            case 10:
+                data.resting = "1/" + game.i18n.localize('abfalter.basicInfo.minute');
+                data.notresting = "N/A";
+                data.redpenalty = "-40/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 1440;
+                break;
+            case 11:
+                data.resting = "2/" + game.i18n.localize('abfalter.basicInfo.minute');
+                data.notresting = "N/A";
+                data.redpenalty = "-50/" + game.i18n.localize('abfalter.basicInfo.day');
+                data.regenValue = 2880;
+                break;
+            case 12:
+                data.resting = "5/" + game.i18n.localize('abfalter.basicInfo.minute');
+                data.notresting = "N/A";
+                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.hour');
+                data.regenValue = 7200;
+                break;
+            case 13:
+                data.resting = "10/" + game.i18n.localize('abfalter.basicInfo.minute');
+                data.notresting = "N/A";
+                data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.hour');
+                data.regenValue = 10000;
+                break;
+            case 14:
+                data.resting = "1/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.notresting = "N/A";
+                data.redpenalty = "-15/" + game.i18n.localize('abfalter.basicInfo.hour');
+                data.regenValue = 20000;
+                break;
+            case 15:
+                data.resting = "5/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.notresting = "N/A";
+                data.redpenalty = "-20/" + game.i18n.localize('abfalter.basicInfo.hour');
+                data.regenValue = 50000;
+                break;
+            case 16:
+                data.resting = "10/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.notresting = "N/A";
+                data.redpenalty = "-50/" + game.i18n.localize('abfalter.basicInfo.minute');
+                data.regenValue = 100000;
+                break;
+            case 17:
+                data.resting = "25/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.notresting = "N/A";
+                data.redpenalty = "-10/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.regenValue = 100000;
+                break;
+            case 18:
+                data.resting = "50/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.notresting = "N/A";
+                data.redpenalty = "-25/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.regenValue = 100000;
+                break;
+            case 19:
+                data.resting = "100/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.notresting = "N/A";
+                data.redpenalty = "All/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.regenValue = 100000;
+                break;
+            case 20:
+                data.resting = "200/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.notresting = "N/A";
+                data.redpenalty = "All/" + game.i18n.localize('abfalter.magicTab.turn');
+                data.regenValue = 100000;
+                break;
+            default:
+                data.resting = "0";
+                data.notresting = "0";
+                data.redpenalty = "0";
+                data.regenValue = 0;
+                break;
+        }
+
+        //Initiative
+        data.initiative.extraStats = Math.floor(data.stats.Dexterity.mod + data.stats.Agility.mod);
+        data.iniBase = Math.floor(data.stats.Dexterity.mod + data.stats.Agility.mod + data.initiative.sizeBase);
+        if (data.aamFinal < 0) {
+            data.iniBase = Math.floor(data.iniBase + ~~(data.aamFinal / 2));
+        }
+
+        //Ki Accumulation
+        data.kiPoolAgiAccumTot = Math.max(0, Math.floor(data.stats.Agility.kiPoolAccuBase + data.kiPool.agi.spec + data.kiPool.agi.temp + data.kiPool.agi.bonus + data.kiPool.agi.default + Math.min(0, ~~(data.aamFinal / 20))));
+        data.kiPoolConAccumTot = Math.max(0, Math.floor(data.stats.Constitution.kiPoolAccuBase + data.kiPool.con.spec + data.kiPool.con.temp + data.kiPool.con.bonus + data.kiPool.con.default + Math.min(0, ~~(data.aamFinal / 20))));
+        data.kiPoolDexAccumTot = Math.max(0, Math.floor(data.stats.Dexterity.kiPoolAccuBase + data.kiPool.dex.spec + data.kiPool.dex.temp + data.kiPool.dex.bonus + data.kiPool.dex.default + Math.min(0, ~~(data.aamFinal / 20))));
+        data.kiPoolStrAccumTot = Math.max(0, Math.floor(data.stats.Strength.kiPoolAccuBase + data.kiPool.str.spec + data.kiPool.str.temp + data.kiPool.str.bonus + data.kiPool.str.default + Math.min(0, ~~(data.aamFinal / 20))));
+        data.kiPoolPowAccumTot = Math.max(0, Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + data.kiPool.pow.bonus + data.kiPool.pow.default + Math.min(0, ~~(data.aamFinal / 20))));
+        data.kiPoolWPAccumTot = Math.max(0, Math.floor(data.stats.Willpower.kiPoolAccuBase + data.kiPool.wp.spec + data.kiPool.wp.temp + data.kiPool.wp.bonus + data.kiPool.wp.default + Math.min(0, ~~(data.aamFinal / 20))));
+
+        //Ki Pool
+        if (data.toggles.innatePower == true) {
+            switch (data.kiPool.innate.type) {
+                case "AGI":
+                    data.stats.Agility.kiPoolBase = data.stats.Agility.kiPoolBase * 6;
+                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.agi');
+                    break;
+                case "CON":
+                    data.stats.Constitution.kiPoolBase = data.stats.Constitution.kiPoolBase * 6;
+                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.con');
+                    break;
+                case "DEX":
+                    data.stats.Dexterity.kiPoolBase = data.stats.Dexterity.kiPoolBase * 6;
+                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.dex');
+                    break;
+                case "STR":
+                    data.stats.Strength.kiPoolBase = data.stats.Strength.kiPoolBase * 6;
+                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.str');
+                    break;
+                case "POW":
+                    data.stats.Power.kiPoolBase = data.stats.Power.kiPoolBase * 6;
+                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.pow');
+                    break;
+                case "WP":
+                    data.stats.Willpower.kiPoolBase = data.stats.Willpower.kiPoolBase * 6;
+                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.wp');
+                    break;
+                default:
+                    data.kiPool.innate.tag = "Error";
+                    break;
+            }
+        }
+
+        data.kiPoolAgiTot = Math.floor(data.stats.Agility.kiPoolBase + data.kiPool.agi.specMax + data.kiPool.agi.tempMax + data.kiPool.agi.bonusMax + data.kiPool.agi.defaultMax);
+        data.kiPoolConTot = Math.floor(data.stats.Constitution.kiPoolBase + data.kiPool.con.specMax + data.kiPool.con.tempMax + data.kiPool.dex.bonusMax + data.kiPool.con.defaultMax);
+        data.kiPoolDexTot = Math.floor(data.stats.Dexterity.kiPoolBase + data.kiPool.dex.specMax + data.kiPool.dex.tempMax + data.kiPool.dex.bonusMax + data.kiPool.dex.defaultMax);
+        data.kiPoolStrTot = Math.floor(data.stats.Strength.kiPoolBase + data.kiPool.str.specMax + data.kiPool.str.tempMax + data.kiPool.str.bonusMax + data.kiPool.str.defaultMax);
+        data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax + data.kiPool.pow.bonusMax + data.kiPool.pow.defaultMax);
+        data.kiPoolWPTot = Math.floor(data.stats.Willpower.kiPoolBase + data.kiPool.wp.specMax + data.kiPool.wp.tempMax + data.kiPool.wp.bonusMax + data.kiPool.wp.defaultMax);
+
+        if (data.toggles.unifiedPools == true) {
+            if (data.toggles.innatePower == true) {
+                switch (data.kiPool.innate.type) {
+                    case "AGI":
+                        data.unifiedKi.max = Math.floor(data.kiPool.innate.bonus + data.kiPoolAgiTot);
+                        data.kiPoolConTot = 0;
+                        data.kiPoolDexTot = 0;
+                        data.kiPoolStrTot = 0;
+                        data.kiPoolPowTot = 0;
+                        data.kiPoolWPTot = 0;
+                        data.innateAgi = true;
+                        break;
+                    case "CON":
+                        data.unifiedKi.max = Math.floor(data.kiPool.innate.bonus + data.kiPoolConTot);
+                        data.kiPoolAgiTot = 0;
+                        data.kiPoolDexTot = 0;
+                        data.kiPoolStrTot = 0;
+                        data.kiPoolPowTot = 0;
+                        data.kiPoolWPTot = 0;
+                        break;
+                    case "DEX":
+                        data.unifiedKi.max = Math.floor(data.kiPool.innate.bonus + data.kiPoolDexTot);
+                        data.kiPoolAgiTot = 0;
+                        data.kiPoolConTot = 0;
+                        data.kiPoolStrTot = 0;
+                        data.kiPoolPowTot = 0;
+                        data.kiPoolWPTot = 0;
+                        break;
+                    case "STR":
+                        data.unifiedKi.max = Math.floor(data.kiPool.innate.bonus + data.kiPoolStrTot);
+                        data.kiPoolAgiTot = 0;
+                        data.kiPoolConTot = 0;
+                        data.kiPoolDexTot = 0;
+                        data.kiPoolPowTot = 0;
+                        data.kiPoolWPTot = 0;
+                        break;
+                    case "POW":
+                        data.unifiedKi.max = Math.floor(data.kiPool.innate.bonus + data.kiPoolPowTot);
+                        data.kiPoolAgiTot = 0;
+                        data.kiPoolConTot = 0;
+                        data.kiPoolDexTot = 0;
+                        data.kiPoolStrTot = 0;
+                        data.kiPoolWPTot = 0;
+                        break;
+                    case "WP":
+                        data.unifiedKi.max = Math.floor(data.kiPool.innate.bonus + data.kiPoolWPTot);
+                        data.kiPoolAgiTot = 0;
+                        data.kiPoolConTot = 0;
+                        data.kiPoolDexTot = 0;
+                        data.kiPoolStrTot = 0;
+                        data.kiPoolPowTot = 0;
+                        break;
+                    default:
+                        data.kiPool.innate.tag = "Error";
+                        break;
+                }
+            } else {
+                data.unifiedKi.max = Math.floor(data.kiPoolAgiTot + data.kiPoolConTot + data.kiPoolDexTot + data.kiPoolStrTot + data.kiPoolPowTot + data.kiPoolWPTot + data.kiPool.unifiedBonus);
+            }
+        }
+
+        //atk, blk, dodge
+        data.atkfinal = Math.floor(data.combatstats.atkbase + data.combatstats.atkspecial + data.combatstats.atktemp + data.combatstats.atkbonus + data.stats.Dexterity.mod + data.aamFinal);
+        data.blkfinal = Math.floor(data.combatstats.blkbase + data.combatstats.blkspecial + data.combatstats.blktemp + data.combatstats.blkbonus + data.stats.Dexterity.mod + data.aamFinal);
+        data.dodfinal = Math.floor(data.combatstats.dodbase + data.combatstats.dodspecial + data.combatstats.dodtemp + data.combatstats.dodbonus + data.stats.Agility.mod + data.aamFinal);
+
+        //Magic Projection data.mproj.spec + data.mproj.temp
+        data.mprojfinal = Math.floor(data.mproj.base + data.stats.Dexterity.mod + data.aamFinal);
+        data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.spec + data.mproj.temp + data.mproj.bonus + data.mproj.imbalance);
+        data.mprojfinaldef = Math.floor(data.mprojfinal + data.mproj.spec2 + data.mproj.temp2 + data.mproj.bonus2 - data.mproj.imbalance);
+
+        data.mprojAtkModule = Math.floor(data.combatstats.atkbase + data.mproj.spec + data.mproj.temp + data.mproj.bonus + data.stats.Dexterity.mod + data.aamFinal);
+        data.mprojDefModule = Math.floor(data.combatstats.blkbase + data.mproj.spec2 + data.mproj.temp2 + data.mproj.bonus2 + data.stats.Dexterity.mod + data.aamFinal);
+        data.mprojDodModule = Math.floor(data.combatstats.dodbase + data.mproj.spec2 + data.mproj.temp2 + data.mproj.bonus2 + data.stats.Dexterity.mod + data.aamFinal);
+
+        // Psychic Potential
+        if (data.stats.Willpower.final < 5) {
+            data.fromWP = 0;
+        } else if (data.stats.Willpower.final >= 5 && data.stats.Willpower.final < 15) {
+            data.fromWP = Math.floor((data.stats.Willpower.final - 4) * 10);
+        } else if (data.stats.Willpower.final >= 15) {
+            data.fromWP = Math.floor(((data.stats.Willpower.final - 14) * 20) + 100)
+        }
+        data.finalPotential = Math.floor(data.ppotential.base + data.fromWP + + data.ppotential.spent + data.ppotential.spec + data.ppotential.temp + data.ppotential.bonus);
+        switch (data.ppotential.spent) {
+            case "10":
+                data.ppotentialpp = 1;
+                break;
+            case "20":
+                data.ppotentialpp = 3;
+                break;
+            case "30":
+                data.ppotentialpp = 6;
+                break;
+            case "40":
+                data.ppotentialpp = 10;
+                break;
+            case "50":
+                data.ppotentialpp = 15;
+                break;
+            case "60":
+                data.ppotentialpp = 21;
+                break;
+            case "70":
+                data.ppotentialpp = 28;
+                break;
+            case "80":
+                data.ppotentialpp = 36;
+                break;
+            case "90":
+                data.ppotentialpp = 45;
+                break;
+            case "100":
+                data.ppotentialpp = 55;
+                break;
+            default:
+                data.ppotentialpp = 0;
+                break;
+        }
+
+        // Psychic Projection
+        data.pprojfinal = Math.floor(data.pproj.base + data.pproj.spec + data.pproj.temp + data.pproj.bonusBase + data.stats.Dexterity.mod + data.aamFinal);
+
+        data.pprojAtkModule = Math.floor(data.combatstats.atkbase + data.pproj.spec + data.pproj.temp + data.pproj.bonus + data.stats.Dexterity.mod + data.aamFinal);
+        data.pprojDefModule = Math.floor(data.combatstats.blkbase + data.pproj.spec + data.pproj.temp + data.pproj.bonus2 + data.stats.Dexterity.mod + data.aamFinal);
+        data.pprojDodModule = Math.floor(data.combatstats.dodbase + data.pproj.spec + data.pproj.temp + data.pproj.bonus2 + data.stats.Dexterity.mod + data.aamFinal);
+        // Wear Armor
+        data.wearArmorFinal = Math.floor(data.wearArmor.base + data.wearArmor.spec + data.wearArmor.temp + data.wearArmor.bonus + data.stats.Strength.mod);
+
 
         // Determine Item Values / Last used arr[123]  2                    *Look at js map
         const [level, lpbonus, ini, atk, dod, blk, weararm, mk, pp, zeon, summon, control, bind, banish, acro,
@@ -1289,12 +1291,12 @@ export default class abfalterActor extends Actor {
         //Stuff Xp, Presence, Next lvl Xp
         data.level = level; //class Bonus
         if (data.level == 0) {
-            data.dp = 400 + data.levelinfo.dpmod;
+            data.dp = 400 + data.levelinfo.dpmod + data.levelinfo.dpmodBonus;
         } else {
-            data.dp = Math.floor((data.level * 100) + 500 + data.levelinfo.dpmod);
+            data.dp = Math.floor((data.level * 100) + 500 + data.levelinfo.dpmod + data.levelinfo.dpmodBonus);
         }
-        data.presence = Math.floor((data.dp / 20) + data.levelinfo.presencemod);
-        data.nextlevel = Math.floor(((data.level + data.levelinfo.levelmod) * 25) + 75);
+        data.presence = Math.floor((data.dp / 20) + data.levelinfo.presencemod + data.levelinfo.presencemodBonus);
+        data.nextlevel = Math.floor(((data.level + data.levelinfo.levelmod + data.levelinfo.levelmodBonus) * 25) + 75);
 
         //Mk Calculations
         data.mkBonus = mk; //Class Mk
@@ -1325,7 +1327,7 @@ export default class abfalterActor extends Actor {
         data.arsMagMK = arsMk; //Ars Magnus Cost
         data.mArtMk = maMk; //Martial Arts Bonus MK
         data.kiTechMk = techMk; //Ki Technique Cost
-        data.mkFinal = Math.floor(data.mk.base + data.mk.temp + data.mk.spec + data.mkBonus + data.mArtMk); //Total Final Mk
+        data.mkFinal = Math.floor(data.mk.base + data.mk.temp + data.mk.spec + data.mk.bonus + data.mkBonus + data.mArtMk); //Total Final Mk
         data.mkUsed = Math.floor(data.limitsMK + data.kiThingMK + data.kiSealMk + data.arsMagMK + data.kiTechMk); //Total Used Mk
 
         // Wear Armor
@@ -1404,27 +1406,27 @@ export default class abfalterActor extends Actor {
                 case "Physical":
                     res.name = game.i18n.localize('abfalter.sheet.physicalRes');
                     res.short = game.i18n.localize('abfalter.sheet.phr');
-                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.phrDom + data.allEmpty);
+                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.phrDom + data.allEmpty + res.bonus);
                     break;
                 case "Disease":
                     res.name = game.i18n.localize('abfalter.sheet.diseaseRes');
                     res.short = game.i18n.localize('abfalter.sheet.dr');
-                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.allEmpty);
+                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.allEmpty + res.bonus);
                     break;
                 case "Poison":
                     res.name = game.i18n.localize('abfalter.sheet.poisonRes');
                     res.short = game.i18n.localize('abfalter.sheet.psnr');
-                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.allEmpty);
+                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.allEmpty + res.bonus);
                     break;
                 case "Magic":
                     res.name = game.i18n.localize('abfalter.sheet.magicRes');
                     res.short = game.i18n.localize('abfalter.sheet.mr');
-                    res.final = Math.floor(data.presence + res.mod + stats.Power.mod + data.allEmpty);
+                    res.final = Math.floor(data.presence + res.mod + stats.Power.mod + data.allEmpty + res.bonus);
                     break;
                 case "Psychic":
                     res.name = game.i18n.localize('abfalter.sheet.psychicRes');
                     res.short = game.i18n.localize('abfalter.sheet.psyr');
-                    res.final = Math.floor(data.presence + res.mod + stats.Willpower.mod + data.allEmpty);
+                    res.final = Math.floor(data.presence + res.mod + stats.Willpower.mod + data.allEmpty + res.bonus);
                     break;
                 default:
                     break;
@@ -1432,7 +1434,7 @@ export default class abfalterActor extends Actor {
         }
 
         //Movement
-        data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp + data.movement.sizeBase - data.movement.pen + Math.min(0, Math.ceil(data.aamFinal / 20)) + data.totalMovePen);
+        data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp + data.movement.bonus + data.movement.sizeBase - data.movement.pen + Math.min(0, Math.ceil(data.aamFinal / 20)) + data.totalMovePen);
         switch (data.finalmove) {
             case 1:
                 if (data.useMeters) {
@@ -1701,7 +1703,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.wepFinSpd = data.weaponSpeed;
         }
-        data.iniFinal = Math.floor(data.iniBase + data.inibonus + data.initiative.spec + data.KiBonusSpd + ~~data.wepFinSpd - data.totalNatPen);
+        data.iniFinal = Math.floor(data.iniBase + data.inibonus + data.initiative.spec + data.initiative.bonus + data.KiBonusSpd + ~~data.wepFinSpd - data.totalNatPen);
 
         /*
             Secondaries
@@ -1714,7 +1716,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.acrobaticsnatfinal = 100;
         }
-        data.acrofinal = Math.floor(data.secondary.acrobatics.temp + data.secondary.acrobatics.spec + data.secondary.acrobatics.base + data.acrobaticsbonus + data.acrobaticsnatfinal + data.aamFinal - data.totalNatPen);
+        data.acrofinal = Math.floor(data.secondary.acrobatics.bonus + data.secondary.acrobatics.temp + data.secondary.acrobatics.spec + data.secondary.acrobatics.base + data.acrobaticsbonus + data.acrobaticsnatfinal + data.aamFinal - data.totalNatPen);
 
         // Athelticism
         data.athleticismbonus = athle;
@@ -1725,7 +1727,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.athleticismnatfinal = 100;
         }
-        data.athleticismfinal = Math.floor(data.secondary.athleticism.temp + data.secondary.athleticism.spec + data.secondary.athleticism.base + data.athleticismbonus + data.athleticismnatfinal + data.aamFinal - data.totalNatPen);
+        data.athleticismfinal = Math.floor(data.secondary.athleticism.bonus + data.secondary.athleticism.temp + data.secondary.athleticism.spec + data.secondary.athleticism.base + data.athleticismbonus + data.athleticismnatfinal + data.aamFinal - data.totalNatPen);
 
         // Climb
         data.climbbonus = climb;
@@ -1735,7 +1737,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.climbnatfinal = 100;
         }
-        data.climbfinal = Math.floor(data.secondary.climb.temp + data.secondary.climb.spec + data.secondary.climb.base + data.climbbonus + data.climbnatfinal + data.aamFinal - data.totalNatPen);
+        data.climbfinal = Math.floor(data.secondary.climb.bonus + data.secondary.climb.temp + data.secondary.climb.spec + data.secondary.climb.base + data.climbbonus + data.climbnatfinal + data.aamFinal - data.totalNatPen);
 
         // Jump
         data.jumpbonus = jump;
@@ -1745,7 +1747,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.jumpnatfinal = 100;
         }
-        data.jumpfinal = Math.floor(data.secondary.jump.temp + data.secondary.jump.spec + data.secondary.jump.base + data.jumpbonus + data.jumpnatfinal + data.aamFinal - data.totalNatPen);
+        data.jumpfinal = Math.floor(data.secondary.jump.bonus + data.secondary.jump.temp + data.secondary.jump.spec + data.secondary.jump.base + data.jumpbonus + data.jumpnatfinal + data.aamFinal - data.totalNatPen);
 
         // Ride
         data.ridebonus = ride;
@@ -1755,7 +1757,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.ridenatfinal = 100;
         }
-        data.ridefinal = Math.floor(data.secondary.ride.temp + data.secondary.ride.spec + data.secondary.ride.base + data.ridebonus + data.ridenatfinal + data.aamFinal - data.totalNatPen);
+        data.ridefinal = Math.floor(data.secondary.ride.bonus + data.secondary.ride.temp + data.secondary.ride.spec + data.secondary.ride.base + data.ridebonus + data.ridenatfinal + data.aamFinal - data.totalNatPen);
 
         // Swim
         data.swimbonus = swim;
@@ -1765,7 +1767,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.swimnatfinal = 100;
         }
-        data.swimfinal = Math.floor(data.secondary.swim.temp + data.secondary.swim.spec + data.secondary.swim.base + data.swimbonus + data.swimnatfinal + data.aamFinal - data.totalNatPen);
+        data.swimfinal = Math.floor(data.secondary.swim.bonus + data.secondary.swim.temp + data.secondary.swim.spec + data.secondary.swim.base + data.swimbonus + data.swimnatfinal + data.aamFinal - data.totalNatPen);
 
         // etiquette
         data.etiquettebonus = etiq;
@@ -1775,7 +1777,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.etiquettenatfinal = 100;
         }
-        data.etiquettefinal = Math.floor(data.secondary.etiquette.temp + data.secondary.etiquette.spec + data.secondary.etiquette.base + data.etiquettebonus + data.etiquettenatfinal + data.aamFinal);
+        data.etiquettefinal = Math.floor(data.secondary.etiquette.bonus + data.secondary.etiquette.temp + data.secondary.etiquette.spec + data.secondary.etiquette.base + data.etiquettebonus + data.etiquettenatfinal + data.aamFinal);
 
         // Intimidate
         data.intimidatebonus = intim;
@@ -1785,7 +1787,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.intimidatenatfinal = 100;
         }
-        data.intimidatefinal = Math.floor(data.secondary.intimidate.temp + data.secondary.intimidate.spec + data.secondary.intimidate.base + data.intimidatebonus + data.intimidatenatfinal + data.aamFinal);
+        data.intimidatefinal = Math.floor(data.secondary.intimidate.bonus + data.secondary.intimidate.temp + data.secondary.intimidate.spec + data.secondary.intimidate.base + data.intimidatebonus + data.intimidatenatfinal + data.aamFinal);
 
         // Leadership
         data.leadershipbonus = leader;
@@ -1795,7 +1797,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.leadershipnatfinal = 100;
         }
-        data.leadershipfinal = Math.floor(data.secondary.leadership.temp + data.secondary.leadership.spec + data.secondary.leadership.base + data.leadershipbonus + data.leadershipnatfinal + data.aamFinal);
+        data.leadershipfinal = Math.floor(data.secondary.leadership.bonus + data.secondary.leadership.temp + data.secondary.leadership.spec + data.secondary.leadership.base + data.leadershipbonus + data.leadershipnatfinal + data.aamFinal);
 
         // persuasion
         data.persuasionbonus = persua;
@@ -1805,7 +1807,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.persuasionnatfinal = 100;
         }
-        data.persuasionfinal = Math.floor(data.secondary.persuasion.temp + data.secondary.persuasion.spec + data.secondary.persuasion.base + data.persuasionbonus + data.persuasionnatfinal + data.aamFinal);
+        data.persuasionfinal = Math.floor(data.secondary.persuasion.bonus + data.secondary.persuasion.temp + data.secondary.persuasion.spec + data.secondary.persuasion.base + data.persuasionbonus + data.persuasionnatfinal + data.aamFinal);
 
         // streetwise
         data.streetwisebonus = street;
@@ -1815,7 +1817,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.streetwisenatfinal = 100;
         }
-        data.streetwisefinal = Math.floor(data.secondary.streetwise.temp + data.secondary.streetwise.spec + data.secondary.streetwise.base + data.streetwisebonus + data.streetwisenatfinal + data.aamFinal);
+        data.streetwisefinal = Math.floor(data.secondary.streetwise.bonus + data.secondary.streetwise.temp + data.secondary.streetwise.spec + data.secondary.streetwise.base + data.streetwisebonus + data.streetwisenatfinal + data.aamFinal);
 
         // style
         data.stylebonus = style;
@@ -1825,7 +1827,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.stylenatfinal = 100;
         }
-        data.stylefinal = Math.floor(data.secondary.style.temp + data.secondary.style.spec + data.secondary.style.base + data.stylebonus + data.stylenatfinal + data.aamFinal);
+        data.stylefinal = Math.floor(data.secondary.style.bonus + data.secondary.style.temp + data.secondary.style.spec + data.secondary.style.base + data.stylebonus + data.stylenatfinal + data.aamFinal);
 
         // trading
         data.tradingbonus = trading;
@@ -1835,7 +1837,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.tradingnatfinal = 100;
         }
-        data.tradingfinal = Math.floor(data.secondary.trading.temp + data.secondary.trading.spec + data.secondary.trading.base + data.tradingbonus + data.tradingnatfinal + data.aamFinal);
+        data.tradingfinal = Math.floor(data.secondary.trading.bonus + data.secondary.trading.temp + data.secondary.trading.spec + data.secondary.trading.base + data.tradingbonus + data.tradingnatfinal + data.aamFinal);
 
         // notice
         data.noticebonus = notice;
@@ -1845,7 +1847,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.noticenatfinal = 100;
         }
-        data.noticefinal = Math.floor(data.secondary.notice.temp + data.secondary.notice.spec + data.secondary.notice.base + data.noticebonus + data.noticenatfinal + data.aamFinal);
+        data.noticefinal = Math.floor(data.secondary.notice.bonus + data.secondary.notice.temp + data.secondary.notice.spec + data.secondary.notice.base + data.noticebonus + data.noticenatfinal + data.aamFinal);
 
         // search
         data.searchbonus = search;
@@ -1855,7 +1857,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.searchnatfinal = 100;
         }
-        data.searchfinal = Math.floor(data.secondary.search.temp + data.secondary.search.spec + data.secondary.search.base + data.searchbonus + data.searchnatfinal + data.aamFinal);
+        data.searchfinal = Math.floor(data.secondary.search.bonus + data.secondary.search.temp + data.secondary.search.spec + data.secondary.search.base + data.searchbonus + data.searchnatfinal + data.aamFinal);
 
         // track
         data.trackbonus = track;
@@ -1865,7 +1867,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.tracknatfinal = 100;
         }
-        data.trackfinal = Math.floor(data.secondary.track.temp + data.secondary.track.spec + data.secondary.track.base + data.trackbonus + data.tracknatfinal + data.aamFinal);
+        data.trackfinal = Math.floor(data.secondary.track.bonus + data.secondary.track.temp + data.secondary.track.spec + data.secondary.track.base + data.trackbonus + data.tracknatfinal + data.aamFinal);
 
         // animals
         data.animalsbonus = animals;
@@ -1875,7 +1877,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.animalsnatfinal = 100;
         }
-        data.animalsfinal = Math.floor(data.secondary.animals.temp + data.secondary.animals.spec + data.secondary.animals.base + data.animalsbonus + data.animalsnatfinal + data.aamFinal);
+        data.animalsfinal = Math.floor(data.secondary.animals.bonus + data.secondary.animals.temp + data.secondary.animals.spec + data.secondary.animals.base + data.animalsbonus + data.animalsnatfinal + data.aamFinal);
 
         // appraisal
         data.appraisalbonus = appra;
@@ -1885,7 +1887,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.appraisalnatfinal = 100;
         }
-        data.appraisalfinal = Math.floor(data.secondary.appraisal.temp + data.secondary.appraisal.spec + data.secondary.appraisal.base + data.appraisalbonus + data.appraisalnatfinal + data.aamFinal);
+        data.appraisalfinal = Math.floor(data.secondary.appraisal.bonus + data.secondary.appraisal.temp + data.secondary.appraisal.spec + data.secondary.appraisal.base + data.appraisalbonus + data.appraisalnatfinal + data.aamFinal);
 
         // architecture
         data.architecturebonus = archi;
@@ -1895,7 +1897,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.architecturenatfinal = 100;
         }
-        data.architecturefinal = Math.floor(data.secondary.architecture.temp + data.secondary.architecture.spec + data.secondary.architecture.base + data.architecturebonus + data.architecturenatfinal + data.aamFinal);
+        data.architecturefinal = Math.floor(data.secondary.architecture.bonus + data.secondary.architecture.temp + data.secondary.architecture.spec + data.secondary.architecture.base + data.architecturebonus + data.architecturenatfinal + data.aamFinal);
 
         // herballore
         data.herballorebonus = herb;
@@ -1905,7 +1907,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.herballorenatfinal = 100;
         }
-        data.herballorefinal = Math.floor(data.secondary.herballore.temp + data.secondary.herballore.spec + data.secondary.herballore.base + data.herballorebonus + data.herballorenatfinal + data.aamFinal);
+        data.herballorefinal = Math.floor(data.secondary.herballore.bonus + data.secondary.herballore.temp + data.secondary.herballore.spec + data.secondary.herballore.base + data.herballorebonus + data.herballorenatfinal + data.aamFinal);
 
         // history
         data.historybonus = hist;
@@ -1915,7 +1917,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.historynatfinal = 100;
         }
-        data.historyfinal = Math.floor(data.secondary.history.temp + data.secondary.history.spec + data.secondary.history.base + data.historybonus + data.historynatfinal + data.aamFinal);
+        data.historyfinal = Math.floor(data.secondary.history.bonus + data.secondary.history.temp + data.secondary.history.spec + data.secondary.history.base + data.historybonus + data.historynatfinal + data.aamFinal);
 
         // law
         data.lawbonus = law;
@@ -1925,7 +1927,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.lawnatfinal = 100;
         }
-        data.lawfinal = Math.floor(data.secondary.law.temp + data.secondary.law.spec + data.secondary.law.base + data.lawbonus + data.lawnatfinal + data.aamFinal);
+        data.lawfinal = Math.floor(data.secondary.law.bonus + data.secondary.law.temp + data.secondary.law.spec + data.secondary.law.base + data.lawbonus + data.lawnatfinal + data.aamFinal);
 
         // magicappr
         data.magicapprbonus = magicapr;
@@ -1935,7 +1937,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.magicapprnatfinal = 100;
         }
-        data.magicapprfinal = Math.floor(data.secondary.magicappr.temp + data.secondary.magicappr.spec + data.secondary.magicappr.base + data.magicapprbonus + data.magicapprnatfinal + data.aamFinal);
+        data.magicapprfinal = Math.floor(data.secondary.magicappr.bonus + data.secondary.magicappr.temp + data.secondary.magicappr.spec + data.secondary.magicappr.base + data.magicapprbonus + data.magicapprnatfinal + data.aamFinal);
 
         // medicine
         data.medicinebonus = medic;
@@ -1945,7 +1947,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.medicinenatfinal = 100;
         }
-        data.medicinefinal = Math.floor(data.secondary.medicine.temp + data.secondary.medicine.spec + data.secondary.medicine.base + data.medicinebonus + data.medicinenatfinal + data.aamFinal);
+        data.medicinefinal = Math.floor(data.secondary.medicine.bonus + data.secondary.medicine.temp + data.secondary.medicine.spec + data.secondary.medicine.base + data.medicinebonus + data.medicinenatfinal + data.aamFinal);
 
         // memorize
         data.memorizebonus = mem;
@@ -1955,7 +1957,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.memorizenatfinal = 100;
         }
-        data.memorizefinal = Math.floor(data.secondary.memorize.temp + data.secondary.memorize.spec + data.secondary.memorize.base + data.memorizebonus + data.memorizenatfinal + data.aamFinal);
+        data.memorizefinal = Math.floor(data.secondary.memorize.bonus + data.secondary.memorize.temp + data.secondary.memorize.spec + data.secondary.memorize.base + data.memorizebonus + data.memorizenatfinal + data.aamFinal);
 
         // navigation
         data.navigationbonus = navi;
@@ -1965,7 +1967,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.navigationnatfinal = 100;
         }
-        data.navigationfinal = Math.floor(data.secondary.navigation.temp + data.secondary.navigation.spec + data.secondary.navigation.base + data.navigationbonus + data.navigationnatfinal + data.aamFinal);
+        data.navigationfinal = Math.floor(data.secondary.navigation.bonus + data.secondary.navigation.temp + data.secondary.navigation.spec + data.secondary.navigation.base + data.navigationbonus + data.navigationnatfinal + data.aamFinal);
 
         // occult
         data.occultbonus = occ;
@@ -1975,7 +1977,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.occultnatfinal = 100;
         }
-        data.occultfinal = Math.floor(data.secondary.occult.temp + data.secondary.occult.spec + data.secondary.occult.base + data.occultbonus + data.occultnatfinal + data.aamFinal);
+        data.occultfinal = Math.floor(data.secondary.occult.bonus + data.secondary.occult.temp + data.secondary.occult.spec + data.secondary.occult.base + data.occultbonus + data.occultnatfinal + data.aamFinal);
 
         // science
         data.sciencebonus = science;
@@ -1985,7 +1987,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.sciencenatfinal = 100;
         }
-        data.sciencefinal = Math.floor(data.secondary.science.temp + data.secondary.science.spec + data.secondary.science.base + data.sciencebonus + data.sciencenatfinal + data.aamFinal);
+        data.sciencefinal = Math.floor(data.secondary.science.bonus + data.secondary.science.temp + data.secondary.science.spec + data.secondary.science.base + data.sciencebonus + data.sciencenatfinal + data.aamFinal);
 
         // tactics
         data.tacticsbonus = tactic;
@@ -1995,7 +1997,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.tacticsnatfinal = 100;
         }
-        data.tacticsfinal = Math.floor(data.secondary.tactics.temp + data.secondary.tactics.spec + data.secondary.tactics.base + data.tacticsbonus + data.tacticsnatfinal + data.aamFinal);
+        data.tacticsfinal = Math.floor(data.secondary.tactics.bonus + data.secondary.tactics.temp + data.secondary.tactics.spec + data.secondary.tactics.base + data.tacticsbonus + data.tacticsnatfinal + data.aamFinal);
 
         // composure
         data.composurebonus = comp;
@@ -2005,7 +2007,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.composurenatfinal = 100;
         }
-        data.composurefinal = Math.floor(data.secondary.composure.temp + data.secondary.composure.spec + data.secondary.composure.base + data.composurebonus + data.composurenatfinal + data.aamFinal);
+        data.composurefinal = Math.floor(data.secondary.composure.bonus + data.secondary.composure.temp + data.secondary.composure.spec + data.secondary.composure.base + data.composurebonus + data.composurenatfinal + data.aamFinal);
 
         // featsofstr
         data.featsofstrbonus = fos;
@@ -2015,7 +2017,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.featsofstrnatfinal = 100;
         }
-        data.featsofstrfinal = Math.floor(data.secondary.featsofstr.temp + data.secondary.featsofstr.spec + data.secondary.featsofstr.base + data.featsofstrbonus + data.featsofstrnatfinal + data.aamFinal - data.totalNatPen);
+        data.featsofstrfinal = Math.floor(data.secondary.featsofstr.bonus + data.secondary.featsofstr.temp + data.secondary.featsofstr.spec + data.secondary.featsofstr.base + data.featsofstrbonus + data.featsofstrnatfinal + data.aamFinal - data.totalNatPen);
 
         // withstpain
         data.withstpainbonus = wstp;
@@ -2025,7 +2027,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.withstpainnatfinal = 100;
         }
-        data.withstpainfinal = Math.floor(data.secondary.withstpain.temp + data.secondary.withstpain.spec + data.secondary.withstpain.base + data.withstpainbonus + data.withstpainnatfinal + data.aamFinal);
+        data.withstpainfinal = Math.floor(data.secondary.withstpain.bonus + data.secondary.withstpain.temp + data.secondary.withstpain.spec + data.secondary.withstpain.base + data.withstpainbonus + data.withstpainnatfinal + data.aamFinal);
 
         // disguise
         data.disguisebonus = disg;
@@ -2035,7 +2037,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.disguisenatfinal = 100;
         }
-        data.disguisefinal = Math.floor(data.secondary.disguise.temp + data.secondary.disguise.spec + data.secondary.disguise.base + data.disguisebonus + data.disguisenatfinal + data.aamFinal);
+        data.disguisefinal = Math.floor(data.secondary.disguise.bonus + data.secondary.disguise.temp + data.secondary.disguise.spec + data.secondary.disguise.base + data.disguisebonus + data.disguisenatfinal + data.aamFinal);
 
         // hide
         data.hidebonus = hide;
@@ -2045,7 +2047,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.hidenatfinal = 100;
         }
-        data.hidefinal = Math.floor(data.secondary.hide.temp + data.secondary.hide.spec + data.secondary.hide.base + data.hidebonus + data.hidenatfinal + data.aamFinal - data.totalNatPen);
+        data.hidefinal = Math.floor(data.secondary.hide.bonus + data.secondary.hide.temp + data.secondary.hide.spec + data.secondary.hide.base + data.hidebonus + data.hidenatfinal + data.aamFinal - data.totalNatPen);
 
         // lockpicking
         data.lockpickingbonus = lock;
@@ -2055,7 +2057,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.lockpickingnatfinal = 100;
         }
-        data.lockpickingfinal = Math.floor(data.secondary.lockpicking.temp + data.secondary.lockpicking.spec + data.secondary.lockpicking.base + data.lockpickingbonus + data.lockpickingnatfinal + data.aamFinal);
+        data.lockpickingfinal = Math.floor(data.secondary.lockpicking.bonus + data.secondary.lockpicking.temp + data.secondary.lockpicking.spec + data.secondary.lockpicking.base + data.lockpickingbonus + data.lockpickingnatfinal + data.aamFinal);
 
         // poisons
         data.poisonsbonus = poisn;
@@ -2065,7 +2067,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.poisonsnatfinal = 100;
         }
-        data.poisonsfinal = Math.floor(data.secondary.poisons.temp + data.secondary.poisons.spec + data.secondary.poisons.base + data.poisonsbonus + data.poisonsnatfinal + data.aamFinal);
+        data.poisonsfinal = Math.floor(data.secondary.poisons.bonus + data.secondary.poisons.temp + data.secondary.poisons.spec + data.secondary.poisons.base + data.poisonsbonus + data.poisonsnatfinal + data.aamFinal);
 
         // stealth
         data.stealthbonus = stealth;
@@ -2075,7 +2077,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.stealthnatfinal = 100;
         }
-        data.stealthfinal = Math.floor(data.secondary.stealth.temp + data.secondary.stealth.spec + data.secondary.stealth.base + data.stealthbonus + data.stealthnatfinal + data.aamFinal - data.totalNatPen);
+        data.stealthfinal = Math.floor(data.secondary.stealth.bonus + data.secondary.stealth.temp + data.secondary.stealth.spec + data.secondary.stealth.base + data.stealthbonus + data.stealthnatfinal + data.aamFinal - data.totalNatPen);
 
         // theft
         data.theftbonus = theft;
@@ -2085,7 +2087,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.theftnatfinal = 100;
         }
-        data.theftfinal = Math.floor(data.secondary.theft.temp + data.secondary.theft.spec + data.secondary.theft.base + data.theftbonus + data.theftnatfinal + data.aamFinal);
+        data.theftfinal = Math.floor(data.secondary.theft.bonus + data.secondary.theft.temp + data.secondary.theft.spec + data.secondary.theft.base + data.theftbonus + data.theftnatfinal + data.aamFinal);
 
         // traplore
         data.traplorebonus = trapl;
@@ -2095,7 +2097,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.traplorenatfinal = 100;
         }
-        data.traplorefinal = Math.floor(data.secondary.traplore.temp + data.secondary.traplore.spec + data.secondary.traplore.base + data.traplorebonus + data.traplorenatfinal + data.aamFinal);
+        data.traplorefinal = Math.floor(data.secondary.traplore.bonus + data.secondary.traplore.temp + data.secondary.traplore.spec + data.secondary.traplore.base + data.traplorebonus + data.traplorenatfinal + data.aamFinal);
 
         // alchemy
         data.alchemybonus = alche;
@@ -2105,7 +2107,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.alchemynatfinal = 100;
         }
-        data.alchemyfinal = Math.floor(data.secondary.alchemy.temp + data.secondary.alchemy.spec + data.secondary.alchemy.base + data.alchemybonus + data.alchemynatfinal + data.aamFinal);
+        data.alchemyfinal = Math.floor(data.secondary.alchemy.bonus + data.secondary.alchemy.temp + data.secondary.alchemy.spec + data.secondary.alchemy.base + data.alchemybonus + data.alchemynatfinal + data.aamFinal);
 
         // animism
         data.animismbonus = anims;
@@ -2115,7 +2117,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.animismnatfinal = 100;
         }
-        data.animismfinal = Math.floor(data.secondary.animism.temp + data.secondary.animism.spec + data.secondary.animism.base + data.animismbonus + data.animismnatfinal + data.aamFinal);
+        data.animismfinal = Math.floor(data.secondary.animism.bonus + data.secondary.animism.temp + data.secondary.animism.spec + data.secondary.animism.base + data.animismbonus + data.animismnatfinal + data.aamFinal);
 
         // art
         data.artbonus = art;
@@ -2125,7 +2127,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.artnatfinal = 100;
         }
-        data.artfinal = Math.floor(data.secondary.art.temp + data.secondary.art.spec + data.secondary.art.base + data.artbonus + data.artnatfinal + data.aamFinal);
+        data.artfinal = Math.floor(data.secondary.art.bonus + data.secondary.art.temp + data.secondary.art.spec + data.secondary.art.base + data.artbonus + data.artnatfinal + data.aamFinal);
 
         // dance
         data.dancebonus = dance;
@@ -2135,7 +2137,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.dancenatfinal = 100;
         }
-        data.dancefinal = Math.floor(data.secondary.dance.temp + data.secondary.dance.spec + data.secondary.dance.base + data.dancebonus + data.dancenatfinal + data.aamFinal - data.totalNatPen);
+        data.dancefinal = Math.floor(data.secondary.dance.bonus + data.secondary.dance.temp + data.secondary.dance.spec + data.secondary.dance.base + data.dancebonus + data.dancenatfinal + data.aamFinal - data.totalNatPen);
 
         // forging
         data.forgingbonus = forgi;
@@ -2145,7 +2147,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.forgingnatfinal = 100;
         }
-        data.forgingfinal = Math.floor(data.secondary.forging.temp + data.secondary.forging.spec + data.secondary.forging.base + data.forgingbonus + data.forgingnatfinal + data.aamFinal);
+        data.forgingfinal = Math.floor(data.secondary.forging.bonus + data.secondary.forging.temp + data.secondary.forging.spec + data.secondary.forging.base + data.forgingbonus + data.forgingnatfinal + data.aamFinal);
 
         // jewelry
         data.jewelrybonus = jewel;
@@ -2155,7 +2157,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.jewelrynatfinal = 100;
         }
-        data.jewelryfinal = Math.floor(data.secondary.jewelry.temp + data.secondary.jewelry.spec + data.secondary.jewelry.base + data.jewelrybonus + data.jewelrynatfinal + data.aamFinal);
+        data.jewelryfinal = Math.floor(data.secondary.jewelry.bonus + data.secondary.jewelry.temp + data.secondary.jewelry.spec + data.secondary.jewelry.base + data.jewelrybonus + data.jewelrynatfinal + data.aamFinal);
 
         // music
         data.musicbonus = music;
@@ -2165,7 +2167,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.musicnatfinal = 100;
         }
-        data.musicfinal = Math.floor(data.secondary.music.temp + data.secondary.music.spec + data.secondary.music.base + data.musicbonus + data.musicnatfinal + data.aamFinal);
+        data.musicfinal = Math.floor(data.secondary.music.bonus + data.secondary.music.temp + data.secondary.music.spec + data.secondary.music.base + data.musicbonus + data.musicnatfinal + data.aamFinal);
 
         // runes
         data.runesbonus = runes;
@@ -2175,7 +2177,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.runesnatfinal = 100;
         }
-        data.runesfinal = Math.floor(data.secondary.runes.temp + data.secondary.runes.spec + data.secondary.runes.base + data.runesbonus + data.runesnatfinal + data.aamFinal);
+        data.runesfinal = Math.floor(data.secondary.runes.bonus + data.secondary.runes.temp + data.secondary.runes.spec + data.secondary.runes.base + data.runesbonus + data.runesnatfinal + data.aamFinal);
 
         // ritualcalig
         data.ritualcaligbonus = ritcal;
@@ -2185,7 +2187,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.ritualcalignatfinal = 100;
         }
-        data.ritualcaligfinal = Math.floor(data.secondary.ritualcalig.temp + data.secondary.ritualcalig.spec + data.secondary.ritualcalig.base + data.ritualcaligbonus + data.ritualcalignatfinal + data.aamFinal);
+        data.ritualcaligfinal = Math.floor(data.secondary.ritualcalig.bonus + data.secondary.ritualcalig.temp + data.secondary.ritualcalig.spec + data.secondary.ritualcalig.base + data.ritualcaligbonus + data.ritualcalignatfinal + data.aamFinal);
 
         // slofhand
         data.slofhandbonus = soh;
@@ -2195,7 +2197,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.slofhandnatfinal = 100;
         }
-        data.slofhandfinal = Math.floor(data.secondary.slofhand.temp + data.secondary.slofhand.spec + data.secondary.slofhand.base + data.slofhandbonus + data.slofhandnatfinal + data.aamFinal);
+        data.slofhandfinal = Math.floor(data.secondary.slofhand.bonus + data.secondary.slofhand.temp + data.secondary.slofhand.spec + data.secondary.slofhand.base + data.slofhandbonus + data.slofhandnatfinal + data.aamFinal);
 
         // tailoring
         data.tailoringbonus = tailoring;
@@ -2205,7 +2207,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.tailoringnatfinal = 100;
         }
-        data.tailoringfinal = Math.floor(data.secondary.tailoring.temp + data.secondary.tailoring.spec + data.secondary.tailoring.base + data.tailoringbonus + data.tailoringnatfinal + data.aamFinal);
+        data.tailoringfinal = Math.floor(data.secondary.tailoring.bonus + data.secondary.tailoring.temp + data.secondary.tailoring.spec + data.secondary.tailoring.base + data.tailoringbonus + data.tailoringnatfinal + data.aamFinal);
 
         // piloting
         data.pilotingbonus = pilot;
@@ -2215,7 +2217,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.pilotingnatfinal = 100;
         }
-        data.pilotingfinal = Math.floor(data.secondary.piloting.temp + data.secondary.piloting.spec + data.secondary.piloting.base + data.pilotingbonus + data.pilotingnatfinal + data.aamFinal);
+        data.pilotingfinal = Math.floor(data.secondary.piloting.bonus + data.secondary.piloting.temp + data.secondary.piloting.spec + data.secondary.piloting.base + data.pilotingbonus + data.pilotingnatfinal + data.aamFinal);
 
         // cooking
         data.cookingbonus = cook;
@@ -2225,7 +2227,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.cookingnatfinal = 100;
         }
-        data.cookingfinal = Math.floor(data.secondary.cooking.temp + data.secondary.cooking.spec + data.secondary.cooking.base + data.cookingbonus + data.cookingnatfinal + data.aamFinal);
+        data.cookingfinal = Math.floor(data.secondary.cooking.bonus + data.secondary.cooking.temp + data.secondary.cooking.spec + data.secondary.cooking.base + data.cookingbonus + data.cookingnatfinal + data.aamFinal);
 
         // technomagic
         data.technomagicbonus = techmagic;
@@ -2235,7 +2237,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.technomagicnatfinal = 100;
         }
-        data.technomagicfinal = Math.floor(data.secondary.technomagic.temp + data.secondary.technomagic.spec + data.secondary.technomagic.base + data.technomagicbonus + data.technomagicnatfinal + data.aamFinal);
+        data.technomagicfinal = Math.floor(data.secondary.technomagic.bonus + data.secondary.technomagic.temp + data.secondary.technomagic.spec + data.secondary.technomagic.base + data.technomagicbonus + data.technomagicnatfinal + data.aamFinal);
 
         //toymaking
         data.toymakingbonus = toy;
@@ -2245,7 +2247,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.toymakingnatfinal = 100;
         }
-        data.toymakingfinal = Math.floor(data.secondary.toymaking.temp + data.secondary.toymaking.spec + data.secondary.toymaking.base + data.toymakingbonus + data.toymakingnatfinal + data.aamFinal);
+        data.toymakingfinal = Math.floor(data.secondary.toymaking.bonus + data.secondary.toymaking.temp + data.secondary.toymaking.spec + data.secondary.toymaking.base + data.toymakingbonus + data.toymakingnatfinal + data.aamFinal);
 
 
         //kidetection data.kidetectionbase
@@ -2258,7 +2260,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.kidetectionnatfinal = 100;
         }
-        data.kidetectionfinal = Math.floor(data.secondary.kidetection.temp + data.secondary.kidetection.spec + data.kidetectionbase + data.kidetectionbonus + data.kidetectionnatfinal + data.aamFinal);
+        data.kidetectionfinal = Math.floor(data.secondary.kidetection.bonus + data.secondary.kidetection.temp + data.secondary.kidetection.spec + data.kidetectionbase + data.kidetectionbonus + data.kidetectionnatfinal + data.aamFinal);
 
 
         //kicoceal
@@ -2271,7 +2273,7 @@ export default class abfalterActor extends Actor {
         } else {
             data.kiconcealnatfinal = 100;
         }
-        data.kiconcealfinal = Math.floor(data.secondary.kiconceal.temp + data.secondary.kiconceal.spec + data.kiconcealbase + data.kiconcealbonus + data.kiconcealnatfinal + data.aamFinal);
+        data.kiconcealfinal = Math.floor(data.secondary.kiconceal.bonus + data.secondary.kiconceal.temp + data.secondary.kiconceal.spec + data.kiconcealbase + data.kiconcealbonus + data.kiconcealnatfinal + data.aamFinal);
         /*
          * // z
         data.znat = Math.floor(stats.x.mod + data.secondary.z.natural + Math.ceil(data.secondary.z.nat * stats.x.mod));
@@ -2376,10 +2378,10 @@ export default class abfalterActor extends Actor {
             data.maccupow = 35;
             data.zeonpow = 260;
         }
-        data.maccufinal = Math.floor(data.maccu.base + data.maccupow + (data.maccu.mult * data.maccupow) + data.maccu.spec + data.maccu.temp);
+        data.maccufinal = Math.floor(data.maccu.base + data.maccupow + (data.maccu.mult * data.maccupow) + data.maccu.spec + data.maccu.bonus + data.maccu.temp);
         data.maccuhalffinal = Math.floor(data.maccufinal / 2);
-        data.mregenfinal = Math.floor(((data.maccupow * data.mregen.regenmult) + data.mregen.spec + data.mregen.temp + data.maccufinal) * data.mregen.recoverymult);
-        data.zeon.max = Math.floor(data.zeon.base + data.zeonpow + data.zeonbonus + data.zeon.spec + data.zeon.temp);
+        data.mregenfinal = Math.floor(((data.maccupow * data.mregen.regenmult) + data.mregen.spec + data.mregen.temp + data.mregen.bonus + data.maccufinal) * data.mregen.recoverymult);
+        data.zeon.max = Math.floor(data.zeon.base + data.zeonpow + data.zeonbonus + data.zeon.spec + data.zeon.temp + data.zeon.bonus);
 
         // Innate Magic
         if (data.maccufinal >= 10 && data.maccufinal <= 50) {
@@ -2460,7 +2462,7 @@ export default class abfalterActor extends Actor {
         }
         data.mlLevels = pathLvl;
         data.spellLevels = spellCost;
-        data.mlevelfinal = Math.floor(data.mlevel.base + data.mlevel.spec + data.mlevel.temp + data.mlevelint);
+        data.mlevelfinal = Math.floor(data.mlevel.base + data.mlevel.spec + data.mlevel.temp + data.mlevel.bonus +data.mlevelint);
         data.mlevelused = Math.floor(data.mlLevels + data.spellLevels + data.metaCost);
 
         // Summoning Abilities
@@ -2468,10 +2470,10 @@ export default class abfalterActor extends Actor {
         data.controlbonus = control;
         data.bindbonus = bind;
         data.banishbonus = banish;
-        data.summonfinal = Math.floor(data.summoning.summon.base + data.summonbonus + data.summoning.summon.spec + data.stats.Power.mod + Math.min(0, data.aamFinal));
-        data.controlfinal = Math.floor(data.summoning.control.base + data.controlbonus + data.summoning.control.spec + data.stats.Willpower.mod + Math.min(0, data.aamFinal));
-        data.bindfinal = Math.floor(data.summoning.bind.base + data.bindbonus + data.summoning.bind.spec + data.stats.Power.mod + Math.min(0, data.aamFinal));
-        data.banishfinal = Math.floor(data.summoning.banish.base + data.banishbonus + data.summoning.banish.spec + data.stats.Power.mod + Math.min(0, data.aamFinal));
+        data.summonfinal = Math.floor(data.summoning.summon.base + data.summonbonus + data.summoning.summon.spec + data.summoning.summon.bonus + data.stats.Power.mod + Math.min(0, data.aamFinal));
+        data.controlfinal = Math.floor(data.summoning.control.base + data.controlbonus + data.summoning.control.spec + data.summoning.control.bonus + data.stats.Willpower.mod + Math.min(0, data.aamFinal));
+        data.bindfinal = Math.floor(data.summoning.bind.base + data.bindbonus + data.summoning.bind.spec + data.summoning.bind.bonus + data.stats.Power.mod + Math.min(0, data.aamFinal));
+        data.banishfinal = Math.floor(data.summoning.banish.base + data.banishbonus + data.summoning.banish.spec + data.summoning.banish.bonus + data.stats.Power.mod + Math.min(0, data.aamFinal));
 
         //Unarmed
         switch (data.fistDamage.multOption) {
@@ -2544,11 +2546,11 @@ export default class abfalterActor extends Actor {
                 data.unarmedDmgMult2 = 0;
                 break;
         }
-        data.unarmedDmgFinal = Math.floor(data.fistDamage.base + data.unarmedDmgMult1 + data.unarmedDmgMult2);
+        data.unarmedDmgFinal = Math.floor(data.fistDamage.base + data.unarmedDmgMult1 + data.unarmedDmgMult2 + data.fistDamage.bonus);
 
         // Psychic Points
         data.ppbonus = pp;
-        data.finalpp = Math.floor(data.ppoint.base + data.ppoint.spec + data.ppbonus);
+        data.finalpp = Math.floor(data.ppoint.base + data.ppoint.spec + data.ppoint.bonus + data.ppbonus);
         data.innateSlotspp = Math.floor(data.other.innateSlots * 2);
         data.psychicPoint.max = Math.floor(data.finalpp - (+usedpp + data.ppotentialpp + +matrixpp + data.innateSlotspp));
 
@@ -2559,8 +2561,8 @@ export default class abfalterActor extends Actor {
 
 
         // Settings
-        data.openRangeFinal = Math.floor(data.rollRange.base + data.rollRange.spec + data.rollRange.temp);
-        data.fumbleRangeFinal = Math.floor(data.fumleRange.base + data.fumleRange.spec + data.fumleRange.temp);
+        data.openRangeFinal = Math.floor(data.rollRange.base - data.rollRange.spec - data.rollRange.temp - data.rollRange.bonus);
+        data.fumbleRangeFinal = Math.floor(data.fumleRange.base + data.fumleRange.spec + data.fumleRange.temp + data.fumleRange.bonus);
 
 
         // Reload Items to get Atk/Def

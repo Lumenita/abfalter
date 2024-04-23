@@ -15,8 +15,11 @@
         "experience": 0,
         "levelinfo": {
           "levelmod": 0,
+          "levelmodBonus": 0,
           "presencemod": 0,
-          "dpmod": 0
+          "presencemodBonus": 0,
+          "dpmod": 0,
+          "dpmodBonus": 0
         },
         "notesOne": "",
         "notesTwo": "",
@@ -26,12 +29,14 @@
           "base": 90,
           "spec": 0,
           "temp": 0,
+          "bonus": 0,
           "doubles": false
         },
         "fumleRange": {
           "base": 3,
           "spec": 0,
-          "temp": 0
+          "temp": 0,
+          "bonus": 0
         },
         "itemToggle": {
           "advantages": false,
@@ -131,6 +136,7 @@
             "spec": 0,
             "temp": 0,
             "opposed": 0,
+            "opposedBonus": 0,
             "status": false
           },
           "Constitution": {
@@ -138,6 +144,7 @@
             "spec": 0,
             "temp": 0,
             "opposed": 0,
+            "opposedBonus": 0,
             "status": false
           },
           "Strength": {
@@ -145,6 +152,7 @@
             "spec": 0,
             "temp": 0,
             "opposed": 0,
+            "opposedBonus": 0,
             "status": false
           },
           "Dexterity": {
@@ -152,6 +160,7 @@
             "spec": 0,
             "temp": 0,
             "opposed": 0,
+            "opposedBonus": 0,
             "status": false
           },
           "Intelligence": {
@@ -159,6 +168,7 @@
             "spec": 0,
             "temp": 0,
             "opposed": 0,
+            "opposedBonus": 0,
             "status": false
           },
           "Perception": {
@@ -166,6 +176,7 @@
             "spec": 0,
             "temp": 0,
             "opposed": 0,
+            "opposedBonus": 0,
             "status": false
           },
           "Power": {
@@ -173,6 +184,7 @@
             "spec": 0,
             "temp": 0,
             "opposed": 0,
+            "opposedBonus": 0,
             "status": false
           },
           "Willpower": {
@@ -180,37 +192,45 @@
             "spec": 0,
             "temp": 0,
             "opposed": 0,
+            "opposedBonus": 0,
             "status": false
           }
         },
         "resistances": {
           "Physical": {
-            "mod": 0
+            "mod": 0,
+            "bonus": 0
           },
           "Disease": {
-            "mod": 0
+            "mod": 0,
+            "bonus": 0
           },
           "Poison": {
-            "mod": 0
+            "mod": 0,
+            "bonus": 0
           },
           "Magic": {
-            "mod": 0
+            "mod": 0,
+            "bonus": 0
           },
           "Psychic": {
-            "mod": 0
+            "mod": 0,
+            "bonus": 0
           }
         },
         "movement": {
           "pen": 0,
           "spec": 0,
-          "temp": 0
+          "temp": 0,
+          "bonus": 0
         },
         "lifepoints": {
           "status": false,
           "multiple": 0,
           "spec": 0,
           "temp": 0,
-          "actual": 0
+          "actual": 0,
+          "bonus": 0
         },
         "fatigue": {
           "status": false,
@@ -218,31 +238,37 @@
           "temp": 0,
           "actual": 0,
           "value": 0,
-          "max": 0
+          "max": 0,
+          "bonus": 0
         },
         "regeneration": {
           "spec": 0,
           "temp": 0,
-          "value": 0
+          "value": 0,
+          "bonus": 0
         },
         "combatstats": {
           "atkbase": 0,
           "atkspecial": 0,
           "atktemp": 0,
+          "atkbonus": 0,
           "atkStatus": false,
           "blkbase": 0,
           "blkspecial": 0,
           "blktemp": 0,
+          "blkbonus": 0,
           "blkStatus": false,
           "dodbase": 0,
           "dodspecial": 0,
           "dodtemp": 0,
+          "dodbonus": 0,
           "dodStatus": false
         },
         "initiative": {
           "status": false,
           "name": "",
-          "spec": 0
+          "spec": 0,
+          "bonus": 0
         },
         "secondary": {
           "main": {
@@ -260,6 +286,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -269,6 +296,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -278,6 +306,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -287,6 +316,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -296,6 +326,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -305,6 +336,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -314,6 +346,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -323,6 +356,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -332,6 +366,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -341,6 +376,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -350,6 +386,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -359,6 +396,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -368,6 +406,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -377,6 +416,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -386,6 +426,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -395,6 +436,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -404,6 +446,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -413,6 +456,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -422,6 +466,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -431,6 +476,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -440,6 +486,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -449,6 +496,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -458,6 +506,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -467,6 +516,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -476,6 +526,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -485,6 +536,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -494,6 +546,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -503,6 +556,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -512,6 +566,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -521,6 +576,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -530,6 +586,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -539,6 +596,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -548,6 +606,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -557,6 +616,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -566,6 +626,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -575,6 +636,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -584,6 +646,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -593,6 +656,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -602,6 +666,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -611,6 +676,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -620,6 +686,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -629,6 +696,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -638,6 +706,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -647,6 +716,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -656,6 +726,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -665,6 +736,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -674,6 +746,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -683,6 +756,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -692,6 +766,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -701,6 +776,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -710,6 +786,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -719,6 +796,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -728,6 +806,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -737,6 +816,7 @@
             "temp": -30,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -745,6 +825,7 @@
             "temp": 0,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           },
@@ -753,6 +834,7 @@
             "temp": 0,
             "nat": 0,
             "natural": 0,
+            "bonus": 0,
             "fav": false,
             "status": false
           }
@@ -761,6 +843,7 @@
         "aamBoon": 0,
         "aamCrit": 0,
         "aamOther": 0,
+        "aamBonus": 0,
         "aamStatus": false
       },
       "monsterPowers": {
@@ -818,6 +901,8 @@
           "imbalance": 0,
           "temp": 0,
           "temp2": 0,
+          "bonus": 0,
+          "bonus2": 0,
           "mtheory": "Standard",
           "status": false
         },
@@ -827,6 +912,7 @@
           "spec": 0,
           "temp": 0,
           "actual": 0,
+          "bonus": 0,
           "status": false
         },
         "mregen": {
@@ -834,6 +920,7 @@
           "spec": 0,
           "recoverymult": 1,
           "temp": 0,
+          "bonus": 0,
           "status": false
         },
         "zeon": {
@@ -844,30 +931,36 @@
           "value": 0,
           "max": 0,
           "minnate": 0,
+          "bonus": 0,
           "status": false
         },
         "mlevel": {
           "base": 0,
           "spec": 0,
           "temp": 0,
+          "bonus": 0,
           "status": false
         },
         "summoning": {
           "summon": {
             "base": 0,
-            "spec": 0
+            "spec": 0,
+            "bonus": 0
           },
           "control": {
             "base": 0,
-            "spec": 0
+            "spec": 0,
+            "bonus": 0
           },
           "bind": {
             "base": 0,
-            "spec": 0
+            "spec": 0,
+            "bonus": 0
           },
           "banish": {
             "base": 0,
-            "spec": 0
+            "spec": 0,
+            "bonus": 0
           }
         },
         "metaMagic": {
@@ -1558,7 +1651,8 @@
           "descNum": 3,
           "desc": "",
           "multOption": "",
-          "multOption2": ""
+          "multOption2": "",
+          "bonus": 0
         },
         "kiPool": {
           "agi": {
@@ -1570,6 +1664,8 @@
             "defaultMax": 0,
             "actual": 0,
             "current": 0,
+            "bonus": 0,
+            "bonusMax": 0,
             "status": false
           },
           "con": {
@@ -1581,6 +1677,8 @@
             "defaultMax": 0,
             "actual": 0,
             "current": 0,
+            "bonus": 0,
+            "bonusMax": 0,
             "status": false
           },
           "dex": {
@@ -1592,6 +1690,8 @@
             "defaultMax": 0,
             "actual": 0,
             "current": 0,
+            "bonus": 0,
+            "bonusMax": 0,
             "status": false
           },
           "str": {
@@ -1603,6 +1703,8 @@
             "defaultMax": 0,
             "actual": 0,
             "current": 0,
+            "bonus": 0,
+            "bonusMax": 0,
             "status": false
           },
           "pow": {
@@ -1614,6 +1716,8 @@
             "defaultMax": 0,
             "actual": 0,
             "current": 0,
+            "bonus": 0,
+            "bonusMax": 0,
             "status": false
           },
           "wp": {
@@ -1625,15 +1729,19 @@
             "defaultMax": 0,
             "actual": 0,
             "current": 0,
+            "bonus": 0,
+            "bonusMax": 0,
             "status": false
           },
           "unified": 0,
+          "unifiedBonus": 0,
           "innate": {
             "type": "POW",
             "tag": "POW",
             "spec": 0,
             "temp": 0,
             "actual": 0,
+            "bonus": 0,
             "status": false
           }
         },
@@ -1641,6 +1749,7 @@
           "base": 0,
           "spec": 0,
           "temp": 0,
+          "bonus": 0,
           "status": false
         },
         "kiSeal": {
@@ -1703,7 +1812,8 @@
         "wearArmor": {
           "base": 0,
           "spec": 0,
-          "temp": 0
+          "temp": 0,
+          "bonus": 0
         },
         "currency": {
           "copper": 0,
@@ -1723,6 +1833,7 @@
           "spec": 0,
           "freepp": 0,
           "desc": "",
+          "bonus": 0,
           "status": false
         },
         "ppotential": {
@@ -1730,12 +1841,16 @@
           "spent": 0,
           "spec": 0,
           "temp": 0,
+          "bonus": 0,
           "status": false
         },
         "pproj": {
           "base": 0,
           "spec": 0,
           "temp": 0,
+          "bonusBase": 0,
+          "bonus": 0,
+          "bonus2": 0,
           "status": false
         },
         "other": {

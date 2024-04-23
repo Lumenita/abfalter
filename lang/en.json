@@ -925,8 +925,25 @@
       "totalDpSpent": "Total DP Spent"
     },
     "activeEffectChanges": {
-      "atk": "Attack",
-      "blk": "Block"
+      "magicRegen": "Magic Regeneration",
+      "summoning": "Summoning Ability",
+      "pp": "Psychic Point",
+      "kiAcuAgi": "Ki Accumulation: Agility",
+      "kiPoolAgi": "Ki Pool: Agility",
+      "kiAcuCon": "Ki Accumulation: Constitution",
+      "kiPoolCon": "Ki Pool: Constitution",
+      "kiAcuDex": "Ki Accumulation: Dexterity",
+      "kiPoolDex": "Ki Pool: Dexterity",
+      "kiAcuStr": "Ki Accumulation: Strength",
+      "kiPoolStr": "Ki Pool: Strength",
+      "kiAcuPow": "Ki Accumulation: Power",
+      "kiPoolPow": "Ki Pool: Power",
+      "kiAcuWP": "Ki Accumulation: Willpower",
+      "kiPoolWP": "Ki Pool: Willpower",
+      "kiPoolUnified": "Ki Pool: Unified",
+      "kiPoolInnate": "Ki Pool: Innate Power",
+      "healthRegen": "Health Regeneration",
+      "secAbility": "Sec. Ability"
     }
   }
 }

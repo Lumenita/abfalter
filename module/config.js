@@ -937,6 +937,24 @@ abfalter.monsterPowers = {
 }
 
 abfalter.activeEffectChanges = {
-    atk: "abfalter.activeEffectChanges.atk",
-    blk: "abfalter.activeEffectChanges.blk"
+    magicRegen: "abfalter.activeEffectChanges.magicRegen",
+    summoning: "abfalter.activeEffectChanges.summoning",
+    pp: "abfalter.activeEffectChanges.pp",
+    kiAcuAgi: "abfalter.activeEffectChanges.kiAcuAgi",
+    kiPoolAgi: "abfalter.activeEffectChanges.kiPoolAgi",
+    kiAcuCon: "abfalter.activeEffectChanges.kiAcuCon",
+    kiPoolCon: "abfalter.activeEffectChanges.kiPoolCon",
+    kiAcuDex: "abfalter.activeEffectChanges.kiAcuDex",
+    kiPoolDex: "abfalter.activeEffectChanges.kiPoolDex",
+    kiAcuStr: "abfalter.activeEffectChanges.kiAcuStr",
+    kiPoolStr: "abfalter.activeEffectChanges.kiPoolStr",
+    kiAcuPow: "abfalter.activeEffectChanges.kiAcuPow",
+    kiPoolPow: "abfalter.activeEffectChanges.kiPoolPow",
+    kiAcuWP: "abfalter.activeEffectChanges.kiAcuWP",
+    kiPoolWP: "abfalter.activeEffectChanges.kiPoolWP",
+    kiPoolUnified: "abfalter.activeEffectChanges.kiPoolUnified",
+    kiPoolInnate: "abfalter.activeEffectChanges.kiPoolInnate",
+    healthRegen: "abfalter.activeEffectChanges.healthRegen",
+    secAbility: "abfalter.activeEffectChanges.secAbility"
+
 }
