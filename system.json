@@ -38,7 +38,17 @@
       "path": "lang/fr.json"
     }
   ],
-  "packs": [ ],
+  "packs": [
+    {
+      "name": "compendiums",
+      "label": "Compendium",
+      "system": "abfalter",
+      "path": "./packs/compendiums",
+      "type": "JournalEntry",
+      "private": false,
+      "flags": {}
+    }
+  ],
   "primaryTokenAttribute": "lp",
   "gridDistance": 5,
   "gridUnits": "ft",
