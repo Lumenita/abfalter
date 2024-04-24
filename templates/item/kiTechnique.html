@@ -1,18 +1,32 @@
 <form class="{{cssClass}} baseAbfalter" autocomplete="off">
 
     {{!-- Item Sheet Header --}}
-    <header class="sheet-header">
-        <div class="itemStart">
-            <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-            <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
+    <header class="sheet-header flexrow">
+        <img class="item-img" src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}" />
+
+        <div class="header-details flexrow">
+            <h1 class="itemName">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'abfalter.sheet.nameItem'}}" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{localize "abfalter.sheet.kiTechTitle"}}</h4>
+                <span class="item-subType">{{data.mk}} {{localize "abfalter.basicInfo.mk"}}</span>
+            </div>
+
+            <ul class="summary flexrow">
+                <li>{{data.frequency}}</li>
+                <li>{{data.actionType}}</li>
+                <li>{{localize "abfalter.basicInfo.level"}}: {{data.level}}</li>
+            </ul>
         </div>
     </header>
 
     {{!-- Item Sheet Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item active" data-tab="description">{{ localize "Description" }}</a>
-        <a class="item" data-tab="details">{{ localize "Details" }}</a>
-        <a class="item" data-tab="effects">{{ localize "Effects" }}</a>
+    <nav class="sheet-navigation tabs itemTabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "abfalter.basicInfo.description" }}</a>
+        <a class="item" data-tab="details">{{ localize "abfalter.basicInfo.details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "abfalter.basicInfo.effects" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}

@@ -102,7 +102,8 @@ abfalter.basicInfo = {
     special: "abfalter.basicInfo.special",
     innate: "abfalter.basicInfo.innate",
     shortDesc: "abfalter.basicInfo.shortDesc",
-    monster: "abfalter.basicInfo.monster"
+    monster: "abfalter.basicInfo.monster",
+    details: "abfalter.basicInfo.details"
 }
 
 abfalter.generalTab = {
@@ -208,17 +209,6 @@ abfalter.generalTab = {
     lifePoints: "abfalter.generalTab.lifePoints",
     addAdvantage: "abfalter.generalTab.addAdvantage",
     addDisadvantage: "abfalter.generalTab.addDisadvantage",
-    phr: "abfalter.generalTab.phr",
-    dr: "abfalter.generalTab.dr",
-    psnr: "abfalter.generalTab.psnr",
-    mr: "abfalter.generalTab.mr",
-    psyr: "abfalter.generalTab.psyr",
-    physicalRes: "abfalter.generalTab.physicalRes",
-    diseaseRes: "abfalter.generalTab.diseaseRes",
-    poisonRes: "abfalter.generalTab.poisonRes",
-    magicRes: "abfalter.generalTab.magicRes",
-    psychicRes: "abfalter.generalTab.psychicRes",
-    favorite: "abfalter.generalTab.favorite",
     custom: "abfalter.generalTab.custom"
 }
 
@@ -257,6 +247,25 @@ abfalter.sheet = {
     martialArt: "abfalter.sheet.martialArt",
     arsMagnus: "abfalter.sheet.arsMagnus",
     elan: "abfalter.sheet.elan",
+    phr: "abfalter.sheet.phr",
+    dr: "abfalter.sheet.dr",
+    psnr: "abfalter.sheet.psnr",
+    mr: "abfalter.sheet.mr",
+    psyr: "abfalter.sheet.psyr",
+    physicalRes: "abfalter.sheet.physicalRes",
+    diseaseRes: "abfalter.sheet.diseaseRes",
+    poisonRes: "abfalter.sheet.poisonRes",
+    magicRes: "abfalter.sheet.magicRes",
+    psychicRes: "abfalter.sheet.psychicRes",
+    source: "abfalter.sheet.source",
+    duration: "abfalter.sheet.duration",
+    add: "abfalter.sheet.add",
+    tempEff: "abfalter.sheet.tempEff",
+    passEff: "abfalter.sheet.passEff",
+    InEff: "abfalter.sheet.InEff",
+    newEff: "abfalter.sheet.newEff",
+    kiTechTitle: "abfalter.sheet.kiTechTitle",
+    monsterPowTitle: "abfalter.sheet.monsterPowTitle"
 }
 
 abfalter.magicTab = {

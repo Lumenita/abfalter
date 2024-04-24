@@ -55,6 +55,10 @@ button {
     --color-bg-btn-minor-active: #9aabcb;
     --color-bg-btn-minor-inactive: #354766;
     --color-shadow-primary: #5c9be9;
+    --item-subTitle: #7a7971;
+    --item-summary: #afaea9;
+    --effect-border: #2c3850;
+    --effect-bg: rgb(32 44 66);
 }
 [data-theme="light"] {
     --backgroundColor: url(../img/parchment.jpg);
@@ -82,6 +86,10 @@ button {
     --color-bg-btn-minor-active: inherit;
     --color-bg-btn-minor-inactive: inherit;
     --color-shadow-primary: inherit;
+    --item-subTitle: #7a7971;
+    --item-summary: #4b4a44;
+    --effect-border: #10141c;
+    --effect-bg: rgb(81 121 163 / 29%);
 }
 .window-app .window-content {
     overflow-x: auto;
@@ -4569,20 +4577,218 @@ h6 {
 .monsterPower-item:nth-child(2n) {
     background: var(--itemOffSet);
 }
-/*
-    ****************
-    ----------------
-     Active Effects
-    ----------------
-    ****************
-*/
-/*
-    ***************
-    ---------------
-         Items
-    ---------------
-    ***************
-*/
+/* ----------------------------------------- */
+/*  Active Effects                           */
+/* ----------------------------------------- */
+.abfalter .items-list {
+    list-style: none;
+    padding: 0 1%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+.abfalter .items-list .items-header {
+    height: 28px;
+    margin: 2px 0;
+    padding: 0;
+    align-items: center;
+    background: var(--effect-bg);
+    border: 2px groove var(--effect-border);
+    font-weight: bold;
+}
+.abfalter .items-list .items-header > * {
+    font-size: 15px;
+    text-align: center;
+}
+.abfalter .items-list .items-header h3 {
+    padding-left: 5px;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: left;
+    font-size: 17px;
+    border: none;
+}
+.abfalter .items-list .item-name {
+    flex: 2;
+    margin: 0;
+    overflow: hidden;
+    align-items: center;
+}
+.abfalter .items-list .item-controls {
+    flex: 0 0 60px;
+    justify-content: space-between;
+}
+.abfalter .items-list .item-controls a {
+    font-size: 12px;
+    text-align: center;
+}
+.abfalter .items-list .items-header .item-controls a {
+    font-size: 14px;
+}
+.abfalter .items-list .item-eff {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.abfalter .items-list .item-eff h4 {
+    margin: 0;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+.abfalter .items-list .item {
+    align-items: center;
+    padding: 0 2px;
+    border-bottom: 1px solid var(--boxColor);
+    margin: 0 0 0 10px;
+    height: 28px;
+}
+.abfalter .items-list .item:last-child {
+    border-bottom: none;
+}
+.abfalter .effect .item .effect-source,
+.abfalter .effect .item .effect-duration,
+.abfalter .effect .item .effect-controls {
+    text-align: center;
+    border-left: 1px solid var(--boxColor);
+    border-right: 1px solid var(--boxColor);
+    font-size: 12px;
+}
+.abfalter .effect .item .effect-duration {
+    border-left: none;
+    border-right: 1px solid var(--boxColor);
+}
+.abfalter .effect .item .effect-controls {
+    border: none;
+}
+/* ----------------------------------------- */
+/*  Item Header                              */
+/* ----------------------------------------- */
+.abfalter.sheet.item .sheet-header {
+    flex: 0 0 100px;
+    border-bottom: 2px groove var(--boxColor);
+}
+.abfalter.sheet.item .sheet-header img.item-img {
+    flex: 0 0 100px;
+    max-width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border: 2px solid #000;
+    border-right: 2px groove  var(--boxColor);
+}
+.abfalter.sheet.item .sheet-header .header-details {
+    font-family: "Modesto Condensed", "Palatino Linotype", serif;
+    font-size: 20px;
+    font-weight: 700;
+}
+.abfalter.sheet.item .sheet-header h1 {
+    flex: 1;
+    border-bottom: none;
+    height: 60px;
+    margin: 0;
+    padding: 5px;
+}
+.abfalter.sheet.item .sheet-header h1 input {
+    display: block;
+    height: 50px;
+    font-size: 32px;
+    margin: 0;
+    background: none;
+    text-align: start;
+    border: none;
+}
+.abfalter.sheet.item .sheet-header .item-subtitle {
+    flex: 0 0 100px;
+    height: 60px;
+    margin: 0;
+    padding: 5px;
+    text-align: right;
+    white-space: nowrap;
+    color: var(--item-subTitle);
+}
+.abfalter.sheet.item .sheet-header .item-subtitle .item-type {
+    font-size: 24px;
+    line-height: 26px;
+    margin: 0;
+}
+.abfalter.sheet.item .sheet-header .item-subtitle .item-subType{
+    font-size: 16px;
+    line-height: 24px;
+}
+.abfalter.sheet.item .sheet-header .summary {
+    flex: 0 0 100%;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px groove  var(--boxColor);
+    border-bottom: none;
+}
+.abfalter.sheet.item .sheet-header .summary li {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.25em;
+    height: calc(100% - 6px);
+    float: left;
+    margin: 2px 0 2px 5px;
+    padding: 0;
+    border-right: 2px groove  var(--boxColor);
+    line-height: 34px;
+    color: var(--item-summary);
+}
+.abfalter.sheet.item .sheet-header .summary li span {
+    padding-inline: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 400;
+}
+.abfalter.sheet.item .sheet-header .header-details .summary select {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    font-family: "Modesto Condensed", "Palatino Linotype", serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: capitalize;
+    font-weight: 100;
+    text-align: left;
+    appearance: auto;
+    background: none;
+}
+.abfalter.sheet.item .sheet-header .summary li:last-child {
+    border-right: none;
+}
+/* ----------------------------------------- */
+/*  Item Navigation Bar                      */
+/* ----------------------------------------- */
+.abfalter.sheet .sheet-navigation {
+    flex: 0 0 30px;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+.abfalter.sheet .sheet-navigation .item {
+    height: 30px;
+    line-height: 32px;
+    margin: 0 24px;
+    border-bottom: 3px solid #b5b3a4;
+    text-decoration: none;
+}
+.abfalter.sheet .sheet-navigation .item.active {
+    border-bottom: 3px solid #8da5fd;
+}
+.abfalter.sheet.item .sheet-navigation {
+    margin-bottom: 5px;
+}
+.abfalter.sheet.item .sheet-navigation .item {
+    font-size: 18px;
+}
+
+
+
+
+
+
+
+/* ALL OLD / REDO */
 /*
     -----
     Default

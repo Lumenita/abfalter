@@ -102,7 +102,8 @@
       "special": "Especial",
       "innate": "Innate",
       "shortDesc": "Short Desc.",
-      "monster": "Creature"
+      "monster": "Creature",
+      "details": "Details"
     },
     "generalTab": {
       "characteristics": "Características",
@@ -253,7 +254,16 @@
       "diseaseRes": "Resistencia a Enfer",
       "poisonRes": "Resistencia a Venenos",
       "magicRes": "Resistencia Mágica",
-      "psychicRes": "Resistencia Psíquica"
+      "psychicRes": "Resistencia Psíquica",
+      "source": "Source",
+      "duration": "Duration",
+      "add": "Add",
+      "tempEff": "Temporary Effects",
+      "passEff": "Passive Effects",
+      "InEff": "Inactive Effects",
+      "newEff": "New Effect",
+      "kiTechTitle": "Ki Technique",
+      "monsterPowTitle": "Monster Power"
     },
     "magicTab": {
       "mproj": "Proyección Mágica",
@@ -923,6 +933,27 @@
       "totalCharDp": "Total Char. DP Spent",
       "totalPowDp": "Total Powers DP Spent",
       "totalDpSpent": "Total DP Spent"
+    },
+    "activeEffectChanges": {
+      "magicRegen": "Magic Regeneration",
+      "summoning": "Summoning Ability",
+      "pp": "Psychic Point",
+      "kiAcuAgi": "Ki Accumulation: Agility",
+      "kiPoolAgi": "Ki Pool: Agility",
+      "kiAcuCon": "Ki Accumulation: Constitution",
+      "kiPoolCon": "Ki Pool: Constitution",
+      "kiAcuDex": "Ki Accumulation: Dexterity",
+      "kiPoolDex": "Ki Pool: Dexterity",
+      "kiAcuStr": "Ki Accumulation: Strength",
+      "kiPoolStr": "Ki Pool: Strength",
+      "kiAcuPow": "Ki Accumulation: Power",
+      "kiPoolPow": "Ki Pool: Power",
+      "kiAcuWP": "Ki Accumulation: Willpower",
+      "kiPoolWP": "Ki Pool: Willpower",
+      "kiPoolUnified": "Ki Pool: Unified",
+      "kiPoolInnate": "Ki Pool: Innate Power",
+      "healthRegen": "Health Regeneration",
+      "secAbility": "Sec. Ability"
     }
   }
 }

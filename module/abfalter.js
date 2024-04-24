@@ -68,8 +68,28 @@ Hooks.once("ready", function () {
 Hooks.once('setup', function () {
     // Set active effect keys-labels
     abfalterEffectConfig.initializeChangeKeys();
+
+    /* WIP Localized Select fields
+    abfalter.monstPowType = {
+        other: game.i18n.localize('abfalter.basicInfo.other'),
+        essential: game.i18n.localize('abfalter.basicInfo.essential'),
+        disadvantage: game.i18n.localize('abfalter.basicInfo.disadvantage'),
+        combat: game.i18n.localize('abfalter.basicInfo.combat'),
+        defensive: game.i18n.localize('abfalter.basicInfo.defensive'),
+        misc: game.i18n.localize('abfalter.basicInfo.misc'),
+        divine: game.i18n.localize('abfalter.basicInfo.divine')
+    };
+    preLocalize("monstPowType");*/
 })
 
 Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
+
+/*
+const _preLocalizationRegistrations = {};
+
+function preLocalize(configKeyPath, { key, keys = [], sort = false } = {}) {
+    if (key) keys.unshift(key);
+    _preLocalizationRegistrations[configKeyPath] = { keys, sort };
+}*/

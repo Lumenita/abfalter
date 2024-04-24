@@ -4,11 +4,9 @@
         <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
     </div>
     
-    <nav class="sheet-tabs tabs elanTabs" data-group="primary">
-        <ul>
-            <li><a class="item" data-tab="main"><span>{{localize "abfalter.generalTab.elan"}}</span></a></li>
-            <li><a class="item" data-tab="others"><span>{{localize "abfalter.generalTab.addElan"}}</span></a></li>
-        </ul>       
+    <nav class="sheet-navigation tabs elanTabs" data-group="primary">
+        <a class="item" data-tab="main">{{localize "abfalter.generalTab.elan"}}</a>
+        <a class="item" data-tab="others">{{localize "abfalter.generalTab.addElan"}}</a>
     </nav>
 
     <section class="sheet-body">

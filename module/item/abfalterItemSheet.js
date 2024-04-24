@@ -83,7 +83,7 @@ export default class abfalterItemSheet extends ItemSheet {
             width: 500,
             height: 450,
             resizable: true,
-            tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }],
+            tabs: [{ navSelector: ".sheet-navigation", contentSelector: ".sheet-body", initial: "description" }],
             submitOnClose: true,
             closeOnSubmit: false,
             submitOnChange: true
