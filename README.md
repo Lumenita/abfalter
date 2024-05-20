@@ -6,17 +6,16 @@ As a long-time DM for Anima, I used to play on Roll20. However, when I found out
 They were kind enough to let me use their auto combat calculator as reference, Thank you Linkaynn and the other members who are developing the other Anima Beyond Fanatasy page for allowing me to use your idea for the combat calculator.
 
 I've been working on this page for a few years now, but I never posted it because I felt like it was not ready, but now here it is.
-The system follows the Anima Beyond Fantasy, although some features are more tailored for my table, for example; the fumbling system (I kept the -15 per for any fumbles below the fumble level).
+The system follows the Anima Beyond Fantasy, although some features are more tailored for my table, however these can be turned off in the global settings of the system.
 Worry not, as most core mechanics remain unchanged.
 In this character sheet, I have made a lot of automatic calculation following the books graphs, allowing the players to focus more on playing the game than counting numbers.
 
 I plan to incorporate plenty more of QoL mechanisms into the character pages and the system itself.
-If there is anything you want to see added, please let me know.
+If there is anything you want to see added, please let me free to contanct me.
 If I ever get my hands on the Core 2.0, I will also work on a system for that.
 
 # Planned Updates
-- Combat calculator is still in development.
-- Active effects.
+- Combat calculator is still in heavy development.
 - Certain items don't have a chat card.
 - using power over agility as movement when movement of emptyness is bought.
 - Psychic potential button on matrices that will count the added bonus from pp.
@@ -29,6 +28,7 @@ If I ever get my hands on the Core 2.0, I will also work on a system for that.
 # Contributions
 I would love support from the community! I am open to any feedback, whether its suggestions, bug reports, or critiques.
 - Thank you @Shairin for the spanish translations!
+- Thank you @Dattabase, @Boudou, & @Angelwitch for the French Translations
 - Elis (@Elisianthus) sacrificed her sanity for many evenings to bring a plethora of compendiums with this system into the community!
 
 # Me
