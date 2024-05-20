@@ -967,3 +967,25 @@ abfalter.activeEffectChanges = {
     secAbility: "abfalter.activeEffectChanges.secAbility"
 
 }
+
+abfalter.customSecondaryDropdown = {
+    none: "abfalter.customSecondaryDropdown.none",
+    agi: "abfalter.customSecondaryDropdown.agi",
+    con: "abfalter.customSecondaryDropdown.con",
+    str: "abfalter.customSecondaryDropdown.str",
+    dex: "abfalter.customSecondaryDropdown.dex",
+    int: "abfalter.customSecondaryDropdown.int",
+    per: "abfalter.customSecondaryDropdown.per",
+    pow: "abfalter.customSecondaryDropdown.pow",
+    wp: "abfalter.customSecondaryDropdown.wp",
+}
+
+abfalter.MonsterPowerDropdown = {
+    other: "abfalter.MonsterPowerDropdown.other",
+    essential: "abfalter.MonsterPowerDropdown.essential",
+    disadv: "abfalter.MonsterPowerDropdown.disadv",
+    combat: "abfalter.MonsterPowerDropdown.combat",
+    defense: "abfalter.MonsterPowerDropdown.defense",
+    misc: "abfalter.MonsterPowerDropdown.misc",
+    divine: "abfalter.MonsterPowerDropdown.divine"
+}

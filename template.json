@@ -2010,7 +2010,7 @@
       "temp": 0,
       "nat": 0,
       "natural": 0,
-      "atr": "",
+      "atr": "none",
       "expand": true,
       "fav": false
     },
@@ -2209,7 +2209,7 @@
     "monsterPower": {
       "templates": [ "itemDescription" ],
       "shortDesc": "",
-      "type": "",
+      "type": "other",
       "expand": false,
       "cost": "",
       "gnosis": ""

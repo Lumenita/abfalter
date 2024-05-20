@@ -265,36 +265,47 @@ export default class abfalterItem extends Item {
     }
 
     prepareSecondary() {
+
         if (this.parent != null) {
             this.system.aam = this.parent.system.aamFinal;
             this.system.collapse = this.parent.system.toggles.customSecondary;
+
             switch (this.system.atr) {
-                case game.i18n.localize('abfalter.basicInfo.agi'):
+                case "agi":
                     this.system.mod = this.parent.system.stats.Agility.mod;
+                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.agi');
                     break;
-                case game.i18n.localize('abfalter.basicInfo.con'):
+                case "con":
                     this.system.mod = this.parent.system.stats.Constitution.mod;
+                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.con');
                     break;
-                case game.i18n.localize('abfalter.basicInfo.str'):
+                case "str":
                     this.system.mod = this.parent.system.stats.Strength.mod;
+                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.str');
                     break;
-                case game.i18n.localize('abfalter.basicInfo.dex'):
+                case "dex":
                     this.system.mod = this.parent.system.stats.Dexterity.mod;
+                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.dex');
                     break;
-                case game.i18n.localize('abfalter.basicInfo.per'):
+                case "int":
                     this.system.mod = this.parent.system.stats.Perception.mod;
+                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.int');
                     break;
-                case game.i18n.localize('abfalter.basicInfo.int'):
+                case "per":
                     this.system.mod = this.parent.system.stats.Intelligence.mod;
+                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.per');
                     break;
-                case game.i18n.localize('abfalter.basicInfo.pow'):
+                case "pow":
                     this.system.mod = this.parent.system.stats.Power.mod;
+                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.pow');
                     break;
-                case game.i18n.localize('abfalter.basicInfo.wp'):
+                case "wp":
                     this.system.mod = this.parent.system.stats.Willpower.mod;
+                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.wp');
                     break;
                 default:
                     this.system.mod = 0;
+                    this.system.localizedName = game.i18n.localize('abfalter.customSecondaryDropdown.none');
                     break;
             }
         } else {
@@ -303,11 +314,11 @@ export default class abfalterItem extends Item {
             this.system.collapse = false;
         }
 
-        if (this.system.atr == game.i18n.localize('abfalter.basicInfo.agi') || this.system.atr == game.i18n.localize('abfalter.basicInfo.con') ||
-            this.system.atr == game.i18n.localize('abfalter.basicInfo.str') || this.system.atr == game.i18n.localize('abfalter.basicInfo.dex')) {
+        if (this.system.atr == "agi" || this.system.atr == "con" ||
+            this.system.atr == "str" || this.system.atr == "dex" ) {
             this.system.tag = "physical";
-        } else if (this.system.atr == game.i18n.localize('abfalter.basicInfo.per') || this.system.atr == game.i18n.localize('abfalter.basicInfo.int') ||
-            this.system.atr == game.i18n.localize('abfalter.basicInfo.pow') || this.system.atr == game.i18n.localize('abfalter.basicInfo.wp')) {
+        } else if (this.system.atr == "per" || this.system.atr == "pow" ||
+            this.system.atr == "int" || this.system.atr == "wp") {
             this.system.tag = "mental";
         } else {
             this.system.tag = ""
@@ -318,6 +329,8 @@ export default class abfalterItem extends Item {
             this.system.natFinal = 100;
         }
         this.system.finalValue = Math.floor(~~this.system.base + ~~this.system.extra + ~~this.system.spec + ~~this.system.temp + this.system.natFinal + ~~this.system.aam);
+
+
     }
 
     prepareMonsterPower() {

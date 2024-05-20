@@ -106,6 +106,10 @@ export default class abfalterItemSheet extends ItemSheet {
             effects: prepareActiveEffectCategories(this.item.effects),
             config: CONFIG.abfalter,
         };
+
+        //Dropdowns
+        sheetData.monsterTypeObjList = CONFIG.abfalter.MonsterPowerDropdown;
+
         return sheetData;
     }
 

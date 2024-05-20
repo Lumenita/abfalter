@@ -1924,19 +1924,11 @@
                         <input class="inline-edit" data-field="system.spec" type="number" value="{{secondary.system.spec}}" />
                         <input class="inline-edit" data-field="system.extra" type="number" value="{{secondary.system.extra}}" />
                         <input class="inline-edit" data-field="system.base" type="number" value="{{secondary.system.base}}" />
-                        <select class="inline-edit" data-field="system.atr" data-dtype="String">
-                            {{#select system.atr}}
-                            <option value=""> </option>
-                            <option value="{{localize "abfalter.basicInfo.agi"}}"> {{localize "abfalter.basicInfo.agi"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.con"}}"> {{localize "abfalter.basicInfo.con"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.str"}}"> {{localize "abfalter.basicInfo.str"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.dex"}}"> {{localize "abfalter.basicInfo.dex"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.per"}}"> {{localize "abfalter.basicInfo.per"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.int"}}"> {{localize "abfalter.basicInfo.int"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.pow"}}"> {{localize "abfalter.basicInfo.pow"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.wp"}}"> {{localize "abfalter.basicInfo.wp"}} </option>
-                            {{/select}}
+
+                        <select class="inline-edit" name="system.atr" data-field="system.atr">
+                            {{selectOptions ../customSecObjList selected=system.atr localize=true}}
                         </select>
+
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
 
@@ -1952,7 +1944,7 @@
                     </div>
                     {{else}}
                     <div>
-                        <button type="button" class="rollable" data-roll="123" data-label="{{secondary.name}}" data-type="secondaryRoll">
+                        <button type="button" class="rollable" data-roll="{{secondary.system.finalValue}}" data-label="{{secondary.name}}" data-type="secondaryRoll">
                             <span> {{secondary.name}} </span>
                             <span> {{this.system.finalValue}} </span>
                         </button>
@@ -1960,7 +1952,7 @@
                         <input class="inline-edit" data-field="system.spec" type="number" value="{{secondary.system.spec}}" />
                         <input class="inline-edit" data-field="system.extra" type="number" value="{{secondary.system.extra}}" />
                         <input class="inline-edit" data-field="system.base" type="number" value="{{secondary.system.base}}" />
-                        <span class="{{secondary.system.tag}}"> {{secondary.system.atr}} </span>
+                        <span class="{{secondary.system.tag}}"> {{secondary.system.localizedName}} </span>
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
                     {{/if}}

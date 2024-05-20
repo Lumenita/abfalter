@@ -1698,7 +1698,7 @@ export default class abfalterActor extends Actor {
             data.wepFinSpd = data.weaponSpeed - 10;
             data.weaponName = game.i18n.localize('abfalter.basicInfo.multiWield');
         } else if (data.weaponNumber == 0) {
-            data.wepFinSpd = 0;
+            data.wepFinSpd = 20;
             data.weaponName = game.i18n.localize('abfalter.basicInfo.unarmed');
         } else {
             data.wepFinSpd = data.weaponSpeed;
@@ -2567,7 +2567,7 @@ export default class abfalterActor extends Actor {
 
         // Reload Items to get Atk/Def
         this.items.reduce((arr, item) => {
-            if (item.type === "weapon") {
+            if (item.type === "weapon" || item.type === "secondary" ) {
                 item.prepareData();
             }
         });

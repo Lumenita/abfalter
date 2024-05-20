@@ -168,7 +168,7 @@
 
                 <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
-                    {{#ifEquals system.type "1"}}
+                    {{#ifEquals system.type "essential"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>
@@ -218,7 +218,7 @@
 
                 <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
-                    {{#ifEquals system.type "2"}}
+                    {{#ifEquals system.type "disadv"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>
@@ -268,7 +268,7 @@
 
                 <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
-                    {{#ifEquals system.type "5"}}
+                    {{#ifEquals system.type "misc"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>
@@ -318,7 +318,7 @@
 
                 <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
-                    {{#ifEquals system.type "6"}}
+                    {{#ifEquals system.type "divine"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>
@@ -370,7 +370,7 @@
 
                 <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
-                    {{#ifEquals system.type "3"}}
+                    {{#ifEquals system.type "combat"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>
@@ -420,7 +420,7 @@
 
                 <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
-                    {{#ifEquals system.type "4"}}
+                    {{#ifEquals system.type "defense"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>
@@ -470,7 +470,7 @@
 
                 <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
-                    {{#ifEquals system.type ""}}
+                    {{#ifEquals system.type "other"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>

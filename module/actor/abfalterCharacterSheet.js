@@ -99,6 +99,9 @@ export default class abfalterCharacterSheet extends ActorSheet {
             config: CONFIG.abfalter
         }
 
+        //Dropdowns
+        sheetData.customSecObjList = CONFIG.abfalter.customSecondaryDropdown;
+
         //Initialize Items
         sheetData.inventories = baseData.items.filter(function (item) { return item.type == "inventory" });
         sheetData.weapons = baseData.items.filter(function (item) { return item.type == "weapon" });

@@ -16,16 +16,8 @@
 
             <ul class="summary flexrow">
                 <li>
-                    <select name="data.type" data-dtype="String">
-                        {{#select data.type}}
-                        <option value=""> </option>
-                        <option value="1"> Essential </option>
-                        <option value="2"> Dis-advantage </option>
-                        <option value="3"> Combat </option>
-                        <option value="4"> Defensive </option>
-                        <option value="5"> Misc </option>
-                        <option value="6"> Divine </option>
-                        {{/select}}
+                    <select name="data.type">
+                        {{selectOptions monsterTypeObjList selected=data.type localize=true}}
                     </select>
                 </li>
                 <li>{{localize "abfalter.basicInfo.cost"}}: {{data.cost}}</li>

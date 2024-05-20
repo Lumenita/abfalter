@@ -1,6 +1,6 @@
-function migrateActorData(actor) {
-    let updateData = {};
-
+async function migrateActorData(actor) {
+    /*
+        let updateData = {};
     if (actor.metaMagic) {
         updateData["system.metaMagic.cost"] = 0;
         updateData["system.metaMagic.extraCost"] = 0;
@@ -19,7 +19,50 @@ function migrateActorData(actor) {
         updateData["system.mproj.temp2"] = 0;
 
     }
-    return updateData;
+    */
+    const updates = [];
+    for (const item of actor.items) if (item.type === "monsterPower") {
+        let newType = "";
+        switch (item.system.type) {
+            case "":
+            case "other":
+                newType = "other";
+                break;
+            case "1":
+            case "essential":
+                newType = "essential";
+                break;
+            case "2":
+            case "disadv":
+                newType = "disadv";
+                break;
+            case "3":
+            case "combat":
+                newType = "combat";
+                break;
+            case "4":
+            case "defense":
+                newType = "defense";
+                break;
+            case "5":
+            case "misc":
+                newType = "misc";
+                break;
+            case "6":
+            case "divine":
+                newType = "divine";
+                break;
+            default:
+                newType = "other";
+                break;
+        }
+        item.system.type = newType;
+
+        // Collect the updates
+        updates.push({ _id: item.id, 'system.type': newType });
+    }
+
+    return updates;
 }
 
 function migrateSceneData(scene) {
@@ -40,10 +83,11 @@ function migrateSceneData(scene) {
 
 export async function migrateWorld() {
     for (let actor of game.actors.contents) {
-        const updateData = migrateActorData(actor.system);
+        const updateData = await migrateActorData(actor);
         if (!foundry.utils.isEmpty(updateData)) {
-            console.log(`Migrating Actor entity ${actor.name}`);
-            await actor.update(updateData);
+            console.log(`Migrating Actor entity ${actor.system.name}`);
+            //await actor.update(updateData);
+            await actor.updateEmbeddedDocuments("Item", updateData);
         }
     }
 

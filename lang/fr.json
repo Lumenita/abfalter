@@ -954,6 +954,26 @@
       "kiPoolInnate": "Ki Pool: Innate Power",
       "healthRegen": "Health Regeneration",
       "secAbility": "Sec. Ability"
+    },
+    "customSecondaryDropdown": {
+      "none": "NONE",
+      "agi": "AGI",
+      "con": "CON",
+      "str": "FOR",
+      "dex": "DEX",
+      "int": "INT",
+      "per": "PER",
+      "pow": "POU",
+      "wp": "VOL"
+    },
+    "MonsterPowerDropdown": {
+      "other": "Other Power",
+      "essential": "Essential",
+      "disadv": "Dis-Advantage",
+      "combat": "Combat",
+      "defense": "Defensive",
+      "misc": "Misc",
+      "divine": "Divine"
     }
   }
 }
