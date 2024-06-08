@@ -56,9 +56,14 @@ Hooks.once("ready", function () {
     }
 
     const currentVersion = game.settings.get("abfalter", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "1.3.0";
+    const NEEDS_MIGRATION_VERSION = "1.4.0";
 
-    const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
+    console.log(currentVersion);
+
+    const needsMigration = !currentVersion || foundry.utils.isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
+
+    console.log(needsMigration);
+
 
     if (needsMigration) {
         migrateWorld();

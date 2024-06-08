@@ -1,13 +1,22 @@
 <form class="{{cssClass}} baseAbfalter itemWindow" autocomplete="off">
-    <div class="itemStart">
-        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
-    </div>
 
-    <div class="maintPathContent">
-        <h5> {{localize "abfalter.magicTab.spellPathOne"}} </h5>
-        <div>
-            <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="item-img" src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}" />
+
+        <div class="header-details flexrow">
+            <h1 class="itemName">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'abfalter.sheet.nameItem'}}" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{localize "abfalter.magicTab.spellPathOne"}}</h4>
+            </div>
+
+            <ul class="summary flexrow">
+                <li>{{localize "abfalter.basicInfo.level"}}: <input type="number" name="system.level" value="{{system.level}}" /></li>
+            </ul>
         </div>
-    </div>
+    </header>
+
 </form>

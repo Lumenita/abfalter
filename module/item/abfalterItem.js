@@ -221,6 +221,11 @@ export default class abfalterItem extends Item {
     }
 
     preparePsychicMatrix() {
+        if (this.system.maint == "Yes") {
+            this.system.maintName = game.i18n.localize('abfalter.basicInfo.yes');
+        } else {
+            this.system.maintName = game.i18n.localize('abfalter.basicInfo.no');
+        }
 
         if (this.parent != null) {
             if (this.parent) {
@@ -233,6 +238,32 @@ export default class abfalterItem extends Item {
         if (this.parent != null) {
             this.system.actor = false;
             if (this.parent) {
+                switch (this.system.frequency) {
+                    case "action":
+                        this.system.frequencyName = game.i18n.localize('abfalter.kiTab.action');
+                        break;
+                    case "turn":
+                        this.system.frequencyName = game.i18n.localize('abfalter.kiTab.turn');
+                        break;
+                    case "variable":
+                        this.system.frequencyName = game.i18n.localize('abfalter.kiTab.variable');
+                        break;
+                }
+                switch (this.system.actionType) {
+                    case "attack":
+                        this.system.actionTypeName = game.i18n.localize('abfalter.kiTab.attack');
+                        break;
+                    case "defense":
+                        this.system.actionTypeName = game.i18n.localize('abfalter.kiTab.defense');
+                        break;
+                    case "counterAttack":
+                        this.system.actionTypeName = game.i18n.localize('abfalter.kiTab.counterAttack');
+                        break;
+                    case "variable":
+                        this.system.actionTypeName = game.i18n.localize('abfalter.kiTab.variable');
+                        break;
+                }
+
                 this.system.actor = true;
                 this.system.unified = this.parent.system.toggles.unifiedPools;
                 this.system.innatePower = this.parent.system.toggles.innatePower;

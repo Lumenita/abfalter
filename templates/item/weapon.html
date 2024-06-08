@@ -8,25 +8,20 @@
         <div>
             <h5> {{localize "abfalter.armoryTab.wepDetails"}} </h5>
             <div>
-                <label> <span> {{localize "abfalter.armoryTab.quality"}} </span> <input type="number" name="data.quality" value="{{data.quality}}" /> </label>
-                <label> <span> {{localize "abfalter.armoryTab.rarity"}} </span> <input type="text" name="data.rarity" value="{{data.rarity}}" /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.quality"}} </span> <input type="number" name="system.quality" value="{{system.quality}}" /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.rarity"}} </span> <input type="text" name="system.rarity" value="{{system.rarity}}" /> </label>
             </div>
             <div>
-                <label> <span> {{localize "abfalter.basicInfo.attack"}} </span> <input type="number" name="data.attack" value="{{data.attack}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.block"}} </span> <input type="number" name="data.block" value="{{data.block}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.attack"}} </span> <input type="number" name="system.attack" value="{{system.attack}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.block"}} </span> <input type="number" name="system.block" value="{{system.block}}" /> </label>
             </div>
             <div>
-                <label> <span> {{localize "abfalter.basicInfo.dodge"}} </span> <input type="number" name="data.dodge" value="{{data.dodge}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.dodge"}} </span> <input type="number" name="system.dodge" value="{{system.dodge}}" /> </label>
                 <div class="csSelect">
                     <label>
                         <span> {{localize "abfalter.armoryTab.shieldType"}} </span>
-                        <select name="data.shield" data-dtype="text">
-                            {{#select data.shield}}
-                            <option value="none"> {{localize "abfalter.armoryTab.shieldNone"}} </option>
-                            <option value="buckler"> {{localize "abfalter.armoryTab.shieldBuckler"}} </option>
-                            <option value="shield"> {{localize "abfalter.armoryTab.shieldNorm"}} </option>
-                            <option value="fShield"> {{localize "abfalter.armoryTab.shieldTower"}} </option>
-                            {{/select}}
+                        <select class="inline-edit" name="system.shield" data-field="system.shield">
+                            {{selectOptions shieldObjList selected=system.shield localize=true}}
                         </select>
                     </label>
                 </div>
@@ -39,105 +34,82 @@
                 <div class="csSelect">
                     <label>
                         <span> {{localize "abfalter.armoryTab.primary"}} </span>
-                        <select name="data.primDmgT" data-dtype="text">
-                            {{#select data.primDmgT}}
-                            <option value="CUT"> {{localize "abfalter.armoryTab.cut"}} </option>
-                            <option value="IMP"> {{localize "abfalter.armoryTab.imp"}} </option>
-                            <option value="THR"> {{localize "abfalter.armoryTab.thr"}} </option>
-                            <option value="HEAT"> {{localize "abfalter.armoryTab.heat"}} </option>
-                            <option value="COLD"> {{localize "abfalter.armoryTab.cold"}} </option>
-                            <option value="ELE"> {{localize "abfalter.armoryTab.ele"}} </option>
-                            <option value="ENE"> {{localize "abfalter.armoryTab.ene"}} </option>
-                            {{#if data.spiritHomebrew}}
-                            <option value="SPIRIT"> {{localize "abfalter.armoryTab.spirit"}} </option>
-                            {{/if}}
-                            {{/select}}
+                        {{#if system.spiritHomebrew}}
+                        <select class="inline-edit" name="system.primDmgT" data-field="system.primDmgT">
+                            {{selectOptions damageTypeSpiritObjList selected=system.primDmgT localize=true}}
                         </select>
+                        {{else}}
+                        <select class="inline-edit" name="system.primDmgT" data-field="system.primDmgT">
+                            {{selectOptions damageTypeObjList selected=system.primDmgT localize=true}}
+                        </select>
+                        {{/if}}
                     </label>
                 </div>
                 <div class="csSelect">
                     <label>
                         <span> {{localize "abfalter.armoryTab.secondary"}} </span>
-                        <select name="data.secDmgT" data-dtype="text">
-                            {{#select data.secDmgT}}
-                            <option value="NONE"> {{localize "abfalter.armoryTab.na"}} </option>
-                            <option value="CUT"> {{localize "abfalter.armoryTab.cut"}} </option>
-                            <option value="IMP"> {{localize "abfalter.armoryTab.imp"}} </option>
-                            <option value="THR"> {{localize "abfalter.armoryTab.thr"}} </option>
-                            <option value="HEAT"> {{localize "abfalter.armoryTab.heat"}} </option>
-                            <option value="COLD"> {{localize "abfalter.armoryTab.cold"}} </option>
-                            <option value="ELE"> {{localize "abfalter.armoryTab.ele"}} </option>
-                            <option value="ENE"> {{localize "abfalter.armoryTab.ene"}} </option>
-                            {{#if data.spiritHomebrew}}
-                            <option value="SPIRIT"> {{localize "abfalter.armoryTab.spirit"}} </option>
-                            {{/if}}
-                            {{/select}}
+                        {{#if system.spiritHomebrew}}
+                        <select class="inline-edit" name="system.secDmgT" data-field="system.secDmgT">
+                            {{selectOptions damageTypeSpiritObjList selected=system.secDmgT localize=true}}
                         </select>
+                        {{else}}
+                        <select class="inline-edit" name="system.secDmgT" data-field="system.secDmgT">
+                            {{selectOptions damageTypeObjList selected=system.secDmgT localize=true}}
+                        </select>
+                        {{/if}}
                     </label>
                 </div>
             </div>
             <div>
-                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.baseDmg" value="{{data.baseDmg}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.baseDmg" value="{{system.baseDmg}}" /> </label>
                 <div class="csSelect">
                     <label>
                         <span> {{localize "abfalter.generalTab.modifier"}} </span>
-                        <select name="data.dmgMod" data-dtype="text">
-                            {{#select data.dmgMod}}
-                            <option value="agi"> {{localize "abfalter.basicInfo.agility"}} </option>
-                            <option value="con"> {{localize "abfalter.basicInfo.consti"}} </option>
-                            <option value="str"> {{localize "abfalter.basicInfo.strength"}} </option>
-                            <option value="dex"> {{localize "abfalter.basicInfo.dexerity"}} </option>
-                            <option value="per"> {{localize "abfalter.basicInfo.perception"}} </option>
-                            <option value="int"> {{localize "abfalter.basicInfo.intell"}} </option>
-                            <option value="pow"> {{localize "abfalter.basicInfo.power"}} </option>
-                            <option value="wp"> {{localize "abfalter.basicInfo.willPower"}} </option>
-                            <option value="str2"> {{localize "abfalter.armoryTab.twoStr"}} </option>
-                            <option value="presence"> {{localize "abfalter.armoryTab.twoPresPow"}} </option>
-                            <option value="none"> {{localize "abfalter.basicInfo.none"}} </option>
-                            {{/select}}
+                        <select class="inline-edit" name="system.dmgMod" data-field="system.dmgMod">
+                            {{selectOptions damageModObjList selected=system.dmgMod localize=true}}
                         </select>
                     </label>
                 </div>
             </div>
             <div>
                 <div class="weapContentButton">
-                    <button type="button" class="toggleBoolean {{#if data.toggle}}kiBought{{/if}}" data-label="data.toggle" data-ability="{{data.toggle}}">
+                    <button type="button" class="toggleBoolean {{#if system.toggle}}kiBought{{/if}}" data-label="system.toggle" data-ability="{{system.toggle}}">
                         <span> {{localize "abfalter.armoryTab.twoHand"}} </span>
                     </button>
                 </div>
-                <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.damage"}} </span> <input type="number" name="data.finalDmg" value="{{data.finalDmg}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.damage"}} </span> <input type="number" name="system.finalDmg" value="{{system.finalDmg}}" readonly /> </label>
             </div>
         </div>
 
         <div>
             <h6> Extra </h6>
             <div>
-                <label> <span> {{localize "abfalter.armoryTab.fortitude"}} </span> <input type="number" name="data.fortitude" value="{{data.fortitude}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.fortitude"}} </span> <input type="number" name="data.fortFinal" value="{{data.fortFinal}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.fortitude"}} </span> <input type="number" name="system.fortitude" value="{{system.fortitude}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.fortitude"}} </span> <input type="number" name="system.fortFinal" value="{{system.fortFinal}}" readonly /> </label>
             </div>
             <div>
-                <label> <span> {{localize "abfalter.armoryTab.atPen"}} </span> <input type="number" name="data.atPen" value="{{data.atPen}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.atPen"}} </span> <input type="number" name="data.atPenFinal" value="{{data.atPenFinal}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.atPen"}} </span> <input type="number" name="system.atPen" value="{{system.atPen}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.atPen"}} </span> <input type="number" name="system.atPenFinal" value="{{system.atPenFinal}}" readonly /> </label>
             </div>
             <div>
-                <label> <span> {{localize "abfalter.armoryTab.breakage"}} </span> <input type="number" name="data.breakage" value="{{data.breakage}}" /> </label>
-                <label> <span> {{localize "abfalter.armoryTab.finBreakage"}} </span> <input type="number" name="data.finalBreakage" value="{{data.finalBreakage}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.breakage"}} </span> <input type="number" name="system.breakage" value="{{system.breakage}}" /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.finBreakage"}} </span> <input type="number" name="system.finalBreakage" value="{{system.finalBreakage}}" readonly /> </label>
             </div>
             <div>
-                <label> <span> {{localize "abfalter.armoryTab.presence"}} </span> <input type="number" name="data.presence" value="{{data.presence}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.presence"}} </span> <input type="number" name="data.preFinal" value="{{data.preFinal}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.presence"}} </span> <input type="number" name="system.presence" value="{{system.presence}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.presence"}} </span> <input type="number" name="system.preFinal" value="{{system.preFinal}}" readonly /> </label>
             </div>
             <div>
-                <label> <span> {{localize "abfalter.armoryTab.shieldSpd"}} </span> <input type="number" name="data.shieldSpeed" value="{{data.shieldSpeed}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.shieldSpd"}} </span> <input type="number" name="data.shieldFinalSpeed" value="{{data.shieldFinalSpeed}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.shieldSpd"}} </span> <input type="number" name="system.shieldSpeed" value="{{system.shieldSpeed}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.shieldSpd"}} </span> <input type="number" name="system.shieldFinalSpeed" value="{{system.shieldFinalSpeed}}" readonly /> </label>
             </div>
             <div>
-                <label> <span> {{localize "abfalter.armoryTab.speed"}} </span> <input type="number" name="data.speed" value="{{data.speed}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.speed"}} </span> <input type="number" name="data.FinalWeaponSpeed" value="{{data.FinalWeaponSpeed}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.armoryTab.speed"}} </span> <input type="number" name="system.speed" value="{{system.speed}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.final"}} {{localize "abfalter.armoryTab.speed"}} </span> <input type="number" name="system.FinalWeaponSpeed" value="{{system.FinalWeaponSpeed}}" readonly /> </label>
             </div>
             <div>
                 <div class="weapContentButton">
-                    <button type="button" class="toggleBoolean {{#if data.complex}}kiBought{{/if}}" data-label="data.complex" data-ability="{{data.complex}}">
+                    <button type="button" class="toggleBoolean {{#if system.complex}}kiBought{{/if}}" data-label="system.complex" data-ability="{{system.complex}}">
                         <span> {{localize "abfalter.armoryTab.complex"}} </span>
                     </button>
                 </div>
@@ -146,8 +118,8 @@
 
         <h6> {{localize "abfalter.basicInfo.description"}} </h6>
         <div style="display: grid;">
-            <textarea class="textarea-auto-resize" rows="5" name="data.description" style="grid-area: 1 / 1 / 2/ 2;">{{data.description}}</textarea>
-            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.description}}</div>
+            <textarea class="textarea-auto-resize" rows="5" name="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{system.description}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.description}}</div>
         </div>
     </div>
 </form>

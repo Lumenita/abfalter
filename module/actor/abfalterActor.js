@@ -7,21 +7,21 @@ export default class abfalterActor extends Actor {
     }
 
     prepareBaseData() {
-        const data = this.system;
+        const system = this.system;
 
         //Global Settings
-        data.spiritSettings = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
-        data.fumbleSettings = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_Fumble);
-        data.useMeters = game.settings.get('abfalter', abfalterSettingsKeys.Use_Meters);
+        system.spiritSettings = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
+        system.fumbleSettings = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_Fumble);
+        system.useMeters = game.settings.get('abfalter', abfalterSettingsKeys.Use_Meters);
 
         //All Action Mod
-        data.aamFinal = data.aam + data.aamBoon + data.aamCrit;
+        system.aamFinal = system.aam + system.aamBoon + system.aamCrit;
 
         //Main Characteristics & Dragon Seals
-        data.aamFinal += data.arsMagnus.dragonSeal * 5 || 0;
+        system.aamFinal += system.arsMagnus.dragonSeal * 5 || 0;
 
         //Monster Powers Prep
-        for (let [key, atr] of Object.entries(data.monsterChar)) {
+        for (let [key, atr] of Object.entries(system.monsterChar)) {
             switch (key) {
                 case "agi":
                     atr.name = game.i18n.localize('abfalter.basicInfo.agi');
@@ -104,403 +104,403 @@ export default class abfalterActor extends Actor {
             atr.charBaseCostTotal = Math.floor(atr.costBase + atr.costAdditional);
             atr.charBaseTotal = Math.floor(~~atr.base + ~~atr.additional);
         }
-        data.monsterCharCombCost = Math.floor(data.monsterChar.agi.charBaseCostTotal + data.monsterChar.con.charBaseCostTotal + data.monsterChar.str.charBaseCostTotal +
-            data.monsterChar.dex.charBaseCostTotal + data.monsterChar.per.charBaseCostTotal + data.monsterChar.int.charBaseCostTotal + data.monsterChar.pow.charBaseCostTotal +
-            data.monsterChar.wp.charBaseCostTotal);
+        system.monsterCharCombCost = Math.floor(system.monsterChar.agi.charBaseCostTotal + system.monsterChar.con.charBaseCostTotal + system.monsterChar.str.charBaseCostTotal +
+            system.monsterChar.dex.charBaseCostTotal + system.monsterChar.per.charBaseCostTotal + system.monsterChar.int.charBaseCostTotal + system.monsterChar.pow.charBaseCostTotal +
+            system.monsterChar.wp.charBaseCostTotal);
         //Size Base Values
-        if (data.size >= 9 && data.size <= 22) {
-            data.initiative.sizeBase = 20;
-            data.movement.sizeBase = 0;
-            data.lifepoints.hpMult = 5;
-            data.monsterArmor = 3;
-            data.monsterPhysicalDmg = 10;
-            data.monsterNaturalDmg = 40;
-            data.monsterActionArea = "0";
-            data.monsterNatBreak = 0;
-            data.monsternatFort = 12;
-        } else if (data.size >= 1 && data.size <= 3) {
-            data.initiative.sizeBase = 40;
-            data.movement.sizeBase = -4;
-            data.lifepoints.hpMult = 1;
-            data.monsterArmor = 1;
-            data.monsterPhysicalDmg = 5;
-            data.monsterNaturalDmg = 20;
-            data.monsterActionArea = "0";
-            data.monsterNatBreak = -4;
-            data.monsternatFort = 4;
-        } else if (data.size >= 4 && data.size <= 8) {
-            data.initiative.sizeBase = 30;
-            data.movement.sizeBase = -2;
-            data.lifepoints.hpMult = 2;
-            data.monsterArmor = 2;
-            data.monsterPhysicalDmg = 10;
-            data.monsterNaturalDmg = 30;
-            data.monsterActionArea = "0";
-            data.monsterNatBreak = -2;
-            data.monsternatFort = 8;
-        } else if (data.size >= 23 && data.size <= 24) {
-            data.initiative.sizeBase = 10;
-            data.movement.sizeBase = 0;
-            data.lifepoints.hpMult = 5;
-            data.monsterArmor = 4;
-            data.monsterPhysicalDmg = 20;
-            data.monsterNaturalDmg = 60;
-            data.monsterActionArea = "0";
-            data.monsterNatBreak = 4;
-            data.monsternatFort = 16;
-        } else if (data.size >= 25 && data.size <= 28) {
-            data.initiative.sizeBase = 0;
-            data.movement.sizeBase = 1;
-            data.lifepoints.hpMult = 10;
-            data.monsterArmor = 6;
-            data.monsterPhysicalDmg = 30;
-            data.monsterNaturalDmg = 100;
-            data.monsterActionArea = "5ft / 1.5m";
-            data.monsterNatBreak = 8;
-            data.monsternatFort = 20;
-        } else if (data.size >= 29 && data.size <= 33) {
-            data.initiative.sizeBase = -10;
-            data.movement.sizeBase = 2;
-            data.lifepoints.hpMult = 15;
-            data.monsterArmor = 8;
-            data.monsterPhysicalDmg = 40;
-            data.monsterNaturalDmg = 120;
-            data.monsterActionArea = "15ft / 4.5m";
-            data.monsterNatBreak = 12;
-            data.monsternatFort = 28;
-        } else if (data.size >= 34) {
-            data.initiative.sizeBase = -20;
-            data.movement.sizeBase = 3;
-            data.lifepoints.hpMult = 20;
-            data.monsterArmor = 10;
-            data.monsterPhysicalDmg = 60;
-            data.monsterNaturalDmg = 140;
-            data.monsterActionArea = "60ft / 18m";
-            data.monsterNatBreak = 16;
-            data.monsternatFort = 34;
+        if (system.size >= 9 && system.size <= 22) {
+            system.initiative.sizeBase = 20;
+            system.movement.sizeBase = 0;
+            system.lifepoints.hpMult = 5;
+            system.monsterArmor = 3;
+            system.monsterPhysicalDmg = 10;
+            system.monsterNaturalDmg = 40;
+            system.monsterActionArea = "0";
+            system.monsterNatBreak = 0;
+            system.monsternatFort = 12;
+        } else if (system.size >= 1 && system.size <= 3) {
+            system.initiative.sizeBase = 40;
+            system.movement.sizeBase = -4;
+            system.lifepoints.hpMult = 1;
+            system.monsterArmor = 1;
+            system.monsterPhysicalDmg = 5;
+            system.monsterNaturalDmg = 20;
+            system.monsterActionArea = "0";
+            system.monsterNatBreak = -4;
+            system.monsternatFort = 4;
+        } else if (system.size >= 4 && system.size <= 8) {
+            system.initiative.sizeBase = 30;
+            system.movement.sizeBase = -2;
+            system.lifepoints.hpMult = 2;
+            system.monsterArmor = 2;
+            system.monsterPhysicalDmg = 10;
+            system.monsterNaturalDmg = 30;
+            system.monsterActionArea = "0";
+            system.monsterNatBreak = -2;
+            system.monsternatFort = 8;
+        } else if (system.size >= 23 && system.size <= 24) {
+            system.initiative.sizeBase = 10;
+            system.movement.sizeBase = 0;
+            system.lifepoints.hpMult = 5;
+            system.monsterArmor = 4;
+            system.monsterPhysicalDmg = 20;
+            system.monsterNaturalDmg = 60;
+            system.monsterActionArea = "0";
+            system.monsterNatBreak = 4;
+            system.monsternatFort = 16;
+        } else if (system.size >= 25 && system.size <= 28) {
+            system.initiative.sizeBase = 0;
+            system.movement.sizeBase = 1;
+            system.lifepoints.hpMult = 10;
+            system.monsterArmor = 6;
+            system.monsterPhysicalDmg = 30;
+            system.monsterNaturalDmg = 100;
+            system.monsterActionArea = "5ft / 1.5m";
+            system.monsterNatBreak = 8;
+            system.monsternatFort = 20;
+        } else if (system.size >= 29 && system.size <= 33) {
+            system.initiative.sizeBase = -10;
+            system.movement.sizeBase = 2;
+            system.lifepoints.hpMult = 15;
+            system.monsterArmor = 8;
+            system.monsterPhysicalDmg = 40;
+            system.monsterNaturalDmg = 120;
+            system.monsterActionArea = "15ft / 4.5m";
+            system.monsterNatBreak = 12;
+            system.monsternatFort = 28;
+        } else if (system.size >= 34) {
+            system.initiative.sizeBase = -20;
+            system.movement.sizeBase = 3;
+            system.lifepoints.hpMult = 20;
+            system.monsterArmor = 10;
+            system.monsterPhysicalDmg = 60;
+            system.monsterNaturalDmg = 140;
+            system.monsterActionArea = "60ft / 18m";
+            system.monsterNatBreak = 16;
+            system.monsternatFort = 34;
         } else {
-            data.initiative.sizeBase = 0;
-            data.movement.sizeBase = 0;
-            data.lifepoints.hpMult = 0;
-            data.monsterArmor = 0;
-            data.monsterPhysicalDmg = 0;
-            data.monsterNaturalDmg = 0;
-            data.monsterActionArea = "N/A";
-            data.monsterNatBreak = 0;
-            data.monsternatFort = 0;
+            system.initiative.sizeBase = 0;
+            system.movement.sizeBase = 0;
+            system.lifepoints.hpMult = 0;
+            system.monsterArmor = 0;
+            system.monsterPhysicalDmg = 0;
+            system.monsterNaturalDmg = 0;
+            system.monsterActionArea = "N/A";
+            system.monsterNatBreak = 0;
+            system.monsternatFort = 0;
         }
 
         //Main Char Calc
-        if (data.toggles.monsterChar == false) {
-            for (let [key, stat] of Object.entries(data.stats)) {
+        if (system.toggles.monsterChar == false) {
+            for (let [key, stat] of Object.entries(system.stats)) {
                 stat.final = Math.floor(~~stat.base + stat.spec + stat.temp);
             }
         } else {
-            data.stats.Agility.final = Math.floor(data.monsterChar.agi.charBaseTotal + data.stats.Agility.spec + data.stats.Agility.temp);
-            data.stats.Constitution.final = Math.floor(data.monsterChar.con.charBaseTotal + data.stats.Constitution.spec + data.stats.Constitution.temp);
-            data.stats.Strength.final = Math.floor(data.monsterChar.str.charBaseTotal + data.stats.Strength.spec + data.stats.Strength.temp);
-            data.stats.Dexterity.final = Math.floor(data.monsterChar.dex.charBaseTotal + data.stats.Dexterity.spec + data.stats.Dexterity.temp);
-            data.stats.Perception.final = Math.floor(data.monsterChar.per.charBaseTotal + data.stats.Perception.spec + data.stats.Perception.temp);
-            data.stats.Intelligence.final = Math.floor(data.monsterChar.int.charBaseTotal + data.stats.Intelligence.spec + data.stats.Intelligence.temp);
-            data.stats.Power.final = Math.floor(data.monsterChar.pow.charBaseTotal + data.stats.Power.spec + data.stats.Power.temp);
-            data.stats.Willpower.final = Math.floor(data.monsterChar.wp.charBaseTotal + data.stats.Willpower.spec + data.stats.Willpower.temp);
+            system.stats.Agility.final = Math.floor(system.monsterChar.agi.charBaseTotal + system.stats.Agility.spec + system.stats.Agility.temp);
+            system.stats.Constitution.final = Math.floor(system.monsterChar.con.charBaseTotal + system.stats.Constitution.spec + system.stats.Constitution.temp);
+            system.stats.Strength.final = Math.floor(system.monsterChar.str.charBaseTotal + system.stats.Strength.spec + system.stats.Strength.temp);
+            system.stats.Dexterity.final = Math.floor(system.monsterChar.dex.charBaseTotal + system.stats.Dexterity.spec + system.stats.Dexterity.temp);
+            system.stats.Perception.final = Math.floor(system.monsterChar.per.charBaseTotal + system.stats.Perception.spec + system.stats.Perception.temp);
+            system.stats.Intelligence.final = Math.floor(system.monsterChar.int.charBaseTotal + system.stats.Intelligence.spec + system.stats.Intelligence.temp);
+            system.stats.Power.final = Math.floor(system.monsterChar.pow.charBaseTotal + system.stats.Power.spec + system.stats.Power.temp);
+            system.stats.Willpower.final = Math.floor(system.monsterChar.wp.charBaseTotal + system.stats.Willpower.spec + system.stats.Willpower.temp);
         }
 
-        data.stats.Agility.final += data.arsMagnus.dragonDoor || 0;
-        data.stats.Constitution.final += data.arsMagnus.dragonDoor || 0;
-        data.stats.Strength.final += data.arsMagnus.dragonDoor || 0;
-        data.stats.Dexterity.final += data.arsMagnus.dragonDoor || 0;
-        data.stats.Perception.final += data.arsMagnus.dragonDoor || 0;
+        system.stats.Agility.final += system.arsMagnus.dragonDoor || 0;
+        system.stats.Constitution.final += system.arsMagnus.dragonDoor || 0;
+        system.stats.Strength.final += system.arsMagnus.dragonDoor || 0;
+        system.stats.Dexterity.final += system.arsMagnus.dragonDoor || 0;
+        system.stats.Perception.final += system.arsMagnus.dragonDoor || 0;
 
         //MetaMagic Capstones
-        data.doubleDamageDesc = game.i18n.localize('abfalter.metaMagic.doubleDmgDesc');
-        data.highMagicDesc = game.i18n.localize('abfalter.metaMagic.highMagicDesc');
-        data.natMaintDesc = game.i18n.localize('abfalter.metaMagic.natMaintDesc');
-        data.unlimitedZeonDesc = game.i18n.localize('abfalter.metaMagic.unlimitedZeonDesc');
+        system.doubleDamageDesc = game.i18n.localize('abfalter.metaMagic.doubleDmgDesc');
+        system.highMagicDesc = game.i18n.localize('abfalter.metaMagic.highMagicDesc');
+        system.natMaintDesc = game.i18n.localize('abfalter.metaMagic.natMaintDesc');
+        system.unlimitedZeonDesc = game.i18n.localize('abfalter.metaMagic.unlimitedZeonDesc');
 
         //MetaMagic Desc Arcane Warfare
         //empowered shields
-        if (!data.metaMagic.empShield.bought && !data.metaMagic.empShield2.bought) {
-            data.empShields = false;
-            data.empShieldsDesc = "";
-        } else if (data.metaMagic.empShield.bought && data.metaMagic.empShield2.bought) {
-            data.empShields = true;
-            data.empShieldsDesc = game.i18n.localize('abfalter.metaMagic.empShieldDesc2');
+        if (!system.metaMagic.empShield.bought && !system.metaMagic.empShield2.bought) {
+            system.empShields = false;
+            system.empShieldsDesc = "";
+        } else if (system.metaMagic.empShield.bought && system.metaMagic.empShield2.bought) {
+            system.empShields = true;
+            system.empShieldsDesc = game.i18n.localize('abfalter.metaMagic.empShieldDesc2');
         } else {
-            data.empShields = true;
-            data.empShieldsDesc = game.i18n.localize('abfalter.metaMagic.empShieldDesc1');
+            system.empShields = true;
+            system.empShieldsDesc = game.i18n.localize('abfalter.metaMagic.empShieldDesc1');
         }
         //mystic accuracy
-        if (!data.metaMagic.mysticAcc.bought && !data.metaMagic.mysticAcc2.bought) {
-            data.mysticAccu = false;
-            data.mysticAccuDesc = "";
-        } else if (data.metaMagic.mysticAcc.bought && data.metaMagic.mysticAcc2.bought) {
-            data.mysticAccu = true;
-            data.mysticAccuDesc = game.i18n.localize('abfalter.metaMagic.mysticAccuDesc2');
+        if (!system.metaMagic.mysticAcc.bought && !system.metaMagic.mysticAcc2.bought) {
+            system.mysticAccu = false;
+            system.mysticAccuDesc = "";
+        } else if (system.metaMagic.mysticAcc.bought && system.metaMagic.mysticAcc2.bought) {
+            system.mysticAccu = true;
+            system.mysticAccuDesc = game.i18n.localize('abfalter.metaMagic.mysticAccuDesc2');
         } else {
-            data.mysticAccu = true;
-            data.mysticAccuDesc = game.i18n.localize('abfalter.metaMagic.mysticAccuDesc1');
+            system.mysticAccu = true;
+            system.mysticAccuDesc = game.i18n.localize('abfalter.metaMagic.mysticAccuDesc1');
         }
         //increased destruction
-        if (!data.metaMagic.incDestro.bought && !data.metaMagic.incDestro2.bought) {
-            data.incDestruction = false;
-            data.incDestructionDesc = "";
-        } else if (data.metaMagic.incDestro.bought && data.metaMagic.incDestro2.bought) {
-            data.incDestruction = true;
-            data.incDestructionDesc = game.i18n.localize('abfalter.metaMagic.incDestroDesc2');
+        if (!system.metaMagic.incDestro.bought && !system.metaMagic.incDestro2.bought) {
+            system.incDestruction = false;
+            system.incDestructionDesc = "";
+        } else if (system.metaMagic.incDestro.bought && system.metaMagic.incDestro2.bought) {
+            system.incDestruction = true;
+            system.incDestructionDesc = game.i18n.localize('abfalter.metaMagic.incDestroDesc2');
         } else {
-            data.incDestruction = true;
-            data.incDestructionDesc = game.i18n.localize('abfalter.metaMagic.incDestroDesc1');
+            system.incDestruction = true;
+            system.incDestructionDesc = game.i18n.localize('abfalter.metaMagic.incDestroDesc1');
         }
         //expanded area
-        if (!data.metaMagic.expArea.bought && !data.metaMagic.expArea2.bought) {
-            data.expandArea = false;
-            data.expandAreaDesc = "";
-        } else if (data.metaMagic.expArea.bought && data.metaMagic.expArea2.bought) {
-            data.expandArea = true;
-            data.expandAreaDesc = game.i18n.localize('abfalter.metaMagic.expAreaDesc2');
+        if (!system.metaMagic.expArea.bought && !system.metaMagic.expArea2.bought) {
+            system.expandArea = false;
+            system.expandAreaDesc = "";
+        } else if (system.metaMagic.expArea.bought && system.metaMagic.expArea2.bought) {
+            system.expandArea = true;
+            system.expandAreaDesc = game.i18n.localize('abfalter.metaMagic.expAreaDesc2');
         } else {
-            data.expandArea = true;
-            data.expandAreaDesc = game.i18n.localize('abfalter.metaMagic.expAreaDesc1');
+            system.expandArea = true;
+            system.expandAreaDesc = game.i18n.localize('abfalter.metaMagic.expAreaDesc1');
         }
         //remove protection
-        if (!data.metaMagic.remProtection.bought && !data.metaMagic.remProtection2.bought && !data.metaMagic.remProtection3.bought) {
-            data.removeProtection = false;
-            data.removeProtectionDesc = "";
-        } else if (data.metaMagic.remProtection.bought && data.metaMagic.remProtection2.bought && data.metaMagic.remProtection3.bought) {
-            data.removeProtection = true;
-            data.removeProtectionDesc = game.i18n.localize('abfalter.metaMagic.remProtectDesc3');
-        } else if ((data.metaMagic.remProtection.bought && data.metaMagic.remProtection2.bought) ||
-            (data.metaMagic.remProtection2.bought && data.metaMagic.remProtection3.bought) ||
-            (data.metaMagic.remProtection.bought && data.metaMagic.remProtection3.bought)) {
-            data.removeProtection = true;
-            data.removeProtectionDesc = game.i18n.localize('abfalter.metaMagic.remProtectDesc2');
+        if (!system.metaMagic.remProtection.bought && !system.metaMagic.remProtection2.bought && !system.metaMagic.remProtection3.bought) {
+            system.removeProtection = false;
+            system.removeProtectionDesc = "";
+        } else if (system.metaMagic.remProtection.bought && system.metaMagic.remProtection2.bought && system.metaMagic.remProtection3.bought) {
+            system.removeProtection = true;
+            system.removeProtectionDesc = game.i18n.localize('abfalter.metaMagic.remProtectDesc3');
+        } else if ((system.metaMagic.remProtection.bought && system.metaMagic.remProtection2.bought) ||
+            (system.metaMagic.remProtection2.bought && system.metaMagic.remProtection3.bought) ||
+            (system.metaMagic.remProtection.bought && system.metaMagic.remProtection3.bought)) {
+            system.removeProtection = true;
+            system.removeProtectionDesc = game.i18n.localize('abfalter.metaMagic.remProtectDesc2');
         } else {
-            data.removeProtection = true;
-            data.removeProtectionDesc = game.i18n.localize('abfalter.metaMagic.remProtectDesc1');
+            system.removeProtection = true;
+            system.removeProtectionDesc = game.i18n.localize('abfalter.metaMagic.remProtectDesc1');
         }
         //defensive expertise
-        if (!data.metaMagic.defExper.bought && !data.metaMagic.defExper2.bought && !data.metaMagic.defExper3.bought) {
-            data.defenseExpertise = false;
-            data.defenseExpertiseDesc = "";
-        } else if (data.metaMagic.defExper.bought && data.metaMagic.defExper2.bought && data.metaMagic.defExper3.bought) {
-            data.defenseExpertise = true;
-            data.defenseExpertiseDesc = game.i18n.localize('abfalter.metaMagic.defExperDesc3');
-        } else if ((data.metaMagic.defExper.bought && data.metaMagic.defExper2.bought) ||
-            (data.metaMagic.defExper2.bought && data.metaMagic.defExper3.bought) ||
-            (data.metaMagic.defExper.bought && data.metaMagic.defExper3.bought)) {
-            data.defenseExpertise = true;
-            data.defenseExpertiseDesc = game.i18n.localize('abfalter.metaMagic.defExperDesc2');
+        if (!system.metaMagic.defExper.bought && !system.metaMagic.defExper2.bought && !system.metaMagic.defExper3.bought) {
+            system.defenseExpertise = false;
+            system.defenseExpertiseDesc = "";
+        } else if (system.metaMagic.defExper.bought && system.metaMagic.defExper2.bought && system.metaMagic.defExper3.bought) {
+            system.defenseExpertise = true;
+            system.defenseExpertiseDesc = game.i18n.localize('abfalter.metaMagic.defExperDesc3');
+        } else if ((system.metaMagic.defExper.bought && system.metaMagic.defExper2.bought) ||
+            (system.metaMagic.defExper2.bought && system.metaMagic.defExper3.bought) ||
+            (system.metaMagic.defExper.bought && system.metaMagic.defExper3.bought)) {
+            system.defenseExpertise = true;
+            system.defenseExpertiseDesc = game.i18n.localize('abfalter.metaMagic.defExperDesc2');
         } else {
-            data.defenseExpertise = true;
-            data.defenseExpertiseDesc = game.i18n.localize('abfalter.metaMagic.defExperDesc1');
+            system.defenseExpertise = true;
+            system.defenseExpertiseDesc = game.i18n.localize('abfalter.metaMagic.defExperDesc1');
         }
         //offensive expertise
-        if (!data.metaMagic.offExper.bought && !data.metaMagic.offExper2.bought && !data.metaMagic.offExper3.bought) {
-            data.offExpertise = false;
-            data.offExpertiseDesc = "";
-        } else if (data.metaMagic.offExper.bought && data.metaMagic.offExper2.bought && data.metaMagic.offExper3.bought) {
-            data.offExpertise = true;
-            data.offExpertiseDesc = game.i18n.localize('abfalter.metaMagic.offExperDesc3');
-        } else if ((data.metaMagic.offExper.bought && data.metaMagic.offExper2.bought) ||
-            (data.metaMagic.offExper2.bought && data.metaMagic.offExper3.bought) ||
-            (data.metaMagic.offExper.bought && data.metaMagic.offExper3.bought)) {
-            data.offExpertise = true;
-            data.offExpertiseDesc = game.i18n.localize('abfalter.metaMagic.offExperDesc2');
+        if (!system.metaMagic.offExper.bought && !system.metaMagic.offExper2.bought && !system.metaMagic.offExper3.bought) {
+            system.offExpertise = false;
+            system.offExpertiseDesc = "";
+        } else if (system.metaMagic.offExper.bought && system.metaMagic.offExper2.bought && system.metaMagic.offExper3.bought) {
+            system.offExpertise = true;
+            system.offExpertiseDesc = game.i18n.localize('abfalter.metaMagic.offExperDesc3');
+        } else if ((system.metaMagic.offExper.bought && system.metaMagic.offExper2.bought) ||
+            (system.metaMagic.offExper2.bought && system.metaMagic.offExper3.bought) ||
+            (system.metaMagic.offExper.bought && system.metaMagic.offExper3.bought)) {
+            system.offExpertise = true;
+            system.offExpertiseDesc = game.i18n.localize('abfalter.metaMagic.offExperDesc2');
         } else {
-            data.offExpertise = true;
-            data.offExpertiseDesc = game.i18n.localize('abfalter.metaMagic.offExperDesc1');
+            system.offExpertise = true;
+            system.offExpertiseDesc = game.i18n.localize('abfalter.metaMagic.offExperDesc1');
         }
 
         //MetaMagic Desc Arcane Esoterica
         //secure defense
-        data.secureDefenseDesc = game.i18n.localize('abfalter.metaMagic.secDefenseDesc');
+        system.secureDefenseDesc = game.i18n.localize('abfalter.metaMagic.secDefenseDesc');
         //life magic
-        if (!data.metaMagic.lifeMagic.bought && !data.metaMagic.lifeMagic2.bought) {
-            data.lifeMagic = false;
-            data.lifeMagicDesc = "";
-        } else if (data.metaMagic.lifeMagic.bought && data.metaMagic.lifeMagic2.bought) {
-            data.lifeMagic = true;
-            data.lifeMagicDesc = game.i18n.localize('abfalter.metaMagic.lifeMagicDesc2');
+        if (!system.metaMagic.lifeMagic.bought && !system.metaMagic.lifeMagic2.bought) {
+            system.lifeMagic = false;
+            system.lifeMagicDesc = "";
+        } else if (system.metaMagic.lifeMagic.bought && system.metaMagic.lifeMagic2.bought) {
+            system.lifeMagic = true;
+            system.lifeMagicDesc = game.i18n.localize('abfalter.metaMagic.lifeMagicDesc2');
         } else {
-            data.lifeMagic = true;
-            data.lifeMagicDesc = game.i18n.localize('abfalter.metaMagic.lifeMagicDesc1');
+            system.lifeMagic = true;
+            system.lifeMagicDesc = game.i18n.localize('abfalter.metaMagic.lifeMagicDesc1');
         }
         //feel magic
-        data.feelMagicDesc = game.i18n.localize('abfalter.metaMagic.feelMagicDesc');
+        system.feelMagicDesc = game.i18n.localize('abfalter.metaMagic.feelMagicDesc');
         //hidden magic
-        data.hiddenMagicDesc = game.i18n.localize('abfalter.metaMagic.hiddenMagicDesc');
+        system.hiddenMagicDesc = game.i18n.localize('abfalter.metaMagic.hiddenMagicDesc');
         //spiritual loop
-        if (!data.metaMagic.spiritLoop.bought && !data.metaMagic.spiritLoop2.bought) {
-            data.spiritLoop = false;
-            data.spiritLoopDesc = "";
-        } else if (data.metaMagic.spiritLoop.bought && data.metaMagic.spiritLoop2.bought) {
-            data.spiritLoop = true;
-            data.spiritLoopDesc = game.i18n.localize('abfalter.metaMagic.spiritLoopDesc2');
+        if (!system.metaMagic.spiritLoop.bought && !system.metaMagic.spiritLoop2.bought) {
+            system.spiritLoop = false;
+            system.spiritLoopDesc = "";
+        } else if (system.metaMagic.spiritLoop.bought && system.metaMagic.spiritLoop2.bought) {
+            system.spiritLoop = true;
+            system.spiritLoopDesc = game.i18n.localize('abfalter.metaMagic.spiritLoopDesc2');
         } else {
-            data.spiritLoop = true;
-            data.spiritLoopDesc = game.i18n.localize('abfalter.metaMagic.spiritLoopDesc1');
+            system.spiritLoop = true;
+            system.spiritLoopDesc = game.i18n.localize('abfalter.metaMagic.spiritLoopDesc1');
         }
         //control space
-        data.controlSpaceDesc = game.i18n.localize('abfalter.metaMagic.controlSpaceDesc');
+        system.controlSpaceDesc = game.i18n.localize('abfalter.metaMagic.controlSpaceDesc');
         //energy control
-        data.eneControlDesc = game.i18n.localize('abfalter.metaMagic.eneControlDesc');
+        system.eneControlDesc = game.i18n.localize('abfalter.metaMagic.eneControlDesc');
         //endure supernatural damage
-        data.endureDamageDesc = game.i18n.localize('abfalter.metaMagic.endureDamageDesc');
+        system.endureDamageDesc = game.i18n.localize('abfalter.metaMagic.endureDamageDesc');
         //transfer magic
-        data.transferMagicDesc = game.i18n.localize('abfalter.metaMagic.transferMagicDesc');
+        system.transferMagicDesc = game.i18n.localize('abfalter.metaMagic.transferMagicDesc');
         //force speed
-        if (!data.metaMagic.forceSpeed.bought && !data.metaMagic.forceSpeed2.bought && !data.metaMagic.forceSpeed3.bought) {
-            data.forceSpeed = false;
-            data.forceSpeedDesc = "";
-        } else if (data.metaMagic.forceSpeed.bought && data.metaMagic.forceSpeed2.bought && data.metaMagic.forceSpeed3.bought) {
-            data.forceSpeed = true;
-            data.forceSpeedDesc = game.i18n.localize('abfalter.metaMagic.forceSpeed3');
-        } else if ((data.metaMagic.forceSpeed.bought && data.metaMagic.forceSpeed2.bought) ||
-            (data.metaMagic.forceSpeed2.bought && data.metaMagic.forceSpeed3.bought) ||
-            (data.metaMagic.forceSpeed.bought && data.metaMagic.forceSpeed3.bought)) {
-            data.forceSpeed = true;
-            data.forceSpeedDesc = game.i18n.localize('abfalter.metaMagic.forceSpeed2');
+        if (!system.metaMagic.forceSpeed.bought && !system.metaMagic.forceSpeed2.bought && !system.metaMagic.forceSpeed3.bought) {
+            system.forceSpeed = false;
+            system.forceSpeedDesc = "";
+        } else if (system.metaMagic.forceSpeed.bought && system.metaMagic.forceSpeed2.bought && system.metaMagic.forceSpeed3.bought) {
+            system.forceSpeed = true;
+            system.forceSpeedDesc = game.i18n.localize('abfalter.metaMagic.forceSpeed3');
+        } else if ((system.metaMagic.forceSpeed.bought && system.metaMagic.forceSpeed2.bought) ||
+            (system.metaMagic.forceSpeed2.bought && system.metaMagic.forceSpeed3.bought) ||
+            (system.metaMagic.forceSpeed.bought && system.metaMagic.forceSpeed3.bought)) {
+            system.forceSpeed = true;
+            system.forceSpeedDesc = game.i18n.localize('abfalter.metaMagic.forceSpeed2');
         } else {
-            data.forceSpeed = true;
-            data.forceSpeedDesc = game.i18n.localize('abfalter.metaMagic.forceSpeed1');
+            system.forceSpeed = true;
+            system.forceSpeedDesc = game.i18n.localize('abfalter.metaMagic.forceSpeed1');
         }
         //double innate spells
-        data.doubleInnateDesc = game.i18n.localize('abfalter.metaMagic.doubleInnateDesc');
+        system.doubleInnateDesc = game.i18n.localize('abfalter.metaMagic.doubleInnateDesc');
 
         //MetaMagic Desc Arcane Power
         //advanced zeon regen
-        if (!data.metaMagic.advZeonRegen.bought && !data.metaMagic.advZeonRegen2.bought && !data.metaMagic.advZeonRegen3.bought) {
-            data.advnacedRegen = false;
-            data.advnacedRegenDesc = "";
-        } else if (data.metaMagic.advZeonRegen.bought && data.metaMagic.advZeonRegen2.bought && data.metaMagic.advZeonRegen3.bought) {
-            data.advnacedRegen = true;
-            data.advnacedRegenDesc = game.i18n.localize('abfalter.metaMagic.advZeonRegenDesc3');
-        } else if ((data.metaMagic.advZeonRegen.bought && data.metaMagic.advZeonRegen2.bought) ||
-            (data.metaMagic.advZeonRegen2.bought && data.metaMagic.advZeonRegen3.bought) ||
-            (data.metaMagic.advZeonRegen.bought && data.metaMagic.advZeonRegen3.bought)) {
-            data.advnacedRegen = true;
-            data.advnacedRegenDesc = game.i18n.localize('abfalter.metaMagic.advZeonRegenDesc2');
+        if (!system.metaMagic.advZeonRegen.bought && !system.metaMagic.advZeonRegen2.bought && !system.metaMagic.advZeonRegen3.bought) {
+            system.advnacedRegen = false;
+            system.advnacedRegenDesc = "";
+        } else if (system.metaMagic.advZeonRegen.bought && system.metaMagic.advZeonRegen2.bought && system.metaMagic.advZeonRegen3.bought) {
+            system.advnacedRegen = true;
+            system.advnacedRegenDesc = game.i18n.localize('abfalter.metaMagic.advZeonRegenDesc3');
+        } else if ((system.metaMagic.advZeonRegen.bought && system.metaMagic.advZeonRegen2.bought) ||
+            (system.metaMagic.advZeonRegen2.bought && system.metaMagic.advZeonRegen3.bought) ||
+            (system.metaMagic.advZeonRegen.bought && system.metaMagic.advZeonRegen3.bought)) {
+            system.advnacedRegen = true;
+            system.advnacedRegenDesc = game.i18n.localize('abfalter.metaMagic.advZeonRegenDesc2');
         } else {
-            data.advnacedRegen = true;
-            data.advnacedRegenDesc = game.i18n.localize('abfalter.metaMagic.advZeonRegenDesc1');
+            system.advnacedRegen = true;
+            system.advnacedRegenDesc = game.i18n.localize('abfalter.metaMagic.advZeonRegenDesc1');
         }
         //avatar
-        data.avatarDesc = game.i18n.localize('abfalter.metaMagic.avatarDesc');
+        system.avatarDesc = game.i18n.localize('abfalter.metaMagic.avatarDesc');
         //combined magic
-        data.combinedMagicDesc = game.i18n.localize('abfalter.metaMagic.combinedMagicDesc');
+        system.combinedMagicDesc = game.i18n.localize('abfalter.metaMagic.combinedMagicDesc');
         //define magic projection
-        data.definedProjNumber = data.metaMagic.defMagicProj.bought + data.metaMagic.defMagicProj2.bought + data.metaMagic.defMagicProj3.bought
-            + data.metaMagic.defMagicProj4.bought + data.metaMagic.defMagicProj5.bought
-            + data.metaMagic.defMagicProj6.bought + data.metaMagic.defMagicProj7.bought;
-        switch (data.definedProjNumber) {
+        system.definedProjNumber = system.metaMagic.defMagicProj.bought + system.metaMagic.defMagicProj2.bought + system.metaMagic.defMagicProj3.bought
+            + system.metaMagic.defMagicProj4.bought + system.metaMagic.defMagicProj5.bought
+            + system.metaMagic.defMagicProj6.bought + system.metaMagic.defMagicProj7.bought;
+        switch (system.definedProjNumber) {
             case 1:
-                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc1');
-                data.definedMagicProj = true;
+                system.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc1');
+                system.definedMagicProj = true;
                 break;
             case 2:
-                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc2');
-                data.definedMagicProj = true;
+                system.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc2');
+                system.definedMagicProj = true;
                 break;
             case 3:
-                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc3');
-                data.definedMagicProj = true;
+                system.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc3');
+                system.definedMagicProj = true;
                 break;
             case 4:
-                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc4');
-                data.definedMagicProj = true;
+                system.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc4');
+                system.definedMagicProj = true;
                 break;
             case 5:
-                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc5');
-                data.definedMagicProj = true;
+                system.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc5');
+                system.definedMagicProj = true;
                 break;
             case 6:
-                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc6');
-                data.definedMagicProj = true;
+                system.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc6');
+                system.definedMagicProj = true;
                 break;
             case 7:
-                data.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc7');
-                data.definedMagicProj = true;
+                system.defMagProjDesc = game.i18n.localize('abfalter.metaMagic.defMagProjDesc7');
+                system.definedMagicProj = true;
                 break;
             default:
-                data.defMagProjDesc = "";
-                data.definedMagicProj = false;
+                system.defMagProjDesc = "";
+                system.definedMagicProj = false;
                 break;
         }
         //elevation
-        data.elevationDesc = game.i18n.localize('abfalter.metaMagic.elevationDesc');
+        system.elevationDesc = game.i18n.localize('abfalter.metaMagic.elevationDesc');
         //exploit energy
-        if (!data.metaMagic.exploitEne.bought && !data.metaMagic.exploitEne2.bought) {
-            data.exploitEnergy = false;
-            data.exploitEnergyDesc = "";
-        } else if (data.metaMagic.exploitEne.bought && data.metaMagic.exploitEne2.bought) {
-            data.exploitEnergy = true;
-            data.exploitEnergyDesc = game.i18n.localize('abfalter.metaMagic.exploitEneDesc2');
+        if (!system.metaMagic.exploitEne.bought && !system.metaMagic.exploitEne2.bought) {
+            system.exploitEnergy = false;
+            system.exploitEnergyDesc = "";
+        } else if (system.metaMagic.exploitEne.bought && system.metaMagic.exploitEne2.bought) {
+            system.exploitEnergy = true;
+            system.exploitEnergyDesc = game.i18n.localize('abfalter.metaMagic.exploitEneDesc2');
         } else {
-            data.exploitEnergy = true;
-            data.exploitEnergyDesc = game.i18n.localize('abfalter.metaMagic.exploitEneDesc1');
+            system.exploitEnergy = true;
+            system.exploitEnergyDesc = game.i18n.localize('abfalter.metaMagic.exploitEneDesc1');
         }
         //persistent effects
-        data.persisEffectDesc = game.i18n.localize('abfalter.metaMagic.persisEffectDesc');
+        system.persisEffectDesc = game.i18n.localize('abfalter.metaMagic.persisEffectDesc');
 
         //MetaMagic Desc Arcane Knowledge
         //mystic concentration
-        data.mysticConceDesc = game.i18n.localize('abfalter.metaMagic.mysticConceDesc');
+        system.mysticConceDesc = game.i18n.localize('abfalter.metaMagic.mysticConceDesc');
         //mystic concentration
-        if (!data.metaMagic.spellSpec80.bought && !data.metaMagic.spellSpec70.bought && !data.metaMagic.spellSpec60.bought
-            && !data.metaMagic.spellSpec60x.bought && !data.metaMagic.spellSpec50.bought && !data.metaMagic.spellSpec30.bought
-            && !data.metaMagic.spellSpec30x.bought) {
-            data.spellSpecialization = false;
-            data.spellSpecializationDesc = "";
-        } else if (data.metaMagic.spellSpec80.bought) {
-            data.spellSpecialization = true;
-            data.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec80Desc');
-        } else if (data.metaMagic.spellSpec70.bought) {
-            data.spellSpecialization = true;
-            data.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec70Desc');
-        } else if (data.metaMagic.spellSpec60.bought || data.metaMagic.spellSpec60x.bought) {
-            data.spellSpecialization = true;
-            data.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec60Desc');
-        } else if (data.metaMagic.spellSpec50.bought) {
-            data.spellSpecialization = true;
-            data.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec50Desc');
+        if (!system.metaMagic.spellSpec80.bought && !system.metaMagic.spellSpec70.bought && !system.metaMagic.spellSpec60.bought
+            && !system.metaMagic.spellSpec60x.bought && !system.metaMagic.spellSpec50.bought && !system.metaMagic.spellSpec30.bought
+            && !system.metaMagic.spellSpec30x.bought) {
+            system.spellSpecialization = false;
+            system.spellSpecializationDesc = "";
+        } else if (system.metaMagic.spellSpec80.bought) {
+            system.spellSpecialization = true;
+            system.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec80Desc');
+        } else if (system.metaMagic.spellSpec70.bought) {
+            system.spellSpecialization = true;
+            system.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec70Desc');
+        } else if (system.metaMagic.spellSpec60.bought || system.metaMagic.spellSpec60x.bought) {
+            system.spellSpecialization = true;
+            system.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec60Desc');
+        } else if (system.metaMagic.spellSpec50.bought) {
+            system.spellSpecialization = true;
+            system.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec50Desc');
         } else {
-            data.spellSpecialization = true;
-            data.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec30Desc');
+            system.spellSpecialization = true;
+            system.spellSpecializationDesc = game.i18n.localize('abfalter.metaMagic.spellSpec30Desc');
         }
         //pierce resistances
-        if (!data.metaMagic.pierceRes.bought && !data.metaMagic.pierceRes2.bought) {
-            data.pierceRes = false;
-            data.pierceResDesc = "";
-        } else if (data.metaMagic.pierceRes.bought && data.metaMagic.pierceRes2.bought) {
-            data.pierceRes = true;
-            data.pierceResDesc = game.i18n.localize('abfalter.metaMagic.pierceResDesc2');
+        if (!system.metaMagic.pierceRes.bought && !system.metaMagic.pierceRes2.bought) {
+            system.pierceRes = false;
+            system.pierceResDesc = "";
+        } else if (system.metaMagic.pierceRes.bought && system.metaMagic.pierceRes2.bought) {
+            system.pierceRes = true;
+            system.pierceResDesc = game.i18n.localize('abfalter.metaMagic.pierceResDesc2');
         } else {
-            data.pierceRes = true;
-            data.pierceResDesc = game.i18n.localize('abfalter.metaMagic.pierceResDesc1');
+            system.pierceRes = true;
+            system.pierceResDesc = game.i18n.localize('abfalter.metaMagic.pierceResDesc1');
         }
         //increase range
-        if (!data.metaMagic.incRange.bought && !data.metaMagic.incRange2.bought) {
-            data.increRange = false;
-            data.increRangeDesc = "";
-        } else if (data.metaMagic.incRange.bought && data.metaMagic.incRange2.bought) {
-            data.increRange = true;
-            data.increRangeDesc = game.i18n.localize('abfalter.metaMagic.increRangeDesc2');
+        if (!system.metaMagic.incRange.bought && !system.metaMagic.incRange2.bought) {
+            system.increRange = false;
+            system.increRangeDesc = "";
+        } else if (system.metaMagic.incRange.bought && system.metaMagic.incRange2.bought) {
+            system.increRange = true;
+            system.increRangeDesc = game.i18n.localize('abfalter.metaMagic.increRangeDesc2');
         } else {
-            data.increRange = true;
-            data.increRangeDesc = game.i18n.localize('abfalter.metaMagic.increRangeDesc1');
+            system.increRange = true;
+            system.increRangeDesc = game.i18n.localize('abfalter.metaMagic.increRangeDesc1');
         }
         //bind spells
-        data.bindSpellDesc = game.i18n.localize('abfalter.metaMagic.bindSpellDesc');
+        system.bindSpellDesc = game.i18n.localize('abfalter.metaMagic.bindSpellDesc');
         //maximize spells
-        data.maxSpellsDesc = game.i18n.localize('abfalter.metaMagic.maxSpellsDesc');
+        system.maxSpellsDesc = game.i18n.localize('abfalter.metaMagic.maxSpellsDesc');
         //double spells
-        data.doubleSpellDesc = game.i18n.localize('abfalter.metaMagic.doubleSpellDesc');
+        system.doubleSpellDesc = game.i18n.localize('abfalter.metaMagic.doubleSpellDesc');
         //superior innate spell
-        data.supInnateDesc = game.i18n.localize('abfalter.metaMagic.supInnateDesc');
+        system.supInnateDesc = game.i18n.localize('abfalter.metaMagic.supInnateDesc');
 
         //ML Calculation
-        data.metaCost = data.metaMagic.cost + data.metaMagic.extraCost;
+        system.metaCost = system.metaMagic.cost + system.metaMagic.extraCost;
 
     }
 
@@ -509,12 +509,12 @@ export default class abfalterActor extends Actor {
     }
 
     prepareDerivedData() {
-        const data = this.system;
-        const stats = data.stats;
+        const system = this.system;
+        const stats = system.stats;
 
-        data.aamFinal += data.aamBonus;
+        system.aamFinal += system.aamBonus;
 
-        for (let [key, stat] of Object.entries(data.stats)) {
+        for (let [key, stat] of Object.entries(system.stats)) {
             if (30 < stat.final) {
                 stat.final = 30;
             }
@@ -596,7 +596,7 @@ export default class abfalterActor extends Actor {
                     stat.mod = -40;
             }
 
-            stat.opposedfinal = Math.floor((stat.final + stat.opposed) + ~~(data.aamFinal / 20) + stat.opposedBonus);
+            stat.opposedfinal = Math.floor((stat.final + stat.opposed) + ~~(system.aamFinal / 20) + stat.opposedBonus);
             //Ki Pools
             if (stat != "Intelligence" && "Perception") {
                 if (stat.final >= 1 && stat.final <= 9) {
@@ -621,7 +621,7 @@ export default class abfalterActor extends Actor {
         }
 
         //Calculating Number of Actions
-        const actnumcalc = ~~data.stats.Agility.final + ~~data.stats.Dexterity.final;
+        const actnumcalc = ~~system.stats.Agility.final + ~~system.stats.Dexterity.final;
         if (actnumcalc < 0) {
             actnumcalc = 0;
         }
@@ -637,430 +637,430 @@ export default class abfalterActor extends Actor {
             case 8:
             case 9:
             case 10:
-                data.actionnumber = 1;
+                system.actionnumber = 1;
                 break;
             case 11:
             case 12:
             case 13:
             case 14:
-                data.actionnumber = 2;
+                system.actionnumber = 2;
                 break;
             case 15:
             case 16:
             case 17:
             case 18:
             case 19:
-                data.actionnumber = 3;
+                system.actionnumber = 3;
                 break;
             case 20:
             case 21:
             case 22:
-                data.actionnumber = 4;
+                system.actionnumber = 4;
                 break;
             case 23:
             case 24:
             case 25:
-                data.actionnumber = 5;
+                system.actionnumber = 5;
                 break;
             case 26:
             case 27:
             case 28:
-                data.actionnumber = 6;
+                system.actionnumber = 6;
                 break;
             case 29:
             case 30:
             case 31:
-                data.actionnumber = 8;
+                system.actionnumber = 8;
                 break;
             default:
-                data.actionnumber = 10;
+                system.actionnumber = 10;
                 break;
         }
 
         //Lifepoint Calculation
-        data.lpbase = Math.floor(25 + 10 * data.stats.Constitution.final + data.stats.Constitution.mod - Math.ceil((data.stats.Constitution.final - 1) / data.stats.Constitution.final) * 5);
-        if (data.toggles.dmgRes == false) {
-            data.lp.max = Math.floor(data.lpbase + data.lifepoints.spec + data.lifepoints.temp + data.lifepoints.bonus + Math.ceil(data.lifepoints.multiple * data.stats.Constitution.final));
+        system.lpbase = Math.floor(25 + 10 * system.stats.Constitution.final + system.stats.Constitution.mod - Math.ceil((system.stats.Constitution.final - 1) / system.stats.Constitution.final) * 5);
+        if (system.toggles.dmgRes == false) {
+            system.lp.max = Math.floor(system.lpbase + system.lifepoints.spec + system.lifepoints.temp + system.lifepoints.bonus + Math.ceil(system.lifepoints.multiple * system.stats.Constitution.final));
         } else {
-            if (data.monsterStats.hpDp == null) {
-                data.monsterStats.hpDp = 0;
+            if (system.monsterStats.hpDp == null) {
+                system.monsterStats.hpDp = 0;
             }
-            data.lifepoints.hpDmgRes = Math.floor(data.lifepoints.hpMult * data.monsterStats.hpDp);
-            data.lp.max = Math.floor(data.lpbase + data.lifepoints.spec + data.lifepoints.temp + data.lifepoints.hpDmgRes + data.lifepoints.bonus);
+            system.lifepoints.hpDmgRes = Math.floor(system.lifepoints.hpMult * system.monsterStats.hpDp);
+            system.lp.max = Math.floor(system.lpbase + system.lifepoints.spec + system.lifepoints.temp + system.lifepoints.hpDmgRes + system.lifepoints.bonus);
         }
 
         //Fatigue Calculation
-        data.fatiguebase = data.stats.Constitution.final;
-        data.fatigue.max = Math.floor(data.fatiguebase + data.fatigue.spec + data.fatigue.temp + data.fatigue.bonus);
+        system.fatiguebase = system.stats.Constitution.final;
+        system.fatigue.max = Math.floor(system.fatiguebase + system.fatigue.spec + system.fatigue.temp + system.fatigue.bonus);
         
         //Regeneration Calculation
-        switch (data.stats.Constitution.final) {
+        switch (system.stats.Constitution.final) {
             case 1:
             case 2:
-                data.regenbase = 0;
+                system.regenbase = 0;
                 break;
             case 3:
             case 4:
             case 5:
             case 6:
             case 7:
-                data.regenbase = 1;
+                system.regenbase = 1;
                 break;
             case 8:
             case 9:
-                data.regenbase = 2;
+                system.regenbase = 2;
                 break;
             case 10:
-                data.regenbase = 3;
+                system.regenbase = 3;
                 break;
             case 11:
-                data.regenbase = 4;
+                system.regenbase = 4;
                 break;
             case 12:
-                data.regenbase = 5;
+                system.regenbase = 5;
                 break;
             case 13:
-                data.regenbase = 6;
+                system.regenbase = 6;
                 break;
             case 14:
-                data.regenbase = 7;
+                system.regenbase = 7;
                 break;
             case 15:
-                data.regenbase = 8;
+                system.regenbase = 8;
                 break;
             case 16:
-                data.regenbase = 9;
+                system.regenbase = 9;
                 break;
             case 17:
-                data.regenbase = 10;
+                system.regenbase = 10;
                 break;
             case 18:
-                data.regenbase = 11;
+                system.regenbase = 11;
                 break;
             case 19:
             case 20:
-                data.regenbase = 12;
+                system.regenbase = 12;
                 break;
             default:
-                data.regenbase = 0;
+                system.regenbase = 0;
                 break;
         }
-        if (data.stats.Constitution.final > 20) {
-            data.regenbase = 12;
+        if (system.stats.Constitution.final > 20) {
+            system.regenbase = 12;
         }
-        data.regenfinal = Math.min(Math.floor(data.regenbase + data.regeneration.spec + data.regeneration.temp + data.regeneration.bonus), 20);
-        switch (data.regenfinal) {
+        system.regenfinal = Math.min(Math.floor(system.regenbase + system.regeneration.spec + system.regeneration.temp + system.regeneration.bonus), 20);
+        switch (system.regenfinal) {
             case 1:
-                data.resting = "10/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "5/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 10;
+                system.resting = "10/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.notresting = "5/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.regenValue = 10;
                 break;
             case 2:
-                data.resting = "20/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "10/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 20;
+                system.resting = "20/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.notresting = "10/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.regenValue = 20;
                 break;
             case 3:
-                data.resting = "30/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "15/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 30;
+                system.resting = "30/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.notresting = "15/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.regenValue = 30;
                 break;
             case 4:
-                data.resting = "40/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "20/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 40;
+                system.resting = "40/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.notresting = "20/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.regenValue = 40;
                 break;
             case 5:
-                data.resting = "50/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "25/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 50;
+                system.resting = "50/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.notresting = "25/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.regenValue = 50;
                 break;
             case 6:
-                data.resting = "75/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "30/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-15/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 75;
+                system.resting = "75/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.notresting = "30/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.redpenalty = "-15/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.regenValue = 75;
                 break;
             case 7:
-                data.resting = "100/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "50/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-20/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 100;
+                system.resting = "100/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.notresting = "50/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.redpenalty = "-20/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.regenValue = 100;
                 break;
             case 8:
-                data.resting = "250/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "100/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-25/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 250;
+                system.resting = "250/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.notresting = "100/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.redpenalty = "-25/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.regenValue = 250;
                 break;
             case 9:
-                data.resting = "500/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.notresting = "200/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.redpenalty = "-30/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 500;
+                system.resting = "500/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.notresting = "200/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.redpenalty = "-30/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.regenValue = 500;
                 break;
             case 10:
-                data.resting = "1/" + game.i18n.localize('abfalter.basicInfo.minute');
-                data.notresting = "N/A";
-                data.redpenalty = "-40/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 1440;
+                system.resting = "1/" + game.i18n.localize('abfalter.basicInfo.minute');
+                system.notresting = "N/A";
+                system.redpenalty = "-40/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.regenValue = 1440;
                 break;
             case 11:
-                data.resting = "2/" + game.i18n.localize('abfalter.basicInfo.minute');
-                data.notresting = "N/A";
-                data.redpenalty = "-50/" + game.i18n.localize('abfalter.basicInfo.day');
-                data.regenValue = 2880;
+                system.resting = "2/" + game.i18n.localize('abfalter.basicInfo.minute');
+                system.notresting = "N/A";
+                system.redpenalty = "-50/" + game.i18n.localize('abfalter.basicInfo.day');
+                system.regenValue = 2880;
                 break;
             case 12:
-                data.resting = "5/" + game.i18n.localize('abfalter.basicInfo.minute');
-                data.notresting = "N/A";
-                data.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.hour');
-                data.regenValue = 7200;
+                system.resting = "5/" + game.i18n.localize('abfalter.basicInfo.minute');
+                system.notresting = "N/A";
+                system.redpenalty = "-5/" + game.i18n.localize('abfalter.basicInfo.hour');
+                system.regenValue = 7200;
                 break;
             case 13:
-                data.resting = "10/" + game.i18n.localize('abfalter.basicInfo.minute');
-                data.notresting = "N/A";
-                data.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.hour');
-                data.regenValue = 10000;
+                system.resting = "10/" + game.i18n.localize('abfalter.basicInfo.minute');
+                system.notresting = "N/A";
+                system.redpenalty = "-10/" + game.i18n.localize('abfalter.basicInfo.hour');
+                system.regenValue = 10000;
                 break;
             case 14:
-                data.resting = "1/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "-15/" + game.i18n.localize('abfalter.basicInfo.hour');
-                data.regenValue = 20000;
+                system.resting = "1/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.notresting = "N/A";
+                system.redpenalty = "-15/" + game.i18n.localize('abfalter.basicInfo.hour');
+                system.regenValue = 20000;
                 break;
             case 15:
-                data.resting = "5/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "-20/" + game.i18n.localize('abfalter.basicInfo.hour');
-                data.regenValue = 50000;
+                system.resting = "5/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.notresting = "N/A";
+                system.redpenalty = "-20/" + game.i18n.localize('abfalter.basicInfo.hour');
+                system.regenValue = 50000;
                 break;
             case 16:
-                data.resting = "10/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "-50/" + game.i18n.localize('abfalter.basicInfo.minute');
-                data.regenValue = 100000;
+                system.resting = "10/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.notresting = "N/A";
+                system.redpenalty = "-50/" + game.i18n.localize('abfalter.basicInfo.minute');
+                system.regenValue = 100000;
                 break;
             case 17:
-                data.resting = "25/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "-10/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.regenValue = 100000;
+                system.resting = "25/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.notresting = "N/A";
+                system.redpenalty = "-10/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regenValue = 100000;
                 break;
             case 18:
-                data.resting = "50/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "-25/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.regenValue = 100000;
+                system.resting = "50/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.notresting = "N/A";
+                system.redpenalty = "-25/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regenValue = 100000;
                 break;
             case 19:
-                data.resting = "100/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "All/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.regenValue = 100000;
+                system.resting = "100/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.notresting = "N/A";
+                system.redpenalty = "All/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regenValue = 100000;
                 break;
             case 20:
-                data.resting = "200/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.notresting = "N/A";
-                data.redpenalty = "All/" + game.i18n.localize('abfalter.magicTab.turn');
-                data.regenValue = 100000;
+                system.resting = "200/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.notresting = "N/A";
+                system.redpenalty = "All/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regenValue = 100000;
                 break;
             default:
-                data.resting = "0";
-                data.notresting = "0";
-                data.redpenalty = "0";
-                data.regenValue = 0;
+                system.resting = "0";
+                system.notresting = "0";
+                system.redpenalty = "0";
+                system.regenValue = 0;
                 break;
         }
 
         //Initiative
-        data.initiative.extraStats = Math.floor(data.stats.Dexterity.mod + data.stats.Agility.mod);
-        data.iniBase = Math.floor(data.stats.Dexterity.mod + data.stats.Agility.mod + data.initiative.sizeBase);
-        if (data.aamFinal < 0) {
-            data.iniBase = Math.floor(data.iniBase + ~~(data.aamFinal / 2));
+        system.initiative.extraStats = Math.floor(system.stats.Dexterity.mod + system.stats.Agility.mod);
+        system.iniBase = Math.floor(system.stats.Dexterity.mod + system.stats.Agility.mod + system.initiative.sizeBase);
+        if (system.aamFinal < 0) {
+            system.iniBase = Math.floor(system.iniBase + ~~(system.aamFinal / 2));
         }
 
         //Ki Accumulation
-        data.kiPoolAgiAccumTot = Math.max(0, Math.floor(data.stats.Agility.kiPoolAccuBase + data.kiPool.agi.spec + data.kiPool.agi.temp + data.kiPool.agi.bonus + data.kiPool.agi.default + Math.min(0, ~~(data.aamFinal / 20))));
-        data.kiPoolConAccumTot = Math.max(0, Math.floor(data.stats.Constitution.kiPoolAccuBase + data.kiPool.con.spec + data.kiPool.con.temp + data.kiPool.con.bonus + data.kiPool.con.default + Math.min(0, ~~(data.aamFinal / 20))));
-        data.kiPoolDexAccumTot = Math.max(0, Math.floor(data.stats.Dexterity.kiPoolAccuBase + data.kiPool.dex.spec + data.kiPool.dex.temp + data.kiPool.dex.bonus + data.kiPool.dex.default + Math.min(0, ~~(data.aamFinal / 20))));
-        data.kiPoolStrAccumTot = Math.max(0, Math.floor(data.stats.Strength.kiPoolAccuBase + data.kiPool.str.spec + data.kiPool.str.temp + data.kiPool.str.bonus + data.kiPool.str.default + Math.min(0, ~~(data.aamFinal / 20))));
-        data.kiPoolPowAccumTot = Math.max(0, Math.floor(data.stats.Power.kiPoolAccuBase + data.kiPool.pow.spec + data.kiPool.pow.temp + data.kiPool.pow.bonus + data.kiPool.pow.default + Math.min(0, ~~(data.aamFinal / 20))));
-        data.kiPoolWPAccumTot = Math.max(0, Math.floor(data.stats.Willpower.kiPoolAccuBase + data.kiPool.wp.spec + data.kiPool.wp.temp + data.kiPool.wp.bonus + data.kiPool.wp.default + Math.min(0, ~~(data.aamFinal / 20))));
+        system.kiPoolAgiAccumTot = Math.max(0, Math.floor(system.stats.Agility.kiPoolAccuBase + system.kiPool.agi.spec + system.kiPool.agi.temp + system.kiPool.agi.bonus + system.kiPool.agi.default + Math.min(0, ~~(system.aamFinal / 20))));
+        system.kiPoolConAccumTot = Math.max(0, Math.floor(system.stats.Constitution.kiPoolAccuBase + system.kiPool.con.spec + system.kiPool.con.temp + system.kiPool.con.bonus + system.kiPool.con.default + Math.min(0, ~~(system.aamFinal / 20))));
+        system.kiPoolDexAccumTot = Math.max(0, Math.floor(system.stats.Dexterity.kiPoolAccuBase + system.kiPool.dex.spec + system.kiPool.dex.temp + system.kiPool.dex.bonus + system.kiPool.dex.default + Math.min(0, ~~(system.aamFinal / 20))));
+        system.kiPoolStrAccumTot = Math.max(0, Math.floor(system.stats.Strength.kiPoolAccuBase + system.kiPool.str.spec + system.kiPool.str.temp + system.kiPool.str.bonus + system.kiPool.str.default + Math.min(0, ~~(system.aamFinal / 20))));
+        system.kiPoolPowAccumTot = Math.max(0, Math.floor(system.stats.Power.kiPoolAccuBase + system.kiPool.pow.spec + system.kiPool.pow.temp + system.kiPool.pow.bonus + system.kiPool.pow.default + Math.min(0, ~~(system.aamFinal / 20))));
+        system.kiPoolWPAccumTot = Math.max(0, Math.floor(system.stats.Willpower.kiPoolAccuBase + system.kiPool.wp.spec + system.kiPool.wp.temp + system.kiPool.wp.bonus + system.kiPool.wp.default + Math.min(0, ~~(system.aamFinal / 20))));
 
         //Ki Pool
-        if (data.toggles.innatePower == true) {
-            switch (data.kiPool.innate.type) {
+        if (system.toggles.innatePower == true) {
+            switch (system.kiPool.innate.type) {
                 case "AGI":
-                    data.stats.Agility.kiPoolBase = data.stats.Agility.kiPoolBase * 6;
-                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.agi');
+                    system.stats.Agility.kiPoolBase = system.stats.Agility.kiPoolBase * 6;
+                    system.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.agi');
                     break;
                 case "CON":
-                    data.stats.Constitution.kiPoolBase = data.stats.Constitution.kiPoolBase * 6;
-                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.con');
+                    system.stats.Constitution.kiPoolBase = system.stats.Constitution.kiPoolBase * 6;
+                    system.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.con');
                     break;
                 case "DEX":
-                    data.stats.Dexterity.kiPoolBase = data.stats.Dexterity.kiPoolBase * 6;
-                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.dex');
+                    system.stats.Dexterity.kiPoolBase = system.stats.Dexterity.kiPoolBase * 6;
+                    system.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.dex');
                     break;
                 case "STR":
-                    data.stats.Strength.kiPoolBase = data.stats.Strength.kiPoolBase * 6;
-                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.str');
+                    system.stats.Strength.kiPoolBase = system.stats.Strength.kiPoolBase * 6;
+                    system.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.str');
                     break;
                 case "POW":
-                    data.stats.Power.kiPoolBase = data.stats.Power.kiPoolBase * 6;
-                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.pow');
+                    system.stats.Power.kiPoolBase = system.stats.Power.kiPoolBase * 6;
+                    system.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.pow');
                     break;
                 case "WP":
-                    data.stats.Willpower.kiPoolBase = data.stats.Willpower.kiPoolBase * 6;
-                    data.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.wp');
+                    system.stats.Willpower.kiPoolBase = system.stats.Willpower.kiPoolBase * 6;
+                    system.kiPool.innate.tag = game.i18n.localize('abfalter.basicInfo.wp');
                     break;
                 default:
-                    data.kiPool.innate.tag = "Error";
+                    system.kiPool.innate.tag = "Error";
                     break;
             }
         }
 
-        data.kiPoolAgiTot = Math.floor(data.stats.Agility.kiPoolBase + data.kiPool.agi.specMax + data.kiPool.agi.tempMax + data.kiPool.agi.bonusMax + data.kiPool.agi.defaultMax);
-        data.kiPoolConTot = Math.floor(data.stats.Constitution.kiPoolBase + data.kiPool.con.specMax + data.kiPool.con.tempMax + data.kiPool.dex.bonusMax + data.kiPool.con.defaultMax);
-        data.kiPoolDexTot = Math.floor(data.stats.Dexterity.kiPoolBase + data.kiPool.dex.specMax + data.kiPool.dex.tempMax + data.kiPool.dex.bonusMax + data.kiPool.dex.defaultMax);
-        data.kiPoolStrTot = Math.floor(data.stats.Strength.kiPoolBase + data.kiPool.str.specMax + data.kiPool.str.tempMax + data.kiPool.str.bonusMax + data.kiPool.str.defaultMax);
-        data.kiPoolPowTot = Math.floor(data.stats.Power.kiPoolBase + data.kiPool.pow.specMax + data.kiPool.pow.tempMax + data.kiPool.pow.bonusMax + data.kiPool.pow.defaultMax);
-        data.kiPoolWPTot = Math.floor(data.stats.Willpower.kiPoolBase + data.kiPool.wp.specMax + data.kiPool.wp.tempMax + data.kiPool.wp.bonusMax + data.kiPool.wp.defaultMax);
+        system.kiPoolAgiTot = Math.floor(system.stats.Agility.kiPoolBase + system.kiPool.agi.specMax + system.kiPool.agi.tempMax + system.kiPool.agi.bonusMax + system.kiPool.agi.defaultMax);
+        system.kiPoolConTot = Math.floor(system.stats.Constitution.kiPoolBase + system.kiPool.con.specMax + system.kiPool.con.tempMax + system.kiPool.dex.bonusMax + system.kiPool.con.defaultMax);
+        system.kiPoolDexTot = Math.floor(system.stats.Dexterity.kiPoolBase + system.kiPool.dex.specMax + system.kiPool.dex.tempMax + system.kiPool.dex.bonusMax + system.kiPool.dex.defaultMax);
+        system.kiPoolStrTot = Math.floor(system.stats.Strength.kiPoolBase + system.kiPool.str.specMax + system.kiPool.str.tempMax + system.kiPool.str.bonusMax + system.kiPool.str.defaultMax);
+        system.kiPoolPowTot = Math.floor(system.stats.Power.kiPoolBase + system.kiPool.pow.specMax + system.kiPool.pow.tempMax + system.kiPool.pow.bonusMax + system.kiPool.pow.defaultMax);
+        system.kiPoolWPTot = Math.floor(system.stats.Willpower.kiPoolBase + system.kiPool.wp.specMax + system.kiPool.wp.tempMax + system.kiPool.wp.bonusMax + system.kiPool.wp.defaultMax);
 
-        if (data.toggles.unifiedPools == true) {
-            if (data.toggles.innatePower == true) {
-                switch (data.kiPool.innate.type) {
+        if (system.toggles.unifiedPools == true) {
+            if (system.toggles.innatePower == true) {
+                switch (system.kiPool.innate.type) {
                     case "AGI":
-                        data.unifiedKi.max = Math.floor(data.kiPool.innate.bonus + data.kiPoolAgiTot);
-                        data.kiPoolConTot = 0;
-                        data.kiPoolDexTot = 0;
-                        data.kiPoolStrTot = 0;
-                        data.kiPoolPowTot = 0;
-                        data.kiPoolWPTot = 0;
-                        data.innateAgi = true;
+                        system.unifiedKi.max = Math.floor(system.kiPool.innate.bonus + system.kiPoolAgiTot);
+                        system.kiPoolConTot = 0;
+                        system.kiPoolDexTot = 0;
+                        system.kiPoolStrTot = 0;
+                        system.kiPoolPowTot = 0;
+                        system.kiPoolWPTot = 0;
+                        system.innateAgi = true;
                         break;
                     case "CON":
-                        data.unifiedKi.max = Math.floor(data.kiPool.innate.bonus + data.kiPoolConTot);
-                        data.kiPoolAgiTot = 0;
-                        data.kiPoolDexTot = 0;
-                        data.kiPoolStrTot = 0;
-                        data.kiPoolPowTot = 0;
-                        data.kiPoolWPTot = 0;
+                        system.unifiedKi.max = Math.floor(system.kiPool.innate.bonus + system.kiPoolConTot);
+                        system.kiPoolAgiTot = 0;
+                        system.kiPoolDexTot = 0;
+                        system.kiPoolStrTot = 0;
+                        system.kiPoolPowTot = 0;
+                        system.kiPoolWPTot = 0;
                         break;
                     case "DEX":
-                        data.unifiedKi.max = Math.floor(data.kiPool.innate.bonus + data.kiPoolDexTot);
-                        data.kiPoolAgiTot = 0;
-                        data.kiPoolConTot = 0;
-                        data.kiPoolStrTot = 0;
-                        data.kiPoolPowTot = 0;
-                        data.kiPoolWPTot = 0;
+                        system.unifiedKi.max = Math.floor(system.kiPool.innate.bonus + system.kiPoolDexTot);
+                        system.kiPoolAgiTot = 0;
+                        system.kiPoolConTot = 0;
+                        system.kiPoolStrTot = 0;
+                        system.kiPoolPowTot = 0;
+                        system.kiPoolWPTot = 0;
                         break;
                     case "STR":
-                        data.unifiedKi.max = Math.floor(data.kiPool.innate.bonus + data.kiPoolStrTot);
-                        data.kiPoolAgiTot = 0;
-                        data.kiPoolConTot = 0;
-                        data.kiPoolDexTot = 0;
-                        data.kiPoolPowTot = 0;
-                        data.kiPoolWPTot = 0;
+                        system.unifiedKi.max = Math.floor(system.kiPool.innate.bonus + system.kiPoolStrTot);
+                        system.kiPoolAgiTot = 0;
+                        system.kiPoolConTot = 0;
+                        system.kiPoolDexTot = 0;
+                        system.kiPoolPowTot = 0;
+                        system.kiPoolWPTot = 0;
                         break;
                     case "POW":
-                        data.unifiedKi.max = Math.floor(data.kiPool.innate.bonus + data.kiPoolPowTot);
-                        data.kiPoolAgiTot = 0;
-                        data.kiPoolConTot = 0;
-                        data.kiPoolDexTot = 0;
-                        data.kiPoolStrTot = 0;
-                        data.kiPoolWPTot = 0;
+                        system.unifiedKi.max = Math.floor(system.kiPool.innate.bonus + system.kiPoolPowTot);
+                        system.kiPoolAgiTot = 0;
+                        system.kiPoolConTot = 0;
+                        system.kiPoolDexTot = 0;
+                        system.kiPoolStrTot = 0;
+                        system.kiPoolWPTot = 0;
                         break;
                     case "WP":
-                        data.unifiedKi.max = Math.floor(data.kiPool.innate.bonus + data.kiPoolWPTot);
-                        data.kiPoolAgiTot = 0;
-                        data.kiPoolConTot = 0;
-                        data.kiPoolDexTot = 0;
-                        data.kiPoolStrTot = 0;
-                        data.kiPoolPowTot = 0;
+                        system.unifiedKi.max = Math.floor(system.kiPool.innate.bonus + system.kiPoolWPTot);
+                        system.kiPoolAgiTot = 0;
+                        system.kiPoolConTot = 0;
+                        system.kiPoolDexTot = 0;
+                        system.kiPoolStrTot = 0;
+                        system.kiPoolPowTot = 0;
                         break;
                     default:
-                        data.kiPool.innate.tag = "Error";
+                        system.kiPool.innate.tag = "Error";
                         break;
                 }
             } else {
-                data.unifiedKi.max = Math.floor(data.kiPoolAgiTot + data.kiPoolConTot + data.kiPoolDexTot + data.kiPoolStrTot + data.kiPoolPowTot + data.kiPoolWPTot + data.kiPool.unifiedBonus);
+                system.unifiedKi.max = Math.floor(system.kiPoolAgiTot + system.kiPoolConTot + system.kiPoolDexTot + system.kiPoolStrTot + system.kiPoolPowTot + system.kiPoolWPTot + system.kiPool.unifiedBonus);
             }
         }
 
         //atk, blk, dodge
-        data.atkfinal = Math.floor(data.combatstats.atkbase + data.combatstats.atkspecial + data.combatstats.atktemp + data.combatstats.atkbonus + data.stats.Dexterity.mod + data.aamFinal);
-        data.blkfinal = Math.floor(data.combatstats.blkbase + data.combatstats.blkspecial + data.combatstats.blktemp + data.combatstats.blkbonus + data.stats.Dexterity.mod + data.aamFinal);
-        data.dodfinal = Math.floor(data.combatstats.dodbase + data.combatstats.dodspecial + data.combatstats.dodtemp + data.combatstats.dodbonus + data.stats.Agility.mod + data.aamFinal);
+        system.atkfinal = Math.floor(system.combatstats.atkbase + system.combatstats.atkspecial + system.combatstats.atktemp + system.combatstats.atkbonus + system.stats.Dexterity.mod + system.aamFinal);
+        system.blkfinal = Math.floor(system.combatstats.blkbase + system.combatstats.blkspecial + system.combatstats.blktemp + system.combatstats.blkbonus + system.stats.Dexterity.mod + system.aamFinal);
+        system.dodfinal = Math.floor(system.combatstats.dodbase + system.combatstats.dodspecial + system.combatstats.dodtemp + system.combatstats.dodbonus + system.stats.Agility.mod + system.aamFinal);
 
-        //Magic Projection data.mproj.spec + data.mproj.temp
-        data.mprojfinal = Math.floor(data.mproj.base + data.stats.Dexterity.mod + data.aamFinal);
-        data.mprojfinaloff = Math.floor(data.mprojfinal + data.mproj.spec + data.mproj.temp + data.mproj.bonus + data.mproj.imbalance);
-        data.mprojfinaldef = Math.floor(data.mprojfinal + data.mproj.spec2 + data.mproj.temp2 + data.mproj.bonus2 - data.mproj.imbalance);
+        //Magic Projection system.mproj.spec + system.mproj.temp
+        system.mprojfinal = Math.floor(system.mproj.base + system.stats.Dexterity.mod + system.aamFinal);
+        system.mprojfinaloff = Math.floor(system.mprojfinal + system.mproj.spec + system.mproj.temp + system.mproj.bonus + system.mproj.imbalance);
+        system.mprojfinaldef = Math.floor(system.mprojfinal + system.mproj.spec2 + system.mproj.temp2 + system.mproj.bonus2 - system.mproj.imbalance);
 
-        data.mprojAtkModule = Math.floor(data.combatstats.atkbase + data.mproj.spec + data.mproj.temp + data.mproj.bonus + data.stats.Dexterity.mod + data.aamFinal);
-        data.mprojDefModule = Math.floor(data.combatstats.blkbase + data.mproj.spec2 + data.mproj.temp2 + data.mproj.bonus2 + data.stats.Dexterity.mod + data.aamFinal);
-        data.mprojDodModule = Math.floor(data.combatstats.dodbase + data.mproj.spec2 + data.mproj.temp2 + data.mproj.bonus2 + data.stats.Dexterity.mod + data.aamFinal);
+        system.mprojAtkModule = Math.floor(system.combatstats.atkbase + system.mproj.spec + system.mproj.temp + system.mproj.bonus + system.stats.Dexterity.mod + system.aamFinal);
+        system.mprojDefModule = Math.floor(system.combatstats.blkbase + system.mproj.spec2 + system.mproj.temp2 + system.mproj.bonus2 + system.stats.Dexterity.mod + system.aamFinal);
+        system.mprojDodModule = Math.floor(system.combatstats.dodbase + system.mproj.spec2 + system.mproj.temp2 + system.mproj.bonus2 + system.stats.Dexterity.mod + system.aamFinal);
 
         // Psychic Potential
-        if (data.stats.Willpower.final < 5) {
-            data.fromWP = 0;
-        } else if (data.stats.Willpower.final >= 5 && data.stats.Willpower.final < 15) {
-            data.fromWP = Math.floor((data.stats.Willpower.final - 4) * 10);
-        } else if (data.stats.Willpower.final >= 15) {
-            data.fromWP = Math.floor(((data.stats.Willpower.final - 14) * 20) + 100)
+        if (system.stats.Willpower.final < 5) {
+            system.fromWP = 0;
+        } else if (system.stats.Willpower.final >= 5 && system.stats.Willpower.final < 15) {
+            system.fromWP = Math.floor((system.stats.Willpower.final - 4) * 10);
+        } else if (system.stats.Willpower.final >= 15) {
+            system.fromWP = Math.floor(((system.stats.Willpower.final - 14) * 20) + 100)
         }
-        data.finalPotential = Math.floor(data.ppotential.base + data.fromWP + + data.ppotential.spent + data.ppotential.spec + data.ppotential.temp + data.ppotential.bonus);
-        switch (data.ppotential.spent) {
+        system.finalPotential = Math.floor(system.ppotential.base + system.fromWP + + system.ppotential.spent + system.ppotential.spec + system.ppotential.temp + system.ppotential.bonus);
+        switch (system.ppotential.spent) {
             case "10":
-                data.ppotentialpp = 1;
+                system.ppotentialpp = 1;
                 break;
             case "20":
-                data.ppotentialpp = 3;
+                system.ppotentialpp = 3;
                 break;
             case "30":
-                data.ppotentialpp = 6;
+                system.ppotentialpp = 6;
                 break;
             case "40":
-                data.ppotentialpp = 10;
+                system.ppotentialpp = 10;
                 break;
             case "50":
-                data.ppotentialpp = 15;
+                system.ppotentialpp = 15;
                 break;
             case "60":
-                data.ppotentialpp = 21;
+                system.ppotentialpp = 21;
                 break;
             case "70":
-                data.ppotentialpp = 28;
+                system.ppotentialpp = 28;
                 break;
             case "80":
-                data.ppotentialpp = 36;
+                system.ppotentialpp = 36;
                 break;
             case "90":
-                data.ppotentialpp = 45;
+                system.ppotentialpp = 45;
                 break;
             case "100":
-                data.ppotentialpp = 55;
+                system.ppotentialpp = 55;
                 break;
             default:
-                data.ppotentialpp = 0;
+                system.ppotentialpp = 0;
                 break;
         }
 
         // Psychic Projection
-        data.pprojfinal = Math.floor(data.pproj.base + data.pproj.spec + data.pproj.temp + data.pproj.bonusBase + data.stats.Dexterity.mod + data.aamFinal);
+        system.pprojfinal = Math.floor(system.pproj.base + system.pproj.spec + system.pproj.temp + system.pproj.bonusBase + system.stats.Dexterity.mod + system.aamFinal);
 
-        data.pprojAtkModule = Math.floor(data.combatstats.atkbase + data.pproj.spec + data.pproj.temp + data.pproj.bonus + data.stats.Dexterity.mod + data.aamFinal);
-        data.pprojDefModule = Math.floor(data.combatstats.blkbase + data.pproj.spec + data.pproj.temp + data.pproj.bonus2 + data.stats.Dexterity.mod + data.aamFinal);
-        data.pprojDodModule = Math.floor(data.combatstats.dodbase + data.pproj.spec + data.pproj.temp + data.pproj.bonus2 + data.stats.Dexterity.mod + data.aamFinal);
+        system.pprojAtkModule = Math.floor(system.combatstats.atkbase + system.pproj.spec + system.pproj.temp + system.pproj.bonus + system.stats.Dexterity.mod + system.aamFinal);
+        system.pprojDefModule = Math.floor(system.combatstats.blkbase + system.pproj.spec + system.pproj.temp + system.pproj.bonus2 + system.stats.Dexterity.mod + system.aamFinal);
+        system.pprojDodModule = Math.floor(system.combatstats.dodbase + system.pproj.spec + system.pproj.temp + system.pproj.bonus2 + system.stats.Dexterity.mod + system.aamFinal);
         // Wear Armor
-        data.wearArmorFinal = Math.floor(data.wearArmor.base + data.wearArmor.spec + data.wearArmor.temp + data.wearArmor.bonus + data.stats.Strength.mod);
+        system.wearArmorFinal = Math.floor(system.wearArmor.base + system.wearArmor.spec + system.wearArmor.temp + system.wearArmor.bonus + system.stats.Strength.mod);
 
 
         // Determine Item Values / Last used arr[123]  2                    *Look at js map
@@ -1229,7 +1229,7 @@ export default class abfalterActor extends Actor {
                 }
                 if (item.type === "psychicMatrix") {
                     arr[102] += parseInt(item.system.quantity) || 0;
-                    if (data.toggles.psychicStrengthening == true) {
+                    if (system.toggles.psychicStrengthening == true) {
                         arr[103] += parseInt(item.system.bonus / 20) || 0;
                     } else {
                         arr[103] += parseInt(item.system.bonus / 10) || 0;
@@ -1289,144 +1289,197 @@ export default class abfalterActor extends Actor {
                 0, 0, 0, 0]);
 
         //Stuff Xp, Presence, Next lvl Xp
-        data.level = level; //class Bonus
-        if (data.level == 0) {
-            data.dp = 400 + data.levelinfo.dpmod + data.levelinfo.dpmodBonus;
+        system.level = level; //class Bonus
+        if (system.level == 0) {
+            system.dp = 400 + system.levelinfo.dpmod + system.levelinfo.dpmodBonus;
         } else {
-            data.dp = Math.floor((data.level * 100) + 500 + data.levelinfo.dpmod + data.levelinfo.dpmodBonus);
+            system.dp = Math.floor((system.level * 100) + 500 + system.levelinfo.dpmod + system.levelinfo.dpmodBonus);
         }
-        data.presence = Math.floor((data.dp / 20) + data.levelinfo.presencemod + data.levelinfo.presencemodBonus);
-        data.nextlevel = Math.floor(((data.level + data.levelinfo.levelmod + data.levelinfo.levelmodBonus) * 25) + 75);
+        system.presence = Math.floor((system.dp / 20) + system.levelinfo.presencemod + system.levelinfo.presencemodBonus);
+        system.nextlevel = Math.floor(((system.level + system.levelinfo.levelmod + system.levelinfo.levelmodBonus) * 25) + 75);
 
         //Mk Calculations
-        data.mkBonus = mk; //Class Mk
-        data.kiThingMK = 0; //Ki Abilities Cost
-        for (let [key, kiThing] of Object.entries(data.kiAbility)) {
+        system.mkBonus = mk; //Class Mk
+        system.kiThingMK = 0; //Ki Abilities Cost
+        for (let [key, kiThing] of Object.entries(system.kiAbility)) {
             if (kiThing.status == true && kiThing.status2 == false) {
-                data.kiThingMK += kiThing.cost;
+                system.kiThingMK += kiThing.cost;
             } else {
-                data.kiThingMK += 0;
+                system.kiThingMK += 0;
             }
         }
-        data.kiSealMk = 0; //Minor & Major Seals Cost
-        for (let [key, kiSealStuff] of Object.entries(data.kiSeal.minor)) {
+        system.kiSealMk = 0; //Minor & Major Seals Cost
+        for (let [key, kiSealStuff] of Object.entries(system.kiSeal.minor)) {
             if (kiSealStuff.mastery == true && kiSealStuff.mastery2 == false) {
-                data.kiSealMk += 30;
+                system.kiSealMk += 30;
             } else {
-                data.kiSealMk += 0;
+                system.kiSealMk += 0;
             }
         }
-        for (let [key, kiSealStuff] of Object.entries(data.kiSeal.major)) {
+        for (let [key, kiSealStuff] of Object.entries(system.kiSeal.major)) {
             if (kiSealStuff.mastery == true && kiSealStuff.mastery2 == false) {
-                data.kiSealMk += 50;
+                system.kiSealMk += 50;
             } else {
-                data.kiSealMk += 0;
+                system.kiSealMk += 0;
             }
         }
-        data.limitsMK = +data.limits.limitOne + +data.limits.limitTwo; //Limits Cost
-        data.arsMagMK = arsMk; //Ars Magnus Cost
-        data.mArtMk = maMk; //Martial Arts Bonus MK
-        data.kiTechMk = techMk; //Ki Technique Cost
-        data.mkFinal = Math.floor(data.mk.base + data.mk.temp + data.mk.spec + data.mk.bonus + data.mkBonus + data.mArtMk); //Total Final Mk
-        data.mkUsed = Math.floor(data.limitsMK + data.kiThingMK + data.kiSealMk + data.arsMagMK + data.kiTechMk); //Total Used Mk
+        switch (system.limits.limitOne) {
+            case "mors":
+                system.limitOneCost = 30;
+                break;
+            case "cenobus":
+                system.limitOneCost = 20;
+                break;
+            case "caelum":
+                system.limitOneCost = 15;
+                break;
+            case "agon":
+                system.limitOneCost = 20;
+                break;
+            case "custodium":
+                system.limitOneCost = 10;
+                break;
+            case "cruor":
+                system.limitOneCost = 10;
+                break;
+            case "terminus":
+                system.limitOneCost = 10;
+                break;
+            default:
+                system.limitOneCost = 0;
+                break;
+        }
+        switch (system.limits.limitTwo) {
+            case "mors":
+                system.limitTwoCost = 30;
+                break;
+            case "cenobus":
+                system.limitTwoCost = 20;
+                break;
+            case "caelum":
+                system.limitTwoCost = 15;
+                break;
+            case "agon":
+                system.limitTwoCost = 20;
+                break;
+            case "custodium":
+                system.limitTwoCost = 10;
+                break;
+            case "cruor":
+                system.limitTwoCost = 10;
+                break;
+            case "terminus":
+                system.limitTwoCost = 10;
+                break;
+            default:
+                system.limitTwoCost = 0;
+                break;
+        }
+
+        system.limitsMK = +system.limitOneCost + +system.limitTwoCost; //Limits Cost
+        system.arsMagMK = arsMk; //Ars Magnus Cost
+        system.mArtMk = maMk; //Martial Arts Bonus MK
+        system.kiTechMk = techMk; //Ki Technique Cost
+        system.mkFinal = Math.floor(system.mk.base + system.mk.temp + system.mk.spec + system.mk.bonus + system.mkBonus + system.mArtMk); //Total Final Mk
+        system.mkUsed = Math.floor(system.limitsMK + system.kiThingMK + system.kiSealMk + system.arsMagMK + system.kiTechMk); //Total Used Mk
 
         // Wear Armor
-        data.weararmorbonus = weararm;
-        data.wearArmorFinal += weararm;
+        system.weararmorbonus = weararm;
+        system.wearArmorFinal += weararm;
 
-        if (data.kiAbility.kiEnergyArmor.status == true) { //Energy armor add 2 energy AT for free
-            data.enArm = 2;
-            if (data.toggles.greaterEnergyArmor == true && data.kiAbility.kiArcaneArmor.status == false) { //Greater energy armor only if arcane is not bought
-                data.enArm = 4;
-            } else if (data.kiAbility.kiArcaneArmor.status == true) {
-                data.enArm = 4;
-                data.toggles.greaterEnergyArmor = false;
-                if (data.toggles.arcaneEnergyArmor == true) {
-                    data.enArm = 6;
+        if (system.kiAbility.kiEnergyArmor.status == true) { //Energy armor add 2 energy AT for free
+            system.enArm = 2;
+            if (system.toggles.greaterEnergyArmor == true && system.kiAbility.kiArcaneArmor.status == false) { //Greater energy armor only if arcane is not bought
+                system.enArm = 4;
+            } else if (system.kiAbility.kiArcaneArmor.status == true) {
+                system.enArm = 4;
+                system.toggles.greaterEnergyArmor = false;
+                if (system.toggles.arcaneEnergyArmor == true) {
+                    system.enArm = 6;
                 }
             }
         } else {
-            data.enArm = 0;
+            system.enArm = 0;
         }
-        if (data.kiAbility.kiGreaterArmor.status == false) {
-            data.toggles.greaterEnergyArmor = false;
+        if (system.kiAbility.kiGreaterArmor.status == false) {
+            system.toggles.greaterEnergyArmor = false;
         }
-        if (data.kiAbility.kiArcaneArmor.status == false) {
-            data.toggles.arcaneEnergyArmor = false;
+        if (system.kiAbility.kiArcaneArmor.status == false) {
+            system.toggles.arcaneEnergyArmor = false;
         }
         // Armor Final AT
-        data.aCutFinal = Math.floor((aCutTot - ~~(aCutMax / 2)) + aCutMax);
-        data.aImpFinal = Math.floor((aImpTot - ~~(aImpMax / 2)) + aImpMax);
-        data.aThrFinal = Math.floor((aThrTot - ~~(aThrMax / 2)) + aThrMax);
-        data.aHeatFinal = Math.floor((aHeatTot - ~~(aHeatMax / 2)) + aHeatMax);
-        data.aColdFinal = Math.floor((aColdTot - ~~(aColdMax / 2)) + aColdMax);
-        data.aEleFinal = Math.floor((aEleTot - ~~(aEleMax / 2)) + aEleMax);
-        data.aEneFinal = Math.floor((aEneTot - ~~(aEneMax / 2)) + aEneMax + data.enArm);
-        data.aSptFinal = Math.floor((aSptTot - ~~(aSptMax / 2)) + aSptMax);
+        system.aCutFinal = Math.floor((aCutTot - ~~(aCutMax / 2)) + aCutMax);
+        system.aImpFinal = Math.floor((aImpTot - ~~(aImpMax / 2)) + aImpMax);
+        system.aThrFinal = Math.floor((aThrTot - ~~(aThrMax / 2)) + aThrMax);
+        system.aHeatFinal = Math.floor((aHeatTot - ~~(aHeatMax / 2)) + aHeatMax);
+        system.aColdFinal = Math.floor((aColdTot - ~~(aColdMax / 2)) + aColdMax);
+        system.aEleFinal = Math.floor((aEleTot - ~~(aEleMax / 2)) + aEleMax);
+        system.aEneFinal = Math.floor((aEneTot - ~~(aEneMax / 2)) + aEneMax + system.enArm);
+        system.aSptFinal = Math.floor((aSptTot - ~~(aSptMax / 2)) + aSptMax);
 
         // Helmet Final AT
-        data.ahCutFinal = Math.floor((ahCutTot - ~~(ahCutMax / 2)) + ahCutMax);
-        data.ahImpFinal = Math.floor((ahImpTot - ~~(ahImpMax / 2)) + ahImpMax);
-        data.ahThrFinal = Math.floor((ahThrTot - ~~(ahThrMax / 2)) + ahThrMax);
-        data.ahHeatFinal = Math.floor((ahHeatTot - ~~(ahHeatMax / 2)) + ahHeatMax);
-        data.ahColdFinal = Math.floor((ahColdTot - ~~(ahColdMax / 2)) + ahColdMax);
-        data.ahEleFinal = Math.floor((ahEleTot - ~~(ahEleMax / 2)) + ahEleMax);
-        data.ahEneFinal = Math.floor((ahEneTot - ~~(ahEneMax / 2)) + ahEneMax);
-        data.ahSptFinal = Math.floor((ahSptTot - ~~(ahSptMax / 2)) + ahSptMax);
+        system.ahCutFinal = Math.floor((ahCutTot - ~~(ahCutMax / 2)) + ahCutMax);
+        system.ahImpFinal = Math.floor((ahImpTot - ~~(ahImpMax / 2)) + ahImpMax);
+        system.ahThrFinal = Math.floor((ahThrTot - ~~(ahThrMax / 2)) + ahThrMax);
+        system.ahHeatFinal = Math.floor((ahHeatTot - ~~(ahHeatMax / 2)) + ahHeatMax);
+        system.ahColdFinal = Math.floor((ahColdTot - ~~(ahColdMax / 2)) + ahColdMax);
+        system.ahEleFinal = Math.floor((ahEleTot - ~~(ahEleMax / 2)) + ahEleMax);
+        system.ahEneFinal = Math.floor((ahEneTot - ~~(ahEneMax / 2)) + ahEneMax);
+        system.ahSptFinal = Math.floor((ahSptTot - ~~(ahSptMax / 2)) + ahSptMax);
 
         // Armor Stats
-        data.totalPerPen = perPen;
-        data.armorMod = Math.floor(data.wearArmorFinal - req);
-        if (natPen - data.armorMod < 0) {
-            data.totalNatPen = Math.max(0, Math.floor(((quantity - 1) * 20) + 0));
+        system.totalPerPen = perPen;
+        system.armorMod = Math.floor(system.wearArmorFinal - req);
+        if (natPen - system.armorMod < 0) {
+            system.totalNatPen = Math.max(0, Math.floor(((quantity - 1) * 20) + 0));
         } else {
-            data.totalNatPen = Math.max(0, Math.floor(((quantity - 1) * 20) + (natPen - data.armorMod)));
+            system.totalNatPen = Math.max(0, Math.floor(((quantity - 1) * 20) + (natPen - system.armorMod)));
         }
-        data.movePenMod = Math.max(0, Math.floor(data.armorMod / 50));
-        if (movePen - data.movePenMod < 0) {
-            data.totalMovePen = -Math.floor(movePen + Math.max(0, data.totalNatPen / 50));
+        system.movePenMod = Math.max(0, Math.floor(system.armorMod / 50));
+        if (movePen - system.movePenMod < 0) {
+            system.totalMovePen = -Math.floor(movePen + Math.max(0, system.totalNatPen / 50));
         } else {
-            data.totalMovePen = -Math.floor(movePen + Math.max(0, data.totalNatPen / 50) - data.movePenMod);
+            system.totalMovePen = -Math.floor(movePen + Math.max(0, system.totalNatPen / 50) - system.movePenMod);
         }
 
         //Resistances
-        if (data.kiAbility.kiPhysDom.status == true) { //Physical Dominion adds 10 PhR
-            data.phrDom = 10;
+        if (system.kiAbility.kiPhysDom.status == true) { //Physical Dominion adds 10 PhR
+            system.phrDom = 10;
         } else {
-            data.phrDom = 0;
+            system.phrDom = 0;
         }
-        if (data.kiAbility.nemiBodyEmpty.status == true) { //Physical Dominion adds 20 PhR
-            data.allEmpty = 20;
+        if (system.kiAbility.nemiBodyEmpty.status == true) { //Physical Dominion adds 20 PhR
+            system.allEmpty = 20;
         } else {
-            data.allEmpty = 0;
+            system.allEmpty = 0;
         }
 
-        for (let [key, res] of Object.entries(data.resistances)) {
+        for (let [key, res] of Object.entries(system.resistances)) {
             switch (key) {
                 case "Physical":
                     res.name = game.i18n.localize('abfalter.sheet.physicalRes');
                     res.short = game.i18n.localize('abfalter.sheet.phr');
-                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.phrDom + data.allEmpty + res.bonus);
+                    res.final = Math.floor(system.presence + res.mod + stats.Constitution.mod + system.phrDom + system.allEmpty + res.bonus);
                     break;
                 case "Disease":
                     res.name = game.i18n.localize('abfalter.sheet.diseaseRes');
                     res.short = game.i18n.localize('abfalter.sheet.dr');
-                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.allEmpty + res.bonus);
+                    res.final = Math.floor(system.presence + res.mod + stats.Constitution.mod + system.allEmpty + res.bonus);
                     break;
                 case "Poison":
                     res.name = game.i18n.localize('abfalter.sheet.poisonRes');
                     res.short = game.i18n.localize('abfalter.sheet.psnr');
-                    res.final = Math.floor(data.presence + res.mod + stats.Constitution.mod + data.allEmpty + res.bonus);
+                    res.final = Math.floor(system.presence + res.mod + stats.Constitution.mod + system.allEmpty + res.bonus);
                     break;
                 case "Magic":
                     res.name = game.i18n.localize('abfalter.sheet.magicRes');
                     res.short = game.i18n.localize('abfalter.sheet.mr');
-                    res.final = Math.floor(data.presence + res.mod + stats.Power.mod + data.allEmpty + res.bonus);
+                    res.final = Math.floor(system.presence + res.mod + stats.Power.mod + system.allEmpty + res.bonus);
                     break;
                 case "Psychic":
                     res.name = game.i18n.localize('abfalter.sheet.psychicRes');
                     res.short = game.i18n.localize('abfalter.sheet.psyr');
-                    res.final = Math.floor(data.presence + res.mod + stats.Willpower.mod + data.allEmpty + res.bonus);
+                    res.final = Math.floor(system.presence + res.mod + stats.Willpower.mod + system.allEmpty + res.bonus);
                     break;
                 default:
                     break;
@@ -1434,1135 +1487,1135 @@ export default class abfalterActor extends Actor {
         }
 
         //Movement
-        data.finalmove = Math.floor(data.stats.Agility.final + data.movement.spec + data.movement.temp + data.movement.bonus + data.movement.sizeBase - data.movement.pen + Math.min(0, Math.ceil(data.aamFinal / 20)) + data.totalMovePen);
-        switch (data.finalmove) {
+        system.finalmove = Math.floor(system.stats.Agility.final + system.movement.spec + system.movement.temp + system.movement.bonus + system.movement.sizeBase - system.movement.pen + Math.min(0, Math.ceil(system.aamFinal / 20)) + system.totalMovePen);
+        switch (system.finalmove) {
             case 1:
-                if (data.useMeters) {
-                    data.fullmove = "<1 m.";
-                    data.fourthmove = "<1 m.";
-                    data.runningmove = "<1 m.";
+                if (system.useMeters) {
+                    system.fullmove = "<1 m.";
+                    system.fourthmove = "<1 m.";
+                    system.runningmove = "<1 m.";
                 } else {
-                    data.fullmove = "3 ft";
-                    data.fourthmove = "1 ft";
-                    data.runningmove = "N/A";
+                    system.fullmove = "3 ft";
+                    system.fourthmove = "1 ft";
+                    system.runningmove = "N/A";
                 }
                 break;
             case 2:
-                if (data.useMeters) {
-                    data.fullmove = "4 m.";
-                    data.fourthmove = "1 m.";
-                    data.runningmove = "2 m.";
+                if (system.useMeters) {
+                    system.fullmove = "4 m.";
+                    system.fourthmove = "1 m.";
+                    system.runningmove = "2 m.";
                 } else {
-                    data.fullmove = "15 ft";
-                    data.fourthmove = "3 ft";
-                    data.runningmove = "7 ft";
+                    system.fullmove = "15 ft";
+                    system.fourthmove = "3 ft";
+                    system.runningmove = "7 ft";
                 }
                 break;
             case 3:
-                if (data.useMeters) {
-                    data.fullmove = "8 m.";
-                    data.fourthmove = "2 m.";
-                    data.runningmove = "4 m.";
+                if (system.useMeters) {
+                    system.fullmove = "8 m.";
+                    system.fourthmove = "2 m.";
+                    system.runningmove = "4 m.";
                 } else {
-                    data.fullmove = "25 ft";
-                    data.fourthmove = "6 ft";
-                    data.runningmove = "12 ft";
+                    system.fullmove = "25 ft";
+                    system.fourthmove = "6 ft";
+                    system.runningmove = "12 ft";
                 }
                 break;
             case 4:
-                if (data.useMeters) {
-                    data.fullmove = "15 m.";
-                    data.fourthmove = "4 m.";
-                    data.runningmove = "8 m.";
+                if (system.useMeters) {
+                    system.fullmove = "15 m.";
+                    system.fourthmove = "4 m.";
+                    system.runningmove = "8 m.";
                 } else {
-                    data.fullmove = "50 ft";
-                    data.fourthmove = "12 ft";
-                    data.runningmove = "15 ft";
+                    system.fullmove = "50 ft";
+                    system.fourthmove = "12 ft";
+                    system.runningmove = "15 ft";
                 }
                 break;
             case 5:
-                if (data.useMeters) {
-                    data.fullmove = "20 m.";
-                    data.fourthmove = "5 m.";
-                    data.runningmove = "8 m.";
+                if (system.useMeters) {
+                    system.fullmove = "20 m.";
+                    system.fourthmove = "5 m.";
+                    system.runningmove = "8 m.";
                 } else {
-                    data.fullmove = "65 ft";
-                    data.fourthmove = "16 ft";
-                    data.runningmove = "25 ft";
+                    system.fullmove = "65 ft";
+                    system.fourthmove = "16 ft";
+                    system.runningmove = "25 ft";
                 }
                 break;
             case 6:
-                if (data.useMeters) {
-                    data.fullmove = "22 m.";
-                    data.fourthmove = "5 m.";
-                    data.runningmove = "15 m.";
+                if (system.useMeters) {
+                    system.fullmove = "22 m.";
+                    system.fourthmove = "5 m.";
+                    system.runningmove = "15 m.";
                 } else {
-                    data.fullmove = "70 ft";
-                    data.fourthmove = "17 ft";
-                    data.runningmove = "50 ft";
+                    system.fullmove = "70 ft";
+                    system.fourthmove = "17 ft";
+                    system.runningmove = "50 ft";
                 }
                 break;
             case 7:
-                if (data.useMeters) {
-                    data.fullmove = "25 m.";
-                    data.fourthmove = "6 m.";
-                    data.runningmove = "20 m.";
+                if (system.useMeters) {
+                    system.fullmove = "25 m.";
+                    system.fourthmove = "6 m.";
+                    system.runningmove = "20 m.";
                 } else {
-                    data.fullmove = "80 ft";
-                    data.fourthmove = "20 ft";
-                    data.runningmove = "65 ft";
+                    system.fullmove = "80 ft";
+                    system.fourthmove = "20 ft";
+                    system.runningmove = "65 ft";
                 }
                 break;
             case 8:
-                if (data.useMeters) {
-                    data.fullmove = "28 m.";
-                    data.fourthmove = "7 m.";
-                    data.runningmove = "22 m.";
+                if (system.useMeters) {
+                    system.fullmove = "28 m.";
+                    system.fourthmove = "7 m.";
+                    system.runningmove = "22 m.";
                 } else {
-                    data.fullmove = "90 ft";
-                    data.fourthmove = "22 ft";
-                    data.runningmove = "70 ft";
+                    system.fullmove = "90 ft";
+                    system.fourthmove = "22 ft";
+                    system.runningmove = "70 ft";
                 }
                 break;
             case 9:
-                if (data.useMeters) {
-                    data.fullmove = "32 m.";
-                    data.fourthmove = "8 m.";
-                    data.runningmove = "25 m.";
+                if (system.useMeters) {
+                    system.fullmove = "32 m.";
+                    system.fourthmove = "8 m.";
+                    system.runningmove = "25 m.";
                 } else {
-                    data.fullmove = "105 ft";
-                    data.fourthmove = "26 ft";
-                    data.runningmove = "80 ft";
+                    system.fullmove = "105 ft";
+                    system.fourthmove = "26 ft";
+                    system.runningmove = "80 ft";
                 }
                 break;
             case 10:
-                if (data.useMeters) {
-                    data.fullmove = "35 m.";
-                    data.fourthmove = "9 m.";
-                    data.runningmove = "28 m.";
+                if (system.useMeters) {
+                    system.fullmove = "35 m.";
+                    system.fourthmove = "9 m.";
+                    system.runningmove = "28 m.";
                 } else {
-                    data.fullmove = "115 ft";
-                    data.fourthmove = "28 ft";
-                    data.runningmove = "90 ft";
+                    system.fullmove = "115 ft";
+                    system.fourthmove = "28 ft";
+                    system.runningmove = "90 ft";
                 }
                 break;
             case 11:
-                if (data.useMeters) {
-                    data.fullmove = "40 m.";
-                    data.fourthmove = "10 m.";
-                    data.runningmove = "32 m.";
+                if (system.useMeters) {
+                    system.fullmove = "40 m.";
+                    system.fourthmove = "10 m.";
+                    system.runningmove = "32 m.";
                 } else {
-                    data.fullmove = "130 ft";
-                    data.fourthmove = "32 ft";
-                    data.runningmove = "105 ft";
+                    system.fullmove = "130 ft";
+                    system.fourthmove = "32 ft";
+                    system.runningmove = "105 ft";
                 }
                 break;
             case 12:
-                if (data.useMeters) {
-                    data.fullmove = "50 m.";
-                    data.fourthmove = "12 m.";
-                    data.runningmove = "35 m.";
+                if (system.useMeters) {
+                    system.fullmove = "50 m.";
+                    system.fourthmove = "12 m.";
+                    system.runningmove = "35 m.";
                 } else {
-                    data.fullmove = "160 ft";
-                    data.fourthmove = "40 ft";
-                    data.runningmove = "115 ft";
+                    system.fullmove = "160 ft";
+                    system.fourthmove = "40 ft";
+                    system.runningmove = "115 ft";
                 }
                 break;
             case 13:
-                if (data.useMeters) {
-                    data.fullmove = "80 m.";
-                    data.fourthmove = "20 m.";
-                    data.runningmove = "40 m.";
+                if (system.useMeters) {
+                    system.fullmove = "80 m.";
+                    system.fourthmove = "20 m.";
+                    system.runningmove = "40 m.";
                 } else {
-                    data.fullmove = "250 ft";
-                    data.fourthmove = "62 ft";
-                    data.runningmove = "130 ft";
+                    system.fullmove = "250 ft";
+                    system.fourthmove = "62 ft";
+                    system.runningmove = "130 ft";
                 }
                 break;
             case 14:
-                if (data.useMeters) {
-                    data.fullmove = "150 m.";
-                    data.fourthmove = "37 m.";
-                    data.runningmove = "50 m.";
+                if (system.useMeters) {
+                    system.fullmove = "150 m.";
+                    system.fourthmove = "37 m.";
+                    system.runningmove = "50 m.";
                 } else {
-                    data.fullmove = "500 ft";
-                    data.fourthmove = "125 ft";
-                    data.runningmove = "160 ft";
+                    system.fullmove = "500 ft";
+                    system.fourthmove = "125 ft";
+                    system.runningmove = "160 ft";
                 }
                 break;
             case 15:
-                if (data.useMeters) {
-                    data.fullmove = "250 m.";
-                    data.fourthmove = "62 m.";
-                    data.runningmove = "80 m.";
+                if (system.useMeters) {
+                    system.fullmove = "250 m.";
+                    system.fourthmove = "62 m.";
+                    system.runningmove = "80 m.";
                 } else {
-                    data.fullmove = "800 ft";
-                    data.fourthmove = "200 ft";
-                    data.runningmove = "250 ft";
+                    system.fullmove = "800 ft";
+                    system.fourthmove = "200 ft";
+                    system.runningmove = "250 ft";
                 }
                 break;
             case 16:
-                if (data.useMeters) {
-                    data.fullmove = "500 m.";
-                    data.fourthmove = "125 m.";
-                    data.runningmove = "150 m.";
+                if (system.useMeters) {
+                    system.fullmove = "500 m.";
+                    system.fourthmove = "125 m.";
+                    system.runningmove = "150 m.";
                 } else {
-                    data.fullmove = "1500 ft";
-                    data.fourthmove = "375 ft";
-                    data.runningmove = "500 ft";
+                    system.fullmove = "1500 ft";
+                    system.fourthmove = "375 ft";
+                    system.runningmove = "500 ft";
                 }
                 break;
             case 17:
-                if (data.useMeters) {
-                    data.fullmove = "1 Km.";
-                    data.fourthmove = "250 m.";
-                    data.runningmove = "500 m.";
+                if (system.useMeters) {
+                    system.fullmove = "1 Km.";
+                    system.fourthmove = "250 m.";
+                    system.runningmove = "500 m.";
                 } else {
-                    data.fullmove = "3000 ft";
-                    data.fourthmove = "750 ft";
-                    data.runningmove = "1500 ft";
+                    system.fullmove = "3000 ft";
+                    system.fourthmove = "750 ft";
+                    system.runningmove = "1500 ft";
                 }
                 break;
             case 18:
-                if (data.useMeters) {
-                    data.fullmove = "5 Km.";
-                    data.fourthmove = "1.2 Km.";
-                    data.runningmove = "2.5 Km.";
+                if (system.useMeters) {
+                    system.fullmove = "5 Km.";
+                    system.fourthmove = "1.2 Km.";
+                    system.runningmove = "2.5 Km.";
                 } else {
-                    data.fullmove = "3 miles";
-                    data.fourthmove = "3960 ft";
-                    data.runningmove = "1.5 miles";
+                    system.fullmove = "3 miles";
+                    system.fourthmove = "3960 ft";
+                    system.runningmove = "1.5 miles";
                 }
                 break;
             case 19:
-                if (data.useMeters) {
-                    data.fullmove = "25 Km.";
-                    data.fourthmove = "6.2 Km.";
-                    data.runningmove = "12.5 Km.";
+                if (system.useMeters) {
+                    system.fullmove = "25 Km.";
+                    system.fourthmove = "6.2 Km.";
+                    system.runningmove = "12.5 Km.";
                 } else {
-                    data.fullmove = "15 miles";
-                    data.fourthmove = "3.75 miles";
-                    data.runningmove = "7.5 miles";
+                    system.fullmove = "15 miles";
+                    system.fourthmove = "3.75 miles";
+                    system.runningmove = "7.5 miles";
                 }
                 break;
             case 20:
-                    data.fullmove = game.i18n.localize('abfalter.basicInfo.special');
-                    data.fourthmove = game.i18n.localize('abfalter.basicInfo.special');
-                    data.runningmove = game.i18n.localize('abfalter.basicInfo.special');
+                    system.fullmove = game.i18n.localize('abfalter.basicInfo.special');
+                    system.fourthmove = game.i18n.localize('abfalter.basicInfo.special');
+                    system.runningmove = game.i18n.localize('abfalter.basicInfo.special');
                 break;
             default:
-                    data.fullmove = "0";
-                    data.fourthmove = "0";
-                    data.runningmove = "0";
+                    system.fullmove = "0";
+                    system.fourthmove = "0";
+                    system.runningmove = "0";
                 break;
         }
-        if (data.finalmove > 20) {
-            data.fullmove = game.i18n.localize('abfalter.basicInfo.special');
-            data.fourthmove = game.i18n.localize('abfalter.basicInfo.special');
-            data.runningmove = game.i18n.localize('abfalter.basicInfo.special');
+        if (system.finalmove > 20) {
+            system.fullmove = game.i18n.localize('abfalter.basicInfo.special');
+            system.fourthmove = game.i18n.localize('abfalter.basicInfo.special');
+            system.runningmove = game.i18n.localize('abfalter.basicInfo.special');
         }
         //Lifepoint Calculation
-        data.lpbonus = lpbonus;
-        data.lp.max += lpbonus;
+        system.lpbonus = lpbonus;
+        system.lp.max += lpbonus;
         // Attack, Block, & Dodge post class
-        data.attackbonus = atk + maKiAtk;
-        if (data.attackbonus > 50) {
-            data.attackbonus = 50;
+        system.attackbonus = atk + maKiAtk;
+        if (system.attackbonus > 50) {
+            system.attackbonus = 50;
         }
-        data.atkfinal += data.attackbonus;
-        data.blockbonus = blk + maKiBlk;
-        if (data.blockbonus > 50) {
-            data.blockbonus = 50;
+        system.atkfinal += system.attackbonus;
+        system.blockbonus = blk + maKiBlk;
+        if (system.blockbonus > 50) {
+            system.blockbonus = 50;
         }
-        data.blkfinal += data.blockbonus;
-        data.dodgebonus = dod + maKiDod;
-        if (data.dodgebonus > 50) {
-            data.dodgebonus = 50;
+        system.blkfinal += system.blockbonus;
+        system.dodgebonus = dod + maKiDod;
+        if (system.dodgebonus > 50) {
+            system.dodgebonus = 50;
         }
-        data.dodfinal += data.dodgebonus;
+        system.dodfinal += system.dodgebonus;
 
         // Initiative
-        if (data.kiAbility.kiIncreaseSpd.status == true) {
-            data.KiBonusSpd = 10;
+        if (system.kiAbility.kiIncreaseSpd.status == true) {
+            system.KiBonusSpd = 10;
         } else {
-            data.KiBonusSpd = 0;
+            system.KiBonusSpd = 0;
         }
-        data.inibonus = ini;
-        data.weaponNumber = wepNum;
-        data.weaponSpeed = wepSpd;
-        data.weaponName = wepName;
-        if (data.weaponNumber > 1 && data.weaponSpeed < 0) {
-            data.wepFinSpd = data.weaponSpeed - 20;
-            data.weaponName = game.i18n.localize('abfalter.basicInfo.multiWield');
-        } else if (data.weaponNumber > 1 && data.weaponSpeed >= 0) {
-            data.wepFinSpd = data.weaponSpeed - 10;
-            data.weaponName = game.i18n.localize('abfalter.basicInfo.multiWield');
-        } else if (data.weaponNumber == 0) {
-            data.wepFinSpd = 20;
-            data.weaponName = game.i18n.localize('abfalter.basicInfo.unarmed');
+        system.inibonus = ini;
+        system.weaponNumber = wepNum;
+        system.weaponSpeed = wepSpd;
+        system.weaponName = wepName;
+        if (system.weaponNumber > 1 && system.weaponSpeed < 0) {
+            system.wepFinSpd = system.weaponSpeed - 20;
+            system.weaponName = game.i18n.localize('abfalter.basicInfo.multiWield');
+        } else if (system.weaponNumber > 1 && system.weaponSpeed >= 0) {
+            system.wepFinSpd = system.weaponSpeed - 10;
+            system.weaponName = game.i18n.localize('abfalter.basicInfo.multiWield');
+        } else if (system.weaponNumber == 0) {
+            system.wepFinSpd = 20;
+            system.weaponName = game.i18n.localize('abfalter.basicInfo.unarmed');
         } else {
-            data.wepFinSpd = data.weaponSpeed;
+            system.wepFinSpd = system.weaponSpeed;
         }
-        data.iniFinal = Math.floor(data.iniBase + data.inibonus + data.initiative.spec + data.initiative.bonus + data.KiBonusSpd + ~~data.wepFinSpd - data.totalNatPen);
+        system.iniFinal = Math.floor(system.iniBase + system.inibonus + system.initiative.spec + system.initiative.bonus + system.KiBonusSpd + ~~system.wepFinSpd - system.totalNatPen);
 
         /*
             Secondaries
         */
-        // Acrobatics data.totalNatPen
-        data.acrobaticsbonus = acro;
-        data.acrobaticsnat = Math.floor(stats.Agility.mod + data.secondary.acrobatics.natural + Math.ceil(data.secondary.acrobatics.nat * stats.Agility.mod));
-        if (data.acrobaticsnat < 100) {
-            data.acrobaticsnatfinal = data.acrobaticsnat;
+        // Acrobatics system.totalNatPen
+        system.acrobaticsbonus = acro;
+        system.acrobaticsnat = Math.floor(stats.Agility.mod + system.secondary.acrobatics.natural + Math.ceil(system.secondary.acrobatics.nat * stats.Agility.mod));
+        if (system.acrobaticsnat < 100) {
+            system.acrobaticsnatfinal = system.acrobaticsnat;
         } else {
-            data.acrobaticsnatfinal = 100;
+            system.acrobaticsnatfinal = 100;
         }
-        data.acrofinal = Math.floor(data.secondary.acrobatics.bonus + data.secondary.acrobatics.temp + data.secondary.acrobatics.spec + data.secondary.acrobatics.base + data.acrobaticsbonus + data.acrobaticsnatfinal + data.aamFinal - data.totalNatPen);
+        system.acrofinal = Math.floor(system.secondary.acrobatics.bonus + system.secondary.acrobatics.temp + system.secondary.acrobatics.spec + system.secondary.acrobatics.base + system.acrobaticsbonus + system.acrobaticsnatfinal + system.aamFinal - system.totalNatPen);
 
         // Athelticism
-        data.athleticismbonus = athle;
+        system.athleticismbonus = athle;
 
-        data.athleticismnat = Math.floor(stats.Agility.mod + data.secondary.athleticism.natural + Math.ceil(data.secondary.athleticism.nat * stats.Agility.mod));
-        if (data.athleticismnat < 100) {
-            data.athleticismnatfinal = data.athleticismnat;
+        system.athleticismnat = Math.floor(stats.Agility.mod + system.secondary.athleticism.natural + Math.ceil(system.secondary.athleticism.nat * stats.Agility.mod));
+        if (system.athleticismnat < 100) {
+            system.athleticismnatfinal = system.athleticismnat;
         } else {
-            data.athleticismnatfinal = 100;
+            system.athleticismnatfinal = 100;
         }
-        data.athleticismfinal = Math.floor(data.secondary.athleticism.bonus + data.secondary.athleticism.temp + data.secondary.athleticism.spec + data.secondary.athleticism.base + data.athleticismbonus + data.athleticismnatfinal + data.aamFinal - data.totalNatPen);
+        system.athleticismfinal = Math.floor(system.secondary.athleticism.bonus + system.secondary.athleticism.temp + system.secondary.athleticism.spec + system.secondary.athleticism.base + system.athleticismbonus + system.athleticismnatfinal + system.aamFinal - system.totalNatPen);
 
         // Climb
-        data.climbbonus = climb;
-        data.climbnat = Math.floor(stats.Agility.mod + data.secondary.climb.natural + Math.ceil(data.secondary.climb.nat * stats.Agility.mod));
-        if (data.climbnat < 100) {
-            data.climbnatfinal = data.climbnat;
+        system.climbbonus = climb;
+        system.climbnat = Math.floor(stats.Agility.mod + system.secondary.climb.natural + Math.ceil(system.secondary.climb.nat * stats.Agility.mod));
+        if (system.climbnat < 100) {
+            system.climbnatfinal = system.climbnat;
         } else {
-            data.climbnatfinal = 100;
+            system.climbnatfinal = 100;
         }
-        data.climbfinal = Math.floor(data.secondary.climb.bonus + data.secondary.climb.temp + data.secondary.climb.spec + data.secondary.climb.base + data.climbbonus + data.climbnatfinal + data.aamFinal - data.totalNatPen);
+        system.climbfinal = Math.floor(system.secondary.climb.bonus + system.secondary.climb.temp + system.secondary.climb.spec + system.secondary.climb.base + system.climbbonus + system.climbnatfinal + system.aamFinal - system.totalNatPen);
 
         // Jump
-        data.jumpbonus = jump;
-        data.jumpnat = Math.floor(stats.Strength.mod + data.secondary.jump.natural + Math.ceil(data.secondary.jump.nat * stats.Strength.mod));
-        if (data.jumpnat < 100) {
-            data.jumpnatfinal = data.jumpnat;
+        system.jumpbonus = jump;
+        system.jumpnat = Math.floor(stats.Strength.mod + system.secondary.jump.natural + Math.ceil(system.secondary.jump.nat * stats.Strength.mod));
+        if (system.jumpnat < 100) {
+            system.jumpnatfinal = system.jumpnat;
         } else {
-            data.jumpnatfinal = 100;
+            system.jumpnatfinal = 100;
         }
-        data.jumpfinal = Math.floor(data.secondary.jump.bonus + data.secondary.jump.temp + data.secondary.jump.spec + data.secondary.jump.base + data.jumpbonus + data.jumpnatfinal + data.aamFinal - data.totalNatPen);
+        system.jumpfinal = Math.floor(system.secondary.jump.bonus + system.secondary.jump.temp + system.secondary.jump.spec + system.secondary.jump.base + system.jumpbonus + system.jumpnatfinal + system.aamFinal - system.totalNatPen);
 
         // Ride
-        data.ridebonus = ride;
-        data.ridenat = Math.floor(stats.Agility.mod + data.secondary.ride.natural + Math.ceil(data.secondary.ride.nat * stats.Agility.mod));
-        if (data.ridenat < 100) {
-            data.ridenatfinal = data.ridenat;
+        system.ridebonus = ride;
+        system.ridenat = Math.floor(stats.Agility.mod + system.secondary.ride.natural + Math.ceil(system.secondary.ride.nat * stats.Agility.mod));
+        if (system.ridenat < 100) {
+            system.ridenatfinal = system.ridenat;
         } else {
-            data.ridenatfinal = 100;
+            system.ridenatfinal = 100;
         }
-        data.ridefinal = Math.floor(data.secondary.ride.bonus + data.secondary.ride.temp + data.secondary.ride.spec + data.secondary.ride.base + data.ridebonus + data.ridenatfinal + data.aamFinal - data.totalNatPen);
+        system.ridefinal = Math.floor(system.secondary.ride.bonus + system.secondary.ride.temp + system.secondary.ride.spec + system.secondary.ride.base + system.ridebonus + system.ridenatfinal + system.aamFinal - system.totalNatPen);
 
         // Swim
-        data.swimbonus = swim;
-        data.swimnat = Math.floor(stats.Agility.mod + data.secondary.swim.natural + Math.ceil(data.secondary.swim.nat * stats.Agility.mod));
-        if (data.swimnat < 100) {
-            data.swimnatfinal = data.swimnat;
+        system.swimbonus = swim;
+        system.swimnat = Math.floor(stats.Agility.mod + system.secondary.swim.natural + Math.ceil(system.secondary.swim.nat * stats.Agility.mod));
+        if (system.swimnat < 100) {
+            system.swimnatfinal = system.swimnat;
         } else {
-            data.swimnatfinal = 100;
+            system.swimnatfinal = 100;
         }
-        data.swimfinal = Math.floor(data.secondary.swim.bonus + data.secondary.swim.temp + data.secondary.swim.spec + data.secondary.swim.base + data.swimbonus + data.swimnatfinal + data.aamFinal - data.totalNatPen);
+        system.swimfinal = Math.floor(system.secondary.swim.bonus + system.secondary.swim.temp + system.secondary.swim.spec + system.secondary.swim.base + system.swimbonus + system.swimnatfinal + system.aamFinal - system.totalNatPen);
 
         // etiquette
-        data.etiquettebonus = etiq;
-        data.etiquettenat = Math.floor(stats.Intelligence.mod + data.secondary.etiquette.natural + Math.ceil(data.secondary.etiquette.nat * stats.Intelligence.mod));
-        if (data.etiquettenat < 100) {
-            data.etiquettenatfinal = data.etiquettenat;
+        system.etiquettebonus = etiq;
+        system.etiquettenat = Math.floor(stats.Intelligence.mod + system.secondary.etiquette.natural + Math.ceil(system.secondary.etiquette.nat * stats.Intelligence.mod));
+        if (system.etiquettenat < 100) {
+            system.etiquettenatfinal = system.etiquettenat;
         } else {
-            data.etiquettenatfinal = 100;
+            system.etiquettenatfinal = 100;
         }
-        data.etiquettefinal = Math.floor(data.secondary.etiquette.bonus + data.secondary.etiquette.temp + data.secondary.etiquette.spec + data.secondary.etiquette.base + data.etiquettebonus + data.etiquettenatfinal + data.aamFinal);
+        system.etiquettefinal = Math.floor(system.secondary.etiquette.bonus + system.secondary.etiquette.temp + system.secondary.etiquette.spec + system.secondary.etiquette.base + system.etiquettebonus + system.etiquettenatfinal + system.aamFinal);
 
         // Intimidate
-        data.intimidatebonus = intim;
-        data.intimidatenat = Math.floor(stats.Willpower.mod + data.secondary.intimidate.natural + Math.ceil(data.secondary.intimidate.nat * stats.Willpower.mod));
-        if (data.intimidatenat < 100) {
-            data.intimidatenatfinal = data.intimidatenat;
+        system.intimidatebonus = intim;
+        system.intimidatenat = Math.floor(stats.Willpower.mod + system.secondary.intimidate.natural + Math.ceil(system.secondary.intimidate.nat * stats.Willpower.mod));
+        if (system.intimidatenat < 100) {
+            system.intimidatenatfinal = system.intimidatenat;
         } else {
-            data.intimidatenatfinal = 100;
+            system.intimidatenatfinal = 100;
         }
-        data.intimidatefinal = Math.floor(data.secondary.intimidate.bonus + data.secondary.intimidate.temp + data.secondary.intimidate.spec + data.secondary.intimidate.base + data.intimidatebonus + data.intimidatenatfinal + data.aamFinal);
+        system.intimidatefinal = Math.floor(system.secondary.intimidate.bonus + system.secondary.intimidate.temp + system.secondary.intimidate.spec + system.secondary.intimidate.base + system.intimidatebonus + system.intimidatenatfinal + system.aamFinal);
 
         // Leadership
-        data.leadershipbonus = leader;
-        data.leadershipnat = Math.floor(stats.Power.mod + data.secondary.leadership.natural + Math.ceil(data.secondary.leadership.nat * stats.Power.mod));
-        if (data.leadershipnat < 100) {
-            data.leadershipnatfinal = data.leadershipnat;
+        system.leadershipbonus = leader;
+        system.leadershipnat = Math.floor(stats.Power.mod + system.secondary.leadership.natural + Math.ceil(system.secondary.leadership.nat * stats.Power.mod));
+        if (system.leadershipnat < 100) {
+            system.leadershipnatfinal = system.leadershipnat;
         } else {
-            data.leadershipnatfinal = 100;
+            system.leadershipnatfinal = 100;
         }
-        data.leadershipfinal = Math.floor(data.secondary.leadership.bonus + data.secondary.leadership.temp + data.secondary.leadership.spec + data.secondary.leadership.base + data.leadershipbonus + data.leadershipnatfinal + data.aamFinal);
+        system.leadershipfinal = Math.floor(system.secondary.leadership.bonus + system.secondary.leadership.temp + system.secondary.leadership.spec + system.secondary.leadership.base + system.leadershipbonus + system.leadershipnatfinal + system.aamFinal);
 
         // persuasion
-        data.persuasionbonus = persua;
-        data.persuasionnat = Math.floor(stats.Intelligence.mod + data.secondary.persuasion.natural + Math.ceil(data.secondary.persuasion.nat * stats.Intelligence.mod));
-        if (data.persuasionnat < 100) {
-            data.persuasionnatfinal = data.persuasionnat;
+        system.persuasionbonus = persua;
+        system.persuasionnat = Math.floor(stats.Intelligence.mod + system.secondary.persuasion.natural + Math.ceil(system.secondary.persuasion.nat * stats.Intelligence.mod));
+        if (system.persuasionnat < 100) {
+            system.persuasionnatfinal = system.persuasionnat;
         } else {
-            data.persuasionnatfinal = 100;
+            system.persuasionnatfinal = 100;
         }
-        data.persuasionfinal = Math.floor(data.secondary.persuasion.bonus + data.secondary.persuasion.temp + data.secondary.persuasion.spec + data.secondary.persuasion.base + data.persuasionbonus + data.persuasionnatfinal + data.aamFinal);
+        system.persuasionfinal = Math.floor(system.secondary.persuasion.bonus + system.secondary.persuasion.temp + system.secondary.persuasion.spec + system.secondary.persuasion.base + system.persuasionbonus + system.persuasionnatfinal + system.aamFinal);
 
         // streetwise
-        data.streetwisebonus = street;
-        data.streetwisenat = Math.floor(stats.Intelligence.mod + data.secondary.streetwise.natural + Math.ceil(data.secondary.streetwise.nat * stats.Intelligence.mod));
-        if (data.streetwisenat < 100) {
-            data.streetwisenatfinal = data.streetwisenat;
+        system.streetwisebonus = street;
+        system.streetwisenat = Math.floor(stats.Intelligence.mod + system.secondary.streetwise.natural + Math.ceil(system.secondary.streetwise.nat * stats.Intelligence.mod));
+        if (system.streetwisenat < 100) {
+            system.streetwisenatfinal = system.streetwisenat;
         } else {
-            data.streetwisenatfinal = 100;
+            system.streetwisenatfinal = 100;
         }
-        data.streetwisefinal = Math.floor(data.secondary.streetwise.bonus + data.secondary.streetwise.temp + data.secondary.streetwise.spec + data.secondary.streetwise.base + data.streetwisebonus + data.streetwisenatfinal + data.aamFinal);
+        system.streetwisefinal = Math.floor(system.secondary.streetwise.bonus + system.secondary.streetwise.temp + system.secondary.streetwise.spec + system.secondary.streetwise.base + system.streetwisebonus + system.streetwisenatfinal + system.aamFinal);
 
         // style
-        data.stylebonus = style;
-        data.stylenat = Math.floor(stats.Power.mod + data.secondary.style.natural + Math.ceil(data.secondary.style.nat * stats.Power.mod));
-        if (data.stylenat < 100) {
-            data.stylenatfinal = data.stylenat;
+        system.stylebonus = style;
+        system.stylenat = Math.floor(stats.Power.mod + system.secondary.style.natural + Math.ceil(system.secondary.style.nat * stats.Power.mod));
+        if (system.stylenat < 100) {
+            system.stylenatfinal = system.stylenat;
         } else {
-            data.stylenatfinal = 100;
+            system.stylenatfinal = 100;
         }
-        data.stylefinal = Math.floor(data.secondary.style.bonus + data.secondary.style.temp + data.secondary.style.spec + data.secondary.style.base + data.stylebonus + data.stylenatfinal + data.aamFinal);
+        system.stylefinal = Math.floor(system.secondary.style.bonus + system.secondary.style.temp + system.secondary.style.spec + system.secondary.style.base + system.stylebonus + system.stylenatfinal + system.aamFinal);
 
         // trading
-        data.tradingbonus = trading;
-        data.tradingnat = Math.floor(stats.Intelligence.mod + data.secondary.trading.natural + Math.ceil(data.secondary.trading.nat * stats.Intelligence.mod));
-        if (data.tradingnat < 100) {
-            data.tradingnatfinal = data.tradingnat;
+        system.tradingbonus = trading;
+        system.tradingnat = Math.floor(stats.Intelligence.mod + system.secondary.trading.natural + Math.ceil(system.secondary.trading.nat * stats.Intelligence.mod));
+        if (system.tradingnat < 100) {
+            system.tradingnatfinal = system.tradingnat;
         } else {
-            data.tradingnatfinal = 100;
+            system.tradingnatfinal = 100;
         }
-        data.tradingfinal = Math.floor(data.secondary.trading.bonus + data.secondary.trading.temp + data.secondary.trading.spec + data.secondary.trading.base + data.tradingbonus + data.tradingnatfinal + data.aamFinal);
+        system.tradingfinal = Math.floor(system.secondary.trading.bonus + system.secondary.trading.temp + system.secondary.trading.spec + system.secondary.trading.base + system.tradingbonus + system.tradingnatfinal + system.aamFinal);
 
         // notice
-        data.noticebonus = notice;
-        data.noticenat = Math.floor(stats.Perception.mod + data.secondary.notice.natural + Math.ceil(data.secondary.notice.nat * stats.Perception.mod));
-        if (data.noticenat < 100) {
-            data.noticenatfinal = data.noticenat;
+        system.noticebonus = notice;
+        system.noticenat = Math.floor(stats.Perception.mod + system.secondary.notice.natural + Math.ceil(system.secondary.notice.nat * stats.Perception.mod));
+        if (system.noticenat < 100) {
+            system.noticenatfinal = system.noticenat;
         } else {
-            data.noticenatfinal = 100;
+            system.noticenatfinal = 100;
         }
-        data.noticefinal = Math.floor(data.secondary.notice.bonus + data.secondary.notice.temp + data.secondary.notice.spec + data.secondary.notice.base + data.noticebonus + data.noticenatfinal + data.aamFinal);
+        system.noticefinal = Math.floor(system.secondary.notice.bonus + system.secondary.notice.temp + system.secondary.notice.spec + system.secondary.notice.base + system.noticebonus + system.noticenatfinal + system.aamFinal);
 
         // search
-        data.searchbonus = search;
-        data.searchnat = Math.floor(stats.Perception.mod + data.secondary.search.natural + Math.ceil(data.secondary.search.nat * stats.Perception.mod));
-        if (data.searchnat < 100) {
-            data.searchnatfinal = data.searchnat;
+        system.searchbonus = search;
+        system.searchnat = Math.floor(stats.Perception.mod + system.secondary.search.natural + Math.ceil(system.secondary.search.nat * stats.Perception.mod));
+        if (system.searchnat < 100) {
+            system.searchnatfinal = system.searchnat;
         } else {
-            data.searchnatfinal = 100;
+            system.searchnatfinal = 100;
         }
-        data.searchfinal = Math.floor(data.secondary.search.bonus + data.secondary.search.temp + data.secondary.search.spec + data.secondary.search.base + data.searchbonus + data.searchnatfinal + data.aamFinal);
+        system.searchfinal = Math.floor(system.secondary.search.bonus + system.secondary.search.temp + system.secondary.search.spec + system.secondary.search.base + system.searchbonus + system.searchnatfinal + system.aamFinal);
 
         // track
-        data.trackbonus = track;
-        data.tracknat = Math.floor(stats.Perception.mod + data.secondary.track.natural + Math.ceil(data.secondary.track.nat * stats.Perception.mod));
-        if (data.tracknat < 100) {
-            data.tracknatfinal = data.tracknat;
+        system.trackbonus = track;
+        system.tracknat = Math.floor(stats.Perception.mod + system.secondary.track.natural + Math.ceil(system.secondary.track.nat * stats.Perception.mod));
+        if (system.tracknat < 100) {
+            system.tracknatfinal = system.tracknat;
         } else {
-            data.tracknatfinal = 100;
+            system.tracknatfinal = 100;
         }
-        data.trackfinal = Math.floor(data.secondary.track.bonus + data.secondary.track.temp + data.secondary.track.spec + data.secondary.track.base + data.trackbonus + data.tracknatfinal + data.aamFinal);
+        system.trackfinal = Math.floor(system.secondary.track.bonus + system.secondary.track.temp + system.secondary.track.spec + system.secondary.track.base + system.trackbonus + system.tracknatfinal + system.aamFinal);
 
         // animals
-        data.animalsbonus = animals;
-        data.animalsnat = Math.floor(stats.Intelligence.mod + data.secondary.animals.natural + Math.ceil(data.secondary.animals.nat * stats.Intelligence.mod));
-        if (data.animalsnat < 100) {
-            data.animalsnatfinal = data.animalsnat;
+        system.animalsbonus = animals;
+        system.animalsnat = Math.floor(stats.Intelligence.mod + system.secondary.animals.natural + Math.ceil(system.secondary.animals.nat * stats.Intelligence.mod));
+        if (system.animalsnat < 100) {
+            system.animalsnatfinal = system.animalsnat;
         } else {
-            data.animalsnatfinal = 100;
+            system.animalsnatfinal = 100;
         }
-        data.animalsfinal = Math.floor(data.secondary.animals.bonus + data.secondary.animals.temp + data.secondary.animals.spec + data.secondary.animals.base + data.animalsbonus + data.animalsnatfinal + data.aamFinal);
+        system.animalsfinal = Math.floor(system.secondary.animals.bonus + system.secondary.animals.temp + system.secondary.animals.spec + system.secondary.animals.base + system.animalsbonus + system.animalsnatfinal + system.aamFinal);
 
         // appraisal
-        data.appraisalbonus = appra;
-        data.appraisalnat = Math.floor(stats.Intelligence.mod + data.secondary.appraisal.natural + Math.ceil(data.secondary.appraisal.nat * stats.Intelligence.mod));
-        if (data.appraisalnat < 100) {
-            data.appraisalnatfinal = data.appraisalnat;
+        system.appraisalbonus = appra;
+        system.appraisalnat = Math.floor(stats.Intelligence.mod + system.secondary.appraisal.natural + Math.ceil(system.secondary.appraisal.nat * stats.Intelligence.mod));
+        if (system.appraisalnat < 100) {
+            system.appraisalnatfinal = system.appraisalnat;
         } else {
-            data.appraisalnatfinal = 100;
+            system.appraisalnatfinal = 100;
         }
-        data.appraisalfinal = Math.floor(data.secondary.appraisal.bonus + data.secondary.appraisal.temp + data.secondary.appraisal.spec + data.secondary.appraisal.base + data.appraisalbonus + data.appraisalnatfinal + data.aamFinal);
+        system.appraisalfinal = Math.floor(system.secondary.appraisal.bonus + system.secondary.appraisal.temp + system.secondary.appraisal.spec + system.secondary.appraisal.base + system.appraisalbonus + system.appraisalnatfinal + system.aamFinal);
 
         // architecture
-        data.architecturebonus = archi;
-        data.architecturenat = Math.floor(stats.Intelligence.mod + data.secondary.architecture.natural + Math.ceil(data.secondary.architecture.nat * stats.Intelligence.mod));
-        if (data.architecturenat < 100) {
-            data.architecturenatfinal = data.architecturenat;
+        system.architecturebonus = archi;
+        system.architecturenat = Math.floor(stats.Intelligence.mod + system.secondary.architecture.natural + Math.ceil(system.secondary.architecture.nat * stats.Intelligence.mod));
+        if (system.architecturenat < 100) {
+            system.architecturenatfinal = system.architecturenat;
         } else {
-            data.architecturenatfinal = 100;
+            system.architecturenatfinal = 100;
         }
-        data.architecturefinal = Math.floor(data.secondary.architecture.bonus + data.secondary.architecture.temp + data.secondary.architecture.spec + data.secondary.architecture.base + data.architecturebonus + data.architecturenatfinal + data.aamFinal);
+        system.architecturefinal = Math.floor(system.secondary.architecture.bonus + system.secondary.architecture.temp + system.secondary.architecture.spec + system.secondary.architecture.base + system.architecturebonus + system.architecturenatfinal + system.aamFinal);
 
         // herballore
-        data.herballorebonus = herb;
-        data.herballorenat = Math.floor(stats.Intelligence.mod + data.secondary.herballore.natural + Math.ceil(data.secondary.herballore.nat * stats.Intelligence.mod));
-        if (data.herballorenat < 100) {
-            data.herballorenatfinal = data.herballorenat;
+        system.herballorebonus = herb;
+        system.herballorenat = Math.floor(stats.Intelligence.mod + system.secondary.herballore.natural + Math.ceil(system.secondary.herballore.nat * stats.Intelligence.mod));
+        if (system.herballorenat < 100) {
+            system.herballorenatfinal = system.herballorenat;
         } else {
-            data.herballorenatfinal = 100;
+            system.herballorenatfinal = 100;
         }
-        data.herballorefinal = Math.floor(data.secondary.herballore.bonus + data.secondary.herballore.temp + data.secondary.herballore.spec + data.secondary.herballore.base + data.herballorebonus + data.herballorenatfinal + data.aamFinal);
+        system.herballorefinal = Math.floor(system.secondary.herballore.bonus + system.secondary.herballore.temp + system.secondary.herballore.spec + system.secondary.herballore.base + system.herballorebonus + system.herballorenatfinal + system.aamFinal);
 
         // history
-        data.historybonus = hist;
-        data.historynat = Math.floor(stats.Intelligence.mod + data.secondary.history.natural + Math.ceil(data.secondary.history.nat * stats.Intelligence.mod));
-        if (data.historynat < 100) {
-            data.historynatfinal = data.historynat;
+        system.historybonus = hist;
+        system.historynat = Math.floor(stats.Intelligence.mod + system.secondary.history.natural + Math.ceil(system.secondary.history.nat * stats.Intelligence.mod));
+        if (system.historynat < 100) {
+            system.historynatfinal = system.historynat;
         } else {
-            data.historynatfinal = 100;
+            system.historynatfinal = 100;
         }
-        data.historyfinal = Math.floor(data.secondary.history.bonus + data.secondary.history.temp + data.secondary.history.spec + data.secondary.history.base + data.historybonus + data.historynatfinal + data.aamFinal);
+        system.historyfinal = Math.floor(system.secondary.history.bonus + system.secondary.history.temp + system.secondary.history.spec + system.secondary.history.base + system.historybonus + system.historynatfinal + system.aamFinal);
 
         // law
-        data.lawbonus = law;
-        data.lawnat = Math.floor(stats.Intelligence.mod + data.secondary.law.natural + Math.ceil(data.secondary.law.nat * stats.Intelligence.mod));
-        if (data.lawnat < 100) {
-            data.lawnatfinal = data.lawnat;
+        system.lawbonus = law;
+        system.lawnat = Math.floor(stats.Intelligence.mod + system.secondary.law.natural + Math.ceil(system.secondary.law.nat * stats.Intelligence.mod));
+        if (system.lawnat < 100) {
+            system.lawnatfinal = system.lawnat;
         } else {
-            data.lawnatfinal = 100;
+            system.lawnatfinal = 100;
         }
-        data.lawfinal = Math.floor(data.secondary.law.bonus + data.secondary.law.temp + data.secondary.law.spec + data.secondary.law.base + data.lawbonus + data.lawnatfinal + data.aamFinal);
+        system.lawfinal = Math.floor(system.secondary.law.bonus + system.secondary.law.temp + system.secondary.law.spec + system.secondary.law.base + system.lawbonus + system.lawnatfinal + system.aamFinal);
 
         // magicappr
-        data.magicapprbonus = magicapr;
-        data.magicapprnat = Math.floor(stats.Power.mod + data.secondary.magicappr.natural + Math.ceil(data.secondary.magicappr.nat * stats.Power.mod));
-        if (data.magicapprnat < 100) {
-            data.magicapprnatfinal = data.magicapprnat;
+        system.magicapprbonus = magicapr;
+        system.magicapprnat = Math.floor(stats.Power.mod + system.secondary.magicappr.natural + Math.ceil(system.secondary.magicappr.nat * stats.Power.mod));
+        if (system.magicapprnat < 100) {
+            system.magicapprnatfinal = system.magicapprnat;
         } else {
-            data.magicapprnatfinal = 100;
+            system.magicapprnatfinal = 100;
         }
-        data.magicapprfinal = Math.floor(data.secondary.magicappr.bonus + data.secondary.magicappr.temp + data.secondary.magicappr.spec + data.secondary.magicappr.base + data.magicapprbonus + data.magicapprnatfinal + data.aamFinal);
+        system.magicapprfinal = Math.floor(system.secondary.magicappr.bonus + system.secondary.magicappr.temp + system.secondary.magicappr.spec + system.secondary.magicappr.base + system.magicapprbonus + system.magicapprnatfinal + system.aamFinal);
 
         // medicine
-        data.medicinebonus = medic;
-        data.medicinenat = Math.floor(stats.Intelligence.mod + data.secondary.medicine.natural + Math.ceil(data.secondary.medicine.nat * stats.Intelligence.mod));
-        if (data.medicinenat < 100) {
-            data.medicinenatfinal = data.medicinenat;
+        system.medicinebonus = medic;
+        system.medicinenat = Math.floor(stats.Intelligence.mod + system.secondary.medicine.natural + Math.ceil(system.secondary.medicine.nat * stats.Intelligence.mod));
+        if (system.medicinenat < 100) {
+            system.medicinenatfinal = system.medicinenat;
         } else {
-            data.medicinenatfinal = 100;
+            system.medicinenatfinal = 100;
         }
-        data.medicinefinal = Math.floor(data.secondary.medicine.bonus + data.secondary.medicine.temp + data.secondary.medicine.spec + data.secondary.medicine.base + data.medicinebonus + data.medicinenatfinal + data.aamFinal);
+        system.medicinefinal = Math.floor(system.secondary.medicine.bonus + system.secondary.medicine.temp + system.secondary.medicine.spec + system.secondary.medicine.base + system.medicinebonus + system.medicinenatfinal + system.aamFinal);
 
         // memorize
-        data.memorizebonus = mem;
-        data.memorizenat = Math.floor(stats.Intelligence.mod + data.secondary.memorize.natural + Math.ceil(data.secondary.memorize.nat * stats.Intelligence.mod));
-        if (data.memorizenat < 100) {
-            data.memorizenatfinal = data.memorizenat;
+        system.memorizebonus = mem;
+        system.memorizenat = Math.floor(stats.Intelligence.mod + system.secondary.memorize.natural + Math.ceil(system.secondary.memorize.nat * stats.Intelligence.mod));
+        if (system.memorizenat < 100) {
+            system.memorizenatfinal = system.memorizenat;
         } else {
-            data.memorizenatfinal = 100;
+            system.memorizenatfinal = 100;
         }
-        data.memorizefinal = Math.floor(data.secondary.memorize.bonus + data.secondary.memorize.temp + data.secondary.memorize.spec + data.secondary.memorize.base + data.memorizebonus + data.memorizenatfinal + data.aamFinal);
+        system.memorizefinal = Math.floor(system.secondary.memorize.bonus + system.secondary.memorize.temp + system.secondary.memorize.spec + system.secondary.memorize.base + system.memorizebonus + system.memorizenatfinal + system.aamFinal);
 
         // navigation
-        data.navigationbonus = navi;
-        data.navigationnat = Math.floor(stats.Intelligence.mod + data.secondary.navigation.natural + Math.ceil(data.secondary.navigation.nat * stats.Intelligence.mod));
-        if (data.navigationnat < 100) {
-            data.navigationnatfinal = data.navigationnat;
+        system.navigationbonus = navi;
+        system.navigationnat = Math.floor(stats.Intelligence.mod + system.secondary.navigation.natural + Math.ceil(system.secondary.navigation.nat * stats.Intelligence.mod));
+        if (system.navigationnat < 100) {
+            system.navigationnatfinal = system.navigationnat;
         } else {
-            data.navigationnatfinal = 100;
+            system.navigationnatfinal = 100;
         }
-        data.navigationfinal = Math.floor(data.secondary.navigation.bonus + data.secondary.navigation.temp + data.secondary.navigation.spec + data.secondary.navigation.base + data.navigationbonus + data.navigationnatfinal + data.aamFinal);
+        system.navigationfinal = Math.floor(system.secondary.navigation.bonus + system.secondary.navigation.temp + system.secondary.navigation.spec + system.secondary.navigation.base + system.navigationbonus + system.navigationnatfinal + system.aamFinal);
 
         // occult
-        data.occultbonus = occ;
-        data.occultnat = Math.floor(stats.Intelligence.mod + data.secondary.occult.natural + Math.ceil(data.secondary.occult.nat * stats.Intelligence.mod));
-        if (data.occultnat < 100) {
-            data.occultnatfinal = data.occultnat;
+        system.occultbonus = occ;
+        system.occultnat = Math.floor(stats.Intelligence.mod + system.secondary.occult.natural + Math.ceil(system.secondary.occult.nat * stats.Intelligence.mod));
+        if (system.occultnat < 100) {
+            system.occultnatfinal = system.occultnat;
         } else {
-            data.occultnatfinal = 100;
+            system.occultnatfinal = 100;
         }
-        data.occultfinal = Math.floor(data.secondary.occult.bonus + data.secondary.occult.temp + data.secondary.occult.spec + data.secondary.occult.base + data.occultbonus + data.occultnatfinal + data.aamFinal);
+        system.occultfinal = Math.floor(system.secondary.occult.bonus + system.secondary.occult.temp + system.secondary.occult.spec + system.secondary.occult.base + system.occultbonus + system.occultnatfinal + system.aamFinal);
 
         // science
-        data.sciencebonus = science;
-        data.sciencenat = Math.floor(stats.Intelligence.mod + data.secondary.science.natural + Math.ceil(data.secondary.science.nat * stats.Intelligence.mod));
-        if (data.sciencenat < 100) {
-            data.sciencenatfinal = data.sciencenat;
+        system.sciencebonus = science;
+        system.sciencenat = Math.floor(stats.Intelligence.mod + system.secondary.science.natural + Math.ceil(system.secondary.science.nat * stats.Intelligence.mod));
+        if (system.sciencenat < 100) {
+            system.sciencenatfinal = system.sciencenat;
         } else {
-            data.sciencenatfinal = 100;
+            system.sciencenatfinal = 100;
         }
-        data.sciencefinal = Math.floor(data.secondary.science.bonus + data.secondary.science.temp + data.secondary.science.spec + data.secondary.science.base + data.sciencebonus + data.sciencenatfinal + data.aamFinal);
+        system.sciencefinal = Math.floor(system.secondary.science.bonus + system.secondary.science.temp + system.secondary.science.spec + system.secondary.science.base + system.sciencebonus + system.sciencenatfinal + system.aamFinal);
 
         // tactics
-        data.tacticsbonus = tactic;
-        data.tacticsnat = Math.floor(stats.Intelligence.mod + data.secondary.tactics.natural + Math.ceil(data.secondary.tactics.nat * stats.Intelligence.mod));
-        if (data.tacticsnat < 100) {
-            data.tacticsnatfinal = data.tacticsnat;
+        system.tacticsbonus = tactic;
+        system.tacticsnat = Math.floor(stats.Intelligence.mod + system.secondary.tactics.natural + Math.ceil(system.secondary.tactics.nat * stats.Intelligence.mod));
+        if (system.tacticsnat < 100) {
+            system.tacticsnatfinal = system.tacticsnat;
         } else {
-            data.tacticsnatfinal = 100;
+            system.tacticsnatfinal = 100;
         }
-        data.tacticsfinal = Math.floor(data.secondary.tactics.bonus + data.secondary.tactics.temp + data.secondary.tactics.spec + data.secondary.tactics.base + data.tacticsbonus + data.tacticsnatfinal + data.aamFinal);
+        system.tacticsfinal = Math.floor(system.secondary.tactics.bonus + system.secondary.tactics.temp + system.secondary.tactics.spec + system.secondary.tactics.base + system.tacticsbonus + system.tacticsnatfinal + system.aamFinal);
 
         // composure
-        data.composurebonus = comp;
-        data.composurenat = Math.floor(stats.Willpower.mod + data.secondary.composure.natural + Math.ceil(data.secondary.composure.nat * stats.Willpower.mod));
-        if (data.composurenat < 100) {
-            data.composurenatfinal = data.composurenat;
+        system.composurebonus = comp;
+        system.composurenat = Math.floor(stats.Willpower.mod + system.secondary.composure.natural + Math.ceil(system.secondary.composure.nat * stats.Willpower.mod));
+        if (system.composurenat < 100) {
+            system.composurenatfinal = system.composurenat;
         } else {
-            data.composurenatfinal = 100;
+            system.composurenatfinal = 100;
         }
-        data.composurefinal = Math.floor(data.secondary.composure.bonus + data.secondary.composure.temp + data.secondary.composure.spec + data.secondary.composure.base + data.composurebonus + data.composurenatfinal + data.aamFinal);
+        system.composurefinal = Math.floor(system.secondary.composure.bonus + system.secondary.composure.temp + system.secondary.composure.spec + system.secondary.composure.base + system.composurebonus + system.composurenatfinal + system.aamFinal);
 
         // featsofstr
-        data.featsofstrbonus = fos;
-        data.featsofstrnat = Math.floor(stats.Strength.mod + data.secondary.featsofstr.natural + Math.ceil(data.secondary.featsofstr.nat * stats.Strength.mod));
-        if (data.featsofstrnat < 100) {
-            data.featsofstrnatfinal = data.featsofstrnat;
+        system.featsofstrbonus = fos;
+        system.featsofstrnat = Math.floor(stats.Strength.mod + system.secondary.featsofstr.natural + Math.ceil(system.secondary.featsofstr.nat * stats.Strength.mod));
+        if (system.featsofstrnat < 100) {
+            system.featsofstrnatfinal = system.featsofstrnat;
         } else {
-            data.featsofstrnatfinal = 100;
+            system.featsofstrnatfinal = 100;
         }
-        data.featsofstrfinal = Math.floor(data.secondary.featsofstr.bonus + data.secondary.featsofstr.temp + data.secondary.featsofstr.spec + data.secondary.featsofstr.base + data.featsofstrbonus + data.featsofstrnatfinal + data.aamFinal - data.totalNatPen);
+        system.featsofstrfinal = Math.floor(system.secondary.featsofstr.bonus + system.secondary.featsofstr.temp + system.secondary.featsofstr.spec + system.secondary.featsofstr.base + system.featsofstrbonus + system.featsofstrnatfinal + system.aamFinal - system.totalNatPen);
 
         // withstpain
-        data.withstpainbonus = wstp;
-        data.withstpainnat = Math.floor(stats.Willpower.mod + data.secondary.withstpain.natural + Math.ceil(data.secondary.withstpain.nat * stats.Willpower.mod));
-        if (data.withstpainnat < 100) {
-            data.withstpainnatfinal = data.withstpainnat;
+        system.withstpainbonus = wstp;
+        system.withstpainnat = Math.floor(stats.Willpower.mod + system.secondary.withstpain.natural + Math.ceil(system.secondary.withstpain.nat * stats.Willpower.mod));
+        if (system.withstpainnat < 100) {
+            system.withstpainnatfinal = system.withstpainnat;
         } else {
-            data.withstpainnatfinal = 100;
+            system.withstpainnatfinal = 100;
         }
-        data.withstpainfinal = Math.floor(data.secondary.withstpain.bonus + data.secondary.withstpain.temp + data.secondary.withstpain.spec + data.secondary.withstpain.base + data.withstpainbonus + data.withstpainnatfinal + data.aamFinal);
+        system.withstpainfinal = Math.floor(system.secondary.withstpain.bonus + system.secondary.withstpain.temp + system.secondary.withstpain.spec + system.secondary.withstpain.base + system.withstpainbonus + system.withstpainnatfinal + system.aamFinal);
 
         // disguise
-        data.disguisebonus = disg;
-        data.disguisenat = Math.floor(stats.Dexterity.mod + data.secondary.disguise.natural + Math.ceil(data.secondary.disguise.nat * stats.Dexterity.mod));
-        if (data.disguisenat < 100) {
-            data.disguisenatfinal = data.disguisenat;
+        system.disguisebonus = disg;
+        system.disguisenat = Math.floor(stats.Dexterity.mod + system.secondary.disguise.natural + Math.ceil(system.secondary.disguise.nat * stats.Dexterity.mod));
+        if (system.disguisenat < 100) {
+            system.disguisenatfinal = system.disguisenat;
         } else {
-            data.disguisenatfinal = 100;
+            system.disguisenatfinal = 100;
         }
-        data.disguisefinal = Math.floor(data.secondary.disguise.bonus + data.secondary.disguise.temp + data.secondary.disguise.spec + data.secondary.disguise.base + data.disguisebonus + data.disguisenatfinal + data.aamFinal);
+        system.disguisefinal = Math.floor(system.secondary.disguise.bonus + system.secondary.disguise.temp + system.secondary.disguise.spec + system.secondary.disguise.base + system.disguisebonus + system.disguisenatfinal + system.aamFinal);
 
         // hide
-        data.hidebonus = hide;
-        data.hidenat = Math.floor(stats.Perception.mod + data.secondary.hide.natural + Math.ceil(data.secondary.hide.nat * stats.Perception.mod));
-        if (data.hidenat < 100) {
-            data.hidenatfinal = data.hidenat;
+        system.hidebonus = hide;
+        system.hidenat = Math.floor(stats.Perception.mod + system.secondary.hide.natural + Math.ceil(system.secondary.hide.nat * stats.Perception.mod));
+        if (system.hidenat < 100) {
+            system.hidenatfinal = system.hidenat;
         } else {
-            data.hidenatfinal = 100;
+            system.hidenatfinal = 100;
         }
-        data.hidefinal = Math.floor(data.secondary.hide.bonus + data.secondary.hide.temp + data.secondary.hide.spec + data.secondary.hide.base + data.hidebonus + data.hidenatfinal + data.aamFinal - data.totalNatPen);
+        system.hidefinal = Math.floor(system.secondary.hide.bonus + system.secondary.hide.temp + system.secondary.hide.spec + system.secondary.hide.base + system.hidebonus + system.hidenatfinal + system.aamFinal - system.totalNatPen);
 
         // lockpicking
-        data.lockpickingbonus = lock;
-        data.lockpickingnat = Math.floor(stats.Dexterity.mod + data.secondary.lockpicking.natural + Math.ceil(data.secondary.lockpicking.nat * stats.Dexterity.mod));
-        if (data.lockpickingnat < 100) {
-            data.lockpickingnatfinal = data.lockpickingnat;
+        system.lockpickingbonus = lock;
+        system.lockpickingnat = Math.floor(stats.Dexterity.mod + system.secondary.lockpicking.natural + Math.ceil(system.secondary.lockpicking.nat * stats.Dexterity.mod));
+        if (system.lockpickingnat < 100) {
+            system.lockpickingnatfinal = system.lockpickingnat;
         } else {
-            data.lockpickingnatfinal = 100;
+            system.lockpickingnatfinal = 100;
         }
-        data.lockpickingfinal = Math.floor(data.secondary.lockpicking.bonus + data.secondary.lockpicking.temp + data.secondary.lockpicking.spec + data.secondary.lockpicking.base + data.lockpickingbonus + data.lockpickingnatfinal + data.aamFinal);
+        system.lockpickingfinal = Math.floor(system.secondary.lockpicking.bonus + system.secondary.lockpicking.temp + system.secondary.lockpicking.spec + system.secondary.lockpicking.base + system.lockpickingbonus + system.lockpickingnatfinal + system.aamFinal);
 
         // poisons
-        data.poisonsbonus = poisn;
-        data.poisonsnat = Math.floor(stats.Intelligence.mod + data.secondary.poisons.natural + Math.ceil(data.secondary.poisons.nat * stats.Intelligence.mod));
-        if (data.poisonsnat < 100) {
-            data.poisonsnatfinal = data.poisonsnat;
+        system.poisonsbonus = poisn;
+        system.poisonsnat = Math.floor(stats.Intelligence.mod + system.secondary.poisons.natural + Math.ceil(system.secondary.poisons.nat * stats.Intelligence.mod));
+        if (system.poisonsnat < 100) {
+            system.poisonsnatfinal = system.poisonsnat;
         } else {
-            data.poisonsnatfinal = 100;
+            system.poisonsnatfinal = 100;
         }
-        data.poisonsfinal = Math.floor(data.secondary.poisons.bonus + data.secondary.poisons.temp + data.secondary.poisons.spec + data.secondary.poisons.base + data.poisonsbonus + data.poisonsnatfinal + data.aamFinal);
+        system.poisonsfinal = Math.floor(system.secondary.poisons.bonus + system.secondary.poisons.temp + system.secondary.poisons.spec + system.secondary.poisons.base + system.poisonsbonus + system.poisonsnatfinal + system.aamFinal);
 
         // stealth
-        data.stealthbonus = stealth;
-        data.stealthnat = Math.floor(stats.Agility.mod + data.secondary.stealth.natural + Math.ceil(data.secondary.stealth.nat * stats.Agility.mod));
-        if (data.stealthnat < 100) {
-            data.stealthnatfinal = data.stealthnat;
+        system.stealthbonus = stealth;
+        system.stealthnat = Math.floor(stats.Agility.mod + system.secondary.stealth.natural + Math.ceil(system.secondary.stealth.nat * stats.Agility.mod));
+        if (system.stealthnat < 100) {
+            system.stealthnatfinal = system.stealthnat;
         } else {
-            data.stealthnatfinal = 100;
+            system.stealthnatfinal = 100;
         }
-        data.stealthfinal = Math.floor(data.secondary.stealth.bonus + data.secondary.stealth.temp + data.secondary.stealth.spec + data.secondary.stealth.base + data.stealthbonus + data.stealthnatfinal + data.aamFinal - data.totalNatPen);
+        system.stealthfinal = Math.floor(system.secondary.stealth.bonus + system.secondary.stealth.temp + system.secondary.stealth.spec + system.secondary.stealth.base + system.stealthbonus + system.stealthnatfinal + system.aamFinal - system.totalNatPen);
 
         // theft
-        data.theftbonus = theft;
-        data.theftnat = Math.floor(stats.Dexterity.mod + data.secondary.theft.natural + Math.ceil(data.secondary.theft.nat * stats.Dexterity.mod));
-        if (data.theftnat < 100) {
-            data.theftnatfinal = data.theftnat;
+        system.theftbonus = theft;
+        system.theftnat = Math.floor(stats.Dexterity.mod + system.secondary.theft.natural + Math.ceil(system.secondary.theft.nat * stats.Dexterity.mod));
+        if (system.theftnat < 100) {
+            system.theftnatfinal = system.theftnat;
         } else {
-            data.theftnatfinal = 100;
+            system.theftnatfinal = 100;
         }
-        data.theftfinal = Math.floor(data.secondary.theft.bonus + data.secondary.theft.temp + data.secondary.theft.spec + data.secondary.theft.base + data.theftbonus + data.theftnatfinal + data.aamFinal);
+        system.theftfinal = Math.floor(system.secondary.theft.bonus + system.secondary.theft.temp + system.secondary.theft.spec + system.secondary.theft.base + system.theftbonus + system.theftnatfinal + system.aamFinal);
 
         // traplore
-        data.traplorebonus = trapl;
-        data.traplorenat = Math.floor(stats.Dexterity.mod + data.secondary.traplore.natural + Math.ceil(data.secondary.traplore.nat * stats.Dexterity.mod));
-        if (data.traplorenat < 100) {
-            data.traplorenatfinal = data.traplorenat;
+        system.traplorebonus = trapl;
+        system.traplorenat = Math.floor(stats.Dexterity.mod + system.secondary.traplore.natural + Math.ceil(system.secondary.traplore.nat * stats.Dexterity.mod));
+        if (system.traplorenat < 100) {
+            system.traplorenatfinal = system.traplorenat;
         } else {
-            data.traplorenatfinal = 100;
+            system.traplorenatfinal = 100;
         }
-        data.traplorefinal = Math.floor(data.secondary.traplore.bonus + data.secondary.traplore.temp + data.secondary.traplore.spec + data.secondary.traplore.base + data.traplorebonus + data.traplorenatfinal + data.aamFinal);
+        system.traplorefinal = Math.floor(system.secondary.traplore.bonus + system.secondary.traplore.temp + system.secondary.traplore.spec + system.secondary.traplore.base + system.traplorebonus + system.traplorenatfinal + system.aamFinal);
 
         // alchemy
-        data.alchemybonus = alche;
-        data.alchemynat = Math.floor(stats.Intelligence.mod + data.secondary.alchemy.natural + Math.ceil(data.secondary.alchemy.nat * stats.Intelligence.mod));
-        if (data.alchemynat < 100) {
-            data.alchemynatfinal = data.alchemynat;
+        system.alchemybonus = alche;
+        system.alchemynat = Math.floor(stats.Intelligence.mod + system.secondary.alchemy.natural + Math.ceil(system.secondary.alchemy.nat * stats.Intelligence.mod));
+        if (system.alchemynat < 100) {
+            system.alchemynatfinal = system.alchemynat;
         } else {
-            data.alchemynatfinal = 100;
+            system.alchemynatfinal = 100;
         }
-        data.alchemyfinal = Math.floor(data.secondary.alchemy.bonus + data.secondary.alchemy.temp + data.secondary.alchemy.spec + data.secondary.alchemy.base + data.alchemybonus + data.alchemynatfinal + data.aamFinal);
+        system.alchemyfinal = Math.floor(system.secondary.alchemy.bonus + system.secondary.alchemy.temp + system.secondary.alchemy.spec + system.secondary.alchemy.base + system.alchemybonus + system.alchemynatfinal + system.aamFinal);
 
         // animism
-        data.animismbonus = anims;
-        data.animismnat = Math.floor(stats.Power.mod + data.secondary.animism.natural + Math.ceil(data.secondary.animism.nat * stats.Power.mod));
-        if (data.animismnat < 100) {
-            data.animismnatfinal = data.animismnat;
+        system.animismbonus = anims;
+        system.animismnat = Math.floor(stats.Power.mod + system.secondary.animism.natural + Math.ceil(system.secondary.animism.nat * stats.Power.mod));
+        if (system.animismnat < 100) {
+            system.animismnatfinal = system.animismnat;
         } else {
-            data.animismnatfinal = 100;
+            system.animismnatfinal = 100;
         }
-        data.animismfinal = Math.floor(data.secondary.animism.bonus + data.secondary.animism.temp + data.secondary.animism.spec + data.secondary.animism.base + data.animismbonus + data.animismnatfinal + data.aamFinal);
+        system.animismfinal = Math.floor(system.secondary.animism.bonus + system.secondary.animism.temp + system.secondary.animism.spec + system.secondary.animism.base + system.animismbonus + system.animismnatfinal + system.aamFinal);
 
         // art
-        data.artbonus = art;
-        data.artnat = Math.floor(stats.Power.mod + data.secondary.art.natural + Math.ceil(data.secondary.art.nat * stats.Power.mod));
-        if (data.artnat < 100) {
-            data.artnatfinal = data.artnat;
+        system.artbonus = art;
+        system.artnat = Math.floor(stats.Power.mod + system.secondary.art.natural + Math.ceil(system.secondary.art.nat * stats.Power.mod));
+        if (system.artnat < 100) {
+            system.artnatfinal = system.artnat;
         } else {
-            data.artnatfinal = 100;
+            system.artnatfinal = 100;
         }
-        data.artfinal = Math.floor(data.secondary.art.bonus + data.secondary.art.temp + data.secondary.art.spec + data.secondary.art.base + data.artbonus + data.artnatfinal + data.aamFinal);
+        system.artfinal = Math.floor(system.secondary.art.bonus + system.secondary.art.temp + system.secondary.art.spec + system.secondary.art.base + system.artbonus + system.artnatfinal + system.aamFinal);
 
         // dance
-        data.dancebonus = dance;
-        data.dancenat = Math.floor(stats.Agility.mod + data.secondary.dance.natural + Math.ceil(data.secondary.dance.nat * stats.Agility.mod));
-        if (data.dancenat < 100) {
-            data.dancenatfinal = data.dancenat;
+        system.dancebonus = dance;
+        system.dancenat = Math.floor(stats.Agility.mod + system.secondary.dance.natural + Math.ceil(system.secondary.dance.nat * stats.Agility.mod));
+        if (system.dancenat < 100) {
+            system.dancenatfinal = system.dancenat;
         } else {
-            data.dancenatfinal = 100;
+            system.dancenatfinal = 100;
         }
-        data.dancefinal = Math.floor(data.secondary.dance.bonus + data.secondary.dance.temp + data.secondary.dance.spec + data.secondary.dance.base + data.dancebonus + data.dancenatfinal + data.aamFinal - data.totalNatPen);
+        system.dancefinal = Math.floor(system.secondary.dance.bonus + system.secondary.dance.temp + system.secondary.dance.spec + system.secondary.dance.base + system.dancebonus + system.dancenatfinal + system.aamFinal - system.totalNatPen);
 
         // forging
-        data.forgingbonus = forgi;
-        data.forgingnat = Math.floor(stats.Dexterity.mod + data.secondary.forging.natural + Math.ceil(data.secondary.forging.nat * stats.Dexterity.mod));
-        if (data.forgingnat < 100) {
-            data.forgingnatfinal = data.forgingnat;
+        system.forgingbonus = forgi;
+        system.forgingnat = Math.floor(stats.Dexterity.mod + system.secondary.forging.natural + Math.ceil(system.secondary.forging.nat * stats.Dexterity.mod));
+        if (system.forgingnat < 100) {
+            system.forgingnatfinal = system.forgingnat;
         } else {
-            data.forgingnatfinal = 100;
+            system.forgingnatfinal = 100;
         }
-        data.forgingfinal = Math.floor(data.secondary.forging.bonus + data.secondary.forging.temp + data.secondary.forging.spec + data.secondary.forging.base + data.forgingbonus + data.forgingnatfinal + data.aamFinal);
+        system.forgingfinal = Math.floor(system.secondary.forging.bonus + system.secondary.forging.temp + system.secondary.forging.spec + system.secondary.forging.base + system.forgingbonus + system.forgingnatfinal + system.aamFinal);
 
         // jewelry
-        data.jewelrybonus = jewel;
-        data.jewelrynat = Math.floor(stats.Dexterity.mod + data.secondary.jewelry.natural + Math.ceil(data.secondary.jewelry.nat * stats.Dexterity.mod));
-        if (data.jewelrynat < 100) {
-            data.jewelrynatfinal = data.jewelrynat;
+        system.jewelrybonus = jewel;
+        system.jewelrynat = Math.floor(stats.Dexterity.mod + system.secondary.jewelry.natural + Math.ceil(system.secondary.jewelry.nat * stats.Dexterity.mod));
+        if (system.jewelrynat < 100) {
+            system.jewelrynatfinal = system.jewelrynat;
         } else {
-            data.jewelrynatfinal = 100;
+            system.jewelrynatfinal = 100;
         }
-        data.jewelryfinal = Math.floor(data.secondary.jewelry.bonus + data.secondary.jewelry.temp + data.secondary.jewelry.spec + data.secondary.jewelry.base + data.jewelrybonus + data.jewelrynatfinal + data.aamFinal);
+        system.jewelryfinal = Math.floor(system.secondary.jewelry.bonus + system.secondary.jewelry.temp + system.secondary.jewelry.spec + system.secondary.jewelry.base + system.jewelrybonus + system.jewelrynatfinal + system.aamFinal);
 
         // music
-        data.musicbonus = music;
-        data.musicnat = Math.floor(stats.Power.mod + data.secondary.music.natural + Math.ceil(data.secondary.music.nat * stats.Power.mod));
-        if (data.musicnat < 100) {
-            data.musicnatfinal = data.musicnat;
+        system.musicbonus = music;
+        system.musicnat = Math.floor(stats.Power.mod + system.secondary.music.natural + Math.ceil(system.secondary.music.nat * stats.Power.mod));
+        if (system.musicnat < 100) {
+            system.musicnatfinal = system.musicnat;
         } else {
-            data.musicnatfinal = 100;
+            system.musicnatfinal = 100;
         }
-        data.musicfinal = Math.floor(data.secondary.music.bonus + data.secondary.music.temp + data.secondary.music.spec + data.secondary.music.base + data.musicbonus + data.musicnatfinal + data.aamFinal);
+        system.musicfinal = Math.floor(system.secondary.music.bonus + system.secondary.music.temp + system.secondary.music.spec + system.secondary.music.base + system.musicbonus + system.musicnatfinal + system.aamFinal);
 
         // runes
-        data.runesbonus = runes;
-        data.runesnat = Math.floor(stats.Dexterity.mod + data.secondary.runes.natural + Math.ceil(data.secondary.runes.nat * stats.Dexterity.mod));
-        if (data.runesnat < 100) {
-            data.runesnatfinal = data.runesnat;
+        system.runesbonus = runes;
+        system.runesnat = Math.floor(stats.Dexterity.mod + system.secondary.runes.natural + Math.ceil(system.secondary.runes.nat * stats.Dexterity.mod));
+        if (system.runesnat < 100) {
+            system.runesnatfinal = system.runesnat;
         } else {
-            data.runesnatfinal = 100;
+            system.runesnatfinal = 100;
         }
-        data.runesfinal = Math.floor(data.secondary.runes.bonus + data.secondary.runes.temp + data.secondary.runes.spec + data.secondary.runes.base + data.runesbonus + data.runesnatfinal + data.aamFinal);
+        system.runesfinal = Math.floor(system.secondary.runes.bonus + system.secondary.runes.temp + system.secondary.runes.spec + system.secondary.runes.base + system.runesbonus + system.runesnatfinal + system.aamFinal);
 
         // ritualcalig
-        data.ritualcaligbonus = ritcal;
-        data.ritualcalignat = Math.floor(stats.Dexterity.mod + data.secondary.ritualcalig.natural + Math.ceil(data.secondary.ritualcalig.nat * stats.Dexterity.mod));
-        if (data.ritualcalignat < 100) {
-            data.ritualcalignatfinal = data.ritualcalignat;
+        system.ritualcaligbonus = ritcal;
+        system.ritualcalignat = Math.floor(stats.Dexterity.mod + system.secondary.ritualcalig.natural + Math.ceil(system.secondary.ritualcalig.nat * stats.Dexterity.mod));
+        if (system.ritualcalignat < 100) {
+            system.ritualcalignatfinal = system.ritualcalignat;
         } else {
-            data.ritualcalignatfinal = 100;
+            system.ritualcalignatfinal = 100;
         }
-        data.ritualcaligfinal = Math.floor(data.secondary.ritualcalig.bonus + data.secondary.ritualcalig.temp + data.secondary.ritualcalig.spec + data.secondary.ritualcalig.base + data.ritualcaligbonus + data.ritualcalignatfinal + data.aamFinal);
+        system.ritualcaligfinal = Math.floor(system.secondary.ritualcalig.bonus + system.secondary.ritualcalig.temp + system.secondary.ritualcalig.spec + system.secondary.ritualcalig.base + system.ritualcaligbonus + system.ritualcalignatfinal + system.aamFinal);
 
         // slofhand
-        data.slofhandbonus = soh;
-        data.slofhandnat = Math.floor(stats.Dexterity.mod + data.secondary.slofhand.natural + Math.ceil(data.secondary.slofhand.nat * stats.Dexterity.mod));
-        if (data.slofhandnat < 100) {
-            data.slofhandnatfinal = data.slofhandnat;
+        system.slofhandbonus = soh;
+        system.slofhandnat = Math.floor(stats.Dexterity.mod + system.secondary.slofhand.natural + Math.ceil(system.secondary.slofhand.nat * stats.Dexterity.mod));
+        if (system.slofhandnat < 100) {
+            system.slofhandnatfinal = system.slofhandnat;
         } else {
-            data.slofhandnatfinal = 100;
+            system.slofhandnatfinal = 100;
         }
-        data.slofhandfinal = Math.floor(data.secondary.slofhand.bonus + data.secondary.slofhand.temp + data.secondary.slofhand.spec + data.secondary.slofhand.base + data.slofhandbonus + data.slofhandnatfinal + data.aamFinal);
+        system.slofhandfinal = Math.floor(system.secondary.slofhand.bonus + system.secondary.slofhand.temp + system.secondary.slofhand.spec + system.secondary.slofhand.base + system.slofhandbonus + system.slofhandnatfinal + system.aamFinal);
 
         // tailoring
-        data.tailoringbonus = tailoring;
-        data.tailoringnat = Math.floor(stats.Dexterity.mod + data.secondary.tailoring.natural + Math.ceil(data.secondary.tailoring.nat * stats.Dexterity.mod));
-        if (data.tailoringnat < 100) {
-            data.tailoringnatfinal = data.tailoringnat;
+        system.tailoringbonus = tailoring;
+        system.tailoringnat = Math.floor(stats.Dexterity.mod + system.secondary.tailoring.natural + Math.ceil(system.secondary.tailoring.nat * stats.Dexterity.mod));
+        if (system.tailoringnat < 100) {
+            system.tailoringnatfinal = system.tailoringnat;
         } else {
-            data.tailoringnatfinal = 100;
+            system.tailoringnatfinal = 100;
         }
-        data.tailoringfinal = Math.floor(data.secondary.tailoring.bonus + data.secondary.tailoring.temp + data.secondary.tailoring.spec + data.secondary.tailoring.base + data.tailoringbonus + data.tailoringnatfinal + data.aamFinal);
+        system.tailoringfinal = Math.floor(system.secondary.tailoring.bonus + system.secondary.tailoring.temp + system.secondary.tailoring.spec + system.secondary.tailoring.base + system.tailoringbonus + system.tailoringnatfinal + system.aamFinal);
 
         // piloting
-        data.pilotingbonus = pilot;
-        data.pilotingnat = Math.floor(stats.Dexterity.mod + data.secondary.piloting.natural + Math.ceil(data.secondary.piloting.nat * stats.Dexterity.mod));
-        if (data.pilotingnat < 100) {
-            data.pilotingnatfinal = data.pilotingnat;
+        system.pilotingbonus = pilot;
+        system.pilotingnat = Math.floor(stats.Dexterity.mod + system.secondary.piloting.natural + Math.ceil(system.secondary.piloting.nat * stats.Dexterity.mod));
+        if (system.pilotingnat < 100) {
+            system.pilotingnatfinal = system.pilotingnat;
         } else {
-            data.pilotingnatfinal = 100;
+            system.pilotingnatfinal = 100;
         }
-        data.pilotingfinal = Math.floor(data.secondary.piloting.bonus + data.secondary.piloting.temp + data.secondary.piloting.spec + data.secondary.piloting.base + data.pilotingbonus + data.pilotingnatfinal + data.aamFinal);
+        system.pilotingfinal = Math.floor(system.secondary.piloting.bonus + system.secondary.piloting.temp + system.secondary.piloting.spec + system.secondary.piloting.base + system.pilotingbonus + system.pilotingnatfinal + system.aamFinal);
 
         // cooking
-        data.cookingbonus = cook;
-        data.cookingnat = Math.floor(stats.Power.mod + data.secondary.cooking.natural + Math.ceil(data.secondary.cooking.nat * stats.Power.mod));
-        if (data.cookingnat < 100) {
-            data.cookingnatfinal = data.cookingnat;
+        system.cookingbonus = cook;
+        system.cookingnat = Math.floor(stats.Power.mod + system.secondary.cooking.natural + Math.ceil(system.secondary.cooking.nat * stats.Power.mod));
+        if (system.cookingnat < 100) {
+            system.cookingnatfinal = system.cookingnat;
         } else {
-            data.cookingnatfinal = 100;
+            system.cookingnatfinal = 100;
         }
-        data.cookingfinal = Math.floor(data.secondary.cooking.bonus + data.secondary.cooking.temp + data.secondary.cooking.spec + data.secondary.cooking.base + data.cookingbonus + data.cookingnatfinal + data.aamFinal);
+        system.cookingfinal = Math.floor(system.secondary.cooking.bonus + system.secondary.cooking.temp + system.secondary.cooking.spec + system.secondary.cooking.base + system.cookingbonus + system.cookingnatfinal + system.aamFinal);
 
         // technomagic
-        data.technomagicbonus = techmagic;
-        data.technomagicnat = Math.floor(stats.Intelligence.mod + data.secondary.technomagic.natural + Math.ceil(data.secondary.technomagic.nat * stats.Intelligence.mod));
-        if (data.technomagicnat < 100) {
-            data.technomagicnatfinal = data.technomagicnat;
+        system.technomagicbonus = techmagic;
+        system.technomagicnat = Math.floor(stats.Intelligence.mod + system.secondary.technomagic.natural + Math.ceil(system.secondary.technomagic.nat * stats.Intelligence.mod));
+        if (system.technomagicnat < 100) {
+            system.technomagicnatfinal = system.technomagicnat;
         } else {
-            data.technomagicnatfinal = 100;
+            system.technomagicnatfinal = 100;
         }
-        data.technomagicfinal = Math.floor(data.secondary.technomagic.bonus + data.secondary.technomagic.temp + data.secondary.technomagic.spec + data.secondary.technomagic.base + data.technomagicbonus + data.technomagicnatfinal + data.aamFinal);
+        system.technomagicfinal = Math.floor(system.secondary.technomagic.bonus + system.secondary.technomagic.temp + system.secondary.technomagic.spec + system.secondary.technomagic.base + system.technomagicbonus + system.technomagicnatfinal + system.aamFinal);
 
         //toymaking
-        data.toymakingbonus = toy;
-        data.toymakingnat = Math.floor(stats.Power.mod + data.secondary.toymaking.natural + Math.ceil(data.secondary.toymaking.nat * stats.Power.mod));
-        if (data.toymakingnat < 100) {
-            data.toymakingnatfinal = data.toymakingnat;
+        system.toymakingbonus = toy;
+        system.toymakingnat = Math.floor(stats.Power.mod + system.secondary.toymaking.natural + Math.ceil(system.secondary.toymaking.nat * stats.Power.mod));
+        if (system.toymakingnat < 100) {
+            system.toymakingnatfinal = system.toymakingnat;
         } else {
-            data.toymakingnatfinal = 100;
+            system.toymakingnatfinal = 100;
         }
-        data.toymakingfinal = Math.floor(data.secondary.toymaking.bonus + data.secondary.toymaking.temp + data.secondary.toymaking.spec + data.secondary.toymaking.base + data.toymakingbonus + data.toymakingnatfinal + data.aamFinal);
+        system.toymakingfinal = Math.floor(system.secondary.toymaking.bonus + system.secondary.toymaking.temp + system.secondary.toymaking.spec + system.secondary.toymaking.base + system.toymakingbonus + system.toymakingnatfinal + system.aamFinal);
 
 
-        //kidetection data.kidetectionbase
-        data.noticeDection = Math.floor(data.secondary.notice.temp + data.secondary.notice.spec + data.secondary.notice.base + data.noticebonus + data.noticenatfinal);
-        data.kidetectionbase = Math.floor((data.noticeDection + data.mkFinal) / 2);
-        data.kidetectionbonus = kiDect;
-        data.kidetectionnat = Math.floor(stats.Perception.mod + data.secondary.kidetection.natural + Math.ceil(data.secondary.kidetection.nat * stats.Perception.mod));
-        if (data.kidetectionnat < 100) {
-            data.kidetectionnatfinal = data.kidetectionnat;
+        //kidetection system.kidetectionbase
+        system.noticeDection = Math.floor(system.secondary.notice.temp + system.secondary.notice.spec + system.secondary.notice.base + system.noticebonus + system.noticenatfinal);
+        system.kidetectionbase = Math.floor((system.noticeDection + system.mkFinal) / 2);
+        system.kidetectionbonus = kiDect;
+        system.kidetectionnat = Math.floor(stats.Perception.mod + system.secondary.kidetection.natural + Math.ceil(system.secondary.kidetection.nat * stats.Perception.mod));
+        if (system.kidetectionnat < 100) {
+            system.kidetectionnatfinal = system.kidetectionnat;
         } else {
-            data.kidetectionnatfinal = 100;
+            system.kidetectionnatfinal = 100;
         }
-        data.kidetectionfinal = Math.floor(data.secondary.kidetection.bonus + data.secondary.kidetection.temp + data.secondary.kidetection.spec + data.kidetectionbase + data.kidetectionbonus + data.kidetectionnatfinal + data.aamFinal);
+        system.kidetectionfinal = Math.floor(system.secondary.kidetection.bonus + system.secondary.kidetection.temp + system.secondary.kidetection.spec + system.kidetectionbase + system.kidetectionbonus + system.kidetectionnatfinal + system.aamFinal);
 
 
         //kicoceal
-        data.hideConceal = Math.floor(data.secondary.hide.temp + data.secondary.hide.spec + data.secondary.hide.base + data.hidebonus + data.hidenatfinal - data.totalNatPen);
-        data.kiconcealbase = Math.floor((data.hideConceal + data.mkFinal) / 2);
-        data.kiconcealbonus = kiCon;
-        data.kiconcealnat = Math.floor(stats.Perception.mod + data.secondary.kiconceal.natural + Math.ceil(data.secondary.kiconceal.nat * stats.Perception.mod));
-        if (data.kiconcealnat < 100) {
-            data.kiconcealnatfinal = data.kiconcealnat;
+        system.hideConceal = Math.floor(system.secondary.hide.temp + system.secondary.hide.spec + system.secondary.hide.base + system.hidebonus + system.hidenatfinal - system.totalNatPen);
+        system.kiconcealbase = Math.floor((system.hideConceal + system.mkFinal) / 2);
+        system.kiconcealbonus = kiCon;
+        system.kiconcealnat = Math.floor(stats.Perception.mod + system.secondary.kiconceal.natural + Math.ceil(system.secondary.kiconceal.nat * stats.Perception.mod));
+        if (system.kiconcealnat < 100) {
+            system.kiconcealnatfinal = system.kiconcealnat;
         } else {
-            data.kiconcealnatfinal = 100;
+            system.kiconcealnatfinal = 100;
         }
-        data.kiconcealfinal = Math.floor(data.secondary.kiconceal.bonus + data.secondary.kiconceal.temp + data.secondary.kiconceal.spec + data.kiconcealbase + data.kiconcealbonus + data.kiconcealnatfinal + data.aamFinal);
+        system.kiconcealfinal = Math.floor(system.secondary.kiconceal.bonus + system.secondary.kiconceal.temp + system.secondary.kiconceal.spec + system.kiconcealbase + system.kiconcealbonus + system.kiconcealnatfinal + system.aamFinal);
         /*
          * // z
-        data.znat = Math.floor(stats.x.mod + data.secondary.z.natural + Math.ceil(data.secondary.z.nat * stats.x.mod));
-        if (data.znat < 100) {
-            data.znatfinal = data.znat;
+        system.znat = Math.floor(stats.x.mod + system.secondary.z.natural + Math.ceil(system.secondary.z.nat * stats.x.mod));
+        if (system.znat < 100) {
+            system.znatfinal = system.znat;
         } else {
-            data.znatfinal = 100;
+            system.znatfinal = 100;
         }
-        data.zfinal = Math.floor(data.secondary.z.temp + data.secondary.z.spec + data.secondary.z.base + data.zbonus + data.znatfinal + data.aamFinal);
+        system.zfinal = Math.floor(system.secondary.z.temp + system.secondary.z.spec + system.secondary.z.base + system.zbonus + system.znatfinal + system.aamFinal);
          */
 
         // Magic Accumulation & Zeon
-        data.turnMaintRemove = turnMaint;
-        data.dayMaintRemove = dayMaint;
-        data.zeonbonus = zeon;
-        switch (data.stats.Power.final) {
+        system.turnMaintRemove = turnMaint;
+        system.dayMaintRemove = dayMaint;
+        system.zeonbonus = zeon;
+        switch (system.stats.Power.final) {
             case 1:
-                data.maccupow = 0;
-                data.zeonpow = 5;
+                system.maccupow = 0;
+                system.zeonpow = 5;
                 break;
             case 2:
-                data.maccupow = 0;
-                data.zeonpow = 20;
+                system.maccupow = 0;
+                system.zeonpow = 20;
                 break;
             case 3:
-                data.maccupow = 0;
-                data.zeonpow = 40;
+                system.maccupow = 0;
+                system.zeonpow = 40;
                 break;
             case 4:
-                data.maccupow = 0;
-                data.zeonpow = 55;
+                system.maccupow = 0;
+                system.zeonpow = 55;
                 break;
             case 5:
-                data.maccupow = 5;
-                data.zeonpow = 70;
+                system.maccupow = 5;
+                system.zeonpow = 70;
                 break;
             case 6:
-                data.maccupow = 5;
-                data.zeonpow = 85;
+                system.maccupow = 5;
+                system.zeonpow = 85;
                 break;
             case 7:
-                data.maccupow = 5;
-                data.zeonpow = 95;
+                system.maccupow = 5;
+                system.zeonpow = 95;
                 break;
             case 8:
-                data.maccupow = 10;
-                data.zeonpow = 110;
+                system.maccupow = 10;
+                system.zeonpow = 110;
                 break;
             case 9:
-                data.maccupow = 10;
-                data.zeonpow = 120;
+                system.maccupow = 10;
+                system.zeonpow = 120;
                 break;
             case 10:
-                data.maccupow = 10;
-                data.zeonpow = 135;
+                system.maccupow = 10;
+                system.zeonpow = 135;
                 break;
             case 11:
-                data.maccupow = 10;
-                data.zeonpow = 150;
+                system.maccupow = 10;
+                system.zeonpow = 150;
                 break;
             case 12:
-                data.maccupow = 15;
-                data.zeonpow = 160;
+                system.maccupow = 15;
+                system.zeonpow = 160;
                 break;
             case 13:
-                data.maccupow = 15;
-                data.zeonpow = 175;
+                system.maccupow = 15;
+                system.zeonpow = 175;
                 break;
             case 14:
-                data.maccupow = 15;
-                data.zeonpow = 185;
+                system.maccupow = 15;
+                system.zeonpow = 185;
                 break;
             case 15:
-                data.maccupow = 20;
-                data.zeonpow = 200;
+                system.maccupow = 20;
+                system.zeonpow = 200;
                 break;
             case 16:
-                data.maccupow = 25;
-                data.zeonpow = 215;
+                system.maccupow = 25;
+                system.zeonpow = 215;
                 break;
             case 17:
-                data.maccupow = 25;
-                data.zeonpow = 225;
+                system.maccupow = 25;
+                system.zeonpow = 225;
                 break;
             case 18:
-                data.maccupow = 30;
-                data.zeonpow = 240;
+                system.maccupow = 30;
+                system.zeonpow = 240;
                 break;
             case 19:
-                data.maccupow = 30;
-                data.zeonpow = 250;
+                system.maccupow = 30;
+                system.zeonpow = 250;
                 break;
             case 20:
-                data.maccupow = 35;
-                data.zeonpow = 260;
+                system.maccupow = 35;
+                system.zeonpow = 260;
                 break;
             default:
-                data.zeonpow = 0;
+                system.zeonpow = 0;
                 break;
         }
-        if (data.stats.Power.final > 20) {
-            data.maccupow = 35;
-            data.zeonpow = 260;
+        if (system.stats.Power.final > 20) {
+            system.maccupow = 35;
+            system.zeonpow = 260;
         }
-        data.maccufinal = Math.floor(data.maccu.base + data.maccupow + (data.maccu.mult * data.maccupow) + data.maccu.spec + data.maccu.bonus + data.maccu.temp);
-        data.maccuhalffinal = Math.floor(data.maccufinal / 2);
-        data.mregenfinal = Math.floor(((data.maccupow * data.mregen.regenmult) + data.mregen.spec + data.mregen.temp + data.mregen.bonus + data.maccufinal) * data.mregen.recoverymult);
-        data.zeon.max = Math.floor(data.zeon.base + data.zeonpow + data.zeonbonus + data.zeon.spec + data.zeon.temp + data.zeon.bonus);
+        system.maccufinal = Math.floor(system.maccu.base + system.maccupow + (system.maccu.mult * system.maccupow) + system.maccu.spec + system.maccu.bonus + system.maccu.temp);
+        system.maccuhalffinal = Math.floor(system.maccufinal / 2);
+        system.mregenfinal = Math.floor(((system.maccupow * system.mregen.regenmult) + system.mregen.spec + system.mregen.temp + system.mregen.bonus + system.maccufinal) * system.mregen.recoverymult);
+        system.zeon.max = Math.floor(system.zeon.base + system.zeonpow + system.zeonbonus + system.zeon.spec + system.zeon.temp + system.zeon.bonus);
 
         // Innate Magic
-        if (data.maccufinal >= 10 && data.maccufinal <= 50) {
-            data.minnatefinal = Math.floor(data.zeon.minnate + 10);
-        } else if (data.maccufinal > 50 && data.maccufinal <= 70) {
-            data.minnatefinal = Math.floor(data.zeon.minnate + 20);
-        } else if (data.maccufinal > 70 && data.maccufinal <= 90) {
-            data.minnatefinal = Math.floor(data.zeon.minnate + 30);
-        } else if (data.maccufinal > 90 && data.maccufinal <= 110) {
-            data.minnatefinal = Math.floor(data.zeon.minnate + 40);
-        } else if (data.maccufinal > 110 && data.maccufinal <= 130) {
-            data.minnatefinal = Math.floor(data.zeon.minnate + 50);
-        } else if (data.maccufinal > 130 && data.maccufinal <= 150) {
-            data.minnatefinal = Math.floor(data.zeon.minnate + 60);
-        } else if (data.maccufinal > 150 && data.maccufinal <= 180) {
-            data.minnatefinal = Math.floor(data.zeon.minnate + 70);
-        } else if (data.maccufinal > 180 && data.maccufinal <= 200) {
-            data.minnatefinal = Math.floor(data.zeon.minnate + 80);
-        } else if (data.maccufinal > 200) {
-            data.minnatefinal = Math.floor(data.zeon.minnate + 90);
+        if (system.maccufinal >= 10 && system.maccufinal <= 50) {
+            system.minnatefinal = Math.floor(system.zeon.minnate + 10);
+        } else if (system.maccufinal > 50 && system.maccufinal <= 70) {
+            system.minnatefinal = Math.floor(system.zeon.minnate + 20);
+        } else if (system.maccufinal > 70 && system.maccufinal <= 90) {
+            system.minnatefinal = Math.floor(system.zeon.minnate + 30);
+        } else if (system.maccufinal > 90 && system.maccufinal <= 110) {
+            system.minnatefinal = Math.floor(system.zeon.minnate + 40);
+        } else if (system.maccufinal > 110 && system.maccufinal <= 130) {
+            system.minnatefinal = Math.floor(system.zeon.minnate + 50);
+        } else if (system.maccufinal > 130 && system.maccufinal <= 150) {
+            system.minnatefinal = Math.floor(system.zeon.minnate + 60);
+        } else if (system.maccufinal > 150 && system.maccufinal <= 180) {
+            system.minnatefinal = Math.floor(system.zeon.minnate + 70);
+        } else if (system.maccufinal > 180 && system.maccufinal <= 200) {
+            system.minnatefinal = Math.floor(system.zeon.minnate + 80);
+        } else if (system.maccufinal > 200) {
+            system.minnatefinal = Math.floor(system.zeon.minnate + 90);
         } else {
-            data.minnatefinal = data.zeon.minnate;
+            system.minnatefinal = system.zeon.minnate;
         }
 
         // Magic Levels
-        switch (data.stats.Intelligence.final) {
+        switch (system.stats.Intelligence.final) {
             case 6:
-                data.mlevelint = 10;
+                system.mlevelint = 10;
                 break;
             case 7:
-                data.mlevelint = 20;
+                system.mlevelint = 20;
                 break;
             case 8:
-                data.mlevelint = 30;
+                system.mlevelint = 30;
                 break;
             case 9:
-                data.mlevelint = 40;
+                system.mlevelint = 40;
                 break;
             case 10:
-                data.mlevelint = 50;
+                system.mlevelint = 50;
                 break;
             case 11:
-                data.mlevelint = 75;
+                system.mlevelint = 75;
                 break;
             case 12:
-                data.mlevelint = 100;
+                system.mlevelint = 100;
                 break;
             case 13:
-                data.mlevelint = 150;
+                system.mlevelint = 150;
                 break;
             case 14:
-                data.mlevelint = 200;
+                system.mlevelint = 200;
                 break;
             case 15:
-                data.mlevelint = 300;
+                system.mlevelint = 300;
                 break;
             case 16:
-                data.mlevelint = 400;
+                system.mlevelint = 400;
                 break;
             case 17:
-                data.mlevelint = 500;
+                system.mlevelint = 500;
                 break;
             case 18:
-                data.mlevelint = 600;
+                system.mlevelint = 600;
                 break;
             case 19:
-                data.mlevelint = 700;
+                system.mlevelint = 700;
                 break;
             case 20:
-                data.mlevelint = 800;
+                system.mlevelint = 800;
                 break;
             default:
-                data.mlevelint = 0;
+                system.mlevelint = 0;
                 break;
         }
-        if (data.stats.Intelligence.final > 20) {
-            data.mlevelint = 800;
+        if (system.stats.Intelligence.final > 20) {
+            system.mlevelint = 800;
         }
-        data.mlLevels = pathLvl;
-        data.spellLevels = spellCost;
-        data.mlevelfinal = Math.floor(data.mlevel.base + data.mlevel.spec + data.mlevel.temp + data.mlevel.bonus +data.mlevelint);
-        data.mlevelused = Math.floor(data.mlLevels + data.spellLevels + data.metaCost);
+        system.mlLevels = pathLvl;
+        system.spellLevels = spellCost;
+        system.mlevelfinal = Math.floor(system.mlevel.base + system.mlevel.spec + system.mlevel.temp + system.mlevel.bonus +system.mlevelint);
+        system.mlevelused = Math.floor(system.mlLevels + system.spellLevels + system.metaCost);
 
         // Summoning Abilities
-        data.summonbonus = summon;
-        data.controlbonus = control;
-        data.bindbonus = bind;
-        data.banishbonus = banish;
-        data.summonfinal = Math.floor(data.summoning.summon.base + data.summonbonus + data.summoning.summon.spec + data.summoning.summon.bonus + data.stats.Power.mod + Math.min(0, data.aamFinal));
-        data.controlfinal = Math.floor(data.summoning.control.base + data.controlbonus + data.summoning.control.spec + data.summoning.control.bonus + data.stats.Willpower.mod + Math.min(0, data.aamFinal));
-        data.bindfinal = Math.floor(data.summoning.bind.base + data.bindbonus + data.summoning.bind.spec + data.summoning.bind.bonus + data.stats.Power.mod + Math.min(0, data.aamFinal));
-        data.banishfinal = Math.floor(data.summoning.banish.base + data.banishbonus + data.summoning.banish.spec + data.summoning.banish.bonus + data.stats.Power.mod + Math.min(0, data.aamFinal));
+        system.summonbonus = summon;
+        system.controlbonus = control;
+        system.bindbonus = bind;
+        system.banishbonus = banish;
+        system.summonfinal = Math.floor(system.summoning.summon.base + system.summonbonus + system.summoning.summon.spec + system.summoning.summon.bonus + system.stats.Power.mod + Math.min(0, system.aamFinal));
+        system.controlfinal = Math.floor(system.summoning.control.base + system.controlbonus + system.summoning.control.spec + system.summoning.control.bonus + system.stats.Willpower.mod + Math.min(0, system.aamFinal));
+        system.bindfinal = Math.floor(system.summoning.bind.base + system.bindbonus + system.summoning.bind.spec + system.summoning.bind.bonus + system.stats.Power.mod + Math.min(0, system.aamFinal));
+        system.banishfinal = Math.floor(system.summoning.banish.base + system.banishbonus + system.summoning.banish.spec + system.summoning.banish.bonus + system.stats.Power.mod + Math.min(0, system.aamFinal));
 
         //Unarmed
-        switch (data.fistDamage.multOption) {
+        switch (system.fistDamage.multOption) {
             case "agi":
-                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Agility.mod);
+                system.unarmedDmgMult1 = Math.floor(system.fistDamage.mult * system.stats.Agility.mod);
                 break;
             case "con":
-                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Constitution.mod);
+                system.unarmedDmgMult1 = Math.floor(system.fistDamage.mult * system.stats.Constitution.mod);
                 break;
             case "str":
-                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Strength.mod);
+                system.unarmedDmgMult1 = Math.floor(system.fistDamage.mult * system.stats.Strength.mod);
                 break;
             case "dex":
-                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Dexterity.mod);
+                system.unarmedDmgMult1 = Math.floor(system.fistDamage.mult * system.stats.Dexterity.mod);
                 break;
             case "per":
-                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Perception.mod);
+                system.unarmedDmgMult1 = Math.floor(system.fistDamage.mult * system.stats.Perception.mod);
                 break;
             case "int":
-                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Intelligence.mod);
+                system.unarmedDmgMult1 = Math.floor(system.fistDamage.mult * system.stats.Intelligence.mod);
                 break;
             case "pow":
-                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Power.mod);
+                system.unarmedDmgMult1 = Math.floor(system.fistDamage.mult * system.stats.Power.mod);
                 break;
             case "wp":
-                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * data.stats.Willpower.mod);
+                system.unarmedDmgMult1 = Math.floor(system.fistDamage.mult * system.stats.Willpower.mod);
                 break;
             case "str2":
-                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * (data.stats.Strength.mod * 2));
+                system.unarmedDmgMult1 = Math.floor(system.fistDamage.mult * (system.stats.Strength.mod * 2));
                 break;
             case "presence":
-                data.unarmedDmgMult1 = Math.floor(data.fistDamage.mult * ((data.presence * 2) +  data.stats.Power.mod));
+                system.unarmedDmgMult1 = Math.floor(system.fistDamage.mult * ((system.presence * 2) +  system.stats.Power.mod));
                 break;
             default:
-                data.unarmedDmgMult1 = 0;
+                system.unarmedDmgMult1 = 0;
                 break;
         }
-        switch (data.fistDamage.multOption2) {
+        switch (system.fistDamage.multOption2) {
             case "agi":
-                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Agility.mod);
+                system.unarmedDmgMult2 = Math.floor(system.fistDamage.mult2 * system.stats.Agility.mod);
                 break;
             case "con":
-                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Constitution.mod);
+                system.unarmedDmgMult2 = Math.floor(system.fistDamage.mult2 * system.stats.Constitution.mod);
                 break;
             case "str":
-                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Strength.mod);
+                system.unarmedDmgMult2 = Math.floor(system.fistDamage.mult2 * system.stats.Strength.mod);
                 break;
             case "dex":
-                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Dexterity.mod);
+                system.unarmedDmgMult2 = Math.floor(system.fistDamage.mult2 * system.stats.Dexterity.mod);
                 break;
             case "per":
-                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Perception.mod);
+                system.unarmedDmgMult2 = Math.floor(system.fistDamage.mult2 * system.stats.Perception.mod);
                 break;
             case "int":
-                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Intelligence.mod);
+                system.unarmedDmgMult2 = Math.floor(system.fistDamage.mult2 * system.stats.Intelligence.mod);
                 break;
             case "pow":
-                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Power.mod);
+                system.unarmedDmgMult2 = Math.floor(system.fistDamage.mult2 * system.stats.Power.mod);
                 break;
             case "wp":
-                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * data.stats.Willpower.mod);
+                system.unarmedDmgMult2 = Math.floor(system.fistDamage.mult2 * system.stats.Willpower.mod);
                 break;
             case "str2":
-                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * (data.stats.Strength.mod * 2));
+                system.unarmedDmgMult2 = Math.floor(system.fistDamage.mult2 * (system.stats.Strength.mod * 2));
                 break;
             case "presence":
-                data.unarmedDmgMult2 = Math.floor(data.fistDamage.mult2 * ((data.presence * 2) + data.stats.Power.mod));
+                system.unarmedDmgMult2 = Math.floor(system.fistDamage.mult2 * ((system.presence * 2) + system.stats.Power.mod));
                 break;
             default:
-                data.unarmedDmgMult2 = 0;
+                system.unarmedDmgMult2 = 0;
                 break;
         }
-        data.unarmedDmgFinal = Math.floor(data.fistDamage.base + data.unarmedDmgMult1 + data.unarmedDmgMult2 + data.fistDamage.bonus);
+        system.unarmedDmgFinal = Math.floor(system.fistDamage.base + system.unarmedDmgMult1 + system.unarmedDmgMult2 + system.fistDamage.bonus);
 
         // Psychic Points
-        data.ppbonus = pp;
-        data.finalpp = Math.floor(data.ppoint.base + data.ppoint.spec + data.ppoint.bonus + data.ppbonus);
-        data.innateSlotspp = Math.floor(data.other.innateSlots * 2);
-        data.psychicPoint.max = Math.floor(data.finalpp - (+usedpp + data.ppotentialpp + +matrixpp + data.innateSlotspp));
+        system.ppbonus = pp;
+        system.finalpp = Math.floor(system.ppoint.base + system.ppoint.spec + system.ppoint.bonus + system.ppbonus);
+        system.innateSlotspp = Math.floor(system.other.innateSlots * 2);
+        system.psychicPoint.max = Math.floor(system.finalpp - (+usedpp + system.ppotentialpp + +matrixpp + system.innateSlotspp));
 
         //Monster
-        data.monsterPowerCost = monsterCost;
-        data.monstTotDP = Math.floor(data.monsterCharCombCost + data.monsterPowerCost + data.monsterStats.hpDp);
+        system.monsterPowerCost = monsterCost;
+        system.monstTotDP = Math.floor(system.monsterCharCombCost + system.monsterPowerCost + system.monsterStats.hpDp);
 
 
 
         // Settings
-        data.openRangeFinal = Math.floor(data.rollRange.base - data.rollRange.spec - data.rollRange.temp - data.rollRange.bonus);
-        data.fumbleRangeFinal = Math.floor(data.fumleRange.base + data.fumleRange.spec + data.fumleRange.temp + data.fumleRange.bonus);
+        system.openRangeFinal = Math.floor(system.rollRange.base - system.rollRange.spec - system.rollRange.temp - system.rollRange.bonus);
+        system.fumbleRangeFinal = Math.floor(system.fumleRange.base + system.fumleRange.spec + system.fumleRange.temp + system.fumleRange.bonus);
 
 
         // Reload Items to get Atk/Def

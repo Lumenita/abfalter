@@ -1,27 +1,66 @@
 <form class="{{cssClass}} baseAbfalter itemWindow" autocomplete="off">
-    <div class="itemStart">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
-    </div>
 
-    <div class="mentalpContent">
-        <h5> {{localize "abfalter.psychicTab.mentalPatternsOne"}} </h5>
-        <div>
-            <label> <span> {{localize "abfalter.psychicTab.oppPattern"}} </span> <input type="text" name="data.opposite" value="{{data.opposite}}" /> </label>
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="item-img" src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}" />
+
+        <div class="header-details flexrow">
+            <h1 class="itemName">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'abfalter.sheet.nameItem'}}" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{localize "abfalter.psychicTab.mentalPatternsOne"}}</h4>
+                <span class="item-subType">
+                    {{localize "abfalter.psychicTab.cancelled"}}
+                    <a class="toggleBoolean" data-label="system.toggle" data-ability="{{system.toggle}}"><i class="{{#if system.toggle}}fa-solid fa-toggle-on{{else}}fa-solid fa-toggle-off{{/if}}"></i></a>
+                </span>
+            </div>
+
+            <ul class="summary flexrow">
+                <li>{{localize "abfalter.psychicTab.totalCost"}}: {{system.finalCost}}</li>
+                <li></li>
+                <li></li>
+            </ul>
         </div>
-        <div>
-            <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
-            <label> <span> {{localize "abfalter.psychicTab.cancelCost"}} </span> <input type="number" name="data.cancelCost" value="{{data.cancelCost}}" /> </label>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs itemTabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "abfalter.basicInfo.description" }}</a>
+        <a class="item" data-tab="details">{{ localize "abfalter.basicInfo.details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "abfalter.basicInfo.effects" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        <div class="tab description flexcol" data-group="primary" data-tab="description">
+            <h6> {{localize "abfalter.basicInfo.bonus"}} </h6>
+            <div style="display: grid;">
+                <textarea class="textarea-auto-resize" name="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{system.description}}</textarea>
+                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.description}}</div>
+            </div>
+            <h6> {{localize "abfalter.armoryTab.penalty"}} </h6>
+            <div style="display: grid;">
+                <textarea class="textarea-auto-resize" name="system.penalty" style="grid-area: 1 / 1 / 2/ 2;">{{system.penalty}}</textarea>
+                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.penalty}}</div>
+            </div>
         </div>
-        <h6> {{localize "abfalter.basicInfo.bonus"}} </h6>
-        <div style="display: grid;">
-            <textarea class="textarea-auto-resize" rows="5" name="data.description" style="grid-area: 1 / 1 / 2/ 2;">{{data.description}}</textarea>
-            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.description}}</div>
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <h6> {{localize "abfalter.psychicTab.mentalPatternsOne"}} {{ localize "abfalter.basicInfo.details" }} </h6>
+            <label> <span> {{localize "abfalter.psychicTab.oppPattern"}} </span> <input type="text" name="system.opposite" value="{{system.opposite}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="system.cost" value="{{system.cost}}" /> </label>
+            <label> <span> {{localize "abfalter.psychicTab.cancelCost"}} </span> <input type="number" name="system.cancelCost" value="{{system.cancelCost}}" /> </label>
         </div>
-        <h6> {{localize "abfalter.armoryTab.penalty"}} </h6>
-        <div style="display: grid;">
-            <textarea class="textarea-auto-resize" rows="5" name="data.penalty" style="grid-area: 1 / 1 / 2/ 2;">{{data.penalty}}</textarea>
-            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.penalty}}</div>
+
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> systems/abfalter/templates/actor/parts/active-effects.html }}
         </div>
-    </div>
+    </section>
+
 </form>

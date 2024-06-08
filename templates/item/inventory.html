@@ -1,30 +1,62 @@
 <form class="{{cssClass}} baseAbfalter itemWindow" autocomplete="off">
-    <div class="itemStart">
-        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
-    </div>
 
-    <div class="invContent">
-        <h5> {{localize "abfalter.armoryTab.itemDesc"}} </h5>
-        <div>
-            <label> <span> {{localize "abfalter.armoryTab.quantity"}} </span> <input type="number" name="data.quantity" value="{{data.quantity}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.quality"}} </span> <input type="text" name="data.quality" value="{{data.quality}}" /> </label>
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="item-img" src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}" />
+
+        <div class="header-details flexrow">
+            <h1 class="itemName">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'abfalter.sheet.nameItem'}}" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{localize "abfalter.sheet.item"}}</h4>
+                <span class="item-subType"> {{system.rarity}} </span>
+            </div>
+
+            <ul class="summary flexrow">
+                <li>{{localize "abfalter.armoryTab.quantity"}}: {{system.quantity}}</li>
+                <li>{{localize "abfalter.armoryTab.price"}}: {{system.price}}</li>
+                <li>{{localize "abfalter.armoryTab.weight"}}: {{system.weight}}</li>
+            </ul>
         </div>
-        <div>
-            <label> <span> {{localize "abfalter.armoryTab.price"}} </span> <input type="text" name="data.price" value="{{data.price}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.weight"}} </span> <input type="number" name="data.weight" value="{{data.weight}}" /> </label>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs itemTabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "abfalter.basicInfo.description" }}</a>
+        <a class="item" data-tab="details">{{ localize "abfalter.basicInfo.details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "abfalter.basicInfo.effects" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        <div class="tab description flexcol" data-group="primary" data-tab="description">
+            <h6> {{localize "abfalter.basicInfo.description"}} </h6>
+            <div style="display: grid;">
+                <textarea class="textarea-auto-resize" name="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{system.description}}</textarea>
+                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.description}}</div>
+            </div>
         </div>
-        <div>
-            <label> <span> {{localize "abfalter.armoryTab.presence"}} </span> <input type="number" name="data.presence" value="{{data.presence}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.fortitude"}} </span> <input type="text" name="data.fortitude" value="{{data.fortitude}}" /> </label>
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <h6> {{localize "abfalter.sheet.item"}} {{ localize "abfalter.basicInfo.details" }} </h6>
+            <label> <span> {{localize "abfalter.armoryTab.quantity"}} </span> <input type="number" name="system.quantity" value="{{system.quantity}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.price"}} </span> <input type="text" name="system.price" value="{{system.price}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.weight"}} </span> <input type="number" name="system.weight" value="{{system.weight}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.rarity"}} </span> <input type="text" name="system.rarity" value="{{system.rarity}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.quality"}} </span> <input type="text" name="system.quality" value="{{system.quality}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.presence"}} </span> <input type="number" name="system.presence" value="{{system.presence}}" /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.fortitude"}} </span> <input type="text" name="system.fortitude" value="{{system.fortitude}}" /> </label>
         </div>
-        <div>
-            <label> <span> {{localize "abfalter.armoryTab.rarity"}} </span> <input type="text" name="data.rarity" value="{{data.rarity}}" /> </label>
+
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> systems/abfalter/templates/actor/parts/active-effects.html }}
         </div>
-        <h6> {{localize "abfalter.basicInfo.description"}} </h6>
-        <div style="display: grid;">
-            <textarea class="textarea-auto-resize" rows="5" name="data.description" style="grid-area: 1 / 1 / 2/ 2;">{{data.description}}</textarea>
-            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.description}}</div>
-        </div>
-    </div>
+    </section>
+
 </form>

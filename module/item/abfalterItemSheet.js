@@ -5,80 +5,12 @@ export default class abfalterItemSheet extends ItemSheet {
     constructor(...args) {
         super(...args);
 
-        switch (this.object.type) {
-            case "advantage":
-            case "disadvantage":
-                this.options.height = this.position.height = 350;
-                this.options.width = this.position.width = 500;
-                break;
-            case "armor":
-            case "armorHelmet":
-                this.options.height = this.position.height = 410;
-                break;
-            case "arsMagnus":
-            case "turnMaint":
-            case "dailyMaint":
-            case "maintPower":
-            case "incarnation":
-                this.options.height = this.position.height = 285;
-                break;
-            case "currency":
-                this.options.height = this.position.height = 170;
-                break;
-            case "discipline":
-                this.options.width = this.position.width = 400;
-                this.options.height = this.position.height = 155;
-                break;
-            case "spellPath":
-                this.options.height = this.position.height = 195;
-                break;
-            case "spell":
-                this.options.width = this.position.width = 525;
-                this.options.height = this.position.height = 800;
-                break;
-            case "class":
-                this.options.width = this.position.width = 525;
-                this.options.height = this.position.height = 725;
-                break;
-            case "mentalPattern":
-                this.options.height = this.position.height = 470;
-                break;
-            case "psychicMatrix":
-                this.options.height = this.position.height = 565;
-                break;
-            case "elan":
-                this.options.width = this.position.width = 530;
-                this.options.height = this.position.height = 625;
-                break;
-            case "weapon":
-                this.options.width = this.position.width = 550;
-                this.options.height = this.position.height = 615;
-                break;
-            case "inventory":
-                this.options.height = this.position.height = 375;
-                break;
-            case "kiTechnique":
-                this.options.width = this.position.width = 550;
-                this.options.height = this.position.height = 375;
-                break;
-            case "proficiency":
-                this.options.height = this.position.height = 310;
-                break;
-            case "martialArt":
-                this.options.height = this.position.height = 320;
-                break;
-            case "kiSealCreature":
-                this.options.height = this.position.height = 350;
-                break;
-            default:
-                this.options.height = this.position.height = 400;
-                break;
-        }
+        this.options.height = "auto";
     }
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             classes: ["abfalter", "sheet", "item"],
             width: 500,
             height: 450,
@@ -102,14 +34,38 @@ export default class abfalterItemSheet extends ItemSheet {
             owner: this.item.isOwner,
             editable: this.isEditable,
             item: baseData.item,
-            data: baseData.item.system,
+            system: baseData.item.system,
             effects: prepareActiveEffectCategories(this.item.effects),
             config: CONFIG.abfalter,
         };
 
         //Dropdowns
         sheetData.monsterTypeObjList = CONFIG.abfalter.MonsterPowerDropdown;
+        sheetData.customSecObjList = CONFIG.abfalter.customSecondaryDropdown;
+        sheetData.actionObjList = CONFIG.abfalter.ActionDropdown;
+        sheetData.yesnoObjList = CONFIG.abfalter.yesnoDropdown; 
+        sheetData.martialArtsObjList = CONFIG.abfalter.martialArtsDropdown; //Martial Arts here
+        sheetData.kiFrequencyObjList = CONFIG.abfalter.kiFrequencyDropdown;
+        sheetData.kiActionTypeObjList = CONFIG.abfalter.kiActionTypeDropdown; 
+        sheetData.proficiencyObjList = CONFIG.abfalter.proficiencyDropdown;
+        sheetData.shieldObjList = CONFIG.abfalter.shieldDropdown;
+        sheetData.damageModObjList = CONFIG.abfalter.damageModDropdown;
+        sheetData.damageTypeObjList = CONFIG.abfalter.damageTypeDropdown;
+        sheetData.spellTypeObjList = CONFIG.abfalter.spellTypeDropdown;
+        sheetData.spellProjObjList = CONFIG.abfalter.spellProjDropdown;
+        sheetData.spellMaintTypeObjList = CONFIG.abfalter.spellMaintTypeDropdown;
+        sheetData.spellBoughtObjList = CONFIG.abfalter.spellBoughtDropdown; 
 
+        sheetData.matrixLevelObjList = {
+            1: "1",
+            2: "2",
+            3: "3"
+        }
+        sheetData.classppBonusObjList = {
+            3: "+1 PP /3 lvls",
+            2: "+1 PP /2 lvls",
+            1: "+1 PP /1 lvls"
+        }
         return sheetData;
     }
 
@@ -120,6 +76,7 @@ export default class abfalterItemSheet extends ItemSheet {
             this.nextElementSibling.textContent = this.value;
         });
 
+
         // Everything below here is only needed if the sheet is editable
         if (!this.isEditable) return;
 
@@ -129,9 +86,11 @@ export default class abfalterItemSheet extends ItemSheet {
             value = !(value === 'true');
             this.document.update({ [label]: value });
         });
+
         html.on('click', '.effect-control', (ev) => {
             onManageActiveEffect(ev, this.item);
         });
+
     }
 }
 

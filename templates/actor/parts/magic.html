@@ -4,64 +4,58 @@
             <h5>
                 {{localize "abfalter.magicTab.mproj"}}
                 <label class="expand-box">
-                    <a class="toggleBoolean {{#if data.mproj.status}}showOpacity{{/if}}" data-label="data.mproj.status" data-ability="{{data.mproj.status}}"><i class="{{#if data.mproj.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    <a class="toggleBoolean {{#if system.mproj.status}}showOpacity{{/if}}" data-label="system.mproj.status" data-ability="{{system.mproj.status}}"><i class="{{#if system.mproj.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
             </h5>
-            {{#if data.mproj.status}}
+            {{#if system.mproj.status}}
             <div>
-                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.mproj.base" value="{{data.mproj.base}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.mproj.base" value="{{system.mproj.base}}" /> </label>
                 <label> 
                     <span> {{localize "abfalter.basicInfo.spec"}} </span>
-                    <input type="number" name="data.mproj.spec" value="{{data.mproj.spec}}" />
-                    <input type="number" name="data.mproj.spec2" value="{{data.mproj.spec2}}" /> 
+                    <input type="number" name="system.mproj.spec" value="{{system.mproj.spec}}" />
+                    <input type="number" name="system.mproj.spec2" value="{{system.mproj.spec2}}" /> 
                 </label>
-                <label class="{{#if data.toggles.magicAtkModule}}hidden{{/if}}"> <span> {{localize "abfalter.magicTab.imbalance"}} </span> <input type="number" name="data.mproj.imbalance" value="{{data.mproj.imbalance}}" /> </label>
+                <label class="{{#if system.toggles.magicAtkModule}}hidden{{/if}}"> <span> {{localize "abfalter.magicTab.imbalance"}} </span> <input type="number" name="system.mproj.imbalance" value="{{system.mproj.imbalance}}" /> </label>
             </div>
             {{/if}}
             <label>
                 <span> {{localize "abfalter.basicInfo.temp"}} </span>
-                <input type="number" name="data.mproj.temp" value="{{data.mproj.temp}}" />
-                <input type="number" name="data.mproj.temp2" value="{{data.mproj.temp2}}" />
+                <input type="number" name="system.mproj.temp" value="{{system.mproj.temp}}" />
+                <input type="number" name="system.mproj.temp2" value="{{system.mproj.temp2}}" />
             </label>
             
             <div class="mProjButton">
-                {{#if data.toggles.magicAtkModule}}
-                <button type="button" class="combatRoll" data-roll="{{data.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.magicTab.offensive"}} </span> <span> {{data.mprojAtkModule}} </span>
+                {{#if system.toggles.magicAtkModule}}
+                <button type="button" class="combatRoll" data-roll="{{system.atkfinal}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
+                    <span> {{localize "abfalter.magicTab.offensive"}} </span> <span> {{system.mprojAtkModule}} </span>
                 </button>
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{data.mprojfinaloff}}" data-label="Magic Proj. Offensive" data-type="combatRoll"> 
-                    <span> {{localize "abfalter.magicTab.offensive"}} </span> <span> {{data.mprojfinaloff}} </span>
+                <button type="button" class="combatRoll" data-roll="{{system.mprojfinaloff}}" data-label="Magic Proj. Offensive" data-type="combatRoll"> 
+                    <span> {{localize "abfalter.magicTab.offensive"}} </span> <span> {{system.mprojfinaloff}} </span>
                 </button>
                 {{/if}}
-                {{#if data.toggles.magicDefModule}}
-                {{#if data.toggles.magicDodgeModule}}
-                <button type="button" class="combatRoll" data-roll="{{data.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{data.mprojDodModule}} </span>
+                {{#if system.toggles.magicDefModule}}
+                {{#if system.toggles.magicDodgeModule}}
+                <button type="button" class="combatRoll" data-roll="{{system.dodfinal}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
+                    <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{system.mprojDodModule}} </span>
                 </button>
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{data.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{data.mprojDefModule}} </span>
+                <button type="button" class="combatRoll" data-roll="{{system.blkfinal}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
+                    <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{system.mprojDefModule}} </span>
                 </button>
                 {{/if}}
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{data.mprojfinaldef}}" data-label="Magic Proj. Defensive" data-type="combatRoll">
-                    <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{data.mprojfinaldef}} </span>
+                <button type="button" class="combatRoll" data-roll="{{system.mprojfinaldef}}" data-label="Magic Proj. Defensive" data-type="combatRoll">
+                    <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{system.mprojfinaldef}} </span>
                 </button>
                 {{/if}}
             </div>
 
-            <h6 class="{{#if data.toggles.magicTheoryVis}}hidden{{/if}}"> {{localize "abfalter.magicTab.mtheory"}} </h6>
-            <div class="csSelect2 {{#if data.toggles.magicTheoryVis}}hidden{{/if}}">
+            <h6 class="{{#if system.toggles.magicTheoryVis}}hidden{{/if}}"> {{localize "abfalter.magicTab.mtheory"}} </h6>
+            <div class="csSelect2 {{#if system.toggles.magicTheoryVis}}hidden{{/if}}">
                 <label>
-                    <select name="data.mproj.mtheory" data-dtype="String">
-                        {{#select data.mproj.mtheory}}
-                        <option value="Standard"> {{localize "abfalter.magicTab.standard"}} </option>
-                        <option value="Onmyodo"> {{localize "abfalter.magicTab.onmyodo"}} </option>
-                        <option value="Vodoun"> {{localize "abfalter.magicTab.vodoun"}} </option>
-                        <option value="Shamanism"> {{localize "abfalter.magicTab.shamanism"}} </option>
-                        <option value="Natural Magic"> {{localize "abfalter.magicTab.naturalMagic"}} </option>
-                        {{/select}}
+                    <select name="system.mproj.mtheory">
+                        {{selectOptions MagicTheoryObjList selected=system.mproj.mtheory localize=true}}
                     </select>
                 </label>
             </div>
@@ -74,25 +68,25 @@
                     <h6>
                         {{localize "abfalter.magicTab.maccua"}}
                         <label class="expand-box">
-                            <a class="toggleBoolean {{#if data.maccu.status}}showOpacity{{/if}}" data-label="data.maccu.status" data-ability="{{data.maccu.status}}"><i class="{{#if data.maccu.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                            <a class="toggleBoolean {{#if system.maccu.status}}showOpacity{{/if}}" data-label="system.maccu.status" data-ability="{{system.maccu.status}}"><i class="{{#if system.maccu.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </label>
                     </h6>
-                    {{#if data.maccu.status}}
+                    {{#if system.maccu.status}}
                     <div>
-                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.maccu.base" value="{{data.maccu.base}}" /> </label>
-                        <label> <span> {{localize "abfalter.magicTab.frompow"}} </span> <input type="number" name="data.maccupow" value="{{data.maccupow}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.mult"}} </span> <input type="number" name="data.maccu.mult" value="{{data.maccu.mult}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.maccu.spec" value="{{data.maccu.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.maccu.base" value="{{system.maccu.base}}" /> </label>
+                        <label> <span> {{localize "abfalter.magicTab.frompow"}} </span> <input type="number" name="system.maccupow" value="{{system.maccupow}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.mult"}} </span> <input type="number" name="system.maccu.mult" value="{{system.maccu.mult}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.maccu.spec" value="{{system.maccu.spec}}" /> </label>
                     </div>
                     {{/if}}
-                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.maccu.temp" value="{{data.maccu.temp}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.maccufinal" value="{{data.maccufinal}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.maccu.actual" value="{{data.maccu.actual}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.maccu.temp" value="{{system.maccu.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.maccufinal" value="{{system.maccufinal}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="system.maccu.actual" value="{{system.maccu.actual}}" /> </label>
                     <div>
-                        <button type="button" class="maccuHalf" data-ability="{{data.maccuhalffinal}}">
+                        <button type="button" class="maccuHalf" data-ability="{{system.maccuhalffinal}}">
                             <span> {{localize "abfalter.basicInfo.half"}} </span>
                         </button><!--
-                        --><button type="button" class="maccuFull" data-ability="{{data.maccufinal}}">
+                        --><button type="button" class="maccuFull" data-ability="{{system.maccufinal}}">
                             <span> {{localize "abfalter.basicInfo.full"}} </span>
                         </button>
                     </div>
@@ -101,20 +95,20 @@
                     <h6>
                         {{localize "abfalter.magicTab.maccur"}}
                         <label class="expand-box">
-                            <a class="toggleBoolean {{#if data.mregen.status}}showOpacity{{/if}}" data-label="data.mregen.status" data-ability="{{data.mregen.status}}"><i class="{{#if data.mregen.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                            <a class="toggleBoolean {{#if system.mregen.status}}showOpacity{{/if}}" data-label="system.mregen.status" data-ability="{{system.mregen.status}}"><i class="{{#if system.mregen.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </label>
                     </h6>
-                    {{#if data.mregen.status}}
+                    {{#if system.mregen.status}}
                     <div>
-                        <label> <span> {{localize "abfalter.magicTab.regenmult"}} </span> <input type="number" name="data.mregen.regenmult" value="{{data.mregen.regenmult}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.mregen.spec" value="{{data.mregen.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.magicTab.recoverymult"}} </span> <input type="number" name="data.mregen.recoverymult" value="{{data.mregen.recoverymult}}" /> </label>
+                        <label> <span> {{localize "abfalter.magicTab.regenmult"}} </span> <input type="number" name="system.mregen.regenmult" value="{{system.mregen.regenmult}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.mregen.spec" value="{{system.mregen.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.magicTab.recoverymult"}} </span> <input type="number" name="system.mregen.recoverymult" value="{{system.mregen.recoverymult}}" /> </label>
                     </div>
                     {{/if}}
-                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.mregen.temp" value="{{data.mregen.temp}}" /> </label>
-                    <label> <span> {{localize "abfalter.magicTab.finalregen"}} </span> <input type="number" name="data.mregenfinal" value="{{data.mregenfinal}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.mregen.temp" value="{{system.mregen.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.magicTab.finalregen"}} </span> <input type="number" name="system.mregenfinal" value="{{system.mregenfinal}}" readonly /> </label>
                     <div>
-                        <button type="button" class="mregenFull" data-ability="{{data.mregenfinal}}" data-ability2="{{data.zeon.max}}">
+                        <button type="button" class="mregenFull" data-ability="{{system.mregenfinal}}" data-ability2="{{system.zeon.max}}">
                             <span> {{localize "abfalter.basicInfo.full"}} </span>
                         </button>
                     </div>
@@ -126,30 +120,30 @@
             <h5>
                 {{localize "abfalter.magicTab.zeon"}}
                 <label class="expand-box">
-                    <a class="toggleBoolean {{#if data.zeon.status}}showOpacity{{/if}}" data-label="data.zeon.status" data-ability="{{data.zeon.status}}"><i class="{{#if data.zeon.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    <a class="toggleBoolean {{#if system.zeon.status}}showOpacity{{/if}}" data-label="system.zeon.status" data-ability="{{system.zeon.status}}"><i class="{{#if system.zeon.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
             </h5>
-            {{#if data.zeon.status}}
+            {{#if system.zeon.status}}
             <div>
-                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.zeon.base" value="{{data.zeon.base}}" /> </label>
-                <label> <span> {{localize "abfalter.magicTab.frompow"}} </span> <input type="number" name="data.zeonpow" value="{{data.zeonpow}}" readonly /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="data.zeonbonus" value="{{data.zeonbonus}}" readonly /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.zeon.spec" value="{{data.zeon.spec}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.zeon.base" value="{{system.zeon.base}}" /> </label>
+                <label> <span> {{localize "abfalter.magicTab.frompow"}} </span> <input type="number" name="system.zeonpow" value="{{system.zeonpow}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.zeonbonus" value="{{system.zeonbonus}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.zeon.spec" value="{{system.zeon.spec}}" /> </label>
             </div>
             {{/if}}
-            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.zeon.temp" value="{{data.zeon.temp}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.zeon.max" value="{{data.zeon.max}}" readonly /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="data.zeon.value" value="{{data.zeon.value}}" /> </label>
-            <div class="minnate {{#if data.toggles.innateMagicVis}}hidden{{/if}}">
+            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.zeon.temp" value="{{system.zeon.temp}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.zeon.max" value="{{system.zeon.max}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="system.zeon.value" value="{{system.zeon.value}}" /> </label>
+            <div class="minnate {{#if system.toggles.innateMagicVis}}hidden{{/if}}">
                 <h6> {{localize "abfalter.magicTab.minnate"}} </h6>
                 <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.bonus"}} </span>
-                        <label> <input type="number" name="data.zeon.minnate" value="{{data.zeon.minnate}}" /> </label>
+                        <label> <input type="number" name="system.zeon.minnate" value="{{system.zeon.minnate}}" /> </label>
                     </div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.final"}} </span>
-                        <label> <input type="number" name="data.minnatefinal" value="{{data.minnatefinal}}" readonly /> </label>
+                        <label> <input type="number" name="system.minnatefinal" value="{{system.minnatefinal}}" readonly /> </label>
                     </div>
                 </div>
             </div>
@@ -159,32 +153,32 @@
     <div class="s1">
         <div>
             <div class="s2">
-                <div class="mlevels {{#if data.toggles.spellcastingVis}}hidden{{/if}}">
+                <div class="mlevels {{#if system.toggles.spellcastingVis}}hidden{{/if}}">
                     <h5>
                         {{localize "abfalter.magicTab.mLevels"}}
                         <label class="expand-box">
-                            <a class="toggleBoolean {{#if data.mlevel.status}}showOpacity{{/if}}" data-label="data.mlevel.status" data-ability="{{data.mlevel.status}}"><i class="{{#if data.mlevel.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                            <a class="toggleBoolean {{#if system.mlevel.status}}showOpacity{{/if}}" data-label="system.mlevel.status" data-ability="{{system.mlevel.status}}"><i class="{{#if system.mlevel.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </label>
                     </h5>
-                    {{#if data.mlevel.status}}
+                    {{#if system.mlevel.status}}
                     <div>
-                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.mlevel.base" value="{{data.mlevel.base}}" /> </label>
-                        <label> <span> {{localize "abfalter.magicTab.fromInt"}} </span> <input type="number" name="data.mlevelint" value="{{data.mlevelint}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.mlevel.spec" value="{{data.mlevel.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.mlevel.base" value="{{system.mlevel.base}}" /> </label>
+                        <label> <span> {{localize "abfalter.magicTab.fromInt"}} </span> <input type="number" name="system.mlevelint" value="{{system.mlevelint}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.mlevel.spec" value="{{system.mlevel.spec}}" /> </label>
                     </div>
                     {{/if}}
-                    <label> <span> {{localize "abfalter.basicInfo.extra"}} </span> <input type="number" name="data.mlevel.temp" value="{{data.mlevel.temp}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="data.mlevelfinal" value="{{data.mlevelfinal}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.used"}} </span> <input type="number" name="data.mlevelused" value="{{data.mlevelused}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.extra"}} </span> <input type="number" name="system.mlevel.temp" value="{{system.mlevel.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.mlevelfinal" value="{{system.mlevelfinal}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.used"}} </span> <input type="number" name="system.mlevelused" value="{{system.mlevelused}}" readonly /> </label>
                 </div>
 
-                <div class="spellPath {{#if data.toggles.spellcastingVis}}hidden{{/if}}">
+                <div class="spellPath {{#if system.toggles.spellcastingVis}}hidden{{/if}}">
                     <h5> {{localize "abfalter.magicTab.spellPath"}} </h5>
                     <div>
                         <span> {{localize "abfalter.magicTab.spellPath"}} </span>
                         <span> {{localize "abfalter.basicInfo.level"}} </span>
                     </div>
-                    <div class="{{#if data.itemToggle.spellPath}}item-list{{/if}}">
+                    <div class="{{#if system.itemToggle.spellPath}}item-list{{/if}}">
                         {{#each spellPaths as |spellPath id|}}
                         <div class="spellPath-item item delete-item" data-item-id="{{spellPath._id}}">
                             {{#if system.toggleItem}}
@@ -203,12 +197,12 @@
                     </div>
                     <div>
                         <a class="item-create" data-type="spellPath"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addSpellPath"}} </a>
-                        <a class="toggleBoolean {{#if data.itemToggle.spellPath}}armorpenalty{{/if}}" data-label="data.itemToggle.spellPath" data-ability="{{data.itemToggle.spellPath}}"><i class="{{#if data.itemToggle.spellPath}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                        <a class="toggleBoolean {{#if system.itemToggle.spellPath}}armorpenalty{{/if}}" data-label="system.itemToggle.spellPath" data-ability="{{system.itemToggle.spellPath}}"><i class="{{#if system.itemToggle.spellPath}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
                     </div>
                 </div>
             </div>
 
-            <div class="summoning {{#if data.toggles.summoningVis}}hidden{{/if}}">
+            <div class="summoning {{#if system.toggles.summoningVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.summoning"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.ability"}} </span>
@@ -218,51 +212,51 @@
                     <span> {{localize "abfalter.basicInfo.final"}} </span>
                 </div>
                 <div>
-                    <button type="button" class="rollable" data-roll="{{data.summonfinal}}" data-label="{{localize "abfalter.magicTab.summon"}}" data-type="summoningRoll">
+                    <button type="button" class="rollable" data-roll="{{system.summonfinal}}" data-label="{{localize "abfalter.magicTab.summon"}}" data-type="summoningRoll">
                         <span> {{localize "abfalter.magicTab.summon"}} </span>
                     </button>
-                    <input type="number" name="data.summoning.summon.base" value="{{data.summoning.summon.base}}" />
-                    <input type="number" name="data.summonbonus" value="{{data.summonbonus}}" readonly />
-                    <input type="number" name="data.summoning.summon.spec" value="{{data.summoning.summon.spec}}" />
-                    <input type="number" name="data.summonfinal" value="{{data.summonfinal}}" readonly />
+                    <input type="number" name="system.summoning.summon.base" value="{{system.summoning.summon.base}}" />
+                    <input type="number" name="system.summonbonus" value="{{system.summonbonus}}" readonly />
+                    <input type="number" name="system.summoning.summon.spec" value="{{system.summoning.summon.spec}}" />
+                    <input type="number" name="system.summonfinal" value="{{system.summonfinal}}" readonly />
                 </div>
                 <div>
-                    <button type="button" class="rollable" data-roll="{{data.controlfinal}}" data-label="{{localize "abfalter.magicTab.control"}}" data-type="summoningRoll">
+                    <button type="button" class="rollable" data-roll="{{system.controlfinal}}" data-label="{{localize "abfalter.magicTab.control"}}" data-type="summoningRoll">
                         <span> {{localize "abfalter.magicTab.control"}} </span>
                     </button>
-                    <input type="number" name="data.summoning.control.base" value="{{data.summoning.control.base}}" />
-                    <input type="number" name="data.controlbonus" value="{{data.controlbonus}}" readonly />
-                    <input type="number" name="data.summoning.control.spec" value="{{data.summoning.control.spec}}" />
-                    <input type="number" name="data.controlfinal" value="{{data.controlfinal}}" readonly />
+                    <input type="number" name="system.summoning.control.base" value="{{system.summoning.control.base}}" />
+                    <input type="number" name="system.controlbonus" value="{{system.controlbonus}}" readonly />
+                    <input type="number" name="system.summoning.control.spec" value="{{system.summoning.control.spec}}" />
+                    <input type="number" name="system.controlfinal" value="{{system.controlfinal}}" readonly />
                 </div>
                 <div>
-                    <button type="button" class="rollable" data-roll="{{data.bindfinal}}" data-label="{{localize "abfalter.magicTab.bind"}}" data-type="summoningRoll">
+                    <button type="button" class="rollable" data-roll="{{system.bindfinal}}" data-label="{{localize "abfalter.magicTab.bind"}}" data-type="summoningRoll">
                         <span> {{localize "abfalter.magicTab.bind"}} </span>
                     </button>
-                    <input type="number" name="data.summoning.bind.base" value="{{data.summoning.bind.base}}" />
-                    <input type="number" name="data.bindbonus" value="{{data.bindbonus}}" readonly />
-                    <input type="number" name="data.summoning.bind.spec" value="{{data.summoning.bind.spec}}" />
-                    <input type="number" name="data.bindfinal" value="{{data.bindfinal}}" readonly />
+                    <input type="number" name="system.summoning.bind.base" value="{{system.summoning.bind.base}}" />
+                    <input type="number" name="system.bindbonus" value="{{system.bindbonus}}" readonly />
+                    <input type="number" name="system.summoning.bind.spec" value="{{system.summoning.bind.spec}}" />
+                    <input type="number" name="system.bindfinal" value="{{system.bindfinal}}" readonly />
                 </div>
                 <div>
-                    <button type="button" class="rollable" data-roll="{{data.banishfinal}}" data-label="{{localize "abfalter.magicTab.banish"}}" data-type="summoningRoll">
+                    <button type="button" class="rollable" data-roll="{{system.banishfinal}}" data-label="{{localize "abfalter.magicTab.banish"}}" data-type="summoningRoll">
                         <span> {{localize "abfalter.magicTab.banish"}} </span>
                     </button>
-                    <input type="number" name="data.summoning.banish.base" value="{{data.summoning.banish.base}}" />
-                    <input type="number" name="data.banishbonus" value="{{data.banishbonus}}" readonly />
-                    <input type="number" name="data.summoning.banish.spec" value="{{data.summoning.banish.spec}}" />
-                    <input type="number" name="data.banishfinal" value="{{data.banishfinal}}" readonly />
+                    <input type="number" name="system.summoning.banish.base" value="{{system.summoning.banish.base}}" />
+                    <input type="number" name="system.banishbonus" value="{{system.banishbonus}}" readonly />
+                    <input type="number" name="system.summoning.banish.spec" value="{{system.summoning.banish.spec}}" />
+                    <input type="number" name="system.banishfinal" value="{{system.banishfinal}}" readonly />
                 </div>
             </div>
 
-            <div class="turnDayMaint {{#if data.toggles.turnMaintVis}}hidden{{/if}}">
+            <div class="turnDayMaint {{#if system.toggles.turnMaintVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.turnMaint"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.name"}} </span>
                     <span> {{localize "abfalter.magicTab.spellCost"}} </span>
                     <span> {{localize "abfalter.magicTab.zeon"}} </span>
                 </div>
-                <div class="{{#if data.itemToggle.turnMaint}}item-list{{/if}}">
+                <div class="{{#if system.itemToggle.turnMaint}}item-list{{/if}}">
                     {{#each turnMaints as |turnMaint id|}}
                     <div class="turnMaint-item item equip-item" data-item-id="{{turnMaint._id}}">
                         {{#if system.expand}}
@@ -288,14 +282,14 @@
                     {{/each}}
                 </div>
                 <div>
-                    <span> {{localize "abfalter.magicTab.totalZeon"}} {{data.turnMaintRemove}} </span>
-                    <button type="button" class="removeMaint" data-ability="{{data.turnMaintRemove}}">
+                    <span> {{localize "abfalter.magicTab.totalZeon"}} {{system.turnMaintRemove}} </span>
+                    <button type="button" class="removeMaint" data-ability="{{system.turnMaintRemove}}">
                         <span> {{localize "abfalter.basicInfo.remove"}} </span>
                     </button>
                 </div>
                 <div>
                     <a class="item-create" data-type="turnMaint"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addTurnMaint"}} </a>
-                    <a class="toggleBoolean {{#if data.itemToggle.turnMaint}}armorpenalty{{/if}}" data-label="data.itemToggle.turnMaint" data-ability="{{data.itemToggle.turnMaint}}"><i class="{{#if data.itemToggle.turnMaint}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                    <a class="toggleBoolean {{#if system.itemToggle.turnMaint}}armorpenalty{{/if}}" data-label="system.itemToggle.turnMaint" data-ability="{{system.itemToggle.turnMaint}}"><i class="{{#if system.itemToggle.turnMaint}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
                 </div>
             </div>
 
@@ -306,7 +300,7 @@
                     <span> {{localize "abfalter.magicTab.spellCost"}} </span>
                     <span> {{localize "abfalter.magicTab.zeon"}} </span>
                 </div>
-                <div class="{{#if data.itemToggle.dailyMaint}}item-list{{/if}}">
+                <div class="{{#if system.itemToggle.dailyMaint}}item-list{{/if}}">
                     {{#each dailyMaints as |dailyMaint id|}}
                     <div class="dailyMaint-item item equip-item" data-item-id="{{dailyMaint._id}}">
                         {{#if system.expand}}
@@ -332,22 +326,22 @@
                     {{/each}}
                 </div>
                 <div>
-                    <span> {{localize "abfalter.magicTab.totalZeon"}} {{data.dayMaintRemove}} </span>
-                    <button type="button" class="removeMaint" data-ability="{{data.dayMaintRemove}}">
+                    <span> {{localize "abfalter.magicTab.totalZeon"}} {{system.dayMaintRemove}} </span>
+                    <button type="button" class="removeMaint" data-ability="{{system.dayMaintRemove}}">
                         <span> {{localize "abfalter.basicInfo.remove"}} </span>
                     </button>
                 </div>
                 <div>
                     <a class="item-create" data-type="dailyMaint"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addDailyMaint"}} </a>
-                    <a class="toggleBoolean {{#if data.itemToggle.dailyMaint}}armorpenalty{{/if}}" data-label="data.itemToggle.dailyMaint" data-ability="{{data.itemToggle.dailyMaint}}"><i class="{{#if data.itemToggle.dailyMaint}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                    <a class="toggleBoolean {{#if system.itemToggle.dailyMaint}}armorpenalty{{/if}}" data-label="system.itemToggle.dailyMaint" data-ability="{{system.itemToggle.dailyMaint}}"><i class="{{#if system.itemToggle.dailyMaint}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
                 </div>
             </div>
         </div>
 
         <div>
-            <div class="spells {{#if data.toggles.spellcastingVis}}hidden{{/if}}">
+            <div class="spells {{#if system.toggles.spellcastingVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.spellBook"}} </h5>
-                <div class="{{#if data.itemToggle.spell}}item-list{{/if}}">
+                <div class="{{#if system.itemToggle.spell}}item-list{{/if}}">
                     {{#each spells as |spell id|}}
                     <div class="spell-item item normal-item" data-item-id="{{spell._id}}">
                         {{#if system.expand}}
@@ -368,55 +362,34 @@
                         <div>
                             <label>
                                 <span> {{localize "abfalter.basicInfo.action"}} </span>
-                                <select class="inline-edit" data-field="system.action" data-dtype="String">
-                                    {{#select system.action}}
-                                    <option value="Active"> {{localize "abfalter.basicInfo.active"}} </option>
-                                    <option value="Passive"> {{localize "abfalter.basicInfo.passive"}} </option>
-                                    {{/select}}
+                                <select class="inline-edit" name="system.action" data-field="system.action">
+                                    {{selectOptions ../actionObjList selected=system.action localize=true}}
                                 </select>
                             </label>
                             <label>
                                 <span> {{localize "abfalter.basicInfo.type"}} </span>
-                                <select class="inline-edit" data-field="system.type" data-dtype="String">
-                                    {{#select system.type}}
-                                    <option value="Attack"> {{localize "abfalter.basicInfo.attack"}} </option>
-                                    <option value="Defense"> {{localize "abfalter.basicInfo.defense"}} </option>
-                                    <option value="Spiritual"> {{localize "abfalter.magicTab.spiritual"}} </option>
-                                    <option value="Effect"> {{localize "abfalter.magicTab.effect"}} </option>
-                                    <option value="Automatic"> {{localize "abfalter.magicTab.automatic"}} </option>
-                                    <option value="Detection"> {{localize "abfalter.magicTab.detection"}} </option>
-                                    {{/select}}
+                                <select class="inline-edit" name="system.type" data-field="system.type">
+                                    {{selectOptions ../spellTypeObjList selected=system.type localize=true}}
                                 </select>
                             </label>
                             <label>
                                 <span> {{localize "abfalter.psychicTab.pproj"}} </span>
-                                <select class="inline-edit" data-field="system.projection" data-dtype="String">
-                                    {{#select system.projection}}
-                                    <option value="Offensive"> {{localize "abfalter.magicTab.offensive1"}} </option>
-                                    <option value="Defensive"> {{localize "abfalter.magicTab.defensive1"}} </option>
-                                    {{/select}}
+                                <select class="inline-edit" name="system.projection" data-field="system.projection">
+                                    {{selectOptions ../spellProjObjList selected=system.projection localize=true}}
                                 </select>
                             </label>
                         </div>
                         <div>
                             <label>
                                 <span> {{localize "abfalter.magicTab.maintType"}} </span>
-                                <select class="inline-edit" data-field="system.maintType" data-dtype="String">
-                                    {{#select system.maintType}}
-                                    <option value="None"> {{localize "abfalter.basicInfo.none"}} </option>
-                                    <option value="Turn"> {{localize "abfalter.magicTab.turn"}} </option>
-                                    <option value="Daily"> {{localize "abfalter.magicTab.daily"}} </option>
-                                    {{/select}}
+                                <select class="inline-edit" name="system.maintType" data-field="system.maintType">
+                                    {{selectOptions ../spellMaintTypeObjList selected=system.maintType localize=true}}
                                 </select>
                             </label>
                             <label>
                                 <span> {{localize "abfalter.magicTab.bought"}} </span>
-                                <select class="inline-edit" data-field="system.bought" data-dtype="String">
-                                    {{#select system.bought}}
-                                    <option value="SpellPath"> {{localize "abfalter.magicTab.spellPath1"}} </option>
-                                    <option value="Single"> {{localize "abfalter.magicTab.single"}} </option>
-                                    <option value="Not Bought"> {{localize "abfalter.magicTab.notBought"}} </option>
-                                    {{/select}}
+                                <select class="inline-edit" name="system.bought" data-field="system.bought">
+                                    {{selectOptions ../spellBoughtObjList selected=system.bought localize=true}}
                                 </select>
                             </label>
                             <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" class="inline-edit" data-field="system.cost" value="{{system.cost}}" /> </label>
@@ -491,15 +464,15 @@
                 </div>
                 <div>
                     <a class="item-control item-create" data-type="spell"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addSpell"}} </a>
-                    <a class="toggleBoolean {{#if data.itemToggle.spell}}armorpenalty{{/if}}" data-label="data.itemToggle.spell" data-ability="{{data.itemToggle.spell}}"><i class="{{#if data.itemToggle.spell}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                    <a class="toggleBoolean {{#if system.itemToggle.spell}}armorpenalty{{/if}}" data-label="system.itemToggle.spell" data-ability="{{system.itemToggle.spell}}"><i class="{{#if system.itemToggle.spell}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
                 </div>
             </div>
 
-            <div class="metaMagic {{#if data.toggles.spellcastingVis}}hidden{{/if}}">
+            <div class="metaMagic {{#if system.toggles.spellcastingVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.metaMagic"}} </h5>
                 <div>
-                    <span> {{localize "abfalter.metaMagic.totalCost"}} {{data.metaCost}} </span>
-                    <label> <span> {{localize "abfalter.metaMagic.extraCost"}} </span> <input type="number" name="data.metaMagic.extraCost" value="{{data.metaMagic.extraCost}}" /> </label>
+                    <span> {{localize "abfalter.metaMagic.totalCost"}} {{system.metaCost}} </span>
+                    <label> <span> {{localize "abfalter.metaMagic.extraCost"}} </span> <input type="number" name="system.metaMagic.extraCost" value="{{system.metaMagic.extraCost}}" /> </label>
                     <button type="button" class="openMetaMagic">
                         <span> {{localize "abfalter.metaMagic.openTree"}} </span>
                     </button>
@@ -507,260 +480,260 @@
 
                 <div class="metaMagicDesc">
                     <h6> {{localize "abfalter.metaMagic.metaMaster"}} </h6>
-                    {{#if data.metaMagic.doubleDmg.bought}}
+                    {{#if system.metaMagic.doubleDmg.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.doubleDmg"}} - </span>
-                        <span> {{data.doubleDamageDesc}} </span>
+                        <span> {{system.doubleDamageDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.highMagic.bought}}
+                    {{#if system.metaMagic.highMagic.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.highMagic"}} - </span>
-                        <span> {{data.highMagicDesc}} </span>
+                        <span> {{system.highMagicDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.natMaint.bought}}
+                    {{#if system.metaMagic.natMaint.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.natMaint"}} - </span>
-                        <span> {{data.natMaintDesc}} </span>
+                        <span> {{system.natMaintDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.unlimitedZeon.bought}}
+                    {{#if system.metaMagic.unlimitedZeon.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.unlimitedZeon"}} - </span>
-                        <span> {{data.unlimitedZeonDesc}} </span>
+                        <span> {{system.unlimitedZeonDesc}} </span>
                     </div>
                     {{/if}}
                 </div>
 
                 <div class="metaMagicDesc">
                     <h6> {{localize "abfalter.metaMagic.arcWarfare"}} </h6>
-                    {{#if data.defenseExpertise}}
+                    {{#if system.defenseExpertise}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.defExper"}} - </span>
-                        <span> {{data.defenseExpertiseDesc}} </span>
+                        <span> {{system.defenseExpertiseDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.empShields}}
+                    {{#if system.empShields}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.empShields"}} - </span>
-                        <span> {{data.empShieldsDesc}} </span>
+                        <span> {{system.empShieldsDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.expandArea}}
+                    {{#if system.expandArea}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.expArea"}} - </span>
-                        <span> {{data.expandAreaDesc}} </span>
+                        <span> {{system.expandAreaDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.incDestruction}}
+                    {{#if system.incDestruction}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.incStrength"}} - </span>
-                        <span> {{data.incDestructionDesc}} </span>
+                        <span> {{system.incDestructionDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.mysticAccu}}
+                    {{#if system.mysticAccu}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.mysticAccu"}} - </span>
-                        <span> {{data.mysticAccuDesc}} </span>
+                        <span> {{system.mysticAccuDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.offExpertise}}
+                    {{#if system.offExpertise}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.offeExper"}} - </span>
-                        <span> {{data.offExpertiseDesc}} </span>
+                        <span> {{system.offExpertiseDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.removeProtection}}
+                    {{#if system.removeProtection}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.remProtect"}} - </span>
-                        <span> {{data.removeProtectionDesc}} </span>
+                        <span> {{system.removeProtectionDesc}} </span>
                     </div>
                     {{/if}}
                 </div>
 
                 <div class="metaMagicDesc">
                     <h6> {{localize "abfalter.metaMagic.arcEsoterica"}} </h6>
-                    {{#if data.metaMagic.controlSpace.bought}}
+                    {{#if system.metaMagic.controlSpace.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.controlSpace"}} - </span>
-                        <span> {{data.controlSpaceDesc}} </span>
+                        <span> {{system.controlSpaceDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.doubleInnate.bought}}
+                    {{#if system.metaMagic.doubleInnate.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.doubleInnate"}} - </span>
-                        <span> {{data.doubleInnateDesc}} </span>
+                        <span> {{system.doubleInnateDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.endureDamage.bought}}
+                    {{#if system.metaMagic.endureDamage.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.endureDamage"}} - </span>
-                        <span> {{data.endureDamageDesc}} </span>
+                        <span> {{system.endureDamageDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.eneControl.bought}}
+                    {{#if system.metaMagic.eneControl.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.eneControl"}} - </span>
-                        <span> {{data.eneControlDesc}} </span>
+                        <span> {{system.eneControlDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.feelMagic.bought}}
+                    {{#if system.metaMagic.feelMagic.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.feelMagic"}} - </span>
-                        <span> {{data.feelMagicDesc}} </span>
+                        <span> {{system.feelMagicDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.forceSpeed}}
+                    {{#if system.forceSpeed}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.forceSpeed"}} - </span>
-                        <span> {{data.forceSpeedDesc}} </span>
+                        <span> {{system.forceSpeedDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.hiddenMagic.bought}}
+                    {{#if system.metaMagic.hiddenMagic.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.hiddenMagic"}} - </span>
-                        <span> {{data.hiddenMagicDesc}} </span>
+                        <span> {{system.hiddenMagicDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.lifeMagic}}
+                    {{#if system.lifeMagic}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.lifeMagic"}} - </span>
-                        <span> {{data.lifeMagicDesc}} </span>
+                        <span> {{system.lifeMagicDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.secDefense.bought}}
+                    {{#if system.metaMagic.secDefense.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.secDefense"}} - </span>
-                        <span> {{data.secureDefenseDesc}} </span>
+                        <span> {{system.secureDefenseDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.spiritLoop}}
+                    {{#if system.spiritLoop}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.spiritLoop"}} - </span>
-                        <span> {{data.spiritLoopDesc}} </span>
+                        <span> {{system.spiritLoopDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.transferMagic.bought}}
+                    {{#if system.metaMagic.transferMagic.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.transferMagic"}} - </span>
-                        <span> {{data.transferMagicDesc}} </span>
+                        <span> {{system.transferMagicDesc}} </span>
                     </div>
                     {{/if}}
                 </div>
 
                 <div class="metaMagicDesc">
                     <h6> {{localize "abfalter.metaMagic.arcPower"}} </h6>
-                    {{#if data.advnacedRegen}}
+                    {{#if system.advnacedRegen}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.advZeonRegen"}} - </span>
-                        <span> {{data.advnacedRegenDesc}} </span>
+                        <span> {{system.advnacedRegenDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.avatar.bought}}
+                    {{#if system.metaMagic.avatar.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.avatar"}} - </span>
-                        <span> {{data.avatarDesc}} </span>
+                        <span> {{system.avatarDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.combinedMagic.bought}}
+                    {{#if system.metaMagic.combinedMagic.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.combMagic"}} - </span>
-                        <span> {{data.combinedMagicDesc}} </span>
+                        <span> {{system.combinedMagicDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.definedMagicProj}}
+                    {{#if system.definedMagicProj}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.definedProject"}} - </span>
-                        <span> {{data.defMagProjDesc}} </span>
+                        <span> {{system.defMagProjDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.elevation.bought}}
+                    {{#if system.metaMagic.elevation.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.elevation"}} - </span>
-                        <span> {{data.elevationDesc}} </span>
+                        <span> {{system.elevationDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.exploitEnergy}}
+                    {{#if system.exploitEnergy}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.exploitEne"}} - </span>
-                        <span> {{data.exploitEnergyDesc}} </span>
+                        <span> {{system.exploitEnergyDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.persisEffects.bought}}
+                    {{#if system.metaMagic.persisEffects.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.perEffe"}} - </span>
-                        <span> {{data.persisEffectDesc}} </span>
+                        <span> {{system.persisEffectDesc}} </span>
                     </div>
                     {{/if}}
                 </div>
 
                 <div class="metaMagicDesc">
                     <h6> {{localize "abfalter.metaMagic.arcKnowledge"}} </h6>
-                    {{#if data.metaMagic.bindSpells.bought}}
+                    {{#if system.metaMagic.bindSpells.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.bindSpell"}} - </span>
-                        <span> {{data.bindSpellDesc}} </span>
+                        <span> {{system.bindSpellDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.doubleSpell.bought}}
+                    {{#if system.metaMagic.doubleSpell.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.doubleSpell"}} - </span>
-                        <span> {{data.doubleSpellDesc}} </span>
+                        <span> {{system.doubleSpellDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.increRange}}
+                    {{#if system.increRange}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.increRange"}} - </span>
-                        <span> {{data.increRangeDesc}} </span>
+                        <span> {{system.increRangeDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.maxSpells.bought}}
+                    {{#if system.metaMagic.maxSpells.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.maxSpells"}} - </span>
-                        <span> {{data.maxSpellsDesc}} </span>
+                        <span> {{system.maxSpellsDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.mysticConcen.bought}}
+                    {{#if system.metaMagic.mysticConcen.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.mysticCon"}} - </span>
-                        <span> {{data.mysticConceDesc}} </span>
+                        <span> {{system.mysticConceDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.pierceRes}}
+                    {{#if system.pierceRes}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.pierceRes"}} - </span>
-                        <span> {{data.pierceResDesc}} </span>
+                        <span> {{system.pierceResDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.spellSpecialization}}
+                    {{#if system.spellSpecialization}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.spellSpec"}} - </span>
-                        <span> {{data.spellSpecializationDesc}} </span>
+                        <span> {{system.spellSpecializationDesc}} </span>
                     </div>
                     {{/if}}
-                    {{#if data.metaMagic.supInnateSpell.bought}}
+                    {{#if system.metaMagic.supInnateSpell.bought}}
                     <div>
                         <span> {{localize "abfalter.metaMagic.supInnate"}} - </span>
-                        <span> {{data.supInnateDesc}} </span>
+                        <span> {{system.supInnateDesc}} </span>
                     </div>
                     {{/if}}
                 </div>
 
                 <div style="display: grid;">
-                    <textarea class="textarea-auto-resize" name="data.metaMagic.info" style="grid-area: 1 / 1 / 2/ 2;">{{data.metaMagic.info}}</textarea>
-                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.metaMagic.info}}</div>
+                    <textarea class="textarea-auto-resize" name="system.metaMagic.info" style="grid-area: 1 / 1 / 2/ 2;">{{system.metaMagic.info}}</textarea>
+                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.metaMagic.info}}</div>
                 </div>
             </div>
 
-            <div class="invocations {{#if data.toggles.invocationsVis}}hidden{{/if}}">
+            <div class="invocations {{#if system.toggles.invocationsVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.invocation"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.name"}} </span>
                     <span> {{localize "abfalter.basicInfo.cost"}} </span>
                     <span> {{localize "abfalter.basicInfo.difficulty"}} </span>
                 </div>
-                <div class="{{#if data.itemToggle.invocation}}item-list{{/if}}">
+                <div class="{{#if system.itemToggle.invocation}}item-list{{/if}}">
                     {{#each invocations as |invocation id|}}
                     <div class="invocation-item item normal-item" data-item-id="{{invocation._id}}">
                         {{#if system.expand}}
@@ -787,11 +760,11 @@
                 </div>
                 <div>
                     <a class="item-create" data-type="invocation"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addInvocation"}} </a>
-                    <a class="toggleBoolean {{#if data.itemToggle.invocation}}armorpenalty{{/if}}" data-label="data.itemToggle.invocation" data-ability="{{data.itemToggle.invocation}}"><i class="{{#if data.itemToggle.invocation}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                    <a class="toggleBoolean {{#if system.itemToggle.invocation}}armorpenalty{{/if}}" data-label="system.itemToggle.invocation" data-ability="{{system.itemToggle.invocation}}"><i class="{{#if system.itemToggle.invocation}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
                 </div>
             </div>
 
-            <div class="incarnations {{#if data.toggles.incarnationsVis}}hidden{{/if}}">
+            <div class="incarnations {{#if system.toggles.incarnationsVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.incarnation"}} </h5>
                 <div>
                     <span> {{localize "abfalter.basicInfo.name"}} </span>
@@ -799,7 +772,7 @@
                     <span> {{localize "abfalter.basicInfo.cost"}} </span>
                     <span> {{localize "abfalter.basicInfo.difficulty"}} </span>
                 </div>
-                <div class="{{#if data.itemToggle.incarnation}}item-list{{/if}}">
+                <div class="{{#if system.itemToggle.incarnation}}item-list{{/if}}">
                     {{#each incarnations as |incarnation id|}}
                     <div class="incarnation-item item normal-item" data-item-id="{{incarnation._id}}">
                         {{#if system.expand}}
@@ -828,7 +801,7 @@
                 </div>
                 <div>
                     <a class="item-create" data-type="incarnation"><i class="fas fa-plus"></i> {{localize "abfalter.magicTab.addSpellPath"}} </a>
-                    <a class="toggleBoolean {{#if data.itemToggle.incarnation}}armorpenalty{{/if}}" data-label="data.itemToggle.incarnation" data-ability="{{data.itemToggle.incarnation}}"><i class="{{#if data.itemToggle.incarnation}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                    <a class="toggleBoolean {{#if system.itemToggle.incarnation}}armorpenalty{{/if}}" data-label="system.itemToggle.incarnation" data-ability="{{system.itemToggle.incarnation}}"><i class="{{#if system.itemToggle.incarnation}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
                 </div>
             </div>
         </div>

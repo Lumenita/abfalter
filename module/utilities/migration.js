@@ -70,10 +70,10 @@ function migrateSceneData(scene) {
         const t = token.toJSON();
 
         if (!t.actorLink) {
-            const actor = duplicate(t.delta);
+            const actor = foundry.utils.duplicate(t.delta);
             actor.type = t.actor?.type;
             const update = migrateActorData(actor);
-            mergeObject(t.delta, update);
+            foundry.utils.mergeObject(t.delta, update);
         }
         return t;
     });
@@ -93,7 +93,7 @@ export async function migrateWorld() {
 
     for (let scene of game.scenes.contents) {
         let sceneUpdate = migrateSceneData(scene)
-        if (!foundry.utils / isEmpty(sceneUpdate)) {
+        if (!foundry.utils / foundry.utils.isEmpty(sceneUpdate)) {
             console.log(`Migrating Scene ${scene.name}`);
             await scene.update(sceneUpdate);
         }

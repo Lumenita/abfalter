@@ -198,6 +198,8 @@ baseAbfalter input {
 /* Scrollbar */
 * {
     scrollbar-color: initial;
+    scrollbar-color: #555595 transparent;
+    scrollbar-width: thin;
 }
 ::-webkit-scrollbar-thumb {
     background: #555595;
@@ -700,10 +702,12 @@ h6 {
 }
 .sheet-tabs > ul > li > a { 
     display:block;
+    height: 100%;
 }
 .sheet-tabs > ul > li > a > span { 
     transform: skew(25deg);
     text-shadow: none;
+    height: 100%;
 }
 /*
     **************
@@ -1303,6 +1307,16 @@ h6 {
     margin: 0 0 0 10px;
 }
 .secondary-item .secondaryEditExtend > a {
+    opacity: 1;
+}
+.secondary-item .secondaryEdit > a {
+    width: 5%;
+}
+.secondary-item .secondaryEditCollapsed > a {
+    width: 5%;
+    opacity: 0;
+}
+.secondary-item .secondaryEditCollapsed:hover > a {
     opacity: 1;
 }
 .secondary .customSecAddArea {
@@ -4754,6 +4768,10 @@ h6 {
     appearance: auto;
     background: none;
 }
+.abfalter.sheet.item .sheet-header .summary li input {
+    height: 100%;
+    font-size: 20px;
+}
 .abfalter.sheet.item .sheet-header .summary li:last-child {
     border-right: none;
 }
@@ -4781,20 +4799,173 @@ h6 {
 .abfalter.sheet.item .sheet-navigation .item {
     font-size: 18px;
 }
+/* ----------------------------------------- */
+/*  Item Description Tab                     */
+/* ----------------------------------------- */
+.abfalter.sheet.item .sheet-body .description > h6 {
+    justify-content: start;
+    border-bottom: 1px solid var(--boxColor);
+    font-size: 20px;
+}
+/* ----------------------------------------- */
+/*  Item Effect Tab                          */
+/* ----------------------------------------- */
+/* ----------------------------------------- */
+/*  Item General Details Tab                 */
+/* ----------------------------------------- */
+.abfalter.sheet.item .sheet-body .details > h6 {
+    justify-content: start;
+    border-bottom: 1px solid var(--boxColor);
+    font-size: 20px;
+}
+.abfalter.sheet.item .sheet-body .details .csSelect > label,
+.abfalter.sheet.item .sheet-body .details > label {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+}
+.abfalter.sheet.item .sheet-body .details .csSelect > label > span,
+.abfalter.sheet.item .sheet-body .details > label > span {
+    display: grid;
+}
+.abfalter.sheet.item .sheet-body .details .csSelect > label > select,
+.abfalter.sheet.item .sheet-body .details > label > input {
+    width: 35%;
+}
+.abfalter.sheet.item .sheet-body .details .csSelect::after {
+    top: 0px;
+}
+.abfalter.sheet.item .sheet-body {
+    height: fit-content;
+}
+/*
+    .itemWindow {
+    min-width: 475px;
+}
+.itemWindowSmall {
+    min-width: 375px;
+}
+*/
 
-
-
+/* ----------------------------------------- */
+/*  Item Psychic Matrix Details Tab          */
+/* ----------------------------------------- */
+.psychicMatrix > div > label {
+    display: flex;
+}
+.psychicMatrix > div:nth-of-type(1) {
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid var(--boxColor);
+    padding-top: 3px;
+}
+.psychicMatrix > div:nth-of-type(1) > span,
+.psychicMatrix > div:nth-of-type(2) > label > span {
+    display: grid;
+}
+.psychicMatrix > div:nth-of-type(1) > span:first-of-type {
+    width: 25%;
+}
+.psychicMatrix > div:nth-of-type(1) > span:last-of-type {
+    width: 75%;
+}
+.psychicMatrix > div:nth-of-type(2) > label {
+    text-align: center;
+}
+.psychicMatrix > div:nth-of-type(2) > label > span:first-of-type {
+    width: 7%;
+    border-right: 1px solid var(--boxColor);
+}
+.psychicMatrix > div:nth-of-type(2) > label > span:last-of-type {
+    width: 18%;
+}
+.psychicMatrix > div:nth-of-type(2) > label > input {
+    width: 75%;
+}
+.psychicMatrix > div > label > span,
+.psychicMatrix > div > span {
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+}
+/* ----------------------------------------- */
+/*  Item Ki Seals Details Tab                */
+/* ----------------------------------------- */
+.kiSealContent {
+    background: none !important;
+}
+.kiSealContent > div {
+    display: flex; 
+}
+.kiSealContent > div > span {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+.kiSealContent > div:nth-of-type(2) > span:first-of-type,
+.kiSealContent > div:nth-of-type(3) > span:first-of-type,
+.kiSealContent > div:first-of-type > span:first-of-type {
+    width: 20%;
+    margin: 0;
+}
+.kiSealContent > div > input,
+.kiSealContent > div:first-of-type > span {
+    width: 15%;
+    margin: 0 0 0 1%;
+}
+/* ----------------------------------------- */
+/*  Item Armor Details Tab                   */
+/* ----------------------------------------- */
+.armorContent > label {
+    display: flex;
+    padding: 2px 0;
+}
+.armorContent > label > span {
+    display: grid;
+}
+.armorContent > label > span:first-of-type {
+    width: 65%;
+}
+.armorContent > label > input {
+    width: 17%;
+}
+.armorContent > label > span:nth-of-type(2) {
+    width: 1%;
+    text-align: center;
+}
+.armorContent > label > span:nth-of-type(3) {
+    width: 17%;
+    text-align: center;
+}
+.armorCard > div {
+    display: flex;
+    justify-content: space-around;
+    padding: 3px 0 0 0;
+}
+.armorCard > div:first-of-type {
+    border-bottom: 1px dotted var(--boxColor);
+}
+.armorCard > div > span:first-of-type {
+    width: 15%;
+}
+.armorCard > div > span {
+    width: 10%;
+    text-align: center;
+}
+.armorCard > div > input {
+    width: 10%;
+}
 
 
 
 
 /* ALL OLD / REDO */
-/*
+    /*
     -----
     Default
     -----
 */
-.itemStart {
+    .itemStart {
     display: flex;
     align-items: center;
 }
@@ -4818,22 +4989,13 @@ h6 {
     font-size: 25px;
     border-bottom: 1px solid black;
 }
-.itemWindow {
-    min-width: 475px;
-}
-.itemWindowSmall {
-    min-width: 375px;
-}
+
 /*
     ----
     Elan
     ----
 */
-.elanWindow {
-    min-width: 515px;
-}
 .elanTabs {
-    min-width: 515px;
     max-height: 37px;
     border: none !important;
 }
@@ -5014,30 +5176,6 @@ h6 {
 }
 /*
     -----
-    SpellPath & Turn/Daily Maint
-    -----
-*/
-.maintPathContent > div {
-    display: flex;
-}
-.maintPathContent > div > label {
-    display: flex;
-    padding: 0 10px;
-    width: 50%;
-}
-.maintPathContent > div > label > input,
-.maintPathContent > div > label > span {
-    width: 49%;
-    margin: 0 1% 0 0;
-}
-.maintPathContent > div > label > span {
-    display: grid;
-}
-.maintPathContent > div {
-    border: 3px solid var(--boxColor);
-}
-/*
-    -----
     Spell
     -----
 */
@@ -5147,165 +5285,7 @@ h6 {
 .invocationContent > div:nth-of-type(3) {
     border-bottom: 3px solid var(--boxColor);
 }
-/*
-    -----------------------------
-    Mental Pattern & Maint Matrix
-    -----------------------------
-*/
-.mentalpContent > div {
-    display: flex;
-}
-.maintpContent > div > label,
-.mentalpContent > div > label {
-    display: flex;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-    width: 50%;
-    padding: 0 10px;
-}
-.maintpContent > div > label > input,
-.mentalpContent > div > label > input {
-    width: 50%;
-}
-.maintpContent > div > label > span,
-.mentalpContent > div > label > span {
-    width: 50%;
-    display: grid;
-}
-.maintpContent > div {
-    border: 3px solid var(--boxColor);
-}
-.mentalpContent > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.mentalpContent > div:nth-of-type(2) {
-    border-bottom: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-/*
-    --------------
-    Psychic Matrix
-    --------------
-*/
-.psychicMatrix > div:not(:first-of-type) > label {
-    display: flex;
-}
-.psychicMatrix > div:first-of-type,
-.psychicMatrix > div:first-of-type > div {
-    display: flex;
-    align-items: baseline;
-    width: 100%;
-}
-.psychicMatrix > div:first-of-type > div > label {
-    display: contents;
-}
-.psychicMatrix > div:first-of-type > div > label > span {
-    width: 50%;
-    text-align: end;
-    margin-right: 9px;
-}
-.psychicMatrix > div:first-of-type > div > label > select {
-    width: 50%;
-}
-.psychicMatrix > div:nth-of-type(2) {
-    border-top: 1px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-    text-align: center;
-    padding-top: 3px;
-    padding-bottom: 3px;
-}
-.psychicMatrix > div:nth-of-type(3) {
-    display: flex;
-    text-align: center;
-    border-top: 1px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-    padding-top: 3px;
-}
-.psychicMatrix > div:nth-of-type(3) > span:first-of-type {
-    width: 25%;
-}
-.psychicMatrix > div:nth-of-type(3) > span:last-of-type {
-    width: 75%;
-}
-.psychicMatrix > div:nth-of-type(4) > label {
-    text-align: center;
-}
-.psychicMatrix > div:nth-of-type(4) > label > span:first-of-type {
-    width: 7%;
-    border-right: 1px solid var(--boxColor);
-}
-.psychicMatrix > div:nth-of-type(4) > label > span:last-of-type {
-    width: 18%;
-}
-.psychicMatrix > div:nth-of-type(4) > label > input {
-    width: 75%;
-}
-.psychicMatrix > div > label > span,
-.psychicMatrix > div > span {
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-}
-.psychicMatrix > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.psychicMatrix > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.psychicMatrix > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
-}
-/*
-    ------------
-    Martial Arts
-    ------------
-*/
-.arsContent > div,
-.maContent > div,
-.maContent > div > div {
-    display: flex;
-}
-.maContent > div > label {
-    display: flex;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-    width: 50%;
-    padding: 0 10px;
-}
-.maContent > div > div > label {
-    display: flex;
-    width: 100%;
-}
-.maContent > div:nth-of-type(3)> div {
-    width: 50%;
-    padding: 0 10px;
-}
-.maContent > div > div::after {
-    right: 15px;
-}
-.maContent > div > label > span,
-.maContent > div > div > label > span,
-.maContent > div > div > label > select,
-.maContent > div > label > input {
-    width: 49%;
-    margin: 0 1% 0 0;
-}
-.maContent > div:not(:last-of-type) {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.maContent > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.maContent > div:nth-of-type(3) {
-    border-bottom: 3px solid var(--boxColor);
-}
+
 /*
     -----------------
     Ki Technique
@@ -5314,9 +5294,6 @@ h6 {
 .kiTechMaintMaxContent > div,
 .kiTechContent > div:not(:nth-of-type(4)) {
     display: flex;
-}
-.kiTechContent > div:nth-of-type(1) {
-    border-top: 3px solid var(--boxColor);
 }
 .kiTechContent > div:nth-of-type(1) > label {
     display: flex;
@@ -5338,13 +5315,6 @@ h6 {
 .kiTechContent > div:nth-of-type(2) {
     padding: 3px 0 0 0;
     border-bottom: 1px dashed var(--boxColor);
-}
-.kiTechContent > div:not(:last-of-type) {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.kiTechContent > div:nth-of-type(4) {
-    border-bottom: 3px solid var(--boxColor);
 }
 .kiTechMaintMaxContent > div > span:first-of-type {
     width: 15%;
@@ -5371,144 +5341,6 @@ h6 {
 .techExpandContent > input {
     display: flex;
     width: 12%;
-}
-/*
-    -----------------
-    Ki Seals Creature
-    -----------------
-*/
-.kiSealContent {
-    background: none !important;
-}
-.kiSealContent > div:first-of-type > label {
-    display: flex;
-    font-size: 13px;
-    align-items: start;
-    padding: 0 10px;
-    height: 20px;
-    width: 100%;
-}
-.kiSealContent > div:first-of-type > label > input {
-    width: 15%;
-    margin: 0 0 0 1%;
-}
-.kiSealContent > div:first-of-type > label > span {
-    width: 20%;
-}
-.kiSealContent > div > div {
-    display: flex; 
-}
-.kiSealContent > div > div > span {
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-}
-.kiSealContent > div > div:nth-of-type(2) > span:first-of-type,
-.kiSealContent > div > div:nth-of-type(3) > span:first-of-type,
-.kiSealContent > div > div:first-of-type > span:first-of-type {
-    width: 20%;
-    margin: 0;
-}
-.kiSealContent > div > div > input,
-.kiSealContent > div > div:first-of-type > span {
-    width: 15%;
-    margin: 0 0 0 1%;
-}
-.kiSealContent > div:not(:last-of-type) {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.kiSealContent > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.kiSealContent > div:nth-of-type(2) {
-    border-bottom: 3px solid var(--boxColor);
-}
-/*
-    -----------
-     Ars Magnus
-    -----------
-*/
-.arsContent > div > label {
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    width: 100%;
-}
-.arsContent > div > label > input {
-    width: 50%;
-}
-.arsContent > div > label > span{
-    display: grid;
-    width: 50%;
-}
-.arsContent > div {
-    border: 3px solid var(--boxColor);
-}
-/*
-    -----
-    Armor
-    -----
-*/
-.armorWindow {
-    min-width: 500px;
-}
-.armorContent > div > div {
-    display: flex;
-    justify-content: start;
-}
-.armorContent > div:nth-of-type(1) > div > label {
-    display: flex;
-    padding: 0 10px;
-    margin: 0 1%;
-    width: 48%;
-}
-.armorContent > div:nth-of-type(2) > div > label {
-    display: flex;
-    padding: 0 10px;
-    margin: 0 4.15%;
-    width: 25%;
-}
-.armorContent > div > div > label > input {
-    display: flex;
-    width: 35%;
-}
-.armorContent > div > div > label > span {
-    display: flex;
-    width: 50%;
-}
-.armorContent > div > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.armorContent > div > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.armorContent > div > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
-}
-/*
-    -----------
-    Proficiency
-    -----------
-*/
-.proficiencyContent > div > label {
-    display: flex;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-    width: 50%;
-    padding: 0 10px;
-}
-.proficiencyContent > div > label > select,
-.proficiencyContent > div > label > input {
-    width: 50%;
-}
-.proficiencyContent > div > label > span {
-    width: 50%;
-}
-.proficiencyContent > div {
-    border: 3px solid var(--boxColor);
 }
 /*
     -------
@@ -5567,125 +5399,8 @@ h6 {
 .weaponContent > div > div:last-of-type {
     border-bottom: 3px solid var(--boxColor);
 }
-/*
-    --------
-    Currency
-    --------
-*/
-.currencyContent > div > label {
-    display: flex;
-    padding: 0 10px;
-}
-.currencyContent > div > label > input {
-    width: 15%;
-}
-.currencyContent > div > label > span {
-    display: grid;
-    width: 35%;
-}
-.currencyContent > div {
-    border: 3px solid var(--boxColor);
-}
-/*
-    ---------
-    Inventory
-    ---------
-*/
-.invContent > div  {
-    display: flex;
-}
-.invContent > div > label {
-    display: flex;
-    padding: 0 10px;
-    width: 50%;
-}
-.invContent > div > label > input,
-.invContent > div > label > span {
-    width: 98%;
-    margin: 0 2% 0 0;
-}
-.invContent > div:not(:last-of-type) {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.invContent > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.invContent > div:nth-of-type(4) {
-    border-bottom: 3px solid var(--boxColor);
-}
-/*
-    -------------
-    adv & dis-adv
-    -------------
-*/
-.advantages > div > label {
-    display: flex;
-    justify-content: flex-start;
-    padding: 0 10px;
-}
-.advantages > div > label > span {
-    width: 34%;
-    margin: 0 1% 0 0;
-}
-.advantages > div > label > input {
-    width: 15%;
-}
-.advantages > div {
-    margin: 0 0 5px 0;
-}
 
-.advantages > div {
-    border: 3px solid var(--boxColor);
-}
-
-/*
-    ---------
-    Secondary
-    ---------
-*/
-.secondaryContent > div {
-    display: flex;
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.secondaryContent > div > div > label {
-    display: flex;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-    width: 100%;
-    padding: 0 10px;
-}
-.secondaryContent > div > label {
-    display: flex;
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-    width: 50%;
-    padding: 0 10px;
-}
-.secondaryContent > div > div {
-    width: 50%;
-}
-.secondaryContent > div > div > label > select,
-.secondaryContent > div > label > input {
-    width: 50%;
-}
-.secondaryContent > div > div::after {
-    right: 15px;
-}
-.secondaryContent > div > div > label > span,
-.secondaryContent > div > label > span {
-    width: 50%;
-    display: grid;
-}
-.secondaryContent > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.secondaryContent > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
-}
+/* OLD END HERE */
 /*
     ***************
     ---------------

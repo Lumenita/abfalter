@@ -7,29 +7,23 @@
     <div class="spellContent">
         <h5> {{localize "abfalter.magicTab.spellDetails"}} </h5>
         <div>
-            <label> <span> {{localize "abfalter.magicTab.path"}} </span> <input type="text" name="data.path" value="{{data.path}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="data.level" value="{{data.level}}" /> </label>
+            <label> <span> {{localize "abfalter.magicTab.path"}} </span> <input type="text" name="system.path" value="{{system.path}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.level"}} </span> <input type="number" name="system.level" value="{{system.level}}" /> </label>
         </div>
         <div>
             <div class="csSelect">
                 <label>
                     <span> {{localize "abfalter.basicInfo.action"}} </span>
-                    <select name="data.action" data-dtype="String">
-                        {{#select data.action}}
-                        <option value="Active"> {{localize "abfalter.basicInfo.active"}} </option>
-                        <option value="Passive"> {{localize "abfalter.basicInfo.passive"}} </option>
-                        {{/select}}
+                    <select name="system.action">
+                        {{selectOptions actionObjList selected=system.action localize=true}}
                     </select>
                 </label>
             </div>
             <div class="csSelect">
                 <label>
                     <span> {{localize "abfalter.psychicTab.pproj"}} </span>
-                    <select name="data.projection" data-dtype="String">
-                        {{#select data.projection}}
-                        <option value="Offensive"> {{localize "abfalter.magicTab.offensive1"}} </option>
-                        <option value="Defensive"> {{localize "abfalter.magicTab.defensive1"}} </option>
-                        {{/select}}
+                    <select name="system.projection">
+                        {{selectOptions spellProjObjList selected=system.projection localize=true}}
                     </select>
                 </label>
             </div>
@@ -38,27 +32,16 @@
             <div class="csSelect">
                 <label>
                     <span> {{localize "abfalter.basicInfo.type"}} </span>
-                    <select name="data.type" data-dtype="String">
-                        {{#select data.type}}
-                        <option value="Attack"> {{localize "abfalter.basicInfo.attack"}} </option>
-                        <option value="Defense"> {{localize "abfalter.basicInfo.defense"}} </option>
-                        <option value="Spiritual"> {{localize "abfalter.magicTab.spiritual"}} </option>
-                        <option value="Effect"> {{localize "abfalter.magicTab.effect"}} </option>
-                        <option value="Automatic"> {{localize "abfalter.magicTab.automatic"}} </option>
-                        <option value="Detection"> {{localize "abfalter.magicTab.detection"}} </option>
-                        {{/select}}
+                    <select name="system.type">
+                        {{selectOptions spellTypeObjList selected=system.type localize=true}}
                     </select>
                 </label>
             </div>
             <div class="csSelect">
                 <label>
                     <span> {{localize "abfalter.magicTab.maintType"}} </span>
-                    <select name="data.maintType" data-dtype="String">
-                        {{#select data.maintType}}
-                        <option value="None"> {{localize "abfalter.basicInfo.none"}} </option>
-                        <option value="Turn"> {{localize "abfalter.magicTab.turn"}} </option>
-                        <option value="Daily"> {{localize "abfalter.magicTab.daily"}} </option>
-                        {{/select}}
+                    <select name="system.maintType">
+                        {{selectOptions spellMaintTypeObjList selected=system.maintType localize=true}}
                     </select>
                 </label>
             </div>
@@ -67,21 +50,17 @@
             <div class="csSelect">
                 <label>
                     <span> {{localize "abfalter.magicTab.bought"}} </span>
-                    <select name="data.bought" data-dtype="String">
-                        {{#select data.bought}}
-                        <option value="SpellPath"> {{localize "abfalter.magicTab.spellPath1"}} </option>
-                        <option value="Single"> {{localize "abfalter.magicTab.single"}} </option>
-                        <option value="Not Bought"> {{localize "abfalter.magicTab.notBought"}} </option>
-                        {{/select}}
+                    <select name="system.bought">
+                        {{selectOptions spellBoughtObjList selected=system.bought localize=true}}
                     </select>
                 </label>
             </div>
-            <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="data.cost" value="{{data.cost}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="system.cost" value="{{system.cost}}" /> </label>
         </div>
         <h6> {{localize "abfalter.basicInfo.description"}} </h6>
         <div style="display: grid;">
-            <textarea class="textarea-auto-resize" rows="5" name="data.description" style="grid-area: 1 / 1 / 2/ 2;">{{data.description}}</textarea>
-            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.description}}</div>
+            <textarea class="textarea-auto-resize" rows="5" name="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{system.description}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.description}}</div>
         </div>
     </div>
 
@@ -96,46 +75,46 @@
 
         <div>
             <span> {{localize "abfalter.magicTab.basic"}} </span>
-            <input type="number" name="data.basic.intReq" value="{{data.basic.intReq}}" />
-            <input type="number" name="data.basic.zeonCost" value="{{data.basic.zeonCost}}" />
-            <input type="number" name="data.basic.maint" value="{{data.basic.maint}}" />
+            <input type="number" name="system.basic.intReq" value="{{system.basic.intReq}}" />
+            <input type="number" name="system.basic.zeonCost" value="{{system.basic.zeonCost}}" />
+            <input type="number" name="system.basic.maint" value="{{system.basic.maint}}" />
         </div>
         <div style="display: grid;">
-            <textarea class="textarea-auto-resize" rows="5" name="data.basic.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{data.basic.rollDesc}}</textarea>
-            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.basic.rollDesc}}</div>
+            <textarea class="textarea-auto-resize" rows="5" name="system.basic.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{system.basic.rollDesc}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.basic.rollDesc}}</div>
         </div>
 
         <div>
             <span> {{localize "abfalter.magicTab.intermidiate"}} </span>
-            <input type="number" name="data.intermediate.intReq" value="{{data.intermediate.intReq}}" />
-            <input type="number" name="data.intermediate.zeonCost" value="{{data.intermediate.zeonCost}}" />
-            <input type="number" name="data.intermediate.maint" value="{{data.intermediate.maint}}" />
+            <input type="number" name="system.intermediate.intReq" value="{{system.intermediate.intReq}}" />
+            <input type="number" name="system.intermediate.zeonCost" value="{{system.intermediate.zeonCost}}" />
+            <input type="number" name="system.intermediate.maint" value="{{system.intermediate.maint}}" />
         </div>
         <div style="display: grid;">
-            <textarea class="textarea-auto-resize" rows="5" name="data.intermediate.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{data.intermediate.rollDesc}}</textarea>
-            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.intermediate.rollDesc}}</div>
+            <textarea class="textarea-auto-resize" rows="5" name="system.intermediate.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{system.intermediate.rollDesc}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.intermediate.rollDesc}}</div>
         </div>
 
         <div>
             <span> {{localize "abfalter.magicTab.advanced"}} </span>
-            <input type="number" name="data.advanced.intReq" value="{{data.advanced.intReq}}" />
-            <input type="number" name="data.advanced.zeonCost" value="{{data.advanced.zeonCost}}" />
-            <input type="number" name="data.advanced.maint" value="{{data.advanced.maint}}" />
+            <input type="number" name="system.advanced.intReq" value="{{system.advanced.intReq}}" />
+            <input type="number" name="system.advanced.zeonCost" value="{{system.advanced.zeonCost}}" />
+            <input type="number" name="system.advanced.maint" value="{{system.advanced.maint}}" />
         </div>
         <div style="display: grid;">
-            <textarea class="textarea-auto-resize" rows="5" name="data.advanced.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{data.advanced.rollDesc}}</textarea>
-            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.advanced.rollDesc}}</div>
+            <textarea class="textarea-auto-resize" rows="5" name="system.advanced.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{system.advanced.rollDesc}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.advanced.rollDesc}}</div>
         </div>
 
         <div>
             <span> {{localize "abfalter.magicTab.arcane"}} </span>
-            <input type="number" name="data.arcane.intReq" value="{{data.arcane.intReq}}" />
-            <input type="number" name="data.arcane.zeonCost" value="{{data.arcane.zeonCost}}" />
-            <input type="number" name="data.arcane.maint" value="{{data.arcane.maint}}" />
+            <input type="number" name="system.arcane.intReq" value="{{system.arcane.intReq}}" />
+            <input type="number" name="system.arcane.zeonCost" value="{{system.arcane.zeonCost}}" />
+            <input type="number" name="system.arcane.maint" value="{{system.arcane.maint}}" />
         </div>
         <div style="display: grid;">
-            <textarea class="textarea-auto-resize" rows="5" name="data.arcane.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{data.arcane.rollDesc}}</textarea>
-            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.arcane.rollDesc}}</div>
+            <textarea class="textarea-auto-resize" rows="5" name="system.arcane.rollDesc" style="grid-area: 1 / 1 / 2/ 2;">{{system.arcane.rollDesc}}</textarea>
+            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.arcane.rollDesc}}</div>
         </div>
     </div>
 </form>

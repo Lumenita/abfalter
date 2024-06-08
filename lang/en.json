@@ -101,7 +101,7 @@
       "unarmed": "Unarmed",
       "special": "Special",
       "innate": "Innate",
-      "shortDesc": "Short Desc.",
+      "shortDesc": "Short Description",
       "monster": "Creature",
       "details": "Details"
     },
@@ -263,8 +263,15 @@
       "InEff": "Inactive Effects",
       "newEff": "New Effect",
       "kiTechTitle": "Ki Technique",
-      "monsterPowTitle": "Monster Power"
-
+      "monsterPowTitle": "Monster Power",
+      "adv": "Advantage",
+      "disAdv": "Disadvantage",
+      "secAbility": "Secondary Ability",
+      "fav": "Favorite",
+      "martialArtTitle": "Martial Art",
+      "equipped": "Equipped",
+      "postQuality": "Post Quality",
+      "item": "Item"
     },
     "magicTab": {
       "mproj": "Magic Projection",
@@ -378,7 +385,7 @@
       "maintInfo": "Maintained Matrix information",
       "cancelCost": "Cancel Cost",
       "oppPattern": "Opposite Pattern",
-      "maint": "Maint",
+      "maint": "Maint.",
       "psychicPotential": "Psychic Potential",
       "psyProj": "Psychic Projection"
     },
@@ -956,17 +963,6 @@
       "healthRegen": "Health Regeneration",
       "secAbility": "Sec. Ability"
     },
-    "customSecondaryDropdown": {
-      "none": "NONE",
-      "agi": "AGI",
-      "con": "CON",
-      "str": "STR",
-      "dex": "DEX",
-      "int": "INT",
-      "per": "PER",
-      "pow": "POW",
-      "wp": "WP"
-    },
     "MonsterPowerDropdown": {
       "other": "Other Power",
       "essential": "Essential",
@@ -975,6 +971,39 @@
       "defense": "Defensive",
       "misc": "Misc",
       "divine": "Divine"
+    }
+  },
+  "TYPES": {
+    "Actor": {
+      "character": "Character"
+    },
+    "Item": {
+      "advantage": "Advantage",
+      "armor": "Armor",
+      "armorHelmet": "Armor (Helmet)",
+      "arsMagnus": "Ars Magnus",
+      "class": "Class",
+      "currency": "Currency",
+      "dailyMaint": "Zeon Maint - Daily",
+      "disadvantage": "Disadvantage",
+      "discipline": "Psychic Discipline",
+      "elan": "Elan",
+      "incarnation": "Incarnation",
+      "inventory": "Inventory Item",
+      "invocation": "Invocation",
+      "kiSealCreature": "Ki Seal Creature",
+      "kiTechnique": "Ki Technique",
+      "maintPower": "Psychic Maint Power",
+      "martialArt": "Martial Art",
+      "mentalPattern": "Psychic Mental Pattern",
+      "monsterPower": "Monster Power",
+      "proficiency": "Proficiency",
+      "psychicMatrix": "Psychic Matrix",
+      "secondary": "Secondary Ability",
+      "spell": "Spell",
+      "spellPath": "Spellpath",
+      "turnMaint": "Zeon Maint - Turn",
+      "weapon": "Weapon"
     }
   }
 }

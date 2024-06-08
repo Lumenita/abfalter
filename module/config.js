@@ -265,7 +265,15 @@ abfalter.sheet = {
     InEff: "abfalter.sheet.InEff",
     newEff: "abfalter.sheet.newEff",
     kiTechTitle: "abfalter.sheet.kiTechTitle",
-    monsterPowTitle: "abfalter.sheet.monsterPowTitle"
+    monsterPowTitle: "abfalter.sheet.monsterPowTitle",
+    adv: "abfalter.sheet.adv",
+    disAdv: "abfalter.sheet.disAdv",
+    secAbility: "abfalter.sheet.secAbility",
+    fav: "abfalter.sheet.fav",
+    martialArtTitle: "abfalter.sheet.martialArtTitle",
+    equipped: "abfalter.sheet.equipped",
+    postQuality: "abfalter.sheet.postQuality",
+    item: "abfalter.sheet.item"
 }
 
 abfalter.magicTab = {
@@ -968,18 +976,6 @@ abfalter.activeEffectChanges = {
 
 }
 
-abfalter.customSecondaryDropdown = {
-    none: "abfalter.customSecondaryDropdown.none",
-    agi: "abfalter.customSecondaryDropdown.agi",
-    con: "abfalter.customSecondaryDropdown.con",
-    str: "abfalter.customSecondaryDropdown.str",
-    dex: "abfalter.customSecondaryDropdown.dex",
-    int: "abfalter.customSecondaryDropdown.int",
-    per: "abfalter.customSecondaryDropdown.per",
-    pow: "abfalter.customSecondaryDropdown.pow",
-    wp: "abfalter.customSecondaryDropdown.wp",
-}
-
 abfalter.MonsterPowerDropdown = {
     other: "abfalter.MonsterPowerDropdown.other",
     essential: "abfalter.MonsterPowerDropdown.essential",
@@ -988,4 +984,146 @@ abfalter.MonsterPowerDropdown = {
     defense: "abfalter.MonsterPowerDropdown.defense",
     misc: "abfalter.MonsterPowerDropdown.misc",
     divine: "abfalter.MonsterPowerDropdown.divine"
+}
+
+abfalter.innatePowerSettingDropdown = {
+    AGI: "abfalter.basicInfo.agi",
+    CON: "abfalter.basicInfo.con",
+    DEX: "abfalter.basicInfo.dex",
+    STR: "abfalter.basicInfo.str",
+    POW: "abfalter.basicInfo.pow",
+    WP: "abfalter.basicInfo.wp"
+}
+
+abfalter.proficiencyDropdown = {
+    Starting: "abfalter.armoryTab.starting",
+    Similar: "abfalter.armoryTab.similar",
+    MixedClass: "abfalter.armoryTab.mixedClass",
+    DiffType: "abfalter.armoryTab.diffType",
+    WholeClass: "abfalter.armoryTab.wholeClass",
+    Archetype: "abfalter.armoryTab.archetype",
+    Style: "abfalter.armoryTab.style",
+    Mystical: "abfalter.armoryTab.mystical",
+    Psychic: "abfalter.armoryTab.psychic",
+    Other: "abfalter.armoryTab.other",
+}
+
+abfalter.shieldDropdown = {
+    none: "abfalter.armoryTab.shieldNone",
+    buckler: "abfalter.armoryTab.shieldBuckler",
+    shield: "abfalter.armoryTab.shieldNorm",
+    fShield: "abfalter.armoryTab.shieldTower"
+}
+
+abfalter.damageModDropdown = {
+    agi: "abfalter.basicInfo.agility",
+    con: "abfalter.basicInfo.consti",
+    str: "abfalter.basicInfo.strength",
+    dex: "abfalter.basicInfo.dexerity",
+    per: "abfalter.basicInfo.perception",
+    int: "abfalter.basicInfo.intell",
+    pow: "abfalter.basicInfo.power",
+    wp: "abfalter.basicInfo.willPower",
+    str2: "abfalter.armoryTab.twoStr",
+    presence: "abfalter.armoryTab.twoPresPow",
+    none: "abfalter.basicInfo.none"
+}
+
+abfalter.damageTypeDropdown = {
+    NONE: "abfalter.armoryTab.na",
+    CUT: "abfalter.armoryTab.cut",
+    IMP: "abfalter.armoryTab.imp",
+    THR: "abfalter.armoryTab.thr",
+    HEAT: "abfalter.armoryTab.heat",
+    COLD: "abfalter.armoryTab.cold",
+    ELE: "abfalter.armoryTab.ele",
+    ENE: "abfalter.armoryTab.ene"
+}
+
+abfalter.damageTypeSpiritDropdown = {
+    NONE: "abfalter.armoryTab.na",
+    CUT: "abfalter.armoryTab.cut",
+    IMP: "abfalter.armoryTab.imp",
+    THR: "abfalter.armoryTab.thr",
+    HEAT: "abfalter.armoryTab.heat",
+    COLD: "abfalter.armoryTab.cold",
+    ELE: "abfalter.armoryTab.ele",
+    ENE: "abfalter.armoryTab.ene",
+    SPIRIT: "abfalter.armoryTab.spirit"
+}
+
+abfalter.martialArtsDropdown = {
+    base: "abfalter.basicInfo.base",
+    advanced: "abfalter.kiTab.advanced",
+    supreme: "abfalter.kiTab.supreme",
+    arcane: "abfalter.kiTab.arcane"
+}
+
+abfalter.kiFrequencyDropdown = {
+    action: "abfalter.kiTab.action",
+    turn: "abfalter.kiTab.turn",
+    variable: "abfalter.kiTab.variable"
+}
+
+abfalter.kiActionTypeDropdown = {
+    attack: "abfalter.kiTab.attack",
+    defense: "abfalter.kiTab.defense",
+    counterAttack: "abfalter.kiTab.counterAttack",
+    variable: "abfalter.kiTab.variable"
+}
+
+abfalter.ActionDropdown = {
+    Active: "abfalter.basicInfo.active",
+    Passive: "abfalter.basicInfo.passive"
+}
+
+abfalter.yesnoDropdown = {
+    Yes: "abfalter.basicInfo.yes",
+    No: "abfalter.basicInfo.no"
+}
+
+abfalter.MagicTheoryDropdown = {
+    Standard: "abfalter.magicTab.standard",
+    Onmyodo: "abfalter.magicTab.onmyodo",
+    Vodoun: "abfalter.magicTab.vodoun",
+    Shamanism: "abfalter.magicTab.shamanism",
+    NatMagic: "abfalter.magicTab.naturalMagic"
+}
+
+
+abfalter.spellTypeDropdown = {
+    Attack: "abfalter.basicInfo.attack",
+    Defense: "abfalter.basicInfo.defense",
+    Spiritual: "abfalter.magicTab.spiritual",
+    Effect: "abfalter.magicTab.effect",
+    Automatic: "abfalter.magicTab.automatic",
+    Detection: "abfalter.magicTab.detection"
+}
+
+abfalter.spellProjDropdown = {
+    Offensive: "abfalter.magicTab.offensive1",
+    Defensive: "abfalter.magicTab.defensive1"
+}
+
+abfalter.spellMaintTypeDropdown = {
+    None: "abfalter.basicInfo.none",
+    Turn: "abfalter.magicTab.turn",
+    Daily: "abfalter.magicTab.daily"
+}
+
+abfalter.spellBoughtDropdown = {
+    SpellPath: "abfalter.magicTab.spellPath1",
+    Single: "abfalter.magicTab.single",
+    NotBought: "abfalter.magicTab.notBought"
+}
+
+abfalter.LimitsDropdown = {
+    none: "abfalter.basicInfo.none",
+    mors: "abfalter.kiTab.limitMors",
+    cenobus: "abfalter.kiTab.limitCenobus",
+    caelum: "abfalter.kiTab.limitCaelum",
+    agon: "abfalter.kiTab.limitAgon",
+    custodium: "abfalter.kiTab.limitCustodium",
+    cruor: "abfalter.kiTab.limitCruor",
+    terminus: "abfalter.kiTab.limitTerminus"
 }

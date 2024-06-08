@@ -1650,8 +1650,8 @@
           "mult2": 0,
           "descNum": 3,
           "desc": "",
-          "multOption": "",
-          "multOption2": "",
+          "multOption": "str",
+          "multOption2": "none",
           "bonus": 0
         },
         "kiPool": {
@@ -1878,7 +1878,6 @@
       "martialArt",
       "psychicMatrix",
       "monsterPower",
-      "effect",
       "kiSealCreature",
       "incarnation",
       "invocation",
@@ -2091,11 +2090,11 @@
       "expand": false,
       "quantity": 0,
       "price": "",
-      "quality": "Common",
+      "quality": "",
       "weight": 0,
       "fortitude": "",
       "presence": 0,
-      "rarity": ""
+      "rarity": "Common"
     },
     "weapon": {
       "templates": [ "itemDescription" ],
@@ -2189,12 +2188,13 @@
     },
     "psychicMatrix": {
       "templates": [ "itemDescription" ],
+      "shortDesc": "",
       "quantity": 1,
       "expand": false,
       "bonus": 0,
-      "level": 0,
-      "action": 1,
-      "maint": "",
+      "level": 1,
+      "action": "Active",
+      "maint": "No",
       "effect20": "",
       "effect40": "",
       "effect80": "",
@@ -2213,11 +2213,6 @@
       "expand": false,
       "cost": "",
       "gnosis": ""
-    },
-    "effect": {
-      "combat": {
-        "attack": 0
-      }
     },
     "maintPower": {
       "templates": [ "itemDescription" ],
@@ -2249,8 +2244,8 @@
       "actor": false,
       "level": 0,
       "mk": 0,
-      "actionType": "",
-      "frequency": "",
+      "actionType": "attack",
+      "frequency": "action",
       "use": {
         "unified": 0,
         "agi": 0,
@@ -2284,7 +2279,7 @@
       "bonusDod": 0,
       "dp": 0,
       "mk": 0,
-      "degree": "Base"
+      "degree": "base"
     },
     "elan": {
       "templates": [ "itemDescription" ],

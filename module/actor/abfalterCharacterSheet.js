@@ -5,7 +5,7 @@ import { onManageActiveEffect, prepareActiveEffectCategories } from '../helpers/
 
 export default class abfalterCharacterSheet extends ActorSheet {
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["abfalter", "sheet", "actor"],
             template: "systems/abfalter/templates/actor/actor-sheet.html",
             width: 900,
@@ -21,7 +21,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
             callback: element => {
                 const item = this.actor.items.get(element.data("item-id"));
                 element.equipped = !item.system.equipped;
-                item.update({ "data.equipped": element.equipped });
+                item.update({ "system.equipped": element.equipped });
             }
         },
         {
@@ -66,7 +66,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
             callback: element => {
                 const item = this.actor.items.get(element.data("item-id"));
                 element.toggleItem = !item.system.toggleItem;
-                item.update({ "data.toggleItem": element.toggleItem });
+                item.update({ "system.toggleItem": element.toggleItem });
             }
         },
         {
@@ -94,13 +94,67 @@ export default class abfalterCharacterSheet extends ActorSheet {
             owner: this.actor.isOwner,
             editable: this.isEditable,
             actor: baseData.actor,
-            data: baseData.actor.system,
+            system: baseData.actor.system,
             effects: prepareActiveEffectCategories(this.actor.allApplicableEffects()),
             config: CONFIG.abfalter
         }
 
         //Dropdowns
         sheetData.customSecObjList = CONFIG.abfalter.customSecondaryDropdown;
+        sheetData.InnatePowerObjList = CONFIG.abfalter.innatePowerSettingDropdown;
+
+        sheetData.proficiencyObjList = CONFIG.abfalter.proficiencyDropdown;
+        sheetData.shieldObjList = CONFIG.abfalter.shieldDropdown;
+        sheetData.damageModObjList = CONFIG.abfalter.damageModDropdown;
+        sheetData.damageTypeObjList = CONFIG.abfalter.damageTypeDropdown;
+        sheetData.damageTypeSpiritObjList = CONFIG.abfalter.damageTypeSpiritDropdown;
+        sheetData.martialArtsObjList = CONFIG.abfalter.martialArtsDropdown; //Martial Arts here
+        sheetData.kiFrequencyObjList = CONFIG.abfalter.kiFrequencyDropdown; 
+        sheetData.kiActionTypeObjList = CONFIG.abfalter.kiActionTypeDropdown; 
+        sheetData.actionObjList = CONFIG.abfalter.ActionDropdown; 
+        sheetData.yesnoObjList = CONFIG.abfalter.yesnoDropdown; 
+        sheetData.MagicTheoryObjList = CONFIG.abfalter.MagicTheoryDropdown; 
+        sheetData.spellTypeObjList = CONFIG.abfalter.spellTypeDropdown; 
+        sheetData.spellProjObjList = CONFIG.abfalter.spellProjDropdown; 
+        sheetData.spellMaintTypeObjList = CONFIG.abfalter.spellMaintTypeDropdown; 
+        sheetData.spellBoughtObjList = CONFIG.abfalter.spellBoughtDropdown; 
+        sheetData.limitsObjList = CONFIG.abfalter.LimitsDropdown; 
+        sheetData.ppotentialObjList = {
+            0: "0",
+            10: "1",
+            20: "3",
+            30: "6",
+            40: "10",
+            50: "15",
+            60: "21",
+            70: "28",
+            80: "36",
+            90: "45",
+            100: "55"
+        }
+        sheetData.matrixLevelObjList = {
+            1: "1",
+            2: "2",
+            3: "3"
+        }
+        sheetData.monsterCharObjList = {
+            0: "0",
+            1: "1",
+            2: "2",
+            3: "3",
+            4: "4",
+            5: "5",
+            6: "6",
+            7: "7",
+            8: "8",
+            9: "9",
+            10: "10",
+            11: "11",
+            12: "12",
+            13: "13",
+            14: "14",
+            15: "15"
+        }
 
         //Initialize Items
         sheetData.inventories = baseData.items.filter(function (item) { return item.type == "inventory" });
@@ -156,16 +210,16 @@ export default class abfalterCharacterSheet extends ActorSheet {
         if (this.actor.isOwner) {
             html.find('.maccuHalf').click(ev => {
                 const value = $(ev.currentTarget).attr("data-ability");
-                this.document.update({ "data.maccu.actual": Math.floor(this.document.system.maccu.actual + (value / 1)) });
+                this.document.update({ "system.maccu.actual": Math.floor(this.document.system.maccu.actual + (value / 1)) });
             });
             html.find('.maccuFull').click(ev => {
                 const value = $(ev.currentTarget).attr("data-ability");
-                this.document.update({ "data.maccu.actual": Math.floor(this.document.system.maccu.actual + (value / 1)) });
+                this.document.update({ "system.maccu.actual": Math.floor(this.document.system.maccu.actual + (value / 1)) });
             });
             html.find('.mregenFull').click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
                 let max = $(ev.currentTarget).attr("data-ability2");
-                this.document.update({ "data.zeon.value": Math.min(Math.floor(this.document.system.zeon.value + (value / 1)), max) });
+                this.document.update({ "system.zeon.value": Math.min(Math.floor(this.document.system.zeon.value + (value / 1)), max) });
             });
             html.find('.kiAccuHalf').click(ev => {
                 let value = this.document.system.kiPool.agi.current + Math.max(1, Math.floor(this.document.system.kiPoolAgiAccumTot / 2));
@@ -175,8 +229,8 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 let value5 = this.document.system.kiPool.pow.current + Math.max(1, Math.floor(this.document.system.kiPoolPowAccumTot / 2));
                 let value6 = this.document.system.kiPool.wp.current + Math.max(1, Math.floor(this.document.system.kiPoolWPAccumTot / 2));
                 this.document.update({
-                    "data.kiPool.agi.current": value, "data.kiPool.con.current": value2, "data.kiPool.dex.current": value3,
-                    "data.kiPool.str.current": value4, "data.kiPool.pow.current": value5, "data.kiPool.wp.current": value6 });
+                    "system.kiPool.agi.current": value, "system.kiPool.con.current": value2, "system.kiPool.dex.current": value3,
+                    "system.kiPool.str.current": value4, "system.kiPool.pow.current": value5, "system.kiPool.wp.current": value6 });
             });
             html.find('.kiAccuFull').click(ev => {
                 let value = this.document.system.kiPool.agi.current + this.document.system.kiPoolAgiAccumTot;
@@ -186,13 +240,13 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 let value5 = this.document.system.kiPool.pow.current + this.document.system.kiPoolPowAccumTot;
                 let value6 = this.document.system.kiPool.wp.current + this.document.system.kiPoolWPAccumTot;
                 this.document.update({
-                    "data.kiPool.agi.current": value, "data.kiPool.con.current": value2, "data.kiPool.dex.current": value3,
-                    "data.kiPool.str.current": value4, "data.kiPool.pow.current": value5, "data.kiPool.wp.current": value6
+                    "system.kiPool.agi.current": value, "system.kiPool.con.current": value2, "system.kiPool.dex.current": value3,
+                    "system.kiPool.str.current": value4, "system.kiPool.pow.current": value5, "system.kiPool.wp.current": value6
                 });
             });
             html.find('.removeMaint').click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
-                this.document.update({ "data.zeon.value": Math.max(0, Math.floor(this.document.system.zeon.value - value)) });
+                this.document.update({ "system.zeon.value": Math.max(0, Math.floor(this.document.system.zeon.value - value)) });
             });
             html.find(".toggleBoolean").click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
@@ -356,7 +410,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
         let itemId = element.closest(".item").dataset.itemId;
         let item = this.actor.items.get(itemId);
         element.expand = !item.system.expand;
-        item.update({ "data.expand": element.expand });
+        item.update({ "system.expand": element.expand });
     }
 
     _onItemToggle(event) {

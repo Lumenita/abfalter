@@ -1,43 +1,68 @@
 <form class="{{cssClass}} baseAbfalter itemWindow" autocomplete="off">
-    <div class="itemStart">
-        <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
-    </div>
 
-    <div class="secondaryContent">
-        <h5> {{localize "abfalter.generalTab.secAbility"}} </h5>
-        <div>
-            <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="data.base" value="{{data.base}}" /> </label>
-            <label> <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="data.nat" value="{{data.nat}}" /> </label>
-        </div>
-        <div>
-            <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="data.spec" value="{{data.spec}}" /> </label>
-            <label> <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="data.natural" value="{{data.natural}}" /> </label>
-        </div>
-        <div>
-            <label> <span> {{localize "abfalter.basicInfo.extra"}} </span> <input type="number" name="data.extra" value="{{data.extra}}" /> </label>
-            <div class="csSelect">
-                <label>
-                    <span> {{localize "abfalter.generalTab.atr"}} </span>
-                    <select name="data.atr" data-dtype="String">
-                        {{#select data.atr}}
-                            <option value=""> </option>
-                            <option value="{{localize "abfalter.basicInfo.agi"}}"> {{localize "abfalter.basicInfo.agi"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.con"}}"> {{localize "abfalter.basicInfo.con"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.str"}}"> {{localize "abfalter.basicInfo.str"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.dex"}}"> {{localize "abfalter.basicInfo.dex"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.per"}}"> {{localize "abfalter.basicInfo.per"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.int"}}"> {{localize "abfalter.basicInfo.int"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.pow"}}"> {{localize "abfalter.basicInfo.pow"}} </option>
-                            <option value="{{localize "abfalter.basicInfo.wp"}}"> {{localize "abfalter.basicInfo.wp"}} </option>
-                        {{/select}}
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="item-img" src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}" />
+
+        <div class="header-details flexrow">
+            <h1 class="itemName">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'abfalter.sheet.nameItem'}}" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{localize "abfalter.sheet.secAbility"}}</h4>
+                <span class="item-subType">
+                    {{localize "abfalter.sheet.fav"}}
+                    <a class="toggleBoolean" data-label="system.fav" data-ability="{{system.fav}}"><i class="{{#if system.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
+                </span>
+            </div>
+
+            <ul class="summary flexrow">
+                <li>{{localize "abfalter.basicInfo.final"}}: {{system.finalValue}}</li>
+                <li>
+                    <select name="system.atr">
+                        {{selectOptions customSecObjList selected=system.atr localize=true}}
                     </select>
-                </label>
+                </li>
+                <li></li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs itemTabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "abfalter.basicInfo.description" }}</a>
+        <a class="item" data-tab="details">{{ localize "abfalter.basicInfo.details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "abfalter.basicInfo.effects" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        <div class="tab description flexcol" data-group="primary" data-tab="description">
+            <h6> {{localize "abfalter.basicInfo.description"}} </h6>
+            <div style="display: grid;">
+                <textarea class="textarea-auto-resize" name="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{system.description}}</textarea>
+                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.description}}</div>
             </div>
         </div>
-        <div>
-            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="data.temp" value="{{data.temp}}" /> </label>
-            <label></label>
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <h6> {{localize "abfalter.sheet.secAbility"}} {{ localize "abfalter.basicInfo.details" }} </h6>
+            <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.base" value="{{system.base}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.spec" value="{{system.spec}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.extra"}} </span> <input type="number" name="system.extra" value="{{system.extra}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.temp" value="{{system.temp}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="system.nat" value="{{system.nat}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="system.natural" value="{{system.natural}}" /> </label>
         </div>
-    </div>
+
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> systems/abfalter/templates/actor/parts/active-effects.html }}
+        </div>
+    </section>
+
 </form>

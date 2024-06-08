@@ -1,12 +1,19 @@
 <form class="{{cssClass}} baseAbfalter itemWindowSmall" autocomplete="off">
-    <div class="itemStart">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <label> <input name="name" type="text" value="{{item.name}}" placeholder="Name" /> </label>
-    </div>
-    <div>
-        <h5> {{localize "abfalter.psychicTab.pDiscOne"}} </h5>
-        <div>
+    
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="item-img" src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}" />
+
+        <div class="header-details flexrow">
+            <h1 class="itemName">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'abfalter.sheet.nameItem'}}" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{localize "abfalter.psychicTab.pDiscOne"}}</h4>
+            </div>
 
         </div>
-    </div>
+    </header>
+
 </form>

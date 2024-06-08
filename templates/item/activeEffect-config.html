@@ -2,7 +2,7 @@
 
     <!-- Effect Header -->
     <header class="sheet-header">
-        <img class="effect-icon" src="{{ data.icon }}" data-edit="icon">
+        <img class="effect-img" src="{{ data.img }}" data-edit="img">
         <h1 class="effect-title">
             <input name="name" type="text" value="{{data.name}}" placeholder="{{ localize 'Name' }}" />
         </h1>
@@ -18,9 +18,9 @@
     <!-- Details Tab -->
     <section class="tab" data-tab="details">
         <div class="form-group">
-            <label>{{ localize "EFFECT.IconTint" }}</label>
+            <label>{{ localize "EFFECT.Tint" }}</label>
             <div class="form-fields">
-                {{colorPicker name="tint" value=data.tint}}
+                <color-picker name="tint" value="{{data.tint}}"></color-picker>
             </div>
         </div>
 
@@ -52,6 +52,17 @@
             <p class="hint">{{ labels.transfer.hint }}</p>
         </div>
         {{/if}}
+
+        <div class="form-group">
+            <label>Status Conditions</label>
+            <div class="form-fields">
+                <multi-select name="statuses">
+                    {{#each statuses as |status|}}
+                    <option value="{{status.id}}" {{status.selected}}>{{status.label}}</option>
+                    {{/each}}
+                </multi-select>
+            </div>
+        </div>
     </section>
 
     <!-- Duration Tab -->

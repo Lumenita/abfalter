@@ -9,33 +9,16 @@
                 <span>{{localize "abfalter.monsterPowers.additional"}}</span>
                 <span>{{localize "abfalter.monsterPowers.dpCost"}}</span>
             </div>
-            {{#each data.monsterChar as |atr key|}}
+            {{#each system.monsterChar as |atr key|}}
             <div>
                 <span class="{{atr.type}}">{{atr.name}}</span>
                 <span>{{atr.charBaseTotal}}</span>
                 <label>
-                    <select name="data.monsterChar.{{key}}.base" data-dtype="number">
-                        {{#select atr.base}}
-                        <option value="0"> 0 </option>
-                        <option value="1"> 1 </option>
-                        <option value="2"> 2 </option>
-                        <option value="3"> 3 </option>
-                        <option value="4"> 4 </option>
-                        <option value="5"> 5 </option>
-                        <option value="6"> 6 </option>
-                        <option value="7"> 7 </option>
-                        <option value="8"> 8 </option>
-                        <option value="9"> 9 </option>
-                        <option value="10"> 10 </option>
-                        <option value="11"> 11 </option>
-                        <option value="12"> 12 </option>
-                        <option value="13"> 13 </option>
-                        <option value="14"> 14 </option>
-                        <option value="15"> 15 </option>
-                        {{/select}}
+                    <select name="system.monsterChar.{{key}}.base">
+                        {{selectOptions ../monsterCharObjList selected=atr.base localize=true}}
                     </select>
                 </label>
-                <input type="number" name="data.monsterChar.{{key}}.additional" value="{{atr.additional}}" />
+                <input type="number" name="system.monsterChar.{{key}}.additional" value="{{atr.additional}}" />
                 <span>{{atr.charBaseCostTotal}}</span>
             </div>
             {{/each}}
@@ -45,9 +28,9 @@
             <h5>{{localize "abfalter.monsterPowers.info"}}</h5>
             <div>
                 <span> {{localize "abfalter.monsterPowers.natWep"}} </span>
-                <button type="button" class="toggleBoolean {{#if data.toggles.monsterNatWep}}kiBought{{/if}}"
-                        data-label="data.toggles.monsterNatWep" data-ability="{{data.toggles.monsterNatWep}}">
-                    {{#if data.toggles.monsterNatWep}}
+                <button type="button" class="toggleBoolean {{#if system.toggles.monsterNatWep}}kiBought{{/if}}"
+                        data-label="system.toggles.monsterNatWep" data-ability="{{system.toggles.monsterNatWep}}">
+                    {{#if system.toggles.monsterNatWep}}
                     <span> {{localize "abfalter.basicInfo.yes"}} </span>
                     {{else}}
                     <span> {{localize "abfalter.basicInfo.no"}} </span>
@@ -55,32 +38,32 @@
                 </button>
             </div>
             <div>
-                {{#if data.toggles.monsterNatWep}}
-                <label><span>{{localize "abfalter.monsterPowers.natWepDmg"}}</span> <span>{{data.monsterNaturalDmg}}</span></label>
-                <label><span>{{localize "abfalter.monsterPowers.natWepFort"}}</span> <span>{{data.monsternatFort}}</span></label>
-                <label><span>{{localize "abfalter.monsterPowers.NatWepBreak"}}</span> <span>{{data.monsterNatBreak}}</span></label>
+                {{#if system.toggles.monsterNatWep}}
+                <label><span>{{localize "abfalter.monsterPowers.natWepDmg"}}</span> <span>{{system.monsterNaturalDmg}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.natWepFort"}}</span> <span>{{system.monsternatFort}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.NatWepBreak"}}</span> <span>{{system.monsterNatBreak}}</span></label>
                 {{else}}
-                <label><span>{{localize "abfalter.monsterPowers.physDmg"}}</span> <span>{{data.monsterPhysicalDmg}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.physDmg"}}</span> <span>{{system.monsterPhysicalDmg}}</span></label>
                 {{/if}}
-                <label><span>{{localize "abfalter.monsterPowers.actionArea"}}</span> <span>{{data.monsterActionArea}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.actionArea"}}</span> <span>{{system.monsterActionArea}}</span></label>
             </div>
             <div>
                 <span> {{localize "abfalter.monsterPowers.dmgRes"}} </span>
-                <button type="button" class="toggleBoolean {{#if data.toggles.dmgRes}}kiBought{{/if}}"
-                        data-label="data.toggles.dmgRes" data-ability="{{data.toggles.dmgRes}}">
-                    {{#if data.toggles.dmgRes}}
+                <button type="button" class="toggleBoolean {{#if system.toggles.dmgRes}}kiBought{{/if}}"
+                        data-label="system.toggles.dmgRes" data-ability="{{system.toggles.dmgRes}}">
+                    {{#if system.toggles.dmgRes}}
                     <span> {{localize "abfalter.basicInfo.yes"}} </span>
                     {{else}}
                     <span> {{localize "abfalter.basicInfo.no"}} </span>
                     {{/if}}
                 </button>
             </div>
-            {{#if data.toggles.dmgRes}}
+            {{#if system.toggles.dmgRes}}
             <div>
-                <label><span>{{localize "abfalter.monsterPowers.baseArmor"}}</span> <span>{{data.monsterArmor}}</span></label>                
-                <label><span>{{localize "abfalter.monsterPowers.healthMult"}}</span> <span>{{data.lifepoints.hpMult}}</span></label>                
-                <label><span>{{localize "abfalter.monsterPowers.dpHP"}}</span> <input type="number" name="data.monsterStats.hpDp" value="{{data.monsterStats.hpDp}}" /></label>
-                <label><span>{{localize "abfalter.monsterPowers.totalAddHP"}}</span> <span>{{data.lifepoints.hpDmgRes}}</span></label>                
+                <label><span>{{localize "abfalter.monsterPowers.baseArmor"}}</span> <span>{{system.monsterArmor}}</span></label>                
+                <label><span>{{localize "abfalter.monsterPowers.healthMult"}}</span> <span>{{system.lifepoints.hpMult}}</span></label>                
+                <label><span>{{localize "abfalter.monsterPowers.dpHP"}}</span> <input type="number" name="system.monsterStats.hpDp" value="{{system.monsterStats.hpDp}}" /></label>
+                <label><span>{{localize "abfalter.monsterPowers.totalAddHP"}}</span> <span>{{system.lifepoints.hpDmgRes}}</span></label>                
             </div>
             {{/if}}
         </div>
@@ -89,9 +72,9 @@
             <h5>{{localize "abfalter.basicInfo.settings"}}</h5>
             <div>
                 <span> {{localize "abfalter.monsterPowers.replaceChar"}} </span>
-                <button type="button" class="toggleBoolean {{#if data.toggles.monsterChar}}kiBought{{/if}}"
-                        data-label="data.toggles.monsterChar" data-ability="{{data.toggles.monsterChar}}">
-                    {{#if data.toggles.monsterChar}}
+                <button type="button" class="toggleBoolean {{#if system.toggles.monsterChar}}kiBought{{/if}}"
+                        data-label="system.toggles.monsterChar" data-ability="{{system.toggles.monsterChar}}">
+                    {{#if system.toggles.monsterChar}}
                     <span> {{localize "abfalter.basicInfo.yes"}} </span>
                     {{else}}
                     <span> {{localize "abfalter.basicInfo.no"}} </span>
@@ -100,9 +83,9 @@
             </div>
             <div>
                 <span> {{localize "abfalter.monsterPowers.showShortDesc"}} </span>
-                <button type="button" class="toggleBoolean {{#if data.toggles.monsterPowerShortDesc}}kiBought{{/if}}"
-                        data-label="data.toggles.monsterPowerShortDesc" data-ability="{{data.toggles.monsterPowerShortDesc}}">
-                    {{#if data.toggles.monsterPowerShortDesc}}
+                <button type="button" class="toggleBoolean {{#if system.toggles.monsterPowerShortDesc}}kiBought{{/if}}"
+                        data-label="system.toggles.monsterPowerShortDesc" data-ability="{{system.toggles.monsterPowerShortDesc}}">
+                    {{#if system.toggles.monsterPowerShortDesc}}
                     <span> {{localize "abfalter.basicInfo.yes"}} </span>
                     {{else}}
                     <span> {{localize "abfalter.basicInfo.no"}} </span>
@@ -111,9 +94,9 @@
             </div>
             <div>
                 <span> {{localize "abfalter.monsterPowers.hideDis"}} </span>
-                <button type="button" class="toggleBoolean {{#if data.toggles.monsterdisadvVis}}kiBought{{/if}}"
-                        data-label="data.toggles.monsterdisadvVis" data-ability="{{data.toggles.monsterdisadvVis}}">
-                    {{#if data.toggles.monsterdisadvVis}}
+                <button type="button" class="toggleBoolean {{#if system.toggles.monsterdisadvVis}}kiBought{{/if}}"
+                        data-label="system.toggles.monsterdisadvVis" data-ability="{{system.toggles.monsterdisadvVis}}">
+                    {{#if system.toggles.monsterdisadvVis}}
                     <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
                     <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
@@ -122,9 +105,9 @@
             </div>
             <div>
                 <span> {{localize "abfalter.monsterPowers.hideDivine"}} </span>
-                <button type="button" class="toggleBoolean {{#if data.toggles.monsterdivineVis}}kiBought{{/if}}"
-                        data-label="data.toggles.monsterdivineVis" data-ability="{{data.toggles.monsterdivineVis}}">
-                    {{#if data.toggles.monsterdivineVis}}
+                <button type="button" class="toggleBoolean {{#if system.toggles.monsterdivineVis}}kiBought{{/if}}"
+                        data-label="system.toggles.monsterdivineVis" data-ability="{{system.toggles.monsterdivineVis}}">
+                    {{#if system.toggles.monsterdivineVis}}
                     <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
                     <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
@@ -133,9 +116,9 @@
             </div>
             <div>
                 <span> {{localize "abfalter.monsterPowers.hideDef"}} </span>
-                <button type="button" class="toggleBoolean {{#if data.toggles.monsterdefVis}}kiBought{{/if}}"
-                        data-label="data.toggles.monsterdefVis" data-ability="{{data.toggles.monsterdefVis}}">
-                    {{#if data.toggles.monsterdefVis}}
+                <button type="button" class="toggleBoolean {{#if system.toggles.monsterdefVis}}kiBought{{/if}}"
+                        data-label="system.toggles.monsterdefVis" data-ability="{{system.toggles.monsterdefVis}}">
+                    {{#if system.toggles.monsterdefVis}}
                     <span> {{localize "abfalter.settingsTab.hidden"}} </span>
                     {{else}}
                     <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
@@ -143,14 +126,14 @@
                 </button>
             </div>
             <div>
-                <label> <span>{{localize "abfalter.basicInfo.gnosis"}}</span> <input type="number" name="data.gnosis" value="{{data.gnosis}}" /> </label>
-                <label><span>{{localize "abfalter.monsterPowers.totalCharDp"}}</span> <span>{{data.monsterCharCombCost}}</span></label>
-                <label><span>{{localize "abfalter.monsterPowers.totalPowDp"}}</span> <span>{{data.monsterPowerCost}}</span></label>
-                <label><span>{{localize "abfalter.monsterPowers.totalDpSpent"}}</span> <span>{{data.monstTotDP}}</span></label>
+                <label> <span>{{localize "abfalter.basicInfo.gnosis"}}</span> <input type="number" name="system.gnosis" value="{{system.gnosis}}" /> </label>
+                <label><span>{{localize "abfalter.monsterPowers.totalCharDp"}}</span> <span>{{system.monsterCharCombCost}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.totalPowDp"}}</span> <span>{{system.monsterPowerCost}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.totalDpSpent"}}</span> <span>{{system.monstTotDP}}</span></label>
             </div>
             <div>
                 <a class="item-control item-create" data-type="monsterPower"><i class="fas fa-plus"></i> {{localize "abfalter.monsterPowers.addMonsterPower"}} </a>
-                <a class="toggleBoolean {{#if data.itemToggle.monsterPowers}}armorpenalty{{/if}}" data-label="data.itemToggle.monsterPowers" data-ability="{{data.itemToggle.monsterPowers}}"><i class="{{#if data.itemToggle.monsterPowers}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                <a class="toggleBoolean {{#if system.itemToggle.monsterPowers}}armorpenalty{{/if}}" data-label="system.itemToggle.monsterPowers" data-ability="{{system.itemToggle.monsterPowers}}"><i class="{{#if system.itemToggle.monsterPowers}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
             </div>
         </div>
     </div>
@@ -166,7 +149,7 @@
                     <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
                 </div>
 
-                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                <div class="{{#if system.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
                     {{#ifEquals system.type "essential"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
@@ -207,7 +190,7 @@
                 </div>
             </div>
 
-            <div class="{{#if data.toggles.monsterdisadvVis}}hidden{{/if}}">
+            <div class="{{#if system.toggles.monsterdisadvVis}}hidden{{/if}}">
                 <h5>{{localize "abfalter.monsterPowers.disadvAbi"}}</h5>
 
                 <div>
@@ -216,7 +199,7 @@
                     <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
                 </div>
 
-                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                <div class="{{#if system.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
                     {{#ifEquals system.type "disadv"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
@@ -266,7 +249,7 @@
                     <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
                 </div>
 
-                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                <div class="{{#if system.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
                     {{#ifEquals system.type "misc"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
@@ -307,7 +290,7 @@
                 </div>
             </div>
 
-            <div class="{{#if data.toggles.monsterdivineVis}}hidden{{/if}}">
+            <div class="{{#if system.toggles.monsterdivineVis}}hidden{{/if}}">
                 <h5>{{localize "abfalter.monsterPowers.divineAbi"}}</h5>
 
                 <div>
@@ -316,7 +299,7 @@
                     <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
                 </div>
 
-                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                <div class="{{#if system.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
                     {{#ifEquals system.type "divine"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
@@ -368,7 +351,7 @@
                     <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
                 </div>
 
-                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                <div class="{{#if system.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
                     {{#ifEquals system.type "combat"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
@@ -409,7 +392,7 @@
                 </div>
             </div>
 
-            <div class="{{#if data.toggles.monsterdefVis}}hidden{{/if}}">
+            <div class="{{#if system.toggles.monsterdefVis}}hidden{{/if}}">
                 <h5>{{localize "abfalter.monsterPowers.defenseAbi"}}</h5>
 
                 <div>
@@ -418,7 +401,7 @@
                     <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
                 </div>
 
-                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                <div class="{{#if system.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
                     {{#ifEquals system.type "defense"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
@@ -468,7 +451,7 @@
                     <span>{{localize "abfalter.basicInfo.gnosis"}}</span>
                 </div>
 
-                <div class="{{#if data.itemToggle.monsterPowers}}item-list{{/if}}">
+                <div class="{{#if system.itemToggle.monsterPowers}}item-list{{/if}}">
                     {{#each monsterPowers as |monsterPower id|}}
                     {{#ifEquals system.type "other"}}
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">

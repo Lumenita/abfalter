@@ -69,7 +69,6 @@ async function psychicChatUpdate(msg, label) {
     let cardData = msg.flags.cardData
     cardData.expand = false; 
 
-    console.log(cardData);
     switch (label) {
         case "20":
             cardData.diff = "Routine";

@@ -7,7 +7,7 @@
                 <span> {{localize "abfalter.generalTab.title"}} </span>
                 <span> {{localize "abfalter.generalTab.elan"}} </span>
             </div>
-            <div class="{{#if data.itemToggle.elan}}item-list{{/if}}">
+            <div class="{{#if system.itemToggle.elan}}item-list{{/if}}">
                 {{#each elans as |elan id|}}
                 <div class="elan-item item normal-item" data-item-id="{{elan._id}}">
                     {{#if system.expand}}
@@ -58,14 +58,14 @@
             </div>
             <div class="itemControls">
                 <a class="item-control item-create" data-type="elan"><i class="fas fa-plus"></i> {{localize "abfalter.generalTab.addElan"}} </a>
-                <a class="toggleBoolean {{#if data.itemToggle.elan}}armorpenalty{{/if}}" data-label="data.itemToggle.elan" data-ability="{{data.itemToggle.elan}}"><i class="{{#if data.itemToggle.elan}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                <a class="toggleBoolean {{#if system.itemToggle.elan}}armorpenalty{{/if}}" data-label="system.itemToggle.elan" data-ability="{{system.itemToggle.elan}}"><i class="{{#if system.itemToggle.elan}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
             </div>
         </div>
 
         <div class="natura">
             <h5> {{localize "abfalter.basicInfo.natura"}} </h5>
             <div>
-                <label> <span> {{localize "abfalter.basicInfo.destiny"}} </span> <input type="number" name="data.destiny" value="{{data.destiny}}" /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.destiny"}} </span> <input type="number" name="system.destiny" value="{{system.destiny}}" /> </label>
             </div>
         </div>
     </div>
@@ -78,7 +78,7 @@
                 <span> {{localize "abfalter.generalTab.giftName"}} </span>
                 <span> {{localize "abfalter.generalTab.elan"}} </span>
             </div>
-            <div class="{{#if data.itemToggle.elan}}item-list{{/if}}">
+            <div class="{{#if system.itemToggle.elan}}item-list{{/if}}">
                 {{#each elans as |elan id|}}
                 <div class="elan-item2 item" data-item-id="{{elan._id}}">
                     {{#if system.gifts.one.bought}}
@@ -439,16 +439,16 @@
         <div>
             <h5> {{localize "abfalter.basicInfo.note"}} </h5>
             <div style="display: grid;">
-                <textarea class="textarea-auto-resize" name="data.notesOne" style="grid-area: 1 / 1 / 2/ 2;">{{data.notesOne}}</textarea>
-                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.notesOne}}</div>
+                <textarea class="textarea-auto-resize" name="system.notesOne" style="grid-area: 1 / 1 / 2/ 2;">{{system.notesOne}}</textarea>
+                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.notesOne}}</div>
             </div>
         </div>
 
         <div>
             <h5> {{localize "abfalter.basicInfo.note"}} </h5>
             <div style="display: grid;">
-                <textarea class="textarea-auto-resize" name="data.notesTwo" style="grid-area: 1 / 1 / 2/ 2;">{{data.notesTwo}}</textarea>
-                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{data.notesTwo}}</div>
+                <textarea class="textarea-auto-resize" name="system.notesTwo" style="grid-area: 1 / 1 / 2/ 2;">{{system.notesTwo}}</textarea>
+                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.notesTwo}}</div>
             </div>
         </div>
     </div>

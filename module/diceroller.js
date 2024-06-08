@@ -64,7 +64,7 @@ export async function rollCharacteristic(html, actorData, finalValue, label) {
 
     let baseDice = "1d10";
     let rollFormula = `${baseDice} + ${finalValue} + ${fatigueMod} + ${mod}`;
-    let rollResult = await new Roll(rollFormula, actorData).roll({ async: true });
+    let rollResult = await new Roll(rollFormula, actorData).roll();
     rollResult.rolledDice = rollResult.total - finalValue - fatigueMod - mod;
     let roll = parseInt(rollResult.total);
 
@@ -104,7 +104,7 @@ async function rollSecondary(html, actorData, finalValue, label) {
     let fatigueFinal = Math.floor(fatigueMod * 15);
     let baseDice = "1d100";
     let rollFormula = `${baseDice} + ${finalValue} + ${fatigueFinal} + ${mod}`
-    const rollResult = await new Roll(rollFormula, actorData).roll({ async: true });
+    const rollResult = await new Roll(rollFormula, actorData).roll();
     rollResult.rolledDice = rollResult.total - finalValue - fatigueFinal - mod;
 
     let fumbleRange = actorData.system.fumbleRangeFinal;
@@ -176,7 +176,7 @@ async function rollCombatWeapon(html, actorData, finalValue, label, complex) {
     let fatigueFinal = Math.floor(fatigueMod * 15);
     let baseDice = "1d100";
     let rollFormula = `${baseDice} + ${finalValue} + ${fatigueFinal} + ${mod}`
-    const rollResult = await new Roll(rollFormula, actorData).roll({ async: true });
+    const rollResult = await new Roll(rollFormula, actorData).roll();
     rollResult.rolledDice = rollResult.total - finalValue - fatigueFinal - mod;
 
     let fumbleRange = actorData.system.fumbleRangeFinal;
@@ -267,7 +267,7 @@ export async function rollResistance(html, actorData, finalValue, label) {
 
     let baseDice = "1d100";
     let rollFormula = `${baseDice} + ${finalValue} + ${mod}`;
-    let rollResult = await new Roll(rollFormula, actorData).roll({ async: true });
+    let rollResult = await new Roll(rollFormula, actorData).roll();
     rollResult.rolledDice = rollResult.total - finalValue - mod;
 
     rollResult.color = "";
@@ -302,7 +302,7 @@ export async function rollBreakage(html, actorData, finalValue, label) {
 
     let baseDice = "1d10";
     let rollFormula = `${baseDice} + ${finalValue} + ${mod}`;
-    let rollResult = await new Roll(rollFormula, actorData).roll({ async: true });
+    let rollResult = await new Roll(rollFormula, actorData).roll();
     rollResult.rolledDice = rollResult.total - finalValue - mod;
 
     const template = "systems/abfalter/templates/dialogues/breakRoll.html"
@@ -324,7 +324,7 @@ export async function openRollFunction(msg) {
 
     let baseDice = "1d100";
     let rollFormula = `${baseDice} + ${msg.flags.rollData[1]}`
-    let rollResult = await new Roll(rollFormula).roll({ async: true });
+    let rollResult = await new Roll(rollFormula).roll();
     rollResult.rolledDice = rollResult.total - msg.flags.rollData[1];
     rollResult.openRange = msg.flags.rollData[3];
     rollResult.data.name = msg.speaker.alias;
@@ -379,7 +379,7 @@ export async function fumbleRollFunction(msg) {
     } else {
         rollFormula = `${msg.flags.rollData[1]} - ${baseDice} - ${msg.flags.rollData[5]}`
     };
-    let rollResult = await new Roll(rollFormula).roll({ async: true });
+    let rollResult = await new Roll(rollFormula).roll();
     rollResult.rolledDice = rollResult.total - msg.flags.rollData[1];
     rollResult.data.name = msg.speaker.alias;
 
