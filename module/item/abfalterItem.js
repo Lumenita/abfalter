@@ -336,7 +336,7 @@ export default class abfalterItem extends Item {
                     break;
                 default:
                     this.system.mod = 0;
-                    this.system.localizedName = game.i18n.localize('abfalter.customSecondaryDropdown.none');
+                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.none');
                     break;
             }
         } else {

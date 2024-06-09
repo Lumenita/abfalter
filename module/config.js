@@ -973,7 +973,18 @@ abfalter.activeEffectChanges = {
     kiPoolInnate: "abfalter.activeEffectChanges.kiPoolInnate",
     healthRegen: "abfalter.activeEffectChanges.healthRegen",
     secAbility: "abfalter.activeEffectChanges.secAbility"
+}
 
+abfalter.customSecondaryDropdown = {
+    none: "abfalter.basicInfo.none",
+    agi: "abfalter.basicInfo.agi",
+    con: "abfalter.basicInfo.con",
+    dex: "abfalter.basicInfo.dex",
+    str: "abfalter.basicInfo.str",
+    per: "abfalter.basicInfo.per",
+    int: "abfalter.basicInfo.int",
+    pow: "abfalter.basicInfo.pow",
+    wp: "abfalter.basicInfo.wp"
 }
 
 abfalter.MonsterPowerDropdown = {

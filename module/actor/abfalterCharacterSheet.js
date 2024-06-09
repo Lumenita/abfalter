@@ -102,7 +102,6 @@ export default class abfalterCharacterSheet extends ActorSheet {
         //Dropdowns
         sheetData.customSecObjList = CONFIG.abfalter.customSecondaryDropdown;
         sheetData.InnatePowerObjList = CONFIG.abfalter.innatePowerSettingDropdown;
-
         sheetData.proficiencyObjList = CONFIG.abfalter.proficiencyDropdown;
         sheetData.shieldObjList = CONFIG.abfalter.shieldDropdown;
         sheetData.damageModObjList = CONFIG.abfalter.damageModDropdown;
