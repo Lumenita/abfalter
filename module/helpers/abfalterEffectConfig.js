@@ -1,4 +1,5 @@
 export default class abfalterEffectConfig extends ActiveEffectConfig {
+
     get template() {
         return "systems/abfalter/templates/item/activeEffect-config.html"
     }
@@ -10,6 +11,17 @@ export default class abfalterEffectConfig extends ActiveEffectConfig {
 
         return context;
     }
+
+    activateListeners(html) {
+        super.activateListeners(html);
+
+        html.find(".activeTypes").change(this._categories.bind(this));
+    }
+
+    _categories(event) {
+        const dataset = event.currentTarget.dataset.value;
+    }
+
 
     static initializeChangeKeys() {
         abfalterEffectConfig._availableChangeKeys = {

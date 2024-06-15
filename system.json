@@ -14,7 +14,6 @@
       "discord": "lumenita"
     }
   ],
-  "requires": [],
   "esmodules": [
     "module/abfalter.js"
   ],
@@ -36,6 +35,11 @@
       "lang": "fr",
       "name": "Français",
       "path": "lang/fr.json"
+    },
+    {
+      "lang": "ru",
+      "name": "русский",
+      "path": "lang/ru.json"
     }
   ],
   "packs": [
@@ -52,6 +56,10 @@
   "primaryTokenAttribute": "lp",
   "gridDistance": 5,
   "gridUnits": "ft",
+  "grid": {
+    "distance": 5,
+    "units": "ft"
+  },
   "license": "LICENSE.txt",
   "url": "https://github.com/Lumenita/abfalter",
   "manifest": "https://raw.githubusercontent.com/Lumenita/abfalter/main/system.json",

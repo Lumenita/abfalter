@@ -1,6 +1,6 @@
 export class metaMagicSheet extends ActorSheet {
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["abfalter"],
             template: "systems/abfalter/templates/actor/parts/metaMagic.html",
             width: 1300,
@@ -13,7 +13,7 @@ export class metaMagicSheet extends ActorSheet {
             owner: this.actor.isOwner,
             editable: this.isEditable,
             actor: baseData.actor,
-            data: baseData.actor.system,
+            system: baseData.actor.system,
             config: CONFIG.abfalter
         }
         return sheetData;
@@ -40,7 +40,7 @@ export class metaMagicSheet extends ActorSheet {
                     cost = 0;
                 }
 
-                this.document.update({ [label]: value, [label2]: value2, "data.metaMagic.cost": this.document.system.metaMagic.cost + cost });
+                this.document.update({ [label]: value, [label2]: value2, "system.metaMagic.cost": this.document.system.metaMagic.cost + cost });
             });
         }
     }
