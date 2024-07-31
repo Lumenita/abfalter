@@ -100,9 +100,9 @@ export default class abfalterItem extends Item {
         }
 
         if (this.parent != null) {
-            this.system.finalAtk = Math.floor(this.parent.system.atkfinal + ~~this.system.attack + ~~this.system.quality);
-            this.system.finalBlk = Math.floor(this.parent.system.blkfinal + ~~this.system.block + ~~this.system.shieldBonus + ~~this.system.quality);
-            this.system.finalDod = Math.floor(this.parent.system.dodfinal + ~~this.system.dodge + ~~this.system.shieldBonus2);
+            this.system.finalAtk = Math.floor(this.parent.system.combatValues.attack.final + ~~this.system.attack + ~~this.system.quality);
+            this.system.finalBlk = Math.floor(this.parent.system.combatValues.block.final + ~~this.system.block + ~~this.system.shieldBonus + ~~this.system.quality);
+            this.system.finalDod = Math.floor(this.parent.system.combatValues.dodge.final + ~~this.system.dodge + ~~this.system.shieldBonus2);
 
             if (this.parent.system.kiAbility.kiAuraEx.status == true) {
                 this.system.kiBonus = 5;
@@ -229,7 +229,7 @@ export default class abfalterItem extends Item {
 
         if (this.parent != null) {
             if (this.parent) {
-                this.system.newPotential = Math.floor(~~this.parent.system.finalPotential + ~~this.system.bonus);
+                this.system.newPotential = Math.floor(~~this.parent.system.ppotential.final + ~~this.system.bonus);
             }
         }
     }
@@ -298,7 +298,7 @@ export default class abfalterItem extends Item {
     prepareSecondary() {
 
         if (this.parent != null) {
-            this.system.aam = this.parent.system.aamFinal;
+            this.system.aam = this.parent.system.aamField.final;
             this.system.collapse = this.parent.system.toggles.customSecondary;
 
             switch (this.system.atr) {

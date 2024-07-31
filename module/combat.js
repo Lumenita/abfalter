@@ -19,7 +19,7 @@ export default class abfalterCombat extends Combat {
             const combatant = this.combatants.get(id);
 
             await super.rollInitiative(id, {
-                formula: `1d100 + ${combatant?.actor?.system.iniFinal} + ${mod}`,
+                formula: `1d100 + ${combatant?.actor?.system.initiative.final} + ${mod}`,
                 updateTurn,
                 messageOptions
             });

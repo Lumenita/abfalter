@@ -9,19 +9,20 @@ export const preloadHandlebarsTemplates = () => {
         templates.dialog.combat.combatAttackDialog.parts.combat,
         templates.dialog.combat.combatAttackDialog.parts.mystic,
         //actor tabs
-        "systems/abfalter/templates/actor/parts/bio.html",
-        "systems/abfalter/templates/actor/parts/general.html",
-        "systems/abfalter/templates/actor/parts/background.html",
-        "systems/abfalter/templates/actor/parts/magic.html",
-        "systems/abfalter/templates/actor/parts/psychic.html",
-        "systems/abfalter/templates/actor/parts/ki.html",
-        "systems/abfalter/templates/actor/parts/armory.html",
-        "systems/abfalter/templates/actor/parts/settings.html",
-        "systems/abfalter/templates/actor/parts/monster.html",
-        "systems/abfalter/templates/actor/parts/effect.html",
+        "systems/abfalter/templates/actor/parts/bio.hbs",
+        "systems/abfalter/templates/actor/parts/general.hbs",
+        "systems/abfalter/templates/actor/parts/background.hbs",
+        "systems/abfalter/templates/actor/parts/magic.hbs",
+        "systems/abfalter/templates/actor/parts/psychic.hbs",
+        "systems/abfalter/templates/actor/parts/ki.hbs",
+        "systems/abfalter/templates/actor/parts/armory.hbs",
+        "systems/abfalter/templates/actor/parts/settings.hbs",
+        "systems/abfalter/templates/actor/parts/monster.hbs",
+        "systems/abfalter/templates/actor/parts/effect.hbs",
         //partials
-        "systems/abfalter/templates/actor/parts/metaMagic.html",
-        "systems/abfalter/templates/actor/parts/active-effects.html"
+        "systems/abfalter/templates/actor/parts/metaMagic.hbs",
+        "systems/abfalter/templates/actor/parts/active-effects.hbs",
+        "systems/abfalter/templates/dialogues/changelog.hbs"
     ];
     return loadTemplates(templatePaths);
 };

@@ -7,7 +7,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["abfalter", "sheet", "actor"],
-            template: "systems/abfalter/templates/actor/actor-sheet.html",
+            template: "systems/abfalter/templates/actor/actor-sheet.hbs",
             width: 900,
             height: 950,
             tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
@@ -221,23 +221,23 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 this.document.update({ "system.zeon.value": Math.min(Math.floor(this.document.system.zeon.value + (value / 1)), max) });
             });
             html.find('.kiAccuHalf').click(ev => {
-                let value = this.document.system.kiPool.agi.current + Math.max(1, Math.floor(this.document.system.kiPoolAgiAccumTot / 2));
-                let value2 = this.document.system.kiPool.con.current + Math.max(1, Math.floor(this.document.system.kiPoolConAccumTot / 2));
-                let value3 = this.document.system.kiPool.dex.current + Math.max(1, Math.floor(this.document.system.kiPoolDexAccumTot / 2));
-                let value4 = this.document.system.kiPool.str.current + Math.max(1, Math.floor(this.document.system.kiPoolStrAccumTot / 2));
-                let value5 = this.document.system.kiPool.pow.current + Math.max(1, Math.floor(this.document.system.kiPoolPowAccumTot / 2));
-                let value6 = this.document.system.kiPool.wp.current + Math.max(1, Math.floor(this.document.system.kiPoolWPAccumTot / 2));
+                let value = this.document.system.kiPool.agi.current + Math.max(1, Math.floor(this.document.system.kiPool.agi.accumTot / 2));
+                let value2 = this.document.system.kiPool.con.current + Math.max(1, Math.floor(this.document.system.kiPool.con.accumTot / 2));
+                let value3 = this.document.system.kiPool.dex.current + Math.max(1, Math.floor(this.document.system.kiPool.dex.accumTot / 2));
+                let value4 = this.document.system.kiPool.str.current + Math.max(1, Math.floor(this.document.system.kiPool.str.accumTot / 2));
+                let value5 = this.document.system.kiPool.pow.current + Math.max(1, Math.floor(this.document.system.kiPool.pow.accumTot / 2));
+                let value6 = this.document.system.kiPool.wp.current + Math.max(1, Math.floor(this.document.system.kiPool.wp.accumTot / 2));
                 this.document.update({
                     "system.kiPool.agi.current": value, "system.kiPool.con.current": value2, "system.kiPool.dex.current": value3,
                     "system.kiPool.str.current": value4, "system.kiPool.pow.current": value5, "system.kiPool.wp.current": value6 });
             });
             html.find('.kiAccuFull').click(ev => {
-                let value = this.document.system.kiPool.agi.current + this.document.system.kiPoolAgiAccumTot;
-                let value2 = this.document.system.kiPool.con.current + this.document.system.kiPoolConAccumTot;
-                let value3 = this.document.system.kiPool.dex.current + this.document.system.kiPoolDexAccumTot;
-                let value4 = this.document.system.kiPool.str.current + this.document.system.kiPoolStrAccumTot;
-                let value5 = this.document.system.kiPool.pow.current + this.document.system.kiPoolPowAccumTot;
-                let value6 = this.document.system.kiPool.wp.current + this.document.system.kiPoolWPAccumTot;
+                let value = this.document.system.kiPool.agi.current + this.document.system.kiPool.agi.accumTot;
+                let value2 = this.document.system.kiPool.con.current + this.document.system.kiPool.con.accumTot;
+                let value3 = this.document.system.kiPool.dex.current + this.document.system.kiPool.dex.accumTot;
+                let value4 = this.document.system.kiPool.str.current + this.document.system.kiPool.str.accumTot;
+                let value5 = this.document.system.kiPool.pow.current + this.document.system.kiPool.pow.accumTot;
+                let value6 = this.document.system.kiPool.wp.current + this.document.system.kiPool.wp.accumTot;
                 this.document.update({
                     "system.kiPool.agi.current": value, "system.kiPool.con.current": value2, "system.kiPool.dex.current": value3,
                     "system.kiPool.str.current": value4, "system.kiPool.pow.current": value5, "system.kiPool.wp.current": value6

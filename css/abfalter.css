@@ -5505,20 +5505,27 @@ h6 {
     display: flex;
     justify-content: center;
 }
-.secondarychatmsg > div:nth-of-type(2) {
+.secondarychatmsg > div:not(:nth-of-type(1)) {
     display: flex;
     justify-content: space-between;
+}
+.secondarychatmsg > div:nth-last-of-type(2) {
     border-image: url(../img/border.png) 10 stretch;
     border-top: 5px solid black;
     border-bottom: 5px solid black;
     margin-top: 3px;
     margin-bottom: 3px;
 }
-.secondarychatmsg > div:nth-of-type(2) > span:nth-of-type(1) {
+.secondarychatmsg > div:not(:nth-of-type(1)) > span:nth-of-type(1) {
     padding-left: 10%;
 }
-.secondarychatmsg > div:nth-of-type(2) > span:nth-of-type(2) {
+.secondarychatmsg > div:not(:nth-of-type(1)) > span:nth-of-type(2) {
     padding-right: 10%;
+}
+.fumbleSeverity {
+    padding: 0 10%;
+    display: flex;
+    justify-content: space-between;
 }
 .openRollMod,
 .fumblerollmod {
@@ -5652,14 +5659,53 @@ h6 {
     white-space: pre-wrap;
 }
 
-
-
-
-
-
-
-
-
+/*
+    ***************
+    ---------------
+      Changelog
+    ---------------
+    ***************
+*/
+.changelogHeader > div {
+    display: flex;
+    justify-content: flex-end;
+}
+.changelogHeader > div > span {
+    font-size: 14px;
+    color: var(--boxColor);
+}
+.changelog > h5 {
+    justify-content: start;
+    font-size: 35px;
+    border-bottom: 1px solid var(--boxColor);
+}
+.changelogSection {
+    padding: 15px 0 0 0;
+}
+.changelogSection > h6 {
+    justify-content: start;
+    font-size: 25px;
+}
+.changelogSection > span {
+    display: flex;
+    padding: 7px 0;
+}
+.changelogList > h5 {
+    justify-content: start;
+    font-size: 17px;
+}
+.changelogButtons {
+    display: flex;
+    justify-content: space-evenly;
+}
+.changelogButtons > button {
+    width: 45%;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+    border: 1px solid var(--boxColor);
+}
 /*
     ***************
     ---------------
@@ -5677,6 +5723,7 @@ h6 {
   position: fixed;
   bottom: 75px;
   left: 200px;
+  visibility: hidden;
 }
 .customActionBar .macros {
   display: flex;

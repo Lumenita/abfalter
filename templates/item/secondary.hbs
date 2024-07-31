@@ -10,17 +10,21 @@
             </h1>
 
             <div class="item-subtitle">
-                <h4 class="item-type">{{localize "abfalter.sheet.martialArtTitle"}}</h4>
+                <h4 class="item-type">{{localize "abfalter.sheet.secAbility"}}</h4>
+                <span class="item-subType">
+                    {{localize "abfalter.sheet.fav"}}
+                    <a class="toggleBoolean" data-label="system.fav" data-ability="{{system.fav}}"><i class="{{#if system.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
+                </span>
             </div>
 
             <ul class="summary flexrow">
+                <li>{{localize "abfalter.basicInfo.final"}}: {{system.finalValue}}</li>
                 <li>
-                    <select name="system.degree">
-                        {{selectOptions martialArtsObjList selected=system.degree localize=true}}
+                    <select name="system.atr">
+                        {{selectOptions customSecObjList selected=system.atr localize=true}}
                     </select>
                 </li>
-                <li>{{localize "abfalter.basicInfo.dp"}}: {{system.dp}}</li>
-                <li>{{localize "abfalter.basicInfo.mk"}}: {{system.mk}}</li>
+                <li></li>
             </ul>
         </div>
     </header>
@@ -46,17 +50,18 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h6> {{localize "abfalter.sheet.martialArtTitle"}} {{ localize "abfalter.basicInfo.details" }} </h6>
-            <label> <span> {{localize "abfalter.basicInfo.dp"}} </span> <input type="number" name="system.dp" value="{{system.dp}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.mk"}} </span> <input type="number" name="system.mk" value="{{system.mk}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.attack"}} </span> <input type="number" name="system.bonusAtk" value="{{system.bonusAtk}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.block"}} </span> <input type="number" name="system.bonusDef" value="{{system.bonusDef}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.dodge"}} </span> <input type="number" name="system.bonusDod" value="{{system.bonusDod}}" /> </label>
+            <h6> {{localize "abfalter.sheet.secAbility"}} {{ localize "abfalter.basicInfo.details" }} </h6>
+            <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.base" value="{{system.base}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.spec" value="{{system.spec}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.extra"}} </span> <input type="number" name="system.extra" value="{{system.extra}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.temp" value="{{system.temp}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="system.nat" value="{{system.nat}}" /> </label>
+            <label> <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="system.natural" value="{{system.natural}}" /> </label>
         </div>
 
         {{!-- Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> systems/abfalter/templates/actor/parts/active-effects.html }}
+            {{> systems/abfalter/templates/actor/parts/active-effects.hbs }}
         </div>
     </section>
 

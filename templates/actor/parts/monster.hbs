@@ -39,13 +39,13 @@
             </div>
             <div>
                 {{#if system.toggles.monsterNatWep}}
-                <label><span>{{localize "abfalter.monsterPowers.natWepDmg"}}</span> <span>{{system.monsterNaturalDmg}}</span></label>
-                <label><span>{{localize "abfalter.monsterPowers.natWepFort"}}</span> <span>{{system.monsternatFort}}</span></label>
-                <label><span>{{localize "abfalter.monsterPowers.NatWepBreak"}}</span> <span>{{system.monsterNatBreak}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.natWepDmg"}}</span> <span>{{system.monsterStats.naturalDmg}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.natWepFort"}}</span> <span>{{system.monsterStats.fort}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.NatWepBreak"}}</span> <span>{{system.monsterStats.natBreak}}</span></label>
                 {{else}}
-                <label><span>{{localize "abfalter.monsterPowers.physDmg"}}</span> <span>{{system.monsterPhysicalDmg}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.physDmg"}}</span> <span>{{system.monsterStats.physDmg}}</span></label>
                 {{/if}}
-                <label><span>{{localize "abfalter.monsterPowers.actionArea"}}</span> <span>{{system.monsterActionArea}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.actionArea"}}</span> <span>{{system.monsterStats.actionArea}}</span></label>
             </div>
             <div>
                 <span> {{localize "abfalter.monsterPowers.dmgRes"}} </span>
@@ -60,7 +60,7 @@
             </div>
             {{#if system.toggles.dmgRes}}
             <div>
-                <label><span>{{localize "abfalter.monsterPowers.baseArmor"}}</span> <span>{{system.monsterArmor}}</span></label>                
+                <label><span>{{localize "abfalter.monsterPowers.baseArmor"}}</span> <span>{{system.monsterStats.armor}}</span></label>                
                 <label><span>{{localize "abfalter.monsterPowers.healthMult"}}</span> <span>{{system.lifepoints.hpMult}}</span></label>                
                 <label><span>{{localize "abfalter.monsterPowers.dpHP"}}</span> <input type="number" name="system.monsterStats.hpDp" value="{{system.monsterStats.hpDp}}" /></label>
                 <label><span>{{localize "abfalter.monsterPowers.totalAddHP"}}</span> <span>{{system.lifepoints.hpDmgRes}}</span></label>                
@@ -126,10 +126,10 @@
                 </button>
             </div>
             <div>
-                <label> <span>{{localize "abfalter.basicInfo.gnosis"}}</span> <input type="number" name="system.gnosis" value="{{system.gnosis}}" /> </label>
-                <label><span>{{localize "abfalter.monsterPowers.totalCharDp"}}</span> <span>{{system.monsterCharCombCost}}</span></label>
-                <label><span>{{localize "abfalter.monsterPowers.totalPowDp"}}</span> <span>{{system.monsterPowerCost}}</span></label>
-                <label><span>{{localize "abfalter.monsterPowers.totalDpSpent"}}</span> <span>{{system.monstTotDP}}</span></label>
+                <label> <span>{{localize "abfalter.basicInfo.gnosis"}}</span> <input type="number" name="system.info.gnosis" value="{{system.info.gnosis}}" /> </label>
+                <label><span>{{localize "abfalter.monsterPowers.totalCharDp"}}</span> <span>{{system.monsterStats.charCombinedCost}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.totalPowDp"}}</span> <span>{{system.monsterStats.powersCost}}</span></label>
+                <label><span>{{localize "abfalter.monsterPowers.totalDpSpent"}}</span> <span>{{system.monsterStats.totalDP}}</span></label>
             </div>
             <div>
                 <a class="item-control item-create" data-type="monsterPower"><i class="fas fa-plus"></i> {{localize "abfalter.monsterPowers.addMonsterPower"}} </a>

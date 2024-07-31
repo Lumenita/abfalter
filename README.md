@@ -34,11 +34,11 @@ I would love support from the community! I am open to any feedback, whether its 
 # Me
 You can reach me on discord: @Lumenita 
 
-If you wish to support what I do: https://ko-fi.com/luminitatv
+If you wish to support the systema & what I do: https://ko-fi.com/luminitatv
 
 # Modules
 If there are any difficulties with modules, I can attempt to fix whatever problem there is if its within my ability to do so.
-If you end up using a module called Drag Ruler, for the Speed Attribute put 'actor.system.fullmove' & and Dash Multiplier to 0.25
+If you end up using a module called Drag Ruler, for the Speed Attribute put 'actor.system.movement.fullMove' & and Dash Multiplier to 0.25
 
 # Character Sheet
 ![characterSheet](https://github.com/Lumenita/abfalter/assets/61290963/3dff4b59-e2bc-4f00-8f46-dd4dbdf01f06)

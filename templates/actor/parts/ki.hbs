@@ -653,8 +653,8 @@
                 <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.agi"}} </span>
-                        <input type="number" name="system.kiPoolAgiAccumTot" value="{{system.kiPoolAgiAccumTot}}" readonly />
-                        <input type="number" name="system.kiPoolAgiTot" value="{{system.kiPoolAgiTot}}" readonly />
+                        <input type="number" name="system.kiPool.agi.accumTot" value="{{system.kiPool.agi.accumTot}}" readonly />
+                        <input type="number" name="system.kiPool.agi.poolTot" value="{{system.kiPool.agi.poolTot}}" readonly />
                         {{#if system.toggles.unifiedPools}}
                         <span></span>
                         {{else}}
@@ -689,8 +689,8 @@
                 <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.con"}} </span>
-                        <input type="number" name="system.kiPoolConAccumTot" value="{{system.kiPoolConAccumTot}}" readonly />
-                        <input type="number" name="system.kiPoolConTot" value="{{system.kiPoolConTot}}" readonly />
+                        <input type="number" name="system.kiPool.con.accumTot" value="{{system.kiPool.con.accumTot}}" readonly />
+                        <input type="number" name="system.kiPool.con.poolTot" value="{{system.kiPool.con.poolTot}}" readonly />
                         {{#if system.toggles.unifiedPools}}
                         <span></span>
                         {{else}}
@@ -725,8 +725,8 @@
                 <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.dex"}} </span>
-                        <input type="number" name="system.kiPoolDexAccumTot" value="{{system.kiPoolDexAccumTot}}" readonly />
-                        <input type="number" name="system.kiPoolDexTot" value="{{system.kiPoolDexTot}}" readonly />
+                        <input type="number" name="system.kiPool.dex.accumTot" value="{{system.kiPool.dex.accumTot}}" readonly />
+                        <input type="number" name="system.kiPool.dex.poolTot" value="{{system.kiPool.dex.poolTot}}" readonly />
                         {{#if system.toggles.unifiedPools}}
                         <span></span>
                         {{else}}
@@ -761,8 +761,8 @@
                 <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.str"}} </span>
-                        <input type="number" name="system.kiPoolStrAccumTot" value="{{system.kiPoolStrAccumTot}}" readonly />
-                        <input type="number" name="system.kiPoolStrTot" value="{{system.kiPoolStrTot}}" readonly />
+                        <input type="number" name="system.kiPool.str.accumTot" value="{{system.kiPool.str.accumTot}}" readonly />
+                        <input type="number" name="system.kiPool.str.poolTot" value="{{system.kiPool.str.poolTot}}" readonly />
                         {{#if system.toggles.unifiedPools}}
                         <span></span>
                         {{else}}
@@ -797,8 +797,8 @@
                 <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.pow"}} </span>
-                        <input type="number" name="system.kiPoolPowAccumTot" value="{{system.kiPoolPowAccumTot}}" readonly />
-                        <input type="number" name="system.kiPoolPowTot" value="{{system.kiPoolPowTot}}" readonly />
+                        <input type="number" name="system.kiPool.pow.accumTot" value="{{system.kiPool.pow.accumTot}}" readonly />
+                        <input type="number" name="system.kiPool.pow.poolTot" value="{{system.kiPool.pow.poolTot}}" readonly />
                         {{#if system.toggles.unifiedPools}}
                         <span></span>
                         {{else}}
@@ -833,8 +833,8 @@
                 <div>
                     <div>
                         <span> {{localize "abfalter.basicInfo.wp"}} </span>
-                        <input type="number" name="system.kiPoolWPAccumTot" value="{{system.kiPoolWPAccumTot}}" readonly />
-                        <input type="number" name="system.kiPoolWPTot" value="{{system.kiPoolWPTot}}" readonly />
+                        <input type="number" name="system.kiPool.wp.accumTot" value="{{system.kiPool.wp.accumTot}}" readonly />
+                        <input type="number" name="system.kiPool.wp.poolTot" value="{{system.kiPool.wp.poolTot}}" readonly />
                         {{#if system.toggles.unifiedPools}}
                         <span></span>
                         {{else}}
@@ -898,35 +898,35 @@
                 </div>
                 <div>
                     <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.mk.spec" value="{{system.mk.spec}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.mkBonus" value="{{system.mkBonus}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.mk.class" value="{{system.mk.class}}" readonly /> </label>
                 </div>
                 {{#if system.mk.status}}
                 <div>
-                    <label> <span> {{localize "abfalter.kiTab.martialArts"}}  </span> <input type="number" name="system.mArtMk" value="{{system.mArtMk}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.kiTab.limits"}} </span> <input type="number" name="system.limitsMK" value="{{system.limitsMK}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.kiTab.martialArts"}}  </span> <input type="number" name="system.mk.martialArtsCost" value="{{system.mk.martialArtsCost}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.kiTab.limits"}} </span> <input type="number" name="system.mk.limitsTotalCost" value="{{system.mk.limitsTotalCost}}" readonly /> </label>
                 </div>
                 <div>
-                    <label> <span> {{localize "abfalter.kiTab.kiAbilities"}} </span> <input type="number" name="system.kiThingMK" value="{{system.kiThingMK}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.kiTab.kiSeals"}} </span> <input type="number" name="system.kiSealMk" value="{{system.kiSealMk}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.kiTab.kiAbilities"}} </span> <input type="number" name="system.mk.kiAbilitiesCost" value="{{system.mk.kiAbilitiesCost}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.kiTab.kiSeals"}} </span> <input type="number" name="system.mk.kiSealCost" value="{{system.mk.kiSealCost}}" readonly /> </label>
                 </div>
                 <div>
-                    <label> <span> {{localize "abfalter.kiTab.arsMagnus"}} </span> <input type="number" name="system.arsMagMK" value="{{system.arsMagMK}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.kiTab.kiTechnique"}} </span> <input type="number" name="system.kiTechMk" value="{{system.kiTechMk}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.kiTab.arsMagnus"}} </span> <input type="number" name="system.mk.arsMagCost" value="{{system.mk.arsMagCost}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.kiTab.kiTechnique"}} </span> <input type="number" name="system.mk.kiTechCost" value="{{system.mk.kiTechCost}}" readonly /> </label>
                 </div>
                 {{/if}}
                 <div class="lastMK">
-                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.mkFinal" value="{{system.mkFinal}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.used"}} </span> <input type="number" name="system.mkUsed" value="{{system.mkUsed}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.mk.final" value="{{system.mk.final}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.basicInfo.used"}} </span> <input type="number" name="system.mk.used" value="{{system.mk.used}}" readonly /> </label>
                 </div>
 
                 <div class="kiPoolButtons">
                     <div>
                         <h5> Ki Accu. </h5>
                         <div>
-                            <button type="button" class="kiAccuHalf" data-ability="{{system.maccuhalffinal}}">
+                            <button type="button" class="kiAccuHalf">
                                 <span> {{localize "abfalter.basicInfo.half"}} </span>
                             </button>
-                            <button type="button" class="kiAccuFull" data-ability="{{system.maccufinal}}">
+                            <button type="button" class="kiAccuFull">
                                 <span> {{localize "abfalter.basicInfo.full"}} </span>
                             </button>
                         </div>
@@ -1086,7 +1086,7 @@
                     </div>
                     <span> = </span>
                 </div>
-                <input type="number" name="system.unarmedDmgFinal" value="{{system.unarmedDmgFinal}}" readonly />
+                <input type="number" name="system.fistDamage.final" value="{{system.fistDamage.final}}" readonly />
             </div>
 
             <div class="textarea-div" style="display: grid;">

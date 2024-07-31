@@ -4,14 +4,14 @@ import { templates } from "../utilities/templates.js";
 const gmMacro = [
     {
         macroSelectorId: '#sendAttack',
-        hotkey: e => e.ctrlKey && e.key === '1',
+        hotkey: e => e.ctrlKey && e.key === '0',
         fn: () => window.Websocket.sendAttack?.()
     }
 ];
 const playerMacro = [
     {
         macroSelectorId: '#sendAttackRequest',
-        hotkey: e => e.ctrlKey && e.key === '1',
+        hotkey: e => e.ctrlKey && e.key === '0',
         fn: () => window.Websocket.sendAttackRequest?.()
     }
 ];

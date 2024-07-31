@@ -95,16 +95,16 @@
             <h5> {{localize "abfalter.settingsTab.psychicSettings"}} </h5>
             <div class="{{#if system.toggles.psychicDodgeStatus}}checkLock{{/if}}">
                 <span> {{localize "abfalter.settingsTab.psyAttackModule"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.moduleStatus}}kiBought{{/if}}"
-                        data-label="system.toggles.moduleStatus" data-ability="{{system.toggles.moduleStatus}}">
-                    {{#if system.toggles.moduleStatus}}
+                <button type="button" class="toggleBoolean {{#if system.toggles.psychicModuleStatus}}kiBought{{/if}}"
+                        data-label="system.toggles.psychicModuleStatus" data-ability="{{system.toggles.psychicModuleStatus}}">
+                    {{#if system.toggles.psychicModuleStatus}}
                     <span> {{localize "abfalter.settingsTab.active"}} </span>
                     {{else}}
                     <span> {{localize "abfalter.settingsTab.notActive"}} </span>
                     {{/if}}
                 </button>
             </div>
-            {{#if system.toggles.moduleStatus}}
+            {{#if system.toggles.psychicModuleStatus}}
             <div>
                 <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.magicDodgeModule"}} </span>
                 <button type="button" class="toggleBoolean {{#if system.toggles.psychicDodgeStatus}}kiBought{{/if}}"
@@ -333,7 +333,7 @@
                         </label>
                     </div>
                     <div>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.openRangeFinal" value="{{system.openRangeFinal}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.rollRange.final" value="{{system.rollRange.final}}" readonly /> </label>
                     </div>
                 </div>
 
@@ -345,7 +345,7 @@
                         <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.fumleRange.temp" value="{{system.fumleRange.temp}}" /> </label>
                     </div>
                     <div>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.fumbleRangeFinal" value="{{system.fumbleRangeFinal}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.fumleRange.final" value="{{system.fumleRange.final}}" readonly /> </label>
                     </div>
                 </div>
 

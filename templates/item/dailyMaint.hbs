@@ -1,4 +1,4 @@
-<form class="{{cssClass}} baseAbfalter monsterPowerWindow" autocomplete="off">
+<form class="{{cssClass}} baseAbfalter itemWindow" autocomplete="off">
 
     {{!-- Item Sheet Header --}}
     <header class="sheet-header flexrow">
@@ -10,18 +10,17 @@
             </h1>
 
             <div class="item-subtitle">
-                <h4 class="item-type">{{localize "abfalter.sheet.monsterPowTitle"}}</h4>
-                <span class="item-subType"></span>
+                <h4 class="item-type">{{localize "abfalter.magicTab.dailySpellMaint"}}</h4>
+                <span class="item-subType">
+                    {{localize "abfalter.basicInfo.active"}}?
+                    <a class="toggleBoolean" data-label="system.equipped" data-ability="{{system.equipped}}"><i class="{{#if system.equipped}}fa-solid fa-toggle-on{{else}}fa-solid fa-toggle-off{{/if}}"></i></a>
+                </span>
             </div>
 
             <ul class="summary flexrow">
-                <li>
-                    <select name="system.type">
-                        {{selectOptions monsterTypeObjList selected=system.type localize=true}}
-                    </select>
-                </li>
-                <li>{{localize "abfalter.basicInfo.cost"}}: {{system.cost}}</li>
-                <li>{{localize "abfalter.basicInfo.gnosis"}}: {{system.gnosis}}</li>
+                <li>{{localize "abfalter.magicTab.spellCost"}}: {{system.cost}}</li>
+                <li>{{localize "abfalter.magicTab.zeon"}}: {{system.zeon}}</li>
+                <li></li>
             </ul>
         </div>
     </header>
@@ -38,11 +37,6 @@
 
         {{!-- Description Tab --}}
         <div class="tab description flexcol" data-group="primary" data-tab="description">
-            <h6> {{localize "abfalter.basicInfo.shortDesc"}} </h6>
-            <div style="display: grid;">
-                <textarea class="textarea-auto-resize" name="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;">{{system.shortDesc}}</textarea>
-                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.shortDesc}}</div>
-            </div>
             <h6> {{localize "abfalter.basicInfo.description"}} </h6>
             <div style="display: grid;">
                 <textarea class="textarea-auto-resize" name="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{system.description}}</textarea>
@@ -52,14 +46,14 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h6> {{localize "abfalter.sheet.monsterPowTitle"}} {{ localize "abfalter.basicInfo.details" }} </h6>
-            <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" name="system.cost" value="{{system.cost}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.gnosis"}} </span> <input type="number" name="system.gnosis" value="{{system.gnosis}}" /> </label>
+            <h6> {{localize "abfalter.magicTab.dailySpellMaint"}} {{ localize "abfalter.basicInfo.details" }} </h6>
+            <label> <span> {{localize "abfalter.magicTab.spellCost"}} </span> <input type="number" name="system.cost" value="{{system.cost}}" /> </label>
+            <label> <span> {{localize "abfalter.magicTab.zeon"}} </span> <input type="number" name="system.zeon" value="{{system.zeon}}" /> </label>
         </div>
 
         {{!-- Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> systems/abfalter/templates/actor/parts/active-effects.html }}
+            {{> systems/abfalter/templates/actor/parts/active-effects.hbs }}
         </div>
     </section>
 

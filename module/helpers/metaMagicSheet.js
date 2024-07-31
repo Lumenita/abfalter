@@ -2,7 +2,7 @@ export class metaMagicSheet extends ActorSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["abfalter"],
-            template: "systems/abfalter/templates/actor/parts/metaMagic.html",
+            template: "systems/abfalter/templates/actor/parts/metaMagic.hbs",
             width: 1300,
             height: 950
         });

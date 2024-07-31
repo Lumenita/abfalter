@@ -11,10 +11,10 @@
             <div>
                 <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.ppoint.base" value="{{system.ppoint.base}}" /> </label>
                 <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.ppoint.spec" value="{{system.ppoint.spec}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.ppbonus" value="{{system.ppbonus}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.ppoint.class" value="{{system.ppoint.class}}" readonly /> </label>
             </div>
             {{/if}}
-            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.finalpp" value="{{system.finalpp}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.ppoint.final" value="{{system.ppoint.final}}" readonly /> </label>
             <label> <span> {{localize "abfalter.psychicTab.freeppMax"}} </span> <input type="number" name="system.psychicPoint.max" value="{{system.psychicPoint.max}}" readonly /> </label>
             <label> <span> {{localize "abfalter.psychicTab.freepp"}} </span> <input type="number" name="system.psychicPoint.value" value="{{system.psychicPoint.value}}" /> </label>
         </div>
@@ -29,7 +29,7 @@
             {{#if system.ppotential.status}}
             <div>
                 <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.ppotential.base" value="{{system.ppotential.base}}" /> </label>
-                <label> <span> {{localize "abfalter.psychicTab.fromWP"}} </span> <input type="number" name="system.fromWP" value="{{system.fromWP}}" readonly/> </label>
+                <label> <span> {{localize "abfalter.psychicTab.fromWP"}} </span> <input type="number" name="system.ppotential.wpBase" value="{{system.ppotential.wpBase}}" readonly/> </label>
                 <div class="csSelect1">
                     <label>
                         <span> {{localize "abfalter.basicInfo.spent"}} </span>
@@ -43,9 +43,9 @@
             </div>
             {{/if}}
             <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.ppotential.temp" value="{{system.ppotential.temp}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.finalPotential" value="{{system.finalPotential}}" readonly/> </label>
+            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.ppotential.final" value="{{system.ppotential.final}}" readonly/> </label>
             <div>
-                <button type="button" class="rollable" data-roll="{{system.finalPotential}}" data-label="{{localize "abfalter.psychicTab.psychicPotential"}}" data-type="potentialRoll">
+                <button type="button" class="rollable" data-roll="{{system.ppotential.final}}" data-label="{{localize "abfalter.psychicTab.psychicPotential"}}" data-type="potentialRoll">
                     <span> <i class="fas fa-dice-d20"></i> </span>
                 </button>
             </div>
@@ -65,25 +65,25 @@
             </div>
             {{/if}}
             <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.pproj.temp" value="{{system.pproj.temp}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.pprojfinal" value="{{system.pprojfinal}}" readonly /> </label>
-            {{#if system.toggles.moduleStatus}}
+            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.pproj.final" value="{{system.pproj.final}}" readonly /> </label>
+            {{#if system.toggles.psychicModuleStatus}}
             <div class="pmodButton">
-                <button type="button" class="combatRoll" data-roll="{{system.pprojAtkModule}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.basicInfo.attack"}}: {{system.pprojAtkModule}} </span>
+                <button type="button" class="combatRoll" data-roll="{{system.pproj.atkModule}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
+                    <span> {{localize "abfalter.basicInfo.attack"}}: {{system.pproj.atkModule}} </span>
                 </button>
                 {{#if system.toggles.psychicDodgeStatus}}
-                <button type="button" class="combatRoll" data-roll="{{system.pprojDodModule}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.basicInfo.dodge"}}: {{system.pprojDodModule}} </span>
+                <button type="button" class="combatRoll" data-roll="{{system.pproj.dodModule}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
+                    <span> {{localize "abfalter.basicInfo.dodge"}}: {{system.pproj.dodModule}} </span>
                 </button>
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{system.pprojDefModule}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.basicInfo.block"}}: {{system.pprojDefModule}} </span>
+                <button type="button" class="combatRoll" data-roll="{{system.pproj.defModule}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
+                    <span> {{localize "abfalter.basicInfo.block"}}: {{system.pproj.defModule}} </span>
                 </button>
                 {{/if}}
             </div>
             {{else}}
             <div>
-                <button type="button" class="combatRoll" data-roll="{{system.pprojfinal}}" data-label="{{localize "abfalter.psychicTab.psyProj"}}" data-type="combatRoll">
+                <button type="button" class="combatRoll" data-roll="{{system.pproj.final}}" data-label="{{localize "abfalter.psychicTab.psyProj"}}" data-type="combatRoll">
                     <span> <i class="fas fa-dice-d20"></i> </span>
                 </button>
             </div>
@@ -263,7 +263,7 @@
             <h5> {{localize "abfalter.psychicTab.maintMatrix"}} </h5>
             <div>
                 <label> <span> {{localize "abfalter.psychicTab.numOfSlots"}} </span> <input type="number" name="system.other.innateSlots" value="{{system.other.innateSlots}}" /> </label>
-                <label> <span> {{localize "abfalter.psychicTab.totalppSlots"}}  </span> <input type="number" name="system.innateSlotspp" value="{{system.innateSlotspp}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.psychicTab.totalppSlots"}}  </span> <input type="number" name="system.ppoint.innateSlot" value="{{system.ppoint.innateSlot}}" readonly /> </label>
             </div>
             <div>
                 <span> {{localize "abfalter.basicInfo.name"}} </span>

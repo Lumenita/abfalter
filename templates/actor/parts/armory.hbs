@@ -2,15 +2,15 @@
     <div>
         <div class="wearArmor">
             <h5> {{localize "abfalter.armoryTab.wearArmor"}} </h5>
-            <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.wearArmor.base" value="{{system.wearArmor.base}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.weararmorbonus" value="{{system.weararmorbonus}}" readonly /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.wearArmor.spec" value="{{system.wearArmor.spec}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.wearArmor.temp" value="{{system.wearArmor.temp}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.wearArmorFinal" value="{{system.wearArmorFinal}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.armor.wearArmor.base" value="{{system.armor.wearArmor.base}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.armor.wearArmor.class" value="{{system.armor.wearArmor.class}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.armor.wearArmor.spec" value="{{system.armor.wearArmor.spec}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.armor.wearArmor.temp" value="{{system.armor.wearArmor.temp}}" /> </label>
+            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.armor.wearArmor.final" value="{{system.armor.wearArmor.final}}" readonly /> </label>
             <h5> {{localize "abfalter.armoryTab.armorStats"}} </h5>
-            <label> <span class="armorpenalty"> {{localize "abfalter.armoryTab.totalNatPen"}} </span> <input type="number" name="system.totalNatPen" value="{{system.totalNatPen}}" readonly /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.totalPerPen"}} </span> <input type="number" name="system.totalPerPen" value="{{system.totalPerPen}}" readonly /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.totalMovePen"}} </span> <input type="number" name="system.totalMovePen" value="{{system.totalMovePen}}" readonly /> </label>
+            <label> <span class="armorpenalty"> {{localize "abfalter.armoryTab.totalNatPen"}} </span> <input type="number" name="system.armor.wearArmor.totalNatPen" value="{{system.armor.wearArmor.totalNatPen}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.totalPerPen"}} </span> <input type="number" name="system.armor.wearArmor.totalPerPen" value="{{system.armor.wearArmor.totalPerPen}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.armoryTab.totalMovePen"}} </span> <input type="number" name="system.armor.wearArmor.totalMovePen" value="{{system.armor.wearArmor.totalMovePen}}" readonly /> </label>
             <label> <span> {{localize "abfalter.armoryTab.dmgBarrier"}} </span> <input type="number" name="system.otherStats.damageBarrier" value="{{system.otherStats.damageBarrier}}" /> </label>
             <label> <span> {{localize "abfalter.armoryTab.dmgRdc"}} </span> <input type="number" name="system.otherStats.dmgRdc" value="{{system.otherStats.dmgRdc}}" /> </label>
         </div>
@@ -64,7 +64,7 @@
                 <span> {{localize "abfalter.armoryTab.cold"}} </span>
                 <span> {{localize "abfalter.armoryTab.ele"}} </span>
                 <span> {{localize "abfalter.armoryTab.ene"}} </span>
-                {{#if system.spiritSettings}}
+                {{#if system.other.spiritSettings}}
                 <span> {{localize "abfalter.armoryTab.spirit"}} </span>
                 {{/if}}
             </div>
@@ -118,28 +118,28 @@
             </div>
             <div>
                 <span> {{localize "abfalter.armoryTab.finalHelmet"}} </span>
-                <span> {{system.ahCutFinal}} </span>
-                <span> {{system.ahImpFinal}} </span>
-                <span> {{system.ahThrFinal}} </span>
-                <span> {{system.ahHeatFinal}} </span>
-                <span> {{system.ahColdFinal}} </span>
-                <span> {{system.ahEleFinal}} </span>
-                <span> {{system.ahEneFinal}} </span>
-                {{#if system.spiritSettings}}
-                <span> {{system.ahSptFinal}} </span>
+                <span> {{system.armor.helmet.ahCutFinal}} </span>
+                <span> {{system.armor.helmet.ahImpFinal}} </span>
+                <span> {{system.armor.helmet.ahThrFinal}} </span>
+                <span> {{system.armor.helmet.ahHeatFinal}} </span>
+                <span> {{system.armor.helmet.ahColdFinal}} </span>
+                <span> {{system.armor.helmet.ahEleFinal}} </span>
+                <span> {{system.armor.helmet.ahEneFinal}} </span>
+                {{#if system.other.spiritSettings}}
+                <span> {{system.armor.helmet.ahSptFinal}} </span>
                 {{/if}}
             </div>
             <div>
                 <span> {{localize "abfalter.armoryTab.finalArmor"}} </span>
-                <span> {{system.aCutFinal}} </span>
-                <span> {{system.aImpFinal}} </span>
-                <span> {{system.aThrFinal}} </span>
-                <span> {{system.aHeatFinal}} </span>
-                <span> {{system.aColdFinal}} </span>
-                <span> {{system.aEleFinal}} </span>
-                <span> {{system.aEneFinal}} </span>
-                {{#if system.spiritSettings}}
-                <span> {{system.aSptFinal}} </span>
+                <span> {{system.armor.body.aCutFinal}} </span>
+                <span> {{system.armor.body.aImpFinal}} </span>
+                <span> {{system.armor.body.aThrFinal}} </span>
+                <span> {{system.armor.body.aHeatFinal}} </span>
+                <span> {{system.armor.body.aColdFinal}} </span>
+                <span> {{system.armor.body.aEleFinal}} </span>
+                <span> {{system.armor.body.aEneFinal}} </span>
+                {{#if system.other.spiritSettings}}
+                <span> {{system.armor.body.aSptFinal}} </span>
                 {{/if}}
             </div>
         </div>

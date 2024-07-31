@@ -9,7 +9,8 @@ import abfalterCharacterSheet from "./actor/abfalterCharacterSheet.js";
 import { registerCustomMacros } from "./autoCombat/registerCustomMacros.js";
 import { customMacroBar } from "./autoCombat/customMacroBar.js";
 import { abfalterSettings } from "./utilities/abfalterSettings.js";
-import { migrateWorld } from "./utilities/migration.js";
+import { handleMigrations } from "./utilities/migration.js";
+import { handleChangelog } from "./utilities/changelog.js";
 import { abfalterSettingsKeys } from "./utilities/abfalterSettings.js";
 import abfalterEffectConfig from "./helpers/abfalterEffectConfig.js";
 
@@ -53,52 +54,34 @@ Hooks.once('ready', () => {
 });
 
 Hooks.once("ready", function () {
-
     if (!game.user.isGM) {
-        return;
+        return
     }
-
-    const currentVersion = game.settings.get("abfalter", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "1.4.0";
-
-    console.log(currentVersion);
-
-    const needsMigration = !currentVersion || foundry.utils.isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
-
-    console.log(needsMigration);
-
-
-    if (needsMigration) {
-        migrateWorld();
+    if (game.settings.get("abfalter", "systemChangeLog") === false) {
+        handleChangelog();
     }
-})
-
-Hooks.once('setup', function () {
-    // Set active effect keys-labels
-    abfalterEffectConfig.initializeChangeKeys();
-
+    handleMigrations();
 })
 
 Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 
+Hooks.once('setup', function () {
+    // Set active effect keys-labels
+    abfalterEffectConfig.initializeChangeKeys();
+})
+
+//@TODO
 Hooks.on('createActiveEffect', async (activeEffect, _, userId) => {
     let activeType = "attack";
     const arr = [{ activeType }];
     await activeEffect.setFlag('abfalter', 'data.changes', arr);
 })
 
-/*
-const _preLocalizationRegistrations = {};
-
-function preLocalize(configKeyPath, { key, keys = [], sort = false } = {}) {
-    if (key) keys.unshift(key);
-    _preLocalizationRegistrations[configKeyPath] = { keys, sort };
-}*/
-
-
-
+/**
+ * Data Models from here on 
+ */
 function makeIntField(init = 0, max, min) {
     return new foundry.data.fields.NumberField({
         required: true,
@@ -128,35 +111,51 @@ function makeHtmlField(init = '') {
     })
 }
 
-
 class actorDataModel extends foundry.abstract.DataModel {
     static defineSchema() {
         const type = 'character';
 
         return {
-            system: new foundry.data.fields.SchemaField({ //move out of system to info @CHANGE
+            lp: valueMaxAbility(),
+            shield: valueMaxAbility(),
+            unifiedKi: valueMaxAbility(),
+            psychicPoint: valueMaxAbility(),
+            innatePowerKi: valueMaxAbility(),
+            info: new foundry.data.fields.SchemaField({
+                race: makeStringField(),
+                class: makeStringField(),
+                gender: makeStringField(),
+                height: makeStringField(),
+                weight: makeStringField(),
+                size: makeStringField(),
+                age: makeStringField(),
+                appearance: makeStringField(),
+                notesOne: makeStringField(),
+                notesTwo: makeStringField(),
+                destiny: makeIntField(),
+                gnosis: makeIntField(),
                 bio: makeHtmlField()
             }),
-            race: makeStringField(), //bundle all the info together @CHANGE
-            class: makeStringField(),
-            gender: makeStringField(),
-            height: makeStringField(),
-            weight: makeStringField(),
-            size: makeStringField(),
-            age: makeStringField(),
-            appearance: makeStringField(),
-            experience: makeIntField(), //bundle info partial break
-            notesOne: makeStringField(), //bundle all info cont @CHANGE
-            notesTwo: makeStringField(),
-            destiny: makeIntField(),
-            gnosis: makeIntField(), //bundle info end
             levelinfo: new foundry.data.fields.SchemaField({
+                experience: makeIntField(),
                 levelmod: makeIntField(),
                 levelmodBonus: makeIntField(),
                 presencemod: makeIntField(),
                 presencemodBonus: makeIntField(),
                 dpmod: makeIntField(),
                 dpmodBonus: makeIntField()
+            }),
+            aamField: new foundry.data.fields.SchemaField({
+                base: makeIntField(),
+                boon: makeIntField(),
+                crit: makeIntField(),
+                bonus: makeIntField()
+            }),
+            otherStats: new foundry.data.fields.SchemaField({
+                itemPresence: makeIntField(),
+                damageBarrier: makeIntField(),
+                dmgRdc: makeIntField(),
+                artPresence: makeIntField()
             }),
             rollRange: new foundry.data.fields.SchemaField({
                 base: makeIntField(90),
@@ -190,7 +189,10 @@ class actorDataModel extends foundry.abstract.DataModel {
                 armorHelmet: makeBoolField(),
                 spellPath: makeBoolField(),
                 spell: makeBoolField(),
+                invocation: makeBoolField(),
+                incarnation: makeBoolField(),
                 turnMaint: makeBoolField(),
+                dailyMaint: makeBoolField(),
                 elan: makeBoolField(),
                 class: makeBoolField(),
                 secondary: makeBoolField(),
@@ -238,15 +240,12 @@ class actorDataModel extends foundry.abstract.DataModel {
                 monsterdisadvVis: makeBoolField(),
                 monsterdefVis: makeBoolField(),
                 monsterdivineVis: makeBoolField(),
-                monsterTab: makeBoolField(),
-                effectTab: makeBoolField()
+                monsterTab: makeBoolField(true),
+                effectTab: makeBoolField(),
+                psychicDodgeStatus: makeBoolField(),
+                psychicModuleStatus: makeBoolField(),
             }),
-            lp: valueMaxAbility(),
-            shield: valueMaxAbility(),
-            unifiedKi: valueMaxAbility(),
-            psychicPoint: valueMaxAbility(),
-            innatePowerKi: valueMaxAbility(),
-            stats: new foundry.data.fields.SchemaField({ //rename stats to characteristics && toLowercase @CHANGE
+            stats: new foundry.data.fields.SchemaField({
                 Agility: characteristics(),
                 Constitution: characteristics(),
                 Strength: characteristics(),
@@ -256,7 +255,7 @@ class actorDataModel extends foundry.abstract.DataModel {
                 Power: characteristics(),
                 Willpower: characteristics()
             }),
-            resistances: new foundry.data.fields.SchemaField({ //to lowercase @CHANGE
+            resistances: new foundry.data.fields.SchemaField({
                 Physical: resistances(),
                 Disease: resistances(),
                 Poison: resistances(),
@@ -292,31 +291,18 @@ class actorDataModel extends foundry.abstract.DataModel {
                 value: makeIntField(),
                 bonus: makeIntField()
             }),
-            combatstats: new foundry.data.fields.SchemaField({ //organize @CHANGE
-                atkbase: makeIntField(),
-                atkspecial: makeIntField(),
-                atktemp: makeIntField(),
-                atkbonus: makeIntField(),
-                atkStatus: makeBoolField(),
-                blkbase: makeIntField(),
-                blkspecial: makeIntField(),
-                blktemp: makeIntField(),
-                blkbonus: makeIntField(),
-                blkStatus: makeBoolField(),
-                dodbase: makeIntField(),
-                dodspecial: makeIntField(),
-                dodtemp: makeIntField(),
-                dodbonus: makeIntField(),
-                dodStatus: makeBoolField()
+            combatValues: new foundry.data.fields.SchemaField({
+                attack: combatValues(),
+                block: combatValues(),
+                dodge: combatValues()
             }),
             initiative: new foundry.data.fields.SchemaField({
                 status: makeBoolField(),
-                name: makeStringField(), //useless - delete @CHANGE
                 spec: makeIntField(),
                 bonus: makeIntField()
             }),
-            secondary: new foundry.data.fields.SchemaField({
-                main: new foundry.data.fields.SchemaField({
+            secondaryFields: new foundry.data.fields.SchemaField({
+                category: new foundry.data.fields.SchemaField({
                     athletics: makeBoolField(),
                     social: makeBoolField(),
                     perceptive: makeBoolField(),
@@ -325,78 +311,86 @@ class actorDataModel extends foundry.abstract.DataModel {
                     subterfuge: makeBoolField(),
                     creative: makeBoolField()
                 }),
-                acrobatics: secondaryAbilities(),
-                athleticism: secondaryAbilities(),
-                climb: secondaryAbilities(),
-                jump: secondaryAbilities(),
-                ride: secondaryAbilities(),
-                swim: secondaryAbilities(),
-                etiquette: secondaryAbilities(),
-                intimidate: secondaryAbilities(),
-                leadership: secondaryAbilities(),
-                persuasion: secondaryAbilities(),
-                streetwise: secondaryAbilities(),
-                style: secondaryAbilities(),
-                trading: secondaryAbilities(),
-                notice: secondaryAbilities(),
-                search: secondaryAbilities(),
-                track: secondaryAbilities(),
-                animals: secondaryAbilities(),
-                appraisal: secondaryAbilities(),
-                architecture: secondaryAbilities(),
-                herballore: secondaryAbilities(),
-                history: secondaryAbilities(),
-                law: secondaryAbilities(),
-                magicappr: secondaryAbilities(),
-                medicine: secondaryAbilities(),
-                memorize: secondaryAbilities(),
-                navigation: secondaryAbilities(),
-                occult: secondaryAbilities(),
-                science: secondaryAbilities(),
-                tactics: secondaryAbilities(),
-                composure: secondaryAbilities(),
-                featsofstr: secondaryAbilities(),
-                withstpain: secondaryAbilities(),
-                disguise: secondaryAbilities(),
-                hide: secondaryAbilities(),
-                lockpicking: secondaryAbilities(),
-                poisons: secondaryAbilities(),
-                stealth: secondaryAbilities(),
-                theft: secondaryAbilities(),
-                traplore: secondaryAbilities(),
-                alchemy: secondaryAbilities(),
-                animism: secondaryAbilities(),
-                art: secondaryAbilities(),
-                dance: secondaryAbilities(),
-                forging: secondaryAbilities(),
-                jewelry: secondaryAbilities(),
-                music: secondaryAbilities(),
-                runes: secondaryAbilities(),
-                ritualcalig: secondaryAbilities(),
-                slofhand: secondaryAbilities(),
-                tailoring: secondaryAbilities(),
-                piloting: secondaryAbilities(),
-                cooking: secondaryAbilities(),
-                technomagic: secondaryAbilities(),
-                toymaking: secondaryAbilities(),
-                kidetection: secondaryAbilities(),
-                kiconceal: secondaryAbilities()
+                athletics: new foundry.data.fields.SchemaField({
+                    acrobatics: secondaryAbilities(game.i18n.localize('abfalter.generalTab.acrobatic'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true),
+                    athleticism: secondaryAbilities(game.i18n.localize('abfalter.generalTab.athleticism'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true),
+                    climb: secondaryAbilities(game.i18n.localize('abfalter.generalTab.climb'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true),
+                    jump: secondaryAbilities(game.i18n.localize('abfalter.generalTab.jump'), game.i18n.localize('abfalter.basicInfo.str'), 'physical', true),
+                    piloting: secondaryAbilities(game.i18n.localize('abfalter.generalTab.piloting'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', true),
+                    ride: secondaryAbilities(game.i18n.localize('abfalter.generalTab.ride'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true),
+                    swim: secondaryAbilities(game.i18n.localize('abfalter.generalTab.swim'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true)
+                }),
+                social: new foundry.data.fields.SchemaField({
+                    etiquette: secondaryAbilities(game.i18n.localize('abfalter.generalTab.etiquette'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    intimidate: secondaryAbilities(game.i18n.localize('abfalter.generalTab.intimidate'), game.i18n.localize('abfalter.basicInfo.wp'), 'mental', false),
+                    leadership: secondaryAbilities(game.i18n.localize('abfalter.generalTab.leadership'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
+                    persuasion: secondaryAbilities(game.i18n.localize('abfalter.generalTab.persuasion'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    streetwise: secondaryAbilities(game.i18n.localize('abfalter.generalTab.streetwise'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    style: secondaryAbilities(game.i18n.localize('abfalter.generalTab.style'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
+                    trading: secondaryAbilities(game.i18n.localize('abfalter.generalTab.trading'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false)
+                }),
+                perceptive: new foundry.data.fields.SchemaField({
+                    kidetection: secondaryAbilities(game.i18n.localize('abfalter.kiTab.kiDetection'), game.i18n.localize('abfalter.basicInfo.per'), 'mental', false),
+                    notice: secondaryAbilities(game.i18n.localize('abfalter.generalTab.notice'), game.i18n.localize('abfalter.basicInfo.per'), 'mental', false),
+                    search: secondaryAbilities(game.i18n.localize('abfalter.generalTab.search'), game.i18n.localize('abfalter.basicInfo.per'), 'mental', false),
+                    track: secondaryAbilities(game.i18n.localize('abfalter.generalTab.track'), game.i18n.localize('abfalter.basicInfo.per'), 'mental', false)
+                }),
+                intellectual: new foundry.data.fields.SchemaField({
+                    animals: secondaryAbilities(game.i18n.localize('abfalter.generalTab.animals'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    appraisal: secondaryAbilities(game.i18n.localize('abfalter.generalTab.appraisal'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    architecture: secondaryAbilities(game.i18n.localize('abfalter.generalTab.architecture'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    herballore: secondaryAbilities(game.i18n.localize('abfalter.generalTab.herballore'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    history: secondaryAbilities(game.i18n.localize('abfalter.generalTab.history'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    law: secondaryAbilities(game.i18n.localize('abfalter.generalTab.law'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    magicappr: secondaryAbilities(game.i18n.localize('abfalter.generalTab.magicAppr'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
+                    medicine: secondaryAbilities(game.i18n.localize('abfalter.generalTab.medicine'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    memorize: secondaryAbilities(game.i18n.localize('abfalter.generalTab.memorize'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    navigation: secondaryAbilities(game.i18n.localize('abfalter.generalTab.navigation'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    occult: secondaryAbilities(game.i18n.localize('abfalter.generalTab.occult'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    science: secondaryAbilities(game.i18n.localize('abfalter.generalTab.science'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    tactics: secondaryAbilities(game.i18n.localize('abfalter.generalTab.tactics'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    technomagic: secondaryAbilities(game.i18n.localize('abfalter.generalTab.technomagic'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false)
+                }),
+                vigor: new foundry.data.fields.SchemaField({
+                    composure: secondaryAbilities(game.i18n.localize('abfalter.generalTab.composure'), game.i18n.localize('abfalter.basicInfo.wp'), 'mental', false),
+                    featsofstr: secondaryAbilities(game.i18n.localize('abfalter.generalTab.featsOfStr'), game.i18n.localize('abfalter.basicInfo.str'), 'mental', true),
+                    withstpain: secondaryAbilities(game.i18n.localize('abfalter.generalTab.withstPain'), game.i18n.localize('abfalter.basicInfo.wp'), 'mental', false)
+                }),
+                subterfuge: new foundry.data.fields.SchemaField({
+                    disguise: secondaryAbilities(game.i18n.localize('abfalter.generalTab.disguise'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
+                    hide: secondaryAbilities(game.i18n.localize('abfalter.generalTab.hide'), game.i18n.localize('abfalter.basicInfo.per'), 'mental', true),
+                    kiconceal: secondaryAbilities(game.i18n.localize('abfalter.kiTab.kiConceal'), game.i18n.localize('abfalter.basicInfo.per'), 'mental', false),
+                    lockpicking: secondaryAbilities(game.i18n.localize('abfalter.generalTab.lockpicking'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
+                    poisons: secondaryAbilities(game.i18n.localize('abfalter.generalTab.poisons'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    stealth: secondaryAbilities(game.i18n.localize('abfalter.generalTab.stealth'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true),
+                    theft: secondaryAbilities(game.i18n.localize('abfalter.generalTab.theft'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
+                    traplore: secondaryAbilities(game.i18n.localize('abfalter.generalTab.traplore'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false)
+                }),
+                creative: new foundry.data.fields.SchemaField({
+                    alchemy: secondaryAbilities(game.i18n.localize('abfalter.generalTab.alchemy'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
+                    animism: secondaryAbilities(game.i18n.localize('abfalter.generalTab.animism'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
+                    art: secondaryAbilities(game.i18n.localize('abfalter.generalTab.art'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
+                    cooking: secondaryAbilities(game.i18n.localize('abfalter.generalTab.cooking'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
+                    dance: secondaryAbilities(game.i18n.localize('abfalter.generalTab.dance'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true),
+                    forging: secondaryAbilities(game.i18n.localize('abfalter.generalTab.forging'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
+                    jewelry: secondaryAbilities(game.i18n.localize('abfalter.generalTab.jewelry'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
+                    toymaking: secondaryAbilities(game.i18n.localize('abfalter.generalTab.toymaking'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
+                    music: secondaryAbilities(game.i18n.localize('abfalter.generalTab.music'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
+                    runes: secondaryAbilities(game.i18n.localize('abfalter.generalTab.runes'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
+                    ritualcalig: secondaryAbilities(game.i18n.localize('abfalter.generalTab.ritualCal'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
+                    slofhand: secondaryAbilities(game.i18n.localize('abfalter.generalTab.soh'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
+                    tailoring: secondaryAbilities(game.i18n.localize('abfalter.generalTab.tailoring'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false)
+                })
             }),
-            aam: makeIntField(), //bundle all aam together @CHANGE
-            aamBoon: makeIntField(),
-            aamCrit: makeIntField(),
-            aamOther: makeIntField(),
-            aamBonus: makeIntField(),
-            aamStatus: makeBoolField(), //bundle aam end
             monsterChar: new foundry.data.fields.SchemaField({
-                agi: monsterCharacteristics("physical"),
-                con: monsterCharacteristics("physical"),
-                str: monsterCharacteristics("physical"),
-                dex: monsterCharacteristics("physical"),
-                per: monsterCharacteristics("mental"),
-                int: monsterCharacteristics("mental"),
-                pow: monsterCharacteristics("mental"),
-                wp: monsterCharacteristics("mental")
+                agi: monsterCharacteristics("physical", game.i18n.localize('abfalter.basicInfo.agi')),
+                con: monsterCharacteristics("physical", game.i18n.localize('abfalter.basicInfo.con')),
+                str: monsterCharacteristics("physical", game.i18n.localize('abfalter.basicInfo.str')),
+                dex: monsterCharacteristics("physical", game.i18n.localize('abfalter.basicInfo.dex')),
+                per: monsterCharacteristics("mental", game.i18n.localize('abfalter.basicInfo.per')),
+                int: monsterCharacteristics("mental", game.i18n.localize('abfalter.basicInfo.int')),
+                pow: monsterCharacteristics("mental", game.i18n.localize('abfalter.basicInfo.pow')),
+                wp: monsterCharacteristics("mental", game.i18n.localize('abfalter.basicInfo.wp'))
             }),
             monsterStats: new foundry.data.fields.SchemaField({
                 hpDp: makeIntField()
@@ -455,6 +449,8 @@ class actorDataModel extends foundry.abstract.DataModel {
                 banish: summoningAbiities()
             }),
             metaMagic: new foundry.data.fields.SchemaField({
+                derived: new foundry.data.fields.SchemaField({
+                }),
                 info: makeStringField(),
                 cost: makeIntField(),
                 extraCost: makeIntField(),
@@ -614,7 +610,7 @@ class actorDataModel extends foundry.abstract.DataModel {
                 mult: makeIntField(),
                 mult2: makeIntField(),
                 descNum: makeIntField(),
-                desc: makeStringField(), //html field?
+                desc: makeStringField(),
                 multOption: makeStringField("str"),
                 multOption2: makeStringField("none"),
                 bonus: makeIntField(),
@@ -670,22 +666,22 @@ class actorDataModel extends foundry.abstract.DataModel {
                 dragonSeal: makeIntField(),
                 dragonDoor: makeIntField()
             }),
-            wearArmor: new foundry.data.fields.SchemaField({
-                base: makeIntField(),
-                spec: makeIntField(),
-                temp: makeIntField(),
-                bonus: makeIntField()
+            armor: new foundry.data.fields.SchemaField({
+                wearArmor: new foundry.data.fields.SchemaField({
+                    base: makeIntField(),
+                    spec: makeIntField(),
+                    temp: makeIntField(),
+                    bonus: makeIntField()
+                }),
+                body: new foundry.data.fields.SchemaField({
+                }),
+                helmet: new foundry.data.fields.SchemaField({
+                })
             }),
             currency: new foundry.data.fields.SchemaField({
                 copper: makeIntField(),
                 silver: makeIntField(),
                 gold: makeIntField()
-            }),
-            otherStats: new foundry.data.fields.SchemaField({
-                itemPresence: makeIntField(),
-                damageBarrier: makeIntField(),
-                dmgRdc: makeIntField(),
-                artPresence: makeIntField()
             }),
             ppoint: new foundry.data.fields.SchemaField({
                 base: makeIntField(),
@@ -716,6 +712,117 @@ class actorDataModel extends foundry.abstract.DataModel {
                 innateSlots: makeIntField(),
                 status: makeBoolField()
             }),
+            //@OLD Deprecated since 1.4.2
+            secondary: new foundry.data.fields.SchemaField({
+                main: new foundry.data.fields.SchemaField({
+                    athletics: makeBoolField(),
+                    social: makeBoolField(),
+                    perceptive: makeBoolField(),
+                    intellectual: makeBoolField(),
+                    vigor: makeBoolField(),
+                    subterfuge: makeBoolField(),
+                    creative: makeBoolField()
+                }),
+                acrobatics: secondaryAbility(),
+                athleticism: secondaryAbility(),
+                climb: secondaryAbility(),
+                jump: secondaryAbility(),
+                ride: secondaryAbility(),
+                swim: secondaryAbility(),
+                etiquette: secondaryAbility(),
+                intimidate: secondaryAbility(),
+                leadership: secondaryAbility(),
+                persuasion: secondaryAbility(),
+                streetwise: secondaryAbility(),
+                style: secondaryAbility(),
+                trading: secondaryAbility(),
+                notice: secondaryAbility(),
+                search: secondaryAbility(),
+                track: secondaryAbility(),
+                animals: secondaryAbility(),
+                appraisal: secondaryAbility(),
+                architecture: secondaryAbility(),
+                herballore: secondaryAbility(),
+                history: secondaryAbility(),
+                law: secondaryAbility(),
+                magicappr: secondaryAbility(),
+                medicine: secondaryAbility(),
+                memorize: secondaryAbility(),
+                navigation: secondaryAbility(),
+                occult: secondaryAbility(),
+                science: secondaryAbility(),
+                tactics: secondaryAbility(),
+                composure: secondaryAbility(),
+                featsofstr: secondaryAbility(),
+                withstpain: secondaryAbility(),
+                disguise: secondaryAbility(),
+                hide: secondaryAbility(),
+                lockpicking: secondaryAbility(),
+                poisons: secondaryAbility(),
+                stealth: secondaryAbility(),
+                theft: secondaryAbility(),
+                traplore: secondaryAbility(),
+                alchemy: secondaryAbility(),
+                animism: secondaryAbility(),
+                art: secondaryAbility(),
+                dance: secondaryAbility(),
+                forging: secondaryAbility(),
+                jewelry: secondaryAbility(),
+                music: secondaryAbility(),
+                runes: secondaryAbility(),
+                ritualcalig: secondaryAbility(),
+                slofhand: secondaryAbility(),
+                tailoring: secondaryAbility(),
+                cooking: secondaryAbility(),
+                technomagic: secondaryAbility(),
+                toymaking: secondaryAbility(),
+                kidetection: secondaryAbility(),
+                kiconceal: secondaryAbility(),
+                piloting: secondaryAbility()
+            }),
+            combatstats: new foundry.data.fields.SchemaField({
+                atkbase: makeIntField(),
+                atkspecial: makeIntField(),
+                atktemp: makeIntField(),
+                atkbonus: makeIntField(),
+                atkStatus: makeBoolField(),
+                blkbase: makeIntField(),
+                blkspecial: makeIntField(),
+                blktemp: makeIntField(),
+                blkbonus: makeIntField(),
+                blkStatus: makeBoolField(),
+                dodbase: makeIntField(),
+                dodspecial: makeIntField(),
+                dodtemp: makeIntField(),
+                dodbonus: makeIntField(),
+                dodStatus: makeBoolField()
+            }),
+            wearArmor: new foundry.data.fields.SchemaField({
+                base: makeIntField(),
+                spec: makeIntField(),
+                temp: makeIntField(),
+                bonus: makeIntField()
+            }),
+            race: makeStringField(),
+            class: makeStringField(),
+            gender: makeStringField(),
+            height: makeStringField(),
+            weight: makeStringField(),
+            size: makeStringField(),
+            age: makeStringField(),
+            appearance: makeStringField(),
+            experience: makeIntField(),
+            notesOne: makeStringField(),
+            notesTwo: makeStringField(),
+            destiny: makeIntField(),
+            gnosis: makeIntField(),
+            system: new foundry.data.fields.SchemaField({
+                bio: makeHtmlField()
+            }),
+            aam: makeIntField(),
+            aamBoon: makeIntField(),
+            aamCrit: makeIntField(),
+            aamBonus: makeIntField()
         }
     }
 
@@ -746,6 +853,16 @@ function characteristics() {
     })
 }
 
+function combatValues() {
+    return new foundry.data.fields.SchemaField({
+        base: makeIntField(),
+        special: makeIntField(),
+        temp: makeIntField(),
+        status: makeBoolField(),
+        bonus: makeIntField()
+    })
+}
+
 function resistances() {
     return new foundry.data.fields.SchemaField({
         mod: makeIntField(),
@@ -753,7 +870,7 @@ function resistances() {
     })
 }
 
-function secondaryAbilities() {
+function secondaryAbilities(label, mod, type, armor) {
     return new foundry.data.fields.SchemaField({
         base: makeIntField(),
         spec: makeIntField(),
@@ -761,16 +878,21 @@ function secondaryAbilities() {
         nat: makeIntField(),
         natural: makeIntField(),
         bonus: makeIntField(),
+        label: makeStringField(label),
+        modifier: makeStringField(mod),
+        type: makeStringField(type),
+        armorPen: makeBoolField(armor),
         fav: makeBoolField(),
         status: makeBoolField()
     })
 }
 
-function monsterCharacteristics(type) {
+function monsterCharacteristics(type, name) {
     return new foundry.data.fields.SchemaField({
         base: makeIntField(),
         additional: makeIntField(),
-        type: makeStringField(type)
+        type: makeStringField(type),
+        name: makeStringField(name)
     })
 }
 
@@ -817,5 +939,19 @@ function kiSealAbilities() {
     return new foundry.data.fields.SchemaField({
         mastery: makeBoolField(),
         mastery2: makeBoolField()
+    })
+}
+
+//@OLD Deprecated since 1.4.2
+function secondaryAbility() { 
+    return new foundry.data.fields.SchemaField({
+        base: makeIntField(),
+        spec: makeIntField(),
+        temp: makeIntField(-30),
+        nat: makeIntField(),
+        natural: makeIntField(),
+        bonus: makeIntField(),
+        fav: makeBoolField(),
+        status: makeBoolField()
     })
 }

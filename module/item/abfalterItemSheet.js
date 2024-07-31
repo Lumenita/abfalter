@@ -25,7 +25,7 @@ export default class abfalterItemSheet extends ItemSheet {
 
     get template() {
         const path = "systems/abfalter/templates/item";
-        return `${path}/${this.item.type}.html`;
+        return `${path}/${this.item.type}.hbs`;
     }
 
     getData() {

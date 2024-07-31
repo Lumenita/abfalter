@@ -13,6 +13,14 @@ export const abfalterSettings = () => {
         default: "",
         type: String
     });
+    game.settings.register('abfalter', "systemChangeLog", {
+        name: "Don't show me the system changelog",
+        hint: "when toggled on, the system changelog will not show for the current version again, when toggled off it will show everytime on bootup.",
+        scope: 'world',
+        config: true,
+        default: false,
+        type: Boolean
+    });
     game.settings.register('abfalter', abfalterSettingsKeys.Spirit_Damage, {
         name: game.i18n.localize('abfalter.globalSettings.spiritDmg'),
         hint: game.i18n.localize('abfalter.globalSettings.spiritDetail'),
