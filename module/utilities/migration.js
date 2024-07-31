@@ -119,7 +119,7 @@ async function migrateActorData(actor) {
     updateData["system.armor.wearArmor.spec"] = actor.system.wearArmor.spec;
     updateData["system.armor.wearArmor.temp"] = actor.system.wearArmor.temp;
     }
-
+    
     if (actor.system.secondary) {
     updateData["system.secondaryFields.athletics.acrobatics.base"] = actor.system.secondary.acrobatics.base;
     updateData["system.secondaryFields.athletics.acrobatics.spec"] = actor.system.secondary.acrobatics.spec;
