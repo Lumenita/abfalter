@@ -9,9 +9,9 @@
             </h5>
             {{#if system.mproj.status}}
             <div>
-                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.mproj.base" value="{{system.mproj.base}}" /> </label>
+                <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.mproj.base" value="{{system.mproj.base}}" /> </label>
                 <label> 
-                    <span> {{localize "abfalter.basicInfo.spec"}} </span>
+                    <span> {{localize "abfalter.spec"}} </span>
                     <input type="number" name="system.mproj.spec" value="{{system.mproj.spec}}" />
                     <input type="number" name="system.mproj.spec2" value="{{system.mproj.spec2}}" /> 
                 </label>
@@ -19,14 +19,14 @@
             </div>
             {{/if}}
             <label>
-                <span> {{localize "abfalter.basicInfo.temp"}} </span>
+                <span> {{localize "abfalter.temp"}} </span>
                 <input type="number" name="system.mproj.temp" value="{{system.mproj.temp}}" />
                 <input type="number" name="system.mproj.temp2" value="{{system.mproj.temp2}}" />
             </label>
             
             <div class="mProjButton">
                 {{#if system.toggles.magicAtkModule}}
-                <button type="button" class="combatRoll" data-roll="{{system.mproj.atkModule}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
+                <button type="button" class="combatRoll" data-roll="{{system.mproj.atkModule}}" data-label="{{localize "abfalter.attack"}}" data-type="combatRoll">
                     <span> {{localize "abfalter.magicTab.offensive"}} </span> <span> {{system.mproj.atkModule}} </span>
                 </button>
                 {{else}}
@@ -36,11 +36,11 @@
                 {{/if}}
                 {{#if system.toggles.magicDefModule}}
                 {{#if system.toggles.magicDodgeModule}}
-                <button type="button" class="combatRoll" data-roll="{{system.mproj.dodModule}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
+                <button type="button" class="combatRoll" data-roll="{{system.mproj.dodModule}}" data-label="{{localize "abfalter.dodge"}}" data-type="combatRoll">
                     <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{system.mproj.dodModule}} </span>
                 </button>
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{system.mproj.defModule}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
+                <button type="button" class="combatRoll" data-roll="{{system.mproj.defModule}}" data-label="{{localize "abfalter.block"}}" data-type="combatRoll">
                     <span> {{localize "abfalter.magicTab.defensive"}} </span> <span> {{system.mproj.defModule}} </span>
                 </button>
                 {{/if}}
@@ -73,21 +73,21 @@
                     </h6>
                     {{#if system.maccu.status}}
                     <div>
-                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.maccu.base" value="{{system.maccu.base}}" /> </label>
+                        <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.maccu.base" value="{{system.maccu.base}}" /> </label>
                         <label> <span> {{localize "abfalter.magicTab.frompow"}} </span> <input type="number" name="system.maccu.fromPow" value="{{system.maccu.fromPow}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.mult"}} </span> <input type="number" name="system.maccu.mult" value="{{system.maccu.mult}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.maccu.spec" value="{{system.maccu.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.mult"}} </span> <input type="number" name="system.maccu.mult" value="{{system.maccu.mult}}" /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.maccu.spec" value="{{system.maccu.spec}}" /> </label>
                     </div>
                     {{/if}}
-                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.maccu.temp" value="{{system.maccu.temp}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.maccu.finalFull" value="{{system.maccu.finalFull}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="system.maccu.actual" value="{{system.maccu.actual}}" /> </label>
+                    <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.maccu.temp" value="{{system.maccu.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.maccu.finalFull" value="{{system.maccu.finalFull}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.actual"}} </span> <input type="number" name="system.maccu.actual" value="{{system.maccu.actual}}" /> </label>
                     <div>
                         <button type="button" class="maccuHalf" data-ability="{{system.maccu.finalHalf}}">
-                            <span> {{localize "abfalter.basicInfo.half"}} </span>
+                            <span> {{localize "abfalter.half"}} </span>
                         </button><!--
                         --><button type="button" class="maccuFull" data-ability="{{system.maccu.finalFull}}">
-                            <span> {{localize "abfalter.basicInfo.full"}} </span>
+                            <span> {{localize "abfalter.full"}} </span>
                         </button>
                     </div>
                 </div><!--Accumulation-->
@@ -101,15 +101,15 @@
                     {{#if system.mregen.status}}
                     <div>
                         <label> <span> {{localize "abfalter.magicTab.regenmult"}} </span> <input type="number" name="system.mregen.regenmult" value="{{system.mregen.regenmult}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.mregen.spec" value="{{system.mregen.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.mregen.spec" value="{{system.mregen.spec}}" /> </label>
                         <label> <span> {{localize "abfalter.magicTab.recoverymult"}} </span> <input type="number" name="system.mregen.recoverymult" value="{{system.mregen.recoverymult}}" /> </label>
                     </div>
                     {{/if}}
-                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.mregen.temp" value="{{system.mregen.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.mregen.temp" value="{{system.mregen.temp}}" /> </label>
                     <label> <span> {{localize "abfalter.magicTab.finalregen"}} </span> <input type="number" name="system.mregen.final" value="{{system.mregen.final}}" readonly /> </label>
                     <div>
                         <button type="button" class="mregenFull" data-ability="{{system.mregen.final}}" data-ability2="{{system.zeon.max}}">
-                            <span> {{localize "abfalter.basicInfo.full"}} </span>
+                            <span> {{localize "abfalter.full"}} </span>
                         </button>
                     </div>
                 </div><!--Regeneration-->
@@ -125,24 +125,24 @@
             </h5>
             {{#if system.zeon.status}}
             <div>
-                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.zeon.base" value="{{system.zeon.base}}" /> </label>
+                <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.zeon.base" value="{{system.zeon.base}}" /> </label>
                 <label> <span> {{localize "abfalter.magicTab.frompow"}} </span> <input type="number" name="system.zeon.fromPow" value="{{system.zeon.fromPow}}" readonly /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.zeon.class" value="{{system.zeon.class}}" readonly /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.zeon.spec" value="{{system.zeon.spec}}" /> </label>
+                <label> <span> {{localize "abfalter.class"}} </span> <input type="number" name="system.zeon.class" value="{{system.zeon.class}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.zeon.spec" value="{{system.zeon.spec}}" /> </label>
             </div>
             {{/if}}
-            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.zeon.temp" value="{{system.zeon.temp}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.zeon.max" value="{{system.zeon.max}}" readonly /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="system.zeon.value" value="{{system.zeon.value}}" /> </label>
+            <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.zeon.temp" value="{{system.zeon.temp}}" /> </label>
+            <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.zeon.max" value="{{system.zeon.max}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.actual"}} </span> <input type="number" name="system.zeon.value" value="{{system.zeon.value}}" /> </label>
             <div class="minnate {{#if system.toggles.innateMagicVis}}hidden{{/if}}">
                 <h6> {{localize "abfalter.magicTab.minnate"}} </h6>
                 <div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.bonus"}} </span>
+                        <span> {{localize "abfalter.bonus"}} </span>
                         <label> <input type="number" name="system.zeon.minnate" value="{{system.zeon.minnate}}" /> </label>
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.final"}} </span>
+                        <span> {{localize "abfalter.final"}} </span>
                         <label> <input type="number" name="system.zeon.minnateFinal" value="{{system.zeon.minnateFinal}}" readonly /> </label>
                     </div>
                 </div>
@@ -162,21 +162,21 @@
                     </h5>
                     {{#if system.mlevel.status}}
                     <div>
-                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.mlevel.base" value="{{system.mlevel.base}}" /> </label>
+                        <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.mlevel.base" value="{{system.mlevel.base}}" /> </label>
                         <label> <span> {{localize "abfalter.magicTab.fromInt"}} </span> <input type="number" name="system.mlevel.fromInt" value="{{system.mlevel.fromInt}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.mlevel.spec" value="{{system.mlevel.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.mlevel.spec" value="{{system.mlevel.spec}}" /> </label>
                     </div>
                     {{/if}}
-                    <label> <span> {{localize "abfalter.basicInfo.extra"}} </span> <input type="number" name="system.mlevel.temp" value="{{system.mlevel.temp}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.mlevel.final" value="{{system.mlevel.final}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.used"}} </span> <input type="number" name="system.mlevel.used" value="{{system.mlevel.used}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.extra"}} </span> <input type="number" name="system.mlevel.temp" value="{{system.mlevel.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.mlevel.final" value="{{system.mlevel.final}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.used"}} </span> <input type="number" name="system.mlevel.used" value="{{system.mlevel.used}}" readonly /> </label>
                 </div>
 
                 <div class="spellPath {{#if system.toggles.spellcastingVis}}hidden{{/if}}">
                     <h5> {{localize "abfalter.magicTab.spellPath"}} </h5>
                     <div>
                         <span> {{localize "abfalter.magicTab.spellPath"}} </span>
-                        <span> {{localize "abfalter.basicInfo.level"}} </span>
+                        <span> {{localize "abfalter.level"}} </span>
                     </div>
                     <div class="{{#if system.itemToggle.spellPath}}item-list{{/if}}">
                         {{#each spellPaths as |spellPath id|}}
@@ -205,11 +205,11 @@
             <div class="summoning {{#if system.toggles.summoningVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.summoning"}} </h5>
                 <div>
-                    <span> {{localize "abfalter.basicInfo.ability"}} </span>
-                    <span> {{localize "abfalter.basicInfo.base"}} </span>
-                    <span> {{localize "abfalter.basicInfo.class"}} </span>
-                    <span> {{localize "abfalter.basicInfo.spec"}} </span>
-                    <span> {{localize "abfalter.basicInfo.final"}} </span>
+                    <span> {{localize "abfalter.ability"}} </span>
+                    <span> {{localize "abfalter.base"}} </span>
+                    <span> {{localize "abfalter.class"}} </span>
+                    <span> {{localize "abfalter.spec"}} </span>
+                    <span> {{localize "abfalter.final"}} </span>
                 </div>
                 <div>
                     <button type="button" class="rollable" data-roll="{{system.summoning.summon.final}}" data-label="{{localize "abfalter.magicTab.summon"}}" data-type="summoningRoll">
@@ -252,7 +252,7 @@
             <div class="turnDayMaint {{#if system.toggles.turnMaintVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.turnMaint"}} </h5>
                 <div>
-                    <span> {{localize "abfalter.basicInfo.name"}} </span>
+                    <span> {{localize "abfalter.name"}} </span>
                     <span> {{localize "abfalter.magicTab.spellCost"}} </span>
                     <span> {{localize "abfalter.magicTab.zeon"}} </span>
                 </div>
@@ -284,7 +284,7 @@
                 <div>
                     <span> {{localize "abfalter.magicTab.totalZeon"}} {{system.zeon.turnMaint}} </span>
                     <button type="button" class="removeMaint" data-ability="{{system.zeon.turnMaint}}">
-                        <span> {{localize "abfalter.basicInfo.remove"}} </span>
+                        <span> {{localize "abfalter.remove"}} </span>
                     </button>
                 </div>
                 <div>
@@ -296,7 +296,7 @@
             <div class="turnDayMaint">
                 <h5> {{localize "abfalter.magicTab.dailyMaint"}} </h5>
                 <div>
-                    <span> {{localize "abfalter.basicInfo.name"}} </span>
+                    <span> {{localize "abfalter.name"}} </span>
                     <span> {{localize "abfalter.magicTab.spellCost"}} </span>
                     <span> {{localize "abfalter.magicTab.zeon"}} </span>
                 </div>
@@ -328,7 +328,7 @@
                 <div>
                     <span> {{localize "abfalter.magicTab.totalZeon"}} {{system.zeon.dailyMaint}} </span>
                     <button type="button" class="removeMaint" data-ability="{{system.zeon.dailyMaint}}">
-                        <span> {{localize "abfalter.basicInfo.remove"}} </span>
+                        <span> {{localize "abfalter.remove"}} </span>
                     </button>
                 </div>
                 <div>
@@ -354,20 +354,20 @@
                                 <a class="item-expand :"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                             </div>
                             <div>
-                                <span> {{localize "abfalter.basicInfo.name"}} </span>
+                                <span> {{localize "abfalter.name"}} </span>
                                 <span> {{localize "abfalter.magicTab.path"}} </span>
-                                <span> {{localize "abfalter.basicInfo.level"}} </span>
+                                <span> {{localize "abfalter.level"}} </span>
                             </div>
                         </div>
                         <div>
                             <label>
-                                <span> {{localize "abfalter.basicInfo.action"}} </span>
+                                <span> {{localize "abfalter.action"}} </span>
                                 <select class="inline-edit" name="system.action" data-field="system.action">
                                     {{selectOptions ../actionObjList selected=system.action localize=true}}
                                 </select>
                             </label>
                             <label>
-                                <span> {{localize "abfalter.basicInfo.type"}} </span>
+                                <span> {{localize "abfalter.type"}} </span>
                                 <select class="inline-edit" name="system.type" data-field="system.type">
                                     {{selectOptions ../spellTypeObjList selected=system.type localize=true}}
                                 </select>
@@ -392,7 +392,7 @@
                                     {{selectOptions ../spellBoughtObjList selected=system.bought localize=true}}
                                 </select>
                             </label>
-                            <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input type="number" class="inline-edit" data-field="system.cost" value="{{system.cost}}" /> </label>
+                            <label> <span> {{localize "abfalter.cost"}} </span> <input type="number" class="inline-edit" data-field="system.cost" value="{{system.cost}}" /> </label>
                         </div>
                         <div class="textarea-div" style="display: grid;">
                             <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{spell.system.description}}</textarea>
@@ -729,9 +729,9 @@
             <div class="invocations {{#if system.toggles.invocationsVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.invocation"}} </h5>
                 <div>
-                    <span> {{localize "abfalter.basicInfo.name"}} </span>
-                    <span> {{localize "abfalter.basicInfo.cost"}} </span>
-                    <span> {{localize "abfalter.basicInfo.difficulty"}} </span>
+                    <span> {{localize "abfalter.name"}} </span>
+                    <span> {{localize "abfalter.cost"}} </span>
+                    <span> {{localize "abfalter.difficulty"}} </span>
                 </div>
                 <div class="{{#if system.itemToggle.invocation}}item-list{{/if}}">
                     {{#each invocations as |invocation id|}}
@@ -767,10 +767,10 @@
             <div class="incarnations {{#if system.toggles.incarnationsVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.magicTab.incarnation"}} </h5>
                 <div>
-                    <span> {{localize "abfalter.basicInfo.name"}} </span>
-                    <span> {{localize "abfalter.basicInfo.level"}} </span>
-                    <span> {{localize "abfalter.basicInfo.cost"}} </span>
-                    <span> {{localize "abfalter.basicInfo.difficulty"}} </span>
+                    <span> {{localize "abfalter.name"}} </span>
+                    <span> {{localize "abfalter.level"}} </span>
+                    <span> {{localize "abfalter.cost"}} </span>
+                    <span> {{localize "abfalter.difficulty"}} </span>
                 </div>
                 <div class="{{#if system.itemToggle.incarnation}}item-list{{/if}}">
                     {{#each incarnations as |incarnation id|}}

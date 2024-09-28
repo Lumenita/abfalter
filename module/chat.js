@@ -37,9 +37,6 @@ export const hideChatActionButtons = function (message, html, data) {
     }
 }
 
-
-
-
 async function spellChatUpdate(msg, label) {
     const template = "systems/abfalter/templates/chatItem/spellChat.html";
     let cardData = msg.flags.cardData

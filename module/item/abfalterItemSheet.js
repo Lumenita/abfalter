@@ -1,4 +1,5 @@
 import { onManageActiveEffect, prepareActiveEffectCategories } from '../helpers/effects.js';
+import { abfalterSettingsKeys } from "../utilities/abfalterSettings.js";
 
 export default class abfalterItemSheet extends ItemSheet {
 
@@ -12,7 +13,7 @@ export default class abfalterItemSheet extends ItemSheet {
         const options = super.defaultOptions;
         foundry.utils.mergeObject(options, {
             classes: ["abfalter", "sheet", "item"],
-            width: 500,
+            width: 575,
             height: 450,
             resizable: true,
             tabs: [{ navSelector: ".sheet-navigation", contentSelector: ".sheet-body", initial: "description" }],
@@ -38,6 +39,10 @@ export default class abfalterItemSheet extends ItemSheet {
             effects: prepareActiveEffectCategories(this.item.effects),
             config: CONFIG.abfalter,
         };
+        
+        if (this.item.type === 'weapon') {
+            sheetData.attacks = this.item.system.attacks;
+        }
 
         //Dropdowns
         sheetData.monsterTypeObjList = CONFIG.abfalter.MonsterPowerDropdown;
@@ -55,6 +60,15 @@ export default class abfalterItemSheet extends ItemSheet {
         sheetData.spellProjObjList = CONFIG.abfalter.spellProjDropdown;
         sheetData.spellMaintTypeObjList = CONFIG.abfalter.spellMaintTypeDropdown;
         sheetData.spellBoughtObjList = CONFIG.abfalter.spellBoughtDropdown; 
+
+        sheetData.weaponTypeList = CONFIG.abfalter.weaponTypeDropdown;
+        sheetData.vorpalAtkList = CONFIG.abfalter.vorpalAtkDropdown;
+
+        if (game.settings.get('abfalter', abfalterSettingsKeys.Use_Meters)) {
+            sheetData.throwDistanceDropdown = CONFIG.abfalter.metricDistLongDropdown;
+        } else {
+            sheetData.throwDistanceDropdown = CONFIG.abfalter.imperialDistLongDropdown;
+        }
 
         sheetData.matrixLevelObjList = {
             1: "1",
@@ -76,7 +90,6 @@ export default class abfalterItemSheet extends ItemSheet {
             this.nextElementSibling.textContent = this.value;
         });
 
-
         // Everything below here is only needed if the sheet is editable
         if (!this.isEditable) return;
 
@@ -87,10 +100,75 @@ export default class abfalterItemSheet extends ItemSheet {
             this.document.update({ [label]: value });
         });
 
+        html.find(".wepAtkToggle").click(ev => {
+            let index = $(ev.currentTarget).attr("data-value");
+            let label = $(ev.currentTarget).attr("data-label");
+            let arr = this.item.toObject().system.attacks;
+            let value = arr[index][label];
+            value = !value;
+            arr[index][label] = value;
+            this.document.update({ "system.attacks": arr });
+        });
+
         html.on('click', '.effect-control', (ev) => {
             onManageActiveEffect(ev, this.item);
         });
 
+        // Handle adding new attacks
+        html.find("#add-attack").click((ev) => {
+            ev.preventDefault();
+            const attacks = this.item.system.attacks;
+            const attackCount = attacks.length;
+            attacks[attackCount] = {};
+            this.item.update({ "system.attacks": attacks });
+        });
+
+        // Handle removing attacks
+        html.find(".remove-attack").click((ev) => {
+            ev.preventDefault();
+            const index = $(ev.currentTarget).attr("data-index");
+    
+            new Dialog({
+                title: "Remove Attack",
+                content: game.i18n.localize('abfalter.confirmRemAtkPrompt'),
+                buttons: {
+                    yes: {
+                        label: game.i18n.localize('abfalter.yes'),
+                        callback: () => {
+                            const attacks = this.item.system.attacks;
+                            attacks.splice(index, 1);
+                            this.item.update({ "system.attacks": attacks });
+                        }
+                    },
+                    no: {
+                        label: game.i18n.localize('abfalter.no')
+                    }
+                },
+            }).render(true);
+        });
+    }
+
+    async _updateObject(event, formData) {
+
+        if (this.item.type === 'weapon') {
+            let attacks = this.item.system.attacks; 
+            for (let [key, value] of Object.entries(formData)) {
+                const match = key.match(/attacks\[(\d+)\]\[(\w+)\]$/);
+    
+                if (match) {
+                    const index = match[1]; // Get the index of the attack
+                    const field = match[2]; // Get the field (attack, block, etc.)
+                    attacks[index][field] = value;
+                }
+            }
+            formData["system.attacks"] = attacks;
+            Object.keys(formData).forEach(key => {
+                if (/attacks\[\d+\]\[\w+\]/.test(key)) {
+                    delete formData[key];
+                }
+            });
+        }
+        return super._updateObject(event, formData);
     }
 }
 

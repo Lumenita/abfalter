@@ -74,6 +74,145 @@ export default class abfalterItem extends Item {
     }
 
     prepareWeapon() {
+        //Global Setting
+        this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
+
+        //Inherit from Actor
+        if (this.parent != null) {
+            this.system.derived.baseAtk = Math.floor(this.parent.system.combatValues.attack.final + this.system.attack + this.system.quality);
+            this.system.derived.baseBlk = Math.floor(this.parent.system.combatValues.block.final + this.system.block + this.system.quality);
+            this.system.derived.baseDod = Math.floor(this.parent.system.combatValues.dodge.final + this.system.dodge);
+            if (this.parent.system.kiAbility.kiAuraEx.status == true) {
+                this.system.kiBonusBreakage = 5;
+                this.system.kiBonusFort = 10;
+                this.system.kiBonusDmg = 10;
+            }
+            if (this.parent.system.kiAbility.kiEleFire.status == true && this.system.primDmgT =="HEAT") {
+                this.system.kiBonusDmg += 10;
+            }
+            if (this.parent.system.kiAbility.kiEleWater.status == true && this.system.primDmgT == "COLD") {
+                this.system.kiBonusDmg += 10;
+            }
+            if (this.parent.system.kiAbility.kiEleAir.status == true && this.system.primDmgT == "ELE") {
+                this.system.kiBonusDmg += 10;
+            }
+            if (this.parent.system.kiAbility.kiEleEarth.status == true && this.system.primDmgT == "IMP") {
+                this.system.kiBonusDmg += 10;
+            }
+            if (this.parent.system.kiAbility.kiEleLight.status == true && this.system.primDmgT == "ENE") {
+                this.system.kiBonusDmg += 10;
+            }
+            if (this.parent.system.kiAbility.kiEleDark.status == true && this.system.primDmgT == "ENE") {
+                this.system.kiBonusDmg += 10;
+            }
+            if (this.parent.system.kiAbility.kiIncreaseDmg.status == true) {
+                this.system.kiBonusDmg += 10;
+            }
+            this.system.info.actorOpenRollRange = this.parent.system.rollRange.final;
+            this.system.info.actorFumbleRange = this.parent.system.fumleRange.final;
+        } else {
+            this.system.derived.baseAtk = Math.floor(this.system.attack + this.system.quality);
+            this.system.derived.baseBlk = Math.floor(this.system.block + this.system.quality);
+            this.system.derived.baseDod = Math.floor(this.system.dodge);
+            this.system.kiBonusBreakage = 0;
+            this.system.kiBonusFort = 0;
+            this.system.kiBonusDmg = 0;
+            this.system.info.actorOpenRollRange = 90;
+            this.system.info.actorFumbleRange = 3;
+        }
+
+        this.system.derived.finalFortitude = Math.floor(this.system.fortitude + (this.system.quality * 2) + ~~this.system.kiBonusFort);
+        this.system.derived.finalPresence = Math.floor(this.system.presence + (this.system.quality * 10));
+        this.system.derived.finalWeaponSpeed = Math.floor(this.system.speed + this.system.quality);
+        this.system.derived.baseOpenRollRange = Math.floor(this.system.info.actorOpenRollRange - this.system.info.openRollMod);
+        this.system.derived.baseFumbleRange = Math.floor(this.system.info.actorFumbleRange + this.system.info.fumbleRollMod + (this.system.info.complex ? 2 : 0));
+
+
+        //Melee Weapons
+        if (this.system.info.type == "melee") {
+            if (this.parent != null) {
+                switch (this.system.melee.dmgMod) {
+                    case "agi":
+                        this.system.melee.bonusDmgMod = this.parent.system.stats.Agility.mod;
+                        break;
+                    case "con":
+                        this.system.melee.bonusDmgMod = this.parent.system.stats.Constitution.mod;
+                        break;
+                    case "str":
+                        this.system.melee.bonusDmgMod = this.parent.system.stats.Strength.mod;
+                        break;
+                    case "dex":
+                        this.system.melee.bonusDmgMod = this.parent.system.stats.Dexterity.mod;
+                        break;
+                    case "per":
+                        this.system.melee.bonusDmgMod = this.parent.system.stats.Perception.mod;
+                        break;
+                    case "int":
+                        this.system.melee.bonusDmgMod = this.parent.system.stats.Intelligence.mod;
+                        break;
+                    case "pow":
+                        this.system.melee.bonusDmgMod = this.parent.system.stats.Power.mod;
+                        break;
+                    case "wp":
+                        this.system.melee.bonusDmgMod = this.parent.system.stats.Willpower.mod;
+                        break;
+                    case "str2":
+                        this.system.melee.bonusDmgMod = Math.floor(~~this.parent.system.stats.Strength.mod * 2);
+                        break;
+                    case "presence":
+                        this.system.melee.bonusDmgMod = Math.floor((~~this.parent.system.levelinfo.presence * 2) + this.parent.system.stats.Power.mod);
+                        break;
+                    case "none":
+                        this.system.melee.bonusDmgMod = 0;
+                        break;
+                    default:
+                        break;
+                }
+                switch (this.parent.system.stats.Strength.final) {
+                    case 8:
+                    case 9:
+                        this.system.breakageStr = 1;
+                        break;
+                    case 10:
+                        this.system.breakageStr = 2;
+                        break;
+                    case 11:
+                    case 12:
+                        this.system.breakageStr = 4;
+                        break;
+                    case 13:
+                    case 14:
+                        this.system.breakageStr = 6;
+                        break;
+                    default:
+                        this.system.breakageStr = 0;
+                        break;
+                }
+                if (this.parent.system.stats.Strength.final >= 15) {
+                    this.system.breakageStr = 8;
+                }
+            } else {
+                this.system.melee.bonusDmgMod = 0;
+                this.system.breakageStr = 0;
+            }
+            if (this.system.melee.twoHanded == true) {
+                this.system.melee.bonusDmgMod = Math.floor(this.system.melee.bonusDmgMod * 2);
+            }
+            this.system.melee.baseDmg = Math.floor(~~this.system.baseDmg + ~~this.system.melee.bonusDmgMod + (~~this.system.quality * 2) + ~~this.system.kiBonusDmg);
+            this.system.melee.finalATPen = Math.floor(~~this.system.atPen + Math.floor(~~this.system.quality / 5));
+            this.system.melee.finalBreakage = Math.floor(~~this.system.breakage + ~~this.system.breakageStr + ~~this.system.quality + ~~this.system.kiBonusBreakage);          
+
+            for (let i = 0; i < this.system.attacks.length; i++) {
+                this.system.attacks[i].finalAttack = this.system.attacks[i].attack + this.system.derived.baseAtk;
+                this.system.attacks[i].finalBlock = this.system.attacks[i].block + this.system.derived.baseBlk;
+                this.system.attacks[i].finalDodge = this.system.attacks[i].dodge + this.system.derived.baseDod;
+                this.system.attacks[i].finalAtPen = this.system.attacks[i].atPen + this.system.melee.finalATPen;
+                this.system.attacks[i].finalBreakage = this.system.attacks[i].breakage + this.system.melee.finalBreakage;
+                this.system.attacks[i].finalDamage = this.system.attacks[i].damage + this.system.melee.baseDmg;
+            }
+        }
+
+        /*
         switch (this.system.shield) {
             case "none":
                 this.system.shieldBonus = 0;
@@ -98,118 +237,9 @@ export default class abfalterItem extends Item {
             default:
                 break;
         }
+        */
 
-        if (this.parent != null) {
-            this.system.finalAtk = Math.floor(this.parent.system.combatValues.attack.final + ~~this.system.attack + ~~this.system.quality);
-            this.system.finalBlk = Math.floor(this.parent.system.combatValues.block.final + ~~this.system.block + ~~this.system.shieldBonus + ~~this.system.quality);
-            this.system.finalDod = Math.floor(this.parent.system.combatValues.dodge.final + ~~this.system.dodge + ~~this.system.shieldBonus2);
 
-            if (this.parent.system.kiAbility.kiAuraEx.status == true) {
-                this.system.kiBonus = 5;
-                this.system.kiBonus1 = 10;
-                this.system.kiBonusDmg = 10;
-            }
-            if (this.parent.system.kiAbility.kiEleFire.status == true && this.system.primDmgT =="HEAT") {
-                this.system.kiBonusDmg += 10;
-            }
-            if (this.parent.system.kiAbility.kiEleWater.status == true && this.system.primDmgT == "COLD") {
-                this.system.kiBonusDmg += 10;
-            }
-            if (this.parent.system.kiAbility.kiEleAir.status == true && this.system.primDmgT == "ELE") {
-                this.system.kiBonusDmg += 10;
-            }
-            if (this.parent.system.kiAbility.kiEleEarth.status == true && this.system.primDmgT == "IMP") {
-                this.system.kiBonusDmg += 10;
-            }
-            if (this.parent.system.kiAbility.kiEleLight.status == true && this.system.primDmgT == "ENE") {
-                this.system.kiBonusDmg += 10;
-            }
-            if (this.parent.system.kiAbility.kiEleDark.status == true && this.system.primDmgT == "ENE") {
-                this.system.kiBonusDmg += 10;
-            }
-            if (this.parent.system.kiAbility.kiIncreaseDmg.status == true) {
-                this.system.kiBonusDmg += 10;
-            }
-            switch (this.system.dmgMod) {
-                case "agi":
-                    this.system.bonusDmgMod = this.parent.system.stats.Agility.mod;
-                    break;
-                case "con":
-                    this.system.bonusDmgMod = this.parent.system.stats.Constitution.mod;
-                    break;
-                case "str":
-                    this.system.bonusDmgMod = this.parent.system.stats.Strength.mod;
-                    break;
-                case "dex":
-                    this.system.bonusDmgMod = this.parent.system.stats.Dexterity.mod;
-                    break;
-                case "per":
-                    this.system.bonusDmgMod = this.parent.system.stats.Perception.mod;
-                    break;
-                case "int":
-                    this.system.bonusDmgMod = this.parent.system.stats.Intelligence.mod;
-                    break;
-                case "pow":
-                    this.system.bonusDmgMod = this.parent.system.stats.Power.mod;
-                    break;
-                case "wp":
-                    this.system.bonusDmgMod = this.parent.system.stats.Willpower.mod;
-                    break;
-                case "str2":
-                    this.system.bonusDmgMod = Math.floor(~~this.parent.system.stats.Strength.mod * 2);
-                    break;
-                case "presence":
-                    this.system.bonusDmgMod = Math.floor((this.parent.system.presence * 2) + this.parent.system.stats.Power.mod);
-                    break;
-                case "none":
-                    this.system.bonusDmgMod = 0;
-                    break;
-                default:
-                    break;
-            }
-            switch (this.parent.system.stats.Strength.final) {
-                case 8:
-                case 9:
-                    this.system.breakageStr = 1;
-                    break;
-                case 10:
-                    this.system.breakageStr = 2;
-                    break;
-                case 11:
-                case 12:
-                    this.system.breakageStr = 4;
-                    break;
-                case 13:
-                case 14:
-                    this.system.breakageStr = 6;
-                    break;
-                default:
-                    this.system.breakageStr = 0;
-                    break;
-            }
-            if (this.parent.system.stats.Strength.final >= 15) {
-                this.system.breakageStr = 8;
-            }
-        } else {
-            this.system.bonusDmgMod = 0;
-            this.system.breakageStr = 0;
-            this.system.kiBonus = 0;
-            this.system.kiBonus1 = 0;
-        }
-
-        if (this.system.toggle == true) {
-            this.system.bonusDmgMod = Math.floor(this.system.bonusDmgMod * 2);
-        }
-        this.system.finalDmg = Math.floor(~~this.system.baseDmg + ~~this.system.bonusDmgMod + (~~this.system.quality * 2) + ~~this.system.kiBonusDmg);
-        this.system.fortFinal = Math.floor(~~this.system.fortitude + (~~this.system.quality * 2) + ~~this.system.kiBonus1);
-        this.system.atPenFinal = Math.floor(~~this.system.atPen + Math.floor(~~this.system.quality / 5));
-        this.system.finalBreakage = Math.floor(~~this.system.breakage + ~~this.system.breakageStr + ~~this.system.quality + ~~this.system.kiBonus)
-        this.system.preFinal = Math.floor(~~this.system.presence + (~~this.system.quality * 10));
-        this.system.shieldFinalSpeed = Math.floor(~~this.system.shieldSpeed + ~~this.system.shieldTypeSpeed);
-        this.system.FinalWeaponSpeed = Math.floor(~~this.system.speed + ~~this.system.shieldFinalSpeed + ~~this.system.quality);
-
-        //Global Setting
-        this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
     }
 
     prepareMentalPattern() {
@@ -222,9 +252,9 @@ export default class abfalterItem extends Item {
 
     preparePsychicMatrix() {
         if (this.system.maint == "Yes") {
-            this.system.maintName = game.i18n.localize('abfalter.basicInfo.yes');
+            this.system.maintName = game.i18n.localize('abfalter.yes');
         } else {
-            this.system.maintName = game.i18n.localize('abfalter.basicInfo.no');
+            this.system.maintName = game.i18n.localize('abfalter.no');
         }
 
         if (this.parent != null) {
@@ -304,39 +334,39 @@ export default class abfalterItem extends Item {
             switch (this.system.atr) {
                 case "agi":
                     this.system.mod = this.parent.system.stats.Agility.mod;
-                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.agi');
+                    this.system.localizedName = game.i18n.localize('abfalter.agi');
                     break;
                 case "con":
                     this.system.mod = this.parent.system.stats.Constitution.mod;
-                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.con');
+                    this.system.localizedName = game.i18n.localize('abfalter.con');
                     break;
                 case "str":
                     this.system.mod = this.parent.system.stats.Strength.mod;
-                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.str');
+                    this.system.localizedName = game.i18n.localize('abfalter.str');
                     break;
                 case "dex":
                     this.system.mod = this.parent.system.stats.Dexterity.mod;
-                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.dex');
+                    this.system.localizedName = game.i18n.localize('abfalter.dex');
                     break;
                 case "int":
                     this.system.mod = this.parent.system.stats.Perception.mod;
-                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.int');
+                    this.system.localizedName = game.i18n.localize('abfalter.int');
                     break;
                 case "per":
                     this.system.mod = this.parent.system.stats.Intelligence.mod;
-                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.per');
+                    this.system.localizedName = game.i18n.localize('abfalter.per');
                     break;
                 case "pow":
                     this.system.mod = this.parent.system.stats.Power.mod;
-                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.pow');
+                    this.system.localizedName = game.i18n.localize('abfalter.pow');
                     break;
                 case "wp":
                     this.system.mod = this.parent.system.stats.Willpower.mod;
-                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.wp');
+                    this.system.localizedName = game.i18n.localize('abfalter.wp');
                     break;
                 default:
                     this.system.mod = 0;
-                    this.system.localizedName = game.i18n.localize('abfalter.basicInfo.none');
+                    this.system.localizedName = game.i18n.localize('abfalter.none');
                     break;
             }
         } else {

@@ -317,35 +317,35 @@
                 <div class="rollRange">
                     <h5> {{localize "abfalter.settingsTab.openRoll"}} </h5>
                     <div>
-                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.rollRange.base" value="{{system.rollRange.base}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.rollRange.spec" value="{{system.rollRange.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.rollRange.temp" value="{{system.rollRange.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.rollRange.base" value="{{system.rollRange.base}}" /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.rollRange.spec" value="{{system.rollRange.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.rollRange.temp" value="{{system.rollRange.temp}}" /> </label>
                         <label>
                             <span> {{localize "abfalter.settingsTab.doubles"}} </span>
                             <button type="button" class="toggleBoolean {{#if system.rollRange.doubles}}kiBought{{/if}}"
                                     data-label="system.rollRange.doubles" data-ability="{{system.rollRange.doubles}}">
                                 {{#if system.rollRange.doubles}}
-                                <span> {{localize "abfalter.basicInfo.yes"}} </span>
+                                <span> {{localize "abfalter.yes"}} </span>
                                 {{else}}
-                                <span> {{localize "abfalter.basicInfo.no"}} </span>
+                                <span> {{localize "abfalter.no"}} </span>
                                 {{/if}}
                             </button>
                         </label>
                     </div>
                     <div>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.rollRange.final" value="{{system.rollRange.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.rollRange.final" value="{{system.rollRange.final}}" readonly /> </label>
                     </div>
                 </div>
 
                 <div class="rollRange">
                     <h5> {{localize "abfalter.settingsTab.fumbleRoll"}} </h5>
                     <div>
-                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.fumleRange.base" value="{{system.fumleRange.base}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.fumleRange.spec" value="{{system.fumleRange.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.fumleRange.temp" value="{{system.fumleRange.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.fumleRange.base" value="{{system.fumleRange.base}}" /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.fumleRange.spec" value="{{system.fumleRange.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.fumleRange.temp" value="{{system.fumleRange.temp}}" /> </label>
                     </div>
                     <div>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.fumleRange.final" value="{{system.fumleRange.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.fumleRange.final" value="{{system.fumleRange.final}}" readonly /> </label>
                     </div>
                 </div>
 
@@ -357,8 +357,8 @@
                             <span> Voice </span>
                             <select name="system.actorVoice">
                                 
-                                <option value="false"> {{localize "abfalter.basicInfo.no"}} </option>
-                                <option value="true"> {{localize "abfalter.basicInfo.yes"}} </option>
+                                <option value="false"> {{localize "abfalter.no"}} </option>
+                                <option value="true"> {{localize "abfalter.yes"}} </option>
                                 
                             </select>
                         </label>
@@ -470,8 +470,8 @@
         <div class="innateBonuses">
             <h5> {{localize "abfalter.settingsTab.classLevels"}} </h5>
             <div>
-                <span> {{localize "abfalter.basicInfo.class"}} </span>
-                <span> {{localize "abfalter.basicInfo.level"}} </span>
+                <span> {{localize "abfalter.class"}} </span>
+                <span> {{localize "abfalter.level"}} </span>
             </div>
 
             <div class="{{#if system.itemToggle.class}}item-list{{/if}}">

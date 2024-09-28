@@ -190,7 +190,7 @@
                 <span class="subKi3" title="{{localize "abfalter.kiTab.desckiGreaterArmor"}}"> {{localize "abfalter.kiTab.kiGreaterArmor"}} </span>
                 <button class="kiActiveButton1 toggleBoolean {{#if system.kiAbility.kiArcaneArmor.status}}hidden{{/if}} {{#if system.kiAbility.kiGreaterArmor.status}}{{else}}hidden{{/if}} {{#if system.toggles.greaterEnergyArmor}}kiBought{{/if}}"
                         data-label="system.toggles.greaterEnergyArmor" data-ability="{{system.toggles.greaterEnergyArmor}}">
-                    <span class="{{#if system.toggles.greaterEnergyArmor}}activeKiAbility{{/if}}"> {{localize "abfalter.basicInfo.active"}} </span>
+                    <span class="{{#if system.toggles.greaterEnergyArmor}}activeKiAbility{{/if}}"> {{localize "abfalter.active"}} </span>
                 </button>
                 <button type="button" class="kiAbility {{#if system.kiAbility.kiGreaterArmor.status}}{{#if system.kiAbility.kiGreaterArmor.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                         data-label="system.kiAbility.kiGreaterArmor.status" data-label2="system.kiAbility.kiGreaterArmor.status2" data-ability="{{system.kiAbility.kiGreaterArmor.status}}" data-ability2="{{system.kiAbility.kiGreaterArmor.status2}}">
@@ -202,7 +202,7 @@
                 <span class="subKi4" title="{{localize "abfalter.kiTab.desckiArcaneArmor"}}"> {{localize "abfalter.kiTab.kiArcaneArmor"}} </span>
                 <button class="kiActiveButton toggleBoolean {{#if system.kiAbility.kiArcaneArmor.status}}{{else}}hidden{{/if}} {{#if system.toggles.arcaneEnergyArmor}}kiBought{{/if}}"
                         data-label="system.toggles.arcaneEnergyArmor" data-ability="{{system.toggles.arcaneEnergyArmor}}">
-                    <span class="{{#if system.toggles.arcaneEnergyArmor}}activeKiAbility{{/if}}"> {{localize "abfalter.basicInfo.active"}} </span>
+                    <span class="{{#if system.toggles.arcaneEnergyArmor}}activeKiAbility{{/if}}"> {{localize "abfalter.active"}} </span>
                 </button>
                 <button type="button" class="kiAbility {{#if system.kiAbility.kiArcaneArmor.status}}{{#if system.kiAbility.kiArcaneArmor.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                         data-label="system.kiAbility.kiArcaneArmor.status" data-label2="system.kiAbility.kiArcaneArmor.status2" data-ability="{{system.kiAbility.kiArcaneArmor.status}}" data-ability2="{{system.kiAbility.kiArcaneArmor.status2}}">
@@ -652,7 +652,7 @@
                 </div>
                 <div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.agi"}} </span>
+                        <span> {{localize "abfalter.agi"}} </span>
                         <input type="number" name="system.kiPool.agi.accumTot" value="{{system.kiPool.agi.accumTot}}" readonly />
                         <input type="number" name="system.kiPool.agi.poolTot" value="{{system.kiPool.agi.poolTot}}" readonly />
                         {{#if system.toggles.unifiedPools}}
@@ -665,22 +665,22 @@
                     </div>
                     {{#if system.kiPool.agi.status}}
                     <div>
-                        <span> {{localize "abfalter.basicInfo.innate"}} </span>
+                        <span> {{localize "abfalter.innate"}} </span>
                         <input type="number" name="system.stats.Agility.kiPoolAccuBase" value="{{system.stats.Agility.kiPoolAccuBase}}" readonly />
                         <input type="number" name="system.stats.Agility.kiPoolBase" value="{{system.stats.Agility.kiPoolBase}}" readonly />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <span> {{localize "abfalter.base"}} </span>
                         <input type="number" name="system.kiPool.agi.default" value="{{system.kiPool.agi.default}}" />
                         <input type="number" name="system.kiPool.agi.defaultMax" value="{{system.kiPool.agi.defaultMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.spec"}} </span>
+                        <span> {{localize "abfalter.spec"}} </span>
                         <input type="number" name="system.kiPool.agi.spec" value="{{system.kiPool.agi.spec}}" />
                         <input type="number" name="system.kiPool.agi.specMax" value="{{system.kiPool.agi.specMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
+                        <span> {{localize "abfalter.extra"}} </span>
                         <input type="number" name="system.kiPool.agi.temp" value="{{system.kiPool.agi.temp}}" />
                         <input type="number" name="system.kiPool.agi.tempMax" value="{{system.kiPool.agi.tempMax}}" />
                     </div>
@@ -688,7 +688,7 @@
                 </div>
                 <div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.con"}} </span>
+                        <span> {{localize "abfalter.con"}} </span>
                         <input type="number" name="system.kiPool.con.accumTot" value="{{system.kiPool.con.accumTot}}" readonly />
                         <input type="number" name="system.kiPool.con.poolTot" value="{{system.kiPool.con.poolTot}}" readonly />
                         {{#if system.toggles.unifiedPools}}
@@ -701,22 +701,22 @@
                     </div>
                     {{#if system.kiPool.con.status}}
                     <div>
-                        <span> {{localize "abfalter.basicInfo.innate"}} </span>
+                        <span> {{localize "abfalter.innate"}} </span>
                         <input type="number" name="system.stats.Constitution.kiPoolAccuBase" value="{{system.stats.Constitution.kiPoolAccuBase}}" readonly />
                         <input type="number" name="system.stats.Constitution.kiPoolBase" value="{{system.stats.Constitution.kiPoolBase}}" readonly />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <span> {{localize "abfalter.base"}} </span>
                         <input type="number" name="system.kiPool.con.default" value="{{system.kiPool.con.default}}" />
                         <input type="number" name="system.kiPool.con.defaultMax" value="{{system.kiPool.con.defaultMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.spec"}} </span>
+                        <span> {{localize "abfalter.spec"}} </span>
                         <input type="number" name="system.kiPool.con.spec" value="{{system.kiPool.con.spec}}" />
                         <input type="number" name="system.kiPool.con.specMax" value="{{system.kiPool.con.specMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
+                        <span> {{localize "abfalter.extra"}} </span>
                         <input type="number" name="system.kiPool.con.temp" value="{{system.kiPool.con.temp}}" />
                         <input type="number" name="system.kiPool.con.tempMax" value="{{system.kiPool.con.tempMax}}" />
                     </div>
@@ -724,7 +724,7 @@
                 </div>
                 <div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.dex"}} </span>
+                        <span> {{localize "abfalter.dex"}} </span>
                         <input type="number" name="system.kiPool.dex.accumTot" value="{{system.kiPool.dex.accumTot}}" readonly />
                         <input type="number" name="system.kiPool.dex.poolTot" value="{{system.kiPool.dex.poolTot}}" readonly />
                         {{#if system.toggles.unifiedPools}}
@@ -737,22 +737,22 @@
                     </div>
                     {{#if system.kiPool.dex.status}}
                     <div>
-                        <span> {{localize "abfalter.basicInfo.innate"}} </span>
+                        <span> {{localize "abfalter.innate"}} </span>
                         <input type="number" name="system.stats.Dexterity.kiPoolAccuBase" value="{{system.stats.Dexterity.kiPoolAccuBase}}" readonly />
                         <input type="number" name="system.stats.Dexterity.kiPoolBase" value="{{system.stats.Dexterity.kiPoolBase}}" readonly />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <span> {{localize "abfalter.base"}} </span>
                         <input type="number" name="system.kiPool.dex.default" value="{{system.kiPool.dex.default}}" />
                         <input type="number" name="system.kiPool.dex.defaultMax" value="{{system.kiPool.dex.defaultMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.spec"}} </span>
+                        <span> {{localize "abfalter.spec"}} </span>
                         <input type="number" name="system.kiPool.dex.spec" value="{{system.kiPool.dex.spec}}" />
                         <input type="number" name="system.kiPool.dex.specMax" value="{{system.kiPool.dex.specMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
+                        <span> {{localize "abfalter.extra"}} </span>
                         <input type="number" name="system.kiPool.dex.temp" value="{{system.kiPool.dex.temp}}" />
                         <input type="number" name="system.kiPool.dex.tempMax" value="{{system.kiPool.dex.tempMax}}" />
                     </div>
@@ -760,7 +760,7 @@
                 </div>
                 <div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.str"}} </span>
+                        <span> {{localize "abfalter.str"}} </span>
                         <input type="number" name="system.kiPool.str.accumTot" value="{{system.kiPool.str.accumTot}}" readonly />
                         <input type="number" name="system.kiPool.str.poolTot" value="{{system.kiPool.str.poolTot}}" readonly />
                         {{#if system.toggles.unifiedPools}}
@@ -773,22 +773,22 @@
                     </div>
                     {{#if system.kiPool.str.status}}
                     <div>
-                        <span> {{localize "abfalter.basicInfo.innate"}} </span>
+                        <span> {{localize "abfalter.innate"}} </span>
                         <input type="number" name="system.stats.Strength.kiPoolAccuBase" value="{{system.stats.Strength.kiPoolAccuBase}}" readonly />
                         <input type="number" name="system.stats.Strength.kiPoolBase" value="{{system.stats.Strength.kiPoolBase}}" readonly />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <span> {{localize "abfalter.base"}} </span>
                         <input type="number" name="system.kiPool.str.default" value="{{system.kiPool.str.default}}" />
                         <input type="number" name="system.kiPool.str.defaultMax" value="{{system.kiPool.str.defaultMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.spec"}} </span>
+                        <span> {{localize "abfalter.spec"}} </span>
                         <input type="number" name="system.kiPool.str.spec" value="{{system.kiPool.str.spec}}" />
                         <input type="number" name="system.kiPool.str.specMax" value="{{system.kiPool.str.specMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
+                        <span> {{localize "abfalter.extra"}} </span>
                         <input type="number" name="system.kiPool.str.temp" value="{{system.kiPool.str.temp}}" />
                         <input type="number" name="system.kiPool.str.tempMax" value="{{system.kiPool.str.tempMax}}" />
                     </div>
@@ -796,7 +796,7 @@
                 </div>
                 <div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.pow"}} </span>
+                        <span> {{localize "abfalter.pow"}} </span>
                         <input type="number" name="system.kiPool.pow.accumTot" value="{{system.kiPool.pow.accumTot}}" readonly />
                         <input type="number" name="system.kiPool.pow.poolTot" value="{{system.kiPool.pow.poolTot}}" readonly />
                         {{#if system.toggles.unifiedPools}}
@@ -809,22 +809,22 @@
                     </div>
                     {{#if system.kiPool.pow.status}}
                     <div>
-                        <span> {{localize "abfalter.basicInfo.innate"}} </span>
+                        <span> {{localize "abfalter.innate"}} </span>
                         <input type="number" name="system.stats.Power.kiPoolAccuBase" value="{{system.stats.Power.kiPoolAccuBase}}" readonly />
                         <input type="number" name="system.stats.Power.kiPoolBase" value="{{system.stats.Power.kiPoolBase}}" readonly />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <span> {{localize "abfalter.base"}} </span>
                         <input type="number" name="system.kiPool.pow.default" value="{{system.kiPool.pow.default}}" />
                         <input type="number" name="system.kiPool.pow.defaultMax" value="{{system.kiPool.pow.defaultMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.spec"}} </span>
+                        <span> {{localize "abfalter.spec"}} </span>
                         <input type="number" name="system.kiPool.pow.spec" value="{{system.kiPool.pow.spec}}" />
                         <input type="number" name="system.kiPool.pow.specMax" value="{{system.kiPool.pow.specMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
+                        <span> {{localize "abfalter.extra"}} </span>
                         <input type="number" name="system.kiPool.pow.temp" value="{{system.kiPool.pow.temp}}" />
                         <input type="number" name="system.kiPool.pow.tempMax" value="{{system.kiPool.pow.tempMax}}" />
                     </div>
@@ -832,7 +832,7 @@
                 </div>
                 <div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.wp"}} </span>
+                        <span> {{localize "abfalter.wp"}} </span>
                         <input type="number" name="system.kiPool.wp.accumTot" value="{{system.kiPool.wp.accumTot}}" readonly />
                         <input type="number" name="system.kiPool.wp.poolTot" value="{{system.kiPool.wp.poolTot}}" readonly />
                         {{#if system.toggles.unifiedPools}}
@@ -845,22 +845,22 @@
                     </div>
                     {{#if system.kiPool.wp.status}}
                     <div>
-                        <span> {{localize "abfalter.basicInfo.innate"}} </span>
+                        <span> {{localize "abfalter.innate"}} </span>
                         <input type="number" name="system.stats.Willpower.kiPoolAccuBase" value="{{system.stats.Willpower.kiPoolAccuBase}}" readonly />
                         <input type="number" name="system.stats.Willpower.kiPoolBase" value="{{system.stats.Willpower.kiPoolBase}}" readonly />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.base"}} </span>
+                        <span> {{localize "abfalter.base"}} </span>
                         <input type="number" name="system.kiPool.wp.default" value="{{system.kiPool.wp.default}}" />
                         <input type="number" name="system.kiPool.wp.defaultMax" value="{{system.kiPool.wp.defaultMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.spec"}} </span>
+                        <span> {{localize "abfalter.spec"}} </span>
                         <input type="number" name="system.kiPool.wp.spec" value="{{system.kiPool.wp.spec}}" />
                         <input type="number" name="system.kiPool.wp.specMax" value="{{system.kiPool.wp.specMax}}" />
                     </div>
                     <div>
-                        <span> {{localize "abfalter.basicInfo.extra"}} </span>
+                        <span> {{localize "abfalter.extra"}} </span>
                         <input type="number" name="system.kiPool.wp.temp" value="{{system.kiPool.wp.temp}}" />
                         <input type="number" name="system.kiPool.wp.tempMax" value="{{system.kiPool.wp.tempMax}}" />
                     </div>
@@ -893,12 +893,12 @@
                     </label>
                 </h5>
                 <div>
-                    <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.mk.base" value="{{system.mk.base}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.extra"}} </span> <input type="number" name="system.mk.temp" value="{{system.mk.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.mk.base" value="{{system.mk.base}}" /> </label>
+                    <label> <span> {{localize "abfalter.extra"}} </span> <input type="number" name="system.mk.temp" value="{{system.mk.temp}}" /> </label>
                 </div>
                 <div>
-                    <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.mk.spec" value="{{system.mk.spec}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.mk.class" value="{{system.mk.class}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.mk.spec" value="{{system.mk.spec}}" /> </label>
+                    <label> <span> {{localize "abfalter.class"}} </span> <input type="number" name="system.mk.class" value="{{system.mk.class}}" readonly /> </label>
                 </div>
                 {{#if system.mk.status}}
                 <div>
@@ -915,8 +915,8 @@
                 </div>
                 {{/if}}
                 <div class="lastMK">
-                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.mk.final" value="{{system.mk.final}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.used"}} </span> <input type="number" name="system.mk.used" value="{{system.mk.used}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.mk.final" value="{{system.mk.final}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.used"}} </span> <input type="number" name="system.mk.used" value="{{system.mk.used}}" readonly /> </label>
                 </div>
 
                 <div class="kiPoolButtons">
@@ -924,10 +924,10 @@
                         <h5> Ki Accu. </h5>
                         <div>
                             <button type="button" class="kiAccuHalf">
-                                <span> {{localize "abfalter.basicInfo.half"}} </span>
+                                <span> {{localize "abfalter.half"}} </span>
                             </button>
                             <button type="button" class="kiAccuFull">
-                                <span> {{localize "abfalter.basicInfo.full"}} </span>
+                                <span> {{localize "abfalter.full"}} </span>
                             </button>
                         </div>
 
@@ -949,9 +949,9 @@
             <div class="arsMagnus {{#if system.toggles.arsMagVis}}hidden{{/if}}">
                 <h5> {{localize "abfalter.kiTab.arsMagnus"}} </h5>
                 <div>
-                    <span> {{localize "abfalter.basicInfo.name"}} </span>
-                    <span> {{localize "abfalter.basicInfo.dp"}} </span>
-                    <span> {{localize "abfalter.basicInfo.mk"}} </span>
+                    <span> {{localize "abfalter.name"}} </span>
+                    <span> {{localize "abfalter.dp"}} </span>
+                    <span> {{localize "abfalter.mk"}} </span>
                 </div>
                 <div class="{{#if system.itemToggle.arsMagnus}}item-list{{/if}}">
                     {{#each arsMagnuses as |arsMagnus id|}}
@@ -1017,8 +1017,8 @@
             <div>
                 <span> {{localize "abfalter.kiTab.martialArtName"}} </span>
                 <span> {{localize "abfalter.kiTab.degree"}} </span>
-                <span> {{localize "abfalter.basicInfo.dp"}} </span>
-                <span> {{localize "abfalter.basicInfo.mk"}} </span>
+                <span> {{localize "abfalter.dp"}} </span>
+                <span> {{localize "abfalter.mk"}} </span>
             </div>
             <div class="{{#if system.itemToggle.martialArt}}item-list{{/if}}">
                 {{#each martialArts as |martialArt id|}}
@@ -1106,7 +1106,7 @@
             <div class="kisealmast">
                 <h6> {{localize "abfalter.kiTab.kiSealMaster"}} </h6>
                 <div>
-                    <span> {{localize "abfalter.basicInfo.cost"}} </span>
+                    <span> {{localize "abfalter.cost"}} </span>
                     <span> {{localize "abfalter.kiTab.sealWood"}} </span>
                     <span> {{localize "abfalter.kiTab.sealMetal"}} </span>
                     <span> {{localize "abfalter.kiTab.sealAir"}} </span>
@@ -1164,7 +1164,7 @@
             <div class="kiSealsCreatures">
                 <div>
                     <span> {{localize "abfalter.kiTab.creatureName"}} </span>
-                    <span> {{localize "abfalter.basicInfo.level"}} </span>
+                    <span> {{localize "abfalter.level"}} </span>
                 </div>
                 <div class="{{#if system.itemToggle.kiSealCreature}}item-list{{/if}}">
                     {{#each kiSealCreatures as |kiSealCreature id|}}
@@ -1240,19 +1240,19 @@
                         </div>
 
                         <div class="kiTechSideInfoMax">
-                            <span> {{localize "abfalter.basicInfo.name"}} </span>
-                            <span> {{localize "abfalter.basicInfo.level"}} </span>
-                            <span> {{localize "abfalter.basicInfo.mk"}} </span>
+                            <span> {{localize "abfalter.name"}} </span>
+                            <span> {{localize "abfalter.level"}} </span>
+                            <span> {{localize "abfalter.mk"}} </span>
                         </div>
 
                         <div class="kiTechTypeMax">
                             <span> {{localize "abfalter.kiTab.ki"}} </span>
-                            <span> {{localize "abfalter.basicInfo.agi"}} </span>
-                            <span> {{localize "abfalter.basicInfo.con"}} </span>
-                            <span> {{localize "abfalter.basicInfo.dex"}} </span>
-                            <span> {{localize "abfalter.basicInfo.str"}} </span>
-                            <span> {{localize "abfalter.basicInfo.pow"}} </span>
-                            <span> {{localize "abfalter.basicInfo.wp"}} </span>
+                            <span> {{localize "abfalter.agi"}} </span>
+                            <span> {{localize "abfalter.con"}} </span>
+                            <span> {{localize "abfalter.dex"}} </span>
+                            <span> {{localize "abfalter.str"}} </span>
+                            <span> {{localize "abfalter.pow"}} </span>
+                            <span> {{localize "abfalter.wp"}} </span>
                             <span> {{localize "abfalter.kiTab.actionInfo"}} </span>
                         </div>
 
@@ -1314,18 +1314,18 @@
                         <div class="kiTechSideInfo">
                             <span> {{localize "abfalter.kiTab.frequency"}}: {{kiTechnique.system.frequencyName}} </span>
                             <span> {{localize "abfalter.kiTab.actionType"}}: {{kiTechnique.system.actionTypeName}} </span>
-                            <span> {{localize "abfalter.basicInfo.level"}} </span>
-                            <span> {{localize "abfalter.basicInfo.mk"}} </span>
+                            <span> {{localize "abfalter.level"}} </span>
+                            <span> {{localize "abfalter.mk"}} </span>
                         </div>
 
                         <div class="kiTechType">
                             <span> {{localize "abfalter.kiTab.ki"}} </span>
-                            <span> {{localize "abfalter.basicInfo.agi"}} </span>
-                            <span> {{localize "abfalter.basicInfo.con"}} </span>
-                            <span> {{localize "abfalter.basicInfo.dex"}} </span>
-                            <span> {{localize "abfalter.basicInfo.str"}} </span>
-                            <span> {{localize "abfalter.basicInfo.pow"}} </span>
-                            <span> {{localize "abfalter.basicInfo.wp"}} </span>
+                            <span> {{localize "abfalter.agi"}} </span>
+                            <span> {{localize "abfalter.con"}} </span>
+                            <span> {{localize "abfalter.dex"}} </span>
+                            <span> {{localize "abfalter.str"}} </span>
+                            <span> {{localize "abfalter.pow"}} </span>
+                            <span> {{localize "abfalter.wp"}} </span>
                         </div>
 
                         <div class="kiTechUse">

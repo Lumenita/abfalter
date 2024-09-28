@@ -1,4 +1,4 @@
-import { openModifierDialogue } from "../diceroller.js";
+import { openModifierDialogue, openWeaponDialogue } from "../diceroller.js";
 import { metaMagicSheet } from "../helpers/metaMagicSheet.js";
 import * as actorFunctions from "../helpers/actorFunctions.js";
 import { onManageActiveEffect, prepareActiveEffectCategories } from '../helpers/effects.js';
@@ -278,6 +278,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
             html.find(".item-chat").click(this._onItemChatRoll.bind(this));
             html.find('.rollable').click(this._onRoll.bind(this));
             html.find('.combatRoll').click(this._onAttackRoll.bind(this));
+            html.find('.weaponRoll').click(this._onWeaponRoll.bind(this));
 
             html.on('click', '.effect-control', (ev) => {
                 const row = ev.currentTarget.closest('li');
@@ -310,7 +311,13 @@ export default class abfalterCharacterSheet extends ActorSheet {
 
         openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type, dataset.ability);
     }
+    _onWeaponRoll(event) {
+        event.preventDefault();
+        const dataset = event.currentTarget.dataset;
 
+        console.log(dataset);
+        openWeaponDialogue(this.actor, dataset.label, dataset.type);
+    }
     _changeSecNums(event) {
         event.preventDefault();
         let element = event.currentTarget;

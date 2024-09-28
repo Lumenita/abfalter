@@ -1,0 +1,18 @@
+<form class="baseAbfalter">
+  <header>
+    <div class="diceRollingTemp">
+        <label class="{{#if fatMod}}hidden{{/if}}"> <span> {{localize "abfalter.generalTab.fatigue"}} </span> <input type="number" id="fatiguemod" value="0"  /> </label>
+        <label> <span> {{localize "abfalter.dialogs.modifier"}} </span> <input type="number" id="modifiermod" value="0" /> </label>
+    </div>
+    <div>
+        {{weapon.name}}
+    </div>
+    <div>
+        <select id="attackSelect"></select>
+    </div>
+    <div class="form-group">
+      <label>Power:</label>
+      <span id="attackPower">${attacks[0].finalAttack}</span>
+    </div>
+  </header>
+</form>

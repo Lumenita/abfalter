@@ -5,36 +5,36 @@
                 <h5>{{localize "abfalter.generalTab.characteristics"}}</h5>
                 <div>
                     <span> {{localize "abfalter.generalTab.atr"}} </span>
-                    <span> {{localize "abfalter.basicInfo.final"}} </span>
+                    <span> {{localize "abfalter.final"}} </span>
                     <span> {{localize "abfalter.generalTab.opposed"}} </span>
                 </div>
                 <!--Agility-->
                 <div>
                     {{#if system.stats.Agility.status}}
                     <div class="extend">
-                        <h6 class="physical"> {{localize "abfalter.basicInfo.agility"}} </h6>
+                        <h6 class="physical"> {{localize "abfalter.agility"}} </h6>
                         <label>
                             {{#if system.toggles.monsterChar}}
                             <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
                             <input type="number" name="system.monsterChar.agi.charBaseTotal" value="{{system.monsterChar.agi.charBaseTotal}}" data-dtype="number" readonly/>
                             {{else}}
-                            <span> {{localize "abfalter.basicInfo.base"}} </span>
+                            <span> {{localize "abfalter.base"}} </span>
                             <input type="number" name="system.stats.Agility.base" value="{{system.stats.Agility.base}}" data-dtype="number" />
                             {{/if}}
                         </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.stats.Agility.spec" value="{{system.stats.Agility.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.stats.Agility.temp" value="{{system.stats.Agility.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{system.stats.Agility.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.stats.Agility.spec" value="{{system.stats.Agility.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.stats.Agility.temp" value="{{system.stats.Agility.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" value="{{system.stats.Agility.final}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{system.stats.Agility.mod}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="system.stats.Agility.opposed" value="{{system.stats.Agility.opposed}}" /> </label>
                         <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{system.stats.Agility.opposedfinal}}" readonly /> </label>
                     </div>
                     {{else}}
                     <div class="compact">
-                        <button type="button" class="rollable" data-roll="{{system.stats.Agility.final}}" data-label="{{localize "abfalter.basicInfo.agility"}}" data-type="characteristicRoll">
-                            <span class="physical"> {{localize "abfalter.basicInfo.agi"}} </span> <span> {{system.stats.Agility.final}} </span>
+                        <button type="button" class="rollable" data-roll="{{system.stats.Agility.final}}" data-label="{{localize "abfalter.agility"}}" data-type="characteristicRoll">
+                            <span class="physical"> {{localize "abfalter.agi"}} </span> <span> {{system.stats.Agility.final}} </span>
                         </button>
-                        <button type="button" class="rollable" data-roll="{{system.stats.Agility.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.basicInfo.agility"}}" data-type="characteristicRoll">
+                        <button type="button" class="rollable" data-roll="{{system.stats.Agility.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.agility"}}" data-type="characteristicRoll">
                             <span> {{system.stats.Agility.opposedfinal}} </span>
                         </button>
                     </div>
@@ -47,29 +47,29 @@
                 <div>
                     {{#if system.stats.Constitution.status}}
                     <div class="extend">
-                        <h6 class="physical"> {{localize "abfalter.basicInfo.consti"}} </h6>
+                        <h6 class="physical"> {{localize "abfalter.consti"}} </h6>
                         <label>
                             {{#if system.toggles.monsterChar}}
                             <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
                             <input type="number" name="system.monsterChar.con.charBaseTotal" value="{{system.monsterChar.con.charBaseTotal}}" data-dtype="number" readonly />
                             {{else}}
-                            <span> {{localize "abfalter.basicInfo.base"}} </span>
+                            <span> {{localize "abfalter.base"}} </span>
                             <input type="number" name="system.stats.Constitution.base" value="{{system.stats.Constitution.base}}" data-dtype="number" />
                             {{/if}}
                         </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.stats.Constitution.spec" value="{{system.stats.Constitution.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.stats.Constitution.temp" value="{{system.stats.Constitution.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{system.stats.Constitution.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.stats.Constitution.spec" value="{{system.stats.Constitution.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.stats.Constitution.temp" value="{{system.stats.Constitution.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" value="{{system.stats.Constitution.final}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{system.stats.Constitution.mod}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="system.stats.Constitution.opposed" value="{{system.stats.Constitution.opposed}}" /> </label>
                         <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{system.stats.Constitution.opposedfinal}}" readonly /> </label>
                     </div>
                     {{else}}
                     <div class="compact">
-                        <button type="button" class="rollable" data-roll="{{system.stats.Constitution.final}}" data-label="{{localize "abfalter.basicInfo.consti"}}" data-type="characteristicRoll">
-                            <span class="physical"> {{localize "abfalter.basicInfo.con"}} </span> <span> {{system.stats.Constitution.final}} </span>
+                        <button type="button" class="rollable" data-roll="{{system.stats.Constitution.final}}" data-label="{{localize "abfalter.consti"}}" data-type="characteristicRoll">
+                            <span class="physical"> {{localize "abfalter.con"}} </span> <span> {{system.stats.Constitution.final}} </span>
                         </button>
-                        <button type="button" class="rollable" data-roll="{{system.stats.Constitution.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.basicInfo.consti"}}" data-type="characteristicRoll">
+                        <button type="button" class="rollable" data-roll="{{system.stats.Constitution.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.consti"}}" data-type="characteristicRoll">
                             <span> {{system.stats.Constitution.opposedfinal}} </span>
                         </button>
                     </div>
@@ -82,29 +82,29 @@
                 <div>
                     {{#if system.stats.Strength.status}}
                     <div class="extend">
-                        <h6 class="physical"> {{localize "abfalter.basicInfo.strength"}} </h6>
+                        <h6 class="physical"> {{localize "abfalter.strength"}} </h6>
                         <label>
                             {{#if system.toggles.monsterChar}}
                             <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
                             <input type="number" name="system.monsterChar.str.charBaseTotal" value="{{system.monsterChar.str.charBaseTotal}}" data-dtype="number" readonly />
                             {{else}}
-                            <span> {{localize "abfalter.basicInfo.base"}} </span>
+                            <span> {{localize "abfalter.base"}} </span>
                             <input type="number" name="system.stats.Strength.base" value="{{system.stats.Strength.base}}" data-dtype="number" />
                             {{/if}}
                         </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.stats.Strength.spec" value="{{system.stats.Strength.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.stats.Strength.temp" value="{{system.stats.Strength.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{system.stats.Strength.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.stats.Strength.spec" value="{{system.stats.Strength.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.stats.Strength.temp" value="{{system.stats.Strength.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" value="{{system.stats.Strength.final}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{system.stats.Strength.mod}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="system.stats.Strength.opposed" value="{{system.stats.Strength.opposed}}" /> </label>
                         <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{system.stats.Strength.opposedfinal}}" readonly /> </label>
                     </div>
                     {{else}}
                     <div class="compact">
-                        <button type="button" class="rollable" data-roll="{{system.stats.Strength.final}}" data-label="{{localize "abfalter.basicInfo.strength"}}" data-type="characteristicRoll">
-                            <span class="physical"> {{localize "abfalter.basicInfo.str"}} </span> <span> {{system.stats.Strength.final}} </span>
+                        <button type="button" class="rollable" data-roll="{{system.stats.Strength.final}}" data-label="{{localize "abfalter.strength"}}" data-type="characteristicRoll">
+                            <span class="physical"> {{localize "abfalter.str"}} </span> <span> {{system.stats.Strength.final}} </span>
                         </button>
-                        <button type="button" class="rollable" data-roll="{{system.stats.Strength.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.basicInfo.strength"}}" data-type="characteristicRoll">
+                        <button type="button" class="rollable" data-roll="{{system.stats.Strength.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.strength"}}" data-type="characteristicRoll">
                             <span> {{system.stats.Strength.opposedfinal}} </span>
                         </button>
                     </div>
@@ -117,29 +117,29 @@
                 <div>
                     {{#if system.stats.Dexterity.status}}
                     <div class="extend">
-                        <h6 class="physical"> {{localize "abfalter.basicInfo.dexerity"}} </h6>
+                        <h6 class="physical"> {{localize "abfalter.dexerity"}} </h6>
                         <label>
                             {{#if system.toggles.monsterChar}}
                             <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
                             <input type="number" name="system.monsterChar.dex.charBaseTotal" value="{{system.monsterChar.dex.charBaseTotal}}" data-dtype="number" readonly />
                             {{else}}
-                            <span> {{localize "abfalter.basicInfo.base"}} </span>
+                            <span> {{localize "abfalter.base"}} </span>
                             <input type="number" name="system.stats.Dexterity.base" value="{{system.stats.Dexterity.base}}" data-dtype="number" />
                             {{/if}}
                         </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.stats.Dexterity.spec" value="{{system.stats.Dexterity.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.stats.Dexterity.temp" value="{{system.stats.Dexterity.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{system.stats.Dexterity.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.stats.Dexterity.spec" value="{{system.stats.Dexterity.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.stats.Dexterity.temp" value="{{system.stats.Dexterity.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" value="{{system.stats.Dexterity.final}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{system.stats.Dexterity.mod}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="system.stats.Dexterity.opposed" value="{{system.stats.Dexterity.opposed}}" /> </label>
                         <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{system.stats.Dexterity.opposedfinal}}" readonly /> </label>
                     </div><!-- <i class="fas fa-dice-d20"></i>-->
                     {{else}}
                     <div class="compact">
-                        <button type="button" class="rollable" data-roll="{{system.stats.Dexterity.final}}" data-label="{{localize "abfalter.basicInfo.dexerity"}}" data-type="characteristicRoll">
-                            <span class="physical"> {{localize "abfalter.basicInfo.dex"}} </span> <span> {{system.stats.Dexterity.final}} </span>
+                        <button type="button" class="rollable" data-roll="{{system.stats.Dexterity.final}}" data-label="{{localize "abfalter.dexerity"}}" data-type="characteristicRoll">
+                            <span class="physical"> {{localize "abfalter.dex"}} </span> <span> {{system.stats.Dexterity.final}} </span>
                         </button>
-                        <button type="button" class="rollable" data-roll="{{system.stats.Dexterity.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.basicInfo.dexerity"}}" data-type="characteristicRoll">
+                        <button type="button" class="rollable" data-roll="{{system.stats.Dexterity.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.dexerity"}}" data-type="characteristicRoll">
                             <span> {{system.stats.Dexterity.opposedfinal}} </span>
                         </button>
                     </div>
@@ -152,29 +152,29 @@
                 <div>
                     {{#if system.stats.Perception.status}}
                     <div class="extend">
-                        <h6 class="mental"> {{localize "abfalter.basicInfo.perception"}} </h6>
+                        <h6 class="mental"> {{localize "abfalter.perception"}} </h6>
                         <label>
                             {{#if system.toggles.monsterChar}}
                             <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
                             <input type="number" name="system.monsterChar.per.charBaseTotal" value="{{system.monsterChar.per.charBaseTotal}}" data-dtype="number" readonly />
                             {{else}}
-                            <span> {{localize "abfalter.basicInfo.base"}} </span>
+                            <span> {{localize "abfalter.base"}} </span>
                             <input type="number" name="system.stats.Perception.base" value="{{system.stats.Perception.base}}" data-dtype="number" />
                             {{/if}}
                         </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.stats.Perception.spec" value="{{system.stats.Perception.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.stats.Perception.temp" value="{{system.stats.Perception.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{system.stats.Perception.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.stats.Perception.spec" value="{{system.stats.Perception.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.stats.Perception.temp" value="{{system.stats.Perception.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" value="{{system.stats.Perception.final}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{system.stats.Perception.mod}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="system.stats.Perception.opposed" value="{{system.stats.Perception.opposed}}" /> </label>
                         <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{system.stats.Perception.opposedfinal}}" readonly /> </label>
                     </div><!-- <i class="fas fa-dice-d20"></i>-->
                     {{else}}
                     <div class="compact">
-                        <button type="button" class="rollable" data-roll="{{system.stats.Perception.final}}" data-label="{{localize "abfalter.basicInfo.perception"}}" data-type="characteristicRoll">
-                            <span class="mental"> {{localize "abfalter.basicInfo.per"}} </span> <span> {{system.stats.Perception.final}} </span>
+                        <button type="button" class="rollable" data-roll="{{system.stats.Perception.final}}" data-label="{{localize "abfalter.perception"}}" data-type="characteristicRoll">
+                            <span class="mental"> {{localize "abfalter.per"}} </span> <span> {{system.stats.Perception.final}} </span>
                         </button>
-                        <button type="button" class="rollable" data-roll="{{system.stats.Perception.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.basicInfo.perception"}}" data-type="characteristicRoll">
+                        <button type="button" class="rollable" data-roll="{{system.stats.Perception.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.perception"}}" data-type="characteristicRoll">
                             <span> {{system.stats.Perception.opposedfinal}} </span>
                         </button>
                     </div>
@@ -187,29 +187,29 @@
                 <div>
                     {{#if system.stats.Intelligence.status}}
                     <div class="extend">
-                        <h6 class="mental"> {{localize "abfalter.basicInfo.intell"}} </h6>
+                        <h6 class="mental"> {{localize "abfalter.intell"}} </h6>
                         <label>
                             {{#if system.toggles.monsterChar}}
                             <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
                             <input type="number" name="system.monsterChar.int.charBaseTotal" value="{{system.monsterChar.int.charBaseTotal}}" data-dtype="number" readonly />
                             {{else}}
-                            <span> {{localize "abfalter.basicInfo.base"}} </span>
+                            <span> {{localize "abfalter.base"}} </span>
                             <input type="number" name="system.stats.Intelligence.base" value="{{system.stats.Intelligence.base}}" data-dtype="number" />
                             {{/if}}
                         </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.stats.Intelligence.spec" value="{{system.stats.Intelligence.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.stats.Intelligence.temp" value="{{system.stats.Intelligence.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{system.stats.Intelligence.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.stats.Intelligence.spec" value="{{system.stats.Intelligence.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.stats.Intelligence.temp" value="{{system.stats.Intelligence.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" value="{{system.stats.Intelligence.final}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{system.stats.Intelligence.mod}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="system.stats.Intelligence.opposed" value="{{system.stats.Intelligence.opposed}}" /> </label>
                         <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{system.stats.Intelligence.opposedfinal}}" readonly /> </label>
                     </div><!-- <i class="fas fa-dice-d20"></i>-->
                     {{else}}
                     <div class="compact">
-                        <button type="button" class="rollable" data-roll="{{system.stats.Intelligence.final}}" data-label="{{localize "abfalter.basicInfo.intell"}}" data-type="characteristicRoll">
-                            <span class="mental"> {{localize "abfalter.basicInfo.int"}} </span> <span> {{system.stats.Intelligence.final}} </span>
+                        <button type="button" class="rollable" data-roll="{{system.stats.Intelligence.final}}" data-label="{{localize "abfalter.intell"}}" data-type="characteristicRoll">
+                            <span class="mental"> {{localize "abfalter.int"}} </span> <span> {{system.stats.Intelligence.final}} </span>
                         </button>
-                        <button type="button" class="rollable" data-roll="{{system.stats.Intelligence.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.basicInfo.intell"}}" data-type="characteristicRoll">
+                        <button type="button" class="rollable" data-roll="{{system.stats.Intelligence.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.intell"}}" data-type="characteristicRoll">
                             <span> {{system.stats.Intelligence.opposedfinal}} </span>
                         </button>
                     </div>
@@ -222,29 +222,29 @@
                 <div>
                     {{#if system.stats.Power.status}}
                     <div class="extend">
-                        <h6 class="mental"> {{localize "abfalter.basicInfo.power"}} </h6>
+                        <h6 class="mental"> {{localize "abfalter.power"}} </h6>
                         <label>
                             {{#if system.toggles.monsterChar}}
                             <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
                             <input type="number" name="system.monsterChar.pow.charBaseTotal" value="{{system.monsterChar.pow.charBaseTotal}}" data-dtype="number" readonly />
                             {{else}}
-                            <span> {{localize "abfalter.basicInfo.base"}} </span>
+                            <span> {{localize "abfalter.base"}} </span>
                             <input type="number" name="system.stats.Power.base" value="{{system.stats.Power.base}}" data-dtype="number" />
                             {{/if}}
                         </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.stats.Power.spec" value="{{system.stats.Power.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.stats.Power.temp" value="{{system.stats.Power.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{system.stats.Power.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.stats.Power.spec" value="{{system.stats.Power.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.stats.Power.temp" value="{{system.stats.Power.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" value="{{system.stats.Power.final}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{system.stats.Power.mod}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="system.stats.Power.opposed" value="{{system.stats.Power.opposed}}" /> </label>
                         <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{system.stats.Power.opposedfinal}}" readonly /> </label>
                     </div><!-- <i class="fas fa-dice-d20"></i>-->
                     {{else}}
                     <div class="compact">
-                        <button type="button" class="rollable" data-roll="{{system.stats.Power.final}}" data-label="{{localize "abfalter.basicInfo.power"}}" data-type="characteristicRoll">
-                            <span class="mental"> {{localize "abfalter.basicInfo.pow"}} </span> <span> {{system.stats.Power.final}} </span>
+                        <button type="button" class="rollable" data-roll="{{system.stats.Power.final}}" data-label="{{localize "abfalter.power"}}" data-type="characteristicRoll">
+                            <span class="mental"> {{localize "abfalter.pow"}} </span> <span> {{system.stats.Power.final}} </span>
                         </button>
-                        <button type="button" class="rollable" data-roll="{{system.stats.Power.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.basicInfo.power"}}" data-type="characteristicRoll">
+                        <button type="button" class="rollable" data-roll="{{system.stats.Power.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.power"}}" data-type="characteristicRoll">
                             <span> {{system.stats.Power.opposedfinal}} </span>
                         </button>
                     </div>
@@ -257,29 +257,29 @@
                 <div>
                     {{#if system.stats.Willpower.status}}
                     <div class="extend">
-                        <h6 class="mental"> {{localize "abfalter.basicInfo.willPower"}} </h6>
+                        <h6 class="mental"> {{localize "abfalter.willPower"}} </h6>
                         <label>
                             {{#if system.toggles.monsterChar}}
                             <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
                             <input type="number" name="system.monsterChar.wp.charBaseTotal" value="{{system.monsterChar.wp.charBaseTotal}}" data-dtype="number" readonly />
                             {{else}}
-                            <span> {{localize "abfalter.basicInfo.base"}} </span>
+                            <span> {{localize "abfalter.base"}} </span>
                             <input type="number" name="system.stats.Willpower.base" value="{{system.stats.Willpower.base}}" data-dtype="number" />
                             {{/if}}
                         </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.stats.Willpower.spec" value="{{system.stats.Willpower.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.stats.Willpower.temp" value="{{system.stats.Willpower.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" value="{{system.stats.Willpower.final}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.stats.Willpower.spec" value="{{system.stats.Willpower.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.stats.Willpower.temp" value="{{system.stats.Willpower.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" value="{{system.stats.Willpower.final}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" value="{{system.stats.Willpower.mod}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.generalTab.opposed"}} </span> <input type="number" name="system.stats.Willpower.opposed" value="{{system.stats.Willpower.opposed}}" /> </label>
                         <label> <span> {{localize "abfalter.generalTab.finalOpposed"}} </span> <input type="number" value="{{system.stats.Willpower.opposedfinal}}" readonly /> </label>
                     </div><!-- <i class="fas fa-dice-d20"></i>-->
                     {{else}}
                     <div class="compact">
-                        <button type="button" class="rollable" data-roll="{{system.stats.Willpower.final}}" data-label="{{localize "abfalter.basicInfo.willPower"}}" data-type="characteristicRoll">
-                            <span class="mental"> {{localize "abfalter.basicInfo.wp"}} </span> <span> {{system.stats.Willpower.final}} </span>
+                        <button type="button" class="rollable" data-roll="{{system.stats.Willpower.final}}" data-label="{{localize "abfalter.willPower"}}" data-type="characteristicRoll">
+                            <span class="mental"> {{localize "abfalter.wp"}} </span> <span> {{system.stats.Willpower.final}} </span>
                         </button>
-                        <button type="button" class="rollable" data-roll="{{system.stats.Willpower.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.basicInfo.willPower"}}" data-type="characteristicRoll">
+                        <button type="button" class="rollable" data-roll="{{system.stats.Willpower.opposedfinal}}" data-label="{{localize "abfalter.generalTab.opposed"}} {{localize "abfalter.willPower"}}" data-type="characteristicRoll">
                             <span> {{system.stats.Willpower.opposedfinal}} </span>
                         </button>
                     </div>
@@ -293,9 +293,9 @@
             <div class="resistances">
                 <h5> {{localize "abfalter.generalTab.resistances"}} </h5>
                 <div>
-                    <span> {{localize "abfalter.basicInfo.type"}} </span>
-                    <span> {{localize "abfalter.basicInfo.final"}} </span>
-                    <span> {{localize "abfalter.basicInfo.spec"}} </span>
+                    <span> {{localize "abfalter.type"}} </span>
+                    <span> {{localize "abfalter.final"}} </span>
+                    <span> {{localize "abfalter.spec"}} </span>
                 </div>
                 {{#each system.resistances as |res key|}}
                 <div>
@@ -330,18 +330,18 @@
                     </label>
                 </h5>
                 <div>
-                    <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <span> {{system.stats.Agility.final}} </span> </label>
+                    <label> <span> {{localize "abfalter.base"}} </span> <span> {{system.stats.Agility.final}} </span> </label>
                     {{#if system.toggles.movementInfo}}
                     <div>
-                        <label> <span> {{localize "abfalter.basicInfo.size"}} </span> <input type="number" name="system.movement.sizeBase" value="{{system.movement.sizeBase}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.size"}} </span> <input type="number" name="system.movement.sizeBase" value="{{system.movement.sizeBase}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.armoryTab.armor"}} </span> <input type="number" name="system.armor.wearArmor.totalMovePen" value="{{system.armor.wearArmor.totalMovePen}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.movement.spec" value="{{system.movement.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.movement.spec" value="{{system.movement.spec}}" /> </label>
                         <label> <span> {{localize "abfalter.generalTab.pen"}} </span> <input type="number" name="system.movement.pen" value="{{system.movement.pen}}" /> </label>
                     </div>
                     {{/if}}
-                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.movement.temp" value="{{system.movement.temp}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <span> {{system.movement.final}} </span> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.full"}} </span> <span> {{system.movement.fullMove}} </span> </label>
+                    <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.movement.temp" value="{{system.movement.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.final"}} </span> <span> {{system.movement.final}} </span> </label>
+                    <label> <span> {{localize "abfalter.full"}} </span> <span> {{system.movement.fullMove}} </span> </label>
                     <label> <span> {{localize "abfalter.generalTab.fourthMove"}} </span> <span> {{system.movement.fourthMove}} </span> </label>
                     <label> <span> {{localize "abfalter.generalTab.running"}} </span> <span> {{system.movement.runningMove}} </span> </label>
                 </div>               
@@ -358,20 +358,20 @@
                     </h5>
                     {{#if system.lifepoints.status}}
                     <div>
-                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.lifepoints.base" value="{{system.lifepoints.base}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.lifepoints.base" value="{{system.lifepoints.base}}" readonly /> </label>
                         {{#if system.toggles.dmgRes}}
                         <label> <span> {{localize "abfalter.monsterPowers.hpMonster"}} </span> <input type="number" name="system.lifepoints.hpDmgRes" value="{{system.lifepoints.hpDmgRes}}" readonly/> </label>
                         {{else}}
-                        <label> <span> {{localize "abfalter.basicInfo.mult"}} </span> <input type="number" name="system.lifepoints.multiple" value="{{system.lifepoints.multiple}}" /> </label>
+                        <label> <span> {{localize "abfalter.mult"}} </span> <input type="number" name="system.lifepoints.multiple" value="{{system.lifepoints.multiple}}" /> </label>
                         {{/if}}
-                        <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.lifepoints.class" value="{{system.lifepoints.class}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.lifepoints.spec" value="{{system.lifepoints.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.class"}} </span> <input type="number" name="system.lifepoints.class" value="{{system.lifepoints.class}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.lifepoints.spec" value="{{system.lifepoints.spec}}" /> </label>
                     </div>
                     {{/if}}
                     <div class="lpCompact">
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.lifepoints.temp" value="{{system.lifepoints.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.lp.max" value="{{system.lp.max}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="system.lp.value" value="{{system.lp.value}}" /> </label>
+                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.lifepoints.temp" value="{{system.lifepoints.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.lp.max" value="{{system.lp.max}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.actual"}} </span> <input type="number" name="system.lp.value" value="{{system.lp.value}}" /> </label>
                     </div>                  
                 </div>
                 <!--Fatigue-->
@@ -384,24 +384,24 @@
                     </h5>
                     {{#if system.fatigue.status}}
                     <div>
-                        <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.fatigue.base" value="{{system.fatigue.base}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.fatigue.spec" value="{{system.fatigue.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.fatigue.base" value="{{system.fatigue.base}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.fatigue.spec" value="{{system.fatigue.spec}}" /> </label>
                     </div>
                     {{/if}}
                     <div class="fatCompact">
-                        <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.fatigue.temp" value="{{system.fatigue.temp}}" /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.fatigue.max" value="{{system.fatigue.max}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.basicInfo.actual"}} </span> <input type="number" name="system.fatigue.value" value="{{system.fatigue.value}}" /> </label>
+                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.fatigue.temp" value="{{system.fatigue.temp}}" /> </label>
+                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.fatigue.max" value="{{system.fatigue.max}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.actual"}} </span> <input type="number" name="system.fatigue.value" value="{{system.fatigue.value}}" /> </label>
                     </div>
                 </div>
             </div> <!--Lifepoints & Fatigue-->
 
             <div class="regeneration">
                 <h5> {{localize "abfalter.generalTab.regen"}} </h5>
-                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.regeneration.base" value="{{system.regeneration.base}}" readonly /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.regeneration.spec" value="{{system.regeneration.spec}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.regeneration.temp" value="{{system.regeneration.temp}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.regeneration.final" value="{{system.regeneration.final}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.regeneration.base" value="{{system.regeneration.base}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.regeneration.spec" value="{{system.regeneration.spec}}" /> </label>
+                <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.regeneration.temp" value="{{system.regeneration.temp}}" /> </label>
+                <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.regeneration.final" value="{{system.regeneration.final}}" readonly /> </label>
                 <label> <span> {{localize "abfalter.generalTab.resting"}} </span> <input type="text" name="system.regeneration.resting" value="{{system.regeneration.resting}}" readonly /> </label>
                 <label> <span> {{localize "abfalter.generalTab.noRest"}} </span> <input type="text" name="system.regeneration.notResting" value="{{system.regeneration.notResting}}" readonly /> </label>
                 <label> <span> {{localize "abfalter.generalTab.redPen"}} </span> <input type="text" name="system.regeneration.penaltyReduction" value="{{system.regeneration.penaltyReduction}}" readonly /> </label>
@@ -411,22 +411,22 @@
         <div>
             <div class="atkdef">
                 <h5>
-                    {{localize "abfalter.basicInfo.attack"}}
+                    {{localize "abfalter.attack"}}
                     <label class="expand-box">
                         <a class="toggleBoolean {{#if system.combatValues.attack.status}}showOpacity{{/if}}" data-label="system.combatValues.attack.status" data-ability="{{system.combatValues.attack.status}}"><i class="{{#if system.combatValues.attack.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </h5>
                 {{#if system.combatValues.attack.status}}
                 <div>
-                    <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.combatValues.attack.base" value="{{system.combatValues.attack.base}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.combatValues.attack.class" value="{{system.combatValues.attack.class}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.combatValues.attack.special" value="{{system.combatValues.attack.special}}" /> </label>
+                    <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.combatValues.attack.base" value="{{system.combatValues.attack.base}}" /> </label>
+                    <label> <span> {{localize "abfalter.class"}} </span> <input type="number" name="system.combatValues.attack.class" value="{{system.combatValues.attack.class}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.combatValues.attack.special" value="{{system.combatValues.attack.special}}" /> </label>
                 </div>
                 {{/if}}
                 <div>
-                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.combatValues.attack.temp" value="{{system.combatValues.attack.temp}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.combatValues.attack.final" value="{{system.combatValues.attack.final}}" readonly /> </label>
-                    <button type="button" class="combatRoll" data-roll="{{system.combatValues.attack.final}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
+                    <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.combatValues.attack.temp" value="{{system.combatValues.attack.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.combatValues.attack.final" value="{{system.combatValues.attack.final}}" readonly /> </label>
+                    <button type="button" class="combatRoll" data-roll="{{system.combatValues.attack.final}}" data-label="{{localize "abfalter.attack"}}" data-type="combatRoll">
                         <span> <i class="fas fa-dice-d20"></i> </span>
                     </button>
                 </div>
@@ -434,22 +434,22 @@
 
             <div class="atkdef">
                 <h5>
-                    {{localize "abfalter.basicInfo.block"}}
+                    {{localize "abfalter.block"}}
                     <label class="expand-box">
                         <a class="toggleBoolean {{#if system.combatValues.block.status}}showOpacity{{/if}}" data-label="system.combatValues.block.status" data-ability="{{system.combatValues.block.status}}"><i class="{{#if system.combatValues.block.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </h5>
                 {{#if system.combatValues.block.status}}
                 <div>
-                    <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.combatValues.block.base" value="{{system.combatValues.block.base}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.combatValues.block.class" value="{{system.combatValues.block.class}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.combatValues.block.special" value="{{system.combatValues.block.special}}" /> </label>
+                    <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.combatValues.block.base" value="{{system.combatValues.block.base}}" /> </label>
+                    <label> <span> {{localize "abfalter.class"}} </span> <input type="number" name="system.combatValues.block.class" value="{{system.combatValues.block.class}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.combatValues.block.special" value="{{system.combatValues.block.special}}" /> </label>
                 </div>
                 {{/if}}
                 <div>
-                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.combatValues.block.temp" value="{{system.combatValues.block.temp}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.combatValues.block.final" value="{{system.combatValues.block.final}}" readonly /> </label>
-                    <button type="button" class="combatRoll" data-roll="{{system.combatValues.block.final}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
+                    <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.combatValues.block.temp" value="{{system.combatValues.block.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.combatValues.block.final" value="{{system.combatValues.block.final}}" readonly /> </label>
+                    <button type="button" class="combatRoll" data-roll="{{system.combatValues.block.final}}" data-label="{{localize "abfalter.block"}}" data-type="combatRoll">
                         <span> <i class="fas fa-dice-d20"></i> </span>
                     </button>
                 </div>
@@ -457,22 +457,22 @@
 
             <div class="atkdef">
                 <h5>
-                    {{localize "abfalter.basicInfo.dodge"}}
+                    {{localize "abfalter.dodge"}}
                     <label class="expand-box">
                         <a class="toggleBoolean {{#if system.combatValues.dodge.status}}showOpacity{{/if}}" data-label="system.combatValues.dodge.status" data-ability="{{system.combatValues.dodge.status}}"><i class="{{#if system.combatValues.dodge.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
                 </h5>
                 {{#if system.combatValues.dodge.status}}
                 <div>
-                    <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.combatValues.dodge.base" value="{{system.combatValues.dodge.base}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.combatValues.dodge.class" value="{{system.combatValues.dodge.class}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.combatValues.dodge.special" value="{{system.combatValues.dodge.special}}" /> </label>
+                    <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.combatValues.dodge.base" value="{{system.combatValues.dodge.base}}" /> </label>
+                    <label> <span> {{localize "abfalter.class"}} </span> <input type="number" name="system.combatValues.dodge.class" value="{{system.combatValues.dodge.class}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.combatValues.dodge.special" value="{{system.combatValues.dodge.special}}" /> </label>
                 </div>
                 {{/if}}
                 <div>
-                    <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.combatValues.dodge.temp" value="{{system.combatValues.dodge.temp}}" /> </label>
-                    <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.combatValues.dodge.final" value="{{system.combatValues.dodge.final}}" readonly /> </label>
-                    <button type="button" class="combatRoll" data-roll="{{system.combatValues.dodge.final}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
+                    <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.combatValues.dodge.temp" value="{{system.combatValues.dodge.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.combatValues.dodge.final" value="{{system.combatValues.dodge.final}}" readonly /> </label>
+                    <button type="button" class="combatRoll" data-roll="{{system.combatValues.dodge.final}}" data-label="{{localize "abfalter.dodge"}}" data-type="combatRoll">
                         <span> <i class="fas fa-dice-d20"> </i> </span>
                     </button>
                 </div>
@@ -483,8 +483,8 @@
         <div class="advdis">
             <h5> {{localize "abfalter.generalTab.advant"}} </h5>
             <div>
-                <span> {{localize "abfalter.basicInfo.name"}} </span>
-                <span> {{localize "abfalter.basicInfo.cost"}} </span>
+                <span> {{localize "abfalter.name"}} </span>
+                <span> {{localize "abfalter.cost"}} </span>
             </div>
             <div class="{{#if system.itemToggle.advantages}}item-list{{/if}}">
                 {{#each advantages as |advantage id|}}
@@ -518,7 +518,7 @@
         <div class="advdis">
             <h5> {{localize "abfalter.generalTab.disAdvant"}} </h5>
             <div>
-                <span> {{localize "abfalter.basicInfo.name"}} </span>
+                <span> {{localize "abfalter.name"}} </span>
                 <span> {{localize "abfalter.generalTab.benefit"}} </span>
             </div>
             <div class="{{#if system.itemToggle.disadvantages}}item-list{{/if}}">
@@ -558,12 +558,12 @@
             <div>
                 <div>
                     <span> {{localize "abfalter.generalTab.athletics"}} </span>
-                    <span> {{localize "abfalter.basicInfo.final"}} </span>
+                    <span> {{localize "abfalter.final"}} </span>
                 </div>
-                <span> {{localize "abfalter.basicInfo.temp"}} </span>
-                <span> {{localize "abfalter.basicInfo.spec"}} </span>
-                <span> {{localize "abfalter.basicInfo.class"}} </span>
-                <span> {{localize "abfalter.basicInfo.base"}} </span>
+                <span> {{localize "abfalter.temp"}} </span>
+                <span> {{localize "abfalter.spec"}} </span>
+                <span> {{localize "abfalter.class"}} </span>
+                <span> {{localize "abfalter.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if system.secondaryFields.category.athletics}}showOpacity{{/if}}" data-label="system.secondaryFields.category.athletics" data-ability="{{system.secondaryFields.category.athletics}}"><i class="{{#if system.secondaryFields.category.athletics}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
@@ -596,12 +596,12 @@
             <div>
                 <div>
                     <span> {{localize "abfalter.generalTab.social"}} </span>
-                    <span> {{localize "abfalter.basicInfo.final"}} </span>
+                    <span> {{localize "abfalter.final"}} </span>
                 </div>
-                <span> {{localize "abfalter.basicInfo.temp"}} </span>
-                <span> {{localize "abfalter.basicInfo.spec"}} </span>
-                <span> {{localize "abfalter.basicInfo.class"}} </span>
-                <span> {{localize "abfalter.basicInfo.base"}} </span>
+                <span> {{localize "abfalter.temp"}} </span>
+                <span> {{localize "abfalter.spec"}} </span>
+                <span> {{localize "abfalter.class"}} </span>
+                <span> {{localize "abfalter.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if system.secondaryFields.category.social}}showOpacity{{/if}}" data-label="system.secondaryFields.category.social" data-ability="{{system.secondaryFields.category.social}}"><i class="{{#if system.secondaryFields.category.social}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
@@ -634,12 +634,12 @@
             <div>
                 <div>
                     <span> {{localize "abfalter.generalTab.perceptive"}} </span>
-                    <span> {{localize "abfalter.basicInfo.final"}} </span>
+                    <span> {{localize "abfalter.final"}} </span>
                 </div>
-                <span> {{localize "abfalter.basicInfo.temp"}} </span>
-                <span> {{localize "abfalter.basicInfo.spec"}} </span>
-                <span> {{localize "abfalter.basicInfo.class"}} </span>
-                <span> {{localize "abfalter.basicInfo.base"}} </span>
+                <span> {{localize "abfalter.temp"}} </span>
+                <span> {{localize "abfalter.spec"}} </span>
+                <span> {{localize "abfalter.class"}} </span>
+                <span> {{localize "abfalter.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if system.secondaryFields.category.perceptive}}showOpacity{{/if}}" data-label="system.secondaryFields.category.perceptive" data-ability="{{system.secondaryFields.category.perceptive}}"><i class="{{#if system.secondaryFields.category.perceptive}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
@@ -652,7 +652,11 @@
                 <input type="number" name="system.secondaryFields.perceptive.{{key}}.temp" value="{{sec.temp}}" />
                 <input type="number" name="system.secondaryFields.perceptive.{{key}}.spec" value="{{sec.spec}}" />
                 <input type="number" name="system.secondaryFields.perceptive.{{key}}.classBonus" value="{{sec.classBonus}}" readonly />
+                {{#ifEquals key "kidetection"}}
+                <input type="number" name="system.secondaryFields.perceptive.{{key}}.base" value="{{sec.base}}" readonly/>
+                {{else}}
                 <input type="number" name="system.secondaryFields.perceptive.{{key}}.base" value="{{sec.base}}" />
+                {{/ifEquals}}
                 <span class="{{sec.type}}"> {{sec.modifier}} </span>
                 <a class="toggleBoolean {{#if sec.status}}showOpacity{{/if}}" data-label="system.secondaryFields.perceptive.{{key}}.status" data-ability="{{sec.status}}"><i class="{{#if sec.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
@@ -672,12 +676,12 @@
             <div>
                 <div>
                     <span> {{localize "abfalter.generalTab.intellectual"}} </span>
-                    <span> {{localize "abfalter.basicInfo.final"}} </span>
+                    <span> {{localize "abfalter.final"}} </span>
                 </div>
-                <span> {{localize "abfalter.basicInfo.temp"}} </span>
-                <span> {{localize "abfalter.basicInfo.spec"}} </span>
-                <span> {{localize "abfalter.basicInfo.class"}} </span>
-                <span> {{localize "abfalter.basicInfo.base"}} </span>
+                <span> {{localize "abfalter.temp"}} </span>
+                <span> {{localize "abfalter.spec"}} </span>
+                <span> {{localize "abfalter.class"}} </span>
+                <span> {{localize "abfalter.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if system.secondaryFields.category.intellectual}}showOpacity{{/if}}" data-label="system.secondaryFields.category.intellectual" data-ability="{{system.secondaryFields.category.intellectual}}"><i class="{{#if system.secondaryFields.category.intellectual}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
@@ -710,12 +714,12 @@
             <div>
                 <div>
                     <span> {{localize "abfalter.generalTab.vigor"}} </span>
-                    <span> {{localize "abfalter.basicInfo.final"}} </span>
+                    <span> {{localize "abfalter.final"}} </span>
                 </div>
-                <span> {{localize "abfalter.basicInfo.temp"}} </span>
-                <span> {{localize "abfalter.basicInfo.spec"}} </span>
-                <span> {{localize "abfalter.basicInfo.class"}} </span>
-                <span> {{localize "abfalter.basicInfo.base"}} </span>
+                <span> {{localize "abfalter.temp"}} </span>
+                <span> {{localize "abfalter.spec"}} </span>
+                <span> {{localize "abfalter.class"}} </span>
+                <span> {{localize "abfalter.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if system.secondaryFields.category.vigor}}showOpacity{{/if}}" data-label="system.secondaryFields.category.vigor" data-ability="{{system.secondaryFields.category.vigor}}"><i class="{{#if system.secondaryFields.category.vigor}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
@@ -748,12 +752,12 @@
             <div>
                 <div>
                     <span> {{localize "abfalter.generalTab.subterfuge"}} </span>
-                    <span> {{localize "abfalter.basicInfo.final"}} </span>
+                    <span> {{localize "abfalter.final"}} </span>
                 </div>
-                <span> {{localize "abfalter.basicInfo.temp"}} </span>
-                <span> {{localize "abfalter.basicInfo.spec"}} </span>
-                <span> {{localize "abfalter.basicInfo.class"}} </span>
-                <span> {{localize "abfalter.basicInfo.base"}} </span>
+                <span> {{localize "abfalter.temp"}} </span>
+                <span> {{localize "abfalter.spec"}} </span>
+                <span> {{localize "abfalter.class"}} </span>
+                <span> {{localize "abfalter.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if system.secondaryFields.category.subterfuge}}showOpacity{{/if}}" data-label="system.secondaryFields.category.subterfuge" data-ability="{{system.secondaryFields.category.subterfuge}}"><i class="{{#if system.secondaryFields.category.subterfuge}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
@@ -766,7 +770,11 @@
                 <input type="number" name="system.secondaryFields.subterfuge.{{key}}.temp" value="{{sec.temp}}" />
                 <input type="number" name="system.secondaryFields.subterfuge.{{key}}.spec" value="{{sec.spec}}" />
                 <input type="number" name="system.secondaryFields.subterfuge.{{key}}.classBonus" value="{{sec.classBonus}}" readonly />
+                {{#ifEquals key "kiconceal"}}
+                <input type="number" name="system.secondaryFields.subterfuge.{{key}}.base" value="{{sec.base}}" readonly/>
+                {{else}}
                 <input type="number" name="system.secondaryFields.subterfuge.{{key}}.base" value="{{sec.base}}" />
+                {{/ifEquals}}
                 <span class="{{sec.type}}"> {{sec.modifier}} </span>
                 <a class="toggleBoolean {{#if sec.status}}showOpacity{{/if}}" data-label="system.secondaryFields.subterfuge.{{key}}.status" data-ability="{{sec.status}}"><i class="{{#if sec.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
@@ -786,12 +794,12 @@
             <div>
                 <div>
                     <span> {{localize "abfalter.generalTab.creative"}} </span>
-                    <span> {{localize "abfalter.basicInfo.final"}} </span>
+                    <span> {{localize "abfalter.final"}} </span>
                 </div>
-                <span> {{localize "abfalter.basicInfo.temp"}} </span>
-                <span> {{localize "abfalter.basicInfo.spec"}} </span>
-                <span> {{localize "abfalter.basicInfo.class"}} </span>
-                <span> {{localize "abfalter.basicInfo.base"}} </span>
+                <span> {{localize "abfalter.temp"}} </span>
+                <span> {{localize "abfalter.spec"}} </span>
+                <span> {{localize "abfalter.class"}} </span>
+                <span> {{localize "abfalter.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if system.secondaryFields.category.creative}}showOpacity{{/if}}" data-label="system.secondaryFields.category.creative" data-ability="{{system.secondaryFields.category.creative}}"><i class="{{#if system.secondaryFields.category.creative}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>
@@ -824,12 +832,12 @@
             <div>
                 <div>
                     <span> {{localize "abfalter.generalTab.custom"}} </span>
-                    <span> {{localize "abfalter.basicInfo.final"}} </span>
+                    <span> {{localize "abfalter.final"}} </span>
                 </div>
-                <span> {{localize "abfalter.basicInfo.temp"}} </span>
-                <span> {{localize "abfalter.basicInfo.spec"}} </span>
-                <span> {{localize "abfalter.basicInfo.extra"}} </span>
-                <span> {{localize "abfalter.basicInfo.base"}} </span>
+                <span> {{localize "abfalter.temp"}} </span>
+                <span> {{localize "abfalter.spec"}} </span>
+                <span> {{localize "abfalter.extra"}} </span>
+                <span> {{localize "abfalter.base"}} </span>
                 <span> {{localize "abfalter.generalTab.atr"}} </span>
                 <a class="toggleBoolean {{#if system.toggles.customSecondary}}showOpacity{{/if}}" data-label="system.toggles.customSecondary" data-ability="{{system.toggles.customSecondary}}"><i class="{{#if system.toggles.customSecondary}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
             </div>

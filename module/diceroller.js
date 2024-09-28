@@ -144,6 +144,7 @@ async function abilityRoll(html, actorData, finalValue, label) {
         roll: rollResult.rolledDice, total: rollResult._total, doubles: rollResult.doubles, openRange: rollResult.openRange, label: label, fumbleLevel: rollResult.fumbleLevel,
         fumble: rollResult.fumble, explode: rollResult.explode, result: rollResult.result, color: rollResult.color
     };
+    console.log(rollData);
     const template = "systems/abfalter/templates/dialogues/abilityRoll.hbs"
     const content = await renderTemplate(template, { rollData: rollData, label: label, actor: actorData });
     const chatData = {
@@ -363,4 +364,59 @@ export async function rollBreakage(html, actorData, finalValue, label) {
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     ChatMessage.create(chatData);
+}
+
+export async function openWeaponDialogue(actor, label, wepId) {
+    console.log("Attack Handle Test Start"); 
+    
+    let confirmed = false;
+    const weapon = actor.items.get(wepId);
+    const attacks = weapon.system.attacks;
+    const template = "systems/abfalter/templates/dialogues/attackModifiers.hbs";
+    const html = await renderTemplate(template, {weapon: weapon}, {attacks: attacks}, {label: label});
+
+    console.log(weapon);
+
+    new diceDialog({
+        title: game.i18n.localize('abfalter.dialogs.diceRoller'),
+        content: html,
+        buttons: {
+            roll: { label: game.i18n.localize('abfalter.dialogs.roll'), callback: () => confirmed = true },
+            cancel: { label: game.i18n.localize('abfalter.dialogs.cancel'), callback: () => confirmed = false }
+        },
+        render: (html) => {
+            const attackSelect = html.find('#attackSelect');
+
+            attacks.forEach((attack, index) => {
+              const option = document.createElement('option');
+              option.value = index;
+              option.text = attack.name;
+              attackSelect.append(option);
+            });
+
+            attackSelect.change(function() {
+                const selectedIndex = $(this).val();
+                const selectedAttack = attacks[selectedIndex];
+
+                const attackPowerSpan = html.find('#attackPower');
+              
+                attackPowerSpan.text(selectedAttack.finalAttack);  // Update power span
+            });
+          
+              // Trigger change event to populate with initial values based on default selection
+            attackSelect.trigger('change');
+        },
+        close: html => {
+            if (confirmed) {
+                switch (type) {
+                    case "attacks":
+                        rollCharacteristic(html, actorData, finalValue, label);
+                        break;
+                    default:
+                        console.log("No Roll Function Implemented for this type");
+                        break;
+                }
+            }
+        }
+    }).render(true);
 }

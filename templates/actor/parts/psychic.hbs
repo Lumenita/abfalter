@@ -9,12 +9,12 @@
             </h5>
             {{#if system.ppoint.status}}
             <div>
-                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.ppoint.base" value="{{system.ppoint.base}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.ppoint.spec" value="{{system.ppoint.spec}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.class"}} </span> <input type="number" name="system.ppoint.class" value="{{system.ppoint.class}}" readonly /> </label>
+                <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.ppoint.base" value="{{system.ppoint.base}}" /> </label>
+                <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.ppoint.spec" value="{{system.ppoint.spec}}" /> </label>
+                <label> <span> {{localize "abfalter.class"}} </span> <input type="number" name="system.ppoint.class" value="{{system.ppoint.class}}" readonly /> </label>
             </div>
             {{/if}}
-            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.ppoint.final" value="{{system.ppoint.final}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.ppoint.final" value="{{system.ppoint.final}}" readonly /> </label>
             <label> <span> {{localize "abfalter.psychicTab.freeppMax"}} </span> <input type="number" name="system.psychicPoint.max" value="{{system.psychicPoint.max}}" readonly /> </label>
             <label> <span> {{localize "abfalter.psychicTab.freepp"}} </span> <input type="number" name="system.psychicPoint.value" value="{{system.psychicPoint.value}}" /> </label>
         </div>
@@ -28,22 +28,22 @@
             </h5>
             {{#if system.ppotential.status}}
             <div>
-                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.ppotential.base" value="{{system.ppotential.base}}" /> </label>
+                <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.ppotential.base" value="{{system.ppotential.base}}" /> </label>
                 <label> <span> {{localize "abfalter.psychicTab.fromWP"}} </span> <input type="number" name="system.ppotential.wpBase" value="{{system.ppotential.wpBase}}" readonly/> </label>
                 <div class="csSelect1">
                     <label>
-                        <span> {{localize "abfalter.basicInfo.spent"}} </span>
+                        <span> {{localize "abfalter.spent"}} </span>
                         <select name="system.ppotential.spent">
                             {{selectOptions ppotentialObjList selected=system.ppotential.spent localize=true}}
                         </select>
 
                     </label>
                 </div>
-                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.ppotential.spec" value="{{system.ppotential.spec}}" /> </label>
+                <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.ppotential.spec" value="{{system.ppotential.spec}}" /> </label>
             </div>
             {{/if}}
-            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.ppotential.temp" value="{{system.ppotential.temp}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.ppotential.final" value="{{system.ppotential.final}}" readonly/> </label>
+            <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.ppotential.temp" value="{{system.ppotential.temp}}" /> </label>
+            <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.ppotential.final" value="{{system.ppotential.final}}" readonly/> </label>
             <div>
                 <button type="button" class="rollable" data-roll="{{system.ppotential.final}}" data-label="{{localize "abfalter.psychicTab.psychicPotential"}}" data-type="potentialRoll">
                     <span> <i class="fas fa-dice-d20"></i> </span>
@@ -60,24 +60,24 @@
             </h5>
             {{#if system.pproj.status}}
             <div>
-                <label> <span> {{localize "abfalter.basicInfo.base"}} </span> <input type="number" name="system.pproj.base" value="{{system.pproj.base}}" /> </label>
-                <label> <span> {{localize "abfalter.basicInfo.spec"}} </span> <input type="number" name="system.pproj.spec" value="{{system.pproj.spec}}" /> </label>
+                <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.pproj.base" value="{{system.pproj.base}}" /> </label>
+                <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.pproj.spec" value="{{system.pproj.spec}}" /> </label>
             </div>
             {{/if}}
-            <label> <span> {{localize "abfalter.basicInfo.temp"}} </span> <input type="number" name="system.pproj.temp" value="{{system.pproj.temp}}" /> </label>
-            <label> <span> {{localize "abfalter.basicInfo.final"}} </span> <input type="number" name="system.pproj.final" value="{{system.pproj.final}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.pproj.temp" value="{{system.pproj.temp}}" /> </label>
+            <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.pproj.final" value="{{system.pproj.final}}" readonly /> </label>
             {{#if system.toggles.psychicModuleStatus}}
             <div class="pmodButton">
-                <button type="button" class="combatRoll" data-roll="{{system.pproj.atkModule}}" data-label="{{localize "abfalter.basicInfo.attack"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.basicInfo.attack"}}: {{system.pproj.atkModule}} </span>
+                <button type="button" class="combatRoll" data-roll="{{system.pproj.atkModule}}" data-label="{{localize "abfalter.attack"}}" data-type="combatRoll">
+                    <span> {{localize "abfalter.attack"}}: {{system.pproj.atkModule}} </span>
                 </button>
                 {{#if system.toggles.psychicDodgeStatus}}
-                <button type="button" class="combatRoll" data-roll="{{system.pproj.dodModule}}" data-label="{{localize "abfalter.basicInfo.dodge"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.basicInfo.dodge"}}: {{system.pproj.dodModule}} </span>
+                <button type="button" class="combatRoll" data-roll="{{system.pproj.dodModule}}" data-label="{{localize "abfalter.dodge"}}" data-type="combatRoll">
+                    <span> {{localize "abfalter.dodge"}}: {{system.pproj.dodModule}} </span>
                 </button>
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{system.pproj.defModule}}" data-label="{{localize "abfalter.basicInfo.block"}}" data-type="combatRoll">
-                    <span> {{localize "abfalter.basicInfo.block"}}: {{system.pproj.defModule}} </span>
+                <button type="button" class="combatRoll" data-roll="{{system.pproj.defModule}}" data-label="{{localize "abfalter.block"}}" data-type="combatRoll">
+                    <span> {{localize "abfalter.block"}}: {{system.pproj.defModule}} </span>
                 </button>
                 {{/if}}
             </div>
@@ -130,19 +130,19 @@
                             <input data-field="system.finalCost" type="number" value="{{mentalPattern.system.finalCost}}" readonly />
                             <button type="button" class="item-toggle" data-ability="{{system.toggle}}" data-label="system.toggle">
                                 {{#if system.toggle}}
-                                <span> {{localize "abfalter.basicInfo.yes"}} </span>
+                                <span> {{localize "abfalter.yes"}} </span>
                                 {{else}}
-                                <span> {{localize "abfalter.basicInfo.no"}} </span>
+                                <span> {{localize "abfalter.no"}} </span>
                                 {{/if}}
                             </button>
                             <a class="item-expand"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
                         <div>
-                            <label> <span> {{localize "abfalter.basicInfo.cost"}} </span> <input class="inline-edit" data-field="system.cost" type="number" value="{{mentalPattern.system.cost}}"/> </label>
+                            <label> <span> {{localize "abfalter.cost"}} </span> <input class="inline-edit" data-field="system.cost" type="number" value="{{mentalPattern.system.cost}}"/> </label>
                             <label> <span> {{localize "abfalter.psychicTab.cancelCost"}} </span> <input class="inline-edit" data-field="system.cancelCost" type="number" value="{{mentalPattern.system.cancelCost}}"/> </label>
                         </div>
                         <div>
-                            <span> {{localize "abfalter.basicInfo.bonus"}} </span>
+                            <span> {{localize "abfalter.bonus"}} </span>
                             <div style="display: grid;">
                                 <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{mentalPattern.system.description}}</textarea>
                                 <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{mentalPattern.system.description}}</div>
@@ -158,9 +158,9 @@
                             <span> {{mentalPattern.name}} </span>
                             <span> {{mentalPattern.system.finalCost}} </span>
                             {{#if system.toggle}}
-                            <span> {{localize "abfalter.basicInfo.yes"}} </span>
+                            <span> {{localize "abfalter.yes"}} </span>
                             {{else}}
-                            <span> {{localize "abfalter.basicInfo.no"}} </span>
+                            <span> {{localize "abfalter.no"}} </span>
                             {{/if}}
                             <a class="item-expand"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
@@ -177,8 +177,8 @@
             <div class="ppowers">
                 <h5> {{localize "abfalter.psychicTab.psychicMatrices"}} </h5>
                 <div>
-                    <span> {{localize "abfalter.basicInfo.name"}} </span>
-                    <span> {{localize "abfalter.basicInfo.bonus"}} </span>
+                    <span> {{localize "abfalter.name"}} </span>
+                    <span> {{localize "abfalter.bonus"}} </span>
                 </div>
                 <div class="{{#if system.itemToggle.psychicMatrix}}item-list{{/if}}">
                     {{#each psychicMatrixs as |psychicMatrix id|}}
@@ -194,7 +194,7 @@
                             <div>
                                 <div class="csSelect">
                                     <label>
-                                        <span> {{localize "abfalter.basicInfo.level"}} </span>
+                                        <span> {{localize "abfalter.level"}} </span>
                                         <select class="inline-edit" name="system.level" data-field="system.level">
                                             {{selectOptions ../matrixLevelObjList selected=system.level localize=true}}
                                         </select>
@@ -202,7 +202,7 @@
                                 </div>
                                 <div class="csSelect">
                                     <label>
-                                        <span> {{localize "abfalter.basicInfo.action"}} </span>
+                                        <span> {{localize "abfalter.action"}} </span>
                                         <select class="inline-edit" name="system.action" data-field="system.action">
                                             {{selectOptions ../actionObjList selected=system.action localize=true}}
                                         </select>
@@ -218,27 +218,27 @@
                                 </div>
                             </div>
                             <div>
-                                <span> {{localize "abfalter.basicInfo.description"}} </span>
+                                <span> {{localize "abfalter.description"}} </span>
                             </div>
                             <div style="display: grid;">
                                 <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{psychicMatrix.system.description}}</textarea>
                                 <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{psychicMatrix.system.description}}</div>
                             </div>
                             <div>
-                                <span> {{localize "abfalter.basicInfo.difficulty"}} </span>
-                                <span> {{localize "abfalter.basicInfo.effect"}} </span>
+                                <span> {{localize "abfalter.difficulty"}} </span>
+                                <span> {{localize "abfalter.effect"}} </span>
                             </div>
                             <div>
-                                <label> <span> 20 </span> <span> {{localize "abfalter.basicInfo.routine"}} </span> <input class="inline-edit" type="text" data-field="system.effect20" value="{{psychicMatrix.system.effect20}}" /> </label>
-                                <label> <span> 40 </span> <span> {{localize "abfalter.basicInfo.easy"}} </span> <input class="inline-edit" type="text" data-field="system.effect40" value="{{psychicMatrix.system.effect40}}" /> </label>
-                                <label> <span> 80 </span> <span> {{localize "abfalter.basicInfo.average"}} </span> <input class="inline-edit" type="text" data-field="system.effect80" value="{{psychicMatrix.system.effect80}}" /> </label>
-                                <label> <span> 120 </span> <span> {{localize "abfalter.basicInfo.difficult"}} </span> <input class="inline-edit" type="text" data-field="system.effect120" value="{{psychicMatrix.system.effect120}}" /> </label>
-                                <label> <span> 140 </span> <span> {{localize "abfalter.basicInfo.vDifficult"}} </span> <input class="inline-edit" type="text" data-field="system.effect140" value="{{psychicMatrix.system.effect140}}" /> </label>
-                                <label> <span> 180 </span> <span> {{localize "abfalter.basicInfo.absurd"}} </span> <input class="inline-edit" type="text" data-field="system.effect180" value="{{psychicMatrix.system.effect180}}" /> </label>
-                                <label> <span> 240 </span> <span> {{localize "abfalter.basicInfo.almostImp"}} </span> <input class="inline-edit" type="text" data-field="system.effect240" value="{{psychicMatrix.system.effect240}}" /> </label>
-                                <label> <span> 280 </span> <span> {{localize "abfalter.basicInfo.impossible"}} </span> <input class="inline-edit" type="text" data-field="system.effect280" value="{{psychicMatrix.system.effect280}}" /> </label>
-                                <label> <span> 320 </span> <span> {{localize "abfalter.basicInfo.inhuman"}} </span> <input class="inline-edit" type="text" data-field="system.effect320" value="{{psychicMatrix.system.effect320}}" /> </label>
-                                <label> <span> 440 </span> <span> {{localize "abfalter.basicInfo.zen"}} </span> <input class="inline-edit" type="text" data-field="system.effect440" value="{{psychicMatrix.system.effect440}}" /> </label>
+                                <label> <span> 20 </span> <span> {{localize "abfalter.routine"}} </span> <input class="inline-edit" type="text" data-field="system.effect20" value="{{psychicMatrix.system.effect20}}" /> </label>
+                                <label> <span> 40 </span> <span> {{localize "abfalter.easy"}} </span> <input class="inline-edit" type="text" data-field="system.effect40" value="{{psychicMatrix.system.effect40}}" /> </label>
+                                <label> <span> 80 </span> <span> {{localize "abfalter.average"}} </span> <input class="inline-edit" type="text" data-field="system.effect80" value="{{psychicMatrix.system.effect80}}" /> </label>
+                                <label> <span> 120 </span> <span> {{localize "abfalter.difficult"}} </span> <input class="inline-edit" type="text" data-field="system.effect120" value="{{psychicMatrix.system.effect120}}" /> </label>
+                                <label> <span> 140 </span> <span> {{localize "abfalter.vDifficult"}} </span> <input class="inline-edit" type="text" data-field="system.effect140" value="{{psychicMatrix.system.effect140}}" /> </label>
+                                <label> <span> 180 </span> <span> {{localize "abfalter.absurd"}} </span> <input class="inline-edit" type="text" data-field="system.effect180" value="{{psychicMatrix.system.effect180}}" /> </label>
+                                <label> <span> 240 </span> <span> {{localize "abfalter.almostImp"}} </span> <input class="inline-edit" type="text" data-field="system.effect240" value="{{psychicMatrix.system.effect240}}" /> </label>
+                                <label> <span> 280 </span> <span> {{localize "abfalter.impossible"}} </span> <input class="inline-edit" type="text" data-field="system.effect280" value="{{psychicMatrix.system.effect280}}" /> </label>
+                                <label> <span> 320 </span> <span> {{localize "abfalter.inhuman"}} </span> <input class="inline-edit" type="text" data-field="system.effect320" value="{{psychicMatrix.system.effect320}}" /> </label>
+                                <label> <span> 440 </span> <span> {{localize "abfalter.zen"}} </span> <input class="inline-edit" type="text" data-field="system.effect440" value="{{psychicMatrix.system.effect440}}" /> </label>
                             </div>
                         </div>
                         {{else}}
@@ -266,7 +266,7 @@
                 <label> <span> {{localize "abfalter.psychicTab.totalppSlots"}}  </span> <input type="number" name="system.ppoint.innateSlot" value="{{system.ppoint.innateSlot}}" readonly /> </label>
             </div>
             <div>
-                <span> {{localize "abfalter.basicInfo.name"}} </span>
+                <span> {{localize "abfalter.name"}} </span>
                 <span> {{localize "abfalter.psychicTab.potency"}} </span>
             </div>
             <div class="{{#if system.itemToggle.maintPowers}}item-list{{/if}}">

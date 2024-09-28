@@ -304,6 +304,9 @@ h6 {
 .equipped > span {
     color: var(--equipped) !important;
 }
+.weaponEquipped {
+    color: var(--equipped) !important;
+}
 .kiBought {
     background-color: var(--kiBought) !important;
 }
@@ -1074,7 +1077,6 @@ h6 {
     height: 25px;
     border-radius: 0px;
     border: 0px;
-
 }
 .atkdef > div:first-of-type {
     border-top: 3px solid var(--boxColor);
@@ -3492,40 +3494,41 @@ h6 {
     -------------
     *************
 */
-.armory > div {
+.armory {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    width: 100% !important;
     min-width: 878px;
-    width: 100%;
 }
-.armory > div:nth-of-type(2) {
-    margin: 7px 0 0 0;
+.armory > div:first-of-type {
+    width: 25%;
 }
-.wearArmor {
-    width: 23%;
-}
-.armor {
+.armory > div:last-of-type {
     width: 73%;
 }
+
+.wearArmor {
+    width: 100%;
+}
+.armor {
+    width: 100%;
+}
 .prof {
-    width: 38%;
+    width: 100%;
 }
 .weapons {
-    width: 58%;
+    width: 100%;
 }
 .currency {
     flex-wrap: wrap;
-    width: 25%;
+    width: 100%;
 }
 .inventory {
-    width: 71%
+    width: 100%;
 }
-/*
-    ------------------
-    Wear Armor & Stats
-    ------------------
-*/
+
+/* #region Wear Armor */
 .wearArmor > label {
     display: flex;
     padding: 0 10px;
@@ -3570,11 +3573,9 @@ h6 {
 .wearArmor > label:nth-of-type(10) > input {
     width: 20%;
 }
-/*
-    -----
-    Armor
-    -----
-*/
+/* #endregion */
+
+/* #region Armor */
 .armor > div:first-of-type {
     display: flex;
     border-top: 3px solid var(--boxColor);
@@ -3674,11 +3675,9 @@ h6 {
     border-top: 1px solid var(--boxColor);
     border-bottom: 3px solid var(--boxColor);
 }
-/*
-    -----------
-    Proficiency
-    -----------
-*/
+/* #endregion */
+
+/* #region Proficiency */
 .prof > div:first-of-type {
     display: flex;
     border-top: 3px solid var(--boxColor);
@@ -3728,38 +3727,16 @@ h6 {
     width: 10%;
     margin: 0 0 0 1%;
 }
-/*
-    ------
-    Weapon
-    ------
-*/
-.weapon-item {
-    padding: 0 2.5%;
-}
-.weapon-item:nth-child(2n) {
-    background: var(--itemOffSet);
-}
+/* #endregion */
+
+/* #region Weapon */
 .weapons > div {
     border-right: 3px solid var(--boxColor);
     border-left: 3px solid var(--boxColor);
 }
-.weapons > div:first-of-type,
-.weapon-item > div {
-    display: flex;
-    justify-content: flex-start;
-}
 .weapons > div:first-of-type {
     border-top: 3px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
     padding-bottom: 3px;
-}
-.weapons > div:first-of-type > span,
-.weapon-item > div > span {
-    text-align: center;
-}
-.weapons > div:first-of-type > span:nth-of-type(1) {
-    width: 14.25%;
-    margin: 0 0 0 7.25%;
 }
 .weapons > div:last-of-type {
     display: flex;
@@ -3767,167 +3744,92 @@ h6 {
     border-top: 1px solid var(--boxColor);
     border-bottom: 3px solid var(--boxColor);
 }
-.weapon-item > div:last-of-type > span:first-of-type {
-    width: 15%;
+.weapon-item:nth-child(2n) {
+    background: var(--itemOffSet);
 }
-.weapons > div:first-of-type > span:nth-of-type(2) {
-    width: 55.1%;
-    margin: 0 0 0 .95%;
+.weapon-item {
+    padding: 5px;
+    border-bottom: 1px solid var(--boxColor);
 }
-.weapon-item > div:last-of-type > span:nth-of-type(2) {
-    width: 58%;
-    margin: 0 0 0 1%;
-}
-.weapons > div:first-of-type > span:nth-of-type(3) {
-    width: 14.25%;
-    margin: 0 0 0 0.95%;
-}
-.weapon-item > div:last-of-type > span:nth-of-type(3) {
-    width: 15%;
-    margin: 0 0 0 1%;
-}
-.weapon-item > div > a {
-    font-size: 15px;
-    width: 5%;
-}
-.weapon-item > div > a {
-    opacity: 0;
-}
-.weapon-item > div:hover > a {
-    opacity: 1;
-}
-.weapon-item > div:not(:first-of-type) {
-    border-right: 2px solid var(--boxColor);
-    border-left: 2px solid var(--boxColor);
-}
-.weapon-item > div:nth-child(2),
-.weapon-item > div:nth-child(4),
-.weapon-item > div:nth-child(6) {
-    border-top: 2px solid var(--boxColor);
-    border-bottom: 1px dashed var(--boxColor);
-    place-content: space-between;
-}
-.weapon-item > div:nth-child(8) {
-    border-top: 2px solid var(--boxColor);
-    border-bottom: 1px dashed var(--boxColor);
-}
-.weapon-item > div:nth-child(3),
-.weapon-item > div:nth-child(5),
-.weapon-item > div:nth-child(7),
-.weapon-item > div:nth-child(7),
-.weapon-item > div:nth-child(9) {
-    padding: 0 0 3px 0;
-}
-.weapon-item > div:nth-child(2) > button {
-    height: 20px;
-    margin: 0px;
-    border-radius: 0px;
-    border: 0px;
-}
-.weapon-item > div:nth-child(2) > button,
-.weapon-item > div:nth-child(3) > div {
-    width: 26%;
-}
-.weapon-item > div:nth-child(2) > span,
-.weapon-item > div:nth-child(3) > div:nth-child(2) {
-    width: 19%;
-}
-.weapon-item > div:nth-child(3),
-.weapon-item > div:nth-child(3) > div,
-.weapon-item > div:nth-child(5) > div,
-.weapon-item > div:nth-child(7),
-.weapon-item > div:nth-child(7) > div {
+.weapon-item > div {
     display: flex;
-    place-content: space-between;
+    justify-content: flex-start;
 }
-.weapon-item > div:nth-child(3) > div:nth-child(2) {
-    justify-content: center;
+.weaponHeaderContainer {
+    display: flex;
+    align-items: center;
 }
-.weapon-item > div:nth-child(3) > div:nth-child(2) > select {
+.weapon-item-img {
+    min-width: 50px;
+    width: 50px;
+    height: 50px; 
+    object-fit: cover; 
+    margin-right: 10px; 
+}
+.weaponContainerInfo {
+    display: flex;
+    flex-direction: column;
+    height: 50px;
     width: 100%;
+    justify-content: space-between; 
 }
-.weapon-item > div:nth-child(4) > span,
-.weapon-item > div:nth-child(5) > div {
+.weaponContainerInfo > div {
+    display: flex;
+    height: 25px;
+}
+.weaponContainerInfo > div > a {
+    display: grid;
+    align-items: center;
+    width: 5%;
+    height: 25px;
+}
+.weaponContainerInfo > div > span {
+    height: 25px;
+}
+.weaponContainerInfo .wepContainer1 > span:first-of-type {
+    width: 61%;
+    font-size: 20px;
+    margin: 0 2% 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.weaponContainerInfo .wepContainer1 > span:nth-of-type(2) {
     width: 15%;
 }
-.weapon-item > div:nth-child(4) > span:nth-child(3),
-.weapon-item > div:nth-child(5) > div:nth-child(3) {
-    width: 55%;
-}
-.weapon-item > div:nth-child(4) > span:nth-child(4),
-.weapon-item > div:nth-child(5) > div:nth-child(4) {
+.weaponContainerInfo .wepContainer1 > span:nth-of-type(3) {
     width: 12%;
 }
-.weapon-item > div:nth-child(5),
-.weapon-item > div:nth-child(7) > input {
-    place-content: space-between;
-}
-.weapon-item > div:nth-child(5) > div > select,
-.weapon-item > div:nth-child(5) > div:nth-child(3) > div > select {
-    width: 100%;
-}
-.weapon-item > div:nth-child(5) > div:nth-child(3) > input {
-    width: 15%;
-}
-.weapon-item > div:nth-child(5) > div:nth-child(3) > span {
-    width: 3%;
-}
-.weapon-item > div:nth-child(5) > div:nth-child(3) > div {
-    width: 39%;
-}
-.weapon-item > div:nth-child(5) > div:nth-child(3) > button {
-    width: 35%;
-    height: 20px;
-    margin: 0px;
-    border-radius: 0px;
-    border: 0px;
-}
-.weapon-item > div:nth-child(6) > span,
-.weapon-item > div:nth-child(7) > div,
-.weapon-item > div:nth-child(7) > input,
-.weapon-item > div:nth-child(6) > button {
-    width: 22%;
-}
-.weapon-item > div:nth-child(6) > button {
-    height: 20px;
-    margin: 0px;
-    border-radius: 0px;
-    border: 0px;
-}
-.weapon-item > div:nth-child(6) > span:nth-child(4),
-.weapon-item > div:nth-child(7) > div:nth-child(4) {
-    width: 9%;
-}
-.weapon-item > div:nth-child(9),
-.weapon-item > div:nth-child(9) > div {
+.weaponContainerInfo .wepContainer2 > div {
+    width: 66%;
     display: flex;
+    justify-content: end;
+    margin: 0 2% 0 0;
 }
-.weapon-item > div:nth-child(8) > span,
-.weapon-item > div:nth-child(9) > div {
-    width: 22%;
-    margin: 0 1% 0 0;
-}
-.weapon-item > div:nth-child(8) > span:nth-child(1),
-.weapon-item > div:nth-child(9) > input {
-    width: 14%;
-    margin: 0 1% 0 0;
-}
-.weapon-item > div:nth-child(9) > button {
-    width: 15%;
-    margin: 0 0 0 1%;
-    height: 20px;
+.weaponContainerInfo .wepContainer2 > div > button {
     margin: 0px;
+    width: 33%;
+    height: 25px;
     border-radius: 0px;
-    border: 0px;
+    border: 1px solid var(--boxColor);
 }
-.weapon-item > textarea {
-    border: 2px solid var(--boxColor);
+.weaponContainerInfo .wepContainer2 > span {
+    width: 15%;
+    height: 25px;
 }
-/*
-    --------
-    Currency 
-    --------
-*/
+.weaponContainerInfo .wepContainer2 > span:nth-last-of-type(2) {
+    width: 17%;
+}
+.weaponContainerInfo .wepContainer2 > button {
+    margin: 0px;
+    width: 17%;
+    height: 25px;
+    border-radius: 0px;
+    border: 1px solid var(--boxColor);
+}
+/* #endregion */
+
+/* #region Currency */
 .currency > div {
     border-right: 3px solid var(--boxColor);
     border-left: 3px solid var(--boxColor);
@@ -3967,11 +3869,9 @@ h6 {
 .currency-item:nth-child(2n) {
     background: var(--itemOffSet);
 }
-/*
-    ---------
-    Invnetory
-    ---------
-*/
+/* #endregion */
+
+/* #region Invnetory */
 .inventory > div {
     border-right: 3px solid var(--boxColor);
     border-left: 3px solid var(--boxColor);
@@ -4038,6 +3938,8 @@ h6 {
 .inventory-item > div:hover > a {
     opacity: 1;
 }
+/* #endregion */
+
 /*
     *****************
     -----------------
@@ -4807,6 +4709,41 @@ h6 {
     border-bottom: 1px solid var(--boxColor);
     font-size: 20px;
 }
+.abfalter.sheet.item .sheet-body .itemDescInfo,
+.abfalter.sheet.item .sheet-body .editor-container,
+.abfalter.sheet.item .sheet-body .itemDescInfo > div {
+    min-height: 200px;
+    max-height: 700px;
+}
+.abfalter.sheet.item .sheet-body .editor-container {
+    flex: 0;
+    height: fit-content;
+}
+.abfalter.sheet.item .sheet-body .prosemirror .editor-container .editor-content {
+    position: relative;
+}
+.abfalter.sheet.item .sheet-body .editor {
+    overflow: auto;
+}
+.itemHtmlActor {
+    white-space: pre-line;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+}
+/*
+.abfalter.sheet.item .sheet-body .description .itemEditor > div {
+    min-height: 200px;
+    height: fit-content;
+    max-height: 800px;
+}
+.abfalter.sheet.item .sheet-body .description .editor-container {
+    flex: none;
+    min-height: 200px;
+    height: 620px;
+
+}*/
+
 /* ----------------------------------------- */
 /*  Item Effect Tab                          */
 /* ----------------------------------------- */
@@ -5342,65 +5279,221 @@ h6 {
     display: flex;
     width: 12%;
 }
-/*
-    -------
-    Weapons
-    -------
-*/
-.weaponContent > div > div {
-    display: flex;
+/* #region Item Weapon*/
+.attack-entry:nth-child(2n) {
+    background: var(--itemOffSet);
 }
-.weaponContent > div > div > div {
-    width: 50%;
+.attack-entry {
+    margin: 0 0 5px 0;
 }
-.weaponContent > div > div > label {
-    display: flex;
-    width: 50%;
-    padding: 0 10px;
-}
-.weaponContent > div > div > div > label { 
-    display: flex;
-    width: 100%;
-    padding: 0 10px
-}
-.weaponContent > div > div > label > input,
-.weaponContent > div > div > label > span,
-.weaponContent > div > div > div > label > span,
-.weaponContent > div > div > div > label > select {
-    width: 49%;
-    margin: 0 1% 0 0;
-}
-.weaponContent > div > div > div::after { 
-    right: 15px;
-}
-.weaponContent > div > div > button,
-.weaponContent > div > div > div > button {
-    height: 20px;
+.attacks > button {
+    align-self: center;
     margin: 0px;
+    width: 50%;
+    height: 20px;
     border-radius: 0px;
-    border: 0px;
+    border: none;
 }
-.weapContentButton {
-    padding: 0 10px;
+.weaponContent > label, 
+.weaponContent3 > label,
+.weaponContent4 > label,
+.weaponContent5 > label {
     display: flex;
-    justify-content: end;
+    padding: 2px 0;
 }
-.weapContentButton > button {
-    margin: 0 1% 0 0 !important;
-    width: 49.1%;
+.weaponContent > label > span,
+.weaponContent3 > label > span,
+.weaponContent5 > label > span {
+    display: grid;
 }
-.weaponContent > div > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
+.weaponContent > label > span:first-of-type {
+    width: 65%;
 }
-.weaponContent > div > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
+.weaponContent > label > input,
+.weaponContent5 > label > input {
+    width: 17%;
 }
-.weaponContent > div > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
+.weaponContent > label > button {
+    margin: 0px;
+    width: 35%;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
 }
-
-/* OLD END HERE */
+.weaponContent > label > span:nth-of-type(2) {
+    width: 1%;
+    text-align: center;
+}
+.weaponContent > label > span:nth-of-type(3) {
+    width: 17%;
+    text-align: center;
+}
+.weaponContent3 {
+    display: flex;
+    padding: 2px 0 0 0;
+    margin: 2px 0 0 0;
+    border-top: 1px dashed var(--boxColor);
+}
+.weaponContent3 > div, 
+.weaponContent3 > label {
+    width: 30%;
+    margin: 0 2.5% 0 0;
+}
+.weaponContent3 > div > label > span {
+    width: 45%;
+}
+.abfalter.sheet.item .sheet-body .details .weaponContent3 .csSelect > label > select {
+    width: 45%;
+}
+.weaponContent3 > label > button {
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent3 > input {
+    width: 17%;
+    display: flex;
+    align-self: center;
+}
+.weaponContent3 > span {
+    width: 1%;
+    text-align: center;
+    display: flex;
+    align-self: center;
+}
+.wepaonContentButtons {
+    display: flex;
+    padding: 2px 0;
+    justify-content: space-between;
+}
+.wepaonContentButtons > button{
+    width: 22%;
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent2 {
+    display: flex;
+}
+.weaponContent2 > div,
+.weaponContent2 > label {
+    display: flex;
+    width: 50%;
+    align-items: center;
+}
+.weaponContent2 > div > label {
+    width: 100%;
+}
+.weaponContent2 > div > label > span {
+    display: grid;
+    width: 33%;
+}
+.abfalter.sheet.item .sheet-body .details .weaponContent2 .csSelect > label > select {
+    width: 55%;
+}
+.weaponContent2 > label > span {
+    display: grid;
+    justify-content: center;
+    width: 28%;
+    margin: 0 2% 0 0;
+}
+.weaponContent2 > label > input {
+    width: 70%;
+}
+.weaponContent4 > label > span {
+    display: grid;
+    width: 29%;
+}
+.weaponContent4 > label > span:last-of-type {
+    width: 1%;
+    margin: 0;
+    justify-content: center;
+}
+.weaponContent4 > label > input {
+    width: 17%;
+}
+.weaponContent4 > label > select {
+    width: 35%;
+    margin: 0 0 0 1%;
+}
+.weaponContent5 > label > span:first-of-type {
+    width: 36%;
+}
+.weaponContent5 > label > button {
+    margin: 0 2%;
+    width: 25%;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent5 > label > span:nth-of-type(2) {
+    width: 1%;
+    text-align: center;
+}
+.weaponContent5 > label > span:nth-of-type(3) {
+    width: 17%;
+    text-align: center;
+}
+.weaponContent5 > label > select {
+    width: 35%;
+}
+.weapon-item .editor {
+    height: auto;
+}
+.weapon-item .editor > div * {
+    color: inherit;
+}
+.wepAtkEdit > div:first-of-type {
+    display: flex;
+}
+.wepAtkEdit > div:first-of-type > input {
+    width: 90%
+}   
+.wepAtkEdit > div:first-of-type > a {
+    width: 5%
+}
+.wepAtkEditTop {
+    display: flex;
+    justify-content: space-between;
+    height: 20px;
+    margin: 5px 0 0 0;
+}
+.wepAtkEditTop > label {
+    display: flex;
+    justify-content: start;
+    width: 30%
+}
+.wepAtkEditTop > label > input {
+    display: flex;
+    width: 30%
+}
+.wepAtkEditTop > label > span {
+    display: grid;
+    width: 35%
+}
+.wepAtkEditTop > label > span:nth-of-type(2) {
+    display: flex;
+    width: 1%
+}
+.wepAtkEditTop > label > span:nth-of-type(3) {
+    display: flex;
+    justify-content: center;
+    width: 30%
+}
+.wepAtkNonEdit > div:first-of-type {
+    display: flex;
+}
+.wepAtkNonEdit > div:first-of-type > span {
+    display: grid;
+    width: 90%;
+    font-size: 17px;
+}
+.wepAtkNonEdit > div:first-of-type > a {
+    width: 5%;
+}
+/* #endregion */
 /*
     ***************
     ---------------
@@ -5413,6 +5506,11 @@ h6 {
     color: var(--textColor);
     border: none;
 }
+/*.dialog .dialog-buttons button.default {
+    background: var(--buttonBg);
+    color: var(--textColor);
+    border: none;
+}*/
 .form-fields > input,
 .journal-header > input {
     padding-bottom: 0px;

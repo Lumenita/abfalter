@@ -3,12 +3,11 @@ export async function handleMigrations() {
         return
     }
     //migrateWorld_1_4_2(); //force update on reload (testing purposes)
-
     const currentVersion = game.settings.get("abfalter", "systemMigrationVersion");
-;
+    
     if (!currentVersion) {
         // If no version is saved, no need to migrate
-        return game.settings.set('demonlord', 'systemMigrationVersion', game.system.version)
+        return game.settings.set('abfalter', 'systemMigrationVersion', game.system.version)
     }
     // Compatibility warning
     const COMPATIBLE_MIGRATION_VERSION = '1.3';
@@ -41,36 +40,49 @@ export async function migrateWorld_1_4_2() {
             await scene.update(sceneUpdate);
         }
     }
+    
     for (let pack of game.packs) {
-        const packType = pack.metadata.entity;
+        const packType = pack.metadata.type;
         if (!["Actor", "Scene"].includes(packType)) {
             continue;
         }
-
-        const wasLocked = pack.locked;
-        await pack.configure({ locked: false });
-
-        await pack.migrate();
-        const documents = await pack.getDocuments();
-
-        for (let document of documents) {
-            let updateData = {};
-            switch (packType) {
-                case "Actor":
-                    updateData = migrateActorData(document.data);
-                    break;
-                case "Scene":
-                    updataData = migrateSceneData(document.scene);
-                    break;
+        if (["Actor"].includes(packType)) {
+            const wasLocked = pack.locked;
+            await pack.configure({ locked: false });
+    
+            await pack.migrate();
+            const documents = await pack.getDocuments();
+    
+            for (let document of documents) {
+                const updateData = await migrateActorData(document);
+                if (foundry.utils.isEmpty(updateData)) {
+                    continue;
+                }
+                await document.update(updateData);
+                console.log(`Migrated ${packType} entity ${document.name} in Compendium ${pack.collection}`);
             }
-            if (foundry.utils.isObjectEmpty(updateData)) {
-                continue;
-            }
-            await document.update(updataData);
-            console.log(`Migrated ${packType} entity ${document.name} in Compendium ${pack.collection}`);
+    
+            await pack.configure({ locked: wasLocked });
         }
 
-        await pack.configue({ locked: wasLocked });
+        if (["Scene"].includes(packType)) {
+            const wasLocked = pack.locked;
+            await pack.configure({ locked: false });
+    
+            await pack.migrate();
+            const documents = await pack.getDocuments();
+    
+            for (let document of documents) {
+                const updateData = await migrateActorData(document);
+                if (foundry.utils.isEmpty(updateData)) {
+                    continue;
+                }
+                await document.update(sceneUpdate);
+                console.log(`Migrated ${packType} entity ${document.name} in Compendium ${pack.collection}`);
+            }
+    
+            await pack.configure({ locked: wasLocked });
+        }
     }
     console.log("Migration Complete");
     game.settings.set('abfalter', 'systemMigrationVersion', game.system.version);
@@ -93,11 +105,9 @@ function migrateSceneData(scene) {
 }
 
 async function migrateActorData(actor) {
-
     let updateData = {};
 
     //Save all old values to new paths
-    if (actor.system.combatstats) {
     updateData["system.combatValues.attack.base"] = actor.system.combatstats.atkbase;
     updateData["system.combatValues.attack.special"] = actor.system.combatstats.atkspecial;
     updateData["system.combatValues.attack.temp"] = actor.system.combatstats.atktemp;
@@ -113,7 +123,6 @@ async function migrateActorData(actor) {
     updateData["system.combatValues.dodge.temp"] = actor.system.combatstats.dodtemp;
     updateData["system.combatValues.dodge.status"] = actor.system.combatstats.dodStatus;
 
-    }
     if (actor.system.wearArmor) {
     updateData["system.armor.wearArmor.base"] = actor.system.wearArmor.base;
     updateData["system.armor.wearArmor.spec"] = actor.system.wearArmor.spec;

@@ -1,110 +1,147 @@
-export const abfalter = {};
+export const abfalter = {
+    agility: "abfalter.agility",
+    agi: "abfalter.agi",
+    consti: "abfalter.consti",
+    con: "abfalter.con",
+    strength: "abfalter.strength",
+    str: "abfalter.str",
+    dexerity: "abfalter.dexerity",
+    dex: "abfalter.dex",
+    intell: "abfalter.intell",
+    int: "abfalter.int",
+    perception: "abfalter.perception",
+    per: "abfalter.per",
+    power: "abfalter.power",
+    pow: "abfalter.pow",
+    willPower: "abfalter.willPower",
+    wp: "abfalter.wp",
 
-abfalter.basicInfo = {
-    name: "abfalter.basicInfo.name",
-    base: "abfalter.basicInfo.base",
-    spec: "abfalter.basicInfo.spec.",
-    mult: "abfalter.basicInfo.mult",
-    class: "abfalter.basicInfo.class",
-    temp: "abfalter.basicInfo.temp.",
-    final: "abfalter.basicInfo.final",
-    actual: "abfalter.basicInfo.actual",
-    mastery: "abfalter.basicInfo.mastery",
-    half: "abfalter.basicInfo.half",
-    full: "abfalter.basicInfo.full",
-    bonus: "abfalter.basicInfo.bonus",
-    ability: "abfalter.basicInfo.ability",
-    used: "abfalter.basicInfo.used",
-    type: "abfalter.basicInfo.type",
-    cost: "abfalter.basicInfo.cost",
-    spent: "abfalter.basicInfo.spent",
-    yes: "abfalter.basicInfo.yes",
-    no: "abfalter.basicInfo.no",
-    active: "abfalter.basicInfo.active",
-    passive: "abfalter.basicInfo.passive",
-    level: "abfalter.basicInfo.level",
-    description: "abfalter.basicInfo.description",
-    dp: "abfalter.basicInfo.dp",
-    mk: "abfalter.basicInfo.mk",
-    action: "abfalter.basicInfo.action",
-    difficulty: "abfalter.basicInfo.difficulty",
-    effect: "abfalter.basicInfo.effect",
-    effects: "abfalter.basicInfo.effects",
-    routine: "abfalter.basicInfo.routine",
-    easy: "abfalter.basicInfo.easy",
-    average: "abfalter.basicInfo.average",
-    difficult: "abfalter.basicInfo.difficult",
-    vDifficult: "abfalter.basicInfo.vDifficult",
-    absurd: "abfalter.basicInfo.absurd",
-    almostImp: "abfalter.basicInfo.almostImp",
-    impossible: "abfalter.basicInfo.impossible",
-    inhuman: "abfalter.basicInfo.inhuman",
-    zen: "abfalter.basicInfo.zen",
-    extraInfo: "abfalter.basicInfo.extraInfo",
-    none: "abfalter.basicInfo.none",
-    agility: "abfalter.basicInfo.agility",
-    agi: "abfalter.basicInfo.agi",
-    consti: "abfalter.basicInfo.consti",
-    con: "abfalter.basicInfo.con",
-    strength: "abfalter.basicInfo.strength",
-    str: "abfalter.basicInfo.str",
-    dexerity: "abfalter.basicInfo.dexerity",
-    dex: "abfalter.basicInfo.dex",
-    intell: "abfalter.basicInfo.intell",
-    int: "abfalter.basicInfo.int",
-    perception: "abfalter.basicInfo.perception",
-    per: "abfalter.basicInfo.per",
-    power: "abfalter.basicInfo.power",
-    pow: "abfalter.basicInfo.pow",
-    willPower: "abfalter.basicInfo.willPower",
-    wp: "abfalter.basicInfo.wp",
-    attack: "abfalter.basicInfo.attack",
-    block: "abfalter.basicInfo.block",
-    dodge: "abfalter.basicInfo.dodge",
-    defense: "abfalter.basicInfo.defense",
-    advInfo: "abfalter.basicInfo.advInfo",
-    disadvInfo: "abfalter.basicInfo.disadvInfo",    
-    extra: "abfalter.basicInfo.extra",
-    remove: "abfalter.basicInfo.remove",
-    note: "abfalter.basicInfo.note",
-    natura: "abfalter.basicInfo.natura",
-    gnosis: "abfalter.basicInfo.gnosis",
-    destiny: "abfalter.basicInfo.destiny",
-    archeType: "abfalter.basicInfo.archeType",
-    shield: "abfalter.basicInfo.shield",
-    shieldMax: "abfalter.basicInfo.shieldMax",
-    boons: "abfalter.basicInfo.boons",
-    critical: "abfalter.basicInfo.critical",
-    token: "abfalter.basicInfo.token",
-    gender: "abfalter.basicInfo.gender",
-    race: "abfalter.basicInfo.race",
-    height: "abfalter.basicInfo.height",
-    weight: "abfalter.basicInfo.weight",
-    age: "abfalter.basicInfo.age",
-    exp: "abfalter.basicInfo.exp",
-    size: "abfalter.basicInfo.size",
-    appear: "abfalter.basicInfo.appear",
-    maximum: "abfalter.basicInfo.maximum",
-    aamShort: "abfalter.basicInfo.aamShort",
-    magic: "abfalter.basicInfo.magic",
-    background: "abfalter.basicInfo.background",
-    psychic: "abfalter.basicInfo.psychic",
-    ki: "abfalter.basicInfo.ki",
-    armory: "abfalter.basicInfo.armory",
-    bio: "abfalter.basicInfo.bio",
-    settings: "abfalter.basicInfo.settings",
-    general: "abfalter.basicInfo.general",
-    minute: "abfalter.basicInfo.minute",
-    hour: "abfalter.basicInfo.hour",
-    day: "abfalter.basicInfo.day",
-    multiWield: "abfalter.basicInfo.multiWield",
-    unarmed: "abfalter.basicInfo.unarmed",
-    special: "abfalter.basicInfo.special",
-    innate: "abfalter.basicInfo.innate",
-    shortDesc: "abfalter.basicInfo.shortDesc",
-    monster: "abfalter.basicInfo.monster",
-    details: "abfalter.basicInfo.details"
-}
+    routine: "abfalter.routine",
+    easy: "abfalter.easy",
+    average: "abfalter.average",
+    difficult: "abfalter.difficult",
+    vDifficult: "abfalter.vDifficult",
+    absurd: "abfalter.absurd",
+    almostImp: "abfalter.almostImp",
+    impossible: "abfalter.impossible",
+    inhuman: "abfalter.inhuman",
+    zen: "abfalter.zen",
+
+    name: "abfalter.name",
+    base: "abfalter.base",
+    spec: "abfalter.spec.",
+    mult: "abfalter.mult",
+    class: "abfalter.class",
+    temp: "abfalter.temp.",
+    final: "abfalter.final",
+    actual: "abfalter.actual",
+    half: "abfalter.half",
+    full: "abfalter.full",
+    bonus: "abfalter.bonus",
+    ability: "abfalter.ability",
+    used: "abfalter.used",
+    type: "abfalter.type",
+    cost: "abfalter.cost",
+    spent: "abfalter.spent",
+    yes: "abfalter.yes",
+    no: "abfalter.no",
+    active: "abfalter.active",
+    passive: "abfalter.passive",
+    level: "abfalter.level",
+    description: "abfalter.description",
+    dp: "abfalter.dp",
+    mk: "abfalter.mk",
+    action: "abfalter.action",
+    difficulty: "abfalter.difficulty",
+    effect: "abfalter.effect",
+    effects: "abfalter.effects",
+    none: "abfalter.none",
+    attack: "abfalter.attack",
+    block: "abfalter.block",
+    dodge: "abfalter.dodge",
+    defense: "abfalter.defense",
+    extra: "abfalter.extra",
+    remove: "abfalter.remove",
+    note: "abfalter.note",
+    natura: "abfalter.natura",
+    gnosis: "abfalter.gnosis",
+    destiny: "abfalter.destiny",
+    archeType: "abfalter.archeType",
+    shield: "abfalter.shield",
+    shieldMax: "abfalter.shieldMax",
+    boons: "abfalter.boons",
+    critical: "abfalter.critical",
+    token: "abfalter.token",
+    gender: "abfalter.gender",
+    race: "abfalter.race",
+    height: "abfalter.height",
+    weight: "abfalter.weight",
+    age: "abfalter.age",
+    exp: "abfalter.exp",
+    size: "abfalter.size",
+    appear: "abfalter.appear",
+    maximum: "abfalter.maximum",
+    aamShort: "abfalter.aamShort",
+    magic: "abfalter.magic",
+    background: "abfalter.background",
+    psychic: "abfalter.psychic",
+    ki: "abfalter.ki",
+    armory: "abfalter.armory",
+    bio: "abfalter.bio",
+    settings: "abfalter.settings",
+    general: "abfalter.general",
+    minute: "abfalter.minute",
+    hour: "abfalter.hour",
+    day: "abfalter.day",
+    multiWield: "abfalter.multiWield",
+    unarmed: "abfalter.unarmed",
+    special: "abfalter.special",
+    innate: "abfalter.innate",
+    shortDesc: "abfalter.shortDesc",
+    monster: "abfalter.monster",
+    details: "abfalter.details",
+    required: "abfalter.required",
+    warningsEnabled: "abfalter.warningsEnabled",
+    warningsDisabled: "abfalter.warningsDisabled",
+    precision: "abfalter.precision",
+    vorpal: "abfalter.vorpal",
+    throwable: "abfalter.throwable",
+    range: "abfalter.range",
+    quantity: "abfalter.quantity",
+    trapping: "abfalter.trapping",
+    location: "abfalter.location",
+    head: "abfalter.head",
+    eye: "abfalter.eye",
+    neck: "abfalter.neck",
+    shoulder: "abfalter.shoulder",
+    arm: "abfalter.arm",
+    elbow: "abfalter.elbow",
+    wrist: "abfalter.wrist",
+    hand: "abfalter.hand",
+    heart: "abfalter.heart",
+    torso: "abfalter.torso",
+    abdomen: "abfalter.abdomen",
+    groin: "abfalter.groin",
+    thigh: "abfalter.thigh",
+    knee: "abfalter.knee",
+    calf: "abfalter.calf",
+    foot: "abfalter.foot",
+    mLong: "abfalter.meterLong",
+    m: "abfalter.m",
+    kmLong: "abfalter.kmLong",
+    km: "abfalter.km",
+    ftLong: "abfalter.ftLong",
+    ft: "abfalter.ft",
+    miLong: "abfalter.miLong",
+    mi: "abfalter.mi",
+    withSight: "abfalter.withSight",
+    meleeDetails: "abfalter.meleeDetails",
+    damageDetails: "abfalter.damageDetails",
+    mod: "abfalter.mod",
+    wepClass: "abfalter.wepClass",
+    dmgShort: "abfalter.dmgShort",
+    confirmRemAtkPrompt: "abfalter.confirmRemAtkPrompt"
+};
 
 abfalter.generalTab = {
     characteristics: "abfalter.generalTab.characteristics",
@@ -209,7 +246,7 @@ abfalter.generalTab = {
     lifePoints: "abfalter.generalTab.lifePoints",
     addAdvantage: "abfalter.generalTab.addAdvantage",
     addDisadvantage: "abfalter.generalTab.addDisadvantage",
-    custom: "abfalter.generalTab.custom"
+    custom: "abfalter.generalTab.custom",
 }
 
 abfalter.sheet = {
@@ -708,7 +745,7 @@ abfalter.armoryTab = {
     atPen: "abfalter.armoryTab.atPen",
     finBreakage: "abfalter.armoryTab.finBreakage",
     shieldSpd: "abfalter.armoryTab.shieldSpd",
-    finalSpd: "abfalter.armoryTab.finalSpd"
+    finalSpd: "abfalter.armoryTab.finalSpd",
 }
 
 abfalter.settingsTab = {
@@ -976,15 +1013,15 @@ abfalter.activeEffectChanges = {
 }
 
 abfalter.customSecondaryDropdown = {
-    none: "abfalter.basicInfo.none",
-    agi: "abfalter.basicInfo.agi",
-    con: "abfalter.basicInfo.con",
-    dex: "abfalter.basicInfo.dex",
-    str: "abfalter.basicInfo.str",
-    per: "abfalter.basicInfo.per",
-    int: "abfalter.basicInfo.int",
-    pow: "abfalter.basicInfo.pow",
-    wp: "abfalter.basicInfo.wp"
+    none: "abfalter.none",
+    agi: "abfalter.agi",
+    con: "abfalter.con",
+    dex: "abfalter.dex",
+    str: "abfalter.str",
+    per: "abfalter.per",
+    int: "abfalter.int",
+    pow: "abfalter.pow",
+    wp: "abfalter.wp"
 }
 
 abfalter.MonsterPowerDropdown = {
@@ -998,12 +1035,12 @@ abfalter.MonsterPowerDropdown = {
 }
 
 abfalter.innatePowerSettingDropdown = {
-    AGI: "abfalter.basicInfo.agi",
-    CON: "abfalter.basicInfo.con",
-    DEX: "abfalter.basicInfo.dex",
-    STR: "abfalter.basicInfo.str",
-    POW: "abfalter.basicInfo.pow",
-    WP: "abfalter.basicInfo.wp"
+    AGI: "abfalter.agi",
+    CON: "abfalter.con",
+    DEX: "abfalter.dex",
+    STR: "abfalter.str",
+    POW: "abfalter.pow",
+    WP: "abfalter.wp"
 }
 
 abfalter.proficiencyDropdown = {
@@ -1027,17 +1064,17 @@ abfalter.shieldDropdown = {
 }
 
 abfalter.damageModDropdown = {
-    agi: "abfalter.basicInfo.agility",
-    con: "abfalter.basicInfo.consti",
-    str: "abfalter.basicInfo.strength",
-    dex: "abfalter.basicInfo.dexerity",
-    per: "abfalter.basicInfo.perception",
-    int: "abfalter.basicInfo.intell",
-    pow: "abfalter.basicInfo.power",
-    wp: "abfalter.basicInfo.willPower",
+    agi: "abfalter.agility",
+    con: "abfalter.consti",
+    str: "abfalter.strength",
+    dex: "abfalter.dexerity",
+    per: "abfalter.perception",
+    int: "abfalter.intell",
+    pow: "abfalter.power",
+    wp: "abfalter.willPower",
     str2: "abfalter.armoryTab.twoStr",
     presence: "abfalter.armoryTab.twoPresPow",
-    none: "abfalter.basicInfo.none"
+    none: "abfalter.none"
 }
 
 abfalter.damageTypeDropdown = {
@@ -1064,7 +1101,7 @@ abfalter.damageTypeSpiritDropdown = {
 }
 
 abfalter.martialArtsDropdown = {
-    base: "abfalter.basicInfo.base",
+    base: "abfalter.base",
     advanced: "abfalter.kiTab.advanced",
     supreme: "abfalter.kiTab.supreme",
     arcane: "abfalter.kiTab.arcane"
@@ -1084,13 +1121,13 @@ abfalter.kiActionTypeDropdown = {
 }
 
 abfalter.ActionDropdown = {
-    Active: "abfalter.basicInfo.active",
-    Passive: "abfalter.basicInfo.passive"
+    Active: "abfalter.active",
+    Passive: "abfalter.passive"
 }
 
 abfalter.yesnoDropdown = {
-    Yes: "abfalter.basicInfo.yes",
-    No: "abfalter.basicInfo.no"
+    Yes: "abfalter.yes",
+    No: "abfalter.no"
 }
 
 abfalter.MagicTheoryDropdown = {
@@ -1103,8 +1140,8 @@ abfalter.MagicTheoryDropdown = {
 
 
 abfalter.spellTypeDropdown = {
-    Attack: "abfalter.basicInfo.attack",
-    Defense: "abfalter.basicInfo.defense",
+    Attack: "abfalter.attack",
+    Defense: "abfalter.defense",
     Spiritual: "abfalter.magicTab.spiritual",
     Effect: "abfalter.magicTab.effect",
     Automatic: "abfalter.magicTab.automatic",
@@ -1117,7 +1154,7 @@ abfalter.spellProjDropdown = {
 }
 
 abfalter.spellMaintTypeDropdown = {
-    None: "abfalter.basicInfo.none",
+    None: "abfalter.none",
     Turn: "abfalter.magicTab.turn",
     Daily: "abfalter.magicTab.daily"
 }
@@ -1129,7 +1166,7 @@ abfalter.spellBoughtDropdown = {
 }
 
 abfalter.LimitsDropdown = {
-    none: "abfalter.basicInfo.none",
+    none: "abfalter.none",
     mors: "abfalter.kiTab.limitMors",
     cenobus: "abfalter.kiTab.limitCenobus",
     caelum: "abfalter.kiTab.limitCaelum",
@@ -1137,4 +1174,44 @@ abfalter.LimitsDropdown = {
     custodium: "abfalter.kiTab.limitCustodium",
     cruor: "abfalter.kiTab.limitCruor",
     terminus: "abfalter.kiTab.limitTerminus"
+}
+
+abfalter.weaponTypeDropdown = {
+    melee: "abfalter.dropdown.melee",
+    ranged: "abfalter.dropdown.ranged",
+    shield: "abfalter.dropdown.shield"
+}
+
+abfalter.vorpalAtkDropdown = {
+    anywhere: "abfalter.anywhere",
+    head: "abfalter.head",
+    eye: "abfalter.eye",
+    neck: "abfalter.neck",
+    shoulder: "abfalter.shoulder",
+    arm: "abfalter.arm",
+    elbow: "abfalter.elbow",
+    wrist: "abfalter.wrist",
+    hand: "abfalter.hand",
+    heart: "abfalter.heart",
+    torso: "abfalter.torso",
+    abdomen: "abfalter.abdomen",
+    groin: "abfalter.groin",
+    thigh: "abfalter.thigh",
+    knee: "abfalter.knee",
+    calf: "abfalter.calf",
+    foot: "abfalter.foot"
+}
+
+abfalter.imperialDistLongDropdown = {
+    small: "abfalter.ftLong",
+    big: "abfalter.miLong",
+    withSight: "abfalter.withSight",
+    special: "abfalter.special"
+}
+
+abfalter.metricDistLongDropdown = {
+    small: "abfalter.mLong",
+    big: "abfalter.kmLong",
+    withSight: "abfalter.withSight",
+    special: "abfalter.special"
 }

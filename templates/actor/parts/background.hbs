@@ -3,7 +3,7 @@
         <div class="elan">
             <h5> {{localize "abfalter.generalTab.elan"}} </h5>
             <div>
-                <span> {{localize "abfalter.basicInfo.name"}} </span>
+                <span> {{localize "abfalter.name"}} </span>
                 <span> {{localize "abfalter.generalTab.title"}} </span>
                 <span> {{localize "abfalter.generalTab.elan"}} </span>
             </div>
@@ -63,9 +63,9 @@
         </div>
 
         <div class="natura">
-            <h5> {{localize "abfalter.basicInfo.natura"}} </h5>
+            <h5> {{localize "abfalter.natura"}} </h5>
             <div>
-                <label> <span> {{localize "abfalter.basicInfo.destiny"}} </span> <input type="number" name="system.info.destiny" value="{{system.info.destiny}}" /> </label>
+                <label> <span> {{localize "abfalter.destiny"}} </span> <input type="number" name="system.info.destiny" value="{{system.info.destiny}}" /> </label>
             </div>
         </div>
     </div>
@@ -430,14 +430,47 @@
                 {{/each}}
             </div>
         </div>
-        <div class="hidden">
-            <h5> placeholder </h5>
+
+        <div class="prof">
+            <h5> {{localize "abfalter.armoryTab.prof"}} </h5>
+            <div>
+                <span> {{localize "abfalter.armoryTab.profName"}} </span>
+                <span> {{localize "abfalter.type"}} </span>
+                <span> {{localize "abfalter.cost"}} </span>
+            </div>
+            <div class="{{#if system.itemToggle.proficiency}}item-list{{/if}}">
+                {{#each proficiencies as |proficiency id|}}
+                <div class="prof-item item delete-item" data-item-id="{{proficiency._id}}">
+                    {{#if system.toggleItem}}
+                    <div>
+                        <label> <input class="prof-name inline-edit" data-field="name" type="text" value="{{proficiency.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" /> </label>
+                        <div class="csSelect">
+                            <select class="inline-edit" name="system.type" data-field="system.type">
+                                {{selectOptions ../proficiencyObjList selected=system.type localize=true}}
+                            </select>
+                        </div>
+                        <input class="prof-cost inline-edit" data-field="system.cost" type="number" value="{{proficiency.system.cost}}" />
+                    </div>
+                    {{else}}
+                    <div>
+                        <span> {{proficiency.name}} </span>
+                        <span> {{proficiency.system.type}} </span>
+                        <span> {{proficiency.system.cost}} </span>
+                    </div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+            <div>
+                <a class="item-control item-create" data-type="proficiency"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addProf"}} </a>
+                <a class="toggleBoolean {{#if system.itemToggle.proficiency}}armorpenalty{{/if}}" data-label="system.itemToggle.proficiency" data-ability="{{system.itemToggle.proficiency}}"><i class="{{#if system.itemToggle.proficiency}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+            </div>
         </div>
     </div>
 
     <div class="e3">
         <div>
-            <h5> {{localize "abfalter.basicInfo.note"}} </h5>
+            <h5> {{localize "abfalter.note"}} </h5>
             <div style="display: grid;">
                 <textarea class="textarea-auto-resize" name="system.info.notesOne" style="grid-area: 1 / 1 / 2/ 2;">{{system.info.notesOne}}</textarea>
                 <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.info.notesOne}}</div>
@@ -445,7 +478,7 @@
         </div>
 
         <div>
-            <h5> {{localize "abfalter.basicInfo.note"}} </h5>
+            <h5> {{localize "abfalter.note"}} </h5>
             <div style="display: grid;">
                 <textarea class="textarea-auto-resize" name="system.info.notesTwo" style="grid-area: 1 / 1 / 2/ 2;">{{system.info.notesTwo}}</textarea>
                 <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.info.notesTwo}}</div>

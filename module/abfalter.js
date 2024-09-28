@@ -27,6 +27,7 @@ Hooks.once("init", async () => {
 
     // Register data models
     CONFIG.Actor.dataModels.character = actorDataModel;
+    CONFIG.Item.dataModels.weapon = weaponDataModel;
 
     CONFIG.time.roundTime = 6;
 
@@ -49,7 +50,7 @@ Hooks.once('ready', () => {
     customMacroBar();
     if (game.settings.get('abfalter', abfalterSettingsKeys.Change_Theme) == true) {
         document.documentElement.setAttribute('data-theme', 'light');
-        console.log("dark theme is gone")
+        console.log("dark theme is gone");
     }
 });
 
@@ -57,6 +58,10 @@ Hooks.once("ready", function () {
     if (!game.user.isGM) {
         return
     }
+    if (foundry.utils.isNewerVersion('1.4.3', game.settings.get("abfalter", "systemMigrationVersion"))) {
+        game.settings.set('abfalter', 'systemChangeLog', false);
+    }
+
     if (game.settings.get("abfalter", "systemChangeLog") === false) {
         handleChangelog();
     }
@@ -312,85 +317,85 @@ class actorDataModel extends foundry.abstract.DataModel {
                     creative: makeBoolField()
                 }),
                 athletics: new foundry.data.fields.SchemaField({
-                    acrobatics: secondaryAbilities(game.i18n.localize('abfalter.generalTab.acrobatic'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true),
-                    athleticism: secondaryAbilities(game.i18n.localize('abfalter.generalTab.athleticism'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true),
-                    climb: secondaryAbilities(game.i18n.localize('abfalter.generalTab.climb'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true),
-                    jump: secondaryAbilities(game.i18n.localize('abfalter.generalTab.jump'), game.i18n.localize('abfalter.basicInfo.str'), 'physical', true),
-                    piloting: secondaryAbilities(game.i18n.localize('abfalter.generalTab.piloting'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', true),
-                    ride: secondaryAbilities(game.i18n.localize('abfalter.generalTab.ride'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true),
-                    swim: secondaryAbilities(game.i18n.localize('abfalter.generalTab.swim'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true)
+                    acrobatics: secondaryAbilities(game.i18n.localize('abfalter.generalTab.acrobatic'), game.i18n.localize('abfalter.agi'), 'physical', true),
+                    athleticism: secondaryAbilities(game.i18n.localize('abfalter.generalTab.athleticism'), game.i18n.localize('abfalter.agi'), 'physical', true),
+                    climb: secondaryAbilities(game.i18n.localize('abfalter.generalTab.climb'), game.i18n.localize('abfalter.agi'), 'physical', true),
+                    jump: secondaryAbilities(game.i18n.localize('abfalter.generalTab.jump'), game.i18n.localize('abfalter.str'), 'physical', true),
+                    piloting: secondaryAbilities(game.i18n.localize('abfalter.generalTab.piloting'), game.i18n.localize('abfalter.dex'), 'physical', true),
+                    ride: secondaryAbilities(game.i18n.localize('abfalter.generalTab.ride'), game.i18n.localize('abfalter.agi'), 'physical', true),
+                    swim: secondaryAbilities(game.i18n.localize('abfalter.generalTab.swim'), game.i18n.localize('abfalter.agi'), 'physical', true)
                 }),
                 social: new foundry.data.fields.SchemaField({
-                    etiquette: secondaryAbilities(game.i18n.localize('abfalter.generalTab.etiquette'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    intimidate: secondaryAbilities(game.i18n.localize('abfalter.generalTab.intimidate'), game.i18n.localize('abfalter.basicInfo.wp'), 'mental', false),
-                    leadership: secondaryAbilities(game.i18n.localize('abfalter.generalTab.leadership'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
-                    persuasion: secondaryAbilities(game.i18n.localize('abfalter.generalTab.persuasion'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    streetwise: secondaryAbilities(game.i18n.localize('abfalter.generalTab.streetwise'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    style: secondaryAbilities(game.i18n.localize('abfalter.generalTab.style'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
-                    trading: secondaryAbilities(game.i18n.localize('abfalter.generalTab.trading'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false)
+                    etiquette: secondaryAbilities(game.i18n.localize('abfalter.generalTab.etiquette'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    intimidate: secondaryAbilities(game.i18n.localize('abfalter.generalTab.intimidate'), game.i18n.localize('abfalter.wp'), 'mental', false),
+                    leadership: secondaryAbilities(game.i18n.localize('abfalter.generalTab.leadership'), game.i18n.localize('abfalter.pow'), 'mental', false),
+                    persuasion: secondaryAbilities(game.i18n.localize('abfalter.generalTab.persuasion'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    streetwise: secondaryAbilities(game.i18n.localize('abfalter.generalTab.streetwise'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    style: secondaryAbilities(game.i18n.localize('abfalter.generalTab.style'), game.i18n.localize('abfalter.pow'), 'mental', false),
+                    trading: secondaryAbilities(game.i18n.localize('abfalter.generalTab.trading'), game.i18n.localize('abfalter.int'), 'mental', false)
                 }),
                 perceptive: new foundry.data.fields.SchemaField({
-                    kidetection: secondaryAbilities(game.i18n.localize('abfalter.kiTab.kiDetection'), game.i18n.localize('abfalter.basicInfo.per'), 'mental', false),
-                    notice: secondaryAbilities(game.i18n.localize('abfalter.generalTab.notice'), game.i18n.localize('abfalter.basicInfo.per'), 'mental', false),
-                    search: secondaryAbilities(game.i18n.localize('abfalter.generalTab.search'), game.i18n.localize('abfalter.basicInfo.per'), 'mental', false),
-                    track: secondaryAbilities(game.i18n.localize('abfalter.generalTab.track'), game.i18n.localize('abfalter.basicInfo.per'), 'mental', false)
+                    kidetection: secondaryAbilities(game.i18n.localize('abfalter.kiTab.kiDetection'), game.i18n.localize('abfalter.per'), 'mental', false),
+                    notice: secondaryAbilities(game.i18n.localize('abfalter.generalTab.notice'), game.i18n.localize('abfalter.per'), 'mental', false),
+                    search: secondaryAbilities(game.i18n.localize('abfalter.generalTab.search'), game.i18n.localize('abfalter.per'), 'mental', false),
+                    track: secondaryAbilities(game.i18n.localize('abfalter.generalTab.track'), game.i18n.localize('abfalter.per'), 'mental', false)
                 }),
                 intellectual: new foundry.data.fields.SchemaField({
-                    animals: secondaryAbilities(game.i18n.localize('abfalter.generalTab.animals'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    appraisal: secondaryAbilities(game.i18n.localize('abfalter.generalTab.appraisal'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    architecture: secondaryAbilities(game.i18n.localize('abfalter.generalTab.architecture'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    herballore: secondaryAbilities(game.i18n.localize('abfalter.generalTab.herballore'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    history: secondaryAbilities(game.i18n.localize('abfalter.generalTab.history'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    law: secondaryAbilities(game.i18n.localize('abfalter.generalTab.law'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    magicappr: secondaryAbilities(game.i18n.localize('abfalter.generalTab.magicAppr'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
-                    medicine: secondaryAbilities(game.i18n.localize('abfalter.generalTab.medicine'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    memorize: secondaryAbilities(game.i18n.localize('abfalter.generalTab.memorize'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    navigation: secondaryAbilities(game.i18n.localize('abfalter.generalTab.navigation'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    occult: secondaryAbilities(game.i18n.localize('abfalter.generalTab.occult'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    science: secondaryAbilities(game.i18n.localize('abfalter.generalTab.science'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    tactics: secondaryAbilities(game.i18n.localize('abfalter.generalTab.tactics'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    technomagic: secondaryAbilities(game.i18n.localize('abfalter.generalTab.technomagic'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false)
+                    animals: secondaryAbilities(game.i18n.localize('abfalter.generalTab.animals'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    appraisal: secondaryAbilities(game.i18n.localize('abfalter.generalTab.appraisal'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    architecture: secondaryAbilities(game.i18n.localize('abfalter.generalTab.architecture'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    herballore: secondaryAbilities(game.i18n.localize('abfalter.generalTab.herballore'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    history: secondaryAbilities(game.i18n.localize('abfalter.generalTab.history'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    law: secondaryAbilities(game.i18n.localize('abfalter.generalTab.law'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    magicappr: secondaryAbilities(game.i18n.localize('abfalter.generalTab.magicAppr'), game.i18n.localize('abfalter.pow'), 'mental', false),
+                    medicine: secondaryAbilities(game.i18n.localize('abfalter.generalTab.medicine'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    memorize: secondaryAbilities(game.i18n.localize('abfalter.generalTab.memorize'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    navigation: secondaryAbilities(game.i18n.localize('abfalter.generalTab.navigation'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    occult: secondaryAbilities(game.i18n.localize('abfalter.generalTab.occult'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    science: secondaryAbilities(game.i18n.localize('abfalter.generalTab.science'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    tactics: secondaryAbilities(game.i18n.localize('abfalter.generalTab.tactics'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    technomagic: secondaryAbilities(game.i18n.localize('abfalter.generalTab.technomagic'), game.i18n.localize('abfalter.int'), 'mental', false)
                 }),
                 vigor: new foundry.data.fields.SchemaField({
-                    composure: secondaryAbilities(game.i18n.localize('abfalter.generalTab.composure'), game.i18n.localize('abfalter.basicInfo.wp'), 'mental', false),
-                    featsofstr: secondaryAbilities(game.i18n.localize('abfalter.generalTab.featsOfStr'), game.i18n.localize('abfalter.basicInfo.str'), 'mental', true),
-                    withstpain: secondaryAbilities(game.i18n.localize('abfalter.generalTab.withstPain'), game.i18n.localize('abfalter.basicInfo.wp'), 'mental', false)
+                    composure: secondaryAbilities(game.i18n.localize('abfalter.generalTab.composure'), game.i18n.localize('abfalter.wp'), 'mental', false),
+                    featsofstr: secondaryAbilities(game.i18n.localize('abfalter.generalTab.featsOfStr'), game.i18n.localize('abfalter.str'), 'mental', true),
+                    withstpain: secondaryAbilities(game.i18n.localize('abfalter.generalTab.withstPain'), game.i18n.localize('abfalter.wp'), 'mental', false)
                 }),
                 subterfuge: new foundry.data.fields.SchemaField({
-                    disguise: secondaryAbilities(game.i18n.localize('abfalter.generalTab.disguise'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
-                    hide: secondaryAbilities(game.i18n.localize('abfalter.generalTab.hide'), game.i18n.localize('abfalter.basicInfo.per'), 'mental', true),
-                    kiconceal: secondaryAbilities(game.i18n.localize('abfalter.kiTab.kiConceal'), game.i18n.localize('abfalter.basicInfo.per'), 'mental', false),
-                    lockpicking: secondaryAbilities(game.i18n.localize('abfalter.generalTab.lockpicking'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
-                    poisons: secondaryAbilities(game.i18n.localize('abfalter.generalTab.poisons'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    stealth: secondaryAbilities(game.i18n.localize('abfalter.generalTab.stealth'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true),
-                    theft: secondaryAbilities(game.i18n.localize('abfalter.generalTab.theft'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
-                    traplore: secondaryAbilities(game.i18n.localize('abfalter.generalTab.traplore'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false)
+                    disguise: secondaryAbilities(game.i18n.localize('abfalter.generalTab.disguise'), game.i18n.localize('abfalter.dex'), 'physical', false),
+                    hide: secondaryAbilities(game.i18n.localize('abfalter.generalTab.hide'), game.i18n.localize('abfalter.per'), 'mental', true),
+                    kiconceal: secondaryAbilities(game.i18n.localize('abfalter.kiTab.kiConceal'), game.i18n.localize('abfalter.per'), 'mental', false),
+                    lockpicking: secondaryAbilities(game.i18n.localize('abfalter.generalTab.lockpicking'), game.i18n.localize('abfalter.dex'), 'physical', false),
+                    poisons: secondaryAbilities(game.i18n.localize('abfalter.generalTab.poisons'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    stealth: secondaryAbilities(game.i18n.localize('abfalter.generalTab.stealth'), game.i18n.localize('abfalter.agi'), 'physical', true),
+                    theft: secondaryAbilities(game.i18n.localize('abfalter.generalTab.theft'), game.i18n.localize('abfalter.dex'), 'physical', false),
+                    traplore: secondaryAbilities(game.i18n.localize('abfalter.generalTab.traplore'), game.i18n.localize('abfalter.dex'), 'physical', false)
                 }),
                 creative: new foundry.data.fields.SchemaField({
-                    alchemy: secondaryAbilities(game.i18n.localize('abfalter.generalTab.alchemy'), game.i18n.localize('abfalter.basicInfo.int'), 'mental', false),
-                    animism: secondaryAbilities(game.i18n.localize('abfalter.generalTab.animism'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
-                    art: secondaryAbilities(game.i18n.localize('abfalter.generalTab.art'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
-                    cooking: secondaryAbilities(game.i18n.localize('abfalter.generalTab.cooking'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
-                    dance: secondaryAbilities(game.i18n.localize('abfalter.generalTab.dance'), game.i18n.localize('abfalter.basicInfo.agi'), 'physical', true),
-                    forging: secondaryAbilities(game.i18n.localize('abfalter.generalTab.forging'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
-                    jewelry: secondaryAbilities(game.i18n.localize('abfalter.generalTab.jewelry'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
-                    toymaking: secondaryAbilities(game.i18n.localize('abfalter.generalTab.toymaking'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
-                    music: secondaryAbilities(game.i18n.localize('abfalter.generalTab.music'), game.i18n.localize('abfalter.basicInfo.pow'), 'mental', false),
-                    runes: secondaryAbilities(game.i18n.localize('abfalter.generalTab.runes'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
-                    ritualcalig: secondaryAbilities(game.i18n.localize('abfalter.generalTab.ritualCal'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
-                    slofhand: secondaryAbilities(game.i18n.localize('abfalter.generalTab.soh'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false),
-                    tailoring: secondaryAbilities(game.i18n.localize('abfalter.generalTab.tailoring'), game.i18n.localize('abfalter.basicInfo.dex'), 'physical', false)
+                    alchemy: secondaryAbilities(game.i18n.localize('abfalter.generalTab.alchemy'), game.i18n.localize('abfalter.int'), 'mental', false),
+                    animism: secondaryAbilities(game.i18n.localize('abfalter.generalTab.animism'), game.i18n.localize('abfalter.pow'), 'mental', false),
+                    art: secondaryAbilities(game.i18n.localize('abfalter.generalTab.art'), game.i18n.localize('abfalter.pow'), 'mental', false),
+                    cooking: secondaryAbilities(game.i18n.localize('abfalter.generalTab.cooking'), game.i18n.localize('abfalter.pow'), 'mental', false),
+                    dance: secondaryAbilities(game.i18n.localize('abfalter.generalTab.dance'), game.i18n.localize('abfalter.agi'), 'physical', true),
+                    forging: secondaryAbilities(game.i18n.localize('abfalter.generalTab.forging'), game.i18n.localize('abfalter.dex'), 'physical', false),
+                    jewelry: secondaryAbilities(game.i18n.localize('abfalter.generalTab.jewelry'), game.i18n.localize('abfalter.dex'), 'physical', false),
+                    toymaking: secondaryAbilities(game.i18n.localize('abfalter.generalTab.toymaking'), game.i18n.localize('abfalter.pow'), 'mental', false),
+                    music: secondaryAbilities(game.i18n.localize('abfalter.generalTab.music'), game.i18n.localize('abfalter.pow'), 'mental', false),
+                    runes: secondaryAbilities(game.i18n.localize('abfalter.generalTab.runes'), game.i18n.localize('abfalter.dex'), 'physical', false),
+                    ritualcalig: secondaryAbilities(game.i18n.localize('abfalter.generalTab.ritualCal'), game.i18n.localize('abfalter.dex'), 'physical', false),
+                    slofhand: secondaryAbilities(game.i18n.localize('abfalter.generalTab.soh'), game.i18n.localize('abfalter.dex'), 'physical', false),
+                    tailoring: secondaryAbilities(game.i18n.localize('abfalter.generalTab.tailoring'), game.i18n.localize('abfalter.dex'), 'physical', false)
                 })
             }),
             monsterChar: new foundry.data.fields.SchemaField({
-                agi: monsterCharacteristics("physical", game.i18n.localize('abfalter.basicInfo.agi')),
-                con: monsterCharacteristics("physical", game.i18n.localize('abfalter.basicInfo.con')),
-                str: monsterCharacteristics("physical", game.i18n.localize('abfalter.basicInfo.str')),
-                dex: monsterCharacteristics("physical", game.i18n.localize('abfalter.basicInfo.dex')),
-                per: monsterCharacteristics("mental", game.i18n.localize('abfalter.basicInfo.per')),
-                int: monsterCharacteristics("mental", game.i18n.localize('abfalter.basicInfo.int')),
-                pow: monsterCharacteristics("mental", game.i18n.localize('abfalter.basicInfo.pow')),
-                wp: monsterCharacteristics("mental", game.i18n.localize('abfalter.basicInfo.wp'))
+                agi: monsterCharacteristics("physical", game.i18n.localize('abfalter.agi')),
+                con: monsterCharacteristics("physical", game.i18n.localize('abfalter.con')),
+                str: monsterCharacteristics("physical", game.i18n.localize('abfalter.str')),
+                dex: monsterCharacteristics("physical", game.i18n.localize('abfalter.dex')),
+                per: monsterCharacteristics("mental", game.i18n.localize('abfalter.per')),
+                int: monsterCharacteristics("mental", game.i18n.localize('abfalter.int')),
+                pow: monsterCharacteristics("mental", game.i18n.localize('abfalter.pow')),
+                wp: monsterCharacteristics("mental", game.i18n.localize('abfalter.wp'))
             }),
             monsterStats: new foundry.data.fields.SchemaField({
                 hpDp: makeIntField()
@@ -832,6 +837,104 @@ class actorDataModel extends foundry.abstract.DataModel {
 
     get type() {
         return 'character'
+    }
+}
+
+class weaponDataModel extends foundry.abstract.DataModel {
+    static defineSchema() {
+        return {
+            description: makeHtmlField(),
+            info: new foundry.data.fields.SchemaField({
+                type: makeStringField("melee"),
+                complex: makeBoolField(),
+                openRollMod: makeIntField(),
+                fumbleRollMod: makeIntField(),
+                reqType: makeStringField("str"),
+                reqWarning: makeBoolField(),
+                reqMod: makeIntField(),
+                reqMod2h: makeIntField(),
+                precision: makeBoolField(),
+                vorpal: makeBoolField(),
+                vorpalLocation: makeStringField("everywhere"),
+                vorpalMod: makeIntField(),
+                weaponClass: makeStringField(),
+            }),
+            rarity: makeStringField(),
+            quality: makeIntField(),
+            fortitude: makeIntField(),
+            speed: makeIntField(),
+            presence: makeIntField(),
+            attack: makeIntField(),
+            block: makeIntField(),
+            dodge: makeIntField(),
+            baseDmg: makeIntField(),
+            breakage: makeIntField(),
+            atPen: makeIntField(),
+            strBreak: makeStringField(),
+            primDmgT: makeStringField("CUT"),
+            secDmgT: makeStringField("NONE"),
+            derived: new foundry.data.fields.SchemaField({
+                baseAtk: makeIntField(),
+                baseBlk: makeIntField(),
+                baseDod: makeIntField(),
+                finalFortitude: makeIntField(),
+                finalPresence: makeIntField(),
+                finalWeaponSpeed: makeIntField()
+            }),
+            melee: new foundry.data.fields.SchemaField({
+                dmgMod: makeStringField("str"),
+                twoHanded: makeBoolField(),
+                baseDmg: makeIntField(),
+                finalATPen: makeIntField(),
+                finalBreakage: makeIntField(),
+                throwable: makeBoolField(),
+                throwRange: makeIntField(),
+                throwRangeMax: makeIntField(),
+                throwDistanceType: makeStringField("small"),
+                throwQuantity: makeIntField(),
+                trapping: makeBoolField()
+            }),
+            shield: new foundry.data.fields.SchemaField({
+                type: makeStringField("none"),
+                hasAttack: makeBoolField()
+            }),
+            attacks: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
+                expand: makeBoolField(true),
+                name: makeStringField(),
+                attack: makeIntField(),
+                finalAttack: makeIntField(),
+                block: makeIntField(),
+                finalBlock: makeIntField(),
+                dodge: makeIntField(),
+                finalDodge: makeIntField(),
+                atPen: makeIntField(),
+                finalAtPen: makeIntField(),
+                breakage: makeIntField(),
+                finalBreakage: makeIntField(),
+                damage: makeIntField(),
+                finalDamage: makeIntField(),
+                
+                ignoreThrown: makeBoolField(),
+                fired: makeBoolField(),
+                quantityConsumed: makeBoolField(),
+                consumedValue:  makeIntField(),
+                ignorePrecision: makeBoolField(),
+                ignoreVorpal: makeBoolField(),
+                ignoreTrapping: makeBoolField(),
+                trappingMod: makeIntField(),
+                finalTrapping: makeIntField()
+            })),
+            equipped: makeBoolField(),
+            expand: makeBoolField()
+        }
+    }
+
+    static migrateData(source) {
+        return super.migrateData(source);
+    }
+
+    get type() {
+        return 'weapon'
     }
 }
 
