@@ -79,7 +79,7 @@
                         <div class="subRightHeader2">
                             <div class="subRightLeft">
                                 <h5>
-                                    {{localize "abfalter.generalTab.initiative"}}
+                                    {{localize "abfalter.initiative"}}
                                     <label>
                                         <a class="toggleBoolean {{#if system.initiative.status}}showOpacity{{/if}}" data-label="system.initiative.status" data-ability="{{system.initiative.status}}"><i class="{{#if system.initiative.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                                     </label>
@@ -87,10 +87,10 @@
                                 {{#if system.initiative.status}}
                                 <div class="headerIniDets">
                                     <label> <span> {{localize "abfalter.armoryTab.armor"}} </span> <input type="number" name="system.armor.wearArmor.totalNatPen" value="-{{system.armor.wearArmor.totalNatPen}}" readonly /> </label>
-                                    <label> <span> {{localize "abfalter.generalTab.weapon"}} </span> <input type="number" name="system.initiative.wepFinalSpeed" value="{{system.initiative.wepFinalSpeed}}" readonly /> </label>
+                                    <label> <span> {{localize "abfalter.weapon"}} </span> <input type="number" name="system.initiative.wepFinalSpeed" value="{{system.initiative.wepFinalSpeed}}" readonly /> </label>
                                     <label> <span> {{localize "abfalter.size"}} </span> <input type="number" name="system.initiative.sizeBase" value="{{system.initiative.sizeBase}}" readonly /> </label>
                                     <label> <span> {{localize "abfalter.class"}} </span> <input type="number" name="system.initiative.class" value="{{system.initiative.class}}" readonly /> </label>
-                                    <label title="Dex mod + Agi mod"> <span> {{localize "abfalter.generalTab.modifier"}} </span> <input type="number" name="system.initiative.extraStats" value="{{system.initiative.extraStats}}" readonly /> </label>
+                                    <label title="Dex mod + Agi mod"> <span> {{localize "abfalter.modifier"}} </span> <input type="number" name="system.initiative.extraStats" value="{{system.initiative.extraStats}}" readonly /> </label>
                                     <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.initiative.spec" value="{{system.initiative.spec}}" /> </label>
                                 </div>
                                 {{else}}

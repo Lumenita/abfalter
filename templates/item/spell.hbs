@@ -5,9 +5,9 @@
     </div>
 
     <div class="spellContent">
-        <h5> {{localize "abfalter.magicTab.spellDetails"}} </h5>
+        <h5> {{localize "abfalter.spellDetails"}} </h5>
         <div>
-            <label> <span> {{localize "abfalter.magicTab.path"}} </span> <input type="text" name="system.path" value="{{system.path}}" /> </label>
+            <label> <span> {{localize "abfalter.path"}} </span> <input type="text" name="system.path" value="{{system.path}}" /> </label>
             <label> <span> {{localize "abfalter.level"}} </span> <input type="number" name="system.level" value="{{system.level}}" /> </label>
         </div>
         <div>
@@ -21,7 +21,7 @@
             </div>
             <div class="csSelect">
                 <label>
-                    <span> {{localize "abfalter.psychicTab.pproj"}} </span>
+                    <span> {{localize "abfalter.pproj"}} </span>
                     <select name="system.projection">
                         {{selectOptions spellProjObjList selected=system.projection localize=true}}
                     </select>
@@ -39,7 +39,7 @@
             </div>
             <div class="csSelect">
                 <label>
-                    <span> {{localize "abfalter.magicTab.maintType"}} </span>
+                    <span> {{localize "abfalter.maintType"}} </span>
                     <select name="system.maintType">
                         {{selectOptions spellMaintTypeObjList selected=system.maintType localize=true}}
                     </select>
@@ -49,7 +49,7 @@
         <div>
             <div class="csSelect">
                 <label>
-                    <span> {{localize "abfalter.magicTab.bought"}} </span>
+                    <span> {{localize "abfalter.bought"}} </span>
                     <select name="system.bought">
                         {{selectOptions spellBoughtObjList selected=system.bought localize=true}}
                     </select>
@@ -67,14 +67,14 @@
     <div class="spellContentCont">
         <h6> Spell Content </h6>
         <div>
-            <span> {{localize "abfalter.magicTab.rank"}} </span>
-            <span> {{localize "abfalter.magicTab.req"}} </span>
-            <span> {{localize "abfalter.magicTab.zeon"}} </span>
-            <span> {{localize "abfalter.magicTab.maint"}} </span>
+            <span> {{localize "abfalter.rank"}} </span>
+            <span> {{localize "abfalter.req"}} </span>
+            <span> {{localize "abfalter.zeon"}} </span>
+            <span> {{localize "abfalter.maint"}} </span>
         </div>
 
         <div>
-            <span> {{localize "abfalter.magicTab.basic"}} </span>
+            <span> {{localize "abfalter.basic"}} </span>
             <input type="number" name="system.basic.intReq" value="{{system.basic.intReq}}" />
             <input type="number" name="system.basic.zeonCost" value="{{system.basic.zeonCost}}" />
             <input type="number" name="system.basic.maint" value="{{system.basic.maint}}" />
@@ -85,7 +85,7 @@
         </div>
 
         <div>
-            <span> {{localize "abfalter.magicTab.intermidiate"}} </span>
+            <span> {{localize "abfalter.intermidiate"}} </span>
             <input type="number" name="system.intermediate.intReq" value="{{system.intermediate.intReq}}" />
             <input type="number" name="system.intermediate.zeonCost" value="{{system.intermediate.zeonCost}}" />
             <input type="number" name="system.intermediate.maint" value="{{system.intermediate.maint}}" />
@@ -96,7 +96,7 @@
         </div>
 
         <div>
-            <span> {{localize "abfalter.magicTab.advanced"}} </span>
+            <span> {{localize "abfalter.advanced"}} </span>
             <input type="number" name="system.advanced.intReq" value="{{system.advanced.intReq}}" />
             <input type="number" name="system.advanced.zeonCost" value="{{system.advanced.zeonCost}}" />
             <input type="number" name="system.advanced.maint" value="{{system.advanced.maint}}" />
@@ -107,7 +107,7 @@
         </div>
 
         <div>
-            <span> {{localize "abfalter.magicTab.arcane"}} </span>
+            <span> {{localize "abfalter.arcane"}} </span>
             <input type="number" name="system.arcane.intReq" value="{{system.arcane.intReq}}" />
             <input type="number" name="system.arcane.zeonCost" value="{{system.arcane.zeonCost}}" />
             <input type="number" name="system.arcane.maint" value="{{system.arcane.maint}}" />

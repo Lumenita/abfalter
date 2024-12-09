@@ -31,7 +31,7 @@
                 <div class="currency-item item delete-item" data-item-id="{{currency._id}}">
                     {{#if system.toggleItem}}
                     <div>
-                        <input class="item-name inline-edit" data-field="name" type="text" value="{{currency.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
+                        <input class="item-name inline-edit" data-field="name" type="text" value="{{currency.name}}" placeholder="{{localize "abfalter.newItem"}}" />
                         <input class="inline-edit" data-field="system.quantity" type="number" value="{{currency.system.quantity}}" />
                     </div>
                     {{else}}
@@ -45,7 +45,7 @@
             </div>
             <div>
                 <a class="item-control item-create" data-type="currency"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addCoin"}} </a>
-                <a class="toggleBoolean {{#if system.itemToggle.currency}}armorpenalty{{/if}}" data-label="system.itemToggle.currency" data-ability="{{system.itemToggle.currency}}"><i class="{{#if system.itemToggle.currency}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                <a class="toggleBoolean {{#if system.itemToggle.currency}}armorpenalty{{/if}}" data-label="system.itemToggle.currency" data-ability="{{system.itemToggle.currency}}"><i class="{{#if system.itemToggle.currency}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
         </div>
 
@@ -147,10 +147,10 @@
             <div>
                 <div>
                     <a class="item-control item-create" data-type="armor"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addArmor"}} </a>
-                    <a class="toggleBoolean {{#if system.itemToggle.armor}}armorpenalty{{/if}}" data-label="system.itemToggle.armor" data-ability="{{system.itemToggle.armor}}"><i class="{{#if system.itemToggle.armor}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                    <a class="toggleBoolean {{#if system.itemToggle.armor}}armorpenalty{{/if}}" data-label="system.itemToggle.armor" data-ability="{{system.itemToggle.armor}}"><i class="{{#if system.itemToggle.armor}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
                 </div>
                 <div>
-                    <a class="toggleBoolean {{#if system.itemToggle.armorHelmet}}armorpenalty{{/if}}" data-label="system.itemToggle.armorHelmet" data-ability="{{system.itemToggle.armorHelmet}}"><i class="{{#if system.itemToggle.armorHelmet}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                    <a class="toggleBoolean {{#if system.itemToggle.armorHelmet}}armorpenalty{{/if}}" data-label="system.itemToggle.armorHelmet" data-ability="{{system.itemToggle.armorHelmet}}"><i class="{{#if system.itemToggle.armorHelmet}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
                     <a class="item-control item-create" data-type="armorHelmet"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addHelmet"}} </a>
                 </div>
             </div>
@@ -221,14 +221,15 @@
                             <div class="wepContainer2">
                                 <div>
                                     {{#ifEquals system.info.type "melee"}}
-                                    <!-- WIP
-                                    <button type="button" class="weaponRoll" data-type="{{_id}}" data-label="{{localize "abfalter.attack"}}">
+                                    
+                                    <button type="button" class="weaponRoll" data-type="{{_id}}" data-label="attack" data-value="{{system.info.type}}">
                                         {{localize "abfalter.attack"}}: {{system.derived.baseAtk}}
                                     </button>
-                                    -->
+                                     
+                                    <!-- WIP
                                     <button type="button" class="combatRoll" data-roll="{{system.derived.baseAtk}}" data-label="{{localize "abfalter.attack"}}" data-type="weaponCombatRoll" data-ability="{{system.complex}}">
                                         {{localize "abfalter.attack"}}: {{system.derived.baseAtk}}
-                                    </button>
+                                    </button>-->
                                     {{/ifEquals}}
                                     {{#ifEquals system.info.type "ranged"}}
                                     <button type="button" class="combatRoll" data-roll="{{system.derived.baseAtk}}" data-label="{{localize "abfalter.attack"}}" data-type="weaponCombatRoll" data-ability="{{system.complex}}">
@@ -246,7 +247,7 @@
 
                                 <span>
                                     {{#ifEquals system.info.type "melee"}}
-                                        FORT: {{system.derived.finalFortitude}}
+                                        {{localize "abfalter.fortitudeShort"}}: {{system.derived.finalFortitude}}
                                     {{/ifEquals}}
                                     {{#ifEquals system.info.type "ranged"}}
                                         WIP
@@ -259,12 +260,35 @@
                                 {{#ifEquals system.info.type "melee"}}
                                 <button type="button" class="combatRoll" data-roll="{{system.melee.finalBreakage}}"
                                     data-label="{{localize "abfalter.armoryTab.finBreakage"}}" data-type="breakageRoll">
-                                    BREAK: {{system.melee.finalBreakage}}
+                                    {{localize "abfalter.breakageShort"}}: {{system.melee.finalBreakage}}
                                 </button>
                                 {{/ifEquals}}
                             </div>
                         </div>
                     </div>
+                    
+                    {{#ifEquals system.info.type "melee"}}
+                    <div class="weaponSubHeaderContainer">
+                        {{#if system.melee.trapping}}
+                        <div class="weaponSubTrap">
+                            <span> {{localize "abfalter.trapRoll"}}: {{localize (concat "abfalter." system.melee.trappingTypeF)}} / {{localize (concat "abfalter." system.melee.trappingTypeS)}} </span>
+                            <button type="button" class="weaponRoll" data-type="{{_id}}" data-label="trap" data-value="trap">
+                                {{localize "abfalter.trapping"}}
+                            </button>
+                        </div>  
+                        {{/if}}
+                        {{#if system.melee.throwable}}
+                        <div class="weaponSubThrow">
+                            <span> {{localize "abfalter.range"}}: {{system.melee.throwRange}} {{localize (concat "abfalter." (getDistanceType system.melee.throwDistanceType))}} | </span>
+                            <span> {{localize "abfalter.quantity"}} </span>
+                            <a class="wepThrowQ" data-value="-1"><i class="fas fa-minus"> </i></a>
+                            <span> {{system.melee.throwQuantity}} </span>
+                            <a class="wepThrowQ" data-value="1"><i class="fas fa-plus"></i> </a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/ifEquals}}
+
             
                     {{#if system.expand}}
                     {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
@@ -275,7 +299,7 @@
 
             <div>
                 <a class="item-control item-create" data-type="weapon"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addWeapons"}} </a>
-                <a class="toggleBoolean {{#if system.itemToggle.weapon}}armorpenalty{{/if}}" data-label="system.itemToggle.weapon" data-ability="{{system.itemToggle.weapon}}"><i class="{{#if system.itemToggle.weapon}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                <a class="toggleBoolean {{#if system.itemToggle.weapon}}armorpenalty{{/if}}" data-label="system.itemToggle.weapon" data-ability="{{system.itemToggle.weapon}}"><i class="{{#if system.itemToggle.weapon}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
         </div>
 
@@ -293,7 +317,7 @@
                     <div>
                         <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                         <input class="inline-edit" data-field="system.quantity" type="number" value="{{inventory.system.quantity}}" />
-                        <input class="item-name inline-edit" data-field="name" type="text" value="{{inventory.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
+                        <input class="item-name inline-edit" data-field="name" type="text" value="{{inventory.name}}" placeholder="{{localize "abfalter.newItem"}}" />
                         <input class="inline-edit" data-field="system.quality" type="text" value="{{inventory.system.quality}}" />
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
@@ -315,7 +339,7 @@
             </div>
             <div>
                 <a class="item-control item-create" data-type="inventory"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addInventory"}} </a>
-                <a class="toggleBoolean {{#if system.itemToggle.inventory}}armorpenalty{{/if}}" data-label="system.itemToggle.inventory" data-ability="{{system.itemToggle.inventory}}"><i class="{{#if system.itemToggle.inventory}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                <a class="toggleBoolean {{#if system.itemToggle.inventory}}armorpenalty{{/if}}" data-label="system.itemToggle.inventory" data-ability="{{system.itemToggle.inventory}}"><i class="{{#if system.itemToggle.inventory}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
         </div>
 

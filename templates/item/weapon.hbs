@@ -7,11 +7,11 @@
         <div class="header-details flexrow">
             <h1 class="itemName">
                 <input name="name" type="text" value="{{item.name}}"
-                    placeholder="{{ localize 'abfalter.sheet.nameItem'}}" />
+                    placeholder="{{ localize 'abfalter.nameItem'}}" />
             </h1>
 
             <div class="item-subtitle">
-                <h4 class="item-type">{{localize "abfalter.generalTab.weapon"}}</h4>
+                <h4 class="item-type">{{localize "abfalter.weapon"}}</h4>
                 <span class="item-subType">{{system.rarity}}</span>
             </div>
 
@@ -44,7 +44,7 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h6> {{localize "abfalter.generalTab.weapon"}} {{ localize "abfalter.details" }} </h6>
+            <h6> {{localize "abfalter.weapon"}} {{ localize "abfalter.details" }} </h6>
             <div class="csSelect weaponContent"> 
                 <label>
                     <span> {{localize "abfalter.type"}} </span>
@@ -203,10 +203,8 @@
             {{#if system.melee.throwable}}
             <div class="csSelect weaponContent4">
                 <label>
-                    <span>  {{localize "abfalter.range"}} </span> <!--TODO-->
-                    <input type="number" name="system.melee.throwRange" value="{{system.melee.throwRange}}" placeholder="Min" />
-                    <span> | </span>
-                    <input type="number" name="system.melee.throwRangeMax" value="{{system.melee.throwRangeMax}}" placeholder="Max"/>
+                    <span>  {{localize "abfalter.range"}} </span>
+                    <input type="number" name="system.melee.throwRange" value="{{system.melee.throwRange}}"/>
                     <select name="system.melee.throwDistanceType">
                         {{selectOptions throwDistanceDropdown selected=system.melee.throwDistanceType localize=true}}
                     </select>
@@ -225,7 +223,7 @@
                     </select>
                     {{else}}
                     <select class="inline-edit" name="system.primDmgT" data-field="system.primDmgT">
-                        {{selectOptions damageTypeObjList selected=system.primDmgT localize=true}}
+                        {{selectOptions wepDamageTypeObjList selected=system.primDmgT localize=true}}
                     </select>
                     {{/if}}
                 </label>
@@ -239,7 +237,7 @@
                     </select>
                     {{else}}
                     <select class="inline-edit" name="system.secDmgT" data-field="system.secDmgT">
-                        {{selectOptions damageTypeObjList selected=system.secDmgT localize=true}}
+                        {{selectOptions wepDamageTypeObjList selected=system.secDmgT localize=true}}
                     </select>
                     {{/if}}
                 </label>
@@ -268,6 +266,7 @@
             <span> I PUSHED THE WEAPON UPDATE TO GET FEEDBACK ON THE MELEE PART AND</span>
             <span> I WANT TO IMPLEMENT AN AMMUNITION SYSTEM, WHICH TAKES TIME.</span>
             <span> THEREFORE, YES ITS SUPPOSED TO BE EMPTY HERE.</span>
+            <span> It is now 12/3/24, and this is my next goal to finish</span>
             {{/ifEquals}}
 
 
@@ -275,7 +274,9 @@
             {{#ifEquals system.info.type "shield"}}
             <h6> specific shield {{ localize "abfalter.details" }} </h6> 
             <span> THIS IS A WIP AS OF 9/28/24 WHICH WILL BE COMPLETED AT A LATER DATE.</span>
-            <span> The Shield is Functional, but its probably missing stuff.</span>          
+            <span> The Shield is Functional, but its probably missing stuff.</span> 
+            <span> It is now 12/3/24, and this is my next goal to finish</span>
+
             <div class="csSelect weaponContent">
                 <label>
                     <span> {{localize "abfalter.armoryTab.shieldType"}} </span>
@@ -317,6 +318,7 @@
 
             <div id="attack-list">
                 <!-- Existing attacks will be rendered here -->
+                
                 {{#each system.attacks}}
                 <div class="attack-entry" >
                     {{#if this.expand}}
@@ -369,6 +371,91 @@
                             </label>
                         </div>
 
+                        {{#if this.parentThrowable}}
+                        <div class="wepAtkThrowableTop">
+                            <button class="wepAtkToggle  {{#if this.ignoreThrown}}{{else}}kiBought{{/if}}" data-label="ignoreThrown" data-value="{{@index}}">
+                                {{#if this.ignoreThrown}}
+                                <span> {{localize "abfalter.noThrowRules"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.throwable"}} </span>
+                                {{/if}}
+                            </button>
+                            {{#if this.ignoreThrown}}
+                            {{else}}
+                            <button class="wepAtkToggle {{#if this.fired}}kiBought{{/if}}" data-label="fired" data-value="{{@index}}">
+                                {{#if this.fired}}
+                                <span> {{localize "abfalter.fired"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.thrown"}} </span>
+                                {{/if}}
+                            </button>
+                            <button class="wepAtkToggle {{#if this.quantityConsumed}}kiBought{{/if}}" data-label="quantityConsumed" data-value="{{@index}}">
+                                {{#if this.quantityConsumed}}
+                                <span> {{localize "abfalter.infiniteQuantity"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.ConsumesQuantity"}} </span>
+                                {{/if}}
+                            </button>
+                            {{#if this.quantityConsumed}}
+                            {{else}}
+                            <label>
+                                <span> {{localize "abfalter.ammoPerAtk"}} </span>
+                                <input type="number" name="attacks[{{@index}}][consumedValue]" value="{{this.consumedValue}}">
+                            </label>
+                            {{/if}}
+                            {{/if}}
+                        </div>
+                        {{/if}}
+                        {{#if this.parentTrapping}}
+                        <div class="wepAtkTrapTop">
+                            <button class="wepAtkToggle {{#if this.ignoreTrapping}}{{else}}kiBought{{/if}}" data-label="ignoreTrapping" data-value="{{@index}}">
+                                {{#if this.ignoreTrapping}}
+                                <span> {{localize "abfalter.noTrapping"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.trapping"}} </span>
+                                {{/if}}
+                            </button>
+                            {{#if this.ignoreTrapping}}
+                            {{else}}
+                            <button class="wepAtkToggle {{#if this.trappingType}}{{else}}kiBought{{/if}}" data-label="trappingType" data-value="{{@index}}">
+                                {{#if this.trappingType}}
+                                <span> {{localize "abfalter.flatAmount"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.normal"}} </span>
+                                {{/if}}
+                            </button>
+                            <label>
+                                {{#if this.trappingType}}
+                                <span>{{localize "abfalter.enterFlatAmount"}}</span>
+                                {{else}}
+                                <span>{{localize "abfalter.enterCustomAmount"}} 1d10 + </span>
+                                {{/if}}
+                                <input type="number" name="attacks[{{@index}}][trappingValue]" value="{{this.trappingValue}}">
+                            </label>
+                            {{/if}}
+                        </div>
+                        {{/if}}
+                        <div class="wepAtkOtherTop {{#if this.parentPrecision}}{{else}}{{#if this.parentVorpal}}{{else}}hidden{{/if}}{{/if}}">
+                            {{#if this.parentPrecision}}
+                            <button class="wepAtkToggle {{#if this.ignorePrecision}}{{else}}kiBought{{/if}}" data-label="ignorePrecision" data-value="{{@index}}">
+                                {{#if this.ignorePrecision}}
+                                <span> {{localize "abfalter.noPrecision"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.yesPrecision"}} </span>
+                                {{/if}}
+                            </button>
+                            {{/if}}
+                            {{#if this.parentVorpal}}
+                            <button class="wepAtkToggle {{#if this.ignoreVorpal}}{{else}}kiBought{{/if}}" data-label="ignoreVorpal" data-value="{{@index}}">
+                                {{#if this.ignoreVorpal}}
+                                <span> {{localize "abfalter.noVorpal"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.vorpal"}} </span>
+                                {{/if}}
+                            </button>
+                            {{/if}}
+                        </div>
+
                     </div>
                     {{else}}
                     <div class="wepAtkNonEdit">
@@ -386,12 +473,39 @@
                             <span>{{localize "abfalter.armoryTab.atPen"}}: {{this.finalAtPen}} |</span>
                             <span>{{localize "abfalter.armoryTab.damage"}}: {{this.finalDamage}}</span>
                         </div>
+
+                        <div> 
+                            <span class="{{#if this.ignorePrecision}}hidden{{/if}}">{{localize "abfalter.yesPrecision"}} |</span>
+                            <span class="{{#if this.ignoreVorpal}}hidden{{/if}}">{{localize "abfalter.vorpal"}} |</span>
+                            <span class="{{#if this.ignoreThrown}}hidden{{/if}}">{{localize "abfalter.throwable"}} |</span>
+                            <span class="{{#if this.ignoreThrown}}hidden{{/if}}">
+                                {{#if this.fired}}
+                                <span> {{localize "abfalter.fired"}} |</span>
+                                {{else}}
+                                <span> {{localize "abfalter.thrown"}} |</span>
+                                {{/if}}
+                            </span>
+                            <span class="{{#if this.ignoreThrown}}hidden{{/if}}">
+                                {{#if this.quantityConsumed}}
+                                <span> {{localize "abfalter.infiniteQuantity"}} |</span>
+                                {{else}}
+                                <span> {{localize "abfalter.ammoPerAtk"}}: {{this.consumedValue}} |</span>
+                                {{/if}}
+                            </span>
+                            <span class="{{#if this.ignoreTrapping}}hidden{{/if}}">
+                                {{#if this.trappingType}}
+                                <span> {{localize "abfalter.trapValueOf"}}: {{this.trappingValue}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.trapValueOf"}}: 1d10 + {{this.trappingValue}} </span>
+                                {{/if}}
+                            </span>
+                        </div>
                     </div>
                     {{/if}}
                 </div>
                 {{/each}}
             </div>
-            <button type="button" id="add-attack">+ Add Attack</button>
+            <button type="button" id="add-attack"><i class="fas fa-plus"></i> {{localize "abfalter.addAtk"}}</button>
 
         </div>
 

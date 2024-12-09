@@ -1,0 +1,63 @@
+<form class="baseAbfalter">
+  <body>
+    <div class="wepAtkDiceRoll">
+        <label>
+            <span> {{localize "abfalter.atkType"}}: </span>
+            <select id="attackSelect"></select>
+        </label>
+
+        <div>
+            <span> {{localize "abfalter.baseAtkShort"}}: </span>
+            <span id="attackPower">${attacks[0].finalAttack}</span>
+
+            <span> | {{localize "abfalter.baseDmgShort"}}: </span>
+            <span id="damageNum">${attacks[0].finalDamage}</span>
+
+            <span> | {{localize "abfalter.basePenShort"}}: </span>
+            <span id="atPenNum">${attacks[0].finalAtPen}</span>
+        </div>
+
+        <div> 
+            <span> this atk has a trapping manuever of: </span>
+            <span> trap!!</span>
+        </div>
+        
+        <div>
+            <span>rate of fire</span>
+            <span>50!!</span>
+
+            <span> | {{localize "abfalter.range"}}</span>
+            <span> range!!</span>
+
+            <span> | {{localize "abfalter.ammoUsed"}}</span>
+            <span> ammoUsed!!</span>
+            <span> infinite Ammo!!</span>
+        </div>
+
+        <label>
+            <span> {{localize "abfalter.dmgType"}}: </span>
+            <select id="atkDmgTypeDropdown"></select>
+        </label>
+
+        <label>
+            <span>{{localize "abfalter.activeActionMod"}} </span>
+            <select id="modifierSelect" name="modifierSelect"></select>
+        </label>
+
+        <label>
+            <span>{{localize "abfalter.directedAttackPrompt"}}</span>
+            <select id="directedAtkDropdown"></select>
+        </label>
+
+        <label>
+            <span>{{localize "abfalter.fatigue"}}</span>
+            <select id="fatigueDropdown"></select>
+        </label>
+        <label> 
+            <span> {{localize "abfalter.dialogs.modifier"}} </span>
+            <input type="number" id="modifierMod" value="0" /> 
+        </label>
+
+    </div>
+  </body>
+</form>

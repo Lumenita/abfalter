@@ -1,4 +1,4 @@
-import { openModifierDialogue, openWeaponDialogue } from "../diceroller.js";
+import * as diceFunctions from "../diceroller.js";
 import { metaMagicSheet } from "../helpers/metaMagicSheet.js";
 import * as actorFunctions from "../helpers/actorFunctions.js";
 import { onManageActiveEffect, prepareActiveEffectCategories } from '../helpers/effects.js';
@@ -16,7 +16,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
 
     itemContextMenuEquip = [
         {
-            name: game.i18n.localize("abfalter.sheet.equip"),
+            name: game.i18n.localize("abfalter.equip"),
             icon: '<i class="fas fa-caret-right"></i>',
             callback: element => {
                 const item = this.actor.items.get(element.data("item-id"));
@@ -25,7 +25,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
             }
         },
         {
-            name: game.i18n.localize("abfalter.sheet.edit"),
+            name: game.i18n.localize("abfalter.edit"),
             icon: '<i class="fas fa-edit"></i>',
             callback: element => {
                 const item = this.actor.items.get(element.data("item-id"));
@@ -33,17 +33,31 @@ export default class abfalterCharacterSheet extends ActorSheet {
             }
         },
         {
-            name: game.i18n.localize("abfalter.sheet.delete"),
+            name: game.i18n.localize("abfalter.delete"),
             icon: '<i class="fas fa-trash"></i>',
             callback: element => {
-                this.actor.deleteEmbeddedDocuments("Item", [element.data("item-id")]);
+                new Dialog({
+                    title: "Remove Item",
+                    content: game.i18n.localize('abfalter.confirmRemPrompt'),
+                    buttons: {
+                        yes: {
+                            label: game.i18n.localize('abfalter.yes'),
+                            callback: () => {
+                                this.actor.deleteEmbeddedDocuments("Item", [element.data("item-id")]);
+                            }
+                        },
+                        no: {
+                            label: game.i18n.localize('abfalter.no')
+                        }
+                    },
+                }).render(true);
             }
         }
 
     ]
     itemContextMenu = [
         {
-            name: game.i18n.localize("abfalter.sheet.edit"),
+            name: game.i18n.localize("abfalter.edit"),
             icon: '<i class="fas fa-edit"></i>',
             callback: element => {
                 const item = this.actor.items.get(element.data("item-id"));
@@ -51,17 +65,31 @@ export default class abfalterCharacterSheet extends ActorSheet {
             }
         },
         {
-            name: game.i18n.localize("abfalter.sheet.delete"),
+            name: game.i18n.localize("abfalter.delete"),
             icon: '<i class="fas fa-trash"></i>',
             callback: element => {
-                this.actor.deleteEmbeddedDocuments("Item", [element.data("item-id")]);
+                new Dialog({
+                    title: "Remove Item",
+                    content: game.i18n.localize('abfalter.confirmRemPrompt'),
+                    buttons: {
+                        yes: {
+                            label: game.i18n.localize('abfalter.yes'),
+                            callback: () => {
+                                this.actor.deleteEmbeddedDocuments("Item", [element.data("item-id")]);
+                            }
+                        },
+                        no: {
+                            label: game.i18n.localize('abfalter.no')
+                        }
+                    },
+                }).render(true);
             }
         }
 
     ]
     itemContextMenuDelete = [
         {
-            name: game.i18n.localize("abfalter.sheet.toggle"),
+            name: game.i18n.localize("abfalter.toggle"),
             icon: '<i class="fas fa-caret-right"></i>',
             callback: element => {
                 const item = this.actor.items.get(element.data("item-id"));
@@ -70,20 +98,48 @@ export default class abfalterCharacterSheet extends ActorSheet {
             }
         },
         {
-            name: game.i18n.localize("abfalter.sheet.delete"),
+            name: game.i18n.localize("abfalter.delete"),
             icon: '<i class="fas fa-trash"></i>',
             callback: element => {
-                this.actor.deleteEmbeddedDocuments("Item", [element.data("item-id")]);
+                new Dialog({
+                    title: "Remove Item",
+                    content: game.i18n.localize('abfalter.confirmRemPrompt'),
+                    buttons: {
+                        yes: {
+                            label: game.i18n.localize('abfalter.yes'),
+                            callback: () => {
+                                this.actor.deleteEmbeddedDocuments("Item", [element.data("item-id")]);
+                            }
+                        },
+                        no: {
+                            label: game.i18n.localize('abfalter.no')
+                        }
+                    },
+                }).render(true);
             }
         }
 
     ]
     itemContextMenuOnlyDelete = [
         {
-            name: game.i18n.localize("abfalter.sheet.delete"),
+            name: game.i18n.localize("abfalter.delete"),
             icon: '<i class="fas fa-trash"></i>',
             callback: element => {
-                this.actor.deleteEmbeddedDocuments("Item", [element.data("item-id")]);
+                new Dialog({
+                    title: "Remove Item",
+                    content: game.i18n.localize('abfalter.confirmRemPrompt'),
+                    buttons: {
+                        yes: {
+                            label: game.i18n.localize('abfalter.yes'),
+                            callback: () => {
+                                this.actor.deleteEmbeddedDocuments("Item", [element.data("item-id")]);
+                            }
+                        },
+                        no: {
+                            label: game.i18n.localize('abfalter.no')
+                        }
+                    },
+                }).render(true);
             }
         }
 
@@ -253,6 +309,13 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 value = !(value === 'true');
                 this.document.update({ [label]: value });
             });
+            html.find('.wepThrowQ').click(ev => {
+                let element = ev.currentTarget;
+                let itemId = element.closest(".item").dataset.itemId;
+                let item = this.actor.items.get(itemId);                
+                let num = parseInt($(ev.currentTarget).attr("data-value"));
+                return item.update({ "system.melee.throwQuantity": Math.floor(item.system.melee.throwQuantity + num) });
+            });
             html.find(".kiAbility").click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
                 let value2 = $(ev.currentTarget).attr("data-ability2");
@@ -301,7 +364,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
         const element = event.currentTarget;
         const dataset = element.dataset;
 
-        openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type);
+        diceFunctions.openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type);
     }
 
     _onAttackRoll(event) {
@@ -309,14 +372,31 @@ export default class abfalterCharacterSheet extends ActorSheet {
         const element = event.currentTarget;
         const dataset = element.dataset;
 
-        openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type, dataset.ability);
+        diceFunctions.openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type, dataset.ability);
     }
+
     _onWeaponRoll(event) {
         event.preventDefault();
         const dataset = event.currentTarget.dataset;
 
         console.log(dataset);
-        openWeaponDialogue(this.actor, dataset.label, dataset.type);
+        switch (dataset.value) {
+            case 'melee':
+                diceFunctions.openMeleeWeaponAtkDialogue(this.actor, dataset.label, dataset.type);
+                break;
+            case 'ranged':
+                console.log("Not Implemented");
+                break;
+            case 'shield':
+                console.log("Not Implemented");
+                break;
+            case 'trap':
+                diceFunctions.openMeleeTrapDialogue(this.actor, dataset.label, dataset.type);
+                break;
+            default:
+                console.log("Error: This weapon roll type does not exist");
+                break;
+        }
     }
     _changeSecNums(event) {
         event.preventDefault();
@@ -351,31 +431,31 @@ export default class abfalterCharacterSheet extends ActorSheet {
         const type = element.dataset.type;
 
         const types = {
-            "inventory": game.i18n.localize("abfalter.sheet.inventory"),
-            "weapon": game.i18n.localize("abfalter.sheet.weapon"),
-            "armor": game.i18n.localize("abfalter.sheet.armor"),
-            "armorHelmet": game.i18n.localize("abfalter.sheet.armorHelmet"),
-            "advantage": game.i18n.localize("abfalter.sheet.advantage"),
-            "disadvantage": game.i18n.localize("abfalter.sheet.disadvantage"),
-            "spell": game.i18n.localize("abfalter.sheet.spell"),
-            "class": game.i18n.localize("abfalter.sheet.class"),
-            "spellPath": game.i18n.localize("abfalter.sheet.spellPath"),
-            "incarnation": game.i18n.localize("abfalter.sheet.incarnation"),
-            "invocation": game.i18n.localize("abfalter.sheet.invocation"),
-            "dailyMaint": game.i18n.localize("abfalter.sheet.dailyMaint"),
-            "turnMaint": game.i18n.localize("abfalter.sheet.turnMaint"),
-            "currency": game.i18n.localize("abfalter.sheet.currency"),
-            "proficiency": game.i18n.localize("abfalter.sheet.proficiency"),
-            "weaponAttack": game.i18n.localize("abfalter.sheet.weaponAttack"),
-            "discipline": game.i18n.localize("abfalter.sheet.discipline"),
-            "mentalPattern": game.i18n.localize("abfalter.sheet.mentalPattern"),
-            "psychicMatrix": game.i18n.localize("abfalter.sheet.psychicMatrix"),
-            "maintPower": game.i18n.localize("abfalter.sheet.maintPower"),
-            "kiSealCreature": game.i18n.localize("abfalter.sheet.kiSealCreature"),
-            "kiTechnique": game.i18n.localize("abfalter.sheet.kiTechnique"),
-            "martialArt": game.i18n.localize("abfalter.sheet.martialArt"),
-            "arsMagnus": game.i18n.localize("abfalter.sheet.arsMagnus"),
-            "default": game.i18n.localize("abfalter.sheet.newItem"),
+            "inventory": game.i18n.localize("abfalter.newInventory"),
+            "weapon": game.i18n.localize("abfalter.newWeapon"),
+            "armor": game.i18n.localize("abfalter.newArmor"),
+            "armorHelmet": game.i18n.localize("abfalter.newArmorHelmet"),
+            "advantage": game.i18n.localize("abfalter.newAdvantage"),
+            "disadvantage": game.i18n.localize("abfalter.newDisadvantage"),
+            "spell": game.i18n.localize("abfalter.newSpell"),
+            "class": game.i18n.localize("abfalter.newClass"),
+            "spellPath": game.i18n.localize("abfalter.newSpellPath"),
+            "incarnation": game.i18n.localize("abfalter.newIncarnation"),
+            "invocation": game.i18n.localize("abfalter.newInvocation"),
+            "dailyMaint": game.i18n.localize("abfalter.newDailyMaint"),
+            "turnMaint": game.i18n.localize("abfalter.newTurnMaint"),
+            "currency": game.i18n.localize("abfalter.newCurrency"),
+            "proficiency": game.i18n.localize("abfalter.newProficiency"),
+            "weaponAttack": game.i18n.localize("abfalter.newWeaponAttack"),
+            "discipline": game.i18n.localize("abfalter.newDiscipline"),
+            "mentalPattern": game.i18n.localize("abfalter.newMentalPattern"),
+            "psychicMatrix": game.i18n.localize("abfalter.newPsychicMatrix"),
+            "maintPower": game.i18n.localize("abfalter.newMaintPower"),
+            "kiSealCreature": game.i18n.localize("abfalter.newKiSealCreature"),
+            "kiTechnique": game.i18n.localize("abfalter.newKiTechnique"),
+            "martialArt": game.i18n.localize("abfalter.newMartialArt"),
+            "arsMagnus": game.i18n.localize("abfalter.newArsMagnus"),
+            "default": game.i18n.localize("abfalter.newItem"),
         };
         const name = (types[type] || types["default"]);
         let itemData = {

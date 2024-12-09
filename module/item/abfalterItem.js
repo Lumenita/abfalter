@@ -130,6 +130,14 @@ export default class abfalterItem extends Item {
 
         //Melee Weapons
         if (this.system.info.type == "melee") {
+            //inherit weapon info to Attacks
+            for (let i = 0; i < this.system.attacks.length; i++) {
+                this.system.attacks[i].parentPrecision = this.system.info.precision;
+                this.system.attacks[i].parentVorpal = this.system.info.vorpal;
+                this.system.attacks[i].parentTrapping = this.system.melee.trapping;
+                this.system.attacks[i].parentThrowable = this.system.melee.throwable;
+            }
+
             if (this.parent != null) {
                 switch (this.system.melee.dmgMod) {
                     case "agi":
@@ -270,27 +278,27 @@ export default class abfalterItem extends Item {
             if (this.parent) {
                 switch (this.system.frequency) {
                     case "action":
-                        this.system.frequencyName = game.i18n.localize('abfalter.kiTab.action');
+                        this.system.frequencyName = game.i18n.localize('abfalter.action');
                         break;
                     case "turn":
-                        this.system.frequencyName = game.i18n.localize('abfalter.kiTab.turn');
+                        this.system.frequencyName = game.i18n.localize('abfalter.turn');
                         break;
                     case "variable":
-                        this.system.frequencyName = game.i18n.localize('abfalter.kiTab.variable');
+                        this.system.frequencyName = game.i18n.localize('abfalter.variable');
                         break;
                 }
                 switch (this.system.actionType) {
                     case "attack":
-                        this.system.actionTypeName = game.i18n.localize('abfalter.kiTab.attack');
+                        this.system.actionTypeName = game.i18n.localize('abfalter.attack');
                         break;
                     case "defense":
-                        this.system.actionTypeName = game.i18n.localize('abfalter.kiTab.defense');
+                        this.system.actionTypeName = game.i18n.localize('abfalter.defense');
                         break;
                     case "counterAttack":
-                        this.system.actionTypeName = game.i18n.localize('abfalter.kiTab.counterAttack');
+                        this.system.actionTypeName = game.i18n.localize('abfalter.counterAttack');
                         break;
                     case "variable":
-                        this.system.actionTypeName = game.i18n.localize('abfalter.kiTab.variable');
+                        this.system.actionTypeName = game.i18n.localize('abfalter.variable');
                         break;
                 }
 

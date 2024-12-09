@@ -6,11 +6,11 @@
 
         <div class="header-details flexrow">
             <h1 class="itemName">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'abfalter.sheet.nameItem'}}" />
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'abfalter.nameItem'}}" />
             </h1>
 
             <div class="item-subtitle">
-                <h4 class="item-type">{{localize "abfalter.sheet.kiTechTitle"}}</h4>
+                <h4 class="item-type">{{localize "abfalter.kiTechTitle"}}</h4>
                 <span class="item-subType">{{system.mk}} {{localize "abfalter.mk"}}</span>
             </div>
 
@@ -51,7 +51,7 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h6> {{localize "abfalter.sheet.kiTechTitle"}} {{ localize "abfalter.details" }} </h6>      
+            <h6> {{localize "abfalter.kiTechTitle"}} {{ localize "abfalter.details" }} </h6>      
             <label> <span> {{localize "abfalter.level"}} </span> <input type="number" name="system.level" value="{{system.level}}" /> </label>
             <label> <span> {{localize "abfalter.mk"}} </span> <input type="number" name="system.mk" value="{{system.mk}}" /> </label>
 
@@ -59,7 +59,7 @@
                 <div> </div>
 
                 <div class="kiTechTypeMax">
-                    <span> {{localize "abfalter.kiTab.ki"}} </span>
+                    <span> {{localize "abfalter.ki"}} </span>
                     <span> {{localize "abfalter.agi"}} </span>
                     <span> {{localize "abfalter.con"}} </span>
                     <span> {{localize "abfalter.dex"}} </span>
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="kiTechUseMax">
-                    <span> {{localize "abfalter.kiTab.use"}} </span>
+                    <span> {{localize "abfalter.use"}} </span>
                     <input name="system.use.agi" type="number" value="{{system.use.agi}}" />
                     <input name="system.use.con" type="number" value="{{system.use.con}}" />
                     <input name="system.use.dex" type="number" value="{{system.use.dex}}" />
@@ -85,14 +85,14 @@
                         {{#if system.unified}}
                         <div class="techExpandContent">
                             {{#if system.innatePower}}
-                            <span> {{localize "abfalter.kiTab.innatePowerMaint"}} </span>
+                            <span> {{localize "abfalter.innatePowerMaint"}} </span>
                             {{else}}
-                            <span> {{localize "abfalter.kiTab.unifiedMaint"}} </span>
+                            <span> {{localize "abfalter.unifiedMaint"}} </span>
                             {{/if}}
                             <input name="system.maint.unified" type="number" value="{{system.maint.unified}}" />
                         </div>
                         {{else}}
-                        <span> {{localize "abfalter.kiTab.maint"}} </span>
+                        <span> {{localize "abfalter.maint"}} </span>
                         <input name="system.maint.agi" type="number" value="{{system.maint.agi}}" />
                         <input name="system.maint.con" type="number" value="{{system.maint.con}}" />
                         <input name="system.maint.dex" type="number" value="{{system.maint.dex}}" />
@@ -103,7 +103,7 @@
                     </div>
                     {{else}}
                     <div>
-                        <span> {{localize "abfalter.kiTab.maint"}} </span>
+                        <span> {{localize "abfalter.maint"}} </span>
                         <input name="system.maint.agi" type="number" value="{{system.maint.agi}}" />
                         <input name="system.maint.con" type="number" value="{{system.maint.con}}" />
                         <input name="system.maint.dex" type="number" value="{{system.maint.dex}}" />
@@ -113,7 +113,7 @@
                     </div>
 
                     <div>
-                        <span> {{localize "abfalter.kiTab.unifiedMaint"}} </span>
+                        <span> {{localize "abfalter.unifiedMaint"}} </span>
                         <input name="system.maint.unified" type="number" value="{{system.maint.unified}}" />
                     </div>
                     {{/if}}

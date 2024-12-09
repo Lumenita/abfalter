@@ -6,13 +6,13 @@
 
         <div class="header-details flexrow">
             <h1 class="itemName">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'abfalter.sheet.nameItem'}}" />
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'abfalter.nameItem'}}" />
             </h1>
 
             <div class="item-subtitle">
-                <h4 class="item-type">{{localize "abfalter.sheet.secAbility"}}</h4>
+                <h4 class="item-type">{{localize "abfalter.secAbility"}}</h4>
                 <span class="item-subType">
-                    {{localize "abfalter.sheet.fav"}}
+                    {{localize "abfalter.fav"}}
                     <a class="toggleBoolean" data-label="system.fav" data-ability="{{system.fav}}"><i class="{{#if system.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
                 </span>
             </div>
@@ -50,13 +50,13 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h6> {{localize "abfalter.sheet.secAbility"}} {{ localize "abfalter.details" }} </h6>
+            <h6> {{localize "abfalter.secAbility"}} {{ localize "abfalter.details" }} </h6>
             <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.base" value="{{system.base}}" /> </label>
             <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.spec" value="{{system.spec}}" /> </label>
             <label> <span> {{localize "abfalter.extra"}} </span> <input type="number" name="system.extra" value="{{system.extra}}" /> </label>
             <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.temp" value="{{system.temp}}" /> </label>
-            <label> <span> {{localize "abfalter.generalTab.natNum"}} </span> <input type="number" name="system.nat" value="{{system.nat}}" /> </label>
-            <label> <span> {{localize "abfalter.generalTab.na"}} </span> <input type="number" name="system.natural" value="{{system.natural}}" /> </label>
+            <label> <span> {{localize "abfalter.natNum"}} </span> <input type="number" name="system.nat" value="{{system.nat}}" /> </label>
+            <label> <span> {{localize "abfalter.na"}} </span> <input type="number" name="system.natural" value="{{system.natural}}" /> </label>
         </div>
 
         {{!-- Effects Tab --}}

@@ -3,7 +3,7 @@
         <h5> {{localize "abfalter.kiTab.kiAbilities"}} </h5>
         <div class="kiSubsection">
             <div>
-                <span title="{{localize "abfalter.kiTab.descUseOfKi"}}"> {{localize "abfalter.kiTab.useOfKi"}} </span>
+                <span title="{{localize "abfalter.kiTab.descUseOfKi"}}"> {{localize "abfalter.useOfKi"}} </span>
                 <button type="button" class="kiAbility {{#if system.kiAbility.useOfKi.status}}{{#if system.kiAbility.useOfKi.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                         data-label="system.kiAbility.useOfKi.status" data-label2="system.kiAbility.useOfKi.status2" data-ability="{{system.kiAbility.useOfKi.status}}" data-ability2="{{system.kiAbility.useOfKi.status2}}">
                     <span> {{system.kiAbility.useOfKi.cost}} </span>
@@ -19,7 +19,7 @@
             </div>
             {{#if system.kiAbility.kiControl.status}}
             <div>
-                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiDetection"}}"> {{localize "abfalter.kiTab.kiDetection"}} </span>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiDetection"}}"> {{localize "abfalter.kiDetection"}} </span>
                 <button type="button" class="kiAbility {{#if system.kiAbility.kiDetection.status}}{{#if system.kiAbility.kiDetection.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                         data-label="system.kiAbility.kiDetection.status" data-label2="system.kiAbility.kiDetection.status2" data-ability="{{system.kiAbility.kiDetection.status}}" data-ability2="{{system.kiAbility.kiDetection.status2}}">
                     <span> {{system.kiAbility.kiDetection.cost}} </span>
@@ -353,7 +353,7 @@
             </div>
             {{#if system.kiAbility.kiUseOfEne.status}}
             <div>
-                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiConceal"}}"> {{localize "abfalter.kiTab.kiConceal"}} </span>
+                <span class="subKi2" title="{{localize "abfalter.kiTab.desckiConceal"}}"> {{localize "abfalter.kiConceal"}} </span>
                 <button type="button" class="kiAbility {{#if system.kiAbility.kiConceal.status}}{{#if system.kiAbility.kiConceal.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                         data-label="system.kiAbility.kiConceal.status" data-label2="system.kiAbility.kiConceal.status2" data-ability="{{system.kiAbility.kiConceal.status}}" data-ability2="{{system.kiAbility.kiConceal.status2}}">
                     <span> {{system.kiAbility.kiConceal.cost}} </span>
@@ -473,7 +473,7 @@
         <h5 class="{{#if system.toggles.nemesisVis}}hidden{{/if}}"> Nemesis Abilities </h5>
         <div class="kiSubsection {{#if system.toggles.nemesisVis}}hidden{{/if}}">
             <div>
-                <span title="{{localize "abfalter.kiTab.descuseOfNemesis"}}"> {{localize "abfalter.kiTab.useOfNemesis"}} </span>
+                <span title="{{localize "abfalter.kiTab.descuseOfNemesis"}}"> {{localize "abfalter.useOfNemesis"}} </span>
                 <button type="button" class="kiAbility {{#if system.kiAbility.useOfNemesis.status}}{{#if system.kiAbility.useOfNemesis.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                         data-label="system.kiAbility.useOfNemesis.status" data-label2="system.kiAbility.useOfNemesis.status2" data-ability="{{system.kiAbility.useOfNemesis.status}}" data-ability2="{{system.kiAbility.useOfNemesis.status2}}">
                     <span> {{system.kiAbility.useOfNemesis.cost}} </span>
@@ -643,12 +643,12 @@
     <div class="s5">
         <div>
             <div class="kipool">
-                <h5> {{localize "abfalter.kiTab.kiPool"}} </h5>
+                <h5> {{localize "abfalter.kiPool"}} </h5>
                 <div>
-                    <span> {{localize "abfalter.kiTab.accu"}} </span>
-                    <span> {{localize "abfalter.kiTab.max"}} </span>
-                    <span> {{localize "abfalter.kiTab.reserve"}} </span>
-                    <span> {{localize "abfalter.kiTab.acquired"}} </span>
+                    <span> {{localize "abfalter.accu"}} </span>
+                    <span> {{localize "abfalter.max"}} </span>
+                    <span> {{localize "abfalter.reserve"}} </span>
+                    <span> {{localize "abfalter.acquired"}} </span>
                 </div>
                 <div>
                     <div>
@@ -870,13 +870,13 @@
                 <div>
                     {{#if system.toggles.innatePower}}
                     <div>
-                        <span> {{localize "abfalter.kiTab.unified"}} {{system.kiPool.innate.tag}} </span>
+                        <span> {{localize "abfalter.unified"}} {{system.kiPool.innate.tag}} </span>
                         <input type="number" name="system.unifiedKi.max" value="{{system.unifiedKi.max}}" readonly />
                         <input type="number" name="system.unifiedKi.value" value="{{system.unifiedKi.value}}" />
                     </div>
                     {{else}}
                     <div>
-                        <span> {{localize "abfalter.kiTab.unified"}} </span>
+                        <span> {{localize "abfalter.unified"}} </span>
                         <input type="number" name="system.unifiedKi.max" value="{{system.unifiedKi.max}}" readonly />
                         <input type="number" name="system.unifiedKi.value" value="{{system.unifiedKi.value}}" />
                     </div>
@@ -887,7 +887,7 @@
 
             <div class="mk">
                 <h5>
-                    {{localize "abfalter.kiTab.martialKnow"}}
+                    {{localize "abfalter.martialKnow"}}
                     <label class="expand-box">
                         <a class="toggleBoolean {{#if system.mk.status}}showOpacity{{/if}}" data-label="system.mk.status" data-ability="{{system.mk.status}}"><i class="{{#if system.mk.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </label>
@@ -902,16 +902,16 @@
                 </div>
                 {{#if system.mk.status}}
                 <div>
-                    <label> <span> {{localize "abfalter.kiTab.martialArts"}}  </span> <input type="number" name="system.mk.martialArtsCost" value="{{system.mk.martialArtsCost}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.kiTab.limits"}} </span> <input type="number" name="system.mk.limitsTotalCost" value="{{system.mk.limitsTotalCost}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.martialArts"}}  </span> <input type="number" name="system.mk.martialArtsCost" value="{{system.mk.martialArtsCost}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.limits"}} </span> <input type="number" name="system.mk.limitsTotalCost" value="{{system.mk.limitsTotalCost}}" readonly /> </label>
                 </div>
                 <div>
                     <label> <span> {{localize "abfalter.kiTab.kiAbilities"}} </span> <input type="number" name="system.mk.kiAbilitiesCost" value="{{system.mk.kiAbilitiesCost}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.kiTab.kiSeals"}} </span> <input type="number" name="system.mk.kiSealCost" value="{{system.mk.kiSealCost}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.kiSeals"}} </span> <input type="number" name="system.mk.kiSealCost" value="{{system.mk.kiSealCost}}" readonly /> </label>
                 </div>
                 <div>
-                    <label> <span> {{localize "abfalter.kiTab.arsMagnus"}} </span> <input type="number" name="system.mk.arsMagCost" value="{{system.mk.arsMagCost}}" readonly /> </label>
-                    <label> <span> {{localize "abfalter.kiTab.kiTechnique"}} </span> <input type="number" name="system.mk.kiTechCost" value="{{system.mk.kiTechCost}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.arsMagnus"}} </span> <input type="number" name="system.mk.arsMagCost" value="{{system.mk.arsMagCost}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.kiTechnique"}} </span> <input type="number" name="system.mk.kiTechCost" value="{{system.mk.kiTechCost}}" readonly /> </label>
                 </div>
                 {{/if}}
                 <div class="lastMK">
@@ -947,7 +947,7 @@
 
         <div>
             <div class="arsMagnus {{#if system.toggles.arsMagVis}}hidden{{/if}}">
-                <h5> {{localize "abfalter.kiTab.arsMagnus"}} </h5>
+                <h5> {{localize "abfalter.arsMagnus"}} </h5>
                 <div>
                     <span> {{localize "abfalter.name"}} </span>
                     <span> {{localize "abfalter.dp"}} </span>
@@ -958,7 +958,7 @@
                     <div class="arsMagnus-item item normal-item" data-item-id="{{arsMagnus._id}}">
                         {{#if system.expand}}
                         <div>
-                            <input class="item-name inline-edit" data-field="name" type="text" value="{{arsMagnus.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{arsMagnus.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
                             <input class="inline-edit" data-field="system.dp" type="number" value="{{arsMagnus.system.dp}}" />
                             <input class="inline-edit" data-field="system.mk" type="number" value="{{arsMagnus.system.mk}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
@@ -979,18 +979,18 @@
                     {{/each}}
                 </div>
                 <div>
-                    <a class="item-control item-create" data-type="arsMagnus"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addArsMag"}} </a>
-                    <a class="toggleBoolean {{#if system.itemToggle.arsMagnus}}armorpenalty{{/if}}" data-label="system.itemToggle.arsMagnus" data-ability="{{system.itemToggle.arsMagnus}}"><i class="{{#if system.itemToggle.arsMagnus}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                    <a class="item-control item-create" data-type="arsMagnus"><i class="fas fa-plus"></i> {{localize "abfalter.addArsMag"}} </a>
+                    <a class="toggleBoolean {{#if system.itemToggle.arsMagnus}}armorpenalty{{/if}}" data-label="system.itemToggle.arsMagnus" data-ability="{{system.itemToggle.arsMagnus}}"><i class="{{#if system.itemToggle.arsMagnus}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
                 </div>
                 {{#if system.toggles.dragonSeals}}
                 <h6> Dragon Seals </h6>
                 <div>
-                    <span> {{localize "abfalter.kiTab.specialMag"}} </span>
-                    <span> {{localize "abfalter.kiTab.seals"}} </span>
-                    <span> {{localize "abfalter.kiTab.doors"}} </span>
+                    <span> {{localize "abfalter.specialMag"}} </span>
+                    <span> {{localize "abfalter.seals"}} </span>
+                    <span> {{localize "abfalter.doors"}} </span>
                 </div>
                 <div>
-                    <span> {{localize "abfalter.kiTab.dragonSeal"}} </span>
+                    <span> {{localize "abfalter.dragonSeal"}} </span>
                     <input type="number" name="system.arsMagnus.dragonSeal" value="{{system.arsMagnus.dragonSeal}}" />
                     <input type="number" name="system.arsMagnus.dragonDoor" value="{{system.arsMagnus.dragonDoor}}" />
                 </div>
@@ -998,7 +998,7 @@
             </div>
 
             <div class="limits {{#if system.toggles.arsMagVis}}hidden{{/if}}">
-                <h5> {{localize "abfalter.kiTab.limits"}} </h5>
+                <h5> {{localize "abfalter.limits"}} </h5>
                 <div class="csSelect">
                     <select name="system.limits.limitOne">
                         {{selectOptions limitsObjList selected=system.limits.limitOne localize=true}}
@@ -1013,10 +1013,10 @@
         </div>
 
         <div class="martialarts {{#if system.toggles.maVis}}hidden{{/if}}">
-            <h5> {{localize "abfalter.kiTab.martialArts"}} </h5>
+            <h5> {{localize "abfalter.martialArts"}} </h5>
             <div>
-                <span> {{localize "abfalter.kiTab.martialArtName"}} </span>
-                <span> {{localize "abfalter.kiTab.degree"}} </span>
+                <span> {{localize "abfalter.martialArtName"}} </span>
+                <span> {{localize "abfalter.degree"}} </span>
                 <span> {{localize "abfalter.dp"}} </span>
                 <span> {{localize "abfalter.mk"}} </span>
             </div>
@@ -1025,7 +1025,7 @@
                 <div class="martialArt-item item normal-item" data-item-id="{{martialArt._id}}">
                     {{#if system.expand}}
                     <div>
-                        <input class="item-name inline-edit" data-field="name" type="text" value="{{martialArt.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                        <input class="item-name inline-edit" data-field="name" type="text" value="{{martialArt.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
                         <div class="csSelect">
                             <select class="inline-edit" name="system.degree" data-field="system.degree">
                                 {{selectOptions ../martialArtsObjList selected=system.degree localize=true}}
@@ -1053,17 +1053,17 @@
                 {{/each}}
             </div>
             <div>
-                <a class="item-control item-create" data-type="martialArt"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addMartialArt"}} </a>
-                <a class="toggleBoolean {{#if system.itemToggle.martialArt}}armorpenalty{{/if}}" data-label="system.itemToggle.martialArt" data-ability="{{system.itemToggle.martialArt}}"><i class="{{#if system.itemToggle.martialArt}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                <a class="item-control item-create" data-type="martialArt"><i class="fas fa-plus"></i> {{localize "abfalter.addMartialArt"}} </a>
+                <a class="toggleBoolean {{#if system.itemToggle.martialArt}}armorpenalty{{/if}}" data-label="system.itemToggle.martialArt" data-ability="{{system.itemToggle.martialArt}}"><i class="{{#if system.itemToggle.martialArt}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
         </div>
 
         <div class="unarmed {{#if system.toggles.unarmedVis}}hidden{{/if}}">
-            <h5> {{localize "abfalter.kiTab.unarmedDmg"}} </h5>
+            <h5> {{localize "abfalter.unarmedDmg"}} </h5>
             <div>
-                <span> {{localize "abfalter.kiTab.baseDmg"}} </span>
-                <span> {{localize "abfalter.kiTab.multiplier"}} </span>
-                <span> {{localize "abfalter.kiTab.finalDmg"}} </span>
+                <span> {{localize "abfalter.baseDmg"}} </span>
+                <span> {{localize "abfalter.multiplier"}} </span>
+                <span> {{localize "abfalter.finalDmg"}} </span>
             </div>
             <div>
                 <input type="number" name="system.fistDamage.base" value="{{system.fistDamage.base}}" />
@@ -1097,73 +1097,73 @@
 
         <div class="kiseals {{#if system.toggles.kiSealsVis}}hidden{{/if}}">
             <h5>
-                {{localize "abfalter.kiTab.kiSeals"}}
+                {{localize "abfalter.kiSeals"}}
                 <label class="expand-box">
                     <a class="toggleBoolean {{#if system.kiSeal.status}}showOpacity{{/if}}" data-label="system.kiSeal.status" data-ability="{{system.kiSeal.status}}"><i class="{{#if system.kiSeal.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </label>
             </h5>
             {{#if system.kiSeal.status}}
             <div class="kisealmast">
-                <h6> {{localize "abfalter.kiTab.kiSealMaster"}} </h6>
+                <h6> {{localize "abfalter.kiSealMaster"}} </h6>
                 <div>
                     <span> {{localize "abfalter.cost"}} </span>
-                    <span> {{localize "abfalter.kiTab.sealWood"}} </span>
-                    <span> {{localize "abfalter.kiTab.sealMetal"}} </span>
-                    <span> {{localize "abfalter.kiTab.sealAir"}} </span>
-                    <span> {{localize "abfalter.kiTab.sealWater"}} </span>
-                    <span> {{localize "abfalter.kiTab.sealFire"}} </span>
+                    <span> {{localize "abfalter.sealWood"}} </span>
+                    <span> {{localize "abfalter.sealMetal"}} </span>
+                    <span> {{localize "abfalter.sealAir"}} </span>
+                    <span> {{localize "abfalter.sealWater"}} </span>
+                    <span> {{localize "abfalter.sealFire"}} </span>
                 </div>
                 <div>
-                    <span> {{localize "abfalter.kiTab.minorCost"}} </span>
+                    <span> {{localize "abfalter.minorCost"}} </span>
                     <button type="button" class="kiAbility {{#if system.kiSeal.minor.wood.mastery}}{{#if system.kiSeal.minor.wood.mastery2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                             data-label="system.kiSeal.minor.wood.mastery" data-label2="system.kiSeal.minor.wood.mastery2" data-ability="{{system.kiSeal.minor.wood.mastery}}" data-ability2="{{system.kiSeal.minor.wood.mastery2}}">
-                        <span> {{localize "abfalter.kiTab.minor"}} </span>
+                        <span> {{localize "abfalter.minor"}} </span>
                     </button>
                     <button type="button" class="kiAbility {{#if system.kiSeal.minor.metal.mastery}}{{#if system.kiSeal.minor.metal.mastery2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                             data-label="system.kiSeal.minor.metal.mastery" data-label2="system.kiSeal.minor.metal.mastery2" data-ability="{{system.kiSeal.minor.metal.mastery}}" data-ability2="{{system.kiSeal.minor.metal.mastery2}}">
-                        <span> {{localize "abfalter.kiTab.minor"}} </span>
+                        <span> {{localize "abfalter.minor"}} </span>
                     </button>
                     <button type="button" class="kiAbility {{#if system.kiSeal.minor.air.mastery}}{{#if system.kiSeal.minor.air.mastery2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                             data-label="system.kiSeal.minor.air.mastery" data-label2="system.kiSeal.minor.air.mastery2" data-ability="{{system.kiSeal.minor.air.mastery}}" data-ability2="{{system.kiSeal.minor.air.mastery2}}">
-                        <span> {{localize "abfalter.kiTab.minor"}} </span>
+                        <span> {{localize "abfalter.minor"}} </span>
                     </button>
                     <button type="button" class="kiAbility {{#if system.kiSeal.minor.water.mastery}}{{#if system.kiSeal.minor.water.mastery2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                             data-label="system.kiSeal.minor.water.mastery" data-label2="system.kiSeal.minor.water.mastery2" data-ability="{{system.kiSeal.minor.water.mastery}}" data-ability2="{{system.kiSeal.minor.water.mastery2}}">
-                        <span> {{localize "abfalter.kiTab.minor"}} </span>
+                        <span> {{localize "abfalter.minor"}} </span>
                     </button>
                     <button type="button" class="kiAbility {{#if system.kiSeal.minor.fire.mastery}}{{#if system.kiSeal.minor.fire.mastery2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                             data-label="system.kiSeal.minor.fire.mastery" data-label2="system.kiSeal.minor.fire.mastery2" data-ability="{{system.kiSeal.minor.fire.mastery}}" data-ability2="{{system.kiSeal.minor.fire.mastery2}}">
-                        <span> {{localize "abfalter.kiTab.minor"}} </span>
+                        <span> {{localize "abfalter.minor"}} </span>
                     </button>
                 </div>
                 <div>
-                    <span> {{localize "abfalter.kiTab.majorCost"}} </span>
+                    <span> {{localize "abfalter.majorCost"}} </span>
                     <button type="button" class="kiAbility {{#if system.kiSeal.major.wood.mastery}}{{#if system.kiSeal.major.wood.mastery2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                             data-label="system.kiSeal.major.wood.mastery" data-label2="system.kiSeal.major.wood.mastery2" data-ability="{{system.kiSeal.major.wood.mastery}}" data-ability2="{{system.kiSeal.major.wood.mastery2}}">
-                        <span> {{localize "abfalter.kiTab.major"}} </span>
+                        <span> {{localize "abfalter.major"}} </span>
                     </button>
                     <button type="button" class="kiAbility {{#if system.kiSeal.major.metal.mastery}}{{#if system.kiSeal.major.metal.mastery2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                             data-label="system.kiSeal.major.metal.mastery" data-label2="system.kiSeal.major.metal.mastery2" data-ability="{{system.kiSeal.major.metal.mastery}}" data-ability2="{{system.kiSeal.major.metal.mastery2}}">
-                        <span> {{localize "abfalter.kiTab.major"}} </span>
+                        <span> {{localize "abfalter.major"}} </span>
                     </button>
                     <button type="button" class="kiAbility {{#if system.kiSeal.major.air.mastery}}{{#if system.kiSeal.major.air.mastery2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                             data-label="system.kiSeal.major.air.mastery" data-label2="system.kiSeal.major.air.mastery2" data-ability="{{system.kiSeal.major.air.mastery}}" data-ability2="{{system.kiSeal.major.air.mastery2}}">
-                        <span> {{localize "abfalter.kiTab.major"}} </span>
+                        <span> {{localize "abfalter.major"}} </span>
                     </button>
                     <button type="button" class="kiAbility {{#if system.kiSeal.major.water.mastery}}{{#if system.kiSeal.major.water.mastery2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                             data-label="system.kiSeal.major.water.mastery" data-label2="system.kiSeal.major.water.mastery2" data-ability="{{system.kiSeal.major.water.mastery}}" data-ability2="{{system.kiSeal.major.water.mastery2}}">
-                        <span> {{localize "abfalter.kiTab.major"}} </span>
+                        <span> {{localize "abfalter.major"}} </span>
                     </button>
                     <button type="button" class="kiAbility {{#if system.kiSeal.major.fire.mastery}}{{#if system.kiSeal.major.fire.mastery2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                             data-label="system.kiSeal.major.fire.mastery" data-label2="system.kiSeal.major.fire.mastery2" data-ability="{{system.kiSeal.major.fire.mastery}}" data-ability2="{{system.kiSeal.major.fire.mastery2}}">
-                        <span> {{localize "abfalter.kiTab.major"}} </span>
+                        <span> {{localize "abfalter.major"}} </span>
                     </button>
                 </div>
             </div>
             {{/if}}
             <div class="kiSealsCreatures">
                 <div>
-                    <span> {{localize "abfalter.kiTab.creatureName"}} </span>
+                    <span> {{localize "abfalter.creatureName"}} </span>
                     <span> {{localize "abfalter.level"}} </span>
                 </div>
                 <div class="{{#if system.itemToggle.kiSealCreature}}item-list{{/if}}">
@@ -1172,21 +1172,21 @@
                         {{#if system.expand}}
                         <div>
                             <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
-                            <input class="item-name inline-edit" data-field="name" type="text" value="{{kiSealCreature.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{kiSealCreature.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
                             <input class="inline-edit" data-field="system.level" type="number" value="{{kiSealCreature.system.level}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
                         <div>
                             <div>
-                                <span> {{localize "abfalter.kiTab.sealType"}} </span>
-                                <span> {{localize "abfalter.kiTab.sealWood"}} </span>
-                                <span> {{localize "abfalter.kiTab.sealMetal"}} </span>
-                                <span> {{localize "abfalter.kiTab.sealAir"}} </span>
-                                <span> {{localize "abfalter.kiTab.sealWater"}} </span>
-                                <span> {{localize "abfalter.kiTab.sealFire"}} </span>
+                                <span> {{localize "abfalter.sealType"}} </span>
+                                <span> {{localize "abfalter.sealWood"}} </span>
+                                <span> {{localize "abfalter.sealMetal"}} </span>
+                                <span> {{localize "abfalter.sealAir"}} </span>
+                                <span> {{localize "abfalter.sealWater"}} </span>
+                                <span> {{localize "abfalter.sealFire"}} </span>
                             </div>
                             <div>
-                                <span> {{localize "abfalter.kiTab.minor"}} </span>
+                                <span> {{localize "abfalter.minor"}} </span>
                                 <input class="inline-edit" data-field="system.minor.wood" type="number" value="{{kiSealCreature.system.minor.wood}}" />
                                 <input class="inline-edit" data-field="system.minor.metal" type="number" value="{{kiSealCreature.system.minor.metal}}" />
                                 <input class="inline-edit" data-field="system.minor.air" type="number" value="{{kiSealCreature.system.minor.air}}" />
@@ -1194,7 +1194,7 @@
                                 <input class="inline-edit" data-field="system.minor.fire" type="number" value="{{kiSealCreature.system.minor.fire}}" />
                             </div>
                             <div>
-                                <span> {{localize "abfalter.kiTab.major"}} </span>
+                                <span> {{localize "abfalter.major"}} </span>
                                 <input class="inline-edit" data-field="system.major.wood" type="number" value="{{kiSealCreature.system.major.wood}}" />
                                 <input class="inline-edit" data-field="system.major.metal" type="number" value="{{kiSealCreature.system.major.metal}}" />
                                 <input class="inline-edit" data-field="system.major.air" type="number" value="{{kiSealCreature.system.major.air}}" />
@@ -1218,14 +1218,14 @@
                     {{/each}}
                 </div>
                 <div>
-                    <a class="item-control item-create" data-type="kiSealCreature"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addKiSealCreature"}} </a>
-                    <a class="toggleBoolean {{#if system.itemToggle.kiSealCreature}}armorpenalty{{/if}}" data-label="system.itemToggle.kiSealCreature" data-ability="{{system.itemToggle.kiSealCreature}}"><i class="{{#if system.itemToggle.kiSealCreature}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                    <a class="item-control item-create" data-type="kiSealCreature"><i class="fas fa-plus"></i> {{localize "abfalter.addKiSealCreature"}} </a>
+                    <a class="toggleBoolean {{#if system.itemToggle.kiSealCreature}}armorpenalty{{/if}}" data-label="system.itemToggle.kiSealCreature" data-ability="{{system.itemToggle.kiSealCreature}}"><i class="{{#if system.itemToggle.kiSealCreature}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
                 </div>
             </div>
         </div>
 
         <div class="kiTech {{#if system.toggles.kiTech}}hidden{{/if}}">
-            <h5> {{localize "abfalter.kiTab.kiTechnique"}} </h5>
+            <h5> {{localize "abfalter.kiTechnique"}} </h5>
             <div class="{{#if system.itemToggle.kiTechnique}}item-list{{/if}}">
                 {{#each kiTechniques as |kiTechnique id|}}
                 <div class="kiTechnique-item item normal-item" data-item-id="{{kiTechnique._id}}">
@@ -1233,7 +1233,7 @@
                     <div class="kiTechMaxContainer">
                         <div class="kiTechMainInfo">
                             <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
-                            <input class="item-name inline-edit" data-field="name" type="text" value="{{kiTechnique.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{kiTechnique.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
                             <input class="inline-edit" data-field="system.level" type="number" value="{{kiTechnique.system.level}}" />
                             <input class="inline-edit" data-field="system.mk" type="number" value="{{kiTechnique.system.mk}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
@@ -1246,18 +1246,18 @@
                         </div>
 
                         <div class="kiTechTypeMax">
-                            <span> {{localize "abfalter.kiTab.ki"}} </span>
+                            <span> {{localize "abfalter.ki"}} </span>
                             <span> {{localize "abfalter.agi"}} </span>
                             <span> {{localize "abfalter.con"}} </span>
                             <span> {{localize "abfalter.dex"}} </span>
                             <span> {{localize "abfalter.str"}} </span>
                             <span> {{localize "abfalter.pow"}} </span>
                             <span> {{localize "abfalter.wp"}} </span>
-                            <span> {{localize "abfalter.kiTab.actionInfo"}} </span>
+                            <span> {{localize "abfalter.actionInfo"}} </span>
                         </div>
 
                         <div class="kiTechUseMax">
-                            <span> {{localize "abfalter.kiTab.use"}} </span>
+                            <span> {{localize "abfalter.use"}} </span>
                             <input class="inline-edit" data-field="system.use.agi" type="number" value="{{kiTechnique.system.use.agi}}" />
                             <input class="inline-edit" data-field="system.use.con" type="number" value="{{kiTechnique.system.use.con}}" />
                             <input class="inline-edit" data-field="system.use.dex" type="number" value="{{kiTechnique.system.use.dex}}" />
@@ -1275,14 +1275,14 @@
                             {{#if system.unified}}
                             <div class="techExpandMax">
                                 {{#if system.innatePower}}
-                                <span> {{localize "abfalter.kiTab.innatePowerMaint"}} </span>
+                                <span> {{localize "abfalter.innatePowerMaint"}} </span>
                                 {{else}}
-                                <span> {{localize "abfalter.kiTab.unifiedMaint"}} </span>
+                                <span> {{localize "abfalter.unifiedMaint"}} </span>
                                 {{/if}}
                                 <input class="inline-edit" data-field="system.maint.unified" type="number" value="{{kiTechnique.system.maint.unified}}" />
                             </div>
                             {{else}}
-                            <span> {{localize "abfalter.kiTab.maint"}} </span>
+                            <span> {{localize "abfalter.maint"}} </span>
                             <input class="inline-edit" data-field="system.maint.agi" type="number" value="{{kiTechnique.system.maint.agi}}" />
                             <input class="inline-edit" data-field="system.maint.con" type="number" value="{{kiTechnique.system.maint.con}}" />
                             <input class="inline-edit" data-field="system.maint.dex" type="number" value="{{kiTechnique.system.maint.dex}}" />
@@ -1312,14 +1312,14 @@
                         </div>
 
                         <div class="kiTechSideInfo">
-                            <span> {{localize "abfalter.kiTab.frequency"}}: {{kiTechnique.system.frequencyName}} </span>
-                            <span> {{localize "abfalter.kiTab.actionType"}}: {{kiTechnique.system.actionTypeName}} </span>
+                            <span> {{localize "abfalter.frequency"}}: {{kiTechnique.system.frequencyName}} </span>
+                            <span> {{localize "abfalter.actionType"}}: {{kiTechnique.system.actionTypeName}} </span>
                             <span> {{localize "abfalter.level"}} </span>
                             <span> {{localize "abfalter.mk"}} </span>
                         </div>
 
                         <div class="kiTechType">
-                            <span> {{localize "abfalter.kiTab.ki"}} </span>
+                            <span> {{localize "abfalter.ki"}} </span>
                             <span> {{localize "abfalter.agi"}} </span>
                             <span> {{localize "abfalter.con"}} </span>
                             <span> {{localize "abfalter.dex"}} </span>
@@ -1329,7 +1329,7 @@
                         </div>
 
                         <div class="kiTechUse">
-                            <span> {{localize "abfalter.kiTab.use"}} </span>
+                            <span> {{localize "abfalter.use"}} </span>
                             <span> {{kiTechnique.system.use.agi}} </span>
                             <span> {{kiTechnique.system.use.con}} </span>
                             <span> {{kiTechnique.system.use.dex}} </span>
@@ -1342,14 +1342,14 @@
                             {{#if system.unified}}
                             <div class="techExpand">
                                 {{#if system.innatePower}}
-                                <span> {{localize "abfalter.kiTab.innatePowerMaint"}} </span>
+                                <span> {{localize "abfalter.innatePowerMaint"}} </span>
                                 {{else}}
-                                <span> {{localize "abfalter.kiTab.unifiedMaint"}} </span>
+                                <span> {{localize "abfalter.unifiedMaint"}} </span>
                                 {{/if}}
                                 <span> {{kiTechnique.system.maint.unified}} </span>
                             </div>
                             {{else}}
-                            <span> {{localize "abfalter.kiTab.maint"}} </span>
+                            <span> {{localize "abfalter.maint"}} </span>
                             <span>{{kiTechnique.system.maint.agi}}</span>
                             <span>{{kiTechnique.system.maint.con}}</span>
                             <span>{{kiTechnique.system.maint.dex}}</span>
@@ -1369,8 +1369,8 @@
                 {{/each}}
             </div>
             <div>
-                <a class="item-control item-create" data-type="kiTechnique"><i class="fas fa-plus"></i> {{localize "abfalter.kiTab.addKiTechnique"}} </a>
-                <a class="toggleBoolean {{#if system.itemToggle.kiTechnique}}armorpenalty{{/if}}" data-label="system.itemToggle.kiTechnique" data-ability="{{system.itemToggle.kiTechnique}}"><i class="{{#if system.itemToggle.kiTechnique}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                <a class="item-control item-create" data-type="kiTechnique"><i class="fas fa-plus"></i> {{localize "abfalter.addKiTechnique"}} </a>
+                <a class="toggleBoolean {{#if system.itemToggle.kiTechnique}}armorpenalty{{/if}}" data-label="system.itemToggle.kiTechnique" data-ability="{{system.itemToggle.kiTechnique}}"><i class="{{#if system.itemToggle.kiTechnique}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
         </div>
     </div>

@@ -257,6 +257,7 @@ baseAbfalter input {
     height: 200px;
 }
 .textarea-auto-resize, .textarea-auto-resize-sibling {
+    scrollbar-width: none;
     word-wrap: break-word;
     white-space: pre-wrap;
     box-sizing: border-box;
@@ -3827,6 +3828,40 @@ h6 {
     border-radius: 0px;
     border: 1px solid var(--boxColor);
 }
+.weapon-item .weaponSubHeaderContainer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    width: 100%;
+    padding: 5px 0 0 0;
+}
+.weaponSubTrap {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+.weaponSubTrap > button {
+    margin: 0 0 0 3px;
+    width: 100px;
+    height: 20px;
+    border-radius: 0px;
+    border: 1px solid var(--boxColor);
+}
+.weaponSubThrow {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    justify-self: end;
+}
+.weaponSubThrow > span:nth-of-type(2) {
+    padding: 0 5px 0 3px;
+}
+.weaponSubThrow > a {
+    font-size: 13px;
+}
+.weaponSubThrow > span:nth-of-type(3) {
+    padding: 0 2px 0 2px;
+}
 /* #endregion */
 
 /* #region Currency */
@@ -4578,11 +4613,11 @@ h6 {
 /* ----------------------------------------- */
 /*  Item Header                              */
 /* ----------------------------------------- */
-.abfalter.sheet.item .sheet-header {
+.abfalter.item .sheet-header {
     flex: 0 0 100px;
     border-bottom: 2px groove var(--boxColor);
 }
-.abfalter.sheet.item .sheet-header img.item-img {
+.abfalter.item .sheet-header img.item-img {
     flex: 0 0 100px;
     max-width: 100px;
     height: 100px;
@@ -4590,19 +4625,19 @@ h6 {
     border: 2px solid #000;
     border-right: 2px groove  var(--boxColor);
 }
-.abfalter.sheet.item .sheet-header .header-details {
+.abfalter.item .sheet-header .header-details {
     font-family: "Modesto Condensed", "Palatino Linotype", serif;
     font-size: 20px;
     font-weight: 700;
 }
-.abfalter.sheet.item .sheet-header h1 {
+.abfalter.item .sheet-header h1 {
     flex: 1;
     border-bottom: none;
     height: 60px;
     margin: 0;
     padding: 5px;
 }
-.abfalter.sheet.item .sheet-header h1 input {
+.abfalter.item .sheet-header h1 input {
     display: block;
     height: 50px;
     font-size: 32px;
@@ -4611,7 +4646,7 @@ h6 {
     text-align: start;
     border: none;
 }
-.abfalter.sheet.item .sheet-header .item-subtitle {
+.abfalter.item .sheet-header .item-subtitle {
     flex: 0 0 100px;
     height: 60px;
     margin: 0;
@@ -4620,16 +4655,16 @@ h6 {
     white-space: nowrap;
     color: var(--item-subTitle);
 }
-.abfalter.sheet.item .sheet-header .item-subtitle .item-type {
+.abfalter.item .sheet-header .item-subtitle .item-type {
     font-size: 24px;
     line-height: 26px;
     margin: 0;
 }
-.abfalter.sheet.item .sheet-header .item-subtitle .item-subType{
+.abfalter.item .sheet-header .item-subtitle .item-subType{
     font-size: 16px;
     line-height: 24px;
 }
-.abfalter.sheet.item .sheet-header .summary {
+.abfalter.item .sheet-header .summary {
     flex: 0 0 100%;
     height: 40px;
     margin: 0;
@@ -4638,7 +4673,7 @@ h6 {
     border-top: 2px groove  var(--boxColor);
     border-bottom: none;
 }
-.abfalter.sheet.item .sheet-header .summary li {
+.abfalter.item .sheet-header .summary li {
     display: flex;
     justify-content: space-between;
     gap: 0.25em;
@@ -4650,14 +4685,14 @@ h6 {
     line-height: 34px;
     color: var(--item-summary);
 }
-.abfalter.sheet.item .sheet-header .summary li span {
+.abfalter.item .sheet-header .summary li span {
     padding-inline: 4px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-weight: 400;
 }
-.abfalter.sheet.item .sheet-header .header-details .summary select {
+.abfalter.item .sheet-header .header-details .summary select {
     width: 100%;
     height: 100%;
     border: 0;
@@ -4670,59 +4705,59 @@ h6 {
     appearance: auto;
     background: none;
 }
-.abfalter.sheet.item .sheet-header .summary li input {
+.abfalter.item .sheet-header .summary li input {
     height: 100%;
     font-size: 20px;
 }
-.abfalter.sheet.item .sheet-header .summary li:last-child {
+.abfalter.item .sheet-header .summary li:last-child {
     border-right: none;
 }
 /* ----------------------------------------- */
 /*  Item Navigation Bar                      */
 /* ----------------------------------------- */
-.abfalter.sheet .sheet-navigation {
+.abfalter .sheet-navigation {
     flex: 0 0 30px;
     margin-bottom: 5px;
     font-size: 20px;
 }
-.abfalter.sheet .sheet-navigation .item {
+.abfalter .sheet-navigation .item {
     height: 30px;
     line-height: 32px;
     margin: 0 24px;
     border-bottom: 3px solid #b5b3a4;
     text-decoration: none;
 }
-.abfalter.sheet .sheet-navigation .item.active {
+.abfalter .sheet-navigation .item.active {
     border-bottom: 3px solid #8da5fd;
 }
-.abfalter.sheet.item .sheet-navigation {
+.abfalter.item .sheet-navigation {
     margin-bottom: 5px;
 }
-.abfalter.sheet.item .sheet-navigation .item {
+.abfalter.item .sheet-navigation .item {
     font-size: 18px;
 }
 /* ----------------------------------------- */
 /*  Item Description Tab                     */
 /* ----------------------------------------- */
-.abfalter.sheet.item .sheet-body .description > h6 {
+.abfalter.item .sheet-body .description > h6 {
     justify-content: start;
     border-bottom: 1px solid var(--boxColor);
     font-size: 20px;
 }
-.abfalter.sheet.item .sheet-body .itemDescInfo,
-.abfalter.sheet.item .sheet-body .editor-container,
-.abfalter.sheet.item .sheet-body .itemDescInfo > div {
+.abfalter.item .sheet-body .itemDescInfo,
+.abfalter.item .sheet-body .editor-container,
+.abfalter.item .sheet-body .itemDescInfo > div {
     min-height: 200px;
     max-height: 700px;
 }
-.abfalter.sheet.item .sheet-body .editor-container {
+.abfalter.item .sheet-body .editor-container {
     flex: 0;
     height: fit-content;
 }
-.abfalter.sheet.item .sheet-body .prosemirror .editor-container .editor-content {
+.abfalter.item .sheet-body .prosemirror .editor-container .editor-content {
     position: relative;
 }
-.abfalter.sheet.item .sheet-body .editor {
+.abfalter.item .sheet-body .editor {
     overflow: auto;
 }
 .itemHtmlActor {
@@ -4732,12 +4767,12 @@ h6 {
     width: 100%;
 }
 /*
-.abfalter.sheet.item .sheet-body .description .itemEditor > div {
+.abfalter.item .sheet-body .description .itemEditor > div {
     min-height: 200px;
     height: fit-content;
     max-height: 800px;
 }
-.abfalter.sheet.item .sheet-body .description .editor-container {
+.abfalter.item .sheet-body .description .editor-container {
     flex: none;
     min-height: 200px;
     height: 620px;
@@ -4750,29 +4785,29 @@ h6 {
 /* ----------------------------------------- */
 /*  Item General Details Tab                 */
 /* ----------------------------------------- */
-.abfalter.sheet.item .sheet-body .details > h6 {
+.abfalter.item .sheet-body .details > h6 {
     justify-content: start;
     border-bottom: 1px solid var(--boxColor);
     font-size: 20px;
 }
-.abfalter.sheet.item .sheet-body .details .csSelect > label,
-.abfalter.sheet.item .sheet-body .details > label {
+.abfalter.item .sheet-body .details .csSelect > label,
+.abfalter.item .sheet-body .details > label {
     display: flex;
     justify-content: space-between;
     padding: 2px 0;
 }
-.abfalter.sheet.item .sheet-body .details .csSelect > label > span,
-.abfalter.sheet.item .sheet-body .details > label > span {
+.abfalter.item .sheet-body .details .csSelect > label > span,
+.abfalter.item .sheet-body .details > label > span {
     display: grid;
 }
-.abfalter.sheet.item .sheet-body .details .csSelect > label > select,
-.abfalter.sheet.item .sheet-body .details > label > input {
+.abfalter.item .sheet-body .details .csSelect > label > select,
+.abfalter.item .sheet-body .details > label > input {
     width: 35%;
 }
-.abfalter.sheet.item .sheet-body .details .csSelect::after {
+.abfalter.item .sheet-body .details .csSelect::after {
     top: 0px;
 }
-.abfalter.sheet.item .sheet-body {
+.abfalter.item .sheet-body {
     height: fit-content;
 }
 /*
@@ -5279,221 +5314,6 @@ h6 {
     display: flex;
     width: 12%;
 }
-/* #region Item Weapon*/
-.attack-entry:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-.attack-entry {
-    margin: 0 0 5px 0;
-}
-.attacks > button {
-    align-self: center;
-    margin: 0px;
-    width: 50%;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-}
-.weaponContent > label, 
-.weaponContent3 > label,
-.weaponContent4 > label,
-.weaponContent5 > label {
-    display: flex;
-    padding: 2px 0;
-}
-.weaponContent > label > span,
-.weaponContent3 > label > span,
-.weaponContent5 > label > span {
-    display: grid;
-}
-.weaponContent > label > span:first-of-type {
-    width: 65%;
-}
-.weaponContent > label > input,
-.weaponContent5 > label > input {
-    width: 17%;
-}
-.weaponContent > label > button {
-    margin: 0px;
-    width: 35%;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-}
-.weaponContent > label > span:nth-of-type(2) {
-    width: 1%;
-    text-align: center;
-}
-.weaponContent > label > span:nth-of-type(3) {
-    width: 17%;
-    text-align: center;
-}
-.weaponContent3 {
-    display: flex;
-    padding: 2px 0 0 0;
-    margin: 2px 0 0 0;
-    border-top: 1px dashed var(--boxColor);
-}
-.weaponContent3 > div, 
-.weaponContent3 > label {
-    width: 30%;
-    margin: 0 2.5% 0 0;
-}
-.weaponContent3 > div > label > span {
-    width: 45%;
-}
-.abfalter.sheet.item .sheet-body .details .weaponContent3 .csSelect > label > select {
-    width: 45%;
-}
-.weaponContent3 > label > button {
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-}
-.weaponContent3 > input {
-    width: 17%;
-    display: flex;
-    align-self: center;
-}
-.weaponContent3 > span {
-    width: 1%;
-    text-align: center;
-    display: flex;
-    align-self: center;
-}
-.wepaonContentButtons {
-    display: flex;
-    padding: 2px 0;
-    justify-content: space-between;
-}
-.wepaonContentButtons > button{
-    width: 22%;
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-}
-.weaponContent2 {
-    display: flex;
-}
-.weaponContent2 > div,
-.weaponContent2 > label {
-    display: flex;
-    width: 50%;
-    align-items: center;
-}
-.weaponContent2 > div > label {
-    width: 100%;
-}
-.weaponContent2 > div > label > span {
-    display: grid;
-    width: 33%;
-}
-.abfalter.sheet.item .sheet-body .details .weaponContent2 .csSelect > label > select {
-    width: 55%;
-}
-.weaponContent2 > label > span {
-    display: grid;
-    justify-content: center;
-    width: 28%;
-    margin: 0 2% 0 0;
-}
-.weaponContent2 > label > input {
-    width: 70%;
-}
-.weaponContent4 > label > span {
-    display: grid;
-    width: 29%;
-}
-.weaponContent4 > label > span:last-of-type {
-    width: 1%;
-    margin: 0;
-    justify-content: center;
-}
-.weaponContent4 > label > input {
-    width: 17%;
-}
-.weaponContent4 > label > select {
-    width: 35%;
-    margin: 0 0 0 1%;
-}
-.weaponContent5 > label > span:first-of-type {
-    width: 36%;
-}
-.weaponContent5 > label > button {
-    margin: 0 2%;
-    width: 25%;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-}
-.weaponContent5 > label > span:nth-of-type(2) {
-    width: 1%;
-    text-align: center;
-}
-.weaponContent5 > label > span:nth-of-type(3) {
-    width: 17%;
-    text-align: center;
-}
-.weaponContent5 > label > select {
-    width: 35%;
-}
-.weapon-item .editor {
-    height: auto;
-}
-.weapon-item .editor > div * {
-    color: inherit;
-}
-.wepAtkEdit > div:first-of-type {
-    display: flex;
-}
-.wepAtkEdit > div:first-of-type > input {
-    width: 90%
-}   
-.wepAtkEdit > div:first-of-type > a {
-    width: 5%
-}
-.wepAtkEditTop {
-    display: flex;
-    justify-content: space-between;
-    height: 20px;
-    margin: 5px 0 0 0;
-}
-.wepAtkEditTop > label {
-    display: flex;
-    justify-content: start;
-    width: 30%
-}
-.wepAtkEditTop > label > input {
-    display: flex;
-    width: 30%
-}
-.wepAtkEditTop > label > span {
-    display: grid;
-    width: 35%
-}
-.wepAtkEditTop > label > span:nth-of-type(2) {
-    display: flex;
-    width: 1%
-}
-.wepAtkEditTop > label > span:nth-of-type(3) {
-    display: flex;
-    justify-content: center;
-    width: 30%
-}
-.wepAtkNonEdit > div:first-of-type {
-    display: flex;
-}
-.wepAtkNonEdit > div:first-of-type > span {
-    display: grid;
-    width: 90%;
-    font-size: 17px;
-}
-.wepAtkNonEdit > div:first-of-type > a {
-    width: 5%;
-}
-/* #endregion */
 /*
     ***************
     ---------------
@@ -5583,6 +5403,9 @@ h6 {
 .diceRollingTemp > label > input {
     width: 35%;
 }
+.diceRollingTemp > label > select {
+    width: 35%;
+}
 .message-content {
     display: flex;
     flex-direction: column;
@@ -5670,11 +5493,6 @@ h6 {
 .fumbleChatMessage > div:not(:nth-of-type(1)) > span:nth-of-type(2) {
     padding-right: 10%;
 }
-
-
-
-
-
 /*
     --------
     Spell Chat
@@ -5868,19 +5686,6 @@ h6 {
 .mystic {
     display:flex;
 }
-
-
-
-
-
-
-/*
-    ***************
-    ---------------
-         Other
-    ---------------
-    ***************
-*/
 .compendium-footer > span {
     display: initial;
 }
@@ -5890,3 +5695,298 @@ h6 {
 .editor-content > img {
     border: none;
 }
+/*
+    ***************
+    ---------------
+       New Stuff
+    ---------------
+    ***************
+*/
+/* #region Item Weapon*/
+.attack-entry:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.attack-entry {
+    margin: 0 0 5px 0;
+}
+.attacks > button {
+    align-self: center;
+    margin: 0px;
+    width: 50%;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent > label, 
+.weaponContent3 > label,
+.weaponContent4 > label,
+.weaponContent5 > label {
+    display: flex;
+    padding: 2px 0;
+}
+.weaponContent > label > span,
+.weaponContent3 > label > span,
+.weaponContent5 > label > span {
+    display: grid;
+}
+.weaponContent > label > span:first-of-type {
+    width: 65%;
+}
+.weaponContent > label > input,
+.weaponContent5 > label > input {
+    width: 17%;
+}
+.weaponContent > label > button {
+    margin: 0px;
+    width: 35%;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent > label > span:nth-of-type(2) {
+    width: 1%;
+    text-align: center;
+}
+.weaponContent > label > span:nth-of-type(3) {
+    width: 17%;
+    text-align: center;
+}
+.weaponContent3 {
+    display: flex;
+    padding: 2px 0 0 0;
+    margin: 2px 0 0 0;
+    border-top: 1px dashed var(--boxColor);
+}
+.weaponContent3 > div, 
+.weaponContent3 > label {
+    width: 30%;
+    margin: 0 2.5% 0 0;
+}
+.weaponContent3 > div > label > span {
+    width: 45%;
+}
+.abfalter.item .sheet-body .details .weaponContent3 .csSelect > label > select {
+    width: 45%;
+}
+.weaponContent3 > label > button {
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent3 > input {
+    width: 17%;
+    display: flex;
+    align-self: center;
+}
+.weaponContent3 > span {
+    width: 1%;
+    text-align: center;
+    display: flex;
+    align-self: center;
+}
+.wepaonContentButtons {
+    display: flex;
+    padding: 2px 0;
+    justify-content: space-between;
+}
+.wepaonContentButtons > button{
+    width: 22%;
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent2 {
+    display: flex;
+}
+.weaponContent2 > div,
+.weaponContent2 > label {
+    display: flex;
+    width: 50%;
+    align-items: center;
+}
+.weaponContent2 > div > label {
+    width: 100%;
+}
+.weaponContent2 > div > label > span {
+    display: grid;
+    width: 33%;
+}
+.abfalter.item .sheet-body .details .weaponContent2 .csSelect > label > select {
+    width: 55%;
+}
+.weaponContent2 > label > span {
+    display: grid;
+    justify-content: center;
+    width: 28%;
+    margin: 0 2% 0 0;
+}
+.weaponContent2 > label > input {
+    width: 70%;
+}
+.weaponContent4 > label > span {
+    display: grid;
+    width: 29%;
+}
+.weaponContent4 > label > input {
+    margin: 0 0 0 18%;
+    width: 17%;
+}
+.weaponContent4 > label > select {
+    width: 35%;
+    margin: 0 0 0 1%;
+}
+.weaponContent5 > label > span:first-of-type {
+    width: 36%;
+}
+.weaponContent5 > label > button {
+    margin: 0 2%;
+    width: 25%;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent5 > label > span:nth-of-type(2) {
+    width: 1%;
+    text-align: center;
+}
+.weaponContent5 > label > span:nth-of-type(3) {
+    width: 17%;
+    text-align: center;
+}
+.weaponContent5 > label > select {
+    width: 35%;
+}
+.weapon-item .editor {
+    height: auto;
+}
+.weapon-item .editor > div * {
+    color: inherit;
+}
+.wepAtkEdit > div:first-of-type {
+    display: flex;
+}
+.wepAtkEdit > div:first-of-type > input {
+    width: 90%
+}   
+.wepAtkEdit > div:first-of-type > a {
+    width: 5%
+}
+.wepAtkEditTop {
+    display: flex;
+    justify-content: space-between;
+    height: 20px;
+    margin: 5px 0 0 0;
+}
+.wepAtkEditTop > label {
+    display: flex;
+    justify-content: start;
+    width: 30%
+}
+.wepAtkEditTop > label > input {
+    display: flex;
+    width: 30%
+}
+.wepAtkEditTop > label > span {
+    display: grid;
+    width: 35%
+}
+.wepAtkEditTop > label > span:nth-of-type(2) {
+    display: flex;
+    width: 1%
+}
+.wepAtkEditTop > label > span:nth-of-type(3) {
+    display: flex;
+    justify-content: center;
+    width: 30%
+}
+.wepAtkThrowableTop,
+.wepAtkOtherTop,
+.wepAtkTrapTop {
+    display: flex;
+    justify-content: start;
+    height: 20px;
+    margin: 5px 0 0 0;
+}
+.wepAtkThrowableTop > button,
+.wepAtkOtherTop > button,
+.wepAtkTrapTop > button {
+    margin: 0 2% 0 0;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.wepAtkThrowableTop > label,
+.wepAtkOtherTop > label,
+.wepAtkTrapTop > label {
+    display: flex;
+    justify-content: start;
+}
+.wepAtkThrowableTop > button,
+.wepAtkTrapTop > button,
+.wepAtkOtherTop > button {
+    width: 21%;
+}
+.wepAtkThrowableTop > button:nth-of-type(2) {
+    width: 11%;
+}
+.wepAtkThrowableTop > button:nth-of-type(3) {
+    width: 27%;
+}
+.wepAtkThrowableTop > label {
+    width: 35%;
+}
+.wepAtkTrapTop > label {
+    width: 54%;
+}
+.wepAtkThrowableTop > label > span,
+.wepAtkTrapTop > label > span {
+    display: grid;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.wepAtkThrowableTop > label > input {
+    width: 26%;
+    margin: 0 0 0 1%;
+}
+.wepAtkTrapTop > label > input {
+    width: 17%;
+    margin: 0 0 0 1%;
+}
+.wepAtkNonEdit > div:first-of-type {
+    display: flex;
+}
+.wepAtkNonEdit > div:first-of-type > span {
+    display: grid;
+    width: 90%;
+    font-size: 17px;
+}
+.wepAtkNonEdit > div:first-of-type > a {
+    width: 5%;
+}
+/* #endregion */
+/* #region Weapon Attack Prompt */
+.wepAtkDiceRoll {
+    padding: 0 3%;
+}
+.wepAtkDiceRoll > label {
+    display: flex;
+    justify-content: space-between;
+}
+.wepAtkDiceRoll > label:last-of-type  {
+    border-bottom: 1px dashed var(--boxColor);
+    padding: 0 0 5px 0;
+    margin: 0 0 5px 0;
+}
+.wepAtkDiceRoll > label > span {
+    display: grid;
+    width: 55%;
+}
+.wepAtkDiceRoll > label > input {
+    width: 45%;
+}
+.wepAtkDiceRoll > label > select {
+    width: 45%;
+}
+/* #endregion */

@@ -803,45 +803,45 @@ export default class abfalterActor extends Actor {
                 system.regeneration.rawValue = 10000;
                 break;
             case 14:
-                system.regeneration.resting = "1/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regeneration.resting = "1/" + game.i18n.localize('abfalter.turn');
                 system.regeneration.notResting = "N/A";
                 system.regeneration.penaltyReduction = "-15/" + game.i18n.localize('abfalter.hour');
                 system.regeneration.rawValue = 20000;
                 break;
             case 15:
-                system.regeneration.resting = "5/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regeneration.resting = "5/" + game.i18n.localize('abfalter.turn');
                 system.regeneration.notResting = "N/A";
                 system.regeneration.penaltyReduction = "-20/" + game.i18n.localize('abfalter.hour');
                 system.regeneration.rawValue = 50000;
                 break;
             case 16:
-                system.regeneration.resting = "10/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regeneration.resting = "10/" + game.i18n.localize('abfalter.turn');
                 system.regeneration.notResting = "N/A";
                 system.regeneration.penaltyReduction = "-50/" + game.i18n.localize('abfalter.minute');
                 system.regeneration.rawValue = 100000;
                 break;
             case 17:
-                system.regeneration.resting = "25/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regeneration.resting = "25/" + game.i18n.localize('abfalter.turn');
                 system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "-10/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regeneration.penaltyReduction = "-10/" + game.i18n.localize('abfalter.turn');
                 system.regeneration.rawValue = 100000;
                 break;
             case 18:
-                system.regeneration.resting = "50/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regeneration.resting = "50/" + game.i18n.localize('abfalter.turn');
                 system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "-25/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regeneration.penaltyReduction = "-25/" + game.i18n.localize('abfalter.turn');
                 system.regeneration.rawValue = 100000;
                 break;
             case 19:
-                system.regeneration.resting = "100/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regeneration.resting = "100/" + game.i18n.localize('abfalter.turn');
                 system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "All/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regeneration.penaltyReduction = "All/" + game.i18n.localize('abfalter.turn');
                 system.regeneration.rawValue = 100000;
                 break;
             case 20:
-                system.regeneration.resting = "200/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regeneration.resting = "200/" + game.i18n.localize('abfalter.turn');
                 system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "All/" + game.i18n.localize('abfalter.magicTab.turn');
+                system.regeneration.penaltyReduction = "All/" + game.i18n.localize('abfalter.turn');
                 system.regeneration.rawValue = 100000;
                 break;
             default:
@@ -1427,28 +1427,28 @@ export default class abfalterActor extends Actor {
         for (let [key, res] of Object.entries(system.resistances)) {
             switch (key) {
                 case "Physical":
-                    res.name = game.i18n.localize('abfalter.sheet.physicalRes');
-                    res.short = game.i18n.localize('abfalter.sheet.phr');
+                    res.name = game.i18n.localize('abfalter.physicalRes');
+                    res.short = game.i18n.localize('abfalter.phr');
                     res.final = Math.floor(system.levelinfo.presence + res.mod + stats.Constitution.mod + system.otherStats.phrDom + system.otherStats.allEmpty + res.bonus);
                     break;
                 case "Disease":
-                    res.name = game.i18n.localize('abfalter.sheet.diseaseRes');
-                    res.short = game.i18n.localize('abfalter.sheet.dr');
+                    res.name = game.i18n.localize('abfalter.diseaseRes');
+                    res.short = game.i18n.localize('abfalter.dr');
                     res.final = Math.floor(system.levelinfo.presence + res.mod + stats.Constitution.mod + system.otherStats.allEmpty + res.bonus);
                     break;
                 case "Poison":
-                    res.name = game.i18n.localize('abfalter.sheet.poisonRes');
-                    res.short = game.i18n.localize('abfalter.sheet.psnr');
+                    res.name = game.i18n.localize('abfalter.poisonRes');
+                    res.short = game.i18n.localize('abfalter.psnr');
                     res.final = Math.floor(system.levelinfo.presence + res.mod + stats.Constitution.mod + system.otherStats.allEmpty + res.bonus);
                     break;
                 case "Magic":
-                    res.name = game.i18n.localize('abfalter.sheet.magicRes');
-                    res.short = game.i18n.localize('abfalter.sheet.mr');
+                    res.name = game.i18n.localize('abfalter.magicRes');
+                    res.short = game.i18n.localize('abfalter.mr');
                     res.final = Math.floor(system.levelinfo.presence + res.mod + stats.Power.mod + system.otherStats.allEmpty + res.bonus);
                     break;
                 case "Psychic":
-                    res.name = game.i18n.localize('abfalter.sheet.psychicRes');
-                    res.short = game.i18n.localize('abfalter.sheet.psyr');
+                    res.name = game.i18n.localize('abfalter.psychicRes');
+                    res.short = game.i18n.localize('abfalter.psyr');
                     res.final = Math.floor(system.levelinfo.presence + res.mod + stats.Willpower.mod + system.otherStats.allEmpty + res.bonus);
                     break;
                 default:
@@ -1744,13 +1744,13 @@ export default class abfalterActor extends Actor {
         for (let [key, sec] of Object.entries(system.secondaryFields.athletics)) {
             sec.parentField = system.secondaryFields.category.athletics;
             switch (sec.modifier) {
-                case game.i18n.localize('abfalter.agi'):
+                case 'agi':
                     sec.modValue = stats.Agility.mod;
                     break;
-                case game.i18n.localize('abfalter.str'):
+                case 'str':
                     sec.modValue = stats.Strength.mod;
                     break;
-                case game.i18n.localize('abfalter.dex'):
+                case 'dex':
                     sec.modValue = stats.Dexterity.mod;
                     break;                
             }
@@ -1770,13 +1770,13 @@ export default class abfalterActor extends Actor {
         for (let [key, sec] of Object.entries(system.secondaryFields.social)) {
             sec.parentField = system.secondaryFields.category.social;
             switch (sec.modifier) {
-                case game.i18n.localize('abfalter.int'):
+                case 'int':
                     sec.modValue = stats.Intelligence.mod;
                     break;
-                case game.i18n.localize('abfalter.pow'):
+                case 'pow':
                     sec.modValue = stats.Power.mod;
                     break;
-                case game.i18n.localize('abfalter.wp'):
+                case 'wp':
                     sec.modValue = stats.Willpower.mod;
                     break;
             }
@@ -1794,7 +1794,7 @@ export default class abfalterActor extends Actor {
 
             sec.parentField = system.secondaryFields.category.perceptive;
             switch (sec.modifier) {
-                case game.i18n.localize('abfalter.per'):
+                case 'per':
                     sec.modValue = stats.Perception.mod;
                     break;
             }
@@ -1833,10 +1833,10 @@ export default class abfalterActor extends Actor {
         for (let [key, sec] of Object.entries(system.secondaryFields.intellectual)) {
             sec.parentField = system.secondaryFields.category.intellectual;
             switch (sec.modifier) {
-                case game.i18n.localize('abfalter.int'):
+                case 'int':
                     sec.modValue = stats.Intelligence.mod;
                     break;
-                case game.i18n.localize('abfalter.pow'):
+                case 'pow':
                     sec.modValue = stats.Power.mod;
                     break;
             }
@@ -1852,10 +1852,10 @@ export default class abfalterActor extends Actor {
         for (let [key, sec] of Object.entries(system.secondaryFields.vigor)) {
             sec.parentField = system.secondaryFields.category.vigor;
             switch (sec.modifier) {
-                case game.i18n.localize('abfalter.wp'):
+                case 'wp':
                     sec.modValue = stats.Willpower.mod;
                     break;
-                case game.i18n.localize('abfalter.str'):
+                case 'str':
                     sec.modValue = stats.Strength.mod;
                     break;
             }
@@ -1877,16 +1877,16 @@ export default class abfalterActor extends Actor {
 
             sec.parentField = system.secondaryFields.category.subterfuge;
             switch (sec.modifier) {
-                case game.i18n.localize('abfalter.agi'):
+                case 'agi':
                     sec.modValue = stats.Agility.mod;
                     break;
-                case game.i18n.localize('abfalter.dex'):
+                case 'dex':
                     sec.modValue = stats.Dexterity.mod;
                     break;  
-                case game.i18n.localize('abfalter.per'):
+                case 'per':
                     sec.modValue = stats.Perception.mod;
                     break;
-                case game.i18n.localize('abfalter.int'):
+                case 'int':
                     sec.modValue = stats.Intelligence.mod;
                     break;
             }
@@ -1924,16 +1924,16 @@ export default class abfalterActor extends Actor {
         for (let [key, sec] of Object.entries(system.secondaryFields.creative)) {
             sec.parentField = system.secondaryFields.category.creative;
             switch (sec.modifier) {
-                case game.i18n.localize('abfalter.agi'):
+                case 'agi':
                     sec.modValue = stats.Agility.mod;
                     break;
-                case game.i18n.localize('abfalter.dex'):
+                case 'dex':
                     sec.modValue = stats.Dexterity.mod;
                     break;  
-                case game.i18n.localize('abfalter.int'):
+                case 'int':
                     sec.modValue = stats.Intelligence.mod;
                     break;
-                case game.i18n.localize('abfalter.pow'):
+                case 'pow':
                     sec.modValue = stats.Power.mod;
                     break;
             }

@@ -56,6 +56,7 @@ export default class abfalterItemSheet extends ItemSheet {
         sheetData.shieldObjList = CONFIG.abfalter.shieldDropdown;
         sheetData.damageModObjList = CONFIG.abfalter.damageModDropdown;
         sheetData.damageTypeObjList = CONFIG.abfalter.damageTypeDropdown;
+        sheetData.wepDamageTypeObjList = CONFIG.abfalter.wepDamageTypeDropdown;
         sheetData.spellTypeObjList = CONFIG.abfalter.spellTypeDropdown;
         sheetData.spellProjObjList = CONFIG.abfalter.spellProjDropdown;
         sheetData.spellMaintTypeObjList = CONFIG.abfalter.spellMaintTypeDropdown;

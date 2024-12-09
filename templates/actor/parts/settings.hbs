@@ -478,7 +478,7 @@
                 {{#each classes as |class id|}}
                 <div class="class-item item normal-item" data-item-id="{{class._id}}">
                     <div>
-                        <input class="item-name inline-edit" data-field="name" type="text" value="{{class.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                        <input class="item-name inline-edit" data-field="name" type="text" value="{{class.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
                         <input class="inline-edit" data-field="system.main.levels" type="number" value="{{class.system.main.levels}}" />
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                     </div>
@@ -491,7 +491,7 @@
 
             <div>
                 <a class="item-control item-create" data-type="class"><i class="fas fa-plus"></i> {{localize "abfalter.settingsTab.addClass"}} </a>
-                <a class="toggleBoolean {{#if system.itemToggle.class}}armorpenalty{{/if}}" data-label="system.itemToggle.class" data-ability="{{system.itemToggle.class}}"><i class="{{#if system.itemToggle.class}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                <a class="toggleBoolean {{#if system.itemToggle.class}}armorpenalty{{/if}}" data-label="system.itemToggle.class" data-ability="{{system.itemToggle.class}}"><i class="{{#if system.itemToggle.class}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
         </div>
 

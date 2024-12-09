@@ -1,18 +1,18 @@
 ﻿<div class="tab background">
     <div class="e2">
         <div class="elan">
-            <h5> {{localize "abfalter.generalTab.elan"}} </h5>
+            <h5> {{localize "abfalter.elan"}} </h5>
             <div>
                 <span> {{localize "abfalter.name"}} </span>
-                <span> {{localize "abfalter.generalTab.title"}} </span>
-                <span> {{localize "abfalter.generalTab.elan"}} </span>
+                <span> {{localize "abfalter.title"}} </span>
+                <span> {{localize "abfalter.elan"}} </span>
             </div>
             <div class="{{#if system.itemToggle.elan}}item-list{{/if}}">
                 {{#each elans as |elan id|}}
                 <div class="elan-item item normal-item" data-item-id="{{elan._id}}">
                     {{#if system.expand}}
                     <div>
-                        <input class="item-name inline-edit" data-field="name" type="text" value="{{elan.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" />
+                        <input class="item-name inline-edit" data-field="name" type="text" value="{{elan.name}}" placeholder="{{localize "abfalter.newItem"}}" />
                         <input class="inline-edit" data-field="system.title" type="text" value="{{elan.system.title}}" />
                         <input class="inline-edit" data-field="system.level" type="number" value="{{elan.system.level}}" />
                         <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
@@ -24,13 +24,13 @@
                     <div>
                         <div>
                             {{#if system.upper}}
-                            <h6> {{localize "abfalter.generalTab.gainUpperElan"}} </h6>
+                            <h6> {{localize "abfalter.gainUpperElan"}} </h6>
                             <div style="display: grid;">
                                 <textarea class="inline-edit textarea-auto-resize" data-field="system.gainUpper" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gainUpper}}</textarea>
                                 <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gainUpper}}</div>
                             </div>
                             {{else}}
-                            <h6> {{localize "abfalter.generalTab.gainElan"}} </h6>
+                            <h6> {{localize "abfalter.gainElan"}} </h6>
                             <div style="display: grid;">
                                 <textarea class="inline-edit textarea-auto-resize" data-field="system.gain" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gain}}</textarea>
                                 <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gain}}</div>
@@ -38,7 +38,7 @@
                             {{/if}}
                         </div>
                         <div>
-                            <h6> {{localize "abfalter.generalTab.loseElan"}} </h6>
+                            <h6> {{localize "abfalter.loseElan"}} </h6>
                             <div style="display: grid;">
                                 <textarea class="inline-edit textarea-auto-resize" data-field="system.lose" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.lose}}</textarea>
                                 <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.lose}}</div>
@@ -57,8 +57,8 @@
                 {{/each}}
             </div>
             <div class="itemControls">
-                <a class="item-control item-create" data-type="elan"><i class="fas fa-plus"></i> {{localize "abfalter.generalTab.addElan"}} </a>
-                <a class="toggleBoolean {{#if system.itemToggle.elan}}armorpenalty{{/if}}" data-label="system.itemToggle.elan" data-ability="{{system.itemToggle.elan}}"><i class="{{#if system.itemToggle.elan}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                <a class="item-control item-create" data-type="elan"><i class="fas fa-plus"></i> {{localize "abfalter.addElan"}} </a>
+                <a class="toggleBoolean {{#if system.itemToggle.elan}}armorpenalty{{/if}}" data-label="system.itemToggle.elan" data-ability="{{system.itemToggle.elan}}"><i class="{{#if system.itemToggle.elan}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
         </div>
 
@@ -72,11 +72,11 @@
 
     <div class="e2">
         <div class="elan">
-            <h5> {{localize "abfalter.generalTab.elanGifts"}} </h5>
+            <h5> {{localize "abfalter.elanGifts"}} </h5>
             <div>
-                <span> {{localize "abfalter.generalTab.deity"}} </span>
-                <span> {{localize "abfalter.generalTab.giftName"}} </span>
-                <span> {{localize "abfalter.generalTab.elan"}} </span>
+                <span> {{localize "abfalter.deity"}} </span>
+                <span> {{localize "abfalter.giftName"}} </span>
+                <span> {{localize "abfalter.elan"}} </span>
             </div>
             <div class="{{#if system.itemToggle.elan}}item-list{{/if}}">
                 {{#each elans as |elan id|}}
@@ -443,7 +443,7 @@
                 <div class="prof-item item delete-item" data-item-id="{{proficiency._id}}">
                     {{#if system.toggleItem}}
                     <div>
-                        <label> <input class="prof-name inline-edit" data-field="name" type="text" value="{{proficiency.name}}" placeholder="{{localize "abfalter.sheet.newItem"}}" /> </label>
+                        <label> <input class="prof-name inline-edit" data-field="name" type="text" value="{{proficiency.name}}" placeholder="{{localize "abfalter.newItem"}}" /> </label>
                         <div class="csSelect">
                             <select class="inline-edit" name="system.type" data-field="system.type">
                                 {{selectOptions ../proficiencyObjList selected=system.type localize=true}}
@@ -463,7 +463,7 @@
             </div>
             <div>
                 <a class="item-control item-create" data-type="proficiency"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addProf"}} </a>
-                <a class="toggleBoolean {{#if system.itemToggle.proficiency}}armorpenalty{{/if}}" data-label="system.itemToggle.proficiency" data-ability="{{system.itemToggle.proficiency}}"><i class="{{#if system.itemToggle.proficiency}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                <a class="toggleBoolean {{#if system.itemToggle.proficiency}}armorpenalty{{/if}}" data-label="system.itemToggle.proficiency" data-ability="{{system.itemToggle.proficiency}}"><i class="{{#if system.itemToggle.proficiency}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
         </div>
     </div>

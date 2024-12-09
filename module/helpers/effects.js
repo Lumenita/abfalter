@@ -6,7 +6,7 @@ export function onManageActiveEffect(event, owner) {
     switch (a.dataset.action) {
         case "create":
             return owner.createEmbeddedDocuments('ActiveEffect', [{
-                name: game.i18n.localize('abfalter.sheet.newEff'),
+                name: game.i18n.localize('abfalter.newEff'),
                 icon: "icons/svg/aura.svg",
                 origin: owner.uuid,
                 'duration.rounds':
@@ -27,17 +27,17 @@ export function prepareActiveEffectCategories(effects) {
     const categories = {
         temporary: {
             type: 'temporary',
-            label: game.i18n.localize('abfalter.sheet.tempEff'),
+            label: game.i18n.localize('abfalter.tempEff'),
             effects: [],
         },
         passive: {
             type: 'passive',
-            label: game.i18n.localize('abfalter.sheet.passEff'),
+            label: game.i18n.localize('abfalter.passEff'),
             effects: [],
         },
         inactive: {
             type: 'inactive',
-            label: game.i18n.localize('abfalter.sheet.InEff'),
+            label: game.i18n.localize('abfalter.InEff'),
             effects: [],
         },
     };

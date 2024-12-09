@@ -2,7 +2,7 @@ export async function handleMigrations() {
     if (!game.user.isGM) {
         return
     }
-    //migrateWorld_1_4_2(); //force update on reload (testing purposes)
+    //migrateSecondaryLanguage(); //force update on reload (testing purposes)
     const currentVersion = game.settings.get("abfalter", "systemMigrationVersion");
     
     if (!currentVersion) {
@@ -17,24 +17,32 @@ export async function handleMigrations() {
         ui.notifications.error(warning, { permanent: true });
     }
 
-    //1.4.2 migration & reorganization of all data into data models
-    if (foundry.utils.isNewerVersion('1.4.2', currentVersion)) await migrateWorld_1_4_2();
+    // Define migration tasks
+    const migrations = [
+        { version: '1.4.2', migrate: migrateDataModels }, // Reorganize all data into data models
+        { version: '1.4.4', migrate: migrateSecondaryLanguage }   // Secondary Abilities language fix
+    ];
+
+    for (const { version, migrate } of migrations) {
+        if (foundry.utils.isNewerVersion(version, currentVersion)) {
+            console.log(`Starting migration for version ${version}`);
+            await migrate();
+        }
+    }
 
     return game.settings.set('abfalter', 'systemMigrationVersion', game.system.version);
 }
-
-export async function migrateWorld_1_4_2() {
+export async function migrateSecondaryLanguage() {
     for (let actor of game.actors.contents) {
-        const updateData = await migrateActorData(actor);
+        const updateData = await migrate144Data(actor);
         if (!foundry.utils.isEmpty(updateData)) {
             console.log(`Migrating Actor entity ${actor.name}`);
             await actor.update(updateData);
-            //await actor.updateEmbeddedDocuments("Item", updateData);
         }
     }
 
     for (let scene of game.scenes.contents) {
-        let sceneUpdate = migrateSceneData(scene)
+        let sceneUpdate = migrate144SceneData(scene)
         if (!foundry.utils / foundry.utils.isEmpty(sceneUpdate)) {
             console.log(`Migrating Scene ${scene.name}`);
             await scene.update(sceneUpdate);
@@ -54,7 +62,7 @@ export async function migrateWorld_1_4_2() {
             const documents = await pack.getDocuments();
     
             for (let document of documents) {
-                const updateData = await migrateActorData(document);
+                const updateData = await migrate144Data(document);
                 if (foundry.utils.isEmpty(updateData)) {
                     continue;
                 }
@@ -73,7 +81,212 @@ export async function migrateWorld_1_4_2() {
             const documents = await pack.getDocuments();
     
             for (let document of documents) {
-                const updateData = await migrateActorData(document);
+                const updateData = await migrate144Data(document);
+                if (foundry.utils.isEmpty(updateData)) {
+                    continue;
+                }
+                await document.update(migrate144SceneData);
+                console.log(`Migrated ${packType} entity ${document.name} in Compendium ${pack.collection}`);
+            }
+    
+            await pack.configure({ locked: wasLocked });    
+        }
+    }
+    console.log("Migration Complete for 1.4.4");
+}
+
+function migrate144SceneData(scene) {
+    const tokens = scene.tokens.map(token => {
+        const t = token.toJSON();
+
+        if (!t.actorLink) {
+            const actor = foundry.utils.duplicate(t.delta);
+            actor.type = t.actor?.type;
+            const update = migrate144Data(actor);
+            foundry.utils.mergeObject(t.delta, update);
+        }
+        return t;
+    });
+
+    return { tokens };
+}
+
+async function migrate144Data() {
+    let updateData = {};
+
+    updateData["system.secondaryFields.athletics.acrobatics.label"] = 'acrobatic';
+    updateData["system.secondaryFields.athletics.acrobatics.modifier"] = 'agi';
+    updateData["system.secondaryFields.athletics.athleticism.label"] = 'athleticism';
+    updateData["system.secondaryFields.athletics.athleticism.modifier"] = 'agi';
+    updateData["system.secondaryFields.athletics.climb.label"] = 'climb';
+    updateData["system.secondaryFields.athletics.climb.modifier"] = 'agi';
+    updateData["system.secondaryFields.athletics.jump.label"] = 'jump';
+    updateData["system.secondaryFields.athletics.jump.modifier"] = 'str';
+    updateData["system.secondaryFields.athletics.piloting.label"] = 'piloting';
+    updateData["system.secondaryFields.athletics.piloting.modifier"] = 'dex';
+    updateData["system.secondaryFields.athletics.ride.label"] = 'ride';
+    updateData["system.secondaryFields.athletics.ride.modifier"] = 'agi';
+    updateData["system.secondaryFields.athletics.swim.label"] = 'swim';
+    updateData["system.secondaryFields.athletics.swim.modifier"] = 'agi';
+
+    updateData["system.secondaryFields.social.etiquette.label"] = 'etiquette';
+    updateData["system.secondaryFields.social.etiquette.modifier"] = 'int';
+    updateData["system.secondaryFields.social.intimidate.label"] = 'intimidate';
+    updateData["system.secondaryFields.social.intimidate.modifier"] = 'wp';
+    updateData["system.secondaryFields.social.leadership.label"] = 'leadership';
+    updateData["system.secondaryFields.social.leadership.modifier"] = 'pow';
+    updateData["system.secondaryFields.social.persuasion.label"] = 'persuasion';
+    updateData["system.secondaryFields.social.persuasion.modifier"] = 'int';
+    updateData["system.secondaryFields.social.streetwise.label"] = 'streetwise';
+    updateData["system.secondaryFields.social.streetwise.modifier"] = 'int';
+    updateData["system.secondaryFields.social.style.label"] = 'style';
+    updateData["system.secondaryFields.social.style.modifier"] = 'pow';
+    updateData["system.secondaryFields.social.trading.label"] = 'trading';
+    updateData["system.secondaryFields.social.trading.modifier"] = 'int';
+
+    updateData["system.secondaryFields.perceptive.kidetection.label"] = 'kiDetection';
+    updateData["system.secondaryFields.perceptive.kidetection.modifier"] = 'per';
+    updateData["system.secondaryFields.perceptive.notice.label"] = 'notice';
+    updateData["system.secondaryFields.perceptive.notice.modifier"] = 'per';   
+    updateData["system.secondaryFields.perceptive.search.label"] = 'search';
+    updateData["system.secondaryFields.perceptive.search.modifier"] = 'per';
+    updateData["system.secondaryFields.perceptive.track.label"] = 'track';
+    updateData["system.secondaryFields.perceptive.track.modifier"] = 'per';
+
+    updateData["system.secondaryFields.intellectual.animals.label"] = 'animals';
+    updateData["system.secondaryFields.intellectual.animals.modifier"] = 'int';
+    updateData["system.secondaryFields.intellectual.appraisal.label"] = 'appraisal';
+    updateData["system.secondaryFields.intellectual.appraisal.modifier"] = 'int';  
+    updateData["system.secondaryFields.intellectual.architecture.label"] = 'architecture';
+    updateData["system.secondaryFields.intellectual.architecture.modifier"] = 'int';
+    updateData["system.secondaryFields.intellectual.herballore.label"] = 'herballore';
+    updateData["system.secondaryFields.intellectual.herballore.modifier"] = 'int';
+    updateData["system.secondaryFields.intellectual.history.label"] = 'history';
+    updateData["system.secondaryFields.intellectual.history.modifier"] = 'int';
+    updateData["system.secondaryFields.intellectual.law.label"] = 'law';
+    updateData["system.secondaryFields.intellectual.law.modifier"] = 'int';
+    updateData["system.secondaryFields.intellectual.magicappr.label"] = 'magicAppr';
+    updateData["system.secondaryFields.intellectual.magicappr.modifier"] = 'int';
+    updateData["system.secondaryFields.intellectual.medicine.label"] = 'medicine';
+    updateData["system.secondaryFields.intellectual.medicine.modifier"] = 'int';
+    updateData["system.secondaryFields.intellectual.memorize.label"] = 'memorize';
+    updateData["system.secondaryFields.intellectual.memorize.modifier"] = 'int';
+    updateData["system.secondaryFields.intellectual.navigation.label"] = 'navigation';
+    updateData["system.secondaryFields.intellectual.navigation.modifier"] = 'int';
+    updateData["system.secondaryFields.intellectual.occult.label"] = 'occult';
+    updateData["system.secondaryFields.intellectual.occult.modifier"] = 'int';
+    updateData["system.secondaryFields.intellectual.science.label"] = 'science';
+    updateData["system.secondaryFields.intellectual.science.modifier"] = 'int';
+    updateData["system.secondaryFields.intellectual.tactics.label"] = 'tactics';
+    updateData["system.secondaryFields.intellectual.tactics.modifier"] = 'int';
+    updateData["system.secondaryFields.intellectual.technomagic.label"] = 'technomagic';
+    updateData["system.secondaryFields.intellectual.technomagic.modifier"] = 'int';
+
+    updateData["system.secondaryFields.vigor.composure.label"] = 'composure';
+    updateData["system.secondaryFields.vigor.composure.modifier"] = 'wp';
+    updateData["system.secondaryFields.vigor.featsofstr.label"] = 'featsofstr';
+    updateData["system.secondaryFields.vigor.featsofstr.modifier"] = 'str';
+    updateData["system.secondaryFields.vigor.withstpain.label"] = 'withstpain';
+    updateData["system.secondaryFields.vigor.withstpain.modifier"] = 'wp';
+
+    updateData["system.secondaryFields.subterfuge.disguise.label"] = 'disguise';
+    updateData["system.secondaryFields.subterfuge.disguise.modifier"] = 'dex';
+    updateData["system.secondaryFields.subterfuge.hide.label"] = 'hide';
+    updateData["system.secondaryFields.subterfuge.hide.modifier"] = 'per';
+    updateData["system.secondaryFields.subterfuge.kiconceal.label"] = 'kiconceal';
+    updateData["system.secondaryFields.subterfuge.kiconceal.modifier"] = 'per';
+    updateData["system.secondaryFields.subterfuge.lockpicking.label"] = 'lockpicking';
+    updateData["system.secondaryFields.subterfuge.lockpicking.modifier"] = 'dex';
+    updateData["system.secondaryFields.subterfuge.poisons.label"] = 'poisons';
+    updateData["system.secondaryFields.subterfuge.poisons.modifier"] = 'int';
+    updateData["system.secondaryFields.subterfuge.stealth.label"] = 'stealth';
+    updateData["system.secondaryFields.subterfuge.stealth.modifier"] = 'agi';
+    updateData["system.secondaryFields.subterfuge.theft.label"] = 'theft';
+    updateData["system.secondaryFields.subterfuge.theft.modifier"] = 'dex';
+    updateData["system.secondaryFields.subterfuge.traplore.label"] = 'traplore';
+    updateData["system.secondaryFields.subterfuge.traplore.modifier"] = 'dex';
+
+    updateData["system.secondaryFields.creative.alchemy.label"] = 'alchemy';
+    updateData["system.secondaryFields.creative.alchemy.modifier"] = 'int';
+    updateData["system.secondaryFields.creative.animism.label"] = 'animism';
+    updateData["system.secondaryFields.creative.animism.modifier"] = 'pow';
+    updateData["system.secondaryFields.creative.art.label"] = 'art';
+    updateData["system.secondaryFields.creative.art.modifier"] = 'pow';
+    updateData["system.secondaryFields.creative.cooking.label"] = 'cooking';
+    updateData["system.secondaryFields.creative.cooking.modifier"] = 'pow';
+    updateData["system.secondaryFields.creative.dance.label"] = 'dance';
+    updateData["system.secondaryFields.creative.dance.modifier"] = 'agi';
+    updateData["system.secondaryFields.creative.forging.label"] = 'forging';
+    updateData["system.secondaryFields.creative.forging.modifier"] = 'dex';
+    updateData["system.secondaryFields.creative.jewelry.label"] = 'jewelry';
+    updateData["system.secondaryFields.creative.jewelry.modifier"] = 'dex';
+    updateData["system.secondaryFields.creative.toymaking.label"] = 'toymaking';
+    updateData["system.secondaryFields.creative.toymaking.modifier"] = 'pow';
+    updateData["system.secondaryFields.creative.music.label"] = 'music';
+    updateData["system.secondaryFields.creative.music.modifier"] = 'pow';
+    updateData["system.secondaryFields.creative.runes.label"] = 'runes';
+    updateData["system.secondaryFields.creative.runes.modifier"] = 'dex';
+    updateData["system.secondaryFields.creative.ritualcalig.label"] = 'ritualcalig';
+    updateData["system.secondaryFields.creative.ritualcalig.modifier"] = 'dex';
+    updateData["system.secondaryFields.creative.slofhand.label"] = 'slofhand';
+    updateData["system.secondaryFields.creative.slofhand.modifier"] = 'dex';
+    updateData["system.secondaryFields.creative.tailoring.label"] = 'tailoring';
+    updateData["system.secondaryFields.creative.tailoring.modifier"] = 'dex';
+
+    return updateData;
+}
+
+export async function migrateDataModels() {
+    for (let actor of game.actors.contents) {
+        const updateData = await migrate142Data(actor);
+        if (!foundry.utils.isEmpty(updateData)) {
+            console.log(`Migrating Actor entity ${actor.name}`);
+            await actor.update(updateData);
+            //await actor.updateEmbeddedDocuments("Item", updateData);
+        }
+    }
+
+    for (let scene of game.scenes.contents) {
+        let sceneUpdate = migrate142SceneData(scene)
+        if (!foundry.utils / foundry.utils.isEmpty(sceneUpdate)) {
+            console.log(`Migrating Scene ${scene.name}`);
+            await scene.update(sceneUpdate);
+        }
+    }
+    
+    for (let pack of game.packs) {
+        const packType = pack.metadata.type;
+        if (!["Actor", "Scene"].includes(packType)) {
+            continue;
+        }
+        if (["Actor"].includes(packType)) {
+            const wasLocked = pack.locked;
+            await pack.configure({ locked: false });
+    
+            await pack.migrate();
+            const documents = await pack.getDocuments();
+    
+            for (let document of documents) {
+                const updateData = await migrate142Data(document);
+                if (foundry.utils.isEmpty(updateData)) {
+                    continue;
+                }
+                await document.update(updateData);
+                console.log(`Migrated ${packType} entity ${document.name} in Compendium ${pack.collection}`);
+            }
+    
+            await pack.configure({ locked: wasLocked });
+        }
+
+        if (["Scene"].includes(packType)) {
+            const wasLocked = pack.locked;
+            await pack.configure({ locked: false });
+    
+            await pack.migrate();
+            const documents = await pack.getDocuments();
+    
+            for (let document of documents) {
+                const updateData = await migrate142Data(document);
                 if (foundry.utils.isEmpty(updateData)) {
                     continue;
                 }
@@ -84,18 +297,18 @@ export async function migrateWorld_1_4_2() {
             await pack.configure({ locked: wasLocked });
         }
     }
-    console.log("Migration Complete");
-    game.settings.set('abfalter', 'systemMigrationVersion', game.system.version);
+    console.log("Migration Complete for 1.4.2");
+    game.settings.set('abfalter', 'systemMigrationVersion', '1.4.2');
 }
 
-function migrateSceneData(scene) {
+function migrate142SceneData(scene) {
     const tokens = scene.tokens.map(token => {
         const t = token.toJSON();
 
         if (!t.actorLink) {
             const actor = foundry.utils.duplicate(t.delta);
             actor.type = t.actor?.type;
-            const update = migrateActorData(actor);
+            const update = migrate142Data(actor);
             foundry.utils.mergeObject(t.delta, update);
         }
         return t;
@@ -104,7 +317,7 @@ function migrateSceneData(scene) {
     return { tokens };
 }
 
-async function migrateActorData(actor) {
+async function migrate142Data(actor) {
     let updateData = {};
 
     //Save all old values to new paths
@@ -386,13 +599,13 @@ async function migrateActorData(actor) {
     updateData["system.secondaryFields.vigor.composure.fav"] = actor.system.secondary.composure.fav;
     updateData["system.secondaryFields.vigor.composure.status"] = actor.system.secondary.composure.status;
 
-    updateData["system.secondaryFields.vigor.technomagic.base"] = actor.system.secondary.technomagic.base;
-    updateData["system.secondaryFields.vigor.technomagic.spec"] = actor.system.secondary.technomagic.spec;
-    updateData["system.secondaryFields.vigor.technomagic.temp"] = actor.system.secondary.technomagic.temp;
-    updateData["system.secondaryFields.vigor.technomagic.nat"] = actor.system.secondary.technomagic.nat;
-    updateData["system.secondaryFields.vigor.technomagic.natural"] = actor.system.secondary.technomagic.natural;
-    updateData["system.secondaryFields.vigor.technomagic.fav"] = actor.system.secondary.technomagic.fav;
-    updateData["system.secondaryFields.vigor.technomagic.status"] = actor.system.secondary.technomagic.status;
+    updateData["system.secondaryFields.vigor.featsofstr.base"] = actor.system.secondary.featsofstr.base;
+    updateData["system.secondaryFields.vigor.featsofstr.spec"] = actor.system.secondary.featsofstr.spec;
+    updateData["system.secondaryFields.vigor.featsofstr.temp"] = actor.system.secondary.featsofstr.temp;
+    updateData["system.secondaryFields.vigor.featsofstr.nat"] = actor.system.secondary.featsofstr.nat;
+    updateData["system.secondaryFields.vigor.featsofstr.natural"] = actor.system.secondary.featsofstr.natural;
+    updateData["system.secondaryFields.vigor.featsofstr.fav"] = actor.system.secondary.featsofstr.fav;
+    updateData["system.secondaryFields.vigor.featsofstr.status"] = actor.system.secondary.featsofstr.status;
 
     updateData["system.secondaryFields.vigor.withstpain.base"] = actor.system.secondary.withstpain.base;
     updateData["system.secondaryFields.vigor.withstpain.spec"] = actor.system.secondary.withstpain.spec;
@@ -638,6 +851,4 @@ async function migrateActorData(actor) {
     */
 
 }
-
-
 

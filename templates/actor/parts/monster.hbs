@@ -3,7 +3,7 @@
         <div class="monsterChar">
             <h5>{{localize "abfalter.monsterPowers.monstCharacteristic"}}</h5>
             <div>
-                <span>{{localize "abfalter.generalTab.atr"}}</span>
+                <span>{{localize "abfalter.atr"}}</span>
                 <span>{{localize "abfalter.final"}}</span>
                 <span>{{localize "abfalter.base"}}</span>
                 <span>{{localize "abfalter.monsterPowers.additional"}}</span>
@@ -133,7 +133,7 @@
             </div>
             <div>
                 <a class="item-control item-create" data-type="monsterPower"><i class="fas fa-plus"></i> {{localize "abfalter.monsterPowers.addMonsterPower"}} </a>
-                <a class="toggleBoolean {{#if system.itemToggle.monsterPowers}}armorpenalty{{/if}}" data-label="system.itemToggle.monsterPowers" data-ability="{{system.itemToggle.monsterPowers}}"><i class="{{#if system.itemToggle.monsterPowers}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.sheet.modify"}} </a>
+                <a class="toggleBoolean {{#if system.itemToggle.monsterPowers}}armorpenalty{{/if}}" data-label="system.itemToggle.monsterPowers" data-ability="{{system.itemToggle.monsterPowers}}"><i class="{{#if system.itemToggle.monsterPowers}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
         </div>
     </div>
@@ -155,7 +155,7 @@
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>
-                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
                             <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
                             <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
@@ -205,7 +205,7 @@
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>
-                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
                             <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
                             <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
@@ -255,7 +255,7 @@
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>
-                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
                             <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
                             <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
@@ -305,7 +305,7 @@
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>
-                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
                             <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
                             <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
@@ -357,7 +357,7 @@
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>
-                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
                             <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
                             <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
@@ -407,7 +407,7 @@
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>
-                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
                             <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
                             <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
@@ -457,7 +457,7 @@
                     <div class="monsterPower-item item normal-item" data-item-id="{{monsterPower._id}}">
                         {{#if system.expand}}
                         <div>
-                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.sheet.nameItem"}}" />
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{monsterPower.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
                             <input class="inline-edit" data-field="system.cost" type="number" value="{{monsterPower.system.cost}}" />
                             <input class="inline-edit" data-field="system.gnosis" type="number" value="{{monsterPower.system.gnosis}}" />
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
