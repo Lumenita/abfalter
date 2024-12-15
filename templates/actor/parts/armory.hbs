@@ -269,23 +269,29 @@
                     
                     {{#ifEquals system.info.type "melee"}}
                     <div class="weaponSubHeaderContainer">
-                        {{#if system.melee.trapping}}
-                        <div class="weaponSubTrap">
-                            <span> {{localize "abfalter.trapRoll"}}: {{localize (concat "abfalter." system.melee.trappingTypeF)}} / {{localize (concat "abfalter." system.melee.trappingTypeS)}} </span>
-                            <button type="button" class="weaponRoll" data-type="{{_id}}" data-label="trap" data-value="trap">
-                                {{localize "abfalter.trapping"}}
-                            </button>
-                        </div>  
-                        {{/if}}
-                        {{#if system.melee.throwable}}
-                        <div class="weaponSubThrow">
-                            <span> {{localize "abfalter.range"}}: {{system.melee.throwRange}} {{localize (concat "abfalter." (getDistanceType system.melee.throwDistanceType))}} | </span>
-                            <span> {{localize "abfalter.quantity"}} </span>
-                            <a class="wepThrowQ" data-value="-1"><i class="fas fa-minus"> </i></a>
-                            <span> {{system.melee.throwQuantity}} </span>
-                            <a class="wepThrowQ" data-value="1"><i class="fas fa-plus"></i> </a>
+                        <div class="wepSubLeft">
+                            {{#if system.melee.throwable}}
+                            <div class="weaponSubThrow">
+                                <a class="wepThrowQ" data-value="-1"><i class="fas fa-minus"> </i></a>
+                                <span> {{system.melee.throwQuantity}} </span>
+                                <a class="wepThrowQ" data-value="1"><i class="fas fa-plus"></i> </a>
+                                <span> {{localize "abfalter.quantity"}} |</span>
+                                <span> {{localize "abfalter.range"}}: {{system.melee.throwRange}} {{localize (concat "abfalter." (getDistanceType system.melee.throwDistanceType))}}</span>
+
+                            </div>
+                            {{/if}}
                         </div>
-                        {{/if}}
+
+                        <div class="wepSubRight">
+                            {{#if system.melee.trapping}}
+                            <div class="weaponSubTrap">
+                                <span> {{localize "abfalter.trapRoll"}}: {{localize (concat "abfalter." system.melee.trappingTypeF)}} / {{localize (concat "abfalter." system.melee.trappingTypeS)}} </span>
+                                <button type="button" class="weaponRoll" data-type="{{_id}}" data-label="trap" data-value="trap">
+                                    {{localize "abfalter.trapping"}}
+                                </button>
+                            </div>  
+                            {{/if}}
+                        </div>
                     </div>
                     {{/ifEquals}}
 

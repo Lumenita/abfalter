@@ -529,6 +529,9 @@ export const abfalter = {
     activeActionMod: "abfalter.activeActionMod",
     directedAttackPrompt: "abfalter.directedAttackPrompt",
     trapRoll: "abfalter.trapRoll",
+    fortitudeShort: "abfalter.fortitudeShort",
+    breakageShort: "abfalter.breakageShort",
+    targetAim: "abfalter.targetAim",
 };
 abfalter.kiTab = {
     kiAbilities: "abfalter.kiTab.kiAbilities",

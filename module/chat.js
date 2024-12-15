@@ -1,9 +1,13 @@
 import { openRollFunction } from "./diceroller.js";
+import { wepOpenRollFunction } from "./diceroller.js";
 import { fumbleRollFunction } from "./diceroller.js";
 
 export function addChatListeners(html, _msg) {
     html.find('button.secOpenRoll').click(ev => {
         openRollFunction(_msg.message);
+    });
+    html.find('button.wepOpenRoll').click(ev => {
+        wepOpenRollFunction(_msg.message);
     });
 
     html.find('button.secFumbleRoll').click(ev => {

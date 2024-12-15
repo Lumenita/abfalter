@@ -262,20 +262,16 @@
 
             {{#ifEquals system.info.type "ranged"}}
             <h6> specific ranged {{ localize "abfalter.details" }} </h6>
-            <span> THIS IS A WIP AS OF 9/28/24 WHICH WILL BE COMPLETED AT A LATER DATE.</span>
-            <span> I PUSHED THE WEAPON UPDATE TO GET FEEDBACK ON THE MELEE PART AND</span>
-            <span> I WANT TO IMPLEMENT AN AMMUNITION SYSTEM, WHICH TAKES TIME.</span>
-            <span> THEREFORE, YES ITS SUPPOSED TO BE EMPTY HERE.</span>
-            <span> It is now 12/3/24, and this is my next goal to finish</span>
+            <span> WIP 12/15/24 next update will be this</span>
             {{/ifEquals}}
 
 
 
             {{#ifEquals system.info.type "shield"}}
             <h6> specific shield {{ localize "abfalter.details" }} </h6> 
-            <span> THIS IS A WIP AS OF 9/28/24 WHICH WILL BE COMPLETED AT A LATER DATE.</span>
+            <span> WIP 12/15/24 next update will be this</span>
             <span> The Shield is Functional, but its probably missing stuff.</span> 
-            <span> It is now 12/3/24, and this is my next goal to finish</span>
+            <span> It is now 12/15/24, and this is my next goal to finish</span>
 
             <div class="csSelect weaponContent">
                 <label>
@@ -475,24 +471,24 @@
                         </div>
 
                         <div> 
-                            <span class="{{#if this.ignorePrecision}}hidden{{/if}}">{{localize "abfalter.yesPrecision"}} |</span>
-                            <span class="{{#if this.ignoreVorpal}}hidden{{/if}}">{{localize "abfalter.vorpal"}} |</span>
-                            <span class="{{#if this.ignoreThrown}}hidden{{/if}}">{{localize "abfalter.throwable"}} |</span>
-                            <span class="{{#if this.ignoreThrown}}hidden{{/if}}">
+                            <span class="{{#if this.parentPrecision}}{{#if this.ignorePrecision}}hidden{{/if}}{{else}}hidden{{/if}}">{{localize "abfalter.yesPrecision"}} |</span>
+                            <span class="{{#if this.parentVorpal}}{{#if this.ignoreVorpal}}hidden{{/if}}{{else}}hidden{{/if}}">{{localize "abfalter.vorpal"}} |</span>
+                            <span class="{{#if this.parentThrowable}}{{#if this.ignoreThrown}}hidden{{/if}}{{else}}hidden{{/if}}">{{localize "abfalter.throwable"}} |</span>
+                            <span class="{{#if this.parentThrowable}}{{#if this.ignoreThrown}}hidden{{/if}}{{else}}hidden{{/if}}">
                                 {{#if this.fired}}
                                 <span> {{localize "abfalter.fired"}} |</span>
                                 {{else}}
                                 <span> {{localize "abfalter.thrown"}} |</span>
                                 {{/if}}
                             </span>
-                            <span class="{{#if this.ignoreThrown}}hidden{{/if}}">
+                            <span class="{{#if this.parentThrowable}}{{#if this.ignoreThrown}}hidden{{/if}}{{else}}hidden{{/if}}">
                                 {{#if this.quantityConsumed}}
                                 <span> {{localize "abfalter.infiniteQuantity"}} |</span>
                                 {{else}}
                                 <span> {{localize "abfalter.ammoPerAtk"}}: {{this.consumedValue}} |</span>
                                 {{/if}}
                             </span>
-                            <span class="{{#if this.ignoreTrapping}}hidden{{/if}}">
+                            <span class="{{#if this.parentTrapping}}{{#if this.ignoreTrapping}}hidden{{/if}}{{else}}hidden{{/if}}">
                                 {{#if this.trappingType}}
                                 <span> {{localize "abfalter.trapValueOf"}}: {{this.trappingValue}} </span>
                                 {{else}}

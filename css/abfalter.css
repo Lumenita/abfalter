@@ -3829,11 +3829,19 @@ h6 {
     border: 1px solid var(--boxColor);
 }
 .weapon-item .weaponSubHeaderContainer {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
+    display: flex;
     width: 100%;
     padding: 5px 0 0 0;
+}
+.wepSubLeft {
+    display: flex;
+    justify-content: flex-start;
+    width: 50%;
+}
+.wepSubRight {
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
 }
 .weaponSubTrap {
     display: flex;
@@ -3851,16 +3859,15 @@ h6 {
     display: flex;
     align-items: center;
     white-space: nowrap;
-    justify-self: end;
 }
 .weaponSubThrow > span:nth-of-type(2) {
-    padding: 0 5px 0 3px;
+    padding: 0 3px 0 5px;
 }
 .weaponSubThrow > a {
     font-size: 13px;
 }
-.weaponSubThrow > span:nth-of-type(3) {
-    padding: 0 2px 0 2px;
+.weaponSubThrow > span:nth-of-type(1) {
+    padding: 0 5px;
 }
 /* #endregion */
 
@@ -5966,7 +5973,7 @@ h6 {
     width: 5%;
 }
 /* #endregion */
-/* #region Weapon Attack Prompt */
+/* #region Weapon Attack Prompt & Chat Card */
 .wepAtkDiceRoll {
     padding: 0 3%;
 }
@@ -5988,5 +5995,64 @@ h6 {
 }
 .wepAtkDiceRoll > label > select {
     width: 45%;
+}
+
+.weaponChatRollMsg > div:first-of-type {
+    display: grid;
+    font-size: 23px;
+    justify-items: center;
+}
+.weaponChatRollMsg > div:first-of-type > span:nth-of-type(2) {
+    text-decoration: underline;
+    font-style: italic;
+    font-size: 15px;
+}
+.chatAtkRoll {
+    font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+}
+.chatAtkRoll > span:nth-of-type(1) {
+    padding-left: 7%;
+    max-width: 75%;
+}
+.chatAtkRoll > span:nth-of-type(2) {
+    padding-right: 7%;
+    align-self: center;
+}
+.weaponChatRollMsg > div:nth-last-of-type(2) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+
+
+.atkCustomTitleContainer {
+  position: relative;
+}
+.atkCustomTitle {
+  visibility: hidden;
+  opacity: 0;
+  background-color: #333;
+  color: #fff; 
+  text-align: center;
+  border-radius: 4px;
+  padding: 5px;
+  position: absolute;
+  top: 100%; /* Position it below the container */
+  z-index: 10;
+  left: 50%;
+  width: 200px;
+  transform: translateX(-50%);
+  transition: opacity 0.2s ease-in-out;
+  font-size: 14px;
+  pointer-events: none;
+}
+.atkCustomTitleContainer:hover .atkCustomTitle {
+  visibility: visible;
+  opacity: 1;
 }
 /* #endregion */

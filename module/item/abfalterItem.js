@@ -219,7 +219,6 @@ export default class abfalterItem extends Item {
                 this.system.attacks[i].finalDamage = this.system.attacks[i].damage + this.system.melee.baseDmg;
             }
         }
-
         /*
         switch (this.system.shield) {
             case "none":

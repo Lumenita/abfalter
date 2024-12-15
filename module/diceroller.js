@@ -149,7 +149,6 @@ async function abilityRoll(html, actorData, finalValue, label) {
         roll: rollResult.rolledDice, total: rollResult._total, doubles: rollResult.doubles, openRange: rollResult.openRange, label: label, fumbleLevel: rollResult.fumbleLevel,
         fumble: rollResult.fumble, explode: rollResult.explode, result: rollResult.result, color: rollResult.color
     };
-    console.log(rollData);
     const template = "systems/abfalter/templates/dialogues/abilityRoll.hbs"
     const content = await renderTemplate(template, { rollData: rollData, label: label, actor: actorData });
     const chatData = {
@@ -231,7 +230,7 @@ async function rollCombatWeapon(html, actorData, finalValue, label, complex) {
 }
 
 export async function openRollFunction(msg) {
-    let actorData = msg.flags.actorData;
+    let actor = msg.flags.actor;
     let num = msg.flags.num;
     let oldData = msg.flags.rollData[num];
     let baseDice = "1d100";
@@ -243,7 +242,6 @@ export async function openRollFunction(msg) {
     rollResult.color = "normalRoll";
     let isDouble = rollResult.rolledDice % 11 === 0 && rollResult.rolledDice <= 88;
     if (rollResult.rolledDice > oldData.roll) {
-
         if (oldData.doubles === true) {
             if (isDouble === true) {
                 rollResult.color = "openRoll";
@@ -261,7 +259,6 @@ export async function openRollFunction(msg) {
     } else {
         rollResult.color = "normalRoll";
     }
-
     msg.flags.rollData[num] = {
         roll: oldData.rolledDice, total: oldData.total, doubles: null, openRange: null, label: oldData.label,
         explode: false, result: oldData.result, color: oldData.color
@@ -273,8 +270,16 @@ export async function openRollFunction(msg) {
     };
 
     const rollData = msg.flags.rollData;
-    const template = "systems/abfalter/templates/dialogues/abilityRoll.hbs"
-    const content = await renderTemplate(template, { rollData: msg.flags.rollData, actor: actorData });
+    let template;
+    switch (msg.flags.type) {
+        case "weapon":
+            template = "systems/abfalter/templates/dialogues/diceRolls/weaponRoll.hbs";
+            break;
+        default:
+            template = "systems/abfalter/templates/dialogues/abilityRoll.hbs";
+            break;
+    }
+    const content = await renderTemplate(template, { rollData: msg.flags.rollData, actor: actor });
     game.messages.get(msg._id).update({
         content: content,
         flags: { rollData, num}
@@ -377,14 +382,26 @@ export async function openMeleeWeaponAtkDialogue(actor, label, wepId) {
     let confirmed = false;
     const weapon = actor.items.get(wepId);
     if (event.shiftKey) {
-        console.log('shift key held, skipping dialog.');
-        return; //TO DO: Implement a way to skip the dialog
+        console.log('shift key held, skipping attack dialog.');
+        const basicAttackDetails = {
+            label: game.i18n.localize("abfalter.attack"),
+            name: "",
+            base: weapon.system.derived.baseAtk,
+            value: weapon.system.derived.baseAtk,
+            formula: `${weapon.system.derived.baseAtk}(${game.i18n.localize("abfalter.value")})`,
+            dmg: weapon.system.melee.baseDmg,
+            dmgType: weapon.system.primDmgT,
+            atPen: weapon.system.melee.finalATPen,
+            target: game.i18n.localize("abfalter.none"),
+        };  
+        weaponRoll(actor, weapon, basicAttackDetails);
+        return;
     }
     const attacks = weapon.system.attacks;
     if (attacks.length === 0) {
-        console.log("No Attacks Found");
+        console.log("No Attacks Found, using default attack");
         openModifierDialogue(actor, weapon.system.derived.baseAtk, "Attack", "combatRoll");
-        return; //TO DO: Implement default values
+        return;
     }
     const template = "systems/abfalter/templates/dialogues/weaponPrompts/meleeAtk.hbs";
 
@@ -410,12 +427,9 @@ export async function openMeleeWeaponAtkDialogue(actor, label, wepId) {
             const modifierInput = html.find('#modifierMod');
             const fatigueDropdown = html.find('#fatigueDropdown');
             const atkDmgTypeDropdown = html.find('#atkDmgTypeDropdown');
-
             const directedAtkDropdown = html.find('#directedAtkDropdown');
-            
             const fatigueValue = actor.system.fatigue.value;
             const maxFatigue = actor.system.kiAbility.kiUseOfEne.status ? 5 : 2;
-            let isPrecise = weapon.system.info.precision && !attacks[usedIndex].ignorePrecision;
             const directedAtk = [
                 {tag: 'none', name: game.i18n.localize('abfalter.none'), penalty: 0},
                 {tag: 'head', name: game.i18n.localize('abfalter.head'), penalty: -60},
@@ -445,10 +459,10 @@ export async function openMeleeWeaponAtkDialogue(actor, label, wepId) {
                 ELE: game.i18n.localize('abfalter.armoryTab.ele'),
                 ENE: game.i18n.localize('abfalter.armoryTab.ene')
             };
-            let isVorpal = weapon.system.info.vorpal && !attacks[usedIndex].ignoreVorpal;
             const vorpalLocation = weapon.system.info.vorpalLocation;
             const vorpalModifier = weapon.system.info.vorpalMod;
-
+            let isPrecise = weapon.system.info.precision && !attacks[usedIndex].ignorePrecision;
+            let isVorpal = weapon.system.info.vorpal && !attacks[usedIndex].ignoreVorpal;
             let wepValue = 0;
 
             attacks.forEach((attack, index) => {
@@ -552,10 +566,6 @@ export async function openMeleeWeaponAtkDialogue(actor, label, wepId) {
                 const damageNum = html.find('#damageNum');
                 const atPenNum = html.find('#atPenNum');
                 
-                const isThrowing = html.find('#isThrowing');
-                const infiniteAmmo = html.find('#infiniteAmmo');
-                const isTrapping = html.find('#isTrapping');
-              
                 isPrecise = weapon.system.info.precision && !attacks[usedIndex].ignorePrecision;
                 isVorpal = weapon.system.info.vorpal && !attacks[usedIndex].ignoreVorpal;
                 populateDirectedAtkDropdown(); //Repopulate Dropdown in-case precision/vorpal rule changed.
@@ -569,10 +579,6 @@ export async function openMeleeWeaponAtkDialogue(actor, label, wepId) {
                 damageNum.text(selectedAttack.finalDamage);  // Update dmg span
                 atPenNum.text(selectedAttack.finalAtPen);  // Update At pen span
 
-                isThrowing.bool(weapon.system.melee.throwable && !selectedAttack.ignoreThrown);  // Update thoriwng bool
-                infiniteAmmo.bool(selectedAttack.quantityConsumed);  // Update ammo bool
-                isTrapping.bool(weapon.system.melee.trapping && !selectedAttack.ignoreTrapping);  // Update trapping bool
-
                 wepValue = selectedAttack.finalAttack;
                 updateFinalValue();
             });
@@ -585,8 +591,8 @@ export async function openMeleeWeaponAtkDialogue(actor, label, wepId) {
                 const selectedPenalty = parseInt(selectedOption.data('penalty'), 10);   
                 fatigueUsed = fatigueValue;
             
-                finalValue = wepValue + selectedModifier + (fatigueValue * 15) + modifierValue + selectedPenalty;
-
+                finalValue = wepValue + (fatigueValue * 15) + modifierValue + selectedPenalty + selectedModifier;
+                finalFormula = `${wepValue}(Value) + ${fatigueValue * 15}(Fatigue) + ${modifierValue}(Mod) + ${selectedPenalty}(Aim) + ${selectedModifier}(Action)`;
                 const rollButton = html.closest('.dialog').find('.dialog-button:first');
                 rollButton.text(`${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`);
             }
@@ -603,14 +609,284 @@ export async function openMeleeWeaponAtkDialogue(actor, label, wepId) {
             if (confirmed) {
                 actor.update({ "system.fatigue.value": Math.floor(actor.system.fatigue.value - fatigueUsed) });
                 weapon.update({ 'system.info.lastWepUsed': usedIndex, 'system.melee.throwQuantity': Math.floor(weapon.system.melee.throwQuantity - ammoUsed) });
-                console.log('finished');
-                //abilityRoll(html, actor, finalValue, "Attack");
+                const attackDetails = {
+                    label: game.i18n.localize("abfalter.attack"),
+                    name: attacks[usedIndex].name,
+                    base: weapon.system.derived.baseAtk,
+                    value: finalValue,
+                    formula: finalFormula,
+                    dmg: parseInt(html.find('#damageNum').text(), 10),
+                    dmgType: html.find('#atkDmgTypeDropdown').val(),
+                    atPen: parseInt(html.find('#atPenNum').text(), 10),
+                    target: html.find('#directedAtkDropdown').val(),
+                };  
+                weaponRoll(actor, weapon, attackDetails);
+                console.log('Attack Handle Finished');
             }
         }
     }).render(true);
 }
 
+async function weaponRoll(actor, weapon, attackDetails) {
+    let baseDice = "1d100";
+    let rollFormula = `${baseDice} + ${attackDetails.value}`;
+    const rollResult = await new Roll(rollFormula, actor).roll();
+    rollResult.rolledDice = rollResult.total - attackDetails.value;
+    attackDetails.formula = `(${rollResult.rolledDice}) + ${attackDetails.formula}`;
+    attackDetails.wepName = weapon.name;
+
+    let fumbleRange = weapon.system.derived.baseFumbleRange;  
+    if (attackDetails.base > 199 && fumbleRange > 1) {
+        fumbleRange -= 1;
+    }
+    rollResult.doubles = actor.system.rollRange.doubles;
+    rollResult.color = "";
+    rollResult.fumbleLevel = 0;
+    rollResult.fumble = false;
+    rollResult.explode = false;
+    rollResult.openRange = weapon.system.derived.baseOpenRollRange;
+
+    if (rollResult.rolledDice <= fumbleRange) {
+        rollResult.color = "fumbleRoll";
+        rollResult.fumble = true;
+        while (fumbleRange > rollResult.rolledDice) {
+            rollResult.fumbleLevel += 15;
+            fumbleRange--;
+        }
+    } else if (rollResult.rolledDice >= rollResult.openRange) {
+        rollResult.color = "openRoll";
+        rollResult.explode = true;
+    } else {
+        rollResult.color = "normalRoll";
+    }
+    if (rollResult.doubles === true) {
+        if (rollResult.rolledDice % 11 === 0 && rollResult.rolledDice <= 88) {
+            rollResult.color = "openRoll";
+            rollResult.explode = true;
+        }
+    }
+
+    let num = 0;
+    let type = "weapon";
+    const rollData = [];
+    rollData[0] = {
+        roll: rollResult.rolledDice, total: rollResult._total, doubles: rollResult.doubles, openRange: rollResult.openRange, fumbleLevel: rollResult.fumbleLevel,
+        fumble: rollResult.fumble, explode: rollResult.explode, color: rollResult.color, formula: attackDetails.formula, label: `${attackDetails.name} ${attackDetails.label}`
+    };
+
+    const template = "systems/abfalter/templates/dialogues/diceRolls/weaponRoll.hbs"
+    const content = await renderTemplate(template, { rollData: rollData, actor: actor, attackDetails: attackDetails });
+    const chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({ actor: actor }),
+        sound: CONFIG.sounds.dice,
+        content: content,
+        rolls: [rollResult],
+        flags: { attackDetails, rollData, actor, num, type }
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+    ChatMessage.create(chatData);
+}
+
+export async function wepOpenRollFunction(msg) {
+    let actor = msg.flags.actor;
+    let num = msg.flags.num;
+    let oldData = msg.flags.rollData[msg.flags.num];
+    
+    let baseDice = "1d100";
+    let rollFormula = `${baseDice} + ${oldData.total}`;
+    let rollResult = await new Roll(rollFormula).roll();
+    rollResult.rolledDice = rollResult.total - oldData.total;
+    let formula = `(${rollResult.rolledDice}) + ${oldData.total}(Previous Roll)`;
+    rollResult.rolledDice = rollResult.total - oldData.total;
+    rollResult.openRange = oldData.openRange;
+    rollResult.color = "normalRoll";
+    let isDouble = rollResult.rolledDice % 11 === 0 && rollResult.rolledDice <= 88;
+    if (rollResult.rolledDice > oldData.roll) {
+        if (oldData.doubles === true) {
+            if (isDouble === true) {
+                rollResult.color = "openRoll";
+                rollResult.explode = true;
+            } else if (rollResult.rolledDice >= rollResult.openRange) {
+                rollResult.color = "openRoll";
+                rollResult.explode = true;
+            }
+        } else {
+            if (rollResult.rolledDice >= rollResult.openRange) {
+                rollResult.color = "openRoll";
+                rollResult.explode = true;
+            }
+        }
+    } else {
+        rollResult.color = "normalRoll";
+    }
+    msg.flags.rollData[num].doubles = null;
+    msg.flags.rollData[num].openRange = null;
+    msg.flags.rollData[num].explode = false;
+    num = num + 1;
+    msg.flags.rollData[num] = {
+        roll: rollResult.rolledDice, total: rollResult._total, doubles: oldData.doubles, openRange: oldData.openRange, label: `Open Roll #${num}`,
+        explode: rollResult.explode, formula: formula, color: rollResult.color
+    };
+
+    const rollData = msg.flags.rollData;
+    let template;
+    switch (msg.flags.type) {
+        case "weapon":
+            template = "systems/abfalter/templates/dialogues/diceRolls/weaponRoll.hbs";
+            break;
+        default:
+            template = "systems/abfalter/templates/dialogues/abilityRoll.hbs";
+            break;
+    }
+    const content = await renderTemplate(template, { rollData: msg.flags.rollData, actor: actor, attackDetails: msg.flags.attackDetails });
+    game.messages.get(msg._id).update({
+        content: content,
+        flags: { rollData, num}
+    });
+}
+
 export async function openMeleeTrapDialogue(actor, label, wepId) {
-    console.log("Trap Handle Test Start");
+    let confirmed = false;
+    const weapon = actor.items.get(wepId);
+    const attacks = weapon.system.attacks;
+
+    if (attacks.length === 0) {
+        console.log("No Attacks Found, using default trap");
+        ui.notifications.error("Must have an attack created under the attacks tab to use Trapping.");
+        //function here
+        return;
+    }
+
+    //Values to send to roll function or actor update
+    let usedIndex = (weapon.system.info.lastWepUsed < attacks.length) ? weapon.system.info.lastWepUsed : 0;
+    let trapType = attacks[usedIndex].trappingType;
+    let finalValue = 0;
+    let finalFormula = "";
+
+    if (event.shiftKey) {
+        console.log('shift key held, skipping trap dialog.');
+        const basisTrapDetails = {
+            label: `${attacks[usedIndex].name} ${game.i18n.localize("abfalter.trap")}`,
+            name: attacks[usedIndex].name,
+            wepName: weapon.name,
+            value: attacks[usedIndex].trappingValue,
+            formula: `${attacks[usedIndex].trappingValue}(Value)`,
+            type: attacks[usedIndex].trappingType
+        };
+        trapRoll(actor, basisTrapDetails);
+        return;
+    }
+
+
+
+    const template = "systems/abfalter/templates/dialogues/weaponPrompts/trapAtk.hbs";
+    const html = await renderTemplate(template, {weapon: weapon}, {attacks: attacks}, {label: label});
+
+    new diceDialog({
+        title: "Trap Attack",
+        content: html,
+        buttons: {
+            roll: { label: game.i18n.localize('abfalter.dialogs.roll'), callback: () => confirmed = true },
+            cancel: { label: game.i18n.localize('abfalter.dialogs.cancel'), callback: () => confirmed = false }
+        },
+        render: (html) => {
+            const attackSelect = html.find('#attackSelect');
+            const modifierInput = html.find('#modifierMod');
+            let trapValue = attacks[usedIndex].trappingValue;
+            let usedFormula = ""
+
+            attacks.forEach((attack, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.text = attack.name;
+                attackSelect.append(option);
+              });
+              attackSelect.val(usedIndex); //Default to last used attack
+
+            attackSelect.change(function() {
+                const selectedIndex = $(this).val();
+                usedIndex = selectedIndex;
+                const selectedAttack = attacks[selectedIndex]
+
+                trapValue = selectedAttack.trappingValue;
+                trapType = selectedAttack.trappingType;
+
+                updateFinalValue();
+            });
+
+            function updateFinalValue() {
+                const modifierValue = parseInt(modifierInput.val(), 10) || 0;
+                finalValue = trapValue + modifierValue;
+                finalFormula = `${trapValue}(Value) + ${modifierValue}(Mod)`;
+                if (trapType === true) {
+                    usedFormula = `${finalValue}`;
+                } else {
+                    usedFormula = `1d10 + ${finalValue}`;
+                }
+
+                const rollButton = html.closest('.dialog').find('.dialog-button:first');
+                rollButton.text(`${game.i18n.localize("abfalter.dialogs.roll")}: ${usedFormula}`);
+            }
+
+            modifierInput.on('input', updateFinalValue);
+            attackSelect.trigger('change');
+        },
+        close: html => {
+            console.log('Trap Handle Finished');
+            const trapDetails = {
+                label: `${attacks[usedIndex].name} ${game.i18n.localize("abfalter.trap")}`,
+                name: attacks[usedIndex].name,
+                wepName: weapon.name,
+                value: finalValue,
+                formula: finalFormula,
+                type: trapType
+            }
+            trapRoll(actor, trapDetails);
+        }
+    }).render(true);
     return;
+}
+
+async function trapRoll(actor, trapDetails) {
+    let baseDice = "1d10";
+    let rollFormula = (trapDetails.type === true) ? `${trapDetails.value}` : `${baseDice} + ${trapDetails.value}`;
+
+    const rollResult = await new Roll(rollFormula, actor).roll();
+    rollResult.rolledDice = rollResult.total - trapDetails.value;
+
+    rollResult.color = "";
+    rollResult.fumble = false;
+    rollResult.explode = false;
+
+    switch (rollResult.rolledDice) {
+        case 1:
+            rollResult.color = "fumbleRoll";
+            rollResult.fumble = true;
+            rollResult.newTotal = rollResult.total - 3;
+            trapDetails.formula = `(${rollResult.rolledDice} - 3) + ${trapDetails.formula}`;
+            break;
+        case 10:
+            rollResult.color = "openRoll";
+            rollResult.explode = true;
+            rollResult.newTotal = rollResult.total + 2;
+            trapDetails.formula = `(${rollResult.rolledDice} + 2) + ${trapDetails.formula}`;
+            break;
+        default:
+            rollResult.color = "normalRoll";
+            rollResult.newTotal = rollResult.total;
+            trapDetails.formula = (trapDetails.type === true) ? `${trapDetails.formula}` : `(${rollResult.rolledDice}) + ${trapDetails.formula}`;
+            break;
+    }
+
+    const template = "systems/abfalter/templates/dialogues/diceRolls/trapRoll.hbs"
+    const content = await renderTemplate(template, { actor: actor, rollResult: rollResult, trapDetails: trapDetails});
+    const chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({ actor: actor }),
+        sound: CONFIG.sounds.dice,
+        content: content
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+    ChatMessage.create(chatData);
 }

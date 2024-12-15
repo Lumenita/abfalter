@@ -101,14 +101,13 @@ export default class abfalterItemSheet extends ItemSheet {
             this.document.update({ [label]: value });
         });
 
-        html.find(".wepAtkToggle").click(ev => {
-            let index = $(ev.currentTarget).attr("data-value");
-            let label = $(ev.currentTarget).attr("data-label");
-            let arr = this.item.toObject().system.attacks;
-            let value = arr[index][label];
-            value = !value;
-            arr[index][label] = value;
-            this.document.update({ "system.attacks": arr });
+        html.find(".wepAtkToggle").click(async (ev) => {
+            const index = $(ev.currentTarget).attr("data-value");
+            const label = $(ev.currentTarget).attr("data-label");
+            let attacks = this.item.system.attacks;
+            attacks[index][label] = !attacks[index][label];
+        
+            await this.item.update({ "system.attacks": attacks });
         });
 
         html.on('click', '.effect-control', (ev) => {
