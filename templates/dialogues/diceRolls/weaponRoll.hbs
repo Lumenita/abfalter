@@ -15,10 +15,10 @@
     <div>
         <div>
             <span> {{localize "abfalter.dmgShort"}}: {{attackDetails.dmg}} {{attackDetails.dmgType}}</span>
-            <span> {{localize "abfalter.armoryTab.atPen"}}: {{attackDetails.atPen}}</span>
+            <span> {{localize "abfalter.atPen"}}: {{attackDetails.atPen}}</span>
         </div>
         <div>
-            <span> {{localize "abfalter.targetAim"}}: {{attackDetails.target}} </span>
+            <span> {{localize "abfalter.targetAim"}}: {{localize (concat "abfalter." attackDetails.target)}}</span>
         </div>
     </div>
 

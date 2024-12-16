@@ -450,14 +450,14 @@ export async function openMeleeWeaponAtkDialogue(actor, label, wepId) {
                 {tag: 'foot', name: game.i18n.localize('abfalter.foot'), penalty: -50},
             ]
             const damageTypes = {
-                NONE: game.i18n.localize('abfalter.armoryTab.na'),
-                CUT: game.i18n.localize('abfalter.armoryTab.cut'),
-                IMP: game.i18n.localize('abfalter.armoryTab.imp'),
-                THR: game.i18n.localize('abfalter.armoryTab.thr'),
-                HEAT: game.i18n.localize('abfalter.armoryTab.heat'),
-                COLD: game.i18n.localize('abfalter.armoryTab.cold'),
-                ELE: game.i18n.localize('abfalter.armoryTab.ele'),
-                ENE: game.i18n.localize('abfalter.armoryTab.ene')
+                NONE: game.i18n.localize('abfalter.na'),
+                CUT: game.i18n.localize('abfalter.cut'),
+                IMP: game.i18n.localize('abfalter.imp'),
+                THR: game.i18n.localize('abfalter.thr'),
+                HEAT: game.i18n.localize('abfalter.heat'),
+                COLD: game.i18n.localize('abfalter.cold'),
+                ELE: game.i18n.localize('abfalter.ele'),
+                ENE: game.i18n.localize('abfalter.ene')
             };
             const vorpalLocation = weapon.system.info.vorpalLocation;
             const vorpalModifier = weapon.system.info.vorpalMod;
@@ -592,7 +592,9 @@ export async function openMeleeWeaponAtkDialogue(actor, label, wepId) {
                 fatigueUsed = fatigueValue;
             
                 finalValue = wepValue + (fatigueValue * 15) + modifierValue + selectedPenalty + selectedModifier;
-                finalFormula = `${wepValue}(Value) + ${fatigueValue * 15}(Fatigue) + ${modifierValue}(Mod) + ${selectedPenalty}(Aim) + ${selectedModifier}(Action)`;
+                finalFormula = `${wepValue}(${game.i18n.localize("abfalter.value")}) + ${fatigueValue * 15}(${game.i18n.localize("abfalter.fatigue")})
+                 + ${modifierValue}(${game.i18n.localize("abfalter.mod")}) + ${selectedPenalty}(${game.i18n.localize("abfalter.aim")})
+                 + ${selectedModifier}(${game.i18n.localize("abfalter.action")})`;
                 const rollButton = html.closest('.dialog').find('.dialog-button:first');
                 rollButton.text(`${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`);
             }
@@ -697,7 +699,7 @@ export async function wepOpenRollFunction(msg) {
     let rollFormula = `${baseDice} + ${oldData.total}`;
     let rollResult = await new Roll(rollFormula).roll();
     rollResult.rolledDice = rollResult.total - oldData.total;
-    let formula = `(${rollResult.rolledDice}) + ${oldData.total}(Previous Roll)`;
+    let formula = `(${rollResult.rolledDice}) + ${oldData.total}(${game.i18n.localize("abfalter.prevRoll")})`;
     rollResult.rolledDice = rollResult.total - oldData.total;
     rollResult.openRange = oldData.openRange;
     rollResult.color = "normalRoll";
@@ -753,7 +755,7 @@ export async function openMeleeTrapDialogue(actor, label, wepId) {
 
     if (attacks.length === 0) {
         console.log("No Attacks Found, using default trap");
-        ui.notifications.error("Must have an attack created under the attacks tab to use Trapping.");
+        ui.notifications.error(game.i18n.localize("abfalter.trapError"));
         //function here
         return;
     }
@@ -771,14 +773,13 @@ export async function openMeleeTrapDialogue(actor, label, wepId) {
             name: attacks[usedIndex].name,
             wepName: weapon.name,
             value: attacks[usedIndex].trappingValue,
-            formula: `${attacks[usedIndex].trappingValue}(Value)`,
+            formula: `${attacks[usedIndex].trappingValue}(${game.i18n.localize("abfalter.value")})`,
             type: attacks[usedIndex].trappingType
         };
         trapRoll(actor, basisTrapDetails);
         return;
     }
-
-
+    usedIndex = -1; //Reset to default, prepare for user selection
 
     const template = "systems/abfalter/templates/dialogues/weaponPrompts/trapAtk.hbs";
     const html = await renderTemplate(template, {weapon: weapon}, {attacks: attacks}, {label: label});
@@ -793,16 +794,22 @@ export async function openMeleeTrapDialogue(actor, label, wepId) {
         render: (html) => {
             const attackSelect = html.find('#attackSelect');
             const modifierInput = html.find('#modifierMod');
-            let trapValue = attacks[usedIndex].trappingValue;
-            let usedFormula = ""
+            let trapValue = '';
+            let usedFormula = "";
 
             attacks.forEach((attack, index) => {
-                const option = document.createElement('option');
-                option.value = index;
-                option.text = attack.name;
-                attackSelect.append(option);
+                if (!attacks[index].ignoreTrapping) {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.text = attack.name;
+                    attackSelect.append(option);
+                    if(usedIndex === -1) {
+                        usedIndex = index;
+                        trapValue = attacks[usedIndex].trappin1gValue;
+                    }
+                }
               });
-              attackSelect.val(usedIndex); //Default to last used attack
+            attackSelect.val(usedIndex); //Default to last used attack
 
             attackSelect.change(function() {
                 const selectedIndex = $(this).val();
@@ -818,7 +825,7 @@ export async function openMeleeTrapDialogue(actor, label, wepId) {
             function updateFinalValue() {
                 const modifierValue = parseInt(modifierInput.val(), 10) || 0;
                 finalValue = trapValue + modifierValue;
-                finalFormula = `${trapValue}(Value) + ${modifierValue}(Mod)`;
+                finalFormula = `${trapValue}(${game.i18n.localize("abfalter.value")}) + ${modifierValue}(${game.i18n.localize("abfalter.mod")})`;
                 if (trapType === true) {
                     usedFormula = `${finalValue}`;
                 } else {
@@ -833,16 +840,18 @@ export async function openMeleeTrapDialogue(actor, label, wepId) {
             attackSelect.trigger('change');
         },
         close: html => {
-            console.log('Trap Handle Finished');
-            const trapDetails = {
-                label: `${attacks[usedIndex].name} ${game.i18n.localize("abfalter.trap")}`,
-                name: attacks[usedIndex].name,
-                wepName: weapon.name,
-                value: finalValue,
-                formula: finalFormula,
-                type: trapType
+            if (confirmed) {
+                console.log('Trap Handle Finished');
+                const trapDetails = {
+                    label: `${attacks[usedIndex].name} ${game.i18n.localize("abfalter.trap")}`,
+                    name: attacks[usedIndex].name,
+                    wepName: weapon.name,
+                    value: finalValue,
+                    formula: finalFormula,
+                    type: trapType
+                }
+                trapRoll(actor, trapDetails);
             }
-            trapRoll(actor, trapDetails);
         }
     }).render(true);
     return;

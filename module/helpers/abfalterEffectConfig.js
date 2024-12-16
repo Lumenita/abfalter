@@ -52,7 +52,7 @@ export default class abfalterEffectConfig extends ActiveEffectConfig {
             'system.regeneration.bonus': game.i18n.localize('abfalter.activeEffectChanges.healthRegen'),
             'system.movement.bonus': game.i18n.localize('abfalter.movement'),
             'system.fatigue.bonus': game.i18n.localize('abfalter.fatigue'),
-            'system.armor.wearArmor.bonus': game.i18n.localize('abfalter.armoryTab.wearArmor'),
+            'system.armor.wearArmor.bonus': game.i18n.localize('abfalter.wearArmor'),
             //Secondaries
             'system.secondaryFields.athletics.acrobatics.bonus': game.i18n.localize('abfalter.activeEffectChanges.secAbility') + ': ' + game.i18n.localize('abfalter.acrobatic'),
             'system.secondaryFields.athletics.athleticism.bonus': game.i18n.localize('abfalter.activeEffectChanges.secAbility') + ': ' + game.i18n.localize('abfalter.athleticism'),

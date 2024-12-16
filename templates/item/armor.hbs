@@ -10,7 +10,7 @@
             </h1>
 
             <div class="item-subtitle">
-                <h4 class="item-type">{{localize "abfalter.armoryTab.bodyArmor"}}</h4>
+                <h4 class="item-type">{{localize "abfalter.bodyArmor"}}</h4>
                 <span class="item-subType">
                     {{localize "abfalter.equipped"}}?
                     <a class="toggleBoolean" data-label="system.equipped" data-ability="{{system.equipped}}"><i class="{{#if system.equipped}}fa-solid fa-toggle-on{{else}}fa-solid fa-toggle-off{{/if}}"></i></a>
@@ -18,9 +18,9 @@
             </div>
 
             <ul class="summary flexrow">
-                <li>{{localize "abfalter.armoryTab.quality"}}: {{system.quality}}</li>
-                <li>{{localize "abfalter.armoryTab.presence"}}: {{system.newPresence}}</li>
-                <li>{{localize "abfalter.armoryTab.fortitude"}}: {{system.newFortitude}}</li>
+                <li>{{localize "abfalter.quality"}}: {{system.quality}}</li>
+                <li>{{localize "abfalter.presence"}}: {{system.newPresence}}</li>
+                <li>{{localize "abfalter.fortitude"}}: {{system.newFortitude}}</li>
             </ul>
         </div>
     </header>
@@ -46,11 +46,11 @@
 
         {{!-- Details Tab --}}
     <div class="tab details" data-group="primary" data-tab="details">
-        <h6> {{localize "abfalter.armoryTab.bodyArmor"}} {{ localize "abfalter.details" }} </h6>
-        <label> <span> {{localize "abfalter.armoryTab.quality"}} </span> <input type="number" name="system.quality" value="{{system.quality}}" /> </label>
+        <h6> {{localize "abfalter.bodyArmor"}} {{ localize "abfalter.details" }} </h6>
+        <label> <span> {{localize "abfalter.quality"}} </span> <input type="number" name="system.quality" value="{{system.quality}}" /> </label>
         <div class="armorContent">
             <label>
-                <span> {{localize "abfalter.armoryTab.presence"}} </span>
+                <span> {{localize "abfalter.presence"}} </span>
                 <input type="number" name="system.presence" value="{{system.presence}}" />
                 <span> | </span>
                 <span> {{system.newPresence}} </span>
@@ -58,7 +58,7 @@
         </div>
         <div class="armorContent">
             <label>
-                <span> {{localize "abfalter.armoryTab.fortitude"}} </span>
+                <span> {{localize "abfalter.fortitude"}} </span>
                 <input type="number" name="system.fortitude" value="{{system.fortitude}}" />
                 <span> | </span>
                 <span> {{system.newFortitude}} </span>
@@ -66,7 +66,7 @@
         </div>
         <div class="armorContent">
             <label>
-                <span> {{localize "abfalter.armoryTab.requir"}} </span>
+                <span> {{localize "abfalter.requir"}} </span>
                 <input type="number" name="system.requirement" value="{{system.requirement}}" />
                 <span> | </span>
                 <span> {{system.newRequirement}} </span>
@@ -74,7 +74,7 @@
         </div>
         <div class="armorContent">
             <label>
-                <span> {{localize "abfalter.armoryTab.natPen"}} </span>
+                <span> {{localize "abfalter.natPen"}} </span>
                 <input type="number" name="system.natPenalty" value="{{system.natPenalty}}" />
                 <span> | </span>
                 <span> {{system.newNatPenalty}} </span>
@@ -82,7 +82,7 @@
         </div>
         <div class="armorContent">
             <label>
-                <span> {{localize "abfalter.armoryTab.movePen"}} </span>
+                <span> {{localize "abfalter.movePen"}} </span>
                 <input type="number" name="system.movePenalty" value="{{system.movePenalty}}" />
                 <span> | </span>
                 <span> {{system.newMovePenalty}} </span>
@@ -90,19 +90,19 @@
         </div>
 
 
-        <h6> {{localize "abfalter.armoryTab.armorValues"}} {{ localize "abfalter.details" }} </h6>
+        <h6> {{localize "abfalter.armorValues"}} {{ localize "abfalter.details" }} </h6>
         <div class="armorCard">
             <div>
                 <span> {{localize "abfalter.type"}} </span>
-                <span> {{localize "abfalter.armoryTab.cut"}} </span>
-                <span> {{localize "abfalter.armoryTab.imp"}} </span>
-                <span> {{localize "abfalter.armoryTab.thr"}} </span>
-                <span> {{localize "abfalter.armoryTab.heat"}} </span>
-                <span> {{localize "abfalter.armoryTab.cold"}} </span>
-                <span> {{localize "abfalter.armoryTab.ele"}} </span>
-                <span> {{localize "abfalter.armoryTab.ene"}} </span>
+                <span> {{localize "abfalter.cut"}} </span>
+                <span> {{localize "abfalter.imp"}} </span>
+                <span> {{localize "abfalter.thr"}} </span>
+                <span> {{localize "abfalter.heat"}} </span>
+                <span> {{localize "abfalter.cold"}} </span>
+                <span> {{localize "abfalter.ele"}} </span>
+                <span> {{localize "abfalter.ene"}} </span>
                 {{#if system.spiritHomebrew}}
-                <span> {{localize "abfalter.armoryTab.spirit"}} </span>
+                <span> {{localize "abfalter.spirit"}} </span>
                 {{/if}}
             </div>
 

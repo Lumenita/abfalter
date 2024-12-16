@@ -1,30 +1,30 @@
 <div class="tab armory">
     <div>
         <div class="wearArmor">
-            <h5> {{localize "abfalter.armoryTab.wearArmor"}} </h5>
+            <h5> {{localize "abfalter.wearArmor"}} </h5>
             <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.armor.wearArmor.base" value="{{system.armor.wearArmor.base}}" /> </label>
             <label> <span> {{localize "abfalter.class"}} </span> <input type="number" name="system.armor.wearArmor.class" value="{{system.armor.wearArmor.class}}" readonly /> </label>
             <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.armor.wearArmor.spec" value="{{system.armor.wearArmor.spec}}" /> </label>
             <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.armor.wearArmor.temp" value="{{system.armor.wearArmor.temp}}" /> </label>
             <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.armor.wearArmor.final" value="{{system.armor.wearArmor.final}}" readonly /> </label>
-            <h5> {{localize "abfalter.armoryTab.armorStats"}} </h5>
-            <label> <span class="armorpenalty"> {{localize "abfalter.armoryTab.totalNatPen"}} </span> <input type="number" name="system.armor.wearArmor.totalNatPen" value="{{system.armor.wearArmor.totalNatPen}}" readonly /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.totalPerPen"}} </span> <input type="number" name="system.armor.wearArmor.totalPerPen" value="{{system.armor.wearArmor.totalPerPen}}" readonly /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.totalMovePen"}} </span> <input type="number" name="system.armor.wearArmor.totalMovePen" value="{{system.armor.wearArmor.totalMovePen}}" readonly /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.dmgBarrier"}} </span> <input type="number" name="system.otherStats.damageBarrier" value="{{system.otherStats.damageBarrier}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.dmgRdc"}} </span> <input type="number" name="system.otherStats.dmgRdc" value="{{system.otherStats.dmgRdc}}" /> </label>
+            <h5> {{localize "abfalter.armorStats"}} </h5>
+            <label> <span class="armorpenalty"> {{localize "abfalter.totalNatPen"}} </span> <input type="number" name="system.armor.wearArmor.totalNatPen" value="{{system.armor.wearArmor.totalNatPen}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.totalPerPen"}} </span> <input type="number" name="system.armor.wearArmor.totalPerPen" value="{{system.armor.wearArmor.totalPerPen}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.totalMovePen"}} </span> <input type="number" name="system.armor.wearArmor.totalMovePen" value="{{system.armor.wearArmor.totalMovePen}}" readonly /> </label>
+            <label> <span> {{localize "abfalter.dmgBarrier"}} </span> <input type="number" name="system.otherStats.damageBarrier" value="{{system.otherStats.damageBarrier}}" /> </label>
+            <label> <span> {{localize "abfalter.dmgRdc"}} </span> <input type="number" name="system.otherStats.dmgRdc" value="{{system.otherStats.dmgRdc}}" /> </label>
         </div>
 
         <div class="currency">
-            <h5> {{localize "abfalter.armoryTab.currency"}} </h5>
+            <h5> {{localize "abfalter.currency"}} </h5>
             <div>
                 <span> {{localize "abfalter.name"}} </span>
-                <span> {{localize "abfalter.armoryTab.quantity"}} </span>
+                <span> {{localize "abfalter.quantity"}} </span>
             </div>
             <div class="{{#if system.toggles.currencyHide}}hidden{{/if}}">
-                <label> <span> {{localize "abfalter.armoryTab.cCoin"}} </span> <input type="number" name="system.currency.copper" value="{{system.currency.copper}}" /> </label>
-                <label> <span> {{localize "abfalter.armoryTab.sCoin"}} </span> <input type="number" name="system.currency.silver" value="{{system.currency.silver}}" /> </label>
-                <label> <span> {{localize "abfalter.armoryTab.gCoin"}} </span> <input type="number" name="system.currency.gold" value="{{system.currency.gold}}" /> </label>
+                <label> <span> {{localize "abfalter.cCoin"}} </span> <input type="number" name="system.currency.copper" value="{{system.currency.copper}}" /> </label>
+                <label> <span> {{localize "abfalter.sCoin"}} </span> <input type="number" name="system.currency.silver" value="{{system.currency.silver}}" /> </label>
+                <label> <span> {{localize "abfalter.gCoin"}} </span> <input type="number" name="system.currency.gold" value="{{system.currency.gold}}" /> </label>
             </div>
             <div class="{{#if system.itemToggle.currency}}item-list{{/if}}">
                 {{#each currencies as |currency id|}}
@@ -44,7 +44,7 @@
                 {{/each}}
             </div>
             <div>
-                <a class="item-control item-create" data-type="currency"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addCoin"}} </a>
+                <a class="item-control item-create" data-type="currency"><i class="fas fa-plus"></i> {{localize "abfalter.addCoin"}} </a>
                 <a class="toggleBoolean {{#if system.itemToggle.currency}}armorpenalty{{/if}}" data-label="system.itemToggle.currency" data-ability="{{system.itemToggle.currency}}"><i class="{{#if system.itemToggle.currency}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
         </div>
@@ -54,14 +54,14 @@
 
     <div>
         <div class="armor">
-            <h5> {{localize "abfalter.armoryTab.armor"}} </h5>
+            <h5> {{localize "abfalter.armor"}} </h5>
             <div>
                 <span> {{localize "abfalter.name"}} </span>
-                <span> {{localize "abfalter.armoryTab.quality"}} </span>
-                <span> {{localize "abfalter.armoryTab.presence"}} </span>
-                <span> {{localize "abfalter.armoryTab.fortitude"}} </span>
-                <span> {{localize "abfalter.armoryTab.requir"}} </span>
-                <span> {{localize "abfalter.armoryTab.penalty"}} </span>
+                <span> {{localize "abfalter.quality"}} </span>
+                <span> {{localize "abfalter.presence"}} </span>
+                <span> {{localize "abfalter.fortitude"}} </span>
+                <span> {{localize "abfalter.requir"}} </span>
+                <span> {{localize "abfalter.penalty"}} </span>
             </div>
             <div class="{{#if system.itemToggle.armorHelmet}}item-list{{/if}}">
                 {{#each armorHelmets as |armorHelmet id|}}
@@ -95,15 +95,15 @@
             </div>
             <div>
                 <span> {{localize "abfalter.name"}} </span>
-                <span> {{localize "abfalter.armoryTab.cut"}} </span>
-                <span> {{localize "abfalter.armoryTab.imp"}} </span>
-                <span> {{localize "abfalter.armoryTab.thr"}} </span>
-                <span> {{localize "abfalter.armoryTab.heat"}} </span>
-                <span> {{localize "abfalter.armoryTab.cold"}} </span>
-                <span> {{localize "abfalter.armoryTab.ele"}} </span>
-                <span> {{localize "abfalter.armoryTab.ene"}} </span>
+                <span> {{localize "abfalter.cut"}} </span>
+                <span> {{localize "abfalter.imp"}} </span>
+                <span> {{localize "abfalter.thr"}} </span>
+                <span> {{localize "abfalter.heat"}} </span>
+                <span> {{localize "abfalter.cold"}} </span>
+                <span> {{localize "abfalter.ele"}} </span>
+                <span> {{localize "abfalter.ene"}} </span>
                 {{#if system.other.spiritSettings}}
-                <span> {{localize "abfalter.armoryTab.spirit"}} </span>
+                <span> {{localize "abfalter.spirit"}} </span>
                 {{/if}}
             </div>
             <div class="{{#if system.itemToggle.armorHelmet}}item-list{{/if}}">
@@ -146,16 +146,16 @@
             </div>
             <div>
                 <div>
-                    <a class="item-control item-create" data-type="armor"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addArmor"}} </a>
+                    <a class="item-control item-create" data-type="armor"><i class="fas fa-plus"></i> {{localize "abfalter.addArmor"}} </a>
                     <a class="toggleBoolean {{#if system.itemToggle.armor}}armorpenalty{{/if}}" data-label="system.itemToggle.armor" data-ability="{{system.itemToggle.armor}}"><i class="{{#if system.itemToggle.armor}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
                 </div>
                 <div>
                     <a class="toggleBoolean {{#if system.itemToggle.armorHelmet}}armorpenalty{{/if}}" data-label="system.itemToggle.armorHelmet" data-ability="{{system.itemToggle.armorHelmet}}"><i class="{{#if system.itemToggle.armorHelmet}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
-                    <a class="item-control item-create" data-type="armorHelmet"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addHelmet"}} </a>
+                    <a class="item-control item-create" data-type="armorHelmet"><i class="fas fa-plus"></i> {{localize "abfalter.addHelmet"}} </a>
                 </div>
             </div>
             <div>
-                <span> {{localize "abfalter.armoryTab.finalHelmet"}} </span>
+                <span> {{localize "abfalter.finalHelmet"}} </span>
                 <span> {{system.armor.helmet.ahCutFinal}} </span>
                 <span> {{system.armor.helmet.ahImpFinal}} </span>
                 <span> {{system.armor.helmet.ahThrFinal}} </span>
@@ -168,7 +168,7 @@
                 {{/if}}
             </div>
             <div>
-                <span> {{localize "abfalter.armoryTab.finalArmor"}} </span>
+                <span> {{localize "abfalter.finalArmor"}} </span>
                 <span> {{system.armor.body.aCutFinal}} </span>
                 <span> {{system.armor.body.aImpFinal}} </span>
                 <span> {{system.armor.body.aThrFinal}} </span>
@@ -183,7 +183,7 @@
         </div>
 
         <div class="weapons">
-            <h5> {{localize "abfalter.armoryTab.weapons"}}  </h5>
+            <h5> {{localize "abfalter.weapons"}}  </h5>
             <div class="{{#if system.itemToggle.weapon}}item-list{{/if}}">
                 {{#each weapons as |weapon id|}}
                 <div class="weapon-item item equip-item" data-item-id="{{weapon._id}}">
@@ -195,7 +195,7 @@
                                 <span class="{{#if system.equipped}}weaponEquipped{{else}}notEquipped{{/if}}"> {{weapon.name}} </span>
                                 <span>
                                     {{#ifEquals system.info.type "melee"}}
-                                        {{localize "abfalter.armoryTab.atPen"}}: {{system.melee.finalATPen}}
+                                        {{localize "abfalter.atPen"}}: {{system.melee.finalATPen}}
                                     {{/ifEquals}}
                                     {{#ifEquals system.info.type "ranged"}}
                                         WIP
@@ -259,7 +259,7 @@
 
                                 {{#ifEquals system.info.type "melee"}}
                                 <button type="button" class="combatRoll" data-roll="{{system.melee.finalBreakage}}"
-                                    data-label="{{localize "abfalter.armoryTab.finBreakage"}}" data-type="breakageRoll">
+                                    data-label="{{localize "abfalter.finBreakage"}}" data-type="breakageRoll">
                                     {{localize "abfalter.breakageShort"}}: {{system.melee.finalBreakage}}
                                 </button>
                                 {{/ifEquals}}
@@ -304,17 +304,17 @@
             </div>
 
             <div>
-                <a class="item-control item-create" data-type="weapon"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addWeapons"}} </a>
+                <a class="item-control item-create" data-type="weapon"><i class="fas fa-plus"></i> {{localize "abfalter.addWeapons"}} </a>
                 <a class="toggleBoolean {{#if system.itemToggle.weapon}}armorpenalty{{/if}}" data-label="system.itemToggle.weapon" data-ability="{{system.itemToggle.weapon}}"><i class="{{#if system.itemToggle.weapon}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
         </div>
 
         <div class="inventory">
-            <h5> {{localize "abfalter.armoryTab.inventory"}} </h5>
+            <h5> {{localize "abfalter.inventory"}} </h5>
             <div>
-                <span> {{localize "abfalter.armoryTab.quantity"}} </span>
+                <span> {{localize "abfalter.quantity"}} </span>
                 <span> {{localize "abfalter.name"}} </span>
-                <span> {{localize "abfalter.armoryTab.quality"}} </span>
+                <span> {{localize "abfalter.quality"}} </span>
             </div>
             <div class="{{#if system.itemToggle.inventory}}item-list{{/if}}">
                 {{#each inventories as |inventory id|}}
@@ -344,7 +344,7 @@
                 {{/each}}
             </div>
             <div>
-                <a class="item-control item-create" data-type="inventory"><i class="fas fa-plus"></i> {{localize "abfalter.armoryTab.addInventory"}} </a>
+                <a class="item-control item-create" data-type="inventory"><i class="fas fa-plus"></i> {{localize "abfalter.addInventory"}} </a>
                 <a class="toggleBoolean {{#if system.itemToggle.inventory}}armorpenalty{{/if}}" data-label="system.itemToggle.inventory" data-ability="{{system.itemToggle.inventory}}"><i class="{{#if system.itemToggle.inventory}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
         </div>

@@ -16,8 +16,8 @@
             </div>
 
             <ul class="summary flexrow">
-                <li> {{localize "abfalter.armoryTab.speed"}}: {{system.derived.finalWeaponSpeed}} </li>
-                <li> {{localize "abfalter.armoryTab.presence"}}: {{system.derived.finalPresence}} </li>
+                <li> {{localize "abfalter.speed"}}: {{system.derived.finalWeaponSpeed}} </li>
+                <li> {{localize "abfalter.presence"}}: {{system.derived.finalPresence}} </li>
                 <li> {{system.info.weaponClass}} </li>
             </ul>
         </div>
@@ -54,11 +54,11 @@
                 </label>
             </div>
             <label> <span> {{localize "abfalter.wepClass"}} </span> <input type="text" name="system.info.weaponClass" value="{{system.info.weaponClass}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.rarity"}} </span> <input type="text" name="system.rarity" value="{{system.rarity}}" /> </label>
-            <label> <span> {{localize "abfalter.armoryTab.quality"}} </span> <input type="number" name="system.quality" value="{{system.quality}}" /> </label>
+            <label> <span> {{localize "abfalter.rarity"}} </span> <input type="text" name="system.rarity" value="{{system.rarity}}" /> </label>
+            <label> <span> {{localize "abfalter.quality"}} </span> <input type="number" name="system.quality" value="{{system.quality}}" /> </label>
             <div class="weaponContent"> 
                 <label>
-                    <span> {{localize "abfalter.armoryTab.presence"}} </span>
+                    <span> {{localize "abfalter.presence"}} </span>
                     <input type="number" name="system.presence" value="{{system.presence}}" />
                     <span> | </span>
                     <span> {{system.derived.finalPresence}} </span>
@@ -66,7 +66,7 @@
             </div>
             <div class="weaponContent"> 
                 <label>
-                    <span> {{localize "abfalter.armoryTab.fortitude"}} </span>
+                    <span> {{localize "abfalter.fortitude"}} </span>
                     <input type="number" name="system.fortitude" value="{{system.fortitude}}" />
                     <span> | </span>
                     <span> {{system.derived.finalFortitude}} </span>
@@ -74,7 +74,7 @@
             </div>
             <div class="weaponContent"> 
                 <label>
-                    <span> {{localize "abfalter.armoryTab.speed"}} </span>
+                    <span> {{localize "abfalter.speed"}} </span>
                     <input type="number" name="system.speed" value="{{system.speed}}" />
                     <span> | </span>
                     <span> {{system.derived.finalWeaponSpeed}} </span>
@@ -93,7 +93,7 @@
                     <span> {{localize "abfalter.settingsTab.fumbleRoll"}} </span>
                     <button type="button" class="toggleBoolean {{#if system.info.complex}}kiBought{{/if}}"
                         data-label="system.info.complex" data-ability="{{system.info.complex}}">
-                        <span> {{localize "abfalter.armoryTab.complex"}} </span>
+                        <span> {{localize "abfalter.complex"}} </span>
                     </button>
                     <input type="number" name="system.info.fumbleRollMod" value="{{system.info.fumbleRollMod}}" />
                     <span> | </span>
@@ -129,7 +129,7 @@
             </div>
             <div class="weaponContent"> 
                 <label>
-                    <span> {{localize "abfalter.armoryTab.atPen"}} </span>
+                    <span> {{localize "abfalter.atPen"}} </span>
                     <input type="number" name="system.atPen" value="{{system.atPen}}" />
                     <span> | </span>
                     <span> {{system.melee.finalATPen}} </span>
@@ -137,7 +137,7 @@
             </div>
             <div class="weaponContent"> 
                 <label>
-                    <span> {{localize "abfalter.armoryTab.breakage"}} </span>
+                    <span> {{localize "abfalter.breakage"}} </span>
                     <input type="number" name="system.breakage" value="{{system.breakage}}" />
                     <span> | </span>
                     <span> {{system.melee.finalBreakage}} </span>
@@ -203,20 +203,38 @@
             {{#if system.melee.throwable}}
             <div class="csSelect weaponContent4">
                 <label>
-                    <span>  {{localize "abfalter.range"}} </span>
+                    <span> {{localize "abfalter.range"}} </span>
                     <input type="number" name="system.melee.throwRange" value="{{system.melee.throwRange}}"/>
                     <select name="system.melee.throwDistanceType">
                         {{selectOptions throwDistanceDropdown selected=system.melee.throwDistanceType localize=true}}
                     </select>
                 </label>
             </div>
-            <label> <span> {{localize "abfalter.quantity"}} </span> <input type="text" name="system.melee.throwQuantity" value="{{system.melee.throwQuantity}}" /> </label>
+            <label> <span> {{localize "abfalter.quantity"}} </span> <input type="number" name="system.melee.throwQuantity" value="{{system.melee.throwQuantity}}" /> </label>
+            {{/if}}
+            {{#if system.melee.trapping}}
+            <div class="weaponContent6">
+                <label>
+                    <span> {{localize "abfalter.trapOppChar"}} </span>
+                    <div class="csSelect">
+                        <select name="system.melee.trappingTypeF">
+                            {{selectOptions customSecObjList selected=system.melee.trappingTypeF localize=true}}
+                        </select>
+                    </div>
+                    <span> / </span>
+                    <div class="csSelect">
+                        <select name="system.melee.trappingTypeS">
+                            {{selectOptions customSecObjList selected=system.melee.trappingTypeS localize=true}}
+                        </select>
+                    </div>
+                </label>
+            </div>
             {{/if}}
 
             <h6> {{ localize "abfalter.damageDetails" }} </h6>
             <div class="csSelect weaponContent"> 
                 <label>
-                    <span> {{localize "abfalter.armoryTab.primary"}} </span>
+                    <span> {{localize "abfalter.primary"}} </span>
                     {{#if system.spiritHomebrew}}
                     <select class="inline-edit" name="system.primDmgT" data-field="system.primDmgT">
                         {{selectOptions damageTypeSpiritObjList selected=system.primDmgT localize=true}}
@@ -230,7 +248,7 @@
             </div>
             <div class="csSelect weaponContent"> 
                 <label>
-                    <span> {{localize "abfalter.armoryTab.secondary"}} </span>
+                    <span> {{localize "abfalter.secondary"}} </span>
                     {{#if system.spiritHomebrew}}
                     <select class="inline-edit" name="system.secDmgT" data-field="system.secDmgT">
                         {{selectOptions damageTypeSpiritObjList selected=system.secDmgT localize=true}}
@@ -242,40 +260,40 @@
                     {{/if}}
                 </label>
             </div>
-            <label> <span> {{localize "abfalter.base"}} {{localize "abfalter.armoryTab.damage"}} </span> <input type="text" name="system.baseDmg" value="{{system.baseDmg}}" /> </label>
+            <label> <span> {{localize "abfalter.base"}} {{localize "abfalter.damage"}} </span> <input type="text" name="system.baseDmg" value="{{system.baseDmg}}" /> </label>
             <div class="csSelect weaponContent5">
                 <label>
                     <span> {{localize "abfalter.mod"}} </span>
                     <button type="button" class="toggleBoolean {{#if system.melee.twoHanded}}kiBought{{/if}}"
                         data-label="system.melee.twoHanded" data-ability="{{system.melee.twoHanded}}">
-                        <span> {{localize "abfalter.armoryTab.twoHand"}} </span>
+                        <span> {{localize "abfalter.twoHand"}} </span>
                     </button>
                     <select name="system.melee.dmgMod" data-field="system.melee.dmgMod">
                         {{selectOptions damageModObjList selected=system.melee.dmgMod localize=true}}
                     </select>
                 </label>
             </div>
-            <label> <span>  {{localize "abfalter.final"}} {{localize "abfalter.armoryTab.damage"}} </span> <input type="text" name="system.melee.baseDmg" value="{{system.melee.baseDmg}}" readonly/> </label>
+            <label> <span>  {{localize "abfalter.final"}} {{localize "abfalter.damage"}} </span> <input type="text" name="system.melee.baseDmg" value="{{system.melee.baseDmg}}" readonly/> </label>
             {{/ifEquals}}
 
 
 
             {{#ifEquals system.info.type "ranged"}}
             <h6> specific ranged {{ localize "abfalter.details" }} </h6>
-            <span> WIP 12/15/24 next update will be this</span>
+            <span> WIP 12/16/24 next update will be this</span>
             {{/ifEquals}}
 
 
 
             {{#ifEquals system.info.type "shield"}}
             <h6> specific shield {{ localize "abfalter.details" }} </h6> 
-            <span> WIP 12/15/24 next update will be this</span>
+            <span> WIP 12/16/24 next update will be this</span>
             <span> The Shield is Functional, but its probably missing stuff.</span> 
-            <span> It is now 12/15/24, and this is my next goal to finish</span>
+            <span> It is now 12/16/24, and this is my next goal to finish</span>
 
             <div class="csSelect weaponContent">
                 <label>
-                    <span> {{localize "abfalter.armoryTab.shieldType"}} </span>
+                    <span> {{localize "abfalter.shieldType"}} </span>
                     <select name="system.shield.type" data-field="system.shield.type">
                         {{selectOptions shieldObjList selected=system.shield.type localize=true}}
                     </select>
@@ -299,7 +317,7 @@
             </div>            
             <div class="weaponContent"> 
                 <label>
-                    <span> {{localize "abfalter.armoryTab.breakage"}} </span>
+                    <span> {{localize "abfalter.breakage"}} </span>
                     <input type="number" name="system.breakage" value="{{system.breakage}}" />
                     <span> | </span>
                     <span> {{system.finalBreakage}} </span>
@@ -348,19 +366,19 @@
 
                         <div class="wepAtkEditTop">
                             <label>
-                                <span> {{localize "abfalter.armoryTab.breakage"}} </span>
+                                <span> {{localize "abfalter.breakage"}} </span>
                                 <input type="number" name="attacks[{{@index}}][breakage]" value="{{this.breakage}}">
                                 <span> | </span>
                                 <span> {{this.finalBreakage}} </span>
                             </label>
                             <label>
-                                <span> {{localize "abfalter.armoryTab.atPen"}} </span>
+                                <span> {{localize "abfalter.atPen"}} </span>
                                 <input type="number" name="attacks[{{@index}}][atPen]" value="{{this.atPen}}">
                                 <span> | </span>
                                 <span> {{this.finalAtPen}} </span>
                             </label>
                             <label>
-                                <span> {{localize "abfalter.armoryTab.damage"}} </span>
+                                <span> {{localize "abfalter.damage"}} </span>
                                 <input type="number" name="attacks[{{@index}}][damage]" value="{{this.damage}}">
                                 <span> | </span>
                                 <span> {{this.finalDamage}} </span>
@@ -465,9 +483,9 @@
                             <span>{{localize "abfalter.attack"}}: {{this.finalAttack}} |</span>
                             <span>{{localize "abfalter.block"}}: {{this.finalBlock}} |</span>
                             <span>{{localize "abfalter.dodge"}}: {{this.finalDodge}} |</span>
-                            <span>{{localize "abfalter.armoryTab.breakage"}}: {{this.finalBreakage}} |</span>
-                            <span>{{localize "abfalter.armoryTab.atPen"}}: {{this.finalAtPen}} |</span>
-                            <span>{{localize "abfalter.armoryTab.damage"}}: {{this.finalDamage}}</span>
+                            <span>{{localize "abfalter.breakage"}}: {{this.finalBreakage}} |</span>
+                            <span>{{localize "abfalter.atPen"}}: {{this.finalAtPen}} |</span>
+                            <span>{{localize "abfalter.damage"}}: {{this.finalDamage}}</span>
                         </div>
 
                         <div> 

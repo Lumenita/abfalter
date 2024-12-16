@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="subHeaderRow3">
-                            <span>{{localize "abfalter.armoryTab.presence"}}: {{system.levelinfo.presence}} | {{localize "abfalter.dp"}}: {{system.levelinfo.dp}}</span>
+                            <span>{{localize "abfalter.presence"}}: {{system.levelinfo.presence}} | {{localize "abfalter.dp"}}: {{system.levelinfo.dp}}</span>
                             <label> <input type="number" name="system.levelinfo.experience" value="{{system.levelinfo.experience}}" placeholder="{{localize "abfalter.exp"}}" /> </label>
                             <span> / </span>
                             <span> {{system.levelinfo.nextlevel}} </span>
@@ -86,7 +86,7 @@
                                 </h5>
                                 {{#if system.initiative.status}}
                                 <div class="headerIniDets">
-                                    <label> <span> {{localize "abfalter.armoryTab.armor"}} </span> <input type="number" name="system.armor.wearArmor.totalNatPen" value="-{{system.armor.wearArmor.totalNatPen}}" readonly /> </label>
+                                    <label> <span> {{localize "abfalter.armor"}} </span> <input type="number" name="system.armor.wearArmor.totalNatPen" value="-{{system.armor.wearArmor.totalNatPen}}" readonly /> </label>
                                     <label> <span> {{localize "abfalter.weapon"}} </span> <input type="number" name="system.initiative.wepFinalSpeed" value="{{system.initiative.wepFinalSpeed}}" readonly /> </label>
                                     <label> <span> {{localize "abfalter.size"}} </span> <input type="number" name="system.initiative.sizeBase" value="{{system.initiative.sizeBase}}" readonly /> </label>
                                     <label> <span> {{localize "abfalter.class"}} </span> <input type="number" name="system.initiative.class" value="{{system.initiative.class}}" readonly /> </label>

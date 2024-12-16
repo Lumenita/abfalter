@@ -334,7 +334,7 @@
                     {{#if system.toggles.movementInfo}}
                     <div>
                         <label> <span> {{localize "abfalter.size"}} </span> <input type="number" name="system.movement.sizeBase" value="{{system.movement.sizeBase}}" readonly /> </label>
-                        <label> <span> {{localize "abfalter.armoryTab.armor"}} </span> <input type="number" name="system.armor.wearArmor.totalMovePen" value="{{system.armor.wearArmor.totalMovePen}}" readonly /> </label>
+                        <label> <span> {{localize "abfalter.armor"}} </span> <input type="number" name="system.armor.wearArmor.totalMovePen" value="{{system.armor.wearArmor.totalMovePen}}" readonly /> </label>
                         <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.movement.spec" value="{{system.movement.spec}}" /> </label>
                         <label> <span> {{localize "abfalter.pen"}} </span> <input type="number" name="system.movement.pen" value="{{system.movement.pen}}" /> </label>
                     </div>
@@ -583,7 +583,7 @@
             {{#if sec.status}}
             <div class="extend {{#if sec.parentField}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.natNum"}} </span> <input type="number" name="system.secondaryFields.athletics.{{key}}.nat" value="{{sec.nat}}" />
-                <span> {{localize "abfalter.na"}} </span> <input type="number" name="system.secondaryFields.athletics.{{key}}.natural" value="{{sec.natural}}" />
+                <span> {{localize "abfalter.natAt"}} </span> <input type="number" name="system.secondaryFields.athletics.{{key}}.natural" value="{{sec.natural}}" />
                 <span class="natemph"> {{localize "abfalter.totalNat"}} </span> <input type="number" name="system.secondaryFields.athletics.{{key}}.natTotal" value="{{sec.natTotal}}" readonly />
                 <a class="toggleBoolean {{#if sec.fav}}showOpacity{{/if}}" data-label="system.secondaryFields.athletics.{{key}}.fav"
                    data-ability="{{sec.fav}}"><i class="{{#if sec.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
@@ -621,7 +621,7 @@
             {{#if sec.status}}
             <div class="extend {{#if sec.parentField}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.natNum"}} </span> <input type="number" name="system.secondaryFields.social.{{key}}.nat" value="{{sec.nat}}" />
-                <span> {{localize "abfalter.na"}} </span> <input type="number" name="system.secondaryFields.social.{{key}}.natural" value="{{sec.natural}}" />
+                <span> {{localize "abfalter.natAt"}} </span> <input type="number" name="system.secondaryFields.social.{{key}}.natural" value="{{sec.natural}}" />
                 <span class="natemph"> {{localize "abfalter.totalNat"}} </span> <input type="number" name="system.secondaryFields.social.{{key}}.natTotal" value="{{sec.natTotal}}" readonly />
                 <a class="toggleBoolean {{#if sec.fav}}showOpacity{{/if}}" data-label="system.secondaryFields.social.{{key}}.fav"
                    data-ability="{{sec.fav}}"><i class="{{#if sec.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
@@ -663,7 +663,7 @@
             {{#if sec.status}}
             <div class="extend {{#if sec.parentField}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.natNum"}} </span> <input type="number" name="system.secondaryFields.perceptive.{{key}}.nat" value="{{sec.nat}}" />
-                <span> {{localize "abfalter.na"}} </span> <input type="number" name="system.secondaryFields.perceptive.{{key}}.natural" value="{{sec.natural}}" />
+                <span> {{localize "abfalter.natAt"}} </span> <input type="number" name="system.secondaryFields.perceptive.{{key}}.natural" value="{{sec.natural}}" />
                 <span class="natemph"> {{localize "abfalter.totalNat"}} </span> <input type="number" name="system.secondaryFields.perceptive.{{key}}.natTotal" value="{{sec.natTotal}}" readonly />
                 <a class="toggleBoolean {{#if sec.fav}}showOpacity{{/if}}" data-label="system.secondaryFields.perceptive.{{key}}.fav"
                    data-ability="{{sec.fav}}"><i class="{{#if sec.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
@@ -701,7 +701,7 @@
             {{#if sec.status}}
             <div class="extend {{#if sec.parentField}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.natNum"}} </span> <input type="number" name="system.secondaryFields.intellectual.{{key}}.nat" value="{{sec.nat}}" />
-                <span> {{localize "abfalter.na"}} </span> <input type="number" name="system.secondaryFields.intellectual.{{key}}.natural" value="{{sec.natural}}" />
+                <span> {{localize "abfalter.natAt"}} </span> <input type="number" name="system.secondaryFields.intellectual.{{key}}.natural" value="{{sec.natural}}" />
                 <span class="natemph"> {{localize "abfalter.totalNat"}} </span> <input type="number" name="system.secondaryFields.intellectual.{{key}}.natTotal" value="{{sec.natTotal}}" readonly />
                 <a class="toggleBoolean {{#if sec.fav}}showOpacity{{/if}}" data-label="system.secondaryFields.intellectual.{{key}}.fav"
                    data-ability="{{sec.fav}}"><i class="{{#if sec.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
@@ -739,7 +739,7 @@
             {{#if sec.status}}
             <div class="extend {{#if sec.parentField}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.natNum"}} </span> <input type="number" name="system.secondaryFields.vigor.{{key}}.nat" value="{{sec.nat}}" />
-                <span> {{localize "abfalter.na"}} </span> <input type="number" name="system.secondaryFields.vigor.{{key}}.natural" value="{{sec.natural}}" />
+                <span> {{localize "abfalter.natAt"}} </span> <input type="number" name="system.secondaryFields.vigor.{{key}}.natural" value="{{sec.natural}}" />
                 <span class="natemph"> {{localize "abfalter.totalNat"}} </span> <input type="number" name="system.secondaryFields.vigor.{{key}}.natTotal" value="{{sec.natTotal}}" readonly />
                 <a class="toggleBoolean {{#if sec.fav}}showOpacity{{/if}}" data-label="system.secondaryFields.vigor.{{key}}.fav"
                    data-ability="{{sec.fav}}"><i class="{{#if sec.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
@@ -781,7 +781,7 @@
             {{#if sec.status}}
             <div class="extend {{#if sec.parentField}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.natNum"}} </span> <input type="number" name="system.secondaryFields.subterfuge.{{key}}.nat" value="{{sec.nat}}" />
-                <span> {{localize "abfalter.na"}} </span> <input type="number" name="system.secondaryFields.subterfuge.{{key}}.natural" value="{{sec.natural}}" />
+                <span> {{localize "abfalter.natAt"}} </span> <input type="number" name="system.secondaryFields.subterfuge.{{key}}.natural" value="{{sec.natural}}" />
                 <span class="natemph"> {{localize "abfalter.totalNat"}} </span> <input type="number" name="system.secondaryFields.subterfuge.{{key}}.natTotal" value="{{sec.natTotal}}" readonly />
                 <a class="toggleBoolean {{#if sec.fav}}showOpacity{{/if}}" data-label="system.secondaryFields.subterfuge.{{key}}.fav"
                    data-ability="{{sec.fav}}"><i class="{{#if sec.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
@@ -819,7 +819,7 @@
             {{#if sec.status}}
             <div class="extend {{#if sec.parentField}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
                 <span> {{localize "abfalter.natNum"}} </span> <input type="number" name="system.secondaryFields.creative.{{key}}.nat" value="{{sec.nat}}" />
-                <span> {{localize "abfalter.na"}} </span> <input type="number" name="system.secondaryFields.creative.{{key}}.natural" value="{{sec.natural}}" />
+                <span> {{localize "abfalter.natAt"}} </span> <input type="number" name="system.secondaryFields.creative.{{key}}.natural" value="{{sec.natural}}" />
                 <span class="natemph"> {{localize "abfalter.totalNat"}} </span> <input type="number" name="system.secondaryFields.creative.{{key}}.natTotal" value="{{sec.natTotal}}" readonly />
                 <a class="toggleBoolean {{#if sec.fav}}showOpacity{{/if}}" data-label="system.secondaryFields.creative.{{key}}.fav"
                    data-ability="{{sec.fav}}"><i class="{{#if sec.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
@@ -861,7 +861,7 @@
                     <div class="secondaryEditExtend">
                         <span> {{localize "abfalter.natNum"}} </span>
                         <input class="inline-edit" type="number" data-field="system.nat" value="{{secondary.system.nat}}" />
-                        <span> {{localize "abfalter.na"}} </span>
+                        <span> {{localize "abfalter.natAt"}} </span>
                         <input class="inline-edit" type="number" data-field="system.natural" value="{{secondary.system.natural}}" />
                         <span class="natemph"> {{localize "abfalter.totalNat"}} </span>
                         <input class="inline-edit" type="number" data-field="secondary.system.natFinal" value="{{secondary.system.natFinal}}" readonly />

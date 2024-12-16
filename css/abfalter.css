@@ -45,7 +45,7 @@ button {
     --equipped: #1bb936;
     --kiBought: #4b47b7;
     --kiFree: #106810;
-    --colot-border-dark: #8aa9cb;
+    --color-border-dark: #8aa9cb;
     --color-border-dark-5: #12172ee8;
     --color-text-dark-secondary: #979797;
     --color-border-light-tertiary: #618e9f;
@@ -90,6 +90,12 @@ button {
     --item-summary: #4b4a44;
     --effect-border: #10141c;
     --effect-bg: rgb(81 121 163 / 29%);
+}
+.standard-form .form-group > label {
+    color: var(--textColor);
+}
+.standard-form .form-group > label:hover {
+    color: var(--textColor);
 }
 .window-app .window-content {
     overflow-x: auto;
@@ -3742,7 +3748,6 @@ h6 {
 .weapons > div:last-of-type {
     display: flex;
     place-content: space-between;
-    border-top: 1px solid var(--boxColor);
     border-bottom: 3px solid var(--boxColor);
 }
 .weapon-item:nth-child(2n) {
@@ -5804,7 +5809,8 @@ h6 {
     border-radius: 0px;
     border: none;
 }
-.weaponContent2 {
+.weaponContent2,
+.weaponContent6 > label {
     display: flex;
 }
 .weaponContent2 > div,
@@ -5864,6 +5870,19 @@ h6 {
 }
 .weaponContent5 > label > select {
     width: 35%;
+}
+.weaponContent6 > label > span {
+    display: grid;
+    width: 65%
+}
+.weaponContent6 > label > div {
+    width: 17%
+}
+.weaponContent6 > label > div > select {
+    width: 100%
+}
+.weaponContent6 > label > span:nth-of-type(2) {
+    width: 1%
 }
 .weapon-item .editor {
     height: auto;
@@ -6027,7 +6046,10 @@ h6 {
     margin-top: 3px;
     margin-bottom: 3px;
 }
-
+.weaponChatRollMsg > div:last-of-type > div {
+    display: flex;
+    justify-content: space-between;
+}
 
 
 .atkCustomTitleContainer {

@@ -905,8 +905,8 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 throwDistanceType: makeStringField("small"),
                 throwQuantity: makeIntField(),
                 trapping: makeBoolField(),
-                trappingTypeF: makeStringField("agi"),
-                trappingTypeS: makeStringField("dex"),
+                trappingTypeF: makeStringField("str"),
+                trappingTypeS: makeStringField("agi"),
             }),
             shield: new foundry.data.fields.SchemaField({
                 type: makeStringField("none"),
