@@ -615,6 +615,8 @@ export const abfalter = {
     prevRoll: "abfalter.prevRoll",
     trapError: "abfalter.trapError",
     trap: "abfalter.trap",
+    trapOppChar: "abfalter.trapOppChar",
+    ammo: "abfalter.ammo",
 };
 abfalter.kiTab = {
     kiAbilities: "abfalter.kiTab.kiAbilities",

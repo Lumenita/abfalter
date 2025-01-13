@@ -237,7 +237,7 @@
                     <span> {{localize "abfalter.primary"}} </span>
                     {{#if system.spiritHomebrew}}
                     <select class="inline-edit" name="system.primDmgT" data-field="system.primDmgT">
-                        {{selectOptions damageTypeSpiritObjList selected=system.primDmgT localize=true}}
+                        {{selectOptions wepDamageTypeSpiritObjList selected=system.primDmgT localize=true}}
                     </select>
                     {{else}}
                     <select class="inline-edit" name="system.primDmgT" data-field="system.primDmgT">
@@ -251,7 +251,7 @@
                     <span> {{localize "abfalter.secondary"}} </span>
                     {{#if system.spiritHomebrew}}
                     <select class="inline-edit" name="system.secDmgT" data-field="system.secDmgT">
-                        {{selectOptions damageTypeSpiritObjList selected=system.secDmgT localize=true}}
+                        {{selectOptions wepDamageTypeSpiritObjList selected=system.secDmgT localize=true}}
                     </select>
                     {{else}}
                     <select class="inline-edit" name="system.secDmgT" data-field="system.secDmgT">

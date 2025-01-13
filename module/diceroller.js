@@ -96,21 +96,22 @@ export async function rollCharacteristic(html, actorData, finalValue, label) {
     ChatMessage.create(chatData);
 }
 
-async function abilityRoll(html, actorData, finalValue, label) {
+async function abilityRoll(html, actor, finalValue, label) {
     let fatigueMod = 0;
     let mod = 0;
     if (html != null) {
         fatigueMod = parseInt(html.find('#fatiguemod').val()) || 0;
         mod = parseInt(html.find('#modifiermod').val()) || 0;
     }
+    let newLabel = game.i18n.localize("abfalter." + label);
 
     let fatigueFinal = Math.floor(fatigueMod * 15);
     let baseDice = "1d100";
     let rollFormula = `${baseDice} + ${finalValue} + ${fatigueFinal} + ${mod}`
-    const rollResult = await new Roll(rollFormula, actorData).roll();
+    const rollResult = await new Roll(rollFormula, actor).roll();
     rollResult.rolledDice = rollResult.total - finalValue - fatigueFinal - mod;
 
-    let fumbleRange = actorData.system.fumleRange.final;  
+    let fumbleRange = actor.system.fumleRange.final;  
     if (finalValue > 199 && fumbleRange > 1) {
         fumbleRange -= 1;
     }
@@ -119,7 +120,7 @@ async function abilityRoll(html, actorData, finalValue, label) {
     rollResult.fumble = false;
     rollResult.explode = false;
     rollResult.doubles = false;
-    rollResult.openRange = actorData.system.rollRange.final;
+    rollResult.openRange = actor.system.rollRange.final;
 
     if (rollResult.rolledDice <= fumbleRange) {
         rollResult.color = "fumbleRoll";
@@ -128,13 +129,13 @@ async function abilityRoll(html, actorData, finalValue, label) {
             rollResult.fumbleLevel += 15;
             fumbleRange--;
         }
-    } else if (rollResult.rolledDice >= actorData.system.rollRange.final) {
+    } else if (rollResult.rolledDice >= actor.system.rollRange.final) {
         rollResult.color = "openRoll";
         rollResult.explode = true;
     } else {
         rollResult.color = "normalRoll";
     }
-    if (actorData.system.rollRange.doubles === true) {
+    if (actor.system.rollRange.doubles === true) {
         rollResult.doubles = true;
         let doubleValues = [11, 22, 33, 44, 55, 66, 77, 88];
         if (doubleValues.includes(rollResult.rolledDice)) {
@@ -146,33 +147,33 @@ async function abilityRoll(html, actorData, finalValue, label) {
     let num = 0;
     const rollData = [];
     rollData[0] = {
-        roll: rollResult.rolledDice, total: rollResult._total, doubles: rollResult.doubles, openRange: rollResult.openRange, label: label, fumbleLevel: rollResult.fumbleLevel,
+        roll: rollResult.rolledDice, total: rollResult._total, doubles: rollResult.doubles, openRange: rollResult.openRange, label: newLabel, fumbleLevel: rollResult.fumbleLevel,
         fumble: rollResult.fumble, explode: rollResult.explode, result: rollResult.result, color: rollResult.color
     };
     const template = "systems/abfalter/templates/dialogues/abilityRoll.hbs"
-    const content = await renderTemplate(template, { rollData: rollData, label: label, actor: actorData });
+    const content = await renderTemplate(template, { rollData: rollData, label: newLabel, actor: actor });
     const chatData = {
         user: game.user.id,
-        speaker: ChatMessage.getSpeaker({ actorData: actorData }),
+        speaker: ChatMessage.getSpeaker({ actor: actor }),
         sound: CONFIG.sounds.dice,
         content: content,
         rolls: [rollResult],
-        flags: { rollData, actorData, num }
+        flags: { rollData, actor, num }
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     ChatMessage.create(chatData);
 }
 
-async function rollCombatWeapon(html, actorData, finalValue, label, complex) {
+async function rollCombatWeapon(html, actor, finalValue, label, complex) {
     let fatigueMod = parseInt(html.find('#fatiguemod').val()) || 0;
     let mod = parseInt(html.find('#modifiermod').val()) || 0;
     let fatigueFinal = Math.floor(fatigueMod * 15);
     let baseDice = "1d100";
     let rollFormula = `${baseDice} + ${finalValue} + ${fatigueFinal} + ${mod}`
-    const rollResult = await new Roll(rollFormula, actorData).roll();
+    const rollResult = await new Roll(rollFormula, actor).roll();
     rollResult.rolledDice = rollResult.total - finalValue - fatigueFinal - mod;
 
-    let fumbleRange = actorData.system.fumleRange.final;
+    let fumbleRange = actor.system.fumleRange.final;
     if (complex == "true") {
         fumbleRange += 2;
     }
@@ -185,7 +186,7 @@ async function rollCombatWeapon(html, actorData, finalValue, label, complex) {
     rollResult.fumble = false;
     rollResult.explode = false;
     rollResult.doubles = false;
-    rollResult.openRange = actorData.system.rollRange.final;
+    rollResult.openRange = actor.system.rollRange.final;
 
     if (rollResult.rolledDice <= fumbleRange) {
         rollResult.color = "fumbleRoll";
@@ -194,13 +195,13 @@ async function rollCombatWeapon(html, actorData, finalValue, label, complex) {
             rollResult.fumbleLevel += 15;
             fumbleRange--;
         }
-    } else if (rollResult.rolledDice >= actorData.system.rollRange.final) {
+    } else if (rollResult.rolledDice >= actor.system.rollRange.final) {
         rollResult.color = "openRoll";
         rollResult.explode = true;
     } else {
         rollResult.color = "normalRoll";
     }
-    if (actorData.system.rollRange.doubles === true) {
+    if (actor.system.rollRange.doubles === true) {
         rollResult.doubles = true;
         let doubleValues = [11, 22, 33, 44, 55, 66, 77, 88];
         if (doubleValues.includes(rollResult.rolledDice)) {
@@ -216,14 +217,14 @@ async function rollCombatWeapon(html, actorData, finalValue, label, complex) {
         fumble: rollResult.fumble, explode: rollResult.explode, result: rollResult.result, color: rollResult.color
     };
     const template = "systems/abfalter/templates/dialogues/abilityRoll.hbs"
-    const content = await renderTemplate(template, { rollData: rollData, label: label, actor: actorData });
+    const content = await renderTemplate(template, { rollData: rollData, label: label, actor: actor });
     const chatData = {
         user: game.user.id,
-        speaker: ChatMessage.getSpeaker({ actorData: actorData }),
+        speaker: ChatMessage.getSpeaker({ actor: actor }),
         sound: CONFIG.sounds.dice,
         content: content,
         rolls: [rollResult],
-        flags: { rollData, actorData, num }
+        flags: { rollData, actor, num }
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     ChatMessage.create(chatData);
@@ -627,6 +628,10 @@ export async function openMeleeWeaponAtkDialogue(actor, label, wepId) {
             }
         }
     }).render(true);
+}
+
+export async function openMeleeWeaponDefDialogue(actor, label, wepId) {
+    
 }
 
 async function weaponRoll(actor, weapon, attackDetails) {

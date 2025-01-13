@@ -882,6 +882,7 @@
     "finBreakage": "Final Breakage",
     "shieldSpd": "Shield Speed",
     "finalSpd": "Final Speed",
+    "ammo": "Ammo",
     
     "settingsTab": {
       "openRoll": "Open Roll Range",
@@ -1071,7 +1072,8 @@
       "spell": "Spell",
       "spellPath": "Spellpath",
       "turnMaint": "Zeon Maint - Turn",
-      "weapon": "Weapon"
+      "weapon": "Weapon",
+      "ammo": "Ammo"
     }
   }
 }

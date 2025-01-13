@@ -3524,9 +3524,6 @@ h6 {
 .prof {
     width: 100%;
 }
-.weapons {
-    width: 100%;
-}
 .currency {
     flex-wrap: wrap;
     width: 100%;
@@ -3737,6 +3734,9 @@ h6 {
 /* #endregion */
 
 /* #region Weapon */
+.weapons {
+    width: 100%;
+}
 .weapons > div {
     border-right: 3px solid var(--boxColor);
     border-left: 3px solid var(--boxColor);
@@ -3875,6 +3875,429 @@ h6 {
     padding: 0 5px;
 }
 /* #endregion */
+/* #region Item Weapon*/
+.attack-entry:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+.attack-entry {
+    margin: 0 0 5px 0;
+}
+.attacks > button {
+    align-self: center;
+    margin: 0px;
+    width: 50%;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent > label, 
+.weaponContent3 > label,
+.weaponContent4 > label,
+.weaponContent5 > label {
+    display: flex;
+    padding: 2px 0;
+}
+.weaponContent > label > span,
+.weaponContent3 > label > span,
+.weaponContent5 > label > span {
+    display: grid;
+}
+.weaponContent > label > span:first-of-type {
+    width: 65%;
+}
+.weaponContent > label > input,
+.weaponContent5 > label > input {
+    width: 17%;
+}
+.weaponContent > label > button {
+    margin: 0px;
+    width: 35%;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent > label > span:nth-of-type(2) {
+    width: 1%;
+    text-align: center;
+}
+.weaponContent > label > span:nth-of-type(3) {
+    width: 17%;
+    text-align: center;
+}
+.weaponContent3 {
+    display: flex;
+    padding: 2px 0 0 0;
+    margin: 2px 0 0 0;
+    border-top: 1px dashed var(--boxColor);
+}
+.weaponContent3 > div, 
+.weaponContent3 > label {
+    width: 30%;
+    margin: 0 2.5% 0 0;
+}
+.weaponContent3 > div > label > span {
+    width: 45%;
+}
+.abfalter.item .sheet-body .details .weaponContent3 .csSelect > label > select {
+    width: 45%;
+}
+.weaponContent3 > label > button {
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent3 > input {
+    width: 17%;
+    display: flex;
+    align-self: center;
+}
+.weaponContent3 > span {
+    width: 1%;
+    text-align: center;
+    display: flex;
+    align-self: center;
+}
+.wepaonContentButtons {
+    display: flex;
+    padding: 2px 0;
+    justify-content: space-between;
+}
+.wepaonContentButtons > button{
+    width: 22%;
+    margin: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent2,
+.weaponContent6 > label {
+    display: flex;
+}
+.weaponContent2 > div,
+.weaponContent2 > label {
+    display: flex;
+    width: 50%;
+    align-items: center;
+}
+.weaponContent2 > div > label {
+    width: 100%;
+}
+.weaponContent2 > div > label > span {
+    display: grid;
+    width: 33%;
+}
+.abfalter.item .sheet-body .details .weaponContent2 .csSelect > label > select {
+    width: 55%;
+}
+.weaponContent2 > label > span {
+    display: grid;
+    justify-content: center;
+    width: 28%;
+    margin: 0 2% 0 0;
+}
+.weaponContent2 > label > input {
+    width: 70%;
+}
+.weaponContent4 > label > span {
+    display: grid;
+    width: 29%;
+}
+.weaponContent4 > label > input {
+    margin: 0 0 0 18%;
+    width: 17%;
+}
+.weaponContent4 > label > select {
+    width: 35%;
+    margin: 0 0 0 1%;
+}
+.weaponContent5 > label > span:first-of-type {
+    width: 36%;
+}
+.weaponContent5 > label > button {
+    margin: 0 2%;
+    width: 25%;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent5 > label > span:nth-of-type(2) {
+    width: 1%;
+    text-align: center;
+}
+.weaponContent5 > label > span:nth-of-type(3) {
+    width: 17%;
+    text-align: center;
+}
+.weaponContent5 > label > select {
+    width: 35%;
+}
+.weaponContent6 > label > span {
+    display: grid;
+    width: 65%
+}
+.weaponContent6 > label > div {
+    width: 17%
+}
+.weaponContent6 > label > div > select {
+    width: 100%
+}
+.weaponContent6 > label > span:nth-of-type(2) {
+    width: 1%
+}
+.weapon-item .editor {
+    height: auto;
+}
+.weapon-item .editor > div * {
+    color: inherit;
+}
+.wepAtkEdit > div:first-of-type {
+    display: flex;
+}
+.wepAtkEdit > div:first-of-type > input {
+    width: 90%
+}   
+.wepAtkEdit > div:first-of-type > a {
+    width: 5%
+}
+.wepAtkEditTop {
+    display: flex;
+    justify-content: space-between;
+    height: 20px;
+    margin: 5px 0 0 0;
+}
+.wepAtkEditTop > label {
+    display: flex;
+    justify-content: start;
+    width: 30%
+}
+.wepAtkEditTop > label > input {
+    display: flex;
+    width: 30%
+}
+.wepAtkEditTop > label > span {
+    display: grid;
+    width: 35%
+}
+.wepAtkEditTop > label > span:nth-of-type(2) {
+    display: flex;
+    width: 1%
+}
+.wepAtkEditTop > label > span:nth-of-type(3) {
+    display: flex;
+    justify-content: center;
+    width: 30%
+}
+.wepAtkThrowableTop,
+.wepAtkOtherTop,
+.wepAtkTrapTop {
+    display: flex;
+    justify-content: start;
+    height: 20px;
+    margin: 5px 0 0 0;
+}
+.wepAtkThrowableTop > button,
+.wepAtkOtherTop > button,
+.wepAtkTrapTop > button {
+    margin: 0 2% 0 0;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.wepAtkThrowableTop > label,
+.wepAtkOtherTop > label,
+.wepAtkTrapTop > label {
+    display: flex;
+    justify-content: start;
+}
+.wepAtkThrowableTop > button,
+.wepAtkTrapTop > button,
+.wepAtkOtherTop > button {
+    width: 21%;
+}
+.wepAtkThrowableTop > button:nth-of-type(2) {
+    width: 11%;
+}
+.wepAtkThrowableTop > button:nth-of-type(3) {
+    width: 27%;
+}
+.wepAtkThrowableTop > label {
+    width: 35%;
+}
+.wepAtkTrapTop > label {
+    width: 54%;
+}
+.wepAtkThrowableTop > label > span,
+.wepAtkTrapTop > label > span {
+    display: grid;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.wepAtkThrowableTop > label > input {
+    width: 26%;
+    margin: 0 0 0 1%;
+}
+.wepAtkTrapTop > label > input {
+    width: 17%;
+    margin: 0 0 0 1%;
+}
+.wepAtkNonEdit > div:first-of-type {
+    display: flex;
+}
+.wepAtkNonEdit > div:first-of-type > span {
+    display: grid;
+    width: 90%;
+    font-size: 17px;
+}
+.wepAtkNonEdit > div:first-of-type > a {
+    width: 5%;
+}
+/* #endregion */
+/* #region Weapon Attack Prompt & Chat Card */
+.wepAtkDiceRoll {
+    padding: 0 3%;
+}
+.wepAtkDiceRoll > label {
+    display: flex;
+    justify-content: space-between;
+}
+.wepAtkDiceRoll > label:last-of-type  {
+    border-bottom: 1px dashed var(--boxColor);
+    padding: 0 0 5px 0;
+    margin: 0 0 5px 0;
+}
+.wepAtkDiceRoll > label > span {
+    display: grid;
+    width: 55%;
+}
+.wepAtkDiceRoll > label > input {
+    width: 45%;
+}
+.wepAtkDiceRoll > label > select {
+    width: 45%;
+}
+.weaponChatRollMsg > div:first-of-type {
+    display: grid;
+    font-size: 23px;
+    justify-items: center;
+}
+.weaponChatRollMsg > div:first-of-type > span:nth-of-type(2) {
+    text-decoration: underline;
+    font-style: italic;
+    font-size: 15px;
+}
+.chatAtkRoll {
+    font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+}
+.chatAtkRoll > span:nth-of-type(1) {
+    padding-left: 7%;
+    max-width: 75%;
+}
+.chatAtkRoll > span:nth-of-type(2) {
+    padding-right: 7%;
+    align-self: center;
+}
+.weaponChatRollMsg > div:nth-last-of-type(2) {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.weaponChatRollMsg > div:last-of-type > div {
+    display: flex;
+    justify-content: space-between;
+}
+.atkCustomTitleContainer {
+  position: relative;
+}
+.atkCustomTitle {
+  visibility: hidden;
+  opacity: 0;
+  background-color: #333;
+  color: #fff; 
+  text-align: center;
+  border-radius: 4px;
+  padding: 5px;
+  position: absolute;
+  top: 100%; /* Position it below the container */
+  z-index: 10;
+  left: 50%;
+  width: 200px;
+  transform: translateX(-50%);
+  transition: opacity 0.2s ease-in-out;
+  font-size: 14px;
+  pointer-events: none;
+}
+.atkCustomTitleContainer:hover .atkCustomTitle {
+  visibility: visible;
+  opacity: 1;
+}
+/* #endregion */
+
+
+/* #region Ammo */
+.ammo > div {
+    display: flex;
+}
+.baseAbfalter .armory .ammo span {
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+}
+.ammo > div:first-of-type {
+    border-bottom: 1px solid var(--boxColor);
+}
+.ammo > div:last-of-type {
+    place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+}
+.ammoContainerInfo,
+.ammoContainerInfo > div,
+.ammoContainerInfo > div > div {
+    display: flex;
+}
+.ammo-item {
+    padding: 3px;
+    width: 100%;
+}
+.ammo-item-img {
+    border: 1px solid #000000;
+    min-width: 35px;
+    width: 35px;
+    height: 35px; 
+    object-fit: cover; 
+    margin-right: 5px; 
+}
+.ammoContainerInfo > div {
+    width: 100%;
+    align-items: center;
+    container-type: inline-size;
+}
+.ammoContainerInfo > div > span:first-of-type {
+    width: 50%;
+    font-size: 18px;
+}
+.ammoContainerInfo > div > div:first-of-type {
+    width: 15%;
+}
+.ammoContainerInfo > div > div:nth-of-type(2) {
+    width: 10%;
+}
+.ammoContainerInfo > div > div  {
+    width: 10%;
+}
+.ammoContainerInfo > div > span:last-of-type{
+    width: 10%;
+}
+.ammoContainerInfo > div > a {
+    width: 5%;
+}
+
+/* #endregion*/
 
 /* #region Currency */
 .currency > div {
@@ -4802,34 +5225,33 @@ h6 {
     border-bottom: 1px solid var(--boxColor);
     font-size: 20px;
 }
+.abfalter.item .sheet-body .details .sectionItem .csSelect > label,
+.abfalter.item .sheet-body .details > fieldset > label,
 .abfalter.item .sheet-body .details .csSelect > label,
 .abfalter.item .sheet-body .details > label {
     display: flex;
     justify-content: space-between;
     padding: 2px 0;
 }
+.abfalter.item .sheet-body .details .sectionItem .csSelect > label > span,
+.abfalter.item .sheet-body .details > fieldset > label > span,
 .abfalter.item .sheet-body .details .csSelect > label > span,
 .abfalter.item .sheet-body .details > label > span {
     display: grid;
 }
+.abfalter.item .sheet-body .details .sectionItem .csSelect > label > select,
+.abfalter.item .sheet-body .details > fieldset > label > input,
 .abfalter.item .sheet-body .details .csSelect > label > select,
 .abfalter.item .sheet-body .details > label > input {
     width: 35%;
 }
-.abfalter.item .sheet-body .details .csSelect::after {
+.abfalter.item .sheet-body .details .csSelect::after,
+.abfalter.item .sheet-body .details .sectionItem .csSelect::after {
     top: 0px;
 }
 .abfalter.item .sheet-body {
     height: fit-content;
 }
-/*
-    .itemWindow {
-    min-width: 475px;
-}
-.itemWindowSmall {
-    min-width: 375px;
-}
-*/
 
 /* ----------------------------------------- */
 /*  Item Psychic Matrix Details Tab          */
@@ -5708,373 +6130,54 @@ h6 {
     border: none;
 }
 /*
-    ***************
-    ---------------
-       New Stuff
-    ---------------
-    ***************
+    ****************
+    ----------------
+      General Item
+    ----------------
+    ****************
 */
-/* #region Item Weapon*/
-.attack-entry:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-.attack-entry {
-    margin: 0 0 5px 0;
-}
-.attacks > button {
-    align-self: center;
-    margin: 0px;
-    width: 50%;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-}
-.weaponContent > label, 
-.weaponContent3 > label,
-.weaponContent4 > label,
-.weaponContent5 > label {
+.sectionItem {
     display: flex;
-    padding: 2px 0;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: 4px;
+    border: 1px solid var(--boxColor);
+    margin: 0;
+    max-width: 100%;
+    container-type: inline-size;
 }
-.weaponContent > label > span,
-.weaponContent3 > label > span,
-.weaponContent5 > label > span {
-    display: grid;
-}
-.weaponContent > label > span:first-of-type {
-    width: 65%;
-}
-.weaponContent > label > input,
-.weaponContent5 > label > input {
-    width: 17%;
-}
-.weaponContent > label > button {
-    margin: 0px;
-    width: 35%;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-}
-.weaponContent > label > span:nth-of-type(2) {
-    width: 1%;
-    text-align: center;
-}
-.weaponContent > label > span:nth-of-type(3) {
-    width: 17%;
-    text-align: center;
-}
-.weaponContent3 {
+.sectionItem > legend {
     display: flex;
-    padding: 2px 0 0 0;
-    margin: 2px 0 0 0;
-    border-top: 1px dashed var(--boxColor);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--boxColor);
+    padding: 0 6px;
 }
-.weaponContent3 > div, 
-.weaponContent3 > label {
-    width: 30%;
-    margin: 0 2.5% 0 0;
-}
-.weaponContent3 > div > label > span {
-    width: 45%;
-}
-.abfalter.item .sheet-body .details .weaponContent3 .csSelect > label > select {
-    width: 45%;
-}
-.weaponContent3 > label > button {
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-}
-.weaponContent3 > input {
-    width: 17%;
+.sectionActor {
     display: flex;
-    align-self: center;
+    flex-direction: column;
+    border: 3px solid var(--boxColor);
+    padding: 0 10px;
+    margin: 0;
+    max-width: 100%;
+    container-type: inline-size;
 }
-.weaponContent3 > span {
-    width: 1%;
-    text-align: center;
+.sectionActor > legend {
     display: flex;
-    align-self: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--boxColor);
+    padding: 0 6px;
 }
-.wepaonContentButtons {
-    display: flex;
-    padding: 2px 0;
-    justify-content: space-between;
+.sectionActor > legend > span {
+    font-size: 20px;
+    color: var(--boxColor) !important;
 }
-.wepaonContentButtons > button{
-    width: 22%;
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
+.sectionActor > div {
+    margin: 0 -10px;
 }
-.weaponContent2,
-.weaponContent6 > label {
-    display: flex;
+.flexColumn {
+    flex-direction: column;
 }
-.weaponContent2 > div,
-.weaponContent2 > label {
-    display: flex;
-    width: 50%;
-    align-items: center;
-}
-.weaponContent2 > div > label {
-    width: 100%;
-}
-.weaponContent2 > div > label > span {
-    display: grid;
-    width: 33%;
-}
-.abfalter.item .sheet-body .details .weaponContent2 .csSelect > label > select {
-    width: 55%;
-}
-.weaponContent2 > label > span {
-    display: grid;
-    justify-content: center;
-    width: 28%;
-    margin: 0 2% 0 0;
-}
-.weaponContent2 > label > input {
-    width: 70%;
-}
-.weaponContent4 > label > span {
-    display: grid;
-    width: 29%;
-}
-.weaponContent4 > label > input {
-    margin: 0 0 0 18%;
-    width: 17%;
-}
-.weaponContent4 > label > select {
-    width: 35%;
-    margin: 0 0 0 1%;
-}
-.weaponContent5 > label > span:first-of-type {
-    width: 36%;
-}
-.weaponContent5 > label > button {
-    margin: 0 2%;
-    width: 25%;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-}
-.weaponContent5 > label > span:nth-of-type(2) {
-    width: 1%;
-    text-align: center;
-}
-.weaponContent5 > label > span:nth-of-type(3) {
-    width: 17%;
-    text-align: center;
-}
-.weaponContent5 > label > select {
-    width: 35%;
-}
-.weaponContent6 > label > span {
-    display: grid;
-    width: 65%
-}
-.weaponContent6 > label > div {
-    width: 17%
-}
-.weaponContent6 > label > div > select {
-    width: 100%
-}
-.weaponContent6 > label > span:nth-of-type(2) {
-    width: 1%
-}
-.weapon-item .editor {
-    height: auto;
-}
-.weapon-item .editor > div * {
-    color: inherit;
-}
-.wepAtkEdit > div:first-of-type {
-    display: flex;
-}
-.wepAtkEdit > div:first-of-type > input {
-    width: 90%
-}   
-.wepAtkEdit > div:first-of-type > a {
-    width: 5%
-}
-.wepAtkEditTop {
-    display: flex;
-    justify-content: space-between;
-    height: 20px;
-    margin: 5px 0 0 0;
-}
-.wepAtkEditTop > label {
-    display: flex;
-    justify-content: start;
-    width: 30%
-}
-.wepAtkEditTop > label > input {
-    display: flex;
-    width: 30%
-}
-.wepAtkEditTop > label > span {
-    display: grid;
-    width: 35%
-}
-.wepAtkEditTop > label > span:nth-of-type(2) {
-    display: flex;
-    width: 1%
-}
-.wepAtkEditTop > label > span:nth-of-type(3) {
-    display: flex;
-    justify-content: center;
-    width: 30%
-}
-.wepAtkThrowableTop,
-.wepAtkOtherTop,
-.wepAtkTrapTop {
-    display: flex;
-    justify-content: start;
-    height: 20px;
-    margin: 5px 0 0 0;
-}
-.wepAtkThrowableTop > button,
-.wepAtkOtherTop > button,
-.wepAtkTrapTop > button {
-    margin: 0 2% 0 0;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-}
-.wepAtkThrowableTop > label,
-.wepAtkOtherTop > label,
-.wepAtkTrapTop > label {
-    display: flex;
-    justify-content: start;
-}
-.wepAtkThrowableTop > button,
-.wepAtkTrapTop > button,
-.wepAtkOtherTop > button {
-    width: 21%;
-}
-.wepAtkThrowableTop > button:nth-of-type(2) {
-    width: 11%;
-}
-.wepAtkThrowableTop > button:nth-of-type(3) {
-    width: 27%;
-}
-.wepAtkThrowableTop > label {
-    width: 35%;
-}
-.wepAtkTrapTop > label {
-    width: 54%;
-}
-.wepAtkThrowableTop > label > span,
-.wepAtkTrapTop > label > span {
-    display: grid;
-    white-space: nowrap;
-    overflow: hidden;
-}
-.wepAtkThrowableTop > label > input {
-    width: 26%;
-    margin: 0 0 0 1%;
-}
-.wepAtkTrapTop > label > input {
-    width: 17%;
-    margin: 0 0 0 1%;
-}
-.wepAtkNonEdit > div:first-of-type {
-    display: flex;
-}
-.wepAtkNonEdit > div:first-of-type > span {
-    display: grid;
-    width: 90%;
-    font-size: 17px;
-}
-.wepAtkNonEdit > div:first-of-type > a {
-    width: 5%;
-}
-/* #endregion */
-/* #region Weapon Attack Prompt & Chat Card */
-.wepAtkDiceRoll {
-    padding: 0 3%;
-}
-.wepAtkDiceRoll > label {
-    display: flex;
-    justify-content: space-between;
-}
-.wepAtkDiceRoll > label:last-of-type  {
-    border-bottom: 1px dashed var(--boxColor);
-    padding: 0 0 5px 0;
-    margin: 0 0 5px 0;
-}
-.wepAtkDiceRoll > label > span {
-    display: grid;
-    width: 55%;
-}
-.wepAtkDiceRoll > label > input {
-    width: 45%;
-}
-.wepAtkDiceRoll > label > select {
-    width: 45%;
-}
-
-.weaponChatRollMsg > div:first-of-type {
-    display: grid;
-    font-size: 23px;
-    justify-items: center;
-}
-.weaponChatRollMsg > div:first-of-type > span:nth-of-type(2) {
-    text-decoration: underline;
-    font-style: italic;
-    font-size: 15px;
-}
-.chatAtkRoll {
-    font-size: 17px;
-    display: flex;
-    justify-content: space-between;
-}
-.chatAtkRoll > span:nth-of-type(1) {
-    padding-left: 7%;
-    max-width: 75%;
-}
-.chatAtkRoll > span:nth-of-type(2) {
-    padding-right: 7%;
-    align-self: center;
-}
-.weaponChatRollMsg > div:nth-last-of-type(2) {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
-}
-.weaponChatRollMsg > div:last-of-type > div {
-    display: flex;
-    justify-content: space-between;
-}
-
-
-.atkCustomTitleContainer {
-  position: relative;
-}
-.atkCustomTitle {
-  visibility: hidden;
-  opacity: 0;
-  background-color: #333;
-  color: #fff; 
-  text-align: center;
-  border-radius: 4px;
-  padding: 5px;
-  position: absolute;
-  top: 100%; /* Position it below the container */
-  z-index: 10;
-  left: 50%;
-  width: 200px;
-  transform: translateX(-50%);
-  transition: opacity 0.2s ease-in-out;
-  font-size: 14px;
-  pointer-events: none;
-}
-.atkCustomTitleContainer:hover .atkCustomTitle {
-  visibility: visible;
-  opacity: 1;
-}
-/* #endregion */

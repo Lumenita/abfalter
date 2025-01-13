@@ -28,6 +28,7 @@ Hooks.once("init", async () => {
     // Register data models
     CONFIG.Actor.dataModels.character = actorDataModel;
     CONFIG.Item.dataModels.weapon = weaponDataModel;
+    CONFIG.Item.dataModels.ammo = ammoDataModel;
 
     CONFIG.time.roundTime = 6;
 
@@ -849,6 +850,23 @@ class actorDataModel extends foundry.abstract.DataModel {
 
     get type() {
         return 'character'
+    }
+}
+
+class ammoDataModel extends foundry.abstract.DataModel {
+    static defineSchema() {
+        return {
+            description: makeHtmlField(),
+            price: makeIntField(),
+            weight: makeIntField(),
+            quantity: makeIntField(),
+            damage: makeIntField(),
+            dmgType: makeStringField(),
+            dmgMod: makeStringField(),
+            break: makeIntField(),
+            atPen: makeIntField(),
+            expand: makeBoolField()
+        }
     }
 }
 

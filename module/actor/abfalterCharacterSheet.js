@@ -239,6 +239,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
         sheetData.arsMagnuses = baseData.items.filter(function (item) { return item.type == "arsMagnus" });
         sheetData.elans = baseData.items.filter(function (item) { return item.type == "elan" });
         sheetData.monsterPowers = baseData.items.filter(function (item) { return item.type == "monsterPower" });
+        sheetData.ammos = baseData.items.filter(function (item) { return item.type == "ammo" });
 
         return sheetData;
     }
@@ -316,6 +317,13 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 let num = parseInt($(ev.currentTarget).attr("data-value"));
                 return item.update({ "system.melee.throwQuantity": Math.floor(item.system.melee.throwQuantity + num) });
             });
+            html.find('.ammoQ').click(ev => {
+                let element = ev.currentTarget;
+                let itemId = element.closest(".item").dataset.itemId;
+                let item = this.actor.items.get(itemId);                
+                let num = parseInt($(ev.currentTarget).attr("data-value"));
+                return item.update({ "system.quantity": Math.floor(item.system.quantity + num) });
+            });
             html.find(".kiAbility").click(ev => {
                 let value = $(ev.currentTarget).attr("data-ability");
                 let value2 = $(ev.currentTarget).attr("data-ability2");
@@ -383,6 +391,9 @@ export default class abfalterCharacterSheet extends ActorSheet {
         switch (dataset.value) {
             case 'melee':
                 diceFunctions.openMeleeWeaponAtkDialogue(this.actor, dataset.label, dataset.type);
+                break;
+            case 'meleeDef':
+                diceFunctions.openMeleeWeaponDefDialogue(this.actor, dataset.label, dataset.type);
                 break;
             case 'ranged':
                 console.log("Not Implemented");

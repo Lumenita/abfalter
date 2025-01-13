@@ -221,15 +221,9 @@
                             <div class="wepContainer2">
                                 <div>
                                     {{#ifEquals system.info.type "melee"}}
-                                    
                                     <button type="button" class="weaponRoll" data-type="{{_id}}" data-label="attack" data-value="{{system.info.type}}">
                                         {{localize "abfalter.attack"}}: {{system.derived.baseAtk}}
                                     </button>
-                                     
-                                    <!-- WIP
-                                    <button type="button" class="combatRoll" data-roll="{{system.derived.baseAtk}}" data-label="{{localize "abfalter.attack"}}" data-type="weaponCombatRoll" data-ability="{{system.complex}}">
-                                        {{localize "abfalter.attack"}}: {{system.derived.baseAtk}}
-                                    </button>-->
                                     {{/ifEquals}}
                                     {{#ifEquals system.info.type "ranged"}}
                                     <button type="button" class="combatRoll" data-roll="{{system.derived.baseAtk}}" data-label="{{localize "abfalter.attack"}}" data-type="weaponCombatRoll" data-ability="{{system.complex}}">
@@ -308,6 +302,51 @@
                 <a class="toggleBoolean {{#if system.itemToggle.weapon}}armorpenalty{{/if}}" data-label="system.itemToggle.weapon" data-ability="{{system.itemToggle.weapon}}"><i class="{{#if system.itemToggle.weapon}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
         </div>
+
+        <fieldset class="ammo sectionActor hidden">
+            <legend>
+                <span>{{localize "abfalter.ammo"}}</span>
+            </legend>
+            <div>
+                <span> {{localize "abfalter.name"}} </span>
+                <span> {{localize "abfalter.price"}} </span>
+                <span> {{localize "abfalter.weight"}} </span>
+                <span> {{localize "abfalter.quantity"}} </span>
+                <span> {{localize "abfalter.dmgShort"}} </span>
+            </div>
+            <div class="flexColumn {{#if system.itemToggle.ammo}}item-list{{/if}}">
+                {{#each ammos as |ammo id|}}
+                <div class="ammo-item item normal-item" data-item-id="{{ammo._id}}">
+                    <div class="ammoContainerInfo">
+                        <img class="ammo-item-img" src="{{img}}"/>
+                        <div>
+                            <span> {{ammo.name}} </span>
+                            <div>
+                                <span> {{system.price}} </span>
+                                <span> Crowns </span>
+                            </div>
+                            <div>
+                                <span> icon</span>
+                                <span> {{system.weight}} </span>
+                            </div>
+                            <div>
+                                <a class="ammoQ" data-value="-1"><i class="fas fa-minus"> </i></a>
+                                <span> {{system.quantity}} </span>
+                                <a class="ammoQ" data-value="1"><i class="fas fa-plus"></i> </a>
+                            </div>
+                            <span> Dmg: {{system.damage}} </span>
+                            <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i
+                                        class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            <div>
+                <a class="item-control item-create" data-type="ammo"><i class="fas fa-plus"></i> {{localize "abfalter.addAmmo"}} </a>
+                <a class="toggleBoolean {{#if system.itemToggle.ammo}}armorpenalty{{/if}}" data-label="system.itemToggle.ammo" data-ability="{{system.itemToggle.ammo}}"><i class="{{#if system.itemToggle.ammo}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
+            </div>
+        </fieldset>
 
         <div class="inventory">
             <h5> {{localize "abfalter.inventory"}} </h5>

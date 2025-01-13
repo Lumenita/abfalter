@@ -249,6 +249,10 @@ export default class abfalterItem extends Item {
 
     }
 
+    prepareAmmo() {
+        //Global Setting
+        this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
+    }
     prepareMentalPattern() {
         if (this.system.toggle == true) {
             this.system.finalCost = Math.floor(+this.system.cost + +this.system.cancelCost);
@@ -356,11 +360,11 @@ export default class abfalterItem extends Item {
                     this.system.localizedName = game.i18n.localize('abfalter.dex');
                     break;
                 case "int":
-                    this.system.mod = this.parent.system.stats.Perception.mod;
+                    this.system.mod = this.parent.system.stats.Intelligence.mod;
                     this.system.localizedName = game.i18n.localize('abfalter.int');
                     break;
                 case "per":
-                    this.system.mod = this.parent.system.stats.Intelligence.mod;
+                    this.system.mod = this.parent.system.stats.Perception.mod;
                     this.system.localizedName = game.i18n.localize('abfalter.per');
                     break;
                 case "pow":

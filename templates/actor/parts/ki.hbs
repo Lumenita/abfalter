@@ -3,7 +3,7 @@
         <h5> {{localize "abfalter.kiTab.kiAbilities"}} </h5>
         <div class="kiSubsection">
             <div>
-                <span title="{{localize "abfalter.kiTab.descUseOfKi"}}"> {{localize "abfalter.useOfKi"}} </span>
+                <span title="{{localize "abfalter.kiTab.descUseOfKi"}}"> {{localize "abfalter.kiTab.useOfKi"}} </span>
                 <button type="button" class="kiAbility {{#if system.kiAbility.useOfKi.status}}{{#if system.kiAbility.useOfKi.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                         data-label="system.kiAbility.useOfKi.status" data-label2="system.kiAbility.useOfKi.status2" data-ability="{{system.kiAbility.useOfKi.status}}" data-ability2="{{system.kiAbility.useOfKi.status2}}">
                     <span> {{system.kiAbility.useOfKi.cost}} </span>
@@ -473,7 +473,7 @@
         <h5 class="{{#if system.toggles.nemesisVis}}hidden{{/if}}"> Nemesis Abilities </h5>
         <div class="kiSubsection {{#if system.toggles.nemesisVis}}hidden{{/if}}">
             <div>
-                <span title="{{localize "abfalter.kiTab.descuseOfNemesis"}}"> {{localize "abfalter.useOfNemesis"}} </span>
+                <span title="{{localize "abfalter.kiTab.descuseOfNemesis"}}"> {{localize "abfalter.kiTab.useOfNemesis"}} </span>
                 <button type="button" class="kiAbility {{#if system.kiAbility.useOfNemesis.status}}{{#if system.kiAbility.useOfNemesis.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
                         data-label="system.kiAbility.useOfNemesis.status" data-label2="system.kiAbility.useOfNemesis.status2" data-ability="{{system.kiAbility.useOfNemesis.status}}" data-ability2="{{system.kiAbility.useOfNemesis.status2}}">
                     <span> {{system.kiAbility.useOfNemesis.cost}} </span>
