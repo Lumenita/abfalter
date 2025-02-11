@@ -51,6 +51,15 @@
       "type": "JournalEntry",
       "private": false,
       "flags": {}
+    },
+    {
+      "name": "classes",
+      "label": "Classes",
+      "system": "abfalter",
+      "path": "./packs/classes",
+      "type": "Item",
+      "private": false,
+      "flags": {}
     }
   ],
   "primaryTokenAttribute": "lp",
