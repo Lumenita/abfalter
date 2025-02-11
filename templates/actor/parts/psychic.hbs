@@ -45,7 +45,7 @@
             <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.ppotential.temp" value="{{system.ppotential.temp}}" /> </label>
             <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.ppotential.final" value="{{system.ppotential.final}}" readonly/> </label>
             <div>
-                <button type="button" class="rollable" data-roll="{{system.ppotential.final}}" data-label="{{localize "abfalter.psychicPotential"}}" data-type="potentialRoll">
+                <button type="button" class="rollable" data-roll="{{system.ppotential.final}}" data-label="psychicPotential" data-type="potentialRoll">
                     <span> <i class="fas fa-dice-d20"></i> </span>
                 </button>
             </div>
@@ -68,22 +68,22 @@
             <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.pproj.final" value="{{system.pproj.final}}" readonly /> </label>
             {{#if system.toggles.psychicModuleStatus}}
             <div class="pmodButton">
-                <button type="button" class="combatRoll" data-roll="{{system.pproj.atkModule}}" data-label="{{localize "abfalter.attack"}}" data-type="combatRoll">
+                <button type="button" class="combatRoll" data-roll="{{system.pproj.atkModule}}" data-label="attack" data-type="combatRoll">
                     <span> {{localize "abfalter.attack"}}: {{system.pproj.atkModule}} </span>
                 </button>
                 {{#if system.toggles.psychicDodgeStatus}}
-                <button type="button" class="combatRoll" data-roll="{{system.pproj.dodModule}}" data-label="{{localize "abfalter.dodge"}}" data-type="combatRoll">
+                <button type="button" class="combatRoll" data-roll="{{system.pproj.dodModule}}" data-label="dodge" data-type="combatRoll">
                     <span> {{localize "abfalter.dodge"}}: {{system.pproj.dodModule}} </span>
                 </button>
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{system.pproj.defModule}}" data-label="{{localize "abfalter.block"}}" data-type="combatRoll">
+                <button type="button" class="combatRoll" data-roll="{{system.pproj.defModule}}" data-label="block" data-type="combatRoll">
                     <span> {{localize "abfalter.block"}}: {{system.pproj.defModule}} </span>
                 </button>
                 {{/if}}
             </div>
             {{else}}
             <div>
-                <button type="button" class="combatRoll" data-roll="{{system.pproj.final}}" data-label="{{localize "abfalter.psyProj"}}" data-type="combatRoll">
+                <button type="button" class="combatRoll" data-roll="{{system.pproj.final}}" data-label="psyProj" data-type="combatRoll">
                     <span> <i class="fas fa-dice-d20"></i> </span>
                 </button>
             </div>

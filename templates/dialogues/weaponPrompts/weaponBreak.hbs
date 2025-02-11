@@ -1,0 +1,22 @@
+<form class="baseAbfalter">
+  <body>
+    <div class="wepAtkDiceRoll">
+        {{#ifEquals weaponType "ranged"}}
+        <label>
+            <span> {{localize "abfalter.ammo"}}: </span>
+            <select id="ammoDropdown"></select>
+        </label>
+        {{/ifEquals}}
+
+        <label>
+            <span> {{localize "abfalter.atkType"}}: </span>
+            <select id="attackSelect"></select>
+        </label>
+
+        <label> 
+            <span> {{localize "abfalter.dialogs.modifier"}} </span>
+            <input type="number" id="modifierMod" value="0" /> 
+        </label>
+    </div>
+  </body>
+</form>

@@ -16,8 +16,8 @@
 
             <ul class="summary flexrow">
                 <li></li>
-                <li></li>
-                <li></li>
+                <li>{{localize "abfalter.atPen"}}: {{system.atPen}}</li>
+                <li>{{localize "abfalter.damage"}}: {{system.damage}}</li>
             </ul>
         </div>
     </header>
@@ -34,57 +34,66 @@
         {{!-- Description Tab --}}
         <div class="tab description flexcol" data-group="primary" data-tab="description">
             <h6> {{localize "abfalter.description"}} </h6>
-            <Span> WIP 1/12/25</Span>
-
             {{editor system.description class="itemDescInfo" target="system.description" button=true editable=editable engine="prosemirror"}}
         </div>
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h6> {{localize "abfalter.ammo"}} {{ localize "abfalter.details" }} </h6>
-                <label> <span> {{localize "abfalter.price"}} </span> <input type="number" name="system.price" value="{{system.price}}" /> </label>
+            <h6> {{ localize "abfalter.generalDetails" }} </h6>
 
-            <fieldset class="sectionItem">
-                <legend>
-                    <span> {{localize "abfalter.itemDets"}} </span>
-                </legend>
-                <label> <span> {{localize "abfalter.weight"}} </span> <input type="number" name="system.weight" value="{{system.weight}}" /> </label>
-                <label> <span> {{localize "abfalter.quantity"}} </span> <input type="number" name="system.quantity" value="{{system.quantity}}" /> </label>
-            </fieldset>
-
-            <fieldset class="sectionItem">
-                <legend>
-                    <span> {{localize "abfalter.ammo"}} {{ localize "abfalter.details" }} </span>
-                </legend>
-                <label> <span> {{localize "abfalter.damage"}} </span> <input type="number" name="system.damage" value="{{system.damage}}" /> </label>
-
-                <div class="csSelect">
-                    <label> 
-                        <span> {{localize "abfalter.dmgType"}} </span>
-                        {{#if system.spiritHomebrew}}
-                        <select name="system.dmgType" >
-                            {{selectOptions wepDamageTypeSpiritObjList selected=system.dmgType localize=true}}
-                        </select>
-                        {{else}}
-                        <select name="system.dmgType">
-                            {{selectOptions wepDamageTypeObjList selected=system.dmgType localize=true}}
-                        </select>
-                        {{/if}}
-                    </label>
-                </div>
+            <div class="itemContentSelectInput"> 
+                <label for="ammoPriceInput">
+                    <span> {{localize "abfalter.pricePerItem"}} </span>
+                </label>
                 <div class="csSelect">
                     <label>
-                        <span> {{localize "abfalter.dmgMod"}} </span> 
-                        <select name="system.dmgMod">
-                            {{selectOptions damageModObjList selected=system.dmgMod localize=true}}
+                        <select name="system.priceType">
+                            {{selectOptions currencyOptions selected=system.priceType localize=true}}
                         </select>
                     </label>
                 </div>
+                <input type="number" id="ammoPriceInput" name="system.price" value="{{system.price}}" />
+                <span> | </span>
+                <span> {{system.priceTotal}} </span>
+            </div>
 
-                <label> <span> {{localize "abfalter.breakage"}} </span> <input type="number" name="system.break" value="{{system.break}}" /> </label>
-                <label> <span> {{localize "abfalter.atPen"}} </span> <input type="number" name="system.atPen" value="{{system.atPen}}" /> </label>
-            </fieldset>
-            
+            <div class="itemContentSelectInput weightContainer"> 
+                <label for="AmmoWeightInput">
+                    <span> {{localize "abfalter.weightPerItem"}} </span>
+                </label>
+                <div class="csSelect weightType">
+                    <label>
+                        <select name="system.weightType">
+                            {{selectOptions weightList selected=system.weightType localize=true}}
+                        </select>
+                    </label>
+                </div>
+                <input type="number" id="AmmoWeightInput" name="system.weight" value="{{system.weight}}" />
+                <span> | </span>
+                <span> {{system.weightTotal}} </span>
+            </div>
+
+            <label> <span> {{localize "abfalter.quantity"}} </span> <input type="number" name="system.quantity" value="{{system.quantity}}" /> </label>
+            <label> <span> {{localize "abfalter.presence"}} </span> <input type="number" name="system.presence" value="{{system.presence}}" /> </label>
+
+            <h6> {{ localize "abfalter.ammoDetails" }} </h6>
+            <label> <span> {{localize "abfalter.breakage"}} </span> <input type="number" name="system.break" value="{{system.break}}" /> </label>
+            <label> <span> {{localize "abfalter.atPen"}} </span> <input type="number" name="system.atPen" value="{{system.atPen}}" /> </label>
+            <div class="csSelect">
+                <label> 
+                    <span> {{localize "abfalter.ammoDmgType"}} </span>
+                    {{#if system.spiritHomebrew}}
+                    <select name="system.dmgType" >
+                        {{selectOptions wepDamageTypeSpiritObjList selected=system.dmgType localize=true}}
+                    </select>
+                    {{else}}
+                    <select name="system.dmgType">
+                        {{selectOptions wepDamageTypeObjList selected=system.dmgType localize=true}}
+                    </select>
+                    {{/if}}
+                </label>
+            </div>
+            <label> <span> {{localize "abfalter.damage"}} </span> <input type="number" name="system.damage" value="{{system.damage}}" /> </label>
         </div>
 
     </section>

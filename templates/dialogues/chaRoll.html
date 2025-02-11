@@ -1,5 +1,5 @@
 <div>
-    <div class="secondarychatmsg">
+    <div class="primaryRoll">
         <div>
             <span> {{rollResult.data.name}} </span>
         </div>
@@ -8,12 +8,12 @@
             <span class="{{rollResult.color}}"> {{rollResult.newTotal}} </span>
         </div>
     </div>
-    <div>
+    <div class="primaryExplodeRoll">
         {{#if rollResult.explode}}
-        <span> {{localize "abfalter.dialogs.openRoll"}} </span>
+        <span style="color: green;"> {{localize "abfalter.dialogs.openRoll"}} </span>
         {{/if}}
         {{#if rollResult.fumble}}
-        <span> {{localize "abfalter.dialogs.fumble"}} </span>
+        <span style="color: red;"> {{localize "abfalter.dialogs.fumble"}} </span>
         {{/if}}
     </div>
 </div>

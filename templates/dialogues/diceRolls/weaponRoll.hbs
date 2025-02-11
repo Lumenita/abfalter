@@ -2,6 +2,9 @@
     <div>
         <span> {{actor.name}} </span>
         <span> {{attackDetails.wepName}} </span>
+        {{#ifEquals attackDetails.wepType "ranged"}}
+        <span> {{attackDetails.ammoName}} </span>
+        {{/ifEquals}}
     </div>
 
     {{#each rollData as |roll i|}}
@@ -10,6 +13,12 @@
         <span class="{{roll.color}}"> {{roll.total}} </span>
         <div class="atkCustomTitle">{{roll.formula}}</div>
     </div>
+    {{#if roll.showSeverity}}
+    <div class="wepFumbleSeverity" title="{{rollResult.result}}">
+        <span> {{localize "abfalter.dialogs.fumbleSeverity"}} </span>
+        <span class="fumbleRoll"> -{{roll.fumbleS}} </span>
+    </div>
+    {{/if}}
     {{/each}}
 
     <div>
@@ -28,13 +37,7 @@
         <button class="wepOpenRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
         {{/if}}
         {{#if roll.fumble}}
-        <button class="secFumbleRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
-        {{/if}}
-        {{#if roll.showSeverity}}
-        <div class="fumbleSeverity" title="{{rollResult.result}}">
-            <span> {{localize "abfalter.dialogs.fumbleSeverity"}} </span>
-            <span class="fumbleRoll"> {{roll.roll}} </span>
-        </div>
+        <button class="wepFumbleRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
         {{/if}}
     </label>
     {{/each}}

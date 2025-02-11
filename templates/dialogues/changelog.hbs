@@ -3,10 +3,68 @@
         <div>
             <span>If you wish to support me or the system click -> <a href="https://ko-fi.com/luminitatv">Thank you!</a></span>
         </div>
+        <h5> Change Log </h5>
     </header>
 
-    <body>
-        <h5> Change Log </h5>
+    <div class="changelogBody">
+        <div class="changelogSection">
+            <h6>v1.4.6 - 2025-02-10</h6>
+            <span>
+                Hello all! hope all is going well. I missed last month 1 year anniversary of the system, but I have been working on it. This update brings ranged weapons and ammo into the system. As a 
+                little bonus, I added a class compendium with the official classes and my rebalances and I also added a dp calculator for your current class. It does NOT support multi-classing yet, but it
+                is something I am considering for the future. Other than than theres a bunch of small bug fixes, localization fixes, and visual fixes.
+                The current goal is still to finish the weapon item completely with shields, defensives and more flavor texts on the chat messages, but on the side I will overhaul the inventory item and potentially the armor
+                which will also include weight and price. Other than that, if you find any mistakes in the compendiums or bugs, please keep me updated as always.
+                When I have more time I will continue to update my little tutorial compendium.
+                Enjoy!
+            </span> 
+
+            <div class="changelogList">
+                <h5>Added</h5>
+                <ul>
+                    <li>Ranged weapons attacks</li>
+                    <li>Ammo implementation for ranged weapons</li>
+                    <li>Ammo have weight and price which marks the start of the weight system and a price system which I have in mind, more on this with future updates.</li>
+                    <li>Classes Compendium with the system which include Artorians Class Rebalances and the official classes</li>
+                    <li>Class Item update which allows users to input custom dp costs for all skills</li>
+                    <li>Character DP allocation calculator located under the settings tab > general settings which calculates your current dp allocation based on your current class (does NOT support multi-class)</li>
+                    <li>Breakage rolls now go off of attacks, for ranged weapons ammo also affects final breakage</li>
+                    <li>The 1.4.5 changelog which I forgot last time</li>
+                </ul>
+            </div>
+
+            <div class="changelogList">
+                <h5>Fixed</h5>
+                <ul>
+                    <li>Open Rolls and Fumbles would delete actor name from the chat card</li>
+                    <li>A BUNCH of localization issues which would show abfalter.words</li>
+                    <li>Newly created actors would have 4 secondaries which would show abfalter.words</li>
+                    <li>Formatting with characteristic rolls and resistance rolls which would have the border lines at the wront place</li>
+                    <li>Trapping Rolls now properly show when you open roll and fumble</li>
+                    <li>Added a scroll bar for the changelog and a max height so it doesnt fill the page upon opening it</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="changelogSection">
+            <h6>v1.4.5 - 2025-01-12</h6>
+            <span>
+                A small hotfix for some bugs
+            </span> 
+
+            <div class="changelogList">
+                <h5>Fixed</h5>
+                <ul>
+                    <li>Bug where actor name disappeared on open roll</li>
+                    <li>Custom secondary abilities had int and per bonuses switched with each other</li>
+                    <li>Custom secondary abilities had int and per bonuses switched with each other</li>
+                    <li>Weapons would not open when spirit rule was enabled</li>
+                    <li>Certain labels for secondary abilities where not showing correctly</li>
+                    <li>Update fr.json by @Tinambel</li>
+                </ul>
+            </div>
+    
+        </div>
 
         <div class="changelogSection">
             <h6>v1.4.4 - 2024-12-16</h6>
@@ -109,15 +167,17 @@
                 </ul>
             </div>
         </div>
-        <div class="changelogButtons">
-            <button name="close">
-                <span>Close</span>
-            </button>
-            <button name="dontShowAgain">
-                <span>Don't show again</span>
-            </button>
-        </div>
-    </body>
+
+    </div>
+
+    <div class="changelogButtons">
+        <button name="close">
+            <span>Close</span>
+        </button>
+        <button name="dontShowAgain">
+            <span>Don't show again</span>
+        </button>
+    </div>
 </form>
 
 <!-- 

@@ -76,6 +76,7 @@ export default class abfalterItem extends Item {
     prepareWeapon() {
         //Global Setting
         this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
+        this.system.ranged.ammoIds = [];
 
         //Inherit from Actor
         if (this.parent != null) {
@@ -219,6 +220,79 @@ export default class abfalterItem extends Item {
                 this.system.attacks[i].finalDamage = this.system.attacks[i].damage + this.system.melee.baseDmg;
             }
         }
+
+        //Ranged Weapons
+        if (this.system.info.type == "ranged") { 
+
+            if (this.parent) {
+                for (let i = 0; i < this.system.attacks.length; i++) {
+                    this.system.attacks[i].parentPrecision = this.system.info.precision;
+                    this.system.attacks[i].parentVorpal = this.system.info.vorpal;
+                    this.system.attacks[i].parentRangedInfAmmo = this.system.ranged.infiniteAmmo;
+                }
+
+                this.system.ranged.ammoIds = [
+                    {id: 0, name: game.i18n.localize('abfalter.none')},
+                    ...(this.system.ranged.specialAmmo ? [{id: 'special', name: game.i18n.localize('abfalter.special')}] : []),
+                    ...this.parent.items.filter(i => i.type === "ammo").map(i => ({id: i.id, name: i.name}))
+                ];
+
+                if (this.system.ranged.selectedAmmo === "special") {
+                    this.system.ranged.ammoDamage = this.system.ranged.specialDmg;
+                    this.system.ranged.ammoDmgType = this.system.ranged.specialDmgType;
+                    this.system.ranged.ammoBreak = this.system.ranged.specialBreak;
+                    this.system.ranged.ammoAtPen = this.system.ranged.specialAtPen;
+                } else {
+                    this.system.ranged.ammoDamage = this.parent.items.get(this.system.ranged.selectedAmmo)?.system.damage || 0;
+                    this.system.ranged.ammoDmgType = this.parent.items.get(this.system.ranged.selectedAmmo)?.system.dmgType || 0;
+                    this.system.ranged.ammoBreak = this.parent.items.get(this.system.ranged.selectedAmmo)?.system.break || 0;
+                    this.system.ranged.ammoAtPen = this.parent.items.get(this.system.ranged.selectedAmmo)?.system.atPen || 0;
+                }
+                
+                if (this.parent.system.secondaryFields.creative.slofhand.final > this.parent.system.combatValues.attack.final) {
+                    this.system.ranged.reloadTag = game.i18n.localize('abfalter.slofhand');
+                    this.system.ranged.bestReloadValue = this.parent.system.secondaryFields.creative.slofhand.final;
+                } else {
+                    this.system.ranged.reloadTag = game.i18n.localize('abfalter.attack');
+                    this.system.ranged.bestReloadValue = this.parent.system.combatValues.attack.final;
+                }
+            } else {
+                this.system.ranged.ammoIds = [
+                    {id: 0, name: game.i18n.localize('abfalter.none')},
+                    ...(this.system.ranged.specialAmmo ? [{id: 'special', name: game.i18n.localize('abfalter.special')}] : [])
+                ];
+
+                this.system.ranged.ammoDamage = 0;
+                this.system.ranged.ammoDmgType = 0;
+                this.system.ranged.ammoBreak = 0;
+                this.system.ranged.ammoAtPen = 0;
+                this.system.ranged.bestReloadValue = 0;
+                this.system.ranged.reloadTag = game.i18n.localize('abfalter.none');
+            }
+
+            this.system.ranged.reloadTimeFinal = Math.floor(this.system.ranged.reloadTime - Math.floor(this.system.ranged.bestReloadValue / 100));
+
+            this.system.ranged.ammoDamageFinal = this.system.ranged.ammoDamage + this.system.ranged.ammoDmgMod;
+            this.system.ranged.ammoBreakFinal = this.system.ranged.ammoBreak + this.system.ranged.ammoBreakMod;
+            this.system.ranged.ammoAtPenFinal = this.system.ranged.ammoAtPen + this.system.ranged.ammoAtPenMod;
+
+            if (this.system.ranged.readyToFire == true) {
+                this.system.derived.finalWeaponSpeed = Math.floor(20 + this.system.quality);
+            }
+
+            for (let i = 0; i < this.system.attacks.length; i++) {
+                this.system.attacks[i].finalAttack = this.system.attacks[i].attack + this.system.derived.baseAtk;
+                this.system.attacks[i].finalBlock = this.system.attacks[i].block + this.system.derived.baseBlk;
+                this.system.attacks[i].finalDodge = this.system.attacks[i].dodge + this.system.derived.baseDod;
+
+                this.system.attacks[i].finalAtPen = this.system.attacks[i].atPen + this.system.ranged.ammoAtPenFinal;
+                this.system.attacks[i].finalBreakage = this.system.attacks[i].breakage + this.system.ranged.ammoBreakFinal;
+                this.system.attacks[i].finalDamage = this.system.attacks[i].damage + this.system.ranged.ammoDamageFinal;
+            }
+        }
+
+
+
         /*
         switch (this.system.shield) {
             case "none":
@@ -252,7 +326,27 @@ export default class abfalterItem extends Item {
     prepareAmmo() {
         //Global Setting
         this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
+        this.system.priceListIds = [];
+
+        if(this.parent != null) {
+            this.system.priceListIds = [
+                {id: 'cCoin', name: game.i18n.localize('abfalter.cCoin')},
+                {id: 'sCoin', name: game.i18n.localize('abfalter.sCoin')},
+                {id: 'gCoin', name: game.i18n.localize('abfalter.gCoin')},
+                ...this.parent.items.filter(i => i.type === "currency").map(i => ({id: i.id, name: i.name}))
+            ];
+        } else {
+            this.system.priceListIds = [
+                {id: 'cCoin', name: game.i18n.localize('abfalter.cCoin')},
+                {id: 'sCoin', name: game.i18n.localize('abfalter.sCoin')},
+                {id: 'gCoin', name: game.i18n.localize('abfalter.gCoin')}
+            ];
+        }
+        
+        this.system.priceTotal = parseFloat((this.system.price * this.system.quantity).toFixed(1));
+        this.system.weightTotal = parseFloat((this.system.weight * this.system.quantity).toFixed(1));
     }
+
     prepareMentalPattern() {
         if (this.system.toggle == true) {
             this.system.finalCost = Math.floor(+this.system.cost + +this.system.cancelCost);
@@ -490,6 +584,4 @@ export default class abfalterItem extends Item {
         chatData.content = await renderTemplate(this.chatTemplate[this.type], cardData);
         return ChatMessage.create(chatData);
     }
-
-
 }

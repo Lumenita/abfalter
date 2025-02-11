@@ -29,6 +29,7 @@ Hooks.once("init", async () => {
     CONFIG.Actor.dataModels.character = actorDataModel;
     CONFIG.Item.dataModels.weapon = weaponDataModel;
     CONFIG.Item.dataModels.ammo = ammoDataModel;
+    CONFIG.Item.dataModels.class = classDataModel;
 
     CONFIG.time.roundTime = 6;
 
@@ -107,6 +108,15 @@ function makeIntField(init = 0, max, min) {
         min: min,
         max: max,
         integer: true
+    })
+}
+function makeLongIntField(init = 0, max, min) {
+    return new foundry.data.fields.NumberField({
+        required: true,
+        initial: init,
+        min: min,
+        max: max,
+        integer: false
     })
 }
 
@@ -371,8 +381,8 @@ class actorDataModel extends foundry.abstract.DataModel {
                 }),
                 vigor: new foundry.data.fields.SchemaField({
                     composure: secondaryAbilities('composure', 'wp', 'mental', false),
-                    featsofstr: secondaryAbilities('featsOfStr', 'str', 'mental', true),
-                    withstpain: secondaryAbilities('withstPain', 'wp', 'mental', false)
+                    featsofstr: secondaryAbilities('featsofstr', 'str', 'mental', true),
+                    withstpain: secondaryAbilities('withstpain', 'wp', 'mental', false)
                 }),
                 subterfuge: new foundry.data.fields.SchemaField({
                     disguise: secondaryAbilities('disguise', 'dex', 'physical', false),
@@ -395,8 +405,8 @@ class actorDataModel extends foundry.abstract.DataModel {
                     toymaking: secondaryAbilities('toymaking', 'pow', 'mental', false),
                     music: secondaryAbilities('music', 'pow', 'mental', false),
                     runes: secondaryAbilities('runes', 'dex', 'physical', false),
-                    ritualcalig: secondaryAbilities('ritualCal', 'dex', 'physical', false),
-                    slofhand: secondaryAbilities('soh', 'dex', 'physical', false),
+                    ritualcalig: secondaryAbilities('ritualcalig', 'dex', 'physical', false),
+                    slofhand: secondaryAbilities('slofhand', 'dex', 'physical', false),
                     tailoring: secondaryAbilities('tailoring', 'dex', 'physical', false)
                 })
             }),
@@ -857,12 +867,16 @@ class ammoDataModel extends foundry.abstract.DataModel {
     static defineSchema() {
         return {
             description: makeHtmlField(),
+            presence: makeIntField(),
             price: makeIntField(),
-            weight: makeIntField(),
+            priceType: makeStringField("sCoin"),
+            priceTotal: makeIntField(),
+            weight: makeLongIntField(),
+            weightType: makeStringField("lb"),
+            weightTotal: makeLongIntField(),
             quantity: makeIntField(),
             damage: makeIntField(),
-            dmgType: makeStringField(),
-            dmgMod: makeStringField(),
+            dmgType: makeStringField("THR"),
             break: makeIntField(),
             atPen: makeIntField(),
             expand: makeBoolField()
@@ -924,7 +938,26 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 throwQuantity: makeIntField(),
                 trapping: makeBoolField(),
                 trappingTypeF: makeStringField("str"),
-                trappingTypeS: makeStringField("agi"),
+                trappingTypeS: makeStringField("agi")
+            }),
+            ranged: new foundry.data.fields.SchemaField({
+                selectedAmmo: makeStringField("none"),
+                reloadTime: makeIntField(),
+                bestReloadValue: makeIntField(),
+                reloadTag: makeStringField("none"),
+                fired: makeBoolField(true),
+                range: makeIntField(),
+                rangeType: makeStringField("short"),
+                ammoDmgMod: makeIntField(),
+                ammoBreakMod: makeIntField(),
+                ammoAtPenMod: makeIntField(),
+                infiniteAmmo: makeBoolField(),
+                specialAmmo: makeBoolField(),
+                specialDmg: makeIntField(),
+                specialBreak: makeIntField(),
+                specialAtPen: makeIntField(),
+                specialDmgType: makeStringField("THR"),
+                readyToFire: makeBoolField()
             }),
             shield: new foundry.data.fields.SchemaField({
                 type: makeStringField("none"),
@@ -948,6 +981,8 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 ignoreThrown: makeBoolField(),
                 fired: makeBoolField(),
                 rateOfFire: makeIntField(), //new
+                rangedAmmoConsumed: makeBoolField(true),
+                rangedAmmoConsumedValue: makeIntField(1),
                 quantityConsumed: makeBoolField(),
                 consumedValue:  makeIntField(),
                 ignorePrecision: makeBoolField(),
@@ -958,7 +993,7 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 parentPrecision: makeBoolField(),
                 parentVorpal: makeBoolField(),
                 parentTrapping: makeBoolField(),
-                parentThrowable: makeBoolField(),
+                parentThrowable: makeBoolField()
             })),
             equipped: makeBoolField(),
             expand: makeBoolField()
@@ -971,6 +1006,209 @@ class weaponDataModel extends foundry.abstract.DataModel {
 
     get type() {
         return 'weapon'
+    }
+}
+
+class classDataModel extends foundry.abstract.DataModel {
+    static defineSchema() {
+        return {
+            description: makeStringField(""),
+            expand: makeBoolField(),
+            athletics: makeBoolField(),
+            social: makeBoolField(),
+            perceptive: makeBoolField(),
+            intellectual: makeBoolField(),
+            vigor: makeBoolField(),
+            subterfuge: makeBoolField(),
+            creative: makeBoolField(),
+            main: new foundry.data.fields.SchemaField({
+                levels: makeIntField(0),
+                archeType: makeStringField(),
+                lp: makeIntField(),
+                initiative: makeIntField(),
+                attack: makeIntField(),
+                dodge: makeIntField(),
+                block: makeIntField(),
+                weararmor: makeIntField(),
+                mk: makeIntField(),
+                pp: makeIntField(),
+                zeon: makeIntField(),
+                summon: makeIntField(),
+                control: makeIntField(),
+                bind: makeIntField(),
+                banish: makeIntField()
+            }),
+            secondary: new foundry.data.fields.SchemaField({
+                acro: makeIntField(),
+                athleticism: makeIntField(),
+                climb: makeIntField(),
+                jump: makeIntField(),
+                ride: makeIntField(),
+                swim: makeIntField(),
+                etiquette: makeIntField(),
+                intimidate: makeIntField(),
+                leadership: makeIntField(),
+                persuasion: makeIntField(),
+                streetwise: makeIntField(),
+                style: makeIntField(),
+                trading: makeIntField(),
+                notice: makeIntField(),
+                search: makeIntField(),
+                track: makeIntField(),
+                animals: makeIntField(),
+                appraisal: makeIntField(),
+                architecture: makeIntField(),
+                herballore: makeIntField(),
+                history: makeIntField(),
+                law: makeIntField(),
+                magicappr: makeIntField(),
+                medicine: makeIntField(),
+                memorize: makeIntField(),
+                navigation: makeIntField(),
+                occult: makeIntField(),
+                science: makeIntField(),
+                tactics: makeIntField(),
+                composure: makeIntField(),
+                featsofstr: makeIntField(),
+                withstpain: makeIntField(),
+                disguise: makeIntField(),
+                hide: makeIntField(),
+                lockpicking: makeIntField(),
+                poisons: makeIntField(),
+                stealth: makeIntField(),
+                theft: makeIntField(),
+                traplore: makeIntField(),
+                alchemy: makeIntField(),
+                animism: makeIntField(),
+                art: makeIntField(),
+                dance: makeIntField(),
+                forging: makeIntField(),
+                jewelry: makeIntField(),
+                music: makeIntField(),
+                runes: makeIntField(),
+                ritualcalig: makeIntField(),
+                slofhand: makeIntField(),
+                tailoring: makeIntField(),
+                cooking: makeIntField(),
+                technomagic: makeIntField(),
+                piloting: makeIntField(),
+                toymaking: makeIntField(),
+                kiDetection: makeIntField(),
+                kiconceal: makeIntField()
+            }),
+            dpCost: new foundry.data.fields.SchemaField({
+                limits: new foundry.data.fields.SchemaField({
+                    primary: makeIntField(50),
+                    supernatural: makeIntField(50),
+                    psychic: makeIntField(50)
+                }),
+                primary: new foundry.data.fields.SchemaField({
+                    attack: makeIntField(2),
+                    block: makeIntField(2),
+                    dodge: makeIntField(2),
+                    wearArmor: makeIntField(2),
+                    kiPoint: makeIntField(2),
+                    kiAccuMult: makeIntField(20),
+                }),
+                supernatural: new foundry.data.fields.SchemaField({
+                    zeon: makeIntField(2),
+                    maMult: makeIntField(50),
+                    maRegen: makeIntField(25),
+                    magicProj: makeIntField(2),
+                    summon: makeIntField(2),
+                    control: makeIntField(2),
+                    bind: makeIntField(2),
+                    banish: makeIntField(2)
+                }),
+                psychic: new foundry.data.fields.SchemaField({
+                    psyPoint: makeIntField(10),
+                    psyProj: makeIntField(2)
+                }),
+                other: new foundry.data.fields.SchemaField({
+                    lpMult: makeIntField(20)
+                }),
+                fields: new foundry.data.fields.SchemaField({
+                    athletics: makeIntField(2),
+                    athleticsToggle: makeBoolField(true),
+                    social: makeIntField(2),
+                    socialToggle: makeBoolField(true),
+                    perceptive: makeIntField(2),
+                    perceptiveToggle: makeBoolField(true),
+                    intellectual: makeIntField(2),
+                    intellectualToggle: makeBoolField(true),
+                    vigor: makeIntField(2),
+                    vigorToggle: makeBoolField(true),
+                    subterfuge: makeIntField(2),
+                    subterfugeToggle: makeBoolField(true),
+                    creative: makeIntField(2),
+                    creativeToggle: makeBoolField(true)
+                }),
+                subject: new foundry.data.fields.SchemaField({
+                    acro: makeIntField(2),
+                    athleticism: makeIntField(2),
+                    climb: makeIntField(2),
+                    jump: makeIntField(2),
+                    piloting: makeIntField(2),
+                    ride: makeIntField(2),
+                    swim: makeIntField(2),
+                    etiquette: makeIntField(2),
+                    intimidate: makeIntField(2),
+                    leadership: makeIntField(2),
+                    persuasion: makeIntField(2),
+                    streetwise: makeIntField(2),
+                    style: makeIntField(2),
+                    trading: makeIntField(2),
+                    notice: makeIntField(2),
+                    search: makeIntField(2),
+                    track: makeIntField(2),
+                    animals: makeIntField(2),
+                    appraisal: makeIntField(2),
+                    architecture: makeIntField(2),
+                    herballore: makeIntField(2),
+                    history: makeIntField(2),
+                    law: makeIntField(2),
+                    magicappr: makeIntField(2),
+                    medicine: makeIntField(2),
+                    memorize: makeIntField(2),
+                    navigation: makeIntField(2),
+                    occult: makeIntField(2),
+                    science: makeIntField(2),
+                    tactics: makeIntField(2),
+                    technomagic: makeIntField(2),
+                    composure: makeIntField(2),
+                    featsofstr: makeIntField(2),
+                    withstpain: makeIntField(2),
+                    disguise: makeIntField(2),
+                    hide: makeIntField(2),
+                    lockpicking: makeIntField(2),
+                    poisons: makeIntField(2),
+                    stealth: makeIntField(2),
+                    theft: makeIntField(2),
+                    traplore: makeIntField(2),
+                    alchemy: makeIntField(2),
+                    animism: makeIntField(2),
+                    art: makeIntField(2),
+                    cooking: makeIntField(2),
+                    dance: makeIntField(2),
+                    forging: makeIntField(2),
+                    jewelry: makeIntField(2),
+                    toymaking: makeIntField(2),
+                    music: makeIntField(2),
+                    runes: makeIntField(2),
+                    ritualcalig: makeIntField(2),
+                    slofhand: makeIntField(2),
+                    tailoring: makeIntField(2)
+                })
+            })
+        }
+    }
+
+    static migrateData(source) {
+        return super.migrateData(source);
+    }
+
+    get type() {
+        return 'class'
     }
 }
 

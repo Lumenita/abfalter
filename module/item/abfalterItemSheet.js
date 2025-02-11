@@ -42,6 +42,11 @@ export default class abfalterItemSheet extends ItemSheet {
         
         if (this.item.type === 'weapon') {
             sheetData.attacks = this.item.system.attacks;
+            sheetData.ammoOptions = Object.fromEntries(this.item.system.ranged.ammoIds.map(i => [i.id, i.name]));
+        }
+
+        if (this.item.type === 'ammo') {
+            sheetData.currencyOptions = Object.fromEntries(this.item.system.priceListIds.map(i => [i.id, i.name]));
         }
 
         //Dropdowns
@@ -65,6 +70,7 @@ export default class abfalterItemSheet extends ItemSheet {
 
         sheetData.weaponTypeList = CONFIG.abfalter.weaponTypeDropdown;
         sheetData.vorpalAtkList = CONFIG.abfalter.vorpalAtkDropdown;
+        sheetData.weightList = CONFIG.abfalter.weightDropdown;
 
         if (game.settings.get('abfalter', abfalterSettingsKeys.Use_Meters)) {
             sheetData.throwDistanceDropdown = CONFIG.abfalter.metricDistLongDropdown;

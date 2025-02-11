@@ -1,0 +1,101 @@
+<form>
+    <div class="dpCostCalc">
+        <div class="dpCostHeader">
+            <span> {{localize "abfalter.dpCostLevel" myLevel=myLevel}}  </span>
+            <span class="{{#if dpWarning.all}}fumbleRoll{{/if}}"> {{totalDpCosts.all}} </span>
+            <span> {{localize "abfalter.dpCostLevel2" totalDP=totalDP}} </span>
+        </div>
+
+        <div class="dpCostMainInfo">
+            <label>
+                <span> {{localize "abfalter.primary"}}: </span>
+                <span class="{{#if dpWarning.primary}}fumbleRoll{{/if}}"> {{totalDpCosts.primary}} </span>
+                <span> / {{dpLimits.maxPrimaryDp}}</span>
+            </label>
+            <label>
+                <span> {{localize "abfalter.MonsterPowerDropdown.combat"}}: </span>
+                <span class="{{#if dpWarning.primaryCombat}}fumbleRoll{{/if}}"> {{totalDpCosts.primaryCombat}} </span>
+                <span> / {{dpLimits.maxPrimaryCombatDp}}</span>
+            </label>
+        </div>
+
+        <div class="dpCostMainInfo">
+            <label>
+                <span> {{localize "abfalter.magic"}}: </span>
+                <span class="{{#if dpWarning.magic}}fumbleRoll{{/if}}"> {{totalDpCosts.magic}} </span>
+                <span> / {{dpLimits.maxMagicDp}}</span>
+            </label>
+            <label>
+                <span> {{localize "abfalter.magProjShort"}}: </span>
+                <span class="{{#if dpWarning.magicProj}}fumbleRoll{{/if}}"> {{totalDpCosts.magicProj}} </span>
+                <span> / {{dpLimits.maxMagicProjDp}}</span>
+            </label>
+        </div>
+
+        <div class="dpCostMainInfo">
+            <label>
+                <span> {{localize "abfalter.psychic"}}: </span>
+                <span class="{{#if dpWarning.psychic}}fumbleRoll{{/if}}"> {{totalDpCosts.psychic}} </span>
+                <span> / {{dpLimits.maxPsychicDp}}</span>
+            </label>
+            <label>
+                <span> {{localize "abfalter.psychicProjShort"}}: </span>
+                <span class="{{#if dpWarning.psychicProj}}fumbleRoll{{/if}}"> {{totalDpCosts.psychicProj}} </span>
+                <span> / {{dpLimits.maxPsychicProjDp}}</span>
+            </label>
+        </div>
+
+        <div class="dpCostStatscontainer">
+            <h6>{{localize "abfalter.primary"}}</h6>
+            <div class="dpCostContainer">
+                {{#each dpPrim}}
+                    {{#if this.value}}
+                        <div>
+                            <span>{{this.name}}: {{this.value}}</span>
+                        </div>
+                    {{/if}}
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="dpCostStatscontainer">
+            <h6>{{localize "abfalter.magic"}}</h6>
+            <div class="dpCostContainer">
+                {{#each dpMagic}}
+                    {{#if this.value}}
+                        <div>
+                            <span>{{this.name}}: {{this.value}}</span>
+                        </div>
+                    {{/if}}
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="dpCostStatscontainer">
+            <h6>{{localize "abfalter.psychic"}}</h6>
+            <div class="dpCostContainer">
+                {{#each dpPsychic}}
+                    {{#if this.value}}
+                        <div>
+                            <span>{{this.name}}: {{this.value}}</span>
+                        </div>
+                    {{/if}}
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="dpCostStatscontainer"> 
+            <h6>{{localize "abfalter.other"}}</h6>
+            <div class="dpCostContainer">
+                {{#each dpSecondary}}
+                    {{#if this.value}}
+                        <div>
+                            <span>{{this.name}}: {{this.value}}</span>
+                        </div>
+                    {{/if}}
+                {{/each}}
+            </div>
+        </div>
+
+    </div>
+</form>

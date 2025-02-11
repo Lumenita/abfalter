@@ -6,7 +6,8 @@ class ChangelogForm extends FormApplication {
             width: 800,
             height: "auto",
             closeOnSubmit: false,
-            resizable: true
+            resizable: true,
+            classes: ["changelog-form"], 
         });
     }
 

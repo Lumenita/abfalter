@@ -26,26 +26,26 @@
             
             <div class="mProjButton">
                 {{#if system.toggles.magicAtkModule}}
-                <button type="button" class="combatRoll" data-roll="{{system.mproj.atkModule}}" data-label="{{localize "abfalter.attack"}}" data-type="combatRoll">
+                <button type="button" class="combatRoll" data-roll="{{system.mproj.atkModule}}" data-label="attack" data-type="combatRoll">
                     <span> {{localize "abfalter.offensive"}} </span> <span> {{system.mproj.atkModule}} </span>
                 </button>
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{system.mproj.finalOffensive}}" data-label="Magic Proj. Offensive" data-type="combatRoll"> 
+                <button type="button" class="combatRoll" data-roll="{{system.mproj.finalOffensive}}" data-label="offMagicProj" data-type="combatRoll"> 
                     <span> {{localize "abfalter.offensive"}} </span> <span> {{system.mproj.finalOffensive}} </span>
                 </button>
                 {{/if}}
                 {{#if system.toggles.magicDefModule}}
                 {{#if system.toggles.magicDodgeModule}}
-                <button type="button" class="combatRoll" data-roll="{{system.mproj.dodModule}}" data-label="{{localize "abfalter.dodge"}}" data-type="combatRoll">
+                <button type="button" class="combatRoll" data-roll="{{system.mproj.dodModule}}" data-label="dodge" data-type="combatRoll">
                     <span> {{localize "abfalter.defensive"}} </span> <span> {{system.mproj.dodModule}} </span>
                 </button>
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{system.mproj.defModule}}" data-label="{{localize "abfalter.block"}}" data-type="combatRoll">
+                <button type="button" class="combatRoll" data-roll="{{system.mproj.defModule}}" data-label="block" data-type="combatRoll">
                     <span> {{localize "abfalter.defensive"}} </span> <span> {{system.mproj.defModule}} </span>
                 </button>
                 {{/if}}
                 {{else}}
-                <button type="button" class="combatRoll" data-roll="{{system.mproj.finalDefensive}}" data-label="Magic Proj. Defensive" data-type="combatRoll">
+                <button type="button" class="combatRoll" data-roll="{{system.mproj.finalDefensive}}" data-label="defMagicProj" data-type="combatRoll">
                     <span> {{localize "abfalter.defensive"}} </span> <span> {{system.mproj.finalDefensive}} </span>
                 </button>
                 {{/if}}
@@ -212,7 +212,7 @@
                     <span> {{localize "abfalter.final"}} </span>
                 </div>
                 <div>
-                    <button type="button" class="rollable" data-roll="{{system.summoning.summon.final}}" data-label="{{localize "abfalter.summon"}}" data-type="summoningRoll">
+                    <button type="button" class="rollable" data-roll="{{system.summoning.summon.final}}" data-label="{{localize "summon"}}" data-type="summoningRoll">
                         <span> {{localize "abfalter.summon"}} </span>
                     </button>
                     <input type="number" name="system.summoning.summon.base" value="{{system.summoning.summon.base}}" />
@@ -221,7 +221,7 @@
                     <input type="number" name="system.summoning.summon.final" value="{{system.summoning.summon.final}}" readonly />
                 </div>
                 <div>
-                    <button type="button" class="rollable" data-roll="{{system.summoning.control.final}}" data-label="{{localize "abfalter.control"}}" data-type="summoningRoll">
+                    <button type="button" class="rollable" data-roll="{{system.summoning.control.final}}" data-label="{{localize "control"}}" data-type="summoningRoll">
                         <span> {{localize "abfalter.control"}} </span>
                     </button>
                     <input type="number" name="system.summoning.control.base" value="{{system.summoning.control.base}}" />
@@ -230,7 +230,7 @@
                     <input type="number" name="system.summoning.control.final" value="{{system.summoning.control.final}}" readonly />
                 </div>
                 <div>
-                    <button type="button" class="rollable" data-roll="{{system.summoning.bind.final}}" data-label="{{localize "abfalter.bind"}}" data-type="summoningRoll">
+                    <button type="button" class="rollable" data-roll="{{system.summoning.bind.final}}" data-label="{{localize "bind"}}" data-type="summoningRoll">
                         <span> {{localize "abfalter.bind"}} </span>
                     </button>
                     <input type="number" name="system.summoning.bind.base" value="{{system.summoning.bind.base}}" />
@@ -239,7 +239,7 @@
                     <input type="number" name="system.summoning.bind.final" value="{{system.summoning.bind.final}}" readonly />
                 </div>
                 <div>
-                    <button type="button" class="rollable" data-roll="{{system.summoning.banish.final}}" data-label="{{localize "abfalter.banish"}}" data-type="summoningRoll">
+                    <button type="button" class="rollable" data-roll="{{system.summoning.banish.final}}" data-label="{{localize "banish"}}" data-type="summoningRoll">
                         <span> {{localize "abfalter.banish"}} </span>
                     </button>
                     <input type="number" name="system.summoning.banish.base" value="{{system.summoning.banish.base}}" />

@@ -1,17 +1,17 @@
-import { openRollFunction } from "./diceroller.js";
-import { wepOpenRollFunction } from "./diceroller.js";
-import { fumbleRollFunction } from "./diceroller.js";
+import * as diceFunctions from "./diceroller.js";
 
 export function addChatListeners(html, _msg) {
     html.find('button.secOpenRoll').click(ev => {
-        openRollFunction(_msg.message);
+        diceFunctions.openRollFunction(_msg.message);
     });
     html.find('button.wepOpenRoll').click(ev => {
-        wepOpenRollFunction(_msg.message);
+        diceFunctions.wepOpenRollFunction(_msg.message);
     });
-
     html.find('button.secFumbleRoll').click(ev => {
-        fumbleRollFunction(_msg.message);
+        diceFunctions.fumbleRollFunction(_msg.message);
+    });
+    html.find('button.wepFumbleRoll').click(ev => {
+        diceFunctions.wepFumbleRollFunction(_msg.message);
     });
 
     //Items to Chat

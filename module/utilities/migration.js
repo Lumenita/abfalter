@@ -20,7 +20,7 @@ export async function handleMigrations() {
     // Define migration tasks
     const migrations = [
         { version: '1.4.2', migrate: migrateDataModels }, // Reorganize all data into data models
-        { version: '1.4.5', migrate: migrateSecondaryLanguage }   // Secondary Abilities language fix
+        { version: '1.4.6', migrate: migrateSecondaryLanguage }   // Secondary Abilities language fix
     ];
 
     for (const { version, migrate } of migrations) {
@@ -34,7 +34,7 @@ export async function handleMigrations() {
 }
 export async function migrateSecondaryLanguage() {
     for (let actor of game.actors.contents) {
-        const updateData = await migrate145Data(actor);
+        const updateData = await migrate146Data(actor);
         if (!foundry.utils.isEmpty(updateData)) {
             console.log(`Migrating Actor entity ${actor.name}`);
             await actor.update(updateData);
@@ -42,7 +42,7 @@ export async function migrateSecondaryLanguage() {
     }
 
     for (let scene of game.scenes.contents) {
-        let sceneUpdate = migrate145SceneData(scene)
+        let sceneUpdate = migrate146SceneData(scene)
         if (!foundry.utils / foundry.utils.isEmpty(sceneUpdate)) {
             console.log(`Migrating Scene ${scene.name}`);
             await scene.update(sceneUpdate);
@@ -62,7 +62,7 @@ export async function migrateSecondaryLanguage() {
             const documents = await pack.getDocuments();
     
             for (let document of documents) {
-                const updateData = await migrate145Data(document);
+                const updateData = await migrate146Data(document);
                 if (foundry.utils.isEmpty(updateData)) {
                     continue;
                 }
@@ -81,28 +81,28 @@ export async function migrateSecondaryLanguage() {
             const documents = await pack.getDocuments();
     
             for (let document of documents) {
-                const updateData = await migrate145Data(document);
+                const updateData = await migrate146Data(document);
                 if (foundry.utils.isEmpty(updateData)) {
                     continue;
                 }
-                await document.update(migrate145SceneData);
+                await document.update(migrate146SceneData);
                 console.log(`Migrated ${packType} entity ${document.name} in Compendium ${pack.collection}`);
             }
     
             await pack.configure({ locked: wasLocked });    
         }
     }
-    console.log("Migration Complete for 1.4.5");
+    console.log("Migration Complete for 1.4.6");
 }
 
-function migrate145SceneData(scene) {
+function migrate146SceneData(scene) {
     const tokens = scene.tokens.map(token => {
         const t = token.toJSON();
 
         if (!t.actorLink) {
             const actor = foundry.utils.duplicate(t.delta);
             actor.type = t.actor?.type;
-            const update = migrate145Data(actor);
+            const update = migrate146Data(actor);
             foundry.utils.mergeObject(t.delta, update);
         }
         return t;
@@ -111,7 +111,7 @@ function migrate145SceneData(scene) {
     return { tokens };
 }
 
-async function migrate145Data() {
+async function migrate146Data() {
     let updateData = {};
 
     updateData["system.secondaryFields.athletics.acrobatics.label"] = 'acrobatic';
@@ -166,7 +166,7 @@ async function migrate145Data() {
     updateData["system.secondaryFields.intellectual.law.label"] = 'law';
     updateData["system.secondaryFields.intellectual.law.modifier"] = 'int';
     updateData["system.secondaryFields.intellectual.magicappr.label"] = 'magicAppr';
-    updateData["system.secondaryFields.intellectual.magicappr.modifier"] = 'int';
+    updateData["system.secondaryFields.intellectual.magicappr.modifier"] = 'pow';
     updateData["system.secondaryFields.intellectual.medicine.label"] = 'medicine';
     updateData["system.secondaryFields.intellectual.medicine.modifier"] = 'int';
     updateData["system.secondaryFields.intellectual.memorize.label"] = 'memorize';

@@ -344,6 +344,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
 
             html.find(".changeSecondaryNums").click(this._changeSecNums.bind(this));
             html.find(".openMetaMagic").click(this._openMetaMagic.bind(this));
+            html.find(".openDpCostCalc").click(this._openDpCostCalc.bind(this));
             html.find(".spendKiButton").click(this._openSpendKi.bind(this));
 
             html.find(".item-chat").click(this._onItemChatRoll.bind(this));
@@ -389,20 +390,21 @@ export default class abfalterCharacterSheet extends ActorSheet {
 
         console.log(dataset);
         switch (dataset.value) {
-            case 'melee':
-                diceFunctions.openMeleeWeaponAtkDialogue(this.actor, dataset.label, dataset.type);
+            case 'weaponAtk':
+                diceFunctions.openWeaponAtkDialogue(this.actor, dataset.label, dataset.id, dataset.type);
                 break;
-            case 'meleeDef':
-                diceFunctions.openMeleeWeaponDefDialogue(this.actor, dataset.label, dataset.type);
-                break;
-            case 'ranged':
+            case 'defensive':
+                diceFunctions.openWeaponDefDialogue(this.actor, dataset.label, dataset.id);
                 console.log("Not Implemented");
                 break;
             case 'shield':
                 console.log("Not Implemented");
                 break;
-            case 'trap':
-                diceFunctions.openMeleeTrapDialogue(this.actor, dataset.label, dataset.type);
+            case 'weaponTrap':
+                diceFunctions.openMeleeTrapDialogue(this.actor, dataset.label, dataset.id);
+                break;
+            case 'weaponBreak':
+                diceFunctions.openMeleeBreakDialogue(this.actor, dataset.label, dataset.id, dataset.type);
                 break;
             default:
                 console.log("Error: This weapon roll type does not exist");
@@ -424,6 +426,19 @@ export default class abfalterCharacterSheet extends ActorSheet {
             default:
                 break;
         }
+    }
+
+    _openDpCostCalc(event) {
+        event.preventDefault();
+        //TODO if more than 1 class throw error no multi-class calculations
+        const classItems = this.actor.items.filter(item => item.type === "class");
+        if (classItems.length > 1) {
+            ui.notifications.error("Multi-class calculations are not supported.");
+            console.error("Error: Multi-class calculations are not supported.");
+            return;
+        }
+        const classItem = classItems[0];
+        actorFunctions.calculateDpCost(this.actor, classItem._id);
     }
 
     _openMetaMagic(event) {
@@ -466,6 +481,9 @@ export default class abfalterCharacterSheet extends ActorSheet {
             "kiTechnique": game.i18n.localize("abfalter.newKiTechnique"),
             "martialArt": game.i18n.localize("abfalter.newMartialArt"),
             "arsMagnus": game.i18n.localize("abfalter.newArsMagnus"),
+            "elan": game.i18n.localize("abfalter.newElan"),
+            "monsterPower": game.i18n.localize("abfalter.newMonsterPower"),
+            "ammo": game.i18n.localize("abfalter.newAmmo"),
             "default": game.i18n.localize("abfalter.newItem"),
         };
         const name = (types[type] || types["default"]);

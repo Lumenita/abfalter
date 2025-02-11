@@ -289,7 +289,7 @@ export async function openRollFunction(msg) {
 
 export async function fumbleRollFunction(msg) {
     let fumbleSettings = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_Fumble);
-    let actorData = msg.flags.actorData;
+    let actor = msg.flags.actor;
     let num = msg.flags.num;
     let oldData = msg.flags.rollData[num];
 
@@ -315,8 +315,16 @@ export async function fumbleRollFunction(msg) {
     };
 
     const rollData = msg.flags.rollData;
-    const template = "systems/abfalter/templates/dialogues/abilityRoll.hbs"
-    const content = await renderTemplate(template, { rollData: msg.flags.rollData, actor: actorData });
+    let template;
+    switch (msg.flags.type) {
+        case "weapon":
+            template = "systems/abfalter/templates/dialogues/diceRolls/weaponRoll.hbs";
+            break;
+        default:
+            template = "systems/abfalter/templates/dialogues/abilityRoll.hbs";
+            break;
+    }
+    const content = await renderTemplate(template, { rollData: msg.flags.rollData, actor: actor });
     game.messages.get(msg._id).update({
         content: content,
         flags: { rollData, num }
@@ -377,261 +385,319 @@ export async function rollBreakage(html, actorData, finalValue, label) {
 }
 
 //New Functions
-export async function openMeleeWeaponAtkDialogue(actor, label, wepId) {
-    console.log("Attack Handle Test Start"); 
-    
-    let confirmed = false;
+export async function openWeaponAtkDialogue(actor, label, wepId, wepType) {
+    console.log("Attack Handle Test Start", wepType);
     const weapon = actor.items.get(wepId);
+  
+    // Skip dialog if shift key is held
     if (event.shiftKey) {
-        console.log('shift key held, skipping attack dialog.');
-        const basicAttackDetails = {
-            label: game.i18n.localize("abfalter.attack"),
-            name: "",
-            base: weapon.system.derived.baseAtk,
-            value: weapon.system.derived.baseAtk,
-            formula: `${weapon.system.derived.baseAtk}(${game.i18n.localize("abfalter.value")})`,
-            dmg: weapon.system.melee.baseDmg,
-            dmgType: weapon.system.primDmgT,
-            atPen: weapon.system.melee.finalATPen,
-            target: game.i18n.localize("abfalter.none"),
-        };  
-        weaponRoll(actor, weapon, basicAttackDetails);
-        return;
+      console.log('shift key held, skipping attack dialog.');
+      const basicAttackDetails = {
+        label: game.i18n.localize("abfalter.attack"),
+        name: "",
+        base: weapon.system.derived.baseAtk,
+        value: weapon.system.derived.baseAtk,
+        formula: `${weapon.system.derived.baseAtk}(${game.i18n.localize("abfalter.value")})`,
+        dmg: weapon.system.melee.baseDmg,
+        dmgType: weapon.system.primDmgT,
+        atPen: weapon.system.melee.finalATPen,
+        target: game.i18n.localize("abfalter.none"),
+      };
+      weaponRoll(actor, weapon, basicAttackDetails);
+      return;
     }
+  
     const attacks = weapon.system.attacks;
-    if (attacks.length === 0) {
-        console.log("No Attacks Found, using default attack");
-        openModifierDialogue(actor, weapon.system.derived.baseAtk, "Attack", "combatRoll");
-        return;
+    if (!attacks.length) {
+      console.log("No Attacks Found, using default attack");
+      openModifierDialogue(actor, weapon.system.derived.baseAtk, "attack", "combatRoll");
+      return;
     }
-    const template = "systems/abfalter/templates/dialogues/weaponPrompts/meleeAtk.hbs";
-
-    //Values to send to roll function or actor update
-    let usedIndex = (weapon.system.info.lastWepUsed < attacks.length) ? weapon.system.info.lastWepUsed : 0;
-    let finalValue = 0;
-    let finalFormula = "";
-    let fatigueUsed = 0;
-    let ammoUsed = 0;
-
-    const html = await renderTemplate(template, {weapon: weapon}, {attacks: attacks}, {label: label});
-
+  
+    const templateData = {
+      weaponType: wepType,
+      weapon,
+      attacks,
+      label,
+    };
+    const template = "systems/abfalter/templates/dialogues/weaponPrompts/weaponAtk.hbs";
+    const htmlContent = await renderTemplate(template, templateData);
+  
+    let confirmed = false;
+    let usedIndex = weapon.system.info.lastWepUsed < attacks.length ? weapon.system.info.lastWepUsed : 0;
+    let finalValue = 0, finalFormula = "", fatigueUsed = 0, ammoUsed = 0, ammoIdUsed = "", RangedAmmoUsed = 0;
+    let wepValue = 0; // Current selected attack's base value
+  
+    // Helper: Update the final roll value and button label
+    const updateFinalValue = ($html) => {
+      const selectedModifier = parseInt($html.find('#modifierSelect').val(), 10);
+      const fatigueValue = parseInt($html.find('#fatigueDropdown').val(), 10) || 0;
+      const modifierValue = parseInt($html.find('#modifierMod').val(), 10) || 0;
+      const selectedPenalty = parseInt($html.find('#directedAtkDropdown :selected').data('penalty'), 10);
+      fatigueUsed = fatigueValue;
+  
+      finalValue = wepValue + (fatigueValue * 15) + modifierValue + selectedPenalty + selectedModifier;
+      finalFormula = `${wepValue}(${game.i18n.localize("abfalter.value")}) + ${fatigueValue * 15}(${game.i18n.localize("abfalter.fatigue")}) + ${modifierValue}(${game.i18n.localize("abfalter.mod")}) + ${selectedPenalty}(${game.i18n.localize("abfalter.aim")}) + ${selectedModifier}(${game.i18n.localize("abfalter.action")})`;
+  
+      $html.closest('.dialog').find('.dialog-button:first').text(`${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`);
+    };
+  
     new diceDialog({
-        title: weapon.name + " " + game.i18n.localize('abfalter.attack'),
-        content: html,
-        buttons: {
-            roll: { label: `${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`, callback: () => confirmed = true },
-            cancel: { label: game.i18n.localize('abfalter.dialogs.cancel'), callback: () => confirmed = false }
-        },
-        render: (html) => {
-            const attackSelect = html.find('#attackSelect');
-            const modifierSelect = html.find('#modifierSelect');
-            const modifierInput = html.find('#modifierMod');
-            const fatigueDropdown = html.find('#fatigueDropdown');
-            const atkDmgTypeDropdown = html.find('#atkDmgTypeDropdown');
-            const directedAtkDropdown = html.find('#directedAtkDropdown');
-            const fatigueValue = actor.system.fatigue.value;
-            const maxFatigue = actor.system.kiAbility.kiUseOfEne.status ? 5 : 2;
-            const directedAtk = [
-                {tag: 'none', name: game.i18n.localize('abfalter.none'), penalty: 0},
-                {tag: 'head', name: game.i18n.localize('abfalter.head'), penalty: -60},
-                {tag: 'eye', name: game.i18n.localize('abfalter.eye'), penalty: -100},
-                {tag: 'neck', name: game.i18n.localize('abfalter.neck'), penalty: -80},
-                {tag: 'shoulder', name: game.i18n.localize('abfalter.shoulder'), penalty: -30},
-                {tag: 'arm', name: game.i18n.localize('abfalter.arm'), penalty: -20},
-                {tag: 'elbow', name: game.i18n.localize('abfalter.elbow'), penalty: -60},
-                {tag: 'wrist', name: game.i18n.localize('abfalter.wrist'), penalty: -40},
-                {tag: 'hand', name: game.i18n.localize('abfalter.hand'), penalty: -40},
-                {tag: 'heart', name: game.i18n.localize('abfalter.heart'), penalty: -60},
-                {tag: 'torso', name: game.i18n.localize('abfalter.torso'), penalty: -10},
-                {tag: 'abdomen', name: game.i18n.localize('abfalter.abdomen'), penalty: -20},
-                {tag: 'groin', name: game.i18n.localize('abfalter.groin'), penalty: -60},
-                {tag: 'thigh', name: game.i18n.localize('abfalter.thigh'), penalty: -20},
-                {tag: 'knee', name: game.i18n.localize('abfalter.knee'), penalty: -40},
-                {tag: 'calf', name: game.i18n.localize('abfalter.calf'), penalty: -10},
-                {tag: 'foot', name: game.i18n.localize('abfalter.foot'), penalty: -50},
-            ]
-            const damageTypes = {
-                NONE: game.i18n.localize('abfalter.na'),
-                CUT: game.i18n.localize('abfalter.cut'),
-                IMP: game.i18n.localize('abfalter.imp'),
-                THR: game.i18n.localize('abfalter.thr'),
-                HEAT: game.i18n.localize('abfalter.heat'),
-                COLD: game.i18n.localize('abfalter.cold'),
-                ELE: game.i18n.localize('abfalter.ele'),
-                ENE: game.i18n.localize('abfalter.ene')
-            };
-            const vorpalLocation = weapon.system.info.vorpalLocation;
-            const vorpalModifier = weapon.system.info.vorpalMod;
-            let isPrecise = weapon.system.info.precision && !attacks[usedIndex].ignorePrecision;
-            let isVorpal = weapon.system.info.vorpal && !attacks[usedIndex].ignoreVorpal;
-            let wepValue = 0;
-
-            attacks.forEach((attack, index) => {
-              const option = document.createElement('option');
-              option.value = index;
-              option.text = attack.name;
-              attackSelect.append(option);
-            });
-            attackSelect.val(usedIndex); //Default to last used attack
-
-            const populateAtkTypeDropdown = () => {
-                let availableTypes = [];
-                const primaryType = weapon.system.primDmgT === "ANY" ? "CUT" : weapon.system.primDmgT;
-                if (weapon.system.primDmgT === "ANY" || weapon.system.secDmgT === "ANY") {
-                    availableTypes = Object.keys(damageTypes).filter((type) => type !== "NONE");
+      title: `${weapon.name} ${game.i18n.localize('abfalter.attack')}`,
+      content: htmlContent,
+      buttons: {
+        roll: { label: `${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`, callback: () => confirmed = true },
+        cancel: { label: game.i18n.localize('abfalter.dialogs.cancel'), callback: () => confirmed = false }
+      },
+      render: ($html) => {
+        // Cache frequently used selectors
+        const $attackSelect = $html.find('#attackSelect');
+        const $modifierSelect = $html.find('#modifierSelect');
+        const $modifierInput = $html.find('#modifierMod');
+        const $fatigueDropdown = $html.find('#fatigueDropdown');
+        const $atkDmgTypeDropdown = $html.find('#atkDmgTypeDropdown');
+        const $directedAtkDropdown = $html.find('#directedAtkDropdown');
+        const $ammoDropdown = $html.find('#ammoDropdown');
+  
+        const fatigueVal = actor.system.fatigue.value;
+        const maxFatigue = actor.system.kiAbility.kiUseOfEne.status ? 5 : 2;
+  
+        const directedAtk = [   
+            { tag: 'none', name: game.i18n.localize('abfalter.none'), penalty: 0 },
+            { tag: 'head', name: game.i18n.localize('abfalter.head'), penalty: -60 },
+            { tag: 'eye', name: game.i18n.localize('abfalter.eye'), penalty: -100 },
+            { tag: 'neck', name: game.i18n.localize('abfalter.neck'), penalty: -80 },
+            { tag: 'shoulder', name: game.i18n.localize('abfalter.shoulder'), penalty: -30 },
+            { tag: 'arm', name: game.i18n.localize('abfalter.arm'), penalty: -20 },
+            { tag: 'elbow', name: game.i18n.localize('abfalter.elbow'), penalty: -60 },
+            { tag: 'wrist', name: game.i18n.localize('abfalter.wrist'), penalty: -40 },
+            { tag: 'hand', name: game.i18n.localize('abfalter.hand'), penalty: -40 },
+            { tag: 'heart', name: game.i18n.localize('abfalter.heart'), penalty: -60 },
+            { tag: 'torso', name: game.i18n.localize('abfalter.torso'), penalty: -10 },
+            { tag: 'abdomen', name: game.i18n.localize('abfalter.abdomen'), penalty: -20 },
+            { tag: 'groin', name: game.i18n.localize('abfalter.groin'), penalty: -60 },
+            { tag: 'thigh', name: game.i18n.localize('abfalter.thigh'), penalty: -20 },
+            { tag: 'knee', name: game.i18n.localize('abfalter.knee'), penalty: -40 },
+            { tag: 'calf', name: game.i18n.localize('abfalter.calf'), penalty: -10 },
+            { tag: 'foot', name: game.i18n.localize('abfalter.foot'), penalty: -50 }
+        ];
+        const damageTypes = {
+            NONE: game.i18n.localize('abfalter.na'),
+            CUT: game.i18n.localize('abfalter.cut'),
+            IMP: game.i18n.localize('abfalter.imp'),
+            THR: game.i18n.localize('abfalter.thr'),
+            HEAT: game.i18n.localize('abfalter.heat'),
+            COLD: game.i18n.localize('abfalter.cold'),
+            ELE: game.i18n.localize('abfalter.ele'),
+            ENE: game.i18n.localize('abfalter.ene')
+        };
+  
+        const vorpalLocation = weapon.system.info.vorpalLocation;
+        const vorpalModifier = weapon.system.info.vorpalMod;
+        let isPrecise = weapon.system.info.precision && !attacks[usedIndex].ignorePrecision;
+        let isVorpal = weapon.system.info.vorpal && !attacks[usedIndex].ignoreVorpal;
+  
+        // --- Populate Dropdowns ---
+  
+        // Attack options
+        $attackSelect.empty();
+        attacks.forEach((attack, index) => {
+            $attackSelect.append(`<option value="${index}">${attack.name}</option>`);
+        });
+        $attackSelect.val(usedIndex);
+  
+        // Damage type dropdown
+        const populateAtkTypeDropdown = () => {
+            $atkDmgTypeDropdown.empty();
+            let availableTypes = [];
+            if (wepType === "ranged") {
+                const ammoDmgType = weapon.system.ranged.ammoDmgType;
+                if (!ammoDmgType || ammoDmgType.toLowerCase() === "none") {
+                  $atkDmgTypeDropdown.append(
+                    `<option value="" selected>${game.i18n.localize('abfalter.noDamageType')}</option>`
+                  );
+                  return;
+                }
+                if (ammoDmgType === "ANY") {
+                  availableTypes = Object.keys(damageTypes).filter(type => type !== "NONE");
                 } else {
-                    if (weapon.system.primDmgT !== "NONE") { availableTypes.push(weapon.system.primDmgT); }
-                    if (weapon.system.secDmgT !== "NONE" && weapon.system.secDmgT !== weapon.system.primDmgT) availableTypes.push(weapon.system.secDmgT);
+                  availableTypes = [ammoDmgType];
                 }
-
-                //If both types are set to None
-                if (availableTypes.length === 0) {
-                    const noOption = document.createElement('option');
-                    noOption.value = "";
-                    noOption.text = game.i18n.localize('abfalter.noDamageType');
-                    noOption.selected = true;
-                    atkDmgTypeDropdown.append(noOption);
-                    return;
-                }
-
-                availableTypes.forEach((type) => {
-                    const option = document.createElement('option');
-                    option.value = type;
-                    if (type === weapon.system.primDmgT || weapon.system.primDmgT === "ANY") {
-                        option.text = game.i18n.localize('abfalter.primaryShort') + ` ${type}`;
-                    } else if (type === weapon.system.secDmgT || weapon.system.secDmgT === "ANY") {
-                        option.text = game.i18n.localize('abfalter.secondaryShort') + ` ${type}`;
-                    } else {
-                        option.text = type;
-                    }
-                    if (type === primaryType) {
-                        option.selected = true;
-                    }
-                    atkDmgTypeDropdown.append(option);
+                const primaryType = availableTypes[0];
+                availableTypes.forEach(type => {
+                  $atkDmgTypeDropdown.append(
+                    `<option value="${type}" ${type === primaryType ? 'selected' : ''}>${type}</option>`
+                  );
                 });
+                return;
             }
-            populateAtkTypeDropdown(); //Default initialization
-
-            for (let i = 0; i < 10; i++) {
-                const value = -25 * i;
-                const option = document.createElement('option');
-                option.value = value;
-                option.text = game.i18n.localize(`abfalter.activeAction${i + 1}`);
-                modifierSelect.append(option);
+            const primaryType = weapon.system.primDmgT === "ANY" ? "CUT" : weapon.system.primDmgT;
+            if (weapon.system.primDmgT === "ANY" || weapon.system.secDmgT === "ANY") {
+                availableTypes = Object.keys(damageTypes).filter(type => type !== "NONE");
+            } else {
+                if (weapon.system.primDmgT !== "NONE") availableTypes.push(weapon.system.primDmgT);
+                if (weapon.system.secDmgT !== "NONE" && weapon.system.secDmgT !== weapon.system.primDmgT)
+                availableTypes.push(weapon.system.secDmgT);
             }
-            modifierSelect.val(0); //Default to 1st action
-
-            const populateFatigueDropdown = () => {
-                const availableFatigue = Math.min(maxFatigue, fatigueValue);
-        
-                // Add new options
-                for (let i = 0; i <= availableFatigue; i++) {
-                    const option = document.createElement('option');
-                    option.value = i;
-                    option.text = `${i}`;
-                    fatigueDropdown.append(option);
-                }
-            };
-            populateFatigueDropdown(); //Default initialization
-
-            const populateDirectedAtkDropdown = () => {      
-                directedAtkDropdown.empty();
-                directedAtk.forEach((part) => {
-                    const option = document.createElement('option');
-                    option.value = part.tag;
-                    let penalty = part.penalty;
-                    // Apply precise modifier
-                    if (isPrecise && penalty !== 0) {
-                        penalty = Math.floor(penalty / 2);
-                    }
-                    // Apply vorpal modifier if present & override precise
-                    if (isVorpal && (vorpalLocation === part.tag || vorpalLocation === "anywhere")) {
-                        penalty = vorpalModifier;
-                    }
-                    // Double check none = 0
-                    if (part.tag === "none") {
-                        penalty = 0;
-                }
-                    option.dataset.penalty = penalty;
-                    option.text = `${part.name} (${penalty})`;
-                    directedAtkDropdown.append(option);
-                });
-            };
-            populateDirectedAtkDropdown(); //Default initialization
-
-            attackSelect.change(function() {
-                const selectedIndex = $(this).val();
-                usedIndex = selectedIndex;
-                const selectedAttack = attacks[selectedIndex];
-                const attackPowerSpan = html.find('#attackPower');
-                const damageNum = html.find('#damageNum');
-                const atPenNum = html.find('#atPenNum');
-                
-                isPrecise = weapon.system.info.precision && !attacks[usedIndex].ignorePrecision;
-                isVorpal = weapon.system.info.vorpal && !attacks[usedIndex].ignoreVorpal;
-                populateDirectedAtkDropdown(); //Repopulate Dropdown in-case precision/vorpal rule changed.
-                if (weapon.system.melee.throwable && !attacks[usedIndex].ignoreThrown && !attacks[usedIndex].quantityConsumed) {
-                    ammoUsed = attacks[usedIndex].consumedValue;
-                } else {
-                    ammoUsed = 0;
-                }
-
-                attackPowerSpan.text(selectedAttack.finalAttack);  // Update atk span
-                damageNum.text(selectedAttack.finalDamage);  // Update dmg span
-                atPenNum.text(selectedAttack.finalAtPen);  // Update At pen span
-
-                wepValue = selectedAttack.finalAttack;
-                updateFinalValue();
+            if (!availableTypes.length) {
+                $atkDmgTypeDropdown.append(`<option value="" selected>${game.i18n.localize('abfalter.noDamageType')}</option>`);
+            return;
+            }
+            availableTypes.forEach(type => {
+                const optionText =
+                    type === weapon.system.primDmgT || weapon.system.primDmgT === "ANY"
+                        ? `${game.i18n.localize('abfalter.primaryShort')} ${type}`
+                        : type === weapon.system.secDmgT || weapon.system.secDmgT === "ANY"
+                        ? `${game.i18n.localize('abfalter.secondaryShort')} ${type}`
+                        : type;
+                $atkDmgTypeDropdown.append(`<option value="${type}" ${type === primaryType ? 'selected' : ''}>${optionText}</option>`);
             });
-
-            function updateFinalValue() {
-                const selectedModifier = parseInt(modifierSelect.val(), 10);
-                const fatigueValue = parseInt(fatigueDropdown.val(), 10) || 0;
-                const modifierValue = parseInt(modifierInput.val(), 10) || 0;
-                const selectedOption = directedAtkDropdown.find(':selected');
-                const selectedPenalty = parseInt(selectedOption.data('penalty'), 10);   
-                fatigueUsed = fatigueValue;
-            
-                finalValue = wepValue + (fatigueValue * 15) + modifierValue + selectedPenalty + selectedModifier;
-                finalFormula = `${wepValue}(${game.i18n.localize("abfalter.value")}) + ${fatigueValue * 15}(${game.i18n.localize("abfalter.fatigue")})
-                 + ${modifierValue}(${game.i18n.localize("abfalter.mod")}) + ${selectedPenalty}(${game.i18n.localize("abfalter.aim")})
-                 + ${selectedModifier}(${game.i18n.localize("abfalter.action")})`;
-                const rollButton = html.closest('.dialog').find('.dialog-button:first');
-                rollButton.text(`${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`);
-            }
-
-            fatigueDropdown.change(updateFinalValue);
-            modifierSelect.change(updateFinalValue);
-            directedAtkDropdown.change(updateFinalValue);
-            attackSelect.trigger('change');
-            modifierSelect.trigger('change');
-            directedAtkDropdown.trigger('change');
-            modifierInput.on('input', updateFinalValue);
-        },
-        close: html => {
-            if (confirmed) {
-                actor.update({ "system.fatigue.value": Math.floor(actor.system.fatigue.value - fatigueUsed) });
-                weapon.update({ 'system.info.lastWepUsed': usedIndex, 'system.melee.throwQuantity': Math.floor(weapon.system.melee.throwQuantity - ammoUsed) });
-                const attackDetails = {
-                    label: game.i18n.localize("abfalter.attack"),
-                    name: attacks[usedIndex].name,
-                    base: weapon.system.derived.baseAtk,
-                    value: finalValue,
-                    formula: finalFormula,
-                    dmg: parseInt(html.find('#damageNum').text(), 10),
-                    dmgType: html.find('#atkDmgTypeDropdown').val(),
-                    atPen: parseInt(html.find('#atPenNum').text(), 10),
-                    target: html.find('#directedAtkDropdown').val(),
-                };  
-                weaponRoll(actor, weapon, attackDetails);
-                console.log('Attack Handle Finished');
-            }
+        };
+        populateAtkTypeDropdown();
+  
+        // Modifier select
+        $modifierSelect.empty();
+        for (let i = 0; i < 10; i++) {
+            const value = -25 * i;
+            $modifierSelect.append(`<option value="${value}">${game.i18n.localize(`abfalter.activeAction${i + 1}`)}</option>`);
         }
-    }).render(true);
-}
+        $modifierSelect.val(0);
+  
+        // Fatigue dropdown
+        const populateFatigueDropdown = () => {
+            $fatigueDropdown.empty();
+            const availableFatigue = Math.min(maxFatigue, fatigueVal);
+            for (let i = 0; i <= availableFatigue; i++) {
+                $fatigueDropdown.append(`<option value="${i}">${i}</option>`);
+            }
+        };
+        populateFatigueDropdown();
+  
+        // Directed attack dropdown
+        const populateDirectedAtkDropdown = () => {
+            $directedAtkDropdown.empty();
+            directedAtk.forEach(part => {
+                let penalty = part.penalty;
+                if (isPrecise && penalty !== 0) penalty = Math.floor(penalty / 2);
+                if (isVorpal && (vorpalLocation === part.tag || vorpalLocation === "anywhere")) penalty = vorpalModifier;
+                if (part.tag === "none") penalty = 0;
+                $directedAtkDropdown.append(`<option value="${part.tag}" data-penalty="${penalty}">${part.name} (${penalty})</option>`);
+            });
+        };
+        populateDirectedAtkDropdown();
+  
+        // --- Event Handlers ---
+  
+        // When the attack selection changes
+        $attackSelect.on('change', function() {
+            usedIndex = $(this).val();
+            const selectedAttack = attacks[usedIndex];
+            isPrecise = weapon.system.info.precision && !attacks[usedIndex].ignorePrecision;
+            isVorpal = weapon.system.info.vorpal && !attacks[usedIndex].ignoreVorpal;
+            populateDirectedAtkDropdown();
+            ammoUsed = (weapon.system.melee.throwable && !attacks[usedIndex].ignoreThrown && !attacks[usedIndex].quantityConsumed)
+                ? attacks[usedIndex].consumedValue : 0;
+            RangedAmmoUsed = weapon.system.ranged.infiniteAmmo ? (attacks[usedIndex].rangedAmmoConsumed ? 0 : attacks[usedIndex].rangedAmmoConsumedValue) : attacks[usedIndex].rangedAmmoConsumedValue;
+            $html.find('#attackPower').text(selectedAttack.finalAttack);
+            $html.find('#damageNum').text(selectedAttack.finalDamage);
+            $html.find('#atPenNum').text(selectedAttack.finalAtPen);
+            wepValue = selectedAttack.finalAttack;
+            updateFinalValue($html);
+        });
+  
+        // If weapon is ranged, populate and handle ammo dropdown changes
+        if (wepType === "ranged") {
+            $ammoDropdown.empty();
+            weapon.system.ranged.ammoIds.forEach(ammo => {
+                $ammoDropdown.append(`<option value="${ammo.id}">${ammo.name}</option>`);
+            });
+            ammoIdUsed = weapon.system.ranged.selectedAmmo;
+            $ammoDropdown.val(weapon.system.ranged.selectedAmmo);
+            $ammoDropdown.on('change', function() {
+                ammoIdUsed = $(this).val();
+                let ammoDamage = 0;
+                let ammoDmgType = "";
+                let ammoBreak = 0;
+                let ammoAtPen = 0;
+                if (ammoIdUsed === "special") {
+                    ammoDamage = weapon.system.ranged.specialDmg;
+                    ammoDmgType = weapon.system.ranged.specialDmgType;
+                    ammoBreak = weapon.system.ranged.specialBreak;
+                    ammoAtPen = weapon.system.ranged.specialAtPen;
+                } else {
+                    const ammoItem = weapon.parent.items.get(ammoIdUsed);
+                    ammoDamage = ammoItem?.system.damage || 0;
+                    ammoDmgType = ammoItem?.system.dmgType || "";
+                    ammoBreak = ammoItem?.system.break || 0;
+                    ammoAtPen = ammoItem?.system.atPen || 0;
+                }
 
-export async function openMeleeWeaponDefDialogue(actor, label, wepId) {
-    
+                weapon.system.ranged.ammoDamage = ammoDamage;
+                weapon.system.ranged.ammoDmgType = ammoDmgType;
+                weapon.system.ranged.ammoBreak = ammoBreak;
+                weapon.system.ranged.ammoAtPen = ammoAtPen;
+                weapon.system.ranged.ammoDamageFinal = ammoDamage + weapon.system.ranged.ammoDmgMod;
+                weapon.system.ranged.ammoBreakFinal = ammoBreak + weapon.system.ranged.ammoBreakMod;
+                weapon.system.ranged.ammoAtPenFinal = ammoAtPen + weapon.system.ranged.ammoAtPenMod;
+
+                // Update each attack's ammo-dependent values
+                attacks.forEach(attack => {
+                attack.finalAtPen = attack.atPen + weapon.system.ranged.ammoAtPenFinal;
+                attack.finalBreakage = attack.breakage + weapon.system.ranged.ammoBreakFinal;
+                attack.finalDamage = attack.damage + weapon.system.ranged.ammoDamageFinal;
+                });
+
+                const selectedAttack = attacks[$attackSelect.val()];
+                $html.find('#attackPower').text(selectedAttack.finalAttack);
+                $html.find('#damageNum').text(selectedAttack.finalDamage);
+                $html.find('#atPenNum').text(selectedAttack.finalAtPen);
+                populateAtkTypeDropdown();
+                updateFinalValue($html);
+            });
+        }
+  
+        // Update final value when related inputs change
+        $fatigueDropdown.on('change', () => updateFinalValue($html));
+        $modifierSelect.on('change', () => updateFinalValue($html));
+        $directedAtkDropdown.on('change', () => updateFinalValue($html));
+        $modifierInput.on('input', () => updateFinalValue($html));
+  
+        // Trigger initial change to populate values
+        $attackSelect.trigger('change');
+      },
+      close: ($html) => {
+        if (confirmed) {
+            actor.update({ "system.fatigue.value": Math.floor(actor.system.fatigue.value - fatigueUsed) });
+            const ammoName = wepType === "ranged" ? weapon.parent.items.get(ammoIdUsed)?.name : "No Arrow";
+            weapon.update({
+                'system.info.lastWepUsed': usedIndex,
+                'system.melee.throwQuantity': Math.floor(weapon.system.melee.throwQuantity - ammoUsed)
+            });
+            if (wepType === "ranged") { 
+                const ammoItem = actor.items.get(ammoIdUsed);
+                if (ammoItem) {
+                    ammoItem.update({ 'system.quantity': Math.floor(ammoItem.system.quantity - RangedAmmoUsed) });
+                }
+                weapon.update({ 'system.ranged.selectedAmmo': ammoIdUsed });
+            }
+            const attackDetails = {
+                label: game.i18n.localize("abfalter.attack"),
+                name: attacks[usedIndex].name,
+                base: weapon.system.derived.baseAtk,
+                value: finalValue,
+                formula: finalFormula,
+                dmg: parseInt($html.find('#damageNum').text(), 10),
+                dmgType: $html.find('#atkDmgTypeDropdown').val(),
+                atPen: parseInt($html.find('#atPenNum').text(), 10),
+                target: $html.find('#directedAtkDropdown').val(),
+                ammoName: ammoName,
+                wepType: wepType
+            };
+            weaponRoll(actor, weapon, attackDetails);
+            console.log('Attack Handle Finished');
+        }
+      }
+    }).render(true);
 }
 
 async function weaponRoll(actor, weapon, attackDetails) {
@@ -666,7 +732,7 @@ async function weaponRoll(actor, weapon, attackDetails) {
     } else {
         rollResult.color = "normalRoll";
     }
-    if (rollResult.doubles === true) {
+    if (rollResult.doubles === true && rollResult.fumble === false) {
         if (rollResult.rolledDice % 11 === 0 && rollResult.rolledDice <= 88) {
             rollResult.color = "openRoll";
             rollResult.explode = true;
@@ -749,7 +815,58 @@ export async function wepOpenRollFunction(msg) {
     const content = await renderTemplate(template, { rollData: msg.flags.rollData, actor: actor, attackDetails: msg.flags.attackDetails });
     game.messages.get(msg._id).update({
         content: content,
-        flags: { rollData, num}
+        flags: { rollData, num }
+    });
+}
+
+export async function wepFumbleRollFunction(msg) {
+    let fumbleSettings = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_Fumble);
+    let actor = msg.flags.actor;
+    let num = msg.flags.num;
+    let oldData = msg.flags.rollData[msg.flags.num];
+
+    
+    let baseDice = "1d100";
+    let rollFormula = ``;
+    if (fumbleSettings == true) {
+        rollFormula = `${oldData.total} - ${baseDice}`;
+    } else {
+        rollFormula = `${oldData.total} - ${baseDice} - ${oldData.fumbleLevel}`;
+    };
+    let rollResult = await new Roll(rollFormula).roll();
+    rollResult.rolledDice = rollResult.total - oldData.total + oldData.fumbleLevel;
+    let fumbleS = oldData.fumbleLevel - rollResult.rolledDice;
+    let formula = ``;
+    if (fumbleSettings == true) {
+        formula = `${oldData.total}(${game.i18n.localize("abfalter.prevRoll")}) + ${rollResult.rolledDice}(Roll)`;
+    } else {
+        formula = `${oldData.total}(${game.i18n.localize("abfalter.prevRoll")}) + ${rollResult.rolledDice}(Roll) - ${oldData.fumbleLevel}(Fumble Level)`;
+    };
+    rollResult.color = "fumbleRoll";
+    msg.flags.rollData[num].doubles = null;
+    msg.flags.rollData[num].openRange = null;
+    msg.flags.rollData[num].explode = false;
+    msg.flags.rollData[num].fumble = false;
+    num = num + 1;
+    msg.flags.rollData[num] = {
+        roll: rollResult.rolledDice, total: rollResult._total, doubles: null, openRange: null, label: `Fumble Result`,
+        explode: false, formula: formula, color: rollResult.color, showSeverity: true, fumble: false, fumbleS: fumbleS 
+    };
+    const rollData = msg.flags.rollData;
+    let template;
+    console.log(msg.flags.type);
+    switch (msg.flags.type) {
+        case "weapon":
+            template = "systems/abfalter/templates/dialogues/diceRolls/weaponRoll.hbs";
+            break;
+        default:
+            template = "systems/abfalter/templates/dialogues/abilityRoll.hbs";
+            break;
+    }
+    const content = await renderTemplate(template, { rollData: msg.flags.rollData, actor: actor, attackDetails: msg.flags.attackDetails });
+    game.messages.get(msg._id).update({
+        content: content,
+        flags: { rollData, num }
     });
 }
 
@@ -790,7 +907,7 @@ export async function openMeleeTrapDialogue(actor, label, wepId) {
     const html = await renderTemplate(template, {weapon: weapon}, {attacks: attacks}, {label: label});
 
     new diceDialog({
-        title: "Trap Attack",
+        title: game.i18n.localize('abfalter.trapAttack'),
         content: html,
         buttons: {
             roll: { label: game.i18n.localize('abfalter.dialogs.roll'), callback: () => confirmed = true },
@@ -810,7 +927,7 @@ export async function openMeleeTrapDialogue(actor, label, wepId) {
                     attackSelect.append(option);
                     if(usedIndex === -1) {
                         usedIndex = index;
-                        trapValue = attacks[usedIndex].trappin1gValue;
+                        trapValue = attacks[usedIndex].trappingValue;
                     }
                 }
               });
@@ -903,4 +1020,186 @@ async function trapRoll(actor, trapDetails) {
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     ChatMessage.create(chatData);
+}
+
+export async function openMeleeBreakDialogue(actor, label, wepId, wepType) {
+    const weapon = actor.items.get(wepId);
+    const attacks = weapon.system.attacks;
+
+    if (!attacks.length) {
+        ui.notifications.error(game.i18n.localize("abfalter.noAttacksFound"));
+        return;
+    }
+
+    let usedIndex = weapon.system.info.lastWepUsed < attacks.length ? weapon.system.info.lastWepUsed : 0;
+    let finalValue = 0; let ammoIdUsed = ""; let breakValue = 0; let finalFormula = "";
+    let confirmed = false;
+
+    if (event.shiftKey) {
+        console.log('shift key held, skipping trap dialog. TODO');
+        ui.notifications.error("Not implemented yet");
+        //TODO
+        return;
+    }
+
+    const templateData = {
+        weaponType: wepType,
+        weapon,
+        attacks,
+        label,
+      };
+    const template = "systems/abfalter/templates/dialogues/weaponPrompts/weaponBreak.hbs";
+    const htmlContent = await renderTemplate(template, templateData);
+
+    const updateFinalValue = ($html) => {
+        const modifierValue = parseInt($html.find('#modifierMod').val(), 10) || 0;
+        finalValue = breakValue + modifierValue
+        finalFormula = `${breakValue}(${game.i18n.localize("abfalter.value")}) + ${modifierValue}(${game.i18n.localize("abfalter.mod")})`;
+        $html.closest('.dialog').find('.dialog-button:first').text(`${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue} + 1d10`);
+    };
+
+    new diceDialog({
+        title:`${weapon.name} ${game.i18n.localize('abfalter.breakRoll')}`,
+        content: htmlContent,
+        buttons: {
+            roll: { label: `${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`, callback: () => confirmed = true },
+            cancel: { label: game.i18n.localize('abfalter.dialogs.cancel'), callback: () => confirmed = false }
+        },
+        render: ($html) => {
+            const $attackSelect = $html.find('#attackSelect');
+            const $modifierInput = $html.find('#modifierMod');
+            const $ammoDropdown = $html.find('#ammoDropdown');
+
+            // Attack options
+            $attackSelect.empty();
+            attacks.forEach((attack, index) => {
+                $attackSelect.append(`<option value="${index}">${attack.name}</option>`);
+            });
+            $attackSelect.val(usedIndex);
+
+            $attackSelect.change(function() {
+                usedIndex = $(this).val();
+                const selectedAttack = attacks[usedIndex];
+
+                breakValue = selectedAttack.finalBreakage;
+                updateFinalValue($html);
+            }); 
+
+            if (wepType === "ranged") {
+                $ammoDropdown.empty();
+                weapon.system.ranged.ammoIds.forEach(ammo => {
+                    $ammoDropdown.append(`<option value="${ammo.id}">${ammo.name}</option>`);
+                });
+                ammoIdUsed = weapon.system.ranged.selectedAmmo;
+                $ammoDropdown.val(weapon.system.ranged.selectedAmmo);
+                $ammoDropdown.on('change', function() {
+                    ammoIdUsed = $(this).val();
+                    let ammoDamage = 0;
+                    let ammoDmgType = "";
+                    let ammoBreak = 0;
+                    let ammoAtPen = 0;
+                    if (ammoIdUsed === "special") {
+                        ammoDamage = weapon.system.ranged.specialDmg;
+                        ammoDmgType = weapon.system.ranged.specialDmgType;
+                        ammoBreak = weapon.system.ranged.specialBreak;
+                        ammoAtPen = weapon.system.ranged.specialAtPen;
+                    } else {
+                        const ammoItem = weapon.parent.items.get(ammoIdUsed);
+                        ammoDamage = ammoItem?.system.damage || 0;
+                        ammoDmgType = ammoItem?.system.dmgType || "";
+                        ammoBreak = ammoItem?.system.break || 0;
+                        ammoAtPen = ammoItem?.system.atPen || 0;
+                    }
+    
+                    weapon.system.ranged.ammoDamage = ammoDamage;
+                    weapon.system.ranged.ammoDmgType = ammoDmgType;
+                    weapon.system.ranged.ammoBreak = ammoBreak;
+                    weapon.system.ranged.ammoAtPen = ammoAtPen;
+                    weapon.system.ranged.ammoDamageFinal = ammoDamage + weapon.system.ranged.ammoDmgMod;
+                    weapon.system.ranged.ammoBreakFinal = ammoBreak + weapon.system.ranged.ammoBreakMod;
+                    weapon.system.ranged.ammoAtPenFinal = ammoAtPen + weapon.system.ranged.ammoAtPenMod;
+    
+                    // Update each attack's ammo-dependent values
+                    attacks.forEach(attack => {
+                    attack.finalAtPen = attack.atPen + weapon.system.ranged.ammoAtPenFinal;
+                    attack.finalBreakage = attack.breakage + weapon.system.ranged.ammoBreakFinal;
+                    attack.finalDamage = attack.damage + weapon.system.ranged.ammoDamageFinal;
+                    });
+    
+                    const selectedAttack = attacks[$attackSelect.val()];
+                    breakValue = selectedAttack.finalBreakage;
+                    updateFinalValue($html);
+                });
+            }
+
+
+
+            $modifierInput.on('input', () => updateFinalValue($html));
+            $attackSelect.trigger('change');
+        },
+        close: ($html) => {
+            if(confirmed) {
+                console.log('Breakage Handle Finished');
+                const ammoName = wepType === "ranged" ? weapon.parent.items.get(ammoIdUsed)?.name : "No Arrow";
+
+                const breakDetails = {
+                    label: `${attacks[usedIndex].name} ${game.i18n.localize("abfalter.breakageShort")}`,
+                    name: attacks[usedIndex].name,
+                    wepName: weapon.name,
+                    wepType: wepType,
+                    value: finalValue,
+                    formula: finalFormula,
+                    ammoName: ammoName,
+                }
+                breakRoll(actor, breakDetails);
+            }
+        }
+    }).render(true);
+}
+
+async function breakRoll(actor, breakDetails) {
+    let baseDice = "1d10";
+    let rollFormula = `${baseDice} + ${breakDetails.value}`;
+
+    const rollResult = await new Roll(rollFormula, actor).roll();
+    rollResult.rolledDice = rollResult.total - breakDetails.value;
+
+    rollResult.color = "";
+    rollResult.fumble = false;
+    rollResult.explode = false;
+
+    switch (rollResult.rolledDice) {
+        case 1:
+            rollResult.color = "fumbleRoll";
+            rollResult.fumble = true;
+            rollResult.newTotal = rollResult.total - 3;
+            breakDetails.formula = `(${rollResult.rolledDice} - 3) + ${breakDetails.formula}`;
+            break;
+        case 10:
+            rollResult.color = "openRoll";
+            rollResult.explode = true;
+            rollResult.newTotal = rollResult.total + 2;
+            breakDetails.formula = `(${rollResult.rolledDice} + 2) + ${breakDetails.formula}`;
+            break;
+        default:
+            rollResult.color = "normalRoll";
+            rollResult.newTotal = rollResult.total;
+            breakDetails.formula = `(${rollResult.rolledDice}) + ${breakDetails.formula}`;
+            break;
+    }
+
+    const template = "systems/abfalter/templates/dialogues/diceRolls/breakRoll.hbs"
+    const content = await renderTemplate(template, { actor: actor, rollResult: rollResult, breakDetails: breakDetails});
+    const chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({ actor: actor }),
+        sound: CONFIG.sounds.dice,
+        content: content
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+    ChatMessage.create(chatData);
+}
+
+export async function openWeaponDefDialogue(actor, label, wepId) {
+  
 }

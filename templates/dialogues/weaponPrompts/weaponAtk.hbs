@@ -1,6 +1,13 @@
 <form class="baseAbfalter">
   <body>
     <div class="wepAtkDiceRoll">
+        {{#ifEquals weaponType "ranged"}}
+        <label>
+            <span> {{localize "abfalter.ammo"}}: </span>
+            <select id="ammoDropdown"></select>
+        </label>
+        {{/ifEquals}}
+
         <label>
             <span> {{localize "abfalter.atkType"}}: </span>
             <select id="attackSelect"></select>

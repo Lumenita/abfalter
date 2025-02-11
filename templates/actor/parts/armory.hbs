@@ -193,40 +193,31 @@
                             <div class="wepContainer1">
                                 <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                                 <span class="{{#if system.equipped}}weaponEquipped{{else}}notEquipped{{/if}}"> {{weapon.name}} </span>
-                                <span>
-                                    {{#ifEquals system.info.type "melee"}}
-                                        {{localize "abfalter.atPen"}}: {{system.melee.finalATPen}}
-                                    {{/ifEquals}}
-                                    {{#ifEquals system.info.type "ranged"}}
-                                        WIP
-                                    {{/ifEquals}}
-                                    {{#ifEquals system.info.type "shield"}}
-                                        WIP
-                                    {{/ifEquals}}
-                                </span>
-                                <span>
-                                    {{#ifEquals system.info.type "melee"}}
-                                        {{localize "abfalter.dmgShort"}}: {{system.melee.baseDmg}}
-                                    {{/ifEquals}}
-                                    {{#ifEquals system.info.type "ranged"}}
-                                        WIP
-                                    {{/ifEquals}}
-                                    {{#ifEquals system.info.type "shield"}}
-                                        WIP
-                                    {{/ifEquals}}
-                                </span>
+                                {{#ifEquals system.info.type "melee"}}
+                                <span> {{localize "abfalter.atPen"}}: {{system.melee.finalATPen}} </span>
+                                <span> {{localize "abfalter.dmgShort"}}: {{system.melee.baseDmg}} </span>
+                                {{/ifEquals}}
+                                {{#ifEquals system.info.type "ranged"}}
+                                <label>
+                                    <span> {{localize "abfalter.range"}}: {{system.ranged.range}} {{localize (concat "abfalter." (getDistanceType system.ranged.rangeType))}} </span>
+                                </label>
+                                {{/ifEquals}}
+                                {{#ifEquals system.info.type "shield"}}
+                                <span> WIP </span>
+                                <span> WIP </span>
+                                {{/ifEquals}}
                                 <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i
                                         class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                             </div>
                             <div class="wepContainer2">
                                 <div>
                                     {{#ifEquals system.info.type "melee"}}
-                                    <button type="button" class="weaponRoll" data-type="{{_id}}" data-label="attack" data-value="{{system.info.type}}">
+                                    <button type="button" class="weaponRoll" data-label="attack" data-id="{{_id}}" data-type="{{system.info.type}}" data-value="weaponAtk">
                                         {{localize "abfalter.attack"}}: {{system.derived.baseAtk}}
                                     </button>
                                     {{/ifEquals}}
                                     {{#ifEquals system.info.type "ranged"}}
-                                    <button type="button" class="combatRoll" data-roll="{{system.derived.baseAtk}}" data-label="{{localize "abfalter.attack"}}" data-type="weaponCombatRoll" data-ability="{{system.complex}}">
+                                    <button type="button" class="weaponRoll" data-label="attack" data-id="{{_id}}" data-type="{{system.info.type}}" data-value="weaponAtk">
                                         {{localize "abfalter.attack"}}: {{system.derived.baseAtk}}
                                     </button>
                                     {{/ifEquals}}
@@ -238,24 +229,28 @@
                                         {{localize "abfalter.dodge"}}: {{system.derived.baseDod}}
                                     </button>
                                 </div>
-
-                                <span>
-                                    {{#ifEquals system.info.type "melee"}}
-                                        {{localize "abfalter.fortitudeShort"}}: {{system.derived.finalFortitude}}
-                                    {{/ifEquals}}
-                                    {{#ifEquals system.info.type "ranged"}}
-                                        WIP
-                                    {{/ifEquals}}
-                                    {{#ifEquals system.info.type "shield"}}
-                                        WIP
-                                    {{/ifEquals}}
-                                </span>
-
                                 {{#ifEquals system.info.type "melee"}}
-                                <button type="button" class="combatRoll" data-roll="{{system.melee.finalBreakage}}"
-                                    data-label="{{localize "abfalter.finBreakage"}}" data-type="breakageRoll">
+                                <span> {{localize "abfalter.fortitudeShort"}}: {{system.derived.finalFortitude}} </span>
+                                <button type="button" class="weaponRoll" data-label="breakage" data-id="{{_id}}" data-type="{{system.info.type}}" data-value="weaponBreak">
                                     {{localize "abfalter.breakageShort"}}: {{system.melee.finalBreakage}}
                                 </button>
+                                {{/ifEquals}}
+                                {{#ifEquals system.info.type "ranged"}}
+                                <button type="button" class="item-toggle {{#if system.ranged.readyToFire}}kiBought{{/if}} atkCustomTitleContainer" 
+                                    data-label="system.ranged.readyToFire" data-ability="{{system.ranged.readyToFire}}">
+                                    {{#if system.ranged.readyToFire}} 
+                                        {{localize "abfalter.rdyToFire"}}
+                                    {{else}} 
+                                        {{localize "abfalter.unloaded"}}
+                                    {{/if}}
+                                    <div class="atkCustomTitle">{{localize "abfalter.rdyToFireDef"}}</div>
+                                </button>   
+                                <button type="button" class="weaponRoll" data-label="breakage" data-id="{{_id}}" data-type="{{system.info.type}}" data-value="weaponBreak">
+                                    {{localize "abfalter.breakage"}}
+                                </button>
+                                {{/ifEquals}}
+                                {{#ifEquals system.info.type "shield"}}
+                                    <span> WIP </span>
                                 {{/ifEquals}}
                             </div>
                         </div>
@@ -271,7 +266,6 @@
                                 <a class="wepThrowQ" data-value="1"><i class="fas fa-plus"></i> </a>
                                 <span> {{localize "abfalter.quantity"}} |</span>
                                 <span> {{localize "abfalter.range"}}: {{system.melee.throwRange}} {{localize (concat "abfalter." (getDistanceType system.melee.throwDistanceType))}}</span>
-
                             </div>
                             {{/if}}
                         </div>
@@ -280,7 +274,7 @@
                             {{#if system.melee.trapping}}
                             <div class="weaponSubTrap">
                                 <span> {{localize "abfalter.trapRoll"}}: {{localize (concat "abfalter." system.melee.trappingTypeF)}} / {{localize (concat "abfalter." system.melee.trappingTypeS)}} </span>
-                                <button type="button" class="weaponRoll" data-type="{{_id}}" data-label="trap" data-value="trap">
+                                <button type="button" class="weaponRoll" data-label="trap" data-id="{{_id}}" data-value="weaponTrap">
                                     {{localize "abfalter.trapping"}}
                                 </button>
                             </div>  
@@ -303,16 +297,16 @@
             </div>
         </div>
 
-        <fieldset class="ammo sectionActor hidden">
-            <legend>
-                <span>{{localize "abfalter.ammo"}}</span>
-            </legend>
+        <div class="ammo">
+            <h5> {{localize "abfalter.ammo"}}  </h5>
             <div>
-                <span> {{localize "abfalter.name"}} </span>
-                <span> {{localize "abfalter.price"}} </span>
-                <span> {{localize "abfalter.weight"}} </span>
-                <span> {{localize "abfalter.quantity"}} </span>
-                <span> {{localize "abfalter.dmgShort"}} </span>
+                <div></div>
+                <div>
+                    <span> {{localize "abfalter.name"}} </span>
+                    <span> {{localize "abfalter.weight"}} </span>
+                    <span> {{localize "abfalter.quantity"}} </span>
+                    <span> {{localize "abfalter.dmgShort"}} </span>
+                </div>
             </div>
             <div class="flexColumn {{#if system.itemToggle.ammo}}item-list{{/if}}">
                 {{#each ammos as |ammo id|}}
@@ -322,19 +316,14 @@
                         <div>
                             <span> {{ammo.name}} </span>
                             <div>
-                                <span> {{system.price}} </span>
-                                <span> Crowns </span>
-                            </div>
-                            <div>
-                                <span> icon</span>
-                                <span> {{system.weight}} </span>
+                                <span> {{system.weightTotal}} {{system.weightType}}</span>
                             </div>
                             <div>
                                 <a class="ammoQ" data-value="-1"><i class="fas fa-minus"> </i></a>
                                 <span> {{system.quantity}} </span>
                                 <a class="ammoQ" data-value="1"><i class="fas fa-plus"></i> </a>
                             </div>
-                            <span> Dmg: {{system.damage}} </span>
+                            <span> {{system.damage}} {{localize (concat "abfalter." system.dmgType)}} </span>
                             <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i
                                         class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
@@ -346,7 +335,7 @@
                 <a class="item-control item-create" data-type="ammo"><i class="fas fa-plus"></i> {{localize "abfalter.addAmmo"}} </a>
                 <a class="toggleBoolean {{#if system.itemToggle.ammo}}armorpenalty{{/if}}" data-label="system.itemToggle.ammo" data-ability="{{system.itemToggle.ammo}}"><i class="{{#if system.itemToggle.ammo}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
             </div>
-        </fieldset>
+        </div>
 
         <div class="inventory">
             <h5> {{localize "abfalter.inventory"}} </h5>

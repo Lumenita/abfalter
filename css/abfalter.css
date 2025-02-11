@@ -3806,6 +3806,12 @@ h6 {
 .weaponContainerInfo .wepContainer1 > span:nth-of-type(3) {
     width: 12%;
 }
+.weaponContainerInfo .wepContainer1 > label {
+    width: 27%;
+}
+.weaponContainerInfo .wepContainer1 > label > span {
+    width: 100%;
+}
 .weaponContainerInfo .wepContainer2 > div {
     width: 66%;
     display: flex;
@@ -4032,6 +4038,32 @@ h6 {
 .weaponContent5 > label > select {
     width: 35%;
 }
+
+.weaponContent7 {
+    display: flex;
+}
+.weaponContent7 > label {
+    width: 36%;
+}
+.weaponContent7 > button {
+    margin: 0 2%;
+    width: 25%;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent7 > span:nth-of-type(1) {
+    width: 1%;
+    text-align: center;
+}
+.weaponContent7 > span:nth-of-type(2) {
+    width: 17%;
+    text-align: center;
+}
+.weaponContent7 > input {
+    width: 17%;
+}
+
 .weaponContent6 > label > span {
     display: grid;
     width: 65%
@@ -4181,7 +4213,8 @@ h6 {
     font-size: 23px;
     justify-items: center;
 }
-.weaponChatRollMsg > div:first-of-type > span:nth-of-type(2) {
+.weaponChatRollMsg > div:first-of-type > span:nth-of-type(2),
+.weaponChatRollMsg > div:first-of-type > span:nth-of-type(3) {
     text-decoration: underline;
     font-style: italic;
     font-size: 15px;
@@ -4242,19 +4275,42 @@ h6 {
 .ammo > div {
     display: flex;
 }
-.baseAbfalter .armory .ammo span {
-    white-space: nowrap;
-    overflow: hidden;
-    display: block;
-    text-overflow: ellipsis;
-}
 .ammo > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
+    padding: 0 3px;
+}
+.ammo > div { 
+    border-left: 3px solid var(--boxColor);
+    border-right: 3px solid var(--boxColor);
 }
 .ammo > div:last-of-type {
     place-content: space-between;
     border-top: 1px solid var(--boxColor);
+    border-bottom: 3px solid var(--boxColor);
 }
+.ammo > div:first-of-type {
+    padding: 0 3px;
+}
+.ammo > div:first-of-type > div:first-of-type {
+    width: 5%;
+    margin-right: 5px;
+}
+.ammo > div:first-of-type > div:last-of-type {
+    display: flex;
+    width: 100%;
+}
+.ammo > div:first-of-type > div > span:first-of-type{
+    width: 55%;
+}
+.ammo > div:first-of-type > div > span:nth-of-type(2) {
+    width: 10%;
+}
+.ammo > div:first-of-type > div > span {
+    width: 15%;
+    text-align: center;
+}
+
 .ammoContainerInfo,
 .ammoContainerInfo > div,
 .ammoContainerInfo > div > div {
@@ -4266,9 +4322,9 @@ h6 {
 }
 .ammo-item-img {
     border: 1px solid #000000;
-    min-width: 35px;
-    width: 35px;
-    height: 35px; 
+    min-width: 5%;
+    width: 5%;
+    height: 5%; 
     object-fit: cover; 
     margin-right: 5px; 
 }
@@ -4278,24 +4334,31 @@ h6 {
     container-type: inline-size;
 }
 .ammoContainerInfo > div > span:first-of-type {
-    width: 50%;
+    width: 55%;
     font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
 }
 .ammoContainerInfo > div > div:first-of-type {
-    width: 15%;
-}
-.ammoContainerInfo > div > div:nth-of-type(2) {
     width: 10%;
+    justify-content: center;
+    padding: 0;
 }
 .ammoContainerInfo > div > div  {
-    width: 10%;
+    width: 15%;
+    justify-content: space-between;
+    padding: 0 10px;
 }
-.ammoContainerInfo > div > span:last-of-type{
-    width: 10%;
+.ammoContainerInfo > div > span:last-of-type {
+    width: 15%;
+    text-align: center;
 }
 .ammoContainerInfo > div > a {
     width: 5%;
 }
+
 
 /* #endregion*/
 
@@ -4544,6 +4607,12 @@ h6 {
 .rollRange > div > label > select {
     width: 40%;
 }
+.rollRange > div > label > button {
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+    width: 40%;
+}
 
 /*
     ---------
@@ -4588,11 +4657,8 @@ h6 {
     text-align: start;
     padding: 0 0 0 5px;
 }
-/*
-    ---------
-    Innate Bonuses
-    ---------
-*/
+
+/* #region Innate Bonuses*/
 .class-item {
     padding: 0 2.5%;
 }
@@ -4643,7 +4709,182 @@ h6 {
 .class-item > div:hover > a {
     opacity: 1;
 }
+/* #endregion */
+/* #region Class Item*/
+.itemMax {
+    max-height: 800px;
+}
+.classContent  {
+    display: flex;
+}
+.classContent > label {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 10px;
+    width: 50%;
+}
+.classContent > label > span {
+    display: grid;
+    width: 64%;
+    margin: 0 3% 0 3%;
+    justify-content: flex-start;
+}
+.classContent > label > input {
+    width: 27%;
+    margin: 0 3% 0 0;
+}
+.classHeader {
+    justify-content: flex-start;
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 0;
+    font-size: 17px;
+}
+.classHeader > span {
+    color: var(--boxColor);
+    font-size: 17px;
+}
+.classContent2 {
+    display: flex;
+}
+.classContent2 > label {
+    display: flex;
+    align-items: flex-start;
+    padding: 0 5px;
+    width: 50%;
+}
+.classContent2 > label > span {
+    display: grid;
+    width: 60%;
+    margin: 0 1%;
+    justify-content: flex-start;
+}
+.classContent2 > label > span:last-of-type {
+    width: 30%;
+}
+.classContent2 > label > input {
+    width: 10%;
+    margin: 0 1% 0 0;
+}
+.classContent3 {
+    display: flex;
+}
+.classContent3 > label {
+    display: flex;
+    justify-content: center;
+    padding: 0 5px;
+    width: 33%;
+}
+.classContent3 > label > span {
+    display: grid;
+    margin: 0 1%;
+    justify-content: flex-start;
+}
+.classContent3 > label > span:first-of-type {
+    justify-content: flex-end;
+}
+.classContent3 > label > span:last-of-type {
+    width: 5%;
+}
+.classContent3 > label > input {
+    width: 15%;
+    margin: 0 1% 0 0;
+}
+.dpcost > h6 {
+    justify-content: start;
+    border-bottom: 1px solid var(--boxColor);
+    font-size: 20px;
+}
+.classHeader2 {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--boxColor);
+    padding: 3px 0;
+    font-size: 17px;
+}
+.classHeader2 > span {
+    color: var(--boxColor);
+    font-size: 17px;
+}
+.classHeader2 > button {
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+    width: 35%;
+}
 
+.ppClass > div {
+    width: 50%;
+    padding: 0 10px;
+}
+.ppClass > div::after {
+    right: 15px;
+}
+.ppClass > div > label {
+    display: flex;
+    width: 100%;
+}
+.ppClass > div > label > span {
+    width: 46%;
+    margin: 0 0 0 4%;
+    justify-content: flex-start;
+}
+.ppClass > div > label > select {
+    width: 50%;
+}
+/* #endregion */
+/* #region dp calculator*/
+.dpCostCalc span {
+    display: grid;
+}
+.dpCostHeader,
+.dpCostMainInfo,
+.dpCostMainInfo > label {
+    display: flex;
+}
+.dpCostHeader > span {
+    font-size: 23px;
+}
+.dpCostHeader > span:nth-of-type(2) {
+    margin-left: 5px;
+    margin-right: 3px;
+}
+.dpCostMainInfo > label > span {
+    font-size: 20px;
+}
+.dpCostMainInfo {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.dpCostMainInfo > label {
+    display: flex;
+    width: 48%;
+}
+.dpCostMainInfo > label > span:first-of-type {
+    margin-right: 5px;
+}
+.dpCostMainInfo > label > span:nth-of-type(2) {
+    margin-right: 3px;
+}
+.dpCostStatscontainer > h6 {
+    justify-content: start;
+    border-bottom: 1px solid var(--boxColor);
+    font-size: 20px;
+}
+.dpCostContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+.dpCostContainer > div {
+    width: 33%;
+    box-sizing: border-box;
+    padding: 5px;
+}
+.dpCostContainer > div > span {
+    display: block;
+    text-align: start;
+}
+/* #endregion */
 /*
     ---------
     Homebrew Stuffs
@@ -5253,6 +5494,48 @@ h6 {
     height: fit-content;
 }
 
+.itemContentSelectInput {
+    display: flex;
+    align-items: center;
+}
+.itemContentSelectInput > label {
+    width: 36%;
+}
+.weightContainer > label {
+    width: 46%;
+}
+.itemContentSelectInput > label > span {
+    display: grid;
+}
+.itemContentSelectInput > div {
+    margin: 0 2%;
+    width: 25%;
+}
+.itemContentSelectInput .weightType {
+    margin: 0 2%;
+    width: 15%;
+}
+.itemContentSelectInput > div > label > select {
+    width: 100% !important;
+}
+.itemContentSelectInput > span:nth-of-type(1) {
+    width: 1%;
+    text-align: center;
+    display: grid;
+}
+.itemContentSelectInput > span:nth-of-type(2) {
+    width: 17%;
+    text-align: center;
+    display: grid;
+}
+.itemContentSelectInput > input {
+    width: 17%;
+}
+
+.editor-edit {
+    background: none;
+    border: none;
+}
 /* ----------------------------------------- */
 /*  Item Psychic Matrix Details Tab          */
 /* ----------------------------------------- */
@@ -5486,100 +5769,7 @@ h6 {
 .elanContent > div {
     border: 3px solid var(--boxColor);
 }
-/*
-    -----
-    Class
-    -----
-*/
-.classContent > div {
-    display: flex;
-}
-.classContent > div > label {
-    display: flex;
-    justify-content: flex-start;
-    padding: 0 10px;
-    width: 50%;
-}
-.classContent > div > label > span {
-    width: 64%;
-    margin: 0 2% 0 4%;
-    justify-content: flex-start;
-}
-.classContent > div > label > input {
-    width: 30%;
-}
-.classContent > div:first-of-type > label:first-of-type {
-    display: flex;
-    justify-content: flex-start;
-    width: 50%;
-}
-.classContent > div:first-of-type > label:first-of-type > span {
-    width: 44%;
-    margin: 0 2% 0 4%;
-    justify-content: flex-start;
-}
-.classContent > div:first-of-type > label:first-of-type > input {
-    width: 50%;
-}
-.classHeader {
-    justify-content: flex-start;
-    border-top: 1px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-    padding: 3px 0;
-}
-.classHeader > span {
-    width: 95%;
-}
-.classHeader > a {
-    width: 5%;
-    font-size: 15px;
-}
-.classContent > div > textarea {
-    border-top: 1px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-    padding: 3px 0;
-}
-.classContent > h3:nth-of-type(1) {
-    margin-top: 5px;
-}
-.classContent > h3:nth-of-type(2) {
-    border: none;
-    margin: 5px 0 0 0;
-    padding: 0;
-}
-.ppClass > div {
-    width: 50%;
-    padding: 0 10px;
-}
-.ppClass > div::after {
-    right: 15px;
-}
-.ppClass > div > label {
-    display: flex;
-    width: 100%;
-}
-.ppClass > div > label > span {
-    width: 46%;
-    margin: 0 0 0 4%;
-    justify-content: flex-start;
-}
-.ppClass > div > label > select {
-    width: 50%;
-}
-.classContent > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.classContent > div:first-of-type,
-.classContent > div:nth-of-type(8),
-.classContent > div:nth-of-type(10) {
-    border-top: 3px solid var(--boxColor);
-}
-.classContent > div:last-of-type,
-.classContent > div:nth-of-type(7),
-.classContent > div:nth-of-type(9) {
-    border-bottom: 3px solid var(--boxColor);
-}
+
 /*
     -----
     Spell
@@ -5849,6 +6039,42 @@ h6 {
 }
 /*
     --------
+    1d10 Roll
+    --------
+*/
+.primaryRoll > div {
+    font-size: 17px;
+}
+.primaryRoll > div:nth-of-type(1) {
+    font-size: 23px;
+    display: flex;
+    justify-content: center;
+}
+.primaryRoll > div:not(:nth-of-type(1)) {
+    display: flex;
+    justify-content: space-between;
+}
+.primaryRoll > div:last-of-type {
+    border-image: url(../img/border.png) 10 stretch;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.primaryRoll > div:not(:nth-of-type(1)) > span:nth-of-type(1) {
+    padding-left: 10%;
+}
+.primaryRoll > div:not(:nth-of-type(1)) > span:nth-of-type(2) {
+    padding-right: 10%;
+}
+.primaryExplodeRoll {
+    padding: 0 10%;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+}
+/*
+    --------
     Sec Roll
     --------
 */
@@ -5881,6 +6107,13 @@ h6 {
     padding: 0 10%;
     display: flex;
     justify-content: space-between;
+}
+.wepFumbleSeverity {
+    padding: 0 7%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 17px;
+    border-top: 1px dashed black;
 }
 .openRollMod,
 .fumblerollmod {
@@ -6016,6 +6249,21 @@ h6 {
     ---------------
     ***************
 */
+.changelog {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 1000px;
+}
+.changelogHeader {
+    flex-shrink: 0;
+    padding: 10px;
+}
+.changelogBody {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
 .changelogHeader > div {
     display: flex;
     justify-content: flex-end;
@@ -6024,7 +6272,7 @@ h6 {
     font-size: 14px;
     color: var(--boxColor);
 }
-.changelog > h5 {
+.changelogHeader > h5 {
     justify-content: start;
     font-size: 35px;
     border-bottom: 1px solid var(--boxColor);
