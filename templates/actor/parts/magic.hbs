@@ -108,6 +108,9 @@
                     <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.mregen.temp" value="{{system.mregen.temp}}" /> </label>
                     <label> <span> {{localize "abfalter.finalregen"}} </span> <input type="number" name="system.mregen.final" value="{{system.mregen.final}}" readonly /> </label>
                     <div>
+                        <button type="button" class="mregenActual" data-ability="{{system.mregen.final}}" data-ability2="{{system.zeon.max}}">
+                            <span> {{localize "abfalter.actual"}} ({{system.mregen.finalMinusMaint}})  </span>
+                        </button>
                         <button type="button" class="mregenFull" data-ability="{{system.mregen.final}}" data-ability2="{{system.zeon.max}}">
                             <span> {{localize "abfalter.full"}} </span>
                         </button>

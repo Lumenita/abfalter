@@ -1692,7 +1692,8 @@ h6 {
     border-radius: 0px;
     border: 0px;
 }
-.maccu2 > div > button:first-of-type {
+.maccu2 > div > button:first-of-type,
+.mregen2 > div > button:first-of-type  {
     border-right: 1px solid var(--boxColor);
 }
 .mregen2 > div:last-of-type {
@@ -3834,9 +3835,10 @@ h6 {
 }
 .weaponContainerInfo .wepContainer2 > button {
     margin: 0px;
-    width: 17%;
+    width: 16%;
     height: 25px;
     border-radius: 0px;
+    padding: 0px;
     border: 1px solid var(--boxColor);
 }
 .weapon-item .weaponSubHeaderContainer {
@@ -4038,9 +4040,9 @@ h6 {
 .weaponContent5 > label > select {
     width: 35%;
 }
-
 .weaponContent7 {
     display: flex;
+    padding: 2px 0;
 }
 .weaponContent7 > label {
     width: 36%;
@@ -4063,6 +4065,48 @@ h6 {
 .weaponContent7 > input {
     width: 17%;
 }
+.weaponContent8 {
+    display: flex;
+    padding: 2px 0;
+}
+.weaponContent8 > span {
+    width: 27%;
+    display: grid;
+}
+.weaponContent8 > button {
+    margin: 0 2%;
+    width: 20%;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.weaponContent8 > button:first-of-type {
+    width: 10%;
+}
+.weaponContent8 > label {
+    display: flex;
+    width: 35%;
+}
+.weaponContent8-label1 > input {
+    width: 49%;
+}
+.weaponContent8-label1 > span {
+    display: grid;
+    text-align: center;
+    width: 1%;
+}
+.weaponContent8-label1 > span:nth-of-type(2) {
+    width: 49%;
+    padding-left: 5px;
+}
+.weaponContent8-label2 {
+    justify-content: end;
+}
+.weaponContent8-label2 > span {
+    display: grid;
+    text-align: center;
+    width: 49%;
+}
 
 .weaponContent6 > label > span {
     display: grid;
@@ -4083,6 +4127,9 @@ h6 {
 .weapon-item .editor > div * {
     color: inherit;
 }
+.wepProfileSelector {
+    width: 100%;
+}
 .wepAtkEdit > div:first-of-type {
     display: flex;
 }
@@ -4094,18 +4141,18 @@ h6 {
 }
 .wepAtkEditTop {
     display: flex;
-    justify-content: space-between;
-    height: 20px;
-    margin: 5px 0 0 0;
+    flex-wrap: wrap;
+    margin: 5px 0;
 }
 .wepAtkEditTop > label {
     display: flex;
     justify-content: start;
-    width: 30%
+    width: 30%;
+    margin: 0 3% 0 0;
 }
 .wepAtkEditTop > label > input {
     display: flex;
-    width: 30%
+    width: 30%;
 }
 .wepAtkEditTop > label > span {
     display: grid;
@@ -4120,6 +4167,25 @@ h6 {
     justify-content: center;
     width: 30%
 }
+.profileButtonsTop {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px 0;
+}
+.profileButtonsTop > button {
+    margin: 0 2% 5px 2%;
+    width: 22%;
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+}
+.profileButtonsTop > button:nth-of-type(4n + 1) {
+    margin: 0 2% 5px 0;
+}
+.profileButtonsTop > button:nth-of-type(4n) {
+    margin: 0 0 5px 2%;
+}
+
 .wepAtkThrowableTop,
 .wepAtkOtherTop,
 .wepAtkTrapTop {
@@ -4340,6 +4406,7 @@ h6 {
     overflow: hidden;
     display: block;
     text-overflow: ellipsis;
+    height: 21px;
 }
 .ammoContainerInfo > div > div:first-of-type {
     width: 10%;
@@ -5644,8 +5711,17 @@ h6 {
 .armorCard > div > input {
     width: 10%;
 }
-
-
+.armorContentButtons {
+    display: flex;
+    justify-content: space-between;
+}
+.armorContent > label > button {
+    width: 35%;
+    margin: 0;
+    height: 20px;
+    border-radius: 0px;
+    border: 0px;
+}
 
 
 /* ALL OLD / REDO */
@@ -6006,7 +6082,14 @@ h6 {
     border-top: 5px solid black;
     border-bottom: 5px solid black;
 }
-
+.armorDisplay {
+    background: none;
+    border: none;
+    margin: 0;
+}
+.armorDisplay > tbody > tr {
+    background: none;
+}
 /*
     --------
     Other Stuffs

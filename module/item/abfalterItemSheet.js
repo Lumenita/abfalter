@@ -67,10 +67,12 @@ export default class abfalterItemSheet extends ItemSheet {
         sheetData.spellProjObjList = CONFIG.abfalter.spellProjDropdown;
         sheetData.spellMaintTypeObjList = CONFIG.abfalter.spellMaintTypeDropdown;
         sheetData.spellBoughtObjList = CONFIG.abfalter.spellBoughtDropdown; 
-
+        sheetData.profileTypeList = CONFIG.abfalter.profileTypeDropdown;
         sheetData.weaponTypeList = CONFIG.abfalter.weaponTypeDropdown;
         sheetData.vorpalAtkList = CONFIG.abfalter.vorpalAtkDropdown;
         sheetData.weightList = CONFIG.abfalter.weightDropdown;
+        sheetData.armorTypeList = CONFIG.abfalter.armorTypeDropdown; 
+        sheetData.layerTypeList = CONFIG.abfalter.layerTypeDropdown; 
 
         if (game.settings.get('abfalter', abfalterSettingsKeys.Use_Meters)) {
             sheetData.throwDistanceDropdown = CONFIG.abfalter.metricDistLongDropdown;
@@ -126,7 +128,14 @@ export default class abfalterItemSheet extends ItemSheet {
             ev.preventDefault();
             const attacks = this.item.system.attacks;
             const attackCount = attacks.length;
-            attacks[attackCount] = {};
+
+            const isShield = this.item.system.info?.type === "shield";
+            const newAttack = {
+                profileType: isShield ? "defensive" : "both",
+                wepType: this.item.system.info.type
+            }
+
+            attacks[attackCount] = newAttack;
             this.item.update({ "system.attacks": attacks });
         });
 

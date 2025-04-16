@@ -1,6 +1,6 @@
 import { gmCombatManager } from "./gm/gmCombatManager.js";
 import { playerCombatManager } from "./player/playerCombatManager.js";
-
+import { openSimpleCalculator } from './simpleCalc.js';
 
 export const registerCustomMacros = () => {
     const gameCopy = game;
@@ -10,7 +10,8 @@ export const registerCustomMacros = () => {
             sendAttack: async () => {
                 try { combatManager.sendAttack(); }
                 catch (e) { combatManager.endCombat(); }
-            }
+            },
+            openSimpleCalc: async () => openSimpleCalculator()
         };
     } else {
         const combatManager = new playerCombatManager(gameCopy);

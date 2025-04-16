@@ -1,11 +1,13 @@
 <form class="baseAbfalter">
   <body>
     <div class="wepAtkDiceRoll">
+        {{#ifEquals actionType "attack"}}
         {{#ifEquals weaponType "ranged"}}
         <label>
             <span> {{localize "abfalter.ammo"}}: </span>
             <select id="ammoDropdown"></select>
         </label>
+        {{/ifEquals}}
         {{/ifEquals}}
 
         <label>
@@ -13,6 +15,7 @@
             <select id="attackSelect"></select>
         </label>
 
+        {{#ifEquals actionType "attack"}}
         <div>
             <span> {{localize "abfalter.baseAtkShort"}}: </span>
             <span id="attackPower">${attacks[0].finalAttack}</span>
@@ -23,7 +26,21 @@
             <span> | {{localize "abfalter.basePenShort"}}: </span>
             <span id="atPenNum">${attacks[0].finalAtPen}</span>
         </div>
+        {{/ifEquals}}
+        {{#ifEquals actionType "block"}}
+        <div>
+            <span> {{localize "abfalter.block"}}: </span>
+            <span id="defensePower">${attacks[0].finalBlock}</span>
+        </div>
+        {{/ifEquals}}
+        {{#ifEquals actionType "dodge"}}
+        <div>
+            <span> {{localize "abfalter.dodge"}}: </span>
+            <span id="dodgePower">${attacks[0].finalDodge}</span>
+        </div>
+        {{/ifEquals}}
 
+        {{#ifEquals profileType "offensive"}}
         <label>
             <span> {{localize "abfalter.dmgType"}}: </span>
             <select id="atkDmgTypeDropdown"></select>
@@ -38,6 +55,17 @@
             <span>{{localize "abfalter.directedAttackPrompt"}}</span>
             <select id="directedAtkDropdown"></select>
         </label>
+        {{/ifEquals}}
+        {{#ifEquals profileType "defensive"}}
+        <label>
+            <span>{{localize "abfalter.armorTypeSelect"}}</span>
+            <select id="armorDropdown"></select>
+        </label>
+        <label>
+            <span>{{localize "abfalter.defenseNumber"}}</span>
+            <select id="defNumberDropdown"></select>
+        </label>
+        {{/ifEquals}}
 
         <label>
             <span>{{localize "abfalter.fatigue"}}</span>

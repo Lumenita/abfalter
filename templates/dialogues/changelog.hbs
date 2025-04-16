@@ -8,6 +8,66 @@
 
     <div class="changelogBody">
         <div class="changelogSection">
+            <h6>v1.4.7 - 2025-04-16</h6>
+            <span>
+                Long overdue update that fixes a few issues and adds some new features. I have been working on the weapon item and attack system. There are some bugfixes and QoL changes.
+                While the logic is mostly finished for the weapon, I wiil be doing a ui overhaul since it could be better. For a little surprise, if you click ctrl+2 as gm it open a simple manual calculator,
+                I havent fully tested it, and I wont mention it anywhere else since I am still working on it, but it should be usable.
+            </span> 
+            <span>
+                WARNING: In the next update, I will be removing the armorHelmet item, the only reason I havent done already is because I could not get the migration script to work, so all armorHelemts will rip next update.
+                I will also be rebuilding the Elan from the ground up since its broken, so all Elans information will most likely rip. Be sure to save the information somewhere before the next update so you can manually transfer it.
+                I will attempt to get a migration script to work, but no promises.
+            </span>
+
+            <div class="changelogList">
+                <h5>Weapon Changes</h5>
+                <ul>
+                    <li>The Attacks tab has been renamed to Profiles</li>
+                    <li>Defensive buttons properly work for weapons</li>
+                    <li>holding Shift while clicking attack block dodge skips the dialog</li>
+                    <li>Profiles are now divided into 3 types: both, offensive, defensive which limit which information is shown</li>
+                    <li>both/offensive profile types are shown in the dropdown for attacks</li>
+                    <li>both/defensive profile types are shown in the dropdown for block/dodge</li>
+                    <li>Profiles now have attack, block, dodge, damage overrides allowing for blank base values which also makes it easy for predetermined stuff</li>
+                    <li>Ranged weapons now have a magazine, once the magazine is out of ammo, ready to fire will be disabled</li>
+                    <li>If ready to fire is toggled on, it will fully load the magazine</li>
+                    <li>Ranged weapons dmg can now be altered with STR mod, which is optional, and it also has an override for things like muskets</li>
+                    <li>Shield is also complete but very basic</li>
+                    <li>Rolling a defensive from the weapons now has a custom dialog like attacks</li>
+                    <li>defensive dialog auto reduces fatigue just like attacks</li>
+                    <li>defensive dialog gives the option to show certain AT values on chat message</li>
+                </ul>
+            </div>
+
+            <div class="changelogList">
+                <h5>Added</h5>
+                <ul>
+                    <li>Missing cateories in DP calculator are now there</li>
+                    <li>Class DP values now can be decimals.</li>
+                    <li>Active Effects now automatically turn on and off depending if the item is equipped or not, this only works with weapons and Armors for now</li>
+                    <li>Besides the Zeon regen full box, an Actual box with the value of zeon regen - daily maint</li>
+                    <li>Exposure to all roll functions to the Game Objects for macros</li>
+                    <li>A custom accu zeon/current zeon bar value thing</li>
+                    <li>Armor penalties now should calculate correctly</li>
+                    <li>Armor now has an option to be considered as natural, ignoring layer penalty</li>
+                    <li>Armor now has an option to ignore AT layer rules and be added to the final result</li>
+                </ul>
+            </div>
+
+            <div class="changelogList">
+                <h5>Fixed</h5>
+                <ul>
+                    <li>Initial value of range label for ranged weapons corrected</li>
+                    <li>Aura extension/increased damage apply to ranged weapons</li>
+                    <li>Aura Extension now gives fortitude to armor</li>
+                    <li>A bug where applying a status showed all players an Error of not having permission</li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="changelogSection">
             <h6>v1.4.6 - 2025-02-10</h6>
             <span>
                 Hello all! hope all is going well. I missed last month 1 year anniversary of the system, but I have been working on it. This update brings ranged weapons and ammo into the system. As a 

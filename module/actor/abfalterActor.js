@@ -1044,8 +1044,11 @@ export default class abfalterActor extends Actor {
             aHeatTot: 0, aColdMax: 0, aColdTot: 0, aEleMax: 0, aEleTot: 0, aEneMax: 0, aEneTot: 0, aSptMax: 0, aSptTot: 0, ahReq: 0, ahCutMax: 0, ahCutTot: 0, ahImpMax: 0, ahImpTot: 0, ahThrMax: 0,
             ahThrTot: 0, ahHeatMax: 0, ahHeatTot: 0, ahColdMax: 0, ahColdTot: 0, ahEleMax: 0, ahEleTot: 0, ahEneMax: 0, ahEneTot: 0, ahSptMax: 0, ahSptTot: 0, perPen: 0, usedpp: 0, matrixpp: 0, arsMk: 0,
             maMk: 0, techMk: 0, pathLvl: 0, turnMaint: 0, dayMaint: 0, spellCost: 0, wepNum: 0, wepSpd: 0, maKiAtk: 0, maKiBlk: 0, maKiDod: 0, pilot: 0, techmagic: 0, cook: 0, toy: 0,
-            kiDect: 0, kiCon: 0, wepName: "", monsterCost: 0, shieldSpeed: 0
+            kiDect: 0, kiCon: 0, wepName: "", monsterCost: 0, shieldSpeed: 0, arsDp: 0, maDp: 0, mentalPatDp: 0, profPsyDp: 0, profMystDp: 0, profPrimDp: 0
         }
+        const atTypes = ["cut", "imp", "thr", "heat", "cold", "ele", "ene", "spt"];
+        const atStacks = Object.fromEntries(atTypes.map(t => [t, []]));
+        const atFinal = {};
         this.items.reduce((arr, item) => {
                 if (item.type === "class") {
                     const classLevels = parseInt(item.system.main.levels) || 0;
@@ -1122,42 +1125,30 @@ export default class abfalterActor extends Actor {
                 }
                 if (item.type === "armor") {
                     if (item.system.equipped == true) {
-                        classBonuses.quantity += parseInt(item.system.quantity) || 0;
-                        classBonuses.req += parseInt(item.system.newRequirement) || 0;
-                        classBonuses.natPen += parseInt(item.system.newNatPenalty) || 0;
-                        classBonuses.movePen += parseInt(item.system.newMovePenalty) || 0;
-                        if (classBonuses.aCutMax < item.system.AT.newCut) {
-                            classBonuses.aCutMax = item.system.AT.newCut;
+                        if (!item.system.ignorePenalty) {
+                            classBonuses.quantity += parseInt(item.system.quantity) || 0;
                         }
-                        classBonuses.aCutTot += parseInt(item.system.AT.newCut / 2) || 0;
-                        if (classBonuses.aImpMax < item.system.AT.newImp) {
-                            classBonuses.aImpMax = item.system.AT.newImp;
+                        classBonuses.req += parseInt(item.system.derived.requirement) || 0;
+                        classBonuses.natPen += parseInt(item.system.derived.natPenalty) || 0;
+                        classBonuses.movePen += parseInt(item.system.derived.movePenalty) || 0;
+                        
+                        for (const type of atTypes) {
+                            const val = parseInt(item.system.derived[type]) || 0;
+                            const maxKey = `a${type[0].toUpperCase()}${type.slice(1)}Max`;
+                            const totKey = `a${type[0].toUpperCase()}${type.slice(1)}Tot`;
+                        
+                            if (val > (classBonuses[maxKey] || 0)) {
+                              classBonuses[maxKey] = val;
+                            }
+                        
+                            classBonuses[totKey] += Math.floor(val / 2);
+                        
+                            if (item.system.ignoreLayerRules) {
+                              atFinal[type] = (atFinal[type] || 0) + val;
+                            } else {
+                              atStacks[type].push(val);
+                            }
                         }
-                        classBonuses.aImpTot += parseInt(item.system.AT.newImp / 2) || 0;
-                        if (classBonuses.aThrMax < item.system.AT.newThr) {
-                            classBonuses.aThrMax = item.system.AT.newThr;
-                        }
-                        classBonuses.aThrTot += parseInt(item.system.AT.newThr / 2) || 0;
-                        if (classBonuses.aHeatMax < item.system.AT.newHeat) {
-                            classBonuses.aHeatMax = item.system.AT.newHeat;
-                        }
-                        classBonuses.aHeatTot += parseInt(item.system.AT.newHeat / 2) || 0;
-                        if (classBonuses.aColdMax < item.system.AT.newCold) {
-                            classBonuses.aColdMax = item.system.AT.newCold;
-                        }
-                        classBonuses.aColdTot += parseInt(item.system.AT.newCold / 2) || 0;
-                        if (classBonuses.aEleMax < item.system.AT.newEle) {
-                            classBonuses.aEleMax = item.system.AT.newEle;
-                        }
-                        classBonuses.aEleTot += parseInt(item.system.AT.newEle / 2) || 0;
-                        if (classBonuses.aEneMax < item.system.AT.newEne) {
-                            classBonuses.aEneMax = item.system.AT.newEne;
-                        }
-                        classBonuses.aEneTot += parseInt(item.system.AT.newEne / 2) || 0;
-                        if (classBonuses.aSptMax < item.system.AT.newSpt) {
-                            classBonuses.aSptMax = item.system.AT.newSpt;
-                        }
-                        classBonuses.aSptTot += parseInt(item.system.AT.newSpt / 2) || 0;
                     }
                 }
                 if (item.type === "armorHelmet") {
@@ -1211,9 +1202,11 @@ export default class abfalterActor extends Actor {
                 }
                 if (item.type === "arsMagnus") {
                     classBonuses.arsMk += parseInt(item.system.mk) || 0;
+                    classBonuses.arsDp += parseInt(item.system.dp) || 0;
                 }
                 if (item.type === "martialArt") {
                     classBonuses.maMk += parseInt(item.system.mk) || 0;
+                    classBonuses.maDp += parseInt(item.system.dp) || 0;
                     classBonuses.maKiAtk += parseInt(item.system.bonusAtk) || 0;
                     classBonuses.maKiBlk += parseInt(item.system.bonusDef) || 0;
                     classBonuses.maKiDod += parseInt(item.system.bonusDod) || 0;
@@ -1256,6 +1249,22 @@ export default class abfalterActor extends Actor {
                 }
                 if (item.type === "monsterPower") {
                     classBonuses.monsterCost += parseInt(item.system.cost) || 0;
+                }
+                if (item.type === "mentalPattern") {
+                    classBonuses.mentalPatDp += parseInt(item.system.finalCost) || 0;
+                }
+                if (item.type === "proficiency") {
+                    switch (item.system.type) {
+                        case "Mystical":
+                            classBonuses.profMystDp += parseInt(item.system.cost) || 0;
+                            break;
+                        case "Psychic":
+                            classBonuses.profPsyDp += parseInt(item.system.cost) || 0;
+                            break;
+                        default:
+                            classBonuses.profPrimDp += parseInt(item.system.cost) || 0;
+                            break;
+                    }
                 }
             });
         //Stuff Xp, Presence, Next lvl Xp
@@ -1355,7 +1364,7 @@ export default class abfalterActor extends Actor {
 
         // Wear Armor
         system.armor.wearArmor.class = classBonuses.weararm;
-        system.armor.wearArmor.final += classBonuses.weararm;
+        system.armor.wearArmor.final = Math.max(0, (system.armor.wearArmor.final || 0) + classBonuses.weararm);
 
         if (system.kiAbility.kiEnergyArmor.status == true) { //Energy armor add 2 energy AT for free
             system.otherStats.enArm = 2;
@@ -1377,15 +1386,22 @@ export default class abfalterActor extends Actor {
         if (system.kiAbility.kiArcaneArmor.status == false) {
             system.toggles.arcaneEnergyArmor = false;
         }
-        // Armor Final AT
-        system.armor.body.aCutFinal = Math.floor((classBonuses.aCutTot - ~~(classBonuses.aCutMax / 2)) + classBonuses.aCutMax);
-        system.armor.body.aImpFinal = Math.floor((classBonuses.aImpTot - ~~(classBonuses.aImpMax / 2)) + classBonuses.aImpMax);
-        system.armor.body.aThrFinal = Math.floor((classBonuses.aThrTot - ~~(classBonuses.aThrMax / 2)) + classBonuses.aThrMax);
-        system.armor.body.aHeatFinal = Math.floor((classBonuses.aHeatTot - ~~(classBonuses.aHeatMax / 2)) + classBonuses.aHeatMax);
-        system.armor.body.aColdFinal = Math.floor((classBonuses.aColdTot - ~~(classBonuses.aColdMax / 2)) + classBonuses.aColdMax);
-        system.armor.body.aEleFinal = Math.floor((classBonuses.aEleTot - ~~(classBonuses.aEleMax / 2)) + classBonuses.aEleMax);
-        system.armor.body.aEneFinal = Math.floor((classBonuses.aEneTot - ~~(classBonuses.aEneMax / 2)) + classBonuses.aEneMax + system.otherStats.enArm);
-        system.armor.body.aSptFinal = Math.floor((classBonuses.aSptTot - ~~(classBonuses.aSptMax / 2)) + classBonuses.aSptMax);
+        // Armor Final AT, Apply top-3 AT rule
+        for (const type of atTypes) {
+            const values = atStacks[type].sort((a, b) => b - a);
+            const full = values[0] || 0;
+            const half1 = Math.floor((values[1] || 0) / 2);
+            const half2 = Math.floor((values[2] || 0) / 2);
+        
+            atFinal[type] = (atFinal[type] || 0) + full + half1 + half2;
+        
+            if (type === "ene") {
+            atFinal[type] += system.otherStats.enArm || 0;
+            }
+        
+            const finalKey = `a${type[0].toUpperCase()}${type.slice(1)}Final`;
+            system.armor.body[finalKey] = atFinal[type];
+        }
 
         // Helmet Final AT
         system.armor.helmet.ahCutFinal = Math.floor((classBonuses.ahCutTot - ~~(classBonuses.ahCutMax / 2)) + classBonuses.ahCutMax);
@@ -1400,17 +1416,13 @@ export default class abfalterActor extends Actor {
         // Armor Stats
         system.armor.wearArmor.totalPerPen = classBonuses.perPen;
         system.armor.wearArmor.mod = Math.floor(system.armor.wearArmor.final - classBonuses.req);
-        if (classBonuses.natPen - system.armor.wearArmor.mod < 0) {
-            system.armor.wearArmor.totalNatPen = Math.max(0, Math.floor(((classBonuses.quantity - 1) * 20) + 0));
-        } else {
-            system.armor.wearArmor.totalNatPen = Math.max(0, Math.floor(((classBonuses.quantity - 1) * 20) + (classBonuses.natPen - system.armor.wearArmor.mod)));
-        }
+
+        system.armor.wearArmor.multipleLayerPen = Math.max(0, Math.floor((classBonuses.quantity - 1) * 20));
+        system.armor.wearArmor.effectiveNatPen = classBonuses.natPen - system.armor.wearArmor.mod;
+        system.armor.wearArmor.totalNatPen =  Math.max(0, Math.floor(system.armor.wearArmor.effectiveNatPen < 0 ? system.armor.wearArmor.multipleLayerPen : system.armor.wearArmor.multipleLayerPen + system.armor.wearArmor.effectiveNatPen));
+
         system.armor.wearArmor.movePenMod = Math.max(0, Math.floor(system.armor.wearArmor.mod / 50));
-        if (classBonuses.movePen - system.armor.wearArmor.movePenMod < 0) {
-            system.armor.wearArmor.totalMovePen = -Math.floor(classBonuses.movePen + Math.max(0, system.armor.wearArmor.totalNatPen / 50));
-        } else {
-            system.armor.wearArmor.totalMovePen = -Math.floor(classBonuses.movePen + Math.max(0, system.armor.wearArmor.totalNatPen / 50) - system.armor.wearArmor.movePenMod);
-        }
+        system.armor.wearArmor.totalMovePen = -Math.floor(Math.max(0, classBonuses.movePen - system.armor.wearArmor.movePenMod));
 
         //Resistances
         if (system.kiAbility.kiPhysDom.status == true) { //Physical Dominion adds 10 PhR
@@ -2038,6 +2050,7 @@ export default class abfalterActor extends Actor {
         system.maccu.finalFull = Math.floor(system.maccu.base + system.maccu.fromPow + (system.maccu.mult * system.maccu.fromPow) + system.maccu.spec + system.maccu.bonus + system.maccu.temp);
         system.maccu.finalHalf = Math.floor(system.maccu.finalFull / 2);
         system.mregen.final = Math.floor(((system.maccu.fromPow * system.mregen.regenmult) + system.mregen.spec + system.mregen.temp + system.mregen.bonus + system.maccu.finalFull) * system.mregen.recoverymult);
+        system.mregen.finalMinusMaint = Math.floor(system.mregen.final - system.zeon.dailyMaint);
         system.zeon.max = Math.floor(system.zeon.base + system.zeon.fromPow + system.zeon.class + system.zeon.spec + system.zeon.temp + system.zeon.bonus);
 
         // Innate Magic
@@ -2215,6 +2228,17 @@ export default class abfalterActor extends Actor {
         system.monsterStats.powersCost = classBonuses.monsterCost;
         system.monsterStats.totalDP = Math.floor(system.monsterStats.charCombinedCost + system.monsterStats.powersCost + system.monsterStats.hpDp);
 
+        //Store Dp Values
+        system.levelinfo.mentalPatDp = classBonuses.mentalPatDp;
+        system.levelinfo.arsDp = classBonuses.arsDp;
+        system.levelinfo.maDp = classBonuses.maDp;
+        system.levelinfo.profPrimDp = classBonuses.profPrimDp;
+        system.levelinfo.profMystDp = classBonuses.profMystDp;
+        system.levelinfo.profPsyDp = classBonuses.profPsyDp;
+
+        // Make Custom Bars
+        system.other.accuZeonBar.value = system.maccu.actual;
+        system.other.accuZeonBar.max = system.zeon.value;
 
 
         // Settings

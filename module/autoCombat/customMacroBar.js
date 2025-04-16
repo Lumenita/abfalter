@@ -2,18 +2,27 @@ import { renderTemplates } from "../utilities/renderTemplates.js";
 import { templates } from "../utilities/templates.js";
 
 const gmMacro = [
+    /*
     {
         macroSelectorId: '#sendAttack',
         hotkey: e => e.ctrlKey && e.key === '0',
         fn: () => window.Websocket.sendAttack?.()
     }
+    */
+    {
+        macroSelectorId: '#openSimpleCalc',
+        hotkey: e => e.ctrlKey && e.key === '2',
+        fn: () => window.Websocket.openSimpleCalc?.()
+    }
 ];
 const playerMacro = [
+    /*
     {
         macroSelectorId: '#sendAttackRequest',
         hotkey: e => e.ctrlKey && e.key === '0',
         fn: () => window.Websocket.sendAttackRequest?.()
     }
+        */
 ];
 
 export const customMacroBar = async () => {

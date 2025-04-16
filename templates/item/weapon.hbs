@@ -1,4 +1,4 @@
-<form class="{{cssClass}} baseAbfalter itemWindow" autocomplete="off">
+<form class="{{cssClass}} baseAbfalter itemWindow itemMax" autocomplete="off">
 
     {{!-- Item Sheet Header --}}
     <header class="sheet-header flexrow">
@@ -27,12 +27,7 @@
     <nav class="sheet-navigation tabs itemTabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "abfalter.description" }}</a>
         <a class="item" data-tab="details">{{ localize "abfalter.details" }}</a>
-        {{#ifEquals system.info.type "melee"}}
-        <a class="item" data-tab="attacks">{{ localize "abfalter.attack" }}</a>
-        {{/ifEquals}}
-        {{#ifEquals system.info.type "ranged"}}
-        <a class="item" data-tab="attacks">{{ localize "abfalter.attack" }}</a>
-        {{/ifEquals}}
+        <a class="item" data-tab="attacks">{{ localize "abfalter.profiles" }}</a>
         <a class="item" data-tab="effects">{{ localize "abfalter.effects" }}</a>
     </nav>
 
@@ -327,6 +322,15 @@
                 <span style="display: grid"> {{system.ranged.reloadTimeFinal}} </span>
             </div>
 
+            <div class="weaponContent">
+                <label class="atkCustomTitleContainer">
+                    <span > {{localize "abfalter.magContainer"}} </span>
+                    <input type="number" name="system.ranged.magSize" value="{{system.ranged.magSize}}" />
+                    <span> / </span>
+                    <input type="number" name="system.ranged.magSizeMax" value="{{system.ranged.magSizeMax}}" />
+                </label>
+            </div>
+
             <div class="csSelect weaponContent4">
                 <label>
                     <span> {{localize "abfalter.range"}} </span>
@@ -336,6 +340,31 @@
                     </select>
                 </label>
             </div>
+            
+            <div class="weaponContent3">
+                <div class="csSelect">
+                    <label>
+                        <span> {{localize "abfalter.required"}} </span>
+                        <select name="system.info.reqType">
+                            {{selectOptions customSecObjList selected=system.info.reqType localize=true}}
+                        </select>
+                    </label>
+                </div>
+                <label>
+                    <button type="button" class="toggleBoolean {{#if system.info.reqWarning}}kiBought{{/if}}"
+                        data-label="system.info.reqWarning" data-ability="{{system.info.reqWarning}}">
+                        {{#if system.info.reqWarning}}
+                        <span> {{localize "abfalter.warningsEnabled"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.warningsDisabled"}} </span>
+                        {{/if}}
+                    </button>
+                </label>
+                <input type="number" name="system.info.reqMod" value="{{system.info.reqMod}}" placeholder="1h" />
+                <span> / </span>
+                <input type="number" name="system.info.reqMod2h" value="{{system.info.reqMod2h}}" placeholder="2h" />
+            </div>
+
             <div class="wepaonContentButtons">
                 <button type="button" class="toggleBoolean {{#if system.info.precision}}kiBought{{/if}}"
                     data-label="system.info.precision" data-ability="{{system.info.precision}}">
@@ -420,6 +449,40 @@
                     <span> {{system.ranged.ammoAtPenFinal}} </span>
                 </label>
             </div>
+            <div class="weaponContent8"> 
+                <span>{{localize "abfalter.doesUseStr"}}</span>
+                <button type="button" class="toggleBoolean {{#if system.ranged.showStrFields}}kiBought{{/if}}"
+                    data-label="system.ranged.showStrFields" data-ability="{{system.ranged.showStrFields}}">
+                    {{#if system.ranged.showStrFields}}
+                    <span>{{localize "abfalter.yes"}}</span>
+                    {{else}}
+                    <span>{{localize "abfalter.no"}}</span>
+                    {{/if}}
+                </button>
+                {{#if system.ranged.showStrFields}}
+                <button type="button" class="toggleBoolean {{#if system.ranged.strOverride}}kiBought{{/if}}"
+                    data-label="system.ranged.strOverride" data-ability="{{system.ranged.strOverride}}">
+                    {{#if system.ranged.strOverride}}
+                    <span>{{localize "abfalter.strOverride"}}</span>
+                    {{else}}
+                    <span>{{localize "abfalter.charStr"}}</span>
+                    {{/if}}
+                </button>
+                {{#if system.ranged.strOverride}}
+                <label class="weaponContent8-label1">
+                    <input type="number" name="system.ranged.strOverrideValue" value="{{system.ranged.strOverrideValue}}" />
+                    <span> | </span>
+                    <span> {{this.system.ranged.strOverrideQualValue}} </span>
+                </label>
+                {{else}}
+                <label class="weaponContent8-label2">
+                    <span> {{system.ranged.strField}}</span>
+                </label>
+                {{/if}}
+                {{/if}}
+            </div>
+
+
             <div class="weaponContent"> 
                 <label>
                     <span> {{localize "abfalter.damage"}} </span>
@@ -435,10 +498,7 @@
 
 
             {{#ifEquals system.info.type "shield"}}
-            <h6> specific shield {{ localize "abfalter.details" }} </h6> 
-            <span> WIP 12/16/24 next update will be this</span>
-            <span> The Shield is Functional, but its probably missing stuff.</span> 
-            <span> It is now 12/16/24, and this is my next goal to finish</span>
+            <h6> {{ localize "abfalter.shieldNorm" }} {{ localize "abfalter.details" }} </h6> 
 
             <div class="csSelect weaponContent">
                 <label>
@@ -453,7 +513,7 @@
                     <span> {{localize "abfalter.block"}} </span>
                     <input type="number" name="system.block" value="{{system.block}}" />
                     <span> | </span>
-                    <span> {{system.fortFinal}} </span>
+                    <span> {{this.system.derived.baseBlk}} </span>
                 </label>
             </div>
             <div class="weaponContent"> 
@@ -461,29 +521,18 @@
                     <span> {{localize "abfalter.dodge"}} </span>
                     <input type="number" name="system.dodge" value="{{system.dodge}}" />
                     <span> | </span>
-                    <span> {{system.fortFinal}} </span>
+                    <span> {{this.system.derived.baseDod}} </span>
                 </label>
             </div>            
-            <div class="weaponContent"> 
-                <label>
-                    <span> {{localize "abfalter.breakage"}} </span>
-                    <input type="number" name="system.breakage" value="{{system.breakage}}" />
-                    <span> | </span>
-                    <span> {{system.finalBreakage}} </span>
-                </label>
-            </div>
             {{/ifEquals}}
         </div>
 
         {{!-- Attack Tab --}}
         <div class="tab attacks flexcol" data-group="primary" data-tab="attacks">
-            <h6> {{localize "abfalter.attack"}} </h6>
-
             <div id="attack-list">
                 <!-- Existing attacks will be rendered here -->
-                
                 {{#each system.attacks}}
-                <div class="attack-entry" >
+                <div class="attack-entry">
                     {{#if this.expand}}
                     <div class="wepAtkEdit">
                         <div>
@@ -492,28 +541,44 @@
                             <a class="wepAtkToggle" data-label="expand" data-value="{{@index}}"><i class="{{#if this.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
 
+                        {{#ifIn wepType "melee ranged"}} 
+                        <div class="csSelect wepProfileSelector"> 
+                            <label>
+                                <span> {{localize "abfalter.profileType"}} </span>
+                                <select name="attacks[{{@index}}][profileType]">
+                                    {{selectOptions ../profileTypeList selected=this.profileType localize=true}}
+                                </select>
+                            </label>
+                        </div>
+                        {{/ifIn}}
+
                         <div class="wepAtkEditTop">
+                            {{#ifIn profileType "offensive both"}}
                             <label>
                                 <span> {{localize "abfalter.attack"}} </span>
                                 <input type="number" name="attacks[{{@index}}][attack]" value="{{this.attack}}">
                                 <span> | </span>
                                 <span> {{this.finalAttack}} </span>
                             </label>
+                            {{/ifIn}}
+                            
+                            {{#ifIn profileType "defensive both"}}
                             <label>
                                 <span> {{localize "abfalter.block"}} </span>
                                 <input type="number" name="attacks[{{@index}}][block]" value="{{this.block}}">
                                 <span> | </span>
                                 <span> {{this.finalBlock}} </span>
                             </label>
+
                             <label>
                                 <span> {{localize "abfalter.dodge"}} </span>
                                 <input type="number" name="attacks[{{@index}}][dodge]" value="{{this.dodge}}">
                                 <span> | </span>
                                 <span> {{this.finalDodge}} </span>
                             </label>
-                        </div>
+                            {{/ifIn}}
 
-                        <div class="wepAtkEditTop">
+                            {{#ifIn profileType "offensive both"}}
                             <label>
                                 <span> {{localize "abfalter.breakage"}} </span>
                                 <input type="number" name="attacks[{{@index}}][breakage]" value="{{this.breakage}}">
@@ -532,7 +597,75 @@
                                 <span> | </span>
                                 <span> {{this.finalDamage}} </span>
                             </label>
+                            {{/ifIn}}
                         </div>
+
+                        <div class="profileButtonsTop">
+                            {{#ifIn profileType "offensive both"}}
+                            <button class="wepAtkToggle  {{#if this.atkOverride}}kiBought{{/if}}" data-label="atkOverride" data-value="{{@index}}">
+                                {{#if this.atkOverride}}
+                                <span> {{localize "abfalter.atkOverride"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.atkOverrideNo"}} </span>
+                                {{/if}}
+                            </button>
+                            {{/ifIn}}
+
+                            {{#ifIn profileType "defensive both"}}
+                            <button class="wepAtkToggle  {{#if this.blkOverride}}kiBought{{/if}}" data-label="blkOverride" data-value="{{@index}}">
+                                {{#if this.blkOverride}}
+                                <span> {{localize "abfalter.blkOverride"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.blkOverrideNo"}} </span>
+                                {{/if}}
+                            </button>
+                            {{/ifIn}}
+
+                            {{#ifIn profileType "defensive both"}}
+                            <button class="wepAtkToggle  {{#if this.dodOverride}}kiBought{{/if}}" data-label="dodOverride" data-value="{{@index}}">
+                                {{#if this.dodOverride}}
+                                <span> {{localize "abfalter.dodOverride"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.dodOverrideNo"}} </span>
+                                {{/if}}
+                            </button>
+                            {{/ifIn}}
+
+                            {{#ifIn profileType "offensive both"}}
+                            <button class="wepAtkToggle  {{#if this.dmgOverride}}kiBought{{/if}}" data-label="dmgOverride" data-value="{{@index}}">
+                                {{#if this.dmgOverride}}
+                                <span> {{localize "abfalter.dmgOverride"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.dmgOverrideNo"}} </span>
+                                {{/if}}
+                            </button>
+                            {{/ifIn}}
+
+                            {{#if this.parentPrecision}}
+                            {{#ifIn profileType "offensive both"}}
+                            <button class="wepAtkToggle {{#if this.ignorePrecision}}{{else}}kiBought{{/if}}" data-label="ignorePrecision" data-value="{{@index}}">
+                                {{#if this.ignorePrecision}}
+                                <span> {{localize "abfalter.noPrecision"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.yesPrecision"}} </span>
+                                {{/if}}
+                            </button>
+                            {{/ifIn}}
+                            {{/if}}
+
+                            {{#if this.parentVorpal}}
+                            {{#ifIn profileType "offensive both"}}
+                            <button class="wepAtkToggle {{#if this.ignoreVorpal}}{{else}}kiBought{{/if}}" data-label="ignoreVorpal" data-value="{{@index}}">
+                                {{#if this.ignoreVorpal}}
+                                <span> {{localize "abfalter.noVorpal"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.vorpal"}} </span>
+                                {{/if}}
+                            </button>
+                            {{/ifIn}}
+                            {{/if}}
+                        </div>
+                        
                         {{#ifEquals ../system.info.type "melee"}}
                         {{#if this.parentThrowable}}
                         <div class="wepAtkThrowableTop">
@@ -615,7 +748,7 @@
                                 {{#if this.trappingType}}
                                 <span> {{localize "abfalter.flatAmount"}} </span>
                                 {{else}}
-                                <span> {{localize "abfalter.normal"}} </span>
+                                <span> {{localize "abfalter.regTrap"}} </span>
                                 {{/if}}
                             </button>
                             <label>
@@ -630,28 +763,6 @@
                         </div>
                         {{/if}}
                         {{/ifEquals}}
-
-                        <div class="wepAtkOtherTop {{#if this.parentPrecision}}{{else}}{{#if this.parentVorpal}}{{else}}hidden{{/if}}{{/if}}">
-                            {{#if this.parentPrecision}}
-                            <button class="wepAtkToggle {{#if this.ignorePrecision}}{{else}}kiBought{{/if}}" data-label="ignorePrecision" data-value="{{@index}}">
-                                {{#if this.ignorePrecision}}
-                                <span> {{localize "abfalter.noPrecision"}} </span>
-                                {{else}}
-                                <span> {{localize "abfalter.yesPrecision"}} </span>
-                                {{/if}}
-                            </button>
-                            {{/if}}
-                            {{#if this.parentVorpal}}
-                            <button class="wepAtkToggle {{#if this.ignoreVorpal}}{{else}}kiBought{{/if}}" data-label="ignoreVorpal" data-value="{{@index}}">
-                                {{#if this.ignoreVorpal}}
-                                <span> {{localize "abfalter.noVorpal"}} </span>
-                                {{else}}
-                                <span> {{localize "abfalter.vorpal"}} </span>
-                                {{/if}}
-                            </button>
-                            {{/if}}
-                        </div>
-
                     </div>
                     {{else}}
                     <div class="wepAtkNonEdit">
@@ -662,17 +773,25 @@
                         </div>
 
                         <div>
+                            {{#ifIn profileType "offensive both"}}
                             <span>{{localize "abfalter.attack"}}: {{this.finalAttack}} |</span>
+                            {{/ifIn}}
+                            {{#ifIn profileType "defensive both"}}
                             <span>{{localize "abfalter.block"}}: {{this.finalBlock}} |</span>
                             <span>{{localize "abfalter.dodge"}}: {{this.finalDodge}} |</span>
+                            {{/ifIn}}
+                            {{#ifIn profileType "offensive both"}}
                             <span>{{localize "abfalter.breakage"}}: {{this.finalBreakage}} |</span>
                             <span>{{localize "abfalter.atPen"}}: {{this.finalAtPen}} |</span>
                             <span>{{localize "abfalter.damage"}}: {{this.finalDamage}}</span>
+                            {{/ifIn}}
                         </div>
 
                         <div> 
+                            {{#ifIn profileType "offensive both"}}
                             <span class="{{#if this.parentPrecision}}{{#if this.ignorePrecision}}hidden{{/if}}{{else}}hidden{{/if}}">{{localize "abfalter.yesPrecision"}} |</span>
                             <span class="{{#if this.parentVorpal}}{{#if this.ignoreVorpal}}hidden{{/if}}{{else}}hidden{{/if}}">{{localize "abfalter.vorpal"}} |</span>
+                            {{/ifIn}}
                             {{#ifEquals ../system.info.type "ranged"}}
                             {{#if this.parentRangedInfAmmo}}
                             <span>
@@ -686,7 +805,9 @@
                             <span> {{localize "abfalter.ammoPerAtk"}}: {{this.rangedAmmoConsumedValue}} |</span>
                             {{/if}}
                             {{/ifEquals}}
+
                             {{#ifEquals ../system.info.type "melee"}}
+                            {{#ifIn profileType "offensive both"}}
                             <span class="{{#if this.parentThrowable}}{{#if this.ignoreThrown}}hidden{{/if}}{{else}}hidden{{/if}}">{{localize "abfalter.throwable"}} |</span>
                             <span class="{{#if this.parentThrowable}}{{#if this.ignoreThrown}}hidden{{/if}}{{else}}hidden{{/if}}">
                                 {{#if this.fired}}
@@ -709,6 +830,7 @@
                                 <span> {{localize "abfalter.trapValueOf"}}: 1d10 + {{this.trappingValue}} </span>
                                 {{/if}}
                             </span>
+                            {{/ifIn}}
                             {{/ifEquals}}
                         </div>
                     </div>

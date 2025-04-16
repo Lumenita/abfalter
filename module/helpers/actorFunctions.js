@@ -105,15 +105,21 @@ export async function calculateDpCost(actorData, classId) {
         { name: game.i18n.localize('abfalter.block'), value: Math.floor(system.combatValues.block.base * dpCost.primary.block) },
         { name: game.i18n.localize('abfalter.dodge'), value: Math.floor(system.combatValues.dodge.base * dpCost.primary.dodge) },
         { name: game.i18n.localize('abfalter.wearArmor'), value: Math.floor(system.armor.wearArmor.base * dpCost.primary.wearArmor) },
+        { name: game.i18n.localize('abfalter.mk'), value: Math.floor(system.mk.base) },
+        { name: game.i18n.localize('abfalter.arsMagnus'), value: Math.floor(system.levelinfo.arsDp ) },
+        { name: game.i18n.localize('abfalter.martialArts'), value: Math.floor(system.levelinfo.maDp ) },
         { name: game.i18n.localize('abfalter.kiPool'), value: Math.floor(Math.floor(system.kiPool.agi.defaultMax + system.kiPool.con.defaultMax + system.kiPool.dex.defaultMax +
             system.kiPool.str.defaultMax + system.kiPool.pow.defaultMax + system.kiPool.wp.defaultMax) * dpCost.primary.kiPoint) },
         { name: game.i18n.localize('abfalter.kiAccuMult'), value: Math.floor(Math.floor(system.kiPool.agi.default + system.kiPool.con.default + system.kiPool.dex.default +
-            system.kiPool.str.default + system.kiPool.pow.default + system.kiPool.wp.default) * dpCost.primary.kiAccuMult) }
+            system.kiPool.str.default + system.kiPool.pow.default + system.kiPool.wp.default) * dpCost.primary.kiAccuMult) },
+        { name: game.i18n.localize('abfalter.profModules'), value: Math.floor(system.levelinfo.profPrimDp ) }
+
     ];
     totalDpCosts.primary = dpPrim.reduce((acc, { value }) => acc + value, 0);
     totalDpCosts.primaryCombat = Math.floor(dpPrim[0].value + dpPrim[1].value + dpPrim[2].value);
 
     const dpMagic = [
+        { name: game.i18n.localize('abfalter.mLevels'), value: Math.floor(system.mlevel.base) },
         { name: game.i18n.localize('abfalter.zeon'), value: Math.floor((system.zeon.base / 5) * dpCost.supernatural.zeon) },
         { name: game.i18n.localize('abfalter.maMult'), value: Math.floor(system.maccu.mult * dpCost.supernatural.maMult) },
         { name: game.i18n.localize('abfalter.maRegen'), value: Math.floor(system.mregen.regenmult * dpCost.supernatural.maRegen) },
@@ -121,14 +127,17 @@ export async function calculateDpCost(actorData, classId) {
         { name: game.i18n.localize('abfalter.summon'), value: Math.floor(system.summoning.summon.base * dpCost.supernatural.summon) },
         { name: game.i18n.localize('abfalter.control'), value: Math.floor(system.summoning.control.base * dpCost.supernatural.control) },
         { name: game.i18n.localize('abfalter.bind'), value: Math.floor(system.summoning.bind.base * dpCost.supernatural.bind) },
-        { name: game.i18n.localize('abfalter.banish'), value: Math.floor(system.summoning.banish.base * dpCost.supernatural.banish) }
+        { name: game.i18n.localize('abfalter.banish'), value: Math.floor(system.summoning.banish.base * dpCost.supernatural.banish) },
+        { name: game.i18n.localize('abfalter.profModules'), value: Math.floor(system.levelinfo.profMystDp ) }
     ];
     totalDpCosts.magic = dpMagic.reduce((acc, { value }) => acc + value, 0);
     totalDpCosts.magicProj = dpMagic[3].value;
 
     const dpPsychic = [
         { name: game.i18n.localize('abfalter.activeEffectChanges.pp'), value: Math.floor(system.ppoint.base * dpCost.psychic.psyPoint) },
-        { name: game.i18n.localize('abfalter.psyProj'), value: Math.floor(system.pproj.base * dpCost.psychic.psyProj) }
+        { name: game.i18n.localize('abfalter.psyProj'), value: Math.floor(system.pproj.base * dpCost.psychic.psyProj) },
+        { name: game.i18n.localize('abfalter.mentalPatternsOne'), value: Math.floor(system.levelinfo.mentalPatDp) },
+        { name: game.i18n.localize('abfalter.profModules'), value: Math.floor(system.levelinfo.profPsyDp ) }
     ];
     totalDpCosts.psychic = dpPsychic.reduce((acc, { value }) => acc + value, 0);
     totalDpCosts.psychicProj = dpPsychic[1].value;
@@ -195,9 +204,12 @@ export async function calculateDpCost(actorData, classId) {
         { name: game.i18n.localize('abfalter.runes'), value: Math.floor(system.secondaryFields.creative.runes.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.runes)) },
         { name: game.i18n.localize('abfalter.ritualcalig'), value: Math.floor(system.secondaryFields.creative.ritualcalig.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.ritualcalig)) },
         { name: game.i18n.localize('abfalter.slofhand'), value: Math.floor(system.secondaryFields.creative.slofhand.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.slofhand)) },
-        { name: game.i18n.localize('abfalter.tailoring'), value: Math.floor(system.secondaryFields.creative.tailoring.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.tailoring)) }
+        { name: game.i18n.localize('abfalter.tailoring'), value: Math.floor(system.secondaryFields.creative.tailoring.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.tailoring)) },
+
+        { name: game.i18n.localize('abfalter.monsterPowTitle'), value: Math.floor(system.monsterStats.totalDP) }
     ];
 
+    
     totalDpCosts.other = dpSecondary.reduce((acc, { value }) => acc + value, 0);
     totalDpCosts.all = Math.floor(totalDpCosts.primary + totalDpCosts.magic + totalDpCosts.psychic + totalDpCosts.other);
     

@@ -444,7 +444,7 @@ export const abfalter = {
     noVorpal: "abfalter.noVorpal",
     noTrapping: "abfalter.noTrapping",
     flatAmount: "abfalter.flatAmount",
-    normal: "abfalter.normal",
+    regTrap: "abfalter.regTrap",
     enterFlatAmount: "abfalter.enterFlatAmount",
     enterCustomAmount: "abfalter.enterCustomAmount",
     trapValueOf: "abfalter.trapValueOf",
@@ -651,7 +651,7 @@ export const abfalter = {
     rdyToFire: "abfalter.rdyToFire",
     unloaded: "abfalter.unloaded",
     rdyToFireDef: "abfalter.rdyToFireDef",
-    noAttacksFound: "abfalter.noAttacksFound",
+    noProfilesfound: "abfalter.noProfilesfound",
     trapAttack: "abfalter.trapAttack",
     breakRoll: "abfalter.breakRoll",
     forOne: "abfalter.forOne",
@@ -680,6 +680,42 @@ export const abfalter = {
     dpCostLevel: "abfalter.dpCostLevel",
     dpCostLevel2: "abfalter.dpCostLevel2",
     psychicProjShort: "abfalter.psychicProjShort",
+    profModules: "abfalter.profModules",
+    both: "abfalter.both",
+    magContainer: "abfalter.magContainer",
+    noAmmoPrompt: "abfalter.noAmmoPrompt",
+    doesUseStr: "abfalter.doesUseStr",
+    strOverride: "abfalter.strOverride",
+    charStr: "abfalter.charStr",
+    atkOverride: "abfalter.atkOverride",
+    atkOverrideNo: "abfalter.atkOverrideNo",
+    blkOverride: "abfalter.blkOverride",
+    blkOverrideNo: "abfalter.blkOverrideNo",
+    dodOverride: "abfalter.dodOverride",
+    dodOverrideNo: "abfalter.dodOverrideNo",
+    dmgOverride: "abfalter.dmgOverride",
+    dmgOverrideNo: "abfalter.dmgOverrideNo",
+    profiles: "abfalter.profiles",
+    profileType: "abfalter.profileType",
+    armorTypeSelect: "abfalter.armorTypeSelect",
+    showAll: "abfalter.showAll",
+    firstDef: "abfalter.firstDef",
+    secondDef: "abfalter.secondDef",
+    thirdDef: "abfalter.thirdDef",
+    fourthDef: "abfalter.fourthDef",
+    fifthDef: "abfalter.fifthDef",
+    defenseNumber: "abfalter.defenseNumber",
+    currentLoaded: "abfalter.currentLoaded",
+    armorType: "abfalter.armorType",
+    layerType: "abfalter.layerType",
+    soft: "abfalter.soft",
+    hard: "abfalter.hard",
+    ignorePenalty: "abfalter.ignorePenalty",
+    ignoreLayerRules: "abfalter.ignoreLayerRules",
+    followArmorPenalty: "abfalter.followArmorPenalty",
+    followLayerRules: "abfalter.followLayerRules",
+    normal: "abfalter.normal",
+    altered: "abfalter.altered",
 };
 abfalter.kiTab = {
     kiAbilities: "abfalter.kiTab.kiAbilities",
@@ -1151,10 +1187,11 @@ abfalter.proficiencyDropdown = {
 }
 
 abfalter.shieldDropdown = {
-    none: "abfalter.shieldNone",
-    buckler: "abfalter.shieldBuckler",
-    shield: "abfalter.shieldNorm",
-    fShield: "abfalter.shieldTower"
+    shieldBuckler: "abfalter.shieldBuckler",
+    shieldNorm: "abfalter.shieldNorm",
+    shieldTower: "abfalter.shieldTower",
+    custom: "abfalter.custom",
+
 }
 
 abfalter.damageModDropdown = {
@@ -1339,4 +1376,20 @@ abfalter.weightDropdown = {
     ton: "abfalter.ton",
     g: "abfalter.g",
     kg: "abfalter.kg"
+}
+
+abfalter.profileTypeDropdown = {
+    both: "abfalter.both",
+    offensive: "abfalter.offensive1",
+    defensive: "abfalter.defensive1"
+}
+
+abfalter.armorTypeDropdown = {
+    armor: "abfalter.armor",
+    helmet: "abfalter.helmet"
+}
+
+abfalter.layerTypeDropdown = {
+    soft: "abfalter.soft",
+    hard: "abfalter.hard"
 }

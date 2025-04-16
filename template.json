@@ -150,28 +150,6 @@
       "presence": 0,
       "rarity": "Common"
     },
-    "armor": {
-      "templates": [ "itemDescription" ],
-      "quantity": 1,
-      "quality": 0,
-      "presence": 0,
-      "fortitude": 0,
-      "requirement": 0,
-      "natPenalty": 0,
-      "movePenalty": 0,
-      "natural": false,
-      "equipped": false,
-      "AT": {
-        "cut": 0,
-        "imp": 0,
-        "thr": 0,
-        "heat": 0,
-        "cold": 0,
-        "ele": 0,
-        "ene": 0,
-        "spt": 0
-      }
-    },
     "armorHelmet": {
       "templates": [ "itemDescription" ],
       "quantity": 1,

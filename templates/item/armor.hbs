@@ -19,8 +19,8 @@
 
             <ul class="summary flexrow">
                 <li>{{localize "abfalter.quality"}}: {{system.quality}}</li>
-                <li>{{localize "abfalter.presence"}}: {{system.newPresence}}</li>
-                <li>{{localize "abfalter.fortitude"}}: {{system.newFortitude}}</li>
+                <li>{{localize "abfalter.presence"}}: {{system.derived.presence}}</li>
+                <li>{{localize "abfalter.fortitude"}}: {{system.derived.fortitude}}</li>
             </ul>
         </div>
     </header>
@@ -47,13 +47,32 @@
         {{!-- Details Tab --}}
     <div class="tab details" data-group="primary" data-tab="details">
         <h6> {{localize "abfalter.bodyArmor"}} {{ localize "abfalter.details" }} </h6>
+        <span>The Armor Type and Layer Type are currently just placeholders/preparing for the next update 1.4.8 when the armorHelmet item will be removed and all armors will be done through here.</span>
+        <div class="csSelect weaponContent"> 
+            <label>
+                <span> {{localize "abfalter.armorType"}} </span>
+                <select name="system.armorType">
+                    {{selectOptions armorTypeList selected=system.armorType localize=true}}
+                </select>
+            </label>
+        </div>
+
+        <div class="csSelect armorContent"> 
+            <label>
+                <span> {{localize "abfalter.layerType"}} </span>
+                <select name="system.layerType">
+                    {{selectOptions layerTypeList selected=system.layerType localize=true}}
+                </select>
+            </label>
+        </div>
+
         <label> <span> {{localize "abfalter.quality"}} </span> <input type="number" name="system.quality" value="{{system.quality}}" /> </label>
         <div class="armorContent">
             <label>
                 <span> {{localize "abfalter.presence"}} </span>
                 <input type="number" name="system.presence" value="{{system.presence}}" />
                 <span> | </span>
-                <span> {{system.newPresence}} </span>
+                <span> {{system.derived.presence}} </span>
             </label>
         </div>
         <div class="armorContent">
@@ -61,7 +80,7 @@
                 <span> {{localize "abfalter.fortitude"}} </span>
                 <input type="number" name="system.fortitude" value="{{system.fortitude}}" />
                 <span> | </span>
-                <span> {{system.newFortitude}} </span>
+                <span> {{system.derived.fortitude}} </span>
             </label>
         </div>
         <div class="armorContent">
@@ -69,7 +88,7 @@
                 <span> {{localize "abfalter.requir"}} </span>
                 <input type="number" name="system.requirement" value="{{system.requirement}}" />
                 <span> | </span>
-                <span> {{system.newRequirement}} </span>
+                <span> {{system.derived.requirement}} </span>
             </label>
         </div>
         <div class="armorContent">
@@ -77,7 +96,7 @@
                 <span> {{localize "abfalter.natPen"}} </span>
                 <input type="number" name="system.natPenalty" value="{{system.natPenalty}}" />
                 <span> | </span>
-                <span> {{system.newNatPenalty}} </span>
+                <span> {{system.derived.natPenalty}} </span>
             </label>
         </div>
         <div class="armorContent">
@@ -85,10 +104,45 @@
                 <span> {{localize "abfalter.movePen"}} </span>
                 <input type="number" name="system.movePenalty" value="{{system.movePenalty}}" />
                 <span> | </span>
-                <span> {{system.newMovePenalty}} </span>
+                <span> {{system.derived.movePenalty}} </span>
             </label>
         </div>
 
+        <div class="armorContent">
+            <label>
+                {{#if system.ignorePenalty}}
+                <span> {{localize "abfalter.ignorePenalty"}} </span>
+                {{else}}
+                <span> {{localize "abfalter.followArmorPenalty"}} </span>
+                {{/if}} 
+                <button type="button" class="toggleBoolean {{#if system.ignorePenalty}}kiBought{{/if}}"
+                    data-label="system.ignorePenalty" data-ability="{{system.ignorePenalty}}">
+                    {{#if system.ignorePenalty}}
+                    <span> {{localize "abfalter.altered"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.normal"}} </span>
+                    {{/if}} 
+                </button>
+            </label>
+        </div>
+
+        <div class="armorContent">
+            <label>
+                {{#if system.ignoreLayerRules}}
+                <span> {{localize "abfalter.ignoreLayerRules"}} </span>
+                {{else}}
+                <span> {{localize "abfalter.followLayerRules"}} </span>
+                {{/if}} 
+                <button type="button" class="toggleBoolean {{#if system.ignoreLayerRules}}kiBought{{/if}}"
+                    data-label="system.ignoreLayerRules" data-ability="{{system.ignoreLayerRules}}">
+                    {{#if system.ignoreLayerRules}}
+                    <span> {{localize "abfalter.altered"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.normal"}} </span>
+                    {{/if}} 
+                </button>
+            </label>
+        </div>
 
         <h6> {{localize "abfalter.armorValues"}} {{ localize "abfalter.details" }} </h6>
         <div class="armorCard">
@@ -122,15 +176,15 @@
 
             <div>
                 <span> {{localize "abfalter.final"}} </span>
-                <span> {{system.AT.newCut}} </span>
-                <span> {{system.AT.newImp}} </span>
-                <span> {{system.AT.newThr}} </span>
-                <span> {{system.AT.newHeat}} </span>
-                <span> {{system.AT.newCold}} </span>
-                <span> {{system.AT.newEle}} </span>
-                <span> {{system.AT.newEne}} </span>
+                <span> {{system.derived.cut}} </span>
+                <span> {{system.derived.imp}} </span>
+                <span> {{system.derived.thr}} </span>
+                <span> {{system.derived.heat}} </span>
+                <span> {{system.derived.cold}} </span>
+                <span> {{system.derived.ele}} </span>
+                <span> {{system.derived.ene}} </span>
                 {{#if system.spiritHomebrew}}
-                <span> {{system.AT.newSpt}} </span>
+                <span> {{system.derived.spt}} </span>
                 {{/if}}
             </div>
         </div>

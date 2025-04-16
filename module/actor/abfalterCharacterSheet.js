@@ -252,6 +252,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
             html.find(".item-delete").click(this._onItemDelete.bind(this));
             html.find(".item-expand").click(this._onItemExpand.bind(this));
             html.find(".item-toggle").click(this._onItemToggle.bind(this));
+            html.find(".ammoItem-toggle").click(this._ammoItemtoggle.bind(this));
 
             new ContextMenu(html, ".normal-item", this.itemContextMenu);
             new ContextMenu(html, ".equip-item", this.itemContextMenuEquip);
@@ -276,6 +277,14 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 let value = $(ev.currentTarget).attr("data-ability");
                 let max = $(ev.currentTarget).attr("data-ability2");
                 this.document.update({ "system.zeon.value": Math.min(Math.floor(this.document.system.zeon.value + (value / 1)), max) });
+            });
+            html.find('.mregenActual').click(ev => {
+                let value = $(ev.currentTarget).attr("data-ability");
+                let max = $(ev.currentTarget).attr("data-ability2");
+                let dailyMaint = this.actor.system.zeon.dailyMaint;
+
+
+                this.document.update({ "system.zeon.value": Math.min(Math.floor(this.document.system.zeon.value + (value - dailyMaint)), max) });
             });
             html.find('.kiAccuHalf').click(ev => {
                 let value = this.document.system.kiPool.agi.current + Math.max(1, Math.floor(this.document.system.kiPool.agi.accumTot / 2));
@@ -388,17 +397,15 @@ export default class abfalterCharacterSheet extends ActorSheet {
         event.preventDefault();
         const dataset = event.currentTarget.dataset;
 
-        console.log(dataset);
         switch (dataset.value) {
             case 'weaponAtk':
-                diceFunctions.openWeaponAtkDialogue(this.actor, dataset.label, dataset.id, dataset.type);
+                diceFunctions.openWeaponProfileDialogue(this.actor, dataset.label, dataset.id, dataset.type, 'attack', 'offensive');
                 break;
-            case 'defensive':
-                diceFunctions.openWeaponDefDialogue(this.actor, dataset.label, dataset.id);
-                console.log("Not Implemented");
+            case 'weaponDef':
+                diceFunctions.openWeaponProfileDialogue(this.actor, dataset.label, dataset.id, dataset.type, 'block', 'defensive');
                 break;
-            case 'shield':
-                console.log("Not Implemented");
+            case 'weaponDod':
+                diceFunctions.openWeaponProfileDialogue(this.actor, dataset.label, dataset.id, dataset.type, 'dodge', 'defensive');
                 break;
             case 'weaponTrap':
                 diceFunctions.openMeleeTrapDialogue(this.actor, dataset.label, dataset.id);
@@ -411,6 +418,7 @@ export default class abfalterCharacterSheet extends ActorSheet {
                 break;
         }
     }
+
     _changeSecNums(event) {
         event.preventDefault();
         let element = event.currentTarget;
@@ -537,6 +545,20 @@ export default class abfalterCharacterSheet extends ActorSheet {
         let label = $(event.currentTarget).attr("data-label");
         value = !(value === 'true');
         item.update({ [label]: value });
+    }
+
+    _ammoItemtoggle(event) {
+        event.preventDefault();
+        let element = event.currentTarget;
+        let itemId = element.closest(".item").dataset.itemId;
+        let item = this.actor.items.get(itemId);
+        let ability = $(event.currentTarget).attr("data-ability");
+        let label = $(event.currentTarget).attr("data-label");
+        let value = $(event.currentTarget).attr("data-value");
+        ability = !(ability === 'true');
+        value = ability ? value : 0;
+        item.update({ [label]: ability });
+        item.update({ 'system.ranged.magSize': value });
     }
 
     _onItemChatRoll(event) {

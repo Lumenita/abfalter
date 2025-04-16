@@ -2,8 +2,10 @@
     <div>
         <span> {{actor.name}} </span>
         <span> {{attackDetails.wepName}} </span>
+        {{#ifEquals attackDetails.profileType "offensive"}}
         {{#ifEquals attackDetails.wepType "ranged"}}
         <span> {{attackDetails.ammoName}} </span>
+        {{/ifEquals}}
         {{/ifEquals}}
     </div>
 
@@ -21,6 +23,7 @@
     {{/if}}
     {{/each}}
 
+    {{#ifEquals attackDetails.profileType "offensive"}}
     <div>
         <div>
             <span> {{localize "abfalter.dmgShort"}}: {{attackDetails.dmg}} {{attackDetails.dmgType}}</span>
@@ -30,6 +33,16 @@
             <span> {{localize "abfalter.targetAim"}}: {{localize (concat "abfalter." attackDetails.target)}}</span>
         </div>
     </div>
+    {{/ifEquals}}
+
+    {{#ifEquals attackDetails.profileType "defensive"}}
+    <div>
+        <div>
+            {{{attackDetails.chosenAt}}}
+        </div>
+    </div>
+    {{/ifEquals}}
+
 
     {{#each rollData as |roll i|}}
     <label class="explodeButtons">

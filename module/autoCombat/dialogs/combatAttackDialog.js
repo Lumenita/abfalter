@@ -100,7 +100,6 @@ export class combatAttackDialog extends FormApplication {
 
         html.find('.sendNormAttack').click(() => {
             const { fatigueUsed, modifier, unarmed, weaponsList, weaponUsed, damage } = this.data.attacker.combat; // from getInitial Data stuff
-            //console.log(this.data.attacker.combat);
             const weapon = weaponsList.find(w => w._id === weaponUsed);
             if (typeof damage !== 'undefined') {
                 console.log(weapon);

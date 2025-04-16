@@ -10,35 +10,27 @@ export default class abfalterItem extends Item {
     }
 
     prepareArmor() {
+        if (this.parent != null) {
+            this.system.kiBonusFort = this.parent.system.kiAbility.kiAuraEx.status ? 10 : 0;
+        } else {
+            this.system.kiBonusFort = 0;
+        }
+
         this.system.qualityValue = Math.floor(this.system.quality / 5);
-        this.system.newPresence = Math.floor(+(this.system.qualityValue * 50) + +this.system.presence);
-        this.system.newFortitude = Math.floor(+(this.system.qualityValue * 10) + +this.system.fortitude);
-        this.system.newReq = Math.floor(+this.system.requirement - +(this.system.qualityValue * 5));
-        if (this.system.newReq > 0) {
-            this.system.newRequirement = this.system.newReq;
-        } else {
-            this.system.newRequirement = 0;
-        };
-        this.system.newNatPen = Math.floor(+this.system.natPenalty - +(this.system.qualityValue * 5));
-        if (this.system.newNatPen > 0) {
-            this.system.newNatPenalty = this.system.newNatPen;
-        } else {
-            this.system.newNatPenalty = 0;
-        };
-        this.system.newMovePen = Math.floor(+this.system.movePenalty - +this.system.qualityValue);
-        if (this.system.newMovePen > 0) {
-            this.system.newMovePenalty = this.system.newMovePen;
-        } else {
-            this.system.newMovePenalty = 0;
-        };
-        this.system.AT.newCut = Math.floor(+this.system.AT.cut + +this.system.qualityValue);
-        this.system.AT.newImp = Math.floor(+this.system.AT.imp + +this.system.qualityValue);
-        this.system.AT.newThr = Math.floor(+this.system.AT.thr + +this.system.qualityValue);
-        this.system.AT.newHeat = Math.floor(+this.system.AT.heat + +this.system.qualityValue);
-        this.system.AT.newCold = Math.floor(+this.system.AT.cold + +this.system.qualityValue);
-        this.system.AT.newEle = Math.floor(+this.system.AT.ele + +this.system.qualityValue);
-        this.system.AT.newEne = Math.floor(+this.system.AT.ene + +this.system.qualityValue);
-        this.system.AT.newSpt = Math.floor(+this.system.AT.spt + +this.system.qualityValue);
+        this.system.derived.presence = Math.floor(+(this.system.qualityValue * 50) + +this.system.presence); 
+        this.system.derived.fortitude = Math.floor(+(this.system.qualityValue * 10) + +this.system.fortitude + this.system.kiBonusFort); 
+        this.system.derived.requirement = Math.max(0, Math.floor(+this.system.requirement - +(this.system.qualityValue * 5)));
+        this.system.derived.natPenalty = Math.max(0, Math.floor(+this.system.natPenalty - +(this.system.qualityValue * 5)));
+        this.system.derived.movePenalty = Math.max(0, Math.floor(+this.system.movePenalty - +this.system.qualityValue));
+
+        this.system.derived.cut = Math.floor(+this.system.AT.cut + +this.system.qualityValue);
+        this.system.derived.imp = Math.floor(+this.system.AT.imp + +this.system.qualityValue);
+        this.system.derived.thr = Math.floor(+this.system.AT.thr + +this.system.qualityValue);
+        this.system.derived.heat = Math.floor(+this.system.AT.heat + +this.system.qualityValue);
+        this.system.derived.cold = Math.floor(+this.system.AT.cold + +this.system.qualityValue);
+        this.system.derived.ele = Math.floor(+this.system.AT.ele + +this.system.qualityValue);
+        this.system.derived.ene = Math.floor(+this.system.AT.ene + +this.system.qualityValue);
+        this.system.derived.spt = Math.floor(+this.system.AT.spt + +this.system.qualityValue);
 
         //Global Setting
         this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
@@ -212,17 +204,18 @@ export default class abfalterItem extends Item {
             this.system.melee.finalBreakage = Math.floor(~~this.system.breakage + ~~this.system.breakageStr + ~~this.system.quality + ~~this.system.kiBonusBreakage);          
 
             for (let i = 0; i < this.system.attacks.length; i++) {
-                this.system.attacks[i].finalAttack = this.system.attacks[i].attack + this.system.derived.baseAtk;
-                this.system.attacks[i].finalBlock = this.system.attacks[i].block + this.system.derived.baseBlk;
-                this.system.attacks[i].finalDodge = this.system.attacks[i].dodge + this.system.derived.baseDod;
+                this.system.attacks[i].finalAttack = this.system.attacks[i].attack + (this.system.attacks[i].atkOverride ? 0 : this.system.derived.baseAtk);
+                this.system.attacks[i].finalBlock = this.system.attacks[i].block + (this.system.attacks[i].blkOverride ? 0 : this.system.derived.baseBlk);
+                this.system.attacks[i].finalDodge = this.system.attacks[i].dodge + (this.system.attacks[i].dodOverride ? 0 : this.system.derived.baseDod);
                 this.system.attacks[i].finalAtPen = this.system.attacks[i].atPen + this.system.melee.finalATPen;
                 this.system.attacks[i].finalBreakage = this.system.attacks[i].breakage + this.system.melee.finalBreakage;
-                this.system.attacks[i].finalDamage = this.system.attacks[i].damage + this.system.melee.baseDmg;
+                this.system.attacks[i].finalDamage = this.system.attacks[i].damage + (this.system.attacks[i].dmgOverride ? 0 : this.system.melee.baseDmg);
             }
         }
 
         //Ranged Weapons
         if (this.system.info.type == "ranged") { 
+            this.system.ranged.strOverrideQualValue = Math.floor(this.system.ranged.strOverrideValue + (this.system.quality / 5));
 
             if (this.parent) {
                 for (let i = 0; i < this.system.attacks.length; i++) {
@@ -256,6 +249,8 @@ export default class abfalterItem extends Item {
                     this.system.ranged.reloadTag = game.i18n.localize('abfalter.attack');
                     this.system.ranged.bestReloadValue = this.parent.system.combatValues.attack.final;
                 }
+
+                this.system.ranged.strField = this.parent.system.stats.Strength.final;
             } else {
                 this.system.ranged.ammoIds = [
                     {id: 0, name: game.i18n.localize('abfalter.none')},
@@ -268,11 +263,100 @@ export default class abfalterItem extends Item {
                 this.system.ranged.ammoAtPen = 0;
                 this.system.ranged.bestReloadValue = 0;
                 this.system.ranged.reloadTag = game.i18n.localize('abfalter.none');
+                this.system.ranged.strField = 0
             }
 
             this.system.ranged.reloadTimeFinal = Math.floor(this.system.ranged.reloadTime - Math.floor(this.system.ranged.bestReloadValue / 100));
+            this.system.ranged.bonusDmgKi = this.system.kiBonusDmg;
 
-            this.system.ranged.ammoDamageFinal = this.system.ranged.ammoDamage + this.system.ranged.ammoDmgMod;
+            if (this.system.ranged.showStrFields === true){
+                switch (this.system.ranged.strOverride) {
+                    case true:
+                        switch (this.system.ranged.strOverrideQualValue) {
+                            case 0:
+                                this.system.ranged.strMod = -40;
+                                break;
+                            case 1:
+                                this.system.ranged.strMod = -30;
+                                break;
+                            case 2:
+                                this.system.ranged.strMod = -20;
+                                break;
+                            case 3:
+                                this.system.ranged.strMod = -10;
+                                break;
+                            case 4:
+                                this.system.ranged.strMod = -5;
+                                break;
+                            case 5:
+                                this.system.ranged.strMod = 0;
+                                break;
+                            case 6:
+                            case 7:
+                                this.system.ranged.strMod = 5;
+                                break;
+                            case 8:
+                            case 9:
+                                this.system.ranged.strMod = 10;
+                                break;
+                            case 10:
+                                this.system.ranged.strMod = 15;
+                                break;
+                            case 11:
+                            case 12:
+                                this.system.ranged.strMod = 20;
+                                break;
+                            case 13:
+                            case 14:
+                                this.system.ranged.strMod = 25;
+                                break;
+                            case 15:
+                                this.system.ranged.strMod = 30;
+                                break;
+                            case 16:
+                            case 17:
+                                this.system.ranged.strMod = 35;
+                                break;
+                            case 18:
+                            case 19:
+                                this.system.ranged.strMod = 40;
+                                break;
+                            case 20:
+                                this.system.ranged.strMod = 45;
+                                break;
+                            case 21:
+                            case 22:
+                                this.system.ranged.strMod = 50;
+                                break;
+                            case 23:
+                            case 24:
+                                this.system.ranged.strMod = 55;
+                                break;
+                            case 25:
+                                this.system.ranged.strMod = 60;
+                                break;
+                            case 26:
+                            case 27:
+                                this.system.ranged.strMod = 65;
+                                break;
+                            case 28:
+                            case 29:
+                                this.system.ranged.strMod = 70;
+                                break;
+                            case 30:
+                                this.system.ranged.strMod = 75;
+                                break;
+                            default:
+                                this.system.ranged.strMod = -40;
+                        }
+                        break;
+                    case false:
+                        this.system.ranged.strMod = this.parent.system.stats.Strength.mod
+                        break;
+                }
+            }
+
+            this.system.ranged.ammoDamageFinal = Math.floor(this.system.ranged.ammoDamage + this.system.ranged.ammoDmgMod + ~~this.system.kiBonusDmg + (this.system.ranged.showStrFields ? this.system.ranged.strMod : 0));
             this.system.ranged.ammoBreakFinal = this.system.ranged.ammoBreak + this.system.ranged.ammoBreakMod;
             this.system.ranged.ammoAtPenFinal = this.system.ranged.ammoAtPen + this.system.ranged.ammoAtPenMod;
 
@@ -281,46 +365,49 @@ export default class abfalterItem extends Item {
             }
 
             for (let i = 0; i < this.system.attacks.length; i++) {
-                this.system.attacks[i].finalAttack = this.system.attacks[i].attack + this.system.derived.baseAtk;
-                this.system.attacks[i].finalBlock = this.system.attacks[i].block + this.system.derived.baseBlk;
-                this.system.attacks[i].finalDodge = this.system.attacks[i].dodge + this.system.derived.baseDod;
+                this.system.attacks[i].finalAttack = this.system.attacks[i].attack + (this.system.attacks[i].atkOverride ? 0 : this.system.derived.baseAtk);
+                this.system.attacks[i].finalBlock = this.system.attacks[i].block + (this.system.attacks[i].blkOverride ? 0 : this.system.derived.baseBlk);
+                this.system.attacks[i].finalDodge = this.system.attacks[i].dodge + (this.system.attacks[i].dodOverride ? 0 : this.system.derived.baseDod);
 
                 this.system.attacks[i].finalAtPen = this.system.attacks[i].atPen + this.system.ranged.ammoAtPenFinal;
                 this.system.attacks[i].finalBreakage = this.system.attacks[i].breakage + this.system.ranged.ammoBreakFinal;
-                this.system.attacks[i].finalDamage = this.system.attacks[i].damage + this.system.ranged.ammoDamageFinal;
+                this.system.attacks[i].finalDamage = this.system.attacks[i].damage + (this.system.attacks[i].dmgOverride ? 0 : this.system.ranged.ammoDamageFinal);
             }
         }
 
+        //Shield Weapons
+        if (this.system.info.type == "shield") {
+            switch (this.system.shield.type) {
+                case "shieldBuckler":
+                    this.system.shield.blockBonus = 10;
+                    this.system.shield.dodgeBonus = 5;
+                    this.system.shield.speedBonus = -15;
+                    break;
+                case "shieldNorm":
+                    this.system.shield.blockBonus = 20;
+                    this.system.shield.dodgeBonus = 10;
+                    this.system.shield.speedBonus = -25;
+                    break;
+                case "shieldTower":
+                    this.system.shield.blockBonus = 30;
+                    this.system.shield.dodgeBonus = 15;
+                    this.system.shield.speedBonus = -40;
+                    break;
+                default:
+                    this.system.shield.blockBonus = 0;
+                    this.system.shield.dodgeBonus = 0;
+                    this.system.shield.speedBonus = 0;
+                    break;
+            }
+            this.system.derived.finalWeaponSpeed += this.system.shield.speedBonus;
+            this.system.derived.baseBlk += this.system.shield.blockBonus;
+            this.system.derived.baseDod += this.system.shield.dodgeBonus;
 
-
-        /*
-        switch (this.system.shield) {
-            case "none":
-                this.system.shieldBonus = 0;
-                this.system.shieldBonus2 = 0;
-                this.system.shieldTypeSpeed = 0;
-                break;
-            case "buckler":
-                this.system.shieldBonus = 10;
-                this.system.shieldBonus2 = 5;
-                this.system.shieldTypeSpeed = -15;
-                break;
-            case "shield":
-                this.system.shieldBonus = 20;
-                this.system.shieldBonus2 = 10;
-                this.system.shieldTypeSpeed = -25;
-                break;
-            case "fShield":
-                this.system.shieldBonus = 30;
-                this.system.shieldBonus2 = 15;
-                this.system.shieldTypeSpeed = -40;
-                break;
-            default:
-                break;
+            for (let i = 0; i < this.system.attacks.length; i++) {
+                this.system.attacks[i].finalBlock = this.system.attacks[i].block + (this.system.attacks[i].blkOverride ? 0 : this.system.derived.baseBlk);
+                this.system.attacks[i].finalDodge = this.system.attacks[i].dodge + (this.system.attacks[i].dodOverride ? 0 : this.system.derived.baseDod);
+            }
         }
-        */
-
-
     }
 
     prepareAmmo() {

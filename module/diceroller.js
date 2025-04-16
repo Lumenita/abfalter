@@ -16,7 +16,7 @@ export async function openModifierDialogue(actorData, finalValue, label, type, c
     const template = "systems/abfalter/templates/dialogues/basicModifiers.html";
     let confirmed = false;
     let fatMod = false;
-    if (type == "resRoll" || type == "potentialRoll" || type == "summoningRoll" || type == "breakageRoll") {
+    if (type == "resRoll" || type == "potentialRoll" || type == "summoningRoll") {
         fatMod = true;
     }
 
@@ -40,14 +40,8 @@ export async function openModifierDialogue(actorData, finalValue, label, type, c
                     case "combatRoll":
                         abilityRoll(html, actorData, finalValue, label);
                         break;
-                    case "weaponCombatRoll":
-                        rollCombatWeapon(html, actorData, finalValue, label, complex);
-                        break;
                     case "resRoll":
                         rollResistance(html, actorData, finalValue, label);
-                        break;
-                    case 'breakageRoll':
-                        rollBreakage(html, actorData, finalValue, label);
                         break;
                     default:
                         console.log("No Roll Function Implemented for this type");
@@ -152,72 +146,6 @@ async function abilityRoll(html, actor, finalValue, label) {
     };
     const template = "systems/abfalter/templates/dialogues/abilityRoll.hbs"
     const content = await renderTemplate(template, { rollData: rollData, label: newLabel, actor: actor });
-    const chatData = {
-        user: game.user.id,
-        speaker: ChatMessage.getSpeaker({ actor: actor }),
-        sound: CONFIG.sounds.dice,
-        content: content,
-        rolls: [rollResult],
-        flags: { rollData, actor, num }
-    };
-    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
-    ChatMessage.create(chatData);
-}
-
-async function rollCombatWeapon(html, actor, finalValue, label, complex) {
-    let fatigueMod = parseInt(html.find('#fatiguemod').val()) || 0;
-    let mod = parseInt(html.find('#modifiermod').val()) || 0;
-    let fatigueFinal = Math.floor(fatigueMod * 15);
-    let baseDice = "1d100";
-    let rollFormula = `${baseDice} + ${finalValue} + ${fatigueFinal} + ${mod}`
-    const rollResult = await new Roll(rollFormula, actor).roll();
-    rollResult.rolledDice = rollResult.total - finalValue - fatigueFinal - mod;
-
-    let fumbleRange = actor.system.fumleRange.final;
-    if (complex == "true") {
-        fumbleRange += 2;
-    }
-    if (finalValue > 199 && fumbleRange > 1) {
-        fumbleRange -= 1;
-    }
-
-    rollResult.color = "";
-    rollResult.fumbleLevel = 0;
-    rollResult.fumble = false;
-    rollResult.explode = false;
-    rollResult.doubles = false;
-    rollResult.openRange = actor.system.rollRange.final;
-
-    if (rollResult.rolledDice <= fumbleRange) {
-        rollResult.color = "fumbleRoll";
-        rollResult.fumble = true;
-        while (fumbleRange > rollResult.rolledDice) {
-            rollResult.fumbleLevel += 15;
-            fumbleRange--;
-        }
-    } else if (rollResult.rolledDice >= actor.system.rollRange.final) {
-        rollResult.color = "openRoll";
-        rollResult.explode = true;
-    } else {
-        rollResult.color = "normalRoll";
-    }
-    if (actor.system.rollRange.doubles === true) {
-        rollResult.doubles = true;
-        let doubleValues = [11, 22, 33, 44, 55, 66, 77, 88];
-        if (doubleValues.includes(rollResult.rolledDice)) {
-            rollResult.color = "openRoll";
-            rollResult.explode = true;
-        }
-    }
-
-    let num = 0;
-    const rollData = [];
-    rollData[0] = {
-        roll: rollResult.rolledDice, total: rollResult._total, doubles: rollResult.doubles, openRange: rollResult.openRange, label: label, fumbleLevel: rollResult.fumbleLevel,
-        fumble: rollResult.fumble, explode: rollResult.explode, result: rollResult.result, color: rollResult.color
-    };
-    const template = "systems/abfalter/templates/dialogues/abilityRoll.hbs"
-    const content = await renderTemplate(template, { rollData: rollData, label: label, actor: actor });
     const chatData = {
         user: game.user.id,
         speaker: ChatMessage.getSpeaker({ actor: actor }),
@@ -364,69 +292,167 @@ export async function rollResistance(html, actorData, finalValue, label) {
     ChatMessage.create(chatData);
 }
 
-export async function rollBreakage(html, actorData, finalValue, label) {
-    let mod = parseInt(html.find('#modifiermod').val()) || 0;
 
-    let baseDice = "1d10";
-    let rollFormula = `${baseDice} + ${finalValue} + ${mod}`;
-    let rollResult = await new Roll(rollFormula, actorData).roll();
-    rollResult.rolledDice = rollResult.total - finalValue - mod;
-
-    const template = "systems/abfalter/templates/dialogues/breakRoll.html"
-    const content = await renderTemplate(template, { rollResult: rollResult, label: label });
-    const chatData = {
-        user: game.user.id,
-        speaker: ChatMessage.getSpeaker({ actorData: actorData }),
-        sound: CONFIG.sounds.dice,
-        content: content
-    };
-    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
-    ChatMessage.create(chatData);
-}
 
 //New Functions
-export async function openWeaponAtkDialogue(actor, label, wepId, wepType) {
-    console.log("Attack Handle Test Start", wepType);
+
+/** Opens the weapon profile dialog for the selected weapon.
+ * @param {Actor} actor - The actor using the weapon.
+ * @param {string} label - The label for the dialog.
+ * @param {string} wepId - The ID of the weapon.
+ * @param {string} wepType - The type of the weapon (e.g., "melee", "ranged", "shield").
+ * @param {string} actionType - The type of profile (e.g., "attack", "block", "dodge").
+ * @param {string} profileType - The action type (e.g., "offensive", "defensive").
+ */
+export async function openWeaponProfileDialogue(actor, label, wepId, wepType, actionType, profileType) {
+    console.log("Profile Handle Test Start", wepType);
     const weapon = actor.items.get(wepId);
   
-    // Skip dialog if shift key is held
+    // Skip dialog if shift key is held TODO
     if (event.shiftKey) {
-      console.log('shift key held, skipping attack dialog.');
-      const basicAttackDetails = {
-        label: game.i18n.localize("abfalter.attack"),
-        name: "",
-        base: weapon.system.derived.baseAtk,
-        value: weapon.system.derived.baseAtk,
-        formula: `${weapon.system.derived.baseAtk}(${game.i18n.localize("abfalter.value")})`,
-        dmg: weapon.system.melee.baseDmg,
-        dmgType: weapon.system.primDmgT,
-        atPen: weapon.system.melee.finalATPen,
-        target: game.i18n.localize("abfalter.none"),
-      };
-      weaponRoll(actor, weapon, basicAttackDetails);
-      return;
+        console.log('shift key held, skipping attack dialog.');
+        let basicProfileDetails = {};
+        switch (actionType) {
+            case 'attack':
+                basicProfileDetails = {
+                    label: game.i18n.localize("abfalter.attack"),
+                    name: "",
+                    base: weapon.system.derived.baseAtk,
+                    value: weapon.system.derived.baseAtk,
+                    formula: `${weapon.system.derived.baseAtk}(${game.i18n.localize("abfalter.value")})`,
+                    dmg: weapon.system.melee.baseDmg,
+                    dmgType: weapon.system.primDmgT,
+                    atPen: weapon.system.melee.finalATPen,
+                    target: game.i18n.localize("abfalter.none"),
+                    ammo: 0,
+                    chosenAt: "",
+                    wepType: wepType,
+                    actionType: actionType,
+                    profileType: profileType
+                };
+                break;
+            case 'block':
+                basicProfileDetails = {
+                    label: game.i18n.localize("abfalter.block"),
+                    name: "",
+                    base: weapon.system.derived.baseBlk,
+                    value: weapon.system.derived.baseBlk,
+                    formula: `${weapon.system.derived.baseBlk}(${game.i18n.localize("abfalter.value")})`,
+                    dmg: "",
+                    dmgType: "",
+                    atPen: "",
+                    target: "",
+                    ammo: 0,
+                    chosenAt: "",
+                    wepType: wepType,
+                    actionType: actionType,
+                    profileType: profileType
+                };
+                break;
+            case 'dodge':
+                basicProfileDetails = {
+                    label: game.i18n.localize("abfalter.dodge"),
+                    name: "",
+                    base: weapon.system.derived.baseDod,
+                    value: weapon.system.derived.baseDod,
+                    formula: `${weapon.system.derived.baseDod}(${game.i18n.localize("abfalter.value")})`,
+                    dmg: "",
+                    dmgType: "",
+                    atPen: "",
+                    target: "",
+                    ammo: 0, 
+                    chosenAt: "",
+                    wepType: wepType,
+                    actionType: actionType,
+                    profileType: profileType
+                };
+                break;
+            default:
+                console.log("(Shift Key)Error: No profile type found.");
+                ui.notifications.error("(Shift Key)Error: No profile type found.");
+                return;
+        }
+        weaponRoll(actor, weapon, basicProfileDetails);
+        return;
+    }
+    if (wepType === "ranged" && weapon.system.ranged.infiniteAmmo === false && weapon.system.ranged.magSize <= 0) {
+        ui.notifications.warn(game.i18n.localize("abfalter.noAmmoPrompt"));
     }
   
-    const attacks = weapon.system.attacks;
-    if (!attacks.length) {
-      console.log("No Attacks Found, using default attack");
-      openModifierDialogue(actor, weapon.system.derived.baseAtk, "attack", "combatRoll");
-      return;
-    }
+    const allAttacks = weapon.system.attacks ?? [];
+    const isMelee = wepType === "melee";
+    const baseAttackValue = {
+        name: "Base Weapon",
+        profileType: "both",
+        ignorePrecision: false,
+        ignoreVorpal: false,
+        ignoreThrown: false,
+        quantityConsumed: false,
+        consumedValue: 1,
+        rangedAmmoConsumed: true,
+        rangedAmmoConsumedValue: 1,
+        finalAttack: weapon.system.derived.baseAtk ?? 0,
+        finalBlock: weapon.system.derived.baseBlk ?? 0,
+        finalDodge: weapon.system.derived.baseDod ?? 0,
+        finalDamage: isMelee 
+        ? weapon.system.melee.baseDmg ?? 0 
+        : weapon.system.ranged.ammoDamageFinal ?? 0,
+        finalAtPen: isMelee 
+        ? weapon.system.melee.finalATPen ?? 0 
+        : weapon.system.ranged.ammoAtPenFinal ?? 0,
+        damage: 0,
+        atPen: 0,
+        breakage: 0,
+        finalBreakage: 0,
+    };
+    // filtered list with base at index 0
+    let attacks = [baseAttackValue].concat(
+        allAttacks.filter(atk => {
+            const atkType = atk.profileType?.trim().toLowerCase();
+            const filterType = profileType?.trim().toLowerCase();
+            const match = atkType === "both" || atkType === filterType;
+            return match;
+        })
+    );
   
     const templateData = {
       weaponType: wepType,
+      profileType: profileType,
+      actionType: actionType,
       weapon,
       attacks,
       label,
-    };
-    const template = "systems/abfalter/templates/dialogues/weaponPrompts/weaponAtk.hbs";
+    }
+    const template = "systems/abfalter/templates/dialogues/weaponPrompts/weaponProfile.hbs";
     const htmlContent = await renderTemplate(template, templateData);
   
-    let confirmed = false;
-    let usedIndex = weapon.system.info.lastWepUsed < attacks.length ? weapon.system.info.lastWepUsed : 0;
+    let confirmed = false, usedIndex = 0;
+    switch (profileType) {
+        case 'offensive':
+            usedIndex = weapon.system.info.lastWepUsed < attacks.length ? weapon.system.info.lastWepUsed : 0;
+            break;
+        case 'defensive':
+            usedIndex = weapon.system.info.lastDefUsed < attacks.length ? weapon.system.info.lastDefUsed : 0;
+            break;
+        default:
+            console.log("(Find Used Index)Error: No action type found.");
+            ui.notifications.error("(Find Used Index)Error: No action type found.");
+            return;
+    }
     let finalValue = 0, finalFormula = "", fatigueUsed = 0, ammoUsed = 0, ammoIdUsed = "", RangedAmmoUsed = 0;
-    let wepValue = 0; // Current selected attack's base value
+    let wepValue = 0;// Current selected attack's base value
+
+    //armor values for defensive rolls
+    const armorType = [ 
+        { tag: 'showAll', name: game.i18n.localize('abfalter.showAll'), atValue: 0 },
+        { tag: 'cut', name: game.i18n.localize('abfalter.cut'), atValue: actor.system.armor.body.aCutFinal },
+        { tag: 'imp', name: game.i18n.localize('abfalter.imp'), atValue: actor.system.armor.body.aImpFinal },
+        { tag: 'thr', name: game.i18n.localize('abfalter.thr'), atValue: actor.system.armor.body.aThrFinal },
+        { tag: 'heat', name: game.i18n.localize('abfalter.heat'), atValue: actor.system.armor.body.aHeatFinal },
+        { tag: 'cold', name: game.i18n.localize('abfalter.cold'), atValue: actor.system.armor.body.aColdFinal },
+        { tag: 'ele', name: game.i18n.localize('abfalter.ele'), atValue: actor.system.armor.body.aEleFinal },
+        { tag: 'ene', name: game.i18n.localize('abfalter.ene'), atValue: actor.system.armor.body.aEneFinal }
+    ];
   
     // Helper: Update the final roll value and button label
     const updateFinalValue = ($html) => {
@@ -434,16 +460,31 @@ export async function openWeaponAtkDialogue(actor, label, wepId, wepType) {
       const fatigueValue = parseInt($html.find('#fatigueDropdown').val(), 10) || 0;
       const modifierValue = parseInt($html.find('#modifierMod').val(), 10) || 0;
       const selectedPenalty = parseInt($html.find('#directedAtkDropdown :selected').data('penalty'), 10);
+      const multDefPenalty = parseInt($html.find('#defNumberDropdown :selected').data('penalty'), 10);
+
       fatigueUsed = fatigueValue;
-  
-      finalValue = wepValue + (fatigueValue * 15) + modifierValue + selectedPenalty + selectedModifier;
-      finalFormula = `${wepValue}(${game.i18n.localize("abfalter.value")}) + ${fatigueValue * 15}(${game.i18n.localize("abfalter.fatigue")}) + ${modifierValue}(${game.i18n.localize("abfalter.mod")}) + ${selectedPenalty}(${game.i18n.localize("abfalter.aim")}) + ${selectedModifier}(${game.i18n.localize("abfalter.action")})`;
-  
+
+      switch (actionType) {
+        case 'attack':
+            finalValue = wepValue + (fatigueValue * 15) + modifierValue + selectedPenalty + selectedModifier;
+            finalFormula = `${wepValue}(${game.i18n.localize("abfalter.value")}) + ${fatigueValue * 15}(${game.i18n.localize("abfalter.fatigue")}) + ${modifierValue}(${game.i18n.localize("abfalter.mod")}) + ${selectedPenalty}(${game.i18n.localize("abfalter.aim")}) + ${selectedModifier}(${game.i18n.localize("abfalter.action")})`;
+            break;
+        case 'block':    
+        case 'dodge':
+            finalValue = wepValue + (fatigueValue * 15) + modifierValue + multDefPenalty;
+            finalFormula = `${wepValue}(${game.i18n.localize("abfalter.value")}) + ${fatigueValue * 15}(${game.i18n.localize("abfalter.fatigue")}) + ${modifierValue}(${game.i18n.localize("abfalter.mod")}) + ${multDefPenalty}(${game.i18n.localize("abfalter.multipleDef")})`;
+            break;
+        default:
+            console.log("(Update FInal Value)Error: No action type found.");
+            ui.notifications.error("(Update FInal Value)Error: No action type found.");
+            return;
+      }
+
       $html.closest('.dialog').find('.dialog-button:first').text(`${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`);
-    };
-  
+    }
+
     new diceDialog({
-      title: `${weapon.name} ${game.i18n.localize('abfalter.attack')}`,
+      title: `${weapon.name} ${game.i18n.localize('abfalter.' + actionType)}`,
       content: htmlContent,
       buttons: {
         roll: { label: `${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`, callback: () => confirmed = true },
@@ -458,6 +499,8 @@ export async function openWeaponAtkDialogue(actor, label, wepId, wepType) {
         const $atkDmgTypeDropdown = $html.find('#atkDmgTypeDropdown');
         const $directedAtkDropdown = $html.find('#directedAtkDropdown');
         const $ammoDropdown = $html.find('#ammoDropdown');
+        const $defNumberDropdown = $html.find('#defNumberDropdown');
+        const $armorDropdown = $html.find('#armorDropdown');
   
         const fatigueVal = actor.system.fatigue.value;
         const maxFatigue = actor.system.kiAbility.kiUseOfEne.status ? 5 : 2;
@@ -491,7 +534,15 @@ export async function openWeaponAtkDialogue(actor, label, wepId, wepType) {
             ELE: game.i18n.localize('abfalter.ele'),
             ENE: game.i18n.localize('abfalter.ene')
         };
-  
+        const defensePenalty = [   
+            { tag: 'first', name: game.i18n.localize('abfalter.firstDef'), penalty: 0 },
+            { tag: 'second', name: game.i18n.localize('abfalter.secondDef'), penalty: -30 },
+            { tag: 'third', name: game.i18n.localize('abfalter.thirdDef'), penalty: -50 },
+            { tag: 'fourth', name: game.i18n.localize('abfalter.fourthDef'), penalty: -70 },
+            { tag: 'fifth', name: game.i18n.localize('abfalter.fifthDef'), penalty: -90 }
+        ];
+
+
         const vorpalLocation = weapon.system.info.vorpalLocation;
         const vorpalModifier = weapon.system.info.vorpalMod;
         let isPrecise = weapon.system.info.precision && !attacks[usedIndex].ignorePrecision;
@@ -585,6 +636,26 @@ export async function openWeaponAtkDialogue(actor, label, wepId, wepType) {
             });
         };
         populateDirectedAtkDropdown();
+
+        // Multiple defense dropdown
+        const populateDefNumberDropdown = () => {
+            $defNumberDropdown.empty();
+            defensePenalty.forEach(part => {
+                $defNumberDropdown.append(`<option value="${part.tag}" data-penalty="${part.penalty}">${part.name} (${part.penalty})</option>`);
+            });
+        };
+        populateDefNumberDropdown();
+
+        // Armor dropdown
+        const populateArmorDropdownDropdown = () => {
+            $armorDropdown.empty();
+            armorType.forEach(part => {
+                $armorDropdown.append(`<option value="${part.tag}" data-penalty="${part.atValue}">${part.name} (${part.atValue})</option>`);
+            });
+        };
+        populateArmorDropdownDropdown();
+
+
   
         // --- Event Handlers ---
   
@@ -599,9 +670,26 @@ export async function openWeaponAtkDialogue(actor, label, wepId, wepType) {
                 ? attacks[usedIndex].consumedValue : 0;
             RangedAmmoUsed = weapon.system.ranged.infiniteAmmo ? (attacks[usedIndex].rangedAmmoConsumed ? 0 : attacks[usedIndex].rangedAmmoConsumedValue) : attacks[usedIndex].rangedAmmoConsumedValue;
             $html.find('#attackPower').text(selectedAttack.finalAttack);
+            $html.find('#defensePower').text(selectedAttack.finalBlock);
+            $html.find('#dodgePower').text(selectedAttack.finalDodge);
             $html.find('#damageNum').text(selectedAttack.finalDamage);
             $html.find('#atPenNum').text(selectedAttack.finalAtPen);
-            wepValue = selectedAttack.finalAttack;
+            switch (actionType) {
+                case 'attack':
+                    wepValue = selectedAttack.finalAttack;
+                    break;
+                case 'block':
+                    wepValue = selectedAttack.finalBlock;
+                    break;
+                case 'dodge':
+                    wepValue = selectedAttack.finalDodge;
+                    break;
+                default:
+                    console.log("(Setting Weapon Base Value)Error: No profile type found.");
+                    ui.notifications.error("(Setting Weapon Base Value)Error: No profile type found.");
+                    return;
+            }
+            
             updateFinalValue($html);
         });
   
@@ -636,7 +724,7 @@ export async function openWeaponAtkDialogue(actor, label, wepId, wepType) {
                 weapon.system.ranged.ammoDmgType = ammoDmgType;
                 weapon.system.ranged.ammoBreak = ammoBreak;
                 weapon.system.ranged.ammoAtPen = ammoAtPen;
-                weapon.system.ranged.ammoDamageFinal = ammoDamage + weapon.system.ranged.ammoDmgMod;
+                weapon.system.ranged.ammoDamageFinal = ammoDamage + weapon.system.ranged.ammoDmgMod + weapon.system.ranged.bonusDmgKi + (weapon.system.ranged.showStrFields ? weapon.system.ranged.strMod : 0);                
                 weapon.system.ranged.ammoBreakFinal = ammoBreak + weapon.system.ranged.ammoBreakMod;
                 weapon.system.ranged.ammoAtPenFinal = ammoAtPen + weapon.system.ranged.ammoAtPenMod;
 
@@ -644,7 +732,8 @@ export async function openWeaponAtkDialogue(actor, label, wepId, wepType) {
                 attacks.forEach(attack => {
                 attack.finalAtPen = attack.atPen + weapon.system.ranged.ammoAtPenFinal;
                 attack.finalBreakage = attack.breakage + weapon.system.ranged.ammoBreakFinal;
-                attack.finalDamage = attack.damage + weapon.system.ranged.ammoDamageFinal;
+
+                attack.finalDamage = attack.damage + (attack.dmgOverride ? 0 : weapon.system.ranged.ammoDamageFinal);
                 });
 
                 const selectedAttack = attacks[$attackSelect.val()];
@@ -659,6 +748,7 @@ export async function openWeaponAtkDialogue(actor, label, wepId, wepType) {
         // Update final value when related inputs change
         $fatigueDropdown.on('change', () => updateFinalValue($html));
         $modifierSelect.on('change', () => updateFinalValue($html));
+        $defNumberDropdown.on('change', () => updateFinalValue($html));
         $directedAtkDropdown.on('change', () => updateFinalValue($html));
         $modifierInput.on('input', () => updateFinalValue($html));
   
@@ -673,15 +763,45 @@ export async function openWeaponAtkDialogue(actor, label, wepId, wepType) {
                 'system.info.lastWepUsed': usedIndex,
                 'system.melee.throwQuantity': Math.floor(weapon.system.melee.throwQuantity - ammoUsed)
             });
-            if (wepType === "ranged") { 
+            if (wepType === "ranged" && actionType === "attack") { 
                 const ammoItem = actor.items.get(ammoIdUsed);
                 if (ammoItem) {
                     ammoItem.update({ 'system.quantity': Math.floor(ammoItem.system.quantity - RangedAmmoUsed) });
+                    if (weapon.system.ranged.magSize - RangedAmmoUsed <= 0) {
+                        weapon.update({ 'system.ranged.magSize': 0 });
+                        weapon.update({ 'system.ranged.readyToFire': false });
+
+                    } else {
+                        weapon.update({ 'system.ranged.magSize': weapon.system.ranged.magSize - RangedAmmoUsed });
+                    }
+                    
                 }
                 weapon.update({ 'system.ranged.selectedAmmo': ammoIdUsed });
+            }            
+            let armorContent = "";
+
+            if (profileType === "defensive") {
+                const selectedTag = $html.find('#armorDropdown').val();
+                let typesToShow = [];
+                if (selectedTag === 'showAll') {
+                    typesToShow = armorType.filter(t => t.tag !== 'showAll');
+                } else {
+                    typesToShow = armorType.filter(t => t.tag === selectedTag);
+                }
+                const namesRow = typesToShow.map(type => `<td><strong>${type.name}</strong></td>`).join("");
+                const valuesRow = typesToShow.map(type => `<td>${type.atValue}</td>`).join("");
+            
+                armorContent = `
+                    <table class="armorDisplay" style="text-align:center; width:100%">
+                        <tr>${namesRow}</tr>
+                        <tr>${valuesRow}</tr>
+                    </table>
+                `;
+
             }
+
             const attackDetails = {
-                label: game.i18n.localize("abfalter.attack"),
+                label: game.i18n.localize('abfalter.' + actionType),
                 name: attacks[usedIndex].name,
                 base: weapon.system.derived.baseAtk,
                 value: finalValue,
@@ -691,7 +811,10 @@ export async function openWeaponAtkDialogue(actor, label, wepId, wepType) {
                 atPen: parseInt($html.find('#atPenNum').text(), 10),
                 target: $html.find('#directedAtkDropdown').val(),
                 ammoName: ammoName,
-                wepType: wepType
+                chosenAt: armorContent,
+                wepType: wepType,
+                profileType: profileType,
+                actionType: actionType
             };
             weaponRoll(actor, weapon, attackDetails);
             console.log('Attack Handle Finished');
@@ -700,6 +823,11 @@ export async function openWeaponAtkDialogue(actor, label, wepId, wepType) {
     }).render(true);
 }
 
+/** Rolls the weapon attack and sends the result to chat.
+ * @param {Actor} actor - The actor using the weapon.
+ * @param {Object} weapon - The weapon being used.
+ * @param {Object} attackDetails - The details of the roll from OpenWeaponProfileDialogue.
+ */
 async function weaponRoll(actor, weapon, attackDetails) {
     let baseDice = "1d100";
     let rollFormula = `${baseDice} + ${attackDetails.value}`;
@@ -761,7 +889,9 @@ async function weaponRoll(actor, weapon, attackDetails) {
     ChatMessage.create(chatData);
 }
 
-export async function wepOpenRollFunction(msg) {
+/** Rolls the profile open roll and updates the result on chat msg.
+ */
+export async function profileOpenRollFunction(msg) {
     let actor = msg.flags.actor;
     let num = msg.flags.num;
     let oldData = msg.flags.rollData[msg.flags.num];
@@ -819,7 +949,9 @@ export async function wepOpenRollFunction(msg) {
     });
 }
 
-export async function wepFumbleRollFunction(msg) {
+/** Rolls the profile fumble roll and updates the result on chat msg.
+ */
+export async function profileFumbleRollFunction(msg) {
     let fumbleSettings = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_Fumble);
     let actor = msg.flags.actor;
     let num = msg.flags.num;
@@ -870,6 +1002,11 @@ export async function wepFumbleRollFunction(msg) {
     });
 }
 
+/** Opens the trap dialogue for melee weapons.
+ * @param {Actor} actor - The actor using the weapon.
+ * @param {string} label - The label for the dialogue.
+ * @param {string} wepId - The ID of the weapon being used.
+ */
 export async function openMeleeTrapDialogue(actor, label, wepId) {
     let confirmed = false;
     const weapon = actor.items.get(wepId);
@@ -979,6 +1116,10 @@ export async function openMeleeTrapDialogue(actor, label, wepId) {
     return;
 }
 
+/** Rolls the trap and sends the result to chat.
+ * @param {Actor} actor - The actor using the weapon.
+ * @param {Object} trapDetails - The details of the trap from openMeleeTrapDialogue.
+ */
 async function trapRoll(actor, trapDetails) {
     let baseDice = "1d10";
     let rollFormula = (trapDetails.type === true) ? `${trapDetails.value}` : `${baseDice} + ${trapDetails.value}`;
@@ -1022,12 +1163,19 @@ async function trapRoll(actor, trapDetails) {
     ChatMessage.create(chatData);
 }
 
+/** Opens the break dialogue for melee weapons.
+ * @param {Actor} actor - The actor using the weapon.
+ * @param {string} label - The label for the dialogue.
+ * @param {string} wepId - The ID of the weapon being used.
+ * @param {string} wepType - The type of the weapon (melee or ranged).
+ */
 export async function openMeleeBreakDialogue(actor, label, wepId, wepType) {
     const weapon = actor.items.get(wepId);
     const attacks = weapon.system.attacks;
 
     if (!attacks.length) {
-        ui.notifications.error(game.i18n.localize("abfalter.noAttacksFound"));
+        console.log("Error: No Profiles Found, please create a profile for this weapon.");
+        ui.notifications.error(game.i18n.localize("abfalter.noProfilesfound"));
         return;
     }
 
@@ -1157,6 +1305,10 @@ export async function openMeleeBreakDialogue(actor, label, wepId, wepType) {
     }).render(true);
 }
 
+/** Rolls the break and sends the result to chat.
+ * @param {Actor} actor - The actor using the weapon.
+ * @param {Object} breakDetails - The details of the break from openMeleeBreakDialogue.
+ */
 async function breakRoll(actor, breakDetails) {
     let baseDice = "1d10";
     let rollFormula = `${baseDice} + ${breakDetails.value}`;
@@ -1200,6 +1352,3 @@ async function breakRoll(actor, breakDetails) {
     ChatMessage.create(chatData);
 }
 
-export async function openWeaponDefDialogue(actor, label, wepId) {
-  
-}

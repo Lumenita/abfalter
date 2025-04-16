@@ -13,6 +13,7 @@ import { handleMigrations } from "./utilities/migration.js";
 import { handleChangelog } from "./utilities/changelog.js";
 import { abfalterSettingsKeys } from "./utilities/abfalterSettings.js";
 import abfalterEffectConfig from "./helpers/abfalterEffectConfig.js";
+import * as dice from "./diceroller.js";
 
 Hooks.once("init", async () => {
     console.log("abfalter | Initializing Anima Beyond Fantasy Alter System");
@@ -25,11 +26,22 @@ Hooks.once("init", async () => {
     CONFIG.ActiveEffect.legacyTransferral = false;
     abfalterSettings();
 
+    game.abfalter = game.abfalter || {};
+    //Exposing all roll functions to the game object
+    game.abfalter.openWeaponProfileDialogue = dice.openWeaponProfileDialogue;
+    game.abfalter.profileOpenRollFunction = dice.profileOpenRollFunction;
+    game.abfalter.profileFumbleRollFunction = dice.profileFumbleRollFunction;
+    game.abfalter.openMeleeTrapDialogue = dice.openMeleeTrapDialogue;
+    game.abfalter.openMeleeBreakDialogue = dice.openMeleeBreakDialogue;
+    game.abfalter.rollResistance = dice.rollResistance;
+    game.abfalter.rollCharacteristic = dice.rollCharacteristic;
+
     // Register data models
     CONFIG.Actor.dataModels.character = actorDataModel;
     CONFIG.Item.dataModels.weapon = weaponDataModel;
     CONFIG.Item.dataModels.ammo = ammoDataModel;
     CONFIG.Item.dataModels.class = classDataModel;
+    CONFIG.Item.dataModels.armor = armorDataModel;
 
     CONFIG.time.roundTime = 6;
 
@@ -47,6 +59,7 @@ Hooks.on("renderChatMessage", (_app, html, _msg) => {
     Chat.hideChatActionButtons(_app, html, _msg);
 });
 
+//Custom Macro Bar
 Hooks.once('ready', () => {
     registerCustomMacros();
     customMacroBar();
@@ -73,6 +86,10 @@ Hooks.once("ready", function () {
 Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
+Handlebars.registerHelper('ifIn', function (val, list, options) {
+    if (list.includes(val)) return options.fn(this);
+    return options.inverse(this);
+  });
 Handlebars.registerHelper('getDistanceType', function (arg1) {
     const metric = game.settings.get('abfalter', abfalterSettingsKeys.Use_Meters);
 
@@ -91,12 +108,46 @@ Hooks.once('setup', function () {
     abfalterEffectConfig.initializeChangeKeys();
 })
 
-//@TODO
+//Active effects
 Hooks.on('createActiveEffect', async (activeEffect, _, userId) => {
+    if (game.user.id !== userId) return;
     let activeType = "attack";
     const arr = [{ activeType }];
     await activeEffect.setFlag('abfalter', 'data.changes', arr);
 })
+
+Hooks.on('updateItem', async (item, _updateData, _options, userId) => { // Automatically activate/deactivate effects when item is equipped/unequipped
+    if (game.user.id !== userId) return;
+
+    const isEquipped = foundry.utils.getProperty(_updateData, "system.equipped");
+    if (isEquipped === undefined) return;
+
+    if (isEquipped) {
+        activateItemEffects(item);
+    } else {
+        deactivateItemEffects(item);
+    }
+});
+
+async function activateItemEffects(item) {
+    const actor = item.actor;
+    const effects = item.effects.contents;
+
+    for (let effect of effects) {
+        if (!effect.disabled) continue; // Ignore already active effects
+        await effect.update({ disabled: false });
+    }
+}
+
+async function deactivateItemEffects(item) {
+    const actor = item.actor;
+    const effects = item.effects.contents;
+
+    for (let effect of effects) {
+        if (effect.disabled) continue; // Ignore already inactive effects
+        await effect.update({ disabled: true });
+    }
+}
 
 /**
  * Data Models from here on 
@@ -738,7 +789,11 @@ class actorDataModel extends foundry.abstract.DataModel {
             }),
             other: new foundry.data.fields.SchemaField({
                 innateSlots: makeIntField(),
-                status: makeBoolField()
+                status: makeBoolField(),
+                accuZeonBar: new foundry.data.fields.SchemaField({
+                    value: makeIntField(),
+                    max: makeIntField()
+                })
             }),
             //@OLD Deprecated since 1.4.2
             secondary: new foundry.data.fields.SchemaField({
@@ -902,7 +957,8 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 vorpalLocation: makeStringField("anywhere"),
                 vorpalMod: makeIntField(),
                 weaponClass: makeStringField(),
-                lastWepUsed: makeIntField()
+                lastWepUsed: makeIntField(),
+                lastDefUsed: makeIntField()
             }),
             rarity: makeStringField(),
             quality: makeIntField(),
@@ -947,7 +1003,7 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 reloadTag: makeStringField("none"),
                 fired: makeBoolField(true),
                 range: makeIntField(),
-                rangeType: makeStringField("short"),
+                rangeType: makeStringField("small"),
                 ammoDmgMod: makeIntField(),
                 ammoBreakMod: makeIntField(),
                 ammoAtPenMod: makeIntField(),
@@ -957,14 +1013,23 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 specialBreak: makeIntField(),
                 specialAtPen: makeIntField(),
                 specialDmgType: makeStringField("THR"),
-                readyToFire: makeBoolField()
+                readyToFire: makeBoolField(),
+                magSize: makeIntField(),
+                magSizeMax: makeIntField(1),
+                showStrFields: makeBoolField(),
+                strField: makeIntField(),
+                strOverride: makeBoolField(),
+                strOverrideValue: makeIntField(),
+                reloadTimeFinal: makeIntField(),    
+
             }),
             shield: new foundry.data.fields.SchemaField({
-                type: makeStringField("none"),
-                hasAttack: makeBoolField()
+                type: makeStringField("shieldBuckler")
             }),
             attacks: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
                 expand: makeBoolField(true),
+                profileType: makeStringField("both"),
+                wepType: makeStringField("melee"),
                 name: makeStringField(),
                 attack: makeIntField(),
                 finalAttack: makeIntField(),
@@ -980,7 +1045,7 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 finalDamage: makeIntField(),                
                 ignoreThrown: makeBoolField(),
                 fired: makeBoolField(),
-                rateOfFire: makeIntField(), //new
+                rateOfFire: makeIntField(),
                 rangedAmmoConsumed: makeBoolField(true),
                 rangedAmmoConsumedValue: makeIntField(1),
                 quantityConsumed: makeBoolField(),
@@ -993,7 +1058,11 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 parentPrecision: makeBoolField(),
                 parentVorpal: makeBoolField(),
                 parentTrapping: makeBoolField(),
-                parentThrowable: makeBoolField()
+                parentThrowable: makeBoolField(),
+                atkOverride: makeBoolField(),
+                blkOverride: makeBoolField(),
+                dodOverride: makeBoolField(),
+                dmgOverride: makeBoolField()
             })),
             equipped: makeBoolField(),
             expand: makeBoolField()
@@ -1098,106 +1167,106 @@ class classDataModel extends foundry.abstract.DataModel {
             }),
             dpCost: new foundry.data.fields.SchemaField({
                 limits: new foundry.data.fields.SchemaField({
-                    primary: makeIntField(50),
-                    supernatural: makeIntField(50),
-                    psychic: makeIntField(50)
+                    primary: makeLongIntField(50),
+                    supernatural: makeLongIntField(50),
+                    psychic: makeLongIntField(50)
                 }),
                 primary: new foundry.data.fields.SchemaField({
-                    attack: makeIntField(2),
-                    block: makeIntField(2),
-                    dodge: makeIntField(2),
-                    wearArmor: makeIntField(2),
-                    kiPoint: makeIntField(2),
-                    kiAccuMult: makeIntField(20),
+                    attack: makeLongIntField(2),
+                    block: makeLongIntField(2),
+                    dodge: makeLongIntField(2),
+                    wearArmor: makeLongIntField(2),
+                    kiPoint: makeLongIntField(2),
+                    kiAccuMult: makeLongIntField(20),
                 }),
                 supernatural: new foundry.data.fields.SchemaField({
-                    zeon: makeIntField(2),
-                    maMult: makeIntField(50),
-                    maRegen: makeIntField(25),
-                    magicProj: makeIntField(2),
-                    summon: makeIntField(2),
-                    control: makeIntField(2),
-                    bind: makeIntField(2),
-                    banish: makeIntField(2)
+                    zeon: makeLongIntField(2),
+                    maMult: makeLongIntField(50),
+                    maRegen: makeLongIntField(25),
+                    magicProj: makeLongIntField(2),
+                    summon: makeLongIntField(2),
+                    control: makeLongIntField(2),
+                    bind: makeLongIntField(2),
+                    banish: makeLongIntField(2)
                 }),
                 psychic: new foundry.data.fields.SchemaField({
-                    psyPoint: makeIntField(10),
-                    psyProj: makeIntField(2)
+                    psyPoint: makeLongIntField(10),
+                    psyProj: makeLongIntField(2)
                 }),
                 other: new foundry.data.fields.SchemaField({
-                    lpMult: makeIntField(20)
+                    lpMult: makeLongIntField(20)
                 }),
                 fields: new foundry.data.fields.SchemaField({
-                    athletics: makeIntField(2),
+                    athletics: makeLongIntField(2),
                     athleticsToggle: makeBoolField(true),
-                    social: makeIntField(2),
+                    social: makeLongIntField(2),
                     socialToggle: makeBoolField(true),
-                    perceptive: makeIntField(2),
+                    perceptive: makeLongIntField(2),
                     perceptiveToggle: makeBoolField(true),
-                    intellectual: makeIntField(2),
+                    intellectual: makeLongIntField(2),
                     intellectualToggle: makeBoolField(true),
-                    vigor: makeIntField(2),
+                    vigor: makeLongIntField(2),
                     vigorToggle: makeBoolField(true),
-                    subterfuge: makeIntField(2),
+                    subterfuge: makeLongIntField(2),
                     subterfugeToggle: makeBoolField(true),
-                    creative: makeIntField(2),
+                    creative: makeLongIntField(2),
                     creativeToggle: makeBoolField(true)
                 }),
                 subject: new foundry.data.fields.SchemaField({
-                    acro: makeIntField(2),
-                    athleticism: makeIntField(2),
-                    climb: makeIntField(2),
-                    jump: makeIntField(2),
-                    piloting: makeIntField(2),
-                    ride: makeIntField(2),
-                    swim: makeIntField(2),
-                    etiquette: makeIntField(2),
-                    intimidate: makeIntField(2),
-                    leadership: makeIntField(2),
-                    persuasion: makeIntField(2),
-                    streetwise: makeIntField(2),
-                    style: makeIntField(2),
-                    trading: makeIntField(2),
-                    notice: makeIntField(2),
-                    search: makeIntField(2),
-                    track: makeIntField(2),
-                    animals: makeIntField(2),
-                    appraisal: makeIntField(2),
-                    architecture: makeIntField(2),
-                    herballore: makeIntField(2),
-                    history: makeIntField(2),
-                    law: makeIntField(2),
-                    magicappr: makeIntField(2),
-                    medicine: makeIntField(2),
-                    memorize: makeIntField(2),
-                    navigation: makeIntField(2),
-                    occult: makeIntField(2),
-                    science: makeIntField(2),
-                    tactics: makeIntField(2),
-                    technomagic: makeIntField(2),
-                    composure: makeIntField(2),
-                    featsofstr: makeIntField(2),
-                    withstpain: makeIntField(2),
-                    disguise: makeIntField(2),
-                    hide: makeIntField(2),
-                    lockpicking: makeIntField(2),
-                    poisons: makeIntField(2),
-                    stealth: makeIntField(2),
-                    theft: makeIntField(2),
-                    traplore: makeIntField(2),
-                    alchemy: makeIntField(2),
-                    animism: makeIntField(2),
-                    art: makeIntField(2),
-                    cooking: makeIntField(2),
-                    dance: makeIntField(2),
-                    forging: makeIntField(2),
-                    jewelry: makeIntField(2),
-                    toymaking: makeIntField(2),
-                    music: makeIntField(2),
-                    runes: makeIntField(2),
-                    ritualcalig: makeIntField(2),
-                    slofhand: makeIntField(2),
-                    tailoring: makeIntField(2)
+                    acro: makeLongIntField(2),
+                    athleticism: makeLongIntField(2),
+                    climb: makeLongIntField(2),
+                    jump: makeLongIntField(2),
+                    piloting: makeLongIntField(2),
+                    ride: makeLongIntField(2),
+                    swim: makeLongIntField(2),
+                    etiquette: makeLongIntField(2),
+                    intimidate: makeLongIntField(2),
+                    leadership: makeLongIntField(2),
+                    persuasion: makeLongIntField(2),
+                    streetwise: makeLongIntField(2),
+                    style: makeLongIntField(2),
+                    trading: makeLongIntField(2),
+                    notice: makeLongIntField(2),
+                    search: makeLongIntField(2),
+                    track: makeLongIntField(2),
+                    animals: makeLongIntField(2),
+                    appraisal: makeLongIntField(2),
+                    architecture: makeLongIntField(2),
+                    herballore: makeLongIntField(2),
+                    history: makeLongIntField(2),
+                    law: makeLongIntField(2),
+                    magicappr: makeLongIntField(2),
+                    medicine: makeLongIntField(2),
+                    memorize: makeLongIntField(2),
+                    navigation: makeLongIntField(2),
+                    occult: makeLongIntField(2),
+                    science: makeLongIntField(2),
+                    tactics: makeLongIntField(2),
+                    technomagic: makeLongIntField(2),
+                    composure: makeLongIntField(2),
+                    featsofstr: makeLongIntField(2),
+                    withstpain: makeLongIntField(2),
+                    disguise: makeLongIntField(2),
+                    hide: makeLongIntField(2),
+                    lockpicking: makeLongIntField(2),
+                    poisons: makeLongIntField(2),
+                    stealth: makeLongIntField(2),
+                    theft: makeLongIntField(2),
+                    traplore: makeLongIntField(2),
+                    alchemy: makeLongIntField(2),
+                    animism: makeLongIntField(2),
+                    art: makeLongIntField(2),
+                    cooking: makeLongIntField(2),
+                    dance: makeLongIntField(2),
+                    forging: makeLongIntField(2),
+                    jewelry: makeLongIntField(2),
+                    toymaking: makeLongIntField(2),
+                    music: makeLongIntField(2),
+                    runes: makeLongIntField(2),
+                    ritualcalig: makeLongIntField(2),
+                    slofhand: makeLongIntField(2),
+                    tailoring: makeLongIntField(2)
                 })
             })
         }
@@ -1209,6 +1278,83 @@ class classDataModel extends foundry.abstract.DataModel {
 
     get type() {
         return 'class'
+    }
+}
+
+class armorDataModel extends foundry.abstract.DataModel {
+    static defineSchema() {
+        return {
+            description: makeHtmlField(),
+            equipped: makeBoolField(),
+            ignorePenalty: makeBoolField(),
+            ignoreLayerRules: makeBoolField(),
+            spiritHomebrew: makeBoolField(),
+            armorType: makeStringField("armor"),
+            layerType: makeStringField("soft"),
+            quantity: makeIntField(1),
+            quality: makeIntField(),
+            presence: makeIntField(),
+            fortitude: makeIntField(),
+            requirement: makeIntField(),
+            natPenalty: makeIntField(),
+            movePenalty: makeIntField(),
+            AT: new foundry.data.fields.SchemaField({
+                cut: makeIntField(),
+                imp: makeIntField(),
+                thr: makeIntField(),
+                heat: makeIntField(),
+                cold: makeIntField(),
+                ele: makeIntField(),
+                ene: makeIntField(),
+                spt: makeIntField()
+            }),
+            derived: new foundry.data.fields.SchemaField({
+                presence: makeIntField(),
+                fortitude: makeIntField(),
+                requirement: makeIntField(),
+                natPenalty: makeIntField(),
+                movePenalty: makeIntField(),
+                cut: makeIntField(),
+                imp: makeIntField(),
+                thr: makeIntField(),
+                heat: makeIntField(),
+                cold: makeIntField(),
+                ele: makeIntField(),
+                ene: makeIntField(),
+                spt: makeIntField()
+            })
+        }
+    }
+
+    static migrateData(source) {
+        return super.migrateData(source);
+    }
+
+    get type() {
+        return 'armor'
+    }
+}
+
+class elanDataModel extends foundry.abstract.DataModel { 
+    static defineSchema() {
+        return {
+            description: makeHtmlField(),
+            expand: makeBoolField(),
+            upper: makeBoolField(), //Show above 50 Elan gain on true
+            title: makeStringField(), 
+            gain: makeStringField(), //how to gain elan below 50
+            gainUpper: makeStringField(), //how to gain elan above 50
+            lose: makeStringField(), //ways to lose elan
+            level: makeIntField(),
+            gifts: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
+                name: makeStringField(),
+                req: makeIntField(),
+                cost: makeIntField(),
+                desc: makeStringField(),
+                expand: makeBoolField(),
+                bought: makeBoolField()
+            })),
+        }
     }
 }
 

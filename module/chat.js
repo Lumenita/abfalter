@@ -5,13 +5,13 @@ export function addChatListeners(html, _msg) {
         diceFunctions.openRollFunction(_msg.message);
     });
     html.find('button.wepOpenRoll').click(ev => {
-        diceFunctions.wepOpenRollFunction(_msg.message);
+        diceFunctions.profileOpenRollFunction(_msg.message);
     });
     html.find('button.secFumbleRoll').click(ev => {
         diceFunctions.fumbleRollFunction(_msg.message);
     });
     html.find('button.wepFumbleRoll').click(ev => {
-        diceFunctions.wepFumbleRollFunction(_msg.message);
+        diceFunctions.profileFumbleRollFunction(_msg.message);
     });
 
     //Items to Chat

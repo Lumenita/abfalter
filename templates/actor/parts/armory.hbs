@@ -85,10 +85,10 @@
                         <a class="item-control item-chat"><i class="fas fa-comment-dots"></i></a>
                         <span> {{armor.name}} </span>
                         <span> {{system.quality}} </span>
-                        <span> {{system.newPresence}} </span>
-                        <span> {{system.newFortitude}} </span>
-                        <span> {{system.newRequirement}} </span>
-                        <span> {{system.newMovePenalty}} / {{system.newNatPenalty}} </span>
+                        <span> {{system.derived.presence}} </span>
+                        <span> {{system.derived.fortitude}} </span>
+                        <span> {{system.derived.requirement}} </span>
+                        <span> {{system.derived.movePenalty}} / {{system.derived.natPenalty}} </span>
                     </div>
                 </div>
                 {{/each}}
@@ -130,15 +130,15 @@
                 <div class="armor-item2 item equip-item" data-item-id="{{armor._id}}">
                     <div class="{{#if system.equipped}}equipped{{else}}notEquipped{{/if}}">
                         <span> {{armor.name}} </span>
-                        <span> {{system.AT.newCut}} </span>
-                        <span> {{system.AT.newImp}} </span>
-                        <span> {{system.AT.newThr}} </span>
-                        <span> {{system.AT.newHeat}} </span>
-                        <span> {{system.AT.newCold}} </span>
-                        <span> {{system.AT.newEle}} </span>
-                        <span> {{system.AT.newEne}} </span>
+                        <span> {{system.derived.cut}} </span>
+                        <span> {{system.derived.imp}} </span>
+                        <span> {{system.derived.thr}} </span>
+                        <span> {{system.derived.heat}} </span>
+                        <span> {{system.derived.cold}} </span>
+                        <span> {{system.derived.ele}} </span>
+                        <span> {{system.derived.ene}} </span>
                         {{#if system.spiritHomebrew}}
-                        <span> {{system.AT.newSpt}} </span>
+                        <span> {{system.derived.spt}} </span>
                         {{/if}}
                     </div>
                 </div>
@@ -203,8 +203,8 @@
                                 </label>
                                 {{/ifEquals}}
                                 {{#ifEquals system.info.type "shield"}}
-                                <span> WIP </span>
-                                <span> WIP </span>
+                                <span>  </span>
+                                <span>  </span>
                                 {{/ifEquals}}
                                 <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i
                                         class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
@@ -221,11 +221,11 @@
                                         {{localize "abfalter.attack"}}: {{system.derived.baseAtk}}
                                     </button>
                                     {{/ifEquals}}
-                                    <button type="button" class="combatRoll" data-roll="{{system.derived.baseBlk}}" data-label="{{localize "abfalter.block"}}" data-type="weaponCombatRoll" data-ability="{{system.complex}}">
+                                    <button type="button" class="weaponRoll" data-label="block" data-id="{{_id}}" data-type="{{system.info.type}}" data-value="weaponDef">
                                         {{localize "abfalter.block"}}: {{system.derived.baseBlk}}
                                     </button>
                     
-                                    <button type="button" class="combatRoll" data-roll="{{system.derived.baseDod}}" data-label="{{localize "abfalter.dodge"}}" data-type="weaponCombatRoll" data-ability="{{system.complex}}">
+                                    <button type="button" class="weaponRoll" data-label="dodge" data-id="{{_id}}" data-type="{{system.info.type}}" data-value="weaponDod">
                                         {{localize "abfalter.dodge"}}: {{system.derived.baseDod}}
                                     </button>
                                 </div>
@@ -236,8 +236,8 @@
                                 </button>
                                 {{/ifEquals}}
                                 {{#ifEquals system.info.type "ranged"}}
-                                <button type="button" class="item-toggle {{#if system.ranged.readyToFire}}kiBought{{/if}} atkCustomTitleContainer" 
-                                    data-label="system.ranged.readyToFire" data-ability="{{system.ranged.readyToFire}}">
+                                <button type="button" class="ammoItem-toggle {{#if system.ranged.readyToFire}}kiBought{{/if}} atkCustomTitleContainer" 
+                                    data-label="system.ranged.readyToFire" data-ability="{{system.ranged.readyToFire}}" data-value="{{system.ranged.magSizeMax}}">
                                     {{#if system.ranged.readyToFire}} 
                                         {{localize "abfalter.rdyToFire"}}
                                     {{else}} 
@@ -250,7 +250,7 @@
                                 </button>
                                 {{/ifEquals}}
                                 {{#ifEquals system.info.type "shield"}}
-                                    <span> WIP </span>
+                                    <span> {{localize "abfalter.type"}}: {{localize (concat "abfalter." system.shield.type)}} </span>
                                 {{/ifEquals}}
                             </div>
                         </div>
@@ -279,6 +279,18 @@
                                 </button>
                             </div>  
                             {{/if}}
+                        </div>
+                    </div>
+                    {{/ifEquals}}
+
+                    {{#ifEquals system.info.type "ranged"}}
+                    <div class="weaponSubHeaderContainer">
+                        <div class="wepSubLeft">
+                            <span> {{localize "abfalter.reloadTime"}}: {{system.ranged.reloadTimeFinal}} </span>
+                        </div>
+
+                        <div class="wepSubRight">
+                            <span> {{system.ranged.magSize}} / {{system.ranged.magSizeMax}} {{localize "abfalter.currentLoaded"}} </span>
                         </div>
                     </div>
                     {{/ifEquals}}
