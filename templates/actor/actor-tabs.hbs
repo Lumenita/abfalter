@@ -1,0 +1,54 @@
+<nav class="sheet-tabs tabs navTabsYes" data-group="primary">
+    <ul>
+        <li>
+            <a class="item {{tabs.general.cssClass}}" data-action="tab" data-tab="{{tabs.general.id}}" data-group="primary">
+                <span>{{localize "abfalter.general"}}</span>
+                </a>
+        </li>
+        <li class="{{#if system.toggles.backgroundTab}}hidden{{/if}}">
+            <a class="item {{tabs.background.cssClass}}" data-action="tab" data-tab="{{tabs.background.id}}" data-group="primary">
+                <span>{{localize "abfalter.background"}}</span>
+            </a>
+        </li>
+        <li class="{{#if system.toggles.monsterTab}}hidden{{/if}}">
+            <a class="item {{tabs.monster.cssClass}}" data-action="tab" data-tab="{{tabs.monster.id}}" data-group="primary">
+                <span>{{localize "abfalter.monster"}}</span>
+            </a>
+        </li>
+        <li class="{{#if system.toggles.magicTab}}hidden{{/if}}">
+            <a class="item {{tabs.magic.cssClass}}" data-action="tab" data-tab="{{tabs.magic.id}}" data-group="primary">
+                <span>{{localize "abfalter.magic"}}</span>
+            </a>
+        </li>
+        <li class="{{#if system.toggles.psychicTab}}hidden{{/if}}">
+            <a class="item {{tabs.psychic.cssClass}}" data-action="tab" data-tab="{{tabs.psychic.id}}" data-group="primary">
+                <span>{{localize "abfalter.psychic"}}</span>
+            </a>
+        </li>
+        <li class="{{#if system.toggles.kiTab}}hidden{{/if}}">
+            <a class="item {{tabs.ki.cssClass}}" data-action="tab" data-tab="{{tabs.ki.id}}" data-group="primary">
+                <span>{{localize "abfalter.ki"}}</span>
+            </a>
+        </li>
+        <li>
+            <a class="item {{tabs.armory.cssClass}}" data-action="tab" data-tab="{{tabs.armory.id}}" data-group="primary">
+                <span>{{localize "abfalter.armory"}}</span>
+            </a>
+        </li>
+        <li class="{{#if system.toggles.effectTab}}hidden{{/if}}">
+            <a class="item {{tabs.effect.cssClass}}" data-action="tab" data-tab="{{tabs.effect.id}}" data-group="primary">
+                <span>{{localize "abfalter.effects"}}</span>
+            </a>
+        </li>
+        <li class="{{#if system.toggles.bioTab}}hidden{{/if}}">
+            <a class="item {{tabs.bio.cssClass}}" data-action="tab" data-tab="{{tabs.bio.id}}" data-group="primary">
+                <span>{{localize "abfalter.bio"}}</span>
+            </a>
+        </li>
+        <li>
+            <a class="item {{tabs.settings.cssClass}}" data-action="tab" data-tab="{{tabs.settings.id}}" data-group="primary">
+                <span>{{localize "abfalter.settings"}}</span>
+            </a>
+        </li>    
+    </ul>
+</nav>

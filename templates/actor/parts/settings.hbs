@@ -1,523 +1,635 @@
-﻿<div class="tab settings">
-
-    <div class="settingsOptions">
-        <div class="settingsSubsection">
-            <h5> {{localize "abfalter.settingsTab.mysticSettings"}} </h5>
-            <div>
-                <span> {{localize "abfalter.settingsTab.magicAttackModule"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.magicAtkModule}}kiBought{{/if}}"
+﻿<section class="tab {{tabs.settings.cssClass}} actorPage settingsPage" data-group="{{tabs.settings.group}}"
+    data-tab="{{tabs.settings.id}}">
+    <div class="fieldsetContainer">
+        <div class="fieldSetRow settingsOptions">
+            <fieldset class="settingsSubsection">
+                <legend> {{localize "abfalter.settingsTab.mysticSettings"}} </legend>
+                <div>
+                    <span> {{localize "abfalter.settingsTab.magicAttackModule"}} </span>
+                    <button type="button" data-action="toggleValue" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.magicAtkModule}}kiBought{{/if}}"
                         data-label="system.toggles.magicAtkModule" data-ability="{{system.toggles.magicAtkModule}}">
-                    {{#if system.toggles.magicAtkModule}}
-                    <span> {{localize "abfalter.settingsTab.active"}} </span>
-                    {{else}}
-                <span> {{localize "abfalter.settingsTab.notActive"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            <div class="{{#if system.toggles.magicDodgeModule}}checkLock{{/if}}">
-                <span> {{localize "abfalter.settingsTab.magicDefenseModule"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.magicDefModule}}kiBought{{/if}}"
+                        {{#if system.toggles.magicAtkModule}}
+                        <span> {{localize "abfalter.settingsTab.active"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notActive"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.magicDodgeModule}}checkLock{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.magicDefenseModule"}} </span>
+                    <button type="button" data-action="toggleValue" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.magicDefModule}}kiBought{{/if}}"
                         data-label="system.toggles.magicDefModule" data-ability="{{system.toggles.magicDefModule}}">
-                    {{#if system.toggles.magicDefModule}}
-                    <span> {{localize "abfalter.settingsTab.active"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            {{#if system.toggles.magicDefModule}}
-            <div>
-                <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.magicDodgeModule"}}</span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.magicDodgeModule}}kiBought{{/if}}"
+                        {{#if system.toggles.magicDefModule}}
+                        <span> {{localize "abfalter.settingsTab.active"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notActive"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                {{#if system.toggles.magicDefModule}}
+                <div>
+                    <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.magicDodgeModule"}}</span>
+                    <button type="button" data-action="toggleValue" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.magicDodgeModule}}kiBought{{/if}}"
                         data-label="system.toggles.magicDodgeModule" data-ability="{{system.toggles.magicDodgeModule}}">
-                    {{#if system.toggles.magicDodgeModule}}
-                    <span> {{localize "abfalter.settingsTab.active"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            {{/if}}
-        </div>
+                        {{#if system.toggles.magicDodgeModule}}
+                        <span> {{localize "abfalter.settingsTab.active"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notActive"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                {{/if}}
+            </fieldset>
 
-        <div class="settingsSubsection">
-            <h5> {{localize "abfalter.settingsTab.kiSettings"}} </h5>
-            <div class="{{#if system.toggles.innatePower}}checkLock{{/if}}">
-                <span> {{localize "abfalter.settingsTab.unifiedKi"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.unifiedPools}}kiBought{{/if}}"
+            <fieldset class="settingsSubsection">
+                <legend> {{localize "abfalter.settingsTab.kiSettings"}} </legend>
+                <div class="{{#if system.toggles.innatePower}}checkLock{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.unifiedKi"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.unifiedPools}}kiBought{{/if}}"
                         data-label="system.toggles.unifiedPools" data-ability="{{system.toggles.unifiedPools}}">
-                    {{#if system.toggles.unifiedPools}}
-                    <span> {{localize "abfalter.settingsTab.active"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            {{#if system.toggles.unifiedPools}}
-            <div>
-                <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.innatePower"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.innatePower}}kiBought{{/if}}"
+                        {{#if system.toggles.unifiedPools}}
+                        <span> {{localize "abfalter.settingsTab.active"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notActive"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                {{#if system.toggles.unifiedPools}}
+                <div>
+                    <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.innatePower"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.innatePower}}kiBought{{/if}}"
                         data-label="system.toggles.innatePower" data-ability="{{system.toggles.innatePower}}">
-                    {{#if system.toggles.innatePower}}
-                    <span> {{localize "abfalter.settingsTab.active"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            {{/if}}
-            {{#if system.toggles.innatePower}}
-            <div class="innatePowerSetting">
-                <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.innateType"}} </span>
-                <div class="csSelect">
-                    <label>
-                        <select name="system.kiPool.innate.type">
-                            {{selectOptions InnatePowerObjList selected=system.kiPool.innate.type localize=true}}
-                        </select>
-                    </label>
+                        {{#if system.toggles.innatePower}}
+                        <span> {{localize "abfalter.settingsTab.active"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notActive"}} </span>
+                        {{/if}}
+                    </button>
                 </div>
-            </div>
-            {{/if}}
-            <div>
-                <span> {{localize "abfalter.settingsTab.dragonSeals"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.dragonSeals}}kiBought{{/if}}"
-                        data-label="system.toggles.dragonSeals" data-ability="{{system.toggles.dragonSeals}}">
-                    {{#if system.toggles.dragonSeals}}
-                    <span> {{localize "abfalter.settingsTab.active"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-        </div>
-
-        <div class="settingsSubsection">
-            <h5> {{localize "abfalter.settingsTab.psychicSettings"}} </h5>
-            <div class="{{#if system.toggles.psychicDodgeStatus}}checkLock{{/if}}">
-                <span> {{localize "abfalter.settingsTab.psyAttackModule"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.psychicModuleStatus}}kiBought{{/if}}"
-                        data-label="system.toggles.psychicModuleStatus" data-ability="{{system.toggles.psychicModuleStatus}}">
-                    {{#if system.toggles.psychicModuleStatus}}
-                    <span> {{localize "abfalter.settingsTab.active"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            {{#if system.toggles.psychicModuleStatus}}
-            <div>
-                <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.magicDodgeModule"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.psychicDodgeStatus}}kiBought{{/if}}"
-                        data-label="system.toggles.psychicDodgeStatus" data-ability="{{system.toggles.psychicDodgeStatus}}">
-                    {{#if system.toggles.psychicDodgeStatus}}
-                    <span> {{localize "abfalter.settingsTab.active"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            {{/if}}
-        </div>
-
-        <div class="settingsSubsection">
-            <h5> {{localize "abfalter.settingsTab.generalSettings"}} </h5>
-            <div>
-                <span> {{localize "abfalter.settingsTab.hideCurrency"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.currencyHide}}kiBought{{/if}}"
-                        data-label="system.toggles.currencyHide" data-ability="{{system.toggles.currencyHide}}">
-                    {{#if system.toggles.currencyHide}}
-                    <span> {{localize "abfalter.settingsTab.active"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-
-            <div>
-                <span> {{localize "abfalter.openDpCalc"}} </span>
-                <button type="button" class="openDpCostCalc">
-                    <span> {{localize "abfalter.settingsTab.open"}} </span>
-                </button>
-            </div>
-
-            <div>
-                <span> {{localize "abfalter.settingsTab.changeTemp"}} </span>
-                <button type="button" class="changeSecondaryNums" data-ability="temp">
-                    <span> {{localize "abfalter.settingsTab.open"}} </span>
-                </button>
-            </div>
-
-            <div>
-                <span> {{localize "abfalter.settingsTab.changeSpec"}} </span>
-                <button type="button" class="changeSecondaryNums" data-ability="spec">
-                    <span> {{localize "abfalter.settingsTab.open"}} </span>
-                </button>
-            </div>
-        </div>
-
-        <div class="settingsSubsection">
-            <h5> {{localize "abfalter.settingsTab.hidePageObjects"}} </h5>
-            <div></div>
-            <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.magicTheory"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.magicTheoryVis}}kiBought{{/if}}"
-                        data-label="system.toggles.magicTheoryVis" data-ability="{{system.toggles.magicTheoryVis}}">
-                    {{#if system.toggles.magicTheoryVis}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.innateMagic"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.innateMagicVis}}kiBought{{/if}}"
-                        data-label="system.toggles.innateMagicVis" data-ability="{{system.toggles.innateMagicVis}}">
-                    {{#if system.toggles.innateMagicVis}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.summoning"}}</span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.summoningVis}}kiBought{{/if}}"
-                        data-label="system.toggles.summoningVis" data-ability="{{system.toggles.summoningVis}}">
-                    {{#if system.toggles.summoningVis}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.invocation"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.invocationsVis}}kiBought{{/if}}"
-                        data-label="system.toggles.invocationsVis" data-ability="{{system.toggles.invocationsVis}}">
-                    {{#if system.toggles.invocationsVis}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.incarnation"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.incarnationsVis}}kiBought{{/if}}"
-                        data-label="system.toggles.incarnationsVis" data-ability="{{system.toggles.incarnationsVis}}">
-                    {{#if system.toggles.incarnationsVis}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.spellcasting"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.spellcastingVis}}kiBought{{/if}}"
-                        data-label="system.toggles.spellcastingVis" data-ability="{{system.toggles.spellcastingVis}}">
-                    {{#if system.toggles.spellcastingVis}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.turnMaint"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.turnMaintVis}}kiBought{{/if}}"
-                        data-label="system.toggles.turnMaintVis" data-ability="{{system.toggles.turnMaintVis}}">
-                    {{#if system.toggles.turnMaintVis}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-
-            <div class="{{#if system.toggles.psychicTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.mentalPattern"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.mentalPatternsvis}}kiBought{{/if}}"
-                        data-label="system.toggles.mentalPatternsvis" data-ability="{{system.toggles.mentalPatternsvis}}">
-                    {{#if system.toggles.mentalPatternsvis}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-
-            <div class="{{#if system.toggles.kiTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.arsMag"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.arsMagVis}}kiBought{{/if}}"
-                        data-label="system.toggles.arsMagVis" data-ability="{{system.toggles.arsMagVis}}">
-                    {{#if system.toggles.arsMagVis}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            <div class="{{#if system.toggles.kiTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.martialArt"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.maVis}}kiBought{{/if}}"
-                        data-label="system.toggles.maVis" data-ability="{{system.toggles.maVis}}">
-                    {{#if system.toggles.maVis}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            <div class="{{#if system.toggles.kiTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.unarmedDmg"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.unarmedVis}}kiBought{{/if}}"
-                        data-label="system.toggles.unarmedVis" data-ability="{{system.toggles.unarmedVis}}">
-                    {{#if system.toggles.unarmedVis}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            <div class="{{#if system.toggles.kiTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.nemesis"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.nemesisVis}}kiBought{{/if}}"
-                        data-label="system.toggles.nemesisVis" data-ability="{{system.toggles.nemesisVis}}">
-                    {{#if system.toggles.nemesisVis}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            <div class="{{#if system.toggles.kiTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.kiSeals"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.kiSealsVis}}kiBought{{/if}}"
-                        data-label="system.toggles.kiSealsVis" data-ability="{{system.toggles.kiSealsVis}}">
-                    {{#if system.toggles.kiSealsVis}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            <div class="{{#if system.toggles.kiTab}}hidden{{/if}}">
-                <span> {{localize "abfalter.settingsTab.kiTechniq"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.kiTech}}kiBought{{/if}}"
-                        data-label="system.toggles.kiTech" data-ability="{{system.toggles.kiTech}}">
-                    {{#if system.toggles.kiTech}}
-                    <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                    {{/if}}
-                </button>
-            </div>
-            <div></div>
-        </div>
-    </div>
-
-    <div class="settings2">
-        <div>
-            <div>
-                <div class="rollRange">
-                    <h5> {{localize "abfalter.settingsTab.openRoll"}} </h5>
-                    <div>
-                        <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.rollRange.base" value="{{system.rollRange.base}}" /> </label>
-                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.rollRange.spec" value="{{system.rollRange.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.rollRange.temp" value="{{system.rollRange.temp}}" /> </label>
+                {{/if}}
+                {{#if system.toggles.innatePower}}
+                <div class="innatePowerSetting">
+                    <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.innateType"}} </span>
+                    <div class="csSelect">
                         <label>
-                            <span> {{localize "abfalter.settingsTab.doubles"}} </span>
-                            <button type="button" class="toggleBoolean {{#if system.rollRange.doubles}}kiBought{{/if}}"
-                                    data-label="system.rollRange.doubles" data-ability="{{system.rollRange.doubles}}">
-                                {{#if system.rollRange.doubles}}
-                                <span> {{localize "abfalter.yes"}} </span>
-                                {{else}}
-                                <span> {{localize "abfalter.no"}} </span>
-                                {{/if}}
-                            </button>
-                        </label>
-                    </div>
-                    <div>
-                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.rollRange.final" value="{{system.rollRange.final}}" readonly /> </label>
-                    </div>
-                </div>
-
-                <div class="rollRange">
-                    <h5> {{localize "abfalter.settingsTab.fumbleRoll"}} </h5>
-                    <div>
-                        <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.fumleRange.base" value="{{system.fumleRange.base}}" /> </label>
-                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.fumleRange.spec" value="{{system.fumleRange.spec}}" /> </label>
-                        <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.fumleRange.temp" value="{{system.fumleRange.temp}}" /> </label>
-                    </div>
-                    <div>
-                        <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.fumleRange.final" value="{{system.fumleRange.final}}" readonly /> </label>
-                    </div>
-                </div>
-
-                <!--
-                <div class="rollOptions">
-                    <h5>Roll Option</h5>
-                    <div>
-                        <label>
-                            <span> Voice </span>
-                            <select name="system.actorVoice">
-                                
-                                <option value="false"> {{localize "abfalter.no"}} </option>
-                                <option value="true"> {{localize "abfalter.yes"}} </option>
-                                
+                            <select name="system.kiPool.innate.type">
+                                {{selectOptions InnatePowerObjList selected=system.kiPool.innate.type localize=true}}
                             </select>
                         </label>
                     </div>
                 </div>
-                -->
-            </div>
-
-
-
-            <div class="charOptions">
-                <h5> {{localize "abfalter.settingsTab.charOptions"}} </h5>
+                {{/if}}
                 <div>
-                    <label> <span> {{localize "abfalter.settingsTab.levelMod"}} </span> <input type="number" name="system.levelinfo.levelmod" value="{{system.levelinfo.levelmod}}" /> </label>
-                    <label> <span> {{localize "abfalter.settingsTab.presenceMod"}} </span> <input type="number" name="system.levelinfo.presencemod" value="{{system.levelinfo.presencemod}}" /> </label>
-                    <label> <span> {{localize "abfalter.settingsTab.dpMod"}} </span> <input type="number" name="system.levelinfo.dpmod" value="{{system.levelinfo.dpmod}}" /> </label>
-                    <div>
-                        <span> {{localize "abfalter.settingsTab.hideBack"}} </span>
-                        <button type="button" class="toggleBoolean {{#if system.toggles.backgroundTab}}kiBought{{/if}}"
-                                data-label="system.toggles.backgroundTab" data-ability="{{system.toggles.backgroundTab}}">
-                            {{#if system.toggles.backgroundTab}}
-                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                            {{else}}
-                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                            {{/if}}
-                        </button>
+                    <span> {{localize "abfalter.settingsTab.dragonSeals"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.dragonSeals}}kiBought{{/if}}"
+                        data-label="system.toggles.dragonSeals" data-ability="{{system.toggles.dragonSeals}}">
+                        {{#if system.toggles.dragonSeals}}
+                        <span> {{localize "abfalter.settingsTab.active"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notActive"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+            </fieldset>
+
+            <fieldset class="settingsSubsection">
+                <legend> {{localize "abfalter.settingsTab.psychicSettings"}} </legend>
+                <div class="{{#if system.toggles.psychicDodgeStatus}}checkLock{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.psyAttackModule"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.psychicModuleStatus}}kiBought{{/if}}"
+                        data-label="system.toggles.psychicModuleStatus"
+                        data-ability="{{system.toggles.psychicModuleStatus}}">
+                        {{#if system.toggles.psychicModuleStatus}}
+                        <span> {{localize "abfalter.settingsTab.active"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notActive"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                {{#if system.toggles.psychicModuleStatus}}
+                <div>
+                    <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.magicDodgeModule"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.psychicDodgeStatus}}kiBought{{/if}}"
+                        data-label="system.toggles.psychicDodgeStatus"
+                        data-ability="{{system.toggles.psychicDodgeStatus}}">
+                        {{#if system.toggles.psychicDodgeStatus}}
+                        <span> {{localize "abfalter.settingsTab.active"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notActive"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                {{/if}}
+            </fieldset>
+
+            <fieldset class="settingsSubsection">
+                <legend> {{localize "abfalter.settingsTab.generalSettings"}} </legend>
+                <div>
+                    <span> {{localize "abfalter.settingsTab.hideCurrency"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.currencyHide}}kiBought{{/if}}"
+                        data-label="system.toggles.currencyHide" data-ability="{{system.toggles.currencyHide}}">
+                        {{#if system.toggles.currencyHide}}
+                        <span> {{localize "abfalter.settingsTab.active"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notActive"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+
+                <div>
+                    <span> {{localize "abfalter.openDpCalc"}} </span>
+                    <button type="button" data-action="openDPCalc">
+                        <span> {{localize "abfalter.settingsTab.open"}} </span>
+                    </button>
+                </div>
+
+                <div>
+                    <span> {{localize "abfalter.settingsTab.changeTemp"}} </span>
+                    <button type="button" data-action="changeSecNums" data-ability="temp">
+                        <span> {{localize "abfalter.settingsTab.open"}} </span>
+                    </button>
+                </div>
+
+                <div>
+                    <span> {{localize "abfalter.settingsTab.changeSpec"}} </span>
+                    <button type="button" data-action="changeSecNums" data-ability="spec">
+                        <span> {{localize "abfalter.settingsTab.open"}} </span>
+                    </button>
+                </div>
+            </fieldset>
+
+            <fieldset class="settingsSubsection">
+                <legend> {{localize "abfalter.settingsTab.hidePageObjects"}} </legend>
+                <div></div>
+                <div class="{{#if system.toggles.backgroundTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.mentalHealth"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.mentalHealthStatus}}kiBought{{/if}}"
+                        data-label="system.toggles.mentalHealthStatus" data-ability="{{system.toggles.mentalHealthStatus}}">
+                        {{#if system.toggles.mentalHealthStatus}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.backgroundTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.backgroundElan"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.elanStatus}}kiBought{{/if}}"
+                        data-label="system.toggles.elanStatus" data-ability="{{system.toggles.elanStatus}}">
+                        {{#if system.toggles.elanStatus}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.backgroundTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.backgroundBloodBond"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.bloodBondsStatus}}kiBought{{/if}}"
+                        data-label="system.toggles.bloodBondsStatus" data-ability="{{system.toggles.bloodBondsStatus}}">
+                        {{#if system.toggles.bloodBondsStatus}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.backgroundTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.backgroundRaceRoots"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.raceRootsStatus}}kiBought{{/if}}"
+                        data-label="system.toggles.raceRootsStatus" data-ability="{{system.toggles.raceRootsStatus}}">
+                        {{#if system.toggles.raceRootsStatus}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.magicTheory"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.magicTheoryVis}}kiBought{{/if}}"
+                        data-label="system.toggles.magicTheoryVis" data-ability="{{system.toggles.magicTheoryVis}}">
+                        {{#if system.toggles.magicTheoryVis}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.innateMagic"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.innateMagicVis}}kiBought{{/if}}"
+                        data-label="system.toggles.innateMagicVis" data-ability="{{system.toggles.innateMagicVis}}">
+                        {{#if system.toggles.innateMagicVis}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.summoning"}}</span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.summoningVis}}kiBought{{/if}}"
+                        data-label="system.toggles.summoningVis" data-ability="{{system.toggles.summoningVis}}">
+                        {{#if system.toggles.summoningVis}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.invocation"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.invocationsVis}}kiBought{{/if}}"
+                        data-label="system.toggles.invocationsVis" data-ability="{{system.toggles.invocationsVis}}">
+                        {{#if system.toggles.invocationsVis}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.incarnation"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.incarnationsVis}}kiBought{{/if}}"
+                        data-label="system.toggles.incarnationsVis" data-ability="{{system.toggles.incarnationsVis}}">
+                        {{#if system.toggles.incarnationsVis}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.spellcasting"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.spellcastingVis}}kiBought{{/if}}"
+                        data-label="system.toggles.spellcastingVis" data-ability="{{system.toggles.spellcastingVis}}">
+                        {{#if system.toggles.spellcastingVis}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.magicTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.turnMaint"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.turnMaintVis}}kiBought{{/if}}"
+                        data-label="system.toggles.turnMaintVis" data-ability="{{system.toggles.turnMaintVis}}">
+                        {{#if system.toggles.turnMaintVis}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+
+                <div class="{{#if system.toggles.psychicTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.mentalPattern"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.mentalPatternsvis}}kiBought{{/if}}"
+                        data-label="system.toggles.mentalPatternsvis"
+                        data-ability="{{system.toggles.mentalPatternsvis}}">
+                        {{#if system.toggles.mentalPatternsvis}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+
+                <div class="{{#if system.toggles.kiTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.arsMag"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.arsMagVis}}kiBought{{/if}}"
+                        data-label="system.toggles.arsMagVis" data-ability="{{system.toggles.arsMagVis}}">
+                        {{#if system.toggles.arsMagVis}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.kiTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.martialArt"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.maVis}}kiBought{{/if}}"
+                        data-label="system.toggles.maVis" data-ability="{{system.toggles.maVis}}">
+                        {{#if system.toggles.maVis}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.kiTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.unarmedDmg"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.unarmedVis}}kiBought{{/if}}"
+                        data-label="system.toggles.unarmedVis" data-ability="{{system.toggles.unarmedVis}}">
+                        {{#if system.toggles.unarmedVis}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.kiTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.nemesis"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.nemesisVis}}kiBought{{/if}}"
+                        data-label="system.toggles.nemesisVis" data-ability="{{system.toggles.nemesisVis}}">
+                        {{#if system.toggles.nemesisVis}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.kiTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.kiSeals"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.kiSealsVis}}kiBought{{/if}}"
+                        data-label="system.toggles.kiSealsVis" data-ability="{{system.toggles.kiSealsVis}}">
+                        {{#if system.toggles.kiSealsVis}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div class="{{#if system.toggles.kiTab}}hidden{{/if}}">
+                    <span> {{localize "abfalter.settingsTab.kiTechniq"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.kiTech}}kiBought{{/if}}"
+                        data-label="system.toggles.kiTech" data-ability="{{system.toggles.kiTech}}">
+                        {{#if system.toggles.kiTech}}
+                        <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                        {{/if}}
+                    </button>
+                </div>
+                <div></div>
+            </fieldset>
+        </div>
+
+        <div class="fieldSetRow settings2">
+            <div>
+                <div>
+                    <fieldset class="rollRange">
+                        <legend> {{localize "abfalter.settingsTab.openRoll"}} </legend>
+                        <div>
+                            <label> <span> {{localize "abfalter.base"}} </span> <input type="number"
+                                    name="system.rollRange.base" value="{{system.rollRange.base}}" /> </label>
+                            <label> <span> {{localize "abfalter.spec"}} </span> <input type="number"
+                                    name="system.rollRange.spec" value="{{system.rollRange.spec}}" /> </label>
+                            <label> <span> {{localize "abfalter.temp"}} </span> <input type="number"
+                                    name="system.rollRange.temp" value="{{system.rollRange.temp}}" /> </label>
+                            <label>
+                                <span> {{localize "abfalter.settingsTab.doubles"}} </span>
+                                <button type="button" data-action="toggleValue"
+                                    class="toggleBoolean {{#if system.rollRange.doubles}}kiBought{{/if}}"
+                                    data-label="system.rollRange.doubles" data-ability="{{system.rollRange.doubles}}">
+                                    {{#if system.rollRange.doubles}}
+                                    <span> {{localize "abfalter.yes"}} </span>
+                                    {{else}}
+                                    <span> {{localize "abfalter.no"}} </span>
+                                    {{/if}}
+                                </button>
+                            </label>
+                        </div>
+                        <div>
+                            <label> <span> {{localize "abfalter.final"}} </span> <input type="number"
+                                    name="system.rollRange.final" value="{{system.rollRange.final}}" readonly />
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="rollRange">
+                        <legend> {{localize "abfalter.settingsTab.fumbleRoll"}} </legend>
+                        <div>
+                            <label> <span> {{localize "abfalter.base"}} </span> <input type="number"
+                                    name="system.fumleRange.base" value="{{system.fumleRange.base}}" /> </label>
+                            <label> <span> {{localize "abfalter.spec"}} </span> <input type="number"
+                                    name="system.fumleRange.spec" value="{{system.fumleRange.spec}}" /> </label>
+                            <label> <span> {{localize "abfalter.temp"}} </span> <input type="number"
+                                    name="system.fumleRange.temp" value="{{system.fumleRange.temp}}" /> </label>
+                        </div>
+                        <div>
+                            <label> <span> {{localize "abfalter.final"}} </span> <input type="number"
+                                    name="system.fumleRange.final" value="{{system.fumleRange.final}}" readonly />
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <!--
+                    <div class="rollOptions">
+                        <h5>Roll Option</h5>
+                        <div>
+                            <label>
+                                <span> Voice </span>
+                                <select name="system.actorVoice">
+                                    
+                                    <option value="false"> {{localize "abfalter.no"}} </option>
+                                    <option value="true"> {{localize "abfalter.yes"}} </option>
+                                    
+                                </select>
+                            </label>
+                        </div>
                     </div>
+                    -->
+                </div>
+
+                <fieldset class="charOptions">
+                    <legend> {{localize "abfalter.settingsTab.charOptions"}} </legend>
                     <div>
-                        <span> {{localize "abfalter.settingsTab.hideMonster"}} </span>
-                        <button type="button" class="toggleBoolean {{#if system.toggles.monsterTab}}kiBought{{/if}}"
+                        <label class="lvlModLabel"> 
+                            <span> {{localize "abfalter.settingsTab.levelMod"}} </span> 
+                            <input type="number"name="system.levelinfo.levelmod" value="{{system.levelinfo.levelmod}}" /> 
+                            <span> | </span>
+                            <span> {{system.levelinfo.totalLvlMod}} </span>
+                        </label>
+                        <label> <span> {{localize "abfalter.settingsTab.presenceMod"}} </span> <input type="number"
+                                name="system.levelinfo.presencemod" value="{{system.levelinfo.presencemod}}" /> </label>
+                        <label> <span> {{localize "abfalter.settingsTab.dpMod"}} </span> <input type="number"
+                                name="system.levelinfo.dpmod" value="{{system.levelinfo.dpmod}}" /> </label>
+                        <div>
+                            <span> {{localize "abfalter.settingsTab.hideBack"}} </span>
+                            <button type="button" data-action="toggleValue"
+                                class="toggleBoolean {{#if system.toggles.backgroundTab}}kiBought{{/if}}"
+                                data-label="system.toggles.backgroundTab"
+                                data-ability="{{system.toggles.backgroundTab}}">
+                                {{#if system.toggles.backgroundTab}}
+                                <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                                {{/if}}
+                            </button>
+                        </div>
+                        <div>
+                            <span> {{localize "abfalter.settingsTab.hideMonster"}} </span>
+                            <button type="button" data-action="toggleValue"
+                                class="toggleBoolean {{#if system.toggles.monsterTab}}kiBought{{/if}}"
                                 data-label="system.toggles.monsterTab" data-ability="{{system.toggles.monsterTab}}">
-                            {{#if system.toggles.monsterTab}}
-                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                            {{else}}
-                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                            {{/if}}
-                        </button>
-                    </div>
-                    <div>
-                        <span> {{localize "abfalter.settingsTab.hideMagic"}} </span>
-                        <button type="button" class="toggleBoolean {{#if system.toggles.magicTab}}kiBought{{/if}}"
+                                {{#if system.toggles.monsterTab}}
+                                <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                                {{/if}}
+                            </button>
+                        </div>
+                        <div>
+                            <span> {{localize "abfalter.settingsTab.hideMagic"}} </span>
+                            <button type="button" data-action="toggleValue"
+                                class="toggleBoolean {{#if system.toggles.magicTab}}kiBought{{/if}}"
                                 data-label="system.toggles.magicTab" data-ability="{{system.toggles.magicTab}}">
-                            {{#if system.toggles.magicTab}}
-                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                            {{else}}
-                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                            {{/if}}
-                        </button>
-                    </div>
-                    <div>
-                        <span> {{localize "abfalter.settingsTab.hidePsy"}} </span>
-                        <button type="button" class="toggleBoolean {{#if system.toggles.psychicTab}}kiBought{{/if}}"
+                                {{#if system.toggles.magicTab}}
+                                <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                                {{/if}}
+                            </button>
+                        </div>
+                        <div>
+                            <span> {{localize "abfalter.settingsTab.hidePsy"}} </span>
+                            <button type="button" data-action="toggleValue"
+                                class="toggleBoolean {{#if system.toggles.psychicTab}}kiBought{{/if}}"
                                 data-label="system.toggles.psychicTab" data-ability="{{system.toggles.psychicTab}}">
-                            {{#if system.toggles.psychicTab}}
-                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                            {{else}}
-                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                            {{/if}}
-                        </button>
-                    </div>
-                    <div>
-                        <span> {{localize "abfalter.settingsTab.hideKi"}} </span>
-                        <button type="button" class="toggleBoolean {{#if system.toggles.kiTab}}kiBought{{/if}}"
+                                {{#if system.toggles.psychicTab}}
+                                <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                                {{/if}}
+                            </button>
+                        </div>
+                        <div>
+                            <span> {{localize "abfalter.settingsTab.hideKi"}} </span>
+                            <button type="button" data-action="toggleValue"
+                                class="toggleBoolean {{#if system.toggles.kiTab}}kiBought{{/if}}"
                                 data-label="system.toggles.kiTab" data-ability="{{system.toggles.kiTab}}">
-                            {{#if system.toggles.kiTab}}
-                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                            {{else}}
-                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                            {{/if}}
-                        </button>
-                    </div>
-                    <div>
-                        <span> {{localize "abfalter.settingsTab.hideEffect"}} </span>
-                        <button type="button" class="toggleBoolean {{#if system.toggles.effectTab}}kiBought{{/if}}"
+                                {{#if system.toggles.kiTab}}
+                                <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                                {{/if}}
+                            </button>
+                        </div>
+                        <div>
+                            <span> {{localize "abfalter.settingsTab.hideEffect"}} </span>
+                            <button type="button" data-action="toggleValue"
+                                class="toggleBoolean {{#if system.toggles.effectTab}}kiBought{{/if}}"
                                 data-label="system.toggles.effectTab" data-ability="{{system.toggles.effectTab}}">
-                            {{#if system.toggles.effectTab}}
-                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                            {{else}}
-                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                            {{/if}}
-                        </button>
-                    </div>
-                    <div>
-                        <span> {{localize "abfalter.settingsTab.hideBio"}} </span>
-                        <button type="button" class="toggleBoolean {{#if system.toggles.bioTab}}kiBought{{/if}}"
+                                {{#if system.toggles.effectTab}}
+                                <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                                {{/if}}
+                            </button>
+                        </div>
+                        <div>
+                            <span> {{localize "abfalter.settingsTab.hideBio"}} </span>
+                            <button type="button" data-action="toggleValue"
+                                class="toggleBoolean {{#if system.toggles.bioTab}}kiBought{{/if}}"
                                 data-label="system.toggles.bioTab" data-ability="{{system.toggles.bioTab}}">
-                            {{#if system.toggles.bioTab}}
-                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                            {{else}}
-                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                            {{/if}}
-                        </button>
-                    </div>
-                    <div>
-                        <span> {{localize "abfalter.settingsTab.activateShield"}} </span>
-                        <button type="button" class="toggleBoolean {{#if system.toggles.shield}}kiBought{{/if}}"
+                                {{#if system.toggles.bioTab}}
+                                <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                                {{/if}}
+                            </button>
+                        </div>
+                        <div>
+                            <span> {{localize "abfalter.settingsTab.activateShield"}} </span>
+                            <button type="button" data-action="toggleValue"
+                                class="toggleBoolean {{#if system.toggles.shield}}kiBought{{/if}}"
                                 data-label="system.toggles.shield" data-ability="{{system.toggles.shield}}">
-                            {{#if system.toggles.shield}}
-                            <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
-                            {{else}}
-                            <span> {{localize "abfalter.settingsTab.hidden"}} </span>
-                            {{/if}}
-                        </button>
+                                {{#if system.toggles.shield}}
+                                <span> {{localize "abfalter.settingsTab.notHidden"}} </span>
+                                {{else}}
+                                <span> {{localize "abfalter.settingsTab.hidden"}} </span>
+                                {{/if}}
+                            </button>
+                        </div>
                     </div>
+                </fieldset>
+            </div>
+
+            <fieldset class="innateBonuses">
+                <legend> {{localize "abfalter.settingsTab.classLevels"}} </legend>
+                <div>
+                    <span> {{localize "abfalter.class"}} </span>
+                    <span> {{localize "abfalter.level"}} </span>
                 </div>
-            </div>
-        </div>
 
-        <div class="innateBonuses">
-            <h5> {{localize "abfalter.settingsTab.classLevels"}} </h5>
-            <div>
-                <span> {{localize "abfalter.class"}} </span>
-                <span> {{localize "abfalter.level"}} </span>
-            </div>
-
-            <div class="{{#if system.itemToggle.class}}item-list{{/if}}">
-                {{#each classes as |class id|}}
-                <div class="class-item item normal-item" data-item-id="{{class._id}}">
-                    <div>
-                        <input class="item-name inline-edit" data-field="name" type="text" value="{{class.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
-                        <input class="inline-edit" data-field="system.main.levels" type="number" value="{{class.system.main.levels}}" />
-                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <div>
+                    {{#each classs as |class|}}
+                    <div class="class-item item normal-item {{#if ../system.itemToggle.class}}draggable{{/if}}" data-item-id={{id}}
+                    data-can-edit="true" data-can-delete="true" data-can-equip="false" data-can-toggle="false">
+                        <div>
+                            <input class="item-name inline-edit" data-field="name" type="text" value="{{class.name}}"
+                                placeholder="{{localize " abfalter.nameItem"}}" />
+                            <input class="inline-edit" data-field="system.main.levels" type="number"
+                                value="{{class.system.main.levels}}" />
+                            <a class="{{#if system.expand}}showOpacity{{/if}}" data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand"><i
+                                    class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{#if system.expand}}
+                        <span> {{localize "abfalter.settingsTab.tempWip"}} </span>
+                        {{/if}}
                     </div>
-                    {{#if system.expand}}
-                    <span> {{localize "abfalter.settingsTab.tempWip"}} </span>
-                    {{/if}}
+                    {{/each}}
                 </div>
-                {{/each}}
-            </div>
 
-            <div>
-                <a class="item-control item-create" data-type="class"><i class="fas fa-plus"></i> {{localize "abfalter.settingsTab.addClass"}} </a>
-                <a class="toggleBoolean {{#if system.itemToggle.class}}armorpenalty{{/if}}" data-label="system.itemToggle.class" data-ability="{{system.itemToggle.class}}"><i class="{{#if system.itemToggle.class}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
-            </div>
-        </div>
+                <div>
+                    <a class="item-control" data-action="createItem" data-type="class"><i class="fas fa-plus"></i> {{localize
+                        "abfalter.settingsTab.addClass"}} </a>
+                    <a data-action="toggleValue"
+                        class="toggleBoolean {{#if system.itemToggle.class}}armorpenalty{{/if}}"
+                        data-label="system.itemToggle.class" data-ability="{{system.itemToggle.class}}"><i
+                            class="{{#if system.itemToggle.class}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i>
+                        {{localize "abfalter.modify"}} </a>
+                </div>
+            </fieldset>
 
 
-        <div class="homebrew">
-            <h5> {{localize "abfalter.settingsTab.homebrewSettings"}} </h5>
-            <label>
-                <span> {{localize "abfalter.settingsTab.increasedStr"}} </span>
-                <button type="button" class="toggleBoolean {{#if system.toggles.psychicStrengthening}}kiBought{{/if}}"
-                        data-label="system.toggles.psychicStrengthening" data-ability="{{system.toggles.psychicStrengthening}}">
-                    {{#if system.toggles.psychicStrengthening}}
-                    <span> {{localize "abfalter.settingsTab.active"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.settingsTab.notActive"}} </span>
-                    {{/if}}
-                </button>
-            </label>
+            <fieldset class="homebrew">
+                <legend> {{localize "abfalter.settingsTab.homebrewSettings"}} </legend>
+                <label>
+                    <span> {{localize "abfalter.settingsTab.increasedStr"}} </span>
+                    <button type="button" data-action="toggleValue"
+                        class="toggleBoolean {{#if system.toggles.psychicStrengthening}}kiBought{{/if}}"
+                        data-label="system.toggles.psychicStrengthening"
+                        data-ability="{{system.toggles.psychicStrengthening}}">
+                        {{#if system.toggles.psychicStrengthening}}
+                        <span> {{localize "abfalter.settingsTab.active"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.settingsTab.notActive"}} </span>
+                        {{/if}}
+                    </button>
+                </label>
+            </fieldset>
+
         </div>
 
     </div>
-
-</div>
+</section>

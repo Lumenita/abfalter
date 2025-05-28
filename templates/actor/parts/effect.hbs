@@ -1,3 +1,44 @@
-<div class="tab effect">
-    {{> systems/abfalter/templates/actor/parts/active-effects.hbs }}
-</div>
+<section class="actorEffects tab {{tabs.effect.cssClass}}" data-group="{{tabs.effect.group}}" data-tab="{{tabs.effect.id}}">
+    <ol class="effects-list">
+        {{#each effects as |section sid|}}
+        <li class="effects-header flexrow" data-effect-type="{{section.type}}">
+            <div class="effect-name flexrow">{{localize section.label}}</div>
+            <div class="effect-source">{{localize "abfalter.source"}}</div>
+            <div class="effect-source">{{localize "abfalter.duration"}}</div>
+            <div class="effect-controls flexrow">
+                <a class="effect-control" data-action="createAE" data-document-class="ActiveEffect"
+                data-origin="{{@root.document.uuid}}" data-img="icons/svg/aura.svg"          
+                {{#ifEquals section.type "inactive"}}
+                data-disabled="true"
+                {{/ifEquals}}
+                {{#ifEquals section.type "temporary"}}
+                data-duration.rounds="1"
+                {{/ifEquals}}> 
+                    <i class="fas fa-plus"></i> {{localize "abfalter.add"}}
+                </a>
+            </div>
+        </li>
+
+        <ol class="item-eff">
+            {{#each section.effects as |effect|}}
+            <li class="effect flexrow draggable" data-effect-id="{{effect.id}}" data-parent-id="{{effect.parent.id}}" data-document-class="ActiveEffect">
+                <div class="effect-name flexrow">{{effect.name}}</div>
+                <div class="effect-source">{{effect.sourceName}}</div>
+                <div class="effect-duration">{{effect.duration.label}}</div>
+                <div class="item-controls effect-controls flexrow">
+                    <a class="effect-control" data-action="toggleAE">
+                        <i class="fas {{#if effect.disabled}}fa-check{{else}}fa-times{{/if}}"></i>
+                    </a>
+                    <a class="effect-control" data-action="editAE">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a class="effect-control" data-action="deleteAE">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+            </li>
+            {{/each}}
+        </ol>
+        {{/each}}
+    </ol>
+</section>

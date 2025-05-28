@@ -1,0 +1,13 @@
+<div class="item-subtitle">
+    <h4 class="item-type">{{localize (concat "abfalter.itemNames." document.type)}}</h4>
+    <span class="item-subType"></span>
+</div>
+<ul class="summary flexrow">
+    <li>
+        <select name="system.degree">
+            {{selectOptions martialArtsObjList selected=system.degree localize=true}}
+        </select>
+    </li>
+    <li>{{localize "abfalter.dp"}}: {{system.dp}}</li>
+    <li>{{localize "abfalter.mk"}}: {{system.mk}}</li>
+</ul>

@@ -1,35 +1,6 @@
-button {
-    line-height: normal;
-}
-#context-menu li.context-item {
-    text-align: center;
-}
-/* Colors */
-
-.notExpand {
-    display: none;
-}
-.expand-down {
-    text-align: center;
-}
-.expand-box {
-    width: 0%;
-}
-.showOpacity {
-    opacity: 1 !important;
-}
-.expand-box > input {
-    height: 18px;
-    width: 18px;
-}
-.checkLock {
-    pointer-events: none;
-}
-.fa-comment-dots:before {
-    color: #728ca3;
-}
-/* Color Theme */
+/* #region @Color Theme */
 :root {
+    /*--backgroundColor: rgba(11, 10, 19, 0.9);*/
     --backgroundColor: #15202B;
     --otherBackgrounds: #081426c2;
     --dropdownColor: #252944;
@@ -91,13 +62,16 @@ button {
     --effect-border: #10141c;
     --effect-bg: rgb(81 121 163 / 29%);
 }
+.window-header {
+    background: var(--otherBackgrounds);
+}
 .standard-form .form-group > label {
     color: var(--textColor);
 }
 .standard-form .form-group > label:hover {
     color: var(--textColor);
 }
-.window-app .window-content {
+.window-content {
     overflow-x: auto;
     background: var(--backgroundColor);
     color: var(--textColor);
@@ -115,7 +89,7 @@ button {
 #navigation #scene-list .scene.view, #navigation #scene-list .scene.context,
 #navigation #nav-toggle,
 .app {
-    background: var(--otherBackgrounds);
+    background: var(--backgroundColor);
 }
 .editor-box {
     background-color: aliceblue;
@@ -123,7 +97,9 @@ button {
 .sheet-tabs > ul > li > .active {
     background-color: #1c69c1;
 }
-/* Global Actor Styles */
+.itemStyle:nth-child(2n) {
+    background: var(--itemOffSet);
+}
 .prosemirror menu button:hover, 
 .prosemirror menu button.active,
 .window-app .window-content button {
@@ -159,9 +135,6 @@ a.content-link {
 #module-management .package-list .package-title, #module-management .package-list .package-metadata, #module-management .package-list .package-description {
     color: inherit;
 }
-.form-fields > select option {
-    background: #252944;
-}
 .baseAbfalter .general span,
 .baseAbfalter .actorHeader1 span,
 .baseAbfalter .navTabsYes span,
@@ -173,8 +146,22 @@ a.content-link {
 .baseAbfalter .magic span {
     color: var(--textColor);
 }
-baseAbfalter input {
+.settings-sidebar button,
+.directory .action-buttons button,
+.baseAbfalter button {
     background: var(--buttonBg);
+    color: var(--textColor);
+}
+    .fa-comment-dots:before {
+    color: #728ca3;
+}
+
+.baseAbfalter span {
+    color: var(--textColor);
+}
+.baseAbfalter input {
+    background: var(--buttonBg);
+    color: var(--textColor);
 }
 .baseAbfalter input:read-only {
     background-color: transparent;
@@ -182,18 +169,15 @@ baseAbfalter input {
 .baseAbfalter select {
     color: var(--textColor);
     background-color: var(--buttonBg);
+    line-height: 20px;
 }
 .baseAbfalter select option {
     background: #252944;
 }
 .baseAbfalter textarea {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
     background: var(--buttonBg);
     color: var(--textColor);
 }
-.settings-sidebar button,
-.directory .action-buttons button,
 .baseAbfalter button {
     background: var(--buttonBg);
     color: var(--textColor);
@@ -201,6 +185,256 @@ baseAbfalter input {
 .baseAbfalter hr {
     border-bottom: 1px solid #5c9be9;
 }
+
+.form-fields > select option {
+    background: #252944;
+}
+.fumbleRoll {
+    color: red;
+}
+.openRoll {
+    color: forestgreen;
+}
+.normalRoll {
+    color: black;
+}
+.notEquipped > span {
+    color: #878787;
+}
+.physical {
+    color: var(--physical) !important;
+}
+.mental {
+    color: var(--mental) !important;
+}
+.armorpenalty {
+    color: var(--armorPen) !important;
+}
+.equipped > span {
+    color: var(--equipped) !important;
+}
+.weaponEquipped {
+    color: var(--equipped) !important;
+}
+.kiBought {
+    background-color: var(--kiBought) !important;
+}
+.kiFree {
+    background-color: var(--kiFree) !important;
+}
+.natemph {
+    color: var(--armorPen) !important;
+}
+/* #endregion */
+
+/* #region @Global Actor Styles */
+/* Some might be obsolete TODO */
+.hidden {
+    display: none !important;
+}
+.showOpacity {
+    opacity: 1 !important;
+}
+.tab {
+    overflow-y: auto;
+}
+.window-content {
+    padding: 7px;
+}
+.actorPage {
+    min-width: 878px;
+}
+h5 {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0 0 -3px 0;
+    font-weight: normal;
+    font-size: 25px;
+    color: var(--boxColor);
+}
+h6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-weight: normal;
+    font-size: 17px;
+    color: var(--boxColor);
+}
+.baseAbfalter label {
+    margin: 0px;
+    padding: 0px;
+}
+.baseAbfalter span {
+    font-size: 0.82rem;
+    align-items: center;
+    height: 20px;
+    display: grid;
+}
+.baseAbfalter input {
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 0.82rem;
+    text-align: center;
+    border: 0px;
+    height: 20px;
+    border-radius: 0px;
+    border-bottom: 1px solid var(--inputBorder);
+}
+.baseAbfalter input:read-only {
+    padding: 1px 0 0 0;
+    border: 0;
+}
+.baseAbfalter select {
+    height: 20px;
+    font-size: 0.82rem;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-bottom: 1px solid var(--inputBorder);
+    text-align: center;
+    appearance: none;
+}
+.baseAbfalter a {
+    text-align: center;
+    align-self: center;
+}
+.baseAbfalter textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.82rem;
+    border: none;
+    width: 100%;
+    resize: none;
+    padding: 3px;
+    text-align: justify;
+    border-radius: 0px;
+    margin: 0px;
+}
+.baseAbfalter hr {
+    border-bottom: 1px solid #5c9be9;
+}
+.baseAbfalter button {
+    line-height: normal;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    height: 20px;
+}
+.baseAbfalter button:hover {
+    background: #455069;
+}
+.baseAbfalter button:focus {
+    outline: none;
+    box-shadow: none;
+}
+.baseAbfalter fieldset {
+    border: 2px solid var(--boxColor);
+    padding: 0;
+    border-radius: 12px;
+
+}
+.baseAbfalter legend {
+    padding: 0 0.5rem;
+    color: var(--boxColor);
+    font-size: 1.5rem;
+    text-align: center;
+}
+.fieldsetContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.fieldsetContainerRow {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.fieldSetRow {
+    display: flex;
+    gap: 1rem;
+}
+.fieldSetRow > fieldset {
+    height:fit-content;
+}
+
+/*Unknown*/
+#context-menu li.context-item {
+    text-align: center;
+    color: var(--textColor);    
+}
+.notExpand {
+    display: none;
+}
+.expand-down {
+    text-align: center;
+}
+.expand-box {
+    width: 0%;
+}
+.expand-box > input {
+    height: 18px;
+    width: 18px;
+}
+.checkLock {
+    pointer-events: none;
+}
+/* Actor Stats Styles */
+.simpleDetails > label {
+    display: flex;
+    padding: 0 10px;
+}
+.simpleDetails > label > span {
+    width: 80%
+} 
+.simpleDetails > label > input {
+    width: 20%
+} 
+
+/* Actor Handling Item Styles*/
+.itemStyle {
+    padding: 3px;
+}
+.itemStyle > div {
+    display: flex;
+}
+.itemStyle .editor {
+    height: auto;
+}
+.itemStyle .editor .editor-content {
+    /* width: 100%; causing bugs? */
+    margin: 0 3px;
+    color: inherit;
+}
+.itemStyle .editor .editor-content span {
+    display: contents;
+    color: inherit;
+}
+.itemControls {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    color: var(--textColor);
+    padding: 0 1% !important; 
+}
+.itemToggleA > a {
+    font-size: 15px;
+    width: 5%;
+    opacity: 0;
+    color: var(--textColor);
+}
+.itemToggleA:hover > a {
+    opacity: 1;
+}
+.itemToggleB > a {
+    font-size: 15px;
+    width: 5%;
+    opacity: 1;
+    color: var(--textColor);
+}
+
 /* Scrollbar */
 * {
     scrollbar-color: initial;
@@ -217,6 +451,7 @@ baseAbfalter input {
         scrollbar-width: thin;
     }
 }
+
 /* Select Box Custom Arrow & Center Contents */
 .csSelect::after,
 .csSelect1::after,
@@ -252,15 +487,18 @@ baseAbfalter input {
     font-size: 20px;
     transform: rotate(90deg);
 }
+
 /* Text Area Auto Resize */
+.baseAbfalter .editor-menu {
+    flex-wrap: nowrap;
+    padding: 5px;
+}
+
 .editor-box {
     height: 200px;
     border: 1px solid black;
     margin-top: 5px;
     margin-bottom: 5px;
-}
-.editor {
-    height: 200px;
 }
 .textarea-auto-resize, .textarea-auto-resize-sibling {
     scrollbar-width: none;
@@ -280,127 +518,17 @@ baseAbfalter input {
     justify-content: initial !important;
     padding: 3px 0;
 }
-/* Global #121d32 */
-h5 {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin: 0 0 -3px 0;
-    font-weight: normal;
-    font-size: 25px;
-    color: var(--boxColor);
-}
-h6 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    font-weight: normal;
-    font-size: 17px;
-    color: var(--boxColor);
-}
-.physical {
-    color: var(--physical) !important;
-}
-.mental {
-    color: var(--mental) !important;
-}
-.armorpenalty {
-    color: var(--armorPen) !important;
-}
-.equipped > span {
-    color: var(--equipped) !important;
-}
-.weaponEquipped {
-    color: var(--equipped) !important;
-}
-.kiBought {
-    background-color: var(--kiBought) !important;
-}
-.kiFree {
-    background-color: var(--kiFree) !important;
-}
-.natemph {
-    color: var(--armorPen) !important;
-}
-.hidden {
-    display: none !important;
-}
-.fumbleRoll {
-    color: red;
-}
-.openRoll {
-    color: forestgreen;
-}
-.normalRoll {
-    color: black;
-}
-.notEquipped > span {
-    color: #878787;
-}
-.baseAbfalter label {
-    margin: 0px;
-    padding: 0px;
-}
-.baseAbfalter span {
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-}
-.baseAbfalter .general span,
-.baseAbfalter .actorHeader1 span,
-.baseAbfalter .navTabsYes span,
-.baseAbfalter .armory span,
-.baseAbfalter .background span,
-.baseAbfalter .ki span,
-.baseAbfalter .settings span,
-.baseAbfalter .psychic span,
-.baseAbfalter .magic span {
-    display: grid;
-}
-.baseAbfalter input {
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    text-align: center;
-    border: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border-bottom: 1px solid var(--inputBorder);
-}
-.baseAbfalter input:read-only {
-    padding: 1px 0 0 0;
-    border: 0;
-}
-.baseAbfalter select {
-    height: 20px;
-    font-size: 13px;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    border-bottom: 1px solid var(--inputBorder);
-    text-align: center;
-    appearance: none;
-}
-.baseAbfalter a {
-    text-align: center;
-    align-self: center;
-}
-.baseAbfalter textarea {
-    border: none;
-    width: 100%;
-    resize: none;
+/* Show Text Area with the right format */
+.showTextAreaDesc {
+    border: 1px solid var(--boxColor);
+    white-space: pre-wrap;
+    margin: 0 0 7px 0;
     padding: 3px;
-    text-align: justify;
-    border-radius: 0px;
-    margin: 0px;
 }
-.baseAbfalter hr {
-    border-bottom: 1px solid #5c9be9;
-}
-/* Header */
+
+/* #endregion */
+
+/* #region @Header */
 .actorHeader1 {
     display: flex;
     width: 100%;
@@ -555,9 +683,15 @@ h6 {
     width: 20%;
 }
 .subRightHeader1 > span {
-    height: 40%;
+    width: 40%;
     font-size: 15px;
     margin: 0 15% 0 5%;
+}
+.subRightHeader1 > button {
+    width: 20%;
+    height: 25px;
+    margin: 0 0 0 20%;
+    font-size: 0;
 }
 .subRightHeader2 {
     justify-content: space-around;
@@ -664,7 +798,9 @@ h6 {
 .headerAam > label > input {
     width: 40%;
 }
-/* Navigation Tabs */
+/* #endregion */
+
+/* #region @Navigation Tabs */
 .sheet-tabs > ul > li > .active {
     transform: inherit;
 }
@@ -719,17 +855,21 @@ h6 {
     text-shadow: none;
     height: 100%;
 }
+/* #endregion */
+
 /*
-    **************
-    --------------
-    GENERAL LAYOUT
-    --------------
-    **************
+    ************
+    ------------
+    GENERAL PAGE
+    ------------
+    ************
 */
+/* #region Containers */
 .general {
     flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
+    padding: 0 5px;
     min-width: 878px;
 }
 .g1,
@@ -738,11 +878,7 @@ h6 {
 .resistances {
     width: 49%
 }
-.g1 > div:first-of-type {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
+
 .g1 > div:nth-of-type(2),
 .g1 > div:nth-of-type(3) {
     display: flex;
@@ -757,19 +893,18 @@ h6 {
 .regeneration {
     width: 35%;
 }
-/* Characteristics */
+.fieldSetNarrowGap {
+    gap: 0.5rem !important;
+}
+/* #endregion */
+
+/* #region @Characteristics */
 .characteristics > div {
     display: flex;
-    justify-content: flex-start;
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.characteristics > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);    
 }
 .characteristics > div:first-of-type {
-    border-bottom: 1px solid var(--boxColor);    
-    border-top: 3px solid var(--boxColor);
+    border-bottom: 1px solid var(--boxColor);
+    margin: -5px 0 0px 0px;
 }
 .characteristics > div:first-of-type > span:last-of-type {
     margin-right: 10%;
@@ -778,19 +913,18 @@ h6 {
     width: 33.33%;
     text-align: center;
 }
-.characteristics > div > span:nth-of-type(2) {
-    border-right: 1px solid var(--boxColor);
-}
 .characteristics > div > .compact {
     width: 90%;
     display: flex;
+    height: 20px;
 }
 .characteristics > div > .compact > button:first-of-type {
     width: 66.66%;
     border-right: 1px solid var(--boxColor);
 }
-.characteristics > div > .compact > button{
+.characteristics > div > .compact > button {
     width: 33.33%;
+    font-size: 0px;
     border: 0px;
 }
 .characteristics > div > .compact > button:first-of-type > span {
@@ -809,7 +943,7 @@ h6 {
 }
 .characteristics > div > label > a {
     margin-left: 5px;
-    font-size: 15px;
+    font-size: 0.95rem;
     opacity: 0;
 }
 .characteristics > div:hover > label > a {
@@ -857,18 +991,18 @@ h6 {
 .characteristics > div > .extend > label:nth-of-type(7) {
     border-bottom: 1px solid var(--boxColor);
 }
-/* Resistance */
+/* #endregion */
+
+/* #region @Resistance */
 .resistances > div {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
     justify-content: space-between;
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
 }
 .resistances > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
+    margin: -5px 0 0px 0px;
 }
 .resistances > div > span {
     display: flex;
@@ -882,12 +1016,10 @@ h6 {
 }
 .resistances > div > div > button {
     width: 66.66%;
-    padding: 0px;
     display: flex;
-    margin: 0px;
-    border-radius: 0px;
     border: 0px;
     border-right: 1px solid var(--boxColor);
+    font-size: 0px;
 }
 .resistances > div > div > button > span {
     width: 50%;
@@ -898,7 +1030,6 @@ h6 {
 /* All Action Modifier */
 .modactions {
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
     margin-bottom: 3px;
     padding-top: 3px;
 }
@@ -917,25 +1048,19 @@ h6 {
 }
 .modactions > label > span:last-of-type {
     width: 25%;
+    text-align: center;
 }
-.modactions > label > input {
-    width: 25%;
-}
-/* Movement */
-.movement > div {
-    border-top: 3px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
+/* #endregion */
+
+/* #region @Movement */
+.movement > legend {
+    display: flex;
+    font-size: 1.3rem;
 }
 .movement > div > label {
     display : flex;
     width: 100%;
     padding: 0 10px 0 10px;
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.movement > div > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
 }
 .movement > div > div > label {
     display : flex;
@@ -969,29 +1094,26 @@ h6 {
 .movement > div > label:nth-of-type(6) > span {
     font-weight: bold;
 }
-.movement > h5 > label > a {
-    opacity: 0;
+
+/* #endregion */
+
+/* #region @LP, Fatigue & Regen */
+.lifepoints > legend,
+.fatigue > legend,
+.regeneration > legend {
+    font-size: 1.3rem;
 }
-.movement:hover > h5 > label > a {
-    opacity: 1;
-}
-/* LP, Fatigue & Regen */
-.lifepoints > div:first-of-type ,
-.fatigue > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
+.lifepoints {
+    margin: 0 2px 3px 2px;
 }
 .lifepoints > div > label,
 .fatigue > div > label {
     display: flex;
     padding: 0 10px 0 10px;
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
 }
 .regeneration > label {
     display: flex;
     padding: 0 5px 0 5px;
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
 }
 .lifepoints > div > label > span,
 .fatigue > div > label > span {
@@ -1030,7 +1152,6 @@ h6 {
 .lpCompact > label:nth-of-type(3),
 .fatCompact > label:nth-of-type(3) {
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
     padding-top: 3px;
     padding-bottom: 3px;
 }
@@ -1044,20 +1165,16 @@ h6 {
 .regeneration > label:nth-of-type(7) > span {
     font-weight: bold;
 }
-.regeneration > label:nth-of-type(1) {
-    border-top: 3px solid var(--boxColor);
-}
-.regeneration > label:nth-of-type(7) {
-    border-bottom: 3px solid var(--boxColor);
-}
-/* Attack, Block, & Dodge */
+/* #endregion */
+
+/* #region @Attack, @Block, & @Dodge */
 .atkdef {
     width: 30%;
 }
-.atkdef > h5 > label > a {
+.atkdef > legend > label > a {
     opacity: 0;
 }
-.atkdef:hover > h5 > label > a {
+.atkdef:hover > legend > label > a {
     opacity: 1;
 }
 .atkdef > div > label {
@@ -1085,28 +1202,15 @@ h6 {
     border-radius: 0px;
     border: 0px;
 }
-.atkdef > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.atkdef > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.atkdef > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
-}
-/* Advantages & Dis-advantages */
-.advdis > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
+/* #endregion */
+
+/* #region @Advantages & @Dis-advantages */
 .advantage-item,
 .disadvantage-item {
     padding: 0 2.5%;
 }
 .advdis > div:last-of-type {
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
 }
 .advdis > div:first-of-type,
 .advantage-item > div:first-of-type,
@@ -1115,8 +1219,8 @@ h6 {
     justify-content: flex-start;
 }
 .advdis > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
+    margin: -7px 0 0 0px;
 }
 .advdis > div:first-of-type > span:first-of-type {
     width: 75.05%;
@@ -1125,10 +1229,6 @@ h6 {
 .advdis > div:first-of-type > span:nth-of-type(2){
     width: 14.25%;
     margin: 0 0 0 0.95%;
-}
-.advdis > div:last-of-type {
-    display: flex;
-    place-content: space-between;
 }
 .advantage-item > div > span,
 .disadvantage-item > div > span,
@@ -1149,47 +1249,41 @@ h6 {
     width: 15%;
     margin: 0 0 0 1%;
 }
-.advantage-item > div > a,
-.disadvantage-item > div > a {
-    width: 5%;
-    font-size: 15px;
-}
-.advantage-item > div > a,
-.disadvantage-item > div > a {
-    opacity: 0;
-}
-.advantage-item > div:hover > a,
-.disadvantage-item > div:hover > a {
-    opacity: 1;
-}
 .advantage-item > div:nth-of-type(2),
 .disadvantage-item > div:nth-of-type(2) {
     padding: 3px 0;
 }
-.advdis > div:nth-of-type(2) > div:nth-child(2n) {
-    background: var(--itemOffSet);
+
+/* #endregion */
+
+/* #region @Secondary-Abilities */
+.secondary {
+    height: fit-content;
 }
-/* Secondary Abilities Drawing */
 .secondary > div > div {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.secondary > div:first-of-type > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.secondary > div:last-of-type > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
 }
 .secondary > div > div:first-of-type {
     border-top: 1px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
 }
+.secondary > div:first-of-type > div:first-of-type {
+    border-bottom: 1px solid var(--boxColor);
+    border-top: none;
+    margin: -5px 0 0 0;
+}
+.secondary > div:last-of-type > div:first-of-type {
+    border-top: 1px solid var(--boxColor);
+    border-bottom: none;
+}
+.secondary .customSecondaryListArea .secondary-item:first-of-type{
+    border-top: 1px solid var(--boxColor);
+}
 .secondary > div > div > a {
     width: 5%;
-    font-size: 15px;
+    font-size: .95rem;
     opacity: 0;
 }
 .secondary > div > div:hover > a {
@@ -1229,6 +1323,10 @@ h6 {
     margin: 0px;
     border-radius: 0px;
     border: 0px;
+    font-size: 13px;
+}
+.secondary > div > div > button > span {
+    padding: 0 0 0 4%
 }
 .secondary > div > .extend {
     padding-left: 15px;
@@ -1259,6 +1357,7 @@ h6 {
     opacity: 1;
 }
 .secondary-item > div {
+    align-items: anchor-center;
     display: flex;
 }
 .secondary-item > div > span {
@@ -1289,6 +1388,7 @@ h6 {
     margin: 0px;
     border-radius: 0px;
     border: 0px;
+    font-size: 13px;
 }
 .secondary-item .secondaryEditExtend {
     padding-left: 15px;
@@ -1325,6 +1425,14 @@ h6 {
     width: 5%;
     opacity: 0;
 }
+.secondary-item .secondaryEditCollapsed > button > span:first-of-type {
+    padding: 0 0 0 4%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    align-content: center;
+}
 .secondary-item .secondaryEditCollapsed:hover > a {
     opacity: 1;
 }
@@ -1332,6 +1440,8 @@ h6 {
     display: flex;
     place-content: space-between;
     border-top: 1px solid var(--boxColor);
+    color: var(--textColor);
+    padding: 0 1%;
 }
 .secondary .customSecAddArea > a {
     text-align: center;
@@ -1343,29 +1453,299 @@ h6 {
 .secondary .customSecondaryListArea {
     display: inherit;
 }
+/* #endregion */
+
 /*
-    **************
-    --------------
-      Background
-    --------------
-    **************
+    ***************
+    ---------------
+    BACKGROUND PAGE
+    ---------------
+    ***************
 */
-.e1, .e2, .e3 {
+/* #region Containers */
+.backgroundProf {
+    width: 66%
+}
+.backgroundStats {
+    width: 33%;
+}
+.backgroundElan,
+.backgroundBlood {
+    width: 100%;
+}
+.backgrounRace,
+.backgroundCultural,
+.backgroundNotes {
+    width: 49%;
+}
+/* #endregion */
+
+/* #region @Proficiency */
+.backgroundProf > div:first-of-type {
+    display: flex;
+    border-bottom: 1px solid var(--boxColor);
+    padding: 0 3px;
+    margin: -13px 0 0 0;
+}
+.backgroundProf > div:first-of-type > span,
+.prof-item > div > span,
+.prof-item > div > input {
+    width: 58%;
+}
+.backgroundProf > div:first-of-type > span:nth-of-type(2),
+.prof-item > div > span:nth-of-type(2),
+.prof-item > div > div {
+    width: 25%;
+    margin: 0 0 0 1%;
+}
+.prof-item > div > div > select {
+    width: 100%;
+}
+.backgroundProf > div:first-of-type > span:nth-of-type(3),
+.prof-item > div > span:nth-of-type(3),
+.prof-item > div > input:nth-of-type(2) {
+    width: 10%;
+    margin: 0 0 0 1%;
+}
+.backgroundProf > div:first-of-type > span,
+.prof-item > div > span {
+    text-align: center;
+}
+.backgroundProf .prof-item .editor {
+    border: 1px solid var(--boxColor);
+    margin: 2px 7px;
+}
+/* #endregion */
+
+/* #region @Natura */
+.backgroundStats > div:first-of-type {
+    margin: -10px 0 3px 0;
+    padding: 0 0 3px 0;
+    border-bottom: 1px dashed var(--boxColor);
+}
+.backgroundStats .mentalHealthFirst {
+    margin: 3px 0 0 0;
+    padding: 3px 0 0 0;
+    border-top: 1px dashed var(--boxColor);
+}
+/* #endregion */
+
+/* #region @Elan */
+.backgroundElanIcon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: none;
+}
+.backgroundElanInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5%;
+    border-bottom: 1px solid var(--boxColor);
+    width: 100%;
+}
+.backgroundElanInfo > div {
+    width: 70%;
+    margin: 0 0 0 2%;
+}
+.backgroundElanInfo > div > input:first-of-type,
+.backgroundElanInfo > div > span:first-of-type {
+    height: 35px;
+    font-size: 1.7rem;
+}
+.backgroundElanInfo > div > input,
+.backgroundElanInfo > div > span {
+    height: 25px;
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 1px 3px;
+    margin: 0;
+}
+.backgroundElanInfo > input{
+    width: 10%;
+}
+.backgrounElanDesc {
+    gap: 2.5%;
+    margin: 0 2%;
+}
+.backgrounElanDesc > fieldset {
+    width: 50%;
+    border: 1px solid var(--boxColor);
+}
+.backgrounElanDesc > fieldset > legend {
+    font-size: 1.2rem;
+}
+
+.backgroundElanGifts {
+    flex-direction: column;
+    padding: 0 2%;
+    margin: 7px 0 0 0;
+}
+.backgroundElanGifts > label {
+    display: flex;
+    justify-content: space-between;
+}
+.backgroundElanGifts > label > span:first-of-type {
+    font-size: 1.2rem;
+}
+.backgroundElanGifts > label {
+    display: flex;
+    padding: 0 10px;
+}
+.backgroundElanGifts > div {
+    border: 1px solid var(--boxColor);
+    border-radius: 12px;
+}
+.backElanBorder {
+    border-bottom: 1px solid var(--boxColor);
+}
+.backgroundElanGifts .elanHideDescToggle a {
+    visibility: hidden;
+}
+.backgroundElanGifts:hover .elanHideDescToggle a {
+    visibility: visible;
+}
+/* #endregion */
+
+/* #region @Elan @Item */
+.giftEntryEdit > h6,
+.giftEntryNoEdit > h6 {
+    justify-content: start;
+    border-bottom: 1px solid var(--boxColor);
+    padding: 15px 10px 0 10px;
+}
+.giftEntryNoEdit > h6 {
+    padding: 0px 10px 0 10px;
+}
+.giftEntryNoEdit > h6 > span:first-of-type {
+    margin: 0 0 0 40%;
+}
+.giftEntryNoEdit > h6 > span {
+    margin: 0 0 0 5%;
+}
+.giftEntryEdit .editor {
+    overflow: visible;
+}
+.giftEntryEdit prose-mirror.editor.prosemirror.active {
+    height: 160px;
+    min-height: 160px;
+}
+.giftEntryEdit > prose-mirror {
+    min-height: 100px;
+    height: 100px;
+}
+.giftEntryEdit .editor > button {
+    top: -30px;
+}
+.giftEntryEdit .editor .editor-content {
+    padding: 0 10px;
+}
+.giftEntryNoEdit > div {
+    padding: 0 10px;
+}
+.giftExpandBox {
+    width: 0%;
+}
+.giftExpandBox > a {
+    padding: 0 5px;
+}
+.addElanGifts {
+    justify-self: center;
+    margin: 10px 0 0 0 !important;
+    width: 30%;
+    border: none;
+}
+.totalGiftCost {
+    justify-self: end;
+    margin: 0 5% 0 0;
+    padding: 10px 0 0 0;
+}
+/* #endregion */
+
+/* #region @Blood-Bond same as Race Format*/
+
+/* #endregion */
+
+/* #region @Race-Nephelim */
+.backRace-item .raceInfo {
+    justify-content: space-between;
+}
+.backRace-item .raceInfo > input,
+.backRace-item .raceInfo > span {
+    width: 60%;
+    height: auto;
+    text-align: center;
+    font-size: 1.3rem;
+}
+.backRace-item .raceInfo .raceInfoBorder > span:first-of-type {
+    border-bottom: 1px solid var(--boxColor);
+}
+.backRace-item .raceInfo .raceInfoBorder > span:last-of-type {
+    font-size: 0.75rem;
+    font-style: italic;
+}
+.backRace-item .raceInfo > label {
+    width: 15%;
+    text-align: center;
+}
+.backRace-item .editor {
+    border: 1px solid var(--boxColor);
+    margin: 2px 7px;
+}
+/* #endregion */
+
+/* #region @Cultural-Roots */
+.cultureInfo-item .culInfo,
+.cultureInfo-item .culInfoB {
+    justify-content: space-between;
+}
+.cultureInfo-item .culInfo > input,
+.cultureInfo-item .culInfoB > span {
+    width: 90%;
+    padding: 0 0 0 2%;
+    height: auto;
+    text-align: start;
+    font-size: 1.2rem;
+}
+.cultureInfo-item .editor {
+    border: 1px solid var(--boxColor);
+    margin: 2px 7px;
+}
+.cultureInfo-item .culInfoRowB > label {
+    padding: 3px 0;
+}
+.cultureInfo-item .culInfoRowB > label,
+.cultureInfo-item .culInfoRow > label {
+    display: flex;
+    width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.cultureInfo-item .culInfoRow > label > span {
+    white-space: nowrap;
+    overflow: hidden;
+}
+.cultureInfo-item .culInfoRow > label > span:first-of-type {
+    padding: 0 3px 0 4%;
+}
+.cultureInfo-item .culInfoRowB > label > span {
+    text-align: end;
+    padding: 0 3px 0 0;
+    width: 25%;
+}
+.cultureInfo-item .culInfoRowB > label > input {
+    width: 70%
+}
+/* #endregion */
+
+/* #region @Notes */
+.e3 {
     display: flex;
     justify-content: flex-start;
-}
-.e1 > div {
-    width: 32%;
-}
-.e1 > div:not(:last-of-type) {
-    margin: 0 2% 0 0;
-}
-.e2 > div:first-of-type {
-    width: 66%;
-    margin: 0 2% 0 0;
-}
-.e2 > div {
-    width: 32%;
+    margin: 1.5% 0 0 0;
 }
 .e3 > div:first-of-type {
     margin: 0 2% 0 0;
@@ -1373,119 +1753,195 @@ h6 {
 .e3 > div {
     width: 49%;
 }
-.e2, .e3 {
-    margin: 5px 0 0 0;
+.e3 > div > div {
+    border: 2px solid var(--boxColor);
 }
-/* Elan */
-.elan > div:first-of-type,
-.elan-item > div:first-of-type,
-.elan-item > div:nth-of-type(3) {
-    display: flex;
-    justify-content: flex-start;
+/* #endregion */
+
+/*
+    ************
+    ------------
+    MONSTER PAGE
+    ------------
+    ************
+*/
+/* #region Monster TODO Organize */
+.monsterChar {
+    width: 32%;
 }
-.elan-item2 > div > div {
-    display: flex;
-}
-.elan-item,
-.elan-item2 > div {
-    padding: 0 2.5%;
-}
-.elan > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-}
-.elan > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.elan > div:last-of-type {
-    border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
-}
-.elan > div:first-of-type > span,
-.elan-item > div:first-of-type > span,
-.elan-item2 > div > div > span {
-    text-align: center;
-}
-.elan > div:first-of-type > span:first-of-type {
-    width: 19.95%;
-    margin: 0 0.95% 0 2.5%;
-}
-.elan > div:first-of-type > span:nth-of-type(2) {
-    width: 56.05%;
-    margin: 0 0.95% 0 0;
-}
-.elan > div:first-of-type > span {
-    width: 11.4%;
-    margin: 0 0.95% 0 0
-}
-.elan-item > div > input:first-child,
-.elan-item > div > span,
-.elan-item2 > div > div > span {
-    width: 21%;
-    margin: 0 1% 0 0;
-}
-.elan-item > div > input:nth-child(2),
-.elan-item > div > span:nth-of-type(2),
-.elan-item2 > div > div > input:nth-child(2),
-.elan-item2 > div > div > span:nth-of-type(2){
-    width: 59%;
-    margin: 0 1% 0 0;
-}
-.elan-item > div > input,
-.elan-item2 > div > div > input,
-.elan-item2 > div > div > span:nth-of-type(3) {
-    width: 12%;
-    margin: 0 1% 0 0;
-}
-.elan-item > div > a,
-.elan-item2 > div > div > a {
-    font-size: 15px;
-    width: 5%;
-}
-.elan-item > div > a {
-    opacity: 0;
-}
-.elan-item > div:hover > a {
-    opacity: 1;
-}
-.elan-item > div > div > h6 {
-    margin: 0 0 3px 0;
-}
-.elan-item > div > div {
-    width: 49%;
-}
-.elan-item > div > div:first-of-type {
-    margin: 0 2% 0 0;
-}
-.itemControls {
+.monsterChar > div {
     display: flex;
     justify-content: space-between;
 }
-.elan-item:nth-child(2n) {
-    background: var(--itemOffSet);
+.monsterChar > div:first-of-type {
+    border-bottom: 1px solid var(--boxColor);
+    margin: -5px 0 0 0px;
 }
-.elan-item2 > div:nth-child(2n) {
-    background: var(--itemOffSet);
+.monsterChar > div > span {
+    text-align: center;
+    display: grid;
 }
-/* Natura */
-.natura > div {
-    border: 3px solid var(--boxColor);
+.monsterChar > div > span,
+.monsterChar > div > label {
+    width: 15%;
 }
-.natura > div > label {
-    display: flex;
+.monsterChar > div > label > select {
+    width: 100%;
 }
-.natura > div > label > span {
-    width: 75%;
-    margin: 0 2% 0 0;
-}
-.natura > div > label > input {
+.monsterChar > div:first-of-type > span:nth-of-type(4) {
     width: 23%;
 }
-/* Notes */
-.e3 > div > div {
-    border: 3px solid var(--boxColor);
+.monsterChar > div > input {
+    width: 15%;
+    margin: 0 4%
 }
+.monsterChar > div:first-of-type > span:nth-of-type(5),
+.monsterChar > div:not(:first-of-type) > span:nth-of-type(3) {
+    width: 20%;
+}
+.monsterChar > div:not(:first-of-type) > span:nth-of-type(2) {
+    border-right: 1px solid var(--boxColor);
+}
+.monsterInfo {
+    width: 32%;
+}
+.monsterInfo > div {
+    display: flex;
+    padding: 0 0 0 3px;
+}
+.monsterInfo > div:first-of-type {
+    margin: -5px 0 0 0px;
+}
+.monsterInfo > div:nth-of-type(2),
+.monsterInfo > div:nth-of-type(4) {
+    display: block;
+}
+.monsterInfo > div:nth-of-type(2) > label,
+.monsterInfo > div:nth-of-type(4) > label {
+    display: flex;
+    width: 100%;
+}
+.monsterInfo > div > span,
+.monsterInfo > div > label > span {
+    display: grid;
+    width: 75%;
+}
+.monsterInfo > div > label > input,
+.monsterInfo > div > label > span:nth-of-type(2) {
+    text-align: center;
+    width: 25%;
+}
+.monsterInfo > div > button {
+    width: 25%;
+    border: 0px;
+    font-size: 0px;
+}
+.monsterInfo > div:nth-of-type(2) {
+    border-bottom: 1px dashed var(--boxColor);
+}
+.monsterSettings {
+    width: 32%;
+}
+.monsterSettings > div {
+    display: flex;
+    padding: 0 0 0 3px;
+}
+.monsterSettings > div:first-of-type {
+    margin: -5px 0 0 0px;
+}
+.monsterSettings > div > label > span,
+.monsterSettings > div > span {
+    display: grid;
+    width: 75%;
+}
+.monsterSettings > div > button {
+    width: 25%;
+    border: 0px;
+    font-size: 0px;
+}
+.monsterSettings > div > label > input,
+.monsterSettings > div > label > span:nth-of-type(2) {
+    width: 25%;
+    text-align: center;
+}
+.monsterSettings > div:nth-of-type(6) {
+    display: block;
+}
+.monsterSettings > div:nth-of-type(6) > label {
+    display: flex;
+}
+.monsterSettings > div:nth-of-type(2), 
+.monsterSettings > div:nth-of-type(5) {
+    border-bottom: 1px dashed var(--boxColor);
+}
+.monsterSettings > div:last-of-type {
+    border-top: 1px solid var(--boxColor);
+    justify-content: space-between;
+}
+.monster .monsterBotContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 0 0;
+}
+.monsterSubContainer {
+    width: 49%;
+}
+.monsterSubContainer > div {
+    margin: 0 0 10px 0;
+}
+.monsterSubContainer > div > div:first-of-type {
+    display: flex;
+    justify-content: start;
+    border-bottom: 1px solid var(--boxColor);
+    padding: 0 2.5%;
+}
+.monsterPower-item {
+    padding: 0 2.5% 0 2.5%;
+}
+.monsterPower-item > div > input:first-of-type,
+.monsterPower-item > div > span:first-of-type,
+.monsterSubContainer > div > div:first-of-type > span:first-of-type {
+    width: 67%;
+    margin: 0%;
+}
+.monsterPower-item > div > input,
+.monsterPower-item > div > span,
+.monsterSubContainer > div > div:first-of-type > span {
+    width: 12%;
+    margin: 0 0 0 2%;
+    text-align: center;
+    display: grid;
+}
+.monsterPower-item > div > a {
+    width: 5%;
+}
+.monsterPower-item > div {
+    display: flex;
+}
+.monsterSubContainer > div > div {
+    border-right: 3px solid var(--boxColor);
+    border-left: 3px solid var(--boxColor);
+}
+.monsterSubContainer > div > div:first-of-type {
+    border-top: 3px solid var(--boxColor);
+}
+.monsterSubContainer > div > div:last-of-type {
+    border-bottom: 3px solid var(--boxColor);
+}
+.monstPowerInfo > textarea {
+    background: none;
+    border: 1px solid var(--boxColor);
+    cursor: default;
+}
+.monstPowerLongDesc,
+.monstPowerInfo {
+    padding: 0 0 10px 0;
+}
+.monsterPower-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+/* #endregion */
+
 /*
     ***************
     ---------------
@@ -1493,14 +1949,9 @@ h6 {
     ---------------
     ***************
 */
-.magic {
-    flex-wrap: wrap;
-    min-width: 878px;
-}
+/* #region Containers */
 .magic > div:first-of-type {
-    display: flex;
     justify-content: space-between;
-    margin: 0 0 7px 0;
     width: 100%;
 }
 .s2,
@@ -1512,29 +1963,27 @@ h6 {
 .incarnations {
     margin: 0 0 7px 0;
 }
-.mproj {
+.mprojContainer {
     width: 29%;
 }
-.maccu {
-    width: 48%;
+.maccu, .mregen {
+    width: 24%;
 }
-.maccu > div {
+.maccu2 > div,
+.mregen2 > div {
     display: flex;
     justify-content: space-between;
 }
-.maccu > div > div {
-    width: 48%;
-    height: fit-content;
-}
-.zeon {
+.zeonContainer {
     width: 19%;
 }
 .magic .s1 {
     width: 100%;
-    display: contents;
+    display: flex;
+    gap: 2%;
 }
 .magic .s1 > div {
-    width: 48.5%;
+    width: 49%;
 }
 .mlevels {
     width: 48%;
@@ -1549,13 +1998,9 @@ h6 {
     display: flex;
     justify-content: space-between;
 }
-/* Magic Projection */
-.mproj > h5 > label > a {
-    opacity: 0;
-}
-.mproj:hover > h5 > label > a {
-    opacity: 1;
-}
+/* #endregion */
+
+/* #region @Magic-Projection & @Magic-Theory */
 .mproj > label,
 .mproj > div > label {
     display: flex;
@@ -1587,16 +2032,17 @@ h6 {
 }
 .mproj > div > button {
     width: 50%;
-    margin: 0px;
     height: 25px;
-    border-radius: 0px;
     border: 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom-right-radius: 8px;
 }
 .mproj > div > button:first-of-type {
     border-right: 1px solid var(--boxColor);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 0px;
 }
 .mproj > div > button > span:first-of-type {
     padding-left: 20%;
@@ -1620,99 +2066,72 @@ h6 {
     text-align: center;
     width: 70%;
 }
-.mproj > div,
-.mproj > label {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.mproj > :nth-child(2) {
-    border-top: 3px solid var(--boxColor);
-}
-.mProjButton {
-    border-bottom: 3px solid var(--boxColor);
-}
-.mproj > h6 {
+.mTheory {
     margin: 10px 0 0 0;
 }
-.mproj > div:last-of-type {
-    border-top: 3px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
+.mTheory > div {
+    text-align: center;
 }
-/* Magic Accumulation */
-.maccu2,
-.mregen2 {
-    border-right: 3px solid var(--boxColor);
-    border-top: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
+.mTheory > div > label > select {
+    width: 75%;
 }
-.maccu2 > div:last-of-type,
-.mregen2 > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
-}
-.maccu2 > :nth-child(2),
-.mregen2 > :nth-child(2) {
-    border-top: 1px solid var(--boxColor);
-}
-.maccu2 > h6 > label > a,
-.mregen2 > h6 > label > a {
-    opacity: 0;
-}
-.maccu2:hover > h6 > label > a,
-.mregen2:hover > h6 > label > a {
-    opacity: 1;
-}
-.maccu > div > div > label,
-.maccu > div > div > div > label {
+/* #endregion */
+
+/* #region @Magic-Accumulation & @Magic-Regeneration */
+.maccu > label,
+.maccu > div > label,
+.mregen > label,
+.mregen > div > label {
     display: flex;
     padding: 0 10px 0 10px;
 }
-.maccu > div > div > label > span,
-.maccu > div > div > div > label > span {
+.maccu > label > span,
+.maccu > div > label > span,
+.mregen > label > span,
+.mregen > div > label > span {
     width: 60%;
     text-align: start;
 }
-.maccu > div > div > label > input,
-.maccu > div > div > div > label > input {
+.maccu input,
+.mregen input {
     width: 40%;
 }
-.maccu > div > div > label:nth-of-type(3),
-.mregen2 > label:nth-of-type(2) {
+.maccu >  label:nth-of-type(3),
+.mregen > label:nth-of-type(2) {
     border-top: 1px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
-    padding: 0 10px 0 10px;
 }
-.maccu > div > div > label:nth-of-type(2),
-.maccu > div > div > label:nth-of-type(3) {
+.maccu > label:nth-of-type(2),
+.maccu > label:nth-of-type(3) > span,
+.mregen > label:nth-of-type(2) {
     font-weight: bold;
 }
-.maccu > div > div > div > button {
-    width: 50%;
-    margin: 0px;
-    height: 25px;
-    border-radius: 0px;
-    border: 0px;
-}
-.maccu2 > div > button:first-of-type,
-.mregen2 > div > button:first-of-type  {
-    border-right: 1px solid var(--boxColor);
-}
-.mregen2 > div:last-of-type {
+.maccu > div:last-of-type,
+.mregen > div:last-of-type {
     display: flex;
     justify-content: end;
 }
-/* Zeon */
-.zeon > h5 > label > a {
-    opacity: 0;
+.maccu > div > button,
+.mregen > div > button {
+    width: 50%;
+    height: 25px;
+    border: 0px;
+    border-bottom-right-radius: 8px;
 }
-.zeon:hover > h5 > label > a {
-    opacity: 1;
+.maccu > div > button:first-of-type,
+.mregen > div > button:first-of-type  {
+    border-right: 1px solid var(--boxColor);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 0px;
 }
+
+/* #endregion */
+
+/* #region @Zeon */
 .zeon > label,
 .zeon > div > label {
     display: flex;
     padding: 0 10px 0 10px;
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
 }
 .zeon > label > span,
 .zeon > div > label > span {
@@ -1725,26 +2144,20 @@ h6 {
 }
 .zeon > label:nth-of-type(3) {
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
     padding: 0 10px;
 }
 .zeon > label:nth-of-type(2),
 .zeon > label:nth-of-type(3) {
     font-weight: bold;
 }
-.zeon > :nth-child(2) {
-    border-top: 3px solid var(--boxColor);
+/* #endregion */
+
+/* #region @Innate-Magic */
+.minnate {
+    margin: 7px 0 0 0;
 }
-/* Innate Magic */
-.minnate > h6 {
-    padding-top: 5px;
-    margin-bottom: 0px;
-}
-.minnate > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-    border-top: 3px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
+.minnate > legend {
+    font-size: 1.3rem;
 }
 .minnate > div > div > span {
     justify-content: center;
@@ -1759,19 +2172,14 @@ h6 {
 .minnate > div > div:last-of-type > span {
     font-weight: bold;
 }
+/* #endregion */
+
+/* #region @Magic-Levels */
 /* Magic Levels */
-.mlevels > h5 > label > a {
-    opacity: 0;
-}
-.mlevels:hover > h5 > label > a {
-    opacity: 1;
-}
 .mlevels > label,
 .mlevels > div > label {
     display: flex;
     padding: 0 10px;
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
 }
 .mlevels > label > span,
 .mlevels > div > label > span {
@@ -1784,29 +2192,21 @@ h6 {
 }
 .mlevels > label:nth-of-type(3) {
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
     padding: 0 10px;
 }
 .mlevels > label:nth-of-type(2),
 .mlevels > label:nth-of-type(3) {
     font-weight: bold;
 }
-.mlevels > :nth-child(2) {
-    border-top: 3px solid var(--boxColor);
-}
-/* Spell Paths */
-.spellPath > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
+/* #endregion */
+
+/* #region @Spell-Paths */
 .spellPath > div:last-of-type {
     display: flex;
     place-content: space-between;
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
 }
 .spellPath > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
 }
 .spellPath > div:first-of-type,
@@ -1832,19 +2232,16 @@ h6 {
 .spellPath-item:nth-child(2n){
     background: var(--itemOffSet);
 }
-/* Sumoning Abilities */
+/* #endregion */
+
+/* #region @Sumoning-Abilities */
 .summoning > div {
     display: flex;
     justify-content: flex-start;
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
+    align-items: anchor-center;
 }
 .summoning > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
-}
-.summoning > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
 }
 .summoning > div:first-of-type > span {
     text-align: center;
@@ -1856,10 +2253,10 @@ h6 {
 .summoning > div > button {
     width: 31%;
     margin: 0 1.5% 0 0;
-    height: 20px;
-    border-radius: 0px;
+    height: 25px;
     border: 0px;
     border-right: 1px solid var(--boxColor);
+    font-size: 0px;
 }
 .summoning > div:first-of-type > span,
 .summoning > div > input {
@@ -1870,20 +2267,15 @@ h6 {
 .summoning > div > input:last-of-type {
     margin: 0;
 }
-/* Turn Maintenance & Daily Maintenance */
-.turnDayMaint > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
+/* #endregion */
+
+/* #region @Turn-Maint & @Daily-Maint */
 .turnDayMaint > div:nth-of-type(2) {
     width: 100%;
     min-height: 5px;
 }
 .turnDayMaint > div:nth-of-type(2) > div {
     padding: 0 2.5%;
-}
-.turnDayMaint > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
 }
 .turnDayMaint > div:first-of-type,
 .turnDayMaint > div:nth-of-type(3),
@@ -1914,9 +2306,11 @@ h6 {
     height: 20px;
     border-radius: 0px;
     border: 0px;
+    font-size: 13px;
 }
 .turnDayMaint > div:nth-of-type(3) > span {
     width: 63%;
+    height: 26px;
 }
 .turnDayMaint > div:first-of-type > span:first-of-type {
     width: 59.85%;
@@ -1929,7 +2323,6 @@ h6 {
 .turnDayMaint > div:last-of-type {
     display: flex;
     place-content: space-between;
-    border-bottom: 3px solid var(--boxColor);
 }
 .turnMaint-item > div > input:first-of-type,
 .turnMaint-item > div > span:first-of-type,
@@ -1948,7 +2341,7 @@ h6 {
 .turnMaint-item > div > a,
 .dailyMaint-item > div > a {
     width: 5%;
-    font-size: 15px;
+    font-size: .95rem;
 }
 .turnMaint-item > div > a,
 .dailyMaint-item > div > a {
@@ -1964,23 +2357,13 @@ h6 {
 .turnDayMaint > div > div:nth-child(2n) {
     background: var(--itemOffSet);
 }
-/*
-    ----------
-    Spell Book
-    ----------
-*/
-.spells > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
+/* #endregion */
+
+/* #region @Spell-Book */
 .spells > div:last-of-type {
     display: flex;
     border-top: 1px solid var(--boxColor);
     place-content: space-between;
-    border-bottom: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
 }
 .spell-item:nth-child(2n) {
     background: var(--itemOffSet);
@@ -2090,13 +2473,35 @@ h6 {
 .spell-item > div > div:hover > a {
     opacity: 1;
 }
-/*
-    ---------
-    Metamagic
-    ---------
-*/
+/* #endregion */
+
+/* #region @Item-Spell */
+.spellContentCont > div:first-of-type {
+    display: flex;
+    width: 100%;
+}
+.spellContentCont > div {
+    display: flex;
+}
+.spellContentCont > div > input,
+.spellContentCont > div > span {
+    width: 24.5%;
+    margin: 0 0.5% 0 0;
+}
+.spellContentCont > div > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.spellContentCont > div:nth-of-type(2n) {
+    border-top: 2px solid var(--boxColor);
+    padding: 3px 0;
+}
+
+/* #endregion */
+
+/* #region @Metamagic */
 .metaMagic > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
     display: flex;
     align-items: center;
@@ -2127,11 +2532,6 @@ h6 {
 }
 .metaMagic > div:last-of-type {
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
-}
-.metaMagic > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
 }
 .metaMagicDesc > div > span {
     display: inline !important;
@@ -2145,19 +2545,102 @@ h6 {
 .metaMagicDesc > h6 {
     border-bottom: 1px solid var(--boxColor);
 }
-/*
-    --------------------------
-    Invocations & Incarnations
-    --------------------------
-*/
+/* #endregion */
+
+/* #region @Metamagic-Tree-Page */
+.metaMagicGUI {
+    display: grid;
+    grid-template-columns: repeat(23,85px);
+    grid-template-rows: repeat(23,85px);
+    padding: 20px 10px;
+}
+.metaMagicGUI .bubble {
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #06054a 0%, #552670 66.6%, #2d3c66 66.6%, #4043a5 100%);
+    border: 4px solid #383838;
+    z-index: 1;
+}
+.bubbleBought {
+    border-color: var(--kiBought) !important;
+}
+.bubbleFree {
+    border-color: var(--kiFree) !important;
+}
+.metaMagicGUI .bubbleOffsetWide {
+    place-self: center;
+    width: 50%;
+    height: 100%;
+}
+.metaMagicGUI .bubbleOffsetTall {
+    place-self: center;
+    width: 100%;
+    height: 50%;
+}
+.metaMagicGUI .bubbleOffsetCapstone {
+    place-self: center;
+    width: 65%;
+    height: 65%;
+}
+.metaMagicGUI .bubbleLine {
+    z-index: 0;
+}
+.bubbleInfo {
+    display: grid;
+    grid-template-rows: 5px 50px 20px;
+    place-items: center;
+}
+.bubbleInfoCap {
+    display: grid;
+    grid-template-rows: 5px 70px 20px;
+    place-items: center;
+}
+.metaMagicGUI .bubbleInfo > span,
+.metaMagicGUI .bubbleInfoCap > span {
+    text-align: center;
+}
+.metaMagicGUI .bubbleInfo > span:nth-of-type(1) {
+    font-size: 30px;
+    color: #db48a0;
+    margin: 0 0 30px 0;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+.metaMagicGUI .bubbleInfo > span:nth-of-type(2) {
+    display: flex;
+    font-size: 14px;
+}
+.metaMagicGUI .bubbleInfo > span:nth-of-type(3) {
+    font-size: 20px;
+    display: flex;
+}
+.metaMagicGUI .bubbleInfoCap > span:nth-of-type(1) {
+    font-size: 30px;
+    color: #db48a0;
+    margin: 0 0 30px 0;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+.metaMagicGUI .bubbleInfoCap > span:nth-of-type(2) {
+    display: flex;
+    font-size: 14px;
+}
+.metaMagicGUI .bubbleInfoCap > span:nth-of-type(3) {
+    font-size: 20px;
+    display: flex;
+}
+.metaMagicGUI .arcanaTitle {
+    align-items: center;
+    display: grid;
+}
+.metaMagicGUI .arcanaTitle > h5 {
+    font-size: 50px;
+}
+/* #endregion */
+
+/* #region @Invocations & @Incarnations */
 .invocations > div:nth-of-type(2),
 .incarnations > div:nth-of-type(2) {
     width: 100%;
-}
-.invocations > div,
-.incarnations > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
 }
 .invocations > div:first-of-type,
 .incarnations > div:first-of-type,
@@ -2168,7 +2651,6 @@ h6 {
 }
 .invocations > div:first-of-type,
 .incarnations > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
 }
 .invocation-item,
@@ -2201,7 +2683,6 @@ h6 {
     display: flex;
     place-content: space-between;
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
 }
 .invocations > div:first-of-type > span,
 .incarnations > div:first-of-type > span,
@@ -2245,6 +2726,8 @@ h6 {
     width: 15%;
     margin: 0 0 0 1%;
 }
+/* #endregion */
+
 /*
     ***************
     ---------------
@@ -2252,10 +2735,7 @@ h6 {
     ---------------
     ***************
 */
-.psychic > div {
-    flex-wrap: wrap;
-    min-width: 878px;
-}
+/* #region Containers */
 .s3,
 .s4 {
     display: flex;
@@ -2273,21 +2753,11 @@ h6 {
 .s4 > div {
     width: 48%;
 }
-/*
-    --
-    PP
-    --
-*/
-.ppoint > div,
-.ppoint > label {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.ppoint > :nth-child(2) {
-    border-top: 3px solid var(--boxColor);
-}
-.ppoint > label:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
+/* #endregion */
+
+/* #region @PP */
+.ppoint > *:nth-child(2) {
+    margin: -7px 0 0 0;
 }
 .ppoint > label,
 .ppoint > div > label {
@@ -2318,21 +2788,11 @@ h6 {
 .ppoint:hover > h5 > label > a {
     opacity: 1;
 }
-/*
-    ---------
-    Potential
-    ---------
-*/
-.ppotential > :nth-child(2) {
-    border-top: 3px solid var(--boxColor);
-}
-.ppotential > div,
-.ppotential > label {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.ppotential > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
+/* #endregion */
+
+/* #region @Potential */
+.ppotential > *:nth-child(2) {
+    margin: -7px 0 0 0;
 }
 .ppotential > label,
 .ppotential > div > label,
@@ -2364,26 +2824,17 @@ h6 {
     opacity: 1;
 }
 .ppotential > div > button {
-    margin: 0px;
+    width: 100%;
     height: 25px;
-    border-radius: 0px;
     border: 0px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
-/*
-    ----------
-    Projection
-    ----------
-*/
-.pproj > :nth-child(2) {
-    border-top: 3px solid var(--boxColor);
-}
-.pproj > div,
-.pproj > label {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.pproj > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
+/* #endregion */
+
+/* #region @Projection */
+.pproj > *:nth-child(2) {
+    margin: -7px 0 0 0;
 }
 .pproj > label,
 .pproj > div > label {
@@ -2412,10 +2863,11 @@ h6 {
     opacity: 1;
 }
 .pproj > div > button {
-    margin: 0px;
+    width: 100%;
     height: 25px;
-    border-radius: 0px;
     border: 0px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 .pmodButton {
    display: flex;
@@ -2426,41 +2878,25 @@ h6 {
 .pmodButton > button:first-of-type {
     border-right: 1px solid black;
 }
-/*
-    -----------
-    Disciplines
-    -----------
-*/
+/* #endregion */
+
+/* #region @Disciplines */
 .discipline-item:nth-child(2n) {
     background: var(--itemOffSet);
 }
 .discipline-item > div > span {
     text-align: center;
 }
-.pdisc > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.pdisc > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
 .pdisc > div:last-of-type {
     display: flex;
     place-content: space-between;
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
 }
-/*
-    ---------------
-    Mental Patterns
-    ---------------
-*/
+/* #endregion */
+
+/* #region @Psychic-Patterns */
 .mentalPattern-item {
     padding: 0 2.5%;
-}
-.ppaterns > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
 }
 .ppaterns > div:first-of-type,
 .mentalPattern-item > div:first-of-type {
@@ -2468,8 +2904,8 @@ h6 {
     justify-content: flex-start;
 }
 .ppaterns > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
+    margin: -7px 0 0 0;
 }
 .ppaterns > div > span,
 .mentalPattern-item > div:nth-of-type(1) > span {
@@ -2490,7 +2926,6 @@ h6 {
     display: flex;
     place-content: space-between;
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
 }
 .mentalPattern-item:nth-child(2n) {
     background: var(--itemOffSet);
@@ -2519,10 +2954,8 @@ h6 {
     opacity: 1;
 }
 .mentalPattern-item > div > button {
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
     border: 0px;
+    font-size: 0px;
 }
 .mentalPattern-item > div:nth-of-type(2) {
     display: flex;
@@ -2548,20 +2981,14 @@ h6 {
     text-align: center;
     border-bottom: 1px solid var(--boxColor);
 }
-/*
-    ----------------
-    Psychic Matrices
-    ----------------
-*/
+/* #endregion */
+
+/* #region @Psychic-Matrices */
 .psychicMatrix-item {
     padding: 0 2.5%;
 }
 .psychicMatrix-item:nth-child(2n) {
     background: var(--itemOffSet);
-}
-.ppowers > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
 }
 .ppowers > div:first-of-type,
 .psychicMatrix-item > div:first-of-type {
@@ -2569,8 +2996,8 @@ h6 {
     justify-content: flex-start;
 }
 .ppowers > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
+    margin: -7px 0 0 0;
 }
 .ppowers > div:first-of-type > span,
 .psychicMatrix-item > div:nth-of-type(1) > span,
@@ -2590,7 +3017,6 @@ h6 {
     display: flex;
     place-content: space-between;
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
 }
 .psychicMatrix-item > div > input:first-of-type,
 .psychicMatrix-item > div:nth-of-type(1) > span:first-of-type {
@@ -2664,20 +3090,51 @@ h6 {
     border-bottom: 1px solid var(--boxColor);
     padding: 0 0 3px 0;
 }
-/*
-    -------------------
-    Maintained Matrices
-    -------------------
-*/
+.psychicMatrix > div > label {
+    display: flex;
+}
+.psychicMatrix > div:nth-of-type(1) {
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid var(--boxColor);
+}
+.psychicMatrix > div:nth-of-type(1) > span,
+.psychicMatrix > div:nth-of-type(2) > label > span {
+    display: grid;
+}
+.psychicMatrix > div:nth-of-type(1) > span:first-of-type {
+    width: 25%;
+}
+.psychicMatrix > div:nth-of-type(1) > span:last-of-type {
+    width: 75%;
+}
+.psychicMatrix > div:nth-of-type(2) > label {
+    text-align: center;
+}
+.psychicMatrix > div:nth-of-type(2) > label > span:first-of-type {
+    width: 7%;
+    border-right: 1px solid var(--boxColor);
+}
+.psychicMatrix > div:nth-of-type(2) > label > span:last-of-type {
+    width: 18%;
+}
+.psychicMatrix > div:nth-of-type(2) > label > input {
+    width: 75%;
+}
+.psychicMatrix > div > label > span,
+.psychicMatrix > div > span {
+    font-size: 13px;
+    align-items: center;
+    height: 20px;
+}
+/* #endregion */
+
+/* #region @Maintained-Matrices */
 .maintPower-item:nth-child(2n) {
     background: var(--itemOffSet);
 }
-.pmaint > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
 .pmaint > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
+    margin: -7px 0 0 0;
 }
 .maintPower-item {
     padding: 0 2.5%;
@@ -2720,7 +3177,6 @@ h6 {
     display: flex;
     place-content: space-between;
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
 }
 .maintPower-item > div > input:first-of-type,
 .maintPower-item > div:nth-of-type(1) > span:first-of-type {
@@ -2744,6 +3200,7 @@ h6 {
 .maintPower-item > div > textarea {
     margin: 5px 0 0 0;
 }
+/* #endregion */
 
 /*
     **************
@@ -2752,63 +3209,74 @@ h6 {
     --------------
     **************
 */
-.ki {
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-between;
-    min-width: 878px;
+/* #region Containers */
+.ki .fieldsetContainer {
+    flex-direction: row;
 }
-.kiAbilities {
+.ki .kiAbilities {
     width: 33.5%;
+    display: block;
 }
+
 .s5 {
-    width: 63.5%;
+    width: 64.5%;
     flex-wrap: wrap;
+    gap: .5rem;
+    display: flex;
 }
 .s5 > div:nth-of-type(1),
 .s5 > div:nth-of-type(2) {
-    flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
 }
 .kipool {
     width: 44%;
 }
-.mk {
-    width: 55%;
+.kiPoolRightContainer {
+    width: 54%;
 }
-.arsMagnus {
-    width: 68%;
+.kiMacroControls {
+    width: 44%;
 }
 .limits {
-    width: 28%;
+    width: 54%;
 }
 .mk > div,
 .limits > div {
     width: 95%;
     margin: 0 0 0 2.5%;
 }
-/*
-    ---------
-    Ki Abilities
-    ---------
-*/
-.kiAbilities > div {
-    border: 3px solid var(--boxColor);
+.arsMagnus, .martialarts, .kiseals, .DragonSeals, .kiTech {
+    width: 100%;
 }
-.kiAbility {
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
+/* #endregion */
+
+/* #region @Ki-Abilities */
+.kiSubsection > div:first-of-type {
+    margin: -7px 0 0 0;
+}
+.kiSubsection > div:first-of-type > span { 
+    padding: 0 0 0 3px;
+}
+.kiSubsection > div:last-of-type {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.kiSubsection > div:last-of-type > button {
+    border-bottom-right-radius: 8px;
+}
+.kiSubsection .kiAbility {
+    height: 25px;
     border: 0px;
     width: 15%;
+    font-size: 0px;
 }
 .kiSubsection > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.kiSubsection > div:nth-child(2n) {
+.kiSubsection > div:nth-child(2n + 1) {
     background: var(--itemOffSet);
 }
 .subKi1 {
@@ -2840,26 +3308,16 @@ h6 {
     border-radius: 0px;
     border: 0px;
 }
-/*
-    --------
-    Ki Pools
-    --------
-*/
+/* #endregion */
+
+/* #region @Ki-Pools */
 .kipool > div:not(:first-of-type) > div {
     padding: 0 2.5%;
 }
-.kipool > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
-.kipool > div:last-of-type,
-.innatePowBorder {
-    border-bottom: 3px solid var(--boxColor);
-}
 .kipool > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
     padding: 0 2.5%;
+    margin: -7px 0 0 0;
 }
 .kipool > div:first-of-type > span:first-of-type {
     margin: 0 2.5% 0 19%;
@@ -2882,7 +3340,6 @@ h6 {
 .kipool > div > div > input {
     margin: 0 2% 0 0;
 }
-
 .kipool > div > div > input,
 .kipool > div:nth-of-type(8) > div > input {
     width: 17%;
@@ -2898,7 +3355,7 @@ h6 {
     opacity: 1;
 }
 .kipool > div > div:not(:first-of-type) > span {
-    font-size: 11px;
+    font-size: 12px;
     font-style: italic;
     padding: 0 0 0 8px;
 }
@@ -2906,46 +3363,11 @@ h6 {
     width: 36%;
     margin: 0 2% 0 0;
 }
-.mk .kiPoolButtons {
-    margin: 5% 2.5% 0 2.5%;
-    border: none;
-}
-.mk .kiPoolButtons > div {
-    width: 46%;
-}
-.mk .kiPoolButtons > div > div {
-    display: flex;
-}
-.mk .kiPoolButtons > div > div > button {
-    width: 50%;
-    margin: 0px;
-    height: 25px;
-    border-radius: 0px;
-    border: 0px;
-}
-.mk .kiPoolButtons > div > div {
-    border: 2px solid var(--boxColor);
-}
-.mk .kiPoolButtons > div:first-of-type > div > button {
-    width: 50%;
-}
-.mk .kiPoolButtons > div:first-of-type > div > button:first-of-type {
-    border-right: 1px solid var(--boxColor);
-}
-.mk .kiPoolButtons > div:last-of-type > div > button {
-    width: 100%;
-}
-/*
-    --
-    MK 
-    --
-*/
+/* #endregion */
+
+/* #region @MK */
 .mk > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.mk > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
+    margin: -5px 0 0 2.5%;
 }
 .mk > div,
 .mk > div > label {
@@ -2966,7 +3388,6 @@ h6 {
 }
 .lastMK {
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
     padding: 3px 0;
 }
 .mk > h5 > label > a {
@@ -2975,22 +3396,47 @@ h6 {
 .mk:hover > h5 > label > a {
     opacity: 1;
 }
-/*
-    ----------
-    Ars Magnus
-    ----------
-*/
-.arsMagnus > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
+/* #endregion */
+
+/* #region @Limits */
+.limits > div > select {
+    width: 100%;
 }
+.limits > div:first-of-type {
+    margin: -5px 0 0 2.5%;
+}
+
+/* #endregion */
+
+/* #region @Ki-Macro-Controls */
+.kiMacroControls > div {
+    display: flex;
+}
+.kiMacroControls > div > button {
+    width: 50%;
+    height: 25px;
+    border: 0px;
+    border-bottom: 1px solid var(--boxColor);
+}
+.kiMacroControls > div > button:first-of-type {
+    border-right: 1px solid var(--boxColor);
+}
+.kiMacroControls > button {
+    justify-self: anchor-center;
+    width: 75%;
+    height: 20px;
+    border: 0px;
+}
+/* #endregion */
+
+/* #region @Ars-Magnus */
 .arsMagnus > div:not(:nth-of-type(2)),
 .arsMagnus-item > div:first-of-type {
     display: flex;
 }
 .arsMagnus > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
+    margin: -7px 0 0 0;
 }
 .arsMagnus > div > span:first-of-type {
     width: 69.35%;
@@ -3004,8 +3450,6 @@ h6 {
     display: flex;
     place-content: space-between;
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
-    margin: 0 0 15px 0;
 }
 .arsMagnus > div > span,
 .arsMagnus-item > div > span {
@@ -3040,40 +3484,31 @@ h6 {
 .arsMagnus-item > div:nth-of-type(2) {
     padding: 3px 2.5%;
 }
-.arsMagnus > div:nth-of-type(4) {
-    border-top: 3px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
+/* #endregion */
+
+/* #region @Dragon-Seals */
+.DragonSeals > div {
+    display: flex;
+    padding: 0 2.5%;
+    text-align: center;
 }
-.arsMagnus > div:nth-of-type(5) {
-    border-bottom: 3px solid var(--boxColor);
+.DragonSeals > div:first-of-type {
+    margin: -7px 0 0 0;
 }
-.arsMagnus > div:nth-of-type(5) > input {
-    width: 9.5%;
-    margin: 0 0 0 1%;
+.DragonSeals > div > :nth-child(1) {
+    width: 48%;
+    margin: 0 2% 0 0;
 }
-/*
-    ------
-    Limits
-    ------
-*/
-.limits > div > select {
-    width: 100%;
+.DragonSeals > div > :nth-child(2) {
+    width: 20%;
+    margin: 0 5% 0 0;
 }
-.limits > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
+.DragonSeals > div > :nth-child(3) {
+    width: 20%;
 }
-.limits > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.limits > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
-}
-/*
-    ------------
-    Martial Arts
-    ------------
-*/
+/* #endregion */
+
+/* #region @Martial-Arts */
 .martialarts > div:first-of-type,
 .martialArt-item > div:first-of-type {
     display: flex;
@@ -3081,11 +3516,7 @@ h6 {
 }
 .martialarts > div:first-of-type {
     border-bottom: 1px solid var(--boxColor);
-    border-top: 3px solid var(--boxColor);
-}
-.martialarts > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
+    margin: -7px 0 0 0;
 }
 .martialArt-item > div {
     padding: 0 2.5%;
@@ -3111,7 +3542,6 @@ h6 {
 .martialarts > div:last-of-type {
     display: flex;
     place-content: space-between;
-    border-bottom: 3px solid var(--boxColor);
     border-top: 1px solid var(--boxColor);
 }
 .martialArt-item > div > a {
@@ -3145,26 +3575,17 @@ h6 {
 .martialArt-item > div:nth-of-type(2) {
     padding: 3px 2.5%;
 }
-/*
-    --------------
-    Unarmed Damage
-    --------------
-*/
+/* #endregion */
+
+/* #region @Unarmed-Damage */
 .unarmed > div,
 .unarmed > div > div {
     display: flex;
     justify-content: flex-start;
 }
-.unarmed > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
-.unarmed > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
-}
 .unarmed > div:first-of-type {
     border-bottom: 1px solid var(--boxColor);
-    border-top: 3px solid var(--boxColor);
+    margin: -7px 0 0 0;
 }
 .unarmed > div > span {
     text-align: center;
@@ -3205,18 +3626,9 @@ h6 {
 .unarmed:hover > h5 > label > a {
     opacity: 1;
 }
-/*
-    -----------------
-    Ki Seal Creatures
-    -----------------
-}*/
+/* #endregion */
 
-.kiseals > h5 > label > a {
-    opacity: 0;
-}
-.kiseals:hover > h5 > label > a {
-    opacity: 1;
-}
+/* #region @Ki-Seal-Creatures */
 .kisealmast > div {
     display: flex;
     justify-content: space-evenly;
@@ -3239,18 +3651,17 @@ h6 {
 .kisealmast > div > span,
 .kisealmast > div > button {
     width: 15%;
+    height: 30px;
+}
+.kisealmast > div > button {
+    font-size: 0px;
+    border-color: var(--boxColor);
+}
+.kiseals > div:first-of-type {
+    margin: -7px 0 0 0;
 }
 .kisealmast > div:first-of-type {
     border-top: 1px solid var(--boxColor);
-}
-.kisealmast > h6 {
-    border-top: 3px solid var(--boxColor);
-}
-.kiSealsCreatures > div,
-.kisealmast > div,
-.kisealmast > h6 {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
 }
 .kisealmast > div:last-of-type {
     border-bottom: 1px solid var(--boxColor);
@@ -3258,7 +3669,6 @@ h6 {
 }
 .kiSealsCreatures > div:first-of-type {
     border-bottom: 1px solid var(--boxColor);
-    border-top: 3px solid var(--boxColor);
 }
 .kiSealCreature-item {
     padding: 0 2.5%;
@@ -3283,7 +3693,6 @@ h6 {
     display: flex;
     place-content: space-between;
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
 }
 .kiSealCreature-item > div > a {
     width: 5%;
@@ -3319,23 +3728,38 @@ h6 {
 .kiSealCreature-item > div:last-of-type > textarea {
     margin: 3px 0 0 0;
 }
-/*
-    -------------
-    Ki techniques
-    -------------
-*/
-.kiTech > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
+/* #endregion */
+
+/* #region @Item-Ki-Seals */
+.kiSealContent {
+    background: none !important;
 }
-.kiTech > div:first-of-type {
-    border-top: 1px solid var(--boxColor);
+.kiSealContent > div {
+    display: flex; 
 }
+.kiSealContent > div > span {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+.kiSealContent > div:nth-of-type(2) > span:first-of-type,
+.kiSealContent > div:nth-of-type(3) > span:first-of-type,
+.kiSealContent > div:first-of-type > span:first-of-type {
+    width: 20%;
+    margin: 0;
+}
+.kiSealContent > div > input,
+.kiSealContent > div:first-of-type > span {
+    width: 15%;
+    margin: 0 0 0 1%;
+}
+/* #endregion */
+
+/* #region @Ki-techniques */
 .kiTech > div:last-of-type {
     display: flex;
     place-content: space-between;
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
 }
 .kiTechnique-item {
     padding: 0 2.5% 10px 2.5%;
@@ -3495,6 +3919,62 @@ h6 {
 .kiTechSideInfoMax > span {
     font-size: 12px;
 }
+/* #endregion */
+
+/* #region @Item-Ki-techniques */
+.kiTechMaintMaxContent > div,
+.kiTechContent > div:not(:nth-of-type(4)) {
+    display: flex;
+}
+.kiTechContent > div:nth-of-type(1) > label {
+    display: flex;
+    width: 50%;
+    padding: 0 10px;
+}
+.kiTechContent > div:nth-of-type(1) > label > input{
+    width: 25%;
+    margin: 0 1% 0 0;
+    display: flex;
+    justify-content: center;
+}
+.kiTechContent > div:nth-of-type(1) > label > span {
+    width: 49%;
+    margin: 0 1% 0 0;
+    display: flex;
+    justify-content: center;
+}
+.kiTechContent > div:nth-of-type(2) {
+    padding: 3px 0 0 0;
+    border-bottom: 1px dashed var(--boxColor);
+}
+.kiTechMaintMaxContent > div > span:first-of-type {
+    width: 15%;
+    justify-content: center;
+    display: flex;
+}
+.kiTechMaintMaxContent > div > input {
+    text-align: center;
+    width: 9%;
+    margin: 0 1% 0 0;
+}
+.kiTechMaintMaxContent > div:nth-of-type(2) > span {
+    width: 25%;
+}
+.techExpandContent {
+    display: flex;
+    width: 75%;
+}
+.techExpandContent > span {
+    width: 33.3%;
+    justify-content: center;
+    display: flex;
+}
+.techExpandContent > input {
+    display: flex;
+    width: 12%;
+}
+/* #endregion */
+
 /*
     *************
     -------------
@@ -3502,12 +3982,9 @@ h6 {
     -------------
     *************
 */
-.armory {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100% !important;
-    min-width: 878px;
+/* #region Containers */
+.armory .fieldSetRow {
+    flex-direction: column;
 }
 .armory > div:first-of-type {
     width: 25%;
@@ -3515,37 +3992,17 @@ h6 {
 .armory > div:last-of-type {
     width: 73%;
 }
+.wearArmor, .armorStats, .weightStats, .currency,
+.armor, .inventory {
+    width: 100%;
+}
+/* #endregion */
 
-.wearArmor {
-    width: 100%;
-}
-.armor {
-    width: 100%;
-}
-.prof {
-    width: 100%;
-}
-.currency {
-    flex-wrap: wrap;
-    width: 100%;
-}
-.inventory {
-    width: 100%;
-}
-
-/* #region Wear Armor */
-.wearArmor > label {
+/* #region @Wear-Armor & @Armor-Stats*/
+.wearArmor > label,
+.armorStats > label {
     display: flex;
     padding: 0 10px;
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
-.wearArmor > label:nth-of-type(1),
-.wearArmor > label:nth-of-type(6) {
-    border-top: 3px solid var(--boxColor);
-}
-.wearArmor > label:nth-of-type(10) {
-    border-bottom: 3px solid var(--boxColor);
 }
 .wearArmor > label:nth-of-type(9) {
     border-top: 1px solid var(--boxColor);
@@ -3559,31 +4016,60 @@ h6 {
 }
 .wearArmor > label:nth-of-type(5) {
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
-    margin: 0 0 5px 0;
     padding: 0 10px;
     font-weight: bold;
 }
-.wearArmor > label:nth-of-type(6) > span,
-.wearArmor > label:nth-of-type(7) > span,
-.wearArmor > label:nth-of-type(8) > span,
-.wearArmor > label:nth-of-type(9) > span,
-.wearArmor > label:nth-of-type(10) > span {
+.armorStats > label > span  {
     width: 80%;
+    text-align: start;
 }
-.wearArmor > label:nth-of-type(6) > input,
-.wearArmor > label:nth-of-type(7) > input,
-.wearArmor > label:nth-of-type(8) > input,
-.wearArmor > label:nth-of-type(9) > input,
-.wearArmor > label:nth-of-type(10) > input {
+.armorStats > label > input {
     width: 20%;
 }
 /* #endregion */
 
-/* #region Armor */
+/* #region @Weight-Stats */
+/* #endregion */
+
+/* #region @Currency */
+.currency > div > label,
+.currency-item > div {
+    display: flex;
+}
+.currency > div:first-of-type {
+    display: flex;
+    border-bottom: 1px solid var(--boxColor);
+}
+.currency > div:last-of-type {
+    display: flex;
+    place-content: space-between;
+    border-top: 1px solid var(--boxColor);
+}
+.currency > div > span,
+.currency > div > label > span,
+.currency-item > div > span {
+    text-align: center;
+}
+.currency > div > span:first-of-type,
+.currency > div > label > span,
+.currency-item > div > span:first-of-type,
+.currency-item > div > input:first-of-type {
+    width: 69%;
+}
+.currency > div > span:last-of-type,
+.currency > div > label > input,
+.currency-item > div > input:last-of-type {
+    width: 30%;
+    margin: 0 0 0 1%;
+}
+.currency-item:nth-child(2n) {
+    background: var(--itemOffSet);
+}
+/* #endregion */
+
+/* #region @Armor */
 .armor > div:first-of-type {
     display: flex;
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
 }
 .armor-item > div > a,
@@ -3635,14 +4121,10 @@ h6 {
 .armor-item > div:hover > a {
     opacity: 1;
 }
-.armor > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
 .armor > div:nth-of-type(4) {
     display: flex;
     justify-content: space-between;
-    border-top: 3px solid var(--boxColor);
+    border-top: 2px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
     padding: 3px 0 0 0;
 }
@@ -3663,7 +4145,6 @@ h6 {
 .armor > div:nth-of-type(9) {
     display: flex;
     justify-content: space-between;
-    border-bottom: 3px solid var(--boxColor);
     padding-bottom: 3px;
 }
 .armor > div:nth-of-type(4) > span:not(:first-of-type),
@@ -3678,78 +4159,69 @@ h6 {
     display: flex;
     justify-content: space-between;
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
+    border-bottom: 2px solid var(--boxColor);
 }
 /* #endregion */
 
-/* #region Proficiency */
-.prof > div:first-of-type {
+/* #region @Item-Armor */
+.armorContent {
+    padding: 0 10px;
+}
+.armorContent > label {
     display: flex;
-    border-top: 3px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-    padding-bottom: 3px;
+    padding: 2px 0;
 }
-.prof > div:last-of-type {
-    display: flex;
-    place-content: space-between;
-    border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
+.armorContent > label > span {
+    display: grid;
 }
-.prof > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
+.armorContent > label > span:first-of-type {
+    width: 65%;
 }
-.prof-item > div {
-    display: flex;
+.armorContent > label > input {
+    width: 17%;
 }
-.prof-item:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-.prof > div:first-of-type > span,
-.prof-item > div > span {
+.armorContent > label > span:nth-of-type(2) {
+    width: 1%;
     text-align: center;
 }
-.prof > div:first-of-type > span,
-.prof-item > div > span:first-of-type,
-.prof-item > div > label:first-of-type {
-    width: 50%;
+.armorContent > label > span:nth-of-type(3) {
+    width: 17%;
+    text-align: center;
 }
-.prof-item > div > span:first-of-type {
-    padding-right: 2px;
+.armorCard > div {
+    display: flex;
+    justify-content: space-around;
+    padding: 3px 0 0 0;
 }
-.prof > div:first-of-type > span:nth-of-type(2),
-.prof-item > div > span:nth-of-type(2),
-.prof-item > div > div {
-    width: 38%;
-    margin: 0 0 0 1%;
+.armorCard > div:first-of-type {
+    border-bottom: 1px dotted var(--boxColor);
 }
-.prof-item > div > div > select {
-    width: 100%;
+.armorCard > div > span:first-of-type {
+    width: 15%;
 }
-.prof > div:first-of-type > span:nth-of-type(3),
-.prof-item > div > span:nth-of-type(3),
-.prof-item > div > input {
+.armorCard > div > span {
     width: 10%;
-    margin: 0 0 0 1%;
+    text-align: center;
+}
+.armorCard > div > input {
+    width: 10%;
+}
+.armorContentButtons {
+    display: flex;
+    justify-content: space-between;
 }
 /* #endregion */
 
-/* #region Weapon */
+/* #region @Weapon */
 .weapons {
     width: 100%;
 }
-.weapons > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
 .weapons > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     padding-bottom: 3px;
 }
 .weapons > div:last-of-type {
     display: flex;
     place-content: space-between;
-    border-bottom: 3px solid var(--boxColor);
 }
 .weapon-item:nth-child(2n) {
     background: var(--itemOffSet);
@@ -3882,7 +4354,11 @@ h6 {
 .weaponSubThrow > span:nth-of-type(1) {
     padding: 0 5px;
 }
+.weapons .itemControls {
+    border: none;
+}
 /* #endregion */
+
 /* #region Item Weapon*/
 .attack-entry:nth-child(2n) {
     background: var(--itemOffSet);
@@ -3898,6 +4374,10 @@ h6 {
     border-radius: 0px;
     border: none;
 }
+.weaponContent, .weaponContent2, .weaponContent3, .weaponContent4, .wepaonContentButtons,
+.weaponContent5, .weaponContent6, .weaponContent7, .weaponContent8 {
+    padding: 0 10px !important;
+}
 .weaponContent > label, 
 .weaponContent3 > label,
 .weaponContent4 > label,
@@ -3912,6 +4392,9 @@ h6 {
 }
 .weaponContent > label > span:first-of-type {
     width: 65%;
+}
+.weaponContent > label > select {
+    width: 35%;
 }
 .weaponContent > label > input,
 .weaponContent5 > label > input {
@@ -3949,11 +4432,24 @@ h6 {
 .abfalter.item .sheet-body .details .weaponContent3 .csSelect > label > select {
     width: 45%;
 }
+
+.weaponContent2 > div > label,
+.weaponContent3 > div > label,
+.weaponContent4 > div > label {
+    display: flex;
+}
+.weaponContent3 > div > label > span {
+    width: 45%;
+}
+.weaponContent3 > div > label > select {
+    width: 55%;
+}
 .weaponContent3 > label > button {
     margin: 0px;
     height: 20px;
     border-radius: 0px;
     border: none;
+    font-size: 0px;
 }
 .weaponContent3 > input {
     width: 17%;
@@ -3977,6 +4473,7 @@ h6 {
     height: 20px;
     border-radius: 0px;
     border: none;
+    font-size: 0px;
 }
 .weaponContent2,
 .weaponContent6 > label {
@@ -4028,6 +4525,7 @@ h6 {
     height: 20px;
     border-radius: 0px;
     border: none;
+    font-size: 0px;
 }
 .weaponContent5 > label > span:nth-of-type(2) {
     width: 1%;
@@ -4053,6 +4551,7 @@ h6 {
     height: 20px;
     border-radius: 0px;
     border: none;
+    font-size: 0px;
 }
 .weaponContent7 > span:nth-of-type(1) {
     width: 1%;
@@ -4079,6 +4578,7 @@ h6 {
     height: 20px;
     border-radius: 0px;
     border: none;
+    font-size: 0px;
 }
 .weaponContent8 > button:first-of-type {
     width: 10%;
@@ -4107,7 +4607,6 @@ h6 {
     text-align: center;
     width: 49%;
 }
-
 .weaponContent6 > label > span {
     display: grid;
     width: 65%
@@ -4128,7 +4627,19 @@ h6 {
     color: inherit;
 }
 .wepProfileSelector {
+    width: 50%;
+    margin: 5px 0;
+}
+.wepProfileSelector > label {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.wepProfileSelector > label > span {
+    width: 40%;
+}
+.wepProfileSelector > label > select{
+    width: 55%;
 }
 .wepAtkEdit > div:first-of-type {
     display: flex;
@@ -4178,6 +4689,7 @@ h6 {
     height: 20px;
     border-radius: 0px;
     border: none;
+    font-size: 12px;
 }
 .profileButtonsTop > button:nth-of-type(4n + 1) {
     margin: 0 2% 5px 0;
@@ -4191,16 +4703,17 @@ h6 {
 .wepAtkTrapTop {
     display: flex;
     justify-content: start;
-    height: 20px;
+    height: 24px;
     margin: 5px 0 0 0;
 }
 .wepAtkThrowableTop > button,
 .wepAtkOtherTop > button,
 .wepAtkTrapTop > button {
     margin: 0 2% 0 0;
-    height: 20px;
+    height: 24px;
     border-radius: 0px;
     border: none;
+    font-size: 12px;
 }
 .wepAtkThrowableTop > label,
 .wepAtkOtherTop > label,
@@ -4211,13 +4724,10 @@ h6 {
 .wepAtkThrowableTop > button,
 .wepAtkTrapTop > button,
 .wepAtkOtherTop > button {
-    width: 21%;
+    width: 22%;
 }
 .wepAtkThrowableTop > button:nth-of-type(2) {
-    width: 11%;
-}
-.wepAtkThrowableTop > button:nth-of-type(3) {
-    width: 27%;
+    width: 28%;
 }
 .wepAtkThrowableTop > label {
     width: 35%;
@@ -4230,16 +4740,19 @@ h6 {
     display: grid;
     white-space: nowrap;
     overflow: hidden;
+    height: 24px;
 }
 .wepAtkThrowableTop > label > input {
     width: 26%;
     margin: 0 0 0 1%;
+    height: 22px;
+    align-self: center;
 }
 .wepAtkTrapTop > label > input {
     width: 17%;
     margin: 0 0 0 1%;
 }
-.wepAtkNonEdit > div:first-of-type {
+.wepAtkNonEdit > div {
     display: flex;
 }
 .wepAtkNonEdit > div:first-of-type > span {
@@ -4251,9 +4764,13 @@ h6 {
     width: 5%;
 }
 /* #endregion */
+
 /* #region Weapon Attack Prompt & Chat Card */
 .wepAtkDiceRoll {
     padding: 0 3%;
+}
+.wepAtkDiceRoll > div {
+    display: flex;
 }
 .wepAtkDiceRoll > label {
     display: flex;
@@ -4321,7 +4838,7 @@ h6 {
   border-radius: 4px;
   padding: 5px;
   position: absolute;
-  top: 100%; /* Position it below the container */
+  top: -100%;
   z-index: 10;
   left: 50%;
   width: 200px;
@@ -4332,28 +4849,19 @@ h6 {
 }
 .atkCustomTitleContainer:hover .atkCustomTitle {
   visibility: visible;
+  overflow: visible;
   opacity: 1;
 }
 /* #endregion */
 
-
 /* #region Ammo */
-.ammo > div {
-    display: flex;
-}
 .ammo > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
     padding: 0 3px;
-}
-.ammo > div { 
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
 }
 .ammo > div:last-of-type {
     place-content: space-between;
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
 }
 .ammo > div:first-of-type {
     padding: 0 3px;
@@ -4376,7 +4884,6 @@ h6 {
     width: 15%;
     text-align: center;
 }
-
 .ammoContainerInfo,
 .ammoContainerInfo > div,
 .ammoContainerInfo > div > div {
@@ -4425,57 +4932,9 @@ h6 {
 .ammoContainerInfo > div > a {
     width: 5%;
 }
-
-
 /* #endregion*/
 
-/* #region Currency */
-.currency > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
-.currency > div > label,
-.currency-item > div {
-    display: flex;
-}
-.currency > div:first-of-type {
-    display: flex;
-    border-top: 3px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-}
-.currency > div:last-of-type {
-    display: flex;
-    place-content: space-between;
-    border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
-}
-.currency > div > span,
-.currency > div > label > span,
-.currency-item > div > span {
-    text-align: center;
-}
-.currency > div > span:first-of-type,
-.currency > div > label > span,
-.currency-item > div > span:first-of-type,
-.currency-item > div > input:first-of-type {
-    width: 69%;
-}
-.currency > div > span:last-of-type,
-.currency > div > label > input,
-.currency-item > div > input:last-of-type {
-    width: 30%;
-    margin: 0 0 0 1%;
-}
-.currency-item:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-/* #endregion */
-
-/* #region Invnetory */
-.inventory > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
+/* #region Inventory */
 .inventory-item {
     padding: 0 2.5%;
 }
@@ -4483,7 +4942,6 @@ h6 {
     background: var(--itemOffSet);
 }
 .inventory > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
     padding-bottom: 3px;
 }
@@ -4508,7 +4966,6 @@ h6 {
     display: flex;
     place-content: space-between;
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
 }
 .inventory-item > div:first-of-type > span:first-of-type,
 .inventory-item > div:first-of-type > input:first-of-type {
@@ -4541,12 +4998,13 @@ h6 {
 /* #endregion */
 
 /*
-    *****************
-    -----------------
-    BIO & INFO LAYOUT
-    -----------------
-    *****************
+    ***************
+    ---------------
+    BIO & INFO PAGE
+    ---------------
+    ***************
 */
+/* #region Bio & Info */
 .bio {
     margin: 15px 0 0 0;
 }
@@ -4569,27 +5027,36 @@ h6 {
 .bioPictures > div:first-of-type > img {
     border: none;
 }
-.bioInfo > div {
-    min-height: 500px;
+.bioInfo .editor {
+    min-height: 350px;
 }
+.editor-menu > li > button{
+    padding: 0 0.5rem;
+}
+/* #endregion */
+
 /*
-    ***************
-    ---------------
-    SETTINGS LAYOUT
-    ---------------
-    ***************
+    *************
+    -------------
+    SETTINGS PAGE
+    -------------
+    *************
 */
-.settings {
-    flex-wrap: wrap;
-    display: flex;
-    min-width: 878px;
+/* #region Containers*/
+.settingsPage button {
+    font-size: 0px;
+}
+.settingsPage .fieldsetContainer{
+    flex-direction: row;
+}
+.settingsPage .fieldsetContainer .fieldSetRow {
+    display: block;
 }
 .settingsOptions {
-    width: 33%
+    width: 35%
 }
 .settings2 {
     width: 63%;
-    margin: 0 0 0 4%;
 }
 .settings2 >  div:first-of-type {
     display: flex;
@@ -4601,11 +5068,9 @@ h6 {
     width: 53%;
     margin: 0 0 0 4%;
 }
-/*
-    ---------
-    Settings
-    ---------
-*/
+/* #endregion */
+
+/* #region @Page-Settings */
 .settingsSubsection > div {
     display: flex;
 }
@@ -4624,40 +5089,22 @@ h6 {
 .settingsSubsectionIndent {
     padding: 0 0 0 15px !important;
 }
-.settingsSubsection > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
-.settingsSubsection > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.settingsSubsection > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
-}
 .innatePowerSetting > div {
     width: 30%;
 }
 .innatePowerSetting > div > label > select {
     width: 100%;
 }
-/*
-    ---------
-    RollRange
-    ---------
-*/
+/* #endregion */
+
+/* #region @RollRange */
 .rollRange > div {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
-.rollRange > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
 }
 .rollRange > div:last-of-type {
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
 }
 .rollRange > div > label {
     display: flex;
@@ -4680,18 +5127,12 @@ h6 {
     border: none;
     width: 40%;
 }
+/* #endregion */
 
-/*
-    ---------
-    Character Options
-    ---------
-*/
+/* #region @Character-Options */
 .charOptions > div > label {
     display: flex;
     padding: 0 10px;
-}
-.charOptions > div {
-    border: 3px solid var(--boxColor);
 }
 .charOptions > div > label > span {
     width: 60%;
@@ -4724,8 +5165,19 @@ h6 {
     text-align: start;
     padding: 0 0 0 5px;
 }
+.charOptions .lvlModLabel > input {
+    width: 19.5%;
+}
+.charOptions .lvlModLabel > span:nth-of-type(2) {
+    width: 1%;
+}
+.charOptions .lvlModLabel > span:nth-of-type(3) {
+    width: 19.5%;
+    text-align: center;
+}
+/* #endregion */
 
-/* #region Innate Bonuses*/
+/* #region @Innate-Bonuses*/
 .class-item {
     padding: 0 2.5%;
 }
@@ -4737,19 +5189,14 @@ h6 {
     display: flex;
     justify-content: flex-start;
 }
-.innateBonuses > div {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
 .innateBonuses > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
+    margin: -11px 0 0 0;
 }
 .innateBonuses > div:last-of-type {
     display: flex;
     justify-content: space-between;
     border-top: 1px solid var(--boxColor);
-    border-bottom: 3px solid var(--boxColor);
 }
 .innateBonuses > div:first-of-type > span:first-of-type {
     width: 79.8%;
@@ -4777,12 +5224,21 @@ h6 {
     opacity: 1;
 }
 /* #endregion */
-/* #region Class Item*/
-.itemMax {
-    max-height: 800px;
+
+/* #region @Class-Item*/
+.classHeaderList {
+    display: grid;
+    grid-template-columns: 65% 35%;
 }
+.classContentSelect,
 .classContent  {
     display: flex;
+}
+.classContentSelect > label {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 10px;
+    width: 100%;
 }
 .classContent > label {
     display: flex;
@@ -4790,25 +5246,49 @@ h6 {
     padding: 0 10px;
     width: 50%;
 }
+.classContentSelect > label > span {
+    display: grid;
+    width: 37%;
+    margin: 0 3% 0 3%;
+    justify-content: flex-start;
+}
 .classContent > label > span {
     display: grid;
     width: 64%;
     margin: 0 3% 0 3%;
     justify-content: flex-start;
 }
+.classContentSelect > label > select {
+    width: 54%;
+    margin: 0 3% 0 0;
+}
+.classContentSelect::after {
+    right: 20px !important;
+}
+.classContentSelect {
+    width: 50%;
+}
 .classContent > label > input {
     width: 27%;
     margin: 0 3% 0 0;
 }
 .classHeader {
+    display: flex;
     justify-content: flex-start;
     border-bottom: 1px solid var(--boxColor);
-    padding: 3px 0;
-    font-size: 17px;
+    color: var(--boxColor);
+    padding: 3px 7px;
+    height: 25px;
 }
 .classHeader > span {
     color: var(--boxColor);
-    font-size: 17px;
+    font-size: 1.2rem;
+}
+.classHeader > a {
+    width: 4%;
+}
+.classHeader > a > i {
+    font-size: 1.3rem;
 }
 .classContent2 {
     display: flex;
@@ -4870,13 +5350,15 @@ h6 {
 }
 .classHeader2 > span {
     color: var(--boxColor);
-    font-size: 17px;
+    font-size: 1.3rem;
+    margin: 0 5px;
 }
 .classHeader2 > button {
     height: 20px;
     border-radius: 0px;
     border: none;
     width: 35%;
+    font-size: 13px;
 }
 
 .ppClass > div {
@@ -4899,7 +5381,8 @@ h6 {
     width: 50%;
 }
 /* #endregion */
-/* #region dp calculator*/
+
+/* #region @dp-calculator*/
 .dpCostCalc span {
     display: grid;
 }
@@ -4952,11 +5435,8 @@ h6 {
     text-align: start;
 }
 /* #endregion */
-/*
-    ---------
-    Homebrew Stuffs
-    ---------
-*/
+
+/* #region @Homebrew-Stuffs */
 .homebrew > label {
     display: flex;
     padding: 0 10px 0 10px;
@@ -4972,393 +5452,104 @@ h6 {
     border-radius: 0px;
     border: 0px;
 }
+/* #endregion */
+
 /*
-    ***************
-    ---------------
-       Meta-Magic
-    ---------------
-    ***************
+    **************
+    --------------
+    ACTIVE EFFECTS
+    --------------
+    **************
 */
-.metaMagicGUI {
-    display: grid;
-    grid-template-columns: repeat(23,85px);
-    grid-template-rows: repeat(23,85px);
-    padding: 20px 10px;
+/* #region Actor Active Effects */
+.actorEffects .effects-list {
+    padding: 0 2%;
 }
-.metaMagicGUI .bubble {
-    border-radius: 50%;
-    background: linear-gradient(to bottom, #06054a 0%, #552670 66.6%, #2d3c66 66.6%, #4043a5 100%);
-    border: 4px solid #383838;
-    z-index: 1;
+.actorEffects .effects-list > li {
+    font-size: 1.2rem;
+    background: var(--color-bg-btn-minor-inactive);
+    border: 1px solid var(--boxColor);
+    margin: 0;
 }
-.bubbleBought {
-    border-color: var(--kiBought) !important;
+.actorEffects .effects-list > li .effect-name {
+    padding: 0 0 0 5px;
 }
-.bubbleFree {
-    border-color: var(--kiFree) !important;
-}
-.metaMagicGUI .bubbleOffsetWide {
-    place-self: center;
-    width: 50%;
-    height: 100%;
-}
-.metaMagicGUI .bubbleOffsetTall {
-    place-self: center;
-    width: 100%;
-    height: 50%;
-}
-.metaMagicGUI .bubbleOffsetCapstone {
-    place-self: center;
-    width: 65%;
-    height: 65%;
-}
-.metaMagicGUI .bubbleLine {
-    z-index: 0;
-}
-.bubbleInfo {
-    display: grid;
-    grid-template-rows: 5px 50px 20px;
-    place-items: center;
-}
-.bubbleInfoCap {
-    display: grid;
-    grid-template-rows: 5px 70px 20px;
-    place-items: center;
-}
-.metaMagicGUI .bubbleInfo > span,
-.metaMagicGUI .bubbleInfoCap > span {
+.actorEffects .effects-list li .effect-source,
+.actorEffects .effects-list li .effect-duration {
     text-align: center;
 }
-.metaMagicGUI .bubbleInfo > span:nth-of-type(1) {
-    font-size: 30px;
-    color: #db48a0;
-    margin: 0 0 30px 0;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-}
-.metaMagicGUI .bubbleInfo > span:nth-of-type(2) {
-    display: flex;
-    font-size: 14px;
-}
-.metaMagicGUI .bubbleInfo > span:nth-of-type(3) {
-    font-size: 20px;
-    display: flex;
-}
-.metaMagicGUI .bubbleInfoCap > span:nth-of-type(1) {
-    font-size: 30px;
-    color: #db48a0;
-    margin: 0 0 30px 0;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-}
-.metaMagicGUI .bubbleInfoCap > span:nth-of-type(2) {
-    display: flex;
-    font-size: 14px;
-}
-.metaMagicGUI .bubbleInfoCap > span:nth-of-type(3) {
-    font-size: 20px;
-    display: flex;
-}
-.metaMagicGUI .arcanaTitle {
-    align-items: center;
-    display: grid;
-}
-.metaMagicGUI .arcanaTitle > h5 {
-    font-size: 50px;
-}
-/*
-    ****************
-    ----------------
-     Monster Powers
-    ----------------
-    ****************
-*/
-.monster .monsterTopContainer {
-    display: flex;
-    justify-content: space-between;
-    padding: 17px 0 0 0;
-}
-.monsterChar {
-    width: 32%;
-}
-.monsterChar > div {
-    display: flex;
-    justify-content: space-between;
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
-.monsterChar > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-}
-.monsterChar > div:last-of-type {
-    border-bottom: 1px solid var(--boxColor);
-}
-.monsterChar > div > span {
-    text-align: center;
-    display: grid;
-}
-.monsterChar > div > span,
-.monsterChar > div > label {
-    width: 15%;
-}
-.monsterChar > div > label > select {
-    width: 100%;
-}
-.monsterChar > div:first-of-type > span:nth-of-type(4) {
-    width: 23%;
-}
-.monsterChar > div > input {
-    width: 15%;
-    margin: 0 4%
-}
-.monsterChar > div:first-of-type > span:nth-of-type(5),
-.monsterChar > div:not(:first-of-type) > span:nth-of-type(3) {
-    width: 20%;
-}
-.monsterChar > div:not(:first-of-type) > span:nth-of-type(2) {
-    border-right: 1px solid var(--boxColor);
-}
-.monsterInfo {
-    width: 32%;
-}
-.monsterInfo > div {
-    display: flex;
-    padding: 0 0 0 3px;
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
-.monsterInfo > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.monsterInfo > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
-}
-.monsterInfo > div:nth-of-type(2),
-.monsterInfo > div:nth-of-type(4) {
-    display: block;
-}
-.monsterInfo > div:nth-of-type(2) > label,
-.monsterInfo > div:nth-of-type(4) > label {
-    display: flex;
-    width: 100%;
-}
-.monsterInfo > div > span,
-.monsterInfo > div > label > span {
-    display: grid;
-    width: 75%;
-}
-.monsterInfo > div > label > input,
-.monsterInfo > div > label > span:nth-of-type(2) {
-    text-align: center;
-    width: 25%;
-}
-.monsterInfo > div > button {
-    width: 25%;
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: 0px;
-}
-.monsterInfo > div:nth-of-type(2) {
-    border-bottom: 1px dashed var(--boxColor);
-}
-.monsterSettings {
-    width: 32%;
-}
-.monsterSettings > div {
-    display: flex;
-    padding: 0 0 0 3px;
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
-.monsterSettings > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.monsterSettings > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
-}
-.monsterSettings > div > label > span,
-.monsterSettings > div > span {
-    display: grid;
-    width: 75%;
-}
-.monsterSettings > div > button {
-    width: 25%;
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: 0px;
-}
-.monsterSettings > div > label > input,
-.monsterSettings > div > label > span:nth-of-type(2) {
-    width: 25%;
-    text-align: center;
-}
-.monsterSettings > div:nth-of-type(6) {
-    display: block;
-}
-.monsterSettings > div:nth-of-type(6) > label {
-    display: flex;
-}
-.monsterSettings > div:nth-of-type(2), 
-.monsterSettings > div:nth-of-type(5) {
-    border-bottom: 1px dashed var(--boxColor);
-}
-.monsterSettings > div:last-of-type {
-    border-top: 1px solid var(--boxColor);
-    justify-content: space-between;
-}
-.monster .monsterBotContainer {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0 0 0;
-}
-.monsterSubContainer {
-    width: 49%;
-}
-.monsterSubContainer > div {
+.actorEffects .effects-list > ol {
+    padding: 0px;
     margin: 0 0 10px 0;
 }
-.monsterSubContainer > div > div:first-of-type {
-    display: flex;
-    justify-content: start;
-    border-bottom: 1px solid var(--boxColor);
-    padding: 0 2.5%;
+.actorEffects .effects-list > ol > li {
+    padding: 5px 0;
 }
-.monsterPower-item {
-    padding: 0 2.5% 0 2.5%;
-}
-.monsterPower-item > div > input:first-of-type,
-.monsterPower-item > div > span:first-of-type,
-.monsterSubContainer > div > div:first-of-type > span:first-of-type {
-    width: 67%;
-    margin: 0%;
-}
-.monsterPower-item > div > input,
-.monsterPower-item > div > span,
-.monsterSubContainer > div > div:first-of-type > span {
-    width: 12%;
-    margin: 0 0 0 2%;
-    text-align: center;
-    display: grid;
-}
-.monsterPower-item > div > a {
-    width: 5%;
-}
-.monsterPower-item > div {
-    display: flex;
-}
-.monsterSubContainer > div > div {
-    border-right: 3px solid var(--boxColor);
-    border-left: 3px solid var(--boxColor);
-}
-.monsterSubContainer > div > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.monsterSubContainer > div > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
-}
-.monstPowerInfo > textarea {
-    background: none;
-    border: 1px solid var(--boxColor);
-    cursor: default;
-}
-.monstPowerLongDesc,
-.monstPowerInfo {
-    padding: 0 0 10px 0;
-}
-.monsterPower-item:nth-child(2n) {
+.actorEffects .effects-list > ol > li:nth-of-type(2n + 1) {
     background: var(--itemOffSet);
 }
-/* ----------------------------------------- */
-/*  Active Effects                           */
-/* ----------------------------------------- */
-.abfalter .items-list {
-    list-style: none;
-    padding: 0 1%;
-    overflow-y: auto;
-    scrollbar-width: thin;
+.actorEffects .effects-list > ol > li {
+    font-size: 1rem;
+    font-family: 'Signika';
+    color: var(--textColor);
+    margin: 0;
 }
-.abfalter .items-list .items-header {
-    height: 28px;
-    margin: 2px 0;
-    padding: 0;
-    align-items: center;
-    background: var(--effect-bg);
-    border: 2px groove var(--effect-border);
+.actorEffects .effects-list > ol > li > div:first-of-type {
     font-weight: bold;
+    padding: 0 0 0 5px;
 }
-.abfalter .items-list .items-header > * {
-    font-size: 15px;
+/* #endregion */
+
+/* #region Item Active Effects */
+.itemEffects .effects-list {
+    padding: 0 2%;
+}
+.itemEffects .effects-list > li {
+    font-size: 1rem;
+    background: var(--color-bg-btn-minor-inactive);
+    border: 1px solid var(--boxColor);
+    margin: 0;
+}
+.itemEffects .effects-list > li .effect-name {
+    padding: 0 0 0 5px;
+}
+.itemEffects .effects-list li .effect-source,
+.itemEffects .effects-list li .effect-duration {
     text-align: center;
 }
-.abfalter .items-list .items-header h3 {
-    padding-left: 5px;
-    font-size: 20px;
-    font-weight: 700;
-    text-align: left;
-    font-size: 17px;
-    border: none;
+.itemEffects .effects-list > ol {
+    padding: 0px;
+    margin: 0 0 10px 0;
 }
-.abfalter .items-list .item-name {
-    flex: 2;
+.itemEffects .effects-list > ol > li {
+    padding: 5px 0;
+}
+.itemEffects .effects-list > ol > li:nth-of-type(2n + 1) {
+    background: var(--itemOffSet);
+}
+.itemEffects .effects-list > ol > li {
+    font-size: 0.85rem;
+    font-family: 'Signika';
+    color: var(--textColor);
     margin: 0;
-    overflow: hidden;
-    align-items: center;
 }
-.abfalter .items-list .item-controls {
-    flex: 0 0 60px;
-    justify-content: space-between;
+.itemEffects .effects-list > ol > li > div:first-of-type {
+    padding: 0 0 0 5px;
 }
-.abfalter .items-list .item-controls a {
-    font-size: 12px;
-    text-align: center;
-}
-.abfalter .items-list .items-header .item-controls a {
-    font-size: 14px;
-}
-.abfalter .items-list .item-eff {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.abfalter .items-list .item-eff h4 {
-    margin: 0;
-    white-space: nowrap;
-    overflow-x: hidden;
-}
-.abfalter .items-list .item {
-    align-items: center;
-    padding: 0 2px;
-    border-bottom: 1px solid var(--boxColor);
-    margin: 0 0 0 10px;
-    height: 28px;
-}
-.abfalter .items-list .item:last-child {
-    border-bottom: none;
-}
-.abfalter .effect .item .effect-source,
-.abfalter .effect .item .effect-duration,
-.abfalter .effect .item .effect-controls {
-    text-align: center;
-    border-left: 1px solid var(--boxColor);
-    border-right: 1px solid var(--boxColor);
-    font-size: 12px;
-}
-.abfalter .effect .item .effect-duration {
-    border-left: none;
-    border-right: 1px solid var(--boxColor);
-}
-.abfalter .effect .item .effect-controls {
-    border: none;
-}
-/* ----------------------------------------- */
-/*  Item Header                              */
-/* ----------------------------------------- */
+/* #endregion */
+
+/*
+    ***********
+    -----------
+    ITEM LAYOUT
+    -----------
+    ***********
+*/
+/* #region Item-Header */
 .abfalter.item .sheet-header {
     flex: 0 0 100px;
     border-bottom: 2px groove var(--boxColor);
+    display: flex;
 }
 .abfalter.item .sheet-header img.item-img {
     flex: 0 0 100px;
@@ -5372,6 +5563,7 @@ h6 {
     font-family: "Modesto Condensed", "Palatino Linotype", serif;
     font-size: 20px;
     font-weight: 700;
+    width: 100%;
 }
 .abfalter.item .sheet-header h1 {
     flex: 1;
@@ -5383,7 +5575,7 @@ h6 {
 .abfalter.item .sheet-header h1 input {
     display: block;
     height: 50px;
-    font-size: 32px;
+    font-size: 2rem;
     margin: 0;
     background: none;
     text-align: start;
@@ -5396,36 +5588,35 @@ h6 {
     padding: 5px;
     text-align: right;
     white-space: nowrap;
-    color: var(--item-subTitle);
 }
 .abfalter.item .sheet-header .item-subtitle .item-type {
+    font-family: 'Modesto Condensed';
     font-size: 24px;
     line-height: 26px;
     margin: 0;
+    color: var(--item-subTitle);
 }
-.abfalter.item .sheet-header .item-subtitle .item-subType{
+.abfalter.item .sheet-header .item-subtitle .item-subType {
+    display: block;
     font-size: 16px;
     line-height: 24px;
 }
 .abfalter.item .sheet-header .summary {
     flex: 0 0 100%;
     height: 40px;
-    margin: 0;
+    margin: 0 0 -2px 0;
     padding: 0;
     list-style: none;
     border-top: 2px groove  var(--boxColor);
     border-bottom: none;
 }
+
 .abfalter.item .sheet-header .summary li {
     display: flex;
-    justify-content: space-between;
-    gap: 0.25em;
-    height: calc(100% - 6px);
-    float: left;
-    margin: 2px 0 2px 5px;
+    margin: 0 0 0 5px;
     padding: 0;
     border-right: 2px groove  var(--boxColor);
-    line-height: 34px;
+    /*line-height: 34px;*/
     color: var(--item-summary);
 }
 .abfalter.item .sheet-header .summary li span {
@@ -5440,130 +5631,154 @@ h6 {
     height: 100%;
     border: 0;
     font-family: "Modesto Condensed", "Palatino Linotype", serif;
-    font-size: 20px;
-    font-weight: 700;
-    text-transform: capitalize;
+    font-size: 1.4rem;
     font-weight: 100;
     text-align: left;
     appearance: auto;
     background: none;
 }
+
 .abfalter.item .sheet-header .summary li input {
     height: 100%;
-    font-size: 20px;
+    font-size: 1.4rem;
 }
 .abfalter.item .sheet-header .summary li:last-child {
     border-right: none;
 }
-/* ----------------------------------------- */
-/*  Item Navigation Bar                      */
-/* ----------------------------------------- */
-.abfalter .sheet-navigation {
-    flex: 0 0 30px;
+.abfalter.item .sheet-header .summary > li > label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.abfalter.item .sheet-header .summary > li > label > input {
+    font-size: 1.4rem;
+}
+.abfalter.item .sheet-header .summary > li > label > span {
+    height: fit-content;
+    font-size: 1.4rem;
+}
+.abfalter.item .sheet-header .summary > li > label > button {
+    padding: 0;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+    height: fit-content;
+}
+.abfalter.item .sheet-header .summary > li > label > button > span {
+    height: fit-content;
+    font-size: 1.2rem;
+}
+
+.itemHeader35-60 label > :nth-child(1) {
+    width: 35%
+}
+.itemHeader35-60 label > :nth-child(2) {
+    width: 65%
+}
+.itemHeader65-30 label > :nth-child(1) {
+    width: 65%
+}
+.itemHeader65-30 label > :nth-child(2) {
+    width: 30%
+}
+.itemHeader75-20 label > :nth-child(1) {
+    width: 75%
+}
+.itemHeader75-20 label > :nth-child(2) {
+    max-width: 20%
+}
+/* #endregion */
+
+/* #region Item-Navigation-Bar */
+.abfalter.item .sheet-navigation {
     margin-bottom: 5px;
     font-size: 20px;
+    border: none;
 }
-.abfalter .sheet-navigation .item {
+.abfalter.item .sheet-navigation .item {
     height: 30px;
     line-height: 32px;
-    margin: 0 24px;
     border-bottom: 3px solid #b5b3a4;
     text-decoration: none;
 }
-.abfalter .sheet-navigation .item.active {
+.abfalter.item .sheet-navigation .item.active {
     border-bottom: 3px solid #8da5fd;
-}
-.abfalter.item .sheet-navigation {
-    margin-bottom: 5px;
+    color: var(--boxColor) !important;
+    text-decoration: none;
 }
 .abfalter.item .sheet-navigation .item {
-    font-size: 18px;
+    color: var(--textColor);
 }
-/* ----------------------------------------- */
-/*  Item Description Tab                     */
-/* ----------------------------------------- */
-.abfalter.item .sheet-body .description > h6 {
+/* #endregion */
+
+/* #region Item-Description-Tab  */
+.itemDescStyle h6 {
     justify-content: start;
     border-bottom: 1px solid var(--boxColor);
-    font-size: 20px;
+    padding: 10px 0 0 0;
 }
-.abfalter.item .sheet-body .itemDescInfo,
-.abfalter.item .sheet-body .editor-container,
-.abfalter.item .sheet-body .itemDescInfo > div {
-    min-height: 200px;
-    max-height: 700px;
-}
-.abfalter.item .sheet-body .editor-container {
-    flex: 0;
-    height: fit-content;
-}
-.abfalter.item .sheet-body .prosemirror .editor-container .editor-content {
-    position: relative;
-}
-.abfalter.item .sheet-body .editor {
-    overflow: auto;
-}
-.itemHtmlActor {
-    white-space: pre-line;
-    max-height: 300px;
-    overflow-y: auto;
-    width: 100%;
-}
-/*
-.abfalter.item .sheet-body .description .itemEditor > div {
-    min-height: 200px;
-    height: fit-content;
-    max-height: 800px;
-}
-.abfalter.item .sheet-body .description .editor-container {
-    flex: none;
-    min-height: 200px;
-    height: 620px;
+.itemDescStyle .editor {
+    overflow: visible;
+    height: 300px;
 
-}*/
+}
+.itemDescStyle .editor > button {
+    top: -30px;
+}
+/* #endregion */
 
-/* ----------------------------------------- */
-/*  Item Effect Tab                          */
-/* ----------------------------------------- */
-/* ----------------------------------------- */
-/*  Item General Details Tab                 */
-/* ----------------------------------------- */
-.abfalter.item .sheet-body .details > h6 {
-    justify-content: start;
-    border-bottom: 1px solid var(--boxColor);
-    font-size: 20px;
+/* #region Item-Global-Styles effects-list*/
+.itemPage {
+    min-width: 500px;
+    max-height: 850px;
+    padding: 0 3px 0 0;
 }
-.abfalter.item .sheet-body .details .sectionItem .csSelect > label,
-.abfalter.item .sheet-body .details > fieldset > label,
-.abfalter.item .sheet-body .details .csSelect > label,
-.abfalter.item .sheet-body .details > label {
-    display: flex;
-    justify-content: space-between;
-    padding: 2px 0;
+.itemPage > fieldset:not(:first-of-type) {
+    margin: 1rem 0 0 0;
 }
-.abfalter.item .sheet-body .details .sectionItem .csSelect > label > span,
-.abfalter.item .sheet-body .details > fieldset > label > span,
-.abfalter.item .sheet-body .details .csSelect > label > span,
-.abfalter.item .sheet-body .details > label > span {
-    display: grid;
+.itemPage > fieldset > legend {
+    text-align: left;
+    margin: 0 0 0 30px;
 }
-.abfalter.item .sheet-body .details .sectionItem .csSelect > label > select,
-.abfalter.item .sheet-body .details > fieldset > label > input,
-.abfalter.item .sheet-body .details .csSelect > label > select,
-.abfalter.item .sheet-body .details > label > input {
-    width: 35%;
+.itemPage > fieldset > *:not(legend):last-child {
+    margin: 0 0 5px 0;
 }
-.abfalter.item .sheet-body .details .csSelect::after,
-.abfalter.item .sheet-body .details .sectionItem .csSelect::after {
+.itemPage > fieldset > .csSelect::after {
+    right: 15px;
     top: 0px;
 }
-.abfalter.item .sheet-body {
-    height: fit-content;
+.itemSimpleLabel {
+    display: flex;
+    padding: 2px 10px 2px 10px !important;
+}
+.itemSimpleLabel > label {
+    display: flex;
+    width: 100%;
+}
+.itemSimpleLabel > label > span,
+.itemSimpleLabel > span {
+    width: 65%;
+    height: auto;
+}
+.itemSimpleLabel > label > select,
+.itemSimpleLabel > label > button,
+.itemSimpleLabel > button,
+.itemSimpleLabel > input {
+    width: 35%;
+}
+.itemSimpleLabel > label > button,
+.itemSimpleLabel > button {
+    font-size: 0px;
+    border: none;
+    align-self: center;
 }
 
+
+/* Flavor Details @Weight & @Money */
 .itemContentSelectInput {
     display: flex;
     align-items: center;
+    padding: 2px 10px;
 }
 .itemContentSelectInput > label {
     width: 36%;
@@ -5598,422 +5813,8 @@ h6 {
 .itemContentSelectInput > input {
     width: 17%;
 }
+/* #endregion */
 
-.editor-edit {
-    background: none;
-    border: none;
-}
-/* ----------------------------------------- */
-/*  Item Psychic Matrix Details Tab          */
-/* ----------------------------------------- */
-.psychicMatrix > div > label {
-    display: flex;
-}
-.psychicMatrix > div:nth-of-type(1) {
-    display: flex;
-    text-align: center;
-    border-bottom: 1px solid var(--boxColor);
-    padding-top: 3px;
-}
-.psychicMatrix > div:nth-of-type(1) > span,
-.psychicMatrix > div:nth-of-type(2) > label > span {
-    display: grid;
-}
-.psychicMatrix > div:nth-of-type(1) > span:first-of-type {
-    width: 25%;
-}
-.psychicMatrix > div:nth-of-type(1) > span:last-of-type {
-    width: 75%;
-}
-.psychicMatrix > div:nth-of-type(2) > label {
-    text-align: center;
-}
-.psychicMatrix > div:nth-of-type(2) > label > span:first-of-type {
-    width: 7%;
-    border-right: 1px solid var(--boxColor);
-}
-.psychicMatrix > div:nth-of-type(2) > label > span:last-of-type {
-    width: 18%;
-}
-.psychicMatrix > div:nth-of-type(2) > label > input {
-    width: 75%;
-}
-.psychicMatrix > div > label > span,
-.psychicMatrix > div > span {
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-}
-/* ----------------------------------------- */
-/*  Item Ki Seals Details Tab                */
-/* ----------------------------------------- */
-.kiSealContent {
-    background: none !important;
-}
-.kiSealContent > div {
-    display: flex; 
-}
-.kiSealContent > div > span {
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-}
-.kiSealContent > div:nth-of-type(2) > span:first-of-type,
-.kiSealContent > div:nth-of-type(3) > span:first-of-type,
-.kiSealContent > div:first-of-type > span:first-of-type {
-    width: 20%;
-    margin: 0;
-}
-.kiSealContent > div > input,
-.kiSealContent > div:first-of-type > span {
-    width: 15%;
-    margin: 0 0 0 1%;
-}
-/* ----------------------------------------- */
-/*  Item Armor Details Tab                   */
-/* ----------------------------------------- */
-.armorContent > label {
-    display: flex;
-    padding: 2px 0;
-}
-.armorContent > label > span {
-    display: grid;
-}
-.armorContent > label > span:first-of-type {
-    width: 65%;
-}
-.armorContent > label > input {
-    width: 17%;
-}
-.armorContent > label > span:nth-of-type(2) {
-    width: 1%;
-    text-align: center;
-}
-.armorContent > label > span:nth-of-type(3) {
-    width: 17%;
-    text-align: center;
-}
-.armorCard > div {
-    display: flex;
-    justify-content: space-around;
-    padding: 3px 0 0 0;
-}
-.armorCard > div:first-of-type {
-    border-bottom: 1px dotted var(--boxColor);
-}
-.armorCard > div > span:first-of-type {
-    width: 15%;
-}
-.armorCard > div > span {
-    width: 10%;
-    text-align: center;
-}
-.armorCard > div > input {
-    width: 10%;
-}
-.armorContentButtons {
-    display: flex;
-    justify-content: space-between;
-}
-.armorContent > label > button {
-    width: 35%;
-    margin: 0;
-    height: 20px;
-    border-radius: 0px;
-    border: 0px;
-}
-
-
-/* ALL OLD / REDO */
-    /*
-    -----
-    Default
-    -----
-*/
-    .itemStart {
-    display: flex;
-    align-items: center;
-}
-.itemStart > label {
-    display: contents;
-}
-.itemStart  > img {
-    height: 60px;
-    width: 60px;
-}
-.itemStart > label > input {
-    display: flex;
-    width: 100%;
-    height: 40px;
-    text-align: center;
-    border: 0px;
-    margin-left: 10px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 25px;
-    border-bottom: 1px solid black;
-}
-
-/*
-    ----
-    Elan
-    ----
-*/
-.elanTabs {
-    max-height: 37px;
-    border: none !important;
-}
-.elanTabs > ul > li {
-    width: 25%;
-}
-.elanContent > div,
-.elanContent2 > div {
-    display: flex;
-    width: 100%;
-}
-.elanContent > div > label {
-    display: flex;
-    padding: 0 10px;
-    width: 35%
-}
-.elanContent > div > label:first-of-type {
-    width: 63%;
-    margin: 0 2% 0 0;
-}
-.elanContent > div > label:first-of-type > span {
-    width: 20%
-}
-.elanContent > div > label:first-of-type > input {
-    width: 80%
-}
-.elanContent > div > label > span {
-    width: 40%
-}
-.elanContent > div > label > input {
-    width: 60%
-}
-.elanContent2 > div:first-of-type > label {
-    display: flex;
-    width: 28%;
-    margin: 0 0 0 2%;
-}
-.elanContent2 > div:first-of-type > label > span {
-    width: 72%;
-    justify-content: flex-end;
-    margin: 0 3% 0 0;
-}
-.elanContent2 > div:first-of-type > label > input {
-    width: 25%;
-}
-.elanContent2 > div:first-of-type > span {
-    width: 70%;
-    font-style: italic;
-}
-.elanContent2 > div:nth-of-type(2) {
-    justify-content: flex-start;
-    border-top: 2px solid var(--boxColor);
-    padding-top: 3px;
-    padding-bottom: 3px;
-}
-.elanContent2 > div:nth-of-type(2) > span,
-.elanContent2 > div > input {
-    width: 59%;
-    margin: 0 2% 0 0;
-    text-align: center;
-}
-.elanContent2 > div:nth-of-type(2) > span:nth-of-type(2),
-.elanContent2 > div > input:nth-of-type(2) {
-    width: 15%;
-}
-.elanContent2 > div:nth-of-type(2) > span:nth-of-type(3),
-.elanContent2 > div > input:nth-of-type(3) {
-    width: 15%;
-}
-.elanContent2 > div > a {
-    width: 5%;
-}
-.elanContent2 > div > a {
-    opacity: 0;
-}
-.elanContent2 > div:hover > a {
-    opacity: 1;
-}
-.elanContent2 > textarea {
-    margin: 3px 0 0 0;
-}
-.elanContent > div {
-    border: 3px solid var(--boxColor);
-}
-
-/*
-    -----
-    Spell
-    -----
-*/
-.spellContent > div,
-.spellContent > div > div {
-    display: flex;
-}
-.spellContent > div > label {
-    display: flex;
-    padding: 0 10px;
-    width: 50%;
-}
-.spellContent > div > div > label {
-    display: flex;
-    padding: 0 10px;
-    width: 100%;
-}
-.spellContent > div:not(:last-of-type) > div {
-    width: 50%;
-}
-.spellContent > div > div::after {
-    right: 15px;
-}
-.spellContent > div > label > span,
-.spellContent > div > div > label > span,
-.spellContent > div > div > label > select,
-.spellContent > div > label > input {
-    width: 49%;
-    margin: 0 1% 0 0;
-}
-.spellContent > div:not(:last-of-type) {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.spellContent > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.spellContent > div:nth-of-type(4) {
-    border-bottom: 3px solid var(--boxColor);
-}
-.spellContentCont > div:first-of-type {
-    display: flex;
-    border-top: 3px solid var(--boxColor);
-    padding: 3px 0;
-    width: 100%;
-}
-.spellContentCont > div {
-    display: flex;
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.spellContentCont > div > input,
-.spellContentCont > div > span {
-    width: 24.5%;
-    margin: 0 0.5% 0 0;
-}
-.spellContentCont > div > span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.spellContentCont > div:nth-of-type(2n) {
-    border-top: 2px solid var(--boxColor);
-    padding: 3px 0;
-}
-.spellContentCont > div:last-of-type {
-    border-bottom: 2px solid var(--boxColor);
-}
-/*
-    --------------------------
-    Invocations & Incarnations
-    --------------------------
-*/
-.invocationContent > div,
-.incarnationContent > div {
-    display: flex;
-}
-.invocationContent > div > label,
-.incarnationContent > div > label {
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    width: 50%;
-}
-.invocationContent > div > label > input,
-.invocationContent > div > label > span,
-.incarnationContent > div > label > input,
-.incarnationContent > div > label > span {
-    width: 49%;
-    margin: 0 1% 0 0;
-}
-.incarnationContent > div:last-of-type > label > input,
-.incarnationContent > div:last-of-type > label > span {
-    width: 49%;
-    margin: 0 1% 0 0;
-}
-.incarnationContent > div:not(:last-of-type),
-.invocationContent > div:not(:last-of-type) {
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.incarnationContent > div:first-of-type,
-.invocationContent > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.incarnationContent > div:nth-of-type(2),
-.invocationContent > div:nth-of-type(3) {
-    border-bottom: 3px solid var(--boxColor);
-}
-
-/*
-    -----------------
-    Ki Technique
-    -----------------
-*/
-.kiTechMaintMaxContent > div,
-.kiTechContent > div:not(:nth-of-type(4)) {
-    display: flex;
-}
-.kiTechContent > div:nth-of-type(1) > label {
-    display: flex;
-    width: 50%;
-    padding: 0 10px;
-}
-.kiTechContent > div:nth-of-type(1) > label > input{
-    width: 25%;
-    margin: 0 1% 0 0;
-    display: flex;
-    justify-content: center;
-}
-.kiTechContent > div:nth-of-type(1) > label > span {
-    width: 49%;
-    margin: 0 1% 0 0;
-    display: flex;
-    justify-content: center;
-}
-.kiTechContent > div:nth-of-type(2) {
-    padding: 3px 0 0 0;
-    border-bottom: 1px dashed var(--boxColor);
-}
-.kiTechMaintMaxContent > div > span:first-of-type {
-    width: 15%;
-    justify-content: center;
-    display: flex;
-}
-.kiTechMaintMaxContent > div > input {
-    text-align: center;
-    width: 9%;
-    margin: 0 1% 0 0;
-}
-.kiTechMaintMaxContent > div:nth-of-type(2) > span {
-    width: 25%;
-}
-.techExpandContent {
-    display: flex;
-    width: 75%;
-}
-.techExpandContent > span {
-    width: 33.3%;
-    justify-content: center;
-    display: flex;
-}
-.techExpandContent > input {
-    display: flex;
-    width: 12%;
-}
 /*
     ***************
     ---------------
@@ -6026,20 +5827,8 @@ h6 {
     color: var(--textColor);
     border: none;
 }
-/*.dialog .dialog-buttons button.default {
-    background: var(--buttonBg);
-    color: var(--textColor);
-    border: none;
-}*/
 .form-fields > input,
 .journal-header > input {
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 13px;
-    text-align: center;
-    border: 0px;
-    height: 20px;
     background: var(--buttonBg);
     border-radius: 0px;
     border-bottom: 1px solid var(--inputBorder);
@@ -6057,7 +5846,9 @@ h6 {
     background-color: var(--buttonBg);
 }
 
-
+.restOptionsContainer > label {
+    display: flex;
+}
 
 /*
     ***************
@@ -6089,6 +5880,23 @@ h6 {
 }
 .armorDisplay > tbody > tr {
     background: none;
+    display: flex;
+    justify-content: space-around;
+}
+.armorDisplay > tbody > tr > td {
+    white-space: nowrap;
+    padding: 3px;
+}
+.explodeButtons {
+    display: flex;
+    justify-content: center;
+}
+.explodeButtons > button {
+    width: 75%;
+}
+.iniExplodeRoll {
+    justify-content: center !important;
+    font-style: italic;
 }
 /*
     --------
@@ -6173,12 +5981,28 @@ h6 {
     display: flex;
     justify-content: space-between;
 }
-.secondarychatmsg > div:nth-last-of-type(2) {
+.chatPlainRoll.lastRoll {
     border-image: url(../img/border.png) 10 stretch;
     border-top: 5px solid black;
     border-bottom: 5px solid black;
     margin-top: 3px;
     margin-bottom: 3px;
+}
+.chatPlainRoll {
+    font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+}
+.chatPlainRoll > span:nth-of-type(1) {
+    padding-left: 7%;
+    max-width: 75%;
+}
+.chatPlainRoll > span:nth-of-type(2) {
+    padding-right: 7%;
+    align-self: center;
+}
+.secondarychatmsg .fumbleSeverity {
+    padding: 0 10%;
 }
 .secondarychatmsg > div:not(:nth-of-type(1)) > span:nth-of-type(1) {
     padding-left: 10%;
@@ -6187,7 +6011,7 @@ h6 {
     padding-right: 10%;
 }
 .fumbleSeverity {
-    padding: 0 10%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -6459,56 +6283,4 @@ h6 {
 }
 .editor-content > img {
     border: none;
-}
-/*
-    ****************
-    ----------------
-      General Item
-    ----------------
-    ****************
-*/
-.sectionItem {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    border-radius: 4px;
-    border: 1px solid var(--boxColor);
-    margin: 0;
-    max-width: 100%;
-    container-type: inline-size;
-}
-.sectionItem > legend {
-    display: flex;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 14px;
-    color: var(--boxColor);
-    padding: 0 6px;
-}
-.sectionActor {
-    display: flex;
-    flex-direction: column;
-    border: 3px solid var(--boxColor);
-    padding: 0 10px;
-    margin: 0;
-    max-width: 100%;
-    container-type: inline-size;
-}
-.sectionActor > legend {
-    display: flex;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 20px;
-    color: var(--boxColor);
-    padding: 0 6px;
-}
-.sectionActor > legend > span {
-    font-size: 20px;
-    color: var(--boxColor) !important;
-}
-.sectionActor > div {
-    margin: 0 -10px;
-}
-.flexColumn {
-    flex-direction: column;
 }

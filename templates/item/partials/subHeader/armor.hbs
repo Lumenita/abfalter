@@ -1,0 +1,22 @@
+<div class="item-subtitle">
+    <h4 class="item-type">
+        {{#ifEquals system.armorType "armor"}}
+        {{localize "abfalter.armor"}}
+        {{else}}
+        {{localize "abfalter.helmet"}}
+        {{/ifEquals}}
+    </h4>
+    <span class="item-subType">
+        {{localize "abfalter.equipped"}}?
+        <a data-action="toggleValue" data-label="system.equipped" data-ability="{{system.equipped}}"><i class="{{#if system.equipped}}fa-solid fa-toggle-on{{else}}fa-solid fa-toggle-off{{/if}}"></i></a>
+    </span>
+</div>
+<ul class="summary flexrow">
+    <li>
+        <select name="system.armorType">
+            {{selectOptions armorTypeList selected=system.armorType localize=true}}
+        </select>
+    </li>
+    <li>{{localize "abfalter.quality"}}: {{system.quality}}</li>
+    <li>{{localize "abfalter.fortitude"}}: {{system.derived.fortitude}}</li>
+</ul>

@@ -1,0 +1,39 @@
+<section class="tab changes{{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+    <header>
+        <div class="key">{{localize "EFFECT.ChangeKey"}}</div>
+        <div class="mode">{{localize "EFFECT.ChangeMode"}}</div>
+        <div class="value">{{localize "EFFECT.ChangeValue"}}</div>
+        <div class="priority">{{localize "EFFECT.ChangePriority"}}</div>
+        <div class="controls"><a data-action="addChange"><i class="fa-regular fa-square-plus"></i></a></div>
+    </header>
+    <ol class="scrollable" data-changes>
+        {{#each source.changes as |change i|}}
+        <li data-index="{{i}}">
+            <div class="key">
+                <select name="changes.{{i}}.key">
+                {{#each ../groupedChangeKeys as |options groupLabel|}}
+                    <optgroup label="{{groupLabel}}">
+                    {{#each options as |opt|}}
+                        <option value="{{opt.key}}" {{#if (eq opt.key change.key)}}selected{{/if}}>
+                        {{opt.label}}
+                        </option>
+                    {{/each}}
+                    </optgroup>
+                {{/each}}
+                </select>
+            </div>
+            <div class="mode">
+                {{formInput ../fields.changes.element.fields.mode name=(concat "changes." i ".mode") value=change.mode choices=@root.modes}}
+            </div>
+            <div class="value">
+                {{formInput ../fields.changes.element.fields.value name=(concat "changes." i ".value") value=change.value}}
+            </div>
+            <div class="priority">
+                {{formInput ../fields.changes.element.fields.priority name=(concat "changes." i ".priority") value=change.priority
+                    placeholder=(lookup ../../priorities change.mode)}}
+            </div>
+            <div class="controls"><a data-action="deleteChange"><i class="fa-solid fa-trash"></i></a></div>
+        </li>
+        {{/each}}
+    </ol>
+</section>

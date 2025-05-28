@@ -4,6 +4,8 @@ export var abfalterSettingsKeys;
     abfalterSettingsKeys["Corrected_Fumble"] = "Corrected_Fumble";
     abfalterSettingsKeys["Use_Meters"] = "Use_Meters";
     abfalterSettingsKeys["Change_Theme"] = "Change_Theme";
+	abfalterSettingsKeys["Corrected_OpenRoll"] = "Corrected_OpenRoll";
+	abfalterSettingsKeys["Corrected_InitiativeRoll"] = "Corrected_InitiativeRoll";
 })(abfalterSettingsKeys || (abfalterSettingsKeys = {}));
 export const abfalterSettings = () => {
     game.settings.register('abfalter', "systemMigrationVersion", {
@@ -55,6 +57,22 @@ export const abfalterSettings = () => {
         onChange: value => {
             updateGridUnits(value);
         }
+    });
+    game.settings.register('abfalter', abfalterSettingsKeys.Corrected_OpenRoll, {
+        name: game.i18n.localize('abfalter.globalSettings.openRollName'),
+        hint: game.i18n.localize('abfalter.globalSettings.openRollNameDetails'),
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean
+    });
+    game.settings.register('abfalter', abfalterSettingsKeys.Corrected_InitiativeRoll, {
+        name: game.i18n.localize('abfalter.globalSettings.openRollInitiative'),
+        hint: game.i18n.localize('abfalter.globalSettings.openRollInitiativeDetails'),
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean
     });
 };
 function updateGridUnits(value) {

@@ -1,0 +1,16 @@
+<div class="item-subtitle">
+    <h4 class="item-type">{{localize (concat "abfalter.itemNames." document.type)}}</h4>
+    <span class="item-subType">
+        {{localize "abfalter.fav"}}
+        <a data-action="toggleValue" data-label="system.fav" data-ability="{{system.fav}}"><i class="{{#if system.fav}}fa-solid fa-star{{else}}fa-regular fa-star{{/if}}"></i></a>
+    </span>
+</div>
+<ul class="summary flexrow">
+    <li>{{localize "abfalter.final"}}: {{system.finalValue}}</li>
+    <li>
+        <select name="system.atr">
+            {{selectOptions customSecObjList selected=system.atr localize=true}}
+        </select>
+    </li>
+    <li></li>
+</ul>

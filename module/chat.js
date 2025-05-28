@@ -1,32 +1,21 @@
 import * as diceFunctions from "./diceroller.js";
 
-export function addChatListeners(html, _msg) {
-    html.find('button.secOpenRoll').click(ev => {
-        diceFunctions.openRollFunction(_msg.message);
-    });
-    html.find('button.wepOpenRoll').click(ev => {
-        diceFunctions.profileOpenRollFunction(_msg.message);
-    });
-    html.find('button.secFumbleRoll').click(ev => {
-        diceFunctions.fumbleRollFunction(_msg.message);
-    });
-    html.find('button.wepFumbleRoll').click(ev => {
-        diceFunctions.profileFumbleRollFunction(_msg.message);
-    });
-
-    //Items to Chat
-    html.find('button.spellDifficulty').click(ev => {
-        let label = $(ev.currentTarget).attr("data-label");
-        spellChatUpdate(_msg.message, label);
-    });
-
-    html.find('button.psychicDifficulty').click(ev => {
-        let label = $(ev.currentTarget).attr("data-label");
-        psychicChatUpdate(_msg.message, label);
-    });
+export function addChatListeners(chatMessage, html) {
+    const bindButton = (selector, callback) => {
+        html.querySelectorAll(selector).forEach(button => {
+            button.addEventListener("click", ev => callback(chatMessage, ev));
+        });
+    };
+    bindButton("button.secOpenRoll", diceFunctions.plainOpenRollFunction);
+    bindButton("button.secFumbleRoll", diceFunctions.plainFumbleRollFunction);
+    bindButton("button.spellDifficulty", spellChatUpdate);
+    bindButton("button.psychicDifficulty", psychicChatUpdate);
+    bindButton("button.wepOpenRoll", diceFunctions.profileOpenRollFunction);
+    bindButton("button.wepFumbleRoll", diceFunctions.profileFumbleRollFunction);
 }
 
-export const hideChatActionButtons = function (message, html, data) {
+//export const hideChatActionButtons = function (message, html, data) {
+export const hideChatActionButtons = function (chatMessage, html) {
     const chatCard = html.find(".abfalter.secondarychatmsg");
 
     if (chatCard.length > 0) {
@@ -41,7 +30,9 @@ export const hideChatActionButtons = function (message, html, data) {
     }
 }
 
-async function spellChatUpdate(msg, label) {
+async function spellChatUpdate(msg, ev) {
+    const label = ev.currentTarget.getAttribute("data-label");
+
     const template = "systems/abfalter/templates/chatItem/spellChat.html";
     let cardData = msg.flags.cardData
     cardData.expand = false; 
@@ -61,11 +52,13 @@ async function spellChatUpdate(msg, label) {
         default:
             break;
     }
-    const content = await renderTemplate(template, cardData);
+    const content = await foundry.applications.handlebars.renderTemplate(template, cardData);
     game.messages.get(msg._id).update({ content: content});
 }
 
-async function psychicChatUpdate(msg, label) {
+async function psychicChatUpdate(msg, ev) {
+    const label = ev.currentTarget.getAttribute("data-label");
+
     const template = "systems/abfalter/templates/chatItem/psyMatrixChat.html";
     let cardData = msg.flags.cardData
     cardData.expand = false; 
@@ -114,7 +107,6 @@ async function psychicChatUpdate(msg, label) {
         default:
             break;
     }
-    console.log(cardData.diff + " + " + cardData.effect);
-    const content = await renderTemplate(template, cardData);
+    const content = await foundry.applications.handlebars.renderTemplate(template, cardData);
     game.messages.get(msg._id).update({ content: content });
 }

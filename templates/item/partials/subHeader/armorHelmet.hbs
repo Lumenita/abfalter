@@ -1,0 +1,24 @@
+<div class="item-subtitle">
+    <h4 class="item-type">{{localize "abfalter.helmet"}}</h4>
+    <span class="item-subType">
+        {{localize "abfalter.equipped"}}?
+        <a class="toggleBoolean" data-label="system.equipped" data-ability="{{system.equipped}}"><i
+                class="{{#if system.equipped}}fa-solid fa-toggle-on{{else}}fa-solid fa-toggle-off{{/if}}"></i></a>
+    </span>
+</div>
+
+<ul class="summary flexrow">
+    <li>{{localize "abfalter.quality"}}: {{system.quality}}</li>
+    <li>{{localize "abfalter.presence"}}: {{system.newPresence}}</li>
+    <li>{{localize "abfalter.fortitude"}}: {{system.newFortitude}}</li>
+</ul>
+<div>
+    The armorHelmet item is going to be removed, do not drag this onto your
+    actor unless you want errors in future updates.
+    <br>
+    Instead, create an armor and change its type to helmet.
+    <br>
+    Removal of item is going to happen in 1.5.3, There will be a migration script to double check if actors
+    have the armorHelmet item and remove it. 1.5.0 migration autamically converted the armorHelmet item to an
+    helmet item alrleady.
+</div>

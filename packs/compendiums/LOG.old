@@ -1,3 +1,8 @@
-2025/04/15-13:32:26.390 1cb8 Recovering log #1057
-2025/04/15-13:32:26.402 1cb8 Delete type=0 #1057
-2025/04/15-13:32:26.402 1cb8 Delete type=3 #1056
+2025/05/28-03:22:34.374 2490 Recovering log #1256
+2025/05/28-03:22:34.380 2490 Delete type=0 #1256
+2025/05/28-03:22:34.381 2490 Delete type=3 #1254
+2025/05/28-03:24:45.803 6ec8 Level-0 table #1261: started
+2025/05/28-03:24:45.803 6ec8 Level-0 table #1261: 0 bytes OK
+2025/05/28-03:24:45.808 6ec8 Delete type=0 #1259
+2025/05/28-03:24:45.818 6ec8 Manual compaction at level-0 from '!journal!TqcHR78J6BPJV4Be' @ 72057594037927935 : 1 .. '!journal.pages!TqcHR78J6BPJV4Be.xyCNYxYXH45Zrm5i' @ 0 : 0; will stop at (end)
+2025/05/28-03:24:45.821 6ec8 Manual compaction at level-1 from '!journal!TqcHR78J6BPJV4Be' @ 72057594037927935 : 1 .. '!journal.pages!TqcHR78J6BPJV4Be.xyCNYxYXH45Zrm5i' @ 0 : 0; will stop at (end)

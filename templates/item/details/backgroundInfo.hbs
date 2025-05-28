@@ -1,0 +1,19 @@
+<section class="baseAbfalter itemPage tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+    <fieldset>
+        <legend> {{ localize "abfalter.generalDetails" }} </legend>
+        {{#ifEquals system.type "race"}}
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.levelMod"}} </span> <input type="number" name="system.levelMod" value="{{system.levelMod}}" /> </label>
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.experiencePenalty"}} </span> <input type="number" name="system.expPen" value="{{system.expPen}}" /> </label>
+        {{/ifEquals}}
+
+        {{#ifEquals system.type "bloodBond"}}
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.levelMod"}} </span> <input type="number" name="system.levelMod" value="{{system.levelMod}}" /> </label>
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.cpCost"}} </span> <input type="number" name="system.cpCost" value="{{system.cpCost}}" /> </label>
+        {{/ifEquals}}
+
+        {{#ifEquals system.type "culturalRoot"}}
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.region"}} </span> <input type="number" name="system.region" value="{{system.region}}" /> </label>
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.city"}} </span> <input type="number" name="system.city" value="{{system.city}}" /> </label>
+        {{/ifEquals}}
+    </fieldset>
+</section>

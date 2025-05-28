@@ -1,0 +1,17 @@
+<div class="item-subtitle">
+    <h4 class="item-type">{{localize (concat "abfalter.itemNames." document.type)}}</h4>
+    <span class="item-subType">
+        {{localize "abfalter.toggle"}}
+        <a data-action="toggleValue" data-label="system.toggleItem" data-ability="{{system.toggleItem}}"><i class="{{#if system.toggleItem}}fa-solid fa-toggle-on{{else}}fa-solid fa-toggle-off{{/if}}"></i></a>
+    </span>
+</div>
+<ul class="summary flexrow">
+    <li class="itemHeader65-30">
+        <label>
+            <span>{{localize "abfalter.level"}}: </span>
+            <input type="number" name="system.level" value="{{system.level}}" />
+        </label>
+    </li>
+    <li></li>
+    <li></li>
+</ul>

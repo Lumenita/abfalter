@@ -1,0 +1,17 @@
+<div class="item-subtitle">
+    <h4 class="item-type">{{localize (concat "abfalter.itemNames." document.type)}}</h4>
+    <span class="item-subType">{{system.mk}} {{localize "abfalter.mk"}}</span>
+</div>
+<ul class="summary flexrow">
+    <li>
+        <select name="system.frequency">
+            {{selectOptions kiFrequencyObjList selected=system.frequency localize=true}}
+        </select>
+    </li>
+    <li>
+        <select name="system.actionType">
+            {{selectOptions kiActionTypeObjList selected=system.actionType localize=true}}
+        </select>
+    </li>
+    <li>{{localize "abfalter.level"}}: {{system.level}}</li>
+</ul>

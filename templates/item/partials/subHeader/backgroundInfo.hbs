@@ -1,0 +1,35 @@
+<div class="item-subtitle">
+    <h4 class="item-type">            
+        {{#ifEquals system.type "race"}}
+        {{localize "abfalter.race"}}
+        {{/ifEquals}}
+        {{#ifEquals system.type "bloodBond"}}
+        {{localize "abfalter.bloodBond"}}
+        {{/ifEquals}}
+        {{#ifEquals system.type "culturalRoot"}}
+        {{localize "abfalter.culturalRoot"}}
+        {{/ifEquals}}
+    </h4>
+    <span class="item-subType"></span>
+</div>
+<ul class="summary flexrow">
+    <li>
+        <select name="system.type">
+            {{selectOptions backgroundInfoObjList selected=system.type localize=true}}
+        </select>
+    </li>
+    <li></li>
+    <li class="itemHeader65-30">
+        <label> 
+            <span> {{localize "abfalter.showDesc"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.descToggle}}kiBought{{/if}}"
+                data-label="system.descToggle" data-ability="{{system.descToggle}}">
+                {{#if system.descToggle}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                {{/if}}
+            </button>
+        </label>
+    </li>
+</ul>

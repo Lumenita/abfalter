@@ -1,0 +1,16 @@
+<div class="item-subtitle">
+    <h4 class="item-type">{{localize "abfalter.psychicMatricesOne"}}</h4>
+    <span class="item-subType">
+        {{localize "abfalter.level"}}: {{system.level}}
+    </span>
+</div>
+
+<ul class="summary flexrow">
+    <li>{{localize "abfalter.ppotential"}}: {{system.newPotential}}</li>
+    <li>
+        <select name="system.action">
+            {{selectOptions actionObjList selected=system.action localize=true}}
+        </select>
+    </li>
+    <li>{{localize "abfalter.maint"}} {{system.maintName}}</li>
+</ul>

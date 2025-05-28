@@ -1,4 +1,4 @@
-export class metaMagicSheet extends ActorSheet {
+export class metaMagicSheet extends foundry.appv1.sheets.ActorSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["abfalter"],

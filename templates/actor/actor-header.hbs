@@ -1,0 +1,160 @@
+<div class="sheet-header baseAbfalter actorHeader1">
+    <div class="actorToken">
+        <img class="profile-img" src="{{document.prototypeToken.texture.src}}" title="{{document.name}} {{localize "abfalter.token"}}" />
+    </div>
+
+    <div class="subHeader1">
+        <div class="containerHeader">
+            <div class="SubHeaderLeft">
+                <div class="subHeaderRow1">
+                    <div>
+                        {{#if system.toggles.actorHeaderInfo1}}
+                        <input type="text" name="name" value="{{document.name}}" placeholder="{{localize "
+                            abfalter.name"}}" />
+                        {{else}}
+                        <span>{{document.name}}</span>
+                        {{/if}}
+                        <a data-action="toggleValue" class="{{#if system.toggles.actorHeaderInfo1}}showOpacity{{/if}}"
+                            data-label="system.toggles.actorHeaderInfo1"
+                            data-ability="{{system.toggles.actorHeaderInfo1}}"><i
+                                class="{{#if system.toggles.actorHeaderInfo1}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                    </div>
+                </div>
+
+                <div class="subHeaderRow2">
+                    {{#if system.toggles.actorHeaderInfo1}}
+                    <label> <input type="text" name="system.info.gender" value="{{system.info.gender}}"
+                            placeholder="{{localize "abfalter.gender"}}" /> </label>
+                    <label> <input type="text" name="system.info.race" value="{{system.info.race}}"
+                            placeholder="{{localize "abfalter.race"}}" /> </label>
+                    <label> <input type="text" name="system.info.class" value="{{system.info.class}}"
+                            placeholder="{{localize "abfalter.class"}}" /> </label>
+                    <label> <input type="number" name="system.levelinfo.level" value="{{system.levelinfo.level}}"
+                            readonly /> </label>
+                    {{else}}
+                    <span>{{system.info.gender}} | {{system.info.race}} | {{system.info.class}} | {{localize
+                        "abfalter.level"}}: {{system.levelinfo.level}} </span>
+                    {{/if}}
+                </div>
+
+                <div class="subHeaderRow2Half">
+                    {{#if system.toggles.actorHeaderInfo1}}
+                    <label> <input type="text" name="system.info.height" value="{{system.info.height}}"
+                            placeholder="{{localize "abfalter.height"}}" /> </label>
+                    <label> <input type="text" name="system.info.weight" value="{{system.info.weight}}"
+                            placeholder="{{localize "abfalter.weight"}}" /> </label>
+                    <label> <input type="text" name="system.info.age" value="{{system.info.age}}"
+                            placeholder="{{localize "abfalter.age"}}" /> </label>
+                    {{else}}
+                    <span>{{localize "abfalter.height"}}: {{system.info.height}} | {{localize "abfalter.weight"}}:
+                        {{system.info.weight}} | {{localize "abfalter.age"}}: {{system.info.age}} </span>
+                    {{/if}}
+                </div>
+
+                <div class="subHeaderRow3">
+                    <span>{{localize "abfalter.presence"}}: {{system.levelinfo.presence}} | {{localize "abfalter.dp"}}:
+                        {{system.levelinfo.dp}}</span>
+                    <label> <input type="number" name="system.levelinfo.experience"
+                            value="{{system.levelinfo.experience}}" placeholder="{{localize " abfalter.exp"}}" />
+                    </label>
+                    <span> / </span>
+                    <span> {{system.levelinfo.nextlevel}} </span>
+                    <span> {{localize "abfalter.exp"}} </span>
+                    <label class="levelUpBox hidden">
+                        <a> <i class="fas fa-cog"></i> </a>
+                    </label>
+                </div>
+            </div>
+
+            <div class="SubHeaderRight">
+                <div class="subRightHeader1">
+                    {{#if system.toggles.actorHeaderInfo1}}
+                    <label> <input type="number" name="system.info.size" value="{{system.info.size}}"
+                            placeholder="{{localize "abfalter.size"}}" /> </label>
+                    <label> <input type="number" name="system.info.appearance" value="{{system.info.appearance}}"
+                            placeholder="{{localize "abfalter.appear"}}" /> </label>
+                    {{else}}
+                    <span>{{localize "abfalter.size"}}: {{system.info.size}} | {{localize "abfalter.appear"}}:
+                        {{system.info.appearance}} </span>
+                    {{/if}}
+                    <button type="button" data-action="openRestWindow">
+                        <span>{{localize "abfalter.rest"}}</span>
+                    </button>
+                </div>
+
+                <div class="subRightHeader2">
+                    <div class="subRightLeft">
+                        <h5>
+                            {{localize "abfalter.initiative"}}
+                            <label>
+                                <a data-action="toggleValue" class="{{#if system.initiative.status}}showOpacity{{/if}}"
+                                    data-label="system.initiative.status" data-ability="{{system.initiative.status}}"><i
+                                        class="{{#if system.initiative.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                            </label>
+                        </h5>
+                        {{#if system.initiative.status}}
+                        <div class="headerIniDets">
+                            <label> <span> {{localize "abfalter.armor"}} </span> <input type="number"
+                                    name="system.armor.wearArmor.totalNatPen"
+                                    value="-{{system.armor.wearArmor.totalNatPen}}" readonly /> </label>
+                            <label> <span> {{localize "abfalter.weapon"}} </span> <input type="number"
+                                    name="system.initiative.wepFinalSpeed" value="{{system.initiative.wepFinalSpeed}}"
+                                    readonly /> </label>
+                            <label> <span> {{localize "abfalter.size"}} </span> <input type="number"
+                                    name="system.initiative.sizeBase" value="{{system.initiative.sizeBase}}" readonly />
+                            </label>
+                            <label> <span> {{localize "abfalter.class"}} </span> <input type="number"
+                                    name="system.initiative.class" value="{{system.initiative.class}}" readonly />
+                            </label>
+                            <label title="Dex mod + Agi mod"> <span> {{localize "abfalter.modifier"}} </span> <input
+                                    type="number" name="system.initiative.extraStats"
+                                    value="{{system.initiative.extraStats}}" readonly /> </label>
+                            <label> <span> {{localize "abfalter.spec"}} </span> <input type="number"
+                                    name="system.initiative.spec" value="{{system.initiative.spec}}" /> </label>
+                        </div>
+                        {{else}}
+                        <div class="headerIni">
+                            <span> {{system.initiative.wepName}} </span>
+                            <div>
+                                <!--TO DO-->
+                                <button>
+                                    <span> {{system.initiative.final}} </span>
+                                </button>
+                                <!--End TO DO-->
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+
+                    <div class="subRightMid {{#if system.toggles.shield}}{{else}}hidden{{/if}}">
+                        <h5>
+                            {{localize "abfalter.shield"}}
+                        </h5>
+                        <div>
+                            <label> <span> {{localize "abfalter.maximum"}}: </span> <input type="number"
+                                    name="system.shield.max" value="{{system.shield.max}}" /> </label>
+                            <label> <span> {{localize "abfalter.actual"}}: </span> <input type="number"
+                                    name="system.shield.value" value="{{system.shield.value}}" /> </label>
+                        </div>
+                    </div>
+
+                    <div class="subRightRight">
+                        <h5>
+                            {{localize "abfalter.aamShort"}}
+                        </h5>
+                        <div class="headerAam">
+                            <label><span>{{localize "abfalter.base"}}</span><input type="number"
+                                    name="system.aamField.base" value="{{system.aamField.base}}" /></label>
+                            <label><span>{{localize "abfalter.boons"}}</span><input type="number"
+                                    name="system.aamField.boon" value="{{system.aamField.boon}}" /></label>
+                            <label><span>{{localize "abfalter.critical"}}</span><input type="number"
+                                    name="system.aamField.crit" value="{{system.aamField.crit}}" /></label>
+                            <label><span>{{localize "abfalter.aamShort"}}: </span> <span>{{system.aamField.final}}
+                                </span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

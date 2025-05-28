@@ -1,0 +1,33 @@
+<div class="item-subtitle">
+    <h4 class="item-type">{{localize "abfalter.turnSpellMaint"}}</h4>
+    <span class="item-subType">
+        {{localize "abfalter.active"}}?
+        <a data-action="toggleValue" data-label="system.equipped" data-ability="{{system.equipped}}"><i class="{{#if system.equipped}}fa-solid fa-toggle-on{{else}}fa-solid fa-toggle-off{{/if}}"></i></a>
+    </span>
+</div>
+
+<ul class="summary flexrow">
+    <li class="itemHeader65-30">
+        <label>
+            <span>{{localize "abfalter.spellCost"}}: </span>
+            <input type="number" name="system.cost" value="{{system.cost}}" />
+        </label>
+    </li>
+    <li class="itemHeader65-30">
+        <label>
+            <span>{{localize "abfalter.zeon"}}: </span>
+            <input type="number" name="system.zeon" value="{{system.zeon}}" />
+        </label>
+    </li>
+    <li></li>
+</ul>
+
+<div>
+    The dailyMaint item is going to be removed, do not drag this onto your 
+    actor unless you want errors in future updates.
+    <br>
+    Instead, create a zeonMaint item and change its type to turn Maint.
+    <br>
+    Removal of item is going to happen in 1.5.3, There will be a migration script to double check if actors
+    have the dailyMaint item and remove it. 1.5.0 migration autamically converted the dailyMaint item to a zeonMaint item alrleady.
+</div>

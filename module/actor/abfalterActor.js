@@ -3,8 +3,11 @@ import { abfalterSettingsKeys } from "../utilities/abfalterSettings.js";
 export default class abfalterActor extends Actor {
 
     prepareData() {
+        
         const isTypeData = this.system instanceof foundry.abstract.TypeDataModel;
-        if (isTypeData || (this.system?.prepareBaseData instanceof Function)) this.system.prepareBaseData();
+        if (isTypeData || (this.system?.prepareBaseData instanceof Function)) {
+            this.system.prepareBaseData();
+        }
         super.prepareData();
     }
 
@@ -723,133 +726,49 @@ export default class abfalterActor extends Actor {
             system.regeneration.base = 12;
         }
         system.regeneration.final = Math.min(Math.floor(system.regeneration.base + system.regeneration.spec + system.regeneration.temp + system.regeneration.bonus), 20);
-        switch (system.regeneration.final) {
-            case 1:
-                system.regeneration.resting = "10/" + game.i18n.localize('abfalter.day');
-                system.regeneration.notResting = "5/" + game.i18n.localize('abfalter.day');
-                system.regeneration.penaltyReduction = "-5/" + game.i18n.localize('abfalter.day');
-                system.regeneration.rawValue = 10;
-                break;
-            case 2:
-                system.regeneration.resting = "20/" + game.i18n.localize('abfalter.day');
-                system.regeneration.notResting = "10/" + game.i18n.localize('abfalter.day');
-                system.regeneration.penaltyReduction = "-5/" + game.i18n.localize('abfalter.day');
-                system.regeneration.rawValue = 20;
-                break;
-            case 3:
-                system.regeneration.resting = "30/" + game.i18n.localize('abfalter.day');
-                system.regeneration.notResting = "15/" + game.i18n.localize('abfalter.day');
-                system.regeneration.penaltyReduction = "-5/" + game.i18n.localize('abfalter.day');
-                system.regeneration.rawValue = 30;
-                break;
-            case 4:
-                system.regeneration.resting = "40/" + game.i18n.localize('abfalter.day');
-                system.regeneration.notResting = "20/" + game.i18n.localize('abfalter.day');
-                system.regeneration.penaltyReduction = "-10/" + game.i18n.localize('abfalter.day');
-                system.regeneration.rawValue = 40;
-                break;
-            case 5:
-                system.regeneration.resting = "50/" + game.i18n.localize('abfalter.day');
-                system.regeneration.notResting = "25/" + game.i18n.localize('abfalter.day');
-                system.regeneration.penaltyReduction = "-10/" + game.i18n.localize('abfalter.day');
-                system.regeneration.rawValue = 50;
-                break;
-            case 6:
-                system.regeneration.resting = "75/" + game.i18n.localize('abfalter.day');
-                system.regeneration.notResting = "30/" + game.i18n.localize('abfalter.day');
-                system.regeneration.penaltyReduction = "-15/" + game.i18n.localize('abfalter.day');
-                system.regeneration.rawValue = 75;
-                break;
-            case 7:
-                system.regeneration.resting = "100/" + game.i18n.localize('abfalter.day');
-                system.regeneration.notResting = "50/" + game.i18n.localize('abfalter.day');
-                system.regeneration.penaltyReduction = "-20/" + game.i18n.localize('abfalter.day');
-                system.regeneration.rawValue = 100;
-                break;
-            case 8:
-                system.regeneration.resting = "250/" + game.i18n.localize('abfalter.day');
-                system.regeneration.notResting = "100/" + game.i18n.localize('abfalter.day');
-                system.regeneration.penaltyReduction = "-25/" + game.i18n.localize('abfalter.day');
-                system.regeneration.rawValue = 250;
-                break;
-            case 9:
-                system.regeneration.resting = "500/" + game.i18n.localize('abfalter.day');
-                system.regeneration.notResting = "200/" + game.i18n.localize('abfalter.day');
-                system.regeneration.penaltyReduction = "-30/" + game.i18n.localize('abfalter.day');
-                system.regeneration.rawValue = 500;
-                break;
-            case 10:
-                system.regeneration.resting = "1/" + game.i18n.localize('abfalter.minute');
-                system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "-40/" + game.i18n.localize('abfalter.day');
-                system.regeneration.rawValue = 1440;
-                break;
-            case 11:
-                system.regeneration.resting = "2/" + game.i18n.localize('abfalter.minute');
-                system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "-50/" + game.i18n.localize('abfalter.day');
-                system.regeneration.rawValue = 2880;
-                break;
-            case 12:
-                system.regeneration.resting = "5/" + game.i18n.localize('abfalter.minute');
-                system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "-5/" + game.i18n.localize('abfalter.hour');
-                system.regeneration.rawValue = 7200;
-                break;
-            case 13:
-                system.regeneration.resting = "10/" + game.i18n.localize('abfalter.minute');
-                system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "-10/" + game.i18n.localize('abfalter.hour');
-                system.regeneration.rawValue = 10000;
-                break;
-            case 14:
-                system.regeneration.resting = "1/" + game.i18n.localize('abfalter.turn');
-                system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "-15/" + game.i18n.localize('abfalter.hour');
-                system.regeneration.rawValue = 20000;
-                break;
-            case 15:
-                system.regeneration.resting = "5/" + game.i18n.localize('abfalter.turn');
-                system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "-20/" + game.i18n.localize('abfalter.hour');
-                system.regeneration.rawValue = 50000;
-                break;
-            case 16:
-                system.regeneration.resting = "10/" + game.i18n.localize('abfalter.turn');
-                system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "-50/" + game.i18n.localize('abfalter.minute');
-                system.regeneration.rawValue = 100000;
-                break;
-            case 17:
-                system.regeneration.resting = "25/" + game.i18n.localize('abfalter.turn');
-                system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "-10/" + game.i18n.localize('abfalter.turn');
-                system.regeneration.rawValue = 100000;
-                break;
-            case 18:
-                system.regeneration.resting = "50/" + game.i18n.localize('abfalter.turn');
-                system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "-25/" + game.i18n.localize('abfalter.turn');
-                system.regeneration.rawValue = 100000;
-                break;
-            case 19:
-                system.regeneration.resting = "100/" + game.i18n.localize('abfalter.turn');
-                system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "All/" + game.i18n.localize('abfalter.turn');
-                system.regeneration.rawValue = 100000;
-                break;
-            case 20:
-                system.regeneration.resting = "200/" + game.i18n.localize('abfalter.turn');
-                system.regeneration.notResting = "N/A";
-                system.regeneration.penaltyReduction = "All/" + game.i18n.localize('abfalter.turn');
-                system.regeneration.rawValue = 100000;
-                break;
-            default:
-                system.regeneration.resting = "0";
-                system.regeneration.notResting = "0";
-                system.regeneration.penaltyReduction = "0";
-                system.regeneration.rawValue = 0;
-                break;
+        let localize = key => game.i18n.localize(key);
+        const regenData = {
+        1:  { resting: 10, notResting: 5, penalty: -5, unit: 'abfalter.day' },
+        2:  { resting: 20, notResting: 10, penalty: -5, unit: 'abfalter.day' },
+        3:  { resting: 30, notResting: 15, penalty: -5, unit: 'abfalter.day' },
+        4:  { resting: 40, notResting: 20, penalty: -10, unit: 'abfalter.day' },
+        5:  { resting: 50, notResting: 25, penalty: -10, unit: 'abfalter.day' },
+        6:  { resting: 75, notResting: 30, penalty: -15, unit: 'abfalter.day' },
+        7:  { resting: 100, notResting: 50, penalty: -20, unit: 'abfalter.day' },
+        8:  { resting: 250, notResting: 100, penalty: -25, unit: 'abfalter.day' },
+        9:  { resting: 500, notResting: 200, penalty: -30, unit: 'abfalter.day' },
+        10: { resting: 1, notResting: null, penalty: -40, unit: 'abfalter.minute', raw: 1440 },
+        11: { resting: 2, notResting: null, penalty: -50, unit: 'abfalter.minute', raw: 2880 },
+        12: { resting: 5, notResting: null, penalty: -5,  unit: 'abfalter.hour', raw: 7200 },
+        13: { resting: 10, notResting: null, penalty: -10, unit: 'abfalter.hour', raw: 10000 },
+        14: { resting: 1, notResting: null, penalty: -15, unit: 'abfalter.turn', raw: 20000 },
+        15: { resting: 5, notResting: null, penalty: -20, unit: 'abfalter.turn', raw: 50000 },
+        16: { resting: 10, notResting: null, penalty: -50, unit: 'abfalter.minute', raw: 100000 },
+        17: { resting: 25, notResting: null, penalty: -10, unit: 'abfalter.turn', raw: 100000 },
+        18: { resting: 50, notResting: null, penalty: -25, unit: 'abfalter.turn', raw: 100000 },
+        19: { resting: 100, notResting: null, penalty: 'All', unit: 'abfalter.turn', raw: 100000 },
+        20: { resting: 200, notResting: null, penalty: 'All', unit: 'abfalter.turn', raw: 100000 },
+        };
+        const regenLevel = system.regeneration.final;
+        const entry = regenData[regenLevel];
+
+        if (entry) {
+        let multiplier = (system.toggles?.dmgRes && system.lifepoints?.hpMult) ? system.lifepoints.hpMult : 1;
+        let unit = localize(entry.unit);
+
+        let resting = entry.resting * multiplier;
+        let notResting = entry.notResting !== null ? entry.notResting * multiplier : "N/A";
+        let penalty = entry.penalty === "All" ? "All/" + unit : (entry.penalty * multiplier) + "/" + unit;
+
+        system.regeneration.resting = resting + "/" + unit;
+        system.regeneration.notResting = notResting === "N/A" ? "N/A" : notResting + "/" + unit;
+        system.regeneration.penaltyReduction = penalty;
+        system.regeneration.rawValue = entry.raw !== undefined ? entry.raw * multiplier : resting;
+        } else {
+        system.regeneration.resting = "0";
+        system.regeneration.notResting = "0";
+        system.regeneration.penaltyReduction = "0";
+        system.regeneration.rawValue = 0;
         }
 
         //Initiative
@@ -1044,238 +963,249 @@ export default class abfalterActor extends Actor {
             aHeatTot: 0, aColdMax: 0, aColdTot: 0, aEleMax: 0, aEleTot: 0, aEneMax: 0, aEneTot: 0, aSptMax: 0, aSptTot: 0, ahReq: 0, ahCutMax: 0, ahCutTot: 0, ahImpMax: 0, ahImpTot: 0, ahThrMax: 0,
             ahThrTot: 0, ahHeatMax: 0, ahHeatTot: 0, ahColdMax: 0, ahColdTot: 0, ahEleMax: 0, ahEleTot: 0, ahEneMax: 0, ahEneTot: 0, ahSptMax: 0, ahSptTot: 0, perPen: 0, usedpp: 0, matrixpp: 0, arsMk: 0,
             maMk: 0, techMk: 0, pathLvl: 0, turnMaint: 0, dayMaint: 0, spellCost: 0, wepNum: 0, wepSpd: 0, maKiAtk: 0, maKiBlk: 0, maKiDod: 0, pilot: 0, techmagic: 0, cook: 0, toy: 0,
-            kiDect: 0, kiCon: 0, wepName: "", monsterCost: 0, shieldSpeed: 0, arsDp: 0, maDp: 0, mentalPatDp: 0, profPsyDp: 0, profMystDp: 0, profPrimDp: 0
+            kiDect: 0, kiCon: 0, wepName: "", monsterCost: 0, shieldSpeed: 0, arsDp: 0, maDp: 0, mentalPatDp: 0, profPsyDp: 0, profMystDp: 0, profPrimDp: 0, advCp:0, disAdvCp: 0, bloodBondCp: 0, infoLevelMod: 0
         }
         const atTypes = ["cut", "imp", "thr", "heat", "cold", "ele", "ene", "spt"];
         const atStacks = Object.fromEntries(atTypes.map(t => [t, []]));
         const atFinal = {};
+        const ahtStacks = Object.fromEntries(atTypes.map(t => [t, []]));
+        const ahtFinal = {};
         this.items.reduce((arr, item) => {
-                if (item.type === "class") {
-                    const classLevels = parseInt(item.system.main.levels) || 0;
-                    classBonuses.level += classLevels;
-                    classBonuses.lpbonus += classLevels * (parseInt(item.system.main.lp) || 0);
-                    classBonuses.ini += classLevels * (parseInt(item.system.main.initiative) || 0);
-                    classBonuses.atk += classLevels * (parseInt(item.system.main.attack) || 0);
-                    classBonuses.dod += classLevels * (parseInt(item.system.main.dodge) || 0);
-                    classBonuses.blk += classLevels * (parseInt(item.system.main.block) || 0);
-                    classBonuses.weararm += classLevels * (parseInt(item.system.main.weararmor) || 0);
-                    classBonuses.mk += classLevels * (parseInt(item.system.main.mk) || 0);
-                    classBonuses.pp += (parseInt(item.system.totalPP) || 0);
-                    classBonuses.zeon += classLevels * (parseInt(item.system.main.zeon) || 0);
-                    classBonuses.summon += classLevels * (parseInt(item.system.main.summon) || 0);
-                    classBonuses.control += classLevels * (parseInt(item.system.main.control) || 0);
-                    classBonuses.bind += classLevels * (parseInt(item.system.main.bind) || 0);
-                    classBonuses.banish += classLevels * (parseInt(item.system.main.banish) || 0);
-                    classBonuses.acro += classLevels * (parseInt(item.system.secondary.acro) || 0);
-                    classBonuses.athle += classLevels * (parseInt(item.system.secondary.athleticism) || 0);
-                    classBonuses.climb += classLevels * (parseInt(item.system.secondary.climb) || 0);
-                    classBonuses.jump += classLevels * (parseInt(item.system.secondary.jump) || 0);
-                    classBonuses.pilot += classLevels * (parseInt(item.system.secondary.piloting) || 0);
-                    classBonuses.ride += classLevels * (parseInt(item.system.secondary.ride) || 0);
-                    classBonuses.swim += classLevels * (parseInt(item.system.secondary.swim) || 0);
-                    classBonuses.etiq += classLevels * (parseInt(item.system.secondary.etiquette) || 0);
-                    classBonuses.intim += classLevels * (parseInt(item.system.secondary.intimidate) || 0);
-                    classBonuses.leader += classLevels * (parseInt(item.system.secondary.leadership) || 0);
-                    classBonuses.persua += classLevels * (parseInt(item.system.secondary.persuasion) || 0);
-                    classBonuses.street += classLevels * (parseInt(item.system.secondary.streetwise) || 0);
-                    classBonuses.style += classLevels * (parseInt(item.system.secondary.style) || 0);
-                    classBonuses.trading += classLevels * (parseInt(item.system.secondary.trading) || 0);
-                    classBonuses.notice += classLevels * (parseInt(item.system.secondary.notice) || 0);
-                    classBonuses.search += classLevels * (parseInt(item.system.secondary.search) || 0);
-                    classBonuses.track += classLevels * (parseInt(item.system.secondary.track) || 0);
-                    classBonuses.kiDect += classLevels * (parseInt(item.system.secondary.kidetection) || 0);
-                    classBonuses.animals += classLevels * (parseInt(item.system.secondary.animals) || 0);
-                    classBonuses.appra += classLevels * (parseInt(item.system.secondary.appraisal) || 0);
-                    classBonuses.archi += classLevels * (parseInt(item.system.secondary.architecture) || 0);
-                    classBonuses.herb += classLevels * (parseInt(item.system.secondary.herballore) || 0);
-                    classBonuses.hist += classLevels * (parseInt(item.system.secondary.history) || 0);
-                    classBonuses.law += classLevels * (parseInt(item.system.secondary.law) || 0);
-                    classBonuses.magicapr += classLevels * (parseInt(item.system.secondary.magicappr) || 0);
-                    classBonuses.medic += classLevels * (parseInt(item.system.secondary.medicine) || 0);
-                    classBonuses.mem += classLevels * (parseInt(item.system.secondary.memorize) || 0);
-                    classBonuses.navi += classLevels * (parseInt(item.system.secondary.navigation) || 0);
-                    classBonuses.occ += classLevels * (parseInt(item.system.secondary.occult) || 0);
-                    classBonuses.science += classLevels * (parseInt(item.system.secondary.science) || 0);
-                    classBonuses.tactic += classLevels * (parseInt(item.system.secondary.tactics) || 0);
-                    classBonuses.techmagic += classLevels * (parseInt(item.system.secondary.technomagic) || 0);
-                    classBonuses.comp += classLevels * (parseInt(item.system.secondary.composure) || 0);
-                    classBonuses.fos += classLevels * (parseInt(item.system.secondary.featsofstr) || 0);
-                    classBonuses.wstp += classLevels * (parseInt(item.system.secondary.withstpain) || 0);
-                    classBonuses.disg += classLevels * (parseInt(item.system.secondary.disguise) || 0);
-                    classBonuses.hide += classLevels * (parseInt(item.system.secondary.hide) || 0);
-                    classBonuses.lock += classLevels * (parseInt(item.system.secondary.lockpicking) || 0);
-                    classBonuses.poisn += classLevels * (parseInt(item.system.secondary.poisons) || 0);
-                    classBonuses.stealth += classLevels * (parseInt(item.system.secondary.stealth) || 0);
-                    classBonuses.theft += classLevels * (parseInt(item.system.secondary.theft) || 0);
-                    classBonuses.trapl += classLevels * (parseInt(item.system.secondary.traplore) || 0);
-                    classBonuses.kiCon += classLevels * (parseInt(item.system.secondary.kiconceal) || 0);
-                    classBonuses.alche += classLevels * (parseInt(item.system.secondary.alchemy) || 0);
-                    classBonuses.anims += classLevels * (parseInt(item.system.secondary.animism) || 0);
-                    classBonuses.art += classLevels * (parseInt(item.system.secondary.art) || 0);
-                    classBonuses.cook += classLevels * (parseInt(item.system.secondary.cooking) || 0);
-                    classBonuses.dance += classLevels * (parseInt(item.system.secondary.dance) || 0);
-                    classBonuses.forgi += classLevels * (parseInt(item.system.secondary.forging) || 0);
-                    classBonuses.jewel += classLevels * (parseInt(item.system.secondary.jewelry) || 0);
-                    classBonuses.toy += classLevels * (parseInt(item.system.secondary.toymaking) || 0);
-                    classBonuses.music += classLevels * (parseInt(item.system.secondary.music) || 0);
-                    classBonuses.runes += classLevels * (parseInt(item.system.secondary.runes) || 0);
-                    classBonuses.ritcal += classLevels * (parseInt(item.system.secondary.ritualcalig) || 0);
-                    classBonuses.soh += classLevels * (parseInt(item.system.secondary.slofhand) || 0);
-                    classBonuses.tailoring += classLevels * (parseInt(item.system.secondary.tailoring) || 0);
-                }
-                if (item.type === "armor") {
-                    if (item.system.equipped == true) {
-                        if (!item.system.ignorePenalty) {
-                            classBonuses.quantity += parseInt(item.system.quantity) || 0;
-                        }
-                        classBonuses.req += parseInt(item.system.derived.requirement) || 0;
-                        classBonuses.natPen += parseInt(item.system.derived.natPenalty) || 0;
-                        classBonuses.movePen += parseInt(item.system.derived.movePenalty) || 0;
-                        
-                        for (const type of atTypes) {
-                            const val = parseInt(item.system.derived[type]) || 0;
-                            const maxKey = `a${type[0].toUpperCase()}${type.slice(1)}Max`;
-                            const totKey = `a${type[0].toUpperCase()}${type.slice(1)}Tot`;
-                        
-                            if (val > (classBonuses[maxKey] || 0)) {
-                              classBonuses[maxKey] = val;
+                switch (item.type) {
+                    case "class":
+                        const classLevels = parseInt(item.system.main.levels) || 0;
+                        classBonuses.level += classLevels;
+                        classBonuses.lpbonus += classLevels * (parseInt(item.system.main.lp) || 0);
+                        classBonuses.ini += classLevels * (parseInt(item.system.main.initiative) || 0);
+                        classBonuses.atk += classLevels * (parseInt(item.system.main.attack) || 0);
+                        classBonuses.dod += classLevels * (parseInt(item.system.main.dodge) || 0);
+                        classBonuses.blk += classLevels * (parseInt(item.system.main.block) || 0);
+                        classBonuses.weararm += classLevels * (parseInt(item.system.main.weararmor) || 0);
+                        classBonuses.mk += classLevels * (parseInt(item.system.main.mk) || 0);
+                        classBonuses.pp += (parseInt(item.system.totalPP) || 0);
+                        classBonuses.zeon += classLevels * (parseInt(item.system.main.zeon) || 0);
+                        classBonuses.summon += classLevels * (parseInt(item.system.main.summon) || 0);
+                        classBonuses.control += classLevels * (parseInt(item.system.main.control) || 0);
+                        classBonuses.bind += classLevels * (parseInt(item.system.main.bind) || 0);
+                        classBonuses.banish += classLevels * (parseInt(item.system.main.banish) || 0);
+                        classBonuses.acro += classLevels * (parseInt(item.system.secondary.acro) || 0);
+                        classBonuses.athle += classLevels * (parseInt(item.system.secondary.athleticism) || 0);
+                        classBonuses.climb += classLevels * (parseInt(item.system.secondary.climb) || 0);
+                        classBonuses.jump += classLevels * (parseInt(item.system.secondary.jump) || 0);
+                        classBonuses.pilot += classLevels * (parseInt(item.system.secondary.piloting) || 0);
+                        classBonuses.ride += classLevels * (parseInt(item.system.secondary.ride) || 0);
+                        classBonuses.swim += classLevels * (parseInt(item.system.secondary.swim) || 0);
+                        classBonuses.etiq += classLevels * (parseInt(item.system.secondary.etiquette) || 0);
+                        classBonuses.intim += classLevels * (parseInt(item.system.secondary.intimidate) || 0);
+                        classBonuses.leader += classLevels * (parseInt(item.system.secondary.leadership) || 0);
+                        classBonuses.persua += classLevels * (parseInt(item.system.secondary.persuasion) || 0);
+                        classBonuses.street += classLevels * (parseInt(item.system.secondary.streetwise) || 0);
+                        classBonuses.style += classLevels * (parseInt(item.system.secondary.style) || 0);
+                        classBonuses.trading += classLevels * (parseInt(item.system.secondary.trading) || 0);
+                        classBonuses.notice += classLevels * (parseInt(item.system.secondary.notice) || 0);
+                        classBonuses.search += classLevels * (parseInt(item.system.secondary.search) || 0);
+                        classBonuses.track += classLevels * (parseInt(item.system.secondary.track) || 0);
+                        classBonuses.kiDect += classLevels * (parseInt(item.system.secondary.kidetection) || 0);
+                        classBonuses.animals += classLevels * (parseInt(item.system.secondary.animals) || 0);
+                        classBonuses.appra += classLevels * (parseInt(item.system.secondary.appraisal) || 0);
+                        classBonuses.archi += classLevels * (parseInt(item.system.secondary.architecture) || 0);
+                        classBonuses.herb += classLevels * (parseInt(item.system.secondary.herballore) || 0);
+                        classBonuses.hist += classLevels * (parseInt(item.system.secondary.history) || 0);
+                        classBonuses.law += classLevels * (parseInt(item.system.secondary.law) || 0);
+                        classBonuses.magicapr += classLevels * (parseInt(item.system.secondary.magicappr) || 0);
+                        classBonuses.medic += classLevels * (parseInt(item.system.secondary.medicine) || 0);
+                        classBonuses.mem += classLevels * (parseInt(item.system.secondary.memorize) || 0);
+                        classBonuses.navi += classLevels * (parseInt(item.system.secondary.navigation) || 0);
+                        classBonuses.occ += classLevels * (parseInt(item.system.secondary.occult) || 0);
+                        classBonuses.science += classLevels * (parseInt(item.system.secondary.science) || 0);
+                        classBonuses.tactic += classLevels * (parseInt(item.system.secondary.tactics) || 0);
+                        classBonuses.techmagic += classLevels * (parseInt(item.system.secondary.technomagic) || 0);
+                        classBonuses.comp += classLevels * (parseInt(item.system.secondary.composure) || 0);
+                        classBonuses.fos += classLevels * (parseInt(item.system.secondary.featsofstr) || 0);
+                        classBonuses.wstp += classLevels * (parseInt(item.system.secondary.withstpain) || 0);
+                        classBonuses.disg += classLevels * (parseInt(item.system.secondary.disguise) || 0);
+                        classBonuses.hide += classLevels * (parseInt(item.system.secondary.hide) || 0);
+                        classBonuses.lock += classLevels * (parseInt(item.system.secondary.lockpicking) || 0);
+                        classBonuses.poisn += classLevels * (parseInt(item.system.secondary.poisons) || 0);
+                        classBonuses.stealth += classLevels * (parseInt(item.system.secondary.stealth) || 0);
+                        classBonuses.theft += classLevels * (parseInt(item.system.secondary.theft) || 0);
+                        classBonuses.trapl += classLevels * (parseInt(item.system.secondary.traplore) || 0);
+                        classBonuses.kiCon += classLevels * (parseInt(item.system.secondary.kiconceal) || 0);
+                        classBonuses.alche += classLevels * (parseInt(item.system.secondary.alchemy) || 0);
+                        classBonuses.anims += classLevels * (parseInt(item.system.secondary.animism) || 0);
+                        classBonuses.art += classLevels * (parseInt(item.system.secondary.art) || 0);
+                        classBonuses.cook += classLevels * (parseInt(item.system.secondary.cooking) || 0);
+                        classBonuses.dance += classLevels * (parseInt(item.system.secondary.dance) || 0);
+                        classBonuses.forgi += classLevels * (parseInt(item.system.secondary.forging) || 0);
+                        classBonuses.jewel += classLevels * (parseInt(item.system.secondary.jewelry) || 0);
+                        classBonuses.toy += classLevels * (parseInt(item.system.secondary.toymaking) || 0);
+                        classBonuses.music += classLevels * (parseInt(item.system.secondary.music) || 0);
+                        classBonuses.runes += classLevels * (parseInt(item.system.secondary.runes) || 0);
+                        classBonuses.ritcal += classLevels * (parseInt(item.system.secondary.ritualcalig) || 0);
+                        classBonuses.soh += classLevels * (parseInt(item.system.secondary.slofhand) || 0);
+                        classBonuses.tailoring += classLevels * (parseInt(item.system.secondary.tailoring) || 0);
+                        break;
+                    case "armor":
+                        if (item.system.equipped == true) {
+                            if (item.system.armorType == "armor") {
+                                if (!item.system.ignorePenalty) {
+                                    classBonuses.quantity += parseInt(item.system.quantity) || 0;
+                                }
+                                classBonuses.req += parseInt(item.system.derived.requirement) || 0;
+                                classBonuses.natPen += parseInt(item.system.derived.natPenalty) || 0;
+                                classBonuses.movePen += parseInt(item.system.derived.movePenalty) || 0;
+
+                                for (const type of atTypes) {
+                                    const val = parseInt(item.system.derived[type]) || 0;
+                                    const maxKey = `a${type[0].toUpperCase()}${type.slice(1)}Max`;
+                                    const totKey = `a${type[0].toUpperCase()}${type.slice(1)}Tot`;
+
+                                    if (val > (classBonuses[maxKey] || 0)) {
+                                        classBonuses[maxKey] = val;
+                                    }
+
+                                    classBonuses[totKey] += Math.floor(val / 2);
+
+                                    if (item.system.ignoreLayerRules) {
+                                        atFinal[type] = (atFinal[type] || 0) + val;
+                                    } else {
+                                        atStacks[type].push(val);
+                                    }
+                                }
+                            } else if (item.system.armorType == "helmet") {
+                                classBonuses.ahReq += parseInt(item.system.derived.requirement) || 0;
+                                classBonuses.perPen += parseInt(item.system.derived.natPenalty) || 0;
+
+                               for (const type of atTypes) {
+                                    const val = parseInt(item.system.derived[type]) || 0;
+                                    const maxKey = `ah${type[0].toUpperCase()}${type.slice(1)}Max`;
+                                    const totKey = `ah${type[0].toUpperCase()}${type.slice(1)}Tot`;
+
+                                    if (val > (classBonuses[maxKey] || 0)) {
+                                        classBonuses[maxKey] = val;
+                                    }
+
+                                    classBonuses[totKey] += Math.floor(val / 2);
+
+                                    if (item.system.ignoreLayerRules) {
+                                        ahtFinal[type] = (ahtFinal[type] || 0) + val;
+                                    } else {
+                                        ahtStacks[type].push(val);
+                                    }
+                                }
                             }
-                        
-                            classBonuses[totKey] += Math.floor(val / 2);
-                        
-                            if (item.system.ignoreLayerRules) {
-                              atFinal[type] = (atFinal[type] || 0) + val;
-                            } else {
-                              atStacks[type].push(val);
-                            }
                         }
-                    }
-                }
-                if (item.type === "armorHelmet") {
-                    if (item.system.equipped == true) {
-                        classBonuses.ahReq += parseInt(item.system.newRequirement) || 0;
-                        if (classBonuses.ahCutMax < item.system.AT.newCut) {
-                            classBonuses.ahCutMax = item.system.AT.newCut;
-                        }
-                        classBonuses.ahCutTot += parseInt(item.system.AT.newCut / 2) || 0;
-                        if (classBonuses.ahImpMax < item.system.AT.newImp) {
-                            classBonuses.ahImpMax = item.system.AT.newImp;
-                        }
-                        classBonuses.ahImpTot += parseInt(item.system.AT.newImp / 2) || 0;
-                        if (classBonuses.ahThrMax < item.system.AT.newThr) {
-                            classBonuses.ahThrMax = item.system.AT.newThr;
-                        }
-                        classBonuses.ahThrTot += parseInt(item.system.AT.newThr / 2) || 0;
-                        if (classBonuses.ahHeatMax < item.system.AT.newHeat) {
-                            classBonuses.ahHeatMax = item.system.AT.newHeat;
-                        }
-                        classBonuses.ahHeatTot += parseInt(item.system.AT.newHeat / 2) || 0;
-                        if (classBonuses.ahColdMax < item.system.AT.newCold) {
-                            classBonuses.ahColdMax = item.system.AT.newCold;
-                        }
-                        classBonuses.ahColdTot += parseInt(item.system.AT.newCold / 2) || 0;
-                        if (classBonuses.ahEleMax < item.system.AT.newEle) {
-                            classBonuses.ahEleMax = item.system.AT.newEle;
-                        }
-                        classBonuses.ahEleTot += parseInt(item.system.AT.newEle / 2) || 0;
-                        if (classBonuses.ahEneMax < item.system.AT.newEne) {
-                            classBonuses.ahEneMax = item.system.AT.newEne;
-                        }
-                        classBonuses.ahEneTot += parseInt(item.system.AT.newEne / 2) || 0;
-                        if (classBonuses.ahSptMax < item.system.AT.newSpt) {
-                            classBonuses.ahSptMax = item.system.AT.newSpt;
-                        }
-                        classBonuses.ahSptTot += parseInt(item.system.AT.newSpt / 2) || 0;
-                        classBonuses.perPen += parseInt(item.system.newNatPenalty) || 0;
-                    }
-                }
-                if (item.type === "discipline") {
-                    classBonuses.usedpp += parseInt(item.system.quantity) || 0;
-                }
-                if (item.type === "psychicMatrix") {
-                    classBonuses.usedpp += parseInt(item.system.quantity) || 0;
-                    if (system.toggles.psychicStrengthening == true) {
-                        classBonuses.matrixpp += parseInt(item.system.bonus / 20) || 0;
-                    } else {
-                        classBonuses.matrixpp += parseInt(item.system.bonus / 10) || 0;
-                    }
-                }
-                if (item.type === "arsMagnus") {
-                    classBonuses.arsMk += parseInt(item.system.mk) || 0;
-                    classBonuses.arsDp += parseInt(item.system.dp) || 0;
-                }
-                if (item.type === "martialArt") {
-                    classBonuses.maMk += parseInt(item.system.mk) || 0;
-                    classBonuses.maDp += parseInt(item.system.dp) || 0;
-                    classBonuses.maKiAtk += parseInt(item.system.bonusAtk) || 0;
-                    classBonuses.maKiBlk += parseInt(item.system.bonusDef) || 0;
-                    classBonuses.maKiDod += parseInt(item.system.bonusDod) || 0;
-                }
-                if (item.type === "kiTechnique") {
-                    classBonuses.techMk += parseInt(item.system.mk) || 0;
-                }
-                if (item.type === "spellPath") {
-                    classBonuses.pathLvl += parseInt(item.system.level) || 0;
-                }
-                if (item.type === "turnMaint") {
-                    if (item.system.equipped == true) {
-                        classBonuses.turnMaint += parseInt(item.system.zeon) || 0;
-                    }
-                }
-                if (item.type === "dailyMaint") {
-                    if (item.system.equipped == true) {
-                        classBonuses.dayMaint += parseInt(item.system.zeon) || 0;
-                    }
-                }
-                if (item.type === "spell") {
-                    if (item.system.bought == "Single") {
-                        classBonuses.spellCost += parseInt(item.system.cost) || 0;
-                    }
-                }
-                if (item.type === "weapon") {
-                    if (item.system.equipped == true) {
-                        if (item.system.info.type == "shield") {
-                            classBonuses.shieldSpeed += item.system.derived.finalWeaponSpeed;
+                        break;
+                    case "discipline":
+                        classBonuses.usedpp += parseInt(item.system.quantity) || 0;
+                        break;
+                    case "psychicMatrix":
+                        classBonuses.usedpp += parseInt(item.system.quantity) || 0;
+                        if (system.toggles.psychicStrengthening == true) {
+                            classBonuses.matrixpp += parseInt(item.system.bonus / 20) || 0;
                         } else {
-                            classBonuses.wepNum += 1;
-                            if (classBonuses.wepNum == 1) {
-                                classBonuses.wepSpd = item.system.derived.finalWeaponSpeed;
-                                classBonuses.wepName = item.name;
-                            } else if (classBonuses.wepSpd > item.system.derived.finalWeaponSpeed) {
-                                classBonuses.wepSpd = item.system.derived.finalWeaponSpeed;
+                            classBonuses.matrixpp += parseInt(item.system.bonus / 10) || 0;
+                        }
+                        break;
+                    case "arsMagnus":
+                        classBonuses.arsMk += parseInt(item.system.mk) || 0;
+                        classBonuses.arsDp += parseInt(item.system.dp) || 0;
+                        break;
+                    case "martialArt":
+                        classBonuses.maMk += parseInt(item.system.mk) || 0;
+                        classBonuses.maDp += parseInt(item.system.dp) || 0;
+                        classBonuses.maKiAtk += parseInt(item.system.bonusAtk) || 0;
+                        classBonuses.maKiBlk += parseInt(item.system.bonusDef) || 0;
+                        classBonuses.maKiDod += parseInt(item.system.bonusDod) || 0;
+                        break;
+                    case "kiTechnique":
+                        classBonuses.techMk += parseInt(item.system.mk) || 0;
+                        break;
+                    case "spellPath":
+                        classBonuses.pathLvl += parseInt(item.system.level) || 0;
+                        break;
+                    case "zeonMaint":
+                        if (item.system.type == "turn" && item.system.equipped == true) {
+                            classBonuses.turnMaint += parseInt(item.system.zeon) || 0;
+                        } else if (item.system.type == "daily" && item.system.equipped == true) {
+                            classBonuses.dayMaint += parseInt(item.system.zeon) || 0;
+                        }
+                        break;
+                    case "spell":
+                        if (item.system.bought == "Single") {
+                            classBonuses.spellCost += parseInt(item.system.cost) || 0;
+                        }
+                        break;
+                    case "weapon":
+                        if (item.system.equipped == true) {
+                            if (item.system.info.type == "shield") {
+                                classBonuses.shieldSpeed += item.system.derived.finalWeaponSpeed;
+                            } else {
+                                classBonuses.wepNum += 1;
+                                if (classBonuses.wepNum == 1) {
+                                    classBonuses.wepSpd = item.system.derived.finalWeaponSpeed;
+                                    classBonuses.wepName = item.name;
+                                } else if (classBonuses.wepSpd > item.system.derived.finalWeaponSpeed) {
+                                    classBonuses.wepSpd = item.system.derived.finalWeaponSpeed;
+                                }
                             }
-                        }  
-                    }
-                }
-                if (item.type === "monsterPower") {
-                    classBonuses.monsterCost += parseInt(item.system.cost) || 0;
-                }
-                if (item.type === "mentalPattern") {
-                    classBonuses.mentalPatDp += parseInt(item.system.finalCost) || 0;
-                }
-                if (item.type === "proficiency") {
-                    switch (item.system.type) {
-                        case "Mystical":
-                            classBonuses.profMystDp += parseInt(item.system.cost) || 0;
-                            break;
-                        case "Psychic":
-                            classBonuses.profPsyDp += parseInt(item.system.cost) || 0;
-                            break;
-                        default:
-                            classBonuses.profPrimDp += parseInt(item.system.cost) || 0;
-                            break;
-                    }
+                        }
+                        break;
+                    case "monsterPower":
+                        classBonuses.monsterCost += parseInt(item.system.cost) || 0;
+                        break;
+                    case "mentalPattern":
+                        classBonuses.mentalPatDp += parseInt(item.system.finalCost) || 0;
+                        break;
+                    case "proficiency":
+                        switch (item.system.type) {
+                            case "Mystical":
+                                classBonuses.profMystDp += parseInt(item.system.cost) || 0;
+                                break;
+                            case "Psychic":
+                                classBonuses.profPsyDp += parseInt(item.system.cost) || 0;
+                                break;
+                            default:
+                                classBonuses.profPrimDp += parseInt(item.system.cost) || 0;
+                                break;
+                        }
+                        break;
+                    case "advantage":
+                        switch (item.system.type) {
+                            case "advantage":
+                                classBonuses.advCp += parseInt(item.system.cost) || 0;
+                                break;
+                            case "disadvantage":
+                                classBonuses.disAdvCp += parseInt(item.system.cost) || 0;
+                                break;
+                        }
+                        break;
+                    case "backgroundInfo":
+                        switch (item.system.type) {
+                            case "bloodBond":
+                                classBonuses.bloodBondCp += parseInt(item.system.cpCost) || 0;
+                                classBonuses.infoLevelMod += parseInt(item.system.levelMod) || 0;
+                                break;
+                            case "race":
+                                classBonuses.infoLevelMod += parseInt(item.system.levelMod) || 0;
+                                break;
+                        }
+                    break;
                 }
             });
         //Stuff Xp, Presence, Next lvl Xp
-        system.levelinfo.level = classBonuses.level; //class Bonus
+        system.levelinfo.level = Math.floor(classBonuses.level + (system.levelinfo.levelBonus || 0)); //class BonuslevelBonus
         if (system.levelinfo.level == 0) {
             system.levelinfo.dp = 400 + system.levelinfo.dpmod + system.levelinfo.dpmodBonus;
         } else {
             system.levelinfo.dp = Math.floor((system.levelinfo.level * 100) + 500 + system.levelinfo.dpmod + system.levelinfo.dpmodBonus);
         }
         system.levelinfo.presence = Math.floor((system.levelinfo.dp / 20) + system.levelinfo.presencemod + system.levelinfo.presencemodBonus);
-        system.levelinfo.nextlevel = Math.floor(((system.levelinfo.level + system.levelinfo.levelmod + system.levelinfo.levelmodBonus) * 25) + 75);
+        system.levelinfo.nextlevel = Math.floor(((system.levelinfo.level + system.levelinfo.levelmod + classBonuses.infoLevelMod + system.levelinfo.levelmodBonus) * 25) + 75);
+        system.levelinfo.totalLvlMod = Math.floor(system.levelinfo.levelmod + classBonuses.infoLevelMod + system.levelinfo.levelmodBonus);
+
+        //cp Calculations
+        system.levelinfo.totalCP = Math.floor(3 + system.levelinfo.extraCP + Math.floor(classBonuses.level/2) + classBonuses.disAdvCp - classBonuses.advCp  - classBonuses.bloodBondCp);
 
         //Mk Calculations
         system.mk.class = classBonuses.mk; //Class Mk
@@ -1403,15 +1333,42 @@ export default class abfalterActor extends Actor {
             system.armor.body[finalKey] = atFinal[type];
         }
 
-        // Helmet Final AT
-        system.armor.helmet.ahCutFinal = Math.floor((classBonuses.ahCutTot - ~~(classBonuses.ahCutMax / 2)) + classBonuses.ahCutMax);
-        system.armor.helmet.ahImpFinal = Math.floor((classBonuses.ahImpTot - ~~(classBonuses.ahImpMax / 2)) + classBonuses.ahImpMax);
-        system.armor.helmet.ahThrFinal = Math.floor((classBonuses.ahThrTot - ~~(classBonuses.ahThrMax / 2)) + classBonuses.ahThrMax);
-        system.armor.helmet.ahHeatFinal = Math.floor((classBonuses.ahHeatTot - ~~(classBonuses.ahHeatMax / 2)) + classBonuses.ahHeatMax);
-        system.armor.helmet.ahColdFinal = Math.floor((classBonuses.ahColdTot - ~~(classBonuses.ahColdMax / 2)) + classBonuses.ahColdMax);
-        system.armor.helmet.ahEleFinal = Math.floor((classBonuses.ahEleTot - ~~(classBonuses.ahEleMax / 2)) + classBonuses.ahEleMax);
-        system.armor.helmet.ahEneFinal = Math.floor((classBonuses.ahEneTot - ~~(classBonuses.ahEneMax / 2)) + classBonuses.ahEneMax);
-        system.armor.helmet.ahSptFinal = Math.floor((classBonuses.ahSptTot - ~~(classBonuses.ahSptMax / 2)) + classBonuses.ahSptMax);
+        // Armor Final AT, Apply top-3 AT rule
+        for (const type of atTypes) {
+            const values = ahtStacks[type].sort((a, b) => b - a);
+            const full = values[0] || 0;
+            const half1 = Math.floor((values[1] || 0) / 2);
+            const half2 = Math.floor((values[2] || 0) / 2);
+        
+            ahtFinal[type] = (ahtFinal[type] || 0) + full + half1 + half2;
+        
+            if (type === "ene") {
+            ahtFinal[type] += system.otherStats.enArm || 0;
+            }
+        
+            const finalKey = `ah${type[0].toUpperCase()}${type.slice(1)}Final`;
+            system.armor.helmet[finalKey] = ahtFinal[type];
+        }
+
+        //Helmet Active Effects
+        system.armor.helmet.ahCutFinal += system.armor.helmet.ahCutBonus || 0;
+        system.armor.helmet.ahImpFinal += system.armor.helmet.ahImpBonus || 0;
+        system.armor.helmet.ahThrFinal += system.armor.helmet.ahThrBonus || 0;
+        system.armor.helmet.ahHeatFinal += system.armor.helmet.ahHeatBonus || 0;
+        system.armor.helmet.ahColdFinal += system.armor.helmet.ahColdBonus || 0;
+        system.armor.helmet.ahEleFinal += system.armor.helmet.ahEleBonus || 0;
+        system.armor.helmet.ahEneFinal += system.armor.helmet.ahEneBonus || 0;
+        system.armor.helmet.ahSptFinal += system.armor.helmet.ahSptBonus || 0;
+
+        //Armor Active Effects
+        system.armor.body.aCutFinal += system.armor.body.aCutBonus || 0;
+        system.armor.body.aImpFinal += system.armor.body.aImpBonus || 0;
+        system.armor.body.aThrFinal += system.armor.body.aThrBonus || 0;
+        system.armor.body.aHeatFinal += system.armor.body.aHeatBonus || 0;
+        system.armor.body.aColdFinal += system.armor.body.aColdBonus || 0;
+        system.armor.body.aEleFinal += system.armor.body.aEleBonus || 0;
+        system.armor.body.aEneFinal += system.armor.body.aEneBonus || 0;
+        system.armor.body.aSptFinal += system.armor.body.aSptBonus || 0;
 
         // Armor Stats
         system.armor.wearArmor.totalPerPen = classBonuses.perPen;
@@ -2075,6 +2032,7 @@ export default class abfalterActor extends Actor {
         } else {
             system.zeon.minnateFinal = system.zeon.minnate;
         }
+        system.zeon.minnateFinal += system.zeon.minnateBonus || 0;
 
         // Magic Levels
         switch (system.stats.Intelligence.final) {
@@ -2239,6 +2197,28 @@ export default class abfalterActor extends Actor {
         // Make Custom Bars
         system.other.accuZeonBar.value = system.maccu.actual;
         system.other.accuZeonBar.max = system.zeon.value;
+
+        //Mental Health
+        const lookupTable = [
+            { min: 3, max: 8, mentalHealth: 0, threshold: 0 },
+            { min: 9, max: 12, mentalHealth: 20, threshold: 5 },
+            { min: 13, max: 15, mentalHealth: 30, threshold: 10 },
+            { min: 16, max: 18, mentalHealth: 50, threshold: 15 },
+            { min: 19, max: 21, mentalHealth: 80, threshold: 20 },
+            { min: 22, max: 24, mentalHealth: 120, threshold: 25 },
+            { min: 25, max: 28, mentalHealth: 150, threshold: 30 },
+            { min: 29, max: 31, mentalHealth: 200, threshold: 40 },
+            { min: 32, max: 34, mentalHealth: 350, threshold: 50 },
+            { min: 35, max: Infinity, mentalHealth: 500, threshold: 60 },
+        ];
+        system.otherStats.mentalSum = Math.floor(system.stats.Power.final + system.stats.Intelligence.final + system.stats.Willpower.final + (system.otherStats.mentalHealthBonus || 0));
+        const mentalEntry = lookupTable.find(row => system.otherStats.mentalSum >= row.min && system.otherStats.mentalSum <= row.max);
+        system.mentalHealth.max = mentalEntry?.mentalHealth ?? 0;
+        system.otherStats.mentalThreshold = mentalEntry?.threshold ?? 0;
+
+        //Other
+        system.otherStats.damageBarrierFinal = Math.floor(system.otherStats.damageBarrier + (system.otherStats.damageBarrierBonus || 0));
+        system.otherStats.dmgRdcFinal = Math.floor(system.otherStats.dmgRdc + (system.otherStats.dmgRdcBonus || 0));
 
 
         // Settings

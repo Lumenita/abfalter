@@ -1,489 +1,413 @@
-﻿<div class="tab background">
-    <div class="e2">
-        <div class="elan">
-            <h5> {{localize "abfalter.elan"}} </h5>
-            <div>
-                <span> {{localize "abfalter.name"}} </span>
-                <span> {{localize "abfalter.title"}} </span>
-                <span> {{localize "abfalter.elan"}} </span>
-            </div>
-            <div class="{{#if system.itemToggle.elan}}item-list{{/if}}">
-                {{#each elans as |elan id|}}
-                <div class="elan-item item normal-item" data-item-id="{{elan._id}}">
-                    {{#if system.expand}}
-                    <div>
-                        <input class="item-name inline-edit" data-field="name" type="text" value="{{elan.name}}" placeholder="{{localize "abfalter.newItem"}}" />
-                        <input class="inline-edit" data-field="system.title" type="text" value="{{elan.system.title}}" />
-                        <input class="inline-edit" data-field="system.level" type="number" value="{{elan.system.level}}" />
-                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                    </div>
-                    <div style="display: grid;">
-                        <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.description}}</textarea>
-                        <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.description}}</div>
-                    </div>
-                    <div>
-                        <div>
-                            {{#if system.upper}}
-                            <h6> {{localize "abfalter.gainUpperElan"}} </h6>
-                            <div style="display: grid;">
-                                <textarea class="inline-edit textarea-auto-resize" data-field="system.gainUpper" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gainUpper}}</textarea>
-                                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gainUpper}}</div>
+﻿<section class="tab {{tabs.background.cssClass}} background actorPage" data-group="{{tabs.background.group}}" data-tab="{{tabs.background.id}}">
+    <div class="fieldsetContainer">
+        <div class="fieldSetRow">
+            <fieldset class="backgroundProf">
+                <legend>{{localize "abfalter.prof"}}</legend>
+                <div>
+                    <span> {{localize "abfalter.name"}} </span>
+                    <span> {{localize "abfalter.type"}} </span>
+                    <span> {{localize "abfalter.cost"}} </span>
+                </div>
+                <div class="{{#if system.itemToggle.proficiency}}item-list{{/if}}">
+                    {{#each proficiencys as |proficiency id|}}
+                    <div class="prof-item item itemStyle normal-item" data-item-id="{{proficiency._id}}"
+                    data-can-edit="true" data-can-delete="true" data-can-equip="false" data-can-toggle="false">
+                        {{#if system.expand}}
+                        <div class="itemToggleB">
+                            <input class="prof-name inline-edit" data-field="name" type="text"
+                                value="{{proficiency.name}}" placeholder="{{localize " abfalter.nameItem"}}" />
+                            <div class="csSelect">
+                                <select class="inline-edit" name="system.type" data-field="system.type">
+                                    {{selectOptions ../proficiencyObjList selected=system.type localize=true}}
+                                </select>
                             </div>
-                            {{else}}
-                            <h6> {{localize "abfalter.gainElan"}} </h6>
-                            <div style="display: grid;">
-                                <textarea class="inline-edit textarea-auto-resize" data-field="system.gain" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gain}}</textarea>
-                                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gain}}</div>
+                            <input class="prof-cost inline-edit" data-field="system.cost" type="number"
+                                value="{{proficiency.system.cost}}" />
+                            <a data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand">
+                                <i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i>
+                            </a>
+                        </div>
+                        {{editor system.description target="system.description" editable=false button=false
+                        engine="prosemirror"}}
+                        {{else}}
+                        <div class="itemToggleA">
+                            <span> {{proficiency.name}} </span>
+                            <span> {{localize (concat "abfalter." system.type)}} </span>
+                            <span> {{proficiency.system.cost}} </span>
+                            <a data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand">
+                                <i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i>
+                            </a>
+                        </div>
+                        {{#if system.toggleItem}}
+                        {{editor system.description target="system.description" editable=false button=false
+                        engine="prosemirror"}}
+                        {{/if}}
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="itemControls">
+                    <a class="item-control" data-action="createItem" data-type="proficiency"><i class="fas fa-plus"></i> {{localize
+                        "abfalter.addProf"}} </a>
+                    <a data-action="toggleValue" class="{{#if system.itemToggle.proficiency}}armorpenalty{{/if}}"
+                        data-label="system.itemToggle.proficiency" data-ability="{{system.itemToggle.proficiency}}"><i
+                            class="{{#if system.itemToggle.proficiency}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i>
+                        {{localize "abfalter.modify"}} </a>
+                </div>
+            </fieldset>
+
+            <fieldset class="backgroundStats">
+                <legend>Natura</legend>
+                <div class="simpleDetails">
+                    <label> 
+                        <span> {{localize "abfalter.destiny"}} </span> 
+                        <input type="number" name="system.info.destiny" value="{{system.info.destiny}}" />
+                    </label>
+                </div>
+                <div class="simpleDetails">
+                    <label> 
+                        <span> {{localize "abfalter.extraCP"}} </span> 
+                        <input type="number" name="system.levelinfo.extraCP" value="{{system.levelinfo.extraCP}}"/>
+                    </label>
+                </div>
+                <div class="simpleDetails">
+                    <label> 
+                        <span> {{localize "abfalter.totalCP"}} </span> 
+                        <input type="number" name="system.levelinfo.totalCP" value="{{system.levelinfo.totalCP}}" readonly/>
+                    </label>
+                </div>
+                {{#if system.toggles.mentalHealthStatus}}
+                <div class="mentalHealthFirst simpleDetails">
+                    <label> 
+                        <span> {{localize "abfalter.mentalHealthThreshold"}} </span> 
+                        <input type="number" name="system.otherStats.mentalThreshold" value="{{system.otherStats.mentalThreshold}}" readonly/>
+                    </label>
+                </div>
+                <div class="simpleDetails">
+                    <label> 
+                        <span> {{localize "abfalter.mentalHealth"}} </span> 
+                        <input type="number" name="system.mentalHealth.max" value="{{system.mentalHealth.max}}" readonly/>
+                    </label>
+                </div>
+                <div class="simpleDetails">
+                    <label> 
+                        <span> {{localize "abfalter.mentalHealthCurrent"}} </span> 
+                        <input type="number" name="system.mentalHealth.value" value="{{system.mentalHealth.value}}" />
+                    </label>
+                </div>
+                {{/if}}
+            </fieldset>
+        </div>
+
+        <div class="fieldSetRow {{#if system.toggles.elanStatus}}hidden{{/if}}">
+            <fieldset class="backgroundElan">
+                <legend>{{localize "abfalter.elan"}}</legend>
+                <div class="{{#if system.itemToggle.elan}}item-list{{/if}}">
+                    {{#each elans as |elan id|}}
+                    <div class="elan-item item itemStyle normal-item" data-item-id="{{elan._id}}"
+                    data-can-edit="true" data-can-delete="true" data-can-equip="false" data-can-toggle="false">
+                        {{#if system.expand}}
+                        <div class="itemToggleB">
+                            <img class="backgroundElanIcon" src="{{elan.img}}">
+                            <div class="backgroundElanInfo">
+                                <div>
+                                    <input class="item-name inline-edit" data-field="name" type="text" value="{{elan.name}}"
+                                        placeholder="{{localize " abfalter.newItem"}}" />
+                                    <input class="inline-edit" data-field="system.title" type="text"
+                                        value="{{elan.system.title}}" />
+                                </div>
+                                <input class="inline-edit" data-field="system.level" type="number"
+                                    value="{{elan.system.level}}" />
+                            </div>
+                            <a class="{{#if system.expand}}showOpacity{{/if}}" data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand"><i
+                                    class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{editor system.description target="system.description" editable=false button=false
+                        engine="prosemirror"}}
+                        <div class="backgrounElanDesc">
+                            <fieldset>
+                                <legend>{{localize "abfalter.loseElan"}}</legend>
+                                {{editor system.lose target="system.lose" editable=false button=false
+                                engine="prosemirror"}}
+                            </fieldset>
+                            <fieldset>
+                                {{#if system.upper}}
+                                <legend>{{localize "abfalter.gainUpperElan"}}</legend>
+                                {{editor system.gainUpper target="system.gainUpper" editable=false button=false
+                                engine="prosemirror"}}
+                                {{else}}
+                                <legend>{{localize "abfalter.gainElan"}}</legend>
+                                {{editor system.gain target="system.gain" editable=false button=false
+                                engine="prosemirror"}}
+                                {{/if}}
+                            </fieldset>
+                        </div>
+                        {{else}}
+                        <div class="itemToggleA">
+                            <img class="backgroundElanIcon" src="{{elan.img}}">
+                            <div class="backgroundElanInfo">
+                                <div>
+                                    <span> {{elan.name}} </span>
+                                    <span> {{elan.system.title}} </span>
+                                </div>
+                                <input class="inline-edit" data-field="system.level" type="number"
+                                    value="{{elan.system.level}}" />
+                            </div>
+                            <a class="{{#if system.expand}}showOpacity{{/if}}" data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand"><i
+                                    class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        {{#if system.showDesc}}
+                        {{editor system.description target="system.description" editable=false button=false
+                        engine="prosemirror"}}
+                        {{/if}}
+                        {{#if system.showGains}}
+                        <div class="backgrounElanDesc">
+                            <fieldset>
+                                <legend>{{localize "abfalter.loseElan"}}</legend>
+                                {{editor system.lose target="system.lose" editable=false button=false
+                                engine="prosemirror"}}
+                            </fieldset>
+                            <fieldset>
+                                {{#if system.upper}}
+                                <legend>{{localize "abfalter.gainUpperElan"}}</legend>
+                                {{editor system.gainUpper target="system.gainUpper" editable=false button=false
+                                engine="prosemirror"}}
+                                {{else}}
+                                <legend>{{localize "abfalter.gainElan"}}</legend>
+                                {{editor system.gain target="system.gain" editable=false button=false
+                                engine="prosemirror"}}
+                                {{/if}}
+                            </fieldset>
+                        </div>
+                        {{/if}}
+                        {{/if}}
+                        {{#each system.gifts as |gift key|}}
+                        {{#if gift.active}}
+                        <div class="backgroundElanGifts">
+                            <label class="{{#if this.showGift}}elanHideDescToggle{{else}}backElanBorder{{/if}}">
+                                <span>{{localize "abfalter.giftDesc"}}</span>
+                                <a data-action="toggleElanGift" data-label="showGift" data-value="{{gift.showGift}}" data-code="{{key}}">
+                                    {{#if this.showGift}} {{localize "abfalter.hide"}} {{else}} {{localize "abfalter.show"}} {{/if}}
+                                </a>
+                            </label>
+                            {{#if this.showGift}}
+                            <div>
+                                {{editor gift.desc target="system.gifts.{{key}}.desc" editable=false button=false engine="prosemirror"}}
                             </div>
                             {{/if}}
                         </div>
-                        <div>
-                            <h6> {{localize "abfalter.loseElan"}} </h6>
-                            <div style="display: grid;">
-                                <textarea class="inline-edit textarea-auto-resize" data-field="system.lose" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.lose}}</textarea>
-                                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.lose}}</div>
-                            </div>
-                        </div>
+                        {{/if}}
+                        {{/each}}
                     </div>
-                    {{else}}
-                    <div>
-                        <span> {{elan.name}} </span>
-                        <span> {{elan.system.title}} </span>
-                        <input class="inline-edit" data-field="system.level" type="number" value="{{elan.system.level}}" />
-                        <a class="item-expand {{#if system.expand}}showOpacity{{/if}}"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                    </div>
-                    {{/if}}
+                    {{/each}}
                 </div>
-                {{/each}}
-            </div>
-            <div class="itemControls">
-                <a class="item-control item-create" data-type="elan"><i class="fas fa-plus"></i> {{localize "abfalter.addElan"}} </a>
-                <a class="toggleBoolean {{#if system.itemToggle.elan}}armorpenalty{{/if}}" data-label="system.itemToggle.elan" data-ability="{{system.itemToggle.elan}}"><i class="{{#if system.itemToggle.elan}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
-            </div>
+                <div class="itemControls">
+                    <a class="item-control" data-action="createItem" data-type="elan"><i class="fas fa-plus"></i> {{localize
+                        "abfalter.addElan"}} </a>
+                    <a data-action="toggleValue" class="{{#if system.itemToggle.elan}}armorpenalty{{/if}}"
+                        data-label="system.itemToggle.elan" data-ability="{{system.itemToggle.elan}}"><i
+                            class="{{#if system.itemToggle.elan}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i>
+                        {{localize "abfalter.modify"}} </a>
+                </div>
+            </fieldset>
         </div>
 
-        <div class="natura">
-            <h5> {{localize "abfalter.natura"}} </h5>
-            <div>
-                <label> <span> {{localize "abfalter.destiny"}} </span> <input type="number" name="system.info.destiny" value="{{system.info.destiny}}" /> </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="e2">
-        <div class="elan">
-            <h5> {{localize "abfalter.elanGifts"}} </h5>
-            <div>
-                <span> {{localize "abfalter.deity"}} </span>
-                <span> {{localize "abfalter.giftName"}} </span>
-                <span> {{localize "abfalter.elan"}} </span>
-            </div>
-            <div class="{{#if system.itemToggle.elan}}item-list{{/if}}">
-                {{#each elans as |elan id|}}
-                <div class="elan-item2 item" data-item-id="{{elan._id}}">
-                    {{#if system.gifts.one.bought}}
-                    <div>
-                        {{#if system.gifts.one.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.one.name" type="text" value="{{elan.system.gifts.one.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.one.req" type="text" value="{{elan.system.gifts.one.req}}" />
-                            <a class="item-toggle {{#if system.gifts.one.expand}}showOpacity{{/if}}" data-label="system.gifts.one.expand" data-ability="{{system.gifts.one.expand}}"><i class="{{#if system.gifts.one.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        <div class="fieldSetRow  {{#if system.toggles.bloodBondsStatus}}hidden{{/if}}">
+            <fieldset class="backgroundBlood">
+                <legend>{{localize "abfalter.bloodBonds"}}</legend>
+                <div>
+                    {{#each backgroundInfos as |backgroundInfo|}}
+                    {{#ifEquals system.type "bloodBond"}}
+                    <div class="backRace-item item itemStyle normal-item {{#if ../system.itemToggle.race}}draggable{{/if}}" data-item-id={{id}}
+                    data-can-edit="true" data-can-delete="true" data-can-equip="false" data-can-toggle="false">
+                        {{#if system.expand}}
+                        <div class="raceInfo itemToggleB">
+                            <input class="backInfo-name inline-edit" data-field="name" type="text" value="{{name}}" placeholder="{{localize " abfalter.nameItem"}}" />
+                            <label>
+                                <input class="inline-edit" data-field="system.levelMod" type="number" value="{{system.levelMod}}" />
+                                <span> {{localize "abfalter.lvlMod"}} </span>
+                            </label>
+                            <label>
+                                <input class="inline-edit" data-field="system.cpCost" type="number" value="{{system.cpCost}}" />
+                                <span> {{localize "abfalter.cpCost"}} </span>
+                            </label>
+                            <a data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand">
+                                <i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i>
+                            </a>
                         </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.one.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.one.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.one.desc}}</div>
-                        </div>
+                        {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
                         {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.one.name}} </span>
-                            <span> {{elan.system.gifts.one.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.one.expand}}showOpacity{{/if}}" data-label="system.gifts.one.expand" data-ability="{{system.gifts.one.expand}}"><i class="{{#if system.gifts.one.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        <div class="raceInfo itemToggleA">
+                            <span> {{name}} </span>
+                            <label class="raceInfoBorder">
+                                <span> {{system.levelMod}} </span>
+                                <span> {{localize "abfalter.lvlMod"}} </span>
+                            </label>
+                            <label class="raceInfoBorder">
+                                <span> {{system.cpCost}} </span>
+                                <span> {{localize "abfalter.cpCost"}} </span>
+                            </label>
+                            <a data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand">
+                                <i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i>
+                            </a>
                         </div>
+                        {{#if system.descToggle}}
+                        {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
+                        {{/if}}
                         {{/if}}
                     </div>
-                    {{/if}}
-                    {{#if system.gifts.two.bought}}
-                    <div>
-                        {{#if system.gifts.two.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.two.name" type="text" value="{{elan.system.gifts.two.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.two.req" type="text" value="{{elan.system.gifts.two.req}}" />
-                            <a class="item-toggle {{#if system.gifts.two.expand}}showOpacity{{/if}}" data-label="system.gifts.two.expand" data-ability="{{system.gifts.two.expand}}"><i class="{{#if system.gifts.two.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.two.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.two.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.two.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.two.name}} </span>
-                            <span> {{elan.system.gifts.two.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.two.expand}}showOpacity{{/if}}" data-label="system.gifts.two.expand" data-ability="{{system.gifts.two.expand}}"><i class="{{#if system.gifts.two.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    {{#if system.gifts.three.bought}}
-                    <div>
-                        {{#if system.gifts.three.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.three.name" type="text" value="{{elan.system.gifts.three.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.three.req" type="text" value="{{elan.system.gifts.three.req}}" />
-                            <a class="item-toggle {{#if system.gifts.three.expand}}showOpacity{{/if}}" data-label="system.gifts.three.expand" data-ability="{{system.gifts.three.expand}}"><i class="{{#if system.gifts.three.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.three.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.three.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.three.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.three.name}} </span>
-                            <span> {{elan.system.gifts.three.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.three.expand}}showOpacity{{/if}}" data-label="system.gifts.three.expand" data-ability="{{system.gifts.three.expand}}"><i class="{{#if system.gifts.three.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    {{#if system.gifts.four.bought}}
-                    <div>
-                        {{#if system.gifts.four.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.four.name" type="text" value="{{elan.system.gifts.four.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.four.req" type="text" value="{{elan.system.gifts.four.req}}" />
-                            <a class="item-toggle {{#if system.gifts.four.expand}}showOpacity{{/if}}" data-label="system.gifts.four.expand" data-ability="{{system.gifts.four.expand}}"><i class="{{#if system.gifts.four.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.four.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.four.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.four.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.four.name}} </span>
-                            <span> {{elan.system.gifts.four.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.four.expand}}showOpacity{{/if}}" data-label="system.gifts.four.expand" data-ability="{{system.gifts.four.expand}}"><i class="{{#if system.gifts.four.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    {{#if system.gifts.five.bought}}
-                    <div>
-                        {{#if system.gifts.five.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.five.name" type="text" value="{{elan.system.gifts.five.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.five.req" type="text" value="{{elan.system.gifts.five.req}}" />
-                            <a class="item-toggle {{#if system.gifts.five.expand}}showOpacity{{/if}}" data-label="system.gifts.five.expand" data-ability="{{system.gifts.five.expand}}"><i class="{{#if system.gifts.five.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.five.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.five.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.five.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.five.name}} </span>
-                            <span> {{elan.system.gifts.five.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.five.expand}}showOpacity{{/if}}" data-label="system.gifts.five.expand" data-ability="{{system.gifts.five.expand}}"><i class="{{#if system.gifts.five.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    {{#if system.gifts.six.bought}}
-                    <div>
-                        {{#if system.gifts.six.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.six.name" type="text" value="{{elan.system.gifts.six.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.six.req" type="text" value="{{elan.system.gifts.six.req}}" />
-                            <a class="item-toggle {{#if system.gifts.six.expand}}showOpacity{{/if}}" data-label="system.gifts.six.expand" data-ability="{{system.gifts.six.expand}}"><i class="{{#if system.gifts.six.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.six.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.six.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.six.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.six.name}} </span>
-                            <span> {{elan.system.gifts.six.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.six.expand}}showOpacity{{/if}}" data-label="system.gifts.six.expand" data-ability="{{system.gifts.six.expand}}"><i class="{{#if system.gifts.six.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    {{#if system.gifts.seven.bought}}
-                    <div>
-                        {{#if system.gifts.seven.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.seven.name" type="text" value="{{elan.system.gifts.seven.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.seven.req" type="text" value="{{elan.system.gifts.seven.req}}" />
-                            <a class="item-toggle {{#if system.gifts.seven.expand}}showOpacity{{/if}}" data-label="system.gifts.seven.expand" data-ability="{{system.gifts.seven.expand}}"><i class="{{#if system.gifts.seven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.seven.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.seven.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.seven.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.seven.name}} </span>
-                            <span> {{elan.system.gifts.seven.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.seven.expand}}showOpacity{{/if}}" data-label="system.gifts.seven.expand" data-ability="{{system.gifts.seven.expand}}"><i class="{{#if system.gifts.seven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    {{#if system.gifts.eight.bought}}
-                    <div>
-                        {{#if system.gifts.eight.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.eight.name" type="text" value="{{elan.system.gifts.eight.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.eight.req" type="text" value="{{elan.system.gifts.eight.req}}" />
-                            <a class="item-toggle {{#if system.gifts.eight.expand}}showOpacity{{/if}}" data-label="system.gifts.eight.expand" data-ability="{{system.gifts.eight.expand}}"><i class="{{#if system.gifts.eight.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.eight.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.eight.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.eight.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.eight.name}} </span>
-                            <span> {{elan.system.gifts.eight.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.eight.expand}}showOpacity{{/if}}" data-label="system.gifts.eight.expand" data-ability="{{system.gifts.eight.expand}}"><i class="{{#if system.gifts.eight.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    {{#if system.gifts.nine.bought}}
-                    <div>
-                        {{#if system.gifts.nine.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.nine.name" type="text" value="{{elan.system.gifts.nine.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.nine.req" type="text" value="{{elan.system.gifts.nine.req}}" />
-                            <a class="item-toggle {{#if system.gifts.nine.expand}}showOpacity{{/if}}" data-label="system.gifts.nine.expand" data-ability="{{system.gifts.nine.expand}}"><i class="{{#if system.gifts.nine.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.nine.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.nine.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.nine.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.nine.name}} </span>
-                            <span> {{elan.system.gifts.nine.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.nine.expand}}showOpacity{{/if}}" data-label="system.gifts.nine.expand" data-ability="{{system.gifts.nine.expand}}"><i class="{{#if system.gifts.nine.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    {{#if system.gifts.ten.bought}}
-                    <div>
-                        {{#if system.gifts.ten.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.ten.name" type="text" value="{{elan.system.gifts.ten.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.ten.req" type="text" value="{{elan.system.gifts.ten.req}}" />
-                            <a class="item-toggle {{#if system.gifts.ten.expand}}showOpacity{{/if}}" data-label="system.gifts.ten.expand" data-ability="{{system.gifts.ten.expand}}"><i class="{{#if system.gifts.ten.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.ten.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.ten.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.ten.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.ten.name}} </span>
-                            <span> {{elan.system.gifts.ten.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.ten.expand}}showOpacity{{/if}}" data-label="system.gifts.ten.expand" data-ability="{{system.gifts.ten.expand}}"><i class="{{#if system.gifts.ten.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    {{#if system.gifts.eleven.bought}}
-                    <div>
-                        {{#if system.gifts.eleven.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.eleven.name" type="text" value="{{elan.system.gifts.eleven.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.eleven.req" type="text" value="{{elan.system.gifts.eleven.req}}" />
-                            <a class="item-toggle {{#if system.gifts.eleven.expand}}showOpacity{{/if}}" data-label="system.gifts.eleven.expand" data-ability="{{system.gifts.eleven.expand}}"><i class="{{#if system.gifts.eleven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.eleven.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.eleven.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.eleven.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.eleven.name}} </span>
-                            <span> {{elan.system.gifts.eleven.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.eleven.expand}}showOpacity{{/if}}" data-label="system.gifts.eleven.expand" data-ability="{{system.gifts.eleven.expand}}"><i class="{{#if system.gifts.eleven.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    {{#if system.gifts.twelve.bought}}
-                    <div>
-                        {{#if system.gifts.twelve.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.twelve.name" type="text" value="{{elan.system.gifts.twelve.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.twelve.req" type="text" value="{{elan.system.gifts.twelve.req}}" />
-                            <a class="item-toggle {{#if system.gifts.twelve.expand}}showOpacity{{/if}}" data-label="system.gifts.twelve.expand" data-ability="{{system.gifts.twelve.expand}}"><i class="{{#if system.gifts.twelve.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.twelve.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.twelve.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.twelve.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.twelve.name}} </span>
-                            <span> {{elan.system.gifts.twelve.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.twelve.expand}}showOpacity{{/if}}" data-label="system.gifts.twelve.expand" data-ability="{{system.gifts.twelve.expand}}"><i class="{{#if system.gifts.twelve.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    {{#if system.gifts.thirteen.bought}}
-                    <div>
-                        {{#if system.gifts.thirteen.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.thirteen.name" type="text" value="{{elan.system.gifts.thirteen.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.thirteen.req" type="text" value="{{elan.system.gifts.thirteen.req}}" />
-                            <a class="item-toggle {{#if system.gifts.thirteen.expand}}showOpacity{{/if}}" data-label="system.gifts.thirteen.expand" data-ability="{{system.gifts.thirteen.expand}}"><i class="{{#if system.gifts.thirteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.thirteen.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.thirteen.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.thirteen.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.thirteen.name}} </span>
-                            <span> {{elan.system.gifts.thirteen.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.thirteen.expand}}showOpacity{{/if}}" data-label="system.gifts.thirteen.expand" data-ability="{{system.gifts.thirteen.expand}}"><i class="{{#if system.gifts.thirteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    {{#if system.gifts.fourteen.bought}}
-                    <div>
-                        {{#if system.gifts.fourteen.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.fourteen.name" type="text" value="{{elan.system.gifts.fourteen.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.fourteen.req" type="text" value="{{elan.system.gifts.fourteen.req}}" />
-                            <a class="item-toggle {{#if system.gifts.fourteen.expand}}showOpacity{{/if}}" data-label="system.gifts.fourteen.expand" data-ability="{{system.gifts.fourteen.expand}}"><i class="{{#if system.gifts.fourteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.fourteen.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.fourteen.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.fourteen.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.fourteen.name}} </span>
-                            <span> {{elan.system.gifts.fourteen.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.fourteen.expand}}showOpacity{{/if}}" data-label="system.gifts.fourteen.expand" data-ability="{{system.gifts.fourteen.expand}}"><i class="{{#if system.gifts.fourteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    {{#if system.gifts.fifteen.bought}}
-                    <div>
-                        {{#if system.gifts.fifteen.expand}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <input class="inline-edit" data-field="system.gifts.fifteen.name" type="text" value="{{elan.system.gifts.fifteen.name}}" />
-                            <input class="inline-edit" data-field="system.gifts.fifteen.req" type="text" value="{{elan.system.gifts.fifteen.req}}" />
-                            <a class="item-toggle {{#if system.gifts.fifteen.expand}}showOpacity{{/if}}" data-label="system.gifts.fifteen.expand" data-ability="{{system.gifts.fifteen.expand}}"><i class="{{#if system.gifts.fifteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        <div style="display: grid;">
-                            <textarea class="inline-edit textarea-auto-resize" data-field="system.gifts.fifteen.desc" style="grid-area: 1 / 1 / 2/ 2;">{{elan.system.gifts.fifteen.desc}}</textarea>
-                            <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{elan.system.gifts.fifteen.desc}}</div>
-                        </div>
-                        {{else}}
-                        <div>
-                            <span> {{elan.name}} </span>
-                            <span> {{elan.system.gifts.fifteen.name}} </span>
-                            <span> {{elan.system.gifts.fifteen.req}} </span>
-                            <a class="item-toggle {{#if system.gifts.fifteen.expand}}showOpacity{{/if}}" data-label="system.gifts.fifteen.expand" data-ability="{{system.gifts.fifteen.expand}}"><i class="{{#if system.gifts.fifteen.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/if}}
+                    {{/ifEquals}}
+                    {{/each}}
                 </div>
-                {{/each}}
-            </div>
+                <div class="itemControls">
+                    <a class="item-control" data-action="createItem" data-ability="bloodBond" data-type="backgroundInfo"><i class="fas fa-plus"></i> {{localize "abfalter.addBloodBond"}} </a>
+                    <a data-action="toggleValue" class="{{#if system.itemToggle.bloodBonds}}armorpenalty{{/if}}" data-label="system.itemToggle.bloodBonds" data-ability="{{system.itemToggle.bloodBonds}}">
+                        <i class="{{#if system.itemToggle.bloodBonds}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i>
+                        {{localize "abfalter.modify"}} 
+                    </a>
+                </div>
+            </fieldset>
         </div>
 
-        <div class="prof">
-            <h5> {{localize "abfalter.prof"}} </h5>
-            <div>
-                <span> {{localize "abfalter.profName"}} </span>
-                <span> {{localize "abfalter.type"}} </span>
-                <span> {{localize "abfalter.cost"}} </span>
-            </div>
-            <div class="{{#if system.itemToggle.proficiency}}item-list{{/if}}">
-                {{#each proficiencies as |proficiency id|}}
-                <div class="prof-item item delete-item" data-item-id="{{proficiency._id}}">
-                    {{#if system.toggleItem}}
-                    <div>
-                        <label> <input class="prof-name inline-edit" data-field="name" type="text" value="{{proficiency.name}}" placeholder="{{localize "abfalter.newItem"}}" /> </label>
-                        <div class="csSelect">
-                            <select class="inline-edit" name="system.type" data-field="system.type">
-                                {{selectOptions ../proficiencyObjList selected=system.type localize=true}}
-                            </select>
+        <div class="fieldSetRow  {{#if system.toggles.raceRootsStatus}}hidden{{/if}}">
+            <fieldset class="backgrounRace">
+                <legend>{{localize "abfalter.raceTitle"}}</legend>
+                <div>
+                    {{#each backgroundInfos as |backgroundInfo|}}
+                    {{#ifEquals system.type "race"}}
+                    <div class="backRace-item item itemStyle normal-item {{#if ../system.itemToggle.race}}draggable{{/if}}" data-item-id={{id}}
+                    data-can-edit="true" data-can-delete="true" data-can-equip="false" data-can-toggle="false">
+                        {{#if system.expand}}
+                        <div class="raceInfo itemToggleB">
+                            <input class="inline-edit" data-field="name" type="text" value="{{name}}" placeholder="{{localize " abfalter.nameItem"}}" />
+                            <label>
+                                <input class="inline-edit" data-field="system.levelMod" type="number" value="{{system.levelMod}}" />
+                                <span> {{localize "abfalter.lvlMod"}} </span>
+                            </label>
+                            <label>
+                                <input class="inline-edit" data-field="system.expPen" type="number" value="{{system.expPen}}" />
+                                <span> {{localize "abfalter.expPen"}} </span>
+                            </label>
+                            <a data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand">
+                                <i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i>
+                            </a>
                         </div>
-                        <input class="prof-cost inline-edit" data-field="system.cost" type="number" value="{{proficiency.system.cost}}" />
+                        {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
+                        {{else}}
+                        <div class="raceInfo itemToggleA">
+                            <span> {{backgroundInfo.name}} </span>
+                            <label class="raceInfoBorder">
+                                <span> {{system.levelMod}} </span>
+                                <span> {{localize "abfalter.lvlMod"}} </span>
+                            </label>
+                            <label class="raceInfoBorder">
+                                <span> {{system.expPen}} </span>
+                                <span> {{localize "abfalter.expPen"}} </span>
+                            </label>
+                            <a data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand">
+                                <i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i>
+                            </a>
+                        </div>
+                        {{#if system.descToggle}}
+                        {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
+                        {{/if}}
+                        {{/if}}
                     </div>
-                    {{else}}
-                    <div>
-                        <span> {{proficiency.name}} </span>
-                        <span> {{proficiency.system.type}} </span>
-                        <span> {{proficiency.system.cost}} </span>
-                    </div>
-                    {{/if}}
+                    {{/ifEquals}}
+                    {{/each}}
                 </div>
-                {{/each}}
-            </div>
-            <div>
-                <a class="item-control item-create" data-type="proficiency"><i class="fas fa-plus"></i> {{localize "abfalter.addProf"}} </a>
-                <a class="toggleBoolean {{#if system.itemToggle.proficiency}}armorpenalty{{/if}}" data-label="system.itemToggle.proficiency" data-ability="{{system.itemToggle.proficiency}}"><i class="{{#if system.itemToggle.proficiency}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
-            </div>
+                <div class="itemControls">
+                    <a class="item-control" data-action="createItem" data-ability="race" data-type="backgroundInfo"><i class="fas fa-plus"></i> {{localize "abfalter.addRace"}} </a>
+                    <a data-action="toggleValue" class="{{#if system.itemToggle.race}}armorpenalty{{/if}}" data-label="system.itemToggle.race" data-ability="{{system.itemToggle.race}}">
+                        <i class="{{#if system.itemToggle.race}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i>
+                        {{localize "abfalter.modify"}}
+                    </a>
+                </div>
+            </fieldset>
+
+            <fieldset class="backgroundCultural">
+                <legend>{{localize "abfalter.culturalRootsTitle"}}</legend>
+                <div>
+                    {{#each backgroundInfos as |backgroundInfo|}}
+                    {{#ifEquals system.type "culturalRoot"}}
+                    <div class="cultureInfo-item item itemStyle normal-item {{#if ../system.itemToggle.race}}draggable{{/if}}" data-item-id={{id}}
+                    data-can-edit="true" data-can-delete="true" data-can-equip="false" data-can-toggle="false">
+                        {{#if system.expand}}
+                        <div class="culInfo itemToggleB">
+                            <input class="backInfo-name inline-edit" data-field="name" type="text" value="{{name}}" placeholder="{{localize " abfalter.nameItem"}}" />
+                            <a data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand">
+                                <i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i>
+                            </a>
+                        </div>
+                        <div class="culInfoRowB">
+                            <label>
+                                <span> {{localize "abfalter.region"}} </span>
+                                <input class="inline-edit" data-field="system.region" type="text" value="{{system.region}}" />
+                            </label>
+                            <label>
+                                <span> {{localize "abfalter.city"}} </span>
+                                <input class="inline-edit" data-field="system.city" type="text" value="{{system.city}}" />
+                            </label>
+                        </div>
+                        {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
+                        {{else}}
+                        <div class="culInfoB itemToggleA">
+                            <span> {{backgroundInfo.name}} </span>
+                            <a data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand">
+                                <i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i>
+                            </a>
+                        </div>
+                        <div class="culInfoRow">
+                            <label>
+                                <span> {{localize "abfalter.region"}}: </span>
+                                <span> {{system.region}} </span>
+                            </label>
+                            <label>
+                                <span> {{localize "abfalter.city"}}: </span>
+                                <span> {{system.city}} </span>
+                            </label>
+                        </div>
+                        {{#if system.descToggle}}
+                        {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
+                        {{/if}}
+                        {{/if}}
+                    </div>
+                    {{/ifEquals}}
+                    {{/each}}
+                </div>
+                <div class="itemControls">
+                    <a class="item-control" data-action="createItem" data-ability="culturalRoot" data-type="backgroundInfo"><i class="fas fa-plus"></i> {{localize
+                        "abfalter.addCulturalRoot"}} </a>
+                    <a data-action="toggleValue" class="{{#if system.itemToggle.culturalRoots}}armorpenalty{{/if}}"
+                        data-label="system.itemToggle.culturalRoots" data-ability="{{system.itemToggle.culturalRoots}}"><i
+                            class="{{#if system.itemToggle.culturalRoots}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i>
+                        {{localize "abfalter.modify"}} </a>
+                </div>
+            </fieldset>
         </div>
+        
+
     </div>
 
     <div class="e3">
         <div>
             <h5> {{localize "abfalter.note"}} </h5>
             <div style="display: grid;">
-                <textarea class="textarea-auto-resize" name="system.info.notesOne" style="grid-area: 1 / 1 / 2/ 2;">{{system.info.notesOne}}</textarea>
-                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.info.notesOne}}</div>
+                <textarea class="textarea-auto-resize" name="system.info.notesOne"
+                    style="grid-area: 1 / 1 / 2/ 2;">{{system.info.notesOne}}</textarea>
+                <div class="textarea-auto-resize-sibling" aria-hidden="true"
+                    style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.info.notesOne}}</div>
             </div>
         </div>
 
         <div>
             <h5> {{localize "abfalter.note"}} </h5>
             <div style="display: grid;">
-                <textarea class="textarea-auto-resize" name="system.info.notesTwo" style="grid-area: 1 / 1 / 2/ 2;">{{system.info.notesTwo}}</textarea>
-                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.info.notesTwo}}</div>
+                <textarea class="textarea-auto-resize" name="system.info.notesTwo"
+                    style="grid-area: 1 / 1 / 2/ 2;">{{system.info.notesTwo}}</textarea>
+                <div class="textarea-auto-resize-sibling" aria-hidden="true"
+                    style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{system.info.notesTwo}}</div>
             </div>
         </div>
     </div>
-</div>
-
+</section>

@@ -1,0 +1,33 @@
+<div class="item-subtitle">
+    <h4 class="item-type">
+        {{#ifEquals system.type "turn"}}
+        {{localize "abfalter.turnMaintShort"}}
+        {{else}}
+        {{localize "abfalter.dailyMaintShort"}}
+        {{/ifEquals}}
+    </h4>
+    <span class="item-subType">
+        {{localize "abfalter.active"}}?
+        <a data-action="toggleValue" data-label="system.equipped" data-ability="{{system.equipped}}"><i class="{{#if system.equipped}}fa-solid fa-toggle-on{{else}}fa-solid fa-toggle-off{{/if}}"></i></a>
+    </span>
+</div>
+
+<ul class="summary flexrow">
+    <li>
+        <select name="system.type">
+            {{selectOptions zeonMaintObjList selected=system.type localize=true}}
+        </select>
+    </li>
+    <li class="itemHeader65-30">
+        <label>
+            <span>{{localize "abfalter.spellCost"}}: </span>
+            <input type="number" name="system.cost" value="{{system.cost}}" />
+        </label>
+    </li>
+    <li class="itemHeader65-30">
+        <label>
+            <span>{{localize "abfalter.zeon"}}: </span>
+            <input type="number" name="system.zeon" value="{{system.zeon}}" />
+        </label>
+    </li>
+</ul>

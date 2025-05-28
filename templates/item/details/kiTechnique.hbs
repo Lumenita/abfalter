@@ -1,0 +1,77 @@
+<section class="baseAbfalter itemPage tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+    <fieldset>
+        <legend> {{ localize "abfalter.generalDetails" }} </legend>
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.level"}} </span> <input type="number" name="system.level" value="{{system.level}}" /> </label>
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.mk"}} </span> <input type="number" name="system.mk" value="{{system.mk}}" /> </label>
+    </fieldset>
+
+    <fieldset>
+        <legend> {{localize "abfalter.kiTechTitle"}} {{ localize "abfalter.details" }} </legend>
+        <div class="kiTechContent">
+            <div> </div>
+
+            <div class="kiTechTypeMax">
+                <span> {{localize "abfalter.ki"}} </span>
+                <span> {{localize "abfalter.agi"}} </span>
+                <span> {{localize "abfalter.con"}} </span>
+                <span> {{localize "abfalter.dex"}} </span>
+                <span> {{localize "abfalter.str"}} </span>
+                <span> {{localize "abfalter.pow"}} </span>
+                <span> {{localize "abfalter.wp"}} </span>
+                <span> </span>
+            </div>
+
+            <div class="kiTechUseMax">
+                <span> {{localize "abfalter.use"}} </span>
+                <input name="system.use.agi" type="number" value="{{system.use.agi}}" />
+                <input name="system.use.con" type="number" value="{{system.use.con}}" />
+                <input name="system.use.dex" type="number" value="{{system.use.dex}}" />
+                <input name="system.use.str" type="number" value="{{system.use.str}}" />
+                <input name="system.use.pow" type="number" value="{{system.use.pow}}" />
+                <input name="system.use.wp" type="number" value="{{system.use.wp}}" />
+            </div>
+
+            <div class="kiTechMaintMaxContent">
+                {{#if system.actor}}
+                <div>
+                    {{#if system.unified}}
+                    <div class="techExpandContent">
+                        {{#if system.innatePower}}
+                        <span> {{localize "abfalter.innatePowerMaint"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.unifiedMaint"}} </span>
+                        {{/if}}
+                        <input name="system.maint.unified" type="number" value="{{system.maint.unified}}" />
+                    </div>
+                    {{else}}
+                    <span> {{localize "abfalter.maint"}} </span>
+                    <input name="system.maint.agi" type="number" value="{{system.maint.agi}}" />
+                    <input name="system.maint.con" type="number" value="{{system.maint.con}}" />
+                    <input name="system.maint.dex" type="number" value="{{system.maint.dex}}" />
+                    <input name="system.maint.str" type="number" value="{{system.maint.str}}" />
+                    <input name="system.maint.pow" type="number" value="{{system.maint.pow}}" />
+                    <input name="system.maint.wp" type="number" value="{{system.maint.wp}}" />
+                    {{/if}}
+                </div>
+                {{else}}
+                <div>
+                    <span> {{localize "abfalter.maint"}} </span>
+                    <input name="system.maint.agi" type="number" value="{{system.maint.agi}}" />
+                    <input name="system.maint.con" type="number" value="{{system.maint.con}}" />
+                    <input name="system.maint.dex" type="number" value="{{system.maint.dex}}" />
+                    <input name="system.maint.str" type="number" value="{{system.maint.str}}" />
+                    <input name="system.maint.pow" type="number" value="{{system.maint.pow}}" />
+                    <input name="system.maint.wp" type="number" value="{{system.maint.wp}}" />
+                </div>
+
+                <div>
+                    <span> {{localize "abfalter.unifiedMaint"}} </span>
+                    <input name="system.maint.unified" type="number" value="{{system.maint.unified}}" />
+                </div>
+                {{/if}}
+            </div>
+
+            <div></div>
+        </div>
+    </fieldset>
+</section>

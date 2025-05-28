@@ -1,0 +1,27 @@
+<div class="abfalter secondarychatmsg" data-actor-id="{{actor._id}}">
+  <div>
+    <span> {{actor.name}} </span>
+  </div>
+  
+  {{#each rollData as |roll i|}}
+    <div class="chatPlainRoll atkCustomTitleContainer {{#if @last}}lastRoll{{/if}}">
+		<span>{{roll.label}}</span>
+		<span class="{{roll.color}}"> {{roll.total}} </span>
+        <div class="atkCustomTitle">{{roll.result}}</div>
+    </div>
+	
+	<div></div>
+	{{#if roll.explode}}
+	  <div class="iniExplodeRoll" style="color: forestgreen;">
+		{{localize "abfalter.dialogs.openRoll"}}
+	  </div>
+	{{/if}}
+
+	{{#if roll.fumble}}
+	  <div class="iniExplodeRoll" style="color: red;">
+		{{localize "abfalter.dialogs.fumble"}}
+	  </div>
+	{{/if}}
+
+  {{/each}}
+</div>

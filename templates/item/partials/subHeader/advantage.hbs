@@ -1,0 +1,40 @@
+<div class="item-subtitle">
+    <h4 class="item-type">            
+        {{#ifEquals system.type "advantage"}}
+        {{localize "abfalter.adv"}}
+        {{else}}
+        {{localize "abfalter.disAdv"}}
+        {{/ifEquals}}
+    </h4>
+    <span class="item-subType"></span>
+</div>
+<ul class="summary flexrow">
+    <li>
+        <select name="system.type">
+            {{selectOptions advObjList selected=system.type localize=true}}
+        </select>
+    </li>
+    <li class="itemHeader65-30">
+        <label>
+            {{#ifEquals system.type "advantage"}}
+            <span>{{localize "abfalter.cost"}}: </span>
+            {{else}}
+            <span>{{localize "abfalter.benefit"}}: </span>
+            {{/ifEquals}}
+            <input type="number" name="system.cost" value="{{system.cost}}" />
+        </label>
+    </li>
+    <li class="itemHeader65-30">
+        <label> 
+            <span> {{localize "abfalter.showDesc"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.toggleItem}}kiBought{{/if}}"
+                data-label="system.toggleItem" data-ability="{{system.toggleItem}}">
+                {{#if system.toggleItem}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                {{/if}}
+            </button>
+        </label>
+    </li>
+</ul>

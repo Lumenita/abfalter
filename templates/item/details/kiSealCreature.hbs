@@ -1,0 +1,36 @@
+<section class="baseAbfalter itemPage tab  {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+    <fieldset>
+        <legend> {{ localize "abfalter.generalDetails" }} </legend>
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.level"}} </span> <input type="number" name="system.level" value="{{system.level}}" /> </label>
+    </fieldset>
+
+    <fieldset>
+        <legend> {{localize "abfalter.kiSealsCre"}} {{ localize "abfalter.details" }} </legend>
+        <div class="kiSealContent">
+            <div>
+                <span> {{localize "abfalter.sealType"}} </span>
+                <span> {{localize "abfalter.sealWood"}} </span>
+                <span> {{localize "abfalter.sealMetal"}} </span>
+                <span> {{localize "abfalter.sealAir"}} </span>
+                <span> {{localize "abfalter.sealWater"}} </span>
+                <span> {{localize "abfalter.sealFire"}} </span>
+            </div>
+            <div>
+                <span> {{localize "abfalter.minor"}} </span>
+                <input name="system.minor.wood" type="number" value="{{system.minor.wood}}" />
+                <input name="system.minor.metal" type="number" value="{{system.minor.metal}}" />
+                <input name="system.minor.air" type="number" value="{{system.minor.air}}" />
+                <input name="system.minor.water" type="number" value="{{system.minor.water}}" />
+                <input name="system.minor.fire" type="number" value="{{system.minor.fire}}" />
+            </div>
+            <div>
+                <span> {{localize "abfalter.major"}} </span>
+                <input name="system.major.wood" type="number" value="{{system.major.wood}}" />
+                <input name="system.major.metal" type="number" value="{{system.major.metal}}" />
+                <input name="system.major.air" type="number" value="{{system.major.air}}" />
+                <input name="system.major.water" type="number" value="{{system.major.water}}" />
+                <input name="system.major.fire" type="number" value="{{system.major.fire}}" />
+            </div>
+        </div>
+    </fieldset>
+</section>

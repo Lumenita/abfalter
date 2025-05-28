@@ -22,7 +22,7 @@ export function onManageActiveEffect(event, owner) {
     }
 }
 
-export function prepareActiveEffectCategories(effects) {
+export function prepareActiveEffectCategories() {
     // Define effect header categories
     const categories = {
         temporary: {
@@ -43,10 +43,15 @@ export function prepareActiveEffectCategories(effects) {
     };
 
     // Iterate over active effects, classifying them into categories
-    for (let e of effects) {
-        if (e.disabled) categories.inactive.effects.push(e);
-        else if (e.isTemporary) categories.temporary.effects.push(e);
-        else categories.passive.effects.push(e);
+    for (const e of this.actor.allApplicableEffects()) {
+      if (!e.active) categories.inactive.effects.push(e);
+      else if (e.isTemporary) categories.temporary.effects.push(e);
+      else categories.passive.effects.push(e);
+    }
+
+    // Sort each category
+    for (const c of Object.values(categories)) {
+      c.effects.sort((a, b) => (a.sort || 0) - (b.sort || 0));
     }
     return categories;
 }

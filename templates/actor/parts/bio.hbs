@@ -1,15 +1,29 @@
-<div class="tab bio">
-    <div class="bioPictures">
-        <div>
-            <img class="profile-img" src="{{actor.prototypeToken.texture.src}}" title="{{actor.name}} Token" />
+<section class="tab {{tabs.bio.cssClass}}" data-group="{{tabs.bio.group}}" data-tab="{{tabs.bio.id}}">
+    <div class="bio">
+        <div class="bioPictures">
+            <div>
+                <img class="profile-img" src="{{document.prototypeToken.texture.src}}" />
+            </div>
+            <div>
+                <img class="profile-img" src="{{document.img}}" data-action="editImage" data-edit="img" />
+            </div>
         </div>
-        <div>
-            <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+        <div class="bioInfo">            
+            <prose-mirror name="system.info.bio" data-document-uuidd="{{actor.uuid}}" value="{{system.info.bio}}" toggled="true">
+                {{{enrichedBio}}}
+            </prose-mirror>
         </div>
-    </div>
-    <div class="bioInfo">
-        {{editor system.info.bio target="system.info.bio" button=true editable=editable engine="prosemirror"}}
-    </div>
-</div>
 
+    </div>
+</section>
 
+<!--{{formInput systemFields.info.fields.bio value=system.info.bio enriched=enrichedBio toggled=true}}
+Using formInput gave this error: Fix eventually
+
+vendor.mjs:6 Uncaught TypeError: Cannot read properties of null (reading 'setSelection')
+    at selectionToDOM (vendor.mjs:6:20602)
+    at JV.focus (vendor.mjs:9:48252)
+    at ProseMirrorMenu._onAction (foundry.mjs:65981:15)
+    at button.onclick (foundry.mjs:65509:97)
+what is this error
+-->

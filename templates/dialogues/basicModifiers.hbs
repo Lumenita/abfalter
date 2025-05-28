@@ -1,0 +1,14 @@
+<form class="baseAbfalter">
+  <header>
+    <div class="diceRollingTemp">
+        <label class="{{#if removeFatigue}}hidden{{/if}}">
+            <span>{{localize "abfalter.fatigue"}}</span>
+            <select id="fatigueDropdown"></select>
+        </label>
+        <label> 
+            <span> {{localize "abfalter.dialogs.modifier"}} </span>
+            <input type="number" id="modifierMod" value="0" /> 
+        </label>
+    </div>
+  </header>
+</form>

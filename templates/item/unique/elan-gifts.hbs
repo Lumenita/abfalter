@@ -1,0 +1,62 @@
+{{!-- Gifts Tab --}}
+<section class="baseAbfalter itemPage tab {{tabs.gifts.cssClass}}" data-group="{{tabs.gifts.group}}" data-tab="{{tabs.gifts.id}}">
+    <div>
+        <span class="totalGiftCost"> {{ localize "abfalter.totalGiftCost" }}: {{system.totalCost}}</span>
+    </div>
+    {{log this}}
+    {{#each system.gifts as |gift key|}}
+    <fieldset>
+        <legend placeholder="Gift Name">
+            {{gift.name}}
+            <label class="giftExpandBox">
+                <a data-action="removeElanGift" data-code="{{key}}"><i class="fas fa-trash"></i></a>
+                <a data-action="toggleElanGift" data-label="expand" data-value="{{gift.expand}}" data-code="{{key}}"><i class="{{#if this.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+            </label>
+
+        </legend>
+        {{#if this.expand}}
+        <div class="giftEntryEdit">
+            <label class="itemSimpleLabel"> 
+                <span> {{localize "abfalter.name"}} </span> 
+                <input type="text" name="system.gifts.{{key}}.name" value="{{gift.name}}" placeholder="Gift Name"> 
+            </label>
+            <label class="itemSimpleLabel"> 
+                <span> {{localize "abfalter.req"}} </span> 
+                <input type="number" name="system.gifts.{{key}}.req" value="{{gift.req}}" placeholder="Gift Req.">
+            </label>
+            <label class="itemSimpleLabel"> 
+                <span> {{localize "abfalter.cost"}} </span> 
+                <input type="number" name="system.gifts.{{key}}.cost" value="{{gift.cost}}" placeholder="Gift Cost">
+            </label>
+            <label class="itemSimpleLabel"> 
+                <span> {{localize "abfalter.buyingThisGift"}} </span> 
+                <button type="button" data-action="toggleElanGift" data-label="bought" data-value="{{gift.bought}}" data-code="{{key}}"
+                    class="{{#if this.bought}}kiBought{{/if}}">
+                    {{#if this.bought}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                    {{/if}}
+                </button>
+            </label>
+            <h6>{{localize "abfalter.giftDesc"}}</h6>
+
+            <prose-mirror name="system.gifts.{{key}}.desc" data-document-uuidd="{{item.uuid}}" value="{{gift.desc}}" toggled="true">
+                {{{gift.enrichedDesc}}}
+            </prose-mirror>            
+        </div>
+
+        {{else}}
+        <div class="giftEntryNoEdit">
+            <h6>
+                {{localize "abfalter.giftDesc"}}
+                <span class="{{#if this.bought}}weaponEquipped{{/if}}">{{localize "abfalter.requir"}}: {{gift.req}}</span>
+                <span class="{{#if this.bought}}weaponEquipped{{/if}}">{{localize "abfalter.cost"}}: {{gift.cost}}</span>
+            </h6>
+            <div>{{{gift.enrichedDesc}}}</div>
+        </div>
+        {{/if}}
+    </fieldset>
+    {{/each}}
+    <button class="addElanGifts" type="button" data-action="addElanGift"><i class="fas fa-plus"></i> {{localize "abfalter.addGift"}}</button>
+</section>

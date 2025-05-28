@@ -1,0 +1,7 @@
+<nav class="sheet-navigation tabs itemTabs" data-group="primary">
+    {{#each tabs as |tab key|}}
+        <a class="item {{tab.cssClass}}" data-action="tab" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+            {{localize (concat "abfalter." tab.id)}}
+        </a>
+    {{/each}}
+</nav>

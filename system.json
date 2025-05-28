@@ -2,10 +2,10 @@
   "id": "abfalter",
   "title": "Anima Beyond Fantasy Altered",
   "description": "Engligh Version of 'Fantasy Flight Games' Anima Beyond Fantasy System altered by some house rules.",
-  "version": "1.4.7",
+  "version": "1.5.0",
   "compatibility": {
-    "minimum": 12,
-    "verified": "12.331"
+    "minimum": 13,
+    "verified": "13.344"
   },
   "authors": [
     {
@@ -20,6 +20,17 @@
   "styles": [
     "css/abfalter.css"
   ],
+  "primaryTokenAttribute": "lp",
+  "gridDistance": 5,
+  "gridUnits": "ft",
+  "grid": {
+    "distance": 5,
+    "units": "ft"
+  },
+  "license": "LICENSE.txt",
+  "url": "https://github.com/Lumenita/abfalter",
+  "manifest": "https://raw.githubusercontent.com/Lumenita/abfalter/main/system.json",
+  "download": "https://github.com/Lumenita/abfalter/releases/download/v1.5.0/abfalter.zip",
   "languages": [
     {
       "lang": "en",
@@ -45,7 +56,7 @@
   "packs": [
     {
       "name": "compendiums",
-      "label": "Compendium",
+      "label": "System Tutorials",
       "system": "abfalter",
       "path": "./packs/compendiums",
       "type": "JournalEntry",
@@ -60,17 +71,171 @@
       "type": "Item",
       "private": false,
       "flags": {}
+    },
+    {
+      "name": "advantages-and-disadvantages",
+      "label": "Advantages & Disadvantages",
+      "system": "abfalter",
+      "path": "./packs/advantages-and-disadvantages",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "equipment",
+      "label": "Equipment",
+      "system": "abfalter",
+      "path": "./packs/equipment",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "spells",
+      "label": "Spells",
+      "system": "abfalter",
+      "path": "./packs/spells",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "psychic-powers",
+      "label": "Psychic Powers",
+      "system": "abfalter",
+      "path": "./packs/psychic-powers",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "martial-arts",
+      "label": "Martial Arts",
+      "system": "abfalter",
+      "path": "./packs/martial-arts",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "incarnations",
+      "label": "Incarnations",
+      "system": "abfalter",
+      "path": "./packs/incarnations",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "invocations",
+      "label": "Invocations",
+      "system": "abfalter",
+      "path": "./packs/invocations",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+
+    {
+      "name": "creature-powersabilities",
+      "label": "Creature Powers",
+      "system": "abfalter",
+      "path": "./packs/creature-powersabilities",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "combat-modules",
+      "label": "Combat Modules",
+      "system": "abfalter",
+      "path": "./packs/combat-modules",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "ki-techniques",
+      "label": "Ki Techniques",
+      "system": "abfalter",
+      "path": "./packs/ki-techniques",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "roll-tables",
+      "label": "Roll Tables",
+      "system": "abfalter",
+      "path": "./packs/roll-tables",
+      "type": "RollTable",
+      "private": false
+    },
+    {
+      "name": "macros",
+      "label": "System Macros",
+      "system": "abfalter",
+      "path": "./packs/macros",
+      "type": "Macro",
+      "private": false
+    },
+    {
+      "name": "characters-and-creatures",
+      "label": "Characters & Creatures",
+      "system": "abfalter",
+      "path": "./packs/characters-and-creatures",
+      "type": "Actor",
+      "private": false
+    },
+    {
+      "name": "references",
+      "label": "References",
+      "system": "abfalter",
+      "path": "./packs/references",
+      "type": "JournalEntry",
+      "private": false
     }
   ],
-  "primaryTokenAttribute": "lp",
-  "gridDistance": 5,
-  "gridUnits": "ft",
-  "grid": {
-    "distance": 5,
-    "units": "ft"
-  },
-  "license": "LICENSE.txt",
-  "url": "https://github.com/Lumenita/abfalter",
-  "manifest": "https://raw.githubusercontent.com/Lumenita/abfalter/main/system.json",
-  "download": "https://github.com/Lumenita/abfalter/releases/download/v1.4.7/abfalter.zip"
+  "packFolders": [
+    {
+      "name": "General Items",
+      "sorting": "m",
+      "packs": [
+        "classes",
+        "advantages-and-disadvantages",
+        "equipment",
+        "creature-powersabilities"
+      ]
+    },
+    {
+      "name": "Martial Items",
+      "sorting": "m",
+      "packs": [
+        "combat-modules",
+        "ki-techniques",
+        "martial-arts"
+      ]
+    },
+    {
+      "name": "Magic/Psychic Items",
+      "sorting": "m",
+      "packs": [
+        "spells",
+        "incarnations",
+        "invocations",
+        "psychic-powers"
+      ]
+    },
+    {
+      "name": "Macros & more",
+      "sorting": "m",
+      "packs": [
+        "characters-and-creatures",
+        "macros",
+        "roll-tables",
+        "references",
+        "compendiums"
+      ]
+    }
+  ]
 }

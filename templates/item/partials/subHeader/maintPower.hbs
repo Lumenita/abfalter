@@ -1,0 +1,18 @@
+<div class="item-subtitle">
+    <h4 class="item-type">{{localize (concat "abfalter.itemNames." document.type)}}</h4>
+        <span class="item-subType">
+        {{localize "abfalter.equipped"}}
+        <a data-action="toggleValue" data-label="system.equipped" data-ability="{{system.equipped}}"><i class="{{#if system.equipped}}fa-solid fa-toggle-on{{else}}fa-solid fa-toggle-off{{/if}}"></i></a>
+    </span>
+</div>
+
+<ul class="summary flexrow">
+    <li class="itemHeader65-30">
+        <label>
+            <span>{{localize "abfalter.potency"}}: </span>
+            <input type="number" name="system.value" value="{{system.value}}" />
+        </label>
+    </li>
+    <li></li>
+    <li></li>
+</ul>

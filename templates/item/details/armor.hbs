@@ -1,0 +1,142 @@
+<section class="baseAbfalter itemPage tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+    <fieldset>
+        <legend> {{ localize "abfalter.generalDetails" }} </legend>
+        <div class="csSelect itemSimpleLabel"> 
+            <label>
+                <span> {{localize "abfalter.layerType"}} </span>
+                <select name="system.layerType">
+                    {{selectOptions layerTypeList selected=system.layerType localize=true}}
+                </select>
+            </label>
+        </div>
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.quality"}} </span> <input type="number" name="system.quality" value="{{system.quality}}" /> </label>
+        <div class="armorContent">
+            <label>
+                <span> {{localize "abfalter.presence"}} </span>
+                <input type="number" name="system.presence" value="{{system.presence}}" />
+                <span> | </span>
+                <span> {{system.derived.presence}} </span>
+            </label>
+        </div>
+        <div class="armorContent">
+            <label>
+                <span> {{localize "abfalter.fortitude"}} </span>
+                <input type="number" name="system.fortitude" value="{{system.fortitude}}" />
+                <span> | </span>
+                <span> {{system.derived.fortitude}} </span>
+            </label>
+        </div>
+        <div class="armorContent">
+            <label>
+                <span> {{localize "abfalter.requir"}} </span>
+                <input type="number" name="system.requirement" value="{{system.requirement}}" />
+                <span> | </span>
+                <span> {{system.derived.requirement}} </span>
+            </label>
+        </div>
+        <div class="armorContent">
+            <label>
+                {{#ifEquals system.armorType "armor"}}
+                <span> {{localize "abfalter.natPen"}} </span>
+                {{else}}
+                <span> {{localize "abfalter.perPen"}} </span>
+                {{/ifEquals}}
+                <input type="number" name="system.natPenalty" value="{{system.natPenalty}}" />
+                <span> | </span>
+                <span> {{system.derived.natPenalty}} </span>
+            </label>
+        </div>
+        {{#ifEquals system.armorType "armor"}}
+        <div class="armorContent">
+            <label>
+                <span> {{localize "abfalter.movePen"}} </span>
+                <input type="number" name="system.movePenalty" value="{{system.movePenalty}}" />
+                <span> | </span>
+                <span> {{system.derived.movePenalty}} </span>
+            </label>
+        </div>
+        <div class="itemSimpleLabel">
+            <label>
+                {{#if system.ignorePenalty}}
+                <span> {{localize "abfalter.ignorePenalty"}} </span>
+                {{else}}
+                <span> {{localize "abfalter.followArmorPenalty"}} </span>
+                {{/if}} 
+                <button type="button" data-action="toggleValue" class="{{#if system.ignorePenalty}}kiBought{{/if}}"
+                    data-label="system.ignorePenalty" data-ability="{{system.ignorePenalty}}">
+                    {{#if system.ignorePenalty}}
+                    <span> {{localize "abfalter.altered"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.normal"}} </span>
+                    {{/if}} 
+                </button>
+            </label>
+        </div>
+        {{/ifEquals}}
+
+        <div class="itemSimpleLabel">
+            <label>
+                {{#if system.ignoreLayerRules}}
+                <span> {{localize "abfalter.ignoreLayerRules"}} </span>
+                {{else}}
+                <span> {{localize "abfalter.followLayerRules"}} </span>
+                {{/if}} 
+                <button type="button" data-action="toggleValue" class="{{#if system.ignoreLayerRules}}kiBought{{/if}}"
+                    data-label="system.ignoreLayerRules" data-ability="{{system.ignoreLayerRules}}">
+                    {{#if system.ignoreLayerRules}}
+                    <span> {{localize "abfalter.altered"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.normal"}} </span>
+                    {{/if}} 
+                </button>
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend> {{localize "abfalter.armorValues"}} </legend>
+        <div class="armorCard">
+            <div>
+                <span> {{localize "abfalter.type"}} </span>
+                <span> {{localize "abfalter.cut"}} </span>
+                <span> {{localize "abfalter.imp"}} </span>
+                <span> {{localize "abfalter.thr"}} </span>
+                <span> {{localize "abfalter.heat"}} </span>
+                <span> {{localize "abfalter.cold"}} </span>
+                <span> {{localize "abfalter.ele"}} </span>
+                <span> {{localize "abfalter.ene"}} </span>
+                {{#if system.spiritHomebrew}}
+                <span> {{localize "abfalter.spirit"}} </span>
+                {{/if}}
+            </div>
+
+            <div>
+                <span> {{localize "abfalter.base"}} </span>
+                <input type="number" name="system.AT.cut" value="{{system.AT.cut}}" />
+                <input type="number" name="system.AT.imp" value="{{system.AT.imp}}" />
+                <input type="number" name="system.AT.thr" value="{{system.AT.thr}}" />
+                <input type="number" name="system.AT.heat" value="{{system.AT.heat}}" />
+                <input type="number" name="system.AT.cold" value="{{system.AT.cold}}" />
+                <input type="number" name="system.AT.ele" value="{{system.AT.ele}}" />
+                <input type="number" name="system.AT.ene" value="{{system.AT.ene}}" />
+                {{#if system.spiritHomebrew}}
+                <input type="number" name="system.AT.spt" value="{{system.AT.spt}}" />
+                {{/if}}
+            </div>
+
+            <div>
+                <span> {{localize "abfalter.final"}} </span>
+                <span> {{system.derived.cut}} </span>
+                <span> {{system.derived.imp}} </span>
+                <span> {{system.derived.thr}} </span>
+                <span> {{system.derived.heat}} </span>
+                <span> {{system.derived.cold}} </span>
+                <span> {{system.derived.ele}} </span>
+                <span> {{system.derived.ene}} </span>
+                {{#if system.spiritHomebrew}}
+                <span> {{system.derived.spt}} </span>
+                {{/if}}
+            </div>
+        </div>
+    </fieldset>
+</section>

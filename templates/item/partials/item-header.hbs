@@ -1,0 +1,11 @@
+<div class="sheet-header baseAbfalter itemPage">
+    <img class="item-img" src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}" />
+
+    <div class="header-details flexrow">
+        <h1 class="itemName">
+            <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'abfalter.nameItem'}}" />
+        </h1>
+
+        {{> (concat "systems/abfalter/templates/item/partials/subHeader/" document.type ".hbs")}}
+    </div>
+</div>

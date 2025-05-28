@@ -24,7 +24,7 @@ export const oneModDialog = async ({ content, placeholder = '' }) => {
                 submit: {
                     label: 'Confirm',
                     callback: html => {
-                        const results = new FormDataExtended(html.find('form')[0], {}).object;
+                        const results = new foundry.applications.ux.FormDataExtended(html.find('form')[0], {}).object;
                         resolve(results['dialog-input']);
                     }
                 },
@@ -38,45 +38,88 @@ export const oneModDialog = async ({ content, placeholder = '' }) => {
     });
 }
 
+export async function restOptions(actor) {
+    let confirmed = false;
+    const template = "systems/abfalter/templates/dialogues/restOptions.hbs";
+    const templateData = {
+        actor: actor
+    };
+    const htmlContent = await foundry.applications.handlebars.renderTemplate(template, templateData);
+    new Dialog({
+        title: 'Rest Options',
+        class: 'baseAbfalter',
+        content: htmlContent,
+        buttons: {
+            rest: { label: game.i18n.localize('abfalter.rest'), callback: () => confirmed = true },
+            cancel: { label: game.i18n.localize('abfalter.dialogs.cancel'), callback: () => confirmed = false }
+        },
+        render: ($html) => {
+            
+        },
+        close: html => {
+            if (confirmed) {
+                actor.update({ 
+                    "system.stats.Agility.temp": 0, "system.stats.Constitution.temp": 0, "system.stats.Strength.temp": 0, "system.stats.Dexterity.temp": 0,
+                    "system.stats.Perception.temp": 0, "system.stats.Intelligence.temp": 0, "system.stats.Power.temp": 0, "system.stats.Willpower.temp": 0,
+                    "system.movement.temp": 0, "system.lifepoints.temp": 0, "system.fatigue.temp": 0, "system.regeneration.temp": 0,
+                    "system.combatValues.attack.temp": 0, "system.block.attack.temp": 0, "system.combatValues.dodge.temp": 0, "system.mproj.temp": 0,
+                    "system.mproj.temp2": 0, "system.maccu.temp": 0, "system.mregen.temp": 0, "system.ppotential.temp": 0,
+                    "system.pproj.temp": 0, "system.armor.wearArmor.temp": 0,"system.lp.value": Math.floor(actor.system.lp.value + actor.system.regeneration.rawValue),
+                    "system.fatigue.value": actor.system.fatigue.max, "system.zeon.value":  Math.min(Math.floor(actor.system.zeon.value + actor.system.mregen.finalMinusMaint), actor.system.zeon.max),
+                    "system.psychicPoint.value": actor.system.psychicPoint.max,
+                    "system.kiPool.agi.actual": actor.system.kiPool.agi.poolTot,
+
+                     "system.kiPool.con.actual": actor.system.kiPool.con.poolTot, 
+                    "system.kiPool.dex.actual": actor.system.kiPool.dex.poolTot,
+                    "system.kiPool.str.actual": actor.system.kiPool.str.poolTot, 
+                    "system.kiPool.pow.actual": actor.system.kiPool.pow.poolTot, 
+                    "system.kiPool.wp.actual": actor.system.kiPool.wp.poolTot,
+                    "system.unifiedKi.value": actor.system.unifiedKi.max,
+                  });
+
+            }
+        }
+    }).render(true);
+}
+
+
 export async function changeSecondaryTemps(actorData) {
     const mod = await openOneModDialog() || 0;
-
     actorData.update({
-        "system.secondary.acrobatics.temp": mod, "system.secondary.athleticism.temp": mod, "system.secondary.climb.temp": mod, "system.secondary.jump.temp": mod,
-        "system.secondary.ride.temp": mod, "system.secondary.swim.temp": mod, "system.secondary.etiquette.temp": mod, "system.secondary.intimidate.temp": mod,
-        "system.secondary.leadership.temp": mod, "system.secondary.persuasion.temp": mod, "system.secondary.streetwise.temp": mod, "system.secondary.style.temp": mod,
-        "system.secondary.trading.temp": mod, "system.secondary.notice.temp": mod, "system.secondary.search.temp": mod, "system.secondary.track.temp": mod,
-        "system.secondary.animals.temp": mod, "system.secondary.appraisal.temp": mod, "system.secondary.architecture.temp": mod, "system.secondary.herballore.temp": mod,
-        "system.secondary.history.temp": mod, "system.secondary.law.temp": mod, "system.secondary.magicappr.temp": mod, "system.secondary.medicine.temp": mod,
-        "system.secondary.memorize.temp": mod, "system.secondary.navigation.temp": mod, "system.secondary.occult.temp": mod, "system.secondary.science.temp": mod,
-        "system.secondary.tactics.temp": mod, "system.secondary.composure.temp": mod, "system.secondary.featsofstr.temp": mod, "system.secondary.withstpain.temp": mod,
-        "system.secondary.disguise.temp": mod, "system.secondary.hide.temp": mod, "system.secondary.lockpicking.temp": mod, "system.secondary.poisons.temp": mod,
-        "system.secondary.stealth.temp": mod, "system.secondary.theft.temp": mod, "system.secondary.traplore.temp": mod, "system.secondary.alchemy.temp": mod,
-        "system.secondary.animism.temp": mod, "system.secondary.art.temp": mod, "system.secondary.dance.temp": mod, "system.secondary.forging.temp": mod,
-        "system.secondary.jewelry.temp": mod, "system.secondary.music.temp": mod, "system.secondary.runes.temp": mod, "system.secondary.ritualcalig.temp": mod,
-        "system.secondary.slofhand.temp": mod, "system.secondary.tailoring.temp": mod, "system.secondary.piloting.temp": mod, "system.secondary.cooking.temp": mod,
-        "system.secondary.technomagic.temp": mod, "system.secondary.toymaking.temp": mod, "system.secondary.kidetection.temp": mod, "system.secondary.kiconceal.temp": mod
+        "system.secondaryFields.athletics.acrobatics.temp": mod, "system.secondaryFields.athletics.athleticism.temp": mod, "system.secondaryFields.athletics.climb.temp": mod, "system.secondaryFields.athletics.jump.temp": mod,
+        "system.secondaryFields.athletics.ride.temp": mod, "system.secondaryFields.athletics.swim.temp": mod, "system.secondaryFields.social.etiquette.temp": mod, "system.secondaryFields.social.intimidate.temp": mod,
+        "system.secondaryFields.social.leadership.temp": mod, "system.secondaryFields.social.persuasion.temp": mod, "system.secondaryFields.social.streetwise.temp": mod, "system.secondaryFields.social.style.temp": mod,
+        "system.secondaryFields.social.trading.temp": mod, "system.secondaryFields.perceptive.notice.temp": mod, "system.secondaryFields.perceptive.search.temp": mod, "system.secondaryFields.perceptive.track.temp": mod,
+        "system.secondaryFields.intellectual.animals.temp": mod, "system.secondaryFields.intellectual.appraisal.temp": mod, "system.secondaryFields.intellectual.architecture.temp": mod, "system.secondaryFields.intellectual.herballore.temp": mod,
+        "system.secondaryFields.intellectual.history.temp": mod, "system.secondaryFields.intellectual.law.temp": mod, "system.secondaryFields.intellectual.magicappr.temp": mod, "system.secondaryFields.intellectual.medicine.temp": mod,
+        "system.secondaryFields.intellectual.memorize.temp": mod, "system.secondaryFields.intellectual.navigation.temp": mod, "system.secondaryFields.intellectual.occult.temp": mod, "system.secondaryFields.intellectual.science.temp": mod,
+        "system.secondaryFields.intellectual.tactics.temp": mod, "system.secondaryFields.vigor.composure.temp": mod, "system.secondaryFields.vigor.featsofstr.temp": mod, "system.secondaryFields.vigor.withstpain.temp": mod,
+        "system.secondaryFields.subterfuge.disguise.temp": mod, "system.secondaryFields.subterfuge.hide.temp": mod, "system.secondaryFields.subterfuge.lockpicking.temp": mod, "system.secondaryFields.subterfuge.poisons.temp": mod,
+        "system.secondaryFields.subterfuge.stealth.temp": mod, "system.secondaryFields.subterfuge.theft.temp": mod, "system.secondaryFields.subterfuge.traplore.temp": mod, "system.secondaryFields.creative.alchemy.temp": mod,
+        "system.secondaryFields.creative.animism.temp": mod, "system.secondaryFields.creative.art.temp": mod, "system.secondaryFields.creative.dance.temp": mod, "system.secondaryFields.creative.forging.temp": mod,
+        "system.secondaryFields.creative.jewelry.temp": mod, "system.secondaryFields.creative.music.temp": mod, "system.secondaryFields.creative.runes.temp": mod, "system.secondaryFields.creative.ritualcalig.temp": mod,
+        "system.secondaryFields.creative.slofhand.temp": mod, "system.secondaryFields.creative.tailoring.temp": mod, "system.secondaryFields.athletics.piloting.temp": mod, "system.secondaryFields.creative.cooking.temp": mod,
+        "system.secondaryFields.intellectual.technomagic.temp": mod, "system.secondaryFields.creative.toymaking.temp": mod, "system.secondaryFields.perceptive.kidetection.temp": mod, "system.secondaryFields.subterfuge.kiconceal.temp": mod
     })
 }
 
 export async function changeSecondarySpecs(actorData) {
     const mod = await openOneModDialog() || 0;
-
     actorData.update({
-        "system.secondary.acrobatics.spec": mod, "system.secondary.athleticism.spec": mod, "system.secondary.climb.spec": mod, "system.secondary.jump.spec": mod,
-        "system.secondary.ride.spec": mod, "system.secondary.swim.spec": mod, "system.secondary.etiquette.spec": mod, "system.secondary.intimidate.spec": mod,
-        "system.secondary.leadership.spec": mod, "system.secondary.persuasion.spec": mod, "system.secondary.streetwise.spec": mod, "system.secondary.style.spec": mod,
-        "system.secondary.trading.spec": mod, "system.secondary.notice.spec": mod, "system.secondary.search.spec": mod, "system.secondary.track.spec": mod,
-        "system.secondary.animals.spec": mod, "system.secondary.appraisal.spec": mod, "system.secondary.architecture.spec": mod, "system.secondary.herballore.spec": mod,
-        "system.secondary.history.spec": mod, "system.secondary.law.spec": mod, "system.secondary.magicappr.spec": mod, "system.secondary.medicine.spec": mod,
-        "system.secondary.memorize.spec": mod, "system.secondary.navigation.spec": mod, "system.secondary.occult.spec": mod, "system.secondary.science.spec": mod,
-        "system.secondary.tactics.spec": mod, "system.secondary.composure.spec": mod, "system.secondary.featsofstr.spec": mod, "system.secondary.withstpain.spec": mod,
-        "system.secondary.disguise.spec": mod, "system.secondary.hide.spec": mod, "system.secondary.lockpicking.spec": mod, "system.secondary.poisons.spec": mod,
-        "system.secondary.stealth.spec": mod, "system.secondary.theft.spec": mod, "system.secondary.traplore.spec": mod, "system.secondary.alchemy.spec": mod,
-        "system.secondary.animism.spec": mod, "system.secondary.art.spec": mod, "system.secondary.dance.spec": mod, "system.secondary.forging.spec": mod,
-        "system.secondary.jewelry.spec": mod, "system.secondary.music.spec": mod, "system.secondary.runes.spec": mod, "system.secondary.ritualcalig.spec": mod,
-        "system.secondary.slofhand.spec": mod, "system.secondary.tailoring.spec": mod, "system.secondary.piloting.spec": mod, "system.secondary.cooking.spec": mod,
-        "system.secondary.technomagic.spec": mod, "system.secondary.toymaking.spec": mod, "system.secondary.kidetection.spec": mod, "system.secondary.kiconceal.spec": mod
+        "system.secondaryFields.athletics.acrobatics.spec": mod, "system.secondaryFields.athletics.athleticism.spec": mod, "system.secondaryFields.athletics.climb.spec": mod, "system.secondaryFields.athletics.jump.spec": mod,
+        "system.secondaryFields.athletics.ride.spec": mod, "system.secondaryFields.athletics.swim.spec": mod, "system.secondaryFields.social.etiquette.spec": mod, "system.secondaryFields.social.intimidate.spec": mod,
+        "system.secondaryFields.social.leadership.spec": mod, "system.secondaryFields.social.persuasion.spec": mod, "system.secondaryFields.social.streetwise.spec": mod, "system.secondaryFields.social.style.spec": mod,
+        "system.secondaryFields.social.trading.spec": mod, "system.secondaryFields.perceptive.notice.spec": mod, "system.secondaryFields.perceptive.search.spec": mod, "system.secondaryFields.perceptive.track.spec": mod,
+        "system.secondaryFields.intellectual.animals.spec": mod, "system.secondaryFields.intellectual.appraisal.spec": mod, "system.secondaryFields.intellectual.architecture.spec": mod, "system.secondaryFields.intellectual.herballore.spec": mod,
+        "system.secondaryFields.intellectual.history.spec": mod, "system.secondaryFields.intellectual.law.spec": mod, "system.secondaryFields.intellectual.magicappr.spec": mod, "system.secondaryFields.intellectual.medicine.spec": mod,
+        "system.secondaryFields.intellectual.memorize.spec": mod, "system.secondaryFields.intellectual.navigation.spec": mod, "system.secondaryFields.intellectual.occult.spec": mod, "system.secondaryFields.intellectual.science.spec": mod,
+        "system.secondaryFields.intellectual.tactics.spec": mod, "system.secondaryFields.vigor.composure.spec": mod, "system.secondaryFields.vigor.featsofstr.spec": mod, "system.secondaryFields.vigor.withstpain.spec": mod,
+        "system.secondaryFields.subterfuge.disguise.spec": mod, "system.secondaryFields.subterfuge.hide.spec": mod, "system.secondaryFields.subterfuge.lockpicking.spec": mod, "system.secondaryFields.subterfuge.poisons.spec": mod,
+        "system.secondaryFields.subterfuge.stealth.spec": mod, "system.secondaryFields.subterfuge.theft.spec": mod, "system.secondaryFields.subterfuge.traplore.spec": mod, "system.secondaryFields.creative.alchemy.spec": mod,
+        "system.secondaryFields.creative.animism.spec": mod, "system.secondaryFields.creative.art.spec": mod, "system.secondaryFields.creative.dance.spec": mod, "system.secondaryFields.creative.forging.spec": mod,
+        "system.secondaryFields.creative.jewelry.spec": mod, "system.secondaryFields.creative.music.spec": mod, "system.secondaryFields.creative.runes.spec": mod, "system.secondaryFields.creative.ritualcalig.spec": mod,
+        "system.secondaryFields.creative.slofhand.spec": mod, "system.secondaryFields.creative.tailoring.spec": mod, "system.secondaryFields.athletics.piloting.spec": mod, "system.secondaryFields.creative.cooking.spec": mod,
+        "system.secondaryFields.intellectual.technomagic.spec": mod, "system.secondaryFields.creative.toymaking.spec": mod, "system.secondaryFields.perceptive.kidetection.spec": mod, "system.secondaryFields.subterfuge.kiconceal.spec": mod
     })
 }
 
@@ -131,7 +174,7 @@ export async function calculateDpCost(actorData, classId) {
         { name: game.i18n.localize('abfalter.profModules'), value: Math.floor(system.levelinfo.profMystDp ) }
     ];
     totalDpCosts.magic = dpMagic.reduce((acc, { value }) => acc + value, 0);
-    totalDpCosts.magicProj = dpMagic[3].value;
+    totalDpCosts.magicProj = dpMagic[4].value;
 
     const dpPsychic = [
         { name: game.i18n.localize('abfalter.activeEffectChanges.pp'), value: Math.floor(system.ppoint.base * dpCost.psychic.psyPoint) },
@@ -236,7 +279,7 @@ export async function calculateDpCost(actorData, classId) {
         myLevel
     };
 
-    const htmlContent = await renderTemplate(template, templateData);
+    const htmlContent = await foundry.applications.handlebars.renderTemplate(template, templateData);
     new Dialog({
         title: 'DP Cost Calculation',
         content: htmlContent,

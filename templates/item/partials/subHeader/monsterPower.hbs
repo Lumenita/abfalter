@@ -1,0 +1,24 @@
+<div class="item-subtitle">
+    <h4 class="item-type">{{localize "abfalter.monsterPowTitle"}}</h4>
+    <span class="item-subType"></span>
+</div>
+
+<ul class="summary flexrow">
+    <li>
+        <select name="system.type">
+            {{selectOptions monsterTypeObjList selected=system.type localize=true}}
+        </select>
+    </li>
+    <li class="itemHeader65-30">
+        <label>
+            <span>{{localize "abfalter.cost"}}: </span>
+            <input type="number" name="system.cost" value="{{system.cost}}" />
+        </label>
+    </li>
+    <li class="itemHeader65-30">
+        <label>
+            <span>{{localize "abfalter.gnosis"}}: </span>
+            <input type="number" name="system.gnosis" value="{{system.gnosis}}" />
+        </label>
+    </li>
+</ul>

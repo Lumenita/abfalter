@@ -1,0 +1,214 @@
+﻿<section class="baseAbfalter itemPage tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+
+    <fieldset>
+        <legend> {{localize "abfalter.class"}} </legend>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.lifePoints"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.main.lp" value="{{system.main.lp}}" /> </label>
+            <label> <span> {{localize "abfalter.initiative"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.main.initiative" value="{{system.main.initiative}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.attack"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.main.attack" value="{{system.main.attack}}" /> </label>
+            <label> <span> {{localize "abfalter.dodge"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.main.dodge" value="{{system.main.dodge}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.block"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.main.block" value="{{system.main.block}}" /> </label>
+            <label> <span> {{localize "abfalter.wearArmor"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.main.weararmor" value="{{system.main.weararmor}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.mk"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.main.mk" value="{{system.main.mk}}" /> </label>
+            <label> <span> {{localize "abfalter.zeon"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.main.zeon" value="{{system.main.zeon}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.kiDetection"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.kiDetection" value="{{system.secondary.kiDetection}}" /> </label>
+            <label> <span> {{localize "abfalter.kiConceal"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.kiconceal" value="{{system.secondary.kiconceal}}" /> </label>
+        </div>
+
+        <div class="csSelect classContentSelect">
+            <label>
+                <span> {{localize "abfalter.pp"}}{{localize "abfalter.perLevel"}} </span>
+                <select name="system.main.pp">
+                    {{selectOptions classppBonusObjList selected=system.main.pp localize=true}}
+                </select>
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend> {{localize "abfalter.summoning"}} </legend>
+
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.summon"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.main.summon" value="{{system.main.summon}}" /> </label>
+            <label> <span> {{localize "abfalter.control"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.main.control" value="{{system.main.control}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.bind"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.main.bind" value="{{system.main.bind}}" /> </label>
+            <label> <span> {{localize "abfalter.banish"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.main.banish" value="{{system.main.banish}}" /> </label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>{{localize "abfalter.secondary"}} </legend>
+        <div class="classHeader">
+            <span> {{localize "abfalter.athletics"}} </span>
+            <a data-action="toggleValue" class="{{#if system.athletics}}showOpacity{{/if}}" data-label="system.athletics" data-ability="{{system.athletics}}"><i class="{{#if system.athletics}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if system.athletics}}
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.acrobatic"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.acro" value="{{system.secondary.acro}}" /> </label>
+            <label> <span> {{localize "abfalter.athleticism"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.athleticism" value="{{system.secondary.athleticism}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.climb"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.climb" value="{{system.secondary.climb}}" /> </label>
+            <label> <span> {{localize "abfalter.jump"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.jump" value="{{system.secondary.jump}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.piloting"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.piloting" value="{{system.secondary.piloting}}" /> </label>
+            <label> <span> {{localize "abfalter.ride"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.ride" value="{{system.secondary.ride}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.swim"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.swim" value="{{system.secondary.swim}}" /> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader">
+            <span> {{localize "abfalter.social"}} </span>
+            <a data-action="toggleValue" class="{{#if system.social}}showOpacity{{/if}}" data-label="system.social" data-ability="{{system.social}}"><i class="{{#if system.social}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if system.social}}
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.etiquette"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.etiquette" value="{{system.secondary.etiquette}}" /> </label>
+            <label> <span> {{localize "abfalter.intimidate"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.intimidate" value="{{system.secondary.intimidate}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.leadership"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.leadership" value="{{system.secondary.leadership}}" /> </label>
+            <label> <span> {{localize "abfalter.persuasion"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.persuasion" value="{{system.secondary.persuasion}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.streetwise"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.streetwise" value="{{system.secondary.streetwise}}" /> </label>
+            <label> <span> {{localize "abfalter.style"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.style" value="{{system.secondary.style}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.trading"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.trading" value="{{system.secondary.trading}}" /> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader">
+            <span> {{localize "abfalter.perceptive"}} </span>
+            <a data-action="toggleValue" class="{{#if system.perceptive}}showOpacity{{/if}}" data-label="system.perceptive" data-ability="{{system.perceptive}}"><i class="{{#if system.perceptive}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if system.perceptive}}
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.notice"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.notice" value="{{system.secondary.notice}}" /> </label>
+            <label> <span> {{localize "abfalter.search"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.search" value="{{system.secondary.search}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.track"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.track" value="{{system.secondary.track}}" /> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader">
+            <span> {{localize "abfalter.intellectual"}} </span>
+            <a data-action="toggleValue" class="{{#if system.intellectual}}showOpacity{{/if}}" data-label="system.intellectual" data-ability="{{system.intellectual}}"><i class="{{#if system.intellectual}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if system.intellectual}}
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.animals"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.animals" value="{{system.secondary.animals}}" /> </label>
+            <label> <span> {{localize "abfalter.appraisal"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.appraisal" value="{{system.secondary.appraisal}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.architecture"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.architecture" value="{{system.secondary.architecture}}" /> </label>
+            <label> <span> {{localize "abfalter.herballore"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.herballore" value="{{system.secondary.herballore}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.history"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.history" value="{{system.secondary.history}}" /> </label>
+            <label> <span> {{localize "abfalter.law"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.law" value="{{system.secondary.law}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.magicAppr"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.magicappr" value="{{system.secondary.magicappr}}" /> </label>
+            <label> <span> {{localize "abfalter.medicine"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.medicine" value="{{system.secondary.medicine}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.memorize"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.memorize" value="{{system.secondary.memorize}}" /> </label>
+            <label> <span> {{localize "abfalter.navigation"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.navigation" value="{{system.secondary.navigation}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.occult"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.occult" value="{{system.secondary.occult}}" /> </label>
+            <label> <span> {{localize "abfalter.science"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.science" value="{{system.secondary.science}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.tactics"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.tactics" value="{{system.secondary.tactics}}" /> </label>
+            <label> <span> {{localize "abfalter.technomagic"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.technomagic" value="{{system.secondary.technomagic}}" /> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader">
+            <span> {{localize "abfalter.vigor"}} </span>
+            <a data-action="toggleValue" class="{{#if system.vigor}}showOpacity{{/if}}" data-label="system.vigor" data-ability="{{system.vigor}}"><i class="{{#if system.vigor}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if system.vigor}}
+        <div class="classContent" >
+            <label> <span> {{localize "abfalter.composure"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.composure" value="{{system.secondary.composure}}" /> </label>
+            <label> <span> {{localize "abfalter.featsofstr"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.featsofstr" value="{{system.secondary.featsofstr}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.withstpain"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.withstpain" value="{{system.secondary.withstpain}}" /> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader">
+            <span> {{localize "abfalter.subterfuge"}} </span>
+            <a data-action="toggleValue" class="{{#if system.subterfuge}}showOpacity{{/if}}" data-label="system.subterfuge" data-ability="{{system.subterfuge}}"><i class="{{#if system.subterfuge}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if system.subterfuge}}
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.disguise"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.disguise" value="{{system.secondary.disguise}}" /> </label>
+            <label> <span> {{localize "abfalter.hide"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.hide" value="{{system.secondary.hide}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.lockpicking"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.lockpicking" value="{{system.secondary.lockpicking}}" /> </label>
+            <label> <span> {{localize "abfalter.poisons"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.poisons" value="{{system.secondary.poisons}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.stealth"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.stealth" value="{{system.secondary.stealth}}" /> </label>
+            <label> <span> {{localize "abfalter.theft"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.theft" value="{{system.secondary.theft}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.traplore"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.traplore" value="{{system.secondary.traplore}}" /> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader">
+            <span> {{localize "abfalter.creative"}} </span>
+            <a data-action="toggleValue" class="{{#if system.creative}}showOpacity{{/if}}" data-label="system.creative" data-ability="{{system.creative}}"><i class="{{#if system.creative}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+        </div>
+        {{#if system.creative}}
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.alchemy"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.alchemy" value="{{system.secondary.alchemy}}" /> </label>
+            <label> <span> {{localize "abfalter.animism"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.animism" value="{{system.secondary.animism}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.art"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.art" value="{{system.secondary.art}}" /> </label>
+            <label> <span> {{localize "abfalter.toymaking"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.toymaking" value="{{system.secondary.toymaking}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.cooking"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.cooking" value="{{system.secondary.cooking}}" /> </label>
+            <label> <span> {{localize "abfalter.dance"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.dance" value="{{system.secondary.dance}}" /> </label>
+        </div>
+        <div class="classContent"> 
+            <label> <span> {{localize "abfalter.forging"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.forging" value="{{system.secondary.forging}}" /> </label>
+            <label> <span> {{localize "abfalter.jewelry"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.jewelry" value="{{system.secondary.jewelry}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.music"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.music" value="{{system.secondary.music}}" /> </label>
+            <label> <span> {{localize "abfalter.runes"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.runes" value="{{system.secondary.runes}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.ritualcalig"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.ritualcalig" value="{{system.secondary.ritualcalig}}" /> </label>
+            <label> <span> {{localize "abfalter.slofhand"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.slofhand" value="{{system.secondary.slofhand}}" /> </label>
+        </div>
+        <div class="classContent">
+            <label> <span> {{localize "abfalter.tailoring"}}{{localize "abfalter.perLevel"}} </span> <input type="number" name="system.secondary.tailoring" value="{{system.secondary.tailoring}}" /> </label>
+        </div>
+    {{/if}}
+    </fieldset>
+</section>

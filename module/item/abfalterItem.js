@@ -36,35 +36,6 @@ export default class abfalterItem extends Item {
         this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
     }
 
-    prepareArmorHelmet() {
-        this.system.qualityValue = Math.floor(this.system.quality / 5);
-        this.system.newPresence = Math.floor(+(this.system.qualityValue * 50) + +this.system.presence);
-        this.system.newFortitude = Math.floor(+(this.system.qualityValue * 10) + +this.system.fortitude);
-        this.system.newReq = Math.floor(+this.system.requirement - +(this.system.qualityValue * 5));
-        if (this.system.newReq > 0) {
-            this.system.newRequirement = this.system.newReq;
-        } else {
-            this.system.newRequirement = 0;
-        };
-        this.system.newNatPen = Math.floor(+this.system.natPenalty - +(this.system.qualityValue * 5));
-        if (this.system.newNatPen > 0) {
-            this.system.newNatPenalty = this.system.newNatPen;
-        } else {
-            this.system.newNatPenalty = 0;
-        };
-        this.system.AT.newCut = Math.floor(+this.system.AT.cut + +this.system.qualityValue);
-        this.system.AT.newImp = Math.floor(+this.system.AT.imp + +this.system.qualityValue);
-        this.system.AT.newThr = Math.floor(+this.system.AT.thr + +this.system.qualityValue);
-        this.system.AT.newHeat = Math.floor(+this.system.AT.heat + +this.system.qualityValue);
-        this.system.AT.newCold = Math.floor(+this.system.AT.cold + +this.system.qualityValue);
-        this.system.AT.newEle = Math.floor(+this.system.AT.ele + +this.system.qualityValue);
-        this.system.AT.newEne = Math.floor(+this.system.AT.ene + +this.system.qualityValue);
-        this.system.AT.newSpt = Math.floor(+this.system.AT.spt + +this.system.qualityValue);
-
-        //Global Setting
-        this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
-    }
-
     prepareWeapon() {
         //Global Setting
         this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
@@ -72,37 +43,35 @@ export default class abfalterItem extends Item {
 
         //Inherit from Actor
         if (this.parent != null) {
-            this.system.derived.baseAtk = Math.floor(this.parent.system.combatValues.attack.final + this.system.attack + this.system.quality);
-            this.system.derived.baseBlk = Math.floor(this.parent.system.combatValues.block.final + this.system.block + this.system.quality);
-            this.system.derived.baseDod = Math.floor(this.parent.system.combatValues.dodge.final + this.system.dodge);
-            if (this.parent.system.kiAbility.kiAuraEx.status == true) {
-                this.system.kiBonusBreakage = 5;
-                this.system.kiBonusFort = 10;
-                this.system.kiBonusDmg = 10;
-            }
-            if (this.parent.system.kiAbility.kiEleFire.status == true && this.system.primDmgT =="HEAT") {
-                this.system.kiBonusDmg += 10;
-            }
-            if (this.parent.system.kiAbility.kiEleWater.status == true && this.system.primDmgT == "COLD") {
-                this.system.kiBonusDmg += 10;
-            }
-            if (this.parent.system.kiAbility.kiEleAir.status == true && this.system.primDmgT == "ELE") {
-                this.system.kiBonusDmg += 10;
-            }
-            if (this.parent.system.kiAbility.kiEleEarth.status == true && this.system.primDmgT == "IMP") {
-                this.system.kiBonusDmg += 10;
-            }
-            if (this.parent.system.kiAbility.kiEleLight.status == true && this.system.primDmgT == "ENE") {
-                this.system.kiBonusDmg += 10;
-            }
-            if (this.parent.system.kiAbility.kiEleDark.status == true && this.system.primDmgT == "ENE") {
-                this.system.kiBonusDmg += 10;
-            }
-            if (this.parent.system.kiAbility.kiIncreaseDmg.status == true) {
-                this.system.kiBonusDmg += 10;
-            }
-            this.system.info.actorOpenRollRange = this.parent.system.rollRange.final;
-            this.system.info.actorFumbleRange = this.parent.system.fumleRange.final;
+            const parent = this.parent;
+            const parentStats = parent.system.stats;
+            const parentCombat = parent.system.combatValues;
+            const ki = parent.system.kiAbility;
+            
+            // Derived Base Values
+            this.system.derived.baseAtk = Math.floor(parentCombat.attack.final + this.system.attack + this.system.quality);
+            this.system.derived.baseBlk = Math.floor(parentCombat.block.final + this.system.block + this.system.quality);
+            this.system.derived.baseDod = Math.floor(parentCombat.dodge.final + this.system.dodge);
+
+            // Ki Bonuses
+            this.system.kiBonusBreakage = ki.kiAuraEx.status ? 5 : 0;
+            this.system.kiBonusFort = ki.kiAuraEx.status ? 10 : 0;
+            this.system.kiBonusDmg = ki.kiAuraEx.status ? 10 : 0;
+
+            const elemBonusMap = {
+                "HEAT": ki.kiEleFire.status,
+                "COLD": ki.kiEleWater.status,
+                "ELE": ki.kiEleAir.status,
+                "IMP": ki.kiEleEarth.status,
+                "ENE": ki.kiEleLight.status || ki.kiEleDark.status
+            };
+
+            if (elemBonusMap[this.system.primDmgT]) this.system.kiBonusDmg += 10;
+            if (ki.kiIncreaseDmg.status) this.system.kiBonusDmg += 10;
+
+            // Roll/Fumble Ranges
+            this.system.info.actorOpenRollRange = parent.system.rollRange.final;
+            this.system.info.actorFumbleRange = parent.system.fumleRange.final;
         } else {
             this.system.derived.baseAtk = Math.floor(this.system.attack + this.system.quality);
             this.system.derived.baseBlk = Math.floor(this.system.block + this.system.quality);
@@ -114,6 +83,7 @@ export default class abfalterItem extends Item {
             this.system.info.actorFumbleRange = 3;
         }
 
+        // ========== Derived Stats ==========
         this.system.derived.finalFortitude = Math.floor(this.system.fortitude + (this.system.quality * 2) + ~~this.system.kiBonusFort);
         this.system.derived.finalPresence = Math.floor(this.system.presence + (this.system.quality * 10));
         this.system.derived.finalWeaponSpeed = Math.floor(this.system.speed + this.system.quality);
@@ -121,107 +91,72 @@ export default class abfalterItem extends Item {
         this.system.derived.baseFumbleRange = Math.floor(this.system.info.actorFumbleRange + this.system.info.fumbleRollMod + (this.system.info.complex ? 2 : 0));
 
 
-        //Melee Weapons
+        // ========== Melee Weapon Setup ==========
         if (this.system.info.type == "melee") {
             //inherit weapon info to Attacks
-            for (let i = 0; i < this.system.attacks.length; i++) {
-                this.system.attacks[i].parentPrecision = this.system.info.precision;
-                this.system.attacks[i].parentVorpal = this.system.info.vorpal;
-                this.system.attacks[i].parentTrapping = this.system.melee.trapping;
-                this.system.attacks[i].parentThrowable = this.system.melee.throwable;
+            for (let [key, attack] of Object.entries(this.system.attacks)) {
+                attack.parentPrecision = this.system.info.precision;
+                attack.parentVorpal = this.system.info.vorpal;
+                attack.parentTrapping = this.system.melee.trapping;
+                attack.parentThrowable = this.system.melee.throwable;
             }
 
             if (this.parent != null) {
-                switch (this.system.melee.dmgMod) {
-                    case "agi":
-                        this.system.melee.bonusDmgMod = this.parent.system.stats.Agility.mod;
-                        break;
-                    case "con":
-                        this.system.melee.bonusDmgMod = this.parent.system.stats.Constitution.mod;
-                        break;
-                    case "str":
-                        this.system.melee.bonusDmgMod = this.parent.system.stats.Strength.mod;
-                        break;
-                    case "dex":
-                        this.system.melee.bonusDmgMod = this.parent.system.stats.Dexterity.mod;
-                        break;
-                    case "per":
-                        this.system.melee.bonusDmgMod = this.parent.system.stats.Perception.mod;
-                        break;
-                    case "int":
-                        this.system.melee.bonusDmgMod = this.parent.system.stats.Intelligence.mod;
-                        break;
-                    case "pow":
-                        this.system.melee.bonusDmgMod = this.parent.system.stats.Power.mod;
-                        break;
-                    case "wp":
-                        this.system.melee.bonusDmgMod = this.parent.system.stats.Willpower.mod;
-                        break;
-                    case "str2":
-                        this.system.melee.bonusDmgMod = Math.floor(~~this.parent.system.stats.Strength.mod * 2);
-                        break;
-                    case "presence":
-                        this.system.melee.bonusDmgMod = Math.floor((~~this.parent.system.levelinfo.presence * 2) + this.parent.system.stats.Power.mod);
-                        break;
-                    case "none":
-                        this.system.melee.bonusDmgMod = 0;
-                        break;
-                    default:
-                        break;
-                }
-                switch (this.parent.system.stats.Strength.final) {
-                    case 8:
-                    case 9:
-                        this.system.breakageStr = 1;
-                        break;
-                    case 10:
-                        this.system.breakageStr = 2;
-                        break;
-                    case 11:
-                    case 12:
-                        this.system.breakageStr = 4;
-                        break;
-                    case 13:
-                    case 14:
-                        this.system.breakageStr = 6;
-                        break;
-                    default:
-                        this.system.breakageStr = 0;
-                        break;
-                }
-                if (this.parent.system.stats.Strength.final >= 15) {
-                    this.system.breakageStr = 8;
-                }
+                const getMod = stat => this.parent.system.stats[stat]?.mod ?? 0;
+                const dmgMods = {
+                    agi: getMod('Agility'),
+                    con: getMod('Constitution'),
+                    str: getMod('Strength'),
+                    dex: getMod('Dexterity'),
+                    per: getMod('Perception'),
+                    int: getMod('Intelligence'),
+                    pow: getMod('Power'),
+                    wp:  getMod('Willpower'),
+                    str2: Math.floor(getMod('Strength') * 2),
+                    presence: Math.floor((this.parent.system.levelinfo.presence * 2) + getMod('Power')),
+                    none: 0
+                };
+                this.system.melee.bonusDmgMod = dmgMods[this.system.melee.dmgMod] ?? 0;
+                
+
+                const strFinal = this.parent.system.stats.Strength.final;
+                this.system.breakageStr = 
+                    strFinal >= 15 ? 8 :
+                    strFinal >= 13 ? 6 :
+                    strFinal >= 11 ? 4 :
+                    strFinal >= 10 ? 2 :
+                    strFinal >= 8  ? 1 : 0;
+
             } else {
                 this.system.melee.bonusDmgMod = 0;
                 this.system.breakageStr = 0;
             }
-            if (this.system.melee.twoHanded == true) {
-                this.system.melee.bonusDmgMod = Math.floor(this.system.melee.bonusDmgMod * 2);
+            if (this.system.melee.twoHanded ) {
+                this.system.melee.bonusDmgMod *= 2;
             }
             this.system.melee.baseDmg = Math.floor(~~this.system.baseDmg + ~~this.system.melee.bonusDmgMod + (~~this.system.quality * 2) + ~~this.system.kiBonusDmg);
             this.system.melee.finalATPen = Math.floor(~~this.system.atPen + Math.floor(~~this.system.quality / 5));
             this.system.melee.finalBreakage = Math.floor(~~this.system.breakage + ~~this.system.breakageStr + ~~this.system.quality + ~~this.system.kiBonusBreakage);          
 
-            for (let i = 0; i < this.system.attacks.length; i++) {
-                this.system.attacks[i].finalAttack = this.system.attacks[i].attack + (this.system.attacks[i].atkOverride ? 0 : this.system.derived.baseAtk);
-                this.system.attacks[i].finalBlock = this.system.attacks[i].block + (this.system.attacks[i].blkOverride ? 0 : this.system.derived.baseBlk);
-                this.system.attacks[i].finalDodge = this.system.attacks[i].dodge + (this.system.attacks[i].dodOverride ? 0 : this.system.derived.baseDod);
-                this.system.attacks[i].finalAtPen = this.system.attacks[i].atPen + this.system.melee.finalATPen;
-                this.system.attacks[i].finalBreakage = this.system.attacks[i].breakage + this.system.melee.finalBreakage;
-                this.system.attacks[i].finalDamage = this.system.attacks[i].damage + (this.system.attacks[i].dmgOverride ? 0 : this.system.melee.baseDmg);
+            for (let attack of Object.values(this.system.attacks)) {
+                attack.finalAttack   = attack.attack   + (attack.atkOverride ? 0 : this.system.derived.baseAtk);
+                attack.finalBlock    = attack.block    + (attack.blkOverride ? 0 : this.system.derived.baseBlk);
+                attack.finalDodge    = attack.dodge    + (attack.dodOverride ? 0 : this.system.derived.baseDod);
+                attack.finalAtPen    = attack.atPen    + this.system.melee.finalATPen;
+                attack.finalBreakage = attack.breakage + this.system.melee.finalBreakage;
+                attack.finalDamage   = attack.damage   + (attack.dmgOverride ? 0 : this.system.melee.baseDmg);
             }
         }
 
-        //Ranged Weapons
+        // ========== Ranged Weapon Setup ==========
         if (this.system.info.type == "ranged") { 
             this.system.ranged.strOverrideQualValue = Math.floor(this.system.ranged.strOverrideValue + (this.system.quality / 5));
 
             if (this.parent) {
-                for (let i = 0; i < this.system.attacks.length; i++) {
-                    this.system.attacks[i].parentPrecision = this.system.info.precision;
-                    this.system.attacks[i].parentVorpal = this.system.info.vorpal;
-                    this.system.attacks[i].parentRangedInfAmmo = this.system.ranged.infiniteAmmo;
+                for (let attack of Object.values(this.system.attacks)) {
+                    attack.parentPrecision = this.system.info.precision;
+                    attack.parentVorpal = this.system.info.vorpal;
+                    attack.parentRangedInfAmmo = this.system.ranged.infiniteAmmo;
                 }
 
                 this.system.ranged.ammoIds = [
@@ -236,19 +171,18 @@ export default class abfalterItem extends Item {
                     this.system.ranged.ammoBreak = this.system.ranged.specialBreak;
                     this.system.ranged.ammoAtPen = this.system.ranged.specialAtPen;
                 } else {
-                    this.system.ranged.ammoDamage = this.parent.items.get(this.system.ranged.selectedAmmo)?.system.damage || 0;
-                    this.system.ranged.ammoDmgType = this.parent.items.get(this.system.ranged.selectedAmmo)?.system.dmgType || 0;
-                    this.system.ranged.ammoBreak = this.parent.items.get(this.system.ranged.selectedAmmo)?.system.break || 0;
-                    this.system.ranged.ammoAtPen = this.parent.items.get(this.system.ranged.selectedAmmo)?.system.atPen || 0;
+                    const selected = this.parent.items.get(this.system.ranged.selectedAmmo)?.system;
+                    this.system.ranged.ammoDamage = selected?.damage || 0;
+                    this.system.ranged.ammoDmgType = selected?.dmgType || 0;
+                    this.system.ranged.ammoBreak = selected?.break || 0;
+                    this.system.ranged.ammoAtPen = selected?.atPen || 0;
                 }
                 
-                if (this.parent.system.secondaryFields.creative.slofhand.final > this.parent.system.combatValues.attack.final) {
-                    this.system.ranged.reloadTag = game.i18n.localize('abfalter.slofhand');
-                    this.system.ranged.bestReloadValue = this.parent.system.secondaryFields.creative.slofhand.final;
-                } else {
-                    this.system.ranged.reloadTag = game.i18n.localize('abfalter.attack');
-                    this.system.ranged.bestReloadValue = this.parent.system.combatValues.attack.final;
-                }
+                    const reloadUsing = this.parent.system.secondaryFields.creative.slofhand.final > this.parent.system.combatValues.attack.final;
+                    this.system.ranged.reloadTag = game.i18n.localize(reloadUsing ? 'abfalter.slofhand' : 'abfalter.attack');
+                    this.system.ranged.bestReloadValue = reloadUsing
+                        ? this.parent.system.secondaryFields.creative.slofhand.final
+                        : this.parent.system.combatValues.attack.final;
 
                 this.system.ranged.strField = this.parent.system.stats.Strength.final;
             } else {
@@ -364,18 +298,18 @@ export default class abfalterItem extends Item {
                 this.system.derived.finalWeaponSpeed = Math.floor(20 + this.system.quality);
             }
 
-            for (let i = 0; i < this.system.attacks.length; i++) {
-                this.system.attacks[i].finalAttack = this.system.attacks[i].attack + (this.system.attacks[i].atkOverride ? 0 : this.system.derived.baseAtk);
-                this.system.attacks[i].finalBlock = this.system.attacks[i].block + (this.system.attacks[i].blkOverride ? 0 : this.system.derived.baseBlk);
-                this.system.attacks[i].finalDodge = this.system.attacks[i].dodge + (this.system.attacks[i].dodOverride ? 0 : this.system.derived.baseDod);
+            for (let attack of Object.values(this.system.attacks)) {
+                attack.finalAttack   = attack.attack   + (attack.atkOverride ? 0 : this.system.derived.baseAtk);
+                attack.finalBlock    = attack.block    + (attack.blkOverride ? 0 : this.system.derived.baseBlk);
+                attack.finalDodge    = attack.dodge    + (attack.dodOverride ? 0 : this.system.derived.baseDod);
 
-                this.system.attacks[i].finalAtPen = this.system.attacks[i].atPen + this.system.ranged.ammoAtPenFinal;
-                this.system.attacks[i].finalBreakage = this.system.attacks[i].breakage + this.system.ranged.ammoBreakFinal;
-                this.system.attacks[i].finalDamage = this.system.attacks[i].damage + (this.system.attacks[i].dmgOverride ? 0 : this.system.ranged.ammoDamageFinal);
+                attack.finalAtPen    = attack.atPen    + this.system.ranged.ammoAtPenFinal;
+                attack.finalBreakage = attack.breakage + this.system.ranged.ammoBreakFinal;
+                attack.finalDamage   = attack.damage   + (attack.dmgOverride ? 0 : this.system.ranged.ammoDamageFinal);
             }
         }
 
-        //Shield Weapons
+        // ========== Shield Weapon Setup ==========
         if (this.system.info.type == "shield") {
             switch (this.system.shield.type) {
                 case "shieldBuckler":
@@ -403,9 +337,9 @@ export default class abfalterItem extends Item {
             this.system.derived.baseBlk += this.system.shield.blockBonus;
             this.system.derived.baseDod += this.system.shield.dodgeBonus;
 
-            for (let i = 0; i < this.system.attacks.length; i++) {
-                this.system.attacks[i].finalBlock = this.system.attacks[i].block + (this.system.attacks[i].blkOverride ? 0 : this.system.derived.baseBlk);
-                this.system.attacks[i].finalDodge = this.system.attacks[i].dodge + (this.system.attacks[i].dodOverride ? 0 : this.system.derived.baseDod);
+            for (let attack of Object.values(this.system.attacks)) {
+                attack.finalBlock = attack.block + (attack.blkOverride ? 0 : this.system.derived.baseBlk);
+                attack.finalDodge = attack.dodge + (attack.dodOverride ? 0 : this.system.derived.baseDod);
             }
         }
     }
@@ -495,21 +429,18 @@ export default class abfalterItem extends Item {
     }
 
     prepareElan() {
-        this.system.totalCost = 0;
+        for (let [key, gift] of Object.entries(this.system.gifts)) {
+            if (gift.bought) {
+                this.system.totalCost += gift.cost;
+                gift.active = this.system.level >= gift.req;
+            } else {
+                gift.active = false;
+            }
+        }
         if (this.system.level >= 50) {
             this.system.upper = true;
         } else {
             this.system.upper = false;
-        }
-        for (let [key, gift] of Object.entries(this.system.gifts)) {
-            if (this.system.level >= ~~gift.req && ~~gift.req != 0) {
-                gift.bought = true;
-            } else {
-                gift.bought = false;
-            }
-            if (gift.req != 0) {
-                this.system.totalCost += gift.cost;
-            }
         }
     }
 
@@ -668,7 +599,7 @@ export default class abfalterItem extends Item {
             speaker: ChatMessage.getSpeaker(),
             flags: { cardData }
         };
-        chatData.content = await renderTemplate(this.chatTemplate[this.type], cardData);
+        chatData.content = await foundry.applications.handlebars.renderTemplate(this.chatTemplate[this.type], cardData);
         return ChatMessage.create(chatData);
     }
 }

@@ -1,0 +1,54 @@
+<section class="baseAbfalter itemPage tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+    <fieldset>
+        <legend> {{ localize "abfalter.generalDetails" }} </legend>
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.bonus"}} </span> <input type="number" name="system.bonus" value="{{system.bonus}}" /> </label>
+        <div class="csSelect itemSimpleLabel">
+            <label>
+                <span> {{localize "abfalter.level"}} </span>
+                <select name="system.level">
+                    {{selectOptions matrixLevelObjList selected=system.level localize=true}}
+                </select>
+            </label>
+        </div>
+        <div class="csSelect itemSimpleLabel">
+            <label>
+                <span> {{localize "abfalter.maint"}} </span>
+                <select name="system.maint">
+                    {{selectOptions yesnoObjList selected=system.maint localize=true}}
+                </select>
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend> {{localize "abfalter.psychicMatricesOne"}} {{ localize "abfalter.details" }} </legend>
+        <div class="psychicMatrix">
+            <div>
+                <span> {{localize "abfalter.difficulty"}} </span>
+                <span> {{localize "abfalter.effect"}} </span>
+            </div>
+            <div>
+                <label> <span> 20 </span> <span> {{localize "abfalter.routine"}} </span> <input type="text"
+                        name="system.effect20" value="{{system.effect20}}" /> </label>
+                <label> <span> 40 </span> <span> {{localize "abfalter.easy"}} </span> <input type="text"
+                        name="system.effect40" value="{{system.effect40}}" /> </label>
+                <label> <span> 80 </span> <span> {{localize "abfalter.average"}} </span> <input type="text"
+                        name="system.effect80" value="{{system.effect80}}" /> </label>
+                <label> <span> 120 </span> <span> {{localize "abfalter.difficult"}} </span> <input type="text"
+                        name="system.effect120" value="{{system.effect120}}" /> </label>
+                <label> <span> 140 </span> <span> {{localize "abfalter.vDifficult"}} </span> <input type="text"
+                        name="system.effect140" value="{{system.effect140}}" /> </label>
+                <label> <span> 180 </span> <span> {{localize "abfalter.absurd"}} </span> <input type="text"
+                        name="system.effect180" value="{{system.effect180}}" /> </label>
+                <label> <span> 240 </span> <span> {{localize "abfalter.almostImp"}} </span> <input type="text"
+                        name="system.effect240" value="{{system.effect240}}" /> </label>
+                <label> <span> 280 </span> <span> {{localize "abfalter.impossible"}} </span> <input type="text"
+                        name="system.effect280" value="{{system.effect280}}" /> </label>
+                <label> <span> 320 </span> <span> {{localize "abfalter.inhuman"}} </span> <input type="text"
+                        name="system.effect320" value="{{system.effect320}}" /> </label>
+                <label> <span> 440 </span> <span> {{localize "abfalter.zen"}} </span> <input type="text"
+                        name="system.effect440" value="{{system.effect440}}" /> </label>
+            </div>
+        </div>
+    </fieldset>
+</section>

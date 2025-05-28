@@ -57,7 +57,6 @@ export const getTargetToken = (attackerToken, targetTokens) => {
     }
     if (msg) {
         genericDialogs.prompt(msg);
-        console.log(msg);
         throw new Error(msg);
     }
     return target;

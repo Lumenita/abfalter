@@ -1,0 +1,33 @@
+<div class="item-subtitle">
+    <h4 class="item-type">{{localize "abfalter.elan"}}</h4>
+    <span class="item-subType"></span>
+</div>
+
+<ul class="summary flexrow">
+    <li class="itemHeader65-30">                 
+        <label> 
+            <span> {{localize "abfalter.showDesc"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.showDesc}}kiBought{{/if}}"
+                data-label="system.showDesc" data-ability="{{system.showDesc}}">
+                {{#if system.showDesc}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                {{/if}}
+            </button>
+        </label> 
+    </li>
+    <li class="itemHeader65-30">                 
+        <label> 
+            <span> {{localize "abfalter.showGainLoss"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.showGains}}kiBought{{/if}}"
+                data-label="system.showGains" data-ability="{{system.showGains}}">
+                {{#if system.showGains}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                {{/if}}
+            </button>
+        </label> 
+    </li>
+</ul>

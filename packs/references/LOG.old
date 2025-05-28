@@ -1,0 +1,7 @@
+2025/05/28-03:22:34.567 2d64 Recovering log #272
+2025/05/28-03:22:34.579 2d64 Delete type=0 #272
+2025/05/28-03:22:34.579 2d64 Delete type=3 #270
+2025/05/28-03:24:45.875 6ec8 Level-0 table #277: started
+2025/05/28-03:24:45.875 6ec8 Level-0 table #277: 0 bytes OK
+2025/05/28-03:24:45.878 6ec8 Delete type=0 #275
+2025/05/28-03:24:45.884 6ec8 Manual compaction at level-0 from '!journal!UM2pxtVK3EP6Rl4Y' @ 72057594037927935 : 1 .. '!journal.pages!UM2pxtVK3EP6Rl4Y.Pm5jQbq3XBRIyich' @ 0 : 0; will stop at (end)

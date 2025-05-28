@@ -1,0 +1,298 @@
+<section class="baseAbfalter itemPage tab {{tabs.dpCosts.cssClass}}" data-group="{{tabs.dpCosts.group}}" data-tab="{{tabs.dpCosts.id}}">
+    <fieldset>
+        <legend> {{localize "abfalter.limits"}} </legend>
+        <div class="classContent3">
+            <label> <span> {{localize "abfalter.primary"}} </span> <input type="number" name="system.dpCost.limits.primary" value="{{system.dpCost.limits.primary}}" /> <span> % </span> </label>
+            <label> <span> {{localize "abfalter.magic"}} </span> <input type="number" name="system.dpCost.limits.supernatural" value="{{system.dpCost.limits.supernatural}}" /> <span> % </span> </label>
+            <label> <span> {{localize "abfalter.psychic"}} </span> <input type="number" name="system.dpCost.limits.psychic" value="{{system.dpCost.limits.psychic}}" /> <span> % </span> </label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend> {{localize "abfalter.primaryDp"}} </legend>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.attack"}} </span> <input type="number" name="system.dpCost.primary.attack" value="{{system.dpCost.primary.attack}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.block"}} </span> <input type="number" name="system.dpCost.primary.block" value="{{system.dpCost.primary.block}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.dodge"}} </span> <input type="number" name="system.dpCost.primary.dodge" value="{{system.dpCost.primary.dodge}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.wearArmor"}} </span> <input type="number" name="system.dpCost.primary.wearArmor" value="{{system.dpCost.primary.wearArmor}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.kiPoint"}} </span> <input type="number" name="system.dpCost.primary.kiPoint" value="{{system.dpCost.primary.kiPoint}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.kiAccuMult"}} </span> <input type="number" name="system.dpCost.primary.kiAccuMult" value="{{system.dpCost.primary.kiAccuMult}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend> {{localize "abfalter.supernaturalDp"}} </legend>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.zeon"}} </span> <input type="number" name="system.dpCost.supernatural.zeon" value="{{system.dpCost.supernatural.zeon}}" /> <span> {{localize "abfalter.forFive"}} </span> </label>
+            <label> <span> {{localize "abfalter.maMult"}} </span> <input type="number" name="system.dpCost.supernatural.maMult" value="{{system.dpCost.supernatural.maMult}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.maRegen"}} </span> <input type="number" name="system.dpCost.supernatural.maRegen" value="{{system.dpCost.supernatural.maRegen}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.magProjShort"}} </span> <input type="number" name="system.dpCost.supernatural.magicProj" value="{{system.dpCost.supernatural.magicProj}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.summon"}} </span> <input type="number" name="system.dpCost.supernatural.summon" value="{{system.dpCost.supernatural.summon}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.control"}} </span> <input type="number" name="system.dpCost.supernatural.control" value="{{system.dpCost.supernatural.control}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.bind"}} </span> <input type="number" name="system.dpCost.supernatural.bind" value="{{system.dpCost.supernatural.bind}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.banish"}} </span> <input type="number" name="system.dpCost.supernatural.banish" value="{{system.dpCost.supernatural.banish}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend> {{localize "abfalter.psychicDp"}} </legend>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.pp"}} </span> <input type="number" name="system.dpCost.psychic.psyPoint" value="{{system.dpCost.psychic.psyPoint}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.psyProj"}} </span> <input type="number" name="system.dpCost.psychic.psyProj" value="{{system.dpCost.psychic.psyProj}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend> {{localize "abfalter.otherDp"}} </legend>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.lpMult"}} </span> <input type="number" name="system.dpCost.other.lpMult" value="{{system.dpCost.other.lpMult}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend> {{localize "abfalter.secondaryDp"}} </legend>
+        <div class="classHeader2">
+            <span> {{localize "abfalter.athletics"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.dpCost.fields.athleticsToggle}}kiBought{{/if}}" data-label="system.dpCost.fields.athleticsToggle" data-ability="{{system.dpCost.fields.athleticsToggle}}">
+                {{#if system.dpCost.fields.athleticsToggle}}
+                {{localize "abfalter.field"}}
+                {{else}}
+                {{localize "abfalter.individual"}}
+                {{/if}}
+            </button>
+        </div>
+        {{#if system.dpCost.fields.athleticsToggle}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.athleticsField"}} </span> <input type="number" name="system.dpCost.fields.athletics" value="{{system.dpCost.fields.athletics}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{else}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.acrobatic"}} </span> <input type="number" name="system.dpCost.subject.acro" value="{{system.dpCost.subject.acro}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.athleticism"}} </span> <input type="number" name="system.dpCost.subject.athleticism" value="{{system.dpCost.subject.athleticism}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.climb"}} </span> <input type="number" name="system.dpCost.subject.climb" value="{{system.dpCost.subject.climb}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.jump"}} </span> <input type="number" name="system.dpCost.subject.jump" value="{{system.dpCost.subject.jump}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.piloting"}} </span> <input type="number" name="system.dpCost.subject.piloting" value="{{system.dpCost.subject.piloting}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.ride"}} </span> <input type="number" name="system.dpCost.subject.ride" value="{{system.dpCost.subject.ride}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.swim"}} </span> <input type="number" name="system.dpCost.subject.swim" value="{{system.dpCost.subject.swim}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{/if}}
+        
+
+        <div class="classHeader2">
+            <span> {{localize "abfalter.social"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.dpCost.fields.socialToggle}}kiBought{{/if}}" data-label="system.dpCost.fields.socialToggle" data-ability="{{system.dpCost.fields.socialToggle}}">
+                {{#if system.dpCost.fields.socialToggle}}
+                {{localize "abfalter.field"}}
+                {{else}}
+                {{localize "abfalter.individual"}}
+                {{/if}}
+            </button>
+        </div>
+        {{#if system.dpCost.fields.socialToggle}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.socialField"}} </span> <input type="number" name="system.dpCost.fields.social" value="{{system.dpCost.fields.social}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{else}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.etiquette"}} </span> <input type="number" name="system.dpCost.subject.etiquette" value="{{system.dpCost.subject.etiquette}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.intimidate"}} </span> <input type="number" name="system.dpCost.subject.intimidate" value="{{system.dpCost.subject.intimidate}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.leadership"}} </span> <input type="number" name="system.dpCost.subject.leadership" value="{{system.dpCost.subject.leadership}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.persuasion"}} </span> <input type="number" name="system.dpCost.subject.persuasion" value="{{system.dpCost.subject.persuasion}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.streetwise"}} </span> <input type="number" name="system.dpCost.subject.streetwise" value="{{system.dpCost.subject.streetwise}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.style"}} </span> <input type="number" name="system.dpCost.subject.style" value="{{system.dpCost.subject.style}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.trading"}} </span> <input type="number" name="system.dpCost.subject.trading" value="{{system.dpCost.subject.trading}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader2">
+            <span> {{localize "abfalter.perceptive"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.dpCost.fields.perceptiveToggle}}kiBought{{/if}}" data-label="system.dpCost.fields.perceptiveToggle" data-ability="{{system.dpCost.fields.perceptiveToggle}}">
+                {{#if system.dpCost.fields.perceptiveToggle}}
+                {{localize "abfalter.field"}}
+                {{else}}
+                {{localize "abfalter.individual"}}
+                {{/if}}
+            </button>
+        </div>
+        {{#if system.dpCost.fields.perceptiveToggle}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.perceptiveField"}} </span> <input type="number" name="system.dpCost.fields.perceptive" value="{{system.dpCost.fields.perceptive}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{else}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.notice"}} </span> <input type="number" name="system.dpCost.subject.notice" value="{{system.dpCost.subject.notice}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.search"}} </span> <input type="number" name="system.dpCost.subject.search" value="{{system.dpCost.subject.search}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.track"}} </span> <input type="number" name="system.dpCost.subject.track" value="{{system.dpCost.subject.track}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader2">
+            <span> {{localize "abfalter.intellectual"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.dpCost.fields.intellectualToggle}}kiBought{{/if}}" data-label="system.dpCost.fields.intellectualToggle" data-ability="{{system.dpCost.fields.intellectualToggle}}">
+                {{#if system.dpCost.fields.intellectualToggle}}
+                {{localize "abfalter.field"}}
+                {{else}}
+                {{localize "abfalter.individual"}}
+                {{/if}}
+            </button>
+        </div>
+        {{#if system.dpCost.fields.intellectualToggle}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.intellectualField"}} </span> <input type="number" name="system.dpCost.fields.intellectual" value="{{system.dpCost.fields.intellectual}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{else}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.animals"}} </span> <input type="number" name="system.dpCost.subject.animals" value="{{system.dpCost.subject.animals}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.appraisal"}} </span> <input type="number" name="system.dpCost.subject.appraisal" value="{{system.dpCost.subject.appraisal}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.architecture"}} </span> <input type="number" name="system.dpCost.subject.architecture" value="{{system.dpCost.subject.architecture}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.herballore"}} </span> <input type="number" name="system.dpCost.subject.herballore" value="{{system.dpCost.subject.herballore}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.history"}} </span> <input type="number" name="system.dpCost.subject.history" value="{{system.dpCost.subject.history}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.law"}} </span> <input type="number" name="system.dpCost.subject.law" value="{{system.dpCost.subject.law}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.magicAppr"}} </span> <input type="number" name="system.dpCost.subject.magicappr" value="{{system.dpCost.subject.magicappr}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.medicine"}} </span> <input type="number" name="system.dpCost.subject.medicine" value="{{system.dpCost.subject.medicine}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.memorize"}} </span> <input type="number" name="system.dpCost.subject.memorize" value="{{system.dpCost.subject.memorize}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.navigation"}} </span> <input type="number" name="system.dpCost.subject.navigation" value="{{system.dpCost.subject.navigation}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.occult"}} </span> <input type="number" name="system.dpCost.subject.occult" value="{{system.dpCost.subject.occult}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.science"}} </span> <input type="number" name="system.dpCost.subject.science" value="{{system.dpCost.subject.science}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.tactics"}} </span> <input type="number" name="system.dpCost.subject.tactics" value="{{system.dpCost.subject.tactics}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.technomagic"}} </span> <input type="number" name="system.dpCost.subject.technomagic" value="{{system.dpCost.subject.technomagic}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader2">
+            <span> {{localize "abfalter.vigor"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.dpCost.fields.vigorToggle}}kiBought{{/if}}" data-label="system.dpCost.fields.vigorToggle" data-ability="{{system.dpCost.fields.vigorToggle}}">
+                {{#if system.dpCost.fields.vigorToggle}}
+                {{localize "abfalter.field"}}
+                {{else}}
+                {{localize "abfalter.individual"}}
+                {{/if}}
+            </button>
+        </div>
+        {{#if system.dpCost.fields.vigorToggle}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.vigorField"}} </span> <input type="number" name="system.dpCost.fields.vigor" value="{{system.dpCost.fields.vigor}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{else}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.composure"}} </span> <input type="number" name="system.dpCost.subject.composure" value="{{system.dpCost.subject.composure}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.featsofstr"}} </span> <input type="number" name="system.dpCost.subject.featsofstr" value="{{system.dpCost.subject.featsofstr}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.withstpain"}} </span> <input type="number" name="system.dpCost.subject.withstpain" value="{{system.dpCost.subject.withstpain}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader2">
+            <span> {{localize "abfalter.subterfuge"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.dpCost.fields.subterfugeToggle}}kiBought{{/if}}" data-label="system.dpCost.fields.subterfugeToggle" data-ability="{{system.dpCost.fields.subterfugeToggle}}">
+                {{#if system.dpCost.fields.subterfugeToggle}}
+                {{localize "abfalter.field"}}
+                {{else}}
+                {{localize "abfalter.individual"}}
+                {{/if}}
+            </button>
+        </div>
+        {{#if system.dpCost.fields.subterfugeToggle}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.subterfugeField"}} </span> <input type="number" name="system.dpCost.fields.subterfuge" value="{{system.dpCost.fields.subterfuge}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{else}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.disguise"}} </span> <input type="number" name="system.dpCost.subject.disguise" value="{{system.dpCost.subject.disguise}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.hide"}} </span> <input type="number" name="system.dpCost.subject.hide" value="{{system.dpCost.subject.hide}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.lockpicking"}} </span> <input type="number" name="system.dpCost.subject.lockpicking" value="{{system.dpCost.subject.lockpicking}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.poisons"}} </span> <input type="number" name="system.dpCost.subject.poisons" value="{{system.dpCost.subject.poisons}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.stealth"}} </span> <input type="number" name="system.dpCost.subject.stealth" value="{{system.dpCost.subject.stealth}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.theft"}} </span> <input type="number" name="system.dpCost.subject.theft" value="{{system.dpCost.subject.theft}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.traplore"}} </span> <input type="number" name="system.dpCost.subject.traplore" value="{{system.dpCost.subject.traplore}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{/if}}
+
+        <div class="classHeader2">
+            <span> {{localize "abfalter.creative"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.dpCost.fields.creativeToggle}}kiBought{{/if}}" data-label="system.dpCost.fields.creativeToggle" data-ability="{{system.dpCost.fields.creativeToggle}}">
+                {{#if system.dpCost.fields.creativeToggle}}
+                {{localize "abfalter.field"}}
+                {{else}}
+                {{localize "abfalter.individual"}}
+                {{/if}}
+            </button>
+        </div>
+        {{#if system.dpCost.fields.creativeToggle}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.creativeField"}} </span> <input type="number" name="system.dpCost.fields.creative" value="{{system.dpCost.fields.creative}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{else}}
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.alchemy"}} </span> <input type="number" name="system.dpCost.subject.alchemy" value="{{system.dpCost.subject.alchemy}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.animism"}} </span> <input type="number" name="system.dpCost.subject.animism" value="{{system.dpCost.subject.animism}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.art"}} </span> <input type="number" name="system.dpCost.subject.art" value="{{system.dpCost.subject.art}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.cooking"}} </span> <input type="number" name="system.dpCost.subject.cooking" value="{{system.dpCost.subject.cooking}}" /> <span> {{localize "abfalter.cooking"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.dance"}} </span> <input type="number" name="system.dpCost.subject.dance" value="{{system.dpCost.subject.dance}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.forging"}} </span> <input type="number" name="system.dpCost.subject.forging" value="{{system.dpCost.subject.forging}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.jewelry"}} </span> <input type="number" name="system.dpCost.subject.jewelry" value="{{system.dpCost.subject.jewelry}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.toymaking"}} </span> <input type="number" name="system.dpCost.subject.toymaking" value="{{system.dpCost.subject.toymaking}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.music"}} </span> <input type="number" name="system.dpCost.subject.music" value="{{system.dpCost.subject.music}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.runes"}} </span> <input type="number" name="system.dpCost.subject.runes" value="{{system.dpCost.subject.runes}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.ritualcalig"}} </span> <input type="number" name="system.dpCost.subject.ritualcalig" value="{{system.dpCost.subject.ritualcalig}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+            <label> <span> {{localize "abfalter.slofhand"}} </span> <input type="number" name="system.dpCost.subject.slofhand" value="{{system.dpCost.subject.slofhand}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        <div class="classContent2">
+            <label> <span> {{localize "abfalter.tailoring"}} </span> <input type="number" name="system.dpCost.subject.tailoring" value="{{system.dpCost.subject.tailoring}}" /> <span> {{localize "abfalter.forOne"}} </span> </label>
+        </div>
+        {{/if}}
+    </fieldset>
+</section>

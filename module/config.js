@@ -88,7 +88,6 @@ export const abfalter = {
     piloting: "abfalter.piloting",
     kiConceal: "abfalter.kiConceal",
     kiDetection: "abfalter.kiDetection",
-
     activeAction1: "abfalter.activeAction1",
     activeAction2: "abfalter.activeAction2",
     activeAction3: "abfalter.activeAction3",
@@ -99,7 +98,6 @@ export const abfalter = {
     activeAction8: "abfalter.activeAction8",
     activeAction9: "abfalter.activeAction9",
     activeAction10: "abfalter.activeAction10",
-
     name: "abfalter.name",
     base: "abfalter.base",
     spec: "abfalter.spec.",
@@ -215,7 +213,6 @@ export const abfalter = {
     wepClass: "abfalter.wepClass",
     dmgShort: "abfalter.dmgShort",
     confirmRemAtkPrompt: "abfalter.confirmRemAtkPrompt",
-
     characteristics: "abfalter.characteristics",
     opposed: "abfalter.opposed",
     atr: "abfalter.atr",
@@ -250,16 +247,12 @@ export const abfalter = {
     gainUpperElan: "abfalter.gainUpperElan",
     loseElan: "abfalter.loseElan",
     addElan: "abfalter.addElan",
-    elanEdit: "abfalter.elanEdit",
-    elanGifts: "abfalter.elanGifts",
-    giftName: "abfalter.giftName",
     deity: "abfalter.deity",
     perLevel: "abfalter.perLevel",
     lifePoints: "abfalter.lifePoints",
     addAdvantage: "abfalter.addAdvantage",
     addDisadvantage: "abfalter.addDisadvantage",
     custom: "abfalter.custom",
-
     newItem: "abfalter.newItem",
     nameItem: "abfalter.nameItem",
     edit: "abfalter.edit",
@@ -293,8 +286,7 @@ export const abfalter = {
     newKiTechnique: "abfalter.newKiTechnique",
     newMartialArt: "abfalter.newMartialArt",
     newArsMagnus: "abfalter.newArsMagnus",
-    newElan: "abfalter.newElan",
-    
+    newElan: "abfalter.newElan",    
     phr: "abfalter.phr",
     dr: "abfalter.dr",
     psnr: "abfalter.psnr",
@@ -321,7 +313,6 @@ export const abfalter = {
     equipped: "abfalter.equipped",
     postQuality: "abfalter.postQuality",
     item: "abfalter.item",
-
     mproj: "abfalter.mproj",
     maccu: "abfalter.maccu",
     maccua: "abfalter.maccua",
@@ -397,8 +388,7 @@ export const abfalter = {
     shamanism: "abfalter.shamanism",
     naturalMagic: "abfalter.naturalMagic",
     pact: "abfalter.pact",
-    effDuration: "abfalter.effDuration",
-    
+    effDuration: "abfalter.effDuration",    
     pp: "abfalter.pp",
     ppotential: "abfalter.ppotential",
     pproj: "abfalter.pproj",
@@ -451,7 +441,6 @@ export const abfalter = {
     addAtk: "abfalter.addAtk",
     primaryShort: "abfalter.primaryShort",
     secondaryShort: "abfalter.secondaryShort",
-
     addArsMag: "abfalter.addArsMag",
     addMartialArt: "abfalter.addMartialArt",
     addKiSealCreature: "abfalter.addKiSealCreature",
@@ -520,8 +509,7 @@ export const abfalter = {
     frequency: "abfalter.frequency",
     acquired: "abfalter.acquired",
     reserve: "abfalter.reserve",
-    unifiedMaint: "abfalter.unifiedMaint",
-    
+    unifiedMaint: "abfalter.unifiedMaint",    
     atkType: "abfalter.atkType",
     baseAtkShort: "abfalter.baseAtkShort",
     baseDmgShort: "abfalter.baseDmgShort",
@@ -533,7 +521,6 @@ export const abfalter = {
     fortitudeShort: "abfalter.fortitudeShort",
     breakageShort: "abfalter.breakageShort",
     targetAim: "abfalter.targetAim",
-
     wearArmor: "abfalter.wearArmor",
     stats: "abfalter.stats",
     armorStats: "abfalter.armorStats",
@@ -1081,7 +1068,9 @@ abfalter.globalSettings = {
     meterName: "abfalter.globalSettings.meterName",
     meterDetail: "abfalter.globalSettings.meterDetail",
     changeThemeName: "abfalter.globalSettings.changeThemeName",
-    changeThemeDetails: "abfalter.globalSettings.changeThemeDetails"
+    changeThemeDetails: "abfalter.globalSettings.changeThemeDetails",
+    openRollName: "abfalter.globalSettings.openRollName",
+    openRollNameDetails: "abfalter.globalSettings.openRollDetails"
 }
 
 abfalter.monsterPowers = {
@@ -1392,4 +1381,20 @@ abfalter.armorTypeDropdown = {
 abfalter.layerTypeDropdown = {
     soft: "abfalter.soft",
     hard: "abfalter.hard"
+}
+
+abfalter.advDropdown = {
+    advantage: "abfalter.adv",
+    disadvantage: "abfalter.disAdv",
+}
+
+abfalter.zeonMaintDropdown = {
+    turn: "abfalter.turnMaintShort",
+    daily: "abfalter.dailyMaintShort",
+}
+
+abfalter.backgroundInfoDropdown = {
+    race: "abfalter.race",
+    bloodBond: "abfalter.bloodBond",
+    culturalRoot: "abfalter.culturalRoot",
 }
