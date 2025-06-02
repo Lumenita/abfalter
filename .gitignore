@@ -1,6 +1,6 @@
 # IDE
 .vs/
-packs/*
 
 # Foundry
 *.lock
+packs/*
