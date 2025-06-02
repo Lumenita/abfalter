@@ -934,7 +934,7 @@ export async function openWeaponProfileDialogue(actor, label, wepId, wepType, ac
                     const selectedTag = $html.find('#armorDropdown').val();
                     let typesToShow = [];
                     if (selectedTag === 'showAll') {
-                        typesToShow = F.filter(t => t.tag !== 'showAll');
+                        typesToShow = armorType.filter(t => t.tag !== 'showAll');
                     } else {
                         typesToShow = armorType.filter(t => t.tag === selectedTag);
                     }

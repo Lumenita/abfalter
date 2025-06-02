@@ -538,7 +538,6 @@
     "fav": "Favorite",
     "martialArtTitle": "Martial Art",
     "equipped": "Equipped",
-    "postQuality": "Post Quality",
     "item": "Item",
 
     "mproj": "Magic Projection",
@@ -617,9 +616,6 @@
     "pp": "PP",
     "ppotential": "Potential",
     "pproj": "Projection",
-    "pmodule": "Psychic Module",
-    "pmoduleText": "Use Attack & Defense",
-    "pmoduleText2": "as Psychic Projection",
     "pdisc": "Disciplines",
     "pDiscOne": "Discipline",
     "paddDisc": "Add Discipline",
@@ -796,7 +792,7 @@
     "value": "Value",
     "aim": "Aim",
     "prevRoll": "Previous Roll",
-    "trapError": "Must have an attack created under the attacks tab to use Trapping.",
+    "trapError": "Must have a profile created under the weapon profile tab to use Trapping.",
     "trap": "Trap",
     "trapOppChar": "Trapping Opponent Characteristics",
 
@@ -1040,6 +1036,8 @@
     "mentalHealthMax": "Max Mental Health",
     "mentalHealthCurrent": "Current Mental Health",
     "rest": "Rest",
+    "accuKiReset": "Are you sure you want to reset all Acquired Ki?",
+    "multiClassError": "Error: Multi-class calculations are not supported.",
 
     "itemNames": {
       "advantage": "Advantage",

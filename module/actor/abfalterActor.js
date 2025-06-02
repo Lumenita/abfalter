@@ -753,22 +753,22 @@ export default class abfalterActor extends Actor {
         const entry = regenData[regenLevel];
 
         if (entry) {
-        let multiplier = (system.toggles?.dmgRes && system.lifepoints?.hpMult) ? system.lifepoints.hpMult : 1;
-        let unit = localize(entry.unit);
+            let multiplier = (system.toggles?.dmgRes && system.lifepoints?.hpMult) ? system.lifepoints.hpMult : 1;
+            let unit = localize(entry.unit);
 
-        let resting = entry.resting * multiplier;
-        let notResting = entry.notResting !== null ? entry.notResting * multiplier : "N/A";
-        let penalty = entry.penalty === "All" ? "All/" + unit : (entry.penalty * multiplier) + "/" + unit;
+            let resting = entry.resting * multiplier;
+            let notResting = entry.notResting !== null ? entry.notResting * multiplier : "N/A";
+            let penalty = entry.penalty === "All" ? "All/" + unit : (entry.penalty * multiplier) + "/" + unit;
 
-        system.regeneration.resting = resting + "/" + unit;
-        system.regeneration.notResting = notResting === "N/A" ? "N/A" : notResting + "/" + unit;
-        system.regeneration.penaltyReduction = penalty;
-        system.regeneration.rawValue = entry.raw !== undefined ? entry.raw * multiplier : resting;
+            system.regeneration.resting = resting + "/" + unit;
+            system.regeneration.notResting = notResting === "N/A" ? "N/A" : notResting + "/" + unit;
+            system.regeneration.penaltyReduction = penalty;
+            system.regeneration.rawValue = entry.raw !== undefined ? entry.raw * multiplier : resting;
         } else {
-        system.regeneration.resting = "0";
-        system.regeneration.notResting = "0";
-        system.regeneration.penaltyReduction = "0";
-        system.regeneration.rawValue = 0;
+            system.regeneration.resting = "0";
+            system.regeneration.notResting = "0";
+            system.regeneration.penaltyReduction = "0";
+            system.regeneration.rawValue = 0;
         }
 
         //Initiative
@@ -1653,9 +1653,11 @@ export default class abfalterActor extends Actor {
             system.movement.fourthMove = game.i18n.localize('abfalter.special');
             system.movement.runningMove = game.i18n.localize('abfalter.special');
         }
+
         //Lifepoint Calculation
-        system.lifepoints.class = classBonuses.lpbonus;
-        system.lp.max += classBonuses.lpbonus;
+        let hpClassMonstMult = (system.toggles?.dmgRes && system.lifepoints?.hpMult) ? system.lifepoints.hpMult : 1;
+        system.lifepoints.class = Math.floor(classBonuses.lpbonus * hpClassMonstMult);
+        system.lp.max += system.lifepoints.class;
         // Attack, Block, & Dodge post class
         system.combatValues.attack.class = classBonuses.atk + classBonuses.maKiAtk;
         if (system.combatValues.attack.class > 50) {

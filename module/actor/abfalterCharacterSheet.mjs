@@ -499,7 +499,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
     static #kiAccuReset(ev) {
         new Dialog({
             title: "Reset Accumulation",
-            content: 'Are you sure you want to reset all Acquired Ki?',
+            content: game.i18n.localize('abfalter.accuKiReset'),
             buttons: {
                 yes: {
                     label: game.i18n.localize('abfalter.yes'),
@@ -635,8 +635,8 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
 
         const classItems = this.actor.items.filter(item => item.type === "class");
         if (classItems.length > 1) {
-            ui.notifications.error("Multi-class calculations are not supported.");
-            console.error("Error: Multi-class calculations are not supported.");
+            ui.notifications.error(game.i18n.localize('abfalter.multiClassError'));
+            console.error(game.i18n.localize('abfalter.multiClassError'));
             return;
         }
         const classItem = classItems[0];

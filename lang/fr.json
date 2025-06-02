@@ -541,7 +541,6 @@
     "fav": "Favori",
     "martialArtTitle": "Art Martial",
     "equipped": "Equipé",
-    "postQuality": "Post Quality",
     "item": "Objet",
 
     "mproj": "Projection Magique",
@@ -620,9 +619,7 @@
     "pp": "PPP",
     "ppotential": "Potentiel",
     "pproj": "Projection",
-    "pmodule": "Module Psychique",
-    "pmoduleText": "Utiliser Attaque & Défense",
-    "pmoduleText2": "comme Projection Psychique",
+
     "pdisc": "Disciplines",
     "pDiscOne": "Discipline",
     "paddDisc": "Ajouter Discipline",

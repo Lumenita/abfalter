@@ -541,7 +541,6 @@
     "fav": "Favorite",
     "martialArtTitle": "Martial Art",
     "equipped": "Equipped",
-    "postQuality": "Post Quality",
     "item": "Item",
 
     "mproj": "Магическая проекция",
@@ -620,9 +619,6 @@
     "pp": "PP",
     "ppotential": "Потенциал",
     "pproj": "Проекция",
-    "pmodule": "Психический модуль",
-    "pmoduleText": "Использовать Атаку и Защиту",
-    "pmoduleText2": "как Психическую проекцию",
     "pdisc": "Дисциплины",
     "pDiscOne": "Дисциплина",
     "paddDisc": "Добавить дисциплину",
