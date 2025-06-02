@@ -1,7 +1,7 @@
-2025/06/02-05:33:55.776 ac60 Recovering log #320
-2025/06/02-05:33:55.782 ac60 Delete type=0 #320
-2025/06/02-05:33:55.782 ac60 Delete type=3 #318
-2025/06/02-05:34:05.390 9db4 Level-0 table #325: started
-2025/06/02-05:34:05.390 9db4 Level-0 table #325: 0 bytes OK
-2025/06/02-05:34:05.393 9db4 Delete type=0 #323
-2025/06/02-05:34:05.399 9db4 Manual compaction at level-0 from '!folders!wH9k5F5q8rT2bLqB' @ 72057594037927935 : 1 .. '!tables.results!rVGuDTkkIDozQEC2.xnGGCfZH6JuSZlcc' @ 0 : 0; will stop at (end)
+2025/06/02-05:34:10.170 4254 Recovering log #324
+2025/06/02-05:34:10.183 4254 Delete type=0 #324
+2025/06/02-05:34:10.183 4254 Delete type=3 #322
+2025/06/02-05:34:17.689 9db4 Level-0 table #329: started
+2025/06/02-05:34:17.689 9db4 Level-0 table #329: 0 bytes OK
+2025/06/02-05:34:17.691 9db4 Delete type=0 #327
+2025/06/02-05:34:17.691 9db4 Manual compaction at level-0 from '!folders!wH9k5F5q8rT2bLqB' @ 72057594037927935 : 1 .. '!tables.results!rVGuDTkkIDozQEC2.xnGGCfZH6JuSZlcc' @ 0 : 0; will stop at (end)
