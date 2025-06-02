@@ -111,17 +111,20 @@ Hooks.once('ready', () => {
     }
 });
 
-Hooks.once("ready", function () {
+Hooks.once("ready", async function () {
     if (!game.user.isGM) {
         return
     }
-    if (foundry.utils.isNewerVersion('1.5.0', game.settings.get("abfalter", "systemMigrationVersion"))) {
+    const currentVersion = game.settings.get("abfalter", "systemMigrationVersion");
+    if (foundry.utils.isNewerVersion('1.5.1', currentVersion)) {
         game.settings.set('abfalter', 'systemChangeLog', false);
     }
 
-    if (game.settings.get("abfalter", "systemChangeLog") === false) {
+    const showChangelog = await game.settings.get("abfalter", "systemChangeLog");
+    if (showChangelog === false) {
         handleChangelog();
     }
+
     handleMigrations();
 })
 
@@ -1006,7 +1009,7 @@ class weaponDataModel extends foundry.abstract.DataModel {
     }
 
     static migrateData(source) {
-        if (Array.isArray(source.attacks)) { // v1.5.0 Change from array to typedObjectField so each individual save does not replace the whole array
+        if (Array.isArray(source.attacks)) { // v1.5.0 Changed from array to typedObjectField so each individual save does not replace the whole array
             console.log("Migrating weapon attacks from array to typedObjectField");
             const newAttacks = {};
             for (let atk of source.attacks) {

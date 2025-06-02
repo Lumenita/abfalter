@@ -1,3 +1,8 @@
-2025/06/02-03:37:29.094 7614 Recovering log #415
-2025/06/02-03:37:29.100 7614 Delete type=0 #415
-2025/06/02-03:37:29.100 7614 Delete type=3 #413
+2025/06/02-05:34:10.200 7014 Recovering log #442
+2025/06/02-05:34:10.210 7014 Delete type=0 #442
+2025/06/02-05:34:10.211 7014 Delete type=3 #440
+2025/06/02-05:34:17.698 9db4 Level-0 table #447: started
+2025/06/02-05:34:17.698 9db4 Level-0 table #447: 0 bytes OK
+2025/06/02-05:34:17.700 9db4 Delete type=0 #445
+2025/06/02-05:34:17.722 9db4 Manual compaction at level-0 from '!actors!0TklWFpFjLCA2vCP' @ 72057594037927935 : 1 .. '!folders!zUZRIJxnUWjyaoiR' @ 0 : 0; will stop at (end)
+2025/06/02-05:34:17.722 9db4 Manual compaction at level-1 from '!actors!0TklWFpFjLCA2vCP' @ 72057594037927935 : 1 .. '!folders!zUZRIJxnUWjyaoiR' @ 0 : 0; will stop at (end)
