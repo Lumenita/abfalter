@@ -19,7 +19,7 @@ Should the Core Exxet 2.0 rulebook ever be officially released, I also intend to
 # Road Map
 - full implementation of a weight system for the Armory tab, & whatever small details/ui overhauls the Armory tab is lacking.
 - A QoL update for the Psychic Tab & UI changes on the Creature Tab.
-- A QoL update on The Ki Tab, Better Ki Technique Managment with accumulated Ki and Ki expenditure. Including the ability to create custom ki Abilities.
+- A QoL update on The Ki Tab, Better Ki Technique Managment with accumulated Ki and Ki expenditure. ~~Including the ability to create custom ki Abilities~~.
 - A QoL updateo on the Magic Tab, showing much needed love for invocation & incarnation items, custom metamagic items, and more.
 - Potentially a header update for a more stylized view of hp, fatigue, zeon, & pp while moving the details elsewhere.
 - Auto-combat Macro Calculator.
