@@ -28,7 +28,7 @@ export async function handleMigrations() {
     // --- Get current version ---
     const currentVersion = game.settings.get("abfalter", "systemMigrationVersion");
     
-    // Force migration for testing
+    //Force migration for testing
     //migrateItemFusion();
 
     // If no version is saved, no need to migrate

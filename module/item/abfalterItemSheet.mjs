@@ -22,6 +22,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
         },
         actions: {
             toggleValue: this.#toggleValue,
+            kiAbilityToggle: this.#kiAbilityToggle,
             addWepAtk: this.#addWepAtk,
             removeWepAtk: this.#removeWepAtk,
             wepAtkToggle: this.#atkToggle,
@@ -83,6 +84,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
             case "secondary":
             case "spell":
             case "ammo":
+            case "kiAbility":
                 parts.details = details;
                 break;
             case "incarnation":
@@ -157,6 +159,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
             case "secondary":
             case "spell":
             case "ammo":
+            case "kiAbility":
                 delete tabs.effects;
                 break;
             default:
@@ -239,13 +242,19 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 }
                 break;
             }
+            case "kiAbility": {
+                context.indentTypeList = CONFIG.abfalter.indentTypeDropdown;
+                break;
+            }
             case "martialArt": {
                 context.martialArtsObjList = CONFIG.abfalter.martialArtsDropdown;
                 break;
             }
             case "kiTechnique": {
+                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description);
                 context.kiFrequencyObjList = CONFIG.abfalter.kiFrequencyDropdown;
                 context.kiActionTypeObjList = CONFIG.abfalter.kiActionTypeDropdown;
+                context.kiMaintObjList = CONFIG.abfalter.kiMaintDropdown;
                 break;
             }
             case "armor": {
@@ -319,6 +328,23 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
         let value = target.dataset.ability;
         value = !(value === 'true');
         this.document.update({ [label]: value });
+    }
+
+    static #kiAbilityToggle(ev) {
+        ev.preventDefault();
+        let value = ev.target.dataset.ability;
+        let value2 = ev.target.dataset.ability2;
+                if (value == "false" && value2 == "false") {
+            value = true;
+            value2 = false;
+        } else if (value == "true" && value2 == "false") {
+            value = true;
+            value2 = true;
+        } else {
+            value = false;
+            value2 = false;
+        }
+        this.document.update({ "system.bought": value, "system.bought2": value2 });
     }
 
     static #addWepAtk(ev) {

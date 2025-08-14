@@ -1,0 +1,31 @@
+<section class="baseAbfalter itemPage tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+
+    <fieldset>
+        <legend> {{ localize "abfalter.generalDetails" }} </legend>
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.mk"}} </span> <input type="text" name="system.mk" value="{{system.mk}}" /> </label>
+        <label class="itemSimpleLabel">
+            <span> {{localize "abfalter.bought"}} </span>
+            <button type="button" data-action="kiAbilityToggle" data-ability="{{system.bought}}" data-ability2="{{system.bought2}}"
+            class="{{#if system.bought}}{{#if system.bought2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}">
+            {{#if system.bought}}
+            {{#if system.bought2}}
+            <span> {{localize "abfalter.free"}} </span>
+            {{else}}
+            <span> {{localize "abfalter.yes"}} </span>
+            {{/if}}
+            {{else}}
+            <span> {{localize "abfalter.no"}} </span>
+            {{/if}}
+            </button>
+        </label>
+        <div class="csSelect itemSimpleLabel">
+            <label>
+                <span>{{localize "abfalter.indentType"}}</span>
+                <select name="system.indent">
+                    {{selectOptions indentTypeList selected=system.indent localize=true}}
+                </select>
+            </label>
+        </div>
+    </fieldset>
+
+</section>

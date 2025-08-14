@@ -1,5 +1,5 @@
 <section class="baseAbfalter itemDescStyle tab {{tabs.description.cssClass}}" data-group="{{tabs.description.group}}" data-tab="{{tabs.description.id}}">
-    {{#ifIn document.type "proficiency backgroundInfo elan armor weapon ammo class"}}
+    {{#ifIn document.type "proficiency backgroundInfo elan armor weapon ammo class kiTechnique"}}
         <h6> {{localize "abfalter.description"}} </h6>
         <prose-mirror name="system.description" data-document-uuidd="{{actor.uuid}}" value="{{system.description}}" toggled="true">
             {{{enrichedDesc}}}

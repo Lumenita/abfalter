@@ -1,0 +1,42 @@
+<div class="macroShortcutOverlay"></div>
+
+<div class="customMacroWrapper">
+    <div class="macroDragHandle" title="Drag to move">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="macroToggleHandle" title="Expand/Collapse">
+        <i class="fas fa-chevron-right macroToggleArrow"></i>
+    </div>
+
+    <nav class="customActionBar">
+        {{#if this.isGM}}
+        <div class="macros">
+            <div title="Open Calculator (Ctrl + 1)" id="openSimpleCalc" class="customMacro tile">
+                <img src="systems/abfalter/img/simpleCalc.png" class="img-bottom"/>
+                <img src="systems/abfalter/img/simpleCalc.png" class="img-top" />
+
+            </div>
+            <div title="Send Attack (Ctrl + 2)" id="sendAttack" class="customMacro tile">
+                <img src="systems/abfalter/img/chillDuck.png" class="img-bottom"/>
+                <img src="systems/abfalter/img/combatDuck.png" class="img-top" />
+            </div>
+            <div title="Open Ki Creator (Ctrl + 3)" id="kiCreator" class="customMacro tile">
+                <img src="systems/abfalter/img/kiShortcut.png" class="img-bottom"/>
+                <img src="systems/abfalter/img/kiShortcut.png" class="img-top"/>
+            </div>
+        </div>
+        {{else}}
+        <div class="macros">
+            <div title="Send Attack Request (Ctrl + 1)" id="sendAttackRequest" class="customMacro tile">
+                <img src="systems/abfalter/img/chillDuck.png" class="img-bottom"/>
+                <img src="systems/abfalter/img/combatDuck.png" class="img-top" />
+            </div>
+        </div>
+        {{/if}}
+    </nav>
+    
+    <div class="macroLockHandle" title="Lock/Unlock Position">
+        <i class="fas fa-lock-open"></i>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+<div class="kiTechAbilityContainer">
+    <div class="kiTechAbilityTopLevel">
+        <span>{{localize "abfalter.kiAbilityData.abillitySelect"}}</span>
+        <label>
+            <label>{{localize "abfalter.kiAbilityData.category"}}</label>
+            <select id="category-select"></select>
+        </label>
+        <label>
+            <span>{{localize "abfalter.kiAbilityData.ability"}}</span>
+            <select id="ability-select"></select>
+        </label>
+        <label>
+            <span>{{localize "abfalter.kiAbilityData.elements"}}</span>
+            <select id="element-select"></select>
+        </label>
+        <label>
+            <span>{{localize "abfalter.kiAbilityData.tier"}}</span>
+            <select id="tier-select"></select>
+        </label>
+    </div>
+
+    <div id="additional-effects-container" class="additional-effects"></div>
+
+    <div class="charSelection">
+        <span>{{localize "abfalter.kiAbilityData.characteristics"}}</span>
+        <label>
+            <span>{{localize "abfalter.kiAbilityData.primary"}}:</span>
+            <span id="primary-char">-</span>
+        </label>
+        <label>
+            <span>{{localize "abfalter.kiAbilityData.optional"}}</span>
+            <div id="optional-char-container"></div>
+        </label>
+    </div>
+
+    <div class="statContainer">
+        <span>{{localize "abfalter.kiAbilityData.statsPreview"}}</span>
+        <div class="tierStatsTop">
+            <div class="stat-block">
+                <span>{{localize "abfalter.primary"}}</span>
+                <span id="tier-prim">-</span>
+            </div>
+            <div class="stat-block">
+                <span>{{localize "abfalter.secondary"}}</span>
+                <span id="tier-sec">-</span>
+            </div>
+            <div class="stat-block">
+                <span>{{localize "abfalter.mk"}}</span>
+                <span id="tier-mk">-</span>
+            </div>
+            <div class="stat-block">
+                <span>{{localize "abfalter.level"}}</span>
+                <span id="tier-lvl">-</span>
+            </div>
+        </div>
+
+        <div class="tierStatsBottom">
+            <div class="stat-block">
+                <span>{{localize "abfalter.maintenance"}}</span>
+                <span id="tier-maint">-</span>
+            </div>
+            <div class="stat-block">
+                <span>{{localize "abfalter.kiAbilityData.minorSustenance"}}</span>
+                <span id="tier-mis">-</span>
+            </div>
+            <div class="stat-block">
+                <span>{{localize "abfalter.kiAbilityData.greaterSustenance"}}</span>
+                <span id="tier-grs">-</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="ability-description-preview" class="descriptionPreview">
+        <span>{{localize "abfalter.kiAbilityData.previewDescription"}}</span>
+        <pre id="ability-description-text" style="white-space: pre-wrap; font-family: inherit;"></pre>
+    </div>
+</div>

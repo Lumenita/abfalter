@@ -1,65 +1,47 @@
 import { genericDialogs } from "../dialogs.js";
 
 export const assertCurrentScene = () => {
-    const gameCopy = game;
-    if (gameCopy.scenes?.current?.id !== gameCopy.scenes?.active?.id) {
-        const msg = gameCopy.i18n.localize('abfalter.dialogs.wrongScene');
-        genericDialogs.prompt(msg);
+    if (game.scenes?.current?.id !== game.scenes?.active?.id) {
+        const msg = game.i18n.localize('abfalter.dialogs.wrongScene');
+        genericDialogs.prompt(game.i18n.localize('abfalter.dialogs.wrongSceneTitle'), msg);
         throw new Error(msg);
     }
 };
 
-export function getSelectedToken(game) {
-    const selectedTokens = game.canvas.tokens?.controlled ?? [];
+export function getSelectedToken(gameRef) {
+    const selectedTokens = gameRef.canvas.tokens?.controlled ?? [];
     if (selectedTokens.length !== 1) {
-        const msg = game.i18n.localize(selectedTokens.length > 0 ? 'abfalter.dialogs.noMultiSelect' : 'abfalter.dialogs.noSelectToken');
-        genericDialogs.prompt(msg);
+        const msg = gameRef.i18n.localize(selectedTokens.length > 0 ? 'abfalter.dialogs.noMultiSelect' : 'abfalter.dialogs.noSelectToken');
+        genericDialogs.prompt(gameRef.i18n.localize('abfalter.dialogs.selectTokenTitle'), msg);
         throw new Error(msg);
     }
     return selectedTokens[0].document;
 }
 
-export const getTargetToken = (attackerToken, targetTokens) => {
+export const getTargetToken = (attackerToken, targets) => {
     const gameCopy = game;
-    let msg;
+    const allTargets = Array.from(targets);
 
-    if (targetTokens.ids.length > 1) {
-        let targets = Array.from(game.user.targets);
-        for (let i = 0; i < targetTokens.ids.length; i++) {
-            if (!targets[i].actor?.id) {
-                msg = gameCopy.i18n.localize('abfalter.dialogs.noActor');
-                genericDialogs.prompt(msg);
-                throw new Error(msg);
-            }
-            if (targets[i].id === attackerToken.id) {
-                msg = gameCopy.i18n.localize('abfalter.dialogs.noAtkSelf');
-                genericDialogs.prompt(msg);
-                throw new Error(msg);
-            }
+    if (allTargets.length === 0) {
+        const msg = gameCopy.i18n.localize('abfalter.dialogs.mustTarget');
+        genericDialogs.prompt(gameCopy.i18n.localize('abfalter.dialogs.mustTargetTitle'), msg);
+        throw new Error(msg);
+    }
+
+    for (const t of allTargets) {
+        if (!t.actor?.id) {
+            const msg = gameCopy.i18n.localize('abfalter.dialogs.noActor');
+            genericDialogs.prompt(gameCopy.i18n.localize('abfalter.dialogs.noActorTitle'), msg);
+            throw new Error(msg);
         }
-        msg = gameCopy.i18n.localize('abfalter.dialogs.aoeAttack');
-        genericDialogs.prompt(msg);
-        return targets;
+        if (t.id === attackerToken.id) {
+            const msg = gameCopy.i18n.localize('abfalter.dialogs.noAtkSelf');
+            genericDialogs.prompt(gameCopy.i18n.localize('abfalter.dialogs.noAtkSelfTitle'), msg);
+            throw new Error(msg);
+        }
     }
-    if (targetTokens.ids.length === 0) {
-        msg = gameCopy.i18n.localize('abfalter.dialogs.mustTarget');
-    }
-    if (msg) {
-        genericDialogs.prompt(msg);
-        throw new Error(msg);
-    }
-    const target = targetTokens.values().next().value;
-    if (!target.actor?.id) {
-        msg = gameCopy.i18n.localize('abfalter.dialogs.noActor');
-    }
-    if (target.id === attackerToken.id) {
-        msg = gameCopy.i18n.localize('abfalter.dialogs.noAtkSelf');
-    }
-    if (msg) {
-        genericDialogs.prompt(msg);
-        throw new Error(msg);
-    }
-    return target;
+
+    return allTargets;
 };
 
 export const canOwnerReceiveMessage = (actor) => {

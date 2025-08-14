@@ -11,30 +11,48 @@ export const openOneModDialog = async () => {
 export const oneModDialog = async ({ content, placeholder = '' }) => {
     const html = await renderTemplates({
         name: templates.dialog.initiative,
-        context: {
-            content,
-            placeholder
-        }
+        context: { content, placeholder }
     });
-    return new Promise(resolve => {
-        new Dialog({
-            title: 'Secondary Changer',
+    return new Promise((resolve) => {
+        foundry.applications.api.DialogV2.wait({
+            classes: ["baseAbfalter", "abfalterDialog", "oneModDialog"],
+            window: { title: game.i18n.localize("abfalter.secondaryChanger") },
             content: html,
-            buttons: {
-                submit: {
-                    label: 'Confirm',
-                    callback: html => {
-                        const results = new foundry.applications.ux.FormDataExtended(html.find('form')[0], {}).object;
-                        resolve(results['dialog-input']);
+            position: {
+                width: 275,
+                height: "auto"
+            },
+            buttons: [
+                {
+                    label: game.i18n.localize("abfalter.dialogs.confirm"),
+                    action: 'submit',
+                    callback: (event, button, dialog) => {
+                        const form = dialog.element.querySelector("form");
+                        if (!form) return resolve(null);
+                        const data = new foundry.applications.ux.FormDataExtended(form).object;
+                        const raw = data["dialog-input"];
+                        const value = Number(raw);
+                        console.log(value);
+                        const formData = {
+                            confirmed: true,
+                            value: value || 0
+                        }
+                        resolve(formData);
                     }
                 },
-                cancel: {
-                    label: 'Cancel',
-                    callback: () => resolve(null)
+                {
+                    label: game.i18n.localize("abfalter.dialogs.cancel"),
+                    action: 'cancel',
+                    callback: (event, button, dialog) => {
+                        const formData = {
+                            confirmed: false,
+                            value: null
+                        }
+                        resolve(formData);
+                    }
                 }
-            },
-            render: () => $('#dialog-input').focus()
-        }).render(true);
+            ]
+        });
     });
 }
 
@@ -64,12 +82,13 @@ export async function restOptions(actor) {
                     "system.movement.temp": 0, "system.lifepoints.temp": 0, "system.fatigue.temp": 0, "system.regeneration.temp": 0,
                     "system.combatValues.attack.temp": 0, "system.block.attack.temp": 0, "system.combatValues.dodge.temp": 0, "system.mproj.temp": 0,
                     "system.mproj.temp2": 0, "system.maccu.temp": 0, "system.mregen.temp": 0, "system.ppotential.temp": 0,
-                    "system.pproj.temp": 0, "system.armor.wearArmor.temp": 0,"system.lp.value": Math.floor(actor.system.lp.value + actor.system.regeneration.rawValue),
-                    "system.fatigue.value": actor.system.fatigue.max, "system.zeon.value":  Math.min(Math.floor(actor.system.zeon.value + actor.system.mregen.finalMinusMaint), actor.system.zeon.max),
+                    "system.pproj.temp": 0, "system.armor.wearArmor.temp": 0,
+                    "system.lp.value": Math.min(Math.floor(actor.system.lp.value + actor.system.regeneration.rawValue), actor.system.lp.max),
+                    "system.fatigue.value": actor.system.fatigue.max, 
+                    "system.zeon.value":  Math.min(Math.floor(actor.system.zeon.value + actor.system.mregen.finalMinusMaint), actor.system.zeon.max),
                     "system.psychicPoint.value": actor.system.psychicPoint.max,
                     "system.kiPool.agi.actual": actor.system.kiPool.agi.poolTot,
-
-                     "system.kiPool.con.actual": actor.system.kiPool.con.poolTot, 
+                    "system.kiPool.con.actual": actor.system.kiPool.con.poolTot, 
                     "system.kiPool.dex.actual": actor.system.kiPool.dex.poolTot,
                     "system.kiPool.str.actual": actor.system.kiPool.str.poolTot, 
                     "system.kiPool.pow.actual": actor.system.kiPool.pow.poolTot, 
@@ -82,44 +101,45 @@ export async function restOptions(actor) {
     }).render(true);
 }
 
-
 export async function changeSecondaryTemps(actorData) {
-    const mod = await openOneModDialog() || 0;
+    const formData = await openOneModDialog();
+    if (!formData.confirmed) return;
     actorData.update({
-        "system.secondaryFields.athletics.acrobatics.temp": mod, "system.secondaryFields.athletics.athleticism.temp": mod, "system.secondaryFields.athletics.climb.temp": mod, "system.secondaryFields.athletics.jump.temp": mod,
-        "system.secondaryFields.athletics.ride.temp": mod, "system.secondaryFields.athletics.swim.temp": mod, "system.secondaryFields.social.etiquette.temp": mod, "system.secondaryFields.social.intimidate.temp": mod,
-        "system.secondaryFields.social.leadership.temp": mod, "system.secondaryFields.social.persuasion.temp": mod, "system.secondaryFields.social.streetwise.temp": mod, "system.secondaryFields.social.style.temp": mod,
-        "system.secondaryFields.social.trading.temp": mod, "system.secondaryFields.perceptive.notice.temp": mod, "system.secondaryFields.perceptive.search.temp": mod, "system.secondaryFields.perceptive.track.temp": mod,
-        "system.secondaryFields.intellectual.animals.temp": mod, "system.secondaryFields.intellectual.appraisal.temp": mod, "system.secondaryFields.intellectual.architecture.temp": mod, "system.secondaryFields.intellectual.herballore.temp": mod,
-        "system.secondaryFields.intellectual.history.temp": mod, "system.secondaryFields.intellectual.law.temp": mod, "system.secondaryFields.intellectual.magicappr.temp": mod, "system.secondaryFields.intellectual.medicine.temp": mod,
-        "system.secondaryFields.intellectual.memorize.temp": mod, "system.secondaryFields.intellectual.navigation.temp": mod, "system.secondaryFields.intellectual.occult.temp": mod, "system.secondaryFields.intellectual.science.temp": mod,
-        "system.secondaryFields.intellectual.tactics.temp": mod, "system.secondaryFields.vigor.composure.temp": mod, "system.secondaryFields.vigor.featsofstr.temp": mod, "system.secondaryFields.vigor.withstpain.temp": mod,
-        "system.secondaryFields.subterfuge.disguise.temp": mod, "system.secondaryFields.subterfuge.hide.temp": mod, "system.secondaryFields.subterfuge.lockpicking.temp": mod, "system.secondaryFields.subterfuge.poisons.temp": mod,
-        "system.secondaryFields.subterfuge.stealth.temp": mod, "system.secondaryFields.subterfuge.theft.temp": mod, "system.secondaryFields.subterfuge.traplore.temp": mod, "system.secondaryFields.creative.alchemy.temp": mod,
-        "system.secondaryFields.creative.animism.temp": mod, "system.secondaryFields.creative.art.temp": mod, "system.secondaryFields.creative.dance.temp": mod, "system.secondaryFields.creative.forging.temp": mod,
-        "system.secondaryFields.creative.jewelry.temp": mod, "system.secondaryFields.creative.music.temp": mod, "system.secondaryFields.creative.runes.temp": mod, "system.secondaryFields.creative.ritualcalig.temp": mod,
-        "system.secondaryFields.creative.slofhand.temp": mod, "system.secondaryFields.creative.tailoring.temp": mod, "system.secondaryFields.athletics.piloting.temp": mod, "system.secondaryFields.creative.cooking.temp": mod,
-        "system.secondaryFields.intellectual.technomagic.temp": mod, "system.secondaryFields.creative.toymaking.temp": mod, "system.secondaryFields.perceptive.kidetection.temp": mod, "system.secondaryFields.subterfuge.kiconceal.temp": mod
+        "system.secondaryFields.athletics.acrobatics.temp": formData.value, "system.secondaryFields.athletics.athleticism.temp": formData.value, "system.secondaryFields.athletics.climb.temp": formData.value, "system.secondaryFields.athletics.jump.temp": formData.value,
+        "system.secondaryFields.athletics.ride.temp": formData.value, "system.secondaryFields.athletics.swim.temp": formData.value, "system.secondaryFields.social.etiquette.temp": formData.value, "system.secondaryFields.social.intimidate.temp": formData.value,
+        "system.secondaryFields.social.leadership.temp": formData.value, "system.secondaryFields.social.persuasion.temp": formData.value, "system.secondaryFields.social.streetwise.temp": formData.value, "system.secondaryFields.social.style.temp": formData.value,
+        "system.secondaryFields.social.trading.temp": formData.value, "system.secondaryFields.perceptive.notice.temp": formData.value, "system.secondaryFields.perceptive.search.temp": formData.value, "system.secondaryFields.perceptive.track.temp": formData.value,
+        "system.secondaryFields.intellectual.animals.temp": formData.value, "system.secondaryFields.intellectual.appraisal.temp": formData.value, "system.secondaryFields.intellectual.architecture.temp": formData.value, "system.secondaryFields.intellectual.herballore.temp": formData.value,
+        "system.secondaryFields.intellectual.history.temp": formData.value, "system.secondaryFields.intellectual.law.temp": formData.value, "system.secondaryFields.intellectual.magicappr.temp": formData.value, "system.secondaryFields.intellectual.medicine.temp": formData.value,
+        "system.secondaryFields.intellectual.memorize.temp": formData.value, "system.secondaryFields.intellectual.navigation.temp": formData.value, "system.secondaryFields.intellectual.occult.temp": formData.value, "system.secondaryFields.intellectual.science.temp": formData.value,
+        "system.secondaryFields.intellectual.tactics.temp": formData.value, "system.secondaryFields.vigor.composure.temp": formData.value, "system.secondaryFields.vigor.featsofstr.temp": formData.value, "system.secondaryFields.vigor.withstpain.temp": formData.value,
+        "system.secondaryFields.subterfuge.disguise.temp": formData.value, "system.secondaryFields.subterfuge.hide.temp": formData.value, "system.secondaryFields.subterfuge.lockpicking.temp": formData.value, "system.secondaryFields.subterfuge.poisons.temp": formData.value,
+        "system.secondaryFields.subterfuge.stealth.temp": formData.value, "system.secondaryFields.subterfuge.theft.temp": formData.value, "system.secondaryFields.subterfuge.traplore.temp": formData.value, "system.secondaryFields.creative.alchemy.temp": formData.value,
+        "system.secondaryFields.creative.animism.temp": formData.value, "system.secondaryFields.creative.art.temp": formData.value, "system.secondaryFields.creative.dance.temp": formData.value, "system.secondaryFields.creative.forging.temp": formData.value,
+        "system.secondaryFields.creative.jewelry.temp": formData.value, "system.secondaryFields.creative.music.temp": formData.value, "system.secondaryFields.creative.runes.temp": formData.value, "system.secondaryFields.creative.ritualcalig.temp": formData.value,
+        "system.secondaryFields.creative.slofhand.temp": formData.value, "system.secondaryFields.creative.tailoring.temp": formData.value, "system.secondaryFields.athletics.piloting.temp": formData.value, "system.secondaryFields.creative.cooking.temp": formData.value,
+        "system.secondaryFields.intellectual.technomagic.temp": formData.value, "system.secondaryFields.creative.toymaking.temp": formData.value, "system.secondaryFields.perceptive.kidetection.temp": formData.value, "system.secondaryFields.subterfuge.kiconceal.temp": formData.value
     })
 }
 
 export async function changeSecondarySpecs(actorData) {
-    const mod = await openOneModDialog() || 0;
+    const formData = await openOneModDialog();
+    if (!formData.confirmed) return;
     actorData.update({
-        "system.secondaryFields.athletics.acrobatics.spec": mod, "system.secondaryFields.athletics.athleticism.spec": mod, "system.secondaryFields.athletics.climb.spec": mod, "system.secondaryFields.athletics.jump.spec": mod,
-        "system.secondaryFields.athletics.ride.spec": mod, "system.secondaryFields.athletics.swim.spec": mod, "system.secondaryFields.social.etiquette.spec": mod, "system.secondaryFields.social.intimidate.spec": mod,
-        "system.secondaryFields.social.leadership.spec": mod, "system.secondaryFields.social.persuasion.spec": mod, "system.secondaryFields.social.streetwise.spec": mod, "system.secondaryFields.social.style.spec": mod,
-        "system.secondaryFields.social.trading.spec": mod, "system.secondaryFields.perceptive.notice.spec": mod, "system.secondaryFields.perceptive.search.spec": mod, "system.secondaryFields.perceptive.track.spec": mod,
-        "system.secondaryFields.intellectual.animals.spec": mod, "system.secondaryFields.intellectual.appraisal.spec": mod, "system.secondaryFields.intellectual.architecture.spec": mod, "system.secondaryFields.intellectual.herballore.spec": mod,
-        "system.secondaryFields.intellectual.history.spec": mod, "system.secondaryFields.intellectual.law.spec": mod, "system.secondaryFields.intellectual.magicappr.spec": mod, "system.secondaryFields.intellectual.medicine.spec": mod,
-        "system.secondaryFields.intellectual.memorize.spec": mod, "system.secondaryFields.intellectual.navigation.spec": mod, "system.secondaryFields.intellectual.occult.spec": mod, "system.secondaryFields.intellectual.science.spec": mod,
-        "system.secondaryFields.intellectual.tactics.spec": mod, "system.secondaryFields.vigor.composure.spec": mod, "system.secondaryFields.vigor.featsofstr.spec": mod, "system.secondaryFields.vigor.withstpain.spec": mod,
-        "system.secondaryFields.subterfuge.disguise.spec": mod, "system.secondaryFields.subterfuge.hide.spec": mod, "system.secondaryFields.subterfuge.lockpicking.spec": mod, "system.secondaryFields.subterfuge.poisons.spec": mod,
-        "system.secondaryFields.subterfuge.stealth.spec": mod, "system.secondaryFields.subterfuge.theft.spec": mod, "system.secondaryFields.subterfuge.traplore.spec": mod, "system.secondaryFields.creative.alchemy.spec": mod,
-        "system.secondaryFields.creative.animism.spec": mod, "system.secondaryFields.creative.art.spec": mod, "system.secondaryFields.creative.dance.spec": mod, "system.secondaryFields.creative.forging.spec": mod,
-        "system.secondaryFields.creative.jewelry.spec": mod, "system.secondaryFields.creative.music.spec": mod, "system.secondaryFields.creative.runes.spec": mod, "system.secondaryFields.creative.ritualcalig.spec": mod,
-        "system.secondaryFields.creative.slofhand.spec": mod, "system.secondaryFields.creative.tailoring.spec": mod, "system.secondaryFields.athletics.piloting.spec": mod, "system.secondaryFields.creative.cooking.spec": mod,
-        "system.secondaryFields.intellectual.technomagic.spec": mod, "system.secondaryFields.creative.toymaking.spec": mod, "system.secondaryFields.perceptive.kidetection.spec": mod, "system.secondaryFields.subterfuge.kiconceal.spec": mod
+        "system.secondaryFields.athletics.acrobatics.spec": formData.value, "system.secondaryFields.athletics.athleticism.spec": formData.value, "system.secondaryFields.athletics.climb.spec": formData.value, "system.secondaryFields.athletics.jump.spec": formData.value,
+        "system.secondaryFields.athletics.ride.spec": formData.value, "system.secondaryFields.athletics.swim.spec": formData.value, "system.secondaryFields.social.etiquette.spec": formData.value, "system.secondaryFields.social.intimidate.spec": formData.value,
+        "system.secondaryFields.social.leadership.spec": formData.value, "system.secondaryFields.social.persuasion.spec": formData.value, "system.secondaryFields.social.streetwise.spec": formData.value, "system.secondaryFields.social.style.spec": formData.value,
+        "system.secondaryFields.social.trading.spec": formData.value, "system.secondaryFields.perceptive.notice.spec": formData.value, "system.secondaryFields.perceptive.search.spec": formData.value, "system.secondaryFields.perceptive.track.spec": formData.value,
+        "system.secondaryFields.intellectual.animals.spec": formData.value, "system.secondaryFields.intellectual.appraisal.spec": formData.value, "system.secondaryFields.intellectual.architecture.spec": formData.value, "system.secondaryFields.intellectual.herballore.spec": formData.value,
+        "system.secondaryFields.intellectual.history.spec": formData.value, "system.secondaryFields.intellectual.law.spec": formData.value, "system.secondaryFields.intellectual.magicappr.spec": formData.value, "system.secondaryFields.intellectual.medicine.spec": formData.value,
+        "system.secondaryFields.intellectual.memorize.spec": formData.value, "system.secondaryFields.intellectual.navigation.spec": formData.value, "system.secondaryFields.intellectual.occult.spec": formData.value, "system.secondaryFields.intellectual.science.spec": formData.value,
+        "system.secondaryFields.intellectual.tactics.spec": formData.value, "system.secondaryFields.vigor.composure.spec": formData.value, "system.secondaryFields.vigor.featsofstr.spec": formData.value, "system.secondaryFields.vigor.withstpain.spec": formData.value,
+        "system.secondaryFields.subterfuge.disguise.spec": formData.value, "system.secondaryFields.subterfuge.hide.spec": formData.value, "system.secondaryFields.subterfuge.lockpicking.spec": formData.value, "system.secondaryFields.subterfuge.poisons.spec": formData.value,
+        "system.secondaryFields.subterfuge.stealth.spec": formData.value, "system.secondaryFields.subterfuge.theft.spec": formData.value, "system.secondaryFields.subterfuge.traplore.spec": formData.value, "system.secondaryFields.creative.alchemy.spec": formData.value,
+        "system.secondaryFields.creative.animism.spec": formData.value, "system.secondaryFields.creative.art.spec": formData.value, "system.secondaryFields.creative.dance.spec": formData.value, "system.secondaryFields.creative.forging.spec": formData.value,
+        "system.secondaryFields.creative.jewelry.spec": formData.value, "system.secondaryFields.creative.music.spec": formData.value, "system.secondaryFields.creative.runes.spec": formData.value, "system.secondaryFields.creative.ritualcalig.spec": formData.value,
+        "system.secondaryFields.creative.slofhand.spec": formData.value, "system.secondaryFields.creative.tailoring.spec": formData.value, "system.secondaryFields.athletics.piloting.spec": formData.value, "system.secondaryFields.creative.cooking.spec": formData.value,
+        "system.secondaryFields.intellectual.technomagic.spec": formData.value, "system.secondaryFields.creative.toymaking.spec": formData.value, "system.secondaryFields.perceptive.kidetection.spec": formData.value, "system.secondaryFields.subterfuge.kiconceal.spec": formData.value
     })
 }
 
@@ -135,13 +155,22 @@ export async function calculateDpCost(actorData, classId) {
     const totalDpCosts = [];
 
     const dpLimits = [];
-    const totalDP = system.levelinfo.dp;
+    let totalDP = system.levelinfo.dp;
     dpLimits.maxPrimaryDp = Math.floor(totalDP * (dpCost.limits.primary / 100));
     dpLimits.maxPrimaryCombatDp = Math.floor(totalDP * .5);
     dpLimits.maxMagicDp = Math.floor(totalDP * (dpCost.limits.supernatural / 100));
     dpLimits.maxMagicProjDp = Math.floor(dpLimits.maxMagicDp * .5);
     dpLimits.maxPsychicDp = Math.floor(totalDP * (dpCost.limits.psychic / 100));
     dpLimits.maxPsychicProjDp = Math.floor(dpLimits.maxPsychicDp * .5);
+    dpLimits.fortyPercent = Math.floor(totalDP * .4);
+
+    const customSecEntries = actorData.items
+        .filter(item => item.type === "secondary")
+        .map(item => {
+            const name = item.name;
+            const value = Math.floor(item.system.base * item.system.dpValue);
+            return { name, value };
+    });
 
     const dpPrim = [
         { name: game.i18n.localize('abfalter.attack'), value: Math.floor(system.combatValues.attack.base * dpCost.primary.attack) },
@@ -249,13 +278,22 @@ export async function calculateDpCost(actorData, classId) {
         { name: game.i18n.localize('abfalter.slofhand'), value: Math.floor(system.secondaryFields.creative.slofhand.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.slofhand)) },
         { name: game.i18n.localize('abfalter.tailoring'), value: Math.floor(system.secondaryFields.creative.tailoring.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.tailoring)) },
 
-        { name: game.i18n.localize('abfalter.monsterPowTitle'), value: Math.floor(system.monsterStats.totalDP) }
+        { name: game.i18n.localize('abfalter.monsterPowTitle'), value: Math.floor(system.monsterStats.totalDP) },
+        ...customSecEntries
     ];
 
-    
+    dpLimits.maxPrimaryDp += system.levelinfo.primDpMod;
+    dpLimits.maxPrimaryCombatDp += system.levelinfo.combatDpMod;
+    dpLimits.maxMagicDp += system.levelinfo.mysticDpMod;
+    dpLimits.maxMagicProjDp += system.levelinfo.mysticProjDpMod;
+    dpLimits.maxPsychicDp += system.levelinfo.psychicDpMod;
+    dpLimits.maxPsychicProjDp += system.levelinfo.psychicProjDpMod;
+
     totalDpCosts.other = dpSecondary.reduce((acc, { value }) => acc + value, 0);
     totalDpCosts.all = Math.floor(totalDpCosts.primary + totalDpCosts.magic + totalDpCosts.psychic + totalDpCosts.other);
-    
+    totalDP += Math.floor(system.levelinfo.primDpMod + system.levelinfo.combatDpMod + system.levelinfo.mysticDpMod 
+        + system.levelinfo.mysticProjDpMod + system.levelinfo.psychicDpMod + system.levelinfo.psychicProjDpMod);
+
     const dpWarning = [];
     dpWarning.primary = totalDpCosts.primary > dpLimits.maxPrimaryDp;
     dpWarning.primaryCombat = totalDpCosts.primaryCombat > dpLimits.maxPrimaryCombatDp;
@@ -280,18 +318,143 @@ export async function calculateDpCost(actorData, classId) {
     };
 
     const htmlContent = await foundry.applications.handlebars.renderTemplate(template, templateData);
-    new Dialog({
-        title: 'DP Cost Calculation',
+    foundry.applications.api.DialogV2.wait({
+        classes: ["baseAbfalter", "abfalterDialog"],
+        window: { title: game.i18n.localize("abfalter.dpCostCalc") },
         content: htmlContent,
-        buttons: {
-            close: {
+        position: {
+            width: 500,
+            height: "auto"
+        },
+        buttons: [
+            {
+                label: 'Calculate',
+                action: 'submit',
+                callback: async () => {
+                    await calculateDpCost(actorData, classId);
+                }
+            },
+            {
                 label: 'Close',
+                action: 'close',
                 callback: () => {}
             }
-        }
-    }, {
-        width: 500,
-    }).render(true);
+        ]
+    });
+
+}
+
+export async function dpOffSetsWindow(actorData) {
+    const template = templates.dpOffsets;
+    const templateData = { actor: actorData };
+    const htmlContent = await foundry.applications.handlebars.renderTemplate(template, templateData);
+
+    const formData = await new Promise((resolve) => {
+        foundry.applications.api.DialogV2.wait({
+            classes: ["baseAbfalter", "abfalterDialog", "dpOffSetsDialog"],
+            window: { title: game.i18n.localize("abfalter.dpOffsets") },
+            content: htmlContent,
+            position: {
+                width: 475,
+                height: "auto"
+            },
+            buttons: [
+                {
+                    label: game.i18n.localize("abfalter.dialogs.saveChanges"),
+                    action: 'submit',
+                    callback: (event, button, dialog) => {
+                        const form = dialog.element.querySelector("form");
+                        if (!form) return resolve(null);
+                        const data = new foundry.applications.ux.FormDataExtended(form).object;
+                        let formData = {};
+                        formData.confirmed = true;
+                        formData.dpmod = Number(data["overallDpMod"]);
+                        formData.primDpMod = Number(data["primaryDpMod"]);
+                        formData.combatDpMod = Number(data["combatDpMod"]);
+                        formData.magicDpMod = Number(data["magicDpMod"]);
+                        formData.magicProjDpMod = Number(data["magicProjDpMod"]);
+                        formData.psychicDpMod = Number(data["psychicDpMod"]);
+                        formData.psychicProjDpMod = Number(data["psychicProjDpMod"]);
+                        resolve(formData);
+                    }
+                },
+                {
+                    label: game.i18n.localize("abfalter.dialogs.cancel"),
+                    action: 'cancel',
+                    callback: (event, button, dialog) => {
+                        let formData = {};
+                        formData.confirmed = false;
+                        resolve(formData);
+                    }
+                }
+            ]
+        });
+    });
+    if (!formData || !formData.confirmed) return;
+    await actorData.update({
+        "system.levelinfo.primDpMod": formData.primDpMod,
+        "system.levelinfo.combatDpMod": formData.combatDpMod,
+        "system.levelinfo.mysticDpMod": formData.magicDpMod,
+        "system.levelinfo.mysticProjDpMod": formData.magicProjDpMod,
+        "system.levelinfo.psychicDpMod": formData.psychicDpMod,
+        "system.levelinfo.psychicProjDpMod": formData.psychicProjDpMod
+    });
+}
+
+export async function settingsWindow(actorData) {
+    const template = templates.settingsValues;
+    const templateData = { actor: actorData };
+    const htmlContent = await foundry.applications.handlebars.renderTemplate(template, templateData);
+
+    const formData = await new Promise((resolve) => {
+        foundry.applications.api.DialogV2.wait({
+            classes: ["baseAbfalter", "abfalterDialog", "settingsValuesDialog"],
+            window: { title: game.i18n.localize("abfalter.settingsExtended") },
+            content: htmlContent,
+            position: {
+                width: 475,
+                height: "auto"
+            },
+            buttons: [
+                {
+                    label: game.i18n.localize("abfalter.dialogs.saveChanges"),
+                    action: 'submit',
+                    callback: (event, button, dialog) => {
+                        const form = dialog.element.querySelector("form");
+                        if (!form) return resolve(null);
+                        const data = new foundry.applications.ux.FormDataExtended(form).object;
+                        let formData = {};
+                        formData.confirmed = true;
+                        formData.phrMult = Number(data["phrMult"]);
+                        formData.drMult = Number(data["drMult"]);
+                        formData.psnrMult = Number(data["psnrMult"]);
+                        formData.mrMult = Number(data["mrMult"]);
+                        formData.psyrMult = Number(data["psyrMult"]);
+                        formData.fatigueValue = Number(data["fatigueValue"]);
+                        resolve(formData);
+                    }
+                },
+                {
+                    label: game.i18n.localize("abfalter.dialogs.cancel"),
+                    action: 'cancel',
+                    callback: (event, button, dialog) => {
+                        let formData = {};
+                        formData.confirmed = false;
+                        resolve(formData);
+                    }
+                }
+            ]
+        });
+    });
+    if (!formData || !formData.confirmed) return;
+        await actorData.update({
+        "system.settings.phrMult": formData.phrMult,
+        "system.settings.drMult": formData.drMult,
+        "system.settings.psnrMult": formData.psnrMult,
+        "system.settings.mrMult": formData.mrMult,
+        "system.settings.psyrMult": formData.psyrMult,//here
+        "system.settings.fatigueValue": formData.fatigueValue
+    });
 }
 
 

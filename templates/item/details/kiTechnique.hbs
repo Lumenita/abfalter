@@ -3,75 +3,81 @@
         <legend> {{ localize "abfalter.generalDetails" }} </legend>
         <label class="itemSimpleLabel"> <span> {{localize "abfalter.level"}} </span> <input type="number" name="system.level" value="{{system.level}}" /> </label>
         <label class="itemSimpleLabel"> <span> {{localize "abfalter.mk"}} </span> <input type="number" name="system.mk" value="{{system.mk}}" /> </label>
+        <div class="csSelect itemSimpleLabel">
+            <label>
+                <span> {{localize "abfalter.maintType"}} </span>
+                <select name="system.maintainable">
+                    {{selectOptions kiMaintObjList selected=system.maintainable localize=true}}
+                </select>
+            </label>
+        </div>
+        <div class="csSelect itemSimpleLabel">
+            <label>
+                <span> {{localize "abfalter.frequency"}} </span>
+                <select name="system.frequency">
+                    {{selectOptions kiFrequencyObjList selected=system.frequency localize=true}}
+                </select>
+            </label>
+        </div>
+        
+        <div class="csSelect itemSimpleLabel">
+            <label>
+                <span> {{localize "abfalter.actionType"}} </span>
+                <select name="system.actionType">
+                    {{selectOptions kiActionTypeObjList selected=system.actionType localize=true}}
+                </select>
+            </label>
+        </div>
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.kiAbilityData.isCombinable"}} </span>
+            <button type="button" class="{{#if system.combinable}}kiBought{{/if}}" data-action="toggleValue" data-label="system.combinable" data-ability="{{system.combinable}}">
+                {{#if system.combinable}}<span>{{localize "abfalter.yes"}}</span>{{else}}<span>{{localize "abfalter.no"}}</span>{{/if}}
+            </button>
+        </label>
     </fieldset>
 
     <fieldset>
         <legend> {{localize "abfalter.kiTechTitle"}} {{ localize "abfalter.details" }} </legend>
-        <div class="kiTechContent">
-            <div> </div>
 
-            <div class="kiTechTypeMax">
-                <span> {{localize "abfalter.ki"}} </span>
-                <span> {{localize "abfalter.agi"}} </span>
-                <span> {{localize "abfalter.con"}} </span>
-                <span> {{localize "abfalter.dex"}} </span>
-                <span> {{localize "abfalter.str"}} </span>
-                <span> {{localize "abfalter.pow"}} </span>
-                <span> {{localize "abfalter.wp"}} </span>
-                <span> </span>
-            </div>
+        <div class="kiTechGridContent">
+            {{!-- Header Row --}}
+            <span class="kiTechGridUnderline"> {{localize "abfalter.ki"}} </span>
+            <span class="kiTechGridUnderline"> {{localize "abfalter.agi"}} </span>
+            <span class="kiTechGridUnderline"> {{localize "abfalter.con"}} </span>
+            <span class="kiTechGridUnderline"> {{localize "abfalter.dex"}} </span>
+            <span class="kiTechGridUnderline"> {{localize "abfalter.str"}} </span>
+            <span class="kiTechGridUnderline"> {{localize "abfalter.pow"}} </span>
+            <span class="kiTechGridUnderline"> {{localize "abfalter.wp"}} </span>
 
-            <div class="kiTechUseMax">
-                <span> {{localize "abfalter.use"}} </span>
-                <input name="system.use.agi" type="number" value="{{system.use.agi}}" />
-                <input name="system.use.con" type="number" value="{{system.use.con}}" />
-                <input name="system.use.dex" type="number" value="{{system.use.dex}}" />
-                <input name="system.use.str" type="number" value="{{system.use.str}}" />
-                <input name="system.use.pow" type="number" value="{{system.use.pow}}" />
-                <input name="system.use.wp" type="number" value="{{system.use.wp}}" />
-            </div>
+            {{!-- Ki Row --}}
+            <span> {{localize "abfalter.use"}} </span>
+            <input name="system.use.agi" type="number" value="{{system.use.agi}}" />
+            <input name="system.use.con" type="number" value="{{system.use.con}}" />
+            <input name="system.use.dex" type="number" value="{{system.use.dex}}" />
+            <input name="system.use.str" type="number" value="{{system.use.str}}" />
+            <input name="system.use.pow" type="number" value="{{system.use.pow}}" />
+            <input name="system.use.wp" type="number" value="{{system.use.wp}}" />
 
-            <div class="kiTechMaintMaxContent">
-                {{#if system.actor}}
-                <div>
-                    {{#if system.unified}}
-                    <div class="techExpandContent">
-                        {{#if system.innatePower}}
-                        <span> {{localize "abfalter.innatePowerMaint"}} </span>
-                        {{else}}
-                        <span> {{localize "abfalter.unifiedMaint"}} </span>
-                        {{/if}}
-                        <input name="system.maint.unified" type="number" value="{{system.maint.unified}}" />
-                    </div>
-                    {{else}}
-                    <span> {{localize "abfalter.maint"}} </span>
-                    <input name="system.maint.agi" type="number" value="{{system.maint.agi}}" />
-                    <input name="system.maint.con" type="number" value="{{system.maint.con}}" />
-                    <input name="system.maint.dex" type="number" value="{{system.maint.dex}}" />
-                    <input name="system.maint.str" type="number" value="{{system.maint.str}}" />
-                    <input name="system.maint.pow" type="number" value="{{system.maint.pow}}" />
-                    <input name="system.maint.wp" type="number" value="{{system.maint.wp}}" />
-                    {{/if}}
-                </div>
-                {{else}}
-                <div>
-                    <span> {{localize "abfalter.maint"}} </span>
-                    <input name="system.maint.agi" type="number" value="{{system.maint.agi}}" />
-                    <input name="system.maint.con" type="number" value="{{system.maint.con}}" />
-                    <input name="system.maint.dex" type="number" value="{{system.maint.dex}}" />
-                    <input name="system.maint.str" type="number" value="{{system.maint.str}}" />
-                    <input name="system.maint.pow" type="number" value="{{system.maint.pow}}" />
-                    <input name="system.maint.wp" type="number" value="{{system.maint.wp}}" />
-                </div>
-
-                <div>
-                    <span> {{localize "abfalter.unifiedMaint"}} </span>
-                    <input name="system.maint.unified" type="number" value="{{system.maint.unified}}" />
-                </div>
-                {{/if}}
-            </div>
-
-            <div></div>
+            {{!-- Maint Row --}}
+            {{#if system.maintBool}}
+            <span> {{localize "abfalter.maint"}} </span>
+            <input name="system.maint.agi" type="number" value="{{system.maint.agi}}" />
+            <input name="system.maint.con" type="number" value="{{system.maint.con}}" />
+            <input name="system.maint.dex" type="number" value="{{system.maint.dex}}" />
+            <input name="system.maint.str" type="number" value="{{system.maint.str}}" />
+            <input name="system.maint.pow" type="number" value="{{system.maint.pow}}" />
+            <input name="system.maint.wp" type="number" value="{{system.maint.wp}}" />
+            {{/if}}
         </div>
+
+        {{#if system.maintBool}}
+        <label class="itemSimpleLabel">
+            {{#if system.innatePower}}
+            <span> {{localize "abfalter.innatePowerMaint"}} </span>
+            {{else}}
+            <span> {{localize "abfalter.unifiedMaint"}} </span>
+            {{/if}}
+            <input name="system.maint.unified" type="number" value="{{system.maint.unified}}" />
+        </label>
+        {{/if}}
     </fieldset>
 </section>

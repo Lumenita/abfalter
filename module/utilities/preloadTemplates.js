@@ -41,6 +41,7 @@ export const preloadHandlebarsTemplates = () => {
         "systems/abfalter/templates/item/partials/subHeader/mentalPattern.hbs",
         "systems/abfalter/templates/item/partials/subHeader/psychicMatrix.hbs",
         "systems/abfalter/templates/item/partials/subHeader/maintPower.hbs",
+        "systems/abfalter/templates/item/partials/subHeader/kiAbility.hbs",
         "systems/abfalter/templates/item/partials/subHeader/arsMagnus.hbs",
         "systems/abfalter/templates/item/partials/subHeader/martialArt.hbs",
         "systems/abfalter/templates/item/partials/subHeader/kiSealCreature.hbs",

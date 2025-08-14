@@ -1,7 +1,3 @@
-2025/06/02-05:34:10.140 7014 Recovering log #328
-2025/06/02-05:34:10.152 7014 Delete type=0 #328
-2025/06/02-05:34:10.152 7014 Delete type=3 #326
-2025/06/02-05:34:17.674 9db4 Level-0 table #333: started
-2025/06/02-05:34:17.674 9db4 Level-0 table #333: 0 bytes OK
-2025/06/02-05:34:17.680 9db4 Delete type=0 #331
-2025/06/02-05:34:17.691 9db4 Manual compaction at level-0 from '!folders!BR0xwjrlAvrJCG7R' @ 72057594037927935 : 1 .. '!items!xYBbdDmyZq9zdR5F' @ 0 : 0; will stop at (end)
+2025/08/14-06:49:42.058 abbc Recovering log #507
+2025/08/14-06:49:42.065 abbc Delete type=0 #507
+2025/08/14-06:49:42.065 abbc Delete type=3 #506

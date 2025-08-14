@@ -1,0 +1,273 @@
+<div class="kiTechCreatorContainer">
+    <div class="kiTechCreatorTitle">
+        <span>{{localize "abfalter.kiAbilityData.createKiTech"}}</span>
+    </div>
+
+    <div class="kiTechCreatorTopLevel">
+        <label>
+            <span>{{localize "abfalter.kiAbilityData.kiTechLevel"}}</span>
+            <select class="setLevelDropdown" data-label="level" name="system.level">
+                {{selectOptions system.kiTechLevelList selected=system.level}}
+            </select>
+        </label>
+
+        <label>
+            <span>{{localize "abfalter.kiAbilityData.whatMaint"}}</span>
+            <select class="setMaintDropdown" data-label="maintType" name="system.maintType">
+                {{selectOptions system.maintList selected=system.maintType}}
+            </select>
+        </label>
+
+        <label>
+            <span>{{localize "abfalter.kiAbilityData.isCombinable"}}</span>
+            <button type="button" data-action="toggleCombValue" class="{{#if system.isCombinable}}kiBought{{/if}}"
+                data-label="isCombinable" data-ability="{{system.isCombinable}}">
+                {{#if system.isCombinable}}
+                <span> {{localize "abfalter.yes"}} </span>
+                {{else}}
+                <span> {{localize "abfalter.no"}} </span>
+                {{/if}}
+            </button>
+        </label>
+    </div>
+
+    <div class="kiTechCreatorAddAbility">
+        <button type="button" data-action="addKiAbility">
+            <i class="fas fa-plus"></i>
+            {{localize "abfalter.kiAbilityData.addKiAbility"}}
+        </button>
+    </div>
+
+    <div class="kiTechAbility-list">
+        {{#each system.abilities as |ability key|}}
+        <div class="kiTechAbility-box">
+            <div class="kiTechAbility-header {{#if ability.expand}}{{else}}kiTechAbility-headerLine{{/if}}">
+                <div>
+                    <span class="{{#if (or ability.warningKi ability.warningMaint)}}warningAbfalter tooltip-container{{/if}}">
+                        {{localize (concat "abfalter.kiAbilityData." ability.ability)}}
+                        <span class="custom-tooltip">{{localize "abfalter.kiAbilityData.warningTitle"}}</span>
+                    </span>
+                    <span>{{localize "abfalter.mk"}}: {{ability.costsFinal.mk}}</span>
+                    <a data-action="toggleAbilityRemove" data-ability="{{ability.id}}"><i class="fas fa-trash"></i></a>
+                    <a class="{{#ifEquals ability.category "disadvantages"}}visibilityOff{{/ifEquals}}"
+                        data-action="toggleAbilityExpand" data-ability="{{ability.id}}" data-value="{{ability.expand}}">
+                        {{#if ability.expand}}
+                        <i class="fas fa-chevron-up"></i>
+                        {{else}}
+                        <i class="fas fa-chevron-down"></i>
+                        {{/if}}
+                    </a>
+                </div>
+                <span>{{ability.subTitle}}</span>
+            </div>
+
+            {{#ifNotEquals ability.category "disadvantages"}}
+            {{#if ability.expand}}
+            <div class="kiTechAbility-details">
+                <span>★ {{localize "abfalter.kiAbilityData.primary"}}: {{localize (concat "abfalter."
+                    ability.primaryChar)}}</span>
+                <span>{{localize "abfalter.kiAbilityData.element"}}: {{localize (concat "abfalter.kiAbilityData."
+                    ability.selectedElement)}}</span>
+            </div>
+
+            <div class="kiTechAbility-optionals">
+                {{#each ability.selectedOptionalChars as |char key|}}
+                <label>
+                    <input type="checkbox" data-action="toggleOptionalChar" {{#if char.selected}}checked{{/if}}
+                        data-ability="{{../id}}" data-value="{{char.selected}}" data-index="{{key}}">
+                    <span>{{localize (concat "abfalter." char.type)}}: {{char.value}}</span>
+                </label>
+                {{/each}}
+            </div>
+
+            <div class="kiTechAbility-kiPoints">
+                <div>
+                    <span class="{{#if ability.warningKi}}warningAbfalter tooltip-container{{/if}}"> 
+                        {{localize "abfalter.kiAbilityData.kiPlaced"}} {{ability.placedKi}} / {{ability.chosenKi}}
+                        <span class="custom-tooltip">{{localize "abfalter.kiAbilityData.warningKi"}}</span>
+                    </span>
+                    <span class="{{#if ability.warningMaint}}warningAbfalter tooltip-container{{/if}}"> 
+                        {{localize "abfalter.kiAbilityData.maintPlaced"}} {{ability.placedMaint}} / {{ability.chosenMaint}}
+                        <span class="custom-tooltip custom-tooltip-right">{{localize "abfalter.kiAbilityData.warningMaint"}}</span>
+                    </span>
+                </div>
+
+                <div class="kiTechAbility-kiPointsGrid" style="--char-count: {{ability.chosenChars.length}}">
+                    {{!-- Header Row --}}
+                    <div class="grid-label">
+                        {{localize "abfalter.kiAbilityData.char"}}
+                    </div>
+                    {{#each (array "agility" "consti" "dexterity" "strength" "power" "willPower") as |charName|}}
+                    {{#each ability.chosenChars as |charObj|}}
+                    {{#if (eq charObj.type charName)}}
+                    <div class="grid-char-name">{{shortStat charObj.type}}</div>
+                    {{/if}}
+                    {{/each}}
+                    {{/each}}
+
+                    {{!-- Ki Row --}}
+                    <div class="grid-label">
+                        {{localize "abfalter.ki"}}
+                    </div>
+                    {{#each (array "agility" "consti" "dexterity" "strength" "power" "willPower") as |charName|}}
+                    {{#each ability.chosenChars as |charObj charIndex|}}
+                    {{#if (eq charObj.type charName)}}
+                    <div class="grid-cell">
+                        <a data-action="kiAbilityChange" data-value="-1" data-ability="{{../../id}}"
+                            data-index="{{charIndex}}">
+                            <i class="fas fa-minus"></i>
+                        </a>
+                        <span>{{charObj.kiTotal}}</span>
+                        <a data-action="kiAbilityChange" data-value="1" data-ability="{{../../id}}"
+                            data-index="{{charIndex}}">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                    {{/if}}
+                    {{/each}}
+                    {{/each}}
+
+                    {{!-- Maint Row --}}
+                    {{#ifIn ../system.maintType "maintenance minorSus majorSus" }}
+                    {{!-- Maint Row --}}
+                    <div class="grid-label">
+                        {{localize "abfalter.maint"}}
+                    </div>
+                    {{#each (array "agility" "consti" "dexterity" "strength" "power" "willPower") as |charName|}}
+                    {{#each ability.chosenChars as |charObj charIndex|}}
+                    {{#if (eq charObj.type charName)}}
+                    <div class="grid-cell">
+                        <a data-action="maintAbilityChange" data-value="-1" data-ability="{{../../id}}"
+                            data-index="{{charIndex}}">
+                            <i class="fas fa-minus"></i>
+                        </a>
+                        <span>{{charObj.maint}}</span>
+                        <a data-action="maintAbilityChange" data-value="1" data-ability="{{../../id}}"
+                            data-index="{{charIndex}}">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                    {{/if}}
+                    {{/each}}
+                    {{/each}}
+                    {{/ifIn}}
+
+                </div>
+            </div>
+            {{/if}}
+            {{/ifNotEquals}}
+        </div>
+        {{/each}}
+    </div>
+
+    {{#if system.showPreview}}
+    <div class="kiTechAbility-preview">
+        <span>{{localize "abfalter.kiAbilityData.techPreview"}}</span>
+        <div>
+            <div class="kiTechAbility-previewTitle">
+                <label>
+                    {{localize "abfalter.kiAbilityData.totalMk"}}: {{system.levelMinMk}} &lt;
+                    <span class="{{#if system.warning.mk}}warningAbfalter tooltip-container{{/if}}">
+                        [ {{system.totalMk}} ] 
+                        <span class="custom-tooltip">{{localize "abfalter.kiAbilityData.warningMk"}}</span> 
+                    </span>
+                    &lt; {{system.levelMaxMk}}
+                </label>
+                <label class="{{#if system.warning.disadvantage}}warningAbfalter tooltip-container{{/if}}">
+                    {{localize "abfalter.kiAbilityData.myDisadvantages"}} {{system.disadvNumber}} / {{system.levelDisadvLimit}}
+                    <span class="custom-tooltip custom-tooltip-right">{{localize "abfalter.kiAbilityData.warningDisadv"}}</span> 
+                </label>
+                <label>
+                    {{localize "abfalter.frequency"}}: {{localize (concat "abfalter.kiAbilityData." system.finalFrequency)}}
+                </label>
+                <label>
+                    {{localize "abfalter.actionType"}}: {{localize (concat "abfalter.kiAbilityData." system.finalActionType)}}
+                </label>
+                {{#if system.isCombinable}}
+                <label class="{{#if system.warning.combinableKi}}warningAbfalter tooltip-container{{/if}}">
+                    {{localize "abfalter.kiAbilityData.combPlaced"}} {{system.combKiPlaced}} / {{system.combAddedKi}}
+                    <span class="custom-tooltip">{{localize "abfalter.kiAbilityData.warningComb"}}</span> 
+                </label>
+                {{/if}}
+                {{#ifIn system.maintType "maintenance minorSus majorSus" }}
+                <label>
+                    {{localize "abfalter.unifiedMaintLong"}}: {{system.unifiedCost}}
+                </label>
+                {{/ifIn}}
+            </div>
+
+            <div class="kiTechAbility-kiFinalGrid" style="--char2-count: {{system.kiFinalLength}}">
+                {{!-- Header Row --}}
+                <div class="grid-label">
+                    {{localize "abfalter.kiAbilityData.char"}}
+                </div>
+                {{#each (array "agility" "consti" "dexterity" "strength" "power" "willPower") as |charName|}}
+                {{#with (lookup ../system.kiFinalValues charName) as |charObj|}}
+                {{#if charObj}}
+                <div class="grid-char-name">{{shortStat charObj.type}}</div>
+                {{/if}}
+                {{/with}}
+                {{/each}}
+
+                {{!-- Combinable Ki Row --}}
+                {{#if system.isCombinable}}
+                <div class="grid-label">
+                    {{localize "abfalter.kiAbilityData.combinableKi"}}
+                </div>
+                {{#each (array "agility" "consti" "dexterity" "strength" "power" "willPower") as |charName|}}
+                {{#with (lookup ../system.kiFinalValues charName) as |charObj|}}
+                {{#if charObj}}
+                <div class="grid-cell">
+                    <a data-action="combKiChange" data-value="-1" data-char="{{charName}}">
+                        <i class="fas fa-minus"></i>
+                    </a>
+                    <span>{{charObj.combKi}}</span>
+                    <a data-action="combKiChange" data-value="1" data-char="{{charName}}">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </div>
+                {{/if}}
+                {{/with}}
+                {{/each}}
+                {{/if}}
+
+                {{!-- Ki Row --}}
+                <div class="grid-label">
+                    {{localize "abfalter.kiAbilityData.finalKi"}}
+                </div>
+                {{#each (array "agility" "consti" "dexterity" "strength" "power" "willPower") as |charName|}}
+                {{#with (lookup ../system.kiFinalValues charName) as |charObj|}}
+                {{#if charObj}}
+                <div class="grid-cell">
+                    <span>{{charObj.finalKi}}</span>
+                </div>
+                {{/if}}
+                {{/with}}
+                {{/each}}
+
+                {{!-- Maint Row --}}
+                {{#ifIn system.maintType "maintenance minorSus majorSus"}}
+                <div class="grid-label">
+                    {{localize "abfalter.maint"}}
+                </div>
+                {{#each (array "agility" "consti" "dexterity" "strength" "power" "willPower") as |charName|}}
+                {{#with (lookup ../system.kiFinalValues charName) as |charObj|}}
+                {{#if charObj}}
+                <div class="grid-cell">
+                    <span>{{charObj.finalMaint}}</span>
+                </div>
+                {{/if}}
+                {{/with}}
+                {{/each}}
+                {{/ifIn}}
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="kiTechAbility-description">
+        <span>Description maybe</span>
+    </div>
+    -->
+    {{/if}}
+</div>
+

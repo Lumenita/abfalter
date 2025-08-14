@@ -391,39 +391,34 @@ export default class abfalterItem extends Item {
     }
 
     prepareKiTechnique() {
-        if (this.parent != null) {
-            this.system.actor = false;
-            if (this.parent) {
-                switch (this.system.frequency) {
-                    case "action":
-                        this.system.frequencyName = game.i18n.localize('abfalter.action');
-                        break;
-                    case "turn":
-                        this.system.frequencyName = game.i18n.localize('abfalter.turn');
-                        break;
-                    case "variable":
-                        this.system.frequencyName = game.i18n.localize('abfalter.variable');
-                        break;
-                }
-                switch (this.system.actionType) {
-                    case "attack":
-                        this.system.actionTypeName = game.i18n.localize('abfalter.attack');
-                        break;
-                    case "defense":
-                        this.system.actionTypeName = game.i18n.localize('abfalter.defense');
-                        break;
-                    case "counterAttack":
-                        this.system.actionTypeName = game.i18n.localize('abfalter.counterAttack');
-                        break;
-                    case "variable":
-                        this.system.actionTypeName = game.i18n.localize('abfalter.variable');
-                        break;
-                }
+        const sys = this.system;
+        sys.maintBool = sys.maintainable === "none" ? false : true;
+        sys.unified = this.parent != null ? this.parent.system.toggles.unifiedPools : false;
+        sys.innatePower = this.parent != null ? this.parent.system.toggles.innatePower : false;
 
-                this.system.actor = true;
-                this.system.unified = this.parent.system.toggles.unifiedPools;
-                this.system.innatePower = this.parent.system.toggles.innatePower;
-                this.system.tag = this.parent.system.kiPool.innate.tag;
+        const frequencyLabel  = game.i18n.localize('abfalter.frequency');
+        const actionTypeLabel = game.i18n.localize('abfalter.actionType');
+        let frequencyTypeValue = game.i18n.localize(`abfalter.${sys.frequency}`);
+        let actionTypeValue = game.i18n.localize(`abfalter.${sys.actionType}`);
+        const tags = [];
+        if (String(sys.maintainable).toLowerCase() !== 'none') {
+            const mText = game.i18n.localize(`abfalter.` + sys.maintainable);
+            tags.push(mText);
+        }
+        if (sys.combinable) {
+            const cText = game.i18n.localize('abfalter.combinable');
+            tags.push(cText);
+        }
+        if (sys.active) {
+            const aText = game.i18n.localize('abfalter.active');
+            tags.push(aText);
+        }
+        const left = `${frequencyLabel}: ${frequencyTypeValue}, ${actionTypeLabel}: ${actionTypeValue}`;
+        sys.combinedLabel = tags.length ? `${left}, ${tags.join(', ')}` : left;
+
+        for (const [key, val] of Object.entries(sys.use)) {
+            if (val > 0) {
+                sys.showColumnNumber += 1;
             }
         }
     }
@@ -529,9 +524,8 @@ export default class abfalterItem extends Item {
         "spell": "systems/abfalter/templates/chatItem/spellChat.html",
         "psychicMatrix": "systems/abfalter/templates/chatItem/psyMatrixChat.html",
         "kiSealCreature": "systems/abfalter/templates/chatItem/kiSealChat.html",
-        "kiTechnique": "systems/abfalter/templates/chatItem/kitechChat.html",
+        "kiTechnique": "systems/abfalter/templates/chatItem/kitechChat.hbs",
         "armor": "systems/abfalter/templates/chatItem/armorChat.html",
-        "armorHelmet": "systems/abfalter/templates/chatItem/armorHelmChat.html",
         "weapon": "systems/abfalter/templates/chatItem/weaponChat.html",
         "inventory": "systems/abfalter/templates/chatItem/invChat.html",
     }
@@ -571,6 +565,8 @@ export default class abfalterItem extends Item {
                 }
                 break;
             case "kiTechnique":
+                cardData.chatDesc = cardData.enrichedDesc;
+                console.log(cardData);
                 if (cardData.system.use.agi == 0) {
                     cardData.agi = true;
                 }

@@ -5,7 +5,7 @@ export const abfalter = {
     con: "abfalter.con",
     strength: "abfalter.strength",
     str: "abfalter.str",
-    dexerity: "abfalter.dexerity",
+    dexterity: "abfalter.dexterity",
     dex: "abfalter.dex",
     intell: "abfalter.intell",
     int: "abfalter.int",
@@ -1183,7 +1183,7 @@ abfalter.damageModDropdown = {
     agi: "abfalter.agility",
     con: "abfalter.consti",
     str: "abfalter.strength",
-    dex: "abfalter.dexerity",
+    dex: "abfalter.dexterity",
     per: "abfalter.perception",
     int: "abfalter.intell",
     pow: "abfalter.power",
@@ -1393,4 +1393,20 @@ abfalter.backgroundInfoDropdown = {
     race: "abfalter.race",
     bloodBond: "abfalter.bloodBond",
     culturalRoot: "abfalter.culturalRoot",
+}
+
+abfalter.kiMaintDropdown = {
+    none: "abfalter.none",
+    maintenance: "abfalter.maintenance",
+    minorSus: "abfalter.minorSus",
+    majorSus: "abfalter.majorSus",
+}
+
+abfalter.indentTypeDropdown = {
+    subKiBase: "abfalter.base",
+    subKi1: "abfalter.indent1",
+    subKi2: "abfalter.indent2",
+    subKi3: "abfalter.indent3",
+    subKi4: "abfalter.indent4",
+    subKi5: "abfalter.indent5",
 }

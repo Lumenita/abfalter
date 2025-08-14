@@ -3,15 +3,31 @@
     <span class="item-subType">{{system.mk}} {{localize "abfalter.mk"}}</span>
 </div>
 <ul class="summary flexrow">
-    <li>
-        <select name="system.frequency">
-            {{selectOptions kiFrequencyObjList selected=system.frequency localize=true}}
-        </select>
-    </li>
-    <li>
-        <select name="system.actionType">
-            {{selectOptions kiActionTypeObjList selected=system.actionType localize=true}}
-        </select>
-    </li>
     <li>{{localize "abfalter.level"}}: {{system.level}}</li>
+    <li class="itemHeader65-30">
+        <label> 
+            <span> {{localize "abfalter.showStats"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.showStats}}kiBought{{/if}}"
+                data-label="system.showStats" data-ability="{{system.showStats}}">
+                {{#if system.showStats}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                {{/if}}
+            </button>
+        </label>
+    </li>
+    <li class="itemHeader65-30">
+        <label> 
+            <span> {{localize "abfalter.showDesc"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.showDesc}}kiBought{{/if}}"
+                data-label="system.showDesc" data-ability="{{system.showDesc}}">
+                {{#if system.showDesc}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                {{/if}}
+            </button>
+        </label>
+    </li>
 </ul>

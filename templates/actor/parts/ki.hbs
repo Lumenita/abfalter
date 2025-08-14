@@ -472,7 +472,7 @@
                 {{/if}}
             </fieldset>
             <fieldset class="kiSubsection {{#if system.toggles.nemesisVis}}hidden{{/if}}">
-                <legend> Nemesis Abilities </legend>
+                <legend> {{localize "abfalter.nemesisAbilities"}} </legend>
                 <div>
                     <span title="{{localize "abfalter.kiTab.descuseOfNemesis"}}"> {{localize "abfalter.kiTab.useOfNemesis"}} </span>
                     <button type="button" data-action="toggleBoughtFreeButton" class="kiAbility {{#if system.kiAbility.useOfNemesis.status}}{{#if system.kiAbility.useOfNemesis.status2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
@@ -638,6 +638,36 @@
                 </div>
                 {{/if}}
                 {{/if}}<!--End of Use of Nemesis If Statement-->
+            </fieldset>
+
+            <fieldset> 
+                <legend> {{localize "abfalter.customAbilities"}} </legend>
+                {{#each kiAbilitys as |kiAbility|}}
+                <div class="kiAbility-item item normal-item {{#if ../system.itemToggle.kiAbility}}draggable{{/if}}" data-item-id={{id}}
+                data-can-edit="true" data-can-delete="true" data-can-equip="false" data-can-toggle="true">
+                    {{#if system.toggleItem}}
+                    <label>
+                        <input class="inline-edit" type="text" data-field="name" value="{{name}}">
+                        <input class="inline-edit" type="number" data-field="system.mk" value="{{system.mk}}">
+                    </label>
+                    {{else}}
+                    <label title="{{system.description}}">
+                        <span class="{{system.indent}}">{{name}}</span>
+                        <button type="button" data-action="kiAbilityItemToggle" class="{{#if system.bought}}{{#if system.bought2}}kiFree{{else}}kiBought{{/if}}{{else}}kiNotBought{{/if}}"
+                        data-ability="{{system.bought}}" data-ability2="{{system.bought2}}">
+                            <span>
+                                {{system.mk}}
+                            </span>
+                        </button>
+                    </label>
+                    {{/if}}
+                </div>
+                {{/each}}
+
+                <div class="itemControls">
+                    <a class="item-control" data-action="createItem" data-type="kiAbility"><i class="fas fa-plus"></i> {{localize "abfalter.addCustomAbilities"}} </a>
+                    <a data-action="toggleValue" class="{{#if system.itemToggle.kiAbility}}armorpenalty{{/if}}" data-label="system.itemToggle.kiAbility" data-ability="{{system.itemToggle.kiAbility}}"><i class="{{#if system.itemToggle.kiAbility}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
+                </div>
             </fieldset>
         </div>
 
@@ -1229,142 +1259,107 @@
                 <div>
                     {{#each kiTechniques as |kiTechnique|}}
                     <div class="kiTechnique-item item normal-item {{#if ../system.itemToggle.kiTechnique}}draggable{{/if}}" data-item-id={{id}}
-                    data-can-edit="true" data-can-delete="true" data-can-equip="false" data-can-toggle="false">
+                    data-can-edit="true" data-can-delete="true" data-can-equip="true" data-can-toggle="false">
                         {{#if system.expand}}
-                        <div class="kiTechMaxContainer">
-                            <div class="kiTechMainInfo">
-                                <a class="item-control" data-action="itemToChat"><i class="fas fa-comment-dots"></i></a>
-                                <input class="item-name inline-edit" data-field="name" type="text" value="{{kiTechnique.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
-                                <input class="inline-edit" data-field="system.level" type="number" value="{{kiTechnique.system.level}}" />
-                                <input class="inline-edit" data-field="system.mk" type="number" value="{{kiTechnique.system.mk}}" />
-                                <a class="{{#if system.expand}}showOpacity{{/if}}" data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                            </div>
-
-                            <div class="kiTechSideInfoMax">
-                                <span> {{localize "abfalter.name"}} </span>
-                                <span> {{localize "abfalter.level"}} </span>
-                                <span> {{localize "abfalter.mk"}} </span>
-                            </div>
-
-                            <div class="kiTechTypeMax">
-                                <span> {{localize "abfalter.ki"}} </span>
-                                <span> {{localize "abfalter.agi"}} </span>
-                                <span> {{localize "abfalter.con"}} </span>
-                                <span> {{localize "abfalter.dex"}} </span>
-                                <span> {{localize "abfalter.str"}} </span>
-                                <span> {{localize "abfalter.pow"}} </span>
-                                <span> {{localize "abfalter.wp"}} </span>
-                                <span> {{localize "abfalter.actionInfo"}} </span>
-                            </div>
-
-                            <div class="kiTechUseMax">
-                                <span> {{localize "abfalter.use"}} </span>
-                                <input class="inline-edit" data-field="system.use.agi" type="number" value="{{kiTechnique.system.use.agi}}" />
-                                <input class="inline-edit" data-field="system.use.con" type="number" value="{{kiTechnique.system.use.con}}" />
-                                <input class="inline-edit" data-field="system.use.dex" type="number" value="{{kiTechnique.system.use.dex}}" />
-                                <input class="inline-edit" data-field="system.use.str" type="number" value="{{kiTechnique.system.use.str}}" />
-                                <input class="inline-edit" data-field="system.use.pow" type="number" value="{{kiTechnique.system.use.pow}}" />
-                                <input class="inline-edit" data-field="system.use.wp" type="number" value="{{kiTechnique.system.use.wp}}" />
-                                <div class="csSelect techSelect">
-                                    <select class="inline-edit" name="system.frequency" data-field="system.frequency">
-                                        {{selectOptions ../kiFrequencyObjList selected=system.frequency localize=true}}
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="kiTechMaintMax">
-                                {{#if system.unified}}
-                                <div class="techExpandMax">
-                                    {{#if system.innatePower}}
-                                    <span> {{localize "abfalter.innatePowerMaint"}} </span>
-                                    {{else}}
-                                    <span> {{localize "abfalter.unifiedMaint"}} </span>
-                                    {{/if}}
-                                    <input class="inline-edit" data-field="system.maint.unified" type="number" value="{{kiTechnique.system.maint.unified}}" />
-                                </div>
-                                {{else}}
-                                <span> {{localize "abfalter.maint"}} </span>
-                                <input class="inline-edit" data-field="system.maint.agi" type="number" value="{{kiTechnique.system.maint.agi}}" />
-                                <input class="inline-edit" data-field="system.maint.con" type="number" value="{{kiTechnique.system.maint.con}}" />
-                                <input class="inline-edit" data-field="system.maint.dex" type="number" value="{{kiTechnique.system.maint.dex}}" />
-                                <input class="inline-edit" data-field="system.maint.str" type="number" value="{{kiTechnique.system.maint.str}}" />
-                                <input class="inline-edit" data-field="system.maint.pow" type="number" value="{{kiTechnique.system.maint.pow}}" />
-                                <input class="inline-edit" data-field="system.maint.wp" type="number" value="{{kiTechnique.system.maint.wp}}" />
-                                {{/if}}
-                                <div class="csSelect techSelect">
-                                    <select class="inline-edit" name="system.actionType" data-field="system.actionType">
-                                        {{selectOptions ../kiActionTypeObjList selected=system.actionType localize=true}}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="textarea-div" style="display: grid;">
-                                <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{kiTechnique.system.description}}</textarea>
-                                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{kiTechnique.system.description}}</div>
-                            </div>
+                        <div class="kiTechMainInfo {{#if system.active}}equipped{{/if}}">
+                            <a class="item-control" data-action="itemToChat"><i class="fas fa-comment-dots"></i></a>
+                            <span> {{kiTechnique.name}} </span>
+                            <span> {{localize "abfalter.level"}}: {{kiTechnique.system.level}} </span>
+                            <span> {{localize "abfalter.mk"}}: {{kiTechnique.system.mk}} </span>
+                            <a class="{{#if system.expand}}showOpacity{{/if}}" data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                         </div>
+                        <div class="kiTechSubheader {{#if system.active}}equipped{{/if}}">
+                            <span> {{kiTechnique.system.combinedLabel}} </span>
+                        </div>
+                        <div class="kiTechStatsGrid" style="--char-count: {{system.showColumnNumber}}">
+                            <div class="kiTechFirstGrid kiTechFirstRow">{{localize "abfalter.kiAbilityData.char"}}</div>
+                            {{#each system.use as |val key|}}
+                            {{#if (gt val 0)}}
+                            <div class="kiTechFirstRow">{{localize (concat "abfalter." key)}}</div>
+                            {{/if}}
+                            {{/each}}
+
+                            <div class="kiTechFirstGrid">{{localize "abfalter.ki"}}</div>
+                            {{#each system.use as |val key|}}
+                            {{#if (gt val 0)}}
+                            <div>{{val}}</div>
+                            {{/if}}
+                            {{/each}}
+
+                            {{#if (and system.maintBool (not system.unified))}}
+                            <div class="kiTechFirstGrid">{{localize "abfalter.maint"}}</div>
+                            {{#each system.use as |val key|}}
+                            {{#if (gt val 0)}}
+                            <div>{{lookup ../system.maint key}}</div>
+                            {{/if}}
+                            {{/each}}
+                            {{/if}}
+                        </div>
+
+                        {{#if (and system.maintBool system.unified)}}
+                        <div class="kiTechUnifiedMaint">
+                            <span>{{localize "abfalter.unifiedMaintLong"}}:</span>
+                            <span>{{system.maint.unified}}</span>
+                        </div>
+                        {{/if}}
+
+                        {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
+
                         {{else}}
-                        <div class="kiTechMinContainer">
-                            <div class="kiTechMainInfo">
-                                <a class="item-control" data-action="itemToChat"><i class="fas fa-comment-dots"></i></a>
-                                <span> {{kiTechnique.name}} </span>
-                                <span> {{kiTechnique.system.level}} </span>
-                                <span> {{kiTechnique.system.mk}} </span>
-                                <a class="{{#if system.expand}}showOpacity{{/if}}" data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                            </div>
+                        <div class="kiTechMainInfo {{#if system.active}}equipped{{/if}}">
+                            <a class="item-control" data-action="itemToChat"><i class="fas fa-comment-dots"></i></a>
+                            <span> {{kiTechnique.name}} </span>
+                            <span> {{localize "abfalter.level"}}: {{kiTechnique.system.level}} </span>
+                            <span> {{localize "abfalter.mk"}}: {{kiTechnique.system.mk}} </span>
+                            <a class="{{#if system.expand}}showOpacity{{/if}}" data-action="itemToggleValue" data-ability="{{system.expand}}" data-label="system.expand"><i class="{{#if system.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                        </div>
+                        <div class="kiTechSubheader {{#if system.active}}equipped{{/if}}">
+                            <span> {{kiTechnique.system.combinedLabel}} </span>
+                        </div>
+                        {{#if system.showStats}}
+                        <div class="kiTechStatsGrid" style="--char-count: {{system.showColumnNumber}}">
+                            <div class="kiTechFirstGrid kiTechFirstRow">{{localize "abfalter.kiAbilityData.char"}}</div>
+                            {{#each system.use as |val key|}}
+                            {{#if (gt val 0)}}
+                            <div class="kiTechFirstRow">{{localize (concat "abfalter." key)}}</div>
+                            {{/if}}
+                            {{/each}}
 
-                            <div class="kiTechSideInfo">
-                                <span> {{localize "abfalter.frequency"}}: {{kiTechnique.system.frequencyName}} </span>
-                                <span> {{localize "abfalter.actionType"}}: {{kiTechnique.system.actionTypeName}} </span>
-                                <span> {{localize "abfalter.level"}} </span>
-                                <span> {{localize "abfalter.mk"}} </span>
-                            </div>
+                            <div class="kiTechFirstGrid">{{localize "abfalter.ki"}}</div>
+                            {{#each system.use as |val key|}}
+                            {{#if (gt val 0)}}
+                            <div>{{val}}</div>
+                            {{/if}}
+                            {{/each}}
 
-                            <div class="kiTechType">
-                                <span> {{localize "abfalter.ki"}} </span>
-                                <span> {{localize "abfalter.agi"}} </span>
-                                <span> {{localize "abfalter.con"}} </span>
-                                <span> {{localize "abfalter.dex"}} </span>
-                                <span> {{localize "abfalter.str"}} </span>
-                                <span> {{localize "abfalter.pow"}} </span>
-                                <span> {{localize "abfalter.wp"}} </span>
-                            </div>
-
-                            <div class="kiTechUse">
-                                <span> {{localize "abfalter.use"}} </span>
-                                <span> {{kiTechnique.system.use.agi}} </span>
-                                <span> {{kiTechnique.system.use.con}} </span>
-                                <span> {{kiTechnique.system.use.dex}} </span>
-                                <span> {{kiTechnique.system.use.str}} </span>
-                                <span> {{kiTechnique.system.use.pow}} </span>
-                                <span> {{kiTechnique.system.use.wp}} </span>
-                            </div>
-
-                            <div class="kiTechMaint">
-                                {{#if system.unified}}
-                                <div class="techExpand">
-                                    {{#if system.innatePower}}
-                                    <span> {{localize "abfalter.innatePowerMaint"}} </span>
-                                    {{else}}
-                                    <span> {{localize "abfalter.unifiedMaint"}} </span>
-                                    {{/if}}
-                                    <span> {{kiTechnique.system.maint.unified}} </span>
-                                </div>
+                            {{#if (and system.maintBool (not system.unified))}}
+                            <div class="kiTechFirstGrid">{{localize "abfalter.maint"}}</div>
+                            {{#each system.use as |val key|}}
+                            {{#if (gt val 0)}}
+                            <div>
+                                {{#if (eq (lookup ../system.maint key) 0)}}
+                                -
                                 {{else}}
-                                <span> {{localize "abfalter.maint"}} </span>
-                                <span>{{kiTechnique.system.maint.agi}}</span>
-                                <span>{{kiTechnique.system.maint.con}}</span>
-                                <span>{{kiTechnique.system.maint.dex}}</span>
-                                <span>{{kiTechnique.system.maint.str}}</span>
-                                <span>{{kiTechnique.system.maint.pow}}</span>
-                                <span>{{kiTechnique.system.maint.wp}}</span>
+                                {{lookup ../system.maint key}}
                                 {{/if}}
                             </div>
-
-                            <div class="textarea-div kiTechInfo" style="display: grid;">
-                                <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;" readonly>{{kiTechnique.system.description}}</textarea>
-                                <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{kiTechnique.system.description}}</div>
-                            </div>
+                            {{/if}}
+                            {{/each}}
+                            {{/if}}
                         </div>
+
+                        {{#if (and system.maintBool system.unified)}}
+                        <div class="kiTechUnifiedMaint">
+                            <span>{{localize "abfalter.unifiedMaintLong"}}:</span>
+                            <span>{{system.maint.unified}}</span>
+                        </div>
+                        {{/if}}
+                        {{/if}}
+
+                        {{#if system.showDesc}}
+                        {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
+                        {{/if}}
+
                         {{/if}}
                     </div>
                     {{/each}}

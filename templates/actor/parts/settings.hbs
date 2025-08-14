@@ -133,6 +133,13 @@
             <fieldset class="settingsSubsection">
                 <legend> {{localize "abfalter.settingsTab.generalSettings"}} </legend>
                 <div>
+                    <span> {{localize "abfalter.openSettingsValues"}} </span>
+                    <button type="button" data-action="openSettings">
+                        <span> {{localize "abfalter.settingsTab.open"}} </span>
+                    </button>
+                </div>
+
+                <div>
                     <span> {{localize "abfalter.settingsTab.hideCurrency"}} </span>
                     <button type="button" data-action="toggleValue"
                         class="toggleBoolean {{#if system.toggles.currencyHide}}kiBought{{/if}}"
@@ -471,8 +478,13 @@
                         </label>
                         <label> <span> {{localize "abfalter.settingsTab.presenceMod"}} </span> <input type="number"
                                 name="system.levelinfo.presencemod" value="{{system.levelinfo.presencemod}}" /> </label>
-                        <label> <span> {{localize "abfalter.settingsTab.dpMod"}} </span> <input type="number"
-                                name="system.levelinfo.dpmod" value="{{system.levelinfo.dpmod}}" /> </label>
+                        <label for="mainDpOffset" class="dpOffSetsLabel"> 
+                            <span> {{localize "abfalter.settingsTab.dpMod"}} </span>
+                            <button type="button" data-action="openDpOffsets"> 
+                                <span> {{localize "abfalter.settingsTab.open"}} </span>
+                            </button>
+                            <input type="number" id="mainDpOffset" name="system.levelinfo.dpmod" value="{{system.levelinfo.dpmod}}" />
+                        </label>
                         <div>
                             <span> {{localize "abfalter.settingsTab.hideBack"}} </span>
                             <button type="button" data-action="toggleValue"

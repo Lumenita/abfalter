@@ -1,0 +1,39 @@
+<div class="attackCombatDialog">
+    <span> this is the attack sheet </span>
+    <span> where you set how you attack </span>
+
+    {{log this}}
+    <div>
+        <span> this is the combat html which is heavily WIP still </span>
+        <span> {{document.ui.hasFatiguePoints}} </span>
+        <span> where you set how you attack physically </span>
+
+        <select name="attacker.combat.weaponUsed">
+            {{#each document.attacker.combat.weaponsList}}
+            <option value="{{this._id}}" {{#if (eq this._id ../attacker.combat.weaponUsed)}}selected{{/if}}> {{this.name}} </option>
+            {{/each}}
+        </select>
+
+
+        {{#if this.attackSent}}
+        <div>
+            <span> the attack has been sent </span>
+        </div>
+        {{else}}
+        <button class="sendNormAttack">
+            Send Attack
+        </button>
+        {{/if}}
+    </div>
+
+    {{#if this.data.allowed}}
+        <div class='waitingRow'>
+            <span> Im Allowed </span>
+        </div>
+    {{else}}
+        <div class='waitingRow'>
+            <span> Time to wait :)</span>
+        </div>
+    {{/if}}
+
+</div>

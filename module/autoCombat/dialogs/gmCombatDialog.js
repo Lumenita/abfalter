@@ -1,42 +1,41 @@
-
-
-
-
-
-
-
-
-const getInitialData = (attacker, defender, options = {}) => {
-    const attackerActor = attacker.actor;
-    const defenderActor = defender.actor;
+const getInitialData = (attacker, defenders, options = {}) => {
+    const defenderList = Array.isArray(defenders) ? defenders : [defenders];
     return {
         ui: {
-            isCounter: options.isCounter ?? false
+            isCounter: options.isCounter ?? false,
+            isAoE: defenderList.length > 1
         },
         attacker: {
             token: attacker,
-            actor: attackerActor,
+            actor: attacker.actor,
             customModifier: 0,
             counterAttackBonus: options.counterAttackBonus,
-            isReady: false
+            isReady: false,
+            result: null
         },
-        defender: {
-            token: defender,
-            actor: defenderActor,
+        defenders: defenderList.map(def => ({
+            token: def,
+            actor: def.actor,
             customModifier: 0,
-            isReady: false
-        }
+            isReady: false,
+            result: null
+        }))
     };
 };
+
 export class gmCombatDialog extends FormApplication {
-    constructor(attacker, defender, hooks, options = {}) {
-        super(getInitialData(attacker, defender, options));
+    constructor(attacker, defenders, hooks, options = {}) {
+        super(getInitialData(attacker, defenders, options));
         this.hooks = hooks;
-        this.data = getInitialData(attacker, defender, options);
+        this.data = getInitialData(attacker, defenders, options);
+
+        this._childDialogs = [];
+
         this.render(true);
     }
+
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ['gmCombatDialog'],
             submitOnChange: true,
             closeOnSubmit: false,
@@ -46,50 +45,43 @@ export class gmCombatDialog extends FormApplication {
             title: 'GM Combat'
         });
     }
+
     get attackerActor() {
         return this.data.attacker.token.actor;
     }
-    get defenderActor() {
-        return this.data.defender.token.actor;
-    }
+
     get attackerToken() {
         return this.data.attacker.token;
     }
-    get defenderToken() {
-        return this.data.defender.token;
-    }
+
     async close(options = { executeHook: true }) {
         if (options?.executeHook) {
             await this.hooks.onClose();
         }
         return super.close();
     }
+
     activateListeners(html) {
         super.activateListeners(html);
-        html.find('.cancelButton').click(() => {
-            this.close();
-        });
+        html.find('.cancelButton').click(() => this.close());
     }
-
-
-
-
 
     updateAttackerData(result) {
         this.data.attacker.result = result;
-        //if combat/mystic/psychic
         this.render();
     }
-    updateDefenderData(result) {
+
+    updateDefenderData(result, defenderToken = null) {
         result.values.total = Math.max(0, result.values.total);
-        this.data.defender.result = result;
-        // if shield or marial
-        this.render();
+
+        // Match the correct defender
+        const tokenId = defenderToken?.id ?? this.data.defenders[0].token.id;
+        const entry = this.data.defenders.find(d => d.token.id === tokenId);
+
+        if (entry) {
+            entry.result = result;
+            entry.isReady = true;
+            this.render();
+        }
     }
-
-
-
-
-
-
 }

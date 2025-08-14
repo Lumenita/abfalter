@@ -32,7 +32,8 @@
       "currency",
       "proficiency",
       "zeonMaint",
-      "backgroundInfo"
+      "backgroundInfo",
+      "kiAbility"
     ]
   }
 }

@@ -1,7 +1,6 @@
 /*
     * Simple Calculator for Foundry VTT
     * This script provides a simple calculator dialog for calculating combat outcomes based on attack, damage, defense, and armor values.
-    * Its a WIP minor project as the main calculator is far far away.
 */
 
 // Utility: Damage percentage calculator

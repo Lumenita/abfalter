@@ -1,0 +1,20 @@
+<div class="kiTechCreatorDialog">
+  <div class="form-group">
+    <label for="technique-name">{{localize "abfalter.kiAbilityData.techniqueName"}}</label>
+    <input type="text" id="technique-name" placeholder="{{localize 'abfalter.nameItem'}}"/>
+  </div>
+
+  <div class="form-group">
+    <label for="actor-search">{{localize "abfalter.search"}}</label>
+    <input type="text" id="actor-search" placeholder="{{localize 'abfalter.searchByName'}}"/>
+  </div>
+
+  <div class="form-group">
+    <label for="actor-select">{{localize "abfalter.kiAbilityData.chooseActor"}}</label>
+    <select id="actor-select">
+      {{#each actors as |actor|}}
+        <option value="{{actor.id}}">{{actor.name}}</option>
+      {{/each}}
+    </select>
+  </div>
+</div>

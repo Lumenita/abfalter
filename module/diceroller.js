@@ -165,7 +165,7 @@ export async function plainRoll(html, actor, finalValue, label) {
         mod = parseInt(html.find('#modifierMod').val()) || 0;
     }
 
-    let fatigueFinal = Math.floor(fatigueMod * 15);
+    let fatigueFinal = Math.floor(fatigueMod * actor.system.settings.fatigueValue);
     let baseDice = "1d100";
     let rollFormula = `${baseDice} + ${finalValue} + ${fatigueFinal} + ${mod}`
     const rollResult = await new Roll(rollFormula, actor).roll();
@@ -599,13 +599,13 @@ export async function openWeaponProfileDialogue(actor, label, wepId, wepType, ac
 
         switch (actionType) {
             case 'attack':
-                finalValue = wepValue + (fatigueValue * 15) + modifierValue + selectedPenalty + selectedModifier;
-                finalFormula = `${wepValue}(${game.i18n.localize("abfalter.value")}) + ${fatigueValue * 15}(${game.i18n.localize("abfalter.fatigue")}) + ${modifierValue}(${game.i18n.localize("abfalter.mod")}) + ${selectedPenalty}(${game.i18n.localize("abfalter.aim")}) + ${selectedModifier}(${game.i18n.localize("abfalter.action")})`;
+                finalValue = wepValue + (fatigueValue * actor.system.settings.fatigueValue) + modifierValue + selectedPenalty + selectedModifier;
+                finalFormula = `${wepValue}(${game.i18n.localize("abfalter.value")}) + ${fatigueValue * actor.system.settings.fatigueValue}(${game.i18n.localize("abfalter.fatigue")}) + ${modifierValue}(${game.i18n.localize("abfalter.mod")}) + ${selectedPenalty}(${game.i18n.localize("abfalter.aim")}) + ${selectedModifier}(${game.i18n.localize("abfalter.action")})`;
                 break;
             case 'block':
             case 'dodge':
-                finalValue = wepValue + (fatigueValue * 15) + modifierValue + multDefPenalty;
-                finalFormula = `${wepValue}(${game.i18n.localize("abfalter.value")}) + ${fatigueValue * 15}(${game.i18n.localize("abfalter.fatigue")}) + ${modifierValue}(${game.i18n.localize("abfalter.mod")}) + ${multDefPenalty}(${game.i18n.localize("abfalter.multipleDef")})`;
+                finalValue = wepValue + (fatigueValue * actor.system.settings.fatigueValue) + modifierValue + multDefPenalty;
+                finalFormula = `${wepValue}(${game.i18n.localize("abfalter.value")}) + ${fatigueValue * actor.system.settings.fatigueValue}(${game.i18n.localize("abfalter.fatigue")}) + ${modifierValue}(${game.i18n.localize("abfalter.mod")}) + ${multDefPenalty}(${game.i18n.localize("abfalter.multipleDef")})`;
                 break;
             default:
                 console.log("(Update FInal Value)Error: No action type found.");

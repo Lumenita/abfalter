@@ -2,10 +2,10 @@
   "id": "abfalter",
   "title": "Anima Beyond Fantasy Altered",
   "description": "Engligh Version of 'Fantasy Flight Games' Anima Beyond Fantasy System altered by some house rules.",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "compatibility": {
     "minimum": 13,
-    "verified": "13.344"
+    "verified": "13.346"
   },
   "authors": [
     {
@@ -30,7 +30,7 @@
   "license": "LICENSE.txt",
   "url": "https://github.com/Lumenita/abfalter",
   "manifest": "https://raw.githubusercontent.com/Lumenita/abfalter/main/system.json",
-  "download": "https://github.com/Lumenita/abfalter/releases/download/v1.5.1/abfalter.zip",
+  "download": "https://github.com/Lumenita/abfalter/releases/download/v1.5.2/abfalter.zip",
   "languages": [
     {
       "lang": "en",
@@ -194,6 +194,33 @@
       "path": "./packs/references",
       "type": "JournalEntry",
       "private": false
+    },
+    {
+      "name": "backgrounds",
+      "label": "Background Items",
+      "system": "abfalter",
+      "path": "./packs/backgrounds",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "cultural-roots",
+      "label": "Cultural Roots",
+      "system": "abfalter",
+      "path": "./packs/cultural-roots",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "elan",
+      "label": "Elan",
+      "system": "abfalter",
+      "path": "./packs/elan",
+      "type": "Item",
+      "private": false,
+      "flags": {}
     }
   ],
   "packFolders": [
@@ -204,7 +231,10 @@
         "classes",
         "advantages-and-disadvantages",
         "equipment",
-        "creature-powersabilities"
+        "creature-powersabilities",
+        "backgrounds",
+        "cultural-roots",
+        "elan"
       ]
     },
     {

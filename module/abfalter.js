@@ -6,8 +6,8 @@ import abfalterItem from "./item/abfalterItem.js";
 import abfalterItemSheet from "./item/abfalterItemSheet.mjs";
 import abfalterActor from "./actor/abfalterActor.js";
 import abfalterCharacterSheet from "./actor/abfalterCharacterSheet.mjs";
-import { registerCustomMacros } from "./autoCombat/registerCustomMacros.js";
-import { customMacroBar } from "./autoCombat/customMacroBar.js";
+import { registerCustomMacros } from "./utilities/registerCustomMacros.js";
+import { customMacroBar } from "./utilities/customMacroBar.js";
 import { abfalterSettings } from "./utilities/abfalterSettings.js";
 import { handleMigrations } from "./utilities/migration.js";
 import { handleChangelog } from "./utilities/changelog.js";
@@ -55,6 +55,7 @@ Hooks.once("init", async () => {
         psychicMatrix: psychicMatrixDataModel,
         maintPower: maintPowerDataModel,
         //Ki
+        kiAbility: kiAbilityDataModel,
         arsMagnus: arsMagnusDataModel,
         martialArt: martialArtDataModel,
         kiSealCreature: kiSealCreatureDataModel,
@@ -91,7 +92,6 @@ Hooks.once("init", async () => {
     CONFIG.Combat.documentClass = abfalterCombat;
     CONFIG.ActiveEffect.legacyTransferral = false;
     abfalterSettings();
-
     
     return preloadHandlebarsTemplates();
 });
@@ -131,10 +131,13 @@ Hooks.once("ready", async function () {
 Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
+Handlebars.registerHelper('ifNotEquals', function (arg1, arg2, options) {
+    return (arg1 != arg2) ? options.fn(this) : options.inverse(this);
+});
 Handlebars.registerHelper('ifIn', function (val, list, options) {
     if (list.includes(val)) return options.fn(this);
     return options.inverse(this);
-  });
+});
 Handlebars.registerHelper('getDistanceType', function (arg1) {
     const metric = game.settings.get('abfalter', abfalterSettingsKeys.Use_Meters);
 
@@ -147,12 +150,38 @@ Handlebars.registerHelper('getDistanceType', function (arg1) {
             return arg1;            
     }
 });
+Handlebars.registerHelper('array', function () {
+  // Convert all arguments except the last one (Handlebars options object) into an array
+  return Array.prototype.slice.call(arguments, 0, -1);
+});
+Handlebars.registerHelper('shortStat', function(type) {
+  const map = {
+    agility: game.i18n.localize('abfalter.agi'),
+    consti: game.i18n.localize('abfalter.con'),
+    dexterity: game.i18n.localize('abfalter.dex'),
+    strength: game.i18n.localize('abfalter.str'),
+    perception: game.i18n.localize('abfalter.per'),
+    intelligence: game.i18n.localize('abfalter.int'),
+    power: game.i18n.localize('abfalter.pow'),
+    willPower: game.i18n.localize('abfalter.wp')
+  };
 
+  return map[type] || type; // fallback to original if not found
+});
+
+Hooks.on("preCreateItem", async (item, options, userId) => {
+    if (!item.parent || !(item.parent instanceof Actor)) return;
+
+    const siblings = item.parent.items.filter(i => i.type === item.type);
+    const maxSort = siblings.reduce((max, i) => Math.max(max, i.sort ?? 0), 0);
+
+    await item.updateSource({ sort: maxSort + 10 });
+});
 
 //Automatically activate/deactivate effects when item is equipped/unequipped
 Hooks.on('updateItem', async (item, _updateData, _options, userId) => { 
     if (game.user.id !== userId) return;
-    const isEquipped = foundry.utils.getProperty(_updateData, "system.equipped");
+    const isEquipped = foundry.utils.getProperty(_updateData, "system.equipped") || foundry.utils.getProperty(_updateData, "system.active");
     if (isEquipped === undefined) return;
 
     if (isEquipped) {
@@ -257,6 +286,12 @@ class actorDataModel extends foundry.abstract.DataModel {
                 presencemodBonus: makeIntField(),
                 dpmod: makeIntField(),
                 dpmodBonus: makeIntField(),
+                primDpMod: makeIntField(),
+                combatDpMod: makeIntField(),
+                mysticDpMod: makeIntField(),
+                mysticProjDpMod: makeIntField(),
+                psychicDpMod: makeIntField(),
+                psychicProjDpMod: makeIntField(),
                 totalCP: makeIntField(),
                 extraCP: makeIntField(),
                 totalLvlMod: makeIntField(),
@@ -320,6 +355,7 @@ class actorDataModel extends foundry.abstract.DataModel {
                 race: makeBoolField(),
                 culturalRoots: makeBoolField(),
                 bloodBonds: makeBoolField(),
+                kiAbility: makeBoolField()
             }),
             toggles: new foundry.data.fields.SchemaField({
                 actorHeaderInfo1: makeBoolField(),
@@ -371,6 +407,14 @@ class actorDataModel extends foundry.abstract.DataModel {
                 bloodBondsStatus: makeBoolField(),
                 raceRootsStatus: makeBoolField(),
                 mentalHealthStatus: makeBoolField()
+            }),
+            settings: new foundry.data.fields.SchemaField({
+                phrMult: makeLongIntField(1),
+                drMult: makeLongIntField(1),
+                psnrMult: makeLongIntField(1),
+                mrMult: makeLongIntField(1),
+                psyrMult: makeLongIntField(1),
+                fatigueValue: makeIntField(15)
             }),
             stats: new foundry.data.fields.SchemaField({
                 Agility: characteristics(),
@@ -1361,6 +1405,7 @@ class secondaryDataModel extends foundry.abstract.DataModel {
             atr: makeStringField("none"),
             expand: makeBoolField(),
             fav: makeBoolField(),
+            dpValue: makeLongIntField(2),
         }
     }
 
@@ -1389,7 +1434,7 @@ class spellPathDataModel extends foundry.abstract.DataModel {
     static defineSchema() {
         return {
             level: makeIntField(),
-            toggleItem: makeBoolField(),
+            toggleItem: makeBoolField(true),
         }
     }
 
@@ -1531,7 +1576,7 @@ class mentalPatternDataModel extends foundry.abstract.DataModel {
             toggle: makeBoolField(),
             cancelCost: makeIntField(),
             opposite: makeStringField(),
-            penalty: makeIntField(),
+            penalty: makeStringField(),
         }
     }
 
@@ -1632,15 +1677,23 @@ class kiSealCreatureDataModel extends foundry.abstract.DataModel {
 class kiTechniqueDataModel extends foundry.abstract.DataModel {
     static defineSchema() {
         return {
-            description: makeStringField(),
-            expand: makeBoolField(),
-            actor: makeBoolField(),
+            description: makeHtmlField(),
+            showDesc: makeBoolField(false),
+            showStats: makeBoolField(true),
+            active: makeBoolField(false),
+            expand: makeBoolField(false),
             level: makeIntField(),
             mk: makeIntField(),
             actionType: makeStringField("attack"),
             frequency: makeStringField("action"),
+            maintainable: makeStringField("none"),
+            maintBool: makeBoolField(false),
+            combinable: makeBoolField(false),
+            combinedLabel: makeStringField(),
+            innatePower: makeBoolField(false),
+            unified: makeBoolField(false),
+            showColumnNumber: makeIntField(),
             use: new foundry.data.fields.SchemaField({
-                unified: makeIntField(),
                 agi: makeIntField(),
                 con: makeIntField(),
                 dex: makeIntField(),
@@ -1696,6 +1749,64 @@ class martialArtDataModel extends foundry.abstract.DataModel {
 
     static migrateData(source) {
         return super.migrateData(source);
+    }
+}
+
+class kiAbilityDataModel extends foundry.abstract.DataModel {
+    static defineSchema() {
+        return {
+            description: makeStringField(),
+            mk: makeIntField(),
+            bought: makeBoolField(false),
+            bought2: makeBoolField(false),
+            toggleItem: makeBoolField(true),
+            indent: makeStringField("subKiBase")
+        }
+    }
+
+    static migrateData(source) {
+        return super.migrateData(source);
+    }
+}
+
+export class kiCreatorDataModel extends foundry.abstract.DataModel {
+    static defineSchema() {
+        return {
+            description: makeHtmlField(),
+            previewDescription: makeHtmlField(),
+            level: makeIntField(1),
+            prevLevel: makeIntField(1),
+            levelMinMk: makeIntField(20),
+            levelMaxMk: makeIntField(50),
+            levelDisadvLimit: makeIntField(1),
+            maintType: makeStringField("none"),
+            maintMk: makeIntField(0),
+            isCombinable: makeBoolField(),
+            combAddedKi: makeIntField(0),
+            combAddedMk: makeIntField(0),
+            abilityMk: makeIntField(0),
+            totalMk: makeIntField(0),
+            disadvNumber: makeIntField(0),
+            combKiPlaced: makeIntField(0),
+            kiFinalLength: makeIntField(0),
+            showPreview: makeBoolField(false),
+            finalActionType: makeStringField(""),
+            finalFrequency: makeStringField(""),
+            unifiedCost: makeIntField(0),
+            abilities: new foundry.data.fields.TypedObjectField(
+                new foundry.data.fields.SchemaField({
+                })
+            ),
+            kiFinalValues: new foundry.data.fields.ArrayField(
+                new foundry.data.fields.SchemaField({
+                })
+            ),
+            warning: new foundry.data.fields.SchemaField({
+                mk: makeBoolField(false),
+                disadvantage: makeBoolField(false),
+                combinableKi: makeBoolField(false),
+            })
+        }
     }
 }
 

@@ -187,7 +187,7 @@ export default class abfalterActor extends Actor {
         system.stats.Constitution.final += system.arsMagnus.dragonDoor || 0;
         system.stats.Strength.final += system.arsMagnus.dragonDoor || 0;
         system.stats.Dexterity.final += system.arsMagnus.dragonDoor || 0;
-        system.stats.Perception.final += system.arsMagnus.dragonDoor || 0;
+        system.stats.Power.final += system.arsMagnus.dragonDoor || 0;
 
         //MetaMagic Capstones
         system.metaMagic.derived.doubleDamageDesc = game.i18n.localize('abfalter.metaMagic.doubleDmgDesc');
@@ -737,17 +737,17 @@ export default class abfalterActor extends Actor {
         7:  { resting: 100, notResting: 50, penalty: -20, unit: 'abfalter.day' },
         8:  { resting: 250, notResting: 100, penalty: -25, unit: 'abfalter.day' },
         9:  { resting: 500, notResting: 200, penalty: -30, unit: 'abfalter.day' },
-        10: { resting: 1, notResting: null, penalty: -40, unit: 'abfalter.minute', raw: 1440 },
-        11: { resting: 2, notResting: null, penalty: -50, unit: 'abfalter.minute', raw: 2880 },
-        12: { resting: 5, notResting: null, penalty: -5,  unit: 'abfalter.hour', raw: 7200 },
-        13: { resting: 10, notResting: null, penalty: -10, unit: 'abfalter.hour', raw: 10000 },
-        14: { resting: 1, notResting: null, penalty: -15, unit: 'abfalter.turn', raw: 20000 },
-        15: { resting: 5, notResting: null, penalty: -20, unit: 'abfalter.turn', raw: 50000 },
-        16: { resting: 10, notResting: null, penalty: -50, unit: 'abfalter.minute', raw: 100000 },
-        17: { resting: 25, notResting: null, penalty: -10, unit: 'abfalter.turn', raw: 100000 },
-        18: { resting: 50, notResting: null, penalty: -25, unit: 'abfalter.turn', raw: 100000 },
-        19: { resting: 100, notResting: null, penalty: 'All', unit: 'abfalter.turn', raw: 100000 },
-        20: { resting: 200, notResting: null, penalty: 'All', unit: 'abfalter.turn', raw: 100000 },
+        10: { resting: 1, notResting: null, penalty: -40, unit: 'abfalter.minute', unit2: 'abfalter.day', raw: 1440 },
+        11: { resting: 2, notResting: null, penalty: -50, unit: 'abfalter.minute', unit2: 'abfalter.day', raw: 2880 },
+        12: { resting: 5, notResting: null, penalty: -5,  unit: 'abfalter.minute', unit2: 'abfalter.hour', raw: 7200 }, //
+        13: { resting: 10, notResting: null, penalty: -10, unit: 'abfalter.minute', unit2: 'abfalter.hour', raw: 10000 }, //
+        14: { resting: 1, notResting: null, penalty: -15, unit: 'abfalter.turn', unit2: 'abfalter.hour', raw: 20000 },
+        15: { resting: 5, notResting: null, penalty: -20, unit: 'abfalter.turn', unit2: 'abfalter.hour', raw: 50000 },
+        16: { resting: 10, notResting: null, penalty: -10, unit: 'abfalter.turn', unit2: 'abfalter.minute', raw: 100000 }, //
+        17: { resting: 25, notResting: null, penalty: -10, unit: 'abfalter.turn', unit2: 'abfalter.turn', raw: 100000 },
+        18: { resting: 50, notResting: null, penalty: -25, unit: 'abfalter.turn', unit2: 'abfalter.turn', raw: 100000 },
+        19: { resting: 100, notResting: null, penalty: 'All', unit: 'abfalter.turn', unit2: 'abfalter.hour', raw: 100000 },
+        20: { resting: 250, notResting: null, penalty: 'All', unit: 'abfalter.turn', unit2: 'abfalter.hour', raw: 100000 },
         };
         const regenLevel = system.regeneration.final;
         const entry = regenData[regenLevel];
@@ -755,10 +755,11 @@ export default class abfalterActor extends Actor {
         if (entry) {
             let multiplier = (system.toggles?.dmgRes && system.lifepoints?.hpMult) ? system.lifepoints.hpMult : 1;
             let unit = localize(entry.unit);
+            let unit2 = localize(entry.unit2);
 
             let resting = entry.resting * multiplier;
             let notResting = entry.notResting !== null ? entry.notResting * multiplier : "N/A";
-            let penalty = entry.penalty === "All" ? "All/" + unit : (entry.penalty * multiplier) + "/" + unit;
+            let penalty = entry.penalty === "All" ? "All/" + unit : (entry.penalty * multiplier) + "/" + (notResting == "N/A" ? unit2 : unit);
 
             system.regeneration.resting = resting + "/" + unit;
             system.regeneration.notResting = notResting === "N/A" ? "N/A" : notResting + "/" + unit;
@@ -963,7 +964,8 @@ export default class abfalterActor extends Actor {
             aHeatTot: 0, aColdMax: 0, aColdTot: 0, aEleMax: 0, aEleTot: 0, aEneMax: 0, aEneTot: 0, aSptMax: 0, aSptTot: 0, ahReq: 0, ahCutMax: 0, ahCutTot: 0, ahImpMax: 0, ahImpTot: 0, ahThrMax: 0,
             ahThrTot: 0, ahHeatMax: 0, ahHeatTot: 0, ahColdMax: 0, ahColdTot: 0, ahEleMax: 0, ahEleTot: 0, ahEneMax: 0, ahEneTot: 0, ahSptMax: 0, ahSptTot: 0, perPen: 0, usedpp: 0, matrixpp: 0, arsMk: 0,
             maMk: 0, techMk: 0, pathLvl: 0, turnMaint: 0, dayMaint: 0, spellCost: 0, wepNum: 0, wepSpd: 0, maKiAtk: 0, maKiBlk: 0, maKiDod: 0, pilot: 0, techmagic: 0, cook: 0, toy: 0,
-            kiDect: 0, kiCon: 0, wepName: "", monsterCost: 0, shieldSpeed: 0, arsDp: 0, maDp: 0, mentalPatDp: 0, profPsyDp: 0, profMystDp: 0, profPrimDp: 0, advCp:0, disAdvCp: 0, bloodBondCp: 0, infoLevelMod: 0
+            kiDect: 0, kiCon: 0, wepName: "", monsterCost: 0, shieldSpeed: 0, arsDp: 0, maDp: 0, mentalPatDp: 0, profPsyDp: 0, profMystDp: 0, profPrimDp: 0, advCp:0, disAdvCp: 0, bloodBondCp: 0, infoLevelMod: 0,
+            customKiAbilityMk: 0
         }
         const atTypes = ["cut", "imp", "thr", "heat", "cold", "ele", "ene", "spt"];
         const atStacks = Object.fromEntries(atTypes.map(t => [t, []]));
@@ -1190,7 +1192,12 @@ export default class abfalterActor extends Actor {
                                 classBonuses.infoLevelMod += parseInt(item.system.levelMod) || 0;
                                 break;
                         }
-                    break;
+                        break;
+                    case "kiAbility": {
+                        if (item.system.bought == true && item.system.bought2 == false) {
+                            classBonuses.customKiAbilityMk += parseInt(item.system.mk) || 0;
+                        }
+                    }
                 }
             });
         //Stuff Xp, Presence, Next lvl Xp
@@ -1289,6 +1296,7 @@ export default class abfalterActor extends Actor {
         system.mk.arsMagCost = classBonuses.arsMk; //Ars Magnus Cost
         system.mk.martialArtsCost = classBonuses.maMk; //Martial Arts Bonus MK
         system.mk.kiTechCost = classBonuses.techMk; //Ki Technique Cost
+        system.mk.kiAbilitiesCost += classBonuses.customKiAbilityMk; //Custom Ki Ability MK
         system.mk.final = Math.floor(system.mk.base + system.mk.temp + system.mk.spec + system.mk.bonus + system.mk.class + system.mk.martialArtsCost); //Total Final Mk
         system.mk.used = Math.floor(system.mk.limitsTotalCost + system.mk.kiAbilitiesCost + system.mk.kiSealCost + system.mk.arsMagCost + system.mk.kiTechCost); //Total Used Mk
 
@@ -1398,32 +1406,39 @@ export default class abfalterActor extends Actor {
                 case "Physical":
                     res.name = game.i18n.localize('abfalter.physicalRes');
                     res.short = game.i18n.localize('abfalter.phr');
-                    res.final = Math.floor(system.levelinfo.presence + res.mod + stats.Constitution.mod + system.otherStats.phrDom + system.otherStats.allEmpty + res.bonus);
+                    res.final = Math.floor((system.levelinfo.presence + stats.Constitution.mod) * system.settings.phrMult);
+                    res.final += Math.floor(res.mod + system.otherStats.phrDom + system.otherStats.allEmpty + res.bonus);
                     break;
                 case "Disease":
                     res.name = game.i18n.localize('abfalter.diseaseRes');
                     res.short = game.i18n.localize('abfalter.dr');
-                    res.final = Math.floor(system.levelinfo.presence + res.mod + stats.Constitution.mod + system.otherStats.allEmpty + res.bonus);
+                    res.final = Math.floor((system.levelinfo.presence + stats.Constitution.mod) * system.settings.drMult);
+                    res.final += Math.floor(res.mod + system.otherStats.allEmpty + res.bonus);
                     break;
                 case "Poison":
                     res.name = game.i18n.localize('abfalter.poisonRes');
                     res.short = game.i18n.localize('abfalter.psnr');
-                    res.final = Math.floor(system.levelinfo.presence + res.mod + stats.Constitution.mod + system.otherStats.allEmpty + res.bonus);
+                    res.final = Math.floor((system.levelinfo.presence + stats.Constitution.mod) * system.settings.psnrMult);
+                    res.final += Math.floor(res.mod + system.otherStats.allEmpty + res.bonus);
                     break;
                 case "Magic":
                     res.name = game.i18n.localize('abfalter.magicRes');
                     res.short = game.i18n.localize('abfalter.mr');
-                    res.final = Math.floor(system.levelinfo.presence + res.mod + stats.Power.mod + system.otherStats.allEmpty + res.bonus);
+                    res.final = Math.floor((system.levelinfo.presence + stats.Power.mod) * system.settings.mrMult);
+                    res.final += Math.floor(res.mod + system.otherStats.allEmpty + res.bonus);
                     break;
                 case "Psychic":
                     res.name = game.i18n.localize('abfalter.psychicRes');
                     res.short = game.i18n.localize('abfalter.psyr');
-                    res.final = Math.floor(system.levelinfo.presence + res.mod + stats.Willpower.mod + system.otherStats.allEmpty + res.bonus);
+                    res.final = Math.floor((system.levelinfo.presence + stats.Willpower.mod) * system.settings.psyrMult);
+                    res.final += Math.floor(res.mod + system.otherStats.allEmpty + res.bonus);
                     break;
                 default:
                     break;
             }
         }
+
+        
 
         //Movement
         system.movement.final = Math.floor(system.stats.Agility.final + system.movement.spec + system.movement.temp + system.movement.bonus + system.movement.sizeBase - system.movement.pen + Math.min(0, Math.ceil(system.aamField.final / 20)) + system.armor.wearArmor.totalMovePen);
@@ -1777,7 +1792,7 @@ export default class abfalterActor extends Actor {
         system.secondaryFields.perceptive.kidetection.display = !system.kiAbility.kiDetection.status;
         system.secondaryFields.perceptive.kidetection.classBonus = classBonuses.kiDect;
         system.secondaryFields.perceptive.kidetection.baseNotice = Math.floor(system.secondaryFields.perceptive.notice.temp + system.secondaryFields.perceptive.notice.spec +
-            system.secondaryFields.perceptive.notice.base + system.secondaryFields.perceptive.notice.classBonus + system.secondaryFields.perceptive.notice.natTotal);
+            system.secondaryFields.perceptive.notice.base + system.secondaryFields.perceptive.notice.classBonus + system.secondaryFields.perceptive.notice.natTotal + system.secondaryFields.perceptive.notice.bonus);
         system.secondaryFields.perceptive.kidetection.parentField = system.secondaryFields.category.perceptive;
         system.secondaryFields.perceptive.kidetection.modValue = stats.Perception.mod;
         system.secondaryFields.perceptive.kidetection.base = (system.secondaryFields.perceptive.kidetection.baseNotice + system.mk.final) / 2;
@@ -1869,7 +1884,7 @@ export default class abfalterActor extends Actor {
         system.secondaryFields.subterfuge.kiconceal.display = !system.kiAbility.kiConceal.status;
         system.secondaryFields.subterfuge.kiconceal.classBonus = classBonuses.kiCon;
         system.secondaryFields.subterfuge.kiconceal.baseHide = Math.floor(system.secondaryFields.subterfuge.hide.temp + system.secondaryFields.subterfuge.hide.spec +
-            system.secondaryFields.subterfuge.hide.base + system.secondaryFields.subterfuge.hide.classBonus + system.secondaryFields.subterfuge.hide.natTotal);
+            system.secondaryFields.subterfuge.hide.base + system.secondaryFields.subterfuge.hide.classBonus + system.secondaryFields.subterfuge.hide.natTotal + system.secondaryFields.subterfuge.hide.bonus);
         system.secondaryFields.subterfuge.kiconceal.parentField = system.secondaryFields.category.subterfuge;
         system.secondaryFields.subterfuge.kiconceal.modValue = stats.Perception.mod;
         system.secondaryFields.subterfuge.kiconceal.base = (system.secondaryFields.subterfuge.kiconceal.baseHide + system.mk.final) / 2;

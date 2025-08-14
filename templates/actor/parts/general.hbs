@@ -167,7 +167,7 @@
                     <div>
                         {{#if system.stats.Dexterity.status}}
                         <div class="extend">
-                            <h6 class="physical"> {{localize "abfalter.dexerity"}} </h6>
+                            <h6 class="physical"> {{localize "abfalter.dexterity"}} </h6>
                             <label>
                                 {{#if system.toggles.monsterChar}}
                                 <span> {{localize "abfalter.monsterPowers.monstChar"}} </span>
@@ -198,12 +198,12 @@
                         {{else}}
                         <div class="compact">
                             <button type="button" data-action="characteristicRoll" data-roll="{{system.stats.Dexterity.final}}"
-                                data-label="{{localize "abfalter.dexerity"}}" data-type="characteristicRoll">
+                                data-label="{{localize "abfalter.dexterity"}}" data-type="characteristicRoll">
                                 <span class="physical"> {{localize "abfalter.dex"}} </span> <span>
                                     {{system.stats.Dexterity.final}} </span>
                             </button>
                             <button type="button" data-action="characteristicRoll" data-roll="{{system.stats.Dexterity.opposedfinal}}"
-                                data-label="{{localize "abfalter.opposed"}} {{localize "abfalter.dexerity" }}"
+                                data-label="{{localize "abfalter.opposed"}} {{localize "abfalter.dexterity" }}"
                                 data-type="characteristicRoll">
                                 <span> {{system.stats.Dexterity.opposedfinal}} </span>
                             </button>

@@ -1,3 +1,7 @@
+
+.image-popout .window-header .window-title {
+    visibility: hidden;
+}
 /* #region @Color Theme */
 :root {
     /*--backgroundColor: rgba(11, 10, 19, 0.9);*/
@@ -16,6 +20,9 @@
     --equipped: #1bb936;
     --kiBought: #4b47b7;
     --kiFree: #106810;
+    --selectBackground: #252944;
+    --buttonHover: #5c69c1;
+    --customTooltip: #1f3449;
     --color-border-dark: #8aa9cb;
     --color-border-dark-5: #12172ee8;
     --color-text-dark-secondary: #979797;
@@ -47,7 +54,10 @@
     --equipped: #00a11b;
     --kiBought: #8581e3;
     --kiFree: #1da71d;
-    --colot-border-dark: inherit;
+    --selectBackground: #bcbeb3;
+    --buttonHover: #ca984e;
+    --customTooltip: #dbd1b6;
+    --color-border-dark: inherit;
     --color-border-dark-5: inherit;
     --color-text-dark-secondary: inherit;
     --color-border-light-tertiary: inherit;
@@ -103,7 +113,7 @@
 .prosemirror menu button:hover, 
 .prosemirror menu button.active,
 .window-app .window-content button {
-    color: var(--textColor);
+    color: var(--buttonHover);
 }
 .directory .directory-header .header-search input,
 .prosemirror menu .pm-dropdown,
@@ -127,7 +137,7 @@ a.content-link {
 .prosemirror menu .pm-dropdown ul li:hover,
 .prosemirror menu button.active,
 .prosemirror menu button:hover {
-    background: #5c69c1;
+    background: var(--buttonHover);
 }
 #keybindings .binding .key.uneditable {
     background: inherit;
@@ -172,7 +182,7 @@ a.content-link {
     line-height: 20px;
 }
 .baseAbfalter select option {
-    background: #252944;
+    background: var(--selectBackground);
 }
 .baseAbfalter textarea {
     background: var(--buttonBg);
@@ -190,7 +200,7 @@ a.content-link {
     background: #252944;
 }
 .fumbleRoll {
-    color: red;
+    color: red !important;
 }
 .openRoll {
     color: forestgreen;
@@ -225,12 +235,18 @@ a.content-link {
 .natemph {
     color: var(--armorPen) !important;
 }
+.warningAbfalter {
+    color: #d2621e !important;
+}
 /* #endregion */
 
 /* #region @Global Actor Styles */
 /* Some might be obsolete TODO */
 .hidden {
     display: none !important;
+}
+.visibilityOff {
+    visibility: hidden !important;
 }
 .showOpacity {
     opacity: 1 !important;
@@ -239,7 +255,7 @@ a.content-link {
     overflow-y: auto;
 }
 .window-content {
-    padding: 7px;
+    padding: 3px;
 }
 .actorPage {
     min-width: 878px;
@@ -404,8 +420,7 @@ h6 {
     height: auto;
 }
 .itemStyle .editor .editor-content {
-    /* width: 100%; causing bugs? */
-    margin: 0 3px;
+    margin: 5px 3px;
     color: inherit;
 }
 .itemStyle .editor .editor-content span {
@@ -488,6 +503,14 @@ h6 {
     transform: rotate(90deg);
 }
 
+.baseAbfalter .editor .editor-content span {
+    height: inherit;
+}
+.baseAbfalter .editor-content p:empty {
+    display: block;
+    min-height: 1em;
+}
+
 /* Text Area Auto Resize */
 .baseAbfalter .editor-menu {
     flex-wrap: nowrap;
@@ -525,7 +548,9 @@ h6 {
     margin: 0 0 7px 0;
     padding: 3px;
 }
-
+.form-footer > button {
+    border:none;
+}
 /* #endregion */
 
 /* #region @Header */
@@ -3222,7 +3247,7 @@ h6 {
     width: 64.5%;
     flex-wrap: wrap;
     gap: .5rem;
-    display: flex;
+    display: block;
 }
 .s5 > div:nth-of-type(1),
 .s5 > div:nth-of-type(2) {
@@ -3279,19 +3304,19 @@ h6 {
 .kiSubsection > div:nth-child(2n + 1) {
     background: var(--itemOffSet);
 }
-.subKi1 {
+.kiAbilities .subKi1 {
     margin-left: 10px;
 }
-.subKi2 {
+.kiAbilities .subKi2 {
     margin-left: 30px;
 }
-.subKi3 {
+.kiAbilities .subKi3 {
     margin-left: 50px;
 }
-.subKi4 {
+.kiAbilities .subKi4 {
     margin-left: 70px;
 }
-.subKi5 {
+.kiAbilities .subKi5 {
     margin-left: 90px;
 }
 .kiActiveButton {
@@ -3307,6 +3332,34 @@ h6 {
     height: 20px;
     border-radius: 0px;
     border: 0px;
+}
+/* #endregion */
+
+/* #region @Ki-Abilities-Custom */
+.kiAbility-item > label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.kiAbility-item > label > button {
+    min-height: 25px;
+    border: 0px;
+    width: 15%;
+    font-size: 0px;
+}
+.kiAbility-item > label > span {
+    height: auto;
+}
+.kiAbility-item > label > input:nth-of-type(1) {
+    height: 20px;
+    width: 75%;
+}
+.kiAbility-item > label > input:nth-of-type(2) {
+    height: 25px;
+    width: 15%;
+}
+.subKiBase {
+    margin: 0 0 0 3px;
 }
 /* #endregion */
 
@@ -3767,212 +3820,91 @@ h6 {
 .kiTechnique-item:nth-child(2n) {
     background: var(--itemOffSet);
 }
-.kiTechMinContainer > div,
-.kiTechMaxContainer > div {
-    display: flex;
-}
-.kiTechMinContainer .kiTechMainInfo > span,
-.kiTechSideInfoMax > span,
-.kiTechUseMax > span,
-.kiTechMaint > div > span,
-.kiTechUse > div > span,
-.kiTechTypeMax > div > span:not(:first-of-type) {
+.kiTechStatsGrid {
+    display: grid;
+    grid-template-columns: 75px repeat(var(--char-count), 1fr);
+    gap: 5px 2px;
     text-align: center;
+    align-items: center;
+    padding: 0 0 3px 0;
 }
-.kiTechMinContainer .kiTechMainInfo > span,
-.kiTechMinContainer .kiTechMainInfo > a:first-of-type {
+.kiTechStatsGrid .kiTechFirstGrid {
+    text-align: start;
+}
+.kiTechStatsGrid .kiTechFirstRow {
+    border-bottom: 1px dashed var(--boxColor);
+}
+.kiTechMainInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0 0 0;
+}
+.kiTechMainInfo > span {
+    width: 64%;
     border-bottom: 1px solid var(--boxColor);
+    height: auto;
 }
-.kiTechMainInfo > span:first-of-type,
-.kiTechMainInfo > input:first-of-type {
-    width: 68%;
-    margin: 0;
-}
-.kiTechMainInfo > span,
-.kiTechMainInfo > input {
-    width: 10%;
-    margin: 0 0 0 1%;
+.kiTechMainInfo > span:nth-of-type(2),
+.kiTechMainInfo > span:nth-of-type(3) {
+    width: 11%;
+    justify-content: center;
 }
 .kiTechMainInfo > a {
     width: 5%;
-    height: 20px;
+    height: auto;
 }
-.kiTechnique-item > div > div > a {
+.kiTechMainInfo > a {
     width: 5%;
-    font-size: 15px;
+    font-size: 0.85rem;
 }
-.kiTechnique-item > div > div > a {
+.kiTechMainInfo > a {
     opacity: 0;
 }
-.kiTechnique-item > div:hover > div > a {
+.kiTechnique-item:hover > div > a {
     opacity: 1;
 }
-.kiTechSideInfo > span:first-of-type,
-.kiTechSideInfo > span:nth-of-type(2) {
-    width: 36.5%;
-    text-align: left;
-    padding: 0 0 0 15px;
+.kiTechSubheader {
+    justify-items: center;
+    font-style: italic;
     border-bottom: 1px solid var(--boxColor);
-    border-right: 1px solid var(--boxColor);
+    margin: 3px 0 7px 0;  
+    font-size: 0.8rem;
+} 
+.kiTechnique-item .editor {
+    border: 1px solid var(--boxColor);
+    padding: 0 3px;
+    border-radius: 10px;
+    max-height: 250px;
+    overflow: auto;
 }
-.kiTechSideInfo > span:nth-of-type(3),
-.kiTechSideInfo > span:nth-of-type(4) {
-    width: 11%;
-    padding: 0 0 0 1%;
-    border-bottom: 1px solid var(--boxColor);
-    text-align: center;
-}
-.kiTechSideInfo > span:nth-of-type(4) {
-    width: 16%;
-    padding: 0 5% 0 1%;
-}
-.kiTechSideInfoMax > span:first-of-type {
-    width: 73%;
-    padding: 0 0 0 5%;
-}
-.kiTechSideInfoMax > span {
-    width: 11%;
-    padding: 0 0 0 1%;
-}
-.kiTechMaint > span:first-of-type,
-.kiTechType > span:first-of-type,
-.kiTechUse > span:first-of-type {
-    width: 22%;
-}
-.kiTechMaint > span,
-.kiTechType > span,
-.kiTechUse > span {
-    text-align: center;
-    width: 13%;
-}
-.kiTechMaint {
-    border-bottom: 1px solid var(--boxColor);
-}
-.kiTechMinContainer .kiTechInfo > textarea {
-    background: none;
-    cursor: default;
-}
-.kiTechInfo {
-    border-right: 1px solid var(--boxColor);
-    border-left: 1px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-}
-.kiTechTypeMax > span:first-of-type,
-.kiTechUseMax > span:first-of-type,
-.kiTechMaintMax > span:first-of-type {
-    width: 15%;
-    justify-content: center;
+.kiTechUnifiedMaint {
     display: flex;
-}
-.kiTechTypeMax > span:last-of-type {
-    justify-content: center;
-    display: flex;
-}
-.kiTechTypeMax > span:not(:first-of-type):not(:last-of-type),
-.kiTechUseMax > input,
-.kiTechMaintMax > input {
-    justify-content: center;
-    text-align: center;
-    display: flex;
-    width: 9%;
-    margin: 0 1% 0 0;
-}
-.kiTechTypeMax > span:last-of-type,
-.techSelect {
-    width: 25%;
-}
-.techSelect > select {
-    width: 100%;
-}
-.techExpandMax,
-.techExpand {
-    width: 75%;
-    display: flex;
-}
-.kiTechMaintMax > div > span,
-.kiTechUseMax > div > span,
-.kiTechUse > div > span:first-of-type {
-    width: 33.3%;
     justify-content: center;
 }
-.kiTechMaint > div > span:first-of-type {
-    width: 32%;
-    justify-content: center;
-}
-.kiTechMaintMax > div > input,
-.kiTechMaint > div > span,
-.kiTechUseMax > div > input,
-.kiTechUse > div > span {
-    width: 12%;
-}
-.kiTechTypeMax > div > span:first-of-type {
-    width: 33%;
-    margin: 0 0 0 29px;
-}
-.kiTechTypeMax > div > span {
-    width: 15%;
-}
-.kiTechType,
-.kiTechTypeMax {
-    border-bottom: 1px dashed var(--boxColor);
-}
-.kiTechSideInfoMax > span {
-    font-size: 12px;
+.kiTechUnifiedMaint > span:last-of-type {
+    padding: 0 0 0 5px;
 }
 /* #endregion */
 
 /* #region @Item-Ki-techniques */
-.kiTechMaintMaxContent > div,
-.kiTechContent > div:not(:nth-of-type(4)) {
-    display: flex;
-}
-.kiTechContent > div:nth-of-type(1) > label {
-    display: flex;
-    width: 50%;
+.kiTechGridContent {
+    display: grid;
+    grid-template-columns: 75px repeat(6, 1fr);
+    gap: 8px 2px;
+    text-align: center;
+    align-items: center;
     padding: 0 10px;
+    margin: 0 0 5px 0;
 }
-.kiTechContent > div:nth-of-type(1) > label > input{
-    width: 25%;
-    margin: 0 1% 0 0;
-    display: flex;
-    justify-content: center;
+.kiTechGridContent > input {
+    width: 80%;
+    justify-self: center;
 }
-.kiTechContent > div:nth-of-type(1) > label > span {
-    width: 49%;
-    margin: 0 1% 0 0;
-    display: flex;
-    justify-content: center;
-}
-.kiTechContent > div:nth-of-type(2) {
-    padding: 3px 0 0 0;
+.kiTechGridContent .kiTechGridUnderline {
     border-bottom: 1px dashed var(--boxColor);
 }
-.kiTechMaintMaxContent > div > span:first-of-type {
-    width: 15%;
-    justify-content: center;
-    display: flex;
-}
-.kiTechMaintMaxContent > div > input {
-    text-align: center;
-    width: 9%;
-    margin: 0 1% 0 0;
-}
-.kiTechMaintMaxContent > div:nth-of-type(2) > span {
-    width: 25%;
-}
-.techExpandContent {
-    display: flex;
-    width: 75%;
-}
-.techExpandContent > span {
-    width: 33.3%;
-    justify-content: center;
-    display: flex;
-}
-.techExpandContent > input {
-    display: flex;
-    width: 12%;
-}
+
 /* #endregion */
 
 /*
@@ -5030,6 +4962,12 @@ h6 {
 .bioInfo .editor {
     min-height: 350px;
 }
+.bioInfo span {
+    height: inherit;
+    display: contents;
+    font-size: inherit;
+    color: inherit;
+}
 .editor-menu > li > button{
     padding: 0 0.5rem;
 }
@@ -5174,6 +5112,17 @@ h6 {
 .charOptions .lvlModLabel > span:nth-of-type(3) {
     width: 19.5%;
     text-align: center;
+}
+.charOptions .dpOffSetsLabel > span {
+    width: 30%;
+}
+.charOptions .dpOffSetsLabel > button {
+    width: 27%;
+    margin: 0 3% 0 0;
+    border: none;
+}
+.charOptions .dpOffSetsLabel > input {
+    width: 40%;
 }
 /* #endregion */
 
@@ -5405,6 +5354,7 @@ h6 {
     display: flex;
     justify-content: space-between;
     gap: 10px;
+    margin: 7px 0;
 }
 .dpCostMainInfo > label {
     display: flex;
@@ -5556,7 +5506,6 @@ h6 {
     max-width: 100px;
     height: 100px;
     object-fit: contain;
-    border: 2px solid #000;
     border-right: 2px groove  var(--boxColor);
 }
 .abfalter.item .sheet-header .header-details {
@@ -5722,9 +5671,6 @@ h6 {
     height: 300px;
 
 }
-.itemDescStyle .editor > button {
-    top: -30px;
-}
 /* #endregion */
 
 /* #region Item-Global-Styles effects-list*/
@@ -5815,40 +5761,7 @@ h6 {
 }
 /* #endregion */
 
-/*
-    ***************
-    ---------------
-         Temp
-    ---------------
-    ***************
-*/
-.dialog .dialog-buttons button {
-    background: var(--buttonBg);
-    color: var(--textColor);
-    border: none;
-}
-.form-fields > input,
-.journal-header > input {
-    background: var(--buttonBg);
-    border-radius: 0px;
-    border-bottom: 1px solid var(--inputBorder);
-    color: var(--textColor);
-}
-.form-fields > select {
-    height: 20px;
-    font-size: 13px;
-    border: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    border-bottom: 1px solid var(--inputBorder);
-    color: var(--textColor);
-    background-color: var(--buttonBg);
-}
 
-.restOptionsContainer > label {
-    display: flex;
-}
 
 /*
     ***************
@@ -5857,22 +5770,36 @@ h6 {
     ---------------
     ***************
 */
-/*
-    --------
-    General Stuffs
-    --------
-*/
+/* #region Shared Chat Formats */
+.oneModDialog .dialog-form {
+    gap: .7rem;
+}
+.oneModDialog .form-footer > button {
+    --button-size: 2rem;
+}
+.oneModDialog .form-footer > button > span {
+    font-size: .85rem;
+}
 .itemChatTitle > span {
     display: flex;
     justify-content: center;
-    font-size: 15px;
+    font-size: 0.95rem;
 }
 .itemChatTitle > span:nth-of-type(2) {
-    font-size: 20px;
+    font-size: 1.25rem;
     border-image: url(../img/border.png) 10 stretch;
     border-top: 5px solid black;
     border-bottom: 5px solid black;
 }
+.explodeButtons {
+    display: flex;
+    justify-content: center;
+}
+.explodeButtons > button {
+    width: 75%;
+}
+/* #endregion */
+
 .armorDisplay {
     background: none;
     border: none;
@@ -5887,22 +5814,13 @@ h6 {
     white-space: nowrap;
     padding: 3px;
 }
-.explodeButtons {
-    display: flex;
-    justify-content: center;
-}
-.explodeButtons > button {
-    width: 75%;
-}
+
 .iniExplodeRoll {
     justify-content: center !important;
     font-style: italic;
 }
-/*
-    --------
-    Other Stuffs
-    --------
-*/
+
+/* #region Basic Modifier Roll */
 .diceRollingTemp > label {
     display: flex;
     padding: 0 15%;
@@ -5921,13 +5839,12 @@ h6 {
 .diceRollingTemp > label > select {
     width: 35%;
 }
-.message-content {
-    display: flex;
-    flex-direction: column;
-}
+/* #endregion */
 .chat-message .message-header .message-metadata {
     display: block;
 }
+
+
 /*
     --------
     1d10 Roll
@@ -6127,10 +6044,11 @@ h6 {
 */
 .kiChatInfo {
     display: flex;
-    justify-content: space-evenly;
-    font-size: 13px;
     border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
+    border-bottom : 5px solid black;
+    text-align: center;
+    font-size: .8rem;
+    font-style: italic;
 }
 .kiChatBorderHere {
     border-image: url(../img/border.png) 10 stretch;
@@ -6152,10 +6070,46 @@ h6 {
 /*
     ***************
     ---------------
+         Temp
+    ---------------
+    ***************
+*/
+.dialog .dialog-buttons button {
+    background: var(--buttonBg);
+    color: var(--textColor);
+    border: none;
+}
+.form-fields > input,
+.journal-header > input {
+    background: var(--buttonBg);
+    border-radius: 0px;
+    border-bottom: 1px solid var(--inputBorder);
+    color: var(--textColor);
+}
+.form-fields > select {
+    height: 20px;
+    font-size: 13px;
+    border: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-bottom: 1px solid var(--inputBorder);
+    color: var(--textColor);
+    background-color: var(--buttonBg);
+}
+
+.restOptionsContainer > label {
+    display: flex;
+}
+
+/*
+    ***************
+    ---------------
       Changelog
     ---------------
     ***************
 */
+/* #region Changelog */
 .changelog {
     display: flex;
     flex-direction: column;
@@ -6211,41 +6165,54 @@ h6 {
     border: 0px;
     border: 1px solid var(--boxColor);
 }
+/* #endregion */
+
+
+
 /*
     ***************
     ---------------
-      Auto Combat
+       Macro Bar
     ---------------
     ***************
 */
-/*
-    ---------
-    Macro Bar
-    ---------
-*/
+/* #region Macro Bar */
+.customMacroWrapper {
+    position: fixed;
+    bottom: 75px;
+    left: 15px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
 .customActionBar {
-  z-index: 70;
-  position: fixed;
-  bottom: 75px;
-  left: 200px;
-  visibility: hidden;
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(8px);
 }
 .customActionBar .macros {
-  display: flex;
+    display: flex;
 }
-.customActionBar .macros .customMacro {
-  position: relative;
-  cursor: pointer;
-  border-radius: 0.5rem;
-  width: 3.2rem;
-  height: 3.2rem;
+.customActionBar .macros > div {
+    display: flex;
+    border-top: 2px solid #666669;
+    border-bottom: 2px solid #666669;
+}
+.customMacro {
+    position: relative;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    width: 3.2rem;
+    height: 3.7rem;
+    margin: 0 0.25rem;
 }
 .img-top {
     display: none;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 99;
+    z-index: 50;
 }
 .customMacro.hover .img-bottom {
     display: none;
@@ -6253,23 +6220,520 @@ h6 {
 .customMacro.hover .img-top {
     display: inline;
 }
-.customActionBar .macros .customMacro img {
-  transition: all 0.3s ease-in-out;
-  border: none;
+.customMacro img {
+    transition: all 0.3s ease-in-out;
+    border: none;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    pointer-events: none;
 }
-.customActionBar .macros .customMacro .shortcut {
-  transition: all 0.3s ease-in-out;
-  position: absolute;
-  bottom: 40px;
-  background-color: white;
-  font-weight: bold;
-  font-size: 0.75rem;
-  color: #6e2917;
-  width: 100%;
-  text-align: center;
-  margin: 0;
-  opacity: 0.8;
+
+/*Drag, Toggle, Lock Handles*/
+.macroDragHandle{
+    width: 1.5rem;
+    height: 3.7rem;
+    background: #666669;
+    color: #c7c7c7;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
 }
+.macroToggleHandle {
+    width: 1.5rem;
+    height: 3.7rem;
+    background: #666669;
+    color: #c7c7c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 0;
+}
+.macroLockHandle {
+    width: 1.8rem;
+    height: 3.7rem;
+    background: #666669;
+    color: #c7c7c7;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+}
+.macroToggleArrow {
+    transition: transform 0.2s ease-in-out;
+    display: inline-block;
+}
+.customMacroWrapper.collapsed .customActionBar {
+    display: none;
+}
+.customMacroWrapper.collapsed .macroToggleArrow {
+    transform: rotate(180deg);
+}
+
+/*Shortcut Overlay*/
+.macroShortcutOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    z-index: 50;
+    font-family: sans-serif;
+}
+.macroShortcutOverlay .shortcut-float {
+    position: absolute;
+    background: white;
+    color: #6e2917;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
+    white-space: nowrap;
+}
+/* #endregion */
+
+/* #region kiTech Opener */
+.kiCreatorDialog .form-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px 0;
+}
+.kiCreatorDialog .form-footer button {
+    width: 100%;
+    border: none;
+}
+.kiCreatorDialog .form-footer button > span {
+    font-size: 1rem;
+}
+/* #endregion */
+
+/* #region KiTech Creator */
+.kiTechCreator .window-content {
+    padding: 3px;
+}
+.kiTechCreatorContainer {
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    max-height: 1000px;
+    overflow-y: auto;
+    padding: 0 5px;
+}
+.kiTechCreatorContainer .kiTechCreatorTitle > span {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    height: 2.5rem;
+    font-family: monospace;
+}
+.kiTechCreatorContainer .kiTechCreatorTopLevel {
+    gap: 0.25rem;
+    display: flex;
+    flex-direction: column;
+}
+.kiTechCreatorContainer .kiTechCreatorTopLevel > label {
+    display: flex;
+    padding: 0 5px;
+    justify-content: space-between;
+}
+.kiTechCreatorContainer .kiTechCreatorTopLevel > label > span {
+    width: 60%;
+    align-items: center;
+}
+.kiTechCreatorContainer .kiTechCreatorTopLevel > label > button {
+    width: 35%;
+    align-items: center;
+    font-size: 0px;
+    border: none;
+}
+.kiTechCreatorContainer .kiTechCreatorTopLevel > label > select {
+    width: 35%;
+    align-items: center;
+}
+.kiTechCreatorContainer .kiTechCreatorAddAbility {
+    justify-content: center;
+    display: flex;
+}
+.kiTechCreatorContainer .kiTechCreatorAddAbility > button {
+    width: 50%;
+    font-size: 1rem;
+    border: none;
+}
+.kiTechAbility-list .kiTechAbility-header,
+.kiTechAbility-list .kiTechAbility-details {
+    display: flex;
+    padding: 0 5px;
+    justify-content: space-between;
+}
+.kiTechAbility-details {
+    padding: 3px 5px 0 5px;
+}
+.kiTechAbility-list .kiTechAbility-header {
+    flex-direction: column;
+}
+.kiTechAbility-list .kiTechAbility-headerLine {
+    border-bottom: 2px solid var(--boxColor);
+}
+.kiTechAbility-box {
+    margin: 0 0 10px 0;
+}
+.kiTechAbility-header > div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.kiTechAbility-header > div > span:first-of-type {
+    width: 65%;
+    justify-content: start;
+    align-items: start;
+    font-size: 1.2rem;
+    height: auto;
+}
+.kiTechAbility-header > div > span:nth-of-type(2) {
+    width: 18%;
+    align-items: center;
+    font-size: 1.2rem;
+    height: auto;
+}
+.kiTechAbility-header > div > a {
+    width: 5%;
+    align-items: center;
+    font-size: 1rem;
+    height: auto;
+}
+.kiTechAbility-header > span {
+    width: 100%;
+    align-items: start;
+    font-style: italic;
+    height: auto;
+}
+.kiTechAbility-optionals {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    gap: 4px;
+    padding: 3px 5px;
+}
+.kiTechAbility-optionals > label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.kiTechAbility-optionals > label > input {
+    margin-right: 4px;
+}
+.kiTechAbility-details {
+    border-top: 2px solid var(--boxColor);
+    border-radius: 13px 13px 0 0;
+}
+.kiTechAbility-details,
+.kiTechAbility-optionals {
+    border-left: 2px solid var(--boxColor);
+    border-right: 2px solid var(--boxColor);
+}
+.kiTechAbility-kiPoints > div:first-of-type {
+    border-bottom: 1px solid var(--boxColor);
+    margin: 0 0 5px 0;
+}
+.kiTechAbility-kiPoints {
+    padding: 0 5px;
+    border-bottom: 2px solid var(--boxColor);
+    border-left: 2px solid var(--boxColor);
+    border-right: 2px solid var(--boxColor);
+    border-radius: 0 0 13px 13px;
+}
+.kiTechAbility-kiPoints > div:first-of-type {
+    display: flex;
+    justify-content: space-between;
+}
+.kiTechAbility-kiPointsGrid {
+    display: grid;
+    grid-template-columns: 75px repeat(var(--char-count), 1fr);
+    gap: 8px;
+    text-align: center;
+    align-items: center;
+}
+.grid-label {
+    font-weight: bold;
+    text-align: left;
+}
+.grid-char-name {
+    font-weight: bold;
+    text-align: center;
+}
+.grid-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+.kiTechAbility-preview > span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    margin: 0 0 0.25rem 0;
+}
+.kiTechAbility-preview > span::before,
+.kiTechAbility-preview > span::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #666;
+    margin: 0 5px;
+}
+.kiTechAbility-previewTitle > label {
+    display: flex;
+    align-items: center;
+    font-size: .82rem;
+}
+.kiTechAbility-previewTitle > label > span {
+    display: flex;
+    flex-direction: row;
+    margin: 0 3px;
+}
+.kiTechAbility-previewTitle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 5px;
+    gap: 5px;
+}
+.kiTechAbility-previewTitle > *:nth-child(odd) {
+    justify-self: start;  
+}
+.kiTechAbility-previewTitle > *:nth-child(even) {
+    justify-self: end;
+}
+.kiTechAbility-previewTitle {
+    border-bottom: 1px solid var(--boxColor);
+    margin: 0 0 5px 0;
+}
+.kiTechAbility-previewTitle > *:nth-child(odd) {
+    justify-self: start;
+}
+.kiTechAbility-previewTitle > *:nth-child(even) {
+    justify-self: end;
+}
+.kiTechAbility-kiFinalGrid {
+    display: grid;
+    grid-template-columns: 75px repeat(var(--char2-count), 1fr);
+    gap: 8px;
+    text-align: center;
+    align-items: center;
+    padding: 0 5px;
+}
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+.custom-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    background-color: var(--customTooltip);
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px;
+    position: absolute;
+    top: -100%;
+    z-index: 10;
+    left: 25%;
+    width: 250px;
+    height: auto !important;
+    transition: opacity 0.2s ease-in-out;
+    font-size: 0.85rem;
+    display: block;
+    pointer-events: none;
+}
+.custom-tooltip-right {
+    left: -150% !important;
+}
+.tooltip-container:hover .custom-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+.kiTechAbility-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 10px 5px 5px 5px;
+}
+.kiTechAbility-buttons > button {
+    width: 49%;
+    font-size: 1.1rem;
+    border: none;
+}
+/* #endregion */
+
+/* #region kiTech Ability Chooser */
+.kiTechAbilityContainer {
+    gap: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+}
+.kiTechAbilityContainer .kiTechAbilityTitle > span {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    height: 2.5rem;
+    font-family: monospace;
+}
+.kiTechAbilityContainer .effect-group,
+.kiTechAbilityContainer .primCharDisplay,
+.kiTechAbilityContainer .kiTechAbilityTopLevel {
+    gap: 0.35rem;
+    display: flex;
+    flex-direction: column;
+}
+.kiTechAbilityContainer .effect-group > label,
+.kiTechAbilityContainer .kiTechAbilityTopLevel > label {
+    display: flex;
+    padding: 0 10px;
+    justify-content: space-between;
+}
+.kiTechAbilityContainer .effect-group > label > span,
+.kiTechAbilityContainer .kiTechAbilityTopLevel > label > span {
+    width: 40%;
+    align-items: center;
+    font-size: 0.9rem;
+}
+.kiTechAbilityContainer .effect-group > label > select,
+.kiTechAbilityContainer .kiTechAbilityTopLevel > label > select {
+    width: 55%;
+    align-items: center;
+}
+.kiTechAbilityContainer .primCharDisplay > label {
+    display: flex;
+    padding: 0 10px;
+}
+.kiTechAbilityContainer .primCharDisplay > label > span:last-of-type {
+    padding: 0 0 0 2px;
+}
+.kiTechAbilityContainer .effect-group > label > label {
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.kiTechAbilityContainer .effect-group:not(:last-of-type) {
+    margin: 0 0 .35rem 0;
+}
+.kiTechAbilityContainer .kiTechAbilityTopLevel > span,
+.kiTechAbilityContainer .charSelection > span,
+.kiTechAbilityContainer .statContainer > span,
+.kiTechAbilityContainer .additional-effects > span,
+.kiTechAbilityContainer .descriptionPreview > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    margin: 0 0 0.25rem 0;
+}
+.kiTechAbilityContainer .kiTechAbilityTopLevel > span::before,
+.kiTechAbilityContainer .kiTechAbilityTopLevel > span::after,
+.kiTechAbilityContainer .charSelection > span::before,
+.kiTechAbilityContainer .charSelection > span::after,
+.kiTechAbilityContainer .statContainer > span::before,
+.kiTechAbilityContainer .statContainer > span::after,
+.kiTechAbilityContainer .additional-effects > span::before,
+.kiTechAbilityContainer .additional-effects > span::after,
+.kiTechAbilityContainer .descriptionPreview > span::before,
+.kiTechAbilityContainer .descriptionPreview > span::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #666;
+    margin: 0 10px;
+}
+.kiTechAbilityContainer .charSelection > label:first-of-type {
+    margin: 0 0 0.35rem 0;
+}
+.kiTechAbilityContainer .charSelection > label:last-of-type > span {
+    align-self: center;
+}
+.kiTechAbilityContainer .charSelection > label {
+    display: flex;
+    padding: 0 10px;
+    justify-content: start;
+}
+.kiTechAbilityContainer .charSelection > label > span {
+    font-size: 0.9rem;
+}
+.kiTechAbilityContainer .charSelection > label:first-of-type > span {
+    padding: 0 3px 0 0;
+}
+.kiTechAbilityContainer .optionalContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  max-width: 100%;
+}
+.kiTechAbilityContainer .optionalContainer label {
+  flex: 1 1 calc(50% - 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.kiTechAbilityContainer .statContainer {
+    display: flex;
+    flex-direction: column;
+}
+.kiTechAbilityContainer .tierStatsTop {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px 12px;
+  padding: 8px 0;
+}
+.kiTechAbilityContainer .tierStatsBottom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px 12px;
+  padding: 8px 0;
+}
+.kiTechAbilityContainer .stat-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.kiTechAbilityContainer .stat-block span {
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
+.kiAddAbilityDialog .form-footer > button {
+    border: none;
+}
+/* #endregion */
+
+/* #region kiTech Creator Finalize */
+.kiTechCreatorName .form-footer {
+    justify-content: space-around;
+}
+.kiTechCreatorName .form-footer button {
+    border: none;
+    width: 48%;
+    --button-size: none;
+    height: 37px;
+    flex: none;
+}
+.kiTechCreatorName .form-footer button > span{
+    font-size: 1.1rem;
+}
+/* #endregion */
+
+
+
 /** Combat **/
 .combat,
 .mystic {

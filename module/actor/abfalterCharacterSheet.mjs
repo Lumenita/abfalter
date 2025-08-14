@@ -24,6 +24,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         actions: {
             toggleValue: this.#toggleValue,
             toggleBoughtFreeButton: this.#toggleDualBoolButton,
+            kiAbilityItemToggle: this.#kiAbilityItemToggle,
             itemToggleValue: this.#itemToggleValue,
             itemToggleValueButton: this.#itemToggleValueButton,
             itemToChat: this.#itemToChat,
@@ -51,7 +52,9 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             deleteAE: this.#deleteEffect,
             editAE: this.#editEffect,
             toggleElanGift: this.#toggleElanGift,
-            openRestWindow: this.#openRestWindow
+            openRestWindow: this.#openRestWindow,
+            openDpOffsets: this.#openDpOffsets,
+            openSettings: this.#openSettings
         }
     }
 
@@ -201,7 +204,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
 
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
-
         context.document = this.document;
         context.system = this.document.system;
         context.systemFields = this.document.system.schema.fields;
@@ -216,7 +218,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             "dailyMaint", "turnMaint", "currency", "proficiency", "discipline",
             "mentalPattern", "psychicMatrix", "maintPower", "kiSealCreature",
             "kiTechnique", "martialArt", "arsMagnus", "elan", "monsterPower", "ammo",
-            "zeonMaint", "backgroundInfo"
+            "zeonMaint", "backgroundInfo", "kiAbility"
         ];
         for (const type of itemTypes) {
             const items = this.actor.itemTypes[type]?.sort((a, b) => a.sort - b.sort) || [];
@@ -274,12 +276,26 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 name: game.i18n.localize("abfalter.equip"),
                 icon: '<i class="fas fa-caret-right"></i>',
                 condition: element => {
-                    return element.dataset.canEquip !== "false";
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    return element.dataset.canEquip !== "false" && item?.type !== "kiTechnique";
                 },
                 callback: element => {
                     const item = this.actor.items.get(element.dataset.itemId);
                     element.equipped = !item.system.equipped;
                     item.update({ "system.equipped": element.equipped });
+                }
+            },
+            {
+                name: game.i18n.localize("abfalter.toggleActivate"),
+                icon: '<i class="fas fa-caret-right"></i>',
+                condition: (el) => {
+                    const item = this.actor.items.get(el.dataset.itemId);
+                    return el.dataset.canEquip !== "false" && item?.type === "kiTechnique";
+                },
+                callback: (el) => {
+                    const item = this.actor.items.get(el.dataset.itemId);
+                    if (!item) return;
+                    item.update({ "system.active": !item.system?.active });
                 }
             },
             {
@@ -361,6 +377,24 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         this.document.update({ [label]: value, [label2]: value2 });
     }
 
+    static #kiAbilityItemToggle(ev) {
+        let itemId = ev.target.closest(".item").dataset.itemId;
+        let item = this.actor.items.get(itemId);
+        let value = ev.target.dataset.ability;
+        let value2 = ev.target.dataset.ability2;
+        if (value == "false" && value2 == "false") {
+            value = true;
+            value2 = false;
+        } else if (value == "true" && value2 == "false") {
+            value = true;
+            value2 = true;
+        } else {
+            value = false;
+            value2 = false;
+        }
+        item.update({ "system.bought": value, "system.bought2": value2 });
+    }
+
     static #itemToggleValue(ev) {
         ev.preventDefault();
         let itemId = ev.target.closest(".item").dataset.itemId;
@@ -424,6 +458,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             "secondary": game.i18n.localize("abfalter.newSecondary"),
             "zeonMaint": game.i18n.localize("abfalter.newTurnMaint"),
             "backgroundInfo": game.i18n.localize("abfalter.newRace"),
+            "kiAbility": game.i18n.localize("abfalter.newKiAbility"),
             "default": game.i18n.localize("abfalter.newItem"),
             //Deprecated since 1.5.0
             "disadvantage": game.i18n.localize("abfalter.newDisadvantage"),
@@ -572,6 +607,16 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
     static #openArcanaSephirah(ev) {
         ev.preventDefault();
         new metaMagicSheet(this.document).render(true);
+    }
+
+    static #openDpOffsets(ev) {
+        ev.preventDefault();
+        actorFunctions.dpOffSetsWindow(this.actor);
+    }
+
+    static #openSettings(ev) {
+        ev.preventDefault();
+        actorFunctions.settingsWindow(this.actor);
     }
 
     static #onWeaponRoll(ev) {
@@ -822,4 +867,3 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         this.actor.updateEmbeddedDocuments("ActiveEffect", directUpdates);
     }
 }
-

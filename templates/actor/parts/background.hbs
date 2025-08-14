@@ -185,7 +185,7 @@
                         {{#if gift.active}}
                         <div class="backgroundElanGifts">
                             <label class="{{#if this.showGift}}elanHideDescToggle{{else}}backElanBorder{{/if}}">
-                                <span>{{localize "abfalter.giftDesc"}}</span>
+                                <span>{{gift.name}}</span>
                                 <a data-action="toggleElanGift" data-label="showGift" data-value="{{gift.showGift}}" data-code="{{key}}">
                                     {{#if this.showGift}} {{localize "abfalter.hide"}} {{else}} {{localize "abfalter.show"}} {{/if}}
                                 </a>
