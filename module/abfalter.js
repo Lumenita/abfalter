@@ -115,9 +115,12 @@ Hooks.once("ready", async function () {
     if (!game.user.isGM) {
         return
     }
-    const currentVersion = game.settings.get("abfalter", "systemMigrationVersion");
-    if (foundry.utils.isNewerVersion('1.5.1', currentVersion)) {
-        game.settings.set('abfalter', 'systemChangeLog', false);
+    const systemVersion = game.system.version ?? game.system.data?.version ?? "0.0.0";
+    const currentVersion = game.settings.get("abfalter", "systemMigrationVersion") ?? "0.0.0";
+
+    if (foundry.utils.isNewerVersion('1.5.3', currentVersion)) {
+        await game.settings.set("abfalter", "systemChangeLog", false); 
+        await game.settings.set("abfalter", "systemMigrationVersion", systemVersion);
     }
 
     const showChangelog = await game.settings.get("abfalter", "systemChangeLog");

@@ -22,13 +22,23 @@ const gmMacro = [
 
 ];
 const playerMacro = [
+    {
+        macroSelectorId: '#openSimpleCalc',
+        hotkey: e => e.ctrlKey && e.key === '1',
+        fn: () => window.Websocket.openSimpleCalc?.()
+    },
     /*
     {
         macroSelectorId: '#sendAttackRequest',
         hotkey: e => e.ctrlKey && e.key === '2',
         fn: () => window.Websocket.sendAttackRequest?.()
     }
-        */
+    */
+    {
+        macroSelectorId: '#kiCreator',
+        hotkey: e => e.ctrlKey && e.key === '2',
+        fn: () => window.Websocket.kiCreator?.()
+    }
 ];
 
 export const customMacroBar = async () => {

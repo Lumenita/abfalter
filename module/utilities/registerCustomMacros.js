@@ -19,15 +19,18 @@ export const registerCustomMacros = () => {
             kiCreator: async () => openKiCreatorTitle()
         };
     } else {
-        const combatManager = new playerCombatManager(gameCopy);
+        //const combatManager = new playerCombatManager(gameCopy);
         window.Websocket = {
+            /*
             sendAttackRequest: async () => {
                 try { combatManager.sendAttackRequest(); }
                 catch (e) { 
                     console.error("Combat Macro Error:", e);
                     combatManager.endCombat(); 
                 }
-            }
+            },*/
+            openSimpleCalc: async () => openSimpleCalculator(),
+            kiCreator: async () => openKiCreatorTitle()
         };
     }
 }
