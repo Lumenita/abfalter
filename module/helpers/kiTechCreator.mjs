@@ -355,16 +355,16 @@ export default class kiTechCreator extends foundry.applications.api.HandlebarsAp
 
         let totalKiPlaced = this.document.abilities[abilityId].chosenChars.reduce((sum, c) => sum + c.ki, 0);
         let otherKiPlaced = totalKiPlaced - current;
-        let remainingKi = valueMax - otherKiPlaced;
 
-        let newValue = Math.max(0, Math.min(current + value, remainingKi));
-        let newPlaced = Math.max(0, Math.min(placed + value, valueMax));
-        this.document.abilities[abilityId].placedKi = newPlaced;
-        this.document.abilities[abilityId].chosenChars[index].ki = newValue;
+        const maxForThisChar = Math.max(0, valueMax - otherKiPlaced);
+        const desired = Math.min(Math.max(current + value, 0), maxForThisChar);
+        const delta = desired - current;
+        if (delta === 0) return;
 
-        // Update Ki value based on changes
-        this.document.abilities[abilityId].chosenChars[index].kiTotal = newValue + this.document.abilities[abilityId].chosenChars[index].maint;
-
+        this.document.abilities[abilityId].chosenChars[index].ki = desired;
+        this.document.abilities[abilityId].placedKi = Math.min(valueMax, Math.max(0, placed + delta));
+        const maint = this.document.abilities[abilityId].chosenChars[index].maint || 0;
+        this.document.abilities[abilityId].chosenChars[index].kiTotal = desired + maint;
         this.render();
     }
 
@@ -383,15 +383,15 @@ export default class kiTechCreator extends foundry.applications.api.HandlebarsAp
 
         let totalMaintPlaced = this.document.abilities[abilityId].chosenChars.reduce((sum, c) => sum + c.maint, 0);
         let otherMaintPlaced = totalMaintPlaced - current;
-        let remainingMaint = valueMax - otherMaintPlaced;
-        // Calculate new values
-        let newMaint = Math.max(0, Math.min(current + value, remainingMaint));
-        let newPlaced = Math.max(0, Math.min(placed + value, valueMax));
-        this.document.abilities[abilityId].placedMaint = newPlaced;
-        this.document.abilities[abilityId].chosenChars[index].maint = newMaint;
-        // Update Ki value based on maintenance changes
-        this.document.abilities[abilityId].chosenChars[index].kiTotal = newMaint + this.document.abilities[abilityId].chosenChars[index].ki;
+        const maxForThisChar = Math.max(0, valueMax - otherMaintPlaced);
+        const desired = Math.min(Math.max(current + value, 0), maxForThisChar);
+        const delta = desired - current;
+        if (delta === 0) return;
 
+        this.document.abilities[abilityId].chosenChars[index].maint = desired;
+        this.document.abilities[abilityId].placedMaint = Math.min(valueMax, Math.max(0, placed + delta));
+        const ki = this.document.abilities[abilityId].chosenChars[index].ki || 0;
+        this.document.abilities[abilityId].chosenChars[index].kiTotal = desired + ki;
         this.render();
     }
 
@@ -819,11 +819,11 @@ async function getKiValue(tag, costsFinal, selectedOptionalChars) {
 
 // Ki Ability Dialog Function
 async function addNewKiAbility(level) {
+    let category = "offensive";
     const template = templates.addKiTechAbility;
-    const htmlContent = await foundry.applications.handlebars.renderTemplate(template);
+    const htmlContent = await foundry.applications.handlebars.renderTemplate(template, { category });
 
     return new Promise((resolve) => {
-        let category = "offensive";
         let ability = null;
         let selectedElement = "any";
         let selectedTier = null;
@@ -879,6 +879,8 @@ async function addNewKiAbility(level) {
             ],
             render: (ev, dialog) => {
                 const categorySelect = dialog.element.querySelector("#category-select");
+                const elementWrapper = dialog.element.querySelector("#element-wrapper");
+                const charSelection  = dialog.element.querySelector(".charSelection");
                 const abilitySelect = dialog.element.querySelector("#ability-select");
                 const elementSelect = dialog.element.querySelector("#element-select");
                 const tierSelect = dialog.element.querySelector("#tier-select");
@@ -1121,6 +1123,13 @@ async function addNewKiAbility(level) {
                     });
                 };
 
+                const updateVisibility = () => {
+                    const hide = category === "disadvantages";
+                    elementWrapper?.classList.toggle("hidden", hide);
+                    charSelection?.classList.toggle("hidden", hide);
+                };
+                updateVisibility();
+
                 // Helper to generate full description text
                 const generateFullDescription = () => {
                     const selectedAbility = kiTechAbilitiesData().find(a => a.id === ability);
@@ -1222,6 +1231,7 @@ async function addNewKiAbility(level) {
                         category = ev.target.value;
                         dialog.category = category;
                         populateAbilityDropdown(category);
+                        updateVisibility();
                         //console.log(`Category changed to: ${category}`);
                     });
                 }

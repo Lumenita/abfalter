@@ -759,7 +759,7 @@ export default class abfalterActor extends Actor {
 
             let resting = entry.resting * multiplier;
             let notResting = entry.notResting !== null ? entry.notResting * multiplier : "N/A";
-            let penalty = entry.penalty === "All" ? "All/" + unit : (entry.penalty * multiplier) + "/" + (notResting == "N/A" ? unit2 : unit);
+            let penalty = entry.penalty === "All" ? "All/" + unit : (entry.penalty) + "/" + (notResting == "N/A" ? unit2 : unit);
 
             system.regeneration.resting = resting + "/" + unit;
             system.regeneration.notResting = notResting === "N/A" ? "N/A" : notResting + "/" + unit;
