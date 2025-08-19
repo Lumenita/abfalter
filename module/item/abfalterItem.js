@@ -18,7 +18,11 @@ export default class abfalterItem extends Item {
 
         this.system.qualityValue = Math.floor(this.system.quality / 5);
         this.system.derived.presence = Math.floor(+(this.system.qualityValue * 50) + +this.system.presence); 
-        this.system.derived.fortitude = Math.floor(+(this.system.qualityValue * 10) + +this.system.fortitude + this.system.kiBonusFort); 
+        if (game.settings.get('abfalter', abfalterSettingsKeys.CoreExxet_BreakageFortitude)) {
+            this.system.derived.fortitude = Math.floor(+(this.system.qualityValue * 5) + +this.system.fortitude + this.system.kiBonusFort);
+        } else {
+            this.system.derived.fortitude = Math.floor(+(this.system.qualityValue * 10) + +this.system.fortitude + this.system.kiBonusFort);
+        }
         this.system.derived.requirement = Math.max(0, Math.floor(+this.system.requirement - +(this.system.qualityValue * 5)));
         this.system.derived.natPenalty = Math.max(0, Math.floor(+this.system.natPenalty - +(this.system.qualityValue * 5)));
         this.system.derived.movePenalty = Math.max(0, Math.floor(+this.system.movePenalty - +this.system.qualityValue));
@@ -120,12 +124,21 @@ export default class abfalterItem extends Item {
                 
 
                 const strFinal = this.parent.system.stats.Strength.final;
-                this.system.breakageStr = 
-                    strFinal >= 15 ? 8 :
-                    strFinal >= 13 ? 6 :
-                    strFinal >= 11 ? 4 :
-                    strFinal >= 10 ? 2 :
-                    strFinal >= 8  ? 1 : 0;
+                if (game.settings.get('abfalter', abfalterSettingsKeys.CoreExxet_BreakageFortitude)) {
+                    this.system.breakageStr = 
+                        strFinal >= 15 ? 5 :
+                        strFinal >= 13 ? 4 :
+                        strFinal >= 11 ? 3 :
+                        strFinal >= 10 ? 2 :
+                        strFinal >= 8  ? 1 : 0;
+                } else {
+                    this.system.breakageStr = 
+                        strFinal >= 15 ? 8 :
+                        strFinal >= 13 ? 6 :
+                        strFinal >= 11 ? 4 :
+                        strFinal >= 10 ? 2 :
+                        strFinal >= 8  ? 1 : 0;
+                }
 
             } else {
                 this.system.melee.bonusDmgMod = 0;
@@ -136,7 +149,11 @@ export default class abfalterItem extends Item {
             }
             this.system.melee.baseDmg = Math.floor(~~this.system.baseDmg + ~~this.system.melee.bonusDmgMod + (~~this.system.quality * 2) + ~~this.system.kiBonusDmg);
             this.system.melee.finalATPen = Math.floor(~~this.system.atPen + Math.floor(~~this.system.quality / 5));
-            this.system.melee.finalBreakage = Math.floor(~~this.system.breakage + ~~this.system.breakageStr + ~~this.system.quality + ~~this.system.kiBonusBreakage);          
+            if (game.settings.get('abfalter', abfalterSettingsKeys.CoreExxet_BreakageFortitude)) {
+                this.system.melee.finalBreakage = Math.floor(~~this.system.breakage + ~~this.system.breakageStr + (Math.floor(~~this.system.quality / 5) * 2) + ~~this.system.kiBonusBreakage);
+            } else {
+                this.system.melee.finalBreakage = Math.floor(~~this.system.breakage + ~~this.system.breakageStr + ~~this.system.quality + ~~this.system.kiBonusBreakage);
+            }
 
             for (let attack of Object.values(this.system.attacks)) {
                 attack.finalAttack   = attack.attack   + (attack.atkOverride ? 0 : this.system.derived.baseAtk);
