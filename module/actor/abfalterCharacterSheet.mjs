@@ -506,12 +506,12 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
     }
 
     static #kiAccuHalf(ev) {
-        let value = this.document.system.kiPool.agi.current + Math.max(1, Math.floor(this.document.system.kiPool.agi.accumTot / 2));
-        let value2 = this.document.system.kiPool.con.current + Math.max(1, Math.floor(this.document.system.kiPool.con.accumTot / 2));
-        let value3 = this.document.system.kiPool.dex.current + Math.max(1, Math.floor(this.document.system.kiPool.dex.accumTot / 2));
-        let value4 = this.document.system.kiPool.str.current + Math.max(1, Math.floor(this.document.system.kiPool.str.accumTot / 2));
-        let value5 = this.document.system.kiPool.pow.current + Math.max(1, Math.floor(this.document.system.kiPool.pow.accumTot / 2));
-        let value6 = this.document.system.kiPool.wp.current + Math.max(1, Math.floor(this.document.system.kiPool.wp.accumTot / 2));
+        let value = this.document.system.kiPool.agi.current + Math.max(1, Math.ceil(this.document.system.kiPool.agi.accumTot / 2));
+        let value2 = this.document.system.kiPool.con.current + Math.max(1, Math.ceil(this.document.system.kiPool.con.accumTot / 2));
+        let value3 = this.document.system.kiPool.dex.current + Math.max(1, Math.ceil(this.document.system.kiPool.dex.accumTot / 2));
+        let value4 = this.document.system.kiPool.str.current + Math.max(1, Math.ceil(this.document.system.kiPool.str.accumTot / 2));
+        let value5 = this.document.system.kiPool.pow.current + Math.max(1, Math.ceil(this.document.system.kiPool.pow.accumTot / 2));
+        let value6 = this.document.system.kiPool.wp.current + Math.max(1, Math.ceil(this.document.system.kiPool.wp.accumTot / 2));
         this.document.update({
             "system.kiPool.agi.current": value, "system.kiPool.con.current": value2, "system.kiPool.dex.current": value3,
             "system.kiPool.str.current": value4, "system.kiPool.pow.current": value5, "system.kiPool.wp.current": value6
