@@ -2022,7 +2022,7 @@ export default class abfalterActor extends Actor {
             system.zeon.fromPow = 260;
         }
         system.maccu.finalFull = Math.floor(system.maccu.base + system.maccu.fromPow + (system.maccu.mult * system.maccu.fromPow) + system.maccu.spec + system.maccu.bonus + system.maccu.temp);
-        system.maccu.finalHalf = Math.floor(system.maccu.finalFull / 2);
+        system.maccu.finalHalf = Math.ceil(system.maccu.finalFull / 10) * 5;
         system.mregen.final = Math.floor(((system.maccu.fromPow * system.mregen.regenmult) + system.mregen.spec + system.mregen.temp + system.mregen.bonus + system.maccu.finalFull) * system.mregen.recoverymult);
         system.mregen.finalMinusMaint = Math.floor(system.mregen.final - system.zeon.dailyMaint);
         system.zeon.max = Math.floor(system.zeon.base + system.zeon.fromPow + system.zeon.class + system.zeon.spec + system.zeon.temp + system.zeon.bonus);
