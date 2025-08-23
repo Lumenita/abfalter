@@ -64,6 +64,8 @@ export default class kiTechCreator extends foundry.applications.api.HandlebarsAp
             toggleAbilityExpand: this.#toggleAbilityExpand,
             toggleAbilityRemove: this.#toggleAbilityRemove,
             combKiChange: this.#combKiChange,
+            addKiChange: this.#addKiChange,
+            subKiChange: this.#subKiChange,
             continue: this.#continue,
             close: this.#close
         }
@@ -119,9 +121,12 @@ export default class kiTechCreator extends foundry.applications.api.HandlebarsAp
                     newFinalValues[char.type] = {
                         type: char.type,
                         combKi: context.system.isCombinable ? context.system.kiFinalValues?.[char.type]?.combKi || 0 : 0,
+                        addKi: context.system.kiFinalValues?.[char.type]?.addKi || 0,
+                        subKi: context.system.kiFinalValues?.[char.type]?.subKi || 0,
                         finalKi: 0,
                         finalMaint: 0,
                         _combAdded: false,
+                        _modAdded: false,
                     };
                 }
 
@@ -130,6 +135,10 @@ export default class kiTechCreator extends foundry.applications.api.HandlebarsAp
                 if (context.system.isCombinable && !newFinalValues[char.type]._combAdded) {
                     newFinalValues[char.type].finalKi += newFinalValues[char.type].combKi; 
                     newFinalValues[char.type]._combAdded = true;                   
+                }
+                if (!newFinalValues[char.type]._modAdded) {
+                    newFinalValues[char.type].finalKi += newFinalValues[char.type].addKi + newFinalValues[char.type].subKi; 
+                    newFinalValues[char.type]._modAdded = true;                   
                 }
             });
 
@@ -163,6 +172,12 @@ export default class kiTechCreator extends foundry.applications.api.HandlebarsAp
         context.system.kiFinalLength = Object.keys(newFinalValues).length;
         context.system.combKiPlaced = Object.values(context.system.kiFinalValues).reduce((sum, c) => sum + (c.combKi || 0), 0);
         context.system.unifiedCost = Object.values(context.system.kiFinalValues).reduce((sum, char) => sum + (char.finalMaint || 0), 0);
+
+        // Make MK modifications for modified Ki
+        context.system.addKiPlaced = Object.values(context.system.kiFinalValues).reduce((sum, c) => sum + (c.addKi || 0), 0);
+        context.system.subKiPlaced = Object.values(context.system.kiFinalValues).reduce((sum, c) => sum + (c.subKi || 0), 0);
+        context.system.totalMk += (Math.floor(context.system.addKiPlaced / 2) * -5);
+        context.system.totalMk += Math.abs(context.system.subKiPlaced * 10);
 
         // Compile Warning Messages
         context.system.warning.disadvantage = context.system.disadvNumber > context.system.levelDisadvLimit;
@@ -537,6 +552,44 @@ export default class kiTechCreator extends foundry.applications.api.HandlebarsAp
         const newValue = Math.max(0, Math.min(current + value, remaining));
 
         this.document.kiFinalValues[char].combKi = newValue;
+        this.render();
+    }
+
+    static #addKiChange(ev) {
+        const el = ev.currentTarget;
+        const target = ev.target.closest('[data-value][data-char]');
+        if (!target) return;
+        const char = target.dataset.char;
+        let value = Number(target.dataset.value);
+
+        const current = this.document.kiFinalValues[char]?.addKi || 0;
+        const totalAddKi  = Object.values(this.document.kiFinalValues).reduce((sum, c) => sum + (c.addKi || 0), 0);
+        const newTotal = totalAddKi + value;
+        const invalid = (newTotal > 8) || (newTotal < 0) || (current + value < 0);
+        const newValue = invalid ? current : (current + value);
+
+        this.document.kiFinalValues[char].addKi = newValue;
+        this.render();
+    }
+
+    static #subKiChange(ev) {
+        const el = ev.currentTarget;
+        const target = ev.target.closest('[data-value][data-char]');
+        if (!target) return;
+        const char = target.dataset.char;
+        let value = Number(target.dataset.value);
+
+        const current = this.document.kiFinalValues[char]?.subKi || 0;
+        const added = this.document.kiFinalValues[char]?.addKi || 0;
+        const totalSubKi  = Object.values(this.document.kiFinalValues).reduce((sum, c) => sum + (c.subKi || 0), 0);
+        const kiFinalLength = Object.keys(this.document.kiFinalValues).length;
+        const finalKi = this.document.kiFinalValues[char]?.finalKi || 0;
+        const unmoddedKi = finalKi - current - added;
+        const newTotal = totalSubKi + value;
+        const invalid = (newTotal > 0) || (newTotal < -5) || (current + value > 0) || (Math.ceil(unmoddedKi/2) > (finalKi + value)) || (kiFinalLength < 3);
+        const newValue = invalid ? current : (current + value);
+
+        this.document.kiFinalValues[char].subKi = newValue;
         this.render();
     }
 
