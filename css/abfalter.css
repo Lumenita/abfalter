@@ -3385,6 +3385,11 @@ h6 {
     width: 19%;
     justify-content: center;
 }
+.kipool > div > div > button {
+    width: 19%;
+    justify-content: center;
+    --button-size: 0em;
+}
 .kipool > div > span {
     justify-content: center;
     margin: 0 2% 0 0;

@@ -885,6 +885,7 @@ export default class abfalterActor extends Actor {
             } else {
                 system.unifiedKi.max = Math.floor(system.kiPool.agi.poolTot + system.kiPool.con.poolTot + system.kiPool.dex.poolTot + system.kiPool.str.poolTot + system.kiPool.pow.poolTot + system.kiPool.wp.poolTot + system.kiPool.unifiedBonus);
             }
+                system.unifiedKi.current = Math.floor(system.kiPool.agi.current + system.kiPool.con.current + system.kiPool.dex.current + system.kiPool.str.current + system.kiPool.pow.current + system.kiPool.wp.current);
         }
 
         //atk, blk, dodge
