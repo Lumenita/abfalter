@@ -1984,6 +1984,7 @@ function kiPoolAbilities() {
         current: makeIntField(),
         bonus: makeIntField(),
         bonusMax: makeIntField(),
+        accumulating: makeBoolField(),
         status: makeBoolField()
     })
 }
