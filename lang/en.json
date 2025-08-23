@@ -1131,6 +1131,8 @@
       "myDisadvantages": "Disadvantages",
       "combPlaced": "Comb. ki Placed",
       "combinableKi": "Comb. Ki",
+      "addKiCost": "Add Cost",
+      "subtractKiCost": "Sub. Cost",
       "finalKi": "Final Ki",
       "warningTitle": "Warning: Either the ki cost or maintenance cost is not fully set.",
       "warningComb": "Warning: The combinable ki cost is not fully set.",

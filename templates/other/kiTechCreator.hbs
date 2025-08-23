@@ -231,6 +231,45 @@
                 {{/each}}
                 {{/if}}
 
+                {{!-- Ki Cost Modification Rows --}}
+                <div class="grid-label">
+                    {{localize "abfalter.kiAbilityData.addKiCost"}}
+                </div>
+                {{#each (array "agility" "consti" "dexterity" "strength" "power" "willPower") as |charName|}}
+                {{#with (lookup ../system.kiFinalValues charName) as |charObj|}}
+                {{#if charObj}}
+                <div class="grid-cell">
+                    <a data-action="addKiChange" data-value="-1" data-char="{{charName}}">
+                        <i class="fas fa-minus"></i>
+                    </a>
+                    <span>{{charObj.addKi}}</span>
+                    <a data-action="addKiChange" data-value="1" data-char="{{charName}}">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </div>
+                {{/if}}
+                {{/with}}
+                {{/each}}
+
+                <div class="grid-label">
+                    {{localize "abfalter.kiAbilityData.subtractKiCost"}}
+                </div>
+                {{#each (array "agility" "consti" "dexterity" "strength" "power" "willPower") as |charName|}}
+                {{#with (lookup ../system.kiFinalValues charName) as |charObj|}}
+                {{#if charObj}}
+                <div class="grid-cell">
+                    <a data-action="subKiChange" data-value="-1" data-char="{{charName}}">
+                        <i class="fas fa-minus"></i>
+                    </a>
+                    <span>{{charObj.subKi}}</span>
+                    <a data-action="subKiChange" data-value="1" data-char="{{charName}}">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </div>
+                {{/if}}
+                {{/with}}
+                {{/each}}
+
                 {{!-- Ki Row --}}
                 <div class="grid-label">
                     {{localize "abfalter.kiAbilityData.finalKi"}}
