@@ -1,9 +1,9 @@
 <div class="item-subtitle">
-    <h4 class="item-type">{{localize (concat "abfalter.itemNames." document.type)}}</h4>
-    <span class="item-subType"></span>
+    <h4 class="item-type">{{localize "abfalter.consumable"}}</h4>
+    <span class="item-subType">{{system.rarity}}</span>
 </div>
 <ul class="summary flexrow">
+    <li>{{localize "abfalter.type"}}: {{localize (concat "abfalter." system.type)}}</li>
     <li>{{localize "abfalter.atPen"}}: {{system.atPen}}</li>
     <li>{{localize "abfalter.damage"}}: {{system.damage}}</li>
-    <li></li>
 </ul>

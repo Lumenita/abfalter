@@ -1,11 +1,12 @@
 import * as diceFunctions from "../diceroller.js";
 import { metaMagicSheet } from "../helpers/metaMagicSheet.js";
 import * as actorFunctions from "../helpers/actorFunctions.js";
+import { genericDialogs } from "../dialogs.js";
 
 export default class abfalterCharacterSheet extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ActorSheetV2) {
     static DEFAULT_OPTIONS = {
         tag: "form",
-        classes: ["baseAbfalter", "actor"],
+        classes: ["actor", "baseAbfalterActorV2"],
         position: {
             width: 910,
             height: 950
@@ -26,7 +27,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             toggleBoughtFreeButton: this.#toggleDualBoolButton,
             kiAbilityItemToggle: this.#kiAbilityItemToggle,
             itemToggleValue: this.#itemToggleValue,
-            itemToggleValueButton: this.#itemToggleValueButton,
             itemToChat: this.#itemToChat,
             subItemToChat: this.#subItemToChat,
             characteristicRoll: this.#onChaRoll,
@@ -42,9 +42,13 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             removeMaint: this.#removeMaint,
             openArcanaSephirah: this.#openArcanaSephirah,
             weaponRoll: this.#onWeaponRoll,
+
+            armoryAddItem: this.#armoryAddItem,
+            increase: this.#increaseQuantity,
+            decrease: this.#decreaseQuantity,
+            openMenu: this.#openMenu,
             ammoWeaponToggle: this.#ammoWeaponToggle,
-            weaponThrowQuantity: this.#weaponThrowQuantity,
-            ammoQuantity: this.#ammoQuantity,
+
             openDPCalc: this.#openDpCostCalc,
             changeSecNums: this.#changeSecNums,
             createAE: this.#createActiveEffect,
@@ -54,7 +58,11 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             toggleElanGift: this.#toggleElanGift,
             openRestWindow: this.#openRestWindow,
             openDpOffsets: this.#openDpOffsets,
-            openSettings: this.#openSettings
+            configButton: this.#configButton,
+            openResolveWindow: this.#openResolveWindow,
+            addExp: this.#addExp,
+            rollInitiative: this.#rollInitiative,
+            armorTag: this.#armorTag,
         }
     }
 
@@ -123,7 +131,9 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         switch (partId) {
             case "header":
             case "tabs":
+                break
             case "armory":
+                context.weightList = CONFIG.abfalter.armoryWeightDropdown;
                 break;
             case "general":
                 context.customSecObjList = CONFIG.abfalter.customSecondaryDropdown;
@@ -204,18 +214,17 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
 
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
-        context.document = this.document;
+        //context.document = this.document;
+        //context.fields = this.document.schema.fields;
         context.system = this.document.system;
         context.systemFields = this.document.system.schema.fields;
-        context.isEditable = this.isEditable;
         context.config = CONFIG.abfalter;
 
         //Initialize Items
-        //Deprecated items in 1.5.3 "disadvantage", "dailyMaint", "turnMaint", armorHelmet
         const itemTypes = [
-            "inventory", "weapon", "armor", "armorHelmet", "advantage", "disadvantage",
+            "inventory", "weapon", "armor", "advantage",
             "spell", "class", "secondary", "spellPath", "incarnation", "invocation",
-            "dailyMaint", "turnMaint", "currency", "proficiency", "discipline",
+            "currency", "proficiency", "discipline",
             "mentalPattern", "psychicMatrix", "maintPower", "kiSealCreature",
             "kiTechnique", "martialArt", "arsMagnus", "elan", "monsterPower", "ammo",
             "zeonMaint", "backgroundInfo", "kiAbility"
@@ -230,7 +239,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
 
     async _onRender(context, options) {
         await super._onRender(context, options);
-
+            
         if (!this.isEditable) {
             for (const el of this.element.querySelectorAll(".window-content :is(input, button, select, textarea)")) {
                 el.disabled = true;
@@ -266,6 +275,10 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
 
         this._createContextMenu(this._itemContextMenu, ".normal-item", {
             hookName: "itemContextMenu",
+            fixed: true,
+        });
+        this._createContextMenu(this._itemContextMenuV2, ".normal-itemV2", {
+            hookName: "itemContextMenuV2",
             fixed: true,
         });
     }
@@ -348,6 +361,116 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         ]
     }
 
+    _itemContextMenuV2() {
+        const menu = [
+            {
+                name: game.i18n.localize("abfalter.edit"),
+                icon: '<i class="fas fa-edit"></i>',
+                callback: element => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    item.sheet.render(true);
+                }
+            },
+            {
+                name: game.i18n.localize("abfalter.duplicate"),
+                icon: '<i class="fas fa-copy"></i>',
+                callback: element => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    const createData = item.toObject();
+                    delete createData._id;
+                    createData.name = `${item.name} (Copy)`;
+                    this.actor.createEmbeddedDocuments("Item", [createData]);
+                }
+            },
+            {
+                name: game.i18n.localize("abfalter.delete"),
+                icon: '<i class="fas fa-trash"></i>',
+                callback: element => {
+                    new Dialog({
+                        title: "Remove Item",
+                        content: game.i18n.localize('abfalter.confirmRemPrompt'),
+                        buttons: {
+                            yes: {
+                                label: game.i18n.localize('abfalter.yes'),
+                                callback: () => {
+                                    this.actor.deleteEmbeddedDocuments("Item", [element.dataset.itemId]);
+                                }
+                            },
+                            no: {
+                                label: game.i18n.localize('abfalter.no')
+                            }
+                        },
+                    }).render(true);
+                }
+            },
+            {
+                name: game.i18n.localize("abfalter.displayChat"),
+                icon: '<i class="fa-solid fa-message"></i>',
+                condition: element => {
+                    return element.dataset.canChat !== "false";
+                },
+                callback: element => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    item.roll();
+                }
+            },
+            {
+                name: game.i18n.localize("abfalter.equip"),
+                icon: '<i class="fas fa-shield-alt"></i>',
+                condition: element => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    return ("equipped" in item.system);
+                },
+                callback: element => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    element.equipped = !item.system.equipped;
+                    item.update({ "system.equipped": element.equipped });
+                }
+            },
+            {
+                name: game.i18n.localize("abfalter.toggleActivate"),
+                icon: '<i class="fas fa-caret-right"></i>',
+                condition: (el) => {
+                    const item = this.actor.items.get(el.dataset.itemId);
+                    return el.dataset.canEquip !== "false" && item?.type === "kiTechnique";
+                },
+                callback: (el) => {
+                    const item = this.actor.items.get(el.dataset.itemId);
+                    if (!item) return;
+                    item.update({ "system.active": !item.system?.active });
+                }
+            },
+            {
+                name: game.i18n.localize("abfalter.toggle"),
+                icon: '<i class="fas fa-caret-right"></i>',
+                condition: element => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    return ("toggleItem" in item.system);
+                },
+                callback: element => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    element.toggleItem = !item.system.toggleItem;
+                    item.update({ "system.toggleItem": element.toggleItem });
+                }
+            },
+            {
+                name: game.i18n.localize("abfalter.expand"),
+                icon: '<i class="fa-solid fa-expand"></i>',
+                condition: element => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    return ("expand" in item.system);
+                },
+                callback: element => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    element.expand = !item.system.expand;
+                    item.update({ "system.expand": element.expand });
+                }
+            }
+        ]
+        
+        return menu;
+    }
+
     static #toggleValue(ev) {
         ev.preventDefault();
         const target = ev.target.closest('[data-label][data-ability]');
@@ -397,22 +520,28 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
 
     static #itemToggleValue(ev) {
         ev.preventDefault();
+        const target = ev.target.closest('[data-label][data-ability]');
+        if (!target) return;
         let itemId = ev.target.closest(".item").dataset.itemId;
         let item = this.actor.items.get(itemId);
-        const label = ev.target.closest("a").dataset.label;
-        let value = ev.target.closest("a").dataset.ability;
+        const label = target.dataset.label;
+        let value = target.dataset.ability;
         value = !(value === 'true');
         item.update({ [label]: value })
     }
 
-    static #itemToggleValueButton(ev) {
+    static #toggleElanGift(ev) {
         ev.preventDefault();
+        const target = ev.target.closest('[data-label][data-code][data-value]');
+        if (!target) return;
         let itemId = ev.target.closest(".item").dataset.itemId;
         let item = this.actor.items.get(itemId);
-        const label = ev.target.dataset.label;
-        let value = ev.target.dataset.ability;
+        const label = target.dataset.label;
+        const key = target.dataset.code;
+        let value = target.dataset.value;
+        //console.log(`Toggling Elan Gift: ${key} - ${label} - ${value}`);
         value = !(value === 'true');
-        item.update({ [label]: value })
+        return item.update({ [`system.gifts.${key}.${label}`]: value });
     }
 
     static #onChaRoll(ev) {
@@ -425,6 +554,51 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         ev.preventDefault();
         const dataset = ev.target.dataset;
         diceFunctions.openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type, dataset.ability);
+    }
+
+    static #kiAccuHalf(ev) {
+        let value = this.document.system.kiPool.agi.current + (this.document.system.kiPool.agi.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.agi.accumTot / 2)) : 0);
+        let value2 = this.document.system.kiPool.con.current + (this.document.system.kiPool.con.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.con.accumTot / 2)) : 0);
+        let value3 = this.document.system.kiPool.dex.current + (this.document.system.kiPool.dex.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.dex.accumTot / 2)) : 0);
+        let value4 = this.document.system.kiPool.str.current + (this.document.system.kiPool.str.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.str.accumTot / 2)) : 0);
+        let value5 = this.document.system.kiPool.pow.current + (this.document.system.kiPool.pow.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.pow.accumTot / 2)) : 0);
+        let value6 = this.document.system.kiPool.wp.current + (this.document.system.kiPool.wp.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.wp.accumTot / 2)) : 0);
+        this.document.update({
+            "system.kiPool.agi.current": value, "system.kiPool.con.current": value2, "system.kiPool.dex.current": value3,
+            "system.kiPool.str.current": value4, "system.kiPool.pow.current": value5, "system.kiPool.wp.current": value6
+        });
+    }
+    static #kiAccuFull(ev) {
+        let value = this.document.system.kiPool.agi.current + (this.document.system.kiPool.agi.accumulating ? this.document.system.kiPool.agi.accumTot : 0);
+        let value2 = this.document.system.kiPool.con.current + (this.document.system.kiPool.con.accumulating ? this.document.system.kiPool.con.accumTot : 0);
+        let value3 = this.document.system.kiPool.dex.current + (this.document.system.kiPool.dex.accumulating ? this.document.system.kiPool.dex.accumTot : 0);
+        let value4 = this.document.system.kiPool.str.current + (this.document.system.kiPool.str.accumulating ? this.document.system.kiPool.str.accumTot : 0);
+        let value5 = this.document.system.kiPool.pow.current + (this.document.system.kiPool.pow.accumulating ? this.document.system.kiPool.pow.accumTot : 0);
+        let value6 = this.document.system.kiPool.wp.current + (this.document.system.kiPool.wp.accumulating ? this.document.system.kiPool.wp.accumTot : 0);
+        this.document.update({
+            "system.kiPool.agi.current": value, "system.kiPool.con.current": value2, "system.kiPool.dex.current": value3,
+            "system.kiPool.str.current": value4, "system.kiPool.pow.current": value5, "system.kiPool.wp.current": value6
+        });
+    }
+    static #kiAccuReset(ev) {
+        new Dialog({
+            title: "Reset Accumulation",
+            content: game.i18n.localize('abfalter.accuKiReset'),
+            buttons: {
+                yes: {
+                    label: game.i18n.localize('abfalter.yes'),
+                    callback: () => {
+                        this.document.update({
+                            "system.kiPool.agi.current": 0, "system.kiPool.con.current": 0, "system.kiPool.dex.current": 0,
+                            "system.kiPool.str.current": 0, "system.kiPool.pow.current": 0, "system.kiPool.wp.current": 0
+                        });
+                    }
+                },
+                no: {
+                    label: game.i18n.localize('abfalter.no')
+                }
+            },
+        }).render(true);
     }
 
     static #createNewItem(ev) {
@@ -460,11 +634,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             "backgroundInfo": game.i18n.localize("abfalter.newRace"),
             "kiAbility": game.i18n.localize("abfalter.newKiAbility"),
             "default": game.i18n.localize("abfalter.newItem"),
-            //Deprecated since 1.5.0
-            "disadvantage": game.i18n.localize("abfalter.newDisadvantage"),
-            "dailyMaint": game.i18n.localize("abfalter.newDailyMaint"),
-            "turnMaint": game.i18n.localize("abfalter.newTurnMaint"),
-            "armorHelmet": game.i18n.localize("abfalter.newArmorHelmet")
         };
         const name = (types[type] || types["default"]);
         let itemData = {
@@ -505,53 +674,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         return this.actor.createEmbeddedDocuments("Item", [itemData]);
     }
 
-    static #kiAccuHalf(ev) {
-        let value = this.document.system.kiPool.agi.current + (this.document.system.kiPool.agi.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.agi.accumTot / 2)) : 0);
-        let value2 = this.document.system.kiPool.con.current + (this.document.system.kiPool.con.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.con.accumTot / 2)) : 0);
-        let value3 = this.document.system.kiPool.dex.current + (this.document.system.kiPool.dex.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.dex.accumTot / 2)) : 0);
-        let value4 = this.document.system.kiPool.str.current + (this.document.system.kiPool.str.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.str.accumTot / 2)) : 0);
-        let value5 = this.document.system.kiPool.pow.current + (this.document.system.kiPool.pow.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.pow.accumTot / 2)) : 0);
-        let value6 = this.document.system.kiPool.wp.current + (this.document.system.kiPool.wp.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.wp.accumTot / 2)) : 0);
-        this.document.update({
-            "system.kiPool.agi.current": value, "system.kiPool.con.current": value2, "system.kiPool.dex.current": value3,
-            "system.kiPool.str.current": value4, "system.kiPool.pow.current": value5, "system.kiPool.wp.current": value6
-        });
-    }
-
-    static #kiAccuFull(ev) {
-        let value = this.document.system.kiPool.agi.current + (this.document.system.kiPool.agi.accumulating ? this.document.system.kiPool.agi.accumTot : 0);
-        let value2 = this.document.system.kiPool.con.current + (this.document.system.kiPool.con.accumulating ? this.document.system.kiPool.con.accumTot : 0);
-        let value3 = this.document.system.kiPool.dex.current + (this.document.system.kiPool.dex.accumulating ? this.document.system.kiPool.dex.accumTot : 0);
-        let value4 = this.document.system.kiPool.str.current + (this.document.system.kiPool.str.accumulating ? this.document.system.kiPool.str.accumTot : 0);
-        let value5 = this.document.system.kiPool.pow.current + (this.document.system.kiPool.pow.accumulating ? this.document.system.kiPool.pow.accumTot : 0);
-        let value6 = this.document.system.kiPool.wp.current + (this.document.system.kiPool.wp.accumulating ? this.document.system.kiPool.wp.accumTot : 0);
-        this.document.update({
-            "system.kiPool.agi.current": value, "system.kiPool.con.current": value2, "system.kiPool.dex.current": value3,
-            "system.kiPool.str.current": value4, "system.kiPool.pow.current": value5, "system.kiPool.wp.current": value6
-        });
-    }
-
-    static #kiAccuReset(ev) {
-        new Dialog({
-            title: "Reset Accumulation",
-            content: game.i18n.localize('abfalter.accuKiReset'),
-            buttons: {
-                yes: {
-                    label: game.i18n.localize('abfalter.yes'),
-                    callback: () => {
-                        this.document.update({
-                            "system.kiPool.agi.current": 0, "system.kiPool.con.current": 0, "system.kiPool.dex.current": 0,
-                            "system.kiPool.str.current": 0, "system.kiPool.pow.current": 0, "system.kiPool.wp.current": 0
-                        });
-                    }
-                },
-                no: {
-                    label: game.i18n.localize('abfalter.no')
-                }
-            },
-        }).render(true);
-    }
-
     static #itemToChat(ev) {
         ev.preventDefault();
         let itemId = ev.target.closest(".item").dataset.itemId;
@@ -575,20 +697,17 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         const value = ev.target.dataset.ability;
         this.document.update({ "system.maccu.actual": Math.floor(this.document.system.maccu.actual + (value / 1)) });
     }
-
     static #magicAccuFull(ev) {
         ev.preventDefault();
         const value = ev.target.dataset.ability;
         this.document.update({ "system.maccu.actual": Math.floor(this.document.system.maccu.actual + (value / 1)) });
     }
-
     static #magicRegenFull(ev) {
         ev.preventDefault();
         const value = ev.target.dataset.ability;
         const max = ev.target.dataset.ability2;
         this.document.update({ "system.zeon.value": Math.min(Math.floor(this.document.system.zeon.value + (value / 1)), max) });
     }
-
     static #magicRegenActual(ev) {
         ev.preventDefault();
         const value = ev.target.dataset.ability;
@@ -596,12 +715,29 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         let dailyMaint = this.actor.system.zeon.dailyMaint;
         this.document.update({ "system.zeon.value": Math.min(Math.floor(this.document.system.zeon.value + (value - dailyMaint)), max) });
     }
-
     static #removeMaint(ev) {
         ev.preventDefault();
         const value = ev.target.dataset.ability;
         this.document.update({ "system.zeon.value": Math.max(0, Math.floor(this.document.system.zeon.value - value)) });
+    }
 
+    static #configButton(ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const target = ev.target.closest('[data-ability]');
+        const type = target.dataset.ability;
+        let app;
+
+        console.log("Config Button Clicked:", type);
+        switch (type) {
+            case "classManager":
+                app = new classManager({ document: this.actor });
+                break;
+            case "initiative":
+                app = new initiativeWindow({ document: this.actor });
+                break;
+        }
+        app?.render(true);
     }
 
     static #openArcanaSephirah(ev) {
@@ -612,11 +748,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
     static #openDpOffsets(ev) {
         ev.preventDefault();
         actorFunctions.dpOffSetsWindow(this.actor);
-    }
-
-    static #openSettings(ev) {
-        ev.preventDefault();
-        actorFunctions.settingsWindow(this.actor);
     }
 
     static #onWeaponRoll(ev) {
@@ -645,6 +776,70 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         }
     }
 
+    static async #armoryAddItem(ev) {
+        ev.preventDefault();
+        let x = await genericDialogs.armoryItemCreationPrompt();
+        if (x.itemType === null || x.itemType === "none") return;
+        let itemType = x.itemType;
+        let name = x.itemName.trim();
+        if (name.length === 0) {
+            const types = {
+                "inventory": game.i18n.localize("abfalter.newLoot"),
+                "weapon": game.i18n.localize("abfalter.newWeapon"),
+                "armor": game.i18n.localize("abfalter.newEquipment"),
+                "ammo": game.i18n.localize("abfalter.newConsumable"),
+            };
+            name = (types[itemType] || types["default"]);
+        }
+
+        let itemData = {
+            name: name,
+            type: itemType
+        }
+        
+        const [item] = await this.actor.createEmbeddedDocuments("Item", [{
+            name,
+            type: itemType
+        }]);
+
+        item?.sheet?.render(true);
+
+        return item;
+    }
+
+    static #increaseQuantity(ev) {
+        ev.preventDefault();
+        const target = ev.target.closest('[data-label][data-value]');
+        if (!target) return;
+        let itemId = ev.target.closest(".item").dataset.itemId;
+        let item = this.actor.items.get(itemId);
+        const label = target.dataset.label;
+        let value = 1;
+        if (ev.shiftKey) value *= 10;
+        if (ev.ctrlKey) value *= 100;
+        let newValue = Math.floor(target.dataset.value) + value;
+        return item.update({ [label]: newValue });
+    }
+
+    static #decreaseQuantity(ev) {
+        ev.preventDefault();
+        const target = ev.target.closest('[data-label][data-value]');
+        if (!target) return;
+        let itemId = ev.target.closest(".item").dataset.itemId;
+        let item = this.actor.items.get(itemId);
+        const label = target.dataset.label;
+        let value = 1;
+        if (ev.shiftKey) value *= 10;
+        if (ev.ctrlKey) value *= 100;
+        let newValue = Math.floor(target.dataset.value) - value;
+        return item.update({ [label]: newValue });
+    }
+
+    static #openMenu(ev) {
+        ev.preventDefault();
+        ui.notifications.info("This menu function is not implemented, eta v1.6.1"); //TODO
+    }
+
     static #ammoWeaponToggle(ev) {
         ev.preventDefault();
         let itemId = ev.target.closest(".item").dataset.itemId;
@@ -654,25 +849,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         let value = ev.target.dataset.value;
         ability = !(ability === 'true');
         value = ability ? value : 0;
-        item.update({ [label]: ability });
-        item.update({ 'system.ranged.magSize': value });
-    }
-
-    static #weaponThrowQuantity(ev) {
-        ev.preventDefault();
-        let itemId = ev.target.closest(".item").dataset.itemId;
-        let item = this.actor.items.get(itemId);
-        let num = parseInt(ev.target.closest("a").dataset.value);
-        item.update({ "system.melee.throwQuantity": Math.floor(item.system.melee.throwQuantity + num) });
-    }
-
-    static #ammoQuantity(ev) {
-        ev.preventDefault();
-        let itemId = ev.target.closest(".item").dataset.itemId;
-        let item = this.actor.items.get(itemId);
-        let num = parseInt(ev.target.closest("a").dataset.value);
-        return item.update({ "system.quantity": Math.floor(item.system.quantity + num) });
-
+        item.update({ [label]: ability, 'system.ranged.magSize': value });
     }
 
     static #openDpCostCalc(ev) {
@@ -708,18 +885,98 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         }
 
     }
-    static #toggleElanGift(ev) {
-        const target = ev.target.closest('[data-label][data-code][data-value]');
-        if (!target) return;
-        let itemId = ev.target.closest(".item").dataset.itemId;
-        let item = this.actor.items.get(itemId);
-        const label = target.dataset.label;
-        const key = target.dataset.code;
-        let value = target.dataset.value;
-        console.log(`Toggling Elan Gift: ${key} - ${label} - ${value}`);
-        value = !(value === 'true');
-        return item.update({ [`system.gifts.${key}.${label}`]: value });
+
+
+    static async #openResolveWindow(ev) {
+        ev.preventDefault();
+        const result = await genericDialogs.hpShieldCriticalPrompt();
+        if (!result) return;
+
+        const actor = this.actor;
+        const type = result.type // "damage" | "heal"
+        let amount = Number(result.amount) || 0;
+        amount = Math.max(0, amount);
+
+        let crit = Number(result.critical) || 0;
+        crit = Math.max(0, crit); // crit cannot be negative
+
+        let lpDamage = 0, lpHeal = 0;
+        let shieldDamage = 0, shieldHeal = 0;
+        let critDmg = 0, bigCritDmg = 0;
+
+
+        if (type === "damage") {
+            let x = amount;
+            // Damage to shield first, with overflow to LP
+            if (result.pool === "shield") {
+                const currentShield = actor.system.shield.value ?? 0;
+
+                if (currentShield >= x) {
+                    shieldDamage = x;
+                    x = 0;
+                } else {
+                    shieldDamage = currentShield;
+                    x = x - currentShield;
+                }
+            }
+
+            // Direct LP damage, or splash damage if shield didn't absorb all
+            if (result.pool === "health" || x > 0) {
+                lpDamage = x;
+            }
+        } else if (type === "heal") {
+            if (result.pool === "shield") {
+                shieldHeal = amount;
+            } else {
+                lpHeal = amount;
+            }
+        }
+
+        if (crit > 50) {
+            bigCritDmg = Math.floor(crit / 2);
+            critDmg = Math.floor(crit - bigCritDmg);
+        } else {
+            critDmg = crit;
+        }
+
+        let lpNew = actor.system.lp.value - lpDamage + lpHeal;
+        lpNew = Math.min(lpNew, actor.system.lp.max);
+
+        let shieldNew = actor.system.shield.value - shieldDamage + shieldHeal;
+        shieldNew = Math.max(0, Math.min(shieldNew, actor.system.shield.max));
+        const critNew = actor.system.aamField.crit - critDmg;
+        const critBigNew = actor.system.aamField.critBig - bigCritDmg;
+
+        this.document.update({
+            "system.lp.value": lpNew,
+            "system.shield.value": shieldNew,
+            "system.aamField.crit": critNew,
+            "system.aamField.critBig": critBigNew
+        });
     }
+    static async #addExp(ev) {
+        ev.preventDefault();
+        const result = await genericDialogs.addExpPrompt();
+        if (!result) return;
+        let amount = Number(result.amount) || 0;
+        let newExp = this.actor.system.levelinfo.experience + amount;
+        this.document.update({ "system.levelinfo.experience": newExp });
+        return;
+    }
+
+    static #armorTag(ev) {
+        ev.preventDefault();
+        let newLabel;
+        if (this.document.system.armor.tag === "body") newLabel = "helmet"; else newLabel = "body";
+        this.document.update({ "system.armor.tag": newLabel });
+    }
+
+    static #rollInitiative(ev) {
+        ev.preventDefault();
+
+    }
+
+
 
     /**
      * AE inherited from Draw Steel System
@@ -865,5 +1122,115 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
 
         // Update on the main actor
         this.actor.updateEmbeddedDocuments("ActiveEffect", directUpdates);
+    }
+}
+
+/**
+ * Class Manager Application
+ * Handles the management of character classes for an actor.
+ * @extends {abfalterCharacterSheet}
+ */
+export class classManager extends abfalterCharacterSheet {
+    static DEFAULT_OPTIONS = {
+        classes: ["classManager", "baseAbfalterV2"],
+        position: {
+            width: 420
+        },
+        actions: {
+            cmClassManage: this.#manageClassActions,
+        }
+    };
+
+    static PARTS = {
+        config: {
+            template: "systems/abfalter/templates/actor/extensions/classManager.hbs",
+        }
+    };
+
+    get title() {
+        return game.i18n.localize("classManager");
+    }
+
+    async _preparePartContext(partId, context, options) {
+        context = await super._preparePartContext(partId, context, options);
+        const actor = this.actor;
+        const classItems = actor.items.filter(i => i.type === "class");
+        const classless = classItems.length === 0;
+
+        const levelUpAvailable = !classless && context.system.levelinfo.levelUpAvailable;
+
+        let state = "view";
+        if (classless) state = "classless";
+        else if (levelUpAvailable) state = "levelUp";
+
+        context.system.levelinfo.classManagerState = state;  // "classless" | "levelUp" | "view"
+
+        console.log(context.system.levelinfo.classManagerState);
+
+        return context;
+    }
+
+    _openClassCompendiumPicker() { // NOT YET USED ATM
+        // Change this to your real pack id (e.g., "world.classes" or "abfalter.classes")
+        const PACK_ID = "abfalter.classes";
+        const pack = game.packs.get(PACK_ID);
+
+        if (!pack) {
+        ui.notifications?.error(game.i18n.format("ABF.ClassManager.PackMissing", { pack: PACK_ID }));
+        return;
+        }
+
+        // Open the Compendium window so the user can drag-drop a class Item
+        pack.render(true);
+    }
+
+    static async #manageClassActions(ev) {
+        const action = ev.target.dataset.label;
+        const itemId = ev.target.dataset.itemId;
+        switch (action) {
+            case "levelUp":
+                ui.notifications?.info(`${game.i18n.localize(`ABF.ClassManager.${action.capitalize()}For`)} ${classId}`);
+                console.log(`${action.capitalize()} Class:`, classId);
+                break;
+            case "view":
+                ui.notifications?.info(`${game.i18n.localize(`ABF.ClassManager.${action.capitalize()}For`)} ${classId}`);
+                console.log(`${action.capitalize()} Class:`, classId);
+                //const item = this.actor.items.get(element.dataset.itemId);
+                //item.sheet.render(true);
+                break;
+            case "delete":
+                console.log(`Delete Class:`, itemId);
+                const title = game.i18n.localize("abfalter.removeItem");
+                const body = `<p>${game.i18n.localize("abfalter.confirmRemPrompt")}</p>`;
+                const confirmed = await genericDialogs.confirm(title, body);
+                if (!confirmed) break;
+                this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+                break;
+        }
+    }
+
+}      
+
+export class initiativeWindow extends abfalterCharacterSheet {
+    static DEFAULT_OPTIONS = {
+        classes: ["baseAbfalterV2", "initiativeWindow"],
+        position: {
+            width: 250,
+            height: 270
+        },
+        window: {
+            resizable: false
+        },
+    };
+
+    static PARTS = {
+        config: {
+            template: "systems/abfalter/templates/actor/extensions/initiative.hbs",
+        }
+    };
+
+    get title() {
+        return game.i18n.localize("abfalter.initiativeWindow");
+        
     }
 }

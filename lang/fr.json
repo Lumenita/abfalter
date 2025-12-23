@@ -1044,12 +1044,9 @@
     "Item": {
       "advantage": "Advantage",
       "armor": "Armor",
-      "armorHelmet": "Armor (Helmet)",
       "arsMagnus": "Ars Magnus",
       "class": "Class",
       "currency": "Currency",
-      "dailyMaint": "Zeon Maint - Daily",
-      "disadvantage": "Disadvantage",
       "discipline": "Psychic Discipline",
       "elan": "Elan",
       "incarnation": "Incarnation",
@@ -1066,7 +1063,6 @@
       "secondary": "Secondary Ability",
       "spell": "Spell",
       "spellPath": "Spellpath",
-      "turnMaint": "Zeon Maint - Turn",
       "weapon": "Weapon"
     }
   }

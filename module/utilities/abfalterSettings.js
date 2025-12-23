@@ -6,15 +6,29 @@ export var abfalterSettingsKeys;
     abfalterSettingsKeys["Change_Theme"] = "Change_Theme";
     abfalterSettingsKeys["Corrected_OpenRoll"] = "Corrected_OpenRoll";
     abfalterSettingsKeys["Corrected_InitiativeRoll"] = "Corrected_InitiativeRoll";
-    abfalterSettingsKeys["CoreExxet_BreakageFortitude"] = "CoreExxet_BreakageFortitude";
 })(abfalterSettingsKeys || (abfalterSettingsKeys = {}));
 export const abfalterSettings = () => {
+    game.settings.register("abfalter", "migrationInProgress", {
+        name: "Migration in Progress (internal)",
+        scope: "world", 
+        config: false, 
+        type: Boolean, 
+        default: false
+    });
     game.settings.register('abfalter', "systemMigrationVersion", {
         name: "System Migration Version",
         scope: 'world',
         config: false,
         default: "",
         type: String
+    });
+    game.settings.register("abfalter", "forceMigration", {
+        name: "Force migration on next launch",
+        hint: "Runs all migration steps on next load, regardless of stored version.",
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false
     });
     game.settings.register('abfalter', "systemChangeLog", {
         name: "Don't show me the system changelog",
@@ -27,7 +41,7 @@ export const abfalterSettings = () => {
     game.settings.register('abfalter', abfalterSettingsKeys.Spirit_Damage, {
         name: game.i18n.localize('abfalter.globalSettings.spiritDmg'),
         hint: game.i18n.localize('abfalter.globalSettings.spiritDetail'),
-        scope: 'client',
+        scope: 'world',
         config: true,
         default: false,
         type: Boolean
@@ -43,7 +57,7 @@ export const abfalterSettings = () => {
     game.settings.register('abfalter', abfalterSettingsKeys.Corrected_Fumble, {
         name: game.i18n.localize('abfalter.globalSettings.fumbleName'),
         hint: game.i18n.localize('abfalter.globalSettings.fumbleDetail'),
-        scope: 'client',
+        scope: 'world',
         config: true,
         default: false,
         type: Boolean
@@ -51,7 +65,7 @@ export const abfalterSettings = () => {
     game.settings.register('abfalter', abfalterSettingsKeys.Use_Meters, {
         name: game.i18n.localize('abfalter.globalSettings.meterName'),
         hint: game.i18n.localize('abfalter.globalSettings.meterDetail'),
-        scope: 'client',
+        scope: 'world',
         config: true,
         default: false,
         type: Boolean,
@@ -62,7 +76,7 @@ export const abfalterSettings = () => {
     game.settings.register('abfalter', abfalterSettingsKeys.Corrected_OpenRoll, {
         name: game.i18n.localize('abfalter.globalSettings.openRollName'),
         hint: game.i18n.localize('abfalter.globalSettings.openRollNameDetails'),
-        scope: "client",
+        scope: "world",
         config: true,
         default: false,
         type: Boolean
@@ -70,15 +84,7 @@ export const abfalterSettings = () => {
     game.settings.register('abfalter', abfalterSettingsKeys.Corrected_InitiativeRoll, {
         name: game.i18n.localize('abfalter.globalSettings.openRollInitiative'),
         hint: game.i18n.localize('abfalter.globalSettings.openRollInitiativeDetails'),
-        scope: "client",
-        config: true,
-        default: false,
-        type: Boolean
-    });
-    game.settings.register('abfalter', abfalterSettingsKeys.CoreExxet_BreakageFortitude, {
-        name: "Use Core Exxet values for Breakage and Fort",
-        hint: "When toggled on, the modified Breakage and Fortitude values for weapons and armor will be used.",
-        scope: "client",
+        scope: "world",
         config: true,
         default: false,
         type: Boolean

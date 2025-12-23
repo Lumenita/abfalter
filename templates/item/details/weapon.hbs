@@ -1,213 +1,368 @@
-<section class="baseAbfalter itemPage tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+<section class="baseAbfalterV2 itemPageV2 tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+    {{> (concat "systems/abfalter/templates/item/partials/generalDetails.hbs")}}
+
     <fieldset>
-        <legend> {{ localize "abfalter.generalDetails" }} </legend>
-        <div class="csSelect itemSimpleLabel">
+        <legend> {{ localize "abfalter.weaponDetails" }} </legend>
+        <div class="csSelect itemSimpleLabel abfDivFormat">
             <label>
-                <span> {{localize "abfalter.type"}} </span>
+                <span> {{localize "abfalter.weaponType"}} </span>
                 <select name="system.info.type">
                     {{selectOptions weaponTypeList selected=system.info.type localize=true}}
                 </select>
             </label>
         </div>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.wepClass"}} </span> <input type="text" name="system.info.weaponClass" value="{{system.info.weaponClass}}" /> </label>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.rarity"}} </span> <input type="text" name="system.rarity" value="{{system.rarity}}" /> </label>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.quality"}} </span> <input type="number" name="system.quality" value="{{system.quality}}" /> </label>
-        <div class="weaponContent">
+        {{#ifEquals system.info.type "hybrid"}}
+        Currently not supported. Please select either "melee" or "ranged" as weapon type, wip 1.6.1 feature. please read notes on github for more info.
+        {{/ifEquals}}
+        <div class="itemPropertyContainer abfDivFormat">
+            <span> {{localize "abfalter.weaponProperties"}} </span>
+            <div>
+            {{#each system.properties as |prop key|}}
+                {{#if (armoryPropSelector ../system.info.type key)}}
+                <label class="prop">
+                    <input type="checkbox" name="system.properties.{{key}}.bool" {{checked prop.bool}} />
+                    <span>{{localize (concat "abfalter." prop.label)}}</span>
+                </label>
+                {{/if}}
+            {{/each}}
+            </div>
+        </div>
+        {{#ifEquals system.info.type "shield"}}
+        <div class="csSelect itemSimpleLabel abfDivFormat">
             <label>
+                <span> {{localize "abfalter.shieldType"}} </span>
+                <select name="system.shield.type" data-field="system.shield.type">
+                    {{selectOptions shieldObjList selected=system.shield.type localize=true}}
+                </select>
+            </label>
+        </div>
+        {{/ifEquals}}
+        <div class="abfDivFormat">
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.wepClass"}} </span> <input type="text" name="system.info.weaponClass" value="{{system.info.weaponClass}}" /> </label>
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.quality"}} </span> <input type="number" name="system.quality" value="{{system.quality}}" /> </label>
+            <label class="itemDoubleInputLabel">
                 <span> {{localize "abfalter.presence"}} </span>
                 <input type="number" name="system.presence" value="{{system.presence}}" />
                 <span> | </span>
                 <span> {{system.derived.finalPresence}} </span>
             </label>
-        </div>
-        <div class="weaponContent">
-            <label>
+            <label class="itemDoubleInputLabel">
                 <span> {{localize "abfalter.fortitude"}} </span>
                 <input type="number" name="system.fortitude" value="{{system.fortitude}}" />
                 <span> | </span>
                 <span> {{system.derived.finalFortitude}} </span>
             </label>
-        </div>
-        <div class="weaponContent">
-            <label>
+            <label class="itemDoubleInputLabel">
                 <span> {{localize "abfalter.speed"}} </span>
                 <input type="number" name="system.speed" value="{{system.speed}}" />
                 <span> | </span>
                 <span> {{system.derived.finalWeaponSpeed}} </span>
             </label>
         </div>
-        <div class="weaponContent">
-            <label>
+        {{#ifIn system.info.type "melee hybrid"}}
+        {{#if this.system.pushSpeed.isNegative}}
+        <div class="abfDivFormat">
+            <label class="pushSpeedLabel">
+                <span> {{localize "abfalter.pushSpeed"}} </span>
+                <span> {{system.pushSpeed.applied}} / {{system.pushSpeed.max}} </span>
+                <span> +{{system.pushSpeed.applied}} {{localize "abfalter.speed"}} </span>
+                <span> | </span>
+                <span> -{{system.pushSpeed.applied}} {{localize "abfalter.dmgShort"}} </span>
+            </label>
+            <div class="pushSpeedContents">
+                <input type="range" name="system.pushSpeed.value" value="{{system.pushSpeed.value}}" min="0" max="{{system.pushSpeed.max}}" step="5" />
+            </div>
+        </div>
+        {{/if}}
+        {{/ifIn}}
+        <div class="abfDivFormat">
+            <label class="itemDoubleInputLabel">
                 <span> {{localize "abfalter.settingsTab.openRoll"}} </span>
                 <input type="number" name="system.info.openRollMod" value="{{system.info.openRollMod}}" />
                 <span> | </span>
                 <span> {{system.derived.baseOpenRollRange}} </span>
             </label>
         </div>
-        <div class="weaponContent7">
-            <label for="fumbleInput">
+        <div class="abfDivFormat">
+            <label class="itemDoubleInputButtonLabel" for="fumbleInput">
                 <span style="display: grid"> {{localize "abfalter.settingsTab.fumbleRoll"}} </span>
-            </label>
-            <button type="button" data-action="toggleValue" class="{{#if system.info.complex}}kiBought{{/if}}"
+                <button type="button" data-action="toggleValue" class="{{#if system.info.complex}}kiBought{{/if}}"
                 data-label="system.info.complex" data-ability="{{system.info.complex}}">
-                <span> {{localize "abfalter.complex"}} </span>
-            </button>
-            <input type="number" id="fumbleInput" name="system.info.fumbleRollMod"
-                value="{{system.info.fumbleRollMod}}" />
-            <span style="display: grid"> | </span>
-            <span style="display: grid"> {{system.derived.baseFumbleRange}} </span>
+                    <span> {{localize "abfalter.complex"}} </span>
+                </button>
+                <input type="number" id="fumbleInput" name="system.info.fumbleRollMod"
+                    value="{{system.info.fumbleRollMod}}" />
+                <span style="display: grid"> | </span>
+                <span style="display: grid"> {{system.derived.baseFumbleRange}} </span>
+            </label>
         </div>
-    </fieldset>
-
-    {{#ifEquals system.info.type "melee"}}
-    <fieldset>
-        <legend> {{ localize "abfalter.meleeDetails" }} </legend>
-        <div class="weaponContent">
-            <label>
+        <div class="abfDivFormat">
+            <label class="itemDoubleInputSelectLabel" for="reqInput">
+                <span> {{localize "abfalter.required"}} </span>
+                <div class="csSelect">
+                    <label>
+                        <select name="system.info.reqType">
+                            {{selectOptions customSecObjList selected=system.info.reqType localize=true}}
+                        </select>
+                    </label>
+                </div>
+                <input class="{{#if system.properties.versatile.bool}}{{else}}weaponReqOnlyOne{{/if}}" type="number" name="system.info.reqMod" value="{{system.info.reqMod}}"/>
+                {{#if system.properties.versatile.bool}}
+                <span> / </span>
+                <input type="number" name="system.info.reqMod2h" value="{{system.info.reqMod2h}}"/>
+                {{/if}}
+            </label>
+        </div>
+        <div class="abfDivFormat">
+            {{#ifIn system.info.type "hybrid melee ranged"}}
+            <label class="itemDoubleInputLabel">
                 <span> {{localize "abfalter.attack"}} </span>
                 <input type="number" name="system.attack" value="{{system.attack}}" />
                 <span> | </span>
                 <span> {{system.derived.baseAtk}} </span>
             </label>
-        </div>
-        <div class="weaponContent">
-            <label>
+            {{/ifIn}}
+            <label class="itemDoubleInputLabel">
                 <span> {{localize "abfalter.block"}} </span>
                 <input type="number" name="system.block" value="{{system.block}}" />
                 <span> | </span>
                 <span> {{system.derived.baseBlk}} </span>
             </label>
-        </div>
-        <div class="weaponContent">
-            <label>
+            <label class="itemDoubleInputLabel">
                 <span> {{localize "abfalter.dodge"}} </span>
                 <input type="number" name="system.dodge" value="{{system.dodge}}" />
                 <span> | </span>
                 <span> {{system.derived.baseDod}} </span>
             </label>
         </div>
-        <div class="weaponContent">
-            <label>
-                <span> {{localize "abfalter.atPen"}} </span>
-                <input type="number" name="system.atPen" value="{{system.atPen}}" />
-                <span> | </span>
-                <span> {{system.melee.finalATPen}} </span>
+    </fieldset>
+
+    {{#ifIn system.info.type "hybrid melee ranged"}}
+    <fieldset>
+        <legend> {{ localize "abfalter.range" }} </legend>
+        <div class="abfDivFormat">
+            <label class="itemSimpleSelectLabel">
+                <span> {{localize "abfalter.reach"}} </span>
+                <div class="csSelect abfDivFormat">
+                    <label>
+                        <select name="system.distance.reachUnitType">
+                            {{selectOptions distanceLongList selected=system.distance.reachUnitType localize=true}}
+                        </select>
+                    </label>
+                </div>
+                <input type="number" name="system.distance.reach" value="{{system.distance.reach}}" />
             </label>
-        </div>
-        <div class="weaponContent">
-            <label>
-                <span> {{localize "abfalter.breakage"}} </span>
-                <input type="number" name="system.breakage" value="{{system.breakage}}" />
-                <span> | </span>
-                <span> {{system.melee.finalBreakage}} </span>
+            {{#if this.system.distance.usesRange}}
+            <label class="itemSimpleSelectLabel">
+                <span> {{localize "abfalter.range"}} </span>
+                <div class="csSelect abfDivFormat">
+                    <label>
+                        <select name="system.distance.rangeUnitType">
+                            {{selectOptions distanceLongList selected=system.distance.rangeUnitType localize=true}}
+                        </select>
+                    </label>
+                </div>
+                <input type="number" name="system.distance.range" value="{{system.distance.range}}" />
             </label>
+            {{/if}}
         </div>
-        <div class="weaponContent3">
-            <div class="csSelect">
-                <label>
-                    <span> {{localize "abfalter.required"}} </span>
-                    <select name="system.info.reqType">
-                        {{selectOptions customSecObjList selected=system.info.reqType localize=true}}
-                    </select>
-                </label>
-            </div>
-            <label>
-                <button type="button" data-action="toggleValue" class="{{#if system.info.reqWarning}}kiBought{{/if}}"
-                    data-label="system.info.reqWarning" data-ability="{{system.info.reqWarning}}">
-                    {{#if system.info.reqWarning}}
-                    <span> {{localize "abfalter.warningsEnabled"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.warningsDisabled"}} </span>
-                    {{/if}}
-                </button>
-            </label>
-            <input type="number" name="system.info.reqMod" value="{{system.info.reqMod}}" placeholder="1h" />
-            <span> / </span>
-            <input type="number" name="system.info.reqMod2h" value="{{system.info.reqMod2h}}" placeholder="2h" />
-        </div>
-        <div class="wepaonContentButtons">
-            <button type="button" data-action="toggleValue" class="{{#if system.info.precision}}kiBought{{/if}}"
-                data-label="system.info.precision" data-ability="{{system.info.precision}}">
-                <span> {{localize "abfalter.precision"}} </span>
-            </button>
-            <button type="button" data-action="toggleValue" class="{{#if system.info.vorpal}}kiBought{{/if}}"
-                data-label="system.info.vorpal" data-ability="{{system.info.vorpal}}">
-                <span> {{localize "abfalter.vorpal"}} </span>
-            </button>
-            <button type="button" data-action="toggleValue" class="{{#if system.melee.throwable}}kiBought{{/if}}"
-                data-label="system.melee.throwable" data-ability="{{system.melee.throwable}}">
-                <span> {{localize "abfalter.throwable"}} </span>
-            </button>
-            <button type="button" data-action="toggleValue" class="{{#if system.melee.trapping}}kiBought{{/if}}"
-                data-label="system.melee.trapping" data-ability="{{system.melee.trapping}}">
-                <span> {{localize "abfalter.trapping"}} </span>
-            </button>
-        </div>
-        {{#if system.info.vorpal}}
-        <div class="weaponContent2">
-            <div class="csSelect">
-                <label>
-                    <span> {{localize "abfalter.location"}} </span>
-                    <select name="system.info.vorpalLocation">
-                        {{selectOptions vorpalAtkList selected=system.info.vorpalLocation localize=true}}
-                    </select>
-                </label>
-            </div>
-            <label>
+    </fieldset>
+
+    {{#if this.system.info.hasSpecialConditions}}
+    <fieldset>
+        <legend> {{ localize "abfalter.combatDetails" }} </legend>
+        <div class="abfDivFormat">
+            {{#if system.properties.vorpal.bool}}
+            <label class="weaponVorpal">
+                <span> {{localize "abfalter.vorpalLocation"}} </span>
+                <div class="csSelect abfDivFormat">
+                    <label>
+                        <select name="system.info.vorpalLocation">
+                            {{selectOptions vorpalAtkList selected=system.info.vorpalLocation localize=true}}
+                        </select>
+                    </label>
+                </div>
                 <span> {{localize "abfalter.mod"}} </span>
                 <input type="number" name="system.info.vorpalMod" value="{{system.info.vorpalMod}}" />
             </label>
-        </div>
-        {{/if}}
-        {{#if system.melee.throwable}}
-        <div class="csSelect weaponContent4">
-            <label>
-                <span> {{localize "abfalter.range"}} </span>
-                <input type="number" name="system.melee.throwRange" value="{{system.melee.throwRange}}" />
-                <select name="system.melee.throwDistanceType">
-                    {{selectOptions throwDistanceDropdown selected=system.melee.throwDistanceType localize=true}}
-                </select>
+            {{/if}}
+            
+            {{#if system.properties.throwable.bool}}
+            <label class="itemSimpleSelectLabel">
+                <span> {{localize "abfalter.throwConsumption"}} </span> 
+                <button type="button" data-action="toggleValue" class="{{#if system.melee.returning}}kiBought{{/if}}"
+                    data-label="system.melee.returning" data-ability="{{system.melee.returning}}">
+                    {{#if system.melee.returning}}
+                    <span> {{localize "abfalter.returning"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.consumesQuantity"}} </span>
+                    {{/if}}
+                </button>
+                <input type="number" name="system.melee.throwConsumption" value="{{system.melee.throwConsumption}}" />
             </label>
-        </div>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.quantity"}} </span> <input type="number" name="system.melee.throwQuantity" value="{{system.melee.throwQuantity}}" /> </label>
-        {{/if}}
-        {{#if system.melee.trapping}}
-        <div class="weaponContent6">
-            <label>
+
+            <label class="itemSimpleSelectLabel">
+                <span> {{localize "abfalter.throwableRof"}} </span>
+                <button type="button" data-action="toggleValue" class="{{#if system.melee.throwableFired}}kiBought{{/if}}"
+                data-label="system.melee.throwableFired" data-ability="{{system.melee.throwableFired}}">
+                    {{#if system.melee.throwableFired}}
+                    <span> {{localize "abfalter.fired"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.thrown"}} </span>
+                    {{/if}}
+                </button>
+                <input type="number" name="system.melee.throwableRof" value="{{system.melee.throwableRof}}" />
+            </label>
+            <div class="abfDivFormat">
+                <label class="weaponReloadDisplay atkCustomTitleContainer">
+                    <span> {{localize "abfalter.thrownRofAttacks"}}</span>
+                    <span>{{this.system.melee.thrownRofDisplay}}</span>
+                    <div class="atkCustomTitle">{{this.system.melee.thrownRofCalculationTitle}}</div>
+                </label>
+            </div>
+            {{/if}}
+
+            {{#if system.properties.trapping.bool}}
+            <label class="weaponTrapping">
                 <span> {{localize "abfalter.trapOppChar"}} </span>
-                <div class="csSelect">
+                <div class="csSelect abfDivFormat">
                     <select name="system.melee.trappingTypeF">
                         {{selectOptions customSecObjList selected=system.melee.trappingTypeF localize=true}}
                     </select>
                 </div>
-                <span> / </span>
-                <div class="csSelect">
+                <span> | </span>
+                <div class="csSelect abfDivFormat">
                     <select name="system.melee.trappingTypeS">
                         {{selectOptions customSecObjList selected=system.melee.trappingTypeS localize=true}}
                     </select>
                 </div>
             </label>
-        </div>
-        {{/if}}
-    </fieldset>
+            {{/if}}
 
+            {{#if system.properties.ammunition.bool}}
+            <label class="itemDoubleInputButtonLabel">
+                <span title="{{localize "abfalter.reloadInfo"}}"> {{localize "abfalter.magContainer"}} </span>
+                <button type="button" data-action="toggleValue" class="{{#if system.ranged.hasClip}}kiBought{{/if}}"
+                    data-label="system.ranged.hasClip" data-ability="{{system.ranged.hasClip}}">
+                    {{#if system.ranged.hasClip}}
+                    <span> {{localize "abfalter.clip"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.regular"}} </span>
+                    {{/if}}
+                </button>
+                <input type="number" name="system.ranged.magSize" value="{{system.ranged.magSize}}" />
+                <span> | </span>
+                <input type="number" name="system.ranged.magSizeMax" value="{{system.ranged.magSizeMax}}" />
+            </label>
+            {{#if this.system.ranged.hasMagazine}}
+            <label class="itemSimpleLabel"> 
+                <span title="{{localize "abfalter.rdyToFireDef"}}"> {{localize "abfalter.useReadyToFire"}} </span> 
+                <button type="button" data-action="toggleValue" class="{{#if system.ranged.useReadyToFire}}kiBought{{/if}}"
+                    data-label="system.ranged.useReadyToFire" data-ability="{{system.ranged.useReadyToFire}}">
+                    {{#if system.ranged.useReadyToFire}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                    {{/if}}
+                </button>
+            </label>
+            <label class="itemSimpleSelectLabel">
+                <span> {{localize "abfalter.ammoConsumption"}} </span> 
+                <button type="button" data-action="toggleValue" class="{{#if system.ranged.infiniteAmmo}}kiBought{{/if}}"
+                    data-label="system.ranged.infiniteAmmo" data-ability="{{system.ranged.infiniteAmmo}}">
+                    {{#if system.ranged.infiniteAmmo}}
+                    <span> {{localize "abfalter.infiniteAmmo"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.consumesAmmo"}} </span>
+                    {{/if}}
+                </button>
+                <input type="number" name="system.ranged.ammoConsumption" value="{{system.ranged.ammoConsumption}}" />
+            </label>
+            {{#if this.system.ranged.hasClip}}
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.rof"}} </span> <input type="text" name="system.ranged.clipRof" value="{{system.ranged.clipRof}}" /> </label>
+            <div class="abfDivFormat">
+                <label class="weaponReloadDisplay atkCustomTitleContainer">
+                    <span> {{localize "abfalter.rangeRofAttacks"}}</span>
+                    <span>{{this.system.ranged.clipRofDisplay}}</span>
+                    <div class="atkCustomTitle">{{this.system.ranged.clipRofCalculationTitle}}</div>
+                </label>
+            </div>
+            {{else}}
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.reloadTime"}} </span> <input type="text" name="system.ranged.reloadTime" value="{{system.ranged.reloadTime}}" /> </label>
+            <div class="abfDivFormat">
+                <label class="weaponReloadDisplay atkCustomTitleContainer">
+                    <span> {{localize "abfalter.rangeAttacks"}}</span>
+                    <span>{{this.system.ranged.reloadDisplay}}</span>
+                    <div class="atkCustomTitle">{{this.system.ranged.reloadCalculationTitle}}</div>
+                </label>
+            </div>
+            {{/if}}
+            {{/if}}
+            {{/if}}
+
+        </div>
+    </fieldset>
+    {{/if}}
+
+    {{#ifIn system.info.type "ranged hybrid"}}
+    {{#if system.properties.specialAmmo.bool}}
     <fieldset>
-        <legend> {{ localize "abfalter.damageDetails" }} </legend>
-        <div class="csSelect weaponContent">
+        <legend> {{ localize "abfalter.specialAmmunition" }} </legend>
+        <div class="abfDivFormat">
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.atPen"}} </span> <input type="number" name="system.ranged.specialAtPen" value="{{system.ranged.specialAtPen}}" /> </label>
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.breakage"}} </span> <input type="number" name="system.ranged.specialBreak" value="{{system.ranged.specialBreak}}" /> </label>
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.damage"}} </span> <input type="number" name="system.ranged.specialDmg" value="{{system.ranged.specialDmg}}" /> </label>
+        </div>
+        <div class="csSelect itemSimpleLabel abfDivFormat">
+            <label>
+                <span> {{localize "abfalter.dmgType"}} </span>
+                {{#if system.spiritHomebrew}}
+                <select class="inline-edit" name="system.ranged.specialDmgType" data-field="system.ranged.specialDmgType">
+                    {{selectOptions wepDamageTypeSpiritObjList selected=system.ranged.specialDmgType localize=true}}
+                </select>
+                {{else}}
+                <select class="inline-edit" name="system.ranged.specialDmgType" data-field="system.ranged.specialDmgType">
+                    {{selectOptions wepDamageTypeObjList selected=system.ranged.specialDmgType localize=true}}
+                </select>
+                {{/if}}
+            </label>
+        </div>
+    </fieldset>
+    {{/if}}
+    {{/ifIn}}
+
+    {{#ifIn system.info.type "melee hybrid"}}
+    <fieldset>
+        <legend> {{ localize "abfalter.meleeDamageDetails" }} </legend>
+        <div class="abfDivFormat">
+            <label class="itemDoubleInputLabel">
+                <span> {{localize "abfalter.atPen"}} </span>
+                <input type="number" name="system.atPen" value="{{system.atPen}}" />
+                <span> | </span>
+                <span> {{system.derived.meleeAtPen}} </span>
+            </label>
+            <label class="itemDoubleInputLabel">
+                <span> {{localize "abfalter.breakage"}} </span>
+                <input type="number" name="system.breakage" value="{{system.breakage}}" />
+                <span> | </span>
+                <span> {{system.derived.meleeBreak}} </span>
+            </label>
+        </div>
+        <div class="csSelect itemSimpleLabel abfDivFormat">
             <label>
                 <span> {{localize "abfalter.primary"}} </span>
                 {{#if system.spiritHomebrew}}
-                <select class="inline-edit" name="system.primDmgT" data-field="system.primDmgT">
+                <select name="system.primDmgT">
                     {{selectOptions wepDamageTypeSpiritObjList selected=system.primDmgT localize=true}}
                 </select>
                 {{else}}
-                <select class="inline-edit" name="system.primDmgT" data-field="system.primDmgT">
+                <select name="system.primDmgT">
                     {{selectOptions wepDamageTypeObjList selected=system.primDmgT localize=true}}
                 </select>
                 {{/if}}
             </label>
         </div>
-        <div class="csSelect weaponContent">
+        <div class="csSelect itemSimpleLabel abfDivFormat">
             <label>
                 <span> {{localize "abfalter.secondary"}} </span>
                 {{#if system.spiritHomebrew}}
@@ -221,181 +376,52 @@
                 {{/if}}
             </label>
         </div>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.base"}} {{localize "abfalter.damage"}} </span> <input type="text" name="system.baseDmg" value="{{system.baseDmg}}" /> </label>
-        <div class="csSelect weaponContent5">
-            <label>
+
+        {{#if system.properties.versatile.bool}}
+        <div class="csSelect abfDivFormat">
+            <label class="itemSimpleSelectLabel" for="dmgModSelect">
                 <span> {{localize "abfalter.mod"}} </span>
-                <button type="button" data-action="toggleValue" class="{{#if system.melee.twoHanded}}kiBought{{/if}}"
-                    data-label="system.melee.twoHanded" data-ability="{{system.melee.twoHanded}}">
+                <button type="button" data-action="toggleValue" class="{{#if system.melee.twoHandedBonusDmg}}kiBought{{/if}}"
+                    data-label="system.melee.twoHandedBonusDmg" data-ability="{{system.melee.twoHandedBonusDmg}}">
+                    {{#if system.melee.twoHandedBonusDmg}}
                     <span> {{localize "abfalter.twoHand"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.oneHand"}} </span>
+                    {{/if}}
                 </button>
-                <select name="system.melee.dmgMod" data-field="system.melee.dmgMod">
+                <select name="system.melee.dmgMod" id="dmgModSelect" data-field="system.melee.dmgMod">
                     {{selectOptions damageModObjList selected=system.melee.dmgMod localize=true}}
                 </select>
             </label>
         </div>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.final"}} {{localize "abfalter.damage"}} </span> <input type="text" name="system.melee.baseDmg" value="{{system.melee.baseDmg}}" readonly /> </label>
-    </fieldset>
-    {{/ifEquals}}
+        {{else}}
+        <div class="csSelect itemSimpleLabel abfDivFormat">
 
-    {{#ifEquals system.info.type "ranged"}}
-    <fieldset>
-        <legend> {{ localize "abfalter.rangedDetails" }} </legend>
-
-        <div class="weaponContent">
-            <label>
-                <span> {{localize "abfalter.attack"}} </span>
-                <input type="number" name="system.attack" value="{{system.attack}}" />
-                <span> | </span>
-                <span> {{system.derived.baseAtk}} </span>
-            </label>
-        </div>
-        <div class="weaponContent">
-            <label>
-                <span> {{localize "abfalter.block"}} </span>
-                <input type="number" name="system.block" value="{{system.block}}" />
-                <span> | </span>
-                <span> {{system.derived.baseBlk}} </span>
-            </label>
-        </div>
-        <div class="weaponContent">
-            <label>
-                <span> {{localize "abfalter.dodge"}} </span>
-                <input type="number" name="system.dodge" value="{{system.dodge}}" />
-                <span> | </span>
-                <span> {{system.derived.baseDod}} </span>
-            </label>
-        </div>
-
-        <div class="weaponContent7">
-            <label for="reloadTime" class="atkCustomTitleContainer">
-                <span style="display: grid"> {{localize "abfalter.reloadTime"}} </span>
-                <div class="atkCustomTitle">({{system.ranged.reloadTime}}) {{localize "abfalter.reloadTime"}} -
-                    [({{system.ranged.bestReloadValue}}) {{system.ranged.reloadTag}} / 100]</div>
-            </label>
-            <button type="button" data-action="toggleValue" class="{{#if system.ranged.fired}}kiBought{{/if}}"
-                data-label="system.ranged.fired" data-ability="{{system.ranged.fired}}">
-                {{#if system.ranged.fired}}
-                <span> {{localize "abfalter.fired"}} </span>
-                {{else}}
-                <span> {{localize "abfalter.thrown"}} </span>
-                {{/if}}
-            </button>
-            <input type="number" id="reloadTime" name="system.ranged.reloadTime" value="{{system.ranged.reloadTime}}" />
-            <span style="display: grid"> | </span>
-            <span style="display: grid"> {{system.ranged.reloadTimeFinal}} </span>
-        </div>
-
-        <div class="weaponContent">
-            <label class="atkCustomTitleContainer">
-                <span> {{localize "abfalter.magContainer"}} </span>
-                <input type="number" name="system.ranged.magSize" value="{{system.ranged.magSize}}" />
-                <span> / </span>
-                <input type="number" name="system.ranged.magSizeMax" value="{{system.ranged.magSizeMax}}" />
-            </label>
-        </div>
-
-        <div class="csSelect weaponContent4">
-            <label>
-                <span> {{localize "abfalter.range"}} </span>
-                <input type="number" name="system.ranged.range" value="{{system.ranged.range}}" />
-                <select name="system.ranged.rangeType">
-                    {{selectOptions throwDistanceDropdown selected=system.ranged.rangeType localize=true}}
+        <label>
+            <span> {{localize "abfalter.mod"}} </span>
+                <select name="system.melee.dmgMod" data-field="system.melee.dmgMod">
+                    {{selectOptions damageModObjList selected=system.melee.dmgMod localize=true}}
                 </select>
-            </label>
+        </label>
         </div>
 
-        <div class="weaponContent3">
-            <div class="csSelect">
-                <label>
-                    <span> {{localize "abfalter.required"}} </span>
-                    <select name="system.info.reqType">
-                        {{selectOptions customSecObjList selected=system.info.reqType localize=true}}
-                    </select>
-                </label>
-            </div>
-            <label>
-                <button type="button" data-action="toggleValue" class="{{#if system.info.reqWarning}}kiBought{{/if}}"
-                    data-label="system.info.reqWarning" data-ability="{{system.info.reqWarning}}">
-                    {{#if system.info.reqWarning}}
-                    <span> {{localize "abfalter.warningsEnabled"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.warningsDisabled"}} </span>
-                    {{/if}}
-                </button>
-            </label>
-            <input type="number" name="system.info.reqMod" value="{{system.info.reqMod}}" placeholder="1h" />
-            <span> / </span>
-            <input type="number" name="system.info.reqMod2h" value="{{system.info.reqMod2h}}" placeholder="2h" />
-        </div>
-
-        <div class="wepaonContentButtons">
-            <button type="button" data-action="toggleValue" class="{{#if system.info.precision}}kiBought{{/if}}"
-                data-label="system.info.precision" data-ability="{{system.info.precision}}">
-                <span> {{localize "abfalter.precision"}} </span>
-            </button>
-            <button type="button" data-action="toggleValue" class="{{#if system.info.vorpal}}kiBought{{/if}}"
-                data-label="system.info.vorpal" data-ability="{{system.info.vorpal}}">
-                <span> {{localize "abfalter.vorpal"}} </span>
-            </button>
-
-            <button type="button" data-action="toggleValue" class="{{#if system.ranged.specialAmmo}}kiBought{{/if}}"
-                data-label="system.ranged.specialAmmo" data-ability="{{system.ranged.specialAmmo}}">
-                <span> {{localize "abfalter.specialAmmo"}} </span>
-            </button>
-
-            <button type="button" data-action="toggleValue" class="{{#if system.ranged.infiniteAmmo}}kiBought{{/if}}"
-                data-label="system.ranged.infiniteAmmo" data-ability="{{system.ranged.infiniteAmmo}}">
-                <span> {{localize "abfalter.infiniteAmmo"}} </span>
-            </button>
-        </div>
-        {{#if system.info.vorpal}}
-        <div class="weaponContent2">
-            <div class="csSelect">
-                <label>
-                    <span> {{localize "abfalter.location"}} </span>
-                    <select name="system.info.vorpalLocation">
-                        {{selectOptions vorpalAtkList selected=system.info.vorpalLocation localize=true}}
-                    </select>
-                </label>
-            </div>
-            <label>
-                <span> {{localize "abfalter.mod"}} </span>
-                <input type="number" name="system.info.vorpalMod" value="{{system.info.vorpalMod}}" />
-            </label>
-        </div>
         {{/if}}
-
-        {{#if system.ranged.specialAmmo}}
-        <h6> {{localize "abfalter.specialAmmoDetails"}} </h6>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.breakage"}} </span> <input type="number" name="system.ranged.specialBreak"
-                value="{{system.ranged.specialBreak}}" /> </label>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.atPen"}} </span> <input type="number" name="system.ranged.specialAtPen"
-                value="{{system.ranged.specialAtPen}}" /> </label>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.damage"}} </span> <input type="number" name="system.ranged.specialDmg"
-                value="{{system.ranged.specialDmg}}" /> </label>
-        <div class="csSelect weaponContent">
-            <label>
-                <span> {{localize "abfalter.dmgType"}} </span>
-                {{#if system.spiritHomebrew}}
-                <select class="inline-edit" name="system.ranged.specialDmgType"
-                    data-field="system.ranged.specialDmgType">
-                    {{selectOptions wepDamageTypeSpiritObjList selected=system.ranged.specialDmgType localize=true}}
-                </select>
-                {{else}}
-                <select class="inline-edit" name="system.ranged.specialDmgType"
-                    data-field="system.ranged.specialDmgType">
-                    {{selectOptions wepDamageTypeObjList selected=system.ranged.specialDmgType localize=true}}
-                </select>
-                {{/if}}
+        <div class="abfDivFormat">
+            <label class="itemDoubleInputLabel">
+                <span> {{localize "abfalter.damage"}} </span> 
+                 <input type="text" name="system.baseDmg" value="{{system.baseDmg}}" /> 
+                <span> | </span>
+                <input type="text" name="system.derived.meleeDmg" value="{{system.derived.meleeDmg}}" readonly /> 
             </label>
-        </div>
-        {{/if}}
+        </div>  
     </fieldset>
+    {{/ifIn}}
 
+    {{#ifIn system.info.type "ranged hybrid"}}
     <fieldset>
-        <legend> {{ localize "abfalter.damageDetails" }} </legend>
-        <div class="csSelect weaponContent">
+        <legend> {{ localize "abfalter.rangeDamageDetails" }} </legend>
+        {{#if system.properties.ammunition.bool}}
+        <div class="csSelect itemSimpleLabel abfDivFormat">
             <label>
                 <span> {{localize "abfalter.selectAmmo"}} </span>
                 <select name="system.ranged.selectedAmmo" data-field="system.ranged.selectedAmmo">
@@ -403,23 +429,24 @@
                 </select>
             </label>
         </div>
-        <div class="weaponContent">
-            <label>
-                <span> {{localize "abfalter.breakage"}} </span>
-                <input type="number" name="system.ranged.ammoBreakMod" value="{{system.ranged.ammoBreakMod}}" />
-                <span> | </span>
-                <span> {{system.ranged.ammoBreakFinal}} </span>
-            </label>
-        </div>
-        <div class="weaponContent">
-            <label>
+        {{/if}}
+
+        <div class="abfDivFormat">
+            <label class="itemDoubleInputLabel">
                 <span> {{localize "abfalter.atPen"}} </span>
-                <input type="number" name="system.ranged.ammoAtPenMod" value="{{system.ranged.ammoAtPenMod}}" />
+                <input type="number" name="system.rangedAtPen" value="{{system.rangedAtPen}}" />
                 <span> | </span>
-                <span> {{system.ranged.ammoAtPenFinal}} </span>
+                <span> {{system.derived.rangedAtPen}} </span>
+            </label>
+            <label class="itemDoubleInputLabel">
+                <span> {{localize "abfalter.breakage"}} </span>
+                <input type="number" name="system.rangedBreakage" value="{{system.rangedBreakage}}" />
+                <span> | </span>
+                <span> {{system.derived.rangedBreak}} </span>
             </label>
         </div>
-        <div class="weaponContent8">
+
+        <div class="weaponAmmoStr abfDivFormat">
             <span>{{localize "abfalter.doesUseStr"}}</span>
             <button type="button" data-action="toggleValue" class="{{#if system.ranged.showStrFields}}kiBought{{/if}}"
                 data-label="system.ranged.showStrFields" data-ability="{{system.ranged.showStrFields}}">
@@ -439,58 +466,34 @@
                 {{/if}}
             </button>
             {{#if system.ranged.strOverride}}
-            <label class="weaponContent8-label1">
-                <input type="number" name="system.ranged.strOverrideValue" value="{{system.ranged.strOverrideValue}}" />
-                <span> | </span>
-                <span> {{this.system.ranged.strOverrideQualValue}} </span>
-            </label>
+            <input class="weaponAmmoStr-doubleInput" type="number" name="system.ranged.strOverrideValue" value="{{system.ranged.strOverrideValue}}" />
+            <span class="weaponAmmoStr-doubleInputSpan"> | </span>
+            <span class="weaponAmmoStr-doubleInputSpanTwo"> {{this.system.ranged.strOverrideQualValue}} </span>
             {{else}}
-            <label class="weaponContent8-label2">
-                <span> {{system.ranged.strField}}</span>
-            </label>
+            <span class="weaponAmmoStr-singleSpan"> {{system.ranged.strField}}</span>
             {{/if}}
             {{/if}}
         </div>
-        <div class="weaponContent">
-            <label>
+
+        <div class="abfDivFormat">
+            <label class="itemDoubleInputButtonLabel" for="rangedBaseDmg">
                 <span> {{localize "abfalter.damage"}} </span>
-                <input type="number" name="system.ranged.ammoDmgMod" value="{{system.ranged.ammoDmgMod}}" />
+                <button type="button" data-action="toggleValue" class="{{#if system.ranged.fired}}kiBought{{/if}}"
+                    data-label="system.ranged.fired" data-ability="{{system.ranged.fired}}">
+                    {{#if system.ranged.fired}}
+                    <span> {{localize "abfalter.fired"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.thrown"}} </span>
+                    {{/if}}
+                </button>
+                <input type="number" name="system.rangedBaseDmg" value="{{system.rangedBaseDmg}}" id="rangedBaseDmg"/>
                 <span> | </span>
-                <span> {{system.ranged.ammoDamageFinal}} </span>
+                <span> {{system.derived.rangedDmg}} </span>
             </label>
         </div>
+
     </fieldset>
-    {{/ifEquals}}
+    {{/ifIn}}
 
-    {{#ifEquals system.info.type "shield"}}
-    <fieldset>
-        <legend> {{ localize "abfalter.shieldNorm" }} {{ localize "abfalter.details" }} </legend>
-
-        <div class="csSelect weaponContent">
-            <label>
-                <span> {{localize "abfalter.shieldType"}} </span>
-                <select name="system.shield.type" data-field="system.shield.type">
-                    {{selectOptions shieldObjList selected=system.shield.type localize=true}}
-                </select>
-            </label>
-        </div>
-        <div class="weaponContent">
-            <label>
-                <span> {{localize "abfalter.block"}} </span>
-                <input type="number" name="system.block" value="{{system.block}}" />
-                <span> | </span>
-                <span> {{this.system.derived.baseBlk}} </span>
-            </label>
-        </div>
-        <div class="weaponContent">
-            <label>
-                <span> {{localize "abfalter.dodge"}} </span>
-                <input type="number" name="system.dodge" value="{{system.dodge}}" />
-                <span> | </span>
-                <span> {{this.system.derived.baseDod}} </span>
-            </label>
-        </div>
-    </fieldset>
-    {{/ifEquals}}
-
+    {{/ifIn}}
 </section>

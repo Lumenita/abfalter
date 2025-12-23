@@ -1,0 +1,39 @@
+<fieldset>
+    <legend> {{ localize "abfalter.generalDetails" }} </legend>
+    <div class="abfDivFormat">
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.quantity"}} </span> <input type="number" name="system.quantity" value="{{system.quantity}}" /> </label>
+    </div>
+    <div class="itemContentSelectInput abfDivFormat">
+        <label for="priceInput">
+            <span> {{localize "abfalter.pricePerItem"}} </span>
+        </label>
+        <div class="csSelect">
+            <label>
+                <select name="system.priceType">
+                    {{selectOptions currencyOptions selected=system.priceType localize=true}}
+                </select>
+            </label>
+        </div>
+        <input type="number" id="priceInput" name="system.price" value="{{system.price}}" />
+        <span> | </span>
+        <span> {{system.priceTotal}} </span>
+    </div>
+    <div class="itemContentSelectInput weightContainer abfDivFormat">
+        <label for="weightInput">
+            <span> {{localize "abfalter.weightPerItem"}} </span>
+        </label>
+        <div class="csSelect weightType">
+            <label>
+                <select name="system.weightType">
+                    {{selectOptions weightList selected=system.weightType localize=true}}
+                </select>
+            </label>
+        </div>
+        <input type="number" id="weightInput" name="system.weight" value="{{system.weight}}" />
+        <span> | </span>
+        <span> {{system.weightTotal}} </span>
+    </div>
+    <div class="abfDivFormat">
+        <label class="itemSimpleLabel"> <span> {{localize "abfalter.rarity"}} </span> <input type="text" name="system.rarity" value="{{system.rarity}}" /> </label>
+    </div>
+</fieldset>

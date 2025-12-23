@@ -33,7 +33,6 @@ Hooks.once("init", async () => {
     CONFIG.Item.dataModels = {
         //general
         advantage: advantageDataModel,
-        disadvantage: disadvantageDataModel, //Deprecated removal in 1.5.3
         secondary: secondaryDataModel,
         //Background
         proficiency: proficiencyDataModel,
@@ -43,8 +42,6 @@ Hooks.once("init", async () => {
         monsterPower: monsterPowerDataModel,
         //Magic
         spellPath: spellPathDataModel,
-        turnMaint: turnMaintDataModel, //Deprecated removal in 1.5.3
-        dailyMaint: dailyMaintDataModel, //Deprecated removal in 1.5.3
         zeonMaint: zeonMaintDataModel,
         spell: spellDataModel,
         incarnation: incarnationDataModel,
@@ -62,7 +59,6 @@ Hooks.once("init", async () => {
         kiTechnique: kiTechniqueDataModel,
         //Armory
         currency: currencyDataModel,
-        armorHelmet: armorHelmetDataModel, //Deprecated removal in 1.5.3
         armor: armorDataModel,
         weapon: weaponDataModel,
         ammo: ammoDataModel,
@@ -118,7 +114,7 @@ Hooks.once("ready", async function () {
     const systemVersion = game.system.version ?? game.system.data?.version ?? "0.0.0";
     const currentVersion = game.settings.get("abfalter", "systemMigrationVersion") ?? "0.0.0";
 
-    if (foundry.utils.isNewerVersion('1.5.3', currentVersion)) {
+    if (foundry.utils.isNewerVersion(systemVersion, currentVersion)) {
         await game.settings.set("abfalter", "systemChangeLog", false); 
         await game.settings.set("abfalter", "systemMigrationVersion", systemVersion);
     }
@@ -170,6 +166,24 @@ Handlebars.registerHelper('shortStat', function(type) {
   };
 
   return map[type] || type; // fallback to original if not found
+});
+Handlebars.registerHelper('armoryPropSelector', function (weaponType, propKey) {
+    const type = String(weaponType ?? "");
+    const key = String(propKey ?? "");
+
+    if (type === "shield") {
+        return key === "magical";
+    }
+
+    if (type === "melee") {
+        if (key === "ammunition" || key === "ammo" || key === "specialAmmo") return false;
+    }
+
+    if (type === "ranged") {
+        if (key === "throwable" || key === "trapping") return false;
+    }
+
+    return true;
 });
 
 Hooks.on("preCreateItem", async (item, options, userId) => {
@@ -278,8 +292,7 @@ class actorDataModel extends foundry.abstract.DataModel {
                 notesTwo: makeStringField(),
                 destiny: makeIntField(),
                 gnosis: makeIntField(),
-                bio: makeHtmlField(),
-                enrichedBio: makeHtmlField()
+                bio: makeHtmlField()
             }),
             levelinfo: new foundry.data.fields.SchemaField({
                 experience: makeIntField(),
@@ -298,11 +311,16 @@ class actorDataModel extends foundry.abstract.DataModel {
                 totalCP: makeIntField(),
                 extraCP: makeIntField(),
                 totalLvlMod: makeIntField(),
+                classManagerState: makeStringField("classless"),
+                levelUpAvailable: makeBoolField(false),
+                classString: makeStringField(""),
+                totalExp: makeIntField()
             }),
             aamField: new foundry.data.fields.SchemaField({
                 base: makeIntField(),
                 boon: makeIntField(),
                 crit: makeIntField(),
+                critBig: makeIntField(),
                 bonus: makeIntField()
             }),
             otherStats: new foundry.data.fields.SchemaField({
@@ -313,6 +331,8 @@ class actorDataModel extends foundry.abstract.DataModel {
                 damageBarrierFinal: makeIntField(),
                 dmgRdcFinal: makeIntField(),
                 mentalThreshold: makeIntField(),
+                shieldRatio: makeLongIntField(),
+                shieldBonus: makeIntField()
             }),
             rollRange: new foundry.data.fields.SchemaField({
                 base: makeIntField(90),
@@ -409,7 +429,9 @@ class actorDataModel extends foundry.abstract.DataModel {
                 elanStatus: makeBoolField(),
                 bloodBondsStatus: makeBoolField(),
                 raceRootsStatus: makeBoolField(),
-                mentalHealthStatus: makeBoolField()
+                mentalHealthStatus: makeBoolField(),
+                weightStatus: makeBoolField(),
+                presenceStatus: makeBoolField()
             }),
             settings: new foundry.data.fields.SchemaField({
                 phrMult: makeLongIntField(1),
@@ -417,7 +439,18 @@ class actorDataModel extends foundry.abstract.DataModel {
                 psnrMult: makeLongIntField(1),
                 mrMult: makeLongIntField(1),
                 psyrMult: makeLongIntField(1),
-                fatigueValue: makeIntField(15)
+                fatigueValue: makeIntField(15),
+                fatiguePenMult: makeLongIntField(1),
+                fatigueZeroMod: makeIntField(-120),
+                fatigueOneMod: makeIntField(-80),
+                fatigueTwoMod: makeIntField(-40),
+                fatigueThreeMod: makeIntField(-20),
+                fatigueFourMod: makeIntField(-10),
+                negHealthMult: makeLongIntField(5),
+                artiPresenceMult: makeLongIntField(10),
+                artiPresenceMultMax: makeLongIntField(20),
+                presenceWarningLower: makeBoolField(),
+                presenceWarningUpper: makeBoolField(),
             }),
             stats: new foundry.data.fields.SchemaField({
                 Agility: characteristics(),
@@ -448,7 +481,11 @@ class actorDataModel extends foundry.abstract.DataModel {
                 spec: makeIntField(),
                 temp: makeIntField(),
                 actual: makeIntField(),
-                bonus: makeIntField()
+                bonus: makeIntField(),
+                ratio: makeLongIntField(),
+                threshold: makeIntField(),
+                negRatio: makeLongIntField(),
+                isNegative: makeBoolField()
             }),
             fatigue: new foundry.data.fields.SchemaField({
                 status: makeBoolField(),
@@ -457,7 +494,8 @@ class actorDataModel extends foundry.abstract.DataModel {
                 actual: makeIntField(),
                 value: makeIntField(),
                 max: makeIntField(),
-                bonus: makeIntField()
+                bonus: makeIntField(),
+                ratio: makeLongIntField()
             }),
             regeneration: new foundry.data.fields.SchemaField({
                 spec: makeIntField(),
@@ -473,6 +511,7 @@ class actorDataModel extends foundry.abstract.DataModel {
             initiative: new foundry.data.fields.SchemaField({
                 status: makeBoolField(),
                 spec: makeIntField(),
+                other: makeIntField(),
                 bonus: makeIntField()
             }),
             secondaryFields: new foundry.data.fields.SchemaField({
@@ -841,6 +880,7 @@ class actorDataModel extends foundry.abstract.DataModel {
                 dragonDoor: makeIntField()
             }),
             armor: new foundry.data.fields.SchemaField({
+                tag: makeStringField("body"),
                 wearArmor: new foundry.data.fields.SchemaField({
                     base: makeIntField(),
                     spec: makeIntField(),
@@ -885,6 +925,15 @@ class actorDataModel extends foundry.abstract.DataModel {
             other: new foundry.data.fields.SchemaField({
                 innateSlots: makeIntField(),
                 status: makeBoolField(),
+                weightType: makeStringField("lb"),
+                naturalCarryLoad: makeStringField(),
+                maxCarryLoad: makeStringField(),
+                weaponWeight: makeLongIntField(),
+                armorWeight: makeLongIntField(),
+                consumbablesWeight: makeLongIntField(),
+                lootWeight: makeLongIntField(),
+                totalWeight: makeLongIntField(),
+                totalPresence: makeIntField(),
                 accuZeonBar: new foundry.data.fields.SchemaField({
                     value: makeIntField(),
                     max: makeIntField()
@@ -906,20 +955,38 @@ class ammoDataModel extends foundry.abstract.DataModel {
     static defineSchema() {
         return {
             description: makeHtmlField(),
+            expand: makeBoolField(),
             presence: makeIntField(),
-            price: makeIntField(),
-            priceType: makeStringField("sCoin"),
-            priceTotal: makeIntField(),
-            weight: makeLongIntField(),
-            weightType: makeStringField("lb"),
-            weightTotal: makeLongIntField(),
-            quantity: makeIntField(),
             damage: makeIntField(),
             dmgType: makeStringField("THR"),
             break: makeIntField(),
             atPen: makeIntField(),
-            expand: makeBoolField()
+            quantity: makeIntField(),
+            price: makeLongIntField(),
+            priceType: makeStringField("sCoin"),
+            priceTotal: makeLongIntField(),
+            weight: makeLongIntField(),
+            weightType: makeStringField("lb"),
+            weightTotal: makeLongIntField(),
+            rarity: makeStringField(),
+            type: makeStringField("consumable"),
+            descTag: makeStringField(),
+            properties: new foundry.data.fields.SchemaField({
+                magical: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("magical"),
+                }),
+                endless: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("endless"),
+                })
+            })
         }
+    }
+
+    static migrateData(source) {
+        if (source.type === null) source.type = "consumable";
+        return super.migrateData(source);
     }
 }
 
@@ -927,8 +994,58 @@ class weaponDataModel extends foundry.abstract.DataModel {
     static defineSchema() {
         return {
             description: makeHtmlField(),
+            equipped: makeBoolField(),
+            expand: makeBoolField(),
+            quantity: makeIntField(),
+            rarity: makeStringField(),
+            price: makeLongIntField(),
+            priceType: makeStringField("sCoin"),
+            priceTotal: makeLongIntField(),
+            weight: makeLongIntField(),
+            weightType: makeStringField("lb"),
+            weightTotal: makeLongIntField(),
+            descTag: makeStringField(),
+            properties: new foundry.data.fields.SchemaField({
+                magical: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("magical"),
+                }),
+                precision: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("precision"),
+                }),
+                vorpal: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("vorpal"),
+                }),
+                versatile: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("versatile"),
+                }),
+                twoHanded: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("twoHanded"),
+                }),
+                throwable: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("throwable"),
+                }),
+                trapping: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("trapping"),
+                }),
+                ammunition: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("ammunition"),
+                }),
+                specialAmmo: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("specialAmmo"),
+                }),
+            }),
             info: new foundry.data.fields.SchemaField({
-                type: makeStringField("melee"),
+                type: makeStringField("hybrid"),
+                weaponClass: makeStringField(),
                 complex: makeBoolField(),
                 openRollMod: makeIntField(),
                 fumbleRollMod: makeIntField(),
@@ -936,26 +1053,44 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 reqWarning: makeBoolField(),
                 reqMod: makeIntField(),
                 reqMod2h: makeIntField(),
-                precision: makeBoolField(),
-                vorpal: makeBoolField(),
                 vorpalLocation: makeStringField("anywhere"),
                 vorpalMod: makeIntField(),
-                weaponClass: makeStringField(),
-                lastWepUsed: makeIntField(),
-                lastDefUsed: makeIntField()
+                hasSpecialConditions: makeBoolField(),
+                lastWepUsed: makeIntField(),//this
+                lastDefUsed: makeIntField(),//this
+                proficiency: makeStringField("proficient"), //this
+                //toMigrate
+                twoHandedBonus: makeBoolField(), //2Handed
+                precision: makeBoolField(), //properties.precision.bool
+                vorpal: makeBoolField(), //properties.vorpal.bool
             }),
-            rarity: makeStringField(),
             quality: makeIntField(),
+            presence: makeIntField(),
             fortitude: makeIntField(),
             speed: makeIntField(),
-            presence: makeIntField(),
+            pushSpeed: new foundry.data.fields.SchemaField({
+                isNegative: makeBoolField(),
+                negMagnitude: makeIntField(),
+                applied: makeBoolField(),
+                max: makeIntField(),
+                value: makeIntField()
+            }),
+            distance: new foundry.data.fields.SchemaField({
+                range: makeIntField(),
+                rangeUnitType: makeStringField("ftLong"),
+                reach: makeIntField(),
+                reachUnitType: makeStringField("ftLong"),
+                usesRange: makeBoolField(false)
+            }),
             attack: makeIntField(),
             block: makeIntField(),
             dodge: makeIntField(),
-            baseDmg: makeIntField(),
-            breakage: makeIntField(),
             atPen: makeIntField(),
-            strBreak: makeStringField(),
+            breakage: makeIntField(),
+            baseDmg: makeIntField(),
+            rangedAtPen: makeIntField(),
+            rangedBreakage: makeIntField(),
+            rangedBaseDmg: makeIntField(),
             primDmgT: makeStringField("CUT"),
             secDmgT: makeStringField("NONE"),
             derived: new foundry.data.fields.SchemaField({
@@ -964,57 +1099,138 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 baseDod: makeIntField(),
                 finalFortitude: makeIntField(),
                 finalPresence: makeIntField(),
-                finalWeaponSpeed: makeIntField()
+                finalWeaponSpeed: makeIntField(),
+                meleeAtPen: makeIntField(),
+                meleeBreak: makeIntField(),
+                meleeDmg: makeIntField(),
+                rangedAtPen: makeIntField(),
+                rangedBreak: makeIntField(),
+                rangedDmg: makeIntField()
             }),
             melee: new foundry.data.fields.SchemaField({
-                dmgMod: makeStringField("str"),
-                twoHanded: makeBoolField(),
-                baseDmg: makeIntField(),
-                finalATPen: makeIntField(),
-                finalBreakage: makeIntField(),
-                throwable: makeBoolField(),
-                throwRange: makeIntField(),
-                throwDistanceType: makeStringField("small"),
-                throwQuantity: makeIntField(),
-                trapping: makeBoolField(),
                 trappingTypeF: makeStringField("str"),
-                trappingTypeS: makeStringField("agi")
+                trappingTypeS: makeStringField("agi"),
+                throwableRof: makeIntField(),
+                throwableFired: makeBoolField(),
+                rofThrownPerTurn: makeIntField(),
+                thrownRofDisplay: makeStringField(""),
+                thrownRofCalculationTitle: makeStringField(""),
+                throwConsumption: makeIntField(1),
+                returning: makeBoolField(),
+                dmgMod: makeStringField("str"),
+                showVersatileDmgMod: makeBoolField(),
+                twoHandedBonusDmg: makeBoolField(),
+                //toMigrate 
+                baseDmg: makeIntField(), //derived
+                finalATPen: makeIntField(),//derived
+                finalBreakage: makeIntField(),//derived
+                trapping: makeBoolField(), // to properties.trapping.bool
+                throwable: makeBoolField(), // to properties.throwable.bool
+                throwRange: makeIntField(), // to distance.range
+                throwDistanceType: makeStringField("small"), // to distance.rangeUnitType
+                throwQuantity: makeIntField(), // old Quantity
+                twoHanded: makeBoolField(), // to properties.twoHanded.bool
             }),
             ranged: new foundry.data.fields.SchemaField({
-                selectedAmmo: makeStringField("none"),
+                specialAtPen: makeIntField(),
+                specialBreak: makeIntField(),
+                specialDmgType: makeStringField("THR"),
+                specialDmg: makeIntField(),
                 reloadTime: makeIntField(),
                 bestReloadValue: makeIntField(),
                 reloadTag: makeStringField("none"),
-                fired: makeBoolField(true),
-                range: makeIntField(),
-                rangeType: makeStringField("small"),
-                ammoDmgMod: makeIntField(),
-                ammoBreakMod: makeIntField(),
-                ammoAtPenMod: makeIntField(),
-                infiniteAmmo: makeBoolField(),
-                specialAmmo: makeBoolField(),
-                specialDmg: makeIntField(),
-                specialBreak: makeIntField(),
-                specialAtPen: makeIntField(),
-                specialDmgType: makeStringField("THR"),
-                readyToFire: makeBoolField(),
+                reloadSteps: makeIntField(),
+                reloadTimeEffective: makeIntField(),
+                shotsPerTurn: makeIntField(),
+                turnsBetweenShots: makeIntField(),
+                reloadSpeedPenalty: makeIntField(),
+                reloadDisplay: makeStringField(""),
+                reloadCalculationTitle: makeStringField(""),
+                useReadyToFire: makeBoolField(),
+                isLoaded: makeBoolField(),//
+                hasMagazine: makeBoolField(false),
                 magSize: makeIntField(),
                 magSizeMax: makeIntField(1),
+                hasClip: makeBoolField(false),
+                clipRof: makeIntField(),
+                rofShotsPerTurn: makeIntField(),
+                clipRofDisplay: makeStringField(""),
+                clipRofCalculationTitle: makeStringField(""),
+                infiniteAmmo: makeBoolField(),
+                ammoConsumption: makeIntField(1),
+                selectedAmmo: makeStringField("none"),
+                fired: makeBoolField(true),
                 showStrFields: makeBoolField(),
                 strField: makeIntField(),
                 strOverride: makeBoolField(),
                 strOverrideValue: makeIntField(),
-                reloadTimeFinal: makeIntField(),    
-
+                //toMigrate 
+                readyToFire: makeBoolField(),//useReadyToFire
+                ammoDmgMod: makeIntField(), //derived
+                ammoBreakMod: makeIntField(),//derived
+                ammoAtPenMod: makeIntField(),//derived
+                specialAmmo: makeBoolField(), // to properties.specialAmmo
+                range: makeIntField(), //to range
+                rangeType: makeStringField("small"), //to rangeUnitType
+                reloadTimeFinal: makeIntField(), //no migrate all derived
             }),
             shield: new foundry.data.fields.SchemaField({
                 type: makeStringField("shieldBuckler")
             }),
             attacks: new foundry.data.fields.TypedObjectField(
                 new foundry.data.fields.SchemaField({
-                    expand: makeBoolField(true),
                     profileType: makeStringField("both"),
                     wepType: makeStringField("melee"),
+                    atkType: makeStringField("hybrid"),
+                    expand: makeBoolField(true),
+                    properties: new foundry.data.fields.SchemaField({
+                        attack: new foundry.data.fields.SchemaField({
+                            parent: makeBoolField(true),
+                            bool: makeBoolField(),
+                            label: makeStringField("attack"),
+                        }),
+                        block: new foundry.data.fields.SchemaField({
+                            parent: makeBoolField(true),
+                            bool: makeBoolField(),
+                            label: makeStringField("block"),
+                        }),
+                        dodge: new foundry.data.fields.SchemaField({
+                            parent: makeBoolField(true),
+                            bool: makeBoolField(),
+                            label: makeStringField("dodge"),
+                        }),
+                        damage: new foundry.data.fields.SchemaField({
+                            parent: makeBoolField(true),
+                            bool: makeBoolField(),
+                            label: makeStringField("damage"),
+                        }),
+                        precision: new foundry.data.fields.SchemaField({
+                            parent: makeBoolField(),
+                            bool: makeBoolField(),
+                            label: makeStringField("precision"),
+                        }),
+                        vorpal: new foundry.data.fields.SchemaField({
+                            parent: makeBoolField(),
+                            bool: makeBoolField(),
+                            label: makeStringField("vorpal"),
+                        }),
+                        throwable: new foundry.data.fields.SchemaField({
+                            parent: makeBoolField(),
+                            bool: makeBoolField(),
+                            label: makeStringField("throwable"),
+                        }),
+                        trapping: new foundry.data.fields.SchemaField({
+                            parent: makeBoolField(),
+                            bool: makeBoolField(),
+                            label: makeStringField("trapping"),
+                        }),
+                        ammunition: new foundry.data.fields.SchemaField({
+                            parent: makeBoolField(),
+                            bool: makeBoolField(),
+                            label: makeStringField("ammunition"),
+                        })
+                    }),
+                    //from here
                     name: makeStringField(),
                     attack: makeIntField(),
                     finalAttack: makeIntField(),
@@ -1040,6 +1256,7 @@ class weaponDataModel extends foundry.abstract.DataModel {
                     ignoreTrapping: makeBoolField(false),
                     trappingType: makeBoolField(),                
                     trappingValue: makeIntField(),
+
                     parentPrecision: makeBoolField(),
                     parentVorpal: makeBoolField(),
                     parentTrapping: makeBoolField(),
@@ -1050,20 +1267,11 @@ class weaponDataModel extends foundry.abstract.DataModel {
                     dmgOverride: makeBoolField()
                 })
             ),
-            equipped: makeBoolField(),
-            expand: makeBoolField()
+            migrated: makeBoolField(true)
         }
     }
 
     static migrateData(source) {
-        if (Array.isArray(source.attacks)) { // v1.5.0 Changed from array to typedObjectField so each individual save does not replace the whole array
-            console.log("Migrating weapon attacks from array to typedObjectField");
-            const newAttacks = {};
-            for (let atk of source.attacks) {
-                newAttacks[foundry.utils.randomID()] = atk;
-            }
-            source.attacks = newAttacks;
-        }
         return super.migrateData(source);
     }
 
@@ -1280,18 +1488,17 @@ class armorDataModel extends foundry.abstract.DataModel {
         return {
             description: makeHtmlField(),
             equipped: makeBoolField(),
-            ignorePenalty: makeBoolField(),
-            ignoreLayerRules: makeBoolField(),
+            expand: makeBoolField(),
             spiritHomebrew: makeBoolField(),
-            armorType: makeStringField("armor"),
             layerType: makeStringField("soft"),
-            quantity: makeIntField(1),
             quality: makeIntField(),
             presence: makeIntField(),
             fortitude: makeIntField(),
             requirement: makeIntField(),
             natPenalty: makeIntField(),
             movePenalty: makeIntField(),
+            ignorePenalty: makeBoolField(),
+            ignoreLayerRules: makeBoolField(),
             AT: new foundry.data.fields.SchemaField({
                 cut: makeIntField(),
                 imp: makeIntField(),
@@ -1316,11 +1523,38 @@ class armorDataModel extends foundry.abstract.DataModel {
                 ele: makeIntField(),
                 ene: makeIntField(),
                 spt: makeIntField()
-            })
+            }),
+            quantity: makeIntField(1),
+            price: makeLongIntField(),
+            priceType: makeStringField("sCoin"),
+            priceTotal: makeLongIntField(),
+            weight: makeLongIntField(),
+            weightType: makeStringField("lb"),
+            weightTotal: makeLongIntField(),
+            rarity: makeStringField(),
+            type: makeStringField("equipment"),
+            descTag: makeStringField(),
+            properties: new foundry.data.fields.SchemaField({
+                magical: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("magical"),
+                }),
+                unbreakable: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("unbreakable"),
+                })
+            }),
+            //Deprecated
+            armorType: makeStringField("armor"),
         }
     }
 
     static migrateData(source) {
+        if (source.type === undefined) {
+            if (source.armorType === "armor") source.type = "armor";
+            if (source.armorType === "helmet") source.type = "helmet";
+        }
+
         return super.migrateData(source);
     }
 }
@@ -1530,16 +1764,31 @@ class inventoryDataModel extends foundry.abstract.DataModel {
             description: makeStringField(),
             expand: makeBoolField(),
             quantity: makeIntField(),
-            price: makeStringField(),
+            price: makeIntField(),
+            priceType: makeStringField("sCoin"),
+            priceTotal: makeIntField(),
+            priceIcon: makeStringField(),
+            weight: makeLongIntField(),
+            weightType: makeStringField("lb"),
+            weightTotal: makeLongIntField(),
             quality: makeStringField(),
-            weight: makeIntField(),
             fortitude: makeStringField(),
             presence: makeIntField(),
-            rarity: makeStringField("Common")
+            rarity: makeStringField("Common"),
+            type: makeStringField("loot"),
+            descTag: makeStringField(),
+            readOnly: makeBoolField(),
+            properties: new foundry.data.fields.SchemaField({
+                magical: new foundry.data.fields.SchemaField({
+                    bool: makeBoolField(),
+                    label: makeStringField("magical"),
+                })
+            })
         }
     }
 
     static migrateData(source) {
+        if (source.type === null) source.type = "loot";
         return super.migrateData(source);
     }
 }
@@ -1812,81 +2061,6 @@ export class kiCreatorDataModel extends foundry.abstract.DataModel {
         }
     }
 }
-
-//Deprecated DataModels since 1.5.0 removing in 1.5.3
-class disadvantageDataModel extends foundry.abstract.DataModel {
-    static defineSchema() {
-        return {
-            description: makeStringField(),
-            expand: makeBoolField(),
-            benefit: makeIntField()
-        }
-    }
-
-    static migrateData(source) {
-        return super.migrateData(source);
-    }
-}
-class turnMaintDataModel extends foundry.abstract.DataModel {
-    static defineSchema() {
-        return {
-            description: makeStringField(),
-            expand: makeBoolField(),
-            zeon: makeIntField(),
-            cost: makeIntField(),
-            equipped: makeBoolField()
-        }
-    }
-
-    static migrateData(source) {
-        return super.migrateData(source);
-    }
-}
-class dailyMaintDataModel extends foundry.abstract.DataModel {
-    static defineSchema() {
-        return {
-            description: makeStringField(),
-            expand: makeBoolField(),
-            zeon: makeIntField(),
-            cost: makeIntField(),
-            equipped: makeBoolField()
-        }
-    }
-
-    static migrateData(source) {
-        return super.migrateData(source);
-    }
-}
-class armorHelmetDataModel extends foundry.abstract.DataModel {
-    static defineSchema() {
-        return {
-            description: makeHtmlField(),
-            quantity: makeIntField(1),
-            quality: makeIntField(),
-            presence: makeIntField(),
-            fortitude: makeIntField(),
-            requirement: makeIntField(),
-            natPenalty: makeIntField(),
-            equipped: makeBoolField(),
-            AT: new foundry.data.fields.SchemaField({
-                cut: makeIntField(),
-                imp: makeIntField(),
-                thr: makeIntField(),
-                heat: makeIntField(),
-                cold: makeIntField(),
-                ele: makeIntField(),
-                ene: makeIntField(),
-                spt: makeIntField()
-            })
-        }
-    }
-
-    static migrateData(source) {
-        return super.migrateData(source);
-    }
-}
-//End of deprecated DataModels
-
 
 function valueMaxAbility() {
     return new foundry.data.fields.SchemaField({

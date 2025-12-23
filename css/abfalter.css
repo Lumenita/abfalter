@@ -1,15 +1,218 @@
-
 .image-popout .window-header .window-title {
     visibility: hidden;
 }
+
+/* #region @GlobalV2 Actor Styles @v2 */
+.tab {
+    overflow-y: auto;
+}
+h5 {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0 0 -3px 0;
+    font-weight: normal;
+    font-size: var(--font-size-24);
+    color: var(--boxColor);
+}
+h6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-weight: normal;
+    font-size: var(--font-size-16);
+    color: var(--boxColor);
+}
+
+
+.baseAbfalterV2 select {
+    height: 20px;
+    line-height: normal;
+    font-size: var(--font-size-13);
+    border: 0px;
+    padding: 1px 0 0 0;
+    border-bottom: 1px solid var(--inputBorder);
+    text-align: center;
+    appearance: none;
+    color: var(--textColor);
+    background-color: var(--buttonBg);
+}
+.baseAbfalterV2 select option {
+    background: var(--color-select-bg);
+}
+.baseAbfalterV2 textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: var(--font-size-13);
+    border: none;
+    width: 100%;
+    resize: none;
+    padding: 3px;
+    text-align: justify;
+    border-radius: 0px;
+    margin: 0px;
+    background: var(--color-textarea-bg);
+    color: var(--textColor);
+}
+.baseAbfalterV2 .abfDivFormat input[type="radio"] {
+    --checkbox-checked-color: var(--armorPen);
+    --checkbox-background-color: var(--color-checkbox-bg);
+}
+.baseAbfalterV2 .abfDivFormat button {
+    background: var(--buttonBg);
+    color: var(--textColor);
+    line-height: normal;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    height: 20px;
+}
+.baseAbfalterV2 .abfDivFormat button:hover {
+    background: var(--buttonHover);
+}
+.baseAbfalterV2 .abfDivFormat button:focus {
+    outline: none;
+    box-shadow: none;
+}
+.baseAbfalterV2 .abfDivFormat label {
+    margin: 0px;
+    padding: 1px 0px;
+}
+.baseAbfalterV2 .abfDivFormat span {
+    font-size: var(--font-size-13);
+    align-content: center;
+    color: var(--textColor);
+    --input-height: 20px;
+}
+.baseAbfalterV2 .abfDivFormat input {
+    padding: 1px 0 0 0;
+    font-size: var(--font-size-13);
+    text-align: center;
+    border: 0px;
+    border-radius: 0px;
+    border-bottom: 1px solid var(--inputBorder);
+    background-color: var(--buttonBg);
+    color: var(--textColor);
+    --input-height: 20px;
+}
+.baseAbfalterV2 .abfDivFormat input:read-only {
+    padding: 1px 0 0 0;
+    border: 0;
+    background-color: transparent;
+}
+.baseAbfalterV2 .abfDivFormat a {
+    text-align: center;
+    align-self: center;
+}
+.baseAbfalterV2 .itemControlsV2 {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--boxColor);
+    color: var(--textColor);
+    padding: 0 1% !important; 
+    font-size: var(--font-size-13);
+}
+.baseAbfalterV2 .fieldsetContainerColumnV2 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.baseAbfalterV2 .fieldsetContainerRowV2 {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.baseAbfalterV2 .fieldSetRowV2 {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+.baseAbfalterV2 .fieldSetColumnV2 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.baseAbfalterV2 .fieldSetRowV2 legend,
+.baseAbfalterV2 .fieldSetColumnV2 legend {
+    padding: 0 0.3rem;
+    color: var(--boxColor);
+    font-size: var(--font-size-20);
+    margin: 0 7%;
+}
+.baseAbfalterV2 .fieldSetRowV2 fieldset,
+.baseAbfalterV2 .fieldSetColumnV2 fieldset {
+    border: 2px solid var(--boxColor);
+    padding: 0;
+    border-radius: 12px;
+    height: fit-content;
+}
+.baseAbfalterActorV2 .window-content {
+    padding: 3px;
+}
+.baseAbfalterV2 .abfEditorFormat > span {
+    border-bottom: 1px solid var(--boxColor);
+    font-size: var(--font-size-16);
+    margin: 0 0 0 5px;
+    width: 95%;
+    display: inline-block;
+}
+.baseAbfalterV2 .abfEditorFormat .editor {
+    min-height: 350px;
+}
+.actorPage {
+    min-width: 878px;
+}
+.lockLabel {
+    pointer-events: none;
+}
+/* #endRegion */
+
+/* #region @!Important classes  @v2 */
+.hidden {
+    display: none !important;
+}
+.visibilityOff {
+    visibility: hidden !important;
+}
+.showOpacity {
+    opacity: 1 !important;
+}
+/* #endRegion */
+
+/* #region @Context-Menu @v2 */
+#context-menu li.context-item {
+    text-align: start;
+    color: var(--color-text-alt);    
+    padding: 8px 10px;
+}
+#context-menu .context-items > li:nth-of-type(5),
+#context-menu .context-items > li:nth-of-type(6) {
+    border-top: 1px solid var(--boxColor);
+}
+/* #endregion */
+
 /* #region @Color Theme */
 :root {
-    /*--backgroundColor: rgba(11, 10, 19, 0.9);*/
-    --backgroundColor: #15202B;
-    --otherBackgrounds: #081426c2;
-    --dropdownColor: #252944;
-    --navbarColor: #333a7e;
+    --abfalter-font-roboto-condensed: "Roboto Condensed", sans-serif;
+    --abfalter-font-roboto-slab: "Roboto Slab", serif;
+    --color-background: #15202B;
+    --color-background-header: #081426c2;
+    --color-navbar: #333a7e;
+    --color-navbar-hover: #2a7bc9;
+    --color-navbar-active: #1c69c1;
+    --color-checkbox-bg: #252944;
+    --color-select-bg: #252944;
+    --color-textarea-bg: #58598757;
+    /* Armory Colors */
+    --armoryItemHeader: #021839ad;
+    --armoryItemBackground: #2b2c5780;
+    --armoryButtonBackground: rgb(11 10 18 / 50%);
+    /* text Colors */
     --textColor: #bbbbbb;
+    --color-text-alt: #bbbbbb;
+    --armoryTagText: #e7d1b1;
+
+    --dropdownColor: #252944;
     --buttonBg: #5859872e;
     --inputBorder: #747493;
     --boxColor: #687591;
@@ -20,9 +223,13 @@
     --equipped: #1bb936;
     --kiBought: #4b47b7;
     --kiFree: #106810;
-    --selectBackground: #252944;
-    --buttonHover: #5c69c1;
+    --buttonHover: #455069;
     --customTooltip: #1f3449;
+    --warningColor: #d2621e;
+    --errorColor: #ff0000;
+
+    --scrollbarColor: #555595;
+
     --color-border-dark: #8aa9cb;
     --color-border-dark-5: #12172ee8;
     --color-text-dark-secondary: #979797;
@@ -37,29 +244,57 @@
     --item-summary: #afaea9;
     --effect-border: #2c3850;
     --effect-bg: rgb(32 44 66);
+
 }
 [data-theme="light"] {
-    --backgroundColor: url(../img/parchment.jpg);
-    --otherBackgrounds: url(../img/denim.jpg);
+    --abfalter-font-roboto-condensed: "Roboto Condensed", sans-serif;
+    --abfalter-font-roboto-slab: "Roboto Slab", serif;
+    --color-background: #d5d4cb;
+    --color-background-header: #3b0707c2;
+    --color-navbar: #c5b498;
+    --color-navbar-hover: #b97d37;
+    --color-navbar-active: #c1571c;
+    --color-checkbox-bg: #cfc9bf;
+    --color-select-bg: #cfc9bf;
+    --color-textarea-bg: #87775857;
+    /* Armory Colors */
+    --armoryItemHeader: #af5b31;
+    --armoryItemBackground: #00000012;
+    --armoryButtonBackground: #df922e42;
+    /* text Colors */
+    --textColor: #111111;
+    --color-text-alt: #dec9ab;
+    --armoryTagText: #3a3a3a;
+
+
+    --buttonBg: #c9c1b6;
+    --buttonHover: #c58b58;
+    --inputBorder: #3b0707;
+    --boxColor: #7b0d0d;
+
     --dropdownColor: #e7e7e7;
-    --navbarColor: #b1b1a7;
-    --textColor: black;
-    --buttonBg: #bbb9aa;
-    --inputBorder: black;
-    --boxColor: black;
-    --itemOffSet: #c1c5c9;
+
+    --itemOffSet: #c7beb3;
+
+    --armorPen: #e5550d;
+
     --physical: #10ad10;
     --mental: #0043ff;
-    --armorPen: #d1681f;
-    --equipped: #00a11b;
-    --kiBought: #8581e3;
-    --kiFree: #1da71d;
-    --selectBackground: #bcbeb3;
-    --buttonHover: #ca984e;
+    --equipped: #128d2d;
+    
+    --kiBought: #d7885b;
+    --kiFree: #4aad4a;
+
+    --scrollbarColor: #955555;
+
     --customTooltip: #dbd1b6;
+    --item-subTitle: #7a7971;
+    --item-summary: #4b4a44;
+    --effect-border: #10141c;
+    --effect-bg: rgb(81 121 163 / 29%);
+
     --color-border-dark: inherit;
     --color-border-dark-5: inherit;
-    --color-text-dark-secondary: inherit;
     --color-border-light-tertiary: inherit;
     --color-border-highlight: inherit;
     --color-border-highlight-alt: inherit;
@@ -67,13 +302,9 @@
     --color-bg-btn-minor-active: inherit;
     --color-bg-btn-minor-inactive: inherit;
     --color-shadow-primary: inherit;
-    --item-subTitle: #7a7971;
-    --item-summary: #4b4a44;
-    --effect-border: #10141c;
-    --effect-bg: rgb(81 121 163 / 29%);
 }
 .window-header {
-    background: var(--otherBackgrounds);
+    background: var(--color-background-header);
 }
 .standard-form .form-group > label {
     color: var(--textColor);
@@ -83,11 +314,11 @@
 }
 .window-content {
     overflow-x: auto;
-    background: var(--backgroundColor);
+    background: var(--color-background);
     color: var(--textColor);
 }
 .sheet.journal-entry .journal-entry-content {
-    background: var(--backgroundColor);
+    background: var(--color-background);
 }
 .macro-sheet .form-group.command textarea {
     color: var(--textColor);
@@ -99,13 +330,13 @@
 #navigation #scene-list .scene.view, #navigation #scene-list .scene.context,
 #navigation #nav-toggle,
 .app {
-    background: var(--backgroundColor);
+    background: var(--color-background);
 }
 .editor-box {
     background-color: aliceblue;
 }
 .sheet-tabs > ul > li > .active {
-    background-color: #1c69c1;
+    background-color: var(--color-navbar-active);
 }
 .itemStyle:nth-child(2n) {
     background: var(--itemOffSet);
@@ -182,7 +413,7 @@ a.content-link {
     line-height: 20px;
 }
 .baseAbfalter select option {
-    background: var(--selectBackground);
+    background: var(--color-select-bg);
 }
 .baseAbfalter textarea {
     background: var(--buttonBg);
@@ -197,7 +428,7 @@ a.content-link {
 }
 
 .form-fields > select option {
-    background: #252944;
+    background: var(--color-select-bg);
 }
 .fumbleRoll {
     color: red !important;
@@ -220,6 +451,9 @@ a.content-link {
 .armorpenalty {
     color: var(--armorPen) !important;
 }
+.baseAbfalterV2 .abfDivFormat .equipped {
+    color: var(--equipped);
+}
 .equipped > span {
     color: var(--equipped) !important;
 }
@@ -238,28 +472,13 @@ a.content-link {
 .warningAbfalter {
     color: #d2621e !important;
 }
+.errorAbfalter {
+    color: var(--errorColor) !important;
+}
 /* #endregion */
 
 /* #region @Global Actor Styles */
-/* Some might be obsolete TODO */
-.hidden {
-    display: none !important;
-}
-.visibilityOff {
-    visibility: hidden !important;
-}
-.showOpacity {
-    opacity: 1 !important;
-}
-.tab {
-    overflow-y: auto;
-}
-.window-content {
-    padding: 3px;
-}
-.actorPage {
-    min-width: 878px;
-}
+/* legacy, remove when all tabs are reworked */
 h5 {
     display: flex;
     width: 100%;
@@ -340,7 +559,7 @@ h6 {
     height: 20px;
 }
 .baseAbfalter button:hover {
-    background: #455069;
+    background: var(--buttonHover);
 }
 .baseAbfalter button:focus {
     outline: none;
@@ -373,19 +592,13 @@ h6 {
     gap: 1rem;
 }
 .fieldSetRow > fieldset {
-    height:fit-content;
+    height: fit-content;
 }
 
 /*Unknown*/
-#context-menu li.context-item {
-    text-align: center;
-    color: var(--textColor);    
-}
+
 .notExpand {
     display: none;
-}
-.expand-down {
-    text-align: center;
 }
 .expand-box {
     width: 0%;
@@ -394,9 +607,7 @@ h6 {
     height: 18px;
     width: 18px;
 }
-.checkLock {
-    pointer-events: none;
-}
+
 /* Actor Stats Styles */
 .simpleDetails > label {
     display: flex;
@@ -453,11 +664,11 @@ h6 {
 /* Scrollbar */
 * {
     scrollbar-color: initial;
-    scrollbar-color: #555595 transparent;
+    scrollbar-color: var(--scrollbarColor) transparent;
     scrollbar-width: thin;
 }
 ::-webkit-scrollbar-thumb {
-    background: #555595;
+    background: var(--scrollbarColor);
     border: 1px solid #6d879f;
 }
 @-moz-document url-prefix() {
@@ -553,276 +764,404 @@ h6 {
 }
 /* #endregion */
 
-/* #region @Header */
-.actorHeader1 {
-    display: flex;
-    width: 100%;
+/* #region Prompt Dialog */
+.abfalterPromptDialog .dialog-content > div > label > span {
+    font-size: 0.9rem;
+    margin: 0 5px 0 0;
 }
-.actorToken {
-    height: 125px;
-    min-width: 125px;
+.abfalterPromptDialog .dialog-content > div > label > input {
+    font-size: 0.9rem;
+    --input-height: 1.5rem;
 }
-.actorToken > img {
+.abfalterPromptDialog .dialog-form .form-footer > button {
+    background: var(--buttonBg);
+    color: var(--buttonText);
+}
+.abfalterPromptDialog .dialog-form .form-footer > button:hover {
+    background: var(--buttonHover);
+}
+.abfalterPromptDialog .dialog-form .form-footer > button:focus {
+    outline: none;
+    box-shadow: none;
+}
+/* #endregion*/
+
+/* #region @Header @v2 */
+.headerFormat {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-auto-rows: 30px;
+    grid-auto-flow: dense;
+    gap: 5px;
+}
+.headerFormat .actorToken {
+    grid-column: span 3;
+    grid-row: span 3;
+    justify-items: anchor-center;
+}
+.headerFormat .actorToken > img {
     max-height: 100%;
     max-width: 100%;
     border: none;
 }
-.subHeader1 {
-    width: inherit;
-    min-width: 753px;
+/* #region @Region #1 Name & Class */
+.headerFormat .headerName {
+    grid-column: span 13;
+    grid-row: span 2;   
 }
-.containerHeader {
-    width: 100%;
+.headerFormat .headerName .headerNamespace {
     display: flex;
 }
-.SubHeaderLeft {
-    width: 45%;
-}
-.subHeaderRow1 > div:nth-of-type(1) {
-    display: flex;
-}
-.subHeaderRow1 > div:nth-of-type(1) > span,
-.subHeaderRow1 > div:nth-of-type(1) > input { /* Name */
-    height: 50px;
+.headerFormat .headerName .headerNamespace > span,
+.headerFormat .headerName .headerNamespace > input {
+    height: 40px;
     font-size: 30px;
     text-align: left;
-    padding: 0 0 0 3px;
     background: none;
     border: none;
-    width: 90%;
-}
-.subHeaderRow1 > div:nth-of-type(1) > a {
-    width: 10%;
-    font-size: 30px;
-}
-.subHeaderRow2 { /* Gender, Race, Class, Level */
-    display: flex;
-    height: 25px;
-    width: 100%;
-    justify-content: space-between;
-    padding: 0 0 0 3px;
-}
-.subHeaderRow2 > span,
-.subHeaderRow2 > label > input,
-.subHeaderRow2Half > span,
-.subHeaderRow2Half > label > input,
-.subHeaderRow3 > label > input,
-.subRightHeader1 > label > input {
-    height: 25px;
-    font-size: 15px;
-}
-.subHeaderRow1 > div:nth-of-type(1) > input,
-.subHeaderRow2 > label > input,
-.subHeaderRow2Half > label > input,
-.subRightHeader1 > label > input {
-    border-bottom: 1px solid red;
-}
-.subHeaderRow2 > label > input:placeholder-shown,
-.subHeaderRow2Half > label > input:placeholder-shown,
-.subHeaderRow3 > label > input:placeholder-shown,
-.subRightHeader1 > label > input:placeholder-shown {
-    border: 1px solid red;
-}
-.subHeaderRow2 > label > input::placeholder,
-.subHeaderRow2Half > label > input::placeholder,
-.subHeaderRow3 > label > input::placeholder{
-    color: #c33333;
-}
-.subHeaderRow2 > label:nth-of-type(1) {
-    width: 21%;
-}
-.subHeaderRow2 > label:nth-of-type(2) {
-    width: 32%;
-}
-.subHeaderRow2 > label:nth-of-type(3) {
-    width: 35%;
-}
-.subHeaderRow2 > label:nth-of-type(4) {
-    width: 10%;
-}
-.subHeaderRow2Half { /* height, weight, age */
-    display: flex;
-    height: 25px;
-    width: 100%;
-    justify-content: flex-start;
-    padding: 0 0 0 3px;
-}
-.subHeaderRow2Half > label {
-    width: 32%;
-}
-.subHeaderRow3 { /* Exp, next lvl exp, lvl up box, DP */
-    display: flex;
-    height: 25px;
-    width: 100%;
-    justify-content: flex-start;
-}
-.subHeaderRow3 > span {
-    height: 26px;
-    font-size: 15px;
-}
-.subHeaderRow3 > span:nth-of-type(1) { /* dp & Presence */
-    display: flex;
-    width: 59%;
-    justify-content: start;
-    padding: 0 0 0 3px;
-}
-.subHeaderRow3 > label:nth-of-type(1) { /* exp number */
-    display: flex;
-    width: 11%;
-}
-.subHeaderRow3 > label:nth-of-type(1) > input { 
-    text-align: end;
-}
-.subHeaderRow3 > span:nth-of-type(2) { /* / */
-    display: flex;
-    width: 5%;
-    justify-content: center;
-}
-.subHeaderRow3 > span:nth-of-type(3) { /* next lvl exp number*/
-    width: 10%;
-    text-align: start;
-    height: 26px;
-    font-size: 15px;
-}
-.subHeaderRow3 > span:nth-of-type(4) { 
-    width: 10%;
-    text-align: start;
-    height: 26px;
-    font-size: 15px;
-}
-.subHeaderRow3 > label:nth-of-type(2) { /* lvl up box */
-    display: flex;
-    width: 5%;
-    justify-content: center;
-}
-.SubHeaderRight {
-    width: 55%;
-}
-.SubHeaderRight > div {
-    display: flex;
-}
-.subRightHeader1 {
-    height: 25px;
-}
-.subRightHeader1 > label {
-    width: 20%;
-}
-.subRightHeader1 > span {
-    width: 40%;
-    font-size: 15px;
-    margin: 0 15% 0 5%;
-}
-.subRightHeader1 > button {
-    width: 20%;
-    height: 25px;
-    margin: 0 0 0 20%;
-    font-size: 0;
-}
-.subRightHeader2 {
-    justify-content: space-around;
-}
-.subRightLeft { /* initiative */
-    width: 30%;
-}
-.subRightLeft > div {
-    width: 90%;
-    margin: 0 5%;
-    justify-content: center;
-    border-left: 3px solid var(--boxColor);
-    border-right: 3px solid var(--boxColor);
-}
-.subRightLeft > div:first-of-type {
-    border-top: 3px solid var(--boxColor);
-}
-.subRightLeft > div:last-of-type {
-    border-bottom: 3px solid var(--boxColor);
-}
-.headerIni > span {
-    display: block;
-    padding: 3px 0 0 0;
-    height: 20px;
-    font-size: 12px;
+    width: 95%;
     white-space: nowrap;
-    text-align: center;
+    overflow: hidden;
+    padding: 0;
+}
+.headerFormat .headerName .headerNamespace > input {
+    border-bottom: 1px solid var(--boxColor);
+}
+.headerFormat .headerName .headerNamespace > a {
+    width: 5%;
+    font-size: 25px;
+}
+.headerFormat .headerName .headerClass {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    width: 95%;
+}
+.headerFormat .headerName .headerClass > span {
+    margin: 1px 0 0 0;
+    font-size: 0.9rem;
+    padding: 0 0 0 2px;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.headerIni > div {
-    height: 50px;
-    font-size: 14px;
+/* #endregion */
+/* #region @Region #2 Stats */
+.headerFormat .headerStats {
+    grid-column: span 6;
+    grid-row: span 1;
+}
+.headerFormat .headerStats > div {
+    height: 100%;
+    align-content: center;
+}
+.headerFormat .headerStats > div > span {
+    display: block;
+    font-size: 0.9rem;
+}
+.headerFormat .headerStats > div > label {
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
-.headerIni > div > button {
-    height: 40px;
-    width: 90%;
-    font-size: 14px;
-    border: none;
+.headerFormat .headerStats > div > label > span {
+    font-size: 0.9rem;
+    margin: 0 5px 0 0;
 }
-.headerIni > div > button > span {
-    font-size: 25px;
-    height: 30px;
-}
-.headerIniDets > label {
-    display: flex;
-    padding: 0 5px;
-}
-.headerIniDets > label:last-of-type {
-    border-top: 1px solid var(--boxColor);
-}
-.headerIniDets > label > span {
-    width: 65%;
-    text-align: start;
-}
-.headerIniDets > label > input {
-    width: 35%;
-}
-.subRightMid {
+.headerFormat .headerStats > div > label > input {
+    font-size: 0.9rem;
     width: 30%;
 }
-.subRightMid > div {
-    border: 3px solid var(--boxColor);
+.headerFormat .headerStats > div > label > input:placeholder-shown {
+    border: 1px solid var(--errorColor);
 }
-.subRightMid > div > label {
+/* #endregion */
+/* #region @Region #3 Rest */
+.headerFormat .headerRest {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+.headerFormat .headerRest > div > button {
+    border: 1px solid var(--boxColor);
+    width: 100%;
+}
+/* #endregion */
+/* #region @Region #4 Exp */
+.headerFormat .headerExp {
+    grid-column: span 8;
+    grid-row: span 1;
+    height: 100%;
+    align-content: center;
+}
+.headerFormat .headerExp > div {
     display: flex;
-    padding: 0 5px;
+    gap: 3px;
+    flex-direction: row;
 }
-.subRightMid > div > label > span {
-    width: 65%;
-    text-align: start;
+.headerFormat .headerExp > div > input {
+    width: 15%;
 }
-.subRightMid > div > label > input{
+.headerFormat .headerExp > div span {
+    margin: 1px 0 0 0;
+}
+/* #endregion */
+/* #region @Region #5 Life, Shield, Fatigue Bars */
+.headerFormat .headerBars {
+    grid-column: span 7;
+    grid-row: span 4;
+}
+.headerFormat .headerBars .barButton {
+    height: 17%;
+    width: 99%;
+    justify-items: center;
+}
+.headerFormat .headerBars .barButton > button {
+    border: 1px solid var(--boxColor);
+    padding: 1px 0 0 0;
     width: 35%;
 }
-.subRightRight {
-    width: 40%;
+.headerFormat .headerBars .barsBars {
+    height: 83%;
+    width: 99%;
 }
-.headerAam {
-    margin: 0 5%;
-    border: 3px solid var(--boxColor);
+.barContainer {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 4px;
+    overflow: hidden;
 }
-.headerAam > label {
+.hp-text,
+.shield-text,
+.fatigue-text {
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    color: #dddddd;
+}
+.lpBar {
+    position: absolute;
+    inset: 0 auto 0 0;
+    height: 100%;
+    width: calc(var(--lp) * 100%);
+    background-color: hsl(calc(var(--lp) * 120), 70%, 40%);
+    transition: width 0.4s ease, background-color 0.4s ease;
+    opacity: 0.8;
+    mix-blend-mode: lighten;
+}
+.negBar {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: calc(var(--neg) * 100%);
+    height: 100%;
+    background-color: hsl(280deg 88% 39%);
+    transition: width 0.4s ease, background-color 0.4s ease;
+    opacity: 0.8;
+    mix-blend-mode: lighten;
+}
+.shieldBar {
+    position: absolute;
+    inset: 0 auto 0 0;
+    height: 100%;
+    width: calc(var(--shield) * 100%);
+    background-color: hsl(calc(200 + var(--shield) * 40), 80%, calc(40% + var(--shield) * 30%));
+    transition: width 0.4s ease, background-color 0.4s ease;
+    opacity: 0.8;
+    mix-blend-mode: lighten;
+}
+.fatigueBar {
+    position: absolute;
+    inset: 0 auto 0 0;
+    height: 100%;
+    width: calc(var(--fatigue) * 100%);
+    background-color: hsl(calc(28 + var(--fatigue) * 20), 90%, calc(50% + var(--fatigue) * 10%));
+    transition: width 0.4s ease, background-color 0.4s ease;
+    opacity: 0.8;
+    mix-blend-mode: lighten;
+}
+.abfalterPromptDialog .resolveWindow-label > label  {
+    justify-content: space-between;
     display: flex;
-    padding: 0 5px;
+    align-items: anchor-center;
 }
-.headerAam > label:last-of-type {
-    border-top: 1px solid var(--boxColor);
-}
-.headerAam > label:last-of-type > span:first-of-type {
+.abfalterPromptDialog .resolveWindow-label > label > span {
     width: 60%;
 }
-.headerAam > label:last-of-type> span:last-of-type  {
+.abfalterPromptDialog .resolveWindow-label > label > input {
     width: 40%;
+}
+
+/* #endregion */
+/* #region @Region #6 Armor */
+.headerFormat .headerArmor {
+    grid-column: span 9;
+    grid-row: span 4;
+}
+.headerFormat .headerArmor > fieldset {
+    border: 2px solid var(--boxColor);
+    padding: 0;
+    border-radius: 12px;
+    height: 100%;
+}
+.headerFormat .headerArmor > fieldset > legend {
+    padding: 0 0.3rem;
+    color: var(--boxColor);
+    font-size: 1.1rem;
     text-align: center;
 }
-.headerAam > label > span {
-    width: 60%;
-    text-align: start;
+.headerFormat .headerArmor .armorContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    place-content: space-between;
 }
-.headerAam > label > input {
-    width: 40%;
+.headerFormat .headerArmor .armorContainer .armorTop {
+    display: flex;
+    flex-direction: row;
 }
+.headerFormat .headerArmor .armorContainer .armorSubTop {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.headerFormat .headerArmor .armorContainer .armorSubTop > label {
+    display: flex;
+    padding: 0 10px;
+}
+.headerFormat .headerArmor .armorContainer .armorSubTop > label > span {
+    width: 70%;
+}
+.headerFormat .headerArmor .armorContainer .armorSubTop > label > span:nth-of-type(2) {
+    width: 25%;
+    text-align: center;
+}
+.headerFormat .headerArmor .armorContainer .armorBottom {
+    display: flex;
+    flex-direction: column;
+}
+.headerFormat .headerArmor .armorContainer .armorBottom > label {
+    font-size: 1rem;
+    padding: 0 10px 2px 10px;
+    border-bottom: 1px solid var(--boxColor);
+    margin: 0 0 2px 0;
+}
+.headerFormat .headerArmor .armorContainer .armorBottom > label > a {
+    font-size: 0.9rem;
+
+}
+.headerFormat .headerArmor .armorContainer .armorBottom .armorAtValues {
+    display: flex;
+    flex-direction: row;
+    padding: 0 10px;
+    justify-content: space-between;
+}
+.headerFormat .headerArmor .armorContainer .armorBottom .armorAtBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* #endregion */
+/* #region @Region #7 AAM */
+.headerFormat .headerAam {
+    grid-column: span 5;
+    grid-row: span 4;
+}
+.headerFormat .headerAam > fieldset {
+    border: 2px solid var(--boxColor);
+    padding: 0;
+    border-radius: 12px;
+    height: fit-content;
+}
+.headerFormat .headerAam > fieldset > legend {
+    padding: 0 0.3rem;
+    color: var(--boxColor);
+    font-size: 1.1rem;
+    text-align: center;
+}
+.headerFormat .headerAam > fieldset > div > label {
+    display: flex;
+    padding: 0 10px;
+}
+.headerFormat .headerAam > fieldset > div > label:last-of-type {
+    border-top: 1px solid var(--boxColor);
+    padding: 3px 10px 0 10px;
+    margin: 3px 0 0 0;
+}
+.headerFormat .headerAam > fieldset > div > label > span {
+    width: 70%;
+}
+.headerFormat .headerAam > fieldset > div > label > span:nth-of-type(2) {
+    width: 30%;
+    text-align: center;
+}
+.headerFormat .headerAam > fieldset > div > label > input {
+    width: 30%;
+}
+/* #endregion */
+/* #region @Region #8 Initiative */
+.headerFormat .headerinitiative {
+    grid-column: span 3;
+    grid-row: span 3;
+}
+.headerFormat .headerinitiative > fieldset {
+    border: 2px solid var(--boxColor);
+    padding: 5px;
+    border-radius: 12px;
+    height: 100%;
+}
+.headerFormat .headerinitiative > fieldset > legend {
+    padding: 0 0.3rem;
+    color: var(--boxColor);
+    font-size: 1.1rem;
+    text-align: center;
+}
+.headerFormat .headerinitiative > fieldset > legend > a {
+    font-size: 0.9rem;
+}
+.headerFormat .headerinitiative > fieldset > div > button {
+    justify-self: center;
+    width: 75%;
+}
+.headerFormat .headerinitiative > fieldset > div > span {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    text-align: center;
+    height: 35px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+.initiativeWindow {
+    height: fit-content !important;
+}
+.initiativeWindow .headerIniDets > label {
+    display: flex;
+    padding: 0 10px 2px 10px;
+}
+.initiativeWindow .headerIniDets > label:nth-last-of-type(2),
+.initiativeWindow .headerIniDets > label:nth-last-of-type(4),
+.initiativeWindow .headerIniDets > label:nth-last-of-type(6),
+.initiativeWindow .headerIniDets > label:nth-last-of-type(8) {
+    border-bottom: 1px solid var(--boxColor);
+    margin: 0 0 2px 0;
+    padding: 0 10px 2px 10px;
+}
+.initiativeWindow .headerIniDets > label > span {
+    width: 70%;
+}
+.initiativeWindow .headerIniDets > label > span:nth-of-type(2) {
+    text-align: center;
+    width: 30%;
+}
+.initiativeWindow .headerIniDets > label > input {
+    width: 30%;
+}
+/* #endregion */
 /* #endregion */
 
 /* #region @Navigation Tabs */
@@ -853,14 +1192,14 @@ h6 {
     justify-content: space-evenly;
 }
 .sheet-tabs > ul > li {
-    background-color: var(--navbarColor);
+    background-color: var(--color-navbar);
     float: left;
-    border-right: 1px solid var(--navbarColor);
+    border-right: 1px solid var(--color-navbar);
     height: 35px;
     width: 12%;
 }
 .sheet-tabs > ul > li:hover {
-    background-color: #2a7bc9;
+    background-color: var(--color-navbar-hover);
 }
 .sheet-tabs > ul > li:first-child > .active,
 .sheet-tabs > ul > li:first-child {
@@ -1539,6 +1878,9 @@ h6 {
 .backgroundProf .prof-item .editor {
     border: 1px solid var(--boxColor);
     margin: 2px 7px;
+}
+.prof-item .editor .editor-content {
+    width: 100%;
 }
 /* #endregion */
 
@@ -3919,72 +4261,25 @@ h6 {
     -------------
     *************
 */
-/* #region Containers */
-.armory .fieldSetRow {
-    flex-direction: column;
-}
-.armory > div:first-of-type {
-    width: 25%;
-}
-.armory > div:last-of-type {
-    width: 73%;
-}
-.wearArmor, .armorStats, .weightStats, .currency,
-.armor, .inventory {
+/* #region Containers @v2 */
+.wearArmor, .weightStats, .presenceStats, .currency {
     width: 100%;
 }
 /* #endregion */
 
-/* #region @Wear-Armor & @Armor-Stats*/
-.wearArmor > label,
-.armorStats > label {
-    display: flex;
-    padding: 0 10px;
-}
-.wearArmor > label:nth-of-type(9) {
-    border-top: 1px solid var(--boxColor);
-}
-.wearArmor > label > span  {
-    width: 60%;
-    text-align: start;
-}
-.wearArmor > label > input {
-    width: 40%;
-}
-.wearArmor > label:nth-of-type(5) {
-    border-top: 1px solid var(--boxColor);
-    padding: 0 10px;
-    font-weight: bold;
-}
-.armorStats > label > span  {
-    width: 80%;
-    text-align: start;
-}
-.armorStats > label > input {
-    width: 20%;
-}
-/* #endregion */
-
-/* #region @Weight-Stats */
-/* #endregion */
-
-/* #region @Currency */
-.currency > div > label,
+/* #region @Currency @v2 */
+.fieldSetRowV2 .currency > div > label,
+.currency > div:first-of-type,
 .currency-item > div {
     display: flex;
+    padding: 0 10px;
 }
 .currency > div:first-of-type {
     display: flex;
     border-bottom: 1px solid var(--boxColor);
+    margin: -10px 0 0 0;
 }
-.currency > div:last-of-type {
-    display: flex;
-    place-content: space-between;
-    border-top: 1px solid var(--boxColor);
-}
-.currency > div > span,
-.currency > div > label > span,
-.currency-item > div > span {
+.currency > div > span {
     text-align: center;
 }
 .currency > div > span:first-of-type,
@@ -4004,101 +4299,361 @@ h6 {
 }
 /* #endregion */
 
-/* #region @Armor */
-.armor > div:first-of-type {
+/* #region @Weight-Stats @v2 */
+.weightStats .abfDivFormat > label,
+.weightStats .abfDivFormat > div > label {
     display: flex;
+    padding: 0 10px;
+}
+.weightStats > div > label > span, 
+.weightStats > div > div > label > span,
+.weightStats > div > div > div > label > span {
+    width: 55%;
+    text-align: start;
+}
+.baseAbfalterV2  .weightStats > div > label > input,
+.baseAbfalterV2  .weightStats > div > div > label > input{
+    width: 45%;
+    text-align: end;
+}
+.baseAbfalterV2  .weightStats > div > div > div > label > select {
+    width: 45%;
+}
+.baseAbfalterV2  .weightStats > div > div > div::after{
+    right: 15px;
+}
+.weightStats > div > label:nth-of-type(2),
+.weightStats .abfDivFormat > div > label:last-of-type {
     border-bottom: 1px solid var(--boxColor);
+    padding: 0 10px 2px 10px;
+    margin: 0px 0 2px 0;
 }
-.armor-item > div > a,
-.armorHelmet-item > div > a {
-    width: 3%;
-}
-.armor > div > span,
-.armor-item > div > span,
-.armor-item2 > div > span,
-.armorHelmet-item > div > span,
-.armorHelmet-item2 > div > span {
-    text-align: center;
-}
-.armor > div > span:first-of-type,
-.armor-item > div > span:first-of-type,
-.armor-item2 > div > span:first-of-type,
-.armorHelmet-item > div > span:first-of-type,
-.armorHelmet-item2 > div > span:first-of-type {
-    width: 23%;
-}
-.armor > div > span:first-of-type,
-.armor-item2 > div > span:first-of-type,
-.armorHelmet-item2 > div > span:first-of-type {
-    margin: 0 0 0 3%;
-}
-.armor > div:first-of-type > span:not(:first-of-type),
-.armor-item > div > span:not(:first-of-type),
-.armorHelmet-item > div > span:not(:first-of-type) {
-    width: 15.2%;
-}
-.armor-item:nth-child(2n),
-.armor-item2:nth-child(2n),
-.armorHelmet-item:nth-child(2n),
-.armorHelmet-item2:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-.armor-item > div,
-.armor-item2 > div,
-.armorHelmet-item > div,
-.armorHelmet-item2 > div {
+
+/* #endregion */
+
+/* #region @Presence-Stats @v2 */
+.presenceStats .abfDivFormat > label,
+.presenceStats .abfDivFormat > div > label {
     display: flex;
-    justify-content: space-between;
+    padding: 0 10px;
 }
-.armorHelmet-item > div > a,
-.armor-item > div > a {
-    opacity: 0;
+.presenceStats > div > label > span, 
+.presenceStats > div > div > label > span  {
+    width: 70%;
+    text-align: start;
 }
-.armorHelmet-item > div:hover > a,
-.armor-item > div:hover > a {
-    opacity: 1;
+.baseAbfalterV2  .presenceStats > div > label > input,
+.baseAbfalterV2  .presenceStats > div > div > label > input {
+    width: 30%;
 }
-.armor > div:nth-of-type(4) {
-    display: flex;
-    justify-content: space-between;
-    border-top: 2px solid var(--boxColor);
+.presenceStats > div > label:nth-of-type(2),
+.presenceStats .abfDivFormat > div > label:last-of-type {
     border-bottom: 1px solid var(--boxColor);
-    padding: 3px 0 0 0;
-}
-.armor > div:nth-of-type(2),
-.armor > div:nth-of-type(5) {
-    border-bottom: 1px dashed var(--boxColor);
-    padding: 0 0 5px 0;
-}
-.armor > div:nth-of-type(3),
-.armor > div:nth-of-type(6) {
-    padding: 5px 0 0 0;
-}
-.armor > div:nth-of-type(8) {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 3px;
-}
-.armor > div:nth-of-type(9) {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 3px;
-}
-.armor > div:nth-of-type(4) > span:not(:first-of-type),
-.armor-item2 > div > span:not(:first-of-type),
-.armor > div:nth-of-type(8) > span:not(:first-of-type),
-.armor > div:nth-of-type(9) > span:not(:first-of-type),
-.armorHelmet-item2 > div > span:not(:first-of-type) {
-    width: 9.25%;
-}
-.armor > div:nth-of-type(7) {
-    padding: 3px 0;
-    display: flex;
-    justify-content: space-between;
-    border-top: 1px solid var(--boxColor);
-    border-bottom: 2px solid var(--boxColor);
+    padding: 0 10px 2px 10px;
+    margin: 0px 0 2px 0;
 }
 /* #endregion */
+
+/* #region @Wear-Armor @v2 */
+.wearArmor .abfDivFormat > label {
+    display: flex;
+    padding: 0 10px;
+}
+.wearArmor > div > label > span  {
+    width: 60%;
+    text-align: start;
+}
+.wearArmor > div > label > input {
+    width: 40%;
+}
+.wearArmor > div > label:nth-of-type(5) {
+    border-top: 1px solid var(--boxColor);
+    padding: 0 10px;
+    font-weight: bold;
+}
+/* #endregion */
+
+/* #region @addItemBox @v2 */
+.armoryAddBox {
+    position: absolute;
+    z-index: 1;
+    left: 95%;
+    top: 96%;
+    background: var(--buttonHover);
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    align-self: center;
+    border: 1px solid var(--boxColor);
+    font-size: var(--font-size-20);
+    padding: 1px 0 0px 1px;
+}
+.armoryAddBox a:hover {
+    text-shadow: 0 0 8px var(--armorPen);
+    color: var(--armorPen);
+}
+/* #endregion */
+
+/* #region @Armory-Items @v2 */
+.weapon > div:nth-of-type(n+3),
+.armor > div:nth-of-type(n+3),
+.ammo > div:nth-of-type(n+3),
+.inventory > div:nth-of-type(n+3) {
+    border-top: 1px solid var(--boxColor);
+}
+.inventory {
+    margin: 0 0 30px 0;
+}
+.armory .armoryItemHeader.armoryItemHeader,
+.armory .armory-item {
+    width: 98%;
+    justify-self: center;
+}
+.armory .armoryItemHeader {
+    display: flex;
+    height: 30px;
+    background: linear-gradient(to right, var(--color-navbar), var(--armoryItemHeader));
+    border-bottom: 1px solid black;
+}
+.armory .armoryItemHeader > span {
+    text-transform: uppercase;
+    font-family: var(--abfalter-font-roboto-condensed);
+    font-size: var(--font-size-11);
+    text-align: center;
+}
+.armory .armoryItemHeader > span:first-of-type {
+    font-family: var(--abfalter-font-roboto-slab);
+    font-size: var(--font-size-18);
+    text-transform: none;
+    text-align: start;
+    padding: 0 0 0 15px;
+    font-weight: bold;
+}
+.armory .armoryItemHeader .armoryNameHeader {
+    width: 59%;
+}
+.armory .armoryItemHeader .armoryPriceHeader {
+    width: 9%;
+}
+.armory .armoryItemHeader .armoryWeightHeader,
+.armory .armoryItemHeader .armoryQuantityHeader,
+.armory .armoryItemHeader .armoryChargesHeader,
+.armory .armoryItemHeader .armorHeaderEmpty {
+    width: 8%;
+}
+.armory-item {
+    background: var(--armoryItemBackground);
+    padding: 5px 0;
+}
+.armoryItemContainer {
+    display: flex;
+    flex-direction: row;
+}
+.armoryItemMain {
+    display: flex;
+    flex-direction: row;
+    width: 59%;
+}
+.armoryItemImg {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    min-width: 36px;
+    min-height: 36px;
+    align-self: center;
+    border: 1px solid #cf9e06;
+    box-shadow: 0px 0px 3px #cf9e06;
+    border-radius: 7px;
+}
+.armoryItemNames {
+    display: flex;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    padding: 0 0 0 5px;
+}
+.armoryItemNames span:first-of-type {
+    font-size: var(--font-size-18);
+    cursor: pointer;
+}
+.armoryItemNames span:first-of-type:hover {
+    color: var(--armorPen);
+}
+.armoryItemNames span:last-of-type {
+    font-size: var(--font-size-11);
+    color: var(--armoryTagText);
+}
+.armoryTags {
+    width: 7%;
+    text-align: center;
+    align-self: center;
+}
+.armoryPrice {
+    display: flex;
+    width: 9%;
+}
+.armoryPrice > span {
+    display: flex;
+    justify-content: end;
+    align-self: center;
+    padding: 0 3px 0 0;
+    width: -webkit-fill-available;
+}
+.armoryPrice > img {
+    width: 13px;
+    height: 13px;
+    object-fit: cover;
+    min-width: 13px;
+    min-height: 13px;
+    align-self: center;
+}
+.armoryWeight {
+    text-align: center;
+    width: 8%;
+}
+.armoryQuantity {
+    display: flex;
+    justify-content: space-between;
+    width: 8%;
+}
+.armoryCharges {
+    width: 8%;
+    justify-content: space-evenly;
+    text-align: center;
+}
+.armoryItemControls {
+    display: flex;
+    width: 8%;
+    align-items: stretch;
+    justify-content: start;
+    gap: 6px;
+    color: var(--item-control-color);
+    padding: 0 38px 0 4px;
+    position: relative;
+}
+.armory-item .armoryItemControls > a:first-of-type {
+    margin: 0 0.4rem;
+}
+.armoryDescription {
+    padding: 3px 10px;
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.armoryTags {
+    display: flex;
+    flex-direction: row;
+    padding: 0 10px;
+    gap: 5px;
+}
+.armory-item .armoryTags span {
+    text-transform: uppercase;
+    border: 1px solid var(--boxColor);
+    width: fit-content;
+    font-size: var(--font-size-11);
+    white-space: nowrap;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 2px 2px 0 2px;
+}
+.armoryIndent {
+    width: 22px;
+    align-items: center;
+    display: flex;
+    padding: 4px 0 0 0;
+}
+
+/* #endregion */
+
+/* #region @Armory-Weapon Buttons @v2 */
+.armoryWepEquip {
+    display: flex;
+    align-items: center;
+    height: 29px;
+    padding: 0 0 0 5px;
+    color: var(--boxColor);
+}
+.baseAbfalterV2 .armoryWepEquip button {
+    height: 25px;
+    min-height: 0px;
+    border-radius: 0px;
+    border: 1px solid var(--boxColor);
+    background: var(--armoryButtonBackground);
+}
+.armoryWepCombat {
+    display: flex;
+    justify-content: end;
+    width: 42%;
+}
+.baseAbfalterV2 .armoryWepCombat > button {
+    width: 33.3%;
+}
+.armoryWepBreak {
+    display: flex;
+    justify-content: end;
+    width: 14%;
+    margin: 0 0 0 3%;
+}
+.armoryWepTrap, .armoryWepAmmo {
+    display: flex;
+    justify-content: end;
+    width: 14%;
+}
+.baseAbfalterV2 .armoryWepBreak > button,
+.baseAbfalterV2 .armoryWepTrap > button,
+.baseAbfalterV2 .armoryWepAmmo > button {
+    width: 100%;
+
+}
+/* #endregion */
+
+/* #region @Armory-Item-Creation @v2 */
+.armoryItemCreate {
+    width: 400px;
+}
+.baseAbfalterV2 .armoryItemCreate > input {
+    display: flex;
+    justify-content: center;
+    font-size: var(--font-size-28);
+    margin: 0 0 10px 0;
+    height: auto;
+}
+.baseAbfalterV2 .armoryItemCreate > div {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--boxColor);
+    border-radius: 5px;
+    box-shadow: 0 0 5px var(--boxColor);
+    padding: 5px 10px;
+}
+.baseAbfalterV2  .armoryItemCreate > div > label {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+.baseAbfalterV2 .armoryItemCreate > div > label:not(:last-of-type) {
+    border-bottom: 1px solid var(--boxColor);
+}
+.baseAbfalterV2 .armoryItemCreate > div > label > img {
+    width: 40px;
+    height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    filter: invert(1);
+}
+.baseAbfalterV2 .armoryItemCreate > div > label > span {
+    padding: 0 0 0 15px;
+    font-size: var(--font-size-20);
+    width: -webkit-fill-available;
+}
+.baseAbfalterV2 .armoryItemCreate > div > label > input {
+    width: 10%;
+}
+
+
+/* #endregion */
+
+
+
 
 /* #region @Item-Armor */
 .armorContent {
@@ -4150,9 +4705,9 @@ h6 {
 /* #endregion */
 
 /* #region @Weapon */
-.weapons {
-    width: 100%;
-}
+
+
+
 .weapons > div:first-of-type {
     padding-bottom: 3px;
 }
@@ -4297,6 +4852,147 @@ h6 {
 /* #endregion */
 
 /* #region Item Weapon*/
+.atkCustomTitleContainer {
+  position: relative;
+}
+.atkCustomTitle {
+  visibility: hidden;
+  opacity: 0;
+  background-color: #333;
+  color: #fff; 
+  text-align: center;
+  border-radius: 4px;
+  padding: 5px;
+  position: absolute;
+  top: -100%;
+  z-index: 10;
+  left: 50%;
+  width: 200px;
+  transform: translateX(-50%);
+  transition: opacity 0.2s ease-in-out;
+  font-size: 14px;
+  pointer-events: none;
+}
+.atkCustomTitleContainer:hover .atkCustomTitle {
+  visibility: visible;
+  overflow: visible;
+  opacity: 1;
+}
+.baseAbfalterV2 .weaponReqOnlyOne {
+    width: 35%;
+}
+.weaponVorpal {
+    display: flex;
+    padding: 2px 10px 2px 10px !important;
+}
+.weaponVorpal > span {
+    width: 32%;
+}
+.baseAbfalterV2 .weaponVorpal > div {
+    width: 31%;
+    margin: 0 2% 0 0;
+}
+.weaponVorpal > span:nth-of-type(2) {
+    width: 17%;           
+    margin: 0 1% 0 0;
+    text-align: center;
+}
+.weaponVorpal > input {
+    width: 17%;
+    text-align: center;
+}
+.weaponTrapping {
+    display: flex;
+    padding: 2px 10px 2px 10px !important;
+}
+.weaponTrapping > span {
+    width: 65%
+}
+.baseAbfalterV2 .weaponTrapping > div {
+    width: 17%;
+}
+.weaponTrapping > span:nth-of-type(2) {
+    width: 1%;           
+    text-align: center;
+}
+.weaponReloadDisplay {
+    display: flex;
+    padding: 2px 10px 2px 10px !important;
+    justify-content: space-between;
+}
+.weaponReloadDisplay > span:nth-of-type(2) {
+    min-width: 35%;
+    text-align: center;
+}
+.weaponAmmoStr {
+    display: flex;
+    padding: 2px 10px 2px 10px !important;
+    align-items: center;
+}
+.weaponAmmoStr > span:first-of-type {
+    width: 31%;
+}
+.baseAbfalterV2  .weaponAmmoStr > button {
+    margin: 0 2% 0 0;
+    width: 20%;
+    border-radius: 0px;
+    border: none;
+    font-size: 0px;
+}
+.weaponAmmoStr > button:first-of-type {
+    width: 10%;
+}
+.weaponAmmoStr-doubleInput {
+    width: 17%;
+}
+.weaponAmmoStr-doubleInputSpan {
+    width: 1%;
+}
+.weaponAmmoStr-doubleInputSpanTwo {
+    text-align: center;
+    width: 17%;
+}
+.weaponAmmoStr-singleSpan {
+    width: 35%;
+    text-align: center;
+}
+.pushSpeedLabel {
+    display: flex;
+    padding: 2px 10px 2px 10px !important;
+}
+.pushSpeedLabel > span{
+    height: 20px;
+}
+.pushSpeedLabel > span:nth-of-type(1) {
+    width: 40%;
+}
+.pushSpeedLabel > span:nth-of-type(2) {
+    width: 25%;
+    text-align: center;
+}
+.pushSpeedLabel > span:nth-of-type(3) {
+    width: 17%;
+    text-align: center;
+}
+.pushSpeedLabel > span:nth-of-type(4) {
+    width: 1%;
+    text-align: center;
+}
+.pushSpeedLabel > span:nth-of-type(5) {
+    width: 17%;
+    text-align: center;
+}
+.pushSpeedContents {
+    display: flex;
+    padding: 2px 10px 2px 10px !important;
+}
+
+
+
+
+
+/* OLD STUFF */
+
 .attack-entry:nth-child(2n) {
     background: var(--itemOffSet);
 }
@@ -4311,252 +5007,8 @@ h6 {
     border-radius: 0px;
     border: none;
 }
-.weaponContent, .weaponContent2, .weaponContent3, .weaponContent4, .wepaonContentButtons,
-.weaponContent5, .weaponContent6, .weaponContent7, .weaponContent8 {
-    padding: 0 10px !important;
-}
-.weaponContent > label, 
-.weaponContent3 > label,
-.weaponContent4 > label,
-.weaponContent5 > label {
-    display: flex;
-    padding: 2px 0;
-}
-.weaponContent > label > span,
-.weaponContent3 > label > span,
-.weaponContent5 > label > span {
-    display: grid;
-}
-.weaponContent > label > span:first-of-type {
-    width: 65%;
-}
-.weaponContent > label > select {
-    width: 35%;
-}
-.weaponContent > label > input,
-.weaponContent5 > label > input {
-    width: 17%;
-}
-.weaponContent > label > button {
-    margin: 0px;
-    width: 35%;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-}
-.weaponContent > label > span:nth-of-type(2) {
-    width: 1%;
-    text-align: center;
-}
-.weaponContent > label > span:nth-of-type(3) {
-    width: 17%;
-    text-align: center;
-}
-.weaponContent3 {
-    display: flex;
-    padding: 2px 0 0 0;
-    margin: 2px 0 0 0;
-    border-top: 1px dashed var(--boxColor);
-}
-.weaponContent3 > div, 
-.weaponContent3 > label {
-    width: 30%;
-    margin: 0 2.5% 0 0;
-}
-.weaponContent3 > div > label > span {
-    width: 45%;
-}
-.abfalter.item .sheet-body .details .weaponContent3 .csSelect > label > select {
-    width: 45%;
-}
 
-.weaponContent2 > div > label,
-.weaponContent3 > div > label,
-.weaponContent4 > div > label {
-    display: flex;
-}
-.weaponContent3 > div > label > span {
-    width: 45%;
-}
-.weaponContent3 > div > label > select {
-    width: 55%;
-}
-.weaponContent3 > label > button {
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-    font-size: 0px;
-}
-.weaponContent3 > input {
-    width: 17%;
-    display: flex;
-    align-self: center;
-}
-.weaponContent3 > span {
-    width: 1%;
-    text-align: center;
-    display: flex;
-    align-self: center;
-}
-.wepaonContentButtons {
-    display: flex;
-    padding: 2px 0;
-    justify-content: space-between;
-}
-.wepaonContentButtons > button{
-    width: 22%;
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-    font-size: 0px;
-}
-.weaponContent2,
-.weaponContent6 > label {
-    display: flex;
-}
-.weaponContent2 > div,
-.weaponContent2 > label {
-    display: flex;
-    width: 50%;
-    align-items: center;
-}
-.weaponContent2 > div > label {
-    width: 100%;
-}
-.weaponContent2 > div > label > span {
-    display: grid;
-    width: 33%;
-}
-.abfalter.item .sheet-body .details .weaponContent2 .csSelect > label > select {
-    width: 55%;
-}
-.weaponContent2 > label > span {
-    display: grid;
-    justify-content: center;
-    width: 28%;
-    margin: 0 2% 0 0;
-}
-.weaponContent2 > label > input {
-    width: 70%;
-}
-.weaponContent4 > label > span {
-    display: grid;
-    width: 29%;
-}
-.weaponContent4 > label > input {
-    margin: 0 0 0 18%;
-    width: 17%;
-}
-.weaponContent4 > label > select {
-    width: 35%;
-    margin: 0 0 0 1%;
-}
-.weaponContent5 > label > span:first-of-type {
-    width: 36%;
-}
-.weaponContent5 > label > button {
-    margin: 0 2%;
-    width: 25%;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-    font-size: 0px;
-}
-.weaponContent5 > label > span:nth-of-type(2) {
-    width: 1%;
-    text-align: center;
-}
-.weaponContent5 > label > span:nth-of-type(3) {
-    width: 17%;
-    text-align: center;
-}
-.weaponContent5 > label > select {
-    width: 35%;
-}
-.weaponContent7 {
-    display: flex;
-    padding: 2px 0;
-}
-.weaponContent7 > label {
-    width: 36%;
-}
-.weaponContent7 > button {
-    margin: 0 2%;
-    width: 25%;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-    font-size: 0px;
-}
-.weaponContent7 > span:nth-of-type(1) {
-    width: 1%;
-    text-align: center;
-}
-.weaponContent7 > span:nth-of-type(2) {
-    width: 17%;
-    text-align: center;
-}
-.weaponContent7 > input {
-    width: 17%;
-}
-.weaponContent8 {
-    display: flex;
-    padding: 2px 0;
-}
-.weaponContent8 > span {
-    width: 27%;
-    display: grid;
-}
-.weaponContent8 > button {
-    margin: 0 2%;
-    width: 20%;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-    font-size: 0px;
-}
-.weaponContent8 > button:first-of-type {
-    width: 10%;
-}
-.weaponContent8 > label {
-    display: flex;
-    width: 35%;
-}
-.weaponContent8-label1 > input {
-    width: 49%;
-}
-.weaponContent8-label1 > span {
-    display: grid;
-    text-align: center;
-    width: 1%;
-}
-.weaponContent8-label1 > span:nth-of-type(2) {
-    width: 49%;
-    padding-left: 5px;
-}
-.weaponContent8-label2 {
-    justify-content: end;
-}
-.weaponContent8-label2 > span {
-    display: grid;
-    text-align: center;
-    width: 49%;
-}
-.weaponContent6 > label > span {
-    display: grid;
-    width: 65%
-}
-.weaponContent6 > label > div {
-    width: 17%
-}
-.weaponContent6 > label > div > select {
-    width: 100%
-}
-.weaponContent6 > label > span:nth-of-type(2) {
-    width: 1%
-}
+
 .weapon-item .editor {
     height: auto;
 }
@@ -4763,176 +5215,9 @@ h6 {
     display: flex;
     justify-content: space-between;
 }
-.atkCustomTitleContainer {
-  position: relative;
-}
-.atkCustomTitle {
-  visibility: hidden;
-  opacity: 0;
-  background-color: #333;
-  color: #fff; 
-  text-align: center;
-  border-radius: 4px;
-  padding: 5px;
-  position: absolute;
-  top: -100%;
-  z-index: 10;
-  left: 50%;
-  width: 200px;
-  transform: translateX(-50%);
-  transition: opacity 0.2s ease-in-out;
-  font-size: 14px;
-  pointer-events: none;
-}
-.atkCustomTitleContainer:hover .atkCustomTitle {
-  visibility: visible;
-  overflow: visible;
-  opacity: 1;
-}
+
 /* #endregion */
 
-/* #region Ammo */
-.ammo > div:first-of-type {
-    border-bottom: 1px solid var(--boxColor);
-    padding: 0 3px;
-}
-.ammo > div:last-of-type {
-    place-content: space-between;
-    border-top: 1px solid var(--boxColor);
-}
-.ammo > div:first-of-type {
-    padding: 0 3px;
-}
-.ammo > div:first-of-type > div:first-of-type {
-    width: 5%;
-    margin-right: 5px;
-}
-.ammo > div:first-of-type > div:last-of-type {
-    display: flex;
-    width: 100%;
-}
-.ammo > div:first-of-type > div > span:first-of-type{
-    width: 55%;
-}
-.ammo > div:first-of-type > div > span:nth-of-type(2) {
-    width: 10%;
-}
-.ammo > div:first-of-type > div > span {
-    width: 15%;
-    text-align: center;
-}
-.ammoContainerInfo,
-.ammoContainerInfo > div,
-.ammoContainerInfo > div > div {
-    display: flex;
-}
-.ammo-item {
-    padding: 3px;
-    width: 100%;
-}
-.ammo-item-img {
-    border: 1px solid #000000;
-    min-width: 5%;
-    width: 5%;
-    height: 5%; 
-    object-fit: cover; 
-    margin-right: 5px; 
-}
-.ammoContainerInfo > div {
-    width: 100%;
-    align-items: center;
-    container-type: inline-size;
-}
-.ammoContainerInfo > div > span:first-of-type {
-    width: 55%;
-    font-size: 18px;
-    white-space: nowrap;
-    overflow: hidden;
-    display: block;
-    text-overflow: ellipsis;
-    height: 21px;
-}
-.ammoContainerInfo > div > div:first-of-type {
-    width: 10%;
-    justify-content: center;
-    padding: 0;
-}
-.ammoContainerInfo > div > div  {
-    width: 15%;
-    justify-content: space-between;
-    padding: 0 10px;
-}
-.ammoContainerInfo > div > span:last-of-type {
-    width: 15%;
-    text-align: center;
-}
-.ammoContainerInfo > div > a {
-    width: 5%;
-}
-/* #endregion*/
-
-/* #region Inventory */
-.inventory-item {
-    padding: 0 2.5%;
-}
-.inventory-item:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-.inventory > div:first-of-type {
-    border-bottom: 1px solid var(--boxColor);
-    padding-bottom: 3px;
-}
-.inventory > div:first-of-type,
-.inventory-item > div:first-of-type {
-    display: flex;
-    justify-content: flex-start;
-}
-.inventory-item > div > a {
-    font-size: 15px;
-    width: 5%;
-}
-.inventory > div:first-of-type > span,
-.inventory-item > div:first-of-type > span {
-    text-align: center;
-}
-.inventory > div:first-of-type > span:nth-of-type(1) {
-    width: 8.55%;
-    margin: 0 0 0 7.25%
-}
-.inventory > div:last-of-type {
-    display: flex;
-    place-content: space-between;
-    border-top: 1px solid var(--boxColor);
-}
-.inventory-item > div:first-of-type > span:first-of-type,
-.inventory-item > div:first-of-type > input:first-of-type {
-    width: 9%;
-}
-.inventory > div:first-of-type > span:nth-of-type(2) {
-    width: 60.8%;
-    margin: 0 0 0 0.95%
-}
-.inventory-item > div:first-of-type > span:nth-of-type(2),
-.inventory-item > div:first-of-type > input:nth-of-type(2) {
-    width: 64%;
-    margin: 0 0 0 1%
-}
-.inventory > div:first-of-type > span:nth-of-type(3) {
-    width: 14.25%;
-    margin: 0 0 0 0.95%
-}
-.inventory-item > div:first-of-type > span:nth-of-type(3),
-.inventory-item > div:first-of-type > input:nth-of-type(3) {
-    width: 15%;
-    margin: 0 0 0 1%
-}
-.inventory-item > div > a {
-    opacity: 0;
-}
-.inventory-item > div:hover > a {
-    opacity: 1;
-}
-/* #endregion */
 
 /*
     ***************
@@ -4941,40 +5226,58 @@ h6 {
     ---------------
     ***************
 */
-/* #region Bio & Info */
+/* #region Bio & Info @v2 */
 .bio {
-    margin: 15px 0 0 0;
+    margin: 5px 3px 0 0;
 }
-.bioPictures {
+.bio .bioPictures {
     display: flex;
     min-width: 878px;
     width: 100%;
     justify-content: space-between;
 }
-.bioPictures > div:first-of-type{
-    width: 30%;
-    height: 30%;
+.bio .bioPictures > div:first-of-type{
+    width: 25%;
+    height: 25%;
 }
-.bioPictures > div:last-of-type {
-    max-width: 68%;
+.bio .bioPictures > div:last-of-type {
+    max-width: 60%;
 }
-.bioPictures > div:last-of-type > img {
+.bio .bioPictures > div:last-of-type > img {
     max-height: 500px;
 }
-.bioPictures > div:first-of-type > img {
+.bio .bioPictures > div:first-of-type > img {
     border: none;
 }
-.bioInfo .editor {
-    min-height: 350px;
+.bio .bioInformation {
+    padding: 10px 0 0 0;
 }
-.bioInfo span {
-    height: inherit;
-    display: contents;
-    font-size: inherit;
-    color: inherit;
+.bio .bioInformation > div {
+    padding: 0 0 5px 0;
+    margin: 0 0 0 5px;
+
 }
-.editor-menu > li > button{
-    padding: 0 0.5rem;
+.bio .bioInformation > div > label {
+    display: inline-flex;
+    width: 20%;
+    padding: 0 15px 0 0;
+}
+.bio .bioInformation > div > label > span {
+    padding: 0 7px 0 0;
+}
+.baseAbfalterV2 .bio .bioInformation > div > label > input {
+    border-bottom: 1px solid var(--boxColor);
+    background: transparent;
+    text-align: left;
+}
+.baseAbfalterV2 .bio .bioInformation > div > label > input:placeholder-shown {
+    border: 1px solid var(--errorColor);
+}
+.bio .abfEditorFormat {
+    padding: 7px 0 0 0;
+}
+.bio .abfEditorFormat .editor {
+    min-height: 700px;
 }
 /* #endregion */
 
@@ -4985,66 +5288,54 @@ h6 {
     -------------
     *************
 */
-/* #region Containers*/
-.settingsPage button {
+/* #region @Page-Settings @v2 */
+.settingsOptions {
+    width: 35%;
+}
+.settingsOptions .settingsSubsection > label {
+    display: flex;
+    padding: 0 10px;
+}
+.settingsOptions .settingsSubsection > label > button {
+    width: 30%;
+    border-radius: 0px;
+    align-self: center;
     font-size: 0px;
 }
-.settingsPage .fieldsetContainer{
-    flex-direction: row;
+.settingsOptions .settingsSubsection > label > span {
+    width: 70%;
+    text-align: start;
 }
-.settingsPage .fieldsetContainer .fieldSetRow {
-    display: block;
+.settingsSubsectionIndent {
+    padding: 0 0 0 15px;
 }
-.settingsOptions {
-    width: 35%
+.innatePowerSetting > div {
+    width: 30%;
 }
+/* #endregion */
+
+/* #region Containers @v2*/
 .settings2 {
     width: 63%;
 }
 .settings2 >  div:first-of-type {
     display: flex;
+    gap: 1rem;
 }
 .settings2 >  div:first-of-type > div:first-of-type {
     width: 43%;
 }
 .charOptions {
     width: 53%;
-    margin: 0 0 0 4%;
 }
 /* #endregion */
 
-/* #region @Page-Settings */
-.settingsSubsection > div {
-    display: flex;
-}
-.settingsSubsection > div > button {
-    width: 30%;
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: 0px;
-}
-.settingsSubsection > div > span {
-    width: 70%;
-    text-align: start;
-    padding: 0 0 0 5px;
-}
-.settingsSubsectionIndent {
-    padding: 0 0 0 15px !important;
-}
-.innatePowerSetting > div {
-    width: 30%;
-}
-.innatePowerSetting > div > label > select {
-    width: 100%;
-}
-/* #endregion */
-
-/* #region @RollRange */
+/* #region @RollRange @v2 */
 .rollRange > div {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding: 0 10px;
 }
 .rollRange > div:last-of-type {
     border-top: 1px solid var(--boxColor);
@@ -5055,25 +5346,24 @@ h6 {
     justify-content: space-between;
 }
 .rollRange > div > label > span {
-    display: flex;
     width: 60%;
+    padding: 1px 0 0 0;
 }
-.rollRange > div > label > input[type="number"] {
+.rollRange > div > label > input {
     width: 40%;
 }
 .rollRange > div > label > select {
     width: 40%;
 }
 .rollRange > div > label > button {
-    height: 20px;
+    font-size: 0px;
     border-radius: 0px;
-    border: none;
     width: 40%;
 }
 /* #endregion */
 
-/* #region @Character-Options */
-.charOptions > div > label {
+/* #region @Character-Options @v2 */
+.baseAbfalterV2 .charOptions > div > label {
     display: flex;
     padding: 0 10px;
 }
@@ -5082,31 +5372,6 @@ h6 {
 }
 .charOptions > div > label > input {
     width: 40%;
-}
-.charOptions > div > div {
-    display: flex;
-}
-.charOptions > div > div:first-of-type {
-    border-top: 1px dashed var(--boxColor);
-    margin: 3px 0 0 0;
-    padding: 3px 0 0 0;
-}
-.charOptions > div > div:nth-of-type(8) {
-    border-top: 1px dashed var(--boxColor);
-    margin: 3px 0 0 0;
-    padding: 3px 0 0 0;
-}
-.charOptions > div > div > button {
-    width: 30%;
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: 0px;
-}
-.charOptions > div > div > span {
-    width: 70%;
-    text-align: start;
-    padding: 0 0 0 5px;
 }
 .charOptions .lvlModLabel > input {
     width: 19.5%;
@@ -5124,14 +5389,79 @@ h6 {
 .charOptions .dpOffSetsLabel > button {
     width: 27%;
     margin: 0 3% 0 0;
-    border: none;
+    font-size: 0px;
 }
 .charOptions .dpOffSetsLabel > input {
     width: 40%;
 }
+.charOptions > div > label:nth-of-type(4) {
+    border-top: 1px dashed var(--boxColor);
+    margin: 3px 0 0 0;
+    padding: 3px 10px 0 10px;
+}
+.charOptions > div > label:nth-of-type(11) {
+    border-top: 1px dashed var(--boxColor);
+    margin: 3px 0 0 0;
+    padding: 3px 10px 0 10px;
+}
+.charOptions > div > label:not(:nth-of-type(3)) > button {
+    width: 40%;
+    border-radius: 0px;
+    font-size: 0px;
+}
+.charOptions .shieldValuesLabel > input {
+    width: 19%;
+}
+.charOptions .shieldValuesLabel > span:nth-of-type(2) {
+    width: 2%;
+}
+.charOptions .shieldValuesLabel > span:nth-of-type(3) {
+    width: 19%;
+    text-align: center;
+}
 /* #endregion */
 
-/* #region @Innate-Bonuses*/
+/* #region @Extended-Settings @v2 */
+.extendedSettingsContainer {
+    display: flex;
+}
+.baseAbfalterV2 .extendedSettings {
+    width: 50%;
+}
+.baseAbfalterV2 .extendedSettings > label {
+    display: flex;
+    padding: 0 10px;
+}
+.extendedSettings > label > span {
+    width: 60%
+}
+.extendedSettings .setDoubleInput > input {
+    width: 19%;
+    align-self: center;
+}
+.extendedSettings .setDoubleInput > span:nth-of-type(2) {
+    width: 2%;
+    align-self: center;
+}
+.extendedSettings .setDoubleInput > span:nth-of-type(3) {
+    width: 19%;
+    text-align: center;
+    align-self: center;
+}
+.extendedSettings .setSingleInput > input {
+    width: 40%;
+    align-self: center;
+}
+.extendedSettings .setSingleInput > button {
+    width: 40%;
+    font-size: 0px;
+    align-self: center;
+}
+/* #endregion */
+
+
+
+/* #region @Innate-Bonuses MAYBE TODO*/
 .class-item {
     padding: 0 2.5%;
 }
@@ -5391,23 +5721,6 @@ h6 {
 }
 /* #endregion */
 
-/* #region @Homebrew-Stuffs */
-.homebrew > label {
-    display: flex;
-    padding: 0 10px 0 10px;
-    width: 49%;
-}
-.homebrew > label > span {
-    width: 60%
-}
-.homebrew > label > button {
-    width: 30%;
-    margin: 0px;
-    height: 20px;
-    border-radius: 0px;
-    border: 0px;
-}
-/* #endregion */
 
 /*
     **************
@@ -5500,6 +5813,265 @@ h6 {
     -----------
     ***********
 */
+/* #region Item-Global-Styles effects-list @V2 */
+.itemPageV2 {
+    min-width: 500px;
+    max-height: 850px;
+    padding: 0 3px 0 0;
+}
+.itemPageV2 > fieldset:not(:first-of-type) {
+    margin: 1rem 0 0 0;
+}
+.itemPageV2 > fieldset > legend {
+    text-align: left;
+    margin: 0 0 0 30px;
+    padding: 0 0.5rem;
+    color: var(--boxColor);
+    font-size: 1.5rem;
+}
+.itemPageV2 > fieldset > *:not(legend):last-child {
+    margin: 0 0 5px 0;
+}
+.itemPageV2 > fieldset > .csSelect::after {
+    right: 15px;
+    top: 0px;
+}
+.itemPageV2 fieldset {
+    border: 2px solid var(--boxColor);
+    padding: 0;
+    border-radius: 12px;
+}
+.itemSimpleLabel {
+    display: flex;
+    padding: 2px 10px 2px 10px !important;
+}
+.itemSimpleLabel > label {
+    display: flex;
+    width: 100%;
+}
+.itemSimpleLabel > label > span,
+.itemSimpleLabel > span {
+    width: 65%;
+    height: auto;
+}
+.itemSimpleLabel > label > select,
+.itemSimpleLabel > label > button,
+.itemSimpleLabel > button,
+.itemSimpleLabel > input {
+    width: 35%;
+}
+.itemSimpleLabel > label > button,
+.itemSimpleLabel > button {
+    font-size: 0px;
+    border: none;
+    align-self: center;
+}
+.itemLabelSpan {
+    display: flex;
+    padding: 4px 10px 2px 10px !important;
+}
+.itemSimpleSelectLabel {
+    display: flex;
+    padding: 2px 10px 2px 10px !important;
+}
+.itemSimpleSelectLabel > label {
+    display: flex;
+    width: 100%;
+}
+.itemSimpleSelectLabel > span {
+    width: 38%;
+}
+.baseAbfalterV2 .itemSimpleSelectLabel > button {
+    width: 25%;
+    margin: 0 2% 0 0;
+    font-size: 0px;
+    border: none;
+    align-self: center;
+}
+.baseAbfalterV2 .itemSimpleSelectLabel > div {
+    width: 25%;
+    margin: 0 2% 0 0;
+}
+.itemSimpleSelectLabel > select,
+.itemSimpleSelectLabel > input {
+    width: 35%;
+}
+.itemDoubleInputLabel {
+    display: flex;
+    padding: 2px 10px 2px 10px !important;
+}
+.itemDoubleInputLabel > span {
+    width: 65%;
+}
+.itemDoubleInputLabel > input {
+    width: 17%;
+}
+.itemDoubleInputLabel > span:nth-of-type(2) {
+    width: 1%;
+}
+.itemDoubleInputLabel > span:nth-of-type(3),
+.itemDoubleInputLabel > input:nth-of-type(2) {
+    width: 17%;
+    text-align: center;
+}
+.itemDoubleInputLabel > button {
+    font-size: 0px;
+    border: none;
+    align-self: center;
+}
+.itemDoubleInputButtonLabel {
+    display: flex;
+    padding: 2px 10px 2px 10px !important;
+}
+.itemDoubleInputButtonLabel > label {
+    display: flex;
+    width: 100%;
+}
+.itemDoubleInputButtonLabel > span {
+    width: 38%;
+}
+.baseAbfalterV2 .itemDoubleInputButtonLabel > button {
+    width: 25%;
+    margin: 0 2% 0 0;
+}
+.itemDoubleInputButtonLabel > input {
+    width: 17%;
+}
+.itemDoubleInputButtonLabel > span:nth-of-type(2) {
+    width: 1%;
+}
+.itemDoubleInputButtonLabel > span:nth-of-type(3),
+.itemDoubleInputButtonLabel > input:nth-of-type(2) {
+    width: 17%;
+    text-align: center;
+}
+.itemDoubleInputButtonLabel > button {
+    font-size: 0px;
+    border: none;
+    align-self: center;
+}
+.itemDoubleInputSelectLabel {
+    display: flex;
+    padding: 2px 10px 2px 10px !important;
+}
+.itemDoubleInputSelectLabel > label {
+    display: flex;
+    width: 100%;
+}
+.itemDoubleInputSelectLabel > span {
+    width: 38%;
+}
+.baseAbfalterV2 .itemDoubleInputSelectLabel > div {
+    width: 25%;
+    margin: 0 2% 0 0;
+}
+.itemDoubleInputSelectLabel > input {
+    width: 17%;
+}
+.itemDoubleInputSelectLabel > span:nth-of-type(2) {
+    width: 1%;
+}
+.itemDoubleInputSelectLabel > span:nth-of-type(3),
+.itemDoubleInputSelectLabel > input:nth-of-type(2) {
+    width: 17%;
+    text-align: center;
+}
+.itemDoubleInputSelectLabel > button {
+    font-size: 0px;
+    border: none;
+    align-self: center;
+}
+/* General Details @Weight & @Money */
+.itemContentSelectInput {
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+}
+.itemContentSelectInput > label {
+    width: 36%;
+}
+.weightContainer > label {
+    width: 46%;
+}
+.itemContentSelectInput > label > span {
+    display: grid;
+}
+.itemContentSelectInput > div {
+    margin: 0 2%;
+    width: 25%;
+}
+.itemContentSelectInput .weightType {
+    margin: 0 2%;
+    width: 15%;
+}
+.itemContentSelectInput > div > label > select {
+    width: 100% !important;
+}
+.itemContentSelectInput > span:nth-of-type(1) {
+    width: 1%;
+    text-align: center;
+    display: grid;
+}
+.itemContentSelectInput > span:nth-of-type(2) {
+    width: 17%;
+    text-align: center;
+    display: grid;
+}
+.itemContentSelectInput > input {
+    width: 17%;
+}
+/* Property Container */
+.itemPropertyContainer {
+    display: flex;
+    padding: 2px 10px 2px 10px !important;
+    flex-direction: column;
+}
+.itemPropertyContainer > div  {
+    display: flex;
+    flex-flow: wrap;
+}
+.itemPropertyContainer > div > label {
+    display: flex;
+    width: 33.3%;
+
+}
+.itemPropertyContainer > div > label > input::before {
+    color: var(--color-checkbox-bg);
+}
+.itemPropertyContainer > div > label > input::after {
+    color: var(--boxColor);
+}
+.itemPropertyContainer > div > label > span {
+    align-self: center;
+    font-size: var(--font-size-13);
+}
+/* #endregion */
+
+
+
+
+/* #region Item-Global-Styles effects-list */
+.itemPage {
+    min-width: 500px;
+    max-height: 850px;
+    padding: 0 3px 0 0;
+}
+.itemPage > fieldset:not(:first-of-type) {
+    margin: 1rem 0 0 0;
+}
+.itemPage > fieldset > legend {
+    text-align: left;
+    margin: 0 0 0 30px;
+}
+.itemPage > fieldset > *:not(legend):last-child {
+    margin: 0 0 5px 0;
+}
+.itemPage > fieldset > .csSelect::after {
+    right: 15px;
+    top: 0px;
+}
+/* #endregion */
+
 /* #region Item-Header */
 .abfalter.item .sheet-header {
     flex: 0 0 100px;
@@ -5678,95 +6250,6 @@ h6 {
 }
 /* #endregion */
 
-/* #region Item-Global-Styles effects-list*/
-.itemPage {
-    min-width: 500px;
-    max-height: 850px;
-    padding: 0 3px 0 0;
-}
-.itemPage > fieldset:not(:first-of-type) {
-    margin: 1rem 0 0 0;
-}
-.itemPage > fieldset > legend {
-    text-align: left;
-    margin: 0 0 0 30px;
-}
-.itemPage > fieldset > *:not(legend):last-child {
-    margin: 0 0 5px 0;
-}
-.itemPage > fieldset > .csSelect::after {
-    right: 15px;
-    top: 0px;
-}
-.itemSimpleLabel {
-    display: flex;
-    padding: 2px 10px 2px 10px !important;
-}
-.itemSimpleLabel > label {
-    display: flex;
-    width: 100%;
-}
-.itemSimpleLabel > label > span,
-.itemSimpleLabel > span {
-    width: 65%;
-    height: auto;
-}
-.itemSimpleLabel > label > select,
-.itemSimpleLabel > label > button,
-.itemSimpleLabel > button,
-.itemSimpleLabel > input {
-    width: 35%;
-}
-.itemSimpleLabel > label > button,
-.itemSimpleLabel > button {
-    font-size: 0px;
-    border: none;
-    align-self: center;
-}
-
-
-/* Flavor Details @Weight & @Money */
-.itemContentSelectInput {
-    display: flex;
-    align-items: center;
-    padding: 2px 10px;
-}
-.itemContentSelectInput > label {
-    width: 36%;
-}
-.weightContainer > label {
-    width: 46%;
-}
-.itemContentSelectInput > label > span {
-    display: grid;
-}
-.itemContentSelectInput > div {
-    margin: 0 2%;
-    width: 25%;
-}
-.itemContentSelectInput .weightType {
-    margin: 0 2%;
-    width: 15%;
-}
-.itemContentSelectInput > div > label > select {
-    width: 100% !important;
-}
-.itemContentSelectInput > span:nth-of-type(1) {
-    width: 1%;
-    text-align: center;
-    display: grid;
-}
-.itemContentSelectInput > span:nth-of-type(2) {
-    width: 17%;
-    text-align: center;
-    display: grid;
-}
-.itemContentSelectInput > input {
-    width: 17%;
-}
-/* #endregion */
-
-
 
 /*
     ***************
@@ -5775,6 +6258,84 @@ h6 {
     ---------------
     ***************
 */
+
+/* #region @Shared-Item @Chat */
+.itemChat .chatActorHeader {
+    display: flex;
+    padding: 0 0 7px 0;
+}
+.itemChat .chatActorHeader > img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    min-width: 40px;
+    min-height: 40px;
+    align-self: center;
+}
+.itemChat .chatActorHeader > span {
+    font-size: var(--font-size-18);
+    align-self: center;
+    padding: 0 0 0 3px;
+}
+.itemChat .chatItemContent {
+    border: 1px solid #3f3f3f;
+    border-radius: 5px;
+    padding: 7px;
+}
+.itemChat .chatItemContent .chatItemHeader {
+    display: flex;
+    padding: 0 0 5px 0;
+}
+
+.itemChat .chatItemContent .chatItemHeader > img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    min-width: 32px;
+    min-height: 32px;
+    align-self: center;
+    border: 1px solid black;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 7px;
+}
+.itemChat .chatItemContent .chatItemHeader > div {
+    display: flex;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    padding: 0 0 0 5px;
+}
+.itemChat .chatItemContent .chatItemHeader > div > span {
+    font-size: var(--font-size-11);
+}
+.itemChat .chatItemContent .chatItemHeader > div > span:first-of-type {
+    font-size: var(--font-size-15);
+    color: black;
+    font-weight: 600;
+}
+.itemChat .chatItemContent .chatItemHeader > a {
+    width: 10%;
+    align-self: center;
+    text-align: center;
+}
+.itemChat .Itemdescription {
+    display: none;
+}
+.itemChat .Itemdescription.ItemDescOpen {
+    display: block;
+}
+.itemChat a.descToggle.ItemDescOpen i {
+    transform: rotate(90deg);
+}
+
+/* #endregion */
+
+/* #region @Loot-Item @Chat */
+
+
+
+/* #endregion */
+
+
 /* #region Shared Chat Formats */
 .oneModDialog .dialog-form {
     gap: .7rem;
@@ -6102,75 +6663,24 @@ h6 {
     color: var(--textColor);
     background-color: var(--buttonBg);
 }
-
 .restOptionsContainer > label {
     display: flex;
 }
+/** Combat **/
+.combat,
+.mystic {
+    display:flex;
+}
+.compendium-footer > span {
+    display: initial;
+}
+.page-title, .page-number, chat-message {
+    height: inherit;
+}
+.editor-content > img {
+    border: none;
+}
 
-/*
-    ***************
-    ---------------
-      Changelog
-    ---------------
-    ***************
-*/
-/* #region Changelog */
-.changelog {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    max-height: 1000px;
-}
-.changelogHeader {
-    flex-shrink: 0;
-    padding: 10px;
-}
-.changelogBody {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: 10px;
-}
-.changelogHeader > div {
-    display: flex;
-    justify-content: flex-end;
-}
-.changelogHeader > div > span {
-    font-size: 14px;
-    color: var(--boxColor);
-}
-.changelogHeader > h5 {
-    justify-content: start;
-    font-size: 35px;
-    border-bottom: 1px solid var(--boxColor);
-}
-.changelogSection {
-    padding: 15px 0 0 0;
-}
-.changelogSection > h6 {
-    justify-content: start;
-    font-size: 25px;
-}
-.changelogSection > span {
-    display: flex;
-    padding: 7px 0;
-}
-.changelogList > h5 {
-    justify-content: start;
-    font-size: 17px;
-}
-.changelogButtons {
-    display: flex;
-    justify-content: space-evenly;
-}
-.changelogButtons > button {
-    width: 45%;
-    padding: 0px;
-    margin: 0px;
-    border-radius: 0px;
-    border: 0px;
-    border: 1px solid var(--boxColor);
-}
-/* #endregion */
 
 
 
@@ -6737,19 +7247,67 @@ h6 {
 }
 /* #endregion */
 
-
-
-/** Combat **/
-.combat,
-.mystic {
-    display:flex;
+/*
+    ***************
+    ---------------
+      Changelog
+    ---------------
+    ***************
+*/
+/* #region Changelog */
+.changelog {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 1000px;
 }
-.compendium-footer > span {
-    display: initial;
+.changelogHeader {
+    flex-shrink: 0;
+    padding: 10px;
 }
-.page-title, .page-number, chat-message {
-    height: inherit;
+.changelogBody {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
 }
-.editor-content > img {
-    border: none;
+.changelogHeader > div {
+    display: flex;
+    justify-content: flex-end;
 }
+.changelogHeader > div > span {
+    font-size: 14px;
+    color: var(--boxColor);
+}
+.changelogHeader > h5 {
+    justify-content: start;
+    font-size: 35px;
+    border-bottom: 1px solid var(--boxColor);
+}
+.changelogSection {
+    padding: 15px 0 0 0;
+}
+.changelogSection > h6 {
+    justify-content: start;
+    font-size: 25px;
+}
+.changelogSection > span {
+    display: flex;
+    padding: 7px 0;
+}
+.changelogList > h5 {
+    justify-content: start;
+    font-size: 17px;
+}
+.changelogButtons {
+    display: flex;
+    justify-content: space-evenly;
+}
+.changelogButtons > button {
+    width: 45%;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+    border: 1px solid var(--boxColor);
+}
+/* #endregion */

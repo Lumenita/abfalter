@@ -12,6 +12,8 @@ export function addChatListeners(chatMessage, html) {
     bindButton("button.psychicDifficulty", psychicChatUpdate);
     bindButton("button.wepOpenRoll", diceFunctions.profileOpenRollFunction);
     bindButton("button.wepFumbleRoll", diceFunctions.profileFumbleRollFunction);
+
+    bindButton("a.descToggle", toggleValue);
 }
 
 //export const hideChatActionButtons = function (message, html, data) {
@@ -28,6 +30,21 @@ export const hideChatActionButtons = function (chatMessage, html) {
             });
         }
     }
+}
+
+async function toggleValue(msg, ev) {
+    ev.preventDefault();
+
+    const card = ev.currentTarget.closest(".chat-message");
+    if (!card) return;
+
+    const desc = card.querySelector(".Itemdescription");
+    if (!desc) return;
+
+    desc.classList.toggle("ItemDescOpen");
+
+    // optional: rotate arrow
+    ev.currentTarget.classList.toggle("ItemDescOpen");
 }
 
 async function spellChatUpdate(msg, ev) {

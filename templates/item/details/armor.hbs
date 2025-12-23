@@ -1,7 +1,30 @@
-<section class="baseAbfalter itemPage tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+<section class="baseAbfalterV2 itemPageV2 tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+    {{> (concat "systems/abfalter/templates/item/partials/generalDetails.hbs")}}
+
     <fieldset>
-        <legend> {{ localize "abfalter.generalDetails" }} </legend>
-        <div class="csSelect itemSimpleLabel"> 
+        <legend> {{ localize "abfalter.equipmentDetails" }} </legend>
+        <div class="csSelect itemSimpleLabel abfDivFormat">
+            <label>
+                <span> {{localize "abfalter.equipmentType"}} </span>
+                <select name="system.type">
+                    {{selectOptions equipmentTypeList selected=system.type localize=true}}
+                </select>
+            </label>
+        </div>
+        <div class="itemPropertyContainer abfDivFormat">
+            <span> {{localize "abfalter.equipmentProperties"}} </span>
+            <div>
+            {{#each system.properties as |prop key|}}
+                <label class="prop">
+                    <input type="checkbox" name="system.properties.{{key}}.bool" {{checked prop.bool}} />
+                    <span>{{localize (concat "abfalter." prop.label)}}</span>
+                </label>
+            {{/each}}
+            </div>
+        </div>
+
+        {{#ifEquals system.type "armor"}}
+        <div class="csSelect itemSimpleLabel abfDivFormat"> 
             <label>
                 <span> {{localize "abfalter.layerType"}} </span>
                 <select name="system.layerType">
@@ -9,8 +32,11 @@
                 </select>
             </label>
         </div>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.quality"}} </span> <input type="number" name="system.quality" value="{{system.quality}}" /> </label>
-        <div class="armorContent">
+        {{/ifEquals}}
+        <div class="abfDivFormat">
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.quality"}} </span> <input type="number" name="system.quality" value="{{system.quality}}" /> </label>
+        </div>
+        <div class="armorContent abfDivFormat">
             <label>
                 <span> {{localize "abfalter.presence"}} </span>
                 <input type="number" name="system.presence" value="{{system.presence}}" />
@@ -18,7 +44,7 @@
                 <span> {{system.derived.presence}} </span>
             </label>
         </div>
-        <div class="armorContent">
+        <div class="armorContent abfDivFormat">
             <label>
                 <span> {{localize "abfalter.fortitude"}} </span>
                 <input type="number" name="system.fortitude" value="{{system.fortitude}}" />
@@ -26,7 +52,8 @@
                 <span> {{system.derived.fortitude}} </span>
             </label>
         </div>
-        <div class="armorContent">
+        {{#ifIn system.type "armor helmet"}}
+        <div class="armorContent abfDivFormat">
             <label>
                 <span> {{localize "abfalter.requir"}} </span>
                 <input type="number" name="system.requirement" value="{{system.requirement}}" />
@@ -34,9 +61,9 @@
                 <span> {{system.derived.requirement}} </span>
             </label>
         </div>
-        <div class="armorContent">
+        <div class="armorContent abfDivFormat">
             <label>
-                {{#ifEquals system.armorType "armor"}}
+                {{#ifEquals system.type "armor"}}
                 <span> {{localize "abfalter.natPen"}} </span>
                 {{else}}
                 <span> {{localize "abfalter.perPen"}} </span>
@@ -46,8 +73,9 @@
                 <span> {{system.derived.natPenalty}} </span>
             </label>
         </div>
-        {{#ifEquals system.armorType "armor"}}
-        <div class="armorContent">
+        {{/ifIn}}
+        {{#ifEquals system.type "armor"}}
+        <div class="armorContent abfDivFormat">
             <label>
                 <span> {{localize "abfalter.movePen"}} </span>
                 <input type="number" name="system.movePenalty" value="{{system.movePenalty}}" />
@@ -55,7 +83,7 @@
                 <span> {{system.derived.movePenalty}} </span>
             </label>
         </div>
-        <div class="itemSimpleLabel">
+        <div class="itemSimpleLabel abfDivFormat">
             <label>
                 {{#if system.ignorePenalty}}
                 <span> {{localize "abfalter.ignorePenalty"}} </span>
@@ -73,8 +101,8 @@
             </label>
         </div>
         {{/ifEquals}}
-
-        <div class="itemSimpleLabel">
+        {{#ifIn system.type "armor helmet"}}
+        <div class="itemSimpleLabel abfDivFormat">
             <label>
                 {{#if system.ignoreLayerRules}}
                 <span> {{localize "abfalter.ignoreLayerRules"}} </span>
@@ -91,12 +119,15 @@
                 </button>
             </label>
         </div>
+        {{/ifIn}}
+
     </fieldset>
 
+    {{#ifIn system.type "armor helmet"}}
     <fieldset>
         <legend> {{localize "abfalter.armorValues"}} </legend>
         <div class="armorCard">
-            <div>
+            <div class="abfDivFormat">
                 <span> {{localize "abfalter.type"}} </span>
                 <span> {{localize "abfalter.cut"}} </span>
                 <span> {{localize "abfalter.imp"}} </span>
@@ -110,7 +141,7 @@
                 {{/if}}
             </div>
 
-            <div>
+            <div class="abfDivFormat">
                 <span> {{localize "abfalter.base"}} </span>
                 <input type="number" name="system.AT.cut" value="{{system.AT.cut}}" />
                 <input type="number" name="system.AT.imp" value="{{system.AT.imp}}" />
@@ -124,7 +155,7 @@
                 {{/if}}
             </div>
 
-            <div>
+            <div class="abfDivFormat">
                 <span> {{localize "abfalter.final"}} </span>
                 <span> {{system.derived.cut}} </span>
                 <span> {{system.derived.imp}} </span>
@@ -139,4 +170,6 @@
             </div>
         </div>
     </fieldset>
+    {{/ifIn}}
+
 </section>

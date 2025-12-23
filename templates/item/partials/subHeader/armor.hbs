@@ -12,11 +12,7 @@
     </span>
 </div>
 <ul class="summary flexrow">
-    <li>
-        <select name="system.armorType">
-            {{selectOptions armorTypeList selected=system.armorType localize=true}}
-        </select>
-    </li>
+    <li>{{localize "abfalter.type"}}: {{localize (concat "abfalter." system.type)}}</li>
     <li>{{localize "abfalter.quality"}}: {{system.quality}}</li>
     <li>{{localize "abfalter.fortitude"}}: {{system.derived.fortitude}}</li>
 </ul>

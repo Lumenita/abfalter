@@ -1,0 +1,34 @@
+<section>
+    <div>
+        This is the Class Manager interface.
+    </div>
+
+    {{log this}}
+
+    {{#each classs as |class|}}
+    <div class="classManager-item item normal-item draggable" data-item-id={{id}}
+    data-can-edit="true" data-can-delete="true" data-can-equip="false" data-can-toggle="false">
+        <div>
+            <span> {{system.main.levels}}</span>
+            <span> {{class.name}} </span>
+            <button data-action="cmClassManage">
+                <span>
+                    Level up
+                </span>
+            </button>
+            <button data-action="cmClassManage">
+                <span>
+                    View Details
+                </span>
+            </button>
+            <button data-action="cmClassManage" data-label="delete" data-item-id={{id}}>
+                <span>
+                    Delete
+                </span>
+            </button>
+        </div>
+    </div>
+    {{/each}}
+
+
+</section>

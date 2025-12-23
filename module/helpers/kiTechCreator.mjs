@@ -9,6 +9,8 @@ import { kiTechAbilitiesData } from "./kiTechAbilitiesData.js";
  */
 
 export function openKiCreatorTitle() {
+    new kiTechCreator().render(true);
+    /* Ki Tech Randomizer is a long project that wont be completed for a while.
     new foundry.applications.api.DialogV2({
         classes: ["baseAbfalter", "abfalterDialog", "kiCreatorDialog"],
         window: { title: game.i18n.localize("abfalter.kiAbilityData.kiCreatorMenu") },
@@ -38,6 +40,7 @@ export function openKiCreatorTitle() {
             }
         ],
     }).render({ force: true });
+    */
 }
 
 export default class kiTechCreator extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2) {

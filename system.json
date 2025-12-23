@@ -2,7 +2,7 @@
   "id": "abfalter",
   "title": "Anima Beyond Fantasy Altered",
   "description": "Engligh Version of 'Fantasy Flight Games' Anima Beyond Fantasy System altered by some house rules.",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "compatibility": {
     "minimum": 13,
     "verified": "13.347"
@@ -21,8 +21,6 @@
     "css/abfalter.css"
   ],
   "primaryTokenAttribute": "lp",
-  "gridDistance": 5,
-  "gridUnits": "ft",
   "grid": {
     "distance": 5,
     "units": "ft"

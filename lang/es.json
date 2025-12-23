@@ -1240,12 +1240,9 @@
     "Item": {
       "advantage": "Ventaja",
       "armor": "Armadura",
-      "armorHelmet": "Yelmo",
       "arsMagnus": "Ars Magnus",
       "class": "Categoría",
       "currency": "Moneda",
-      "dailyMaint": "Mant. Zeon - Diario",
-      "disadvantage": "Desventaja",
       "discipline": "Disciplina Psíquica",
       "elan": "Elan",
       "incarnation": "Encarnación",
@@ -1265,8 +1262,7 @@
       "weapon": "Arma",
       "ammo": "Munición",
       "zeonMaint": "Mant. Zeon",
-      "backgroundInfo": "Trasfondo",
-      "turnMaint": "Mant. Zeon - Turno"
+      "backgroundInfo": "Trasfondo"
     }
   }
 }

@@ -1,0 +1,24 @@
+<div class="itemChat baseAbfalterV2">
+    <div class="chatActorHeader">
+        <img src="{{actorImg}}">
+        <span> {{actorName}} </span>
+    </div>
+
+    <div class="chatItemContent">
+        <div class="chatItemHeader">
+            <img src="{{img}}"/>
+            <div>
+                <span> {{name}} </span>
+                <span> {{system.descTag}} </span>
+            </div>
+            <a class="descToggle" data-value="{{descToggle}}">
+                <i class="fas fa-chevron-right fa-fw"></i>
+            </a>
+        </div>
+
+        <div class="Itemdescription {{#if descToggle}}ItemDescOpen{{/if}}">
+            {{{system.description}}}
+        </div>
+    </div>
+
+</div>

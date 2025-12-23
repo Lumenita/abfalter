@@ -72,10 +72,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
 
         switch(itemType) {
             case "advantage":
-            case "disadvantage": //deprecated removal in 1.5.3
             case "monsterPower":
-            case "turnMaint": //deprecated removal in 1.5.3
-            case "dailyMaint": //deprecated removal in 1.5.3
             case "maintPower":
             case "arsMagnus":
             case "zeonMaint":
@@ -95,7 +92,6 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
             case "kiSealCreature":
             case "kiTechnique":
             case "armor":
-            case "armorHelmet": //deprecated removal in 1.5.3
             case "inventory":
             case "backgroundInfo":
                 parts.details = details;
@@ -147,10 +143,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 delete tabs.effects;
                 break;
             case "advantage":
-            case "disadvantage": //deprecated removal in 1.5.3
             case "monsterPower":
-            case "turnMaint": //deprecated removal in 1.5.3
-            case "dailyMaint": //deprecated removal in 1.5.3
             case "zeonMaint":
             case "arsMagnus":
             case "maintPower":
@@ -258,14 +251,22 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 break;
             }
             case "armor": {
+                context.currencyOptions = Object.fromEntries(this.item.system.priceListIds.map(i => [i.id, i.name]));
+                context.weightList = CONFIG.abfalter.weightDropdown;
                 context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description);
+                context.equipmentTypeList = CONFIG.abfalter.equipmentTypeDropdown;
                 context.armorTypeList = CONFIG.abfalter.armorTypeDropdown;
                 context.layerTypeList = CONFIG.abfalter.layerTypeDropdown;
                 break;
             }
             case "weapon": {
-                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description);
+                context.currencyOptions = Object.fromEntries(this.item.system.priceListIds.map(i => [i.id, i.name]));
                 context.ammoOptions = Object.fromEntries(this.item.system.ranged.ammoIds.map(i => [i.id, i.name]));
+                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description);
+
+                context.weightList = CONFIG.abfalter.weightDropdown;
+                context.distanceLongList = CONFIG.abfalter.distanceLongDropdown;
+
 
                 context.customSecObjList = CONFIG.abfalter.customSecondaryDropdown;
                 context.shieldObjList = CONFIG.abfalter.shieldDropdown;
@@ -284,11 +285,20 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
             }
             case "ammo": {
                 context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description);
+
                 context.currencyOptions = Object.fromEntries(this.item.system.priceListIds.map(i => [i.id, i.name]));
 
+                context.consumableTypeList = CONFIG.abfalter.consumableTypeDropdown;
                 context.wepDamageTypeObjList = CONFIG.abfalter.wepDamageTypeDropdown;
                 context.wepDamageTypeSpiritObjList = CONFIG.abfalter.wepDamageTypeSpiritDropdown;
                 context.weightList = CONFIG.abfalter.weightDropdown;
+                break;
+            }
+            case "inventory": {
+                context.currencyOptions = Object.fromEntries(this.item.system.priceListIds.map(i => [i.id, i.name]));
+                context.weightList = CONFIG.abfalter.weightDropdown;
+                context.lootTypeList = CONFIG.abfalter.lootTypeDropdown;
+
                 break;
             }
             case "class": {

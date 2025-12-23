@@ -1,373 +1,678 @@
-export async function handleMigrations() {
+import { abfalter } from "../config.js";
+import { abfalterSettingsKeys } from "../utilities/abfalterSettings.js";
+
+export async function handleMigrations({ force: forceArg = false } = {}) {
     if (!game.user.isGM) return;
 
-    const migrationStart = 'Migration in progress. Please wait until it completes before using the system.';
-    const migrationEnd = 'Migration has finished. You can now use the system.';
-
     const COMPATIBLE_MIGRATION_VERSION = '1.4.3';
+    const systemVersion  = game.system.version ?? game.system.data?.version ?? "0.0.0";
+    const storedVersion  = game.settings.get("abfalter", "systemMigrationVersion") ?? "0.0.0";
+    const forceSetting = game.settings.get("abfalter", "forceMigration") === true;
+    const force = !!(forceArg || forceSetting);
 
-    // --- Show Non-Closable Dialog ---
-    let migrationDialog;
-    const showMigrationDialog = () => {
-        migrationDialog = new Dialog({
-            title: "System Migration",
-            content: `<p>${migrationStart}</p>`,
-            buttons: {},
-            close: () => migrationDialog?.render(true)  // Prevent manual closing
-        }, {
-            id: "abfalter-migration-dialog",
-            width: 400
-        });
-        migrationDialog.render(true);
-    };
-
-    const closeMigrationDialog = () => {
-        migrationDialog?.close({ force: true });
-    };
-
-    // --- Get current version ---
-    const currentVersion = game.settings.get("abfalter", "systemMigrationVersion");
-    
-    //Force migration for testing
-    //migrateItemFusion();
-
-    // If no version is saved, no need to migrate
-    if (!currentVersion) {
-        return game.settings.set('abfalter', 'systemMigrationVersion', game.system.version);
+    // ---- Singleton guard: bail if already running
+    if (game.settings.get("abfalter", "migrationInProgress")) {
+        console.warn("ABF Alter: migration already in progress, skipping duplicate call.");
+        return;
     }
 
-    // Compatibility warning, Warn if version is too old
-    if (currentVersion && foundry.utils.isNewerVersion(COMPATIBLE_MIGRATION_VERSION, currentVersion)) {
-        const warning = 'Your ABF Alter system data is too old and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.';
-        ui.notifications.error(warning, { permanent: true });
-    }
-
-    // Define migration tasks
+    // Define migrations (ordered)
     const migrations = [
-        { version: '1.4.6', migrate: migrateSecondaryLanguage },   // Secondary Abilities language fix
-        { version: '1.5.0', migrate: migrateItemFusion }   // Merge Items into 1
+        { version: '1.4.6', label: 'Secondary Abilities language fix', migrate: migrateSecondaryLanguage },
+        { version: '1.5.0', label: 'Item fusion (merge items)',        migrate: migrateItemFusion },
+        { version: '1.6.0', label: 'Weapon Migration',        migrate: migrateWeapons }
+
     ];
 
-    // Check if migration is needed
-    const needsMigration = migrations.some(({ version }) =>
-        foundry.utils.isNewerVersion(version, currentVersion)
+    // Decide whether any migration is needed
+    const needsMigration = force || migrations.some(({ version }) =>
+        foundry.utils.isNewerVersion(version, storedVersion)
     );
 
-    if (needsMigration) { showMigrationDialog(); }
+    if (!needsMigration) {
+        // Nothing to do, but ensure version is set
+        if (!storedVersion) await game.settings.set('abfalter', 'systemMigrationVersion', systemVersion);
+        return;
+    }
 
-    for (const { version, migrate } of migrations) {
-        if (foundry.utils.isNewerVersion(version, currentVersion)) {
-            console.log(`Starting migration for version ${version}`);
+    // Compatibility warning if the stored version is older than your “guaranteed compatible” floor
+    if (storedVersion && foundry.utils.isNewerVersion(COMPATIBLE_MIGRATION_VERSION, storedVersion)) {
+        ui.notifications.error(
+        'Your ABF Alter system data is too old and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.',
+        { permanent: true }
+        );
+    }
+
+    // --- Sticky modal dialog helpers ---
+    const DIALOG_ID = "abfalter-migration-dialog";
+    let dlg = null;
+
+    const ensureDialog = () => {
+        // Reuse if exists
+        const existing = Object.values(ui.windows ?? {}).find(w => w?.id === DIALOG_ID);
+        if (existing) { dlg = existing; return dlg; }
+
+        dlg = new Dialog(
+        {
+            title: "System Migration",
+            content: `
+            <div class="abfalter-migration">
+                <p>Migration in progress. Please wait until it completes before using the system.</p>
+                <p><strong class="abfalter-step">Preparing…</strong></p>
+            </div>
+            `,
+            buttons: {}
+        },
+        { id: DIALOG_ID, width: 440, modal: true, closeOnEscape: false }
+        );
+
+        dlg.render(true);
+
+        // Hide close button once the dialog is first rendered
+        Hooks.once("renderDialog", (app, html) => {
+        if (app.id === DIALOG_ID) {
+            html.closest(".window-app").find(".header-button.close").hide();
+            app.options.draggable = false;
+        }
+        });
+
+        return dlg;
+    };
+
+    const setStep = (html) => {
+        // Update the existing DOM instead of re-rendering (prevents duplicate dialogs)
+        const win = dlg?.element?.length ? dlg.element : $(`.window-app#${DIALOG_ID}`);
+        win.find(".abfalter-step").html(html);
+    };
+
+    const closeAllMigrationDialogs = async () => {
+        // Close our tracked dialog
+        if (dlg?.rendered) await dlg.close({ force: true });
+        // Close any stray windows with same id (defensive)
+        for (const app of Object.values(ui.windows ?? {})) {
+        if (app?.id === DIALOG_ID && app !== dlg && app.rendered) {
+            try { await app.close({ force: true }); } catch {}
+        }
+        }
+    };
+
+    // ---- Run
+    await game.settings.set("abfalter", "migrationInProgress", true);
+
+    try {
+        ensureDialog();
+        setStep("Starting…");
+
+        for (const { version, migrate, label } of migrations) {
+        if (force || foundry.utils.isNewerVersion(version, storedVersion)) {
+            console.log(`ABF Alter: starting migration ${version} — ${label}`);
+            setStep(`Running: ${label ?? version} <small>(this may take a moment)</small>`);
             await migrate();
         }
+        }
+
+        await game.settings.set("abfalter", "systemMigrationVersion", systemVersion);
+
+        if (forceSetting) {
+        // Reset the toggle so it only runs once per opt-in
+        await game.settings.set("abfalter", "forceMigration", false);
+        }
+
+        ui.notifications.info("Migration has finished. You can now use the system.");
+    } catch (err) {
+        console.error(err);
+        ui.notifications.error(`Migration failed: ${err?.message ?? err}`, { permanent: true });
+    } finally {
+        await closeAllMigrationDialogs();
+        await game.settings.set("abfalter", "migrationInProgress", false);
+    }
+};
+
+
+/**
+ * v1.6.0 — Weapon property normalization
+ *
+ * Scope:
+ * - World Actors (embedded items)
+ * - World Items (directory)
+ * - Scenes (unlinked token delta items)
+ * - World compendiums (Actor/Item/Scene)
+ */
+export async function migrateWeapons() {
+  const meters = game.settings.get('abfalter', abfalterSettingsKeys.Use_Meters); 
+
+  // 1) WORLD ACTORS
+  for (const actor of game.actors.contents) {
+    const updates = collectActorWeaponUpdates(actor);
+    if (updates.length) {
+      console.log(`v1.6 Migrating Actor Weapons: ${actor.name}`);
+      await actor.updateEmbeddedDocuments("Item", updates);
+    }
+  }
+
+  // 2) WORLD ITEMS
+  const worldItemUpdates = [];
+  for (const item of game.items.contents) {
+    
+    const upd = buildWeaponUpdate(item, meters);
+    if (upd) worldItemUpdates.push({ _id: item.id, ...upd });
+  }
+  if (worldItemUpdates.length) {
+    console.log(`v1.6 Migrating World Weapons: ${worldItemUpdates.length} item(s)`);
+    await Item.updateDocuments(worldItemUpdates);
+  }
+
+  // 3) SCENES — UNLINKED TOKENS ONLY (delta items)
+  for (const scene of game.scenes.contents) {
+    await migrateSceneUnlinkedTokenWeaponsV16(scene);
+  }
+
+  // 4) COMPENDIUMS (WORLD only)
+  for (const pack of game.packs) {
+    if (!["Actor", "Scene", "Item"].includes(pack.metadata.type)) continue;
+
+    const wasLocked = pack.locked;
+    await pack.configure({ locked: false });
+    await pack.migrate(); // schema sync
+
+    const docs = await pack.getDocuments();
+
+    if (pack.metadata.type === "Actor") {
+      for (const actor of docs) {
+        const updates = collectActorWeaponUpdates(actor);
+        if (updates.length) {
+          console.log(`v1.6 Migrating Actor in ${pack.collection}: ${actor.name}`);
+          await actor.updateEmbeddedDocuments("Item", updates);
+          await actor.pack?.setDocument(actor);
+        }
+      }
     }
 
-    if (needsMigration) {
-        closeMigrationDialog();
-        ui.notifications.info(migrationEnd);
+    if (pack.metadata.type === "Item") {
+      const updates = [];
+      for (const it of docs) {
+        const upd = buildWeaponUpdate(it, meters);
+        if (upd) updates.push({ _id: it.id, ...upd });
+      }
+      if (updates.length) {
+        console.log(`v1.6 Migrating Items in ${pack.collection}: ${updates.length} item(s)`);
+        await Item.updateDocuments(updates, { pack: pack.collection });
+      }
     }
 
-    return game.settings.set('abfalter', 'systemMigrationVersion', game.system.version);
+    if (pack.metadata.type === "Scene") {
+      for (const scn of docs) {
+        await migrateSceneUnlinkedTokenWeaponsV16(scn);
+        await scn.pack?.setDocument(scn);
+      }
+    }
+
+    await pack.configure({ locked: wasLocked });
+  }
+
+  ui.notifications.info("Migration v1.6.0: Weapon fields updated.");
+}
+
+/* -------------------------------------------- */
+/* Actor embedded items                         */
+/* -------------------------------------------- */
+
+function collectActorWeaponUpdates(actor) {
+  const updates = [];
+  const meters = game.settings.get('abfalter', abfalterSettingsKeys.Use_Meters); 
+
+  for (const it of actor.items) {
+    const upd = buildWeaponUpdate(it, meters);
+    if (upd) updates.push({ _id: it.id, ...upd });
+  }
+
+  return updates;
+}
+
+/* -------------------------------------------- */
+/* World/Pack item update builder               */
+/* -------------------------------------------- */
+
+/**
+ * Builds update data for a weapon item migration.
+ */
+function buildWeaponUpdate(item, meters) {
+  if (item.type !== "weapon") return null;
+
+  const sys = item.system ?? {};
+  const props = sys.properties ?? {};
+  const ranged = sys.ranged ?? {};
+  const melee = sys.melee ?? {};
+
+  const updates = {};
+
+  console.log(meters);
+  updates["system.properties.specialAmmo.bool"] = !!ranged.specialAmmo;
+  updates["system.properties.trapping.bool"] = !!melee.trapping;
+  updates["system.properties.throwable.bool"] = !!melee.throwable;
+  updates["system.properties.twoHanded.bool"] = !!melee.twoHanded;
+  updates["system.properties.precision.bool"] = !!sys.info.precision;
+  updates["system.properties.vorpal.bool"] = !!sys.info.vorpal;
+
+  if (sys.info.type === "ranged") {
+    updates["system.properties.ammunition.bool"] = true;
+    updates["system.ranged.useReadyToFire"] = !!ranged.readyToFire; //new field
+    updates["system.distance.range"] = ranged.range || 0;
+    if (ranged.rangeType == "small" || ranged.rangeType == "big") {
+      if (meters) {
+        console.log("meters true"); 
+        updates["system.distance.rangeUnitType"] = ranged.rangeType == "small" ? "m" : "km"; 
+      } else {
+        updates["system.distance.rangeUnitType"] = ranged.rangeType == "small" ? "ft" : "mi"; 
+      }
+    } else {
+      updates["system.distance.rangeUnitType"] = ranged.rangeType;
+    }
+  }
+  if (sys.info.type === "melee") {
+    updates["system.distance.range"] = melee.throwRange || 0;
+    if (melee.throwDistanceType == "small" || melee.throwDistanceType == "big") {
+      if (meters) {
+        updates["system.distance.rangeUnitType"] = melee.throwDistanceType == "small" ? "m" : "km"; 
+      } else {
+        updates["system.distance.rangeUnitType"] = melee.throwDistanceType == "small" ? "ft" : "mi"; 
+      }
+    } else {
+      updates["system.distance.rangeUnitType"] = melee.throwDistanceType;
+    }
+    updates["system.quantity"] = melee.throwQuantity || 1;
+  }
+  console.log(updates);
+  return updates;
+}
+
+/* -------------------------------------------- */
+/* Scenes — Unlinked token deltas               */
+/* -------------------------------------------- */
+
+async function migrateSceneUnlinkedTokenWeaponsV16(scene) {
+  const updates = [];
+
+  for (const token of scene.tokens) {
+    if (token.actorLink) continue;
+
+    const t = token.toObject();
+    const items = t.delta?.items ?? [];
+    if (!items.length) continue;
+
+    let changed = false;
+
+    for (const it of items) {
+      if (it.type !== "weapon") continue;
+
+      const sys = it.system ?? {};
+      sys.ranged ??= {};
+      sys.properties ??= {};
+
+      const oldSpecialAmmo = sys.ranged.specialAmmo;
+      const newSpecialAmmoBool = sys.properties?.specialAmmo?.bool;
+
+      if (oldSpecialAmmo !== undefined && oldSpecialAmmo !== null && newSpecialAmmoBool === undefined) {
+        sys.properties.specialAmmo ??= {};
+        sys.properties.specialAmmo.bool = !!oldSpecialAmmo;
+        delete sys.ranged.specialAmmo;
+        changed = true;
+      }
+
+      it.system = sys;
+    }
+
+    if (!changed) continue;
+
+    t.delta = { ...(t.delta ?? {}), items };
+    updates.push(t);
+  }
+
+  if (updates.length) {
+    console.log(`v1.6 Migrating Scene Unlinked Tokens: ${scene.name}`);
+    await scene.deleteEmbeddedDocuments("Token", updates.map(t => t._id));
+    await scene.createEmbeddedDocuments("Token", updates);
+  }
 }
 
 
 /**
- * Migrates items of type "disadvantage" to "advantage"
- * Version 1.5.0
+ * v1.5.0 — Item fusion
+ * - disadvantage -> advantage (system.cost = benefit, system.type = "disadvantage")
+ * - turnMaint/dailyMaint -> zeonMaint (system.type = "turn"/"daily")
+ * - armorHelmet -> armor (system.armorType = "helmet")
  */
 export async function migrateItemFusion() {
-    for (let actor of game.actors.contents) {
-        const { createData, deleteIds } = await migrate150Data(actor);
-        if (createData.length > 0 || deleteIds.length > 0) {
-            console.log(`Migrating items for Actor ${actor.name}`);
-            if (createData.length > 0) {
-                await actor.createEmbeddedDocuments("Item", createData);
-            }
-            if (deleteIds.length > 0) {
-                await actor.deleteEmbeddedDocuments("Item", deleteIds);
-            }
+  // 1) WORLD ACTORS
+  for (const actor of game.actors.contents) {
+    const { toCreate, toDelete } = collectActorItemChanges(actor);
+    if (toCreate.length || toDelete.length) {
+      console.log(`Migrating Actor: ${actor.name}`);
+      // Delete first, then create in one go to avoid collisions
+      if (toDelete.length) await actor.deleteEmbeddedDocuments("Item", toDelete);
+      if (toCreate.length) await actor.createEmbeddedDocuments("Item", toCreate);
+    }
+  }
+
+  // 2) WORLD ITEMS (directory items not embedded in actors)
+  for (const item of game.items.contents) {
+    const repl = remakeItemIfNeeded(item);
+    if (repl) {
+      console.log(`Migrating World Item: ${item.name}`);
+      await item.delete();                      // remove old (wrong type)
+      await Item.create(repl, { temporary: false });  // create new with correct type
+    }
+  }
+
+  // 3) SCENES — UNLINKED TOKENS ONLY
+  for (const scene of game.scenes.contents) {
+    await migrateSceneUnlinkedTokens(scene);
+  }
+
+  // 4) COMPENDIUMS (WORLD only)
+  for (const pack of game.packs) {
+    if (pack.metadata.packageType !== "world") continue;
+    if (!["Actor", "Scene", "Item"].includes(pack.metadata.type)) continue;
+
+    const wasLocked = pack.locked;
+    await pack.configure({ locked: false });
+    await pack.migrate(); // ensure schema
+
+    const docs = await pack.getDocuments();
+
+    if (pack.metadata.type === "Actor") {
+      for (const actor of docs) {
+        const { toCreate, toDelete } = collectActorItemChanges(actor);
+        if (toCreate.length || toDelete.length) {
+          console.log(`Migrating Actor in ${pack.collection}: ${actor.name}`);
+          if (toDelete.length) await actor.deleteEmbeddedDocuments("Item", toDelete);
+          if (toCreate.length) await actor.createEmbeddedDocuments("Item", toCreate);
+          await actor.pack?.setDocument(actor); // persist
         }
+      }
     }
 
-    for (let scene of game.scenes.contents) {
-        migrate150SceneData(scene);
+    if (pack.metadata.type === "Scene") {
+      for (const scn of docs) {
+        await migrateSceneUnlinkedTokens(scn);
+        await scn.pack?.setDocument(scn);
+      }
     }
 
-    for (let pack of game.packs) {
-        console.log(pack.metadata.packageType);
-        if (pack.metadata.packageType !== "world") continue;
-
-        const packType = pack.metadata.type;
-        if (!["Actor", "Scene", "Item"].includes(packType)) continue;
-
-        const wasLocked = pack.locked;
-        await pack.configure({ locked: false });
-        await pack.migrate();
-        const documents = await pack.getDocuments();
-
-        for (let document of documents) {
-            if (packType === "Actor") {
-                const { createData, deleteIds } = await migrate150Data(document);
-                if (createData.length || deleteIds.length) {
-                    if (deleteIds.length > 0) {
-                        await document.deleteEmbeddedDocuments("Item", deleteIds);
-                    }
-                    if (createData.length > 0) {
-                        await document.createEmbeddedDocuments("Item", createData);
-                    }
-                    console.log(`Migrated Actor ${document.name} in Compendium ${pack.collection}`);
-                }
-            }
-
-            if (packType === "Scene") {
-                migrate150SceneData(document);
-                console.log(`Migrated Scene ${document.name} in Compendium ${pack.collection}`);
-            }
-
-            if (packType === "Item") {
-                if (document.type === "disadvantage") {
-                    const newItemData = {
-                        name: document.name,
-                        type: "advantage",
-                        system: {
-                            description: document.system.description,
-                            expand: document.system.expand,
-                            cost: document.system.benefit,
-                            toggleItem: false,
-                            type: "disadvantage"
-                        }
-                    };
-                    await document.update(newItemData, { recursive: false });
-                    console.log(`Migrated Item ${document.name} in Compendium ${pack.collection}`);
-                }
-                if (document.type === "turnMaint" || document.type === "dailyMaint") {
-                    const newItemData = {
-                        name: document.name,
-                        type: "zeonMaint",
-                        system: {
-                            description: document.system.description,
-                            expand: document.system.expand,
-                            zeon: document.system.zeon,
-                            cost: document.system.benefit,
-                            equipped: document.system.equipped,
-                            toggleItem: false,
-                            type: document.type === "turnMaint" ? "turn" : "daily"
-                        }
-                    };
-                    await document.update(newItemData, { recursive: false });
-                    console.log(`Migrated Item ${document.name} in Compendium ${pack.collection}`);
-                }
-                if (document.type === "armorHelmet") {
-                    const newItemData = {
-                        name: document.name,
-                        type: "armor",
-                        system: {
-                            description: document.system.description,
-                            quantity: document.system.quantity,
-                            quality: document.system.quality,
-                            presence: document.system.presence,
-                            fortitude: document.system.fortitude,
-                            requirement: document.system.requirement,
-                            natPenalty: document.system.natPenalty,
-                            equipped: document.system.equipped,
-                            AT: {
-                                cut: document.system.AT.cut,
-                                imp: document.system.AT.imp,
-                                thr: document.system.AT.thr,
-                                heat: document.system.AT.heat,
-                                cold: document.system.AT.cold,
-                                ele: document.system.AT.ele,
-                                ene: document.system.AT.ene,
-                                spt: document.system.AT.spt,
-                            },
-                            armorType: "helmet"
-                        }
-                    };
-                    await document.update(newItemData, { recursive: false });
-                    console.log(`Migrated Item ${document.name} in Compendium ${pack.collection}`);
-                }
-            }
+    if (pack.metadata.type === "Item") {
+      for (const it of docs) {
+        const repl = remakeItemIfNeeded(it);
+        if (repl) {
+          console.log(`Migrating Item in ${pack.collection}: ${it.name}`);
+          await it.delete();
+          // Important: create into the same pack
+          await Item.create(repl, { pack: pack.collection });
         }
-
-        await pack.configure({ locked: wasLocked });
+      }
     }
+
+    await pack.configure({ locked: wasLocked });
+  }
+
+  // 5) SAFETY SWEEP
+  await safetySweepLogAndFix();
 }
 
-async function migrate150Data(actor) {
-    const createData = [];
-    const deleteIds = [];
-    for (const item of actor.items) {
-        if (item.type === "disadvantage") {
-            const { description, expand, benefit } = item.system;
+function collectActorItemChanges(actor) {
+  const toCreate = [];
+  const toDelete = [];
 
-            createData.push({
-                name: item.name,
-                type: "advantage",
-                system: {
-                    description,
-                    expand,
-                    cost: benefit,
-                    toggleItem: false,
-                    type: "disadvantage" 
-                }
-            });
-
-            deleteIds.push(item.id);
-        }
-        if (item.type === "turnMaint" || item.type === "dailyMaint") {
-            const { description, expand, zeon, cost } = item.system;
-
-            createData.push({
-                name: item.name,
-                type: "zeonMaint",
-                system: {
-                    description,
-                    expand,
-                    zeon,
-                    cost,
-                    equipped: item.system.equipped,
-                    toggleItem: false,
-                    type: item.type === "turnMaint" ? "turn" : "daily"
-                }
-            });
-
-            deleteIds.push(item.id);
-        }
-        if (item.type === "armorHelmet") {
-            console.log(`Migrating Item: ${item.name}`);
-            createData.push({
-                name: item.name,
-                type: "armor",
-                system: {
-                    description: item.system.description,
-                    quantity: item.system.quantity,
-                    quality: item.system.quality,
-                    presence: item.system.presence,
-                    fortitude: item.system.fortitude,
-                    requirement: item.system.requirement,
-                    natPenalty: item.system.natPenalty,
-                    equipped: item.system.equipped,
-                    AT: {
-                        cut: item.system.AT.cut,
-                        imp: item.system.AT.imp,
-                        thr: item.system.AT.thr,
-                        heat: item.system.AT.heat,
-                        cold: item.system.AT.cold,
-                        ele: item.system.AT.ele,
-                        ene: item.system.AT.ene,
-                        spt: item.system.AT.spt,
-                    },
-                    armorType: "helmet"
-                }
-            });
-
-            deleteIds.push(item.id);
-        }        
+  for (const it of actor.items) {
+    if (it.type === "disadvantage") {
+      const { description, expand, benefit } = it.system;
+      toCreate.push({
+        name: it.name,
+        type: "advantage",
+        system: {
+          description, expand,
+          cost: benefit ?? 0,
+          toggleItem: false,
+          type: "disadvantage"
+        },
+        img: it.img, flags: it.flags
+      });
+      toDelete.push(it.id);
     }
-    return { createData, deleteIds };
+
+    if (it.type === "turnMaint" || it.type === "dailyMaint") {
+      const { description, expand, zeon, cost, equipped } = it.system;
+      toCreate.push({
+        name: it.name,
+        type: "zeonMaint",
+        system: {
+          description, expand,
+          zeon: zeon ?? 0,
+          cost: cost ?? 0,
+          equipped: !!equipped,
+          toggleItem: false,
+          type: it.type === "turnMaint" ? "turn" : "daily"
+        },
+        img: it.img, flags: it.flags
+      });
+      toDelete.push(it.id);
+    }
+
+    if (it.type === "armorHelmet") {
+      const s = it.system;
+      toCreate.push({
+        name: it.name,
+        type: "armor",
+        system: {
+          description: s.description,
+          quantity: s.quantity, quality: s.quality,
+          presence: s.presence, fortitude: s.fortitude,
+          requirement: s.requirement, natPenalty: s.natPenalty,
+          equipped: s.equipped,
+          AT: { cut: s.AT?.cut, imp: s.AT?.imp, thr: s.AT?.thr, heat: s.AT?.heat, cold: s.AT?.cold, ele: s.AT?.ele, ene: s.AT?.ene, spt: s.AT?.spt },
+          armorType: "helmet"
+        },
+        img: it.img, flags: it.flags
+      });
+      toDelete.push(it.id);
+    }
+  }
+
+  return { toCreate, toDelete };
 }
 
-async function migrate150SceneData(scene) {
-    const updatedTokens = [];
+async function migrateSceneUnlinkedTokens(scene) {
+  const updates = [];
+  for (const token of scene.tokens) {
+    if (token.actorLink) continue; // linked tokens use the base Actor
+    const t = token.toObject();
+    const items = t.delta?.items ?? [];
+    if (!items.length) continue;
 
-    for (let tokenDoc of scene.tokens) {
-        if (tokenDoc.actorLink) continue;
-        const t = tokenDoc.toObject();
-        const items = t.delta.items || [];
-        console.log(`Migrating Unlinked Token: ${t.name}`);
+    const { create, remove } = collectTokenItemChanges(items);
+    if (!create.length && !remove.length) continue;
 
-        const { createData, deleteIds } = await migrate150TokenData(t.delta);
+    const remaining = items.filter(i => !remove.has(i._id));
+    t.delta = { ...(t.delta ?? {}), items: [...remaining, ...create] };
+    updates.push(t);
+  }
 
-        if (createData.length === 0 && deleteIds.length === 0) continue;
-
-        const remainingItems = (t.delta.items || []).filter(i => !deleteIds.includes(i._id));
-        const updatedItems = [...remainingItems, ...createData];
-        t.delta = {
-            items: updatedItems
-        };
-
-        updatedTokens.push(t);
-    }
-    if (updatedTokens.length > 0) {
-        console.log(`Migrating Scene: ${scene.name}`);
-        await scene.deleteEmbeddedDocuments("Token", updatedTokens.map(t => t._id));
-        await scene.createEmbeddedDocuments("Token", updatedTokens);
-    }
-    return;
+  if (updates.length) {
+    console.log(`Migrating Scene: ${scene.name}`);
+    await scene.deleteEmbeddedDocuments("Token", updates.map(t => t._id));
+    await scene.createEmbeddedDocuments("Token", updates);
+  }
 }
 
-async function migrate150TokenData(actor) {
-    const createData = [];
-    const deleteIds = [];
-    for (const item of actor.items) {
-        if (item.type === "disadvantage") {
-            const { description, expand, benefit } = item.system;
+function collectTokenItemChanges(itemsArray) {
+  const create = [];
+  const remove = new Set();
 
-            createData.push({
-                name: item.name,
-                type: "advantage",
-                system: {
-                    description,
-                    expand,
-                    cost: benefit,
-                    toggleItem: false,
-                    type: "disadvantage" 
-                }
-            });
-
-            deleteIds.push(item._id);
-        }
-        if (item.type === "turnMaint" || item.type === "dailyMaint") {
-            const { description, expand, zeon, cost } = item.system;
-
-            createData.push({
-                name: item.name,
-                type: "zeonMaint",
-                system: {
-                    description,
-                    expand,
-                    zeon,
-                    cost,
-                    equipped: item.system.equipped,
-                    toggleItem: false,
-                    type: item.type === "turnMaint" ? "turn" : "daily"
-                }
-            });
-
-            deleteIds.push(item._id);
-        }
-        if (item.type === "armorHelmet") {
-            console.log(`Migrating Item: ${item.name}`);
-            createData.push({
-                name: item.name,
-                type: "armor",
-                system: {
-                    description: item.system.description,
-                    quantity: item.system.quantity,
-                    quality: item.system.quality,
-                    presence: item.system.presence,
-                    fortitude: item.system.fortitude,
-                    requirement: item.system.requirement,
-                    natPenalty: item.system.natPenalty,
-                    equipped: item.system.equipped,
-                    AT: {
-                        cut: item.system.AT.cut,
-                        imp: item.system.AT.imp,
-                        thr: item.system.AT.thr,
-                        heat: item.system.AT.heat,
-                        cold: item.system.AT.cold,
-                        ele: item.system.AT.ele,
-                        ene: item.system.AT.ene,
-                        spt: item.system.AT.spt,
-                    },
-                    armorType: "helmet"
-                }
-            });
-
-            deleteIds.push(item._id);
-        } 
+  for (const it of itemsArray) {
+    if (it.type === "disadvantage") {
+      const { description, expand, benefit } = it.system ?? {};
+      create.push({
+        name: it.name,
+        type: "advantage",
+        system: {
+          description, expand,
+          cost: benefit ?? 0,
+          toggleItem: false,
+          type: "disadvantage"
+        },
+        img: it.img, flags: it.flags
+      });
+      if (it._id) remove.add(it._id);
     }
-    return { createData, deleteIds };
+
+    if (it.type === "turnMaint" || it.type === "dailyMaint") {
+      const { description, expand, zeon, cost, equipped } = it.system ?? {};
+      create.push({
+        name: it.name,
+        type: "zeonMaint",
+        system: {
+          description, expand,
+          zeon: zeon ?? 0,
+          cost: cost ?? 0,
+          equipped: !!equipped,
+          toggleItem: false,
+          type: it.type === "turnMaint" ? "turn" : "daily"
+        },
+        img: it.img, flags: it.flags
+      });
+      if (it._id) remove.add(it._id);
+    }
+
+    if (it.type === "armorHelmet") {
+      const s = it.system ?? {};
+      create.push({
+        name: it.name,
+        type: "armor",
+        system: {
+          description: s.description,
+          quantity: s.quantity, quality: s.quality,
+          presence: s.presence, fortitude: s.fortitude,
+          requirement: s.requirement, natPenalty: s.natPenalty,
+          equipped: s.equipped,
+          AT: { cut: s.AT?.cut, imp: s.AT?.imp, thr: s.AT?.thr, heat: s.AT?.heat, cold: s.AT?.cold, ele: s.AT?.ele, ene: s.AT?.ene, spt: s.AT?.spt },
+          armorType: "helmet"
+        },
+        img: it.img, flags: it.flags
+      });
+      if (it._id) remove.add(it._id);
+    }
+  }
+
+  return { create, remove };
+}
+
+function remakeItemIfNeeded(item) {
+  if (item.type === "disadvantage") {
+    const { description, expand, benefit } = item.system;
+    return {
+      name: item.name,
+      type: "advantage",
+      system: {
+        description, expand,
+        cost: benefit ?? 0,
+        toggleItem: false,
+        type: "disadvantage"
+      },
+      img: item.img, flags: item.flags
+    };
+  }
+  if (item.type === "turnMaint" || item.type === "dailyMaint") {
+    const { description, expand, zeon, cost, equipped } = item.system;
+    return {
+      name: item.name,
+      type: "zeonMaint",
+      system: {
+        description, expand,
+        zeon: zeon ?? 0,
+        cost: cost ?? 0,
+        equipped: !!equipped,
+        toggleItem: false,
+        type: item.type === "turnMaint" ? "turn" : "daily"
+      },
+      img: item.img, flags: item.flags
+    };
+  }
+  if (item.type === "armorHelmet") {
+    const s = item.system;
+    return {
+      name: item.name,
+      type: "armor",
+      system: {
+        description: s.description,
+        quantity: s.quantity, quality: s.quality,
+        presence: s.presence, fortitude: s.fortitude,
+        requirement: s.requirement, natPenalty: s.natPenalty,
+        equipped: s.equipped,
+        AT: { cut: s.AT?.cut, imp: s.AT?.imp, thr: s.AT?.thr, heat: s.AT?.heat, cold: s.AT?.cold, ele: s.AT?.ele, ene: s.AT?.ene, spt: s.AT?.spt },
+        armorType: "helmet"
+      },
+      img: item.img, flags: item.flags
+    };
+  }
+  return null;
+}
+
+async function safetySweepLogAndFix() {
+  let fixed = 0;
+
+  // Actors
+  for (const actor of game.actors.contents) {
+    const bad = actor.items.filter(i => i.type === "disadvantage");
+    if (!bad.length) continue;
+    console.warn(`Safety sweep — Actor "${actor.name}" still has ${bad.length} disadvantage item(s). Fixing…`);
+    const toCreate = bad.map(i => ({
+      name: i.name,
+      type: "advantage",
+      system: {
+        description: i.system.description,
+        expand: i.system.expand,
+        cost: i.system.benefit ?? 0,
+        toggleItem: false,
+        type: "disadvantage"
+      },
+      img: i.img, flags: i.flags
+    }));
+    const toDelete = bad.map(i => i.id);
+    await actor.deleteEmbeddedDocuments("Item", toDelete);
+    await actor.createEmbeddedDocuments("Item", toCreate);
+    fixed += bad.length;
+  }
+
+  // World Items
+  for (const item of game.items.filter(i => i.type === "disadvantage")) {
+    console.warn(`Safety sweep — World Item "${item.name}" is still disadvantage. Fixing…`);
+    const repl = remakeItemIfNeeded(item);
+    await item.delete();
+    await Item.create(repl, { temporary: false });
+    fixed++;
+  }
+
+  // Tokens in scenes (unlinked)
+  for (const scene of game.scenes.contents) {
+    const ups = [];
+    for (const token of scene.tokens) {
+      if (token.actorLink) continue;
+      const t = token.toObject();
+      const items = t.delta?.items ?? [];
+      if (!items.some(i => i.type === "disadvantage")) continue;
+      console.warn(`Safety sweep — Unlinked token "${t.name}" in scene "${scene.name}" has disadvantage items. Fixing…`);
+      const { create, remove } = collectTokenItemChanges(items);
+      const remaining = items.filter(i => !remove.has(i._id));
+      t.delta = { ...(t.delta ?? {}), items: [...remaining, ...create] };
+      ups.push(t);
+      fixed += remove.size;
+    }
+    if (ups.length) {
+      await scene.deleteEmbeddedDocuments("Token", ups.map(t => t._id));
+      await scene.createEmbeddedDocuments("Token", ups);
+    }
+  }
+
+  if (fixed) ui.notifications.info(`Migration 1.5.0 safety sweep fixed ${fixed} lingering item(s).`);
 }
 
 
@@ -393,6 +698,7 @@ export async function migrateSecondaryLanguage() {
     }
     
     for (let pack of game.packs) {
+        if (pack.metadata.packageType !== "world") continue;
         const packType = pack.metadata.type;
         if (!["Actor", "Scene"].includes(packType)) {
             continue;

@@ -699,6 +699,8 @@ export const abfalter = {
     followLayerRules: "abfalter.followLayerRules",
     normal: "abfalter.normal",
     altered: "abfalter.altered",
+    initiativeWindow: "abfalter.initiativeWindow",
+    iniModCalc: "abfalter.iniModCalc",
 };
 abfalter.kiTab = {
     kiAbilities: "abfalter.kiTab.kiAbilities",
@@ -861,6 +863,7 @@ abfalter.kiTab = {
     nemiZen: "abfalter.kiTab.nemiZen",
     descnemiZen: "abfalter.kiTab.descnemiZen",
 }
+
 abfalter.metaMagic = {
     arcTitle: "abfalter.metaMagic.arcTitle",
     arcTip: "abfalter.metaMagic.arcTip",
@@ -1240,6 +1243,7 @@ abfalter.wepDamageTypeSpiritDropdown = {
     SPIRIT: "abfalter.spirit",
     ANY: "abfalter.any"
 }
+
 abfalter.martialArtsDropdown = {
     base: "abfalter.base",
     advanced: "abfalter.advanced",
@@ -1277,7 +1281,6 @@ abfalter.MagicTheoryDropdown = {
     Shamanism: "abfalter.shamanism",
     NatMagic: "abfalter.naturalMagic"
 }
-
 
 abfalter.spellTypeDropdown = {
     Attack: "abfalter.attack",
@@ -1317,9 +1320,10 @@ abfalter.LimitsDropdown = {
 }
 
 abfalter.weaponTypeDropdown = {
-    melee: "abfalter.dropdown.melee",
-    ranged: "abfalter.dropdown.ranged",
-    shield: "abfalter.dropdown.shield"
+    hybrid: "abfalter.hybrid",
+    melee: "abfalter.melee",
+    ranged: "abfalter.ranged",
+    shield: "abfalter.shield"
 }
 
 abfalter.vorpalAtkDropdown = {
@@ -1356,11 +1360,35 @@ abfalter.metricDistLongDropdown = {
     special: "abfalter.special"
 }
 
+abfalter.distanceLongDropdown = {
+    ft: "abfalter.ftLong",
+    mi: "abfalter.miLong",
+    m: "abfalter.mLong",
+    km: "abfalter.kmLong",
+    sight: "abfalter.sightLong",
+    special: "abfalter.specialLong"
+}
+abfalter.distanceDropdown = {
+    ft: "abfalter.ft",
+    mi: "abfalter.mi",
+    m: "abfalter.m",
+    km: "abfalter.km",
+    sight: "abfalter.sight",
+    special: "abfalter.special"
+}
+
+
 abfalter.weightDropdown = {
     lb: "abfalter.lb",
     ton: "abfalter.ton",
     g: "abfalter.g",
     kg: "abfalter.kg"
+}
+
+abfalter.armoryWeightDropdown = {
+    lb: "abfalter.lb",
+    kg: "abfalter.kg",
+    ton: "abfalter.ton",
 }
 
 abfalter.profileTypeDropdown = {
@@ -1376,7 +1404,8 @@ abfalter.armorTypeDropdown = {
 
 abfalter.layerTypeDropdown = {
     soft: "abfalter.soft",
-    hard: "abfalter.hard"
+    hard: "abfalter.hard",
+    natural: "abfalter.natural",
 }
 
 abfalter.advDropdown = {
@@ -1409,4 +1438,45 @@ abfalter.indentTypeDropdown = {
     subKi3: "abfalter.indent3",
     subKi4: "abfalter.indent4",
     subKi5: "abfalter.indent5",
+}
+
+abfalter.lootTypeDropdown = {
+    loot : "abfalter.blank",
+    artObj: "abfalter.artObj",
+    advGear: "abfalter.advGear",
+    gemstone: "abfalter.gemstone",
+    junk: "abfalter.junk",
+    material: "abfalter.material",
+    resource: "abfalter.resource",
+    treasure: "abfalter.treasure",
+}
+
+abfalter.chatTemplates = {
+    spell: "systems/abfalter/templates/chatItem/spellChat.html",
+    psychicMatrix: "systems/abfalter/templates/chatItem/psyMatrixChat.html",
+    kiSealCreature: "systems/abfalter/templates/chatItem/kiSealChat.html",
+    kiTechnique: "systems/abfalter/templates/chatItem/kitechChat.hbs",
+    armor: "systems/abfalter/templates/chatItem/equipmentChat.hbs",
+    weapon: "systems/abfalter/templates/chatItem/weaponChat.hbs",
+    ammo: "systems/abfalter/templates/chatItem/consumableChat.hbs",
+    inventory: "systems/abfalter/templates/chatItem/lootChat.hbs",
+}
+
+abfalter.consumableTypeDropdown = {
+    consumable: "abfalter.blank",
+    ammo: "abfalter.ammo",
+    food: "abfalter.food",
+    poison: "abfalter.poison",
+    potion: "abfalter.potion",
+    tool: "abfalter.tool",
+}
+
+abfalter.equipmentTypeDropdown = {
+    equipment: "abfalter.blank",
+    armor: "abfalter.armor",
+    helmet: "abfalter.helmet",
+    accessory: "abfalter.accessory",
+    clothing: "abfalter.clothing",
+    trinket: "abfalter.trinket",
+    wondrous: "abfalter.wondrous",
 }

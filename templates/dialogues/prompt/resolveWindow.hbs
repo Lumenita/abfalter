@@ -1,0 +1,36 @@
+<div class="form-group abfDivFormat">
+    <label>
+        <input type="radio" name="pool" value="health" checked>
+        {{localize "abfalter.lifePoints"}}
+    </label>
+    <label>
+        <input type="radio" name="pool" value="shield">
+        {{localize "abfalter.shield"}}
+    </label>
+</div>
+
+<div class="form-group abfDivFormat">
+    <label>
+        <input type="radio" name="type" value="damage" checked>
+        {{localize "abfalter.damage"}}
+    </label>
+    <label>
+        <input type="radio" name="type" value="heal">
+        {{localize "abfalter.healing"}}
+    </label>
+</div>
+
+
+<div class="form-group abfDivFormat resolveWindow-label">
+    <label>
+        <span> {{localize "abfalter.resolveAmount"}} </span>
+        <input type="number" name="amount">
+    </label>
+</div>
+
+<div class="form-group abfDivFormat resolveWindow-label">
+    <label>
+        <span> {{localize "abfalter.resolveCritical"}} </span>
+        <input type="number" name="critical">
+    </label>
+</div>

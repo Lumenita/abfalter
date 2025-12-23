@@ -1,4 +1,4 @@
-﻿<section class="tab {{tabs.psychic.cssClass}} actorPage" data-group="{{tabs.psychic.group}}" data-tab="{{tabs.psychic.id}}">
+﻿<section class="tab {{tabs.psychic.cssClass}} actorPage baseAbfalter" data-group="{{tabs.psychic.group}}" data-tab="{{tabs.psychic.id}}">
     <div class="fieldsetContainer psychic">
         <div class="fieldSetRow s3">        
             <fieldset class="ppoint">
@@ -131,7 +131,7 @@
                             <div>
                                 <input class="item-name inline-edit" data-field="name" type="text" value="{{mentalPattern.name}}" placeholder="{{localize "abfalter.nameItem"}}" />
                                 <input data-field="system.finalCost" type="number" value="{{mentalPattern.system.finalCost}}" readonly />
-                                <button type="button" data-action="itemToggleValueButton" data-ability="{{system.toggle}}" data-label="system.toggle">
+                                <button type="button" data-action="itemToggleValue" data-ability="{{system.toggle}}" data-label="system.toggle">
                                     {{#if system.toggle}}
                                     <span> {{localize "abfalter.yes"}} </span>
                                     {{else}}
