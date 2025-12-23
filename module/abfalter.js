@@ -491,7 +491,7 @@ class actorDataModel extends foundry.abstract.DataModel {
                 status: makeBoolField(),
                 spec: makeIntField(),
                 temp: makeIntField(),
-                actual: makeIntField(),
+                actual: makeIntField(5),
                 value: makeIntField(),
                 max: makeIntField(),
                 bonus: makeIntField(),

@@ -1226,6 +1226,7 @@
     "newConsumable": "New Consumable",
     "pushSpeed": "Push Speed",
     "dragToActorToCalcRof": "Drag to Actor to Calc RoF",
+    "atkDefAbility": "Atk/Def",
 
     "kiAbilityData": {
       "kiCreatorMenu": "Ki Creator Menu",
