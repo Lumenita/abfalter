@@ -1225,7 +1225,7 @@
     "newLoot": "New Loot",
     "newConsumable": "New Consumable",
     "pushSpeed": "Push Speed",
-
+    "dragToActorToCalcRof": "Drag to Actor to Calc RoF",
 
     "kiAbilityData": {
       "kiCreatorMenu": "Ki Creator Menu",

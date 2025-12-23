@@ -475,7 +475,7 @@ export default class abfalterItem extends Item {
                         }
                         break;
                     case false:
-                        this.system.ranged.strMod = this.parent.system.stats.Strength.mod
+                        this.system.ranged.strMod = this.parent ? this.parent.system.stats.Strength.mod : 0;
                         break;
                 }
             }

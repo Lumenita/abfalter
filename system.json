@@ -5,7 +5,7 @@
   "version": "1.6.0",
   "compatibility": {
     "minimum": 13,
-    "verified": "13.347"
+    "verified": "13.351"
   },
   "authors": [
     {
@@ -28,7 +28,7 @@
   "license": "LICENSE.txt",
   "url": "https://github.com/Lumenita/abfalter",
   "manifest": "https://raw.githubusercontent.com/Lumenita/abfalter/main/system.json",
-  "download": "https://github.com/Lumenita/abfalter/releases/download/v1.5.3/abfalter.zip",
+  "download": "https://github.com/Lumenita/abfalter/releases/download/v1.6.0/abfalter.zip",
   "languages": [
     {
       "lang": "en",

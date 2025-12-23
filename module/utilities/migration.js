@@ -169,6 +169,7 @@ export async function migrateWeapons() {
 
   // 4) COMPENDIUMS (WORLD only)
   for (const pack of game.packs) {
+    if (pack.metadata.packageType !== "world") continue;
     if (!["Actor", "Scene", "Item"].includes(pack.metadata.type)) continue;
 
     const wasLocked = pack.locked;
@@ -183,7 +184,6 @@ export async function migrateWeapons() {
         if (updates.length) {
           console.log(`v1.6 Migrating Actor in ${pack.collection}: ${actor.name}`);
           await actor.updateEmbeddedDocuments("Item", updates);
-          await actor.pack?.setDocument(actor);
         }
       }
     }
@@ -203,7 +203,6 @@ export async function migrateWeapons() {
     if (pack.metadata.type === "Scene") {
       for (const scn of docs) {
         await migrateSceneUnlinkedTokenWeaponsV16(scn);
-        await scn.pack?.setDocument(scn);
       }
     }
 
@@ -387,7 +386,6 @@ export async function migrateItemFusion() {
           console.log(`Migrating Actor in ${pack.collection}: ${actor.name}`);
           if (toDelete.length) await actor.deleteEmbeddedDocuments("Item", toDelete);
           if (toCreate.length) await actor.createEmbeddedDocuments("Item", toCreate);
-          await actor.pack?.setDocument(actor); // persist
         }
       }
     }
@@ -395,7 +393,6 @@ export async function migrateItemFusion() {
     if (pack.metadata.type === "Scene") {
       for (const scn of docs) {
         await migrateSceneUnlinkedTokens(scn);
-        await scn.pack?.setDocument(scn);
       }
     }
 
