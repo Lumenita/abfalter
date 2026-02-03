@@ -206,6 +206,8 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 break;
             case "settings":
                 context.InnatePowerObjList = CONFIG.abfalter.innatePowerSettingDropdown;
+                context.openRollLimitsList = CONFIG.abfalter.openRollLimitsDropdown;
+                context.rollSpeakerTypeList = CONFIG.abfalter.rollSpeakerTypeDropdown;
                 break;
         }
 
@@ -728,7 +730,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         const type = target.dataset.ability;
         let app;
 
-        console.log("Config Button Clicked:", type);
         switch (type) {
             case "classManager":
                 app = new classManager({ document: this.actor });
@@ -837,7 +838,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
 
     static #openMenu(ev) {
         ev.preventDefault();
-        ui.notifications.info("This menu function is not implemented, eta v1.6.1"); //TODO
+        ui.notifications.info("This menu function is not implemented, eta v1.6.3"); //TODO
     }
 
     static #ammoWeaponToggle(ev) {
@@ -1166,7 +1167,6 @@ export class classManager extends abfalterCharacterSheet {
         context.system.levelinfo.classManagerState = state;  // "classless" | "levelUp" | "view"
 
         console.log(context.system.levelinfo.classManagerState);
-
         return context;
     }
 

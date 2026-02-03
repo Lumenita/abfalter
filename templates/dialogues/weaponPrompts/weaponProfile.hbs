@@ -2,12 +2,12 @@
   <body>
     <div class="wepAtkDiceRoll">
         {{#ifEquals actionType "attack"}}
-        {{#ifEquals weaponType "ranged"}}
-        <label>
+        {{#ifIn weaponType "hybrid ranged"}}
+        <label id="ammoRow">
             <span> {{localize "abfalter.ammo"}}: </span>
             <select id="ammoDropdown"></select>
         </label>
-        {{/ifEquals}}
+        {{/ifIn}}
         {{/ifEquals}}
 
         <label>
@@ -17,14 +17,10 @@
 
         {{#ifEquals actionType "attack"}}
         <div>
-            <span> {{localize "abfalter.baseAtkShort"}}: </span>
-            <span id="attackPower">${attacks[0].finalAttack}</span>
-
-            <span> | {{localize "abfalter.baseDmgShort"}}: </span>
-            <span id="damageNum">${attacks[0].finalDamage}</span>
-
-            <span> | {{localize "abfalter.basePenShort"}}: </span>
-            <span id="atPenNum">${attacks[0].finalAtPen}</span>
+            <span id="newAtkInfo"></span>
+        </div>
+        <div>
+            <span id="newRangeInfo"></span>
         </div>
         {{/ifEquals}}
         {{#ifEquals actionType "block"}}
@@ -76,6 +72,11 @@
             <input type="number" id="modifierMod" value="0" /> 
         </label>
 
+        <label id="noteRow">
+            <span id="noteInfo"></span>
+        </label>
+
+        <label></label>
     </div>
   </body>
 </form>

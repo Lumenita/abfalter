@@ -1514,11 +1514,18 @@ export default class abfalterActor extends Actor {
 
         // Armor Stats
         system.armor.wearArmor.totalPerPen = classBonuses.perPen;
-        system.armor.wearArmor.mod = Math.floor(system.armor.wearArmor.final - classBonuses.req);
-
         system.armor.wearArmor.multipleLayerPen = Math.max(0, Math.floor((classBonuses.quantity - 1) * 20));
+
+        system.armor.wearArmor.mod = Math.floor(system.armor.wearArmor.final - classBonuses.req);
         system.armor.wearArmor.effectiveNatPen = classBonuses.natPen - system.armor.wearArmor.mod;
         system.armor.wearArmor.totalNatPen =  Math.max(0, Math.floor(system.armor.wearArmor.effectiveNatPen < 0 ? system.armor.wearArmor.multipleLayerPen : system.armor.wearArmor.multipleLayerPen + system.armor.wearArmor.effectiveNatPen));
+
+        system.armor.wearArmor.swimPenalty = classBonuses.natPen - Math.min(system.armor.wearArmor.mod, 0); // Swim Penalty
+        if (system.armor.wearArmor.effectiveNatPen > classBonuses.natPen / 2) {
+            system.armor.wearArmor.stealthPenanlty = classBonuses.natPen - system.armor.wearArmor.mod; // Stealth Penalty
+        } else {
+            system.armor.wearArmor.stealthPenanlty = Math.floor(classBonuses.natPen / 2);
+        }
 
         system.armor.wearArmor.movePenMod = Math.max(0, Math.floor(system.armor.wearArmor.mod / 50));
         system.armor.wearArmor.totalMovePen = -Math.floor(Math.max(0, classBonuses.movePen - system.armor.wearArmor.movePenMod));
@@ -1833,6 +1840,11 @@ export default class abfalterActor extends Actor {
         }
         system.combatValues.dodge.final += system.combatValues.dodge.class;
 
+        // Armor Penalties to Physical Actions
+        system.combatValues.attack.final -= system.armor.wearArmor.totalNatPen;
+        system.combatValues.block.final -= system.armor.wearArmor.totalNatPen;
+        system.combatValues.dodge.final -= system.armor.wearArmor.totalNatPen;
+
         // Initiative
         if (system.kiAbility.kiIncreaseSpd.status == true) {
             system.initiative.kiAbilityBonus = 10;
@@ -1885,6 +1897,7 @@ export default class abfalterActor extends Actor {
             sec.natTotal = sec.natTotal < 100 ? sec.natTotal : 100;
             sec.final = Math.floor(sec.base + sec.spec + sec.temp + sec.classBonus + sec.natTotal + sec.bonus + system.aamField.final - system.armor.wearArmor.totalNatPen);
         };
+        system.secondaryFields.athletics.swim.final += system.armor.wearArmor.totalNatPen - system.armor.wearArmor.swimPenalty; //add the reduces penalty back then remove from the natural one
 
         //Social Fields
         system.secondaryFields.social.etiquette.classBonus = classBonuses.etiq;
@@ -2021,6 +2034,9 @@ export default class abfalterActor extends Actor {
             sec.natTotal = sec.natTotal < 100 ? sec.natTotal : 100;
             sec.final = Math.floor(sec.base + sec.spec + sec.temp + sec.classBonus + sec.natTotal + sec.bonus + system.aamField.final - (sec.armorPen ? system.armor.wearArmor.totalNatPen : 0));
         };
+        system.secondaryFields.subterfuge.stealth.final += system.armor.wearArmor.totalNatPen - system.armor.wearArmor.stealthPenanlty; //add the reduces penalty back then remove from the natural one
+
+        
         //Ki Concealment
         system.secondaryFields.subterfuge.kiconceal.display = !system.kiAbility.kiConceal.status;
         system.secondaryFields.subterfuge.kiconceal.classBonus = classBonuses.kiCon;
@@ -2167,6 +2183,14 @@ export default class abfalterActor extends Actor {
         system.mregen.final = Math.floor(((system.maccu.fromPow * system.mregen.regenmult) + system.mregen.spec + system.mregen.temp + system.mregen.bonus + system.maccu.finalFull) * system.mregen.recoverymult);
         system.mregen.finalMinusMaint = Math.floor(system.mregen.final - system.zeon.dailyMaint);
         system.zeon.max = Math.floor(system.zeon.base + system.zeon.fromPow + system.zeon.class + system.zeon.spec + system.zeon.temp + system.zeon.bonus);
+        if (system.settings.autoLowZeonPen) {
+            if (system.zeon.value == 0) {
+                system.aamField.final += system.settings.noZeonPenalty;
+            } else if (system.zeon.value <= 50) {
+                system.aamField.final += system.settings.lowZeonPenalty;
+            }
+        }
+
 
         // Innate Magic
         if (system.maccu.finalFull >= 10 && system.maccu.finalFull <= 50) {

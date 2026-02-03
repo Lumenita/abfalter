@@ -4901,7 +4901,8 @@ h6 {
     width: 17%;
     text-align: center;
 }
-.weaponTrapping {
+.weaponTrapping,
+.weaponTrapping2 {
     display: flex;
     padding: 2px 10px 2px 10px !important;
 }
@@ -4915,6 +4916,25 @@ h6 {
     width: 1%;           
     text-align: center;
 }
+.weaponTrapping2 > span {
+    width: 38%;
+}
+.weaponTrapping2 > span:nth-of-type(2) {
+    margin: 0 1% 0 0;
+    width: 30%;
+    text-align: right;
+}
+.weaponTrapping2 > button {
+    width: 25%;
+    margin: 0 2% 0 0;
+    font-size: 0px;
+    border: none;
+    align-self: center;
+}
+.weaponTrapping2 > input {
+    width: 6%;
+}
+
 .weaponReloadDisplay {
     display: flex;
     padding: 2px 10px 2px 10px !important;
@@ -4986,171 +5006,179 @@ h6 {
     display: flex;
     padding: 2px 10px 2px 10px !important;
 }
+/* #endregion */
 
-
-
-
-
-/* OLD STUFF */
-
-.attack-entry:nth-child(2n) {
-    background: var(--itemOffSet);
+/* #redion Item Weapon Profile */
+.profile {
+    margin: 0px 0 5px 0;
+    border-bottom: 1px solid var(--boxColor);
+    padding: 0 0 5px 0;
 }
-.attack-entry {
-    margin: 0 0 5px 0;
-}
-.attacks > button {
-    align-self: center;
-    margin: 0px;
-    width: 50%;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-}
-
-
-.weapon-item .editor {
-    height: auto;
-}
-.weapon-item .editor > div * {
-    color: inherit;
-}
-.wepProfileSelector {
-    width: 50%;
-    margin: 5px 0;
-}
-.wepProfileSelector > label {
-    width: 100%;
+.wepProfileName {
     display: flex;
     justify-content: space-between;
 }
-.wepProfileSelector > label > span {
-    width: 40%;
+.wepProfileName > span {
+    width: 85%;
 }
-.wepProfileSelector > label > select{
-    width: 55%;
+.wepProfileName > input {
+    width: 85%;
 }
-.wepAtkEdit > div:first-of-type {
+.wepProfileName > a {
+    width: 5%;
+}
+.wepProfileType {
     display: flex;
-}
-.wepAtkEdit > div:first-of-type > input {
-    width: 90%
-}   
-.wepAtkEdit > div:first-of-type > a {
-    width: 5%
-}
-.wepAtkEditTop {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 5px 0;
-}
-.wepAtkEditTop > label {
-    display: flex;
-    justify-content: start;
-    width: 30%;
-    margin: 0 3% 0 0;
-}
-.wepAtkEditTop > label > input {
-    display: flex;
-    width: 30%;
-}
-.wepAtkEditTop > label > span {
-    display: grid;
-    width: 35%
-}
-.wepAtkEditTop > label > span:nth-of-type(2) {
-    display: flex;
-    width: 1%
-}
-.wepAtkEditTop > label > span:nth-of-type(3) {
-    display: flex;
-    justify-content: center;
-    width: 30%
-}
-.profileButtonsTop {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 5px 0;
-}
-.profileButtonsTop > button {
-    margin: 0 2% 5px 2%;
-    width: 22%;
-    height: 20px;
-    border-radius: 0px;
-    border: none;
-    font-size: 12px;
-}
-.profileButtonsTop > button:nth-of-type(4n + 1) {
-    margin: 0 2% 5px 0;
-}
-.profileButtonsTop > button:nth-of-type(4n) {
-    margin: 0 0 5px 2%;
-}
-
-.wepAtkThrowableTop,
-.wepAtkOtherTop,
-.wepAtkTrapTop {
-    display: flex;
-    justify-content: start;
-    height: 24px;
+    width: 99%;
+    justify-content: space-between;
     margin: 5px 0 0 0;
 }
-.wepAtkThrowableTop > button,
-.wepAtkOtherTop > button,
-.wepAtkTrapTop > button {
-    margin: 0 2% 0 0;
-    height: 24px;
-    border-radius: 0px;
-    border: none;
-    font-size: 12px;
-}
-.wepAtkThrowableTop > label,
-.wepAtkOtherTop > label,
-.wepAtkTrapTop > label {
+.wepProfileType > div > label {
     display: flex;
-    justify-content: start;
 }
-.wepAtkThrowableTop > button,
-.wepAtkTrapTop > button,
-.wepAtkOtherTop > button {
-    width: 22%;
+.wepProfileSelector {
+    width: 40%;
 }
-.wepAtkThrowableTop > button:nth-of-type(2) {
-    width: 28%;
+.wepProfileSelector > label > span:first-of-type {
+    width: 40%;
 }
-.wepAtkThrowableTop > label {
+.wepProfileSelector > label > select {
+    width: 60%;
+}
+.wepProfileStats {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 5px 0;
+}
+.wepProfileStats > label {
+    width: 30%;
+    display: flex;
+}
+.wepProfileStats > label:nth-of-type(3n + 1),
+.wepProfileStats > label:nth-of-type(3n + 2) {
+    margin: 0 5% 0 0;
+}
+.wepProfileStats > label > span {
+    width: 40%;
+}
+.wepProfileStats > label > input {
+    width: 27%;
+}
+.wepProfileStats > label > span:nth-of-type(2) {
+    width: 3%;
+    text-align: center;
+}
+.wepProfileStats > label > span:nth-of-type(3) {
+    width: 27%;
+    text-align: center;
+}
+.wepProfileBasic {
+    padding: 2px 0;
+}
+.wepProfileBasic > label,
+.wepProfileBasic > label > label {
+    display: flex;
+    align-items: center;
+}
+.wepProfileBasic > label > button {
+    min-height: 24px;
+    border: none;
+    border-radius: 0;
+}
+.wepProfileDmgTypeO > label > span {
+    width: 70%;
+}
+.wepProfileDmgTypeO > label > div {
+    width: 29%;
+}
+.wepProfileVorpalO > label > button:first-of-type {
+    width: 25%;
+    margin: 0 2% 0 0;
+}
+.wepProfileVorpalO > label > label:first-of-type {
+    width: 36%;
+    margin: 0 2% 0 0;
+}
+.wepProfileVorpalO > label > label:first-of-type > span {
+    width: 33%;
+}
+.wepProfileVorpalO > label > label:first-of-type > div {
+    width: 67%;
+}
+.wepProfileVorpalO > label > label:nth-of-type(2) {
     width: 35%;
 }
-.wepAtkTrapTop > label {
-    width: 54%;
+.wepProfileVorpalO > label > label:nth-of-type(2) > span{
+    width: 80%;
 }
-.wepAtkThrowableTop > label > span,
-.wepAtkTrapTop > label > span {
-    display: grid;
-    white-space: nowrap;
-    overflow: hidden;
-    height: 24px;
+.wepProfileVorpalO > label > label:nth-of-type(2) > input{
+    width: 20%;
 }
-.wepAtkThrowableTop > label > input {
-    width: 26%;
-    margin: 0 0 0 1%;
-    height: 22px;
-    align-self: center;
+.wepProfileThrowableO > label > button:first-of-type {
+    width: 25%;
+    margin: 0 2% 0 0;
 }
-.wepAtkTrapTop > label > input {
-    width: 17%;
-    margin: 0 0 0 1%;
+.wepProfileThrowableO > label > button:nth-of-type(2) {
+    width: 10%;
+    margin: 0 2% 0 0;
 }
-.wepAtkNonEdit > div {
-    display: flex;
+.wepProfileThrowableO > label > button:nth-of-type(3) {
+    width: 24%;
+    margin: 0 2% 0 0;
 }
-.wepAtkNonEdit > div:first-of-type > span {
-    display: grid;
-    width: 90%;
-    font-size: 17px;
+.wepProfileThrowableO > label > label {
+    width: 35%;
 }
-.wepAtkNonEdit > div:first-of-type > a {
-    width: 5%;
+.wepProfileThrowableO > label > label > span {
+    width: 80%;
+}
+.wepProfileThrowableO > label > label > input {
+    width: 20%;
+}
+.wepProfileTrappingO > label > button:first-of-type {
+    width: 25%;
+    margin: 0 2% 0 0;
+}
+.wepProfileTrappingO > label > button:nth-of-type(2) {
+    width: 20%;
+    margin: 0 18% 0 0;
+}
+.wepProfileTrappingO > label > label {
+    width: 35%;
+}
+.wepProfileTrappingO > label > label > span {
+    width: 80%;
+}
+.wepProfileTrappingO > label > label > input {
+    width: 20%;
+}
+.wepProfileAmmunitionO > label > span:first-of-type {
+    width: 25%;
+    margin: 0 2% 0 0;
+    text-align: center;
+}
+.wepProfileAmmunitionO > label > button:nth-of-type(1) {
+    width: 10%;
+    margin: 0 2% 0 0;
+}
+.wepProfileAmmunitionO > label > button:nth-of-type(2) {
+    width: 24%;
+    margin: 0 2% 0 0;
+}
+.wepProfileAmmunitionO > label > label {
+    width: 35%;
+}
+.wepProfileAmmunitionO > label > label > span {
+    width: 80%;
+}
+.wepProfileAmmunitionO > label > label > input {
+    width: 20%;
+}
+.wepProfileNotesO > label:first-of-type {
+    margin: 0 0 3px 0;
+}
+.wepProfileNotesO > label > span {
+    width: 20%;
 }
 /* #endregion */
 
@@ -5359,6 +5387,25 @@ h6 {
     font-size: 0px;
     border-radius: 0px;
     width: 40%;
+}
+.rollRange .openRollLimits {
+    padding: 2px 10px;
+}
+.openRollLimits > span {
+    width: 40%;
+}
+.openRollLimits > div {
+    width: 60%
+}
+.speakerOptions > label {
+    display: flex;
+    padding: 0 10px;
+}
+.speakerOptions > label > span {
+    width: 45%;
+}
+.speakerOptions > label > div {
+    width: 55%
 }
 /* #endregion */
 

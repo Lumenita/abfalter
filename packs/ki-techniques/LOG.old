@@ -1,3 +1,7 @@
-2025/12/23-06:16:59.218 e4ac Recovering log #774
-2025/12/23-06:16:59.225 e4ac Delete type=0 #774
-2025/12/23-06:16:59.225 e4ac Delete type=3 #772
+2026/02/03-06:20:19.255 8ed4 Recovering log #868
+2026/02/03-06:20:19.263 8ed4 Delete type=0 #868
+2026/02/03-06:20:19.263 8ed4 Delete type=3 #867
+2026/02/03-06:33:22.660 8150 Level-0 table #872: started
+2026/02/03-06:33:22.660 8150 Level-0 table #872: 0 bytes OK
+2026/02/03-06:33:22.663 8150 Delete type=0 #870
+2026/02/03-06:33:22.669 8150 Manual compaction at level-0 from '!folders!51CERlfrV9CB20Hq' @ 72057594037927935 : 1 .. '!items!znWNZGGbsYEzea1J' @ 0 : 0; will stop at (end)

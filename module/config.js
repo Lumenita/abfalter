@@ -1480,3 +1480,22 @@ abfalter.equipmentTypeDropdown = {
     trinket: "abfalter.trinket",
     wondrous: "abfalter.wondrous",
 }
+
+abfalter.wepProfileAtkTypeDropdown = {
+    melee: "abfalter.melee",
+    ranged: "abfalter.ranged"
+}
+
+abfalter.openRollLimitsDropdown = {
+    none: "abfalter.none",
+    single: "abfalter.singleOpen",
+    double: "abfalter.doubleOpen",
+    triple: "abfalter.tripleOpen",
+    unlucky: "abfalter.unluckyDestiny"
+}
+
+abfalter.rollSpeakerTypeDropdown = {
+    default: "abfalter.defaultFoundry",
+    public: "abfalter.alwaysPublic",
+    private: "abfalter.alwaysPrivate",
+}

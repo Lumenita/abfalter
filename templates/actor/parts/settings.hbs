@@ -45,7 +45,7 @@
                 <div class="settingsSubsection abfDivFormat">
                     <label>
                         <span> {{localize "abfalter.settingsTab.magicAttackModule"}} </span>
-                        <button type="button" data-action="toggleValue" data-action="toggleValue"
+                        <button type="button" data-action="toggleValue"
                             class="toggleBoolean {{#if system.toggles.magicAtkModule}}kiBought{{/if}}"
                             data-label="system.toggles.magicAtkModule" data-ability="{{system.toggles.magicAtkModule}}">
                             {{#if system.toggles.magicAtkModule}}
@@ -57,7 +57,7 @@
                     </label>
                     <label class="{{#if system.toggles.magicDodgeModule}}lockLabel{{/if}}">
                         <span> {{localize "abfalter.settingsTab.magicDefenseModule"}} </span>
-                        <button type="button" data-action="toggleValue" data-action="toggleValue"
+                        <button type="button" data-action="toggleValue"
                             class="toggleBoolean {{#if system.toggles.magicDefModule}}kiBought{{/if}}"
                             data-label="system.toggles.magicDefModule" data-ability="{{system.toggles.magicDefModule}}">
                             {{#if system.toggles.magicDefModule}}
@@ -70,7 +70,7 @@
                     {{#if system.toggles.magicDefModule}}
                     <label>
                         <span class="settingsSubsectionIndent"> {{localize "abfalter.settingsTab.magicDodgeModule"}}</span>
-                        <button type="button" data-action="toggleValue" data-action="toggleValue"
+                        <button type="button" data-action="toggleValue"
                             class="toggleBoolean {{#if system.toggles.magicDodgeModule}}kiBought{{/if}}"
                             data-label="system.toggles.magicDodgeModule" data-ability="{{system.toggles.magicDodgeModule}}">
                             {{#if system.toggles.magicDodgeModule}}
@@ -419,6 +419,14 @@
                                 </button>
                             </label>
                         </div>
+                        <div class="abfDivFormat openRollLimits">
+                            <span>{{localize "abfalter.rollLimits"}}</span>
+                            <div class="csSelect">
+                                <select name="system.rollRange.limits">
+                                    {{selectOptions openRollLimitsList selected=system.rollRange.limits localize=true}}
+                                </select>
+                            </div>
+                        </div>
                         <div class="abfDivFormat">
                             <label> <span> {{localize "abfalter.final"}} </span> <input type="number"
                                     name="system.rollRange.final" value="{{system.rollRange.final}}" readonly />
@@ -443,22 +451,17 @@
                         </div>
                     </fieldset>
 
-                    <!--
-                    <div class="rollOptions">
-                        <h5>Roll Option</h5>
-                        <div>
-                            <label>
-                                <span> Voice </span>
-                                <select name="system.actorVoice">
-                                    
-                                    <option value="false"> {{localize "abfalter.no"}} </option>
-                                    <option value="true"> {{localize "abfalter.yes"}} </option>
-                                    
+                    <fieldset class="speakerOptions">
+                        <legend>{{localize "abfalter.speakerOptions"}}</legend>
+                        <label>
+                            <span>{{localize "abfalter.chooseRollVoice"}}</span>
+                            <div class="csSelect">
+                                <select name="system.rollRange.speaker">
+                                    {{selectOptions rollSpeakerTypeList selected=system.rollRange.speaker localize=true}}
                                 </select>
-                            </label>
-                        </div>
-                    </div>
-                    -->
+                            </div>
+                        </label>
+                    </fieldset>
                 </div>
 
                 <fieldset class="charOptions">
@@ -734,6 +737,28 @@
                         <span> | </span>
                         <input type="number" name="system.settings.fatigueZeroModFinal" value="{{system.settings.fatigueZeroModFinal}}" readonly/> 
                     </label>
+
+                    <label class="setSingleInput">
+                        <span> {{localize "abfalter.autoZeonPen"}} </span>
+                        <button type="button" data-action="toggleValue" class="toggleBoolean {{#if system.settings.autoLowZeonPen}}kiBought{{/if}}"
+                            data-label="system.settings.autoLowZeonPen" data-ability="{{system.settings.autoLowZeonPen}}">
+                            {{#if system.settings.autoLowZeonPen}}
+                            <span> {{localize "abfalter.yes"}} </span>
+                            {{else}}
+                            <span> {{localize "abfalter.no"}} </span>
+                            {{/if}}
+                        </button>
+                    </label>
+                    {{#if system.settings.autoLowZeonPen}}
+                    <label class="setSingleInput">
+                        <span> {{localize "abfalter.lowZeon"}} </span>
+                        <input type="number" name="system.settings.lowZeonPenalty" value="{{system.settings.lowZeonPenalty}}" /> 
+                    </label>
+                        <label class="setSingleInput">
+                        <span> {{localize "abfalter.noZeon"}} </span>
+                        <input type="number" name="system.settings.noZeonPenalty" value="{{system.settings.noZeonPenalty}}" /> 
+                    </label>
+                    {{/if}}
                 </div>
             </fieldset>
 

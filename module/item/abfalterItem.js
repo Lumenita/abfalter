@@ -52,6 +52,23 @@ export default class abfalterItem extends Item {
         this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage); //Global Setting
         this.system.ranged.ammoIds = [];
 
+        if (this.system.info.type == "melee") {
+            this.system.properties.ammunition.bool = false;
+            this.system.properties.specialAmmo.bool = false;
+        } else if (this.system.info.type == "ranged") {
+            this.system.properties.throwable.bool = false;
+            this.system.properties.trapping.bool = false;
+        } else if (this.system.info.type == "shield") {
+            this.system.properties.precision.bool = false;
+            this.system.properties.vorpal.bool = false;
+            this.system.properties.versatile.bool = false;
+            this.system.properties.twoHanded.bool = false;
+            this.system.properties.throwable.bool = false;
+            this.system.properties.trapping.bool = false;
+            this.system.properties.ammunition.bool = false;
+            this.system.properties.specialAmmo.bool = false;
+        }
+
         if (this.system.properties.throwable.bool == true || this.system.info.type == "hybrid" || this.system.info.type == "ranged") {
             this.system.distance.usesRange = true;
         } else {
@@ -64,6 +81,13 @@ export default class abfalterItem extends Item {
         } else {
             this.system.info.hasSpecialConditions = false;
         }
+
+        if (this.system.properties.ammunition.bool == true || this.system.properties.specialAmmo.bool == true) {
+            this.system.info.hasAmmunition = true;
+        } else {
+            this.system.info.hasAmmunition = false;
+        }
+
 
         if (this.parent != null) { 
             const parentCombat = this.parent.system.combatValues;
@@ -92,17 +116,15 @@ export default class abfalterItem extends Item {
             } else {
                 this.system.info.reqWarning = WarningStatFinal < this.system.info.reqMod;
             }
-
-            // Derived Base Values
+            // ========== Derived Base Values ==========
             this.system.derived.baseAtk = Math.floor(parentCombat.attack.final + this.system.attack + this.system.quality);
             this.system.derived.baseBlk = Math.floor(parentCombat.block.final + this.system.block + this.system.quality);
             this.system.derived.baseDod = Math.floor(parentCombat.dodge.final + this.system.dodge);
 
-            // Ki Bonuses
+            // ========== Ki Bonuses ==========
             this.system.kiBonusBreakage = ki.kiAuraEx.status ? 5 : 0;
             this.system.kiBonusFort = ki.kiAuraEx.status ? 10 : 0;
             this.system.kiBonusDmg = ki.kiAuraEx.status ? 10 : 0;
-
             const elemBonusMap = {
                 "HEAT": ki.kiEleFire.status,
                 "COLD": ki.kiEleWater.status,
@@ -110,15 +132,14 @@ export default class abfalterItem extends Item {
                 "IMP": ki.kiEleEarth.status,
                 "ENE": ki.kiEleLight.status || ki.kiEleDark.status
             };
-
             if (elemBonusMap[this.system.primDmgT]) this.system.kiBonusDmg += 10;
             if (ki.kiIncreaseDmg.status) this.system.kiBonusDmg += 10;
 
-            // Roll/Fumble Ranges
+            // ========== Roll/Fumble Ranges ==========
             this.system.info.actorOpenRollRange = this.parent.system.rollRange.final;
             this.system.info.actorFumbleRange = this.parent.system.fumleRange.final;
 
-            //Reload Time & Rate of Fire
+            // ========== Reload Time & Rate of Fire ==========
             const reloadUsing = this.parent.system.secondaryFields.creative.slofhand.final > this.parent.system.combatValues.attack.final;
             this.system.ranged.reloadTag = game.i18n.localize(reloadUsing ? 'abfalter.slofhand' : 'abfalter.attack');
             this.system.ranged.bestReloadValue = reloadUsing ? this.parent.system.secondaryFields.creative.slofhand.final : this.parent.system.combatValues.attack.final;
@@ -170,7 +191,7 @@ export default class abfalterItem extends Item {
                 }
             }
 
-            //Melee Dmg Modifier with custom Char
+            // ========== Melee Dmg Modifier with custom Char ==========
             const getMod = stat => this.parent.system.stats[stat]?.mod ?? 0;
             const dmgMods = {
                 agi: getMod('Agility'),
@@ -186,7 +207,8 @@ export default class abfalterItem extends Item {
                 none: 0
             };
             this.system.melee.bonusDmgMod = dmgMods[this.system.melee.dmgMod] ?? 0;
-            // Melee Breakage Strength
+
+            // ========== Melee Breakage Stats ==========
             const strFinal = this.parent.system.stats.Strength.final;
             this.system.breakageStr = 
                 strFinal >= 15 ? 5 :
@@ -198,6 +220,51 @@ export default class abfalterItem extends Item {
             if (this.system.melee.twoHandedBonusDmg ) {
                 this.system.melee.bonusDmgMod *= 2;
             }
+
+            // ========== Ammunition Stats ==========
+            if (this.system.info.hasAmmunition) { 
+                if (this.system.properties.ammunition.bool == false && this.system.properties.specialAmmo.bool == true) {
+                    this.system.ranged.ammoIds = [
+                        {id: 0, name: game.i18n.localize('abfalter.none')},
+                        ...(this.system.properties.specialAmmo.bool ? [{id: 'special', name: game.i18n.localize('abfalter.special')}] : [])
+                    ];
+                } else if (this.system.properties.ammunition.bool == true && this.system.properties.specialAmmo.bool == false){
+                    this.system.ranged.ammoIds = [
+                        {id: 0, name: game.i18n.localize('abfalter.none')},
+                        ...this.parent.items.filter(i => i.type === "ammo"  && i.system.type === "ammo").map(i => ({id: i.id, name: i.name}))
+                    ];
+                } else {
+                    this.system.ranged.ammoIds = [
+                        {id: 0, name: game.i18n.localize('abfalter.none')},
+                        ...(this.system.properties.specialAmmo.bool ? [{id: 'special', name: game.i18n.localize('abfalter.special')}] : []),
+                        ...this.parent.items.filter(i => i.type === "ammo"  && i.system.type === "ammo").map(i => ({id: i.id, name: i.name}))
+                    ];
+                }
+            } else {
+                this.system.ranged.ammoIds = [
+                    {id: 0, name: game.i18n.localize('abfalter.none')},
+                ];
+            }
+
+            if (this.system.ranged.selectedAmmo === "special" && this.system.properties.specialAmmo.bool == true) {
+                this.system.ranged.ammoAtPen = this.system.ranged.specialAtPen;
+                this.system.ranged.ammoBreak = this.system.ranged.specialBreak;
+                this.system.ranged.ammoDmgType = this.system.ranged.specialDmgType;
+                this.system.ranged.ammoDamage = this.system.ranged.specialDmg;
+            } else if(this.system.properties.ammunition.bool == true){
+                const selected = this.parent.items.get(this.system.ranged.selectedAmmo)?.system;
+                this.system.ranged.ammoAtPen = selected?.atPen || 0;
+                this.system.ranged.ammoBreak = selected?.break || 0;
+                this.system.ranged.ammoDmgType = selected?.dmgType || "THR";
+                this.system.ranged.ammoDamage = selected?.damage || 0;
+            } else {
+                this.system.ranged.ammoAtPen = 0;
+                this.system.ranged.ammoBreak = 0;
+                this.system.ranged.ammoDmgType = "THR";
+                this.system.ranged.ammoDamage = 0;
+            }
+            this.system.ranged.strField = this.parent.system.stats.Strength.final;
+
         } else {
             this.system.info.reqWarning = false;
             this.system.derived.baseAtk = Math.floor(this.system.attack + this.system.quality);
@@ -208,7 +275,7 @@ export default class abfalterItem extends Item {
             this.system.kiBonusDmg = 0;
             this.system.info.actorOpenRollRange = 90;
             this.system.info.actorFumbleRange = 3;
-            //reload
+            //reload/rof
             this.system.ranged.bestReloadValue = 0;
             this.system.ranged.reloadTag = game.i18n.localize('abfalter.none');
             this.system.ranged.reloadSteps = 0; 
@@ -223,8 +290,37 @@ export default class abfalterItem extends Item {
             this.system.melee.thrownRofCalculationTitle = game.i18n.localize("abfalter.unknown");
             this.system.melee.bonusDmgMod = 0;
             this.system.breakageStr = 0;
-        }
+            //ammunition
+            if (this.system.info.hasAmmunition) { 
+                if (this.system.properties.specialAmmo.bool == true) {
+                    this.system.ranged.ammoIds = [
+                        {id: 0, name: game.i18n.localize('abfalter.none')},
+                        ...this.parent.items.filter(i => i.type === "ammo"  && i.system.type === "ammo").map(i => ({id: i.id, name: i.name}))
+                    ];
+                } else {
+                    this.system.ranged.ammoIds = [
+                        {id: 0, name: game.i18n.localize('abfalter.none')},
+                    ];
+                }
+            } else {
+                this.system.ranged.ammoIds = [
+                    {id: 0, name: game.i18n.localize('abfalter.none')},
+                ];
+            }
+            if (this.system.ranged.selectedAmmo === "special" && this.system.properties.specialAmmo.bool == true) {
+                this.system.ranged.ammoAtPen = this.system.ranged.specialAtPen;
+                this.system.ranged.ammoBreak = this.system.ranged.specialBreak;
+                this.system.ranged.ammoDmgType = this.system.ranged.specialDmgType;
+                this.system.ranged.ammoDamage = this.system.ranged.specialDmg;
+            } else { 
+                this.system.ranged.ammoAtPen = 0;
+                this.system.ranged.ammoBreak = 0;
+                this.system.ranged.ammoDmgType = "THR";
+                this.system.ranged.ammoDamage = 0;
+            }
+            this.system.ranged.strField = 0
 
+        }
 
         // ========== Derived Stats ==========
         this.system.derived.finalFortitude = Math.floor(this.system.fortitude + (this.system.quality * 2) + ~~this.system.kiBonusFort);
@@ -270,129 +366,8 @@ export default class abfalterItem extends Item {
 
         // ========== Ranged Stats ==========
         if (this.system.info.type == "ranged" || this.system.info.type == "hybrid") { 
-
-        }
-
-        // ========== Base Weapon Final Setup ==========
-        this.system.derived.meleeAtPen = Math.floor(~~this.system.atPen + Math.floor(~~this.system.quality / 5));
-        this.system.derived.meleeBreak = Math.floor(~~this.system.breakage + ~~this.system.breakageStr + (Math.floor(~~this.system.quality / 5) * 2) + ~~this.system.kiBonusBreakage);
-        this.system.derived.meleeDmg = Math.floor(~~this.system.baseDmg + ~~this.system.melee.bonusDmgMod + (~~this.system.quality * 2) + ~~this.system.kiBonusDmg);
-
-
-
-
-        // ========== Combined Profile Setup ==========
-        /*
-        if (this.system.info.type == "melee" || this.system.info.type == "hybrid") { 
-            //Inherit weapon properties for per attack overrides
-            for (let [key, attack] of Object.entries(this.system.attacks)) { 
-                attack.atkType = "melee";
-                attack.properties.attack.parent = true;
-                attack.properties.block.parent = true;
-                attack.properties.dodge.parent = true;
-                attack.properties.damage.parent = true;
-
-                attack.properties.precision.parent = this.system.properties.precision.bool;
-                attack.properties.vorpal.parent = this.system.properties.vorpal.bool;
-                attack.properties.throwable.parent = this.system.properties.throwable.bool;
-                attack.properties.trapping.parent = this.system.properties.trapping.bool;
-                attack.properties.ammunition.parent = false;
-            }
-        } else if (this.system.info.type == "ranged") {
-            for (let [key, attack] of Object.entries(this.system.attacks)) { 
-                attack.atkType = "ranged";
-                attack.properties.attack.parent = true;
-                attack.properties.block.parent = true;
-                attack.properties.dodge.parent = true;
-                attack.properties.damage.parent = true;
-
-                attack.properties.precision.parent = this.system.properties.precision.bool;
-                attack.properties.vorpal.parent = this.system.properties.vorpal.bool;
-                attack.properties.throwable.parent = this.system.properties.throwable.bool;
-                attack.properties.trapping.parent = this.system.properties.trapping.bool;
-                attack.properties.ammunition.parent = this.system.properties.ammunition.bool;
-            }
-        } else {
-
-        }*/
-
-
-
-        // ========== Melee Weapon Setup ==========
-        if (this.system.info.type == "melee") {
-            //inherit weapon info to Attacks
-            for (let [key, attack] of Object.entries(this.system.attacks)) { //done
-                attack.parentPrecision = this.system.properties.precision.bool;
-                attack.parentVorpal = this.system.properties.vorpal.bool;
-                attack.parentTrapping = this.system.properties.trapping.bool;
-                attack.parentThrowable = this.system.properties.throwable.bool;
-            }
-
-            for (let attack of Object.values(this.system.attacks)) {
-                attack.finalAttack   = attack.attack   + (attack.atkOverride ? 0 : this.system.derived.baseAtk);
-                attack.finalBlock    = attack.block    + (attack.blkOverride ? 0 : this.system.derived.baseBlk);
-                attack.finalDodge    = attack.dodge    + (attack.dodOverride ? 0 : this.system.derived.baseDod);
-                attack.finalAtPen    = attack.atPen    + this.system.derived.meleeAtPen;
-                attack.finalBreakage = attack.breakage + this.system.derived.meleeBreak;
-                attack.finalDamage   = attack.damage   + (attack.dmgOverride ? 0 : this.system.derived.meleeDmg);
-            }
-        }
-
-        // ========== Ranged Weapon Setup ==========
-        if (this.system.info.type == "ranged") { 
             this.system.ranged.strOverrideQualValue = Math.floor(this.system.ranged.strOverrideValue + (this.system.quality / 5));
-
-            if (this.parent) {
-                for (let attack of Object.values(this.system.attacks)) {
-                    attack.parentPrecision = this.system.properties.precision.bool;
-                    attack.parentVorpal = this.system.properties.vorpal.bool;
-                    attack.parentRangedInfAmmo = this.system.ranged.infiniteAmmo;
-                }
-
-                this.system.ranged.ammoIds = [
-                    {id: 0, name: game.i18n.localize('abfalter.none')},
-                    ...(this.system.properties.specialAmmo.bool ? [{id: 'special', name: game.i18n.localize('abfalter.special')}] : []),
-                    ...this.parent.items.filter(i => i.type === "ammo"  && i.system.type === "ammo").map(i => ({id: i.id, name: i.name}))
-                ];
-
-                if (this.system.ranged.selectedAmmo === "special") {
-                    this.system.ranged.ammoAtPen = this.system.ranged.specialAtPen;
-                    this.system.ranged.ammoBreak = this.system.ranged.specialBreak;
-                    this.system.ranged.ammoDmgType = this.system.ranged.specialDmgType;
-                    this.system.ranged.ammoDamage = this.system.ranged.specialDmg;
-                } else {
-                    const selected = this.parent.items.get(this.system.ranged.selectedAmmo)?.system;
-                    this.system.ranged.ammoAtPen = selected?.atPen || 0;
-                    this.system.ranged.ammoBreak = selected?.break || 0;
-                    this.system.ranged.ammoDmgType = selected?.dmgType || "THR";
-                    this.system.ranged.ammoDamage = selected?.damage || 0;
-                }
-                
-
-                
-                this.system.ranged.strField = this.parent.system.stats.Strength.final;
-            } else {
-                this.system.ranged.ammoIds = [
-                    {id: 0, name: game.i18n.localize('abfalter.none')},
-                    ...(this.system.ranged.specialAmmo ? [{id: 'special', name: game.i18n.localize('abfalter.special')}] : [])
-                ];
-
-                if (this.system.ranged.selectedAmmo === "special") {
-                    this.system.ranged.ammoAtPen = this.system.ranged.specialAtPen;
-                    this.system.ranged.ammoBreak = this.system.ranged.specialBreak;
-                    this.system.ranged.ammoDmgType = this.system.ranged.specialDmgType;
-                    this.system.ranged.ammoDamage = this.system.ranged.specialDmg;
-                } else { 
-                this.system.ranged.ammoAtPen = 0;
-                this.system.ranged.ammoBreak = 0;
-                this.system.ranged.ammoDmgType = "THR";
-                this.system.ranged.ammoDamage = 0;
-                }
-                this.system.ranged.strField = 0
-            }
-
             this.system.ranged.bonusDmgKi = this.system.kiBonusDmg;
-
             if (this.system.ranged.showStrFields === true){
                 switch (this.system.ranged.strOverride) {
                     case true:
@@ -479,27 +454,13 @@ export default class abfalterItem extends Item {
                         break;
                 }
             }
-
-            this.system.derived.rangedAtPen = this.system.ranged.ammoAtPen + this.system.ranged.ammoAtPenMod;
-            this.system.derived.rangedBreak = this.system.ranged.ammoBreak + this.system.ranged.ammoBreakMod;
-            this.system.derived.rangedDmg = Math.floor(this.system.ranged.ammoDamage + this.system.ranged.ammoDmgMod + ~~this.system.kiBonusDmg + (this.system.ranged.showStrFields ? this.system.ranged.strMod : 0));
-
+            // Ready to Fire 
             if (this.system.ranged.useReadyToFire && this.system.ranged.isLoaded) {
                 this.system.derived.finalWeaponSpeed = Math.floor(20 + this.system.quality);
             }
-
-            for (let attack of Object.values(this.system.attacks)) {
-                attack.finalAttack   = attack.attack   + (attack.atkOverride ? 0 : this.system.derived.baseAtk);
-                attack.finalBlock    = attack.block    + (attack.blkOverride ? 0 : this.system.derived.baseBlk);
-                attack.finalDodge    = attack.dodge    + (attack.dodOverride ? 0 : this.system.derived.baseDod);
-
-                attack.finalAtPen    = attack.atPen    + this.system.derived.rangedAtPen;
-                attack.finalBreakage = attack.breakage + this.system.derived.rangedBreak;
-                attack.finalDamage   = attack.damage   + (attack.dmgOverride ? 0 : this.system.derived.rangedDmg);
-            }
         }
 
-        // ========== Shield Weapon Setup ==========
+        // ========== Shield Stats ==========
         if (this.system.info.type == "shield") {
             switch (this.system.shield.type) {
                 case "shieldBuckler":
@@ -526,13 +487,93 @@ export default class abfalterItem extends Item {
             this.system.derived.finalWeaponSpeed += this.system.shield.speedBonus;
             this.system.derived.baseBlk += this.system.shield.blockBonus;
             this.system.derived.baseDod += this.system.shield.dodgeBonus;
+        }
 
-            for (let attack of Object.values(this.system.attacks)) {
+        // ========== Base Weapon Final Setup ==========
+        this.system.derived.meleeAtPen = Math.floor(~~this.system.atPen + Math.floor(~~this.system.quality / 5));
+        this.system.derived.meleeBreak = Math.floor(~~this.system.breakage + ~~this.system.breakageStr + (Math.floor(~~this.system.quality / 5) * 2) + ~~this.system.kiBonusBreakage);
+        this.system.derived.meleeDmg = Math.floor(~~this.system.baseDmg + ~~this.system.melee.bonusDmgMod + (~~this.system.quality * 2) + ~~this.system.kiBonusDmg);
+        
+        this.system.derived.rangedAtPen = this.system.ranged.ammoAtPen + this.system.ranged.ammoAtPenMod;
+        this.system.derived.rangedBreak = this.system.ranged.ammoBreak + this.system.ranged.ammoBreakMod;
+        this.system.derived.rangedDmgPreAmmo = Math.floor(this.system.rangedBaseDmg + this.system.ranged.ammoDmgMod + ~~this.system.kiBonusDmg + (this.system.ranged.showStrFields ? this.system.ranged.strMod : 0));
+        this.system.derived.rangedDmg =  this.system.ranged.ammoDamage + this.system.derived.rangedDmgPreAmmo;
+
+
+        // ========== Profile Setup ==========
+        for (let attack of Object.values(this.system.attacks)) {
+            attack.parentPrecision = this.system.properties.precision.bool;
+            attack.parentVorpal = this.system.properties.vorpal.bool;
+            attack.parentRangedInfAmmo = this.system.ranged.infiniteAmmo;
+            attack.parentThrowable = this.system.properties.throwable.bool;
+
+            attack.wepType = this.system.info.type;
+            attack.properties.precision.parent = this.system.properties.precision.bool;
+            attack.properties.vorpal.parent = this.system.properties.vorpal.bool;
+            attack.properties.throwable.parent = this.system.properties.throwable.bool;
+            attack.properties.trapping.parent = this.system.properties.trapping.bool;
+            attack.properties.ammunition.parent = this.system.info.hasAmmunition;
+            attack.properties.note.parent = true;
+
+            if (attack.profileType == "offensive") {
+                attack.properties.attack.parent = true;
+                attack.properties.block.parent = false;
+                attack.properties.dodge.parent = false;
+                attack.properties.damage.parent = true;
+                attack.properties.damageType.parent = true;
+                attack.properties.predetermined.parent = true;
+            } else if (attack.profileType == "defensive") {
+                attack.properties.attack.parent = false;
+                attack.properties.block.parent = true;
+                attack.properties.dodge.parent = true;
+                attack.properties.damage.parent = false;
+                attack.properties.damageType.parent = false;
+                attack.properties.predetermined.parent = true;
+                attack.properties.precision.parent = false;
+                attack.properties.vorpal.parent = false;
+                attack.properties.throwable.parent = false;
+                attack.properties.trapping.parent = false;
+                attack.properties.ammunition.parent = false;
+            } else {
+                attack.properties.attack.parent = true;
+                attack.properties.block.parent = true;
+                attack.properties.dodge.parent = true;
+                attack.properties.damage.parent = true;
+                attack.properties.damageType.parent = true;
+                attack.properties.predetermined.parent = true;
+            }
+            if (attack.wepType == 'melee' || (attack.wepType == 'hybrid' && attack.atkType == 'melee')) {
+                attack.properties.ammunition.parent = false;
+                attack.finalAttack   = attack.attack   + (attack.properties.attack.bool ? 0 : this.system.derived.baseAtk);
+                attack.finalBlock    = attack.block    + (attack.properties.block.bool ? 0 : this.system.derived.baseBlk);
+                attack.finalDodge    = attack.dodge    + (attack.properties.dodge.bool ? 0 : this.system.derived.baseDod);
+                attack.finalAtPen    = attack.atPen    + this.system.derived.meleeAtPen;
+                attack.finalBreakage = attack.breakage + this.system.derived.meleeBreak;
+                attack.finalDamage   = attack.damage   + (attack.properties.damage.bool ? 0 : this.system.derived.meleeDmg);
+            } else if (attack.wepType == 'ranged' || (attack.wepType == 'hybrid' && attack.atkType == 'ranged')) {
+                attack.properties.throwable.parent = false;
+                attack.finalAttack   = attack.attack   + (attack.properties.attack.bool ? 0 : this.system.derived.baseAtk);
+                attack.finalBlock    = attack.block    + (attack.properties.block.bool ? 0 : this.system.derived.baseBlk);
+                attack.finalDodge    = attack.dodge    + (attack.properties.dodge.bool ? 0 : this.system.derived.baseDod);
+                attack.finalAtPen    = attack.atPen    + this.system.derived.rangedAtPen;
+                attack.finalBreakage = attack.breakage + this.system.derived.rangedBreak;
+                attack.finalDamage   = attack.damage   + (attack.properties.damage.bool ? 0 : this.system.derived.rangedDmg);
+            } else { //Shield
                 attack.finalBlock = attack.block + (attack.blkOverride ? 0 : this.system.derived.baseBlk);
                 attack.finalDodge = attack.dodge + (attack.dodOverride ? 0 : this.system.derived.baseDod);
             }
+            // ========== Profile Information Tags ==========
+            attack.standardInfo = [
+                (attack.profileType === "both" || attack.profileType === "offensive") && `${game.i18n.localize('abfalter.attack')}: ${attack.finalAttack}`,
+                (attack.profileType === "both" || attack.profileType === "defensive") && `${game.i18n.localize('abfalter.block')}: ${attack.finalBlock}`,
+                (attack.profileType === "both" || attack.profileType === "defensive") && `${game.i18n.localize('abfalter.dodge')}: ${attack.finalDodge}`,
+                (attack.profileType === "both" || attack.profileType === "offensive") && `${game.i18n.localize('abfalter.breakage')}: ${attack.finalBreakage}`,
+                (attack.profileType === "both" || attack.profileType === "offensive") && `${game.i18n.localize('abfalter.atPen')}: ${attack.finalAtPen}`,
+                (attack.profileType === "both" || attack.profileType === "offensive") &&`${game.i18n.localize('abfalter.damage')}: ${attack.finalDamage}`
+            ].filter(Boolean).join(" · ");
         }
 
+        // ========== Description Tags ==========
         this.system.descTag = this.system.quality != "" ? `${this.system.quality > 0 ? "+" : ""}${this.system.quality} ` : "";
         this.system.descTag += game.i18n.localize(`abfalter.${this.system.info.type}`);
         this.system.descTag += this.system.rarity != "" ? ` · ${this.system.rarity}` : "";
@@ -553,6 +594,7 @@ export default class abfalterItem extends Item {
         }
         this.system.descTag += this.system.properties.magical.bool == false ? "" : ` · ${game.i18n.localize('abfalter.magical')}`;
 
+        // ========== Information Tags ==========
         this.system.tags = [];
         this.system.tags.push(game.i18n.localize(`abfalter.${this.system.info.type}`));
         if (this.system.properties.magical.bool) this.system.tags.push(`${this.system.derived.finalPresence} ${game.i18n.localize(`abfalter.presence`)}`);

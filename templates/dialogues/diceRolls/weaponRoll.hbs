@@ -32,6 +32,11 @@
         <div>
             <span> {{localize "abfalter.targetAim"}}: {{localize (concat "abfalter." attackDetails.target)}}</span>
         </div>
+        {{#if attackDetails.hasNote}}
+        <div>
+            <span>{{attackDetails.note}}</span>
+        </div>
+        {{/if}}
     </div>
     {{/ifEquals}}
 
@@ -42,6 +47,8 @@
         </div>
     </div>
     {{/ifEquals}}
+
+
 
 
     {{#each rollData as |roll i|}}

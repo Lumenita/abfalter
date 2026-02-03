@@ -12,7 +12,6 @@
             </label>
         </div>
         {{#ifEquals system.info.type "hybrid"}}
-        Currently not supported. Please select either "melee" or "ranged" as weapon type, wip 1.6.1 feature. please read notes on github for more info.
         {{/ifEquals}}
         <div class="itemPropertyContainer abfDivFormat">
             <span> {{localize "abfalter.weaponProperties"}} </span>
@@ -237,6 +236,25 @@
                     </select>
                 </div>
             </label>
+            <label class="weaponTrapping2">
+                <span>{{localize "abfalter.trapType"}}</span>
+                <button type="button" data-action="toggleValue" class="{{#if system.melee.trappingType}}kiBought{{/if}}"
+                    data-label="system.melee.trappingType" data-ability="{{system.melee.trappingType}}">
+                    {{#if system.melee.trappingType}}
+                    <span> {{localize "abfalter.flatAmount"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.regTrap"}} </span>
+                    {{/if}}
+                </button>
+                {{#if system.melee.trappingType}}
+                <span>{{localize "abfalter.enterFlatAmount"}}</span>
+                {{else}}
+                <span>{{localize "abfalter.enterCustomAmount"}} 1d10 + </span>
+                {{/if}}
+                <input type="number" name="system.melee.trappingValue" value="{{system.melee.trappingValue}}" />
+            </label>
+
+
             {{/if}}
 
             {{#if system.properties.ammunition.bool}}
@@ -420,7 +438,7 @@
     {{#ifIn system.info.type "ranged hybrid"}}
     <fieldset>
         <legend> {{ localize "abfalter.rangeDamageDetails" }} </legend>
-        {{#if system.properties.ammunition.bool}}
+        {{#if system.info.hasAmmunition}}
         <div class="csSelect itemSimpleLabel abfDivFormat">
             <label>
                 <span> {{localize "abfalter.selectAmmo"}} </span>

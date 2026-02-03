@@ -266,8 +266,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
 
                 context.weightList = CONFIG.abfalter.weightDropdown;
                 context.distanceLongList = CONFIG.abfalter.distanceLongDropdown;
-
-
+                context.wepProfileAtkTypeList = CONFIG.abfalter.wepProfileAtkTypeDropdown;
                 context.customSecObjList = CONFIG.abfalter.customSecondaryDropdown;
                 context.shieldObjList = CONFIG.abfalter.shieldDropdown;
                 context.damageModObjList = CONFIG.abfalter.damageModDropdown;
@@ -276,11 +275,10 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 context.profileTypeList = CONFIG.abfalter.profileTypeDropdown;
                 context.weaponTypeList = CONFIG.abfalter.weaponTypeDropdown;
                 context.vorpalAtkList = CONFIG.abfalter.vorpalAtkDropdown;
-                if (game.settings.get('abfalter', abfalterSettingsKeys.Use_Meters)) {
-                    context.throwDistanceDropdown = CONFIG.abfalter.metricDistLongDropdown;
-                } else {
-                    context.throwDistanceDropdown = CONFIG.abfalter.imperialDistLongDropdown;
-                }
+
+                const stripNone = (obj) => Object.fromEntries(Object.entries(obj).filter(([key]) => key !== "NONE"));
+                context.profileDamageTypeObjList = stripNone(CONFIG.abfalter.damageTypeDropdown);
+                context.profileDamageTypeSpiritObjList = stripNone(CONFIG.abfalter.damageTypeSpiritDropdown);
                 break;
             }
             case "ammo": {
@@ -329,7 +327,6 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
         }
     }
 
-
     static #toggleValue(ev) {
         ev.preventDefault();
         const target = ev.target.closest('[data-label][data-ability]');
@@ -361,12 +358,14 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
         ev.preventDefault();
         const attacks = this.item.system.attacks;
         const isShield = this.item.system.info?.type === "shield";
+        const isRanged = this.item.system.info?.type === "ranged";
 
         attacks[foundry.utils.randomID()]  = {
                 expand: true,
+                name: game.i18n.localize('abfalter.newProfile'),
                 profileType: isShield ? "defensive" : "both",
                 wepType: this.item.system.info.type,
-                name: "New Attack",
+                atkType: isShield ? "none" : isRanged ? "melee" : "ranged",
                 attack: 0,
                 finalAttack: 0,
                 block: 0,
@@ -379,27 +378,27 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 finalBreakage: 0,
                 damage: 0,
                 finalDamage: 0,
-                ignoreThrown: false,
-                fired: false,
-                rateOfFire: 0,
-                rangedAmmoConsumed: true,
-                rangedAmmoConsumedValue: 1,
-                quantityConsumed: false,
-                consumedValue: 0,
-                ignorePrecision: false,
                 ignoreVorpal: false,
+                vorpalLocation: this.item.system.info.vorpalLocation,
+                vorpalMod: this.item.system.info.vorpalMod,
+                ignoreThrown: false,
+                fired: this.item.system.melee.throwableFired,
+                quantityConsumed: this.item.system.melee.returning,
+                consumedValue: this.item.system.melee.throwConsumption,
                 ignoreTrapping: false,
-                trappingType: false,
-                trappingValue: 0,
-                parentPrecision: false,
-                parentVorpal: false,
-                parentTrapping: false,
-                parentThrowable: false,
-                atkOverride: false,
-                blkOverride: false,
-                dodOverride: false,
-                dmgOverride: false
+                trappingType: this.item.system.melee.trappingType,
+                trappingValue: this.item.system.melee.trappingValue,
+                ignoreAmmo: false,
+                rangedAmmoFired: this.item.system.ranged.fired,
+                rangedAmmoConsumed: this.item.system.ranged.infiniteAmmo,
+                rangedAmmoConsumedValue: this.item.system.ranged.ammoConsumption,
+                damageType: isShield ? "NONE" : isRanged ? this.item.system.primDmgT : this.item.system.ranged.ammoDmgType,
+                attackNote: "",
+                chatNote: "",
+                standardInfo: "",
+                ignorePrecision: false,
         };
+        if (attacks.damageType == "ANY") isRanged ? attacks.damageType = "CUT" : attacks.damageType = "THR";
 
         this.document.update({ "system.attacks": attacks });
     }
@@ -664,4 +663,3 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
     #dragDrop = this.#createDragDropHandlers();
 
 }
-
