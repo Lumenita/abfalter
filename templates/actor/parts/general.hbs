@@ -41,14 +41,11 @@
                         </div>
                         {{else}}
                         <div class="compact">
-                            <button type="button" data-roll="{{system.stats.Agility.final}}" data-action="characteristicRoll"
-                                data-label="{{localize "abfalter.agility"}}" data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Agility.final}}" data-type="{{localize "abfalter.agility"}}" data-label="characteristic">
                                 <span class="physical"> {{localize "abfalter.agi"}} </span> <span>
                                     {{system.stats.Agility.final}} </span>
                             </button>
-                            <button type="button" data-roll="{{system.stats.Agility.opposedfinal}}" data-action="characteristicRoll"
-                                data-label="{{localize "abfalter.opposed"}} {{localize "abfalter.agility" }}"
-                                data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Agility.opposedfinal}}" data-type="{{localize "abfalter.opposed"}} {{localize "abfalter.agility" }}" data-label="characteristic">
                                 <span> {{system.stats.Agility.opposedfinal}} </span>
                             </button>
                         </div>
@@ -94,13 +91,11 @@
                         </div>
                         {{else}}
                         <div class="compact">
-                            <button type="button" data-roll="{{system.stats.Constitution.final}}" data-action="characteristicRoll"
-                                data-label="{{localize "abfalter.consti"}}" data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Constitution.final}}" data-type="{{localize "abfalter.consti"}}" data-label="characteristic">
                                 <span class="physical"> {{localize "abfalter.con"}} </span> <span>
                                     {{system.stats.Constitution.final}} </span>
                             </button>
-                            <button type="button" data-action="characteristicRoll"
-                                data-roll="{{system.stats.Constitution.opposedfinal}}" data-label="{{localize "abfalter.opposed"}} {{localize "abfalter.consti" }}" data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Constitution.opposedfinal}}" data-type="{{localize "abfalter.opposed"}} {{localize "abfalter.consti" }}" data-label="characteristic">
                                 <span> {{system.stats.Constitution.opposedfinal}} </span>
                             </button>
                         </div>
@@ -144,14 +139,11 @@
                         </div>
                         {{else}}
                         <div class="compact">
-                            <button type="button" data-action="characteristicRoll" data-roll="{{system.stats.Strength.final}}"
-                                data-label="{{localize "abfalter.strength"}}" data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Strength.final}}" data-type="{{localize "abfalter.strength"}}" data-label="characteristic">
                                 <span class="physical"> {{localize "abfalter.str"}} </span> <span>
                                     {{system.stats.Strength.final}} </span>
                             </button>
-                            <button type="button" data-action="characteristicRoll" data-roll="{{system.stats.Strength.opposedfinal}}"
-                                data-label="{{localize "abfalter.opposed"}} {{localize "abfalter.strength" }}"
-                                data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Strength.opposedfinal}}" data-type="{{localize "abfalter.opposed"}} {{localize "abfalter.strength" }}" data-label="characteristic">
                                 <span> {{system.stats.Strength.opposedfinal}} </span>
                             </button>
                         </div>
@@ -197,14 +189,11 @@
                         </div><!-- <i class="fas fa-dice-d20"></i>-->
                         {{else}}
                         <div class="compact">
-                            <button type="button" data-action="characteristicRoll" data-roll="{{system.stats.Dexterity.final}}"
-                                data-label="{{localize "abfalter.dexterity"}}" data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Dexterity.final}}" data-type="{{localize "abfalter.dexterity"}}" data-label="characteristic">
                                 <span class="physical"> {{localize "abfalter.dex"}} </span> <span>
                                     {{system.stats.Dexterity.final}} </span>
                             </button>
-                            <button type="button" data-action="characteristicRoll" data-roll="{{system.stats.Dexterity.opposedfinal}}"
-                                data-label="{{localize "abfalter.opposed"}} {{localize "abfalter.dexterity" }}"
-                                data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Dexterity.opposedfinal}}" data-type="{{localize "abfalter.opposed"}} {{localize "abfalter.dexterity" }}" data-label="characteristic">
                                 <span> {{system.stats.Dexterity.opposedfinal}} </span>
                             </button>
                         </div>
@@ -250,14 +239,11 @@
                         </div><!-- <i class="fas fa-dice-d20"></i>-->
                         {{else}}
                         <div class="compact">
-                            <button type="button" data-action="characteristicRoll" data-roll="{{system.stats.Perception.final}}"
-                                data-label="{{localize "abfalter.perception"}}" data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Perception.final}}" data-type="{{localize "abfalter.perception"}}" data-label="characteristic">
                                 <span class="mental"> {{localize "abfalter.per"}} </span> <span>
                                     {{system.stats.Perception.final}} </span>
                             </button>
-                            <button type="button" data-action="characteristicRoll" data-roll="{{system.stats.Perception.opposedfinal}}"
-                                data-label="{{localize "abfalter.opposed"}} {{localize "abfalter.perception" }}"
-                                data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Perception.opposedfinal}}" data-type="{{localize "abfalter.opposed"}} {{localize "abfalter.perception" }}" data-label="characteristic">
                                 <span> {{system.stats.Perception.opposedfinal}} </span>
                             </button>
                         </div>
@@ -303,13 +289,11 @@
                         </div><!-- <i class="fas fa-dice-d20"></i>-->
                         {{else}}
                         <div class="compact">
-                            <button type="button" data-action="characteristicRoll" data-roll="{{system.stats.Intelligence.final}}"
-                                data-label="{{localize "abfalter.intell"}}" data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Intelligence.final}}" data-type="{{localize "abfalter.intell"}}" data-label="characteristic">
                                 <span class="mental"> {{localize "abfalter.int"}} </span> <span>
                                     {{system.stats.Intelligence.final}} </span>
                             </button>
-                            <button type="button" data-action="characteristicRoll"
-                                data-roll="{{system.stats.Intelligence.opposedfinal}}" data-label="{{localize "abfalter.opposed"}} {{localize "abfalter.intell" }}" data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Intelligence.opposedfinal}}" data-type="{{localize "abfalter.opposed"}} {{localize "abfalter.intell" }}" data-label="characteristic">
                                 <span> {{system.stats.Intelligence.opposedfinal}} </span>
                             </button>
                         </div>
@@ -352,14 +336,11 @@
                         </div><!-- <i class="fas fa-dice-d20"></i>-->
                         {{else}}
                         <div class="compact">
-                            <button type="button" data-action="characteristicRoll" data-roll="{{system.stats.Power.final}}"
-                                data-label="{{localize "abfalter.power"}}" data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Power.final}}" data-type="{{localize "abfalter.power"}}" data-label="characteristic">
                                 <span class="mental"> {{localize "abfalter.pow"}} </span> <span>
                                     {{system.stats.Power.final}} </span>
                             </button>
-                            <button type="button" data-action="characteristicRoll" data-roll="{{system.stats.Power.opposedfinal}}"
-                                data-label="{{localize "abfalter.opposed"}} {{localize "abfalter.power" }}"
-                                data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Power.opposedfinal}}" data-type="{{localize "abfalter.opposed"}} {{localize "abfalter.power" }}" data-label="characteristic">
                                 <span> {{system.stats.Power.opposedfinal}} </span>
                             </button>
                         </div>
@@ -404,14 +385,11 @@
                         </div><!-- <i class="fas fa-dice-d20"></i>-->
                         {{else}}
                         <div class="compact">
-                            <button type="button" data-action="characteristicRoll" data-roll="{{system.stats.Willpower.final}}"
-                                data-label="{{localize "abfalter.willPower"}}" data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Willpower.final}}" data-type="{{localize "abfalter.willPower"}}" data-label="characteristic">
                                 <span class="mental"> {{localize "abfalter.wp"}} </span> <span>
                                     {{system.stats.Willpower.final}} </span>
                             </button>
-                            <button type="button" data-action="characteristicRoll" data-roll="{{system.stats.Willpower.opposedfinal}}"
-                                data-label="{{localize "abfalter.opposed"}} {{localize "abfalter.willPower" }}"
-                                data-type="characteristicRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{system.stats.Willpower.opposedfinal}}" data-type="{{localize "abfalter.opposed"}} {{localize "abfalter.willPower" }}" data-label="characteristic">
                                 <span> {{system.stats.Willpower.opposedfinal}} </span>
                             </button>
                         </div>
@@ -435,8 +413,7 @@
                     {{#each system.resistances as |res key|}}
                     <div>
                         <div>
-                            <button type="button" data-action="characteristicRoll" data-roll="{{res.final}}" data-label="{{res.name}}"
-                                data-type="resRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{res.final}}" data-type="{{res.name}}" data-label="resistance">
                                 <span> {{res.short}} </span>
                                 <span> {{res.final}} </span>
                             </button>
@@ -653,8 +630,7 @@
                         <label> <span> {{localize "abfalter.final"}} </span> <input type="number"
                                 name="system.combatValues.block.final" value="{{system.combatValues.block.final}}"
                                 readonly /> </label>
-                        <button type="button" data-action="plainRoll" data-roll="{{system.combatValues.block.final}}"
-                            data-label="block" data-type="combatRoll">
+                        <button type="button" data-action="abfRollButton" data-label="unarmedBlock" data-value="{{system.combatValues.block.final}}">
                             <span> <i class="fas fa-dice-d20"></i> </span>
                         </button>
                     </div>
@@ -690,8 +666,7 @@
                         <label> <span> {{localize "abfalter.final"}} </span> <input type="number"
                                 name="system.combatValues.dodge.final" value="{{system.combatValues.dodge.final}}"
                                 readonly /> </label>
-                        <button type="button" data-action="plainRoll" data-roll="{{system.combatValues.dodge.final}}"
-                            data-label="dodge" data-type="combatRoll">
+                        <button type="button" data-action="abfRollButton" data-label="unarmedDodge" data-value="{{system.combatValues.dodge.final}}">
                             <span> <i class="fas fa-dice-d20"> </i> </span>
                         </button>
                     </div>

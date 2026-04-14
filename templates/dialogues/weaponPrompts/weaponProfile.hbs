@@ -72,9 +72,16 @@
             <input type="number" id="modifierMod" value="0" /> 
         </label>
 
-        <label id="noteRow">
+        <label class="profileNoteRow" id="noteRow">
             <span id="noteInfo"></span>
         </label>
+        
+        {{#ifEquals actionType "attack"}}
+        <div class="target-preview-row">
+            <label>{{localize "abfalter.targets"}}</label>
+            <div id="selectedTargetsList">None</div>
+        </div>
+        {{/ifEquals}}
 
         <label></label>
     </div>

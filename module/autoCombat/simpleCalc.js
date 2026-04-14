@@ -3,8 +3,8 @@
     * This script provides a simple calculator dialog for calculating combat outcomes based on attack, damage, defense, and armor values.
 */
 
-// Utility: Damage percentage calculator
-function calculateDamagePercentage(diff, armorCount) {
+  // Utility: Damage percentage calculator
+  function calculateDamagePercentage(diff, armorCount) {
     if (diff <= 0) return 0;
   
     if (armorCount === 0) {

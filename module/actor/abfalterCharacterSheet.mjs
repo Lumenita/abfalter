@@ -29,8 +29,13 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             itemToggleValue: this.#itemToggleValue,
             itemToChat: this.#itemToChat,
             subItemToChat: this.#subItemToChat,
-            characteristicRoll: this.#onChaRoll,
+
+            abfRollButton: this.#hadleRollFunctions,
+
             plainRoll: this.#onPlainRoll,
+            weaponRoll: this.#onWeaponRoll,
+
+
             createItem: this.#createNewItem,
             kiAccuHalf: this.#kiAccuHalf,
             kiAccuFull: this.#kiAccuFull,
@@ -41,13 +46,13 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             magicRegenActual: this.#magicRegenActual,
             removeMaint: this.#removeMaint,
             openArcanaSephirah: this.#openArcanaSephirah,
-            weaponRoll: this.#onWeaponRoll,
 
             armoryAddItem: this.#armoryAddItem,
             increase: this.#increaseQuantity,
             decrease: this.#decreaseQuantity,
-            openMenu: this.#openMenu,
             ammoWeaponToggle: this.#ammoWeaponToggle,
+            openMenu: this.#openMenu,
+
 
             openDPCalc: this.#openDpCostCalc,
             changeSecNums: this.#changeSecNums,
@@ -546,16 +551,58 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         return item.update({ [`system.gifts.${key}.${label}`]: value });
     }
 
-    static #onChaRoll(ev) {
-        ev.preventDefault();
-        const dataset = ev.target.dataset;
-        diceFunctions.openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type);
-    }
-
     static #onPlainRoll(ev) {
         ev.preventDefault();
         const dataset = ev.target.dataset;
         diceFunctions.openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type, dataset.ability);
+    }
+
+    static #hadleRollFunctions(ev) {
+        ev.preventDefault();
+        const dataset = ev.target.dataset;
+        switch (dataset.label) {
+            case "characteristic": 
+                diceFunctions.characteristicDialogue({actor: this.actor, chaLabel: dataset.type, value: dataset.value});
+                break;
+            case "resistance":
+                diceFunctions.resistanceDialogue({actor: this.actor, chaLabel: dataset.type, value: dataset.value});
+                break;
+            case "unarmedBlock":
+            case "unarmedDodge":
+            case "defMagicProj":
+            case "defPsyProj":
+                diceFunctions.defensiveRollDialogue({actor: this.actor, defLabel: dataset.label, baseValue: dataset.value, weaponId: null});
+                break;
+            case "weaponBlock":
+            case "weaponDodge":
+                diceFunctions.defensiveRollDialogue({actor: this.actor, defLabel: dataset.label, baseValue: dataset.value, weaponId: dataset.id});
+                break;
+            case "offPsyProj":
+                console.log('HA');
+                break;
+            default:
+                break;
+        }
+    }
+
+    static #onWeaponRoll(ev) {
+        ev.preventDefault();
+        const dataset = ev.target.dataset;
+
+        switch (dataset.value) {
+            case 'weaponAtk':
+                diceFunctions.openWeaponProfileDialogue(this.actor, dataset.label, dataset.id, dataset.type, 'attack', 'offensive');
+                break;
+            case 'weaponTrap':
+                diceFunctions.openMeleeTrapDialogue(this.actor, dataset.label, dataset.id);
+                break;
+            case 'weaponBreak':
+                diceFunctions.openMeleeBreakDialogue(this.actor, dataset.label, dataset.id, dataset.type);
+                break;
+            default:
+                console.log("Error: This weapon roll type does not exist");
+                break;
+        }
     }
 
     static #kiAccuHalf(ev) {
@@ -749,32 +796,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
     static #openDpOffsets(ev) {
         ev.preventDefault();
         actorFunctions.dpOffSetsWindow(this.actor);
-    }
-
-    static #onWeaponRoll(ev) {
-        ev.preventDefault();
-        const dataset = ev.target.dataset;
-
-        switch (dataset.value) {
-            case 'weaponAtk':
-                diceFunctions.openWeaponProfileDialogue(this.actor, dataset.label, dataset.id, dataset.type, 'attack', 'offensive');
-                break;
-            case 'weaponDef':
-                diceFunctions.openWeaponProfileDialogue(this.actor, dataset.label, dataset.id, dataset.type, 'block', 'defensive');
-                break;
-            case 'weaponDod':
-                diceFunctions.openWeaponProfileDialogue(this.actor, dataset.label, dataset.id, dataset.type, 'dodge', 'defensive');
-                break;
-            case 'weaponTrap':
-                diceFunctions.openMeleeTrapDialogue(this.actor, dataset.label, dataset.id);
-                break;
-            case 'weaponBreak':
-                diceFunctions.openMeleeBreakDialogue(this.actor, dataset.label, dataset.id, dataset.type);
-                break;
-            default:
-                console.log("Error: This weapon roll type does not exist");
-                break;
-        }
     }
 
     static async #armoryAddItem(ev) {
@@ -1019,15 +1040,13 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
 
     static async #createActiveEffect(ev, target) {
         const docCls = getDocumentClass(target.dataset.documentClass);
-        const docData = {
-        name: docCls.defaultName({ type: target.dataset.type, parent: this.actor }),
-        };
+        const docData = { name: docCls.defaultName({ type: target.dataset.type, parent: this.actor }),};
         // Loop through the dataset and add it to our docData
         for (const [dataKey, value] of Object.entries(target.dataset)) {
-        // These data attributes are reserved for the action handling
-        if (["action", "documentClass", "renderSheet"].includes(dataKey)) continue;
-        // Nested properties use dot notation like `data-system.prop`
-        foundry.utils.setProperty(docData, dataKey, value);
+            // These data attributes are reserved for the action handling
+            if (["action", "documentClass", "renderSheet"].includes(dataKey)) continue;
+            // Nested properties use dot notation like `data-system.prop`
+            foundry.utils.setProperty(docData, dataKey, value);
         }
 
         await docCls.create(docData, { parent: this.actor, renderSheet: target.dataset.renderSheet });
@@ -1094,7 +1113,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         }
 
         // Perform the sort
-        const sortUpdates = foundry.utils.SortingHelpers.performIntegerSort(effect, {
+        const sortUpdates = foundry.utils.performIntegerSort(effect, {
         target,
         siblings,
         });

@@ -1,0 +1,15 @@
+    <div class="defaultDefRoll">
+        {{#each rollData as |roll i|}}
+        <div class="chatCustomRoll chatCustomTitleContainer">
+            <span> {{roll.label}}</span>
+            <span class="{{roll.color}}"> {{roll.total}} </span>
+            <div class="chatCustomTitle">{{roll.formula}}</div>
+        </div>
+        {{#if roll.showSeverity}}
+        <div class="defaultDefFumble" title="{{rollResult.result}}">
+            <span> {{localize "abfalter.dialogs.fumbleSeverity"}} </span>
+            <span class="fumbleRoll"> -{{roll.fumbleS}} </span>
+        </div>
+        {{/if}}
+        {{/each}}
+    </div>

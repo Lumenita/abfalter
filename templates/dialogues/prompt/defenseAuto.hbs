@@ -1,0 +1,57 @@
+<form>
+  <body>
+    <div class="abfDivFormat defenseAuto">
+        <label>
+            <span>Defense Type</span>
+            <select id="defenseTypeDropdown"></select>
+        </label>
+
+        <label id="weaponRow">
+            <span>Weapon</span>
+            <select id="weaponDropdown"></select>
+        </label>
+
+        <label id="profileRow">
+            <span>Profile</span>
+            <select id="profileDropdown"></select>
+        </label>
+
+        <label id="combatDefenseRow">
+            <span>Combat Defense</span>
+            <select id="combatDefenseDropdown"></select>
+        </label>
+
+        <div class="armor-row" id="armorRow">
+            <label id="armorLabel">
+                {{localize "abfalter.armor"}} ({{armorTypeName}})
+            </label>
+
+            <input
+                type="number"
+                id="armorMod"
+                value="0"
+                step="1"
+                class="armor-mod-input"
+            />
+
+            <span id="armorFinalValue">{{armorBaseValue}}</span>
+        </div>
+
+        <label>
+            <span>{{localize "abfalter.defenseNumber"}}</span>
+            <select id="defNumberDropdown"></select>
+        </label>
+
+        <label>
+            <span>{{localize "abfalter.fatigue"}}</span>
+            <select id="fatigueDropdown"></select>
+        </label>
+
+        <label> 
+            <span> {{localize "abfalter.dialogs.modifier"}} </span>
+            <input type="number" id="modifierMod" value="0" /> 
+        </label>
+
+    </div>
+  </body>
+</form>

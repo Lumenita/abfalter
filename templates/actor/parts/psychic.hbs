@@ -73,18 +73,21 @@
                         <span> {{localize "abfalter.attack"}}: {{system.pproj.atkModule}} </span>
                     </button>
                     {{#if system.toggles.psychicDodgeStatus}}
-                    <button type="button" data-action="plainRoll" data-roll="{{system.pproj.dodModule}}" data-label="dodge" data-type="combatRoll">
+                    <button type="button" data-action="abfRollButton" data-label="defPsyProj" data-value="{{system.pproj.dodModule}}">
                         <span> {{localize "abfalter.dodge"}}: {{system.pproj.dodModule}} </span>
                     </button>
                     {{else}}
-                    <button type="button" data-action="plainRoll" data-roll="{{system.pproj.defModule}}" data-label="block" data-type="combatRoll">
+                    <button type="button" data-action="abfRollButton" data-label="defPsyProj" data-value="{{system.pproj.defModule}}">
                         <span> {{localize "abfalter.block"}}: {{system.pproj.defModule}} </span>
                     </button>
                     {{/if}}
                 </div>
                 {{else}}
-                <div>
-                    <button type="button" data-action="plainRoll" data-roll="{{system.pproj.final}}" data-label="psyProj" data-type="combatRoll">
+                <div class="pmodButton">
+                    <button type="button" data-action="abfRollButton" data-label="offPsyProj" data-value="{{system.pproj.final}}">
+                        <span> <i class="fas fa-dice-d20"></i> </span>
+                    </button>
+                    <button type="button" data-action="abfRollButton" data-label="defPsyProj" data-value="{{system.pproj.final}}">
                         <span> <i class="fas fa-dice-d20"></i> </span>
                     </button>
                 </div>

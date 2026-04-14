@@ -1,0 +1,39 @@
+{{> "systems/abfalter/templates/dialogues/partials/customChatHeader.hbs"}}
+
+<div class="baseAbfalterV2 defaultRollMsg autoDefRollMsg" data-actor-id="{{actor._id}}">
+    <div>
+        <span> {{defenseDetails.defTypeName}} </span>
+    </div>
+
+    {{> "systems/abfalter/templates/dialogues/partials/customDefaultRoll.hbs"}}
+
+    <div class="autoDefArmor">
+        <div>
+            {{defenseDetails.armorType}}
+            {{defenseDetails.armorFinal}}
+        </div>
+    </div>
+
+    {{#each rollData as |roll i|}}
+    <label class="explodeButtons">
+        {{#if roll.explode}}
+        <button class="autoDefOpenRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
+        {{/if}}
+        {{#if roll.fumble}}
+        <button class="autoDefFumbleRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
+        {{/if}}
+    </label>
+    {{/each}}
+
+    {{#ifEquals status "pendingGMAccept"}}
+    <div class="gm-only resolveAcceptButton">
+        <button class="sendDefenseToResolve">Accept Defense</button>
+    </div>
+    {{/ifEquals}}
+    {{#ifEquals status "accepted"}}
+    <div class="gm-only resolveAcceptText">
+        <span>Defense has been accepted</span>
+    </div>
+    {{/ifEquals}}
+
+</div>

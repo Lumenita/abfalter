@@ -69,13 +69,18 @@ Hooks.once("init", async () => {
 
     //Exposing all roll functions to the game object
     game.abfalter = {
+        characteristicRoll: dice.characteristicRoll,
+        resistanceRoll: dice.resistanceRoll,
+
+        defensiveRollDialogue: dice.defensiveRollDialogue,
+        defensiveOpenRollFunction: dice.defensiveOpenRollFunction,
+        defensiveFumbleRollFunction: dice.defensiveFumbleRollFunction,
+
         openWeaponProfileDialogue: dice.openWeaponProfileDialogue,
         profileOpenRollFunction: dice.profileOpenRollFunction,
         profileFumbleRollFunction: dice.profileFumbleRollFunction,
         openMeleeTrapDialogue: dice.openMeleeTrapDialogue,
         openMeleeBreakDialogue: dice.openMeleeBreakDialogue,
-        rollResistance: dice.rollResistance,
-        rollCharacteristic: dice.rollCharacteristic,
         plainRoll: dice.plainRoll
     }
 
@@ -91,10 +96,35 @@ Hooks.once("init", async () => {
     
     return preloadHandlebarsTemplates();
 });
- 
 Hooks.on("renderChatMessageHTML", (chatMessage, html) => {
     Chat.addChatListeners(chatMessage, html);
-    //Chat.hideChatActionButtons(chatMessage, html);
+    Chat.hideResolveControls(chatMessage, html);
+
+    const isCustomResolution = chatMessage.flags?.abfalter?.customChatHeaderCard;
+    if (!isCustomResolution) return;
+
+    const timeEl = html.querySelector(".abfResolutionTime");
+    if (timeEl) {
+        const updateTime = () => {
+            timeEl.textContent = foundry.utils.timeSince(new Date(chatMessage.timestamp));
+        };
+
+        updateTime();
+
+        const interval = setInterval(updateTime, 15000);
+
+        const observer = new MutationObserver(() => {
+            if (!document.body.contains(timeEl)) {
+                clearInterval(interval);
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
+
+    const header = html.querySelector("header.message-header");
+    if (header) header.remove();
 });
 
 //Custom Macro Bar
@@ -320,6 +350,10 @@ class actorDataModel extends foundry.abstract.DataModel {
                 crit: makeIntField(),
                 critBig: makeIntField(),
                 bonus: makeIntField()
+            }),
+            autoCombat: new foundry.data.fields.SchemaField({
+                prefDefenseType: makeStringField("combat"),
+                prefWeapon: makeStringField(""),
             }),
             otherStats: new foundry.data.fields.SchemaField({
                 itemPresence: makeIntField(),
@@ -2188,5 +2222,16 @@ function spellDif() {
         zeonCost: makeIntField(),
         maint: makeIntField(),
         rollDesc: makeStringField()
+    })
+}
+
+function usage() {
+    return new foundry.data.fields.SchemaField({
+        spent: makeIntField(),
+        max: makeIntField(),
+        destroyEmpty: makeBoolField(),
+        recoveryPeriod: makeStringField(), // day, initiative, x turns
+        recoveryType: makeStringField(), // full or x amount 
+        recoveryTime: makeIntField(), // x value until recovered
     })
 }

@@ -1268,6 +1268,17 @@
     "poison": "Poison",
     "potion": "Potion",
     "noProfilesFound": "The weapon currently has no Profiles. Create a profile to be able to use the weapon.",
+    "physical": "Physical",
+    "combat": "Combat",
+    "gm": "Gamemaster",
+    "defPsyProj": "Def. Psychic Proj.",
+    "offPsyProj": "Off. Psychic Proj.",
+    "openRoll": "Open Roll",
+    "roll": "Roll",
+    "fumbleLevel": "Fumble Level",
+    "fumbleResult": "Fumble Result",
+    "fumble": "Fumble",
+
 
 
     "kiAbilityData": {

@@ -711,7 +711,7 @@ export default class kiTechCreator extends foundry.applications.api.HandlebarsAp
                                     dex: techniqueData.kiFinalValues.dexterity?.finalKi || 0,
                                     str: techniqueData.kiFinalValues.strength?.finalKi || 0,
                                     pow: techniqueData.kiFinalValues.power?.finalKi || 0,
-                                    wp: techniqueData.kiFinalValues.willpower?.finalKi || 0
+                                    wp: techniqueData.kiFinalValues.willPower?.finalKi || 0
                                 },
                                 maint: {
                                     unified: techniqueData.unifiedCost,
@@ -720,7 +720,7 @@ export default class kiTechCreator extends foundry.applications.api.HandlebarsAp
                                     dex: techniqueData.kiFinalValues.dexterity?.finalMaint || 0,
                                     str: techniqueData.kiFinalValues.strength?.finalMaint || 0,
                                     pow: techniqueData.kiFinalValues.power?.finalMaint || 0,
-                                    wp: techniqueData.kiFinalValues.willpower?.finalMaint || 0
+                                    wp: techniqueData.kiFinalValues.willPower?.finalMaint || 0
                                 }
                             }
                         };

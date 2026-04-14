@@ -1845,31 +1845,6 @@ export default class abfalterActor extends Actor {
         system.combatValues.block.final -= system.armor.wearArmor.totalNatPen;
         system.combatValues.dodge.final -= system.armor.wearArmor.totalNatPen;
 
-        // Initiative
-        if (system.kiAbility.kiIncreaseSpd.status == true) {
-            system.initiative.kiAbilityBonus = 10;
-        } else {
-            system.initiative.kiAbilityBonus = 0;
-        }
-        system.initiative.class = classBonuses.ini;
-        system.initiative.wepNumber = classBonuses.wepNum;
-        system.initiative.wepSpeed = classBonuses.wepSpd + classBonuses.shieldSpeed;
-        system.initiative.wepName = classBonuses.wepName;
-        
-        if (system.initiative.wepNumber > 1 && system.initiative.wepSpeed < 0) {
-            system.initiative.wepFinalSpeed = system.initiative.wepSpeed - 20;
-            system.initiative.wepName = game.i18n.localize('abfalter.multiWield');
-        } else if (system.initiative.wepNumber > 1 && system.initiative.wepSpeed >= 0) {
-            system.initiative.wepFinalSpeed = system.initiative.wepSpeed - 10;
-            system.initiative.wepName = game.i18n.localize('abfalter.multiWield');
-        } else if (system.initiative.wepNumber == 0) {
-            system.initiative.wepFinalSpeed = 20;
-            system.initiative.wepName = game.i18n.localize('abfalter.unarmed');
-        } else {
-            system.initiative.wepFinalSpeed = system.initiative.wepSpeed;
-        }
-        system.initiative.final = Math.floor(system.initiative.base + system.initiative.class + system.initiative.other + system.initiative.spec + system.initiative.bonus + system.initiative.kiAbilityBonus + ~~system.initiative.wepFinalSpeed - system.armor.wearArmor.totalNatPen);
-
         //@SECONDARIES
         //Athletics Fields
         system.secondaryFields.athletics.acrobatics.classBonus = classBonuses.acro;
@@ -2406,13 +2381,41 @@ export default class abfalterActor extends Actor {
         system.rollRange.final = Math.floor(system.rollRange.base - system.rollRange.spec - system.rollRange.temp - system.rollRange.bonus);
         system.fumleRange.final = Math.floor(system.fumleRange.base + system.fumleRange.spec + system.fumleRange.temp + system.fumleRange.bonus);
 
-        // Reload Items to get Atk/Def
+        // 2nd Item load for derived Item values.
+        let pushSpeed;
         this.items.reduce((arr, item) => {
             if (item.type === "weapon" || item.type === "secondary" ) {
-
                 item.prepareData();
+                if (item.type === "weapon") {
+                    pushSpeed = item.system.pushSpeed.applied;
+                }
             }
         });
+
+        // Initiative
+        if (system.kiAbility.kiIncreaseSpd.status == true) {
+            system.initiative.kiAbilityBonus = 10;
+        } else {
+            system.initiative.kiAbilityBonus = 0;
+        }
+        system.initiative.class = classBonuses.ini;
+        system.initiative.wepNumber = classBonuses.wepNum;
+        system.initiative.wepSpeed = classBonuses.wepSpd + classBonuses.shieldSpeed + pushSpeed;
+        system.initiative.wepName = classBonuses.wepName;
+        
+        if (system.initiative.wepNumber > 1 && system.initiative.wepSpeed < 0) {
+            system.initiative.wepFinalSpeed = system.initiative.wepSpeed - 20;
+            system.initiative.wepName = game.i18n.localize('abfalter.multiWield');
+        } else if (system.initiative.wepNumber > 1 && system.initiative.wepSpeed >= 0) {
+            system.initiative.wepFinalSpeed = system.initiative.wepSpeed - 10;
+            system.initiative.wepName = game.i18n.localize('abfalter.multiWield');
+        } else if (system.initiative.wepNumber == 0) {
+            system.initiative.wepFinalSpeed = 20;
+            system.initiative.wepName = game.i18n.localize('abfalter.unarmed');
+        } else {
+            system.initiative.wepFinalSpeed = system.initiative.wepSpeed;
+        }
+        system.initiative.final = Math.floor(system.initiative.base + system.initiative.class + system.initiative.other + system.initiative.spec + system.initiative.bonus + system.initiative.kiAbilityBonus + ~~system.initiative.wepFinalSpeed - system.armor.wearArmor.totalNatPen);
     }
 }
 

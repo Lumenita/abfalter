@@ -48,7 +48,45 @@
     </div>
     {{/ifEquals}}
 
+    {{#ifEquals attackDetails.profileType "offensive"}}
+    {{#if workflow.selectedDefenderIds.length}}
+    <section class="abf-target-list">
+        <div class="abf-target-list__header">
+            TARGETS
+        </div>
 
+        {{#each targetList}}
+        <div class="abf-target-row" data-token-id="{{this.tokenId}}">
+            <div class="abf-target-row__left">
+                {{#if this.img}}
+                    <img class="abf-target-row__img" src="{{this.img}}" alt="{{this.name}}">
+                {{/if}}
+                <span class="abf-target-row__name">{{this.name}}</span>
+            </div>
+
+            <div class="abf-target-row__right">
+                <button
+                    type="button"
+                    class="abfDefendButton"
+                    data-token-id="{{this.tokenId}}"
+                    data-actor-id="{{this.actorId}}"
+                    data-locked-by-roll="{{#if ../defendLocked}}true{{else}}false{{/if}}"
+                    {{#if ../defendLocked}}disabled{{/if}}
+                >
+                    Defend
+                </button>
+            </div>
+        </div>
+        {{/each}}
+
+        {{#if defendLocked}}
+        <div class="abf-target-list__note">
+            Waiting for open roll / fumble resolution.
+        </div>
+        {{/if}}
+    </section>
+    {{/if}}
+    {{/ifEquals}}
 
 
     {{#each rollData as |roll i|}}
@@ -61,4 +99,7 @@
         {{/if}}
     </label>
     {{/each}}
+
+
+    
 </div>

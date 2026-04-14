@@ -38,16 +38,16 @@
                         {{/if}}
                         {{#if system.toggles.magicDefModule}}
                         {{#if system.toggles.magicDodgeModule}}
-                        <button type="button" data-action="plainRoll" data-roll="{{system.mproj.dodModule}}" data-label="dodge" data-type="combatRoll">
+                        <button type="button" data-action="abfRollButton" data-label="defMagicProj" data-value="{{system.mproj.dodModule}}">
                             <span> {{localize "abfalter.defensive"}} </span> <span> {{system.mproj.dodModule}} </span>
                         </button>
                         {{else}}
-                        <button type="button" data-action="plainRoll" data-roll="{{system.mproj.defModule}}" data-label="block" data-type="combatRoll">
+                        <button type="button" data-action="abfRollButton" data-label="defMagicProj" data-value="{{system.mproj.defModule}}">
                             <span> {{localize "abfalter.defensive"}} </span> <span> {{system.mproj.defModule}} </span>
                         </button>
                         {{/if}}
                         {{else}}
-                        <button type="button" data-action="plainRoll" data-roll="{{system.mproj.finalDefensive}}" data-label="defMagicProj" data-type="combatRoll">
+                        <button type="button" data-action="abfRollButton" data-label="defMagicProj" data-value="{{system.mproj.finalDefensive}}">
                             <span> {{localize "abfalter.defensive"}} </span> <span> {{system.mproj.finalDefensive}} </span>
                         </button>
                         {{/if}}

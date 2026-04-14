@@ -1,0 +1,103 @@
+{{> "systems/abfalter/templates/dialogues/partials/customChatHeader.hbs"}}
+
+<div class="baseAbfalterV2 resolveCombatMsg">
+    <div>
+        <span> Combat Results </span>
+    </div>
+
+    <div class="resolveAttackContainer">
+        <div class="resolveAttackData">
+            <label>
+                <span>
+                    {{resolveData.attackerValues.attackSubLabel}} ({{resolveData.attackerValues.attackName}})
+                </span>
+            </label>
+            <label>
+                <span>
+                    Attack: {{resolveData.attackerValues.finalValue}} | Damage: {{resolveData.attackerValues.dmg}} {{resolveData.attackerValues.dmgType}} | AT Pen: {{resolveData.attackerValues.atPen}}
+                </span>
+            </label>
+        </div>
+        <div class="resolveAttackExtra">
+            <span>
+                Other notes
+            </span>
+        </div>
+    </div>
+
+    <div>
+        <div class="resolveTargetsHeader">
+        <span class="resolveTargetsHeaderCenter">
+            <i class="fa-solid fa-heart-crack resolveTargetsHeaderIcon"></i>
+            <span class="resolveTargetsHeaderText">Apply</span>
+            <i class="fas fa-caret-right resolveTargetsHeaderChevron"></i>
+        </span>
+        </div>
+
+        <div class="resolveTargetsBody">
+            {{#each resolveData.defenderValues as |defender key|}}
+            <div class="resolveDefenderContainer" data-defender-index="{{key}}" data-defender-id="{{key}}" data-base-damage="{{defender.totalDmg}}">
+                <div class="resolveDefenderTopRow">
+                    <img class="resolveDefenderPortraitWrap" src="{{defender.portrait}}">
+                    <div class="resolveDefenderName">{{defender.name}}</div>
+                    <div class="resolveDefenderTotalDamageValue {{defender.dmgColor}}">{{defender.totalDmg}}</div>
+                </div>
+
+                <div class="resolveDefenderMiddle">
+                    <div class="resolveDefenderStatsRow">
+                        <span class="resolveDefenderStat">
+                            Defense: {{defender.defenseTotal}} | Final AT: {{defender.effectiveArmor}} | Dmg: {{defender.dmgPercentage}}%
+                        </span>
+                    </div>
+
+                    <div class="resolveDefenderInfoRow">
+                        <span>{{defender.dmgInfo}}</span>
+                    </div>
+                </div>
+                {{#unless @root.resolveData.resolved}}
+                <div class="gm-only resolveDefenderApplyContainer">
+                    <span>x</span>
+                    <div class="resolveDefenderApplyDmg">
+                        <label class="resolveDmgOption">
+                            <input type="radio" name="dmg-{{key}}" value="-1">
+                            <span>-1</span>
+                        </label>
+
+                        <label class="resolveDmgOption">
+                            <input type="radio" name="dmg-{{key}}" value="0">
+                            <span>0</span>
+                        </label>
+
+                        <label class="resolveDmgOption">
+                            <input type="radio" name="dmg-{{key}}" value="0.5">
+                            <span>½</span>
+                        </label>
+
+                        <label class="resolveDmgOption">
+                            <input type="radio" name="dmg-{{key}}" value="1" checked>
+                            <span>1</span>
+                        </label>
+
+                        <label class="resolveDmgOption">
+                            <input type="radio" name="dmg-{{key}}" value="1.5">
+                            <span>1.5</span>
+                        </label>
+
+                        <label class="resolveDmgOption">
+                            <input type="radio" name="dmg-{{key}}" value="2">
+                            <span>2</span>
+                        </label>
+                    </div>
+                </div>
+                {{/unless}}
+            </div>
+            {{/each}}
+        </div>
+
+        {{#unless resolveData.resolved}}
+        <div class="gm-only resolveApplyButton">
+            <button class="applyDamageToActors">Apply</button>
+        </div>
+        {{/unless}}
+    </div>
+</div>

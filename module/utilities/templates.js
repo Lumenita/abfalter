@@ -8,18 +8,8 @@ export const templates = {
     classManager: 'systems/abfalter/templates/other/classManager.hbs',
     dialog: {
         generic: 'systems/abfalter/templates/dialogues/generic.html',
-        initiative: 'systems/abfalter/templates/dialogues/initiative.html',
         edits: {
             header: 'systems/abfalter/templates/editDetails/headerEdit.html'
-        },
-        combat: {
-            combatAttackDialog: {
-                main: 'systems/abfalter/templates/autoCombat/attackCombatDialog.hbs',
-                parts: {
-                    combat: 'systems/abfalter/templates/autoCombat/attackParts/combat.html',
-                    mystic: 'systems/abfalter/templates/autoCombat/attackParts/mystic.html'
-                }
-            }
         }
     }
 }

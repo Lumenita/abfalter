@@ -5,9 +5,6 @@ export const preloadHandlebarsTemplates = () => {
         templates.CustomHotBar,
         templates.dialog.generic,
         templates.dialog.initiative,
-        templates.dialog.combat.combatAttackDialog.main,
-        templates.dialog.combat.combatAttackDialog.parts.combat,
-        templates.dialog.combat.combatAttackDialog.parts.mystic,
         //actor tabs
         "systems/abfalter/templates/actor/parts/bio.hbs",
         "systems/abfalter/templates/actor/parts/general.hbs",
@@ -22,6 +19,8 @@ export const preloadHandlebarsTemplates = () => {
         //partials
         "systems/abfalter/templates/actor/parts/metaMagic.hbs",
         "systems/abfalter/templates/dialogues/changelog.hbs",
+        "systems/abfalter/templates/dialogues/partials/customChatHeader.hbs",
+        "systems/abfalter/templates/dialogues/partials/customDefaultRoll.hbs",
         //item partials
         "systems/abfalter/templates/item/partials/generalDetails.hbs",
         "systems/abfalter/templates/item/partials/subHeader/advantage.hbs",

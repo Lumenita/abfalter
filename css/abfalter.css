@@ -6,6 +6,16 @@
 .tab {
     overflow-y: auto;
 }
+h1 {
+    color: var(--color-text-alt);
+}
+h2 {
+    color: var(--color-text-alt);
+}
+h3 {
+    color: var(--color-text-alt);
+    border-bottom: 1px solid var(--boxColor);
+}
 h5 {
     display: flex;
     width: 100%;
@@ -24,7 +34,6 @@ h6 {
     font-size: var(--font-size-16);
     color: var(--boxColor);
 }
-
 
 .baseAbfalterV2 select {
     height: 20px;
@@ -165,6 +174,7 @@ h6 {
 .lockLabel {
     pointer-events: none;
 }
+
 /* #endRegion */
 
 /* #region @!Important classes  @v2 */
@@ -189,6 +199,9 @@ h6 {
 #context-menu .context-items > li:nth-of-type(6) {
     border-top: 1px solid var(--boxColor);
 }
+.chat-message #context-menu li.context-item {
+    color: var(--armoryItemHeader);
+} 
 /* #endregion */
 
 /* #region @Color Theme */
@@ -209,7 +222,7 @@ h6 {
     --armoryButtonBackground: rgb(11 10 18 / 50%);
     /* text Colors */
     --textColor: #bbbbbb;
-    --color-text-alt: #bbbbbb;
+    --color-text-alt: #dddddd;
     --armoryTagText: #e7d1b1;
 
     --dropdownColor: #252944;
@@ -2003,9 +2016,6 @@ h6 {
 .giftEntryEdit > prose-mirror {
     min-height: 100px;
     height: 100px;
-}
-.giftEntryEdit .editor > button {
-    top: -30px;
 }
 .giftEntryEdit .editor .editor-content {
     padding: 0 10px;
@@ -4878,6 +4888,7 @@ h6 {
   overflow: visible;
   opacity: 1;
 }
+
 .baseAbfalterV2 .weaponReqOnlyOne {
     width: 35%;
 }
@@ -5008,7 +5019,7 @@ h6 {
 }
 /* #endregion */
 
-/* #redion Item Weapon Profile */
+/* #region Item Weapon Profile */
 .profile {
     margin: 0px 0 5px 0;
     border-bottom: 1px solid var(--boxColor);
@@ -5243,8 +5254,12 @@ h6 {
     display: flex;
     justify-content: space-between;
 }
-
+.wepAtkDiceRoll .profileNoteRow > span {
+    width: 100%;
+    height: auto;
+}
 /* #endregion */
+
 
 
 /*
@@ -6094,9 +6109,6 @@ h6 {
 }
 /* #endregion */
 
-
-
-
 /* #region Item-Global-Styles effects-list */
 .itemPage {
     min-width: 500px;
@@ -6293,7 +6305,6 @@ h6 {
 .itemDescStyle .editor {
     overflow: visible;
     height: 300px;
-
 }
 /* #endregion */
 
@@ -6305,6 +6316,430 @@ h6 {
     ---------------
     ***************
 */
+
+/* #region @Prompt-Default-Buttons */
+.baseAbfalterV2 .window-content .standard-form {
+    gap: 0px;
+}
+.baseAbfalterV2 .window-content .standard-form .form-footer {
+    justify-content: center;
+}
+.baseAbfalterV2 .window-content .standard-form .form-footer > button {
+    background: var(--buttonBg);
+    color: var(--textColor);
+    line-height: normal;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    flex: none;
+    --button-size:  2rem;
+    width: 40%;
+}
+.baseAbfalterV2 .window-content .standard-form .form-footer > button:hover {
+    background: var(--buttonHover);
+}
+.baseAbfalterV2 .window-content .standard-form .form-footer > button:focus {
+    outline: 1px solid var(--buttonHover);
+    box-shadow: 0 0 4px var(--buttonHover);
+}
+/* #endregion */
+
+/* #region @Custom-Chat-Header */
+.abfalterChatHeader{
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+.abfalterChatPortrait {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+}
+.abfalterChatHeaderNames {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+.abfalterChatActor {
+    font-size: 1.2rem;
+}
+.abfalterCharUser {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+.abfResolutionTime {
+    margin-left: auto;
+    white-space: nowrap;
+    opacity: 0.7;
+    font-size: 0.75rem;
+    margin-bottom: auto;
+}
+/* #endregion */
+
+/* #region @Custom-Chat-Title */
+.chatCustomTitleContainer {
+  position: relative;
+}
+.chatCustomTitle {
+  visibility: hidden;
+  opacity: 0;
+  background-color: #333;
+  color: #fff; 
+  text-align: center;
+  border-radius: 4px;
+  padding: 5px;
+  position: absolute;
+  top: -100%;
+  z-index: 10;
+  left: 50%;
+  width: 200px;
+  transform: translateX(-50%);
+  transition: opacity 0.2s ease-in-out;
+  font-size: 14px;
+  pointer-events: none;
+}
+.chatCustomTitleContainer:hover .chatCustomTitle {
+  visibility: visible;
+  overflow: visible;
+  opacity: 1;
+}
+.chatCustomRoll {
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+.chatCustomRoll > span:nth-of-type(1) {
+    max-width: 75%;
+}
+.chatCustomRoll > span:nth-of-type(2) {
+    align-self: center;
+}
+/* #endregion */
+
+/* #region @Roll-Default */
+.defaultRollMsg > div:first-of-type > span {
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+.defaultRollMsg > div:nth-of-type(2) {
+    margin: 0 7%;
+}
+
+.defaultRollMsg .resolveAcceptText, 
+.defaultRollMsg .resolveAcceptButton {
+    display: flex;
+    justify-content: space-between;
+}
+.defaultDefRoll > div:last-of-type {
+    border-bottom: 1px solid gray;
+}
+.defaultDefFumble {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    border-top: 1px dashed gray;
+}
+/* #endregion */
+
+/* #region @Custom-Armor-Chat */
+.defenseArmorDisplay {
+    display: grid;
+    grid-template-rows: auto auto;
+    width: 100%;
+    text-align: center;
+    padding: 4px 0;
+    gap: 2px 0;
+}
+.defenseArmorDisplay .defenseArmorRow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+}
+.defenseArmorDisplay .defenseArmorCell:not(:last-child) {
+    border-right: 1px dashed gray;
+}
+.defenseArmorDisplay .defenseArmorCell {
+    padding: 0px;
+}
+/* #endregion */
+
+/* #region @Roll-Characteristic */
+.characteristicRoll > div {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+    margin: 0 7%;
+    font-size: 1rem;
+}
+.charExplodeRoll {
+    padding: 0 10%;
+    display: flex;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+/* #endregion */
+
+/* #region @Roll-Resistance */
+.resistanceRoll > div {
+    margin: 0 7%;
+}
+.rollExplodeText {
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+/* #endregion */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* #region @Resolve-Chat-Combat */
+.resolveTargetsHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.resolveTargetsHeader::before,
+.resolveTargetsHeader::after {
+    content: "";
+    flex: 1;
+    border-top: 1px dotted #8a847f;
+    margin: 0 8px;
+}
+.resolveTargetsHeaderCenter {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+    line-height: 1;
+}
+.resolveTargetsHeaderIcon {
+    font-size: 0.8rem;
+    color: #8a847f;
+}
+.resolveTargetsHeaderText {
+    line-height: 1;
+}
+.resolveTargetsHeaderChevron {
+    font-size: 0.9rem;
+    color: #3f342d;
+}
+.resolveTargetsBody .resolveDefenderContainer {
+    padding: 4px 0px;
+}
+.resolveTargetsBody .resolveDefenderContainer:not(:last-of-type) {
+    border-bottom: 1px solid gray;
+}
+.resolveTargetsBody .resolveTargetsBody {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.resolveTargetsBody .resolveDefenderTopRow {
+    display: flex;
+    align-items: center;
+}
+.resolveTargetsBody .resolveDefenderPortraitWrap {
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+}
+.resolveTargetsBody .resolveDefenderName {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    width: 100%;
+    font-size: 1.2rem;
+}
+.resolveTargetsBody .resolveDefenderTotalDamageValue {
+    font-size: 1.1rem;
+    padding: 0 5px 0 0;
+}
+.resolveTargetsBody .resolveDefenderMiddle {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+.resolveTargetsBody .resolveDefenderStatsRow {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+.resolveTargetsBody .resolveDefenderStat {
+    white-space: nowrap;
+}
+.resolveTargetsBody .resolveDefenderInfoRow {
+    font-size: 0.9rem;
+}
+.resolveTargetsBody .resolveDefenderApplyContainer {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+.resolveTargetsBody .resolveDefenderApplyContainer > span{
+    font-size: 1rem;
+    opacity: 0.5;
+}
+.resolveTargetsBody .resolveDefenderApplyDmg {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.resolveTargetsBody .resolveDmgOption {
+    position: relative;
+    cursor: pointer;
+}
+.resolveTargetsBody .resolveDmgOption input {
+    display: none;
+}
+.resolveTargetsBody .resolveDmgOption span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 5px;
+    border: 2px solid #999;
+    border-radius: 6px;
+    min-width: 36px;
+}
+.resolveTargetsBody .resolveDmgOption input:checked + span {
+    border-color: #7a2b2b;
+    box-shadow: inset 0 0 0 2px #7a2b2b;
+}
+.resolveTargetsBody .resolveDmgOption span::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-left: 2px;
+}
+.resolveTargetsBody .resolveDmgOption input:checked + span::after {
+    background: #7a2b2b;
+}
+.resolveTargetsBody .resolveApplyButton {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0 0 0;
+}
+.resolveTargetsBody .applyDamageToActors {
+    margin: 0;
+    width: 50%
+}
+/* #endregion */
+
+
+/* #region @Prompt-Auto-Defense */
+.defenseAuto {
+    padding: 0 3%;
+}
+.defenseAuto > div {
+    display: flex;
+}
+.defenseAuto > label {
+    display: flex;
+    justify-content: space-between;
+}
+.defenseAuto > label:last-of-type  {
+    border-bottom: 1px dashed var(--boxColor);
+    padding: 0 0 5px 0;
+    margin: 0 0 5px 0;
+}
+.defenseAuto > label > span {
+    display: grid;
+    width: 55%;
+}
+.defenseAuto > label > input {
+    width: 45%;
+}
+.defenseAuto > label > select {
+    width: 45%;
+}
+.defenseAuto .profileNoteRow > span {
+    width: 100%;
+    height: auto;
+}
+
+.armor-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.armor-mod-input {
+    width: 60px;
+}
+/* #endregion */
+
+
+/* #region @Workflow-Combat */
+.abfDefendButton[disabled] {
+    opacity: 0.45;
+    cursor: not-allowed;
+    filter: grayscale(100%);
+    pointer-events: none;
+}
+.abfDefendButton.abf-disabled-defense,
+.abfDefendButton:disabled {
+    opacity: 0.4;
+    filter: grayscale(100%);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.abf-target-list {
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.abf-target-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin: 0.25rem 0;
+}
+
+.abf-target-row__left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.abf-target-row__img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+/* #endregion */
+
+
+
+
+
+
+
+
+
+
 
 /* #region @Shared-Item @Chat */
 .itemChat .chatActorHeader {
@@ -6458,42 +6893,7 @@ h6 {
 }
 
 
-/*
-    --------
-    1d10 Roll
-    --------
-*/
-.primaryRoll > div {
-    font-size: 17px;
-}
-.primaryRoll > div:nth-of-type(1) {
-    font-size: 23px;
-    display: flex;
-    justify-content: center;
-}
-.primaryRoll > div:not(:nth-of-type(1)) {
-    display: flex;
-    justify-content: space-between;
-}
-.primaryRoll > div:last-of-type {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    margin-top: 3px;
-    margin-bottom: 3px;
-}
-.primaryRoll > div:not(:nth-of-type(1)) > span:nth-of-type(1) {
-    padding-left: 10%;
-}
-.primaryRoll > div:not(:nth-of-type(1)) > span:nth-of-type(2) {
-    padding-right: 10%;
-}
-.primaryExplodeRoll {
-    padding: 0 10%;
-    display: flex;
-    justify-content: center;
-    font-size: 20px;
-}
+
 /*
     --------
     Sec Roll
@@ -6564,121 +6964,8 @@ h6 {
     margin-left: 10%;
     background-color: #b5b3a4;
 }
-/*
-    --------
-    Fumble Roll
-    --------
-*/
-.fumbleChatMessage > div {
-    font-size: 17px;
-}
-.fumbleChatMessage > div:nth-of-type(1) {
-    font-size: 23px;
-    display: flex;
-    justify-content: center;
-}
-.fumbleChatMessage > div:nth-of-type(2) {
-    display: flex;
-    justify-content: space-between;
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    margin-top: 3px;
-}
-.fumbleChatMessage > div:nth-of-type(3) {
-    display: flex;
-    justify-content: center;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-    margin-bottom: 3px;
-}
-.fumbleChatMessage > div:not(:nth-of-type(1)) > span:nth-of-type(1) {
-    padding-left: 10%;
-}
-.fumbleChatMessage > div:not(:nth-of-type(1)) > span:nth-of-type(2) {
-    padding-right: 10%;
-}
-/*
-    --------
-    Spell Chat
-    --------
-*/
-.spellChatInfo {
-    font-size: 13px;
-    display: flex;
-    justify-content: space-evenly;
-}
-.spellChatDesc {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-}
-.spellChatDesc > span {
-    white-space: pre-wrap;
-}
-.spellChatDiff > span:first-of-type {
-    display: flex;
-    justify-content: center;
-    font-size: 17px;
-}
-.spellChatDiff > div {
-    display: flex;
-    justify-content: space-evenly;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-}
-.spellChatDiff > span:last-of-type {
-    white-space: pre-wrap;
-}
-/*
-    --------
-    Psychic Matrix Chat #112542
-    --------
-*/
-.psychicChatInfo {
-    font-size: 13px;
-    display: flex;
-    justify-content: space-evenly;
-}
-.psychicChatDesc {
-    border-image: url(../img/border.png) 10 stretch;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-}
-.psychicChatDesc > span {
-    white-space: pre-wrap;
-}
-.psyMatrixChat > div > h6 {
-    color: black;
-}
-/*
-    --------
-    Ki Technique Chat
-    --------
-*/
-.kiChatInfo {
-    display: flex;
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom : 5px solid black;
-    text-align: center;
-    font-size: .8rem;
-    font-style: italic;
-}
-.kiChatBorderHere {
-    border-image: url(../img/border.png) 10 stretch;
-    border-bottom: 5px solid black;
-}
-.kiChatTypes2,
-.kiChatTypes {
-    display: flex;
-    justify-content: space-evenly;
-}
-.kiChatTypes > span {
-    width: 15%;
-    text-align: center;
-}
-.kiChatDesc > span{
-    white-space: pre-wrap;
-}
+
+
 
 /*
     ***************

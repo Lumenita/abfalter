@@ -1,0 +1,22 @@
+{{> "systems/abfalter/templates/dialogues/partials/customChatHeader.hbs"}}
+
+<div class="baseAbfalterV2 resistanceRoll" data-actor-id="{{actor._id}}">
+    <div class="defaultDefRoll">
+        <div class="chatCustomRoll chatCustomTitleContainer">
+            <span> {{label}}</span>
+            <span class="{{rollResult.color}}"> {{rollResult.total}} </span>
+            <div class="chatCustomTitle">{{formula}}</div>
+        </div>
+    </div>
+    <div class="rollExplodeText">
+        {{#if rollResult.explode}}
+        <span class="openRoll"> {{localize "abfalter.dialogs.success"}} </span>
+        {{/if}}
+        {{#if rollResult.fumble}}
+        <span class="fumbleRoll"> {{localize "abfalter.dialogs.failure"}} </span>
+        {{/if}}
+    </div>
+</div>
+
+
+

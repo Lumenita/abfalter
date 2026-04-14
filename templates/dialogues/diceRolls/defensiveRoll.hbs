@@ -1,0 +1,34 @@
+{{> "systems/abfalter/templates/dialogues/partials/customChatHeader.hbs"}}
+
+<div class="baseAbfalterV2 defaultRollMsg autoDefRollMsg" data-actor-id="{{actor._id}}">
+    <div>
+        <span> {{defenseDetails.defTypeName}} </span>
+    </div>
+
+    {{> "systems/abfalter/templates/dialogues/partials/customDefaultRoll.hbs"}}
+
+    <div class="defenseArmorDisplay">
+        <div class="defenseArmorRow">
+            {{#each defenseDetails.selectedAT}}
+                <div class="defenseArmorCell"><strong>{{this.name}}</strong></div>
+            {{/each}}
+        </div>
+
+        <div class="defenseArmorRow">
+            {{#each defenseDetails.selectedAT}}
+                <div class="defenseArmorCell">{{this.atValue}}</div>
+            {{/each}}
+        </div>
+    </div>
+
+    {{#each rollData as |roll i|}}
+    <label class="explodeButtons">
+        {{#if roll.explode}}
+        <button class="defensiveOpenRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
+        {{/if}}
+        {{#if roll.fumble}}
+        <button class="defensiveFumbleRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
+        {{/if}}
+    </label>
+    {{/each}}
+</div>

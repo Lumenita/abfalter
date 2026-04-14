@@ -97,7 +97,7 @@
         </div>
 
         <div class="fieldSetColumnV2"> 
-            <div class="weapon abfDivFormat">
+            <div class="weapon">
                 <div class="armoryItemHeader abfDivFormat">
                     <span class="armoryNameHeader"> {{localize "abfalter.weapon"}} </span>
                     <span class="armoryPriceHeader"> {{localize "abfalter.price"}} </span>
@@ -108,8 +108,8 @@
                 </div>
 
                 {{#each weapons as |weapon|}}
-                <div class="armory-item item normal-itemV2 abfDivFormat draggable" data-item-id={{id}}>
-                        <div class="armoryItemContainer">
+                <div class="armory-item item normal-itemV2 draggable" data-item-id={{id}}>
+                        <div class="armoryItemContainer abfDivFormat">
                             <div class="armoryItemMain">
                                 <img class="armoryItemImg" src="{{img}}"/>
                                 <div class="armoryItemNames">
@@ -152,7 +152,7 @@
                             </div>
                         </div>
                         {{#if system.equipped}}
-                        <div class="armoryWepEquip">
+                        <div class="armoryWepEquip abfDivFormat">
                             <div class="armoryIndent">┗</div>
                             <div class="armoryWepCombat">
                                 {{#ifIn system.info.type "hybrid melee ranged"}}
@@ -160,10 +160,10 @@
                                     {{localize "abfalter.attack"}}: {{system.derived.baseAtk}}
                                 </button>
                                 {{/ifIn}}
-                                <button type="button" data-action="weaponRoll" data-label="block" data-id="{{_id}}" data-type="{{system.info.type}}" data-value="weaponDef">
+                                <button type="button" data-action="abfRollButton" data-label="weaponBlock" data-value="{{system.derived.baseBlk}}" data-id="{{_id}}" >
                                     {{localize "abfalter.block"}}: {{system.derived.baseBlk}}
                                 </button>
-                                <button type="button" data-action="weaponRoll" data-label="dodge" data-id="{{_id}}" data-type="{{system.info.type}}" data-value="weaponDod">
+                                <button type="button" data-action="abfRollButton" data-label="weaponDodge" data-value="{{system.derived.baseDod}}" data-id="{{_id}}" >
                                     {{localize "abfalter.dodge"}}: {{system.derived.baseDod}}
                                 </button>
                             </div>
@@ -197,13 +197,11 @@
                             {{/ifIn}}
                         </div>
                         {{/if}}
-
-
                         {{#if system.expand}}
                         <div class="armoryDescription">
                             {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
                         </div>
-                        <div class="armoryTags">
+                        <div class="armoryTags abfDivFormat">
                             {{#each system.tags}}
                                 <span class="armoryTag">{{this}}</span>
                             {{/each}}
@@ -213,7 +211,7 @@
                 {{/each}}
             </div>
 
-            <div class="armor abfDivFormat">
+            <div class="armor">
                 <div class="armoryItemHeader abfDivFormat">
                     <span class="armoryNameHeader"> {{localize "abfalter.equipment"}} </span>
                     <span class="armoryPriceHeader"> {{localize "abfalter.price"}} </span>
@@ -224,8 +222,8 @@
                 </div>
 
                 {{#each armors as |armor|}}
-                <div class="armory-item item normal-itemV2 abfDivFormat draggable" data-item-id={{id}}>
-                        <div class="armoryItemContainer">
+                <div class="armory-item item normal-itemV2 draggable" data-item-id={{id}}>
+                        <div class="armoryItemContainer abfDivFormat">
                             <div class="armoryItemMain">
                                 <img class="armoryItemImg" src="{{img}}"/>
                                 <div class="armoryItemNames">
@@ -271,7 +269,7 @@
                         <div class="armoryDescription">
                             {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
                         </div>
-                        <div class="armoryTags">
+                        <div class="armoryTags abfDivFormat">
                             {{#each system.tags}}
                                 <span class="armoryTag">{{this}}</span>
                             {{/each}}
@@ -282,7 +280,7 @@
             </div>
 
             <div class="ammo abfDivFormat">
-                <div class="armoryItemHeader abfDivFormat">
+                <div class="armoryItemHeader">
                     <span class="armoryNameHeader"> {{localize "abfalter.consumable"}} </span>
                     <span class="armoryPriceHeader"> {{localize "abfalter.price"}} </span>
                     <span class="armoryWeightHeader"> {{localize "abfalter.weight"}} </span>
@@ -292,8 +290,8 @@
                 </div>
 
                 {{#each ammos as |ammo|}}
-                <div class="armory-item item normal-itemV2 abfDivFormat draggable" data-item-id={{id}}>
-                        <div class="armoryItemContainer">
+                <div class="armory-item item normal-itemV2 draggable" data-item-id={{id}}>
+                        <div class="armoryItemContainer abfDivFormat">
                             <div class="armoryItemMain">
                                 <img class="armoryItemImg" src="{{img}}"/>
                                 <div class="armoryItemNames">
@@ -339,7 +337,7 @@
                         <div class="armoryDescription">
                             {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
                         </div>
-                        <div class="armoryTags">
+                        <div class="armoryTags abfDivFormat">
                             {{#each system.tags}}
                                 <span class="armoryTag">{{this}}</span>
                             {{/each}}
@@ -349,7 +347,7 @@
                 {{/each}}
             </div>
 
-            <div class="inventory abfDivFormat">
+            <div class="inventory">
                 <div class="armoryItemHeader abfDivFormat">
                     <span class="armoryNameHeader"> {{localize "abfalter.loot"}} </span>
                     <span class="armoryPriceHeader"> {{localize "abfalter.price"}} </span>
@@ -360,8 +358,8 @@
                 </div>
 
                 {{#each inventorys as |inventory|}}
-                <div class="armory-item item normal-itemV2 abfDivFormat draggable" data-item-id={{id}}>
-                        <div class="armoryItemContainer">
+                <div class="armory-item item normal-itemV2 draggable" data-item-id={{id}}>
+                        <div class="armoryItemContainer abfDivFormat">
                             <div class="armoryItemMain">
                                 <img class="armoryItemImg" src="{{img}}"/>
                                 <div class="armoryItemNames">
@@ -414,7 +412,7 @@
                             </div>
                             {{/if}}
                         </div>
-                        <div class="armoryTags">
+                        <div class="armoryTags abfDivFormat">
                             {{#each system.tags}}
                                 <span class="armoryTag">{{this}}</span>
                             {{/each}}

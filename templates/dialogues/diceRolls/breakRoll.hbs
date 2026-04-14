@@ -13,12 +13,12 @@
         <div class="atkCustomTitle">{{breakDetails.formula}}</div>
     </div>
 
-    <div class="primaryExplodeRoll">
+    <div class="rollExplodeText">
         {{#if rollResult.explode}}
-        <span style="color: green;"> {{localize "abfalter.dialogs.openRoll"}} </span>
+        <span class="openRoll"> {{localize "abfalter.dialogs.openRoll"}} </span>
         {{/if}}
         {{#if rollResult.fumble}}
-        <span style="color: red;"> {{localize "abfalter.dialogs.fumble"}} </span>
+        <span class="fumbleRoll"> {{localize "abfalter.dialogs.fumble"}} </span>
         {{/if}}
     </div>
 </div>
