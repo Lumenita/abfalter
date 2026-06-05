@@ -1,20 +1,93 @@
-{{> "systems/abfalter/templates/dialogues/partials/customChatHeader.hbs"}}
+<div class="abfalterChatHeader">
+    <img class="abfalterChatPortrait" src="{{basicInfo.portrait}}">
+
+    <div class="abfalterChatHeaderNames">
+        {{#if defSettings.defTokName}}
+        <span class="abfalterChatActor">{{basicInfo.name}}</span>
+        {{else}}
+        <span class="gm-only abfalterChatActor">{{basicInfo.name}}</span>
+        <span class="player-only abfalterChatActor">{{localize "abfalter.unknown"}}</span>
+        {{/if}}
+        <span class="abfalterCharUser">{{basicInfo.userName}}</span>
+    </div>
+    
+    <div class="abfResolutionTime"></div>
+</div>
 
 <div class="baseAbfalterV2 defaultRollMsg autoDefRollMsg" data-actor-id="{{actor._id}}">
     <div>
+        {{#if defSettings.defWepName}}
         <span> {{defenseDetails.defTypeName}} </span>
+        {{else}}
+        <span class="gm-only"> {{defenseDetails.defTypeName}} </span>
+        <span class="player-only"> {{localize "abfalter.unknownWep"}} </span>
+        {{/if}}
     </div>
 
-    {{> "systems/abfalter/templates/dialogues/partials/customDefaultRoll.hbs"}}
+    <div class="defaultDefRoll">
+        {{#each rollData as |roll i|}}
+        <div class="chatCustomRoll chatCustomTitleContainer {{#unless ../defSettings.defFinValue}}{{#if i}}gm-only{{/if}}{{/unless}}">
+            {{#if ../defSettings.defAtkName}}
+                <span> {{roll.label}}</span>
+            {{else}}
+                <span class="gm-only"> {{roll.label}}</span>
+                <span class="player-only"> {{localize "abfalter.defense"}}</span>
+            {{/if}}
 
-    <div class="autoDefArmor">
-        <div>
-            {{defenseDetails.armorType}}
-            {{defenseDetails.armorFinal}}
+            {{#if ../defSettings.defFinValue}}
+                <span class="{{roll.color}}">{{roll.total}}</span>
+            {{else}}
+                <span class="gm-only {{roll.color}}">{{roll.total}}</span>
+                <span class="player-only">???</span>
+            {{/if}}
+
+            {{#if ../defSettings.defFormula}}
+                <div class="chatCustomTitle">{{roll.formula}}</div>
+            {{else}}
+                <div class="chatCustomTitle gm-only">{{roll.formula}}</div>
+                <div class="chatCustomTitle player-only">???</div>
+            {{/if}}
         </div>
+        {{#if roll.showSeverity}}
+        {{#if ../defSettings.defFinValue}}
+        <div class="defaultDefFumble" title="{{rollResult.result}}">
+            <span> {{localize "abfalter.dialogs.fumbleSeverity"}} </span>
+            <span class="fumbleRoll"> -{{roll.fumbleS}} </span>
+        </div>
+        {{else}}
+        <div class="gm-only defaultDefFumble" title="{{rollResult.result}}">
+            <span> {{localize "abfalter.dialogs.fumbleSeverity"}} </span>
+            <span class="fumbleRoll"> -{{roll.fumbleS}} </span>
+        </div>
+        {{/if}}
+        {{/if}}
+        {{/each}}
+    </div>
+
+    <div class="rollTextMargin">
+        {{#if defSettings.defAT}}
+        <div>
+            <span>{{localize (concat "abfalter." defenseDetails.armorType)}}</span>
+            {{localize "abfalter.at"}}: {{defenseDetails.armorFinal}}
+        </div>
+        {{else}}
+        <div class="gm-only">
+            <span>{{localize (concat "abfalter." defenseDetails.armorType)}}</span>
+            {{localize "abfalter.at"}}: {{defenseDetails.armorFinal}}
+        </div>
+        <div class="player-only">
+            <span>{{localize (concat "abfalter." defenseDetails.armorType)}}</span>
+            {{localize "abfalter.at"}}: ???
+        </div>
+        {{/if}}
+    </div>
+
+    <div class="rollTextMargin">
+        {{defenseDetails.note}}
     </div>
 
     {{#each rollData as |roll i|}}
+    {{#if ../defSettings.defFinValue}}
     <label class="explodeButtons">
         {{#if roll.explode}}
         <button class="autoDefOpenRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
@@ -23,17 +96,26 @@
         <button class="autoDefFumbleRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
         {{/if}}
     </label>
+    {{else}}
+    <label class="gm-only explodeButtons">
+        {{#if roll.explode}}
+        <button class="autoDefOpenRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
+        {{/if}}
+        {{#if roll.fumble}}
+        <button class="autoDefFumbleRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
+        {{/if}}
+    </label>
+    {{/if}}
     {{/each}}
 
     {{#ifEquals status "pendingGMAccept"}}
     <div class="gm-only resolveAcceptButton">
-        <button class="sendDefenseToResolve">Accept Defense</button>
+        <button class="sendDefenseToResolve">{{localize "abfalter.acceptDefense"}}</button>
     </div>
     {{/ifEquals}}
     {{#ifEquals status "accepted"}}
-    <div class="gm-only resolveAcceptText">
-        <span>Defense has been accepted</span>
+    <div class="resolveAcceptText">
+        <span>{{localize "abfalter.defenseAccepted"}}</span>
     </div>
     {{/ifEquals}}
-
 </div>

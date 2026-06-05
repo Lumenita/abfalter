@@ -22,13 +22,13 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
         },
         actions: {
             toggleValue: this.#toggleValue,
+            itemToggleEachValue: this.#itemToggleEachValue, // Toggles values within #each handlebar
             kiAbilityToggle: this.#kiAbilityToggle,
             addWepAtk: this.#addWepAtk,
             removeWepAtk: this.#removeWepAtk,
             wepAtkToggle: this.#atkToggle,
             addElanGift: this.#addElanGift,
             removeElanGift: this.#deleteElanGift,
-            toggleElanGift: this.#toggleElanGift,
             viewEffect: this.#viewEffect,
             deleteEffect: this.#deleteEffect,
             createEffect: this.#createEffect,
@@ -226,13 +226,23 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 break;
             }
             case "psychicMatrix": {
+                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description ?? "",
+                    { async: true }
+                );
+                const matrices = this.item.system.matrixDetails ?? {};                
+                for (const [key, matrix] of Object.entries(matrices)) {
+                    matrix.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(matrix.description ?? "",
+                        { async: true }
+                    );
+                };
+                context.psyTypeObjList = CONFIG.abfalter.psyTypeDropdown;
                 context.actionObjList = CONFIG.abfalter.ActionDropdown;
                 context.yesnoObjList = CONFIG.abfalter.yesnoDropdown;
                 context.matrixLevelObjList = {
                     1: "1",
                     2: "2",
                     3: "3"
-                }
+                };
                 break;
             }
             case "kiAbility": {
@@ -317,6 +327,12 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
         await super._onRender(context, options);
         this.#dragDrop.forEach((d) => d.bind(this.element));
 
+        for (const editor of this.element.querySelectorAll("prose-mirror")) {
+            editor.addEventListener("focusout", () => {
+                this.submit({ preventClose: true });
+            });
+        }
+
         const autoResizes = this.element.querySelectorAll("textarea.textarea-auto-resize");
         for (const textarea of autoResizes) {
             textarea.addEventListener("input", function () {
@@ -335,6 +351,16 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
         let value = target.dataset.ability;
         value = !(value === 'true');
         this.document.update({ [label]: value });
+    }
+
+    static #itemToggleEachValue(ev) {
+        ev.preventDefault();
+        const target = ev.target.closest("[data-path][data-value]");
+        if (!target) return;
+        const path = target.dataset.path;
+        let value = target.dataset.value;
+        value = !(value === 'true');
+        this.document.update({ [path]: value });
     }
 
     static #kiAbilityToggle(ev) {
@@ -472,15 +498,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
         }).render(true);
     }
 
-    static #toggleElanGift(ev) {
-        const target = ev.target.closest('[data-label][data-code][data-value]');
-        if (!target) return;
-        const label = target.dataset.label;
-        const key = target.dataset.code;
-        let value = target.dataset.value;
-        value = !(value === 'true');
-        this.document.update({ [`system.gifts.${key}.${label}`]: value });
-    }
+
 
     /**
      * AE inherited from Draw Steel System

@@ -21,20 +21,15 @@
             <select id="combatDefenseDropdown"></select>
         </label>
 
-        <div class="armor-row" id="armorRow">
+        <div class="armorRow" id="armorRow">
             <label id="armorLabel">
                 {{localize "abfalter.armor"}} ({{armorTypeName}})
             </label>
-
-            <input
-                type="number"
-                id="armorMod"
-                value="0"
-                step="1"
-                class="armor-mod-input"
-            />
-
-            <span id="armorFinalValue">{{armorBaseValue}}</span>
+            <div>
+                <input type="number" id="armorMod" value="0" step="1" />
+                <span>|</span>
+                <span id="armorFinalValue">{{armorBaseValue}}</span>
+            </div>
         </div>
 
         <label>

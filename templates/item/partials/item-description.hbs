@@ -1,5 +1,5 @@
 <section class="baseAbfalterV2 itemDescStyle tab {{tabs.description.cssClass}}" data-group="{{tabs.description.group}}" data-tab="{{tabs.description.id}}">
-    {{#ifIn document.type "proficiency backgroundInfo elan armor weapon ammo class kiTechnique"}}
+    {{#ifIn document.type "proficiency backgroundInfo elan armor weapon ammo class kiTechnique psychicMatrix"}}
         <h6> {{localize "abfalter.description"}} </h6>
         <prose-mirror name="system.description" data-document-uuidd="{{actor.uuid}}" value="{{system.description}}" toggled="true">
             {{{enrichedDesc}}}
@@ -21,7 +21,7 @@
         </prose-mirror>
         {{/ifEquals}}
     {{else}}
-        {{#ifIn document.type "monsterPower psychicMatrix"}}
+        {{#ifIn document.type "monsterPower"}}
         <h6> {{localize "abfalter.shortDesc"}} </h6>
         <div style="display: grid;">
             <textarea class="textarea-auto-resize" name="system.shortDesc" style="grid-area: 1 / 1 / 2/ 2;">{{system.shortDesc}}</textarea>

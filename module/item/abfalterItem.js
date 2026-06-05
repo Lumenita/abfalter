@@ -737,10 +737,14 @@ export default class abfalterItem extends Item {
         } else {
             this.system.maintName = game.i18n.localize('abfalter.no');
         }
+        
+        this.system.chatTag = `${game.i18n.localize('abfalter.action')}: ` + this.system.action
+            + ` | ${game.i18n.localize('abfalter.level')}: ` + this.system.level
+            + ` | ${game.i18n.localize('abfalter.maintanence')}: ` + this.system.maint
 
         if (this.parent != null) {
             if (this.parent) {
-                this.system.newPotential = Math.floor(~~this.parent.system.ppotential.final + ~~this.system.bonus);
+                this.system.finalPot = Math.floor(~~this.parent.system.ppotential.final + ~~this.system.bonus);
             }
         }
     }
@@ -876,7 +880,7 @@ export default class abfalterItem extends Item {
 
     chatTemplate = {
         "spell": "systems/abfalter/templates/chatItem/spellChat.html",
-        "psychicMatrix": "systems/abfalter/templates/chatItem/psyMatrixChat.html",
+        "psychicMatrix": "systems/abfalter/templates/chatItem/psyMatrixChat.hbs",
         "kiSealCreature": "systems/abfalter/templates/chatItem/kiSealChat.html",
         "kiTechnique": "systems/abfalter/templates/chatItem/kitechChat.hbs",
         "weapon": "systems/abfalter/templates/chatItem/weaponChat.hbs",
@@ -902,7 +906,18 @@ export default class abfalterItem extends Item {
             case "psychicMatrix":
                 cardData.expand = true;
                 cardData.diff = "";
-                cardData.effect = "";
+                cardData.tag = this.system.chatTag;
+                cardData.effect;
+                cardData.effect20 = this.system.matrixDetails.effect20.enrichedDesc;
+                cardData.effect40 = this.system.matrixDetails.effect40.enrichedDesc;
+                cardData.effect80 = this.system.matrixDetails.effect80.enrichedDesc;
+                cardData.effect120 = this.system.matrixDetails.effect120.enrichedDesc;
+                cardData.effect140 = this.system.matrixDetails.effect140.enrichedDesc;
+                cardData.effect180 = this.system.matrixDetails.effect180.enrichedDesc;
+                cardData.effect240 = this.system.matrixDetails.effect240.enrichedDesc;
+                cardData.effect280 = this.system.matrixDetails.effect280.enrichedDesc;
+                cardData.effect320 = this.system.matrixDetails.effect320.enrichedDesc;
+                cardData.effect440 = this.system.matrixDetails.effect440.enrichedDesc;
                 break;
             case "spell":
                 switch (label) {

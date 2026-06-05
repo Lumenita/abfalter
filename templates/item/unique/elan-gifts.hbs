@@ -10,7 +10,12 @@
             {{gift.name}}
             <label class="giftExpandBox">
                 <a data-action="removeElanGift" data-code="{{key}}"><i class="fas fa-trash"></i></a>
-                <a data-action="toggleElanGift" data-label="expand" data-value="{{gift.expand}}" data-code="{{key}}"><i class="{{#if this.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
+                <a
+                    data-action="itemToggleEachValue"
+                    data-path="system.gifts.{{key}}.expand"
+                    data-value="{{gift.expand}}">
+                    <i class="{{#if this.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i>
+                </a>
             </label>
 
         </legend>
@@ -30,8 +35,7 @@
             </label>
             <label class="itemSimpleLabel"> 
                 <span> {{localize "abfalter.buyingThisGift"}} </span> 
-                <button type="button" data-action="toggleElanGift" data-label="bought" data-value="{{gift.bought}}" data-code="{{key}}"
-                    class="{{#if this.bought}}kiBought{{/if}}">
+                <button type="button" data-action="itemToggleEachValue" data-path="system.gifts.{{key}}.bought" data-value="{{gift.bought}}" class="{{#if this.bought}}kiBought{{/if}}">
                     {{#if this.bought}}
                     <span> {{localize "abfalter.yes"}} </span>
                     {{else}}

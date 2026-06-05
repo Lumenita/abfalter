@@ -1,0 +1,119 @@
+<form>
+    <div class="combatHeaderInfo"> 
+        <label> {{localize "abfalter.combatSettingsInfo"}} </label>
+    </div>
+    <div class="combatHeader">
+        <label> {{localize "abfalter.atkSettings"}} </label>
+    </div>
+    <label class="form-group">
+        <span>{{localize "abfalter.showTokName"}}</span>
+        <input type="checkbox" name="atkTokName" {{checked settings.atkTokName}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.showWepName"}}</span>
+        <input type="checkbox" name="atkWepName" {{checked settings.atkWepName}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.showAtkName"}}</span>
+        <input type="checkbox" name="atkAtkName" {{checked settings.atkAtkName}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.showFinValue"}}</span>
+        <input type="checkbox" name="atkFinValue" {{checked settings.atkFinValue}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.showFormula"}}</span>
+        <input type="checkbox" name="atkFormula" {{checked settings.atkFormula}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.showDmg"}}</span>
+        <input type="checkbox" name="atkDmg" {{checked settings.atkDmg}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.showAtPen"}}</span>
+        <input type="checkbox" name="atkAtPen" {{checked settings.atkAtPen}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.showNote"}}</span>
+        <input type="checkbox" name="atkNote" {{checked settings.atkNote}}>
+    </label>
+    <div class="combatHeader">
+        <label> {{localize "abfalter.defSettings"}} </label>
+    </div>
+    <label class="form-group">
+        <span>{{localize "abfalter.showTokName"}}</span>
+        <input type="checkbox" name="defTokName" {{checked settings.defTokName}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.showWepName"}}</span>
+        <input type="checkbox" name="defWepName" {{checked settings.defWepName}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.showAtkName"}}</span>
+        <input type="checkbox" name="defAtkName" {{checked settings.defAtkName}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.showFinValue"}}</span>
+        <input type="checkbox" name="defFinValue" {{checked settings.defFinValue}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.showFormula"}}</span>
+        <input type="checkbox" name="defFormula" {{checked settings.defFormula}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.showAT"}}</span>
+        <input type="checkbox" name="defAT" {{checked settings.defAT}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.showNote"}}</span>
+        <input type="checkbox" name="defNote" {{checked settings.defNote}}>
+    </label>
+    
+    <div class="combatHeader">
+        <label> {{localize "abfalter.resSetting"}} </label>
+    </div>
+    <label class="form-group combatRule">
+        <span>{{localize "abfalter.resDmgFormula"}}</span>
+        <input type="checkbox" name="resDmgFormula" {{checked settings.resDmgFormula}}>
+    </label>    
+    <label class="form-group">
+        <span>{{localize "abfalter.resDefDmgTaken"}}</span>
+        <input type="checkbox" name="resDefDmgTaken" {{checked settings.resDefDmgTaken}}>
+    </label>    
+    <label class="form-group">
+        <span>{{localize "abfalter.resDefDmgPer"}}</span>
+        <input type="checkbox" name="resDefDmgPer" {{checked settings.resDefDmgPer}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.resFinalAT"}}</span>
+        <input type="checkbox" name="resFinalAT" {{checked settings.resFinalAT}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.resDefInfoMsg"}}</span>
+        <input type="checkbox" name="resDefInfoMsg" {{checked settings.resDefInfoMsg}}>
+    </label>
+    <label class="form-group combatRule">
+        <span>{{localize "abfalter.resDefInfoLumi"}}</span>
+        <input type="checkbox" name="resDefInfoLumi" {{checked settings.resDefInfoLumi}}>
+    </label>
+    <label class="form-group">
+        <span>{{localize "abfalter.resCcNum"}}</span>
+        <input type="checkbox" name="resCcNum" {{checked settings.resCcNum}}>
+    </label>
+</form>
+
+<!--  example for input & select
+    <label class="form-group">
+        <label>Max Targets</label>
+        <input type="number" name="maxTargets" value="{{settings.maxTargets}}" min="1" step="1">
+    </label>
+
+    <label class="form-group">
+        <label>Range Mode</label>
+        <select name="rangeMode">
+            <option value="normal" {{#if (eq settings.rangeMode "normal")}}selected{{/if}}>Normal</option>
+            <option value="strict" {{#if (eq settings.rangeMode "strict")}}selected{{/if}}>Strict</option>
+            <option value="cinematic" {{#if (eq settings.rangeMode "cinematic")}}selected{{/if}}>Cinematic</option>
+        </select>
+    </label>
+-->

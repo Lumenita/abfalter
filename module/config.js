@@ -1228,7 +1228,6 @@ abfalter.wepDamageTypeDropdown = {
     COLD: "abfalter.cold",
     ELE: "abfalter.ele",
     ENE: "abfalter.ene",
-    ANY: "abfalter.any"
 }
 
 abfalter.wepDamageTypeSpiritDropdown = {
@@ -1241,7 +1240,6 @@ abfalter.wepDamageTypeSpiritDropdown = {
     ELE: "abfalter.ele",
     ENE: "abfalter.ene",
     SPIRIT: "abfalter.spirit",
-    ANY: "abfalter.any"
 }
 
 abfalter.martialArtsDropdown = {
@@ -1453,7 +1451,7 @@ abfalter.lootTypeDropdown = {
 
 abfalter.chatTemplates = {
     spell: "systems/abfalter/templates/chatItem/spellChat.html",
-    psychicMatrix: "systems/abfalter/templates/chatItem/psyMatrixChat.html",
+    psychicMatrix: "systems/abfalter/templates/chatItem/psyMatrixChat.hbs",
     kiSealCreature: "systems/abfalter/templates/chatItem/kiSealChat.html",
     kiTechnique: "systems/abfalter/templates/chatItem/kitechChat.hbs",
     armor: "systems/abfalter/templates/chatItem/equipmentChat.hbs",
@@ -1498,4 +1496,11 @@ abfalter.rollSpeakerTypeDropdown = {
     default: "abfalter.defaultFoundry",
     public: "abfalter.alwaysPublic",
     private: "abfalter.alwaysPrivate",
+}
+
+abfalter.psyTypeDropdown = {
+    basic: "abfalter.basic",
+    attack: "abfalter.attack",
+    shield: "abfalter.shield",
+    effect: "abfalter.effect"
 }

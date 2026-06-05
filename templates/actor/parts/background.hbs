@@ -8,9 +8,9 @@
                     <span> {{localize "abfalter.type"}} </span>
                     <span> {{localize "abfalter.cost"}} </span>
                 </div>
-                <div class="{{#if system.itemToggle.proficiency}}item-list{{/if}}">
+                <div>
                     {{#each proficiencys as |proficiency id|}}
-                    <div class="prof-item item itemStyle normal-item" data-item-id="{{proficiency._id}}"
+                    <div class="prof-item item itemStyle normal-item {{#if ../system.itemToggle.proficiency}}draggable{{/if}}" data-item-id="{{proficiency._id}}"
                     data-can-edit="true" data-can-delete="true" data-can-equip="false" data-can-toggle="false">
                         {{#if system.expand}}
                         <div class="itemToggleB">

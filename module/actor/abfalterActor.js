@@ -1134,7 +1134,7 @@ export default class abfalterActor extends Actor {
                     classBonuses.usedpp += parseInt(item.system.quantity) || 0;
                     break;
                 case "psychicMatrix":
-                    classBonuses.usedpp += parseInt(item.system.quantity) || 0;
+                    if (item.system.countCost) classBonuses.usedpp += 1;
                     if (system.toggles.psychicStrengthening == true) {
                         classBonuses.matrixpp += parseInt(item.system.bonus / 20) || 0;
                     } else {
@@ -2384,7 +2384,7 @@ export default class abfalterActor extends Actor {
         // 2nd Item load for derived Item values.
         let pushSpeed;
         this.items.reduce((arr, item) => {
-            if (item.type === "weapon" || item.type === "secondary" ) {
+            if (item.type === "weapon" || item.type === "secondary" || item.type === "psychicMatrix") {
                 item.prepareData();
                 if (item.type === "weapon") {
                     pushSpeed = item.system.pushSpeed.applied;

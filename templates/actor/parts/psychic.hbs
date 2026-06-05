@@ -69,8 +69,11 @@
                 <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.pproj.final" value="{{system.pproj.final}}" readonly /> </label>
                 {{#if system.toggles.psychicModuleStatus}}
                 <div class="pmodButton">
-                    <button type="button" data-action="plainRoll" data-roll="{{system.pproj.atkModule}}" data-label="attack" data-type="combatRoll">
+                    <!--<button type="button" data-action="abfRollButton" data-label="offPsyProj" data-value="{{system.pproj.atkModule}}">
                         <span> {{localize "abfalter.attack"}}: {{system.pproj.atkModule}} </span>
+                    </button>-->
+                    <button type="button" data-action="plainRoll" data-roll="{{system.pproj.atkModule}}" data-label="offPsyProj" data-type="combatRoll">
+                        <span> {{localize "abfalter.attack"}} </span> <span> {{system.pproj.atkModule}} </span>
                     </button>
                     {{#if system.toggles.psychicDodgeStatus}}
                     <button type="button" data-action="abfRollButton" data-label="defPsyProj" data-value="{{system.pproj.dodModule}}">
@@ -84,11 +87,14 @@
                 </div>
                 {{else}}
                 <div class="pmodButton">
-                    <button type="button" data-action="abfRollButton" data-label="offPsyProj" data-value="{{system.pproj.final}}">
+                    <!--<button type="button" data-action="abfRollButton" data-label="offPsyProj" data-value="{{system.pproj.final}}">
                         <span> <i class="fas fa-dice-d20"></i> </span>
+                    </button>-->
+                    <button type="button" data-action="plainRoll" data-roll="{{system.pproj.final}}" data-label="offPsyProj" data-type="combatRoll">
+                        <span> {{localize "abfalter.offensive"}} </span> <span> {{system.pproj.final}} </span>
                     </button>
                     <button type="button" data-action="abfRollButton" data-label="defPsyProj" data-value="{{system.pproj.final}}">
-                        <span> <i class="fas fa-dice-d20"></i> </span>
+                        <span> {{localize "abfalter.defensive"}} </span> <span> {{system.pproj.final}} </span>
                     </button>
                 </div>
                 {{/if}}
@@ -229,25 +235,23 @@
                                 <div>
                                     <span> {{localize "abfalter.description"}} </span>
                                 </div>
-                                <div style="display: grid;">
-                                    <textarea class="inline-edit textarea-auto-resize" data-field="system.description" style="grid-area: 1 / 1 / 2/ 2;">{{psychicMatrix.system.description}}</textarea>
-                                    <div class="textarea-auto-resize-sibling" aria-hidden="true" style="visibility: hidden; grid-area: 1 / 1 / 2 / 2;">{{psychicMatrix.system.description}}</div>
-                                </div>
+                                <div>{{{psychicMatrix.enrichedDesc}}}</div>
                                 <div>
                                     <span> {{localize "abfalter.difficulty"}} </span>
                                     <span> {{localize "abfalter.effect"}} </span>
                                 </div>
                                 <div>
-                                    <label> <span> 20 </span> <span> {{localize "abfalter.routine"}} </span> <input class="inline-edit" type="text" data-field="system.effect20" value="{{psychicMatrix.system.effect20}}" /> </label>
-                                    <label> <span> 40 </span> <span> {{localize "abfalter.easy"}} </span> <input class="inline-edit" type="text" data-field="system.effect40" value="{{psychicMatrix.system.effect40}}" /> </label>
-                                    <label> <span> 80 </span> <span> {{localize "abfalter.average"}} </span> <input class="inline-edit" type="text" data-field="system.effect80" value="{{psychicMatrix.system.effect80}}" /> </label>
-                                    <label> <span> 120 </span> <span> {{localize "abfalter.difficult"}} </span> <input class="inline-edit" type="text" data-field="system.effect120" value="{{psychicMatrix.system.effect120}}" /> </label>
-                                    <label> <span> 140 </span> <span> {{localize "abfalter.vDifficult"}} </span> <input class="inline-edit" type="text" data-field="system.effect140" value="{{psychicMatrix.system.effect140}}" /> </label>
-                                    <label> <span> 180 </span> <span> {{localize "abfalter.absurd"}} </span> <input class="inline-edit" type="text" data-field="system.effect180" value="{{psychicMatrix.system.effect180}}" /> </label>
-                                    <label> <span> 240 </span> <span> {{localize "abfalter.almostImp"}} </span> <input class="inline-edit" type="text" data-field="system.effect240" value="{{psychicMatrix.system.effect240}}" /> </label>
-                                    <label> <span> 280 </span> <span> {{localize "abfalter.impossible"}} </span> <input class="inline-edit" type="text" data-field="system.effect280" value="{{psychicMatrix.system.effect280}}" /> </label>
-                                    <label> <span> 320 </span> <span> {{localize "abfalter.inhuman"}} </span> <input class="inline-edit" type="text" data-field="system.effect320" value="{{psychicMatrix.system.effect320}}" /> </label>
-                                    <label> <span> 440 </span> <span> {{localize "abfalter.zen"}} </span> <input class="inline-edit" type="text" data-field="system.effect440" value="{{psychicMatrix.system.effect440}}" /> </label>
+                                    {{#each psychicMatrix.system.matrixDetails as |matrix key|}}
+                                    <label>
+                                        <span>{{matrix.titleNum}}</span> 
+                                        <span>{{localize (concat "abfalter." matrix.title)}}</span>
+                                        {{#if this.failure}}
+                                        <div class="psyTempDesc">{{localize "abfalter.fatigue"}}: {{matrix.fatigue}}</div>
+                                        {{else}}
+                                        <div class="psyTempDesc">{{{matrix.enrichedDesc}}}</div>
+                                        {{/if}}
+                                    </label>
+                                    {{/each}}
                                 </div>
                             </div>
                             {{else}}

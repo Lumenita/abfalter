@@ -3,8 +3,7 @@ import { templates } from "./templates.js"
 export const preloadHandlebarsTemplates = () => {
     const templatePaths = [
         templates.CustomHotBar,
-        templates.dialog.generic,
-        templates.dialog.initiative,
+        templates.initiative,
         //actor tabs
         "systems/abfalter/templates/actor/parts/bio.hbs",
         "systems/abfalter/templates/actor/parts/general.hbs",

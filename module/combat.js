@@ -165,7 +165,7 @@ export const openInitiativeDialog = async () => {
 
 export const initiativeDialog = async ({ content, placeholder = '' }) => {
     const html = await renderTemplates({
-        name: templates.dialog.initiative,
+        name: templates.initiative,
         context: {
             content,
             placeholder

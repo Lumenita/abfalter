@@ -7,19 +7,11 @@ const gmMacro = [
         hotkey: e => e.ctrlKey && e.key === '1',
         fn: () => window.Websocket.openSimpleCalc?.()
     },
-    /*
-    {
-        macroSelectorId: '#sendAttack',
-        hotkey: e => e.ctrlKey && e.key === '2',
-        fn: () => window.Websocket.sendAttack?.()
-    },
-    */
     {
         macroSelectorId: '#kiCreator',
         hotkey: e => e.ctrlKey && e.key === '2',
         fn: () => window.Websocket.kiCreator?.()
     }
-
 ];
 const playerMacro = [
     {
@@ -27,13 +19,6 @@ const playerMacro = [
         hotkey: e => e.ctrlKey && e.key === '1',
         fn: () => window.Websocket.openSimpleCalc?.()
     },
-    /*
-    {
-        macroSelectorId: '#sendAttackRequest',
-        hotkey: e => e.ctrlKey && e.key === '2',
-        fn: () => window.Websocket.sendAttackRequest?.()
-    }
-    */
     {
         macroSelectorId: '#kiCreator',
         hotkey: e => e.ctrlKey && e.key === '2',

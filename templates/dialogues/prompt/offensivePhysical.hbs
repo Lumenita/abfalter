@@ -1,0 +1,59 @@
+<form>
+  <body>
+    <div class="abfDivFormat wepAtkDiceRoll">
+        <label id="ammoRow">
+            <span> {{localize "abfalter.ammo"}}: </span>
+            <select id="ammoDropdown"></select>
+        </label>
+
+        <label id="profileRow">
+            <span>Profile</span>
+            <select id="profileDropdown"></select>
+        </label>
+
+        <label>
+            <span id="newAtkInfo"></span>
+        </label>
+
+        <label>
+            <span id="newRangeInfo"></span>
+        </label>
+
+        <label>
+            <span> {{localize "abfalter.dmgType"}}: </span>
+            <select id="atkDmgTypeDropdown"></select>
+        </label>
+
+        <label>
+            <span>{{localize "abfalter.activeActionMod"}} </span>
+            <select id="modifierSelect" name="modifierSelect"></select>
+        </label>
+
+        <label>
+            <span>{{localize "abfalter.directedAttackPrompt"}}</span>
+            <select id="directedAtkDropdown"></select>
+        </label>
+
+        <label>
+            <span>{{localize "abfalter.fatigue"}}</span>
+            <select id="fatigueDropdown"></select>
+        </label>
+        
+        <label> 
+            <span> {{localize "abfalter.dialogs.modifier"}} </span>
+            <input type="number" id="modifierMod" value="0" /> 
+        </label>
+
+        <label class="profileNoteRow" id="noteRow">
+            <span id="noteInfo"></span>
+        </label>
+        
+        <label class="target-preview-row">
+            <span>{{localize "abfalter.targets"}}</span>
+            <span id="selectedTargetsList">None</span>
+        </label>
+
+        <label></label>
+    </div>
+  </body>
+</form>

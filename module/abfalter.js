@@ -69,16 +69,11 @@ Hooks.once("init", async () => {
 
     //Exposing all roll functions to the game object
     game.abfalter = {
-        characteristicRoll: dice.characteristicRoll,
-        resistanceRoll: dice.resistanceRoll,
-
-        defensiveRollDialogue: dice.defensiveRollDialogue,
-        defensiveOpenRollFunction: dice.defensiveOpenRollFunction,
-        defensiveFumbleRollFunction: dice.defensiveFumbleRollFunction,
-
-        openWeaponProfileDialogue: dice.openWeaponProfileDialogue,
-        profileOpenRollFunction: dice.profileOpenRollFunction,
-        profileFumbleRollFunction: dice.profileFumbleRollFunction,
+        characteristicDialogue: dice.characteristicDialogue,
+        resistanceDialogue: dice.resistanceDialogue,
+        offensiveDialogue: dice.offensiveDialogue,
+        defensiveDialogue: dice.defensiveDialogue,
+        //old
         openMeleeTrapDialogue: dice.openMeleeTrapDialogue,
         openMeleeBreakDialogue: dice.openMeleeBreakDialogue,
         plainRoll: dice.plainRoll
@@ -138,23 +133,31 @@ Hooks.once('ready', () => {
 });
 
 Hooks.once("ready", async function () {
-    if (!game.user.isGM) {
-        return
-    }
-    const systemVersion = game.system.version ?? game.system.data?.version ?? "0.0.0";
-    const currentVersion = game.settings.get("abfalter", "systemMigrationVersion") ?? "0.0.0";
+    if (!game.user.isGM) return;
 
-    if (foundry.utils.isNewerVersion(systemVersion, currentVersion)) {
-        await game.settings.set("abfalter", "systemChangeLog", false); 
-        await game.settings.set("abfalter", "systemMigrationVersion", systemVersion);
-    }
+    await handleMigrations();
 
-    const showChangelog = await game.settings.get("abfalter", "systemChangeLog");
+    const showChangelog = game.settings.get("abfalter", "systemChangeLog");
     if (showChangelog === false) {
         handleChangelog();
     }
+    // if (!game.user.isGM) {
+    //     return
+    // }
+    // const systemVersion = game.system.version ?? game.system.data?.version ?? "0.0.0";
+    // const currentVersion = game.settings.get("abfalter", "systemMigrationVersion") ?? "0.0.0";
 
-    handleMigrations();
+    // if (foundry.utils.isNewerVersion(systemVersion, currentVersion)) {
+    //     await game.settings.set("abfalter", "systemChangeLog", false); 
+    //     await game.settings.set("abfalter", "systemMigrationVersion", systemVersion);
+    // }
+
+    // const showChangelog = await game.settings.get("abfalter", "systemChangeLog");
+    // if (showChangelog === false) {
+    //     handleChangelog();
+    // }
+
+    //handleMigrations();
 })
 
 Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
@@ -529,7 +532,7 @@ class actorDataModel extends foundry.abstract.DataModel {
                 spec: makeIntField(),
                 temp: makeIntField(),
                 actual: makeIntField(5),
-                value: makeIntField(),
+                value: makeIntField(5),
                 max: makeIntField(),
                 bonus: makeIntField(),
                 ratio: makeLongIntField()
@@ -856,7 +859,7 @@ class actorDataModel extends foundry.abstract.DataModel {
                 useOfnemiZenKi: kiAbility(40)
             }),
             fistDamage: new foundry.data.fields.SchemaField({
-                base: makeIntField(),
+                base: makeIntField(10),
                 mult: makeIntField(),
                 mult2: makeIntField(),
                 descNum: makeIntField(),
@@ -864,6 +867,8 @@ class actorDataModel extends foundry.abstract.DataModel {
                 multOption: makeStringField("str"),
                 multOption2: makeStringField("none"),
                 bonus: makeIntField(),
+                dmgType: makeStringField("CUT"),
+                atPen: makeIntField() //unused
             }),
             kiPool: new foundry.data.fields.SchemaField({
                 agi: kiPoolAbilities(),
@@ -1093,8 +1098,8 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 vorpalMod: makeIntField(),
                 hasSpecialConditions: makeBoolField(),
                 hasAmmunition: makeBoolField(),
-                lastWepUsed: makeIntField(),//this
-                lastDefUsed: makeIntField(),//this
+                lastWepUsed: makeIntField(),
+                lastDefUsed: makeIntField(),
                 proficiency: makeStringField("proficient"), //this
                 //toMigrate
                 twoHandedBonus: makeBoolField(), //2Handed
@@ -1886,14 +1891,30 @@ class mentalPatternDataModel extends foundry.abstract.DataModel {
 class psychicMatrixDataModel extends foundry.abstract.DataModel {
     static defineSchema() {
         return {
-            description: makeStringField(),
-            shortDesc: makeStringField(),
-            quantity: makeIntField(1),
+            description: makeHtmlField(),
             expand: makeBoolField(),
-            bonus: makeIntField(),
             level: makeIntField(1),
             action: makeStringField("Active"),
+            type: makeStringField("basic"), // basic, attack, shield, effect
             maint: makeStringField("No"),
+            higherLvl: makeBoolField(),
+            countCost: makeBoolField(true),
+            bonus: makeIntField(),
+            matrixDetails: new foundry.data.fields.SchemaField({
+                effect20: matrixStuff("routine", 20),
+                effect40: matrixStuff("easy", 40),
+                effect80: matrixStuff("average", 80),
+                effect120: matrixStuff("difficult", 120),
+                effect140: matrixStuff("vDifficult", 140),
+                effect180: matrixStuff("absurd", 180),
+                effect240: matrixStuff("almostImp", 240),
+                effect280: matrixStuff("impossible", 280),
+                effect320: matrixStuff("inhuman", 320),
+                effect440: matrixStuff("zen", 440)
+            }),
+            //Old - to Migrate
+            quantity: makeIntField(1),
+            shortDesc: makeStringField(),
             effect20: makeStringField(),
             effect40: makeStringField(),
             effect80: makeStringField(),
@@ -2224,6 +2245,47 @@ function spellDif() {
         rollDesc: makeStringField()
     })
 }
+
+function matrixStuff(header, value) {
+    return new foundry.data.fields.SchemaField({
+        description: makeHtmlField(),
+        expand: makeBoolField(true),
+        title: makeStringField(header),
+        titleNum: makeIntField(value),
+        failure: makeBoolField(),
+        fatigue: makeIntField(),
+        dmgValue: makeIntField(),
+        dmgType: new foundry.data.fields.SchemaField({
+            cut: makeBoolField(),
+            imp: makeBoolField(),
+            thr: makeBoolField(),
+            heat: makeBoolField(),
+            cold: makeBoolField(),
+            ele: makeBoolField(),
+            ene: makeBoolField(),
+        }),
+        favDmgType: makeStringField(),
+        atPen: makeIntField(),
+        shieldValue: makeIntField(),
+        resType: new foundry.data.fields.SchemaField({
+            physical: makeBoolField(),
+            disease: makeBoolField(),
+            poison: makeBoolField(),
+            magic: makeBoolField(),
+            psychic: makeBoolField()
+        }),
+        resValue: makeIntField()
+    })
+}
+
+
+
+
+
+
+
+
+
 
 function usage() {
     return new foundry.data.fields.SchemaField({

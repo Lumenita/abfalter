@@ -156,7 +156,7 @@
                             <div class="armoryIndent">┗</div>
                             <div class="armoryWepCombat">
                                 {{#ifIn system.info.type "hybrid melee ranged"}}
-                                <button type="button" data-action="weaponRoll" data-label="attack" data-id="{{_id}}" data-type="{{system.info.type}}" data-value="weaponAtk">
+                                <button type="button" data-action="abfRollButton" data-label="weaponAttack" data-value="{{system.derived.baseAtk}}" data-id="{{_id}}">
                                     {{localize "abfalter.attack"}}: {{system.derived.baseAtk}}
                                 </button>
                                 {{/ifIn}}
@@ -168,14 +168,14 @@
                                 </button>
                             </div>
                             <div class="armoryWepBreak">
-                                <button type="button" data-action="weaponRoll" data-label="breakage" data-id="{{_id}}" data-type="{{system.info.type}}" data-value="weaponBreak">
+                                <button type="button" data-action="abfRollButton" data-label="weaponBreak" data-value="breakage" data-id="{{_id}}" data-type="{{system.info.type}}" >
                                     {{localize "abfalter.breakageShort"}}: {{system.melee.finalBreakage}}
                                 </button>
                             </div>
                             {{#ifIn system.info.type "hybrid melee"}}
                             {{#if system.properties.trapping.bool}}
                             <div class="armoryWepTrap">
-                                <button type="button" data-action="weaponRoll" data-label="trap" data-id="{{_id}}" data-value="weaponTrap">
+                                <button type="button" data-action="abfRollButton" data-label="weaponTrap" data-value="trap" data-id="{{_id}}">
                                     {{localize "abfalter.trapping"}}
                                 </button>
                             </div>

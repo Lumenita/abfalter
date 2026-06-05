@@ -1,8 +1,23 @@
-{{> "systems/abfalter/templates/dialogues/partials/customChatHeader.hbs"}}
+<div class="abfalterChatHeader">
+    <img class="abfalterChatPortrait" src="{{basicInfo.portrait}}">
+
+    <div class="abfalterChatHeaderNames">
+        {{#if atkSettings.atkTokName}}
+        <span class="abfalterChatActor">{{basicInfo.name}}</span>
+        {{else}}
+        <span class="gm-only abfalterChatActor">{{basicInfo.name}}</span>
+        <span class="player-only abfalterChatActor">{{localize "abfalter.unknown"}}</span>
+        {{/if}}
+        <span class="abfalterCharUser">{{basicInfo.userName}}</span>
+    </div>
+    
+    <div class="abfResolutionTime"></div>
+</div>
+
 
 <div class="baseAbfalterV2 resolveCombatMsg">
     <div>
-        <span> Combat Results </span>
+        <span> {{localize "abfalter.combatResults"}} </span>
     </div>
 
     <div class="resolveAttackContainer">
@@ -13,25 +28,42 @@
                 </span>
             </label>
             <label>
-                <span>
-                    Attack: {{resolveData.attackerValues.finalValue}} | Damage: {{resolveData.attackerValues.dmg}} {{resolveData.attackerValues.dmgType}} | AT Pen: {{resolveData.attackerValues.atPen}}
-                </span>
+                {{#if resolveData.atkSettings.atkFinValue}}
+                <span>{{localize "abfalter.attack"}}: {{resolveData.attackerValues.finalValue}} | </span>
+                {{else}}
+                <span class="gm-only">{{localize "abfalter.attack"}}: {{resolveData.attackerValues.finalValue}} | </span>
+                <span class="player-only">{{localize "abfalter.attack"}}: ??? | </span>
+                {{/if}}
+
+                {{#if resolveData.atkSettings.atkDmg}}
+                <span>{{localize "abfalter.damage"}}: {{resolveData.attackerValues.dmg}} {{resolveData.attackerValues.dmgType}} | </span>
+                {{else}}
+                <span class="gm-only">{{localize "abfalter.damage"}}: {{resolveData.attackerValues.dmg}} {{resolveData.attackerValues.dmgType}} | </span>
+                <span class="player-only">{{localize "abfalter.damage"}}: ??? {{resolveData.attackerValues.dmgType}} | </span>
+                {{/if}}
+
+                {{#if resolveData.atkSettings.atkAtPen}}
+                <span>{{localize "abfalter.atPen"}}: {{resolveData.attackerValues.atPen}}</span>
+                {{else}}
+                <span class="gm-only">{{localize "abfalter.atPen"}}: {{resolveData.attackerValues.atPen}}</span>
+                <span class="player-only">{{localize "abfalter.atPen"}}: ???</span>
+                {{/if}}
             </label>
         </div>
-        <div class="resolveAttackExtra">
+        <!-- <div class="resolveAttackExtra">
             <span>
                 Other notes
             </span>
-        </div>
+        </div> -->
     </div>
 
     <div>
         <div class="resolveTargetsHeader">
-        <span class="resolveTargetsHeaderCenter">
-            <i class="fa-solid fa-heart-crack resolveTargetsHeaderIcon"></i>
-            <span class="resolveTargetsHeaderText">Apply</span>
-            <i class="fas fa-caret-right resolveTargetsHeaderChevron"></i>
-        </span>
+            <span class="resolveTargetsHeaderCenter">
+                <i class="fa-solid fa-heart-crack resolveTargetsHeaderIcon"></i>
+                <span class="resolveTargetsHeaderText">{{localize "abfalter.apply"}}</span>
+                <i class="fas fa-caret-right resolveTargetsHeaderChevron"></i>
+            </span>
         </div>
 
         <div class="resolveTargetsBody">
@@ -39,19 +71,48 @@
             <div class="resolveDefenderContainer" data-defender-index="{{key}}" data-defender-id="{{key}}" data-base-damage="{{defender.totalDmg}}">
                 <div class="resolveDefenderTopRow">
                     <img class="resolveDefenderPortraitWrap" src="{{defender.portrait}}">
+                    {{#if defender.defSettings.defTokName}}
                     <div class="resolveDefenderName">{{defender.name}}</div>
+                    {{else}}
+                    <div class="resolveDefenderName gm-only">{{defender.name}}</div>
+                    <div class="resolveDefenderName player-only">???</div>
+                    {{/if}}
+
+                    {{#if defender.defSettings.resDefDmgTaken}}
                     <div class="resolveDefenderTotalDamageValue {{defender.dmgColor}}">{{defender.totalDmg}}</div>
+                    {{else}}
+                    <div class="resolveDefenderTotalDamageValue gm-only {{defender.dmgColor}}">{{defender.totalDmg}}</div>
+                    <div class="resolveDefenderTotalDamageValue player-only">???</div>
+                    {{/if}}
                 </div>
 
                 <div class="resolveDefenderMiddle">
                     <div class="resolveDefenderStatsRow">
-                        <span class="resolveDefenderStat">
-                            Defense: {{defender.defenseTotal}} | Final AT: {{defender.effectiveArmor}} | Dmg: {{defender.dmgPercentage}}%
-                        </span>
+                        {{#if defender.defSettings.defFinValue}}
+                        <span class="resolveDefenderStat">{{localize "abfalter.defense"}}: {{defender.defenseTotal}} |  </span>
+                        {{else}}
+                        <span class="resolveDefenderStat gm-only">{{localize "abfalter.defense"}}: {{defender.defenseTotal}} |  </span>
+                        <span class="resolveDefenderStat player-only">{{localize "abfalter.defense"}}: ??? |  </span>
+                        {{/if}}
+
+                        {{#if defender.defSettings.resFinalAT}}
+                        <span class="resolveDefenderStat">{{localize "abfalter.finalAt"}}: {{defender.effectiveArmor}} | </span>
+                        {{else}}
+                        <span class="resolveDefenderStat gm-only">{{localize "abfalter.finalAt"}}: {{defender.effectiveArmor}} | </span>
+                        <span class="resolveDefenderStat player-only">{{localize "abfalter.finalAt"}}: ??? | </span>
+                        {{/if}}
+
+                        {{#if defender.defSettings.resDefDmgPer}}
+                        <span class="resolveDefenderStat">{{localize "abfalter.dmgShort"}}: {{defender.dmgPercentage}}% </span>
+                        {{else}}
+                        <span class="resolveDefenderStat gm-only">{{localize "abfalter.dmgShort"}}: {{defender.dmgPercentage}}% </span>
+                        <span class="resolveDefenderStat player-only">{{localize "abfalter.dmgShort"}}: ???% </span>
+                        {{/if}}
                     </div>
 
                     <div class="resolveDefenderInfoRow">
-                        <span>{{defender.dmgInfo}}</span>
+                        <span class="gm-only">{{defender.dmgInfoGM}}</span>
+                        <span class="player-only">{{defender.dmgInfoPlayer}}</span>
                     </div>
                 </div>
                 {{#unless @root.resolveData.resolved}}
@@ -96,7 +157,7 @@
 
         {{#unless resolveData.resolved}}
         <div class="gm-only resolveApplyButton">
-            <button class="applyDamageToActors">Apply</button>
+            <button class="applyDamageToActors">{{localize "abfalter.apply"}}</button>
         </div>
         {{/unless}}
     </div>

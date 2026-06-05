@@ -1,8 +1,16 @@
-<section class="baseAbfalter itemPage tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+<section class="baseAbfalterV2 itemPageV2 tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+    
     <fieldset>
         <legend> {{ localize "abfalter.generalDetails" }} </legend>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.bonus"}} </span> <input type="number" name="system.bonus" value="{{system.bonus}}" /> </label>
-        <div class="csSelect itemSimpleLabel">
+        <div class="abfDivFormat">
+            <label class="itemDoubleInputLabel">
+                <span> {{localize "abfalter.bonus"}} </span>
+                <input type="number" name="system.bonus" value="{{system.bonus}}" />
+                <span> | </span>
+                <span> {{system.finalPot}} </span>
+            </label>
+        </div>
+        <div class="csSelect itemSimpleLabel abfDivFormat">
             <label>
                 <span> {{localize "abfalter.level"}} </span>
                 <select name="system.level">
@@ -10,7 +18,7 @@
                 </select>
             </label>
         </div>
-        <div class="csSelect itemSimpleLabel">
+        <div class="csSelect itemSimpleLabel abfDivFormat">
             <label>
                 <span> {{localize "abfalter.maint"}} </span>
                 <select name="system.maint">
@@ -18,37 +26,167 @@
                 </select>
             </label>
         </div>
+        <div class="csSelect itemSimpleLabel abfDivFormat">
+            <label>
+                <span> {{localize "abfalter.actionType"}} </span>
+                <select name="system.action">
+                    {{selectOptions actionObjList selected=system.action localize=true}}
+                </select>
+            </label>
+        </div>
+        <div class="csSelect itemSimpleLabel abfDivFormat">
+            <label>
+                <span> {{localize "abfalter.rollType"}} </span>
+                <select name="system.type">
+                    {{selectOptions psyTypeObjList selected=system.type localize=true}}
+                </select>
+            </label>
+        </div>
+        <div class="abfDivFormat">
+            <span class="psyTypeInfo">{{localize "abfalter.psychicRollInfo"}}</span>
+            <label class="itemSimpleLabel">
+                <span> {{localize "abfalter.castAtHigherPot"}} </span>
+                <button type="button" data-action="toggleValue" class="{{#if system.higherLvl}}kiBought{{/if}}"
+                    data-label="system.higherLvl" data-ability="{{system.higherLvl}}">
+                    {{#if system.higherLvl}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                    {{/if}} 
+                </button>
+            </label>
+            <label class="itemSimpleLabel">
+                <span> {{localize "abfalter.countPpCost"}} </span>
+                <button type="button" data-action="toggleValue" class="{{#if system.countCost}}kiBought{{/if}}"
+                    data-label="system.countCost" data-ability="{{system.countCost}}">
+                    {{#if system.countCost}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                    {{/if}} 
+                </button>
+            </label>
+        </div>
     </fieldset>
 
     <fieldset>
         <legend> {{localize "abfalter.psychicMatricesOne"}} {{ localize "abfalter.details" }} </legend>
-        <div class="psychicMatrix">
-            <div>
-                <span> {{localize "abfalter.difficulty"}} </span>
-                <span> {{localize "abfalter.effect"}} </span>
+        {{#each system.matrixDetails as |matrix key|}}
+        <div class="psyItemEachMatrix">
+            <div class="psyItemDetHeader abfDivFormat">
+                <span>{{matrix.titleNum}}</span>
+                <span>{{localize (concat "abfalter." matrix.title)}}</span>
+                <a
+                    data-action="itemToggleEachValue"
+                    data-path="system.matrixDetails.{{key}}.expand"
+                    data-value="{{matrix.expand}}">
+                    <i class="{{#if this.expand}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i>
+                </a>
             </div>
-            <div>
-                <label> <span> 20 </span> <span> {{localize "abfalter.routine"}} </span> <input type="text"
-                        name="system.effect20" value="{{system.effect20}}" /> </label>
-                <label> <span> 40 </span> <span> {{localize "abfalter.easy"}} </span> <input type="text"
-                        name="system.effect40" value="{{system.effect40}}" /> </label>
-                <label> <span> 80 </span> <span> {{localize "abfalter.average"}} </span> <input type="text"
-                        name="system.effect80" value="{{system.effect80}}" /> </label>
-                <label> <span> 120 </span> <span> {{localize "abfalter.difficult"}} </span> <input type="text"
-                        name="system.effect120" value="{{system.effect120}}" /> </label>
-                <label> <span> 140 </span> <span> {{localize "abfalter.vDifficult"}} </span> <input type="text"
-                        name="system.effect140" value="{{system.effect140}}" /> </label>
-                <label> <span> 180 </span> <span> {{localize "abfalter.absurd"}} </span> <input type="text"
-                        name="system.effect180" value="{{system.effect180}}" /> </label>
-                <label> <span> 240 </span> <span> {{localize "abfalter.almostImp"}} </span> <input type="text"
-                        name="system.effect240" value="{{system.effect240}}" /> </label>
-                <label> <span> 280 </span> <span> {{localize "abfalter.impossible"}} </span> <input type="text"
-                        name="system.effect280" value="{{system.effect280}}" /> </label>
-                <label> <span> 320 </span> <span> {{localize "abfalter.inhuman"}} </span> <input type="text"
-                        name="system.effect320" value="{{system.effect320}}" /> </label>
-                <label> <span> 440 </span> <span> {{localize "abfalter.zen"}} </span> <input type="text"
-                        name="system.effect440" value="{{system.effect440}}" /> </label>
+            {{#if this.expand}}
+            <div class="abfDivFormat">
+                <label class="itemSimpleLabel"> 
+                    <span>{{localize "abfalter.psyFailure"}}</span>
+                    <button type="button" data-action="itemToggleEachValue" data-path="system.matrixDetails.{{key}}.failure" data-value="{{matrix.failure}}" class="{{#if this.failure}}kiBought{{/if}}">
+                        {{#if this.failure}}
+                        <span> {{localize "abfalter.yes"}} </span>
+                        {{else}}
+                        <span> {{localize "abfalter.no"}} </span>
+                        {{/if}}
+                    </button>
+                </label>
             </div>
+            {{#if this.failure}}
+            <div class="abfDivFormat">
+                <label class="itemSimpleLabel"> <span> {{localize "abfalter.psyFailureMsg"}} </span> <input type="number" name="system.matrixDetails.{{key}}.fatigue" value="{{matrix.fatigue}}" /> </label>
+            </div>
+            {{else}}
+            <div class="abfDivFormat">
+                {{#ifEquals ../system.type "attack"}}
+                <label class="itemSimpleLabel"> <span> {{localize "abfalter.damage"}} </span> <input type="number" name="system.matrixDetails.{{key}}.dmgValue" value="{{matrix.dmgValue}}" /> </label>
+                <label class="itemSimpleLabel"> <span> {{localize "abfalter.atPen"}} </span> <input type="number" name="system.matrixDetails.{{key}}.atPen" value="{{matrix.atPen}}" /> </label>
+                <label class="itemSimpleLabel"> <span> {{localize "abfalter.dmgType"}} </span> </label>
+                <div class="psyItemDmgTypes">
+                    <button type="button" data-action="itemToggleEachValue" data-path="system.matrixDetails.{{key}}.dmgType.cut" data-value="{{matrix.dmgType.cut}}" class="{{#if this.dmgType.cut}}kiBought{{/if}}">
+                        <span>{{localize "abfalter.cut"}}</span>
+                    </button>
+                    <button type="button" data-action="itemToggleEachValue" data-path="system.matrixDetails.{{key}}.dmgType.imp" data-value="{{matrix.dmgType.imp}}" class="{{#if this.dmgType.imp}}kiBought{{/if}}">
+                        <span>{{localize "abfalter.imp"}}</span>
+                    </button>
+                    <button type="button" data-action="itemToggleEachValue" data-path="system.matrixDetails.{{key}}.dmgType.thr" data-value="{{matrix.dmgType.thr}}" class="{{#if this.dmgType.thr}}kiBought{{/if}}">
+                        <span>{{localize "abfalter.thr"}}</span>
+                    </button>
+                    <button type="button" data-action="itemToggleEachValue" data-path="system.matrixDetails.{{key}}.dmgType.heat" data-value="{{matrix.dmgType.heat}}" class="{{#if this.dmgType.heat}}kiBought{{/if}}">
+                        <span>{{localize "abfalter.heat"}}</span>
+                    </button>
+                    <button type="button" data-action="itemToggleEachValue" data-path="system.matrixDetails.{{key}}.dmgType.cold" data-value="{{matrix.dmgType.cold}}" class="{{#if this.dmgType.cold}}kiBought{{/if}}">
+                        <span>{{localize "abfalter.cold"}}</span>
+                    </button>
+                    <button type="button" data-action="itemToggleEachValue" data-path="system.matrixDetails.{{key}}.dmgType.ele" data-value="{{matrix.dmgType.ele}}" class="{{#if this.dmgType.ele}}kiBought{{/if}}">
+                        <span>{{localize "abfalter.ele"}}</span>
+                    </button>
+                    <button type="button" data-action="itemToggleEachValue" data-path="system.matrixDetails.{{key}}.dmgType.ene" data-value="{{matrix.dmgType.ene}}" class="{{#if this.dmgType.ene}}kiBought{{/if}}">
+                        <span>{{localize "abfalter.ene"}}</span>
+                    </button>
+                </div>
+                {{/ifEquals}}
+
+                {{#ifEquals ../system.type "shield"}}
+                <label class="itemSimpleLabel"> <span> {{localize "abfalter.shieldValue"}} </span> <input type="number" name="system.matrixDetails.{{key}}.shieldValue" value="{{matrix.shieldValue}}" /> </label>
+                {{/ifEquals}}
+
+                {{#ifEquals ../system.type "effect"}}
+                <label class="itemSimpleLabel"> <span> {{localize "abfalter.resValue"}} </span> <input type="number" name="system.matrixDetails.{{key}}.resValue" value="{{matrix.resValue}}" /> </label>
+                <label class="itemSimpleLabel"> <span> {{localize "abfalter.resType"}} </span> </label>
+                <div class="psyItemResTypes">
+                    <button type="button" data-action="itemToggleEachValue" data-path="system.matrixDetails.{{key}}.resType.physical" data-value="{{matrix.resType.physical}}" class="{{#if this.resType.physical}}kiBought{{/if}}">
+                        <span>{{localize "abfalter.physical"}}</span>
+                    </button>
+                    <button type="button" data-action="itemToggleEachValue" data-path="system.matrixDetails.{{key}}.resType.disease" data-value="{{matrix.resType.disease}}" class="{{#if this.resType.disease}}kiBought{{/if}}">
+                        <span>{{localize "abfalter.disease"}}</span>
+                    </button>
+                    <button type="button" data-action="itemToggleEachValue" data-path="system.matrixDetails.{{key}}.resType.poison" data-value="{{matrix.resType.poison}}" class="{{#if this.resType.poison}}kiBought{{/if}}">
+                        <span>{{localize "abfalter.poison"}}</span>
+                    </button>
+                    <button type="button" data-action="itemToggleEachValue" data-path="system.matrixDetails.{{key}}.resType.magic" data-value="{{matrix.resType.magic}}" class="{{#if this.resType.magic}}kiBought{{/if}}">
+                        <span>{{localize "abfalter.magic"}}</span>
+                    </button>
+                    <button type="button" data-action="itemToggleEachValue" data-path="system.matrixDetails.{{key}}.resType.psychic" data-value="{{matrix.resType.psychic}}" class="{{#if this.resType.psychic}}kiBought{{/if}}">
+                        <span>{{localize "abfalter.psychic"}}</span>
+                    </button>
+                </div>
+                {{/ifEquals}}
+                <!-- if basic then nothing, if attack then dmgValue, dmgType, atPen, if shield then shieldValue, if effect then resType and resValue -->
+            </div>
+            <div class="psyItemDescContainer">
+                <span class="psyItemDescHeader"> Description </span>
+                <div class="psyItemDesc">
+                    {{formInput
+                        (lookup
+                            (lookup
+                                (lookup ../systemFields.matrixDetails.fields key)
+                                "fields"
+                            )
+                            "description"
+                        )
+                        name=(concat "system.matrixDetails." key ".description")
+                        value=matrix.description
+                        enriched=matrix.enrichedDesc
+                        toggled=true
+                    }}
+                </div>
+            </div>
+            {{/if}}
+            {{else}}
+            <div class="psyItemEachCollapsed">
+                {{#if this.failure}}
+                <span>{{localize "abfalter.fatigue"}}: {{matrix.fatigue}}</span>
+                {{else}}
+                {{{matrix.enrichedDesc}}}
+                {{/if}}
+            </div>
+            {{/if}}
         </div>
+        {{/each}}
     </fieldset>
 </section>

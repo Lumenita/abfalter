@@ -23,20 +23,10 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         editPermission: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER,
         dragDrop: [{ dragSelector: '.draggable', dropSelector: null }],
         actions: {
-            toggleValue: this.#toggleValue,
-            toggleBoughtFreeButton: this.#toggleDualBoolButton,
-            kiAbilityItemToggle: this.#kiAbilityItemToggle,
-            itemToggleValue: this.#itemToggleValue,
-            itemToChat: this.#itemToChat,
-            subItemToChat: this.#subItemToChat,
-
-            abfRollButton: this.#hadleRollFunctions,
-
-            plainRoll: this.#onPlainRoll,
-            weaponRoll: this.#onWeaponRoll,
-
-
-            createItem: this.#createNewItem,
+            toggleValue: this.#toggleValue,                     // Universal Toggle
+            toggleBoughtFreeButton: this.#toggleDualBoolButton, // Universal Toggle between 3 states
+            kiAbilityItemToggle: this.#kiAbilityItemToggle,     // Toggle specifically for ki abilities, due to laziness
+            armorTag: this.#armorTag,                           // Switch armor values in header
             kiAccuHalf: this.#kiAccuHalf,
             kiAccuFull: this.#kiAccuFull,
             kiAccuReset: this.#kiAccuReset,
@@ -45,29 +35,35 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             magicRegenFull: this.#magicRegenFull,
             magicRegenActual: this.#magicRegenActual,
             removeMaint: this.#removeMaint,
+            addExp: this.#addExp,                           // Adds Experince Points
+            //Master Buttons
+            abfRollButton: this.#hadleRollFunctions,        // Handles all roll functions
+            configButton: this.#configButton,               // New function to handle all button clicks (class manager, initiative stats popout)
+            //To merge above
+            plainRoll: this.#onPlainRoll,
             openArcanaSephirah: this.#openArcanaSephirah,
-
-            armoryAddItem: this.#armoryAddItem,
-            increase: this.#increaseQuantity,
-            decrease: this.#decreaseQuantity,
-            ammoWeaponToggle: this.#ammoWeaponToggle,
-            openMenu: this.#openMenu,
-
-
             openDPCalc: this.#openDpCostCalc,
             changeSecNums: this.#changeSecNums,
+            openRestWindow: this.#openRestWindow,           // Opens Rest Window, move to configButton
+            openDpOffsets: this.#openDpOffsets,             // Opens the offset window, could go into congig Button
+            openResolveWindow: this.#openResolveWindow,     // Header Resolve Button
+            rollInitiative: this.#rollInitiative,           // TODO
+            //Items
+            itemToggleValue: this.#itemToggleValue,         // Universal Item Toggle
+            toggleElanGift: this.#toggleElanGift,           // Toggles values within Elan objects
+            itemToChat: this.#itemToChat,                   // Sends information about item to chat
+            subItemToChat: this.#subItemToChat,             // As above from within an item in the actor sheet, can prob merge
+            createItem: this.#createNewItem,
+            armoryAddItem: this.#armoryAddItem,
+            increase: this.#increaseQuantity,               // Armory Items quantity
+            decrease: this.#decreaseQuantity,               // Armory Items quantity
+            ammoWeaponToggle: this.#ammoWeaponToggle,       // Loads ammo onto ranged weapons
+            openMenu: this.#openMenu,                       // obsolete?
+            //Active Effects
             createAE: this.#createActiveEffect,
             toggleAE: this.#toggleEffect,
             deleteAE: this.#deleteEffect,
             editAE: this.#editEffect,
-            toggleElanGift: this.#toggleElanGift,
-            openRestWindow: this.#openRestWindow,
-            openDpOffsets: this.#openDpOffsets,
-            configButton: this.#configButton,
-            openResolveWindow: this.#openResolveWindow,
-            addExp: this.#addExp,
-            rollInitiative: this.#rollInitiative,
-            armorTag: this.#armorTag,
         }
     }
 
@@ -221,8 +217,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
 
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
-        //context.document = this.document;
-        //context.fields = this.document.schema.fields;
         context.system = this.document.system;
         context.systemFields = this.document.system.schema.fields;
         context.config = CONFIG.abfalter;
@@ -239,6 +233,24 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         for (const type of itemTypes) {
             const items = this.actor.itemTypes[type]?.sort((a, b) => a.sort - b.sort) || [];
             context[`${type}s`] = items;
+        }
+        // Prepare enriched descriptions for psychic matrices
+        for (const psychicMatrix of context.psychicMatrixs) {
+            psychicMatrix.enrichedDesc =
+                await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+                    psychicMatrix.system.description ?? "",
+                    { async: true }
+                );
+
+            const matrices = psychicMatrix.system.matrixDetails ?? {};
+
+            for (const matrix of Object.values(matrices)) {
+                matrix.enrichedDesc =
+                    await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+                        matrix.description ?? "",
+                        { async: true }
+                    );
+            }
         }
 
         return context;
@@ -546,10 +558,25 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         const label = target.dataset.label;
         const key = target.dataset.code;
         let value = target.dataset.value;
-        //console.log(`Toggling Elan Gift: ${key} - ${label} - ${value}`);
         value = !(value === 'true');
         return item.update({ [`system.gifts.${key}.${label}`]: value });
     }
+
+    // static #itemToggleEachValue(ev) {
+    //     ev.preventDefault();
+
+    //     const target = ev.target.closest("[data-path][data-value]");
+    //     const itemId = ev.target.closest(".item").dataset.itemId;
+    //     const item = this.actor.items.get(itemId);
+
+    //     const path = target.dataset.path;
+    //     let value = target.dataset.value;
+    //     value = !(value === 'true');
+    //     console.log(path, value)
+    //     return item.update({ [path]: value });
+    // }
+
+    
 
     static #onPlainRoll(ev) {
         ev.preventDefault();
@@ -571,36 +598,29 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             case "unarmedDodge":
             case "defMagicProj":
             case "defPsyProj":
-                diceFunctions.defensiveRollDialogue({actor: this.actor, defLabel: dataset.label, baseValue: dataset.value, weaponId: null});
+                diceFunctions.defensiveDialogue({actor: this.actor, defLabel: dataset.label, value: dataset.value, weaponId: null});
                 break;
             case "weaponBlock":
             case "weaponDodge":
-                diceFunctions.defensiveRollDialogue({actor: this.actor, defLabel: dataset.label, baseValue: dataset.value, weaponId: dataset.id});
+                diceFunctions.defensiveDialogue({actor: this.actor, defLabel: dataset.label, value: dataset.value, weaponId: dataset.id});
+                break;
+            case "unarmedAttack":
+                diceFunctions.offensiveDialogue({actor: this.actor, offLabel: dataset.label, value: dataset.value, weaponId: null});
+                break;
+            case "weaponAttack":
+                diceFunctions.offensiveDialogue({actor: this.actor, offLabel: dataset.label, value: dataset.value, weaponId: dataset.id});
                 break;
             case "offPsyProj":
-                console.log('HA');
+                diceFunctions.psychicOffensiveDialogue({actor: this.actor, offLabel: dataset.label, baseValue: dataset.value});
                 break;
-            default:
-                break;
-        }
-    }
 
-    static #onWeaponRoll(ev) {
-        ev.preventDefault();
-        const dataset = ev.target.dataset;
-
-        switch (dataset.value) {
-            case 'weaponAtk':
-                diceFunctions.openWeaponProfileDialogue(this.actor, dataset.label, dataset.id, dataset.type, 'attack', 'offensive');
-                break;
             case 'weaponTrap':
-                diceFunctions.openMeleeTrapDialogue(this.actor, dataset.label, dataset.id);
+                diceFunctions.openMeleeTrapDialogue(this.actor, dataset.value, dataset.id);
                 break;
             case 'weaponBreak':
-                diceFunctions.openMeleeBreakDialogue(this.actor, dataset.label, dataset.id, dataset.type);
+                diceFunctions.openMeleeBreakDialogue(this.actor, dataset.value, dataset.id, dataset.type);
                 break;
             default:
-                console.log("Error: This weapon roll type does not exist");
                 break;
         }
     }
@@ -859,7 +879,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
 
     static #openMenu(ev) {
         ev.preventDefault();
-        ui.notifications.info("This menu function is not implemented, eta v1.6.3"); //TODO
+        ui.notifications.info("This menu function is not implemented, eta v1.6.x"); //TODO
     }
 
     static #ammoWeaponToggle(ev) {

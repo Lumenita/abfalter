@@ -3,10 +3,56 @@
         <div>
             <span>If you wish to support me or the system click -> <a href="https://ko-fi.com/luminitatv">Thank you!</a></span>
         </div>
+        <div>
+            <span><a href="https://discord.gg/KyUnYUD7Bj">Discord</a> for abfalter, come join!</span>
+        </div>
         <h5> Change Log </h5>
     </header>
 
     <div class="changelogBody">
+        <div class="changelogSection">
+            <h6>v1.6.2 - 2026-06-05</h6>
+            <span>
+                Hello all! After a long wait (4 months), the new update if finally here. The main new feature is automation to martial combat! meanwhile, psychic and magic are under rework to fit the new auto-combat resolver system.
+                I have made a new discord for all those who want to keep up to date with new upcoming features, a centralized place for feedback and bug reports. As summer is rolling by, remember to stay hydrated!
+            </span> 
+
+            <div class="changelogList">
+                <h5>Combat Resolver System</h5>
+                <ul>
+                    <li>New settings in foundry settings can be found to set certain behaviors, be sure to check it out first.</li>
+                    <li>The settings change how NON friendly token show their stats to the chat to players. This is due to the chat messages having to be public so that players can interact with them.</li>
+                    <li>By Default, everything other than actor name, attack type, weapon name are hidden.</li>
+                    <li>By NON friendly, its referred to the token disposition found in token settings.</li>
+                    <li>Currently unarmed attacks and weapon attacks are only supported, magic and psychic will be added in future updates.</li>
+                    <li>All you have to do to start it is click the attack button, whether from the general page or armory.</li>
+                    <li>In the prompt there is a new field 'Targets', which use the foundry targeting system. Targets can be picked and changed before or while the prompt is open, after rolling the targets are locked.</li>
+                    <li>After rolling, its pretty straight forward. it awaits for open roll/fumbles. Once satisfied, the targets can roll a defense from the chat button (must be from the chat button).</li>
+                    <li>The defense prompt can be changed from physical, to magical or psychic. Once rolled, the defense type is saved and all future defenses default to that defense type.</li>
+                    <li>For martial defenses, it automatically selects the highest between dodge or block, but can be changed during the prompt.</li>
+                    <li>For GM's -> When a player rolls a defense this way, a new button shows up in their chat card, you must accept their defense to continue.</li>
+                    <li>Once all targets defense are satisfied, it automatically posts the resolve card into the chat, where the GM must then decide the damage multiplier and apply the damage.</li>
+                    <li>Currently, the damage goes straight to the player, subtracting health only. More complex algorithms will be added in later updates for shields, criticals, etc.</li>
+                </ul>
+                <h5>Changes</h5>
+                <ul>
+                    <li>Changes to the psychic item - new fields for data which means the compendiums are slightly outdated for now</li>
+                    <li>New visual formats for rolls</li>
+                    <li>Weapon pushing has been fixed to actually affect initiative</li>
+                    <li>Nemesis Zen button fixed</li>
+                    <li>More fixes of small things</li>
+                </ul>
+                <h5>Macro Users</h5>
+                <ul>
+                    <li>I have rebuilt most roll functions from the ground up. Which means, if any macros relied on the old ones, they are most likely broken.</li>
+                    <li>The profile roll is now separated into offensive rolls and defensive rolls to accommodate the new resolver.</li>
+                    <li>There are 2 defense roll functions, one for the buttons pressed on the actor which are independent, the other is called autoDefense which links to the attacks it was prompted by.</li>
+                    <li>Resistance and Characteristic rolls should still function but they did receive an overhaul.</li>
+                    <li>Whichever rolls haven't been change will be changed soon, such as secondary abilities, magic stuff, psychic stuff, weapon breakage or trapping, etc.</li>
+                </ul>
+            </div>
+        </div>
+
         <div class="changelogSection">
             <h6>v1.6.1 - 2026-02-03</h6>
             <span>

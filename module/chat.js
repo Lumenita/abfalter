@@ -12,8 +12,8 @@ export function addChatListeners(chatMessage, html) {
         });
     };
     // Offensive
-    bindButton("button.wepOpenRoll", diceFunctions.profileOpenRollFunction);
-    bindButton("button.wepFumbleRoll", diceFunctions.profileFumbleRollFunction);
+    bindButton("button.offOpenRoll", diceFunctions.offenseOpenRollFunction);
+    bindButton("button.offFumbleRoll", diceFunctions.offenseFumbleRollFunction);
     // Defensive
     bindButton("button.defensiveOpenRoll", diceFunctions.defensiveOpenRollFunction);
     bindButton("button.defensiveFumbleRoll", diceFunctions.defensiveFumbleRollFunction);
@@ -26,28 +26,23 @@ export function addChatListeners(chatMessage, html) {
     // Resolve Combat
     bindChange('.resolveDmgOption input[type="radio"]', diceFunctions.updateResolveDamagePreview);
     bindButton("button.applyDamageToActors", diceFunctions.resolveApplyDamageToActors);
-
-
+    // Other
     bindButton("button.secOpenRoll", diceFunctions.plainOpenRollFunction);
     bindButton("button.secFumbleRoll", diceFunctions.plainFumbleRollFunction);
     bindButton("button.spellDifficulty", spellChatUpdate);
     bindButton("button.psychicDifficulty", psychicChatUpdate);
-
+    // Toggle Value (expanding descriptions)
     bindButton("a.descToggle", toggleValue);
 }
 
 async function toggleValue(msg, html, ev) {
     ev.preventDefault();
-
     const card = ev.currentTarget.closest(".chat-message");
     if (!card) return;
-
-    const desc = card.querySelector(".Itemdescription");
+    const desc = card.querySelector(".itemDescription");
     if (!desc) return;
 
     desc.classList.toggle("ItemDescOpen");
-
-    // optional: rotate arrow
     ev.currentTarget.classList.toggle("ItemDescOpen");
 }
 
@@ -80,50 +75,49 @@ async function spellChatUpdate(msg, html, ev) {
 async function psychicChatUpdate(msg, html, ev) {
     const label = ev.currentTarget.getAttribute("data-label");
 
-    const template = "systems/abfalter/templates/chatItem/psyMatrixChat.html";
+    const template = "systems/abfalter/templates/chatItem/psyMatrixChat.hbs";
     let cardData = msg.flags.cardData
     cardData.expand = false; 
-
     switch (label) {
         case "20":
-            cardData.diff = "Routine";
-            cardData.effect = cardData.system.effect20;
+            cardData.diff = game.i18n.localize(`abfalter.routine`);
+            cardData.effect = cardData.effect20;
             break;
         case "40":
-            cardData.diff = "Easy";
-            cardData.effect = cardData.system.effect40;
+            cardData.diff = game.i18n.localize(`abfalter.easy`);
+            cardData.effect = cardData.effect40;
             break;
         case "80":
-            cardData.diff = "Average";
-            cardData.effect = cardData.system.effect80;
+            cardData.diff = game.i18n.localize(`abfalter.average`);
+            cardData.effect = cardData.effect80;
             break;
         case "120":
-            cardData.diff = "Difficult";
-            cardData.effect = cardData.system.effect120;
+            cardData.diff = game.i18n.localize(`abfalter.difficult`);
+            cardData.effect = cardData.effect120;
             break;
         case "140":
-            cardData.diff = "Very Difficult";
-            cardData.effect = cardData.system.effect140;
+            cardData.diff = game.i18n.localize(`abfalter.vDifficult`);
+            cardData.effect = cardData.effect140;
             break;
         case "180":
-            cardData.diff = "Absurd";
-            cardData.effect = cardData.system.effect180;
+            cardData.diff = game.i18n.localize(`abfalter.absurd`);
+            cardData.effect = cardData.effect180;
             break;
         case "240":
-            cardData.diff = "Almost Impossible";
-            cardData.effect = cardData.system.effect240;
+            cardData.diff = game.i18n.localize(`abfalter.almostImp`);
+            cardData.effect = cardData.effect240;
             break;
         case "280":
-            cardData.diff = "Impossible";
-            cardData.effect = cardData.system.effect280;
+            cardData.diff = game.i18n.localize(`abfalter.impossible`);
+            cardData.effect = cardData.effect280;
             break;
         case "320":
-            cardData.diff = "Inhuman";
-            cardData.effect = cardData.system.effect320;
+            cardData.diff = game.i18n.localize(`abfalter.inhuman`);
+            cardData.effect = cardData.effect320;
             break;
         case "440":
-            cardData.diff = "Zen";
-            cardData.effect = cardData.system.effect440;
+            cardData.diff = game.i18n.localize(`abfalter.zen`);
+            cardData.effect = cardData.effect440;
             break;
         default:
             break;
@@ -183,12 +177,18 @@ async function sendDefenseClicked(msg, html, ev) {
     const template = "systems/abfalter/templates/dialogues/diceRolls/defensiveAutoRoll.hbs"
     const defenseDetails = foundry.utils.deepClone(msg.flags?.abfalter?.defenseDetails ?? {});
     const rollData = foundry.utils.deepClone(msg.flags?.abfalter?.rollData ?? {});
+    const basicInfo = foundry.utils.deepClone(msg.flags?.abfalter?.basicInfo ?? {});
+    const defSettings = foundry.utils.deepClone(msg.flags?.abfalter?.defSettings ?? {});
+
     let status = 'accepted';
+
     const speaker = msg.speaker;
     const actor = ChatMessage.getSpeakerActor(speaker);
 
     const content = await foundry.applications.handlebars.renderTemplate(template, {
+        basicInfo,
         defenseDetails,
+        defSettings,
         rollData,
         actor,
         status
@@ -205,6 +205,10 @@ function updateDefenseButtonOwnership(msg, html, ev) {
     for (const button of buttons) {
         const actorId = button.dataset.actorId;
         const tokenId = button.dataset.tokenId;
+        const workflow = msg.flags?.abfalter?.workflow;
+        const targetState = workflow?.targetStates?.[tokenId];
+        const status = targetState?.status ?? "pending";
+        console.log(status);
 
         const actor = actorId ? game.actors.get(actorId) : null;
         const token = tokenId ? canvas.tokens?.get(tokenId) : null;
@@ -212,16 +216,27 @@ function updateDefenseButtonOwnership(msg, html, ev) {
 
         const canDefend = game.user.isGM || Boolean(defenderActor?.isOwner);
 
-        if (!canDefend) {
+        // lock if attack roll is already locked or defense has been accepted
+        const isLocked =
+            button.dataset.lockedByRoll === "true" ||
+            status === "completed";
+
+        if (!canDefend || isLocked) {
             button.disabled = true;
             button.classList.add("abf-disabled-defense");
             button.setAttribute("aria-disabled", "true");
-            button.title = game.i18n.localize("abfalter.notOwner") || "You do not control this target";
-        } else {
-            // only re-enable if the attack itself is not locked for another reason
-            if (!button.dataset.lockedByRoll || button.dataset.lockedByRoll !== "true") {
-                button.disabled = false;
+
+            if (!canDefend) {
+                button.title =
+                    game.i18n.localize("abfalter.notOwner") ||
+                    "You do not control this target";
+            } else if (status === "completed") {
+                button.title =
+                    game.i18n.localize("abfalter.defenseAccepted") ||
+                    "Defense has already been accepted";
             }
+        } else {
+            button.disabled = false;
             button.classList.remove("abf-disabled-defense");
             button.removeAttribute("aria-disabled");
             button.title = "";
@@ -231,20 +246,11 @@ function updateDefenseButtonOwnership(msg, html, ev) {
 
 export function hideResolveControls(chatMessage, html) {
     if (!chatMessage.flags?.abfalter?.customChatHeaderCard) return;
-    if (game.user.isGM) return;
-
-    html.querySelectorAll(".gm-only").forEach(el => {
-        el.style.display = "none";
-    });
-
-    // html.querySelectorAll(".resolveApplyButton").forEach(el => {
-    //     el.style.display = "none";
-    // });
-
-    // html.querySelectorAll(".resolveAcceptButton").forEach(el => {
-    //     el.style.display = "none";
-    // });
-
+    if (game.user.isGM) {
+        html.querySelectorAll(".player-only").forEach(el => el.style.display = "none");
+    } else {
+        html.querySelectorAll(".gm-only").forEach(el => el.style.display = "none");
+    }
 }
 
 
