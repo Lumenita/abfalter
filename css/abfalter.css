@@ -190,13 +190,13 @@ h6 {
 /* #endRegion */
 
 /* #region @Context-Menu @v2 */
-#context-menu li.context-item {
+#context-menu.abfalterContextMenu li.context-item {
     text-align: start;
     color: var(--color-text-alt);    
     padding: 8px 10px;
 }
-#context-menu .context-items > li:nth-of-type(5),
-#context-menu .context-items > li:nth-of-type(6) {
+#context-menu.abfalterContextMenu .context-items > li:nth-of-type(5),
+#context-menu.abfalterContextMenu .context-items > li:nth-of-type(6) {
     border-top: 1px solid var(--boxColor);
 }
 .chat-message #context-menu li.context-item {

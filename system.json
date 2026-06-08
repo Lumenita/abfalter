@@ -4,8 +4,8 @@
   "description": "Engligh Version of 'Fantasy Flight Games' Anima Beyond Fantasy System altered by some house rules.",
   "version": "1.6.2",
   "compatibility": {
-    "minimum": 13,
-    "verified": "13.351"
+    "minimum": 14,
+    "verified": "14.363"
   },
   "authors": [
     {

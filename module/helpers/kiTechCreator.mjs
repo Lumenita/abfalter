@@ -774,7 +774,7 @@ export default class kiTechCreator extends foundry.applications.api.HandlebarsAp
                 speaker: game.user,
                 content: `{{localized "abfalter.kiAbilityData.createdWithWarnings"}}`,
             };
-            ChatMessage.applyRollMode(chatData, 'game.settings.get("core", "rollMode")');
+            ChatMessage.applyMode(chatData, 'game.settings.get("core", "messageMode")');
             ChatMessage.create(chatData);
         }
         */

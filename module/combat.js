@@ -146,7 +146,7 @@ export default class abfalterCombat extends Combat {
 			  flags: { rollData, actor },
 			};
 
-			ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+			ChatMessage.applyMode(chatData, game.settings.get("core", "messageMode"));
 			ChatMessage.create(chatData);
 
 			// Update initiative

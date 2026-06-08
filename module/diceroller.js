@@ -1204,16 +1204,16 @@ async function offensiveRoll({actor, weapon, attackDetails, workflow}) {
     const speakerMode = actor.system.rollRange.speaker; // "default" | "public" | "private"
     let rollMode;
     switch (speakerMode) {
-    case "public":
-        rollMode = CONST.DICE_ROLL_MODES.PUBLIC;
-        break;
-    case "private":
-        rollMode = CONST.DICE_ROLL_MODES.PRIVATE;
-        break;
-    default:
-        rollMode = game.settings.get("core", "rollMode");
+        case "public":
+            rollMode = "public";
+            break;
+        case "private":
+            rollMode = "gm";
+            break;
+        default:
+            rollMode = game.settings.get("core", "messageMode");
     }
-    ChatMessage.applyRollMode(chatData, rollMode);
+    ChatMessage.applyMode(chatData, rollMode);
     ChatMessage.create(chatData);
 }
 
@@ -2004,15 +2004,15 @@ async function autoDefenseRoll({actor, tokenId, defenseDetails, atkMsgId}) {
     let rollMode;
     switch (speakerMode) {
     case "public":
-        rollMode = CONST.DICE_ROLL_MODES.PUBLIC;
+        rollMode = "public";
         break;
     case "private":
-        rollMode = CONST.DICE_ROLL_MODES.PRIVATE;
+        rollMode = "gm";
         break;
     default:
-        rollMode = game.settings.get("core", "rollMode");
+        rollMode = game.settings.get("core", "messageMode");
     }
-    ChatMessage.applyRollMode(chatData, rollMode);
+    ChatMessage.applyMode(chatData, rollMode);
     const createdMessage = await ChatMessage.create(chatData);
 
     if (!needsContinuation) {
@@ -2379,8 +2379,8 @@ async function createCombatResolutionMessage(msg) {
         }
     };
 
-    let rollMode = game.settings.get("core", "rollMode");
-    ChatMessage.applyRollMode(chatData, rollMode);
+    let rollMode = game.settings.get("core", "messageMode");
+    ChatMessage.applyMode(chatData, rollMode);
     await ChatMessage.create(chatData);
 }
 
@@ -2922,16 +2922,16 @@ async function defenseRoll({actor, defenseDetails}) {
     const speakerMode = actor.system.rollRange.speaker; // "default" | "public" | "private"
     let rollMode;
     switch (speakerMode) {
-    case "public":
-        rollMode = CONST.DICE_ROLL_MODES.PUBLIC;
-        break;
-    case "private":
-        rollMode = CONST.DICE_ROLL_MODES.PRIVATE;
-        break;
-    default:
-        rollMode = game.settings.get("core", "rollMode");
+        case "public":
+            rollMode = "public";
+            break;
+        case "private":
+            rollMode = "gm";
+            break;
+        default:
+            rollMode = game.settings.get("core", "messageMode");
     }
-    ChatMessage.applyRollMode(chatData, rollMode);
+    ChatMessage.applyMode(chatData, rollMode);
     await ChatMessage.create(chatData);
 }
 
@@ -3225,16 +3225,16 @@ async function characteristicRoll({actor, rollDetails}) {
     const speakerMode = actor.system.rollRange.speaker; // "default" | "public" | "private"
     let rollMode;
     switch (speakerMode) {
-    case "public":
-        rollMode = CONST.DICE_ROLL_MODES.PUBLIC;
-        break;
-    case "private":
-        rollMode = CONST.DICE_ROLL_MODES.PRIVATE;
-        break;
-    default:
-        rollMode = game.settings.get("core", "rollMode");
+        case "public":
+            rollMode = "public";
+            break;
+        case "private":
+            rollMode = "gm";
+            break;
+        default:
+            rollMode = game.settings.get("core", "messageMode");
     }
-    ChatMessage.applyRollMode(chatData, rollMode);
+    ChatMessage.applyMode(chatData, rollMode);
     ChatMessage.create(chatData);
 }
 
@@ -3398,16 +3398,16 @@ async function resistanceRoll({actor, rollDetails}) {
     const speakerMode = actor.system.rollRange.speaker; // "default" | "public" | "private"
     let rollMode;
     switch (speakerMode) {
-    case "public":
-        rollMode = CONST.DICE_ROLL_MODES.PUBLIC;
-        break;
-    case "private":
-        rollMode = CONST.DICE_ROLL_MODES.PRIVATE;
-        break;
-    default:
-        rollMode = game.settings.get("core", "rollMode");
+        case "public":
+            rollMode = "public";
+            break;
+        case "private":
+            rollMode = "gm";
+            break;
+        default:
+            rollMode = game.settings.get("core", "messageMode");
     }
-    ChatMessage.applyRollMode(chatData, rollMode);
+    ChatMessage.applyMode(chatData, rollMode);
     ChatMessage.create(chatData);
 }
 
@@ -3591,16 +3591,16 @@ export async function plainRoll(html, actor, finalValue, label) {
     const speakerMode = actor.system.rollRange.speaker; // "default" | "public" | "private"
     let rollMode;
     switch (speakerMode) {
-    case "public":
-        rollMode = CONST.DICE_ROLL_MODES.PUBLIC;
-        break;
-    case "private":
-        rollMode = CONST.DICE_ROLL_MODES.PRIVATE;
-        break;
-    default:
-        rollMode = game.settings.get("core", "rollMode");
+        case "public":
+            rollMode = "public";
+            break;
+        case "private":
+            rollMode = "gm";
+            break;
+        default:
+        rollMode = game.settings.get("core", "messageMode");
     }
-    ChatMessage.applyRollMode(chatData, rollMode);
+    ChatMessage.applyMode(chatData, rollMode);
     ChatMessage.create(chatData);
 }
 
@@ -3910,16 +3910,16 @@ async function trapRoll(actor, trapDetails) {
     const speakerMode = actor.system.rollRange.speaker; // "default" | "public" | "private"
     let rollMode;
     switch (speakerMode) {
-    case "public":
-        rollMode = CONST.DICE_ROLL_MODES.PUBLIC;
-        break;
-    case "private":
-        rollMode = CONST.DICE_ROLL_MODES.PRIVATE;
-        break;
-    default:
-        rollMode = game.settings.get("core", "rollMode");
+        case "public":
+            rollMode = "public";
+            break;
+        case "private":
+            rollMode = "gm";
+            break;
+        default:
+        rollMode = game.settings.get("core", "messageMode");
     }
-    ChatMessage.applyRollMode(chatData, rollMode);
+    ChatMessage.applyMode(chatData, rollMode);
     ChatMessage.create(chatData);
 }
 
@@ -4112,16 +4112,16 @@ async function breakRoll(actor, breakDetails) {
     const speakerMode = actor.system.rollRange.speaker; // "default" | "public" | "private"
     let rollMode;
     switch (speakerMode) {
-    case "public":
-        rollMode = CONST.DICE_ROLL_MODES.PUBLIC;
-        break;
-    case "private":
-        rollMode = CONST.DICE_ROLL_MODES.PRIVATE;
-        break;
-    default:
-        rollMode = game.settings.get("core", "rollMode");
+        case "public":
+            rollMode = "public";
+            break;
+        case "private":
+            rollMode = "gm";
+            break;
+        default:
+        rollMode = game.settings.get("core", "messageMode");
     }
-    ChatMessage.applyRollMode(chatData, rollMode);
+    ChatMessage.applyMode(chatData, rollMode);
     ChatMessage.create(chatData);
 }
 

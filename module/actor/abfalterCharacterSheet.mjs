@@ -299,6 +299,13 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         this._createContextMenu(this._itemContextMenuV2, ".normal-itemV2", {
             hookName: "itemContextMenuV2",
             fixed: true,
+            onOpen: (element) => {
+                requestAnimationFrame(() => {
+                        document
+                            .getElementById("context-menu")
+                            ?.classList.add("abfalterContextMenu");
+                    });
+            }
         });
     }
 
@@ -383,7 +390,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
     _itemContextMenuV2() {
         const menu = [
             {
-                name: game.i18n.localize("abfalter.edit"),
+                label: game.i18n.localize("abfalter.edit"),
                 icon: '<i class="fas fa-edit"></i>',
                 callback: element => {
                     const item = this.actor.items.get(element.dataset.itemId);
@@ -391,7 +398,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 }
             },
             {
-                name: game.i18n.localize("abfalter.duplicate"),
+                label: game.i18n.localize("abfalter.duplicate"),
                 icon: '<i class="fas fa-copy"></i>',
                 callback: element => {
                     const item = this.actor.items.get(element.dataset.itemId);
@@ -402,7 +409,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 }
             },
             {
-                name: game.i18n.localize("abfalter.delete"),
+                label: game.i18n.localize("abfalter.delete"),
                 icon: '<i class="fas fa-trash"></i>',
                 callback: element => {
                     new Dialog({
@@ -423,9 +430,9 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 }
             },
             {
-                name: game.i18n.localize("abfalter.displayChat"),
+                label: game.i18n.localize("abfalter.displayChat"),
                 icon: '<i class="fa-solid fa-message"></i>',
-                condition: element => {
+                visible: element => {
                     return element.dataset.canChat !== "false";
                 },
                 callback: element => {
@@ -434,9 +441,9 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 }
             },
             {
-                name: game.i18n.localize("abfalter.equip"),
+                label: game.i18n.localize("abfalter.equip"),
                 icon: '<i class="fas fa-shield-alt"></i>',
-                condition: element => {
+                visible: element => {
                     const item = this.actor.items.get(element.dataset.itemId);
                     return ("equipped" in item.system);
                 },
@@ -447,9 +454,9 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 }
             },
             {
-                name: game.i18n.localize("abfalter.toggleActivate"),
+                label: game.i18n.localize("abfalter.toggleActivate"),
                 icon: '<i class="fas fa-caret-right"></i>',
-                condition: (el) => {
+                visible: (el) => {
                     const item = this.actor.items.get(el.dataset.itemId);
                     return el.dataset.canEquip !== "false" && item?.type === "kiTechnique";
                 },
@@ -460,9 +467,9 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 }
             },
             {
-                name: game.i18n.localize("abfalter.toggle"),
+                label: game.i18n.localize("abfalter.toggle"),
                 icon: '<i class="fas fa-caret-right"></i>',
-                condition: element => {
+                visible: element => {
                     const item = this.actor.items.get(element.dataset.itemId);
                     return ("toggleItem" in item.system);
                 },
@@ -473,9 +480,9 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 }
             },
             {
-                name: game.i18n.localize("abfalter.expand"),
+                label: game.i18n.localize("abfalter.expand"),
                 icon: '<i class="fa-solid fa-expand"></i>',
-                condition: element => {
+                visible: element => {
                     const item = this.actor.items.get(element.dataset.itemId);
                     return ("expand" in item.system);
                 },
@@ -486,7 +493,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 }
             }
         ]
-        
         return menu;
     }
 

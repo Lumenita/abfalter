@@ -3,15 +3,15 @@ import { abfalterSettingsKeys } from "../utilities/abfalterSettings.js";
 export default class abfalterActor extends Actor {
 
     prepareData() {
-        
-        const isTypeData = this.system instanceof foundry.abstract.TypeDataModel;
-        if (isTypeData || (this.system?.prepareBaseData instanceof Function)) {
-            this.system.prepareBaseData();
-        }
+        // const isTypeData = this.system instanceof foundry.abstract.TypeDataModel;
+        // if (isTypeData || (this.system?.prepareBaseData instanceof Function)) {
+        //     this.system.prepareBaseData();
+        // }
         super.prepareData();
     }
 
     prepareBaseData() {
+        super.prepareBaseData();
         const system = this.system;
 
         //Global Settings
