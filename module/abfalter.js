@@ -141,24 +141,58 @@ Hooks.once("ready", async function () {
     if (showChangelog === false) {
         handleChangelog();
     }
-    // if (!game.user.isGM) {
-    //     return
-    // }
-    // const systemVersion = game.system.version ?? game.system.data?.version ?? "0.0.0";
-    // const currentVersion = game.settings.get("abfalter", "systemMigrationVersion") ?? "0.0.0";
-
-    // if (foundry.utils.isNewerVersion(systemVersion, currentVersion)) {
-    //     await game.settings.set("abfalter", "systemChangeLog", false); 
-    //     await game.settings.set("abfalter", "systemMigrationVersion", systemVersion);
-    // }
-
-    // const showChangelog = await game.settings.get("abfalter", "systemChangeLog");
-    // if (showChangelog === false) {
-    //     handleChangelog();
-    // }
-
-    //handleMigrations();
 })
+
+Hooks.on("preCreateItem", async (item, options, userId) => {
+    if (!item.parent || !(item.parent instanceof Actor)) return;
+
+    const siblings = item.parent.items.filter(i => i.type === item.type);
+    const maxSort = siblings.reduce((max, i) => Math.max(max, i.sort ?? 0), 0);
+
+    await item.updateSource({ sort: maxSort + 10 });
+});
+//Change source name for Active Effects (Fixes Unknown Error)
+Hooks.on("createItem", async item => {
+    if (!item.parent || item.parent.documentName !== "Actor") return;
+    if (!item.effects?.size) return;
+
+    const updates = item.effects.map(effect => ({
+        _id: effect.id,
+        origin: item.uuid
+    }));
+
+    await item.updateEmbeddedDocuments("ActiveEffect", updates);
+});
+
+//Automatically activate/deactivate effects when item is equipped/unequipped
+Hooks.on('updateItem', async (item, _updateData, _options, userId) => { 
+    if (game.user.id !== userId) return;
+    const isEquipped = foundry.utils.getProperty(_updateData, "system.equipped");
+    const isActive = foundry.utils.getProperty(_updateData, "system.active");
+    if (isEquipped === undefined && isActive === undefined) return;
+    if (isEquipped || isActive) {
+        activateItemEffects(item);
+    } else {
+        deactivateItemEffects(item);
+    }
+});
+async function activateItemEffects(item) {
+    const actor = item.actor;
+    const effects = item.effects.contents;
+    for (let effect of effects) {
+        if (!effect.disabled) continue; // Ignore already active effects
+        await effect.update({ disabled: false });
+    }
+}
+async function deactivateItemEffects(item) {
+    const actor = item.actor;
+    const effects = item.effects.contents;
+    for (let effect of effects) {
+        if (effect.disabled) continue; // Ignore already inactive effects
+        await effect.update({ disabled: true });
+    }
+}
+
 
 Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
@@ -219,44 +253,6 @@ Handlebars.registerHelper('armoryPropSelector', function (weaponType, propKey) {
     return true;
 });
 
-Hooks.on("preCreateItem", async (item, options, userId) => {
-    if (!item.parent || !(item.parent instanceof Actor)) return;
-
-    const siblings = item.parent.items.filter(i => i.type === item.type);
-    const maxSort = siblings.reduce((max, i) => Math.max(max, i.sort ?? 0), 0);
-
-    await item.updateSource({ sort: maxSort + 10 });
-});
-
-//Automatically activate/deactivate effects when item is equipped/unequipped
-Hooks.on('updateItem', async (item, _updateData, _options, userId) => { 
-    if (game.user.id !== userId) return;
-    const isEquipped = foundry.utils.getProperty(_updateData, "system.equipped");
-    if (isEquipped === undefined) return;
-    if (isEquipped) {
-        activateItemEffects(item);
-    } else {
-        deactivateItemEffects(item);
-    }
-});
-
-async function activateItemEffects(item) {
-    const actor = item.actor;
-    const effects = item.effects.contents;
-    for (let effect of effects) {
-        if (!effect.disabled) continue; // Ignore already active effects
-        await effect.update({ disabled: false });
-    }
-}
-
-async function deactivateItemEffects(item) {
-    const actor = item.actor;
-    const effects = item.effects.contents;
-    for (let effect of effects) {
-        if (effect.disabled) continue; // Ignore already inactive effects
-        await effect.update({ disabled: true });
-    }
-}
 
 /**
  * Data Models from here on 

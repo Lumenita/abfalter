@@ -208,7 +208,6 @@ function updateDefenseButtonOwnership(msg, html, ev) {
         const workflow = msg.flags?.abfalter?.workflow;
         const targetState = workflow?.targetStates?.[tokenId];
         const status = targetState?.status ?? "pending";
-        console.log(status);
 
         const actor = actorId ? game.actors.get(actorId) : null;
         const token = tokenId ? canvas.tokens?.get(tokenId) : null;

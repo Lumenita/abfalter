@@ -483,6 +483,7 @@ export default class abfalterActor extends Actor {
     }
 
     prepareDerivedData() {
+        super.prepareDerivedData();
         const system = this.system;
         const stats = system.stats;
 

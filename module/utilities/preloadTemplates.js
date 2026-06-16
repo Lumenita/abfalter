@@ -66,7 +66,8 @@ export const preloadHandlebarsTemplates = () => {
         "systems/abfalter/templates/item/partials/subHeader/class.hbs",
         "systems/abfalter/templates/item/details/class.hbs",
         //Active Effects
-        "systems/abfalter/templates/active-effect/changes.hbs"
+        "systems/abfalter/templates/active-effect/changes.hbs",
+        "systems/abfalter/templates/active-effect/change.hbs"
     ];
     return foundry.applications.handlebars.loadTemplates(templatePaths);
 };

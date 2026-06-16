@@ -525,8 +525,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
 
         // Iterate over active effects, classifying them into categories
         for (const e of this.item.effects) {
-        if (!e.transfer) categories.applied.effects.push(e);
-        else if (!e.active) categories.inactive.effects.push(e);
+        if (!e.active) categories.inactive.effects.push(e);
         else if (e.isTemporary) categories.temporary.effects.push(e);
         else categories.passive.effects.push(e);
         }
@@ -551,14 +550,18 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
 
     static async #createEffect(event, target) {
         const aeCls = getDocumentClass("ActiveEffect");
+
         const effectData = {
             name: aeCls.defaultName({ type: target.dataset.type, parent: this.item }),
+            origin: this.item.uuid
         };
+
         for (const [dataKey, value] of Object.entries(target.dataset)) {
             if (["action", "documentClass"].includes(dataKey)) continue;
-            // Nested properties require dot notation in the HTML, e.g. anything with `system`
             foundry.utils.setProperty(effectData, dataKey, value);
         }
+
+        effectData.origin = this.item.uuid;
 
         await aeCls.create(effectData, { parent: this.item });
     }

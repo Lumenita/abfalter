@@ -1099,8 +1099,38 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
 
     async _onDropActiveEffect(event, effect) {
         if (!this.actor.isOwner || !effect) return;
-        if (effect.target === this.actor) await this._onSortActiveEffect(event, effect);
-        else await super._onDropActiveEffect(event, effect);
+
+        if (effect.target === this.actor) {
+            return this._onSortActiveEffect(event, effect);
+        }
+
+        const effectData = effect.toObject();
+
+        delete effectData._id;
+        effectData.origin = this.actor.uuid;
+
+        return ActiveEffect.create(effectData, {
+            parent: this.actor,
+            renderSheet: false
+        });
+    }
+
+    async _onDropItemCreate(itemData) {
+        const created = await super._onDropItemCreate(itemData);
+        const items = Array.isArray(created) ? created : [created];
+
+        for (const item of items) {
+            if (!item?.effects?.size) continue;
+
+            const updates = item.effects.map(effect => ({
+                _id: effect.id,
+                origin: item.uuid
+            }));
+
+            await item.updateEmbeddedDocuments("ActiveEffect", updates);
+        }
+
+        return created;
     }
 
     _getEmbeddedDocument(target) {
@@ -1209,9 +1239,8 @@ export class classManager extends abfalterCharacterSheet {
         if (classless) state = "classless";
         else if (levelUpAvailable) state = "levelUp";
 
-        context.system.levelinfo.classManagerState = state;  // "classless" | "levelUp" | "view"
+        context.classManagerState = state;  // "classless" | "levelUp" | "view"
 
-        console.log(context.system.levelinfo.classManagerState);
         return context;
     }
 
@@ -1235,11 +1264,11 @@ export class classManager extends abfalterCharacterSheet {
         switch (action) {
             case "levelUp":
                 ui.notifications?.info(`${game.i18n.localize(`ABF.ClassManager.${action.capitalize()}For`)} ${classId}`);
-                console.log(`${action.capitalize()} Class:`, classId);
+                console.log(`${action.capitalize()} Class:`, itemId);
                 break;
             case "view":
                 ui.notifications?.info(`${game.i18n.localize(`ABF.ClassManager.${action.capitalize()}For`)} ${classId}`);
-                console.log(`${action.capitalize()} Class:`, classId);
+                console.log(`${action.capitalize()} Class:`, itemId);
                 //const item = this.actor.items.get(element.dataset.itemId);
                 //item.sheet.render(true);
                 break;

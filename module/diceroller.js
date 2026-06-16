@@ -296,18 +296,21 @@ export async function offensiveDialogue({ actor, offLabel, value, weaponId }) {
         const weapon = actor.items.get(weaponId);
         if (!weapon) return;
 
-        const profiles = Object.values(weapon.system.attacks ?? {}).filter(p => {
-            const pType = p.profileType?.trim().toLowerCase();
-            return pType === "both" || pType === "offensive";
-        });
+        const profiles = Object.values(weapon.system.attacks ?? {})
+            .map((profile, originalIndex) => ({ originalIndex, profile }))
+            .filter(({ profile }) => {
+                const pType = profile.profileType?.trim().toLowerCase();
+                return pType === "both" || pType === "offensive";
+            });
 
         if (!profiles.length) {
             ui.notifications.warn(game.i18n.localize("abfalter.noProfilesFound"));
             return;
         }
 
-        const index = Number(weapon.system.info?.lastWepUsed ?? 0);
-        const profile = profiles[index] ?? profiles[0];
+        const lastAtkUsed = Number(weapon.system.info?.lastWepUsed ?? 0);
+        const profileEntry = profiles.find(entry => entry.originalIndex === lastAtkUsed) ?? profiles[0];
+        const profile = profileEntry.profile;
 
         const effectiveWeaponType = (() => {
             const wepType = String(weapon.system.info?.wepType ?? "").toLowerCase();
@@ -423,13 +426,16 @@ export async function offensiveDialogue({ actor, offLabel, value, weaponId }) {
     };
     const getWeaponProfiles = (weapon) => {
         if (!weapon) return [];
-        const allAttacks = Object.values(weapon.system.attacks ?? {});
-        return allAttacks.filter(profile => {
-            const pType = profile.profileType?.trim().toLowerCase();
-            return pType === "both" || pType === "offensive";
-        });
+        return Object.values(weapon.system.attacks ?? {})
+            .map((profile, originalIndex) => ({ originalIndex, profile }))
+            .filter(({ profile }) => {
+                const pType = profile.profileType?.trim().toLowerCase();
+                return pType === "both" || pType === "offensive";
+            });
     };
-    const getSelectedProfile = () => selectedProfiles?.[selectedProfileIndex] ?? null;
+    const getSelectedProfileEntry = () => selectedProfiles?.[selectedProfileIndex] ?? null;
+    const getSelectedProfile = () => getSelectedProfileEntry()?.profile ?? null;
+    const getSelectedProfileOriginalIndex = () => getSelectedProfileEntry()?.originalIndex ?? 0;
     const getEffectiveWeaponType = (weapon, profile) => {
         const weaponType = String(weapon?.system?.info?.type ?? "").toLowerCase();
 
@@ -646,12 +652,14 @@ export async function offensiveDialogue({ actor, offLabel, value, weaponId }) {
                 }
 
                 const lastAtkUsed = Number(weapon?.system?.info?.lastWepUsed ?? 0);
-                selectedProfileIndex = lastAtkUsed >= 0 && lastAtkUsed < selectedProfiles.length ? lastAtkUsed : 0;
 
-                selectedProfiles.forEach((profile, index) => {
+                selectedProfileIndex = selectedProfiles.findIndex(entry => entry.originalIndex === lastAtkUsed);
+                if (selectedProfileIndex < 0) selectedProfileIndex = 0;
+
+                selectedProfiles.forEach((entry, index) => {
                     appendOption(profileDropdown, {
                         value: index,
-                        label: profile.name,
+                        label: entry.profile.name,
                         selected: index === selectedProfileIndex
                     });
                 });
@@ -1034,7 +1042,7 @@ export async function offensiveDialogue({ actor, offLabel, value, weaponId }) {
             const profile = getSelectedProfile();
             if (!weapon || !profile) return;
 
-            await weapon.update({ 'system.info.lastWepUsed': selectedProfileIndex });
+            await weapon.update({ 'system.info.lastWepUsed': getSelectedProfileOriginalIndex() });
 
             const effectiveWeaponType = getEffectiveWeaponType(weapon, profile);
 
@@ -1161,16 +1169,17 @@ async function offensiveRoll({actor, weapon, attackDetails, workflow}) {
     const attackerDisposition = attackerToken?.document?.disposition ?? CONST.TOKEN_DISPOSITIONS.NEUTRAL;
     const isFriendly = attackerDisposition === CONST.TOKEN_DISPOSITIONS.FRIENDLY;
     const combatSettings = game.settings.get('abfalter', "combatSettings");
+    const revealAll = attackerToken === undefined;
     const atkSettings = {
-        atkTokName: isFriendly || !!combatSettings.atkTokName,
-        atkWepName: isFriendly || !!combatSettings.atkWepName,
-        atkAtkName: isFriendly || !!combatSettings.atkAtkName,
-        atkFinValue: isFriendly || !!combatSettings.atkFinValue,
-        atkFormula: isFriendly || !!combatSettings.atkFormula,
-        atkDmg: isFriendly || !!combatSettings.atkDmg,
-        atkAtPen: isFriendly || !!combatSettings.atkAtPen,
-        atkNote: isFriendly || !!combatSettings.atkNote
-    }
+        atkTokName: revealAll || isFriendly || !!combatSettings.atkTokName,
+        atkWepName: revealAll || isFriendly || !!combatSettings.atkWepName,
+        atkAtkName: revealAll || isFriendly || !!combatSettings.atkAtkName,
+        atkFinValue: revealAll || isFriendly || !!combatSettings.atkFinValue,
+        atkFormula: revealAll || isFriendly || !!combatSettings.atkFormula,
+        atkDmg: revealAll || isFriendly || !!combatSettings.atkDmg,
+        atkAtPen: revealAll || isFriendly || !!combatSettings.atkAtPen,
+        atkNote: revealAll || isFriendly || !!combatSettings.atkNote
+    };
 
     const content = await foundry.applications.handlebars.renderTemplate(template, { 
         basicInfo,
@@ -1493,12 +1502,16 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
     };
     const getWeaponProfiles = (weapon) => {
         if (!weapon) return [];
-        const allAttacks = Object.values(weapon.system.attacks ?? {});
-        return allAttacks.filter(profile => {
-            const pType = profile.profileType?.trim().toLowerCase();
-            return pType === "both" || pType === "defensive";
-        });
+        return Object.values(weapon.system.attacks ?? {})
+            .map((profile, originalIndex) => ({ originalIndex, profile }))
+            .filter(({ profile }) => {
+                const pType = profile.profileType?.trim().toLowerCase();
+                return pType === "both" || pType === "defensive";
+            });
     };
+    const getSelectedProfileEntry = () => selectedProfiles?.[selectedProfileIndex] ?? null;
+    const getSelectedProfile = () => getSelectedProfileEntry()?.profile ?? null;
+    const getSelectedProfileOriginalIndex = () => getSelectedProfileEntry()?.originalIndex ?? 0;
     const getCurrentCombatDefenseValues = () => {
         // Unarmed uses actor defaults
         if (selectedWeaponId === unarmedOption) {
@@ -1528,7 +1541,7 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
     const updateCombatBaseValue = (html, dialog) => {
         switch (selectedDefenseType) {
             case "combat": {
-                const profile = selectedProfiles?.[selectedProfileIndex];
+                const profile = getSelectedProfile();
                 // Unarmed uses actor defaults
                 if (selectedWeaponId === unarmedOption) {
                     if (selectedCombatDefense === "block") {
@@ -1739,14 +1752,16 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
                     return;
                 }
 
-                const lastDefUsed = selectedWeapon.system.info.lastDefUsed;
-                selectedProfileIndex = lastDefUsed >= 0 && lastDefUsed < selectedProfiles.length ? lastDefUsed : 0;
+                const lastDefUsed = Number(selectedWeapon.system.info.lastDefUsed ?? 0);
 
-                selectedProfiles.forEach((profile, index) => {
+                selectedProfileIndex = selectedProfiles.findIndex(entry => entry.originalIndex === lastDefUsed);
+                if (selectedProfileIndex < 0) selectedProfileIndex = 0;
+
+                selectedProfiles.forEach((entry, index) => {
                     appendOption(profileDropdown, {
                         value: index,
-                        label: profile.name,
-                        selected: index === lastDefUsed
+                        label: entry.profile.name,
+                        selected: index === selectedProfileIndex
                     });
                 });
                 profileDropdown.value = String(selectedProfileIndex);
@@ -1821,13 +1836,7 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
             });
             weaponDropdown?.addEventListener('change', (ev) => {
                 selectedWeaponId = ev.currentTarget.value;
-                if (selectedWeaponId === unarmedOption) {
-                    selectedProfileIndex = 0;
-                } else {
-                    const weapon = actor.items.get(selectedWeaponId);
-                    const lastDefUsed = weapon.system.info.lastDefUsed;
-                    selectedProfileIndex = lastDefUsed;
-                }
+                selectedProfileIndex = 0;
                 populateProfileDropdown();
                 populateCombatDefenseDropdown();
                 updateDefenseRowsVisibility();
@@ -1853,19 +1862,21 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
             });
             if (selectedWeaponId !== unarmedOption && selectedWeapon) {
                 await selectedWeapon.update({
-                    "system.info.lastDefUsed": selectedProfileIndex
+                    "system.info.lastDefUsed": getSelectedProfileOriginalIndex()
                 });
             }
 
             let chosenIndex = null;
-            let chosenWeaponId = selectedWeaponId
+            let chosenWeaponId = getSelectedProfileOriginalIndex();
 
             switch (selectedDefenseType) {
                 case "combat":
                     if (selectedWeaponId === "__unarmed__") {
-                        
+                        chosenWeaponId = "__unarmed__";
+                        chosenIndex = null;
                     } else {
-                        chosenIndex = selectedProfileIndex;
+                        chosenWeaponId = selectedWeaponId;
+                        chosenIndex = getSelectedProfileOriginalIndex();
                     }
                     break;
                 case "magic":
@@ -1903,7 +1914,11 @@ async function autoDefenseRoll({actor, tokenId, defenseDetails, atkMsgId}) {
     let defenseName = "";
     let num = 0;
 
-    if (defenseDetails.defenseType == "combat" && defenseDetails.weaponId != "__unarmed__") {
+    if (
+        defenseDetails.defenseType === "combat" &&
+        defenseDetails.weaponId &&
+        defenseDetails.weaponId !== "__unarmed__"
+    ) {
         weapon = actor.items.get(defenseDetails.weaponId);
         if (!weapon) console.warn("Weapon not found even though a weapon was used for defense:", defenseDetails.weaponId);
         fumbleRange = weapon.system.derived.baseFumbleRange;
@@ -2540,7 +2555,10 @@ export async function defensiveDialogue({actor, defLabel, value, weaponId}) {
         let theFormula = `${defBaseValue}(${game.i18n.localize("abfalter.value")}) + 0(${game.i18n.localize("abfalter.fatigue")}) + 0(${game.i18n.localize("abfalter.mod")}) + 0(${game.i18n.localize("abfalter.multipleDef")})`;
         let theValue = value;
         const weapon = actor.items.get(weaponId);
-        let chosenIndex = defenseType == "weapon" ? weapon.system.info.lastDefUsed : 0;
+        let chosenIndex = 0;
+        if (defenseType === "weapon" && weapon) {
+            chosenIndex = Number(weapon.system.info.lastDefUsed ?? 0);
+        }
         const defenseDetails = {
             baseValue: theValue,
             finalValue: theValue,
@@ -2587,7 +2605,7 @@ export async function defensiveDialogue({actor, defLabel, value, weaponId}) {
     const updateCombatBaseValue = (html, dialog) => {
         switch (defenseType) {
             case "weapon": {
-                const profile = selectedProfiles?.[selectedProfileIndex];
+                const profile = getSelectedProfile();
                 // Weapon selected
                 if (defLabel === "weaponBlock") {
                     if (profile?.finalBlock != null) {
@@ -2617,12 +2635,17 @@ export async function defensiveDialogue({actor, defLabel, value, weaponId}) {
     };
     const getWeaponProfiles = (weapon) => {
         if (!weapon) return [];
-        const allAttacks = Object.values(weapon.system.attacks ?? {});
-        return allAttacks.filter(profile => {
-            const pType = profile.profileType?.trim().toLowerCase();
-            return pType === "both" || pType === "defensive";
-        });
+
+        return Object.values(weapon.system.attacks ?? {})
+            .map((profile, originalIndex) => ({ originalIndex, profile }))
+            .filter(({ profile }) => {
+                const pType = profile.profileType?.trim().toLowerCase();
+                return pType === "both" || pType === "defensive";
+            });
     };
+    const getSelectedProfileEntry = () => selectedProfiles?.[selectedProfileIndex] ?? null;
+    const getSelectedProfile = () => getSelectedProfileEntry()?.profile ?? null;
+    const getSelectedProfileOriginalIndex = () => getSelectedProfileEntry()?.originalIndex ?? 0;
     const updateFinalValue = (html, dialog) => {
         const modifierValue = parseInt(html.querySelector('#modifierMod')?.value ?? 0, 10);
         const multDefPenalty = parseInt(html.querySelector('#defNumberDropdown option:checked')?.dataset.penalty ?? 0, 10);
@@ -2751,16 +2774,19 @@ export async function defensiveDialogue({actor, defLabel, value, weaponId}) {
                     return;
                 }
 
-                const lastDefUsed = weapon.system.info.lastDefUsed;
-                selectedProfileIndex = lastDefUsed >= 0 && lastDefUsed < selectedProfiles.length ? lastDefUsed : 0;
+                const lastDefUsed = Number(weapon.system.info.lastDefUsed ?? 0);
 
-                selectedProfiles.forEach((profile, index) => {
+                selectedProfileIndex = selectedProfiles.findIndex(entry => entry.originalIndex === lastDefUsed);
+                if (selectedProfileIndex < 0) selectedProfileIndex = 0;
+
+                selectedProfiles.forEach((entry, index) => {
                     appendOption(profileDropdown, {
                         value: index,
-                        label: profile.name,
-                        selected: index === lastDefUsed
+                        label: entry.profile.name,
+                        selected: index === selectedProfileIndex
                     });
                 });
+
                 profileDropdown.value = String(selectedProfileIndex);
             };
             populateProfileDropdown();
@@ -2801,10 +2827,10 @@ export async function defensiveDialogue({actor, defLabel, value, weaponId}) {
 
             let chosenIndex = null;
             if (defenseType == "weapon") {
-                chosenIndex = selectedProfileIndex;
+                chosenIndex = getSelectedProfileOriginalIndex();
                 const weapon = actor.items.get(weaponId);
                 await weapon.update({
-                    "system.info.lastDefUsed": selectedProfileIndex
+                    "system.info.lastDefUsed": getSelectedProfileOriginalIndex()
                 });
             }
         

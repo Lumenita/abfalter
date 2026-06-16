@@ -27,12 +27,94 @@ export default class abfalterEffectConfig extends foundry.applications.sheets.Ac
         },
     };
 
+    _onRender(context, options) {
+        super._onRender(context, options);
+
+        const applyChangeDefaults = keySelect => {
+            const preset = CHANGE_DEFAULTS[keySelect.value];
+            if (!preset) return;
+
+            const li = keySelect.closest("li");
+            if (!li) return;
+
+            const phaseInput = li.querySelector(`[name$=".phase"]`);
+            const priorityInput = li.querySelector(`[name$=".priority"]`);
+
+            if (phaseInput) phaseInput.value = preset.phase;
+        };
+
+        this.element.querySelectorAll(".change-category").forEach(select => {
+            select.addEventListener("change", event => {
+                const categorySelect = event.currentTarget;
+                const li = categorySelect.closest("li");
+                const keySelect = li.querySelector(".change-key");
+
+                const category = categorySelect.value;
+                const options = this.groupedChangeKeys?.[category] ?? [];
+
+                keySelect.innerHTML = options.map(opt => {
+                    return `<option value="${opt.key}">${opt.label}</option>`;
+                }).join("");
+
+                if (options[0]) keySelect.value = options[0].key;
+
+                applyChangeDefaults(keySelect);
+
+                keySelect.dispatchEvent(new Event("change", { bubbles: true }));
+            });
+        });
+
+        this.element.querySelectorAll(".change-key").forEach(keySelect => {
+            keySelect.addEventListener("change", event => {
+                applyChangeDefaults(event.currentTarget);
+            });
+        });
+    }
+
+    async _renderChange(context) {
+        const { change, index } = context;
+        const groupedChangeKeys = this.groupedChangeKeys ?? {};
+
+        const selectedCategory = Object.entries(groupedChangeKeys).find(([category, options]) =>
+            options.some(opt => opt.key === change.key))?.[0] ?? Object.keys(groupedChangeKeys)[0];
+
+        context.groupedChangeKeys = groupedChangeKeys;
+        context.selectedCategory = selectedCategory;
+        context.selectedKeyOptions = groupedChangeKeys[selectedCategory] ?? [];
+
+        if (typeof change.value !== "string") {
+            change.value = JSON.stringify(change.value);
+        }
+
+        Object.assign(change, ["key", "type", "value", "phase", "priority"].reduce((paths, fieldName) => {
+            paths[`${fieldName}Path`] = `system.changes.${index}.${fieldName}`;
+            return paths;
+        }, {}));
+
+        const CHANGE_TYPES = foundry.documents.ActiveEffect.CHANGE_TYPES;
+        context.changeTypes = Object.fromEntries(
+            Object.entries(CHANGE_TYPES).map(([type, data]) => [
+                type,
+                game.i18n.localize(data.label ?? `EFFECT.CHANGE_TYPES.${type}`)
+            ])
+        );
+
+        context.defaultPriority = CONST.ACTIVE_EFFECT_CHANGE_TYPES[change.type] ?? 0;
+
+        return foundry.applications.handlebars.renderTemplate(
+            "systems/abfalter/templates/active-effect/change.hbs",
+            context
+        );
+    }
+
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
+        context.systemFields = this.document.system.schema.fields;
+
 
         context.groupedChangeKeys = {
             General: [
-            { key: 'system.aamField.bonus', label: game.i18n.localize('abfalter.aam') },
+            { key: 'system.aamField.final', label: game.i18n.localize('abfalter.aam') },
             { key: 'system.initiative.bonus', label: game.i18n.localize('abfalter.initiative') },
             { key: 'system.movement.bonus', label: game.i18n.localize('abfalter.movement') },
             { key: 'system.lifepoints.bonus', label: game.i18n.localize('abfalter.lifePoints') },
@@ -198,7 +280,182 @@ export default class abfalterEffectConfig extends foundry.applications.sheets.Ac
             { key: 'system.otherStats.mentalHealthBonus', label: game.i18n.localize('abfalter.mentalHealthMax') }
             ]
         };
-
+        this.groupedChangeKeys = context.groupedChangeKeys; 
+        
         return context;
     }
 }
+
+const AE_PHASE = {
+    INITIAL: "initial",
+    FINAL: "final"
+};
+
+
+const CHANGE_DEFAULTS = {
+    // General
+    "system.aamField.final": { phase: AE_PHASE.INITIAL },
+    "system.initiative.bonus": { phase: AE_PHASE.INITIAL },
+    "system.movement.bonus": { phase: AE_PHASE.INITIAL },
+    "system.lifepoints.bonus": { phase: AE_PHASE.INITIAL },
+    "system.regeneration.bonus": { phase: AE_PHASE.INITIAL },
+    "system.fatigue.bonus": { phase: AE_PHASE.INITIAL },
+
+    // Characteristics
+    "system.stats.Agility.final": { phase: AE_PHASE.INITIAL },
+    "system.stats.Agility.opposedBonus": { phase: AE_PHASE.INITIAL },
+    "system.stats.Constitution.final": { phase: AE_PHASE.INITIAL },
+    "system.stats.Constitution.opposedBonus": { phase: AE_PHASE.INITIAL },
+    "system.stats.Strength.final": { phase: AE_PHASE.INITIAL },
+    "system.stats.Strength.opposedBonus": { phase: AE_PHASE.INITIAL },
+    "system.stats.Dexterity.final": { phase: AE_PHASE.INITIAL },
+    "system.stats.Dexterity.opposedBonus": { phase: AE_PHASE.INITIAL },
+    "system.stats.Perception.final": { phase: AE_PHASE.INITIAL },
+    "system.stats.Perception.opposedBonus": { phase: AE_PHASE.INITIAL },
+    "system.stats.Intelligence.final": { phase: AE_PHASE.INITIAL },
+    "system.stats.Intelligence.opposedBonus": { phase: AE_PHASE.INITIAL },
+    "system.stats.Power.final": { phase: AE_PHASE.INITIAL },
+    "system.stats.Power.opposedBonus": { phase: AE_PHASE.INITIAL },
+    "system.stats.Willpower.final": { phase: AE_PHASE.INITIAL },
+    "system.stats.Willpower.opposedBonus": { phase: AE_PHASE.INITIAL },
+
+    // Resistances
+    "system.resistances.Physical.bonus": { phase: AE_PHASE.INITIAL },
+    "system.resistances.Disease.bonus": { phase: AE_PHASE.INITIAL },
+    "system.resistances.Poison.bonus": { phase: AE_PHASE.INITIAL },
+    "system.resistances.Magic.bonus": { phase: AE_PHASE.INITIAL },
+    "system.resistances.Psychic.bonus": { phase: AE_PHASE.INITIAL },
+
+    // Combat
+    "system.combatValues.attack.bonus": { phase: AE_PHASE.INITIAL },
+    "system.combatValues.block.bonus": { phase: AE_PHASE.INITIAL },
+    "system.combatValues.dodge.bonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.wearArmor.bonus": { phase: AE_PHASE.INITIAL },
+    "system.otherStats.damageBarrierBonus": { phase: AE_PHASE.INITIAL },
+    "system.otherStats.dmgRdcBonus": { phase: AE_PHASE.INITIAL },
+
+    // Helmet
+    "system.armor.helmet.aCutBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.helmet.aImpBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.helmet.aThrBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.helmet.aHeatBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.helmet.aColdBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.helmet.aEleBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.helmet.aEneBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.helmet.aSptBonus": { phase: AE_PHASE.INITIAL },
+
+    // Armor
+    "system.armor.body.aCutBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.body.aImpBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.body.aThrBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.body.aHeatBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.body.aColdBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.body.aEleBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.body.aEneBonus": { phase: AE_PHASE.INITIAL },
+    "system.armor.body.aSptBonus": { phase: AE_PHASE.INITIAL },
+
+    // Secondary
+    "system.secondaryFields.athletics.acrobatics.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.athletics.athleticism.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.athletics.climb.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.athletics.jump.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.athletics.piloting.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.athletics.ride.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.athletics.swim.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.social.etiquette.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.social.intimidate.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.social.leadership.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.social.persuasion.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.social.streetwise.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.social.style.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.social.trading.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.perceptive.kidetection.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.perceptive.notice.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.perceptive.search.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.perceptive.track.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.animals.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.appraisal.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.architecture.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.herballore.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.history.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.law.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.magicappr.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.medicine.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.memorize.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.navigation.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.occult.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.science.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.tactics.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.intellectual.technomagic.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.vigor.composure.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.vigor.featsofstr.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.vigor.withstpain.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.subterfuge.disguise.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.subterfuge.hide.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.subterfuge.kiconceal.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.subterfuge.lockpicking.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.subterfuge.poisons.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.subterfuge.stealth.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.subterfuge.theft.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.subterfuge.traplore.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.creative.alchemy.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.creative.animism.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.creative.art.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.creative.cooking.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.creative.dance.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.creative.forging.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.creative.jewelry.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.creative.toymaking.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.creative.music.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.creative.runes.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.creative.ritualcalig.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.creative.slofhand.bonus": { phase: AE_PHASE.INITIAL },
+    "system.secondaryFields.creative.tailoring.bonus": { phase: AE_PHASE.INITIAL },
+
+    // Mystic
+    "system.mproj.bonus": { phase: AE_PHASE.INITIAL },
+    "system.mproj.bonus2": { phase: AE_PHASE.INITIAL },
+    "system.maccu.bonus": { phase: AE_PHASE.INITIAL },
+    "system.mregen.bonus": { phase: AE_PHASE.INITIAL },
+    "system.zeon.bonus": { phase: AE_PHASE.INITIAL },
+    "system.zeon.minnateBonus": { phase: AE_PHASE.INITIAL },
+    "system.mlevel.bonus": { phase: AE_PHASE.INITIAL },
+    "system.summoning.summon.bonus": { phase: AE_PHASE.INITIAL },
+    "system.summoning.control.bonus": { phase: AE_PHASE.INITIAL },
+    "system.summoning.bind.bonus": { phase: AE_PHASE.INITIAL },
+    "system.summoning.banish.bonus": { phase: AE_PHASE.INITIAL },
+
+    // Psychic
+    "system.ppoint.bonus": { phase: AE_PHASE.INITIAL },
+    "system.ppotential.bonus": { phase: AE_PHASE.INITIAL },
+    "system.pproj.bonusBase": { phase: AE_PHASE.INITIAL },
+    "system.pproj.bonus": { phase: AE_PHASE.INITIAL },
+    "system.pproj.bonus2": { phase: AE_PHASE.INITIAL },
+
+    // Ki
+    "system.mk.bonus": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.agi.bonus": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.agi.bonusMax": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.con.bonus": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.con.bonusMax": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.dex.bonus": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.dex.bonusMax": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.str.bonus": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.str.bonusMax": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.pow.bonus": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.pow.bonusMax": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.wp.bonus": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.wp.bonusMax": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.unifiedBonus": { phase: AE_PHASE.INITIAL },
+    "system.kiPool.innate.bonus": { phase: AE_PHASE.INITIAL },
+    "system.fistDamage.bonus": { phase: AE_PHASE.INITIAL },
+
+    // Other
+    "system.levelinfo.levelBonus": { phase: AE_PHASE.INITIAL },
+    "system.rollRange.bonus": { phase: AE_PHASE.INITIAL },
+    "system.fumleRange.bonus": { phase: AE_PHASE.INITIAL },
+    "system.levelinfo.levelmodBonus": { phase: AE_PHASE.INITIAL },
+    "system.levelinfo.presencemodBonus": { phase: AE_PHASE.INITIAL },
+    "system.levelinfo.dpmodBonus": { phase: AE_PHASE.INITIAL },
+    "system.otherStats.mentalHealthBonus": { phase: AE_PHASE.INITIAL },
+};

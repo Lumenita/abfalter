@@ -72,6 +72,11 @@ export async function handleMigrations({ force: forceArg = false } = {}) {
       version: "1.6.2",
       label: "Psychic Matrix effect migration",
       migrate: migratePsychicMatrixEffects
+    },
+    {
+      version: "1.6.3",
+      label: "Active Effect key migration",
+      migrate: migrateActiveEffectKeys
     }
   ];
 
@@ -180,6 +185,189 @@ export async function handleMigrations({ force: forceArg = false } = {}) {
     await game.settings.set("abfalter", "migrationInProgress", false);
   }
 }
+
+
+/**
+ * v1.6.3 — Active Effect key migration
+ *
+ * Moves old Active Effect change keys to their new paths.
+ */
+export async function migrateActiveEffectKeys() {
+  const KEY_MIGRATIONS = {
+    "system.aamField.bonus": {
+      key: "system.aamField.final",
+      phase: "final"
+    }
+  };
+
+  const migrateEffectCollection = async parentDoc => {
+    const updates = [];
+
+    for (const effect of parentDoc.effects ?? []) {
+      const effectData = effect.toObject();
+      const changes = effectData.system?.changes ?? [];
+
+      let changed = false;
+
+      for (const change of changes) {
+        const migration = KEY_MIGRATIONS[change.key];
+        if (!migration) continue;
+
+        change.key = migration.key;
+        change.phase = migration.phase;
+        changed = true;
+      }
+
+      if (changed) {
+        updates.push({
+          _id: effect.id,
+          "system.changes": changes
+        });
+      }
+    }
+
+    if (updates.length) {
+      await parentDoc.updateEmbeddedDocuments("ActiveEffect", updates);
+    }
+
+    return updates.length;
+  };
+
+  // World actors + actor-owned items
+  for (const actor of game.actors.contents) {
+    const actorCount = await migrateEffectCollection(actor);
+
+    if (actorCount) {
+      console.log(`ABF Alter | Migrated ${actorCount} Active Effects on Actor: ${actor.name}`);
+    }
+
+    for (const item of actor.items) {
+      const itemCount = await migrateEffectCollection(item);
+
+      if (itemCount) {
+        console.log(`ABF Alter | Migrated ${itemCount} Active Effects on Item ${item.name} on Actor: ${actor.name}`);
+      }
+    }
+  }
+
+  // World items
+  for (const item of game.items.contents) {
+    const itemCount = await migrateEffectCollection(item);
+
+    if (itemCount) {
+      console.log(`ABF Alter | Migrated ${itemCount} Active Effects on World Item: ${item.name}`);
+    }
+  }
+
+  // Scene unlinked token delta effects/items
+  for (const scene of game.scenes.contents) {
+    await migrateSceneActiveEffectKeys(scene, KEY_MIGRATIONS);
+  }
+
+  // World compendiums
+  for (const pack of game.packs) {
+    if (pack.metadata.packageType !== "world") continue;
+    if (!["Actor", "Item", "Scene"].includes(pack.metadata.type)) continue;
+
+    const wasLocked = pack.locked;
+    await pack.configure({ locked: false });
+    await pack.migrate();
+
+    const docs = await pack.getDocuments();
+
+    if (pack.metadata.type === "Actor") {
+      for (const actor of docs) {
+        await migrateEffectCollection(actor);
+
+        for (const item of actor.items) {
+          await migrateEffectCollection(item);
+        }
+      }
+    }
+
+    if (pack.metadata.type === "Item") {
+      for (const item of docs) {
+        await migrateEffectCollection(item);
+      }
+    }
+
+    if (pack.metadata.type === "Scene") {
+      for (const scene of docs) {
+        await migrateSceneActiveEffectKeys(scene, KEY_MIGRATIONS);
+      }
+    }
+
+    await pack.configure({ locked: wasLocked });
+  }
+
+  ui.notifications.info("Migration v1.6.3: Active Effect keys updated.");
+}
+
+async function migrateSceneActiveEffectKeys(scene, keyMigrations) {
+  const tokenUpdates = [];
+
+  for (const token of scene.tokens) {
+    if (token.actorLink) continue;
+
+    const tokenData = token.toObject();
+    const delta = foundry.utils.deepClone(tokenData.delta ?? {});
+
+    let changed = false;
+
+    // Token actor delta Active Effects
+    for (const effect of delta.effects ?? []) {
+      const changes = effect.system?.changes ?? [];
+
+      for (const change of changes) {
+        const migration = keyMigrations[change.key];
+        if (!migration) continue;
+
+        change.key = migration.key;
+        change.phase = migration.phase;
+        changed = true;
+      }
+    }
+
+    // Token actor delta Item Active Effects
+    for (const item of delta.items ?? []) {
+      for (const effect of item.effects ?? []) {
+        const changes = effect.system?.changes ?? [];
+
+        for (const change of changes) {
+          const migration = keyMigrations[change.key];
+          if (!migration) continue;
+
+          change.key = migration.key;
+          change.phase = migration.phase;
+          changed = true;
+        }
+      }
+    }
+
+    if (!changed) continue;
+
+    tokenUpdates.push({
+      _id: token.id,
+      delta
+    });
+  }
+
+  if (tokenUpdates.length) {
+    console.log(`ABF Alter | Migrating Active Effects on Scene: ${scene.name}`);
+    await scene.updateEmbeddedDocuments("Token", tokenUpdates);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
@@ -342,8 +530,8 @@ async function migrateScenePsychicMatrixEffects(scene, effectKeys) {
         }
 
         if (key in item.system) {
-            delete item.system[key];
-            changed = true;
+          delete item.system[key];
+          changed = true;
         }
       }
     }
