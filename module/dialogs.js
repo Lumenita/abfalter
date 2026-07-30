@@ -111,18 +111,18 @@ export const genericDialogs = {
                         icon: '<i class="fas fa-check"></i>',
                         label: game.i18n.localize("abfalter.dialogs.confirm"),
                         action: "confirm",
-                        callback: () => {
-                            onConfirm?.();
+                        callback: async () => {
+                            await onConfirm?.();
                             safeResolve(true);
                         }
                     },
                     {
                         label: game.i18n.localize("abfalter.dialogs.cancel"),
                         action: "cancel",
-                        callback: () => {
-                            onCancel?.();
-                            safeResolve(false);
-                        }
+                        callback: async () => {
+                            await onConfirm?.();
+                            safeResolve(true);
+                        }   
                     },
                 ]
             });

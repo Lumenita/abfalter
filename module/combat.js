@@ -2,20 +2,163 @@ import { renderTemplates } from './utilities/renderTemplates.js';
 import { templates } from './utilities/templates.js';
 import { abfalterSettingsKeys } from "./utilities/abfalterSettings.js";
 
+const SYSTEM_ID = "abfalter";
+const PSYCHIC_POTENTIAL_FLAG = "remainingPsychicPotential";
+
+
 export default class abfalterCombat extends Combat {
  
+	/**
+	* Advances combat to the next round after resetting
+	* all round-based actor resources.
+	*/
     async nextRound() {
-        await this.resetAll();
-        return super.nextRound();
+        const result = await super.nextRound();
+        await this.resetRoundResources();
+        await super.resetAll();
+
+        return result;
     }
 
-    /*
-                await super.rollInitiative(id, {
-                formula: `1d100 + ${combatant?.actor?.system.initiative.final} + ${mod}`,
-                updateTurn,
-                messageOptions
-            });
-    */
+	/**
+	* Resets all round-based resources.
+	* @returns {Promise<void>}
+	*/
+	async resetRoundResources() {
+		const updates = this.combatants
+			.filter(combatant => combatant.actor)
+			.map(combatant => ({
+				_id: combatant.id,
+				[`flags.${SYSTEM_ID}.${PSYCHIC_POTENTIAL_FLAG}`]:
+					this.getMaximumPsychicPotential(combatant.actor)
+			}));
+
+		if (!updates.length) return;
+
+		await this.updateEmbeddedDocuments("Combatant", updates);
+	}
+
+	/**
+	* Returns an actor's maximum Psychic Potential.
+	* @param {Actor} actor
+	* @returns {number}
+	*/
+	getMaximumPsychicPotential(actor) {
+		return Number(actor?.system.ppotential.final) || 0;
+	}
+
+	/**
+	 * Finds this combat's combatant for an actor.
+	 * @param {Actor} actor
+	 * @returns {Combatant|null}
+	 */
+	getCombatantForActor(actor) {
+		if (!actor) return null;
+		return this.combatants.find(combatant => combatant.actorId === actor.id) ?? null;
+	}
+
+	/**
+	 * Returns the actor's remaining Psychic Potential.
+	 *
+	 * Outside combat, this returns the actor's full Potential.
+	 * Inside combat, the value is stored on the Combatant.
+	 * @param {Actor} actor
+	 * @returns {Promise<number>}
+	 */
+	async getRemainingPsychicPotential(actor) {
+		const maximum = this.getMaximumPsychicPotential(actor);
+		const combatant = this.getCombatantForActor(actor);
+		if (!combatant) return maximum
+
+		const storedValue = combatant.getFlag(SYSTEM_ID, PSYCHIC_POTENTIAL_FLAG);
+		if (storedValue !== undefined) { 
+			return Number(storedValue) || 0;
+		}
+
+		await combatant.setFlag(
+			SYSTEM_ID,
+			PSYCHIC_POTENTIAL_FLAG,
+			maximum
+		);
+
+		return maximum;
+	}
+
+	/**
+	 * Spends Psychic Potential from a combatant.
+	 *
+	 * @param {Actor} actor
+	 * @param {number} amount
+	 * @returns {Promise<number>} New remaining Potential
+	 */
+	async spendPsychicPotential(actor, amount) {
+		const combatant = this.getCombatantForActor(actor);
+
+		/*
+		 * Outside combat, Potential is not tracked.
+		 */
+		if (!combatant) { return this.getMaximumPsychicPotential(actor); }
+
+		const spent = Math.max( 0, Number(amount) || 0 );
+		const remaining = await this.getRemainingPsychicPotential(actor);
+		if (spent > remaining) {
+			throw new Error(`${actor.name} does not have enough remaining Psychic Potential.`);
+		}
+		const newRemaining = Math.max( 0, remaining - spent);
+
+		await combatant.setFlag(
+			SYSTEM_ID,
+			PSYCHIC_POTENTIAL_FLAG,
+			newRemaining
+		);
+
+		return newRemaining;
+	}
+
+	/**
+	 * Restores one combatant's Psychic Potential.
+	 *
+	 * @param {Combatant} combatant
+	 * @returns {Promise<void>}
+	 */
+	async resetPsychicPotential(combatant) {
+		const actor = combatant?.actor;
+		if (!actor) return;
+
+		const maximum = this.getMaximumPsychicPotential(actor);
+
+		await combatant.setFlag(
+			SYSTEM_ID,
+			PSYCHIC_POTENTIAL_FLAG,
+			maximum
+		);
+	}
+
+	/**
+	* Restores one combatant's Psychic Potential.
+	*
+	* @param {Combatant} combatant
+	* @returns {Promise<number>}
+	*/
+	async resetPsychicPotential(combatant) {
+		const actor = combatant?.actor;
+
+		if (!actor) {
+			throw new Error("The selected combatant does not have an actor.");
+		}
+
+		const maximumPotential =
+			this.getMaximumPsychicPotential(actor);
+
+		await combatant.setFlag(
+			"abfalter",
+			"remainingPsychicPotential",
+			maximumPotential
+		);
+
+		return maximumPotential;
+	}
+
     async rollInitiative(ids, { updateTurn = false, messageOptions } = {}) {
 		let openRollIniSetting = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_InitiativeRoll);
 		let openRollSetting = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_OpenRoll);

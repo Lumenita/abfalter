@@ -186,6 +186,9 @@ export default class abfalterActor extends Actor {
         system.stats.Strength.final += system.arsMagnus.dragonDoor || 0;
         system.stats.Dexterity.final += system.arsMagnus.dragonDoor || 0;
         system.stats.Power.final += system.arsMagnus.dragonDoor || 0;
+        if (system.arsMagnus.dragonPerToggle) {
+            system.stats.Perception.final += system.arsMagnus.dragonDoor || 0;
+        }
 
         //MetaMagic Capstones
         system.metaMagic.derived.doubleDamageDesc = game.i18n.localize('abfalter.metaMagic.doubleDmgDesc');
@@ -571,9 +574,8 @@ export default class abfalterActor extends Actor {
                     stat.mod = -40;
             }
 
-            stat.opposedfinal = Math.floor((stat.final + stat.opposed) + ~~(system.aamField.final / 20) + stat.opposedBonus);
             //Ki Pools
-            if (stat != "Intelligence" && "Perception") {
+            if (key !== "Intelligence" && key !== "Perception") {
                 if (stat.final >= 1 && stat.final <= 9) {
                     stat.kiPoolAccuBase = 1;
                 } else if (stat.final >= 10 && stat.final <= 12) {
@@ -593,6 +595,46 @@ export default class abfalterActor extends Actor {
                     stat.kiPoolBase = 0;
                 }
             }
+        }
+
+        //Fatigue Calculation
+        system.fatigue.base = system.stats.Constitution.final;
+        system.fatigue.max = Math.floor(system.fatigue.base + system.fatigue.spec + system.fatigue.temp + system.fatigue.bonus);
+        system.fatigue.ratio = Number((system.fatigue.value / system.fatigue.max).toFixed(2));
+
+        system.settings.fatigueFourModFinal = Math.ceil(system.settings.fatigueFourMod * system.settings.fatiguePenMult);
+        system.settings.fatigueThreeModFinal = Math.ceil(system.settings.fatigueThreeMod * system.settings.fatiguePenMult);
+        system.settings.fatigueTwoModFinal = Math.ceil(system.settings.fatigueTwoMod * system.settings.fatiguePenMult);
+        system.settings.fatigueOneModFinal = Math.ceil(system.settings.fatigueOneMod * system.settings.fatiguePenMult);
+        system.settings.fatigueZeroModFinal = Math.ceil(system.settings.fatigueZeroMod * system.settings.fatiguePenMult);
+
+        if (system.fatigue.value < system.fatigue.max) {
+            switch (system.fatigue.value) {
+                case 4:
+                    system.aamField.final += system.settings.fatigueFourModFinal;
+                    break;
+                case 3:
+                    system.aamField.final += system.settings.fatigueThreeModFinal;
+                    break;
+                case 2:
+                    system.aamField.final += system.settings.fatigueTwoModFinal;
+                    break;
+                case 1:
+                    system.aamField.final += system.settings.fatigueOneModFinal;
+                    break;
+                case 0:
+                    system.aamField.final += system.settings.fatigueZeroModFinal;
+                    break;
+            }
+        }
+
+        for (const stat of Object.values(system.stats)) {
+            stat.opposedfinal = Math.floor(
+                stat.final +
+                stat.opposed +
+                ~~(system.aamField.final / 20) +
+                stat.opposedBonus
+            );
         }
 
         //Calculating Number of Actions
@@ -653,7 +695,7 @@ export default class abfalterActor extends Actor {
         }
 
         //Lifepoint Calculation
-        system.lifepoints.base = Math.floor(25 + 10 * system.stats.Constitution.final + system.stats.Constitution.mod - Math.ceil((system.stats.Constitution.final - 1) / system.stats.Constitution.final) * 5);
+        system.lifepoints.base = system.stats.Constitution.final > 0 ? Math.floor(25 + 10 * system.stats.Constitution.final + system.stats.Constitution.mod - Math.ceil((system.stats.Constitution.final - 1) / system.stats.Constitution.final) * 5) : 0;
         if (system.toggles.dmgRes == false) {
             system.lp.max = Math.floor(system.lifepoints.base + system.lifepoints.spec + system.lifepoints.temp + system.lifepoints.bonus + Math.ceil(system.lifepoints.multiple * system.stats.Constitution.final));
         } else {
@@ -663,38 +705,6 @@ export default class abfalterActor extends Actor {
             system.lifepoints.hpDmgRes = Math.floor(system.lifepoints.hpMult * system.monsterStats.hpDp);
             system.lp.max = Math.floor(system.lifepoints.base + system.lifepoints.spec + system.lifepoints.temp + system.lifepoints.hpDmgRes + system.lifepoints.bonus);
         }
-
-        //Fatigue Calculation
-        system.fatigue.base = system.stats.Constitution.final;
-        system.fatigue.max = Math.floor(system.fatigue.base + system.fatigue.spec + system.fatigue.temp + system.fatigue.bonus);
-        system.fatigue.ratio = Number((system.fatigue.value / system.fatigue.max).toFixed(2));
-
-        system.settings.fatigueFourModFinal = Math.ceil(system.settings.fatigueFourMod * system.settings.fatiguePenMult);
-        system.settings.fatigueThreeModFinal = Math.ceil(system.settings.fatigueThreeMod * system.settings.fatiguePenMult);
-        system.settings.fatigueTwoModFinal = Math.ceil(system.settings.fatigueTwoMod * system.settings.fatiguePenMult);
-        system.settings.fatigueOneModFinal = Math.ceil(system.settings.fatigueOneMod * system.settings.fatiguePenMult);
-        system.settings.fatigueZeroModFinal = Math.ceil(system.settings.fatigueZeroMod * system.settings.fatiguePenMult);
-
-        switch (system.fatigue.value) {
-            case 4:
-                system.aamField.final += system.settings.fatigueFourModFinal;
-                break;
-            case 3:
-                system.aamField.final += system.settings.fatigueThreeModFinal;
-                break;
-            case 2:
-                system.aamField.final += system.settings.fatigueTwoModFinal;
-                break;
-            case 1:
-                system.aamField.final += system.settings.fatigueOneModFinal;
-                break;
-            case 0:
-                system.aamField.final += system.settings.fatigueZeroModFinal;
-                break;
-            default:
-                break;
-        }
-
 
         //Regeneration Calculation
         switch (system.stats.Constitution.final) {
@@ -800,7 +810,7 @@ export default class abfalterActor extends Actor {
 
         //Initiative
         system.initiative.extraStats = Math.floor(system.stats.Dexterity.mod + system.stats.Agility.mod);
-        system.initiative.base = Math.floor(system.stats.Dexterity.mod + system.stats.Agility.mod + system.initiative.sizeBase);
+        system.initiative.base = Math.floor(system.stats.Dexterity.mod + system.stats.Agility.mod + system.initiative.sizeBase + (system.arsMagnus.dragonSeal * 5));
         if (system.aamField.final < 0) {
             system.initiative.base = Math.floor(system.initiative.base + ~~(system.aamField.final / 2));
         }
@@ -974,11 +984,12 @@ export default class abfalterActor extends Actor {
         }
 
         // Psychic Projection
-        system.pproj.final = Math.floor(system.pproj.base + system.pproj.spec + system.pproj.temp + system.pproj.bonusBase + system.stats.Dexterity.mod + system.aamField.final);
+        system.pproj.finalOff = Math.floor(system.pproj.base + system.pproj.spec + system.pproj.extraOff + system.pproj.temp + system.pproj.bonusBase + system.stats.Dexterity.mod + system.aamField.final);
+        system.pproj.finalDef = Math.floor(system.pproj.base + system.pproj.spec + system.pproj.extraDef + system.pproj.temp + system.pproj.bonusBase + system.stats.Dexterity.mod + system.aamField.final);
 
-        system.pproj.atkModule = Math.floor(system.combatValues.attack.base + system.pproj.spec + system.pproj.temp + system.pproj.bonus + system.stats.Dexterity.mod + system.aamField.final);
-        system.pproj.defModule = Math.floor(system.combatValues.block.base + system.pproj.spec + system.pproj.temp + system.pproj.bonus2 + system.stats.Dexterity.mod + system.aamField.final);
-        system.pproj.dodModule = Math.floor(system.combatValues.dodge.base + system.pproj.spec + system.pproj.temp + system.pproj.bonus2 + system.stats.Dexterity.mod + system.aamField.final);
+        system.pproj.atkModule = Math.floor(system.combatValues.attack.base + system.pproj.spec + system.pproj.extraOff + system.pproj.temp + system.pproj.bonus + system.stats.Dexterity.mod + system.aamField.final);
+        system.pproj.defModule = Math.floor(system.combatValues.block.base + system.pproj.spec + system.pproj.extraDef + system.pproj.temp + system.pproj.bonus2 + system.stats.Dexterity.mod + system.aamField.final);
+        system.pproj.dodModule = Math.floor(system.combatValues.dodge.base + system.pproj.spec + system.pproj.extraDef + system.pproj.temp + system.pproj.bonus2 + system.stats.Dexterity.mod + system.aamField.final);
         // Wear Armor
         system.armor.wearArmor.final = Math.floor(system.armor.wearArmor.base + system.armor.wearArmor.spec + system.armor.wearArmor.temp + system.armor.wearArmor.bonus + system.stats.Strength.mod);
 
@@ -1136,11 +1147,7 @@ export default class abfalterActor extends Actor {
                     break;
                 case "psychicMatrix":
                     if (item.system.countCost) classBonuses.usedpp += 1;
-                    if (system.toggles.psychicStrengthening == true) {
-                        classBonuses.matrixpp += parseInt(item.system.bonus / 20) || 0;
-                    } else {
-                        classBonuses.matrixpp += parseInt(item.system.bonus / 10) || 0;
-                    }
+                    classBonuses.matrixpp +=  parseInt(item.system.ppInvested) || 0;
                     break;
                 case "arsMagnus":
                     classBonuses.arsMk += parseInt(item.system.mk) || 0;
@@ -1514,21 +1521,22 @@ export default class abfalterActor extends Actor {
         system.armor.body.aSptFinal += system.armor.body.aSptBonus || 0;
 
         // Armor Stats
+        const overReq = Math.max(0, system.armor.wearArmor.final - classBonuses.req); //system.armor.wearArmor.mod
+        const underReq = Math.max(0, classBonuses.req - system.armor.wearArmor.final); 
+
+        system.armor.wearArmor.reqPenalty = underReq; // Penalty for not meeting armor requirement
+        system.armor.wearArmor.multipleLayerPen = Math.max(0, Math.floor((classBonuses.quantity - 1) * 20)); // Extra layer penalty: -20 per additional armor layer
+        system.armor.wearArmor.effectiveNatPen = Math.max(0, classBonuses.natPen - overReq); // Natural penalty reduced by Wear Armor above requirement
+        system.armor.wearArmor.totalNatPen = system.armor.wearArmor.effectiveNatPen + system.armor.wearArmor.multipleLayerPen; // Final Initiative / Secondary Ability armor penalty
+        system.armor.wearArmor.totalSecondaryPenalty = system.armor.wearArmor.reqPenalty + system.armor.wearArmor.effectiveNatPen + system.armor.wearArmor.multipleLayerPen;
+        system.armor.wearArmor.totalInitiativePenalty = system.armor.wearArmor.effectiveNatPen + system.armor.wearArmor.multipleLayerPen;
+
+        system.armor.wearArmor.swimPenalty = classBonuses.natPen + system.armor.wearArmor.multipleLayerPen + underReq; // Swim: armor penalty cannot be reduced by Wear Armor
+        const stealthNatPen = Math.max( Math.floor(classBonuses.natPen / 2), classBonuses.natPen - overReq ); 
+        system.armor.wearArmor.stealthPenalty = stealthNatPen + system.armor.wearArmor.multipleLayerPen + underReq; // Stealth: natural penalty can only be reduced by half
+
         system.armor.wearArmor.totalPerPen = classBonuses.perPen;
-        system.armor.wearArmor.multipleLayerPen = Math.max(0, Math.floor((classBonuses.quantity - 1) * 20));
-
-        system.armor.wearArmor.mod = Math.floor(system.armor.wearArmor.final - classBonuses.req);
-        system.armor.wearArmor.effectiveNatPen = classBonuses.natPen - system.armor.wearArmor.mod;
-        system.armor.wearArmor.totalNatPen =  Math.max(0, Math.floor(system.armor.wearArmor.effectiveNatPen < 0 ? system.armor.wearArmor.multipleLayerPen : system.armor.wearArmor.multipleLayerPen + system.armor.wearArmor.effectiveNatPen));
-
-        system.armor.wearArmor.swimPenalty = classBonuses.natPen - Math.min(system.armor.wearArmor.mod, 0); // Swim Penalty
-        if (system.armor.wearArmor.effectiveNatPen > classBonuses.natPen / 2) {
-            system.armor.wearArmor.stealthPenanlty = classBonuses.natPen - system.armor.wearArmor.mod; // Stealth Penalty
-        } else {
-            system.armor.wearArmor.stealthPenanlty = Math.floor(classBonuses.natPen / 2);
-        }
-
-        system.armor.wearArmor.movePenMod = Math.max(0, Math.floor(system.armor.wearArmor.mod / 50));
+        system.armor.wearArmor.movePenMod = Math.max(0, Math.floor(overReq / 50));
         system.armor.wearArmor.totalMovePen = -Math.floor(Math.max(0, classBonuses.movePen - system.armor.wearArmor.movePenMod));
 
         //Resistances
@@ -1812,8 +1820,44 @@ export default class abfalterActor extends Actor {
         //Lifepoint Calculation
         let hpClassMonstMult = (system.toggles?.dmgRes && system.lifepoints?.hpMult) ? system.lifepoints.hpMult : 1;
         system.lifepoints.class = Math.floor(classBonuses.lpbonus * hpClassMonstMult);
-        system.lp.max += system.lifepoints.class;
-        system.lifepoints.ratio = Number((system.lp.value / system.lp.max).toFixed(2));
+        //system.lp.max += system.lifepoints.class;
+        //system.lifepoints.ratio = Number((system.lp.value / system.lp.max).toFixed(2));
+
+        const normalMaxLP = system.lp.max + system.lifepoints.class;
+
+        if (system.isMass?.isMass) {
+            const totalMass = Math.max(Number(system.isMass.max ?? 1), 1);
+            const hasDamageResistance = !!system.general?.damageResistance;
+
+            system.lp.max = calculateMassEnemyHP({
+                lp: normalMaxLP,
+                count: totalMass,
+                hasDamageResistance
+            });
+
+            system.lifepoints.ratio = Number((system.lp.value / system.lp.max).toFixed(2));
+
+            system.isMass.value = calculateRemainingMassCount({
+                currentHP: system.lp.value,
+                maxHP: system.lp.max,
+                lp: normalMaxLP,
+                totalCount: totalMass,
+                hasDamageResistance
+            });
+        } else {
+            system.lp.max += system.lifepoints.class;
+
+            system.lifepoints.ratio = Number((system.lp.value / system.lp.max).toFixed(2));
+        }
+
+
+
+
+
+
+
+
+
         system.lifepoints.threshold = stats.Constitution.final * system.settings.negHealthMult;
         system.lifepoints.isNegative = system.lp.value < 0;
         system.lifepoints.negRatio = system.lp.value < 0 && system.lifepoints.threshold > 0 ? Math.min(Math.abs(system.lp.value) / system.lifepoints.threshold, 1) : 0;
@@ -1842,9 +1886,9 @@ export default class abfalterActor extends Actor {
         system.combatValues.dodge.final += system.combatValues.dodge.class;
 
         // Armor Penalties to Physical Actions
-        system.combatValues.attack.final -= system.armor.wearArmor.totalNatPen;
-        system.combatValues.block.final -= system.armor.wearArmor.totalNatPen;
-        system.combatValues.dodge.final -= system.armor.wearArmor.totalNatPen;
+        system.combatValues.attack.final -= system.armor.wearArmor.reqPenalty;
+        system.combatValues.block.final -= system.armor.wearArmor.reqPenalty;
+        system.combatValues.dodge.final -= system.armor.wearArmor.reqPenalty;
 
         //@SECONDARIES
         //Athletics Fields
@@ -1871,9 +1915,9 @@ export default class abfalterActor extends Actor {
             }
             sec.natTotal = Math.floor(sec.modValue + sec.natural + Math.ceil(sec.nat * sec.modValue));
             sec.natTotal = sec.natTotal < 100 ? sec.natTotal : 100;
-            sec.final = Math.floor(sec.base + sec.spec + sec.temp + sec.classBonus + sec.natTotal + sec.bonus + system.aamField.final - system.armor.wearArmor.totalNatPen);
+            sec.final = Math.floor(sec.base + sec.spec + sec.temp + sec.classBonus + sec.natTotal + sec.bonus + system.aamField.final - system.armor.wearArmor.totalSecondaryPenalty);
         };
-        system.secondaryFields.athletics.swim.final += system.armor.wearArmor.totalNatPen - system.armor.wearArmor.swimPenalty; //add the reduces penalty back then remove from the natural one
+        system.secondaryFields.athletics.swim.final += system.armor.wearArmor.totalSecondaryPenalty - system.armor.wearArmor.swimPenalty; // Swim Penalty, add back total pen, then sub swim penalty
 
         //Social Fields
         system.secondaryFields.social.etiquette.classBonus = classBonuses.etiq;
@@ -1977,7 +2021,7 @@ export default class abfalterActor extends Actor {
             }
             sec.natTotal = Math.floor(sec.modValue + sec.natural + Math.ceil(sec.nat * sec.modValue));
             sec.natTotal = sec.natTotal < 100 ? sec.natTotal : 100;
-            sec.final = Math.floor(sec.base + sec.spec + sec.temp + sec.classBonus + sec.natTotal + sec.bonus + system.aamField.final - (sec.armorPen ? system.armor.wearArmor.totalNatPen : 0));
+            sec.final = Math.floor(sec.base + sec.spec + sec.temp + sec.classBonus + sec.natTotal + sec.bonus + system.aamField.final - (sec.armorPen ? system.armor.wearArmor.totalSecondaryPenalty : 0));
         };
 
         //Subterfuge Fields
@@ -2008,9 +2052,9 @@ export default class abfalterActor extends Actor {
             }
             sec.natTotal = Math.floor(sec.modValue + sec.natural + Math.ceil(sec.nat * sec.modValue));
             sec.natTotal = sec.natTotal < 100 ? sec.natTotal : 100;
-            sec.final = Math.floor(sec.base + sec.spec + sec.temp + sec.classBonus + sec.natTotal + sec.bonus + system.aamField.final - (sec.armorPen ? system.armor.wearArmor.totalNatPen : 0));
+            sec.final = Math.floor(sec.base + sec.spec + sec.temp + sec.classBonus + sec.natTotal + sec.bonus + system.aamField.final - (sec.armorPen ? system.armor.wearArmor.totalSecondaryPenalty : 0));
         };
-        system.secondaryFields.subterfuge.stealth.final += system.armor.wearArmor.totalNatPen - system.armor.wearArmor.stealthPenanlty; //add the reduces penalty back then remove from the natural one
+        system.secondaryFields.subterfuge.stealth.final += system.armor.wearArmor.totalSecondaryPenalty - system.armor.wearArmor.stealthPenalty; // Stealth Penalty, add back total pen, then sub Stealth penalty
 
         
         //Ki Concealment
@@ -2058,7 +2102,7 @@ export default class abfalterActor extends Actor {
             }
             sec.natTotal = Math.floor(sec.modValue + sec.natural + Math.ceil(sec.nat * sec.modValue));
             sec.natTotal = sec.natTotal < 100 ? sec.natTotal : 100;
-            sec.final = Math.floor(sec.base + sec.spec + sec.temp + sec.classBonus + sec.natTotal + sec.bonus + system.aamField.final - (sec.armorPen ? system.armor.wearArmor.totalNatPen : 0));
+            sec.final = Math.floor(sec.base + sec.spec + sec.temp + sec.classBonus + sec.natTotal + sec.bonus + system.aamField.final - (sec.armorPen ? system.armor.wearArmor.totalSecondaryPenalty : 0));
         };
 
         // Magic Accumulation & Zeon
@@ -2336,7 +2380,7 @@ export default class abfalterActor extends Actor {
 
         // Psychic Points
         system.ppoint.class = classBonuses.pp;
-        system.ppoint.final = Math.floor(system.ppoint.base + system.ppoint.spec + system.ppoint.bonus + system.ppoint.class);
+        system.ppoint.final = Math.floor(system.ppoint.base + system.ppoint.spec + system.ppoint.extra + system.ppoint.bonus + system.ppoint.class);
         system.ppoint.innateSlot = Math.floor(system.other.innateSlots * 2);
         system.psychicPoint.max = Math.floor(system.ppoint.final - (+classBonuses.usedpp + system.ppotential.fromPP + +classBonuses.matrixpp + system.ppoint.innateSlot));
 
@@ -2374,13 +2418,30 @@ export default class abfalterActor extends Actor {
         system.mentalHealth.max = mentalEntry?.mentalHealth ?? 0;
         system.otherStats.mentalThreshold = mentalEntry?.threshold ?? 0;
 
-        //Other
+        // Other
         system.otherStats.damageBarrierFinal = Math.floor(system.otherStats.damageBarrier + (system.otherStats.damageBarrierBonus || 0));
         system.otherStats.dmgRdcFinal = Math.floor(system.otherStats.dmgRdc + (system.otherStats.dmgRdcBonus || 0));
 
         // Settings
         system.rollRange.final = Math.floor(system.rollRange.base - system.rollRange.spec - system.rollRange.temp - system.rollRange.bonus);
         system.fumleRange.final = Math.floor(system.fumleRange.base + system.fumleRange.spec + system.fumleRange.temp + system.fumleRange.bonus);
+
+        // Psychic Settings
+        system.psySettings.projMaxPPFinal = Math.floor(system.psySettings.projMaxPP + system.psySettings.projMaxPPBonus);
+        system.psySettings.projPPValueFinal = Math.floor(system.psySettings.projPPValue + system.psySettings.projPPValueBonus);
+        system.psySettings.potMaxPPFinal = Math.floor(system.psySettings.potMaxPP + system.psySettings.potMaxPPBonus);
+        system.psySettings.potPPValueFinal = Math.floor(system.psySettings.potPPValue + system.psySettings.potPPValueBonus);
+        system.psySettings.maintMaxPPFinal = Math.floor(system.psySettings.maintMaxPP + system.psySettings.maintMaxPPBonus);
+        system.psySettings.maintPPValueFinal = Math.floor(system.psySettings.maintPPValue + system.psySettings.maintPPValueBonus);
+        system.psySettings.maintIncValueFinal = Math.floor(system.psySettings.maintIncValue + system.psySettings.maintIncValueBonus);
+        system.psySettings.upcastValueFinal = Math.floor(system.psySettings.upcastValue + system.psySettings.upcastValueBonus);
+        system.psySettings.matrixDmgIncFinal = Math.floor(system.psySettings.matrixDmgInc + system.psySettings.matrixDmgIncBonus);
+        system.psySettings.matrixDmgMultipleFinal = Math.floor(system.psySettings.matrixDmgMultiple + system.psySettings.matrixDmgMultipleBonus);
+        system.psySettings.matrixPenIncFinal = Math.floor(system.psySettings.matrixPenInc + system.psySettings.matrixPenIncBonus);
+        system.psySettings.matrixResCheckIncFinal = Math.floor(system.psySettings.matrixResCheckInc + system.psySettings.matrixResCheckIncBonus);
+        system.psySettings.matrixResProjIncFinal = Math.floor(system.psySettings.matrixResProjInc + system.psySettings.matrixResProjIncBonus);
+        system.psySettings.matrixShieldIncFinal = Math.floor(system.psySettings.matrixShieldInc + system.psySettings.matrixShieldIncBonus);
+        system.psySettings.matrixShieldMultFinal = Math.floor(system.psySettings.matrixShieldMult + system.psySettings.matrixShieldMultBonus);
 
         // 2nd Item load for derived Item values.
         let pushSpeed;
@@ -2416,7 +2477,7 @@ export default class abfalterActor extends Actor {
         } else {
             system.initiative.wepFinalSpeed = system.initiative.wepSpeed;
         }
-        system.initiative.final = Math.floor(system.initiative.base + system.initiative.class + system.initiative.other + system.initiative.spec + system.initiative.bonus + system.initiative.kiAbilityBonus + ~~system.initiative.wepFinalSpeed - system.armor.wearArmor.totalNatPen);
+        system.initiative.final = Math.floor(system.initiative.base + system.initiative.class + system.initiative.other + system.initiative.spec + system.initiative.bonus + system.initiative.kiAbilityBonus + ~~system.initiative.wepFinalSpeed - system.armor.wearArmor.totalInitiativePenalty);
     }
 }
 
@@ -2439,4 +2500,60 @@ function convertWeight(value, fromUnit, toUnit) {
 
     const grams = value * WEIGHT_TO_GRAMS[fromUnit];
     return grams * GRAMS_TO_WEIGHT[toUnit];
+}
+
+function calculateMassEnemyHP({ lp, count, hasDamageResistance = false }) {
+  if (count <= 0) return 0;
+
+  if (!hasDamageResistance) {
+    const firstGroupCount = Math.min(count, 100);
+    const extraCount = Math.max(count - 100, 0);
+
+    const baseContribution = lp < 50
+      ? lp
+      : Math.floor(lp / 50) * 50;
+
+    const extraContribution = lp <= 250 ? 10 : 25;
+
+    return (firstGroupCount * baseContribution)
+      + (extraCount * extraContribution);
+  }
+
+  const baseHP = Math.floor(lp / 100) * 100;
+
+  const halfContributionCount = Math.min(count - 1, 49);
+  const extraCount = Math.max(count - 50, 0);
+
+  const extraContribution = lp <= 1000 ? 100 : 250;
+
+  return baseHP
+    + (halfContributionCount * (baseHP / 2))
+    + (extraCount * extraContribution);
+}
+
+function calculateRemainingMassCount({ currentHP, maxHP, lp, totalCount, hasDamageResistance = false }) {
+  currentHP = Math.max(Number(currentHP ?? 0), 0);
+  maxHP = Math.max(Number(maxHP ?? 0), 0);
+  totalCount = Math.max(Number(totalCount ?? 1), 1);
+
+  if (currentHP <= 0) return 0;
+  if (currentHP >= maxHP) return totalCount;
+
+  const damageTaken = maxHP - currentHP;
+
+  for (let casualties = 0; casualties <= totalCount; casualties++) {
+    const remainingCount = totalCount - casualties;
+
+    const remainingHP = calculateMassEnemyHP({
+      lp,
+      count: remainingCount,
+      hasDamageResistance
+    });
+
+    if (remainingHP <= currentHP) {
+      return remainingCount;
+    }
+  }
+
+  return 0;
 }

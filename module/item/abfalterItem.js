@@ -635,7 +635,7 @@ export default class abfalterItem extends Item {
             this.system.derived.heat = Math.floor(+this.system.AT.heat + +this.system.qualityValue);
             this.system.derived.cold = Math.floor(+this.system.AT.cold + +this.system.qualityValue);
             this.system.derived.ele = Math.floor(+this.system.AT.ele + +this.system.qualityValue);
-            this.system.derived.ene = Math.floor(+this.system.AT.ene + +this.system.qualityValue);
+            this.system.derived.ene = Math.floor(+this.system.AT.ene + (this.system.properties.magical.bool ? +this.system.qualityValue : 0));
             this.system.derived.spt = Math.floor(+this.system.AT.spt + +this.system.qualityValue);
         }
 
@@ -722,15 +722,7 @@ export default class abfalterItem extends Item {
         }
     }
 
-    /* ---------- Other Items  ---------- */
-    prepareMentalPattern() {
-        if (this.system.toggle == true) {
-            this.system.finalCost = Math.floor(+this.system.cost + +this.system.cancelCost);
-        } else {
-            this.system.finalCost = this.system.cost;
-        }
-    }
-
+    /* ---------- Psychic Items  ---------- */
     preparePsychicMatrix() {
         if (this.system.maint == "Yes") {
             this.system.maintName = game.i18n.localize('abfalter.yes');
@@ -740,14 +732,41 @@ export default class abfalterItem extends Item {
         
         this.system.chatTag = `${game.i18n.localize('abfalter.action')}: ` + this.system.action
             + ` | ${game.i18n.localize('abfalter.level')}: ` + this.system.level
-            + ` | ${game.i18n.localize('abfalter.maintanence')}: ` + this.system.maint
+            + ` | ${game.i18n.localize('abfalter.maintanence')}: ` + this.system.maint;
+        this.system.ppPotential = Math.floor(this.system.ppInvested * 10);
 
         if (this.parent != null) {
             if (this.parent) {
-                this.system.finalPot = Math.floor(~~this.parent.system.ppotential.final + ~~this.system.bonus);
+                this.system.finalPot = Math.floor(~~this.system.bonus + this.system.ppPotential);
+                this.system.effectAddProjFinal = Math.floor(this.system.effectAddProj + this.parent.system.psySettings.matrixResProjIncFinal);
+                this.system.upcastAmountFinal = Math.floor(this.system.upcastAmount + this.parent.system.psySettings.upcastValueFinal);
+                const settings = this.parent.system.psySettings;
+                for (const effect of Object.values(this.system.matrixDetails)) {
+                        effect.dmgValueFinal = Math.floor(
+                            (effect.dmgValue + settings.matrixDmgIncFinal) *
+                            settings.matrixDmgMultipleFinal
+                        );
+                        effect.atPenFinal = effect.atPen + settings.matrixPenIncFinal;
+                        effect.resValueFinal = effect.resValue + settings.matrixResCheckIncFinal;
+                        effect.shieldValueFinal = Math.floor(
+                            (effect.shieldValue + settings.matrixShieldIncFinal) *
+                            settings.matrixShieldMultFinal
+                        );
+                    }
             }
         }
     }
+
+    prepareMentalPattern() {
+        if (this.system.toggle == true) {
+            this.system.finalCost = Math.floor(+this.system.cost + +this.system.cancelCost);
+        } else {
+            this.system.finalCost = this.system.cost;
+        }
+    }
+
+    /* ---------- Other Items  ---------- */
+
 
     prepareKiTechnique() {
         const sys = this.system;

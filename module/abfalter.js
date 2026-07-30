@@ -2,6 +2,7 @@ import { abfalter } from "./config.js";
 import { preloadHandlebarsTemplates } from "./utilities/preloadTemplates.js";
 import * as Chat from "./chat.js";
 import abfalterCombat from "./combat.js";
+import abfalterCombatTracker from "./utilities/abfalterCombatTracker.js";
 import abfalterItem from "./item/abfalterItem.js";
 import abfalterItemSheet from "./item/abfalterItemSheet.mjs";
 import abfalterActor from "./actor/abfalterActor.js";
@@ -86,6 +87,7 @@ Hooks.once("init", async () => {
     CONFIG.Actor.documentClass = abfalterActor;
     CONFIG.Item.documentClass = abfalterItem;
     CONFIG.Combat.documentClass = abfalterCombat;
+    CONFIG.ui.combat = abfalterCombatTracker;
     CONFIG.ActiveEffect.legacyTransferral = false;
     abfalterSettings();
     
@@ -365,6 +367,11 @@ class actorDataModel extends foundry.abstract.DataModel {
                 shieldRatio: makeLongIntField(),
                 shieldBonus: makeIntField()
             }),
+            isMass: new foundry.data.fields.SchemaField({
+                isMass: makeBoolField(),
+                max: makeIntField(),
+                value: makeIntField()
+            }),
             rollRange: new foundry.data.fields.SchemaField({
                 base: makeIntField(90),
                 spec: makeIntField(),
@@ -486,7 +493,39 @@ class actorDataModel extends foundry.abstract.DataModel {
                 presenceWarningUpper: makeBoolField(),
                 autoLowZeonPen: makeBoolField(),
                 lowZeonPenalty: makeIntField(-10),
-                noZeonPenalty: makeIntField(-30)
+                noZeonPenalty: makeIntField(-30),
+            }),
+            psySettings: new foundry.data.fields.SchemaField({
+                projMaxPP: makeIntField(5),
+                projMaxPPBonus: makeIntField(),
+                projPPValue: makeIntField(10),
+                projPPValueBonus: makeIntField(),
+                potMaxPP: makeIntField(5),
+                potMaxPPBonus: makeIntField(),
+                potPPValue: makeIntField(20),
+                potPPValueBonus: makeIntField(),
+                maintMaxPP: makeIntField(5),
+                maintMaxPPBonus: makeIntField(),
+                maintPPValue: makeIntField(20),
+                maintPPValueBonus: makeIntField(),
+                maintIncValue: makeIntField(),
+                maintIncValueBonus: makeIntField(),
+                upcastValue: makeIntField(),
+                upcastValueBonus: makeIntField(),
+                matrixDmgInc: makeIntField(),
+                matrixDmgIncBonus: makeIntField(),
+                matrixDmgMultiple: makeLongIntField(1),
+                matrixDmgMultipleBonus: makeLongIntField(),
+                matrixPenInc: makeIntField(),
+                matrixPenIncBonus: makeIntField(),
+                matrixResCheckInc: makeIntField(),
+                matrixResCheckIncBonus: makeIntField(),
+                matrixResProjInc: makeIntField(),
+                matrixResProjIncBonus: makeIntField(),
+                matrixShieldInc: makeIntField(),
+                matrixShieldIncBonus: makeIntField(),
+                matrixShieldMult: makeLongIntField(1),
+                matrixShieldMultBonus: makeLongIntField(),
             }),
             stats: new foundry.data.fields.SchemaField({
                 Agility: characteristics(),
@@ -915,7 +954,8 @@ class actorDataModel extends foundry.abstract.DataModel {
             }),
             arsMagnus: new foundry.data.fields.SchemaField({
                 dragonSeal: makeIntField(),
-                dragonDoor: makeIntField()
+                dragonDoor: makeIntField(),
+                dragonPerToggle: makeBoolField()
             }),
             armor: new foundry.data.fields.SchemaField({
                 tag: makeStringField("body"),
@@ -938,6 +978,7 @@ class actorDataModel extends foundry.abstract.DataModel {
             ppoint: new foundry.data.fields.SchemaField({
                 base: makeIntField(),
                 spec: makeIntField(),
+                extra: makeIntField(),
                 freepp: makeIntField(),
                 desc: makeStringField(),
                 bonus: makeIntField(),
@@ -958,6 +999,8 @@ class actorDataModel extends foundry.abstract.DataModel {
                 bonusBase: makeIntField(),
                 bonus: makeIntField(),
                 bonus2: makeIntField(),
+                extraOff: makeIntField(),
+                extraDef: makeIntField(),
                 status: makeBoolField()
             }),
             other: new foundry.data.fields.SchemaField({
@@ -1893,9 +1936,19 @@ class psychicMatrixDataModel extends foundry.abstract.DataModel {
             action: makeStringField("Active"),
             type: makeStringField("basic"), // basic, attack, shield, effect
             maint: makeStringField("No"),
+            upcastAmount: makeIntField(),
             higherLvl: makeBoolField(),
             countCost: makeBoolField(true),
+            resProj: makeIntField(),
             bonus: makeIntField(),
+            ppInvested: makeIntField(),
+            isFired: makeBoolField(true),
+            isInvisible: makeBoolField(true),
+            effectUseProj: makeBoolField(),
+            effectAddProj: makeIntField(),
+            effectUseAT: makeBoolField(),
+            effectWhichAT: makeStringField("CUT"),
+            attackHasAoEProfile: makeBoolField(),
             matrixDetails: new foundry.data.fields.SchemaField({
                 effect20: matrixStuff("routine", 20),
                 effect40: matrixStuff("easy", 40),
@@ -2251,6 +2304,7 @@ function matrixStuff(header, value) {
         failure: makeBoolField(),
         fatigue: makeIntField(),
         dmgValue: makeIntField(),
+        projAdditional: makeIntField(),
         dmgType: new foundry.data.fields.SchemaField({
             cut: makeBoolField(),
             imp: makeBoolField(),

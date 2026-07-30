@@ -3127,157 +3127,183 @@ h6 {
     ---------------
     ***************
 */
-/* #region Containers */
-.s3,
-.s4 {
-    display: flex;
-    justify-content: space-between;
-}
-.s4 {
-    margin: 7px 0 0 0;
-}
+/* #region Containers @V2 */
 .ppoint,
 .ppotential,
 .pproj,
 .pdisc {
     width: 23.5%;
 }
-.s4 > div {
-    width: 48%;
-}
 /* #endregion */
 
-/* #region @PP */
-.ppoint > *:nth-child(2) {
-    margin: -7px 0 0 0;
-}
-.ppoint > label,
-.ppoint > div > label {
+/* #region @PP @V2 */
+.ppoint .abfDivFormat > label,
+.ppoint .abfDivFormat > div > label {
     display: flex;
-    padding: 0 10px 0 10px;
+    padding: 0 10px;
 }
-.ppoint > label > span,
-.ppoint > div > label > span {
+.ppoint .abfDivFormat > label > span,
+.ppoint .abfDivFormat > div > label > span {
     width: 60%;
     text-align: start
 }
-.ppoint > label > input,
-.ppoint > div > label > input {
+.ppoint .abfDivFormat > label > input,
+.ppoint .abfDivFormat > div > label > input {
     width: 40%;
 }
-.ppoint > label:nth-of-type(2) {
-    border-bottom: 1px solid var(--boxColor);
+.ppoint .abfDivFormat > label:nth-of-type(2) {
     border-top: 1px solid var(--boxColor);
-    padding: 0 10px;
+    padding: 3px 10px 0 10px;
+}
+.ppoint .abfDivFormat > label:nth-of-type(3) {
+    border-bottom: 1px solid var(--boxColor);
     font-weight: bold;
+    padding: 0 10px 3px 10px;
 }
-.ppoint > label:nth-of-type(3) {
-    font-weight: bold;
-}
-.ppoint > h5 > label > a {
-    opacity: 0;
-}
-.ppoint:hover > h5 > label > a {
-    opacity: 1;
+.ppoint .abfDivFormat > div > button {
+    width: 100%;
+    height: 25px;
+    border: 0px;
+    border-radius: 0 0 8px 8px;
 }
 /* #endregion */
 
-/* #region @Potential */
-.ppotential > *:nth-child(2) {
-    margin: -7px 0 0 0;
+/* #region @CastMatrix @Prompt */
+.potentialPrompt {
+    padding: 0 3%;
 }
-.ppotential > label,
-.ppotential > div > label,
-.ppotential > div > div > label {
+.psychicPotentialAllocation {
+    border-bottom: 1px solid var(--boxColor);
+    padding: 0 0 5px 0;
+    margin: 0 0 5px 0;
+
+}
+.potentialSummary {
+    display: flex;
+    justify-content: space-between;
+}
+.potentialUsing {
+    display: flex;
+    justify-content: center;
+    margin: 3px 0 0 0;
+}
+.potentialAdjustmentButtons {
+    display: flex;
+    justify-content: space-between;
+}
+.potentialAdjustmentButtons > input {
+    display: flex;
+    width: 10%;
+    height: 27px;
+}
+.potentialAdjustmentButtons > button {
+    display: flex;
+    width: 10%;
+    min-height: 27px;
+}
+.potentialPrompt > label {
+    display: flex;
+    justify-content: space-between;
+}
+.potentialPrompt > label:last-of-type  {
+    border-bottom: 1px dashed var(--boxColor);
+    padding: 0 0 5px 0;
+    margin: 0 0 5px 0;
+}
+.potentialPrompt > label > span {
+    display: grid;
+    width: 55%;
+}
+.potentialPrompt > label > input {
+    width: 45%;
+}
+.potentialPrompt > label > select {
+    width: 45%;
+}
+/* #endregion */
+
+/* #region @Potential @V2 */
+.ppotential .abfDivFormat > label,
+.ppotential .abfDivFormat > div > label,
+.ppotential .abfDivFormat > div > div > label {
     display: flex;
     padding: 0 10px;
 }
-.ppotential > label > span,
-.ppotential > div > label > span,
-.ppotential > div > div > label > span {
+.ppotential .abfDivFormat > label > span,
+.ppotential .abfDivFormat > div > label > span,
+.ppotential .abfDivFormat> div > div > label > span {
     width: 60%;
     text-align: start;
 }
-.ppotential > label > input,
-.ppotential > div > label > input,
-.ppotential > div > div > label > select {
+.ppotential .abfDivFormat > label > input,
+.ppotential .abfDivFormat > div > label > input,
+.ppotential .abfDivFormat > div > div > label > select {
     width: 40%;
 }
-.ppotential > label:nth-of-type(2) {
+.ppotential .abfDivFormat > label:nth-of-type(2) {
     border-top: 1px solid var(--boxColor);
     border-bottom: 1px solid var(--boxColor);
     padding: 3px 10px;
     font-weight: bold;
 }
-.ppotential > h5 > label > a {
-    opacity: 0;
-}
-.ppotential:hover > h5 > label > a {
-    opacity: 1;
-}
-.ppotential > div > button {
+.ppotential .abfDivFormat > div > button {
     width: 100%;
     height: 25px;
     border: 0px;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-radius: 0 0 8px 8px;
 }
 /* #endregion */
 
-/* #region @Projection */
-.pproj > *:nth-child(2) {
-    margin: -7px 0 0 0;
-}
-.pproj > label,
-.pproj > div > label {
+/* #region @Projection @V2 */
+.pproj .abfDivFormat > label,
+.pproj .abfDivFormat > div > label {
     display: flex;
     padding: 0 10px;
 }
-.pproj > label > span,
-.pproj > div > label > span {
+.pproj .abfDivFormat > label > span,
+.pproj .abfDivFormat > div > label > span {
     width: 60%;
     text-align: start;
 }
-.pproj > label > input,
-.pproj > div > label > input {
+.pproj .abfDivFormat > label > input,
+.pproj .abfDivFormat > div > label > input {
     width: 40%;
 }
-.pproj > label:nth-of-type(2) {
-    border-top: 1px solid var(--boxColor);
+.pproj .abfDivFormat > div > label:nth-of-type(3) > input {
+    width: 18%;
+}
+.pproj .abfDivFormat > div > label:nth-of-type(3) > input:first-of-type {
+    margin: 0 4% 0 0;
+}
+.pproj .abfDivFormat > label:nth-of-type(1) {
     border-bottom: 1px solid var(--boxColor);
-    padding: 3px 10px;
+    padding: 0 10px 3px 10px;
     font-weight: bold;
 }
-.pproj > h5 > label > a {
-    opacity: 0;
-}
-.pproj:hover > h5 > label > a {
-    opacity: 1;
-}
-.pproj > div > button {
-    width: 100%;
-    height: 25px;
-    border: 0px;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-.pmodButton {
+.pproj .abfDivFormat .pmodButton {
    display: flex;
 }
-.pmodButton > button {
+.pproj .abfDivFormat .pmodButton > button {
     width: 50%;
+    border-radius: 0 0 0 8px;
 }
-.pmodButton > button:first-of-type {
+.pproj .abfDivFormat .pmodButton > button:nth-of-type(2) {
+    width: 50%;
+    border-radius: 0 0 8px 0;
+}
+.pproj .abfDivFormat .pmodButton > button:first-of-type {
     border-right: 1px solid black;
 }
 /* #endregion */
 
-/* #region @Disciplines */
-.discipline-item:nth-child(2n) {
+/* #region @Disciplines @V2 */
+.pdisc .discipline-item:nth-child(2n) {
     background: var(--itemOffSet);
 }
-.discipline-item > div > span {
+.pdisc .discipline-item .abfDivFormat > span {
     text-align: center;
+    display: block;
+    height: 20px;
 }
 .pdisc > div:last-of-type {
     display: flex;
@@ -3286,6 +3312,10 @@ h6 {
 }
 /* #endregion */
 
+
+.s4 > div {
+    width: 48%;
+}
 /* #region @Psychic-Patterns */
 .mentalPattern-item {
     padding: 0 2.5%;
@@ -5494,6 +5524,9 @@ h6 {
 /* #endregion */
 
 /* #region @Extended-Settings @v2 */
+.extendedSettingsContainerField {
+    width: 100%;
+}
 .extendedSettingsContainer {
     display: flex;
 }

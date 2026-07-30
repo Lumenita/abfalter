@@ -430,6 +430,22 @@
                 </fieldset><!--Resistances-->
             </div>
 
+            {{#if system.isMass.isMass}}
+            <div class="fieldSetRow">
+                <fieldset>
+                    <legend>Mass Enemies</legend>
+                    <label>
+                        <span> {{localize "abfalter.base"}} </span> 
+                        <input type="number" name="system.isMass.value" value="{{system.isMass.value}}" readonly/>
+                    </label>
+                    <label>
+                        <span> {{localize "abfalter.max"}} </span> 
+                        <input type="number" name="system.isMass.max" value="{{system.isMass.max}}" />
+                    </label>
+                </fieldset>
+            </div>
+            {{/if}}
+
             <div class="fieldSetRow fieldSetNarrowGap">
                 <fieldset class="movement">
                     <legend>

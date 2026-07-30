@@ -1,0 +1,17 @@
+{{> "systems/abfalter/templates/dialogues/partials/customChatHeader.hbs"}}
+
+<div class="baseAbfalterV2 defaultRollMsg">
+    <div></div>
+    {{> "systems/abfalter/templates/dialogues/partials/customDefaultRoll.hbs"}}
+
+    {{#each rollData as |roll i|}}
+    <label class="explodeButtons">
+        {{#if roll.explode}}
+        <button class="potentialContinuationRoll" data-roll-type="open"> {{localize "abfalter.dialogs.openRoll"}} </button>
+        {{/if}}
+        {{#if roll.fumble}}
+        <button class="potentialContinuationRoll" data-roll-type="fumble"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
+        {{/if}}
+    </label>
+    {{/each}}
+</div>

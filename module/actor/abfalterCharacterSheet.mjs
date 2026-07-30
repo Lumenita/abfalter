@@ -392,7 +392,11 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             {
                 label: game.i18n.localize("abfalter.edit"),
                 icon: '<i class="fas fa-edit"></i>',
-                callback: element => {
+                visible: (element) => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    return item?.type != "discipline";
+                },
+                onClick: async (event, element) => {
                     const item = this.actor.items.get(element.dataset.itemId);
                     item.sheet.render(true);
                 }
@@ -400,7 +404,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             {
                 label: game.i18n.localize("abfalter.duplicate"),
                 icon: '<i class="fas fa-copy"></i>',
-                callback: element => {
+                onClick: async (event, element) => {
                     const item = this.actor.items.get(element.dataset.itemId);
                     const createData = item.toObject();
                     delete createData._id;
@@ -411,31 +415,30 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             {
                 label: game.i18n.localize("abfalter.delete"),
                 icon: '<i class="fas fa-trash"></i>',
-                callback: element => {
-                    new Dialog({
-                        title: "Remove Item",
-                        content: game.i18n.localize('abfalter.confirmRemPrompt'),
-                        buttons: {
-                            yes: {
-                                label: game.i18n.localize('abfalter.yes'),
-                                callback: () => {
-                                    this.actor.deleteEmbeddedDocuments("Item", [element.dataset.itemId]);
-                                }
-                            },
-                            no: {
-                                label: game.i18n.localize('abfalter.no')
-                            }
-                        },
-                    }).render(true);
+                onClick: async (event, element) => {
+                    const confirmed = await genericDialogs.confirm(
+                        game.i18n.localize("abfalter.removeItem"),
+                        game.i18n.localize("abfalter.confirmRemPrompt")
+                    );
+
+                    if (!confirmed) return;
+
+                    await this.actor.deleteEmbeddedDocuments("Item", [
+                        element.dataset.itemId
+                    ]);
                 }
             },
             {
                 label: game.i18n.localize("abfalter.displayChat"),
                 icon: '<i class="fa-solid fa-message"></i>',
-                visible: element => {
-                    return element.dataset.canChat !== "false";
+                visible: (element) => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    const x = 
+                            item?.type != "discipline" &&
+                            item?.type != "currency";
+                    return x;
                 },
-                callback: element => {
+                onClick: async (event, element) => {
                     const item = this.actor.items.get(element.dataset.itemId);
                     item.roll();
                 }
@@ -447,7 +450,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                     const item = this.actor.items.get(element.dataset.itemId);
                     return ("equipped" in item.system);
                 },
-                callback: element => {
+                onClick: async (event, element) => {
                     const item = this.actor.items.get(element.dataset.itemId);
                     element.equipped = !item.system.equipped;
                     item.update({ "system.equipped": element.equipped });
@@ -456,12 +459,12 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             {
                 label: game.i18n.localize("abfalter.toggleActivate"),
                 icon: '<i class="fas fa-caret-right"></i>',
-                visible: (el) => {
-                    const item = this.actor.items.get(el.dataset.itemId);
-                    return el.dataset.canEquip !== "false" && item?.type === "kiTechnique";
+                visible: (element) => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    return element.dataset.canEquip !== "false" && item?.type === "kiTechnique";
                 },
-                callback: (el) => {
-                    const item = this.actor.items.get(el.dataset.itemId);
+                onClick: async (event, element) => {
+                    const item = this.actor.items.get(element.dataset.itemId);
                     if (!item) return;
                     item.update({ "system.active": !item.system?.active });
                 }
@@ -473,7 +476,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                     const item = this.actor.items.get(element.dataset.itemId);
                     return ("toggleItem" in item.system);
                 },
-                callback: element => {
+                onClick: async (event, element) => {
                     const item = this.actor.items.get(element.dataset.itemId);
                     element.toggleItem = !item.system.toggleItem;
                     item.update({ "system.toggleItem": element.toggleItem });
@@ -486,7 +489,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                     const item = this.actor.items.get(element.dataset.itemId);
                     return ("expand" in item.system);
                 },
-                callback: element => {
+                onClick: async (event, element) => {
                     const item = this.actor.items.get(element.dataset.itemId);
                     element.expand = !item.system.expand;
                     item.update({ "system.expand": element.expand });
@@ -600,6 +603,12 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             case "resistance":
                 diceFunctions.resistanceDialogue({actor: this.actor, chaLabel: dataset.type, value: dataset.value});
                 break;
+            case "castMatrix":
+                diceFunctions.handlePsychicMatrices({actor: this.actor, mode: "matrix"});
+                break;
+            case "psychicPotential":
+                diceFunctions.handlePsychicMatrices({actor: this.actor, mode: "generic"});
+                break;
             case "unarmedBlock":
             case "unarmedDodge":
             case "defMagicProj":
@@ -616,10 +625,12 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             case "weaponAttack":
                 diceFunctions.offensiveDialogue({actor: this.actor, offLabel: dataset.label, value: dataset.value, weaponId: dataset.id});
                 break;
+
+
+
             case "offPsyProj":
                 diceFunctions.psychicOffensiveDialogue({actor: this.actor, offLabel: dataset.label, baseValue: dataset.value});
                 break;
-
             case 'weaponTrap':
                 diceFunctions.openMeleeTrapDialogue(this.actor, dataset.value, dataset.id);
                 break;

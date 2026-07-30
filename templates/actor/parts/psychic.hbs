@@ -1,112 +1,121 @@
-﻿<section class="tab {{tabs.psychic.cssClass}} actorPage baseAbfalter" data-group="{{tabs.psychic.group}}" data-tab="{{tabs.psychic.id}}">
-    <div class="fieldsetContainer psychic">
-        <div class="fieldSetRow s3">        
+﻿<section class="tab {{tabs.psychic.cssClass}} actorPage baseAbfalterV2" data-group="{{tabs.psychic.group}}" data-tab="{{tabs.psychic.id}}">
+    <div class="fieldSetColumnV2">
+        <div class="fieldsetContainerRowV2">        
             <fieldset class="ppoint">
                 <legend>
                     {{localize "abfalter.pp"}}
-                    <label class="expand-box"> 
-                        <a data-action="toggleValue" class="{{#if system.ppoint.status}}showOpacity{{/if}}" data-label="system.ppoint.status" data-ability="{{system.ppoint.status}}"><i class="{{#if system.ppoint.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                    </label>
+                    <a data-action="toggleValue" class="{{#if system.ppoint.status}}showOpacity{{/if}}" data-label="system.ppoint.status" data-ability="{{system.ppoint.status}}"><i class="{{#if system.ppoint.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </legend>
-                {{#if system.ppoint.status}}
-                <div>
-                    <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.ppoint.base" value="{{system.ppoint.base}}" /> </label>
-                    <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.ppoint.spec" value="{{system.ppoint.spec}}" /> </label>
-                    <label> <span> {{localize "abfalter.class"}} </span> <input type="number" name="system.ppoint.class" value="{{system.ppoint.class}}" readonly /> </label>
+                <div class="abfDivFormat">
+                    {{#if system.ppoint.status}}
+                    <div>
+                        <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.ppoint.base" value="{{system.ppoint.base}}" /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.ppoint.spec" value="{{system.ppoint.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.extra"}} </span> <input type="number" name="system.ppoint.extra" value="{{system.ppoint.extra}}" /> </label>
+                        <label> <span> {{localize "abfalter.class"}} </span> <input type="number" name="system.ppoint.class" value="{{system.ppoint.class}}" readonly /> </label>
+                    </div>
+                    {{/if}}
+                    <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.ppoint.final" value="{{system.ppoint.final}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.freeppMax"}} </span> <input type="number" name="system.psychicPoint.max" value="{{system.psychicPoint.max}}" readonly /> </label>
+                    <label> <span> {{localize "abfalter.freepp"}} </span> <input type="number" name="system.psychicPoint.value" value="{{system.psychicPoint.value}}" /> </label>
+                    
+                    <div>
+                        <button type="button" data-action="abfRollButton" data-label="castMatrix">
+                            <span> {{localize "abfalter.castMatrix"}} </span>
+                        </button>
+                    </div>
                 </div>
-                {{/if}}
-                <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.ppoint.final" value="{{system.ppoint.final}}" readonly /> </label>
-                <label> <span> {{localize "abfalter.freeppMax"}} </span> <input type="number" name="system.psychicPoint.max" value="{{system.psychicPoint.max}}" readonly /> </label>
-                <label> <span> {{localize "abfalter.freepp"}} </span> <input type="number" name="system.psychicPoint.value" value="{{system.psychicPoint.value}}" /> </label>
             </fieldset>
 
             <fieldset class="ppotential">
                 <legend>
                     {{localize "abfalter.ppotential"}}
-                    <label class="expand-box">
-                        <a data-action="toggleValue" class="{{#if system.ppotential.status}}showOpacity{{/if}}" data-label="system.ppotential.status" data-ability="{{system.ppotential.status}}"><i class="{{#if system.ppotential.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                    </label>
+                    <a data-action="toggleValue" class="{{#if system.ppotential.status}}showOpacity{{/if}}" data-label="system.ppotential.status" data-ability="{{system.ppotential.status}}"><i class="{{#if system.ppotential.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </legend>
-                {{#if system.ppotential.status}}
-                <div>
-                    <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.ppotential.base" value="{{system.ppotential.base}}" /> </label>
-                    <label> <span> {{localize "abfalter.fromWP"}} </span> <input type="number" name="system.ppotential.wpBase" value="{{system.ppotential.wpBase}}" readonly/> </label>
-                    <div class="csSelect1">
-                        <label>
-                            <span> {{localize "abfalter.spent"}} </span>
-                            <select name="system.ppotential.spent">
-                                {{selectOptions ppotentialObjList selected=system.ppotential.spent localize=true}}
-                            </select>
-
-                        </label>
+                <div class="abfDivFormat">
+                    {{#if system.ppotential.status}}
+                    <div>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.ppotential.spec" value="{{system.ppotential.spec}}" /> </label>
+                        <label> <span> {{localize "abfalter.extra"}} </span> <input type="number" name="system.ppotential.base" value="{{system.ppotential.base}}" /> </label>
+                        <label> <span> {{localize "abfalter.fromWP"}} </span> <input type="number" name="system.ppotential.wpBase" value="{{system.ppotential.wpBase}}" readonly/> </label>
+                        <div class="csSelect1">
+                            <label>
+                                <span> {{localize "abfalter.spent"}} </span>
+                                <select name="system.ppotential.spent">
+                                    {{selectOptions ppotentialObjList selected=system.ppotential.spent localize=true}}
+                                </select>
+                            </label>
+                        </div>
                     </div>
-                    <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.ppotential.spec" value="{{system.ppotential.spec}}" /> </label>
-                </div>
-                {{/if}}
-                <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.ppotential.temp" value="{{system.ppotential.temp}}" /> </label>
-                <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.ppotential.final" value="{{system.ppotential.final}}" readonly/> </label>
-                <div>
-                    <button type="button" data-action="plainRoll" data-roll="{{system.ppotential.final}}" data-label="psychicPotential" data-type="potentialRoll">
-                        <span> <i class="fas fa-dice-d20"></i> </span>
-                    </button>
+                    {{/if}}
+                    <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.ppotential.temp" value="{{system.ppotential.temp}}" /> </label>
+                    <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.ppotential.final" value="{{system.ppotential.final}}" readonly/> </label>
+                    <div>
+                        <button type="button" data-action="abfRollButton" data-label="psychicPotential">
+                            <span> <i class="fas fa-dice-d20"></i> </span>
+                        </button>
+                    </div>
                 </div>
             </fieldset>
 
             <fieldset class="pproj">
                 <legend>
                     {{localize "abfalter.pproj"}}
-                    <label class="expand-box">
-                        <a data-action="toggleValue" class="{{#if system.pproj.status}}showOpacity{{/if}}" data-label="system.pproj.status" data-ability="{{system.pproj.status}}"><i class="{{#if system.pproj.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
-                    </label>
+                    <a data-action="toggleValue" class="{{#if system.pproj.status}}showOpacity{{/if}}" data-label="system.pproj.status" data-ability="{{system.pproj.status}}"><i class="{{#if system.pproj.status}}fas fa-caret-up{{else}}fas fa-caret-down{{/if}}"></i></a>
                 </legend>
-                {{#if system.pproj.status}}
-                <div>
-                    <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.pproj.base" value="{{system.pproj.base}}" /> </label>
-                    <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.pproj.spec" value="{{system.pproj.spec}}" /> </label>
-                </div>
-                {{/if}}
-                <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.pproj.temp" value="{{system.pproj.temp}}" /> </label>
-                <label> <span> {{localize "abfalter.final"}} </span> <input type="number" name="system.pproj.final" value="{{system.pproj.final}}" readonly /> </label>
-                {{#if system.toggles.psychicModuleStatus}}
-                <div class="pmodButton">
-                    <!--<button type="button" data-action="abfRollButton" data-label="offPsyProj" data-value="{{system.pproj.atkModule}}">
-                        <span> {{localize "abfalter.attack"}}: {{system.pproj.atkModule}} </span>
-                    </button>-->
-                    <button type="button" data-action="plainRoll" data-roll="{{system.pproj.atkModule}}" data-label="offPsyProj" data-type="combatRoll">
-                        <span> {{localize "abfalter.attack"}} </span> <span> {{system.pproj.atkModule}} </span>
-                    </button>
-                    {{#if system.toggles.psychicDodgeStatus}}
-                    <button type="button" data-action="abfRollButton" data-label="defPsyProj" data-value="{{system.pproj.dodModule}}">
-                        <span> {{localize "abfalter.dodge"}}: {{system.pproj.dodModule}} </span>
-                    </button>
+                <div class="abfDivFormat">
+                    {{#if system.pproj.status}}
+                    <div>
+                        <label> <span> {{localize "abfalter.base"}} </span> <input type="number" name="system.pproj.base" value="{{system.pproj.base}}" /> </label>
+                        <label> <span> {{localize "abfalter.spec"}} </span> <input type="number" name="system.pproj.spec" value="{{system.pproj.spec}}" /> </label>
+                        <label> 
+                            <span> {{localize "abfalter.extra"}} </span>
+                            <input type="number" name="system.pproj.extraOff" value="{{system.pproj.extraOff}}" />
+                            <input type="number" name="system.pproj.extraDef" value="{{system.pproj.extraDef}}" /> 
+                        </label>
+                    </div>
+                    {{/if}}
+                    <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.pproj.temp" value="{{system.pproj.temp}}" /> </label>
+                    {{#if system.toggles.psychicModuleStatus}}
+                    <div class="pmodButton">
+                        <!--<button type="button" data-action="abfRollButton" data-label="offPsyProj" data-value="{{system.pproj.atkModule}}">
+                            <span> {{localize "abfalter.attack"}}: {{system.pproj.atkModule}} </span>
+                        </button>-->
+                        <button type="button" data-action="plainRoll" data-roll="{{system.pproj.atkModule}}" data-label="offPsyProj" data-type="combatRoll">
+                            <span> {{localize "abfalter.attack"}} </span> <span> {{system.pproj.atkModule}} </span>
+                        </button>
+                        {{#if system.toggles.psychicDodgeStatus}}
+                        <button type="button" data-action="abfRollButton" data-label="defPsyProj" data-value="{{system.pproj.dodModule}}">
+                            <span> {{localize "abfalter.dodge"}}: {{system.pproj.dodModule}} </span>
+                        </button>
+                        {{else}}
+                        <button type="button" data-action="abfRollButton" data-label="defPsyProj" data-value="{{system.pproj.defModule}}">
+                            <span> {{localize "abfalter.block"}}: {{system.pproj.defModule}} </span>
+                        </button>
+                        {{/if}}
+                    </div>
                     {{else}}
-                    <button type="button" data-action="abfRollButton" data-label="defPsyProj" data-value="{{system.pproj.defModule}}">
-                        <span> {{localize "abfalter.block"}}: {{system.pproj.defModule}} </span>
-                    </button>
+                    <div class="pmodButton">
+                        <!--<button type="button" data-action="abfRollButton" data-label="offPsyProj" data-value="{{system.pproj.finalOff}}">
+                            <span> <i class="fas fa-dice-d20"></i> </span>
+                        </button>-->
+                        <button type="button" data-action="plainRoll" data-roll="{{system.pproj.finalOff}}" data-label="offPsyProj" data-type="combatRoll">
+                            <span> {{localize "abfalter.offensive"}} </span> <span> {{system.pproj.finalOff}} </span>
+                        </button>
+                        <button type="button" data-action="abfRollButton" data-label="defPsyProj" data-value="{{system.pproj.finalDef}}">
+                            <span> {{localize "abfalter.defensive"}} </span> <span> {{system.pproj.finalDef}} </span>
+                        </button>
+                    </div>
                     {{/if}}
                 </div>
-                {{else}}
-                <div class="pmodButton">
-                    <!--<button type="button" data-action="abfRollButton" data-label="offPsyProj" data-value="{{system.pproj.final}}">
-                        <span> <i class="fas fa-dice-d20"></i> </span>
-                    </button>-->
-                    <button type="button" data-action="plainRoll" data-roll="{{system.pproj.final}}" data-label="offPsyProj" data-type="combatRoll">
-                        <span> {{localize "abfalter.offensive"}} </span> <span> {{system.pproj.final}} </span>
-                    </button>
-                    <button type="button" data-action="abfRollButton" data-label="defPsyProj" data-value="{{system.pproj.final}}">
-                        <span> {{localize "abfalter.defensive"}} </span> <span> {{system.pproj.final}} </span>
-                    </button>
-                </div>
-                {{/if}}
             </fieldset>
 
             <fieldset class="pdisc">
                 <legend> {{localize "abfalter.pdisc"}} </legend>
                 <div>
                     {{#each disciplines as |discipline|}}
-                    <div class="discipline-item item normal-item {{#if ../system.itemToggle.discipline}}draggable{{/if}}" data-item-id={{id}}
-                    data-can-edit="false" data-can-delete="true" data-can-equip="false" data-can-toggle="true">
-                        <div>
+                    <div class="discipline-item item normal-itemV2 {{#if ../system.itemToggle.discipline}}draggable{{/if}}" data-item-id={{id}}>
+                        <div class="abfDivFormat">
                             {{#if system.toggleItem}}
                             <span> {{discipline.name}} </span>
                             {{else}}
@@ -116,7 +125,7 @@
                     </div>
                     {{/each}}
                 </div>
-                <div class="itemControls">
+                <div class="itemControlsV2">
                     <a class="item-control" data-action="createItem" data-type="discipline"><i class="fas fa-plus"></i> {{localize "abfalter.paddDisc"}} </a>
                     <a data-action="toggleValue" class="{{#if system.itemToggle.discipline}}armorpenalty{{/if}}" data-label="system.itemToggle.discipline" data-ability="{{system.itemToggle.discipline}}"><i class="{{#if system.itemToggle.discipline}}fa-solid fa-bars-staggered{{else}}fa-solid fa-bars{{/if}}"></i> {{localize "abfalter.modify"}} </a>
                 </div>

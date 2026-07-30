@@ -26,6 +26,8 @@ export function addChatListeners(chatMessage, html) {
     // Resolve Combat
     bindChange('.resolveDmgOption input[type="radio"]', diceFunctions.updateResolveDamagePreview);
     bindButton("button.applyDamageToActors", diceFunctions.resolveApplyDamageToActors);
+    // Potential
+    bindButton("button.potentialContinuationRoll", diceFunctions.potentialContinuationRollFunction);
     // Other
     bindButton("button.secOpenRoll", diceFunctions.plainOpenRollFunction);
     bindButton("button.secFumbleRoll", diceFunctions.plainFumbleRollFunction);

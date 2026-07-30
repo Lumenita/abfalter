@@ -1197,7 +1197,6 @@ abfalter.damageModDropdown = {
 }
 
 abfalter.damageTypeDropdown = {
-    NONE: "abfalter.na",
     CUT: "abfalter.cut",
     IMP: "abfalter.imp",
     THR: "abfalter.thr",

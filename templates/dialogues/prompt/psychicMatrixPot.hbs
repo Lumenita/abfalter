@@ -1,0 +1,82 @@
+<form>
+    <body>
+        <div class="abfDivFormat potentialPrompt">
+            {{#if isMatrixRoll}}
+            <div class="psychicPotentialAllocation">
+                <div class="potentialSummary">
+                    <span>
+                        {{localize "abfalter.maxPotential"}}:
+                        <strong id="maximumPotential">
+                            {{maximumPotential}}
+                        </strong>
+                    </span>
+                    <span>
+                        {{localize "abfalter.remainingPotential"}}:
+                        <strong id="remainingPotential">
+                            {{remainingPotential}}
+                        </strong>
+                    </span>
+                </div>
+                <div class="potentialUsing">
+                    <span>
+                        {{localize "abfalter.using"}}
+                    </span>
+                </div>
+                <div class="potentialAdjustmentButtons">
+                    <button type="button" data-potential-set="min"> {{localize "abfalter.min"}} </button>
+                    <button type="button" data-potential-change="-100"> -100 </button>
+                    <button type="button" data-potential-change="-10"> -10 </button>
+                    <button type="button" data-potential-change="-5"> -5 </button>
+                    <input id="potentialUsed" type="number" value="{{remainingPotential}}" readonly>
+                    <button type="button" data-potential-change="5"> +5 </button>
+                    <button type="button" data-potential-change="10"> +10 </button>
+                    <button type="button" data-potential-change="100"> +100 </button>
+                    <button type="button" data-potential-set="max"> {{localize "abfalter.max"}} </button>
+                </div>
+            </div>
+
+            <label>
+                <span>{{localize "abfalter.category"}}</span>
+                <select id="psychicMatrixCategory" name="category">
+                    {{#each categories}}
+                        <option value="{{value}}">
+                            {{label}}
+                        </option>
+                    {{/each}}
+                </select>
+            </label>
+
+            <label>
+                <span>{{localize "abfalter.psychicMatrix"}}</span>
+                <select id="psychicMatrixSelection" name="psychicMatrix">
+                    {{#each matrices}}
+                        <option value="{{id}}">
+                            {{name}}
+                        </option>
+                    {{/each}}
+                </select>
+            </label>
+
+            <label>
+                <span>{{localize "abfalter.bonusPotentialMatrix"}} </span>
+                <input type="number" id="bonusPotMatrix" value="0" readonly /> 
+            </label>
+            {{/if}}
+
+            <label>
+                <span>{{localize "abfalter.activeActionMod"}} </span>
+                <select id="modifierSelect" name="modifierSelect"></select>
+            </label>
+
+            <label>
+                <span>{{localize "abfalter.pp"}}</span>
+                <select id="ppDropdown"></select>
+            </label>
+
+            <label> 
+                <span> {{localize "abfalter.dialogs.modifier"}} </span>
+                <input type="number" id="modifierMod" value="0" /> 
+            </label>
+        </div>
+    </body>
+</form>

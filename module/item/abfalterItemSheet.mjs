@@ -235,6 +235,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                         { async: true }
                     );
                 };
+                context.atTypeObjList = CONFIG.abfalter.damageTypeDropdown;
                 context.psyTypeObjList = CONFIG.abfalter.psyTypeDropdown;
                 context.actionObjList = CONFIG.abfalter.ActionDropdown;
                 context.yesnoObjList = CONFIG.abfalter.yesnoDropdown;
@@ -243,6 +244,9 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                     2: "2",
                     3: "3"
                 };
+                context.ppInvestedObjList = Object.fromEntries(
+                    Array.from({ length: 11 }, (_, i) => [i, String(i)])
+                );
                 break;
             }
             case "kiAbility": {
@@ -287,7 +291,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 context.vorpalAtkList = CONFIG.abfalter.vorpalAtkDropdown;
 
                 const stripNone = (obj) => Object.fromEntries(Object.entries(obj).filter(([key]) => key !== "NONE"));
-                context.profileDamageTypeObjList = stripNone(CONFIG.abfalter.damageTypeDropdown);
+                context.profileDamageTypeObjList = CONFIG.abfalter.damageTypeDropdown;
                 context.profileDamageTypeSpiritObjList = stripNone(CONFIG.abfalter.damageTypeSpiritDropdown);
                 break;
             }

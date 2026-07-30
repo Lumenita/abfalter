@@ -1,0 +1,88 @@
+{{> "systems/abfalter/templates/dialogues/partials/customChatHeader.hbs"}}
+
+<div class="baseAbfalterV2 defaultRollMsg itemChat">
+    <div class="chatItemContent">
+        <div class="chatItemHeader">
+            <img src="{{matrixDetails.img}}"/>
+            <div>
+                <span> {{matrixDetails.name}} </span>
+                <div> {{matrixDetails.tag}} </div>
+            </div>
+            <a class="descToggle" data-value="{{descToggle}}">
+                <i class="fas fa-chevron-right fa-fw"></i>
+            </a>
+        </div>
+
+        <div class="itemDescription {{#if descToggle}}ItemDescOpen{{/if}}">
+            {{{matrixDetails.desc}}}
+        </div>
+    </div>
+
+    {{> "systems/abfalter/templates/dialogues/partials/customDefaultRoll.hbs"}}
+
+    {{#each rollData as |roll i|}}
+    <label class="explodeButtons">
+        {{#if roll.explode}}
+        <button class="potentialContinuationRoll" data-roll-type="open"> {{localize "abfalter.dialogs.openRoll"}} </button>
+        {{/if}}
+        {{#if roll.fumble}}
+        <button class="potentialContinuationRoll" data-roll-type="fumble"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
+        {{/if}}
+    </label>
+    {{/each}}
+
+    {{#if matrixDetails.resolved}}
+    {{#if matrixResolution.failed}}
+        <div class="matrixFailure">
+            <span>Failed</span>
+
+            <div>
+                Fatigue: {{matrixResolution.fatigue}}
+            </div>
+        </div>
+    {{else}}
+        <div class="matrixEffectChoices">
+        {{#each matrixResolution.availableEffects as |effect|}}
+        <div class="chatCustomRoll chatCustomTitleContainer">
+            <button
+                type="button"
+                class="selectMatrixEffect"
+                data-effect-key="{{effect.key}}"
+            >
+                {{effect.title}} ({{effect.titleNum}})
+            </button>
+
+            <div class="chatCustomTitle">
+                {{{effect.description}}}
+            </div>
+        </div>
+        {{/each}}
+        </div>
+    {{/if}}
+    {{/if}}
+
+<!--
+    {{#if expand}}
+    <div>
+        <h6> {{localize "abfalter.rolledPot"}} </h6>
+    </div>
+    <div class="psychicChatButtons">
+        <button class="psychicDifficulty" data-label="20"> 20 </button>
+        <button class="psychicDifficulty" data-label="40"> 40 </button>
+        <button class="psychicDifficulty" data-label="80"> 80 </button>
+        <button class="psychicDifficulty" data-label="120"> 120 </button>
+        <button class="psychicDifficulty" data-label="140"> 140 </button>
+        <button class="psychicDifficulty" data-label="180"> 180 </button>
+        <button class="psychicDifficulty" data-label="240"> 240 </button>
+        <button class="psychicDifficulty" data-label="280"> 280 </button>
+        <button class="psychicDifficulty" data-label="320"> 320 </button>
+        <button class="psychicDifficulty" data-label="440"> 440 </button>
+    </div>
+    {{else}}
+    <div>
+        <h6> {{localize "abfalter.achDiff"}} - {{diff}}</h6>
+        <span> {{localize "abfalter.effect"}}: {{effect}} </span>
+    </div>
+    {{/if}}
+    -->
+</div>

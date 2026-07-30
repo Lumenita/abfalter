@@ -1,5 +1,6 @@
 import { abfalter } from "./config.js";
 import { abfalterSettingsKeys } from "./utilities/abfalterSettings.js";
+//import * as combat from "./combat.js";
 
 const diceDialogV2 = class extends foundry.applications.api.DialogV2 {
     #onRenderCallback;
@@ -195,6 +196,172 @@ async function lumiOpenRoll(actor, bonus, previousRange, previousRoll, rollNum) 
     }
 
     return rollResult;
+}
+
+/** Performs the shared open-roll logic and creates the next rollData entry.
+ * @param {ChatMessage} msg
+ * @returns {Promise<{
+ *   actor: Actor,
+ *   num: number,
+ *   oldData: object,
+ *   rollData: object[],
+ *   rollResult: object
+ * }>}
+ */
+async function performOpenRoll(msg) {
+    const actor = game.actors.get(msg.speaker.actor);
+
+    if (!actor) {
+        throw new Error(`Could not find actor for open roll: ${msg.speaker.actor}`);
+    }
+
+    const flags = msg.flags?.abfalter;
+    const currentNum = flags?.num;
+    const currentRollData = flags?.rollData;
+
+    if (!Array.isArray(currentRollData)) { throw new Error("Open roll message does not contain valid rollData.");}
+    const oldData = currentRollData[currentNum];
+
+    if (!oldData) {
+        throw new Error(`Could not find rollData entry at index ${currentNum}.`);
+    }
+
+    const correctedOpenRoll = game.settings.get("abfalter",abfalterSettingsKeys.Corrected_OpenRoll);
+    const nextNum = currentNum + 1;
+    const rollResult = correctedOpenRoll
+        ? await coreOpenRoll(
+            actor,
+            oldData.total,
+            oldData.openRange,
+            nextNum
+        )
+        : await lumiOpenRoll(
+            actor,
+            oldData.total,
+            oldData.openRange,
+            oldData.roll,
+            nextNum
+        );
+
+    const rollData = foundry.utils.deepClone(currentRollData);
+
+    rollData[currentNum] = {
+        ...rollData[currentNum],
+        doubles: null,
+        openRange: null,
+        explode: false
+    };
+
+    rollData[nextNum] = {
+        roll: rollResult.rolledDice,
+        total: rollResult._total,
+        doubles: oldData.doubles,
+        openRange: rollResult.openRange,
+        label: `${game.i18n.localize("abfalter.openRoll")} #${nextNum}`,
+        explode: rollResult.explode,
+        formula:
+            `(${rollResult.rolledDice}) + ` +
+            `${oldData.total} (${game.i18n.localize("abfalter.prevRoll")})`,
+        color: rollResult.color
+    };
+
+    return {
+        actor,
+        num: nextNum,
+        oldData,
+        rollData,
+        rollResult
+    };
+}
+
+/**Performs the shared fumble-roll logic and creates the next rollData entry.
+ * @param {ChatMessage} msg
+ * @returns {Promise<{
+ *   actor: Actor,
+ *   num: number,
+ *   oldData: object,
+ *   rollData: object[],
+ *   rollResult: Roll,
+ *   fumbleSeverity: number
+ * }>}
+ */
+async function performFumbleRoll(msg) {
+    const actor = game.actors.get(msg.speaker.actor);
+
+    if (!actor) {
+        throw new Error(`Could not find actor for fumble roll: ${msg.speaker.actor}`);
+    }
+    const flags = msg.flags?.abfalter;
+    const currentNum = flags?.num;
+    const currentRollData = flags?.rollData;
+
+    if (!Array.isArray(currentRollData)) {
+        throw new Error("Fumble roll message does not contain valid rollData.");
+    }
+    const oldData = currentRollData[currentNum];
+    if (!oldData) {
+        throw new Error(`Could not find rollData entry at index ${currentNum}.`);
+    }
+
+    const correctedFumble = game.settings.get("abfalter", abfalterSettingsKeys.Corrected_Fumble);
+    const baseDice = "1d100";
+    const rollFormula = correctedFumble
+        ? `${oldData.total} - ${baseDice}`
+        : `${oldData.total} - ${baseDice} - ${oldData.fumbleLevel}`;
+    const rollResult = await new Roll(rollFormula).roll();
+
+    const rolledDice = rollResult.total - oldData.total + oldData.fumbleLevel;
+    const fumbleSeverity = oldData.fumbleLevel - rolledDice;
+    const previousRollLabel = game.i18n.localize("abfalter.prevRoll");
+    const rollLabel = game.i18n.localize("abfalter.roll");
+
+    const fumbleLevelLabel = game.i18n.localize("abfalter.fumbleLevel");
+    const formula = correctedFumble
+        ? `${oldData.total} (${previousRollLabel}) ` +
+          `+ ${rolledDice} (${rollLabel})`
+        : `${oldData.total} (${previousRollLabel}) ` +
+          `+ ${rolledDice} (${rollLabel}) ` +
+          `- ${oldData.fumbleLevel} (${fumbleLevelLabel})`;
+    const rollData = foundry.utils.deepClone(currentRollData);
+
+    /*
+     * The original roll has now been resolved, so remove all
+     * continuation flags from it.
+     */
+    rollData[currentNum] = {
+        ...rollData[currentNum],
+        doubles: null,
+        openRange: null,
+        explode: false,
+        fumble: false
+    };
+
+    const nextNum = currentNum + 1;
+
+    rollData[nextNum] = {
+        roll: rolledDice,
+        total: rollResult.total,
+        doubles: null,
+        openRange: null,
+        label: game.i18n.localize(
+            "abfalter.fumbleResult"
+        ),
+        explode: false,
+        formula,
+        color: "fumbleRoll",
+        showSeverity: true,
+        fumble: false,
+        fumbleS: fumbleSeverity
+    };
+
+    return {
+        actor,
+        num: nextNum,
+        oldData,
+        rollData,
+        rollResult,
+        fumbleSeverity
+    };
 }
 
 /** Handles unarmed and weapon attacks 
@@ -1228,74 +1395,44 @@ async function offensiveRoll({actor, weapon, attackDetails, workflow}) {
 
 export async function offenseOpenRollFunction(msg) {
     const template = "systems/abfalter/templates/dialogues/diceRolls/offensiveRoll.hbs";
-    let actor = game.actors.get(msg.speaker.actor);
-    let num = msg.flags.abfalter.num;
-    let oldData = msg.flags.abfalter.rollData[msg.flags.abfalter.num];
-    let openRollSetting = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_OpenRoll);
-    let rollResult;
-
-    if (!openRollSetting) {
-        //Lumis way of open rolls
-        rollResult = await lumiOpenRoll(actor, oldData.total, oldData.openRange, oldData.roll, num+1);
-    } else {
-        //Core rule for open rolls
-        rollResult = await coreOpenRoll(actor, oldData.total, oldData.openRange, num+1)
-    }
-    let formula = `(${rollResult.rolledDice}) + ${oldData.total}(${game.i18n.localize("abfalter.prevRoll")})`;
-
-    msg.flags.abfalter.rollData[num].doubles = null;
-    msg.flags.abfalter.rollData[num].openRange = null;
-    msg.flags.abfalter.rollData[num].explode = false;
-    num = num + 1;
-    msg.flags.abfalter.rollData[num] = {
-        roll: rollResult.rolledDice,
-        total: rollResult._total,
-        doubles: oldData.doubles,
-        openRange: rollResult.openRange,
-        label: `Open Roll #${num}`,
-        explode: rollResult.explode,
-        formula: formula,
-        color: rollResult.color
-    };
-
-    const rollData = msg.flags.abfalter.rollData;
-
-    // Workflow - Combat Data
-    const workflow = msg.flags.abfalter.workflow ?? {
-        selectedDefenderIds: [],
-        targetStates: {}
-    };
-
+    const { actor, num, rollData } = await performOpenRoll(msg);
+    const workflow = msg.flags.abfalter.workflow ?? { selectedDefenderIds: [], targetStates: {}};
     const targetList = workflow.selectedDefenderIds
         .map(tokenId => canvas.tokens?.get(tokenId))
         .filter(Boolean)
         .map(token => {
-            const actor = token.actor;
-            const isOwner = actor?.testUserPermission(game.user, "OWNER");
-            const isGM = game.user.isGM;
+            const targetActor = token.actor;
+            const isOwner = targetActor?.testUserPermission(game.user, "OWNER");
             return {
                 tokenId: token.id,
-                actorId: actor?.id ?? null,
+                actorId: targetActor?.id ?? null,
                 name: token.name,
-                img: token.document?.texture?.src ?? actor?.img ?? "",
-                canDefend: isGM || isOwner,
-                state: workflow.targetStates[token.id] ?? { status: "pending" }
+                img:
+                    token.document?.texture?.src ??
+                    targetActor?.img ??
+                    "",
+                canDefend: game.user.isGM || isOwner,
+                state:
+                    workflow.targetStates[token.id] ??
+                    { status: "pending" }
             };
         });
 
-    const defendLocked = isAttackRollPendingResolution(msg.flags.abfalter.rollData);
+    const defendLocked = isAttackRollPendingResolution(rollData);
 
-    const content = await foundry.applications.handlebars.renderTemplate(template, { 
-        basicInfo: msg.flags.abfalter.basicInfo,
-        rollData: rollData,
-        actor,
-        attackDetails: msg.flags.abfalter.attackDetails,
-        workflow,
-        targetList,
-        defendLocked,
-        atkSettings: msg.flags.abfalter.atkSettings
-    });
-    game.messages.get(msg._id).update({
+    const content =
+        await foundry.applications.handlebars.renderTemplate(template, {
+            basicInfo: msg.flags.abfalter.basicInfo,
+            rollData,
+            actor,
+            attackDetails: msg.flags.abfalter.attackDetails,
+            workflow,
+            targetList,
+            defendLocked,
+            atkSettings: msg.flags.abfalter.atkSettings
+        });
+
+    await msg.update({
         content,
         "flags.abfalter.rollData": rollData,
         "flags.abfalter.num": num
@@ -1304,48 +1441,10 @@ export async function offenseOpenRollFunction(msg) {
 
 export async function offenseFumbleRollFunction(msg) {
     const template = "systems/abfalter/templates/dialogues/diceRolls/offensiveRoll.hbs";
-    let fumbleSettings = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_Fumble);
-    let actor = game.actors.get(msg.speaker.actor);
-    let num = msg.flags.abfalter.num;
-    let oldData = msg.flags.abfalter.rollData[num];
-
-    let baseDice = "1d100";
-    let rollFormula = ``;
-
-    if (fumbleSettings == true) {
-        rollFormula = `${oldData.total} - ${baseDice}`;
-    } else {
-        rollFormula = `${oldData.total} - ${baseDice} - ${oldData.fumbleLevel}`;
-    };
-    let rollResult = await new Roll(rollFormula).roll();
-
-    rollResult.rolledDice = rollResult.total - oldData.total + oldData.fumbleLevel;
-    let fumbleS = oldData.fumbleLevel - rollResult.rolledDice;
-    let formula = ``;
-
-    if (fumbleSettings == true) {
-        formula = `${oldData.total}(${game.i18n.localize("abfalter.prevRoll")}) + ${rollResult.rolledDice}(${game.i18n.localize("abfalter.roll")})`;
-    } else {
-        formula = `${oldData.total}(${game.i18n.localize("abfalter.prevRoll")}) + ${rollResult.rolledDice}(${game.i18n.localize("abfalter.roll")}) - ${oldData.fumbleLevel}(${game.i18n.localize("abfalter.fumbleLevel")})`;
-    };
-
-    rollResult.color = "fumbleRoll";
-    msg.flags.abfalter.rollData[num].doubles = null;
-    msg.flags.abfalter.rollData[num].openRange = null;
-    msg.flags.abfalter.rollData[num].explode = false;
-    msg.flags.abfalter.rollData[num].fumble = false;
-    num = num + 1;
-    msg.flags.abfalter.rollData[num] = {
-        roll: rollResult.rolledDice, total: rollResult._total, doubles: null, openRange: null, label: `${game.i18n.localize("abfalter.fumbleResult")}`,
-        explode: false, formula: formula, color: rollResult.color, showSeverity: true, fumble: false, fumbleS: fumbleS
-    };
-    const rollData = msg.flags.abfalter.rollData;
+    const { actor, num, rollData } = await performFumbleRoll(msg);
 
     // Workflow - Combat Data
-    const workflow = msg.flags.abfalter.workflow ?? {
-        selectedDefenderIds: [],
-        targetStates: {}
-    };
+    const workflow = msg.flags.abfalter.workflow ?? {selectedDefenderIds: [], targetStates: {}};
 
     const targetList = workflow.selectedDefenderIds
         .map(tokenId => canvas.tokens?.get(tokenId))
@@ -1364,7 +1463,7 @@ export async function offenseFumbleRollFunction(msg) {
             };
         });
 
-    const defendLocked = isAttackRollPendingResolution(msg.flags.abfalter.rollData);
+    const defendLocked = isAttackRollPendingResolution(rollData);
 
     const content = await foundry.applications.handlebars.renderTemplate(template, { 
         basicInfo: msg.flags.abfalter.basicInfo,
@@ -1393,8 +1492,7 @@ function isAttackRollPendingResolution(rollData) {
     return Boolean(lastRoll?.explode || lastRoll?.fumble);
 }
 
-/**
- * Defensive rolls that are called from attack chat cards.
+/** Defensive rolls that are called from attack chat cards.
  * @param {String} atkDmgType - has atk dmg type
  * @param {String} atkMsgId - has atk msg id
  * @param {String} tokenId - has defender token id
@@ -1581,7 +1679,7 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
                 break;
 
             case "psychic":
-                defBaseValue = actor.system.pproj.final;
+                defBaseValue = actor.system.pproj.finalDef;
                 updateFinalValue(html, dialog);
                 break;
 
@@ -2041,111 +2139,41 @@ async function autoDefenseRoll({actor, tokenId, defenseDetails, atkMsgId}) {
 
 export async function autoDefOpenRollFunction(msg) {
     const template = "systems/abfalter/templates/dialogues/diceRolls/defensiveAutoRoll.hbs";
-    let actor = game.actors.get(msg.speaker.actor);
-    let num = msg.flags.abfalter.num;
-    let oldData = msg.flags.abfalter.rollData[msg.flags.abfalter.num];
-    let openRollSetting = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_OpenRoll);
-    let rollResult;
-
-    if (!openRollSetting) {
-        //Lumis way of open rolls
-        rollResult = await lumiOpenRoll(actor, oldData.total, oldData.openRange, oldData.roll, num+1);
-    } else {
-        //Core rule for open rolls
-        rollResult = await coreOpenRoll(actor, oldData.total, oldData.openRange, num+1)
-    }
-    let formula = `(${rollResult.rolledDice}) + ${oldData.total}(${game.i18n.localize("abfalter.prevRoll")})`;
-
-    msg.flags.abfalter.rollData[num].doubles = null;
-    msg.flags.abfalter.rollData[num].openRange = null;
-    msg.flags.abfalter.rollData[num].explode = false;
-    num = num + 1;
-    msg.flags.abfalter.rollData[num] = {
-        roll: rollResult.rolledDice,
-        total: rollResult._total,
-        doubles: oldData.doubles,
-        openRange: rollResult.openRange,
-        label: `Open Roll #${num}`,
-        explode: rollResult.explode,
-        formula: formula,
-        color: rollResult.color
-    };
-
-    const rollData = msg.flags.abfalter.rollData;
+    const { actor, num, rollData } = await performOpenRoll(msg);
     const isGM = game.user.isGM;
-    const needsContinuation = rollData?.[num].explode;
-    let status = "";
-    if (isGM) {
-        status = needsContinuation ? 'pending' : 'complete';
-    } else {
-        status = needsContinuation ? 'pending' : 'pendingGMAccept';
-    }
+    const needsContinuation = Boolean(rollData[num]?.explode);
+    const status = needsContinuation
+        ? "pending"
+        : isGM
+            ? "complete"
+            : "pendingGMAccept";
 
-    const content = await foundry.applications.handlebars.renderTemplate(template, { 
-        basicInfo: msg.flags.abfalter.basicInfo,
-        rollData: rollData,
-        actor,
-        defenseDetails: msg.flags.abfalter.defenseDetails,
-        defSettings: msg.flags.abfalter.defSettings,
-        status
-    });
+    const content =
+        await foundry.applications.handlebars.renderTemplate(template, {
+            basicInfo: msg.flags.abfalter.basicInfo,
+            rollData,
+            actor,
+            defenseDetails: msg.flags.abfalter.defenseDetails,
+            defSettings: msg.flags.abfalter.defSettings,
+            status
+        });
 
-    game.messages.get(msg._id).update({
+    await msg.update({
         content,
         "flags.abfalter.rollData": rollData,
         "flags.abfalter.num": num
     });
 
-    const updatedMsg = game.messages.get(msg._id);
-
-    if (!needsContinuation) {
-        if (isGM) {
-            await finalizeDefenseAgainstAttackMessage({
-                defenseMessageId: updatedMsg.id
-            });
-        }
+    if (!needsContinuation && isGM) {
+        await finalizeDefenseAgainstAttackMessage({
+            defenseMessageId: msg.id
+        });
     }
 }
 
 export async function autoDefFumbleRollFunction(msg) {
     const template = "systems/abfalter/templates/dialogues/diceRolls/defensiveAutoRoll.hbs";
-
-    let fumbleSettings = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_Fumble);
-    let actor = game.actors.get(msg.speaker.actor);
-    let num = msg.flags.abfalter.num;
-    let oldData = msg.flags.abfalter.rollData[num];
-
-    let baseDice = "1d100";
-    let rollFormula = ``;
-
-    if (fumbleSettings == true) {
-        rollFormula = `${oldData.total} - ${baseDice}`;
-    } else {
-        rollFormula = `${oldData.total} - ${baseDice} - ${oldData.fumbleLevel}`;
-    };
-    let rollResult = await new Roll(rollFormula).roll();
-
-    rollResult.rolledDice = rollResult.total - oldData.total + oldData.fumbleLevel;
-    let fumbleS = oldData.fumbleLevel - rollResult.rolledDice;
-    let formula = ``;
-
-    if (fumbleSettings == true) {
-        formula = `${oldData.total}(${game.i18n.localize("abfalter.prevRoll")}) + ${rollResult.rolledDice}(Roll)`;
-    } else {
-        formula = `${oldData.total}(${game.i18n.localize("abfalter.prevRoll")}) + ${rollResult.rolledDice}(Roll) - ${oldData.fumbleLevel}(Fumble Level)`;
-    };
-
-    rollResult.color = "fumbleRoll";
-    msg.flags.abfalter.rollData[num].doubles = null;
-    msg.flags.abfalter.rollData[num].openRange = null;
-    msg.flags.abfalter.rollData[num].explode = false;
-    msg.flags.abfalter.rollData[num].fumble = false;
-    num = num + 1;
-    msg.flags.abfalter.rollData[num] = {
-        roll: rollResult.rolledDice, total: rollResult._total, doubles: null, openRange: null, label: `Fumble Result`,
-        explode: false, formula: formula, color: rollResult.color, showSeverity: true, fumble: false, fumbleS: fumbleS
-    };
-    const rollData = msg.flags.abfalter.rollData;
+    const { actor, num, rollData } = await performFumbleRoll(msg);
 
     const isGM = game.user.isGM;
     const needsContinuation = rollData?.[num].explode;
@@ -2164,7 +2192,7 @@ export async function autoDefFumbleRollFunction(msg) {
         defSettings: msg.flags.abfalter.defSettings,
         status
     });
-    game.messages.get(msg._id).update({
+    await game.messages.get(msg._id).update({
         content,
         "flags.abfalter.rollData": rollData,
         "flags.abfalter.num": num
@@ -2503,8 +2531,7 @@ export async function resolveApplyDamageToActors(msg, html, ev) {
     });
 }
 
-/**
- * All Defensive Rolls from the Actor Sheet
+/** All Defensive Rolls from the Actor Sheet
  * @param {Actor} actor - actor document
  * @param {String} defLabel - string identifier
  * @param {Number} value - The passed based value of the defensive
@@ -2962,47 +2989,18 @@ async function defenseRoll({actor, defenseDetails}) {
 }
 
 export async function defensiveOpenRollFunction(msg) {
-    const template = "systems/abfalter/templates/dialogues/diceRolls/defensiveRoll.hbs"
-    let actor = game.actors.get(msg.speaker.actor);
-    let num = msg.flags.abfalter.num;
-    let oldData = msg.flags.abfalter.rollData[msg.flags.abfalter.num];
-    let openRollSetting = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_OpenRoll);
-    let rollResult;
+    const template = "systems/abfalter/templates/dialogues/diceRolls/defensiveRoll.hbs";
 
-    if (!openRollSetting) {
-        //Lumis way of open rolls
-        rollResult = await lumiOpenRoll(actor, oldData.total, oldData.openRange, oldData.roll, num+1);
-    } else {
-        //Core rule for open rolls
-        rollResult = await coreOpenRoll(actor, oldData.total, oldData.openRange, num+1)
-    }
-    let formula = `(${rollResult.rolledDice}) + ${oldData.total}(${game.i18n.localize("abfalter.prevRoll")})`;
+    const { actor, num, rollData } = await performOpenRoll(msg);
 
-    msg.flags.abfalter.rollData[num].doubles = null;
-    msg.flags.abfalter.rollData[num].openRange = null;
-    msg.flags.abfalter.rollData[num].explode = false;
-    num = num + 1;
-    msg.flags.abfalter.rollData[num] = {
-        roll: rollResult.rolledDice,
-        total: rollResult._total,
-        doubles: oldData.doubles,
-        openRange: rollResult.openRange,
-        label: `${game.i18n.localize("abfalter.openRoll")} #${num}`,
-        explode: rollResult.explode,
-        formula: formula,
-        color: rollResult.color
-    };
+    const content = await foundry.applications.handlebars.renderTemplate(template, {
+            basicInfo: msg.flags.abfalter.basicInfo,
+            rollData,
+            actor,
+            defenseDetails: msg.flags.abfalter.defenseDetails
+        });
 
-    const rollData = msg.flags.abfalter.rollData;
-
-    const content = await foundry.applications.handlebars.renderTemplate(template, { 
-        basicInfo: msg.flags.abfalter.basicInfo,
-        rollData: rollData,
-        actor,
-        defenseDetails: msg.flags.abfalter.defenseDetails
-    });
-
-    game.messages.get(msg._id).update({
+    await msg.update({
         content,
         "flags.abfalter.rollData": rollData,
         "flags.abfalter.num": num
@@ -3011,42 +3009,7 @@ export async function defensiveOpenRollFunction(msg) {
 
 export async function defensiveFumbleRollFunction(msg) {
     const template = "systems/abfalter/templates/dialogues/diceRolls/defensiveRoll.hbs"
-    let fumbleSettings = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_Fumble);
-    let actor = game.actors.get(msg.speaker.actor);
-    let num = msg.flags.abfalter.num;
-    let oldData = msg.flags.abfalter.rollData[num];
-
-    let baseDice = "1d100";
-    let rollFormula = ``;
-
-    if (fumbleSettings == true) {
-        rollFormula = `${oldData.total} - ${baseDice}`;
-    } else {
-        rollFormula = `${oldData.total} - ${baseDice} - ${oldData.fumbleLevel}`;
-    };
-    let rollResult = await new Roll(rollFormula).roll();
-
-    rollResult.rolledDice = rollResult.total - oldData.total + oldData.fumbleLevel;
-    let fumbleS = oldData.fumbleLevel - rollResult.rolledDice;
-    let formula = ``;
-
-    if (fumbleSettings == true) {
-        formula = `${oldData.total}(${game.i18n.localize("abfalter.prevRoll")}) + ${rollResult.rolledDice}(${game.i18n.localize("abfalter.roll")})`;
-    } else {
-        formula = `${oldData.total}(${game.i18n.localize("abfalter.prevRoll")}) + ${rollResult.rolledDice}(${game.i18n.localize("abfalter.prevRoll")}) - ${oldData.fumbleLevel}(${game.i18n.localize("abfalter.fumbleLevel")})`;
-    };
-
-    rollResult.color = "fumbleRoll";
-    msg.flags.abfalter.rollData[num].doubles = null;
-    msg.flags.abfalter.rollData[num].openRange = null;
-    msg.flags.abfalter.rollData[num].explode = false;
-    msg.flags.abfalter.rollData[num].fumble = false;
-    num = num + 1;
-    msg.flags.abfalter.rollData[num] = {
-        roll: rollResult.rolledDice, total: rollResult._total, doubles: null, openRange: null, label: `${game.i18n.localize("abfalter.fumbleResult")}`,
-        explode: false, formula: formula, color: rollResult.color, showSeverity: true, fumble: false, fumbleS: fumbleS
-    };
-    const rollData = msg.flags.abfalter.rollData;
+    const { actor, num, rollData } = await performFumbleRoll(msg);
 
     const content = await foundry.applications.handlebars.renderTemplate(template, { 
         basicInfo: msg.flags.abfalter.basicInfo,
@@ -3061,8 +3024,7 @@ export async function defensiveFumbleRollFunction(msg) {
     });
 }
 
-/**
- * All Characteristic Rolls 1d10
+/** All Characteristic Rolls 1d10
  * @param {Actor} actor - actor document
  * @param {String} chaLabel - Already localized Name of Action
  * @param {Number} value - The passed based value of the defensive
@@ -3264,8 +3226,7 @@ async function characteristicRoll({actor, rollDetails}) {
     ChatMessage.create(chatData);
 }
 
-/**
- * All Resistance Rolls
+/** All Resistance Rolls
  * @param {Actor} actor - actor document
  * @param {String} chaLabel - Already localized Name of Action
  * @param {Number} value - The passed based value of the resistance
@@ -3438,16 +3399,640 @@ async function resistanceRoll({actor, rollDetails}) {
 }
 
 
+/** Handles the Cast Matrix button for all psychic spells
+ * @param {Actor} actor - actor document 
+ */
+export async function handlePsychicMatrices({ actor, mode }) {
+    const isMatrixRoll = mode === "matrix";
+
+    const psychicMatrices = actor.items
+        .filter(item => item.type === "psychicMatrix")
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(item => ({
+            id: item.id,
+            name: item.name,
+            type: item.system.type ?? "",
+            finalPot: Number(item.system.finalPot) || 0
+    }));
+
+    if (isMatrixRoll && !psychicMatrices.length) {
+        ui.notifications.warn(`${actor.name} has no psychic matrices.`);
+        return;
+    }
+
+    const categories = [
+        {
+            value: "all",
+            label: game.i18n.localize("abfalter.all")
+        },
+        {
+            value: "basic",
+            label: game.i18n.localize("abfalter.basic")
+        },
+        {
+            value: "effect",
+            label: game.i18n.localize("abfalter.effect")
+        },
+        {
+            value: "attack",
+            label: game.i18n.localize("abfalter.attack")
+        },
+        {
+            value: "shield",
+            label: game.i18n.localize("abfalter.shield")
+        }
+    ];
+
+    const maximumPotential = Number(actor.system.ppotential?.final) || 0;
+    const combat = game.combat;
+    const remainingPotential = combat?.getRemainingPsychicPotential ? await combat.getRemainingPsychicPotential(actor) : maximumPotential;
+
+    const template = "systems/abfalter/templates/dialogues/prompt/psychicMatrixPot.hbs";
+    const htmlContent = await foundry.applications.handlebars.renderTemplate(template, {
+        categories,
+        matrices: psychicMatrices,
+        maximumPotential,
+        remainingPotential,
+        isMatrixRoll
+    });
+
+    let confirmed = false;
+    let selectedMatrixId = isMatrixRoll ? psychicMatrices[0]?.id ?? null : null;
+    let potentialSpent = isMatrixRoll ? remainingPotential >= 10 ? remainingPotential : 0 : 0;
+    let baseValue  = isMatrixRoll ? potentialSpent : maximumPotential;
+    let matrixBonus = isMatrixRoll ? psychicMatrices[0]?.finalPot ?? 0 : 0;
+    let finalValue = baseValue + matrixBonus;
+    let finalFormula = "";
+    let ppSpent = 0;
+
+    const clearOptions = (el) => {
+        if (el) el.innerHTML = "";
+    };
+    const appendOption = (el, { value, label, selected = false, dataset = {} }) => {
+        if (!el) return;
+        const option = document.createElement("option");
+        option.value = String(value ?? "");
+        option.textContent = label ?? "";
+        if (selected) option.selected = true;
+
+        for (const [key, val] of Object.entries(dataset)) {
+            option.dataset[key] = String(val);
+        }
+
+        el.appendChild(option);
+    };
+    const updateRollButtonLabel = (dialog) => {
+        const root = dialog.element;
+        if (!root) return;
+
+        const rollButton =
+            root.querySelector('[data-action="roll"]') ||
+            root.querySelector('button[data-action="roll"]');
+
+        if (rollButton) {
+            rollButton.textContent = `${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`;
+        }
+
+        rollButton.disabled = isMatrixRoll && (potentialSpent < 10 || !selectedMatrixId);
+    };
+    const updateFinalValue = (html, dialog) => {
+        const modifierValue = Number(html.querySelector('#modifierMod')?.value) || 0;
+        const selectedModifier = Number(html.querySelector('#modifierSelect')?.value) || 0;
+        ppSpent = Number(html.querySelector('#ppDropdown')?.value) || 0;
+        baseValue = isMatrixRoll ? potentialSpent : maximumPotential;
+
+        finalValue =
+            baseValue +
+            matrixBonus +
+            (ppSpent * actor.system.psySettings.potPPValueFinal) +
+            modifierValue +
+            selectedModifier;
+
+        const formulaParts = [
+            `${baseValue}(${game.i18n.localize("abfalter.potential")})`
+        ];
+        if (isMatrixRoll) {
+            formulaParts.push(`${matrixBonus}(${game.i18n.localize("abfalter.matrixBonus")})`);
+        }
+        formulaParts.push(
+            `${ppSpent * actor.system.psySettings.potPPValueFinal}(${game.i18n.localize("abfalter.pp")})`,
+            `${modifierValue}(${game.i18n.localize("abfalter.mod")})`,
+            `${selectedModifier}(${game.i18n.localize("abfalter.action")})`
+        );
+
+        finalFormula = formulaParts.join(" + ");
+
+        updateRollButtonLabel(dialog);
+    };
+    const dialog = new diceDialogV2({
+        window: { title: `${actor.name} — ${game.i18n.localize( "abfalter.rollPotential" )}` },
+        position: { width: 400 },
+        content: htmlContent,
+        classes: ["baseAbfalterV2"],
+        buttons: [
+            {
+                action: "roll",
+                label: `${game.i18n.localize("abfalter.dialogs.rollPotential")}: ${finalValue}`,
+                default: true,
+                callback: () => {
+                    confirmed = true;
+                    return "roll";
+                }
+            },
+            {
+                action: "cancel",
+                label: game.i18n.localize( "abfalter.dialogs.cancel" ),
+                callback: () => {
+                    confirmed = false;
+                    return "cancel";
+                }
+            }
+        ],
+        onRender: async (html, dialogInstance) => {
+            const categorySelect = html.querySelector("#psychicMatrixCategory");
+            const matrixSelect = html.querySelector("#psychicMatrixSelection");
+            const emptyMessage = html.querySelector("#psychicMatrixEmptyMessage");
+            const modifierInput = html.querySelector('#modifierMod');
+            const modifierSelect = html.querySelector('#modifierSelect');
+            const ppDropdown = html.querySelector('#ppDropdown');
+            const potentialInput = html.querySelector("#potentialUsed");
+            const maximumPotentialDisplay = html.querySelector("#maximumPotential");
+            const remainingPotentialDisplay = html.querySelector("#remainingPotential");
+            const bonusPotentialDisplay = html.querySelector("#bonusPotential");
+            const finalValueDisplay = html.querySelector("#finalValue");
+            const bonusMatrixDisplay = html.querySelector("#bonusPotMatrix");
+            const ppMax = actor.system.psySettings.potMaxPPFinal;
+            const availablePP = actor.system.psychicPoint.value;
+
+            const populatePPDropdown = () => {
+                clearOptions(ppDropdown);
+                const usablePP = Math.min(ppMax, availablePP);
+                for (let i = 0; i <= usablePP; i++) {
+                    appendOption(ppDropdown, {
+                        value: i,
+                        label: String(i),
+                        selected: i === 0
+                    });
+                }
+            };
+
+            const populateModifierDropdown = () => {
+                clearOptions(modifierSelect);
+                for (let index = 0; index < 10; index++) {
+                    const value = -25 * index;
+
+                    appendOption(modifierSelect, {
+                        value,
+                        label: game.i18n.localize(
+                            `abfalter.activeAction${index + 1}`
+                        ),
+                        selected: index === 0
+                    });
+                }
+            };
+
+            const getFilteredMatrices = category => {
+                if (category === "all") {
+                    return psychicMatrices;
+                }
+                return psychicMatrices.filter(matrix => matrix.type === category);
+            };
+
+            const getSelectedMatrix = () => {
+                return psychicMatrices.find(
+                    matrix => matrix.id === selectedMatrixId
+                ) ?? null;
+            };
+
+            const updatePotentialDisplay = () => {
+                if (potentialInput) { 
+                    potentialInput.value = String(potentialSpent);
+                }
+                if (maximumPotentialDisplay) {
+                    maximumPotentialDisplay.textContent = String(maximumPotential);
+                }
+                if (remainingPotentialDisplay) {
+                    remainingPotentialDisplay.textContent = String(remainingPotential);
+                }
+                updateFinalValue(
+                    html,
+                    dialogInstance
+                );
+            };
+
+            const adjustPotential = change => {
+                const minimum = remainingPotential >= 10 ? 10 : 0;
+                potentialSpent = Math.clamp(
+                    potentialSpent + change,
+                    minimum,
+                    remainingPotential
+                );
+                updatePotentialDisplay();
+            };
+
+            const updateMatrixBonus = () => {
+                const selectedMatrix = getSelectedMatrix();
+                matrixBonus = Number(selectedMatrix?.finalPot) || 0;
+
+                if (bonusMatrixDisplay) { 
+                    bonusMatrixDisplay.value = matrixBonus;
+                }
+
+                updateFinalValue(
+                    html,
+                    dialogInstance
+                );
+            };
+
+            const updateMatrixOptions = () => {
+                if (!isMatrixRoll || !matrixSelect) return;
+                const selectedCategory = categorySelect?.value ?? "all";
+                const filteredMatrices = getFilteredMatrices(selectedCategory);
+                matrixSelect.replaceChildren();
+
+                for ( const matrix of filteredMatrices) {
+                    const option = document.createElement("option");
+                    option.value = matrix.id;
+                    option.textContent = matrix.name;
+                    matrixSelect.append(option);
+                }
+
+                const hasMatrices = filteredMatrices.length > 0;
+                matrixSelect.disabled = !hasMatrices;
+                if (emptyMessage) { 
+                    emptyMessage.hidden = hasMatrices;
+                }
+
+                selectedMatrixId = hasMatrices ? filteredMatrices[0].id : null;
+
+                updateMatrixBonus();
+            };
+
+            /*
+             * Potential adjustment buttons:
+             * -100, -10, -5, +5, +10, +100
+             */
+            html.querySelectorAll("[data-potential-change]").forEach(button => {
+                button.addEventListener( "click", () => {
+                        const change =
+                            Number(
+                                button.dataset
+                                    .potentialChange
+                            ) || 0;
+
+                        adjustPotential(change);
+                    }
+                );
+            });
+
+            /*
+            * Potential set buttons:
+            * Min / Max
+            */
+            html.querySelectorAll("[data-potential-set]").forEach(button => {
+                button.addEventListener("click", () => {
+                        switch (button.dataset.potentialSet) {
+                            case "min":
+                                potentialSpent = remainingPotential >= 10 ? 10 : 0;
+                                break;
+                            case "max":
+                                potentialSpent = remainingPotential;
+                                break;
+                        }
+                        updatePotentialDisplay();
+                    }
+                );
+            });
 
 
+            categorySelect?.addEventListener("change", updateMatrixOptions);
+            matrixSelect?.addEventListener("change", event => {
+                selectedMatrixId = event.currentTarget.value || null;
+                updateMatrixBonus();
+            });
+            modifierInput?.addEventListener("input", () => { updateFinalValue(html, dialogInstance) });
+            ppDropdown?.addEventListener("change", () => { updateFinalValue(html, dialogInstance) });
+            modifierSelect?.addEventListener("change", () => { updateFinalValue(html, dialogInstance) });
 
+            populatePPDropdown();
+            populateModifierDropdown();
+            if (isMatrixRoll) {
+                updatePotentialDisplay();
+                updateMatrixOptions();
+            } else {
+                updateFinalValue(html, dialogInstance);
+            }
+            //updatePotentialDisplay();
+            //updateMatrixOptions();
+        },
 
+        onClose: async () => {
+            if (!confirmed) return;
+            // Error Checking
+            let selectedMatrix = null;
+            if (isMatrixRoll) {
+                if (!selectedMatrixId) {
+                    ui.notifications.warn(game.i18n.localize("abfalter.dialogs.noPsychicMatrixSelected" ));
+                    return;
+                }
+                selectedMatrix = actor.items.get(selectedMatrixId);
+                if (!selectedMatrix) {
+                    ui.notifications.error("The selected psychic matrix could not be found.");
+                    return;
+                }
+                if (potentialSpent < 10) {
+                    ui.notifications.warn( game.i18n.localize("abfalter.minimumPsychicPotential"));
+                    return;
+                }
+                /* Validate the remaining Potential again.
+                * This protects against two open dialogs spending the same resource.
+                */
+                if (
+                    combat?.getRemainingPsychicPotential
+                ) {
+                    const currentRemaining = await combat.getRemainingPsychicPotential(actor);
+                    if (potentialSpent > currentRemaining) {
+                        ui.notifications.warn(game.i18n.localize("abfalter.insufficientPsychicPotential"));
+                        return;
+                    }
+                    await combat.spendPsychicPotential(actor, potentialSpent);
+                }
+            }
 
+            // Remove free PP used
+            await actor.update({ 
+                "system.psychicPoint.value": Math.max(0, actor.system.psychicPoint.value - ppSpent)
+            });
 
+            /** Redirect to rollPotential
+             *  Storing type and more for chat card resolution
+             */
+            let rollDetails = {
+                label: `${game.i18n.localize("abfalter.potential")}`,
+                finalValue: finalValue,
+                formula: finalFormula,
+            }
+            if (isMatrixRoll) {
+                let potString = `${game.i18n.localize("abfalter.potentiaUsed")} ${potentialSpent} / ${remainingPotential}`
+                let rollType = "complex"
+                let matrixDetails = {
+                    matrixId: selectedMatrix.id,
+                    name: selectedMatrix.name,
+                    tag: selectedMatrix.system.chatTag,
+                    desc: selectedMatrix.system.description,
+                    img: selectedMatrix.img,
+                    resolved: false,
+                    potInfo: potString,
+                    effectDetails: selectedMatrix.system.matrixDetails,
+                    upcast: selectedMatrix.system.upcastValueFinal
+                }
+                await potentialRoll({actor, rollDetails, matrixDetails, rollType: "complex"})
+            } else {
+                await potentialRoll({actor, rollDetails, matrixDetails: null, rollType: "simple"})
+            }
 
+        }
+    });
 
+    dialog.render({ force: true });
+}
 
+/** Handles Potential Rolls
+ * @param {Actor} actor 
+ * @param {rollDetailas} Object label, finalValue, formula, potInfo
+ * @param {matrixDetails} Object matrixId, name, tag, desc, img
+ * @param {rollType} String complex is from CastMatrix holding Item data | simple is a generic potential roll from actor page 
+ */
+async function potentialRoll({actor, rollDetails, matrixDetails, rollType}) {
+    const isMatrixRoll = rollType === "complex";
+    const template = isMatrixRoll
+        ? "systems/abfalter/templates/dialogues/diceRolls/potentialMatrixRoll.hbs"
+        : "systems/abfalter/templates/dialogues/diceRolls/potentialRoll.hbs";
+    let fumbleRange = actor.system.fumleRange.final; 
+    let openRange = actor.system.rollRange.final; 
+    let basePotential = actor.system.ppotential.final
+    let isPredetermined = false;
+    let num = 0;
 
+    if (basePotential > 199 && fumbleRange > 1) {
+        fumbleRange -= 1;
+    }
+
+    const rollResult = await createRoll(actor, rollDetails.finalValue, openRange, fumbleRange, isPredetermined);
+    rollDetails.formula = `(${rollResult.rolledDice}) + ${rollDetails.formula}`;
+
+    const rollData = [
+        {
+            roll: rollResult.rolledDice, 
+            total: rollResult._total, 
+            doubles: rollResult.doubles, 
+            openRange: rollResult.openRange, 
+            fumbleLevel: rollResult.fumbleLevel,
+            fumble: rollResult.fumble, 
+            explode: rollResult.explode, 
+            color: rollResult.color, 
+            formula: rollDetails.formula, 
+            label: rollDetails.label
+        }
+    ];
+    let matrixResolution = null;
+
+    if (isMatrixRoll && matrixDetails) {
+        matrixDetails.resolved = !rollResult.explode && !rollResult.fumble;
+        if (matrixDetails.resolved) {
+            matrixResolution = getMatrixResolutionData({
+                matrixDetails: matrixDetails.effectDetails,
+                rollTotal: rollResult.total,
+                upcastAmount: matrixDetails.upcast
+            });
+        }
+    }
+
+    let basicInfo = {
+        portrait: actor.prototypeToken.texture.src,
+        name: actor.name,
+        userName: game.user.isGM ? game.i18n.localize("abfalter.gm") : game.user.name
+    };
+
+    const content = await foundry.applications.handlebars.renderTemplate(template, {
+        matrixResolution, 
+        matrixDetails,
+        basicInfo,
+        rollData,
+        actor,
+    });
+
+    const chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({ actor: actor }),
+        sound: CONFIG.sounds.dice,
+        content: content,
+        rolls: [rollResult],
+        flags: {            
+            abfalter: {
+                customChatHeaderCard: true,
+                basicInfo: basicInfo,
+                matrixDetails,
+                rollData: rollData,
+                num: num,
+                potentialType: rollType
+            } 
+        }
+    };
+
+    const speakerMode = actor.system.rollRange.speaker; // "default" | "public" | "private"
+    let rollMode;
+    switch (speakerMode) {
+        case "public":
+            rollMode = "public";
+            break;
+        case "private":
+            rollMode = "gm";
+            break;
+        default:
+            rollMode = game.settings.get("core", "messageMode");
+    }
+    ChatMessage.applyMode(chatData, rollMode);
+    await ChatMessage.create(chatData);
+}
+
+export async function potentialContinuationRollFunction(msg, html, event) {
+    const isMatrixRoll = msg.flags.abfalter.potentialType === "complex";
+    const template = isMatrixRoll
+        ? "systems/abfalter/templates/dialogues/diceRolls/potentialMatrixRoll.hbs"
+        : "systems/abfalter/templates/dialogues/diceRolls/potentialRoll.hbs";
+
+    const continuationType = event.currentTarget.dataset.rollType;
+    const rollFunction = {
+        open: performOpenRoll,
+        fumble: performFumbleRoll
+    }[continuationType];
+    if (!rollFunction) {
+        throw new Error(`Unknown potential continuation type: ${continuationType}`);
+    }
+    const { actor, num, rollData } = await rollFunction(msg);
+
+    const matrixDetails = msg.flags.abfalter.matrixDetails ?? null;
+    let matrixResolution = null;
+
+    if (isMatrixRoll && matrixDetails) {
+        const currentRoll = rollData[num];
+        matrixDetails.resolved = !rollData[num].explode && !rollData[num].fumble;
+
+        if (matrixDetails.resolved) {
+            matrixResolution = getMatrixResolutionData({
+                matrixDetails: matrixDetails.effectDetails,
+                rollTotal: currentRoll.total,
+                upcastAmount: matrixDetails.upcast
+            });
+        }
+    }
+
+    const content =
+        await foundry.applications.handlebars.renderTemplate(template, {
+            basicInfo: msg.flags.abfalter.basicInfo,
+            rollData,
+            actor,
+            matrixDetails,
+            matrixResolution
+        });
+
+    await msg.update({
+        content,
+        "flags.abfalter.matrixDetails": matrixDetails,
+        "flags.abfalter.rollData": rollData,
+        "flags.abfalter.num": num
+    });
+}
+
+const MATRIX_EFFECT_KEYS = [
+    "effect20",
+    "effect40",
+    "effect80",
+    "effect120",
+    "effect140",
+    "effect180",
+    "effect240",
+    "effect280",
+    "effect320",
+    "effect440"
+];
+
+function getMatrixResolutionData({
+    matrixDetails,
+    rollTotal,
+    upcastAmount = 0
+}) {
+    const total = Number(rollTotal) || 0;
+    const upcast = Math.max(0, Number(upcastAmount) || 0);
+
+    const effects = MATRIX_EFFECT_KEYS
+        .map(key => {
+            const effect = matrixDetails[key];
+
+            if (!effect) return null;
+
+            return {
+                key,
+                title: effect.title,
+                titleNum: Number(key.replace("effect", "")),
+                description: effect.description,
+                failure: effect.failure === true,
+                fatigue: Number(effect.fatigue) || 0
+            };
+        })
+        .filter(Boolean);
+
+    let reachedIndex = -1;
+
+    for (let i = 0; i < effects.length; i++) {
+        if (total >= effects[i].titleNum) {
+            reachedIndex = i;
+        }
+    }
+
+    if (reachedIndex === -1) {
+        const lowestEffect = effects[0];
+
+        return {
+            hasSuccessfulEffect: false,
+            failed: true,
+            fatigue: lowestEffect?.fatigue ?? 0,
+            achievedEffect: lowestEffect,
+            availableEffects: []
+        };
+    }
+
+    const effectiveIndex = Math.min(
+        reachedIndex + upcast,
+        effects.length - 1
+    );
+
+    const availableEffects = effects
+        .slice(0, effectiveIndex + 1)
+        .filter(effect => !effect.failure)
+        .map(effect => ({
+            ...effect,
+            roll: {
+                label: effect.title,
+                total: effect.titleNum,
+                color: "normalRoll",
+                formula: effect.description
+            }
+        }));
+
+    const achievedEffect = effects[effectiveIndex];
+
+    return {
+        hasSuccessfulEffect: availableEffects.length > 0,
+        failed: availableEffects.length === 0,
+        fatigue: availableEffects.length === 0
+            ? achievedEffect.fatigue
+            : 0,
+        achievedEffect,
+        availableEffects
+    };
+}
 
 export async function openModifierDialogue(actorData, finalValue, label, type) {
     const gameCopy = game;
