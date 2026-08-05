@@ -1003,7 +1003,7 @@ export default class abfalterActor extends Actor {
             ahThrTot: 0, ahHeatMax: 0, ahHeatTot: 0, ahColdMax: 0, ahColdTot: 0, ahEleMax: 0, ahEleTot: 0, ahEneMax: 0, ahEneTot: 0, ahSptMax: 0, ahSptTot: 0, perPen: 0, usedpp: 0, matrixpp: 0, arsMk: 0,
             maMk: 0, techMk: 0, pathLvl: 0, turnMaint: 0, dayMaint: 0, spellCost: 0, wepNum: 0, wepSpd: 0, maKiAtk: 0, maKiBlk: 0, maKiDod: 0, pilot: 0, techmagic: 0, cook: 0, toy: 0,
             kiDect: 0, kiCon: 0, wepName: "", monsterCost: 0, shieldSpeed: 0, arsDp: 0, maDp: 0, mentalPatDp: 0, profPsyDp: 0, profMystDp: 0, profPrimDp: 0, advCp:0, disAdvCp: 0, bloodBondCp: 0, infoLevelMod: 0,
-            customKiAbilityMk: 0, ammoWeight: 0, ammoPresence: 0, weaponWeight: 0, weaponPresence: 0, armorWeight: 0, armorPresence: 0, lootWeight: 0, lootPresence: 0
+            customKiAbilityMk: 0, ammoWeight: 0, ammoPresence: 0, weaponWeight: 0, weaponPresence: 0, armorWeight: 0, armorPresence: 0, lootWeight: 0, lootPresence: 0, psyMaintPP: 0
         }
         const atTypes = ["cut", "imp", "thr", "heat", "cold", "ele", "ene", "spt"];
         const atStacks = Object.fromEntries(atTypes.map(t => [t, []]));
@@ -1148,6 +1148,9 @@ export default class abfalterActor extends Actor {
                 case "psychicMatrix":
                     if (item.system.countCost) classBonuses.usedpp += 1;
                     classBonuses.matrixpp +=  parseInt(item.system.ppInvested) || 0;
+                    break;
+                case "maintPower":
+                    if (item.system.equipped) classBonuses.psyMaintPP += parseInt(item.system.ppInvested) || 0;
                     break;
                 case "arsMagnus":
                     classBonuses.arsMk += parseInt(item.system.mk) || 0;
@@ -2378,11 +2381,8 @@ export default class abfalterActor extends Actor {
         }
         system.fistDamage.final = Math.floor(system.fistDamage.base + system.fistDamage.dmgMult1 + system.fistDamage.dmgMult2 + system.fistDamage.bonus);
 
-        // Psychic Points
-        system.ppoint.class = classBonuses.pp;
-        system.ppoint.final = Math.floor(system.ppoint.base + system.ppoint.spec + system.ppoint.extra + system.ppoint.bonus + system.ppoint.class);
-        system.ppoint.innateSlot = Math.floor(system.other.innateSlots * 2);
-        system.psychicPoint.max = Math.floor(system.ppoint.final - (+classBonuses.usedpp + system.ppotential.fromPP + +classBonuses.matrixpp + system.ppoint.innateSlot));
+
+
 
         //Monster
         system.monsterStats.powersCost = classBonuses.monsterCost;
@@ -2419,12 +2419,19 @@ export default class abfalterActor extends Actor {
         system.otherStats.mentalThreshold = mentalEntry?.threshold ?? 0;
 
         // Other
-        system.otherStats.damageBarrierFinal = Math.floor(system.otherStats.damageBarrier + (system.otherStats.damageBarrierBonus || 0));
-        system.otherStats.dmgRdcFinal = Math.floor(system.otherStats.dmgRdc + (system.otherStats.dmgRdcBonus || 0));
+
 
         // Settings
         system.rollRange.final = Math.floor(system.rollRange.base - system.rollRange.spec - system.rollRange.temp - system.rollRange.bonus);
         system.fumleRange.final = Math.floor(system.fumleRange.base + system.fumleRange.spec + system.fumleRange.temp + system.fumleRange.bonus);
+
+        // Combat Settings
+        for (const damage of Object.values(system.combatDmgReceivedStats)) {
+            damage.final = Number((damage.mult + damage.bonus).toFixed(2));
+        }
+        system.otherStats.damageBarrierFinal = Math.floor(system.otherStats.damageBarrier + system.otherStats.damageBarrierBonus);
+        system.otherStats.dmgRdcFinal = Math.floor(system.otherStats.dmgRdc + system.otherStats.dmgRdcBonus);
+        system.otherStats.dmgRdcBaseFinal = Math.floor(system.otherStats.dmgRdcBase + system.otherStats.dmgRdcBaseBonus);
 
         // Psychic Settings
         system.psySettings.projMaxPPFinal = Math.floor(system.psySettings.projMaxPP + system.psySettings.projMaxPPBonus);
@@ -2434,19 +2441,31 @@ export default class abfalterActor extends Actor {
         system.psySettings.maintMaxPPFinal = Math.floor(system.psySettings.maintMaxPP + system.psySettings.maintMaxPPBonus);
         system.psySettings.maintPPValueFinal = Math.floor(system.psySettings.maintPPValue + system.psySettings.maintPPValueBonus);
         system.psySettings.maintIncValueFinal = Math.floor(system.psySettings.maintIncValue + system.psySettings.maintIncValueBonus);
+        system.psySettings.maintSlotIncFinal = Math.floor(system.psySettings.maintSlotInc + system.psySettings.maintSlotIncBonus);
         system.psySettings.upcastValueFinal = Math.floor(system.psySettings.upcastValue + system.psySettings.upcastValueBonus);
         system.psySettings.matrixDmgIncFinal = Math.floor(system.psySettings.matrixDmgInc + system.psySettings.matrixDmgIncBonus);
-        system.psySettings.matrixDmgMultipleFinal = Math.floor(system.psySettings.matrixDmgMultiple + system.psySettings.matrixDmgMultipleBonus);
+        system.psySettings.matrixDmgMultipleFinal = Number((system.psySettings.matrixDmgMultiple + system.psySettings.matrixDmgMultipleBonus).toFixed(2));
         system.psySettings.matrixPenIncFinal = Math.floor(system.psySettings.matrixPenInc + system.psySettings.matrixPenIncBonus);
         system.psySettings.matrixResCheckIncFinal = Math.floor(system.psySettings.matrixResCheckInc + system.psySettings.matrixResCheckIncBonus);
         system.psySettings.matrixResProjIncFinal = Math.floor(system.psySettings.matrixResProjInc + system.psySettings.matrixResProjIncBonus);
         system.psySettings.matrixShieldIncFinal = Math.floor(system.psySettings.matrixShieldInc + system.psySettings.matrixShieldIncBonus);
-        system.psySettings.matrixShieldMultFinal = Math.floor(system.psySettings.matrixShieldMult + system.psySettings.matrixShieldMultBonus);
+        system.psySettings.matrixShieldMultFinal = Number((system.psySettings.matrixShieldMult + system.psySettings.matrixShieldMultBonus).toFixed(2));
+
+        // Psychic Points
+        system.ppoint.maxInnateSlots = system.other.innateSlots + system.psySettings.maintSlotIncFinal;
+        system.ppotential.finalMaintPotency = system.ppotential.final + system.psySettings.maintIncValueFinal;
+        system.ppoint.class = classBonuses.pp;
+        system.ppoint.innateFreePP = classBonuses.psyMaintPP
+        system.ppoint.final = Math.floor(system.ppoint.base + system.ppoint.spec + system.ppoint.extra + system.ppoint.bonus + system.ppoint.class);
+        system.ppoint.innateSlotCost = Math.floor(system.other.innateSlots * 2);
+        system.psychicPoint.max = Math.floor(system.ppoint.final - (+classBonuses.usedpp + system.ppotential.fromPP + +classBonuses.matrixpp + system.ppoint.innateSlotCost + classBonuses.psyMaintPP));
+
 
         // 2nd Item load for derived Item values.
         let pushSpeed;
         this.items.reduce((arr, item) => {
-            if (item.type === "weapon" || item.type === "secondary" || item.type === "psychicMatrix") {
+            if (item.type === "weapon" || item.type === "secondary" 
+                || item.type === "psychicMatrix" || item.type === "maintPower") {
                 item.prepareData();
                 if (item.type === "weapon") {
                     pushSpeed = item.system.pushSpeed.applied;

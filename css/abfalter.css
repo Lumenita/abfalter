@@ -213,13 +213,6 @@ prose-mirror.editor.prosemirror.inactive > button.icon.toggle {
 
 
 
-
-
-
-
-
-
-
 /* #region @Color Theme */
 :root {
     --abfalter-font-roboto-condensed: "Roboto Condensed", sans-serif;
@@ -274,64 +267,117 @@ prose-mirror.editor.prosemirror.inactive > button.icon.toggle {
     --effect-border: #2c3850;
     --effect-bg: rgb(32 44 66);
 
+    /* Matrix Description */
+    --item-description-border: rgba(130, 170, 255, 0.55);
+    --item-description-bg: rgba(0, 0, 0, 0.12);
+    /* Normal Entries */
+    --matrix-entry-bg: rgba(255, 255, 255, 0.025);
+    --matrix-entry-border: rgba(255, 255, 255, 0.08);
+    --matrix-entry-bg-hover: rgba(255, 255, 255, 0.05);
+    --matrix-entry-border-hover: rgba(130, 170, 255, 0.35);
+    /* Failure Entries */
+    --matrix-failure-bg: rgba(145, 55, 55, 0.08);
+    --matrix-failure-border: rgba(215, 95, 95, 0.22);
+    --matrix-failure-bg-hover: rgba(145, 55, 55, 0.13);
+    --matrix-failure-border-hover: rgba(225, 105, 105, 0.38);
+    /* Text */
+    --matrix-failure-text: rgba(255, 190, 190, 0.9);
+    --matrix-title-color: rgba(210, 225, 255, 0.95);
+    --matrix-title-failure-color: rgba(255, 205, 205, 0.95);
+    --matrix-info-color: rgba(190, 225, 255, 1);
 }
 [data-theme="light"] {
     --abfalter-font-roboto-condensed: "Roboto Condensed", sans-serif;
     --abfalter-font-roboto-slab: "Roboto Slab", serif;
-    --color-background: #d5d4cb;
-    --color-background-header: #3b0707c2;
-    --color-navbar: #c5b498;
-    --color-navbar-hover: #b97d37;
-    --color-navbar-active: #c1571c;
-    --color-checkbox-bg: #cfc9bf;
-    --color-select-bg: #cfc9bf;
-    --color-textarea-bg: #87775857;
-    /* Armory Colors */
-    --armoryItemHeader: #af5b31;
-    --armoryItemBackground: #00000012;
-    --armoryButtonBackground: #df922e42;
-    /* text Colors */
-    --textColor: #111111;
-    --color-text-alt: #dec9ab;
-    --armoryTagText: #3a3a3a;
 
+    /* Main surfaces */
+    --color-background: #e8e5dd;
+    --color-background-header: #3f0b0f;
 
-    --buttonBg: #c9c1b6;
-    --buttonHover: #c58b58;
-    --inputBorder: #3b0707;
-    --boxColor: #7b0d0d;
+    /* Navigation */
+    --color-navbar: #cfc5b3;
+    --color-navbar-hover: #b78955;
+    --color-navbar-active: #9f2f22;
 
-    --dropdownColor: #e7e7e7;
+    /* Form controls */
+    --color-checkbox-bg: #f0ede6;
+    --color-select-bg: #f0ede6;
+    --color-textarea-bg: #ddd6c8;
 
-    --itemOffSet: #c7beb3;
+    /* Armory */
+    --armoryItemHeader: #8f2d1f;
+    --armoryItemBackground: #d8d4ca;
+    --armoryButtonBackground: #d6bd9e;
 
-    --armorPen: #e5550d;
+    /* Text */
+    --textColor: #201b19;
+    --color-text-alt: #f4ead9;
+    --armoryTagText: #332c28;
 
-    --physical: #10ad10;
-    --mental: #0043ff;
-    --equipped: #128d2d;
-    
-    --kiBought: #d7885b;
-    --kiFree: #4aad4a;
+    /* Controls */
+    --buttonBg: #d8d1c6;
+    --buttonHover: #caa174;
+    --inputBorder: #86504a;
+    --boxColor: #7f1d1d;
+    --dropdownColor: #f4f1eb;
 
-    --scrollbarColor: #955555;
+    /* Alternating item surface */
+    --itemOffSet: #c8c2b7;
 
-    --customTooltip: #dbd1b6;
-    --item-subTitle: #7a7971;
-    --item-summary: #4b4a44;
-    --effect-border: #10141c;
-    --effect-bg: rgb(81 121 163 / 29%);
+    /* Mechanical accents */
+    --armorPen: #c94b18;
 
-    --color-border-dark: inherit;
-    --color-border-dark-5: inherit;
-    --color-border-light-tertiary: inherit;
-    --color-border-highlight: inherit;
-    --color-border-highlight-alt: inherit;
-    --color-shadow-highlight: inherit;
-    --color-bg-btn-minor-active: inherit;
-    --color-bg-btn-minor-inactive: inherit;
-    --color-shadow-primary: inherit;
+    --physical: #168a31;
+    --mental: #214fc0;
+    --equipped: #158235;
+
+    --kiBought: #bd603d;
+    --kiFree: #3e944b;
+
+    /* Miscellaneous */
+    --scrollbarColor: #8f4a45;
+    --customTooltip: #e7ddca;
+
+    --item-subTitle: #665c55;
+    --item-summary: #49413c;
+
+    --effect-border: #702526;
+    --effect-bg: rgb(130 42 39 / 12%);
+
+    /* Foundry overrides */
+    --color-border-dark: #6e2929;
+    --color-border-dark-5: #9e6c68;
+    --color-border-light-tertiary: #b8aaa0;
+
+    --color-border-highlight: #a33a28;
+    --color-border-highlight-alt: #c98240;
+
+    --color-shadow-highlight: rgb(159 47 34 / 28%);
+    --color-shadow-primary: rgb(55 17 17 / 22%);
+
+    --color-bg-btn-minor-active: #cfac85;
+    --color-bg-btn-minor-inactive: #ddd6cb;
+
+    /* Matrix Description */
+    --item-description-border: #86504a;
+    --item-description-bg: rgb(63 11 15 / 6%);
+    /* Normal Entries */
+    --matrix-entry-bg: rgb(255 255 255 / 28%);
+    --matrix-entry-border: rgb(111 82 66 / 18%);
+    --matrix-entry-bg-hover: rgb(255 255 255 / 42%);
+    --matrix-entry-border-hover: #b78955;
+    /* Failure Entries */
+    --matrix-failure-bg: rgb(159 47 34 / 10%);
+    --matrix-failure-border: rgb(159 47 34 / 24%);
+    --matrix-failure-bg-hover: rgb(159 47 34 / 16%);
+    --matrix-failure-border-hover: #c94b18;
+    /* Text */
+    --matrix-failure-text: #8f2d1f;
+    --matrix-title-color: #3f0b0f;
+    --matrix-title-failure-color: #7f1d1d;
+    --matrix-info-color: #6d4335;
 }
+
 .window-header {
     background: var(--color-background-header);
 }
@@ -1441,6 +1487,22 @@ h6 {
 .modactions > label > span:last-of-type {
     width: 25%;
     text-align: center;
+}
+/* #endregion */
+
+/* #region @Mass-Enemies */
+.isMassContainer {
+    width: 100%;
+}
+.isMassContainer > label {
+    display: flex;
+    margin: 0 10%;
+}
+.isMassContainer > label > span {
+    width: 70%;
+}
+.isMassContainer > label > input {
+    width: 30%;
 }
 /* #endregion */
 
@@ -3120,575 +3182,723 @@ h6 {
 }
 /* #endregion */
 
-/*
-    ***************
-    ---------------
-        Psychic
-    ---------------
-    ***************
-*/
-/* #region Containers @V2 */
-.ppoint,
-.ppotential,
-.pproj,
-.pdisc {
-    width: 23.5%;
-}
+
+/* #region @Psychic @V2 */
+    /* #region Containers @V2 */
+    .ppoint,
+    .ppotential,
+    .pproj,
+    .pdisc {
+        width: 23.5%;
+    }
+    .psyDualContainer {
+        display: flex;
+        gap: 1rem;
+    }
+    /* #endregion */
+
+    /* #region @PP @V2 */
+    .ppoint .abfDivFormat > label,
+    .ppoint .abfDivFormat > div > label {
+        display: flex;
+        padding: 0 10px;
+    }
+    .ppoint .abfDivFormat > label > span,
+    .ppoint .abfDivFormat > div > label > span {
+        width: 60%;
+        text-align: start
+    }
+    .ppoint .abfDivFormat > label > input,
+    .ppoint .abfDivFormat > div > label > input {
+        width: 40%;
+    }
+    .ppoint .abfDivFormat > label:nth-of-type(2) {
+        border-top: 1px solid var(--boxColor);
+        padding: 3px 10px 0 10px;
+    }
+    .ppoint .abfDivFormat > label:nth-of-type(3) {
+        border-bottom: 1px solid var(--boxColor);
+        font-weight: bold;
+        padding: 0 10px 3px 10px;
+    }
+    /* #endregion */
+
+    /* #region @Potential @V2 */
+    .ppotential .abfDivFormat > label,
+    .ppotential .abfDivFormat > div > label,
+    .ppotential .abfDivFormat > div > div > label {
+        display: flex;
+        padding: 0 10px;
+    }
+    .ppotential .abfDivFormat > label > span,
+    .ppotential .abfDivFormat > div > label > span,
+    .ppotential .abfDivFormat> div > div > label > span {
+        width: 60%;
+        text-align: start;
+    }
+    .ppotential .abfDivFormat > label > input,
+    .ppotential .abfDivFormat > div > label > input,
+    .ppotential .abfDivFormat > div > div > label > select {
+        width: 40%;
+    }
+    .ppotential .abfDivFormat > label:nth-of-type(2) {
+        border-top: 1px solid var(--boxColor);
+        border-bottom: 1px solid var(--boxColor);
+        padding: 3px 10px;
+        font-weight: bold;
+    }
+    .ppotential .abfDivFormat .ppotButton {
+        display: flex;
+    }
+    .ppotential .abfDivFormat .ppotButton > button {
+        width: 50%;
+        height: 25px;
+        border: 0px;
+        border-radius: 0 0 0 8px;
+    }
+    .ppotential .abfDivFormat .ppotButton> button:first-of-type {
+        border-right: 1px solid black;
+    }
+    .ppotential .abfDivFormat .ppotButton > button:nth-of-type(2) {
+        border-radius: 0 0 8px 0;
+    }
+
+    /* #endregion */
+
+    /* #region @CastMatrix @Prompt @V2 */
+    .potentialPrompt {
+        padding: 0 3%;
+    }
+    .psychicPotentialAllocation {
+        border-bottom: 1px solid var(--boxColor);
+        padding: 0 0 5px 0;
+        margin: 0 0 5px 0;
+
+    }
+    .potentialSummary {
+        display: flex;
+        justify-content: space-between;
+    }
+    .potentialUsing {
+        display: flex;
+        justify-content: center;
+        margin: 3px 0 0 0;
+    }
+    .potentialAdjustmentButtons {
+        display: flex;
+        justify-content: space-between;
+    }
+    .potentialAdjustmentButtons > input {
+        display: flex;
+        width: 10%;
+        height: 27px;
+    }
+    .potentialAdjustmentButtons > button {
+        display: flex;
+        width: 10%;
+        min-height: 27px;
+    }
+    .potentialPrompt > label {
+        display: flex;
+        justify-content: space-between;
+    }
+    .potentialPrompt > label:last-of-type  {
+        border-bottom: 1px dashed var(--boxColor);
+        padding: 0 0 5px 0;
+        margin: 0 0 5px 0;
+    }
+    .potentialPrompt > label > span {
+        display: grid;
+        width: 55%;
+    }
+    .potentialPrompt > label > input {
+        width: 45%;
+    }
+    .potentialPrompt > label > select {
+        width: 45%;
+    }
+    /* #endregion */
+
+    /* #region @CastMatrix @Chat @V2 */
+    .baseAbfalterV2 .matrixEffectChoices > div {
+        justify-content: center;
+    }
+    .matrixEffectChoices > div > button {
+        width: 75%;
+    }
+    .matrixFailure{
+        margin: 0 7%;
+    }
+    .matrixSuccess{
+        margin: 0 3%;
+    }
+    .matrixSuccess .mastrixSuccessDesc {
+        border-top: 1px dashed black;
+        border-bottom: 1px dashed black;
+        margin: 3px 0;
+        padding: 3px 0;
+    }
+    .matrixSuccess .matrixButton {
+        justify-self: center;
+        width: 75%;
+    }
+    /* #endregion */
+
+    /* #region @Projection @V2 */
+    .pproj .abfDivFormat > label,
+    .pproj .abfDivFormat > div > label {
+        display: flex;
+        padding: 0 10px;
+    }
+    .pproj .abfDivFormat > label > span,
+    .pproj .abfDivFormat > div > label > span {
+        width: 60%;
+        text-align: start;
+    }
+    .pproj .abfDivFormat > label > input,
+    .pproj .abfDivFormat > div > label > input {
+        width: 40%;
+    }
+    .pproj .abfDivFormat > div > label:nth-of-type(3) > input {
+        width: 18%;
+    }
+    .pproj .abfDivFormat > div > label:nth-of-type(3) > input:first-of-type {
+        margin: 0 4% 0 0;
+    }
+    .pproj .abfDivFormat > label:nth-of-type(1) {
+        border-bottom: 1px solid var(--boxColor);
+        padding: 0 10px 3px 10px;
+        font-weight: bold;
+    }
+    .pproj .abfDivFormat .pmodButton {
+    display: flex;
+    }
+    .pproj .abfDivFormat .pmodButton > button {
+        width: 50%;
+        border-radius: 0 0 0 8px;
+    }
+    .pproj .abfDivFormat .pmodButton > button:nth-of-type(2) {
+        width: 50%;
+        border-radius: 0 0 8px 0;
+    }
+    .pproj .abfDivFormat .pmodButton > button:first-of-type {
+        border-right: 1px solid black;
+    }
+    /* #endregion */
+
+    /* #region @Projection @Prompt @V2 */
+    .matrixProjPrompt {
+        padding: 0 3%;
+    }
+    .matrixProjPrompt > label {
+        display: flex;
+        justify-content: space-between;
+    }
+    .matrixProjPrompt > label:last-of-type  {
+        border-bottom: 1px dashed var(--boxColor);
+        padding: 0 0 5px 0;
+        margin: 0 0 5px 0;
+    }
+    .matrixProjPrompt > label > span {
+        display: grid;
+        width: 55%;
+    }
+    .matrixProjPrompt > label > input {
+        width: 45%;
+    }
+    .matrixProjPrompt > label > select {
+        width: 45%;
+    }
+    .matrixProjPrompt > div {
+        display: flex;
+    }
+    .matrixProjPrompt > div > label {
+        width: 55%;
+    }
+    .matrixProjPrompt > div > div {
+        display: flex;
+        width: 45%;
+    }
+    .matrixProjPrompt > div > div > input,
+    .matrixProjPrompt > div > div > span {
+        width: 48%;
+        text-align: center;
+    }
+    .matrixProjPrompt > div > div > span:first-of-type{
+        width: 4%;
+    }
+    .baseAbfalterV2 .abfDivFormat .matrixAimDiv > span {
+        width: 33%
+    }
+    .baseAbfalterV2 .abfDivFormat .matrixAimDiv > button {
+        width: 20%;
+        min-height: auto;
+    }
+    .baseAbfalterV2 .abfDivFormat .matrixAimDiv > select {
+        margin: 0 0 0 2%;
+        width: 45%
+    }
+    /* #endregion */
+
+    /* #region @Disciplines @V2 */
+    .pdisc .discipline-item:nth-child(2n) {
+        background: var(--itemOffSet);
+    }
+    .pdisc .discipline-item .abfDivFormat > span {
+        text-align: center;
+        display: block;
+        height: 20px;
+    }
+    .pdisc > div:last-of-type {
+        display: flex;
+        place-content: space-between;
+        border-top: 1px solid var(--boxColor);
+    }
+    /* #endregion */
+
+    /* #region @Psychic-Patterns @V2 */
+    .ppaterns {
+        width: 45%;
+    }
+    .ppaterns > div:first-of-type,
+    .mentalPattern-item > div:first-of-type {
+        display: flex;
+        justify-content: flex-start;
+    }
+    .ppaterns > div:first-of-type {
+        border-bottom: 1px solid var(--boxColor);
+        height: 20px;
+        align-items: center;
+    }
+    .ppaterns > div > span:first-of-type {
+        width: 51%;
+        padding: 0 10px;
+        text-align: start;
+    }
+    .ppaterns > div > span {
+        width: 22%;
+        text-align: center;
+    }
+    .ppaterns > div:last-of-type {
+        display: flex;
+        place-content: space-between;
+        border-top: 1px solid var(--boxColor);
+    }
+    .mentalPattern-item:nth-child(2n) {
+        background: var(--itemOffSet);
+    }
+    .mentalPattern-item > div:nth-of-type(1) {
+        min-height: 20px;
+        align-items: center;
+    }
+    .mentalPattern-item > div:nth-of-type(1) > span:first-of-type {
+        width: 51%;
+        padding: 0 10px;
+        text-align: start;
+    }
+    .mentalPattern-item > div:nth-of-type(1) > span {
+        width: 22%;
+        text-align: center;
+    }
+    .mentalPattern-item > div > a {
+        width: 5%;
+        font-size: 15px;
+    }
+    .mentalPattern-item > div > a {
+        opacity: 0;
+    }
+    .mentalPattern-item:hover > div > a {
+        opacity: 1;
+    }
+    .mentalPattern-item .patternDesc {
+        display: flex;
+        flex-direction: column;
+        padding: 0 0 10px 0;
+    }
+    .mentalPattern-item .patternDesc > span {
+        border-bottom: 1px solid var(--boxColor);
+        margin: 0 10px;
+    }
+    /* #endregion */
+
+    /* #region @Maintained-Matrices @V2 */
+    .pmaint {
+        flex: 1;
+        min-width: 0;
+    }
+    .pMaintPotency,
+    .pMaintPP {
+        display: flex;
+        justify-content: space-between;
+    }
+    .pMaintPP > label {
+        display: flex;
+    }
+    .pMaintPP > label:nth-of-type(1) {
+        width: 50%;
+        padding: 2px 10px;
+    }
+    .pMaintPP > label:nth-of-type(1) > span {
+        width: 55%;
+    }
+    .pMaintPP > label:nth-of-type(1) > input {
+        width: 20%;
+    }
+    .pMaintPP > label:nth-of-type(1) > span:nth-of-type(2) {
+        width: 3%;
+        text-align: center;
+    }
+    .pMaintPP > label:nth-of-type(1) > span:nth-of-type(3) {
+        width: 20%;
+        text-align: center;
+    }
+    .pMaintPP > label:nth-of-type(2) {
+        width: 40%;
+        padding: 2px 10px;
+    }
+    .pMaintPP > label:nth-of-type(2) > span {
+        width: 70%;
+        text-align: end;
+        padding: 0 5px 0 0;
+    }
+    .pMaintPP > label:nth-of-type(2) > input {
+        width: 30%;
+    }
+    .pMaintPotency > label {
+        display: flex;
+    }
+    .pMaintPotency > label:nth-of-type(1) {
+        width: 50%;
+        padding: 2px 10px;
+    }
+    .pMaintPotency > label:nth-of-type(1) > span {
+        width: 100%;
+    }
+    .pMaintPotency > label:nth-of-type(2) {
+        width: 40%;
+        padding: 2px 10px;
+    }
+    .pMaintPotency > label:nth-of-type(2) > span {
+        width: 70%;
+        text-align: end;
+        padding: 0 5px 0 0;
+    }
+    .pMaintPotency > label:nth-of-type(2) > input {
+        width: 30%;
+    }
+    .pMaintHeader,
+    .maintPower-item > div:first-of-type {
+        display: flex;
+        justify-content: flex-start;
+        align-items: anchor-center;
+    }
+    .pMaintHeader {
+        border-bottom: 1px solid var(--boxColor);
+        border-top: 1px dashed var(--boxColor);
+    }
+    .pMaintHeader > span {
+        width: 70%;
+    }
+    .pMaintHeader > span:nth-of-type(2) {
+        width: 20%;
+        text-align: center;
+    }
+    .maintPower-item > div:first-of-type {
+        min-height: 20px;
+    }
+    .maintPower-item > div > span:first-of-type {
+        width: 50%;
+        padding: 0 0 0 10px;
+    }
+    .maintPower-item > div > span:nth-of-type(2) {
+        width: 20%;
+        text-align: center;
+    }
+    .maintPower-item > div > span:nth-of-type(3) {
+        width: 20%;
+        text-align: center;
+        margin: 0 5% 0 0;
+    }
+    .maintPower-item > div > a {
+        width: 5%;
+        font-size: 15px;
+    }
+    .maintPower-item > div > a {
+        opacity: 0;
+    }
+    .maintPower-item > div:hover > a {
+        opacity: 1;
+    }
+    .maintPower-item .matrixDescription {
+        width: 95%;
+        justify-self: center;
+    }
+    .maintPower-item:nth-child(2n) {
+        background: var(--itemOffSet);
+    }
+    /* #endregion */
+
+    /* #region @Psychic-Matrices @V2 */
+    .matrixMatrices > div:nth-of-type(n+3) {
+        border-top: 1px solid var(--boxColor);
+    }
+    .matrixMatrices {
+        margin: 0 0 30px 0;
+    }
+    .psychic .matrixItemHeader.armoryItemHeader,
+    .psychic .armory-item {
+        width: 98%;
+        justify-self: center;
+    }
+    .psychic .matrixItemHeader {
+        display: flex;
+        height: 30px;
+        background: linear-gradient(to right, var(--color-navbar), var(--armoryItemHeader));
+        border-bottom: 1px solid black;
+        width: 98%;
+        justify-self: center;
+    }
+    .psychic .matrixItemHeader > span {
+        text-transform: uppercase;
+        font-family: var(--abfalter-font-roboto-condensed);
+        font-size: var(--font-size-11);
+        text-align: center;
+    }
+    .psychic .matrixItemHeader > span:first-of-type {
+        font-family: var(--abfalter-font-roboto-slab);
+        font-size: var(--font-size-18);
+        text-transform: none;
+        text-align: start;
+        padding: 0 0 0 15px;
+        font-weight: bold;
+    }
+    .psychic .matrixItemHeader .matrixNameHeader {
+        width: 70%;
+    }
+    .psychic .matrixItemHeader .matrixPPHeader {
+        width: 12%;
+    }
+    .psychic .matrixItemHeader .matrixBonusHeader,
+    .psychic .matrixItemHeader .favOnlyHeader,
+    .psychic .matrixItemHeader .addHeader {
+        width: 9%;
+    }
+    .matrix-item {
+        background: var(--armoryItemBackground);
+        padding: 5px 0;
+        width: 98%;
+        justify-self: center;
+    }
+    .matrixItemContainer {
+        display: flex;
+        flex-direction: row;
+    }
+    .matrixItemMain {
+        display: flex;
+        flex-direction: row;
+        width: 70%;
+    }
+    .matrixItemImg {
+        width: 36px;
+        height: 36px;
+        object-fit: cover;
+        min-width: 36px;
+        min-height: 36px;
+        align-self: center;
+        border: 1px solid #cf9e06;
+        box-shadow: 0px 0px 3px #cf9e06;
+        border-radius: 7px;
+    }
+    .matrixItemNames {
+        display: flex;
+        flex-direction: column;
+        width: -webkit-fill-available;
+        padding: 0 0 0 5px;
+    }
+    .matrixItemNames span:first-of-type {
+        font-size: var(--font-size-18);
+        cursor: pointer;
+    }
+    .matrixItemNames span:first-of-type:hover {
+        color: var(--armorPen);
+    }
+    .matrixItemNames span:last-of-type {
+        font-size: var(--font-size-11);
+        color: var(--armoryTagText);
+    }
+    .matrixPP {
+        width: 12%;
+        text-align: center;
+        align-self: center;
+    }
+    .matrixBonus {
+        width: 9%;
+        text-align: center;
+        align-self: center;
+    }
+    .matrixItemControls {
+        display: flex;
+        width: 9%;
+        align-items: stretch;
+        justify-content: center;
+        color: var(--item-control-color);
+        padding: 0;
+        position: relative;
+    }
+    .matrix-item .matrixItemControls > a:first-of-type {
+        margin: 0 0.4rem;
+    }
+    .matrixDescription {
+        margin: 4px 0 8px;
+        padding: 6px 10px;
+
+        max-height: 300px;
+        overflow-y: auto;
+
+        line-height: 1.35;
+        background: var(--item-description-bg);
+        border-radius: 3px;
+    }
+    .matrixDetailsList {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .matrixDetailEntry {
+        padding: 5px 8px;
+        background: var(--matrix-entry-bg);
+        border: 1px solid var(--matrix-entry-border);
+        border-radius: 4px;
+        transition:
+            background 120ms ease,
+            border-color 120ms ease;
+    }
+    .matrixDetailEntry:hover {
+        background: var(--matrix-entry-bg-hover);
+        border-color: var(--matrix-entry-border-hover);
+    }
+    .matrixFailureEntry {
+        background: var(--matrix-failure-bg);
+        border-color: var(--matrix-failure-border);
+    }
+    .matrixFailureEntry:hover {
+        background: var(--matrix-failure-bg-hover);
+        border-color: var(--matrix-failure-border-hover);
+    }
+    .matrixFailureText {
+        font-style: italic;
+        color: var(--matrix-failure-text);
+    }
+    .matrixFatigueValue {
+        font-style: normal;
+    }
+    .matrixDetailHeader {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: 600;
+    }
+    .matrixTitleNum {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 5px 0 0;
+        font-size: 0.85em;
+        color: var(--matrix-title-color);
+        width: 3%;
+        border-right: 1px solid var(--textColor);
+    }
+    .matrixFailureEntry .matrixTitleNum {
+        color: var(--matrix-title-failure-color);
+    }
+    .matrixInfoLine {
+        margin-left: auto;
+        padding: 0 5px 0 0;
+        font-size: 0.9em;
+        color: var(--matrix-info-color);
+    }
+    .matrixDetailBody {
+        display: grid;
+        grid-template-columns: 16px minmax(0, 1fr);
+        align-items: start;
+        margin-top: 3px;
+    }
+    .matrixDetailBranch {
+        opacity: 0.55;
+        line-height: 1.35;
+    }
+    .matrixDetailDescription {
+        min-width: 0;
+        line-height: 1.35;
+    }
+    .matrixDetailDescription p:first-of-type {
+        margin-top: 0;
+    }
+
+
+
+    /* #endregion */
+
+    /* #region @Item-Psychic-Matrix @V2 */
+    .psyTypeInfo {
+        display: flex;
+        padding: 2px 10px !important;  
+        font-style: italic;
+    }
+    .psyItemEachMatrix:not(:last-of-type) {
+        border-bottom: 1px solid var(--boxColor);
+    }
+    .psyItemDetHeader {
+        display: flex;
+        padding: 2px 10px !important;
+    }
+    .psyItemDetHeader > span:first-of-type {
+        width: 7%;
+        border-right: 1px solid var(--boxColor);
+    }
+    .psyItemDetHeader > span:nth-of-type(2) {
+        width: 83%;
+        padding: 0 0 0 2%;
+    }
+    .psyItemDetHeader > a {
+        width: 10%;
+        text-align: center;
+    }
+    .psyItemDescContainer {
+        padding: 2px 10px !important;
+    }
+    .psyItemDescHeader {
+        font-size: 1.1rem;
+        border-bottom: 1px solid var(--boxColor);
+    }
+    .psyItemDesc {
+        overflow-y: auto;
+    }
+    .psyItemDmgTypes {
+        display: flex;
+        justify-content: space-between;
+        padding: 2px 10px !important;
+    }
+    .psyItemDmgTypes > button {
+        width: 10%
+    }
+    .psyItemResTypes {
+        display: flex;
+        justify-content: space-between;
+        padding: 2px 10px !important;
+    }
+    .psyItemResTypes > button {
+        width: 18%
+    }
+    .psyItemEachCollapsed {
+        padding: 2px 10px 2px 54px !important;
+    }
+    .psyItemEachCollapsed p {
+        margin: 0;
+    }
+    /* #endregion */
 /* #endregion */
 
-/* #region @PP @V2 */
-.ppoint .abfDivFormat > label,
-.ppoint .abfDivFormat > div > label {
-    display: flex;
-    padding: 0 10px;
-}
-.ppoint .abfDivFormat > label > span,
-.ppoint .abfDivFormat > div > label > span {
-    width: 60%;
-    text-align: start
-}
-.ppoint .abfDivFormat > label > input,
-.ppoint .abfDivFormat > div > label > input {
-    width: 40%;
-}
-.ppoint .abfDivFormat > label:nth-of-type(2) {
-    border-top: 1px solid var(--boxColor);
-    padding: 3px 10px 0 10px;
-}
-.ppoint .abfDivFormat > label:nth-of-type(3) {
-    border-bottom: 1px solid var(--boxColor);
-    font-weight: bold;
-    padding: 0 10px 3px 10px;
-}
-.ppoint .abfDivFormat > div > button {
-    width: 100%;
-    height: 25px;
-    border: 0px;
-    border-radius: 0 0 8px 8px;
-}
-/* #endregion */
-
-/* #region @CastMatrix @Prompt */
-.potentialPrompt {
-    padding: 0 3%;
-}
-.psychicPotentialAllocation {
-    border-bottom: 1px solid var(--boxColor);
-    padding: 0 0 5px 0;
-    margin: 0 0 5px 0;
-
-}
-.potentialSummary {
-    display: flex;
-    justify-content: space-between;
-}
-.potentialUsing {
-    display: flex;
-    justify-content: center;
-    margin: 3px 0 0 0;
-}
-.potentialAdjustmentButtons {
-    display: flex;
-    justify-content: space-between;
-}
-.potentialAdjustmentButtons > input {
-    display: flex;
-    width: 10%;
-    height: 27px;
-}
-.potentialAdjustmentButtons > button {
-    display: flex;
-    width: 10%;
-    min-height: 27px;
-}
-.potentialPrompt > label {
-    display: flex;
-    justify-content: space-between;
-}
-.potentialPrompt > label:last-of-type  {
-    border-bottom: 1px dashed var(--boxColor);
-    padding: 0 0 5px 0;
-    margin: 0 0 5px 0;
-}
-.potentialPrompt > label > span {
-    display: grid;
-    width: 55%;
-}
-.potentialPrompt > label > input {
-    width: 45%;
-}
-.potentialPrompt > label > select {
-    width: 45%;
-}
-/* #endregion */
-
-/* #region @Potential @V2 */
-.ppotential .abfDivFormat > label,
-.ppotential .abfDivFormat > div > label,
-.ppotential .abfDivFormat > div > div > label {
-    display: flex;
-    padding: 0 10px;
-}
-.ppotential .abfDivFormat > label > span,
-.ppotential .abfDivFormat > div > label > span,
-.ppotential .abfDivFormat> div > div > label > span {
-    width: 60%;
-    text-align: start;
-}
-.ppotential .abfDivFormat > label > input,
-.ppotential .abfDivFormat > div > label > input,
-.ppotential .abfDivFormat > div > div > label > select {
-    width: 40%;
-}
-.ppotential .abfDivFormat > label:nth-of-type(2) {
-    border-top: 1px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-    padding: 3px 10px;
-    font-weight: bold;
-}
-.ppotential .abfDivFormat > div > button {
-    width: 100%;
-    height: 25px;
-    border: 0px;
-    border-radius: 0 0 8px 8px;
-}
-/* #endregion */
-
-/* #region @Projection @V2 */
-.pproj .abfDivFormat > label,
-.pproj .abfDivFormat > div > label {
-    display: flex;
-    padding: 0 10px;
-}
-.pproj .abfDivFormat > label > span,
-.pproj .abfDivFormat > div > label > span {
-    width: 60%;
-    text-align: start;
-}
-.pproj .abfDivFormat > label > input,
-.pproj .abfDivFormat > div > label > input {
-    width: 40%;
-}
-.pproj .abfDivFormat > div > label:nth-of-type(3) > input {
-    width: 18%;
-}
-.pproj .abfDivFormat > div > label:nth-of-type(3) > input:first-of-type {
-    margin: 0 4% 0 0;
-}
-.pproj .abfDivFormat > label:nth-of-type(1) {
-    border-bottom: 1px solid var(--boxColor);
-    padding: 0 10px 3px 10px;
-    font-weight: bold;
-}
-.pproj .abfDivFormat .pmodButton {
-   display: flex;
-}
-.pproj .abfDivFormat .pmodButton > button {
-    width: 50%;
-    border-radius: 0 0 0 8px;
-}
-.pproj .abfDivFormat .pmodButton > button:nth-of-type(2) {
-    width: 50%;
-    border-radius: 0 0 8px 0;
-}
-.pproj .abfDivFormat .pmodButton > button:first-of-type {
-    border-right: 1px solid black;
-}
-/* #endregion */
-
-/* #region @Disciplines @V2 */
-.pdisc .discipline-item:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-.pdisc .discipline-item .abfDivFormat > span {
-    text-align: center;
-    display: block;
-    height: 20px;
-}
-.pdisc > div:last-of-type {
-    display: flex;
-    place-content: space-between;
-    border-top: 1px solid var(--boxColor);
-}
-/* #endregion */
-
-
-.s4 > div {
-    width: 48%;
-}
-/* #region @Psychic-Patterns */
-.mentalPattern-item {
-    padding: 0 2.5%;
-}
-.ppaterns > div:first-of-type,
-.mentalPattern-item > div:first-of-type {
-    display: flex;
-    justify-content: flex-start;
-}
-.ppaterns > div:first-of-type {
-    border-bottom: 1px solid var(--boxColor);
-    margin: -7px 0 0 0;
-}
-.ppaterns > div > span,
-.mentalPattern-item > div:nth-of-type(1) > span {
-    text-align: center;
-}
-.ppaterns > div > span:first-of-type {
-    width: 52.25%;
-    margin: 0 0 0 2.5%;
-}
-.ppaterns > div > span:nth-of-type(2) {
-    width: 19.95%;
-    margin: 0 1% 0 1%;
-}
-.ppaterns > div > span:last-of-type {
-    width: 16.15%;
-}
-.ppaterns > div:last-of-type {
-    display: flex;
-    place-content: space-between;
-    border-top: 1px solid var(--boxColor);
-}
-.mentalPattern-item:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-.mentalPattern-item > div > input:first-of-type,
-.mentalPattern-item > div:nth-of-type(1) > span:first-of-type {
-    width: 55%
-}
-.mentalPattern-item > div > input:nth-of-type(2),
-.mentalPattern-item > div:nth-of-type(1) > span:nth-of-type(2) {
-    width: 21%;
-    margin: 0 1% 0 1%;
-}
-.mentalPattern-item > div > button,
-.mentalPattern-item > div:nth-of-type(1) > span:last-of-type {
-    width: 17%;
-}
-.mentalPattern-item > div > a {
-    width: 5%;
-    font-size: 15px;
-}
-.mentalPattern-item > div > a {
-    opacity: 0;
-}
-.mentalPattern-item:hover > div > a {
-    opacity: 1;
-}
-.mentalPattern-item > div > button {
-    border: 0px;
-    font-size: 0px;
-}
-.mentalPattern-item > div:nth-of-type(2) {
-    display: flex;
-    margin: 3px 0 0 0;
-}
-.mentalPattern-item > div:nth-of-type(2) > label {
-    display: flex;
-    width: 50%;
-}
-.mentalPattern-item > div:nth-of-type(2) > label > span {
-    width: 40%;
-    text-align: center;
-}
-.mentalPattern-item > div:nth-of-type(2) > label > input {
-    width: 25%;
-}
-.mentalPattern-item > div:nth-of-type(3) > span {
-    border-top: 1px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-    padding: 3px 0 17px 0;
-}
-.mentalPattern-item > div:nth-of-type(3) {
-    text-align: center;
-    border-bottom: 1px solid var(--boxColor);
-}
-/* #endregion */
-
-/* #region @Psychic-Matrices */
-.psychicMatrix-item {
-    padding: 0 2.5%;
-}
-.psychicMatrix-item:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-.ppowers > div:first-of-type,
-.psychicMatrix-item > div:first-of-type {
-    display: flex;
-    justify-content: flex-start;
-}
-.ppowers > div:first-of-type {
-    border-bottom: 1px solid var(--boxColor);
-    margin: -7px 0 0 0;
-}
-.ppowers > div:first-of-type > span,
-.psychicMatrix-item > div:nth-of-type(1) > span,
-.psychicMatrix-item > div > div:not(:first-of-type) > span,
-.psychicMatrix-item > div > div:not(:first-of-type) > label > span {
-    text-align: center;
-}
-.ppowers > div:first-of-type > span:first-of-type {
-    width: 70.3%;
-    margin: 0 0 0 7.25%;
-}
-.ppowers > div:first-of-type > span:nth-of-type(2){
-    width: 14.25%;
-    margin: 0 0 0 1%;
-}
-.ppowers > div:last-of-type {
-    display: flex;
-    place-content: space-between;
-    border-top: 1px solid var(--boxColor);
-}
-.psychicMatrix-item > div > input:first-of-type,
-.psychicMatrix-item > div:nth-of-type(1) > span:first-of-type {
-    width: 74%;
-}
-.psychicMatrix-item > div > input:nth-of-type(2),
-.psychicMatrix-item > div:nth-of-type(1) > span:nth-of-type(2) {
-    width: 15%;
-    margin: 0 0 0 1%;
-}
-.psychicMatrix-item > div > a {
-    width: 5%;
-    font-size: 15px;
-}
-.psychicMatrix-item > div > a {
-    opacity: 0;
-}
-.psychicMatrix-item > div:hover > a {
-    opacity: 1;
-}
-.psychicMatrix-item > div > div:not(:first-of-type) > label {
-    display: flex;
-}
-.psychicMatrix-item > div > div:first-of-type,
-.psychicMatrix-item > div > div:first-of-type > div  {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    margin: 2.5px 0 0 0;
-    width: 100%;
-}
-.psychicMatrix-item > div > div:first-of-type  > div > label {
-    display: contents;
-}
-.psychicMatrix-item > div > div:first-of-type > div > label > span {
-    width: 44%;
-    text-align: end;
-    margin-right: 5px;
-}
-.psychicMatrix-item > div > div:first-of-type > div > label > select {
-    width: 55%;
-}
-.psychicMatrix-item > div > div:nth-of-type(2) {
-    border-top: 1px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-    padding: 3px 0;
-}
-.psychicMatrix-item > div > div:nth-of-type(4) {
-    display: flex;
-    border-top: 1px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-    padding: 3px 0;
-}
-.psychicMatrix-item > div > div:nth-of-type(4) > span:first-of-type {
-    width: 25%;
-}
-.psychicMatrix-item > div > div:nth-of-type(4) > span:last-of-type {
-    width: 75%;
-}
-.psychicMatrix-item > div > div:nth-of-type(5) > label > span:first-of-type {
-    width: 7%;
-    border-right: 1px solid var(--boxColor);
-}
-.psychicMatrix-item > div > div:nth-of-type(5) > label > span:last-of-type {
-    width: 18%;
-}
-.psychicMatrix-item > div > div:nth-of-type(5) > label > input {
-    width: 75%;
-}
-.psychicMatrix-item > div:nth-of-type(2) {
-    border-bottom: 1px solid var(--boxColor);
-    padding: 0 0 3px 0;
-}
-.psychicMatrix > div > label {
-    display: flex;
-}
-.psychicMatrix > div:nth-of-type(1) {
-    display: flex;
-    text-align: center;
-    border-bottom: 1px solid var(--boxColor);
-}
-.psychicMatrix > div:nth-of-type(1) > span,
-.psychicMatrix > div:nth-of-type(2) > label > span {
-    display: grid;
-}
-.psychicMatrix > div:nth-of-type(1) > span:first-of-type {
-    width: 25%;
-}
-.psychicMatrix > div:nth-of-type(1) > span:last-of-type {
-    width: 75%;
-}
-.psychicMatrix > div:nth-of-type(2) > label {
-    text-align: center;
-}
-.psychicMatrix > div:nth-of-type(2) > label > span:first-of-type {
-    width: 7%;
-    border-right: 1px solid var(--boxColor);
-}
-.psychicMatrix > div:nth-of-type(2) > label > span:last-of-type {
-    width: 18%;
-}
-.psychicMatrix > div:nth-of-type(2) > label > input {
-    width: 75%;
-}
-.psychicMatrix > div > label > span,
-.psychicMatrix > div > span {
-    font-size: 13px;
-    align-items: center;
-    height: 20px;
-}
-.psyTempDesc {
-    padding: 0 0 0 3px;
-}
-.psyTempDesc p {
-    margin: 0;
-}
-/* #endregion */
-
-/* #region @Item-Psychic-Matrix @V2*/
-.psyTypeInfo {
-    display: flex;
-    padding: 2px 10px !important;  
-    font-style: italic;
-}
-.psyItemEachMatrix:not(:last-of-type) {
-    border-bottom: 1px solid var(--boxColor);
-}
-.psyItemDetHeader {
-    display: flex;
-    padding: 2px 10px !important;
-}
-.psyItemDetHeader > span:first-of-type {
-    width: 7%;
-    border-right: 1px solid var(--boxColor);
-}
-.psyItemDetHeader > span:nth-of-type(2) {
-    width: 83%;
-    padding: 0 0 0 2%;
-}
-.psyItemDetHeader > a {
-    width: 10%;
-    text-align: center;
-}
-.psyItemDescContainer {
-    padding: 2px 10px !important;
-}
-.psyItemDescHeader {
-    font-size: 1.1rem;
-    border-bottom: 1px solid var(--boxColor);
-}
-.psyItemDesc {
-    overflow-y: auto;
-}
-.psyItemDmgTypes {
-    display: flex;
-    justify-content: space-between;
-    padding: 2px 10px !important;
-}
-.psyItemDmgTypes > button {
-    width: 10%
-}
-.psyItemResTypes {
-    display: flex;
-    justify-content: space-between;
-    padding: 2px 10px !important;
-}
-.psyItemResTypes > button {
-    width: 18%
-}
-.psyItemEachCollapsed {
-    padding: 2px 10px 2px 54px !important;
-}
-.psyItemEachCollapsed p {
-    margin: 0;
-}
-/* #endregion */
-
-
-/* #region @Maintained-Matrices */
-.maintPower-item:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-.pmaint > div:first-of-type {
-    margin: -7px 0 0 0;
-}
-.maintPower-item {
-    padding: 0 2.5%;
-}
-.pmaint > div:not(:nth-of-type(3)),
-.maintPower-item > div:first-of-type {
-    display: flex;
-    justify-content: flex-start;
-}
-.pmaint > div > label:first-of-type {
-    padding: 0 0 0 15px;
-    display: flex;
-}
-.pmaint > div > label:nth-of-type(2) {
-    padding: 0 15px 0 0;
-    display: flex;
-    justify-content: flex-end;
-}
-.pmaint > div > label > input {
-    width: 15%;
-    margin: 0 0 0 5px;
-}
-.pmaint > div:nth-of-type(2) > span,
-.maintPower-item > div:nth-of-type(1) > span {
-    text-align: center;
-}
-.pmaint > div:nth-of-type(2) > span:first-of-type {
-    width: 75.05%;
-    margin: 0 0 0 2.5%;
-}
-.pmaint > div:nth-of-type(2) > span:nth-of-type(2) {
-    width: 14.25%;
-    margin: 0 0 0 1%;
-}
-.pmaint > div:nth-of-type(2) {
-    border-top: 1px solid var(--boxColor);
-    border-bottom: 1px solid var(--boxColor);
-}
-.pmaint > div:last-of-type {
-    display: flex;
-    place-content: space-between;
-    border-top: 1px solid var(--boxColor);
-}
-.maintPower-item > div > input:first-of-type,
-.maintPower-item > div:nth-of-type(1) > span:first-of-type {
-    width: 79%;
-}
-.maintPower-item > div > input:nth-of-type(2),
-.maintPower-item > div:nth-of-type(1) > span:nth-of-type(2) {
-    width: 15%;
-    margin: 0 0 0 1%;
-}
-.maintPower-item > div > a {
-    width: 5%;
-    font-size: 15px;
-}
-.maintPower-item > div > a {
-    opacity: 0;
-}
-.maintPower-item > div:hover > a {
-    opacity: 1;
-}
-.maintPower-item > div > textarea {
-    margin: 5px 0 0 0;
-}
-/* #endregion */
 
 /*
     **************
@@ -4525,7 +4735,7 @@ h6 {
 .inventory {
     margin: 0 0 30px 0;
 }
-.armory .armoryItemHeader.armoryItemHeader,
+.armory .armoryItemHeader,
 .armory .armory-item {
     width: 98%;
     justify-self: center;
@@ -5836,7 +6046,7 @@ h6 {
     -------------
     *************
 */
-/* #region @Combat-Settings*/
+/* #region @Combat-Settings */
 .combatHeaderInfo {
     padding: 0 0 5px 0;
 }
@@ -6387,6 +6597,21 @@ h6 {
     -----------
     ***********
 */
+/* #region Weapon Attack Prompt & Chat Card */
+.baseAbfalterV2 .abfDivFormat .target-preview-row {
+    display: flex;
+    justify-content: space-between;
+}
+.baseAbfalterV2 .abfDivFormat .target-preview-row > span:nth-of-type(1) {
+    width: 55%;
+}
+.baseAbfalterV2 .abfDivFormat .target-preview-row > span:nth-of-type(2) {
+    width: 45%;
+}
+
+/* #endregion */
+
+
 
 /* #region @Prompt-Default-Buttons */
 .baseAbfalterV2 .window-content .standard-form {
@@ -6663,9 +6888,7 @@ h6 {
     padding: 2px 0;
     margin: 3px 0;
 }
-.wepAtkDiceRoll .target-preview-row > span:nth-of-type(2) {
-    width: 45%;
-}
+
 
 /* #endregion */
 
@@ -6931,7 +7154,6 @@ h6 {
     display: flex;
     padding: 0 0 5px 0;
 }
-
 .itemChat .chatItemContent .chatItemHeader > img {
     width: 32px;
     height: 32px;
@@ -6971,7 +7193,19 @@ h6 {
 .itemChat a.descToggle.ItemDescOpen i {
     transform: rotate(90deg);
 }
-
+.chatItemHeader2 {
+    display: flex;
+    padding: 0 0 5px 0;
+}
+.itemChat .itemDescription2 {
+    display: block;
+}
+.itemChat .itemDescription2.ItemDescClose {
+    display: none;
+}
+.itemChat a.descToggle2.ItemDescClose i {
+    transform: rotate(-90deg);
+}
 /* #endregion */
 
 /* #region @Loot-Item @Chat */

@@ -94,6 +94,8 @@ export default class abfalterItem extends Item {
             const parentStats = this.parent.system.stats;
             const ki = this.parent.system.kiAbility;
 
+            this.system.showButtons = this.system.equipped || this.system.info.showButtonsOnActor;
+
             const STAT_KEY_MAP = {
                 agi: 'Agility',
                 con: 'Constitution',
@@ -730,9 +732,11 @@ export default class abfalterItem extends Item {
             this.system.maintName = game.i18n.localize('abfalter.no');
         }
         
-        this.system.chatTag = `${game.i18n.localize('abfalter.action')}: ` + this.system.action
-            + ` | ${game.i18n.localize('abfalter.level')}: ` + this.system.level
-            + ` | ${game.i18n.localize('abfalter.maintanence')}: ` + this.system.maint;
+        this.system.descTag = `${game.i18n.localize('abfalter.level')} ` + this.system.level
+            + ` · ` + this.system.action + ` ${game.i18n.localize('abfalter.action')}`
+            + ` · ${game.i18n.localize('abfalter.type')}: ` + game.i18n.localize(`abfalter.${this.system.type}`);
+        if (this.system.maint == "Yes") this.system.descTag += ` · ${game.i18n.localize(`abfalter.maintainable`)}`;
+
         this.system.ppPotential = Math.floor(this.system.ppInvested * 10);
 
         if (this.parent != null) {
@@ -742,19 +746,100 @@ export default class abfalterItem extends Item {
                 this.system.upcastAmountFinal = Math.floor(this.system.upcastAmount + this.parent.system.psySettings.upcastValueFinal);
                 const settings = this.parent.system.psySettings;
                 for (const effect of Object.values(this.system.matrixDetails)) {
-                        effect.dmgValueFinal = Math.floor(
-                            (effect.dmgValue + settings.matrixDmgIncFinal) *
-                            settings.matrixDmgMultipleFinal
-                        );
-                        effect.atPenFinal = effect.atPen + settings.matrixPenIncFinal;
-                        effect.resValueFinal = effect.resValue + settings.matrixResCheckIncFinal;
-                        effect.shieldValueFinal = Math.floor(
-                            (effect.shieldValue + settings.matrixShieldIncFinal) *
-                            settings.matrixShieldMultFinal
-                        );
+                    effect.dmgValueFinal = Math.floor(
+                        (effect.dmgValue + settings.matrixDmgIncFinal) *
+                        settings.matrixDmgMultipleFinal
+                    );
+                    effect.atPenFinal = effect.atPen + settings.matrixPenIncFinal;
+                    effect.resValueFinal = effect.resValue + settings.matrixResCheckIncFinal;
+                    effect.shieldValueFinal = Math.floor(
+                        (effect.shieldValue + settings.matrixShieldIncFinal) *
+                        settings.matrixShieldMultFinal
+                    );
+                    switch(this.system.type) {
+                        case "attack":
+                            const dmgTypeList = Object.entries(effect.dmgType).filter(([, value]) => value).map(([key]) => key);
+                            const localizedDmgTypes = dmgTypeList.map(type => game.i18n.localize(`abfalter.${type.toLowerCase()}`));
+                            const dmgTypeText = localizedDmgTypes.length ? ` (${localizedDmgTypes.join(", ")})` : "";
+                            const attackInfoParts = [
+                                `${game.i18n.localize(`abfalter.dmgShort`)}: ${effect.dmgValueFinal}${dmgTypeText}`,
+                                `${game.i18n.localize(`abfalter.atPen`)}: ${effect.atPenFinal}`
+                            ];
+                            if (effect.projAdditional !== 0) {
+                                attackInfoParts.push(`${game.i18n.localize(`abfalter.projBonus`)}: ${effect.projAdditional}`);
+                            }
+                            effect.infoLine = attackInfoParts.join(" · ");
+                            break;
+                        case "effect":
+                            const resTypeList = Object.entries(effect.resType ?? {}).filter(([, value]) => value).map(([key]) => key);
+                            const localizedResTypes = resTypeList.map(type => game.i18n.localize(`abfalter.${type.toLowerCase()}`));
+                            const resTypeText = localizedResTypes.length ? ` (${localizedResTypes.join(", ")})` : "";
+                            effect.infoLine = `${game.i18n.localize(`abfalter.resistance`)}: ${effect.resValueFinal}${resTypeText}`;
+                            break;
+                        case "shield":
+                            effect.infoLine = `${game.i18n.localize(`abfalter.shield`)} ${game.i18n.localize(`abfalter.lp`)}: ${effect.shieldValue}`;
+                            break;
+                        case "basic":
+                            effect.infoLine = ``;
+                            break;
                     }
+                }
             }
         }
+    }
+
+    prepareMaintPower() {
+        this.system.matricesList = [];
+        if (!this.parent) return;
+        const settings = this.parent.system.psySettings;
+        const tiers = [
+            { key: "effect20", value: 20 },
+            { key: "effect40", value: 40 },
+            { key: "effect80", value: 80 },
+            { key: "effect120", value: 120 },
+            { key: "effect140", value: 140 },
+            { key: "effect180", value: 180 },
+            { key: "effect240", value: 240 },
+            { key: "effect280", value: 280 },
+            { key: "effect320", value: 320 },
+            { key: "effect440", value: 440 }
+        ];
+        this.system.finalPot = Math.floor((this.system.ppInvested * settings.maintPPValueFinal) + settings.maintIncValueFinal + this.system.value + this.parent.system.ppotential.final);
+        this.system.upcastAmountFinal = this.system.upcastAmount;
+
+        let tierIndex = tiers.findLastIndex(tier => this.system.finalPot >= tier.value);
+        if (tierIndex < 0) tierIndex = 0;
+        const upcastAmount = Math.max(Number(this.system.upcastAmountFinal) || 0, 0);
+        tierIndex = Math.min(tierIndex + upcastAmount, tiers.length - 1);
+        if (!this.system.linked) {
+            this.system.maintPotencyAchieved = tiers[tierIndex].value;;
+            return;
+        }
+
+        const validMatrices = this.parent.items.filter(i => i.type === "psychicMatrix" && i.system.maint === "Yes");
+        this.system.matricesList = validMatrices.map(i => ({ id: i.id, name: i.name }));
+        const selectedMatrix = validMatrices.find(i => i.id === this.system.maintainedMatrixId) ?? null;
+        if (!selectedMatrix) {
+            this.system.maintPotencyAchieved = "";
+            return;
+        }
+
+        const matrixDetails = selectedMatrix.system.matrixDetails;
+
+        // If the selected tier is a failure, move upward to the first successful tier.
+        while (tierIndex < tiers.length - 1 && matrixDetails[tiers[tierIndex].key]?.failure === true) tierIndex++;
+
+        const achievedTier = tiers[tierIndex];
+        const achievedEffect = matrixDetails[achievedTier.key];
+
+        if (!achievedEffect) {
+            this.system.maintPotencyAchieved = "";
+            return;
+        }
+
+        this.system.maintPotencyAchieved = achievedTier.value;
+        this.name = selectedMatrix.name
+        this.system.description = achievedEffect.description ?? "";
     }
 
     prepareMentalPattern() {
@@ -925,7 +1010,7 @@ export default class abfalterItem extends Item {
             case "psychicMatrix":
                 cardData.expand = true;
                 cardData.diff = "";
-                cardData.tag = this.system.chatTag;
+                cardData.tag = this.system.descTag;
                 cardData.effect;
                 cardData.effect20 = this.system.matrixDetails.effect20.enrichedDesc;
                 cardData.effect40 = this.system.matrixDetails.effect40.enrichedDesc;

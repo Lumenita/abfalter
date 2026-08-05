@@ -33,56 +33,67 @@
 
     {{#if matrixDetails.resolved}}
     {{#if matrixResolution.failed}}
-        <div class="matrixFailure">
-            <span>Failed</span>
-
-            <div>
-                Fatigue: {{matrixResolution.fatigue}}
+    <div class="matrixFailure">
+        <h6>{{localize "abfalter.failure"}}</h6>
+        <div>{{localize "abfalter.psyFailLevel"}}: {{matrixResolution.failureLevel}}</div>
+        <div>{{localize "abfalter.fatigue"}}: {{matrixResolution.fatigue}}</div>
+    </div>
+    {{else}}
+    {{#if matrixResolution.chosen}}
+    <div class="matrixSuccess">
+        <h6> 
+            {{matrixResolution.chosenTitle}}
+            <a class="descToggle2" data-value="{{descToggle2}}">
+                <i class="fas fa-chevron-down fa-fw"></i>
+            </a>
+        </h6>
+        <div class="mastrixSuccessDesc"> 
+            <div class="itemDescription2 {{#if descToggle2}}ItemDescClose{{/if}}">
+                {{{matrixResolution.chosenDesc}}} 
             </div>
         </div>
+
+        {{#ifEquals matrixDetails.type "shield"}}
+        <div> {{localize (concat "abfalter." matrixDetails.type)}} {{localize "abfalter.info"}} </div>
+        <div> {{matrixResolution.shieldInfo}} </div>
+        {{/ifEquals}}
+
+        {{#ifEquals matrixDetails.type "attack"}}
+        <div> {{localize (concat "abfalter." matrixDetails.type)}} {{localize "abfalter.info"}} </div>
+        <div> {{matrixResolution.attackInfo}} </div>
+        {{#unless matrixResolution.rollFinished}}
+        <button type="button" class="attackMatrixTargets matrixButton">
+            {{localize "abfalter.selectTargets"}}
+        </button>
+        {{/unless}}
+        {{/ifEquals}}
+
+        {{#ifEquals matrixDetails.type "effect"}}
+        <div> {{localize (concat "abfalter." matrixDetails.type)}} {{localize "abfalter.info"}} </div>
+        <div> {{matrixResolution.resInfo}} </div>
+        <!--
+        {{#unless matrixResolution.rollFinished}}
+        <button type="button" class="effectMatrixTargets matrixButton">
+            {{localize "abfalter.selectTargets"}}
+        </button>
+        {{/unless}}
+        -->
+        {{/ifEquals}}
+    </div>
     {{else}}
-        <div class="matrixEffectChoices">
+    <div class="matrixEffectChoices">
         {{#each matrixResolution.availableEffects as |effect|}}
         <div class="chatCustomRoll chatCustomTitleContainer">
-            <button
-                type="button"
-                class="selectMatrixEffect"
-                data-effect-key="{{effect.key}}"
-            >
-                {{effect.title}} ({{effect.titleNum}})
+            <button type="button" class="selectMatrixEffect" data-effect-key="{{effect.key}}">
+                {{localize (concat "abfalter." effect.title)}} ({{effect.titleNum}})
             </button>
-
             <div class="chatCustomTitle">
                 {{{effect.description}}}
             </div>
         </div>
         {{/each}}
-        </div>
-    {{/if}}
-    {{/if}}
-
-<!--
-    {{#if expand}}
-    <div>
-        <h6> {{localize "abfalter.rolledPot"}} </h6>
-    </div>
-    <div class="psychicChatButtons">
-        <button class="psychicDifficulty" data-label="20"> 20 </button>
-        <button class="psychicDifficulty" data-label="40"> 40 </button>
-        <button class="psychicDifficulty" data-label="80"> 80 </button>
-        <button class="psychicDifficulty" data-label="120"> 120 </button>
-        <button class="psychicDifficulty" data-label="140"> 140 </button>
-        <button class="psychicDifficulty" data-label="180"> 180 </button>
-        <button class="psychicDifficulty" data-label="240"> 240 </button>
-        <button class="psychicDifficulty" data-label="280"> 280 </button>
-        <button class="psychicDifficulty" data-label="320"> 320 </button>
-        <button class="psychicDifficulty" data-label="440"> 440 </button>
-    </div>
-    {{else}}
-    <div>
-        <h6> {{localize "abfalter.achDiff"}} - {{diff}}</h6>
-        <span> {{localize "abfalter.effect"}}: {{effect}} </span>
     </div>
     {{/if}}
-    -->
+    {{/if}}
+    {{/if}}
 </div>

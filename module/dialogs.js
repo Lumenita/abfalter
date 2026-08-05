@@ -121,7 +121,7 @@ export const genericDialogs = {
                         action: "cancel",
                         callback: async () => {
                             await onConfirm?.();
-                            safeResolve(true);
+                            safeResolve(false);
                         }   
                     },
                 ]

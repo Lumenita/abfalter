@@ -4,5 +4,15 @@
         <label class="itemSimpleLabel"> <span> {{localize "abfalter.oppPattern"}} </span> <input type="text" name="system.opposite" value="{{system.opposite}}" /> </label>
         <label class="itemSimpleLabel"> <span> {{localize "abfalter.cost"}} </span> <input type="number" name="system.cost" value="{{system.cost}}" /> </label>
         <label class="itemSimpleLabel"> <span> {{localize "abfalter.cancelCost"}} </span> <input type="number" name="system.cancelCost" value="{{system.cancelCost}}" /> </label>
+        <label class="itemSimpleLabel"> 
+            <span> {{localize "abfalter.cancelled"}} </span> 
+            <button class="{{#if system.toggle}}kiBought{{/if}}" data-action="toggleValue" data-label="system.toggle" data-ability="{{system.toggle}}">
+                {{#if system.toggle}}
+                <span> {{localize "abfalter.yes"}} </span>
+                {{else}}
+                <span> {{localize "abfalter.no"}} </span>
+                {{/if}}
+            </button>
+        </label>
     </fieldset>
 </section>

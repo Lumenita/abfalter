@@ -50,7 +50,8 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             rollInitiative: this.#rollInitiative,           // TODO
             //Items
             itemToggleValue: this.#itemToggleValue,         // Universal Item Toggle
-            toggleElanGift: this.#toggleElanGift,           // Toggles values within Elan objects
+            itemToggleNestedValue: this.#itemToggleNestedValue, // Universal Nested Item Toggle
+            toggleElanGift: this.#toggleElanGift,           // To merge Above
             itemToChat: this.#itemToChat,                   // Sends information about item to chat
             subItemToChat: this.#subItemToChat,             // As above from within an item in the actor sheet, can prob merge
             createItem: this.#createNewItem,
@@ -234,24 +235,72 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             const items = this.actor.itemTypes[type]?.sort((a, b) => a.sort - b.sort) || [];
             context[`${type}s`] = items;
         }
-        // Prepare enriched descriptions for psychic matrices
-        for (const psychicMatrix of context.psychicMatrixs) {
-            psychicMatrix.enrichedDesc =
-                await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-                    psychicMatrix.system.description ?? "",
-                    { async: true }
-                );
 
-            const matrices = psychicMatrix.system.matrixDetails ?? {};
+        // Prepare enriched descriptions to be seen on the actor itself
+        const enrich = content => foundry.applications.ux.TextEditor.implementation.enrichHTML(content ?? "", { async: true });
+        const enrichConfig = {
+            psychicMatrix: {
+                fields: {
+                    description: "enrichedDesc"
+                },
+                nested: [
+                    {
+                        path: "system.matrixDetails",
+                        fields: {
+                            description: "enrichedDesc"
+                        }
+                    }
+                ]
+            },
+            maintPower: {
+                fields: {
+                    description: "enrichedDesc"
+                }
+            },
+            mentalPattern: {
+                fields: {
+                    description: "enrichedDesc",
+                    penalty: "enrichedPenalty"
+                }
+            },
+            weapon: {
+                fields: {
+                    description: "enrichedDesc"
+                }
+            },
+            armor: {
+                fields: {
+                    description: "enrichedDesc"
+                }
+            },
+            ammo: {
+                fields: {
+                    description: "enrichedDesc"
+                }
+            }
+        };
 
-            for (const matrix of Object.values(matrices)) {
-                matrix.enrichedDesc =
-                    await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-                        matrix.description ?? "",
-                        { async: true }
-                    );
+        const tasks = [];
+
+        for (const [type, config] of Object.entries(enrichConfig)) {
+            for (const item of context[`${type}s`] ?? []) {
+                for (const [source, output] of Object.entries(config.fields ?? {})) {
+                    tasks.push(enrich(item.system[source]).then(html => item[output] = html));
+                }
+
+                for (const nested of config.nested ?? []) {
+                    const entries = Object.values(foundry.utils.getProperty(item, nested.path) ?? {});
+
+                    for (const entry of entries) {
+                        for (const [source, output] of Object.entries(nested.fields ?? {})) {
+                            tasks.push(enrich(entry[source]).then(html => entry[output] = html));
+                        }
+                    }
+                }
             }
         }
+
+        await Promise.all(tasks);
 
         return context;
     }
@@ -435,6 +484,8 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                     const item = this.actor.items.get(element.dataset.itemId);
                     const x = 
                             item?.type != "discipline" &&
+                            item?.type != "mentalPattern" &&
+                            item?.type != "maintPower" &&
                             item?.type != "currency";
                     return x;
                 },
@@ -571,19 +622,18 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         return item.update({ [`system.gifts.${key}.${label}`]: value });
     }
 
-    // static #itemToggleEachValue(ev) {
-    //     ev.preventDefault();
+    static #itemToggleNestedValue(ev) {
+        ev.preventDefault();
+        const toggle = event.target.closest("[data-path]");
+        const itemElement = event.target.closest("[data-item-id]");
+        if (!toggle || !itemElement) return;
+        const item = this.actor.items.get(itemElement.dataset.itemId);
+        if (!item) return;
+        const path = toggle.dataset.path;
+        const currentValue = foundry.utils.getProperty(item, path);
+        return item.update({ [path]: !currentValue });
+    }
 
-    //     const target = ev.target.closest("[data-path][data-value]");
-    //     const itemId = ev.target.closest(".item").dataset.itemId;
-    //     const item = this.actor.items.get(itemId);
-
-    //     const path = target.dataset.path;
-    //     let value = target.dataset.value;
-    //     value = !(value === 'true');
-    //     console.log(path, value)
-    //     return item.update({ [path]: value });
-    // }
 
     
 
@@ -604,10 +654,10 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 diceFunctions.resistanceDialogue({actor: this.actor, chaLabel: dataset.type, value: dataset.value});
                 break;
             case "castMatrix":
-                diceFunctions.handlePsychicMatrices({actor: this.actor, mode: "matrix"});
+                diceFunctions.potentialDialogue({actor: this.actor, mode: "matrix"});
                 break;
             case "psychicPotential":
-                diceFunctions.handlePsychicMatrices({actor: this.actor, mode: "generic"});
+                diceFunctions.potentialDialogue({actor: this.actor, mode: "generic"});
                 break;
             case "unarmedBlock":
             case "unarmedDodge":

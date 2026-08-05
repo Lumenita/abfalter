@@ -1,7 +1,7 @@
 ﻿<section class="tab {{tabs.settings.cssClass}} actorPage settingsPage baseAbfalterV2" data-group="{{tabs.settings.group}}" data-tab="{{tabs.settings.id}}">
     <div class="fieldsetContainerRowV2">
         <div class="fieldSetColumnV2 settingsOptions">
-            <fieldset class="settingsSubsection">
+            <fieldset>
                 <legend> {{localize "abfalter.settingsTab.generalSettings"}} </legend>
                 <div class="settingsSubsection abfDivFormat">
                     <label>
@@ -39,7 +39,7 @@
                     </label>
 
                     <label>
-                        <span> {{localize "abfalter.settingsTab.isMass"}} </span>
+                        <span> {{localize "abfalter.isMass"}} </span>
                         <button type="button" data-action="toggleValue"
                             class="toggleBoolean {{#if system.isMass.isMass}}kiBought{{/if}}"
                             data-label="system.isMass.isMass" data-ability="{{system.isMass.isMass}}">
@@ -698,18 +698,8 @@
                         <input type="number" name="system.resistances.Psychic.final" value="{{system.resistances.Psychic.final}}" readonly/> 
                     </label>
                     
-                    <label class="setDoubleInput">
-                        <span> {{localize "abfalter.dmgBarrier"}} </span>
-                        <input type="number" name="system.otherStats.damageBarrier" value="{{system.otherStats.damageBarrier}}" />
-                        <span> | </span>
-                        <input type="number" name="system.otherStats.damageBarrierFinal" value="{{system.otherStats.damageBarrierFinal}}" readonly/> 
-                    </label>
-                    <label class="setDoubleInput">
-                        <span> {{localize "abfalter.dmgRdcFinal"}} </span>
-                        <input type="number" name="system.otherStats.dmgRdc" value="{{system.otherStats.dmgRdc}}" /> 
-                        <span> | </span>
-                        <input type="number" name="system.otherStats.dmgRdcFinal" value="{{system.otherStats.dmgRdcFinal}}" readonly/> 
-                    </label>
+
+
                     
                     <label class="setDoubleInput">
                         <span> {{localize "abfalter.artiPresenceMult"}} </span>
@@ -795,6 +785,42 @@
                 </div>
             </fieldset>
 
+            <fieldset class="extendedSettingsContainer">
+                <legend> {{localize "abfalter.combatSettings"}} </legend>
+                <div class="extendedSettings abfDivFormat">
+                    {{#each system.combatDmgReceivedStats as | dmgRec key |}}
+                    <label class="setDoubleInput">
+                        <span> {{localize (concat "abfalter." key)}} </span>
+                        <input type="number" name="system.combatDmgReceivedStats.{{key}}.mult" value="{{dmgRec.mult}}" /> 
+                        <span> | </span>
+                        <input type="number" name="system.combatDmgReceivedStats.{{key}}.final" value="{{dmgRec.final}}" readonly/> 
+                    </label>
+                    {{/each}}
+                </div>
+
+                <div class="extendedSettings abfDivFormat">
+                    <label class="setDoubleInput">
+                        <span> {{localize "abfalter.dmgBarrier"}} </span>
+                        <input type="number" name="system.otherStats.damageBarrier" value="{{system.otherStats.damageBarrier}}" />
+                        <span> | </span>
+                        <input type="number" name="system.otherStats.damageBarrierFinal" value="{{system.otherStats.damageBarrierFinal}}" readonly/> 
+                    </label>
+                    <label class="setDoubleInput">
+                        <span> {{localize "abfalter.dmgRdcBase"}} </span>
+                        <input type="number" name="system.otherStats.dmgRdcBase" value="{{system.otherStats.dmgRdcBase}}" /> 
+                        <span> | </span>
+                        <input type="number" name="system.otherStats.dmgRdcBaseFinal" value="{{system.otherStats.dmgRdcBaseFinal}}" readonly/> 
+                    </label>
+                    <label class="setDoubleInput">
+                        <span> {{localize "abfalter.dmgRdcFinal"}} </span>
+                        <input type="number" name="system.otherStats.dmgRdc" value="{{system.otherStats.dmgRdc}}" /> 
+                        <span> | </span>
+                        <input type="number" name="system.otherStats.dmgRdcFinal" value="{{system.otherStats.dmgRdcFinal}}" readonly/> 
+                    </label>
+                </div>
+            </fieldset>
+
+
             <fieldset class="extendedSettingsContainer {{#if system.toggles.psychicTab}}hidden{{/if}}">
                 <legend> {{localize "abfalter.psychicSettings"}} </legend>
                 <div class="extendedSettings abfDivFormat">
@@ -841,14 +867,20 @@
                         <input type="number" name="system.psySettings.maintIncValueFinal" value="{{system.psySettings.maintIncValueFinal}}" readonly />
                     </label>
                     <label class="setDoubleInput">
+                        <span>{{localize "abfalter.maintSlotInc"}}</span>
+                        <input type="number" name="system.psySettings.maintSlotInc" value="{{system.psySettings.maintSlotInc}}" />
+                        <span>|</span>
+                        <input type="number" name="system.psySettings.maintSlotIncFinal" value="{{system.psySettings.maintSlotIncFinal}}" readonly />
+                    </label>
+                </div>
+
+                <div class="extendedSettings abfDivFormat">
+                    <label class="setDoubleInput">
                         <span>{{localize "abfalter.upcastValue"}}</span>
                         <input type="number" name="system.psySettings.upcastValue" value="{{system.psySettings.upcastValue}}" />
                         <span>|</span>
                         <input type="number" name="system.psySettings.upcastValueFinal" value="{{system.psySettings.upcastValueFinal}}" readonly />
                     </label>
-                </div>
-
-                <div class="extendedSettings abfDivFormat">
                     <label class="setDoubleInput">
                         <span>{{localize "abfalter.matrixDmgInc"}}</span>
                         <input type="number" name="system.psySettings.matrixDmgInc" value="{{system.psySettings.matrixDmgInc}}" />

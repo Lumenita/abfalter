@@ -1,0 +1,63 @@
+<form>
+  <body>
+    <div class="abfDivFormat matrixProjPrompt">
+        <div class="attack-info-row"> 
+            <span id="atkInfo"></span> 
+        </div>
+
+        <div class="armorRow" id="dmgRow">
+            <label for="dmgMod">{{localize "abfalter.damage"}}</label>
+            <div>
+                <input type="number" id="dmgMod" value="0" step="1"/>
+                <span>|</span>
+                <span id="dmgFinalValue"></span>
+            </div>
+        </div>
+
+        <div class="armorRow" id="atPenRow">
+            <label for="atPenMod"> {{localize "abfalter.atPen"}} </label>
+            <div>
+                <input type="number" id="atPenMod" value="0" step="1"/>
+                <span>|</span>
+                <span id="atPenFinalValue"></span>
+            </div>
+        </div>
+
+        <label>
+            <span>{{localize "abfalter.damageType"}}</span>
+            <select id="damageTypeDropdown"></select>
+        </label>
+
+        <label>
+            <span>{{localize "abfalter.activeActionMod"}} </span>
+            <select id="modifierSelect" name="modifierSelect"></select>
+        </label>
+
+        <div class="matrixAimDiv">
+            <span>{{localize "abfalter.location"}}</span>
+            <button type="button" id="precisionMatrixToggle"> 
+                <span id="precisionModeLabel">
+                    {{localize "abfalter.regular"}}
+                </span>
+            </button>
+
+            <select id="directedAtkDropdown"></select>
+        </div>
+
+        <label>
+            <span>{{localize "abfalter.pp"}}</span>
+            <select id="ppDropdown"></select>
+        </label>
+        
+        <label> 
+            <span> {{localize "abfalter.dialogs.modifier"}} </span>
+            <input type="number" id="modifierMod" value="0" /> 
+        </label>
+        
+        <label class="target-preview-row">
+            <span>{{localize "abfalter.targets"}}</span>
+            <span id="selectedTargetsList">None</span>
+        </label>
+    </div>
+  </body>
+</form>

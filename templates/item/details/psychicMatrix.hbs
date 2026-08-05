@@ -97,22 +97,6 @@
                 </button>
             </label>
             {{/ifIn}}
-            {{#ifIn system.type "attack"}}
-            <label class="itemSimpleLabel">
-                <span> {{localize "abfalter.attackHasAoEProfile"}} </span>
-                <button type="button" data-action="toggleValue" class="{{#if system.attackHasAoEProfile}}kiBought{{/if}}"
-                    data-label="system.attackHasAoEProfile" data-ability="{{system.attackHasAoEProfile}}">
-                    {{#if system.attackHasAoEProfile}}
-                    <span> {{localize "abfalter.yes"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.no"}} </span>
-                    {{/if}} 
-                </button>
-            </label>
-            {{#if system.attackHasAoEProfile}}
-            <span class="psyTypeInfo">{{localize "abfalter.attackHasAoEProfileInfo"}}</span>
-            {{/if}}
-            {{/ifIn}}
 
             {{#ifIn system.type "effect"}}
             <label class="itemSimpleLabel">

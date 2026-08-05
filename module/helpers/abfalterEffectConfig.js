@@ -264,9 +264,10 @@ export default class abfalterEffectConfig extends foundry.applications.sheets.Ac
             { key: 'system.psySettings.projPPValueBonus', label: game.i18n.localize('abfalter.projPPValue') },
             { key: 'system.psySettings.potMaxPPBonus', label: game.i18n.localize('abfalter.potMaxPP') },
             { key: 'system.psySettings.potPPValueBonus', label: game.i18n.localize('abfalter.potPPValue') },
-            { key: 'system.psySettings.bonumaintMaxPPBonussBase', label: game.i18n.localize('abfalter.maintMaxPP') },
+            { key: 'system.psySettings.maintMaxPPBonus', label: game.i18n.localize('abfalter.maintMaxPP') },
             { key: 'system.psySettings.maintPPValueBonus', label: game.i18n.localize('abfalter.maintPPValue') },
             { key: 'system.psySettings.maintIncValueBonus', label: game.i18n.localize('abfalter.maintIncValue') },
+            { key: 'system.psySettings.maintSlotIncBonus', label: game.i18n.localize('abfalter.maintSlotInc') },
             { key: 'system.psySettings.upcastValueBonus', label: game.i18n.localize('abfalter.upcastValue') },
             ],
             Ki: [

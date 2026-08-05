@@ -23,23 +23,23 @@ export const abfalterSettings = () => {
         type: String
     });
     game.settings.register("abfalter", "forceMigration", {
-        name: "Force migration on next launch",
-        hint: "Runs all migration steps on next load, regardless of stored version.",
+        name: game.i18n.localize('abfalter.globalSettings.forceMigration'),
+        hint: game.i18n.localize('abfalter.globalSettings.forceMigrationDetails'),
         scope: "world",
         config: true,
         type: Boolean,
         default: false
     });
     game.settings.register('abfalter', "systemChangeLog", {
-        name: "Don't show me the system changelog",
-        hint: "when toggled on, the system changelog will not show for the current version again, when toggled off it will show everytime on bootup.",
+        name: game.i18n.localize('abfalter.globalSettings.changelogName'),
+        hint: game.i18n.localize('abfalter.globalSettings.changelogDetails'),
         scope: 'world',
         config: true,
         default: false,
         type: Boolean
     });
     game.settings.register("abfalter", "combatSettings", {
-        name: "Combat Settings Data",
+        name: game.i18n.localize('abfalter.globalSettings.combatSettingsData'),
         scope: "world",
         config: false,
         type: Object,
@@ -69,9 +69,9 @@ export const abfalterSettings = () => {
         }
     });
     game.settings.registerMenu("abfalter", "combatSettingsMenu", {
-        name: "Combat Settings",
+        name: game.i18n.localize('abfalter.globalSettings.combatSettings'),
         label: "Configure",
-        hint: "Open the advanced combat settings which allow the configuration of what is visible on attack / defense cards.",
+        hint: game.i18n.localize('abfalter.globalSettings.combatSettingsDetails'),
         icon: "fas fa-sliders-h",
         type: ABFAlterCombatSettingsForm,
         restricted: true

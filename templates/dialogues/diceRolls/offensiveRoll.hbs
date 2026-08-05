@@ -73,10 +73,10 @@
     <div class="rollTextMargin">
         <div class="offenseDmgPen">
             {{#if atkSettings.atkDmg}}
-            <span> {{localize "abfalter.dmgShort"}}: {{attackDetails.dmg}} {{attackDetails.dmgType}}</span>
+            <span> {{localize "abfalter.dmgShort"}}: {{attackDetails.dmg}} {{localize (concat "abfalter." attackDetails.dmgType)}}</span>
             {{else}}
-            <span class="gm-only"> {{localize "abfalter.dmgShort"}}: {{attackDetails.dmg}} {{attackDetails.dmgType}}</span>
-            <span class="player-only"> {{localize "abfalter.dmgShort"}}: ??? {{attackDetails.dmgType}}</span>
+            <span class="gm-only"> {{localize "abfalter.dmgShort"}}: {{attackDetails.dmg}} {{localize (concat "abfalter." attackDetails.dmgType)}}</span>
+            <span class="player-only"> {{localize "abfalter.dmgShort"}}: ??? {{localize (concat "abfalter." attackDetails.dmgType)}}</span>
             {{/if}}
             {{#if atkSettings.atkAtPen}}
             <span> {{localize "abfalter.atPen"}}: {{attackDetails.atPen}}</span>
@@ -136,19 +136,19 @@
     {{#if ../atkSettings.atkFinValue}}
     <label class="explodeButtons">
         {{#if roll.explode}}
-        <button class="offOpenRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
+        <button class="offContinuationRoll" data-roll-type="open" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
         {{/if}}
         {{#if roll.fumble}}
-        <button class="offFumbleRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
+        <button class="offContinuationRoll" data-roll-type="fumble" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
         {{/if}}
     </label>
     {{else}}
     <label class="gm-only explodeButtons">
         {{#if roll.explode}}
-        <button class="offOpenRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
+        <button class="offContinuationRoll" data-roll-type="open" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
         {{/if}}
         {{#if roll.fumble}}
-        <button class="offFumbleRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
+        <button class="offContinuationRoll" data-roll-type="fumble" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
         {{/if}}
     </label>
     {{/if}}

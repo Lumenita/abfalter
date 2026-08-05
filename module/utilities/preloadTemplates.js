@@ -45,6 +45,7 @@ export const preloadHandlebarsTemplates = () => {
         "systems/abfalter/templates/item/partials/subHeader/psychicMatrix.hbs",
         "systems/abfalter/templates/item/details/psychicMatrix.hbs",
         "systems/abfalter/templates/item/partials/subHeader/maintPower.hbs",
+        "systems/abfalter/templates/item/details/maintPower.hbs",
         "systems/abfalter/templates/item/partials/subHeader/kiAbility.hbs",
         "systems/abfalter/templates/item/details/kiAbility.hbs",
         "systems/abfalter/templates/item/partials/subHeader/arsMagnus.hbs",

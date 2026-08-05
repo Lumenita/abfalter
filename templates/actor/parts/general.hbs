@@ -432,8 +432,8 @@
 
             {{#if system.isMass.isMass}}
             <div class="fieldSetRow">
-                <fieldset>
-                    <legend>Mass Enemies</legend>
+                <fieldset class="isMassContainer">
+                    <legend> {{localize "abfalter.massEnemies"}}  </legend>
                     <label>
                         <span> {{localize "abfalter.base"}} </span> 
                         <input type="number" name="system.isMass.value" value="{{system.isMass.value}}" readonly/>
@@ -447,6 +447,7 @@
             {{/if}}
 
             <div class="fieldSetRow fieldSetNarrowGap">
+                <!--Movement-->
                 <fieldset class="movement">
                     <legend>
                         {{localize "abfalter.movement"}}
@@ -485,8 +486,9 @@
                         <label> <span> {{localize "abfalter.running"}} </span> <span> {{system.movement.runningMove}}
                             </span> </label>
                     </div>
-                </fieldset><!--Movement-->
+                </fieldset>
 
+                <!--Lifepoints & Fatigue-->
                 <div class="g2">
                     <!--Lifepoints-->
                     <fieldset class="lifepoints">
@@ -554,8 +556,9 @@
                                     name="system.fatigue.value" value="{{system.fatigue.value}}" /> </label>
                         </div>
                     </fieldset>
-                </div> <!--Lifepoints & Fatigue-->
+                </div> 
 
+                <!--Regeneration-->
                 <fieldset class="regeneration">
                     <legend> {{localize "abfalter.regen"}} </legend>
                     <label> <span> {{localize "abfalter.base"}} </span> <input type="number"
@@ -575,7 +578,7 @@
                     <label> <span> {{localize "abfalter.redPen"}} </span> <input type="text"
                             name="system.regeneration.penaltyReduction" value="{{system.regeneration.penaltyReduction}}"
                             readonly /> </label>
-                </fieldset> <!--Regeneration-->
+                </fieldset> 
             </div>
 
             <div class="fieldSetRow"> 

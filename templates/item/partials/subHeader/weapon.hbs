@@ -5,5 +5,18 @@
 <ul class="summary flexrow">
     <li> {{localize "abfalter.speed"}}: {{system.derived.finalWeaponSpeed}} </li>
     <li> {{localize "abfalter.presence"}}: {{system.derived.finalPresence}} </li>
-    <li> {{system.info.weaponClass}} </li>
+    <li>
+        <label> 
+            <span> {{localize "abfalter.showButtons"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.info.showButtonsOnActor}}kiBought{{/if}}"
+                data-label="system.info.showButtonsOnActor" data-ability="{{system.info.showButtonsOnActor}}">
+                {{#if system.info.showButtonsOnActor}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                {{/if}}
+            </button>
+        </label>
+    </li>
+    
 </ul>

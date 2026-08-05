@@ -2,10 +2,43 @@
   "id": "abfalter",
   "title": "Anima Beyond Fantasy Altered",
   "description": "Engligh Version of 'Fantasy Flight Games' Anima Beyond Fantasy System altered by some house rules.",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "compatibility": {
     "minimum": 14,
-    "verified": "14.363"
+    "verified": "14.365"
+  },
+   "documentTypes": {
+    "Actor": {
+      "character": {}
+    },
+    "Item": {
+      "inventory": {},
+      "weapon": {},
+      "armor": {},
+      "ammo": {},
+      "advantage": {},
+      "secondary": {},
+      "spell": {},
+      "kiTechnique": {},
+      "arsMagnus": {},
+      "martialArt": {},
+      "psychicMatrix": {},
+      "monsterPower": {},
+      "kiSealCreature": {},
+      "incarnation": {},
+      "invocation": {},
+      "elan": {},
+      "mentalPattern": {},
+      "class": {},
+      "discipline": {},
+      "spellPath": {},
+      "maintPower": {},
+      "currency": {},
+      "proficiency": {},
+      "zeonMaint": {},
+      "backgroundInfo": {},
+      "kiAbility": {}
+    }
   },
   "authors": [
     {
@@ -28,7 +61,7 @@
   "license": "LICENSE.txt",
   "url": "https://github.com/Lumenita/abfalter",
   "manifest": "https://raw.githubusercontent.com/Lumenita/abfalter/main/system.json",
-  "download": "https://github.com/Lumenita/abfalter/releases/download/v1.6.3/abfalter.zip",
+  "download": "https://github.com/Lumenita/abfalter/releases/download/v1.6.4/abfalter.zip",
   "languages": [
     {
       "lang": "en",
@@ -194,15 +227,6 @@
       "private": false
     },
     {
-      "name": "backgrounds",
-      "label": "Background Items",
-      "system": "abfalter",
-      "path": "./packs/backgrounds",
-      "type": "Item",
-      "private": false,
-      "flags": {}
-    },
-    {
       "name": "cultural-roots",
       "label": "Cultural Roots",
       "system": "abfalter",
@@ -228,6 +252,24 @@
       "type": "Item",
       "private": false,
       "flags": {}
+    },
+    {
+      "name": "items",
+      "label": "General Wares",
+      "system": "abfalter",
+      "path": "./packs/items",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "prices",
+      "label": "Price Tables",
+      "system": "abfalter",
+      "path": "./packs/prices",
+      "type": "JournalEntry",
+      "private": false,
+      "flags": {}
     }
   ],
   "packFolders": [
@@ -239,10 +281,10 @@
         "advantages-and-disadvantages",
         "equipment",
         "creature-powersabilities",
-        "backgrounds",
         "cultural-roots",
         "elan",
-        "raceslegacies"
+        "raceslegacies",
+        "items"
       ]
     },
     {
@@ -272,7 +314,8 @@
         "macros",
         "roll-tables",
         "references",
-        "compendiums"
+        "compendiums",
+        "prices"
       ]
     }
   ]

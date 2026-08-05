@@ -355,17 +355,31 @@ class actorDataModel extends foundry.abstract.DataModel {
             autoCombat: new foundry.data.fields.SchemaField({
                 prefDefenseType: makeStringField("combat"),
                 prefWeapon: makeStringField(""),
+                prefMatrix: makeStringField(""),
+                precisionMatrix: makeBoolField()
             }),
             otherStats: new foundry.data.fields.SchemaField({
                 itemPresence: makeIntField(),
-                damageBarrier: makeIntField(),
-                dmgRdc: makeIntField(),
                 artPresence: makeIntField(),
-                damageBarrierFinal: makeIntField(),
-                dmgRdcFinal: makeIntField(),
                 mentalThreshold: makeIntField(),
                 shieldRatio: makeLongIntField(),
-                shieldBonus: makeIntField()
+                shieldBonus: makeIntField(),
+                damageBarrier: makeIntField(),
+                damageBarrierBonus: makeIntField(),
+                dmgRdc: makeIntField(),
+                dmgRdcBonus: makeIntField(),
+                dmgRdcBase: makeIntField(),
+                dmgRdcBaseBonus: makeIntField(),
+            }),
+            combatDmgReceivedStats: new foundry.data.fields.SchemaField({
+                allRecDmg: makeDamageMultiplierField(),
+                cutRecDmg: makeDamageMultiplierField(),
+                impRecDmg: makeDamageMultiplierField(),
+                thrRecDmg: makeDamageMultiplierField(),
+                heatRecDmg: makeDamageMultiplierField(),
+                coldRecDmg: makeDamageMultiplierField(),
+                eleRecDmg: makeDamageMultiplierField(),
+                eneRecDmg: makeDamageMultiplierField()
             }),
             isMass: new foundry.data.fields.SchemaField({
                 isMass: makeBoolField(),
@@ -510,6 +524,8 @@ class actorDataModel extends foundry.abstract.DataModel {
                 maintPPValueBonus: makeIntField(),
                 maintIncValue: makeIntField(),
                 maintIncValueBonus: makeIntField(),
+                maintSlotInc: makeIntField(),
+                maintSlotIncBonus: makeIntField(),
                 upcastValue: makeIntField(),
                 upcastValueBonus: makeIntField(),
                 matrixDmgInc: makeIntField(),
@@ -1140,6 +1156,7 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 lastWepUsed: makeIntField(),
                 lastDefUsed: makeIntField(),
                 proficiency: makeStringField("proficient"), //this
+                showButtonsOnActor: makeBoolField(),
                 //toMigrate
                 twoHandedBonus: makeBoolField(), //2Handed
                 precision: makeBoolField(), //properties.precision.bool
@@ -1912,7 +1929,7 @@ class disciplineDataModel extends foundry.abstract.DataModel {
 class mentalPatternDataModel extends foundry.abstract.DataModel {
     static defineSchema() {
         return {
-            description: makeStringField(),
+            description: makeHtmlField(),
             cost: makeIntField(),
             expand: makeBoolField(),
             toggle: makeBoolField(),
@@ -1948,7 +1965,7 @@ class psychicMatrixDataModel extends foundry.abstract.DataModel {
             effectAddProj: makeIntField(),
             effectUseAT: makeBoolField(),
             effectWhichAT: makeStringField("CUT"),
-            attackHasAoEProfile: makeBoolField(),
+            favorite: makeBoolField(),
             matrixDetails: new foundry.data.fields.SchemaField({
                 effect20: matrixStuff("routine", 20),
                 effect40: matrixStuff("easy", 40),
@@ -1985,10 +2002,16 @@ class psychicMatrixDataModel extends foundry.abstract.DataModel {
 class maintPowerDataModel extends foundry.abstract.DataModel {
     static defineSchema() {
         return {
-            description: makeStringField(),
-            value: makeIntField(),
+            description: makeHtmlField(),
             expand: makeBoolField(),
-            equipped: makeBoolField()
+            equipped: makeBoolField(),
+            upcastAmount: makeIntField(),
+            ppInvested: makeIntField(),
+            value: makeIntField(),
+            linked: makeBoolField(),
+            maintainMatrix: makeBoolField(),
+            maintainedMatrixId: makeStringField(),
+            maintPotencyAchieved: makeStringField(),
         }
     }
 
@@ -2299,6 +2322,7 @@ function matrixStuff(header, value) {
     return new foundry.data.fields.SchemaField({
         description: makeHtmlField(),
         expand: makeBoolField(true),
+        toggle: makeBoolField(),
         title: makeStringField(header),
         titleNum: makeIntField(value),
         failure: makeBoolField(),
@@ -2324,11 +2348,17 @@ function matrixStuff(header, value) {
             magic: makeBoolField(),
             psychic: makeBoolField()
         }),
-        resValue: makeIntField()
+        resValue: makeIntField(),
+        infoLine: makeStringField()
     })
 }
 
-
+function makeDamageMultiplierField() {
+    return new foundry.data.fields.SchemaField({
+        mult: makeLongIntField(1),
+        bonus: makeLongIntField()
+    })
+}
 
 
 

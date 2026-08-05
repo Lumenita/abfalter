@@ -73,7 +73,6 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
         switch(itemType) {
             case "advantage":
             case "monsterPower":
-            case "maintPower":
             case "arsMagnus":
             case "zeonMaint":
                 parts.effects = effects;
@@ -88,6 +87,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
             case "invocation":
             case "mentalPattern":
             case "psychicMatrix":
+            case "maintPower":
             case "martialArt":
             case "kiSealCreature":
             case "kiTechnique":
@@ -146,7 +146,6 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
             case "monsterPower":
             case "zeonMaint":
             case "arsMagnus":
-            case "maintPower":
                 delete tabs.details;
                 break;
             case "secondary":
@@ -249,6 +248,27 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 );
                 break;
             }
+            case "maintPower": {
+                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description ?? "",
+                    { async: true }
+                );
+                const actor = this.item.actor;
+                const maxPP = actor?.system.psySettings.maintMaxPPFinal || 5;
+                context.ppInvestedObjList = Object.fromEntries(
+                    Array.from({ length: maxPP + 1 }, (_, i) => [i, String(i)])
+                );
+                context.matricesOptions = Object.fromEntries(this.item.system.matricesList.map(i => [i.id, i.name]));
+
+                break;
+            }
+            case "mentalPattern": {
+                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description ?? "",
+                    { async: true }
+                );
+                context.enrichedPenalty = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.penalty ?? "",
+                    { async: true }
+                );
+            }
             case "kiAbility": {
                 context.indentTypeList = CONFIG.abfalter.indentTypeDropdown;
                 break;
@@ -266,8 +286,11 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
             }
             case "armor": {
                 context.currencyOptions = Object.fromEntries(this.item.system.priceListIds.map(i => [i.id, i.name]));
+                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description ?? "",
+                    { async: true }
+                );
+
                 context.weightList = CONFIG.abfalter.weightDropdown;
-                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description);
                 context.equipmentTypeList = CONFIG.abfalter.equipmentTypeDropdown;
                 context.armorTypeList = CONFIG.abfalter.armorTypeDropdown;
                 context.layerTypeList = CONFIG.abfalter.layerTypeDropdown;
@@ -276,7 +299,9 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
             case "weapon": {
                 context.currencyOptions = Object.fromEntries(this.item.system.priceListIds.map(i => [i.id, i.name]));
                 context.ammoOptions = Object.fromEntries(this.item.system.ranged.ammoIds.map(i => [i.id, i.name]));
-                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description);
+                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description ?? "",
+                    { async: true }
+                );
 
                 context.weightList = CONFIG.abfalter.weightDropdown;
                 context.distanceLongList = CONFIG.abfalter.distanceLongDropdown;
@@ -296,9 +321,10 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 break;
             }
             case "ammo": {
-                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description);
-
                 context.currencyOptions = Object.fromEntries(this.item.system.priceListIds.map(i => [i.id, i.name]));
+                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description ?? "",
+                    { async: true }
+                );
 
                 context.consumableTypeList = CONFIG.abfalter.consumableTypeDropdown;
                 context.wepDamageTypeObjList = CONFIG.abfalter.wepDamageTypeDropdown;
@@ -310,7 +336,6 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 context.currencyOptions = Object.fromEntries(this.item.system.priceListIds.map(i => [i.id, i.name]));
                 context.weightList = CONFIG.abfalter.weightDropdown;
                 context.lootTypeList = CONFIG.abfalter.lootTypeDropdown;
-
                 break;
             }
             case "class": {

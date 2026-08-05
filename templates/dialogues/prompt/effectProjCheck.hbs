@@ -1,0 +1,50 @@
+<form>
+  <body>
+    <div class="abfDivFormat effectProjPrompt">
+        <div class="attack-info-row">
+            <span id="resInfo"></span>
+        </div>
+
+        <div class="armorRow" id="resRow">
+            <label for="resMod">
+                {{localize "abfalter.resistance"}}
+            </label>
+
+            <div>
+                <input
+                    type="number"
+                    id="resMod"
+                    value="0"
+                    step="1"
+                />
+
+                <span>|</span>
+
+                <span id="resFinalValue"></span>
+            </div>
+        </div>
+
+        <div id="projectionControls">
+            <label>
+                <span>{{localize "abfalter.activeActionMod"}} </span>
+                <select id="modifierSelect" name="modifierSelect"></select>
+            </label>
+
+            <label>
+                <span>{{localize "abfalter.pp"}}</span>
+                <select id="ppDropdown"></select>
+            </label>
+            
+            <label> 
+                <span> {{localize "abfalter.dialogs.modifier"}} </span>
+                <input type="number" id="modifierMod" value="0" /> 
+            </label>
+        </div>
+
+        <label class="target-preview-row">
+            <span>{{localize "abfalter.targets"}}</span>
+            <span id="selectedTargetsList">None</span>
+        </label>
+    </div>
+  </body>
+</form>

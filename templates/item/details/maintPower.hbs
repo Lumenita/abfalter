@@ -1,0 +1,50 @@
+<section class="baseAbfalterV2 itemPageV2 tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+
+    <fieldset>
+        <legend> {{ localize "abfalter.generalDetails" }} </legend>
+        <div class="abfDivFormat">
+            <label class="itemDoubleInputSelectLabel" for="potInput">
+                <span> {{localize "abfalter.potentialMaint"}} </span>
+                <div class="csSelect">
+                    <select name="system.ppInvested">
+                        {{selectOptions ppInvestedObjList selected=system.ppInvested localize=true}}
+                    </select>
+                </div>
+                <input type="number" id="potInput" name="system.value" value="{{system.value}}" />
+                <span> | </span>
+                <span> {{system.finalPot}} </span>
+            </label>
+            <label class="itemDoubleInputLabel">
+                <span> {{localize "abfalter.maintAtHigherPot"}} </span>
+                <input type="number" name="system.upcastAmount" value="{{system.upcastAmount}}" />
+                <span> | </span>
+                <span> {{system.upcastAmountFinal}} </span>
+            </label>
+        </div>
+
+        <div class="abfDivFormat">
+            <label class="itemSimpleLabel">
+                <span> {{localize "abfalter.psyLinked"}} </span>
+                <button type="button" data-action="toggleValue" class="{{#if system.linked}}kiBought{{/if}}"
+                    data-label="system.linked" data-ability="{{system.linked}}">
+                    {{#if system.linked}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                    {{/if}} 
+                </button>
+            </label>
+        </div>
+
+        {{#if system.linked}}
+        <div class="csSelect itemSimpleLabel abfDivFormat">
+            <label>
+                <span> {{localize "abfalter.matrixList"}} </span>
+                <select name="system.maintainedMatrixId">
+                    {{selectOptions matricesOptions selected=system.maintainedMatrixId localize=true}}
+                </select>
+            </label>
+        </div>
+        {{/if}}
+    </fieldset>
+</section>

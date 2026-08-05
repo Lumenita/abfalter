@@ -109,104 +109,104 @@
 
                 {{#each weapons as |weapon|}}
                 <div class="armory-item item normal-itemV2 draggable" data-item-id={{id}}>
-                        <div class="armoryItemContainer abfDivFormat">
-                            <div class="armoryItemMain">
-                                <img class="armoryItemImg" src="{{img}}"/>
-                                <div class="armoryItemNames">
-                                    <span class="{{#if system.equipped}}equipped{{/if}}" data-action="itemToChat"> {{weapon.name}} </span>
-                                    <span> {{system.descTag}} </span>
-                                </div>
-                                <div class="armoryTags">
-                                    {{#if system.properties.magical.bool}}
-                                    <i class="fa-solid fa-sparkles"></i>
-                                    {{/if}}
-                                </div>
+                    <div class="armoryItemContainer abfDivFormat">
+                        <div class="armoryItemMain">
+                            <img class="armoryItemImg" src="{{img}}"/>
+                            <div class="armoryItemNames">
+                                <span class="{{#if system.equipped}}equipped{{/if}}" data-action="itemToChat"> {{weapon.name}} </span>
+                                <span> {{system.descTag}} </span>
                             </div>
-                            <div class="armoryPrice">
-                                <span > {{system.priceTotal}} </span>
-                                <img  src="{{system.priceIcon}}"/>
-                            </div>
-                            <span class="armoryWeight">
-                                {{system.weightTotal}} {{system.weightType}}
-                            </span>
-                            <div class="armoryQuantity">
-                                <a data-action="decrease" data-label="system.quantity" data-value="{{system.quantity}}"><i class="fas fa-minus"> </i></a>
-                                <span> {{system.quantity}} </span>
-                                <a data-action="increase" data-label="system.quantity" data-value="{{system.quantity}}"><i class="fas fa-plus"></i> </a>
-                            </div>
-                            <span class="armoryCharges"> — </span>
-                            <div class="armoryItemControls">
-                                <a class="{{#if system.equipped}}equipped{{/if}}" data-action="itemToggleValue" data-label="system.equipped" data-ability="{{system.equipped}}">
-                                    <i class="fa-solid fa-shield-halved"></i>
-                                </a>
-                                <a data-action="itemToggleValue" data-label="system.expand" data-ability="{{system.expand}}">
-                                    {{#if system.expand}}
-                                    <i class="fa-solid fa-compress"></i>
-                                    {{else}}
-                                    <i class="fa-solid fa-expand"></i>
-                                    {{/if}}
-                                </a>
-                                <a data-action="openMenu" class="itemMenu">
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </a>
+                            <div class="armoryTags">
+                                {{#if system.properties.magical.bool}}
+                                <i class="fa-solid fa-sparkles"></i>
+                                {{/if}}
                             </div>
                         </div>
-                        {{#if system.equipped}}
-                        <div class="armoryWepEquip abfDivFormat">
-                            <div class="armoryIndent">┗</div>
-                            <div class="armoryWepCombat">
-                                {{#ifIn system.info.type "hybrid melee ranged"}}
-                                <button type="button" data-action="abfRollButton" data-label="weaponAttack" data-value="{{system.derived.baseAtk}}" data-id="{{_id}}">
-                                    {{localize "abfalter.attack"}}: {{system.derived.baseAtk}}
-                                </button>
-                                {{/ifIn}}
-                                <button type="button" data-action="abfRollButton" data-label="weaponBlock" data-value="{{system.derived.baseBlk}}" data-id="{{_id}}" >
-                                    {{localize "abfalter.block"}}: {{system.derived.baseBlk}}
-                                </button>
-                                <button type="button" data-action="abfRollButton" data-label="weaponDodge" data-value="{{system.derived.baseDod}}" data-id="{{_id}}" >
-                                    {{localize "abfalter.dodge"}}: {{system.derived.baseDod}}
-                                </button>
-                            </div>
-                            <div class="armoryWepBreak">
-                                <button type="button" data-action="abfRollButton" data-label="weaponBreak" data-value="breakage" data-id="{{_id}}" data-type="{{system.info.type}}" >
-                                    {{localize "abfalter.breakageShort"}}: {{system.melee.finalBreakage}}
-                                </button>
-                            </div>
-                            {{#ifIn system.info.type "hybrid melee"}}
-                            {{#if system.properties.trapping.bool}}
-                            <div class="armoryWepTrap">
-                                <button type="button" data-action="abfRollButton" data-label="weaponTrap" data-value="trap" data-id="{{_id}}">
-                                    {{localize "abfalter.trapping"}}
-                                </button>
-                            </div>
-                            {{/if}}
+                        <div class="armoryPrice">
+                            <span > {{system.priceTotal}} </span>
+                            <img  src="{{system.priceIcon}}"/>
+                        </div>
+                        <span class="armoryWeight">
+                            {{system.weightTotal}} {{system.weightType}}
+                        </span>
+                        <div class="armoryQuantity">
+                            <a data-action="decrease" data-label="system.quantity" data-value="{{system.quantity}}"><i class="fas fa-minus"> </i></a>
+                            <span> {{system.quantity}} </span>
+                            <a data-action="increase" data-label="system.quantity" data-value="{{system.quantity}}"><i class="fas fa-plus"></i> </a>
+                        </div>
+                        <span class="armoryCharges"> — </span>
+                        <div class="armoryItemControls">
+                            <a class="{{#if system.equipped}}equipped{{/if}}" data-action="itemToggleValue" data-label="system.equipped" data-ability="{{system.equipped}}">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </a>
+                            <a data-action="itemToggleValue" data-label="system.expand" data-ability="{{system.expand}}">
+                                {{#if system.expand}}
+                                <i class="fa-solid fa-compress"></i>
+                                {{else}}
+                                <i class="fa-solid fa-expand"></i>
+                                {{/if}}
+                            </a>
+                            <a data-action="openMenu" class="itemMenu">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {{#if system.showButtons}}
+                    <div class="armoryWepEquip abfDivFormat">
+                        <div class="armoryIndent">┗</div>
+                        <div class="armoryWepCombat">
+                            {{#ifIn system.info.type "hybrid melee ranged"}}
+                            <button type="button" data-action="abfRollButton" data-label="weaponAttack" data-value="{{system.derived.baseAtk}}" data-id="{{_id}}">
+                                {{localize "abfalter.attack"}}: {{system.derived.baseAtk}}
+                            </button>
                             {{/ifIn}}
-                            {{#ifIn system.info.type "hybrid ranged"}}
-                            {{#if system.properties.ammunition.bool}}
-                            <div class="armoryWepAmmo">
-                                <button type="button" data-action="ammoWeaponToggle" class="ammoItem-toggle {{#if system.ranged.isLoaded}}kiBought{{/if}}" 
-                                    data-label="system.ranged.isLoaded" data-ability="{{system.ranged.isLoaded}}" data-value="{{system.ranged.magSizeMax}}">
-                                    {{#if system.ranged.isLoaded}} 
-                                        {{system.ranged.magSize}} / {{system.ranged.magSizeMax}} {{localize "abfalter.loaded"}} 
-                                    {{else}} 
-                                        {{localize "abfalter.unloaded"}}
-                                    {{/if}}
-                                </button>   
-                            </div>
-                            {{/if}}
-                            {{/ifIn}}
+                            <button type="button" data-action="abfRollButton" data-label="weaponBlock" data-value="{{system.derived.baseBlk}}" data-id="{{_id}}" >
+                                {{localize "abfalter.block"}}: {{system.derived.baseBlk}}
+                            </button>
+                            <button type="button" data-action="abfRollButton" data-label="weaponDodge" data-value="{{system.derived.baseDod}}" data-id="{{_id}}" >
+                                {{localize "abfalter.dodge"}}: {{system.derived.baseDod}}
+                            </button>
+                        </div>
+                        <div class="armoryWepBreak">
+                            <button type="button" data-action="abfRollButton" data-label="weaponBreak" data-value="breakage" data-id="{{_id}}" data-type="{{system.info.type}}" >
+                                {{localize "abfalter.breakageShort"}}: {{system.melee.finalBreakage}}
+                            </button>
+                        </div>
+                        {{#ifIn system.info.type "hybrid melee"}}
+                        {{#if system.properties.trapping.bool}}
+                        <div class="armoryWepTrap">
+                            <button type="button" data-action="abfRollButton" data-label="weaponTrap" data-value="trap" data-id="{{_id}}">
+                                {{localize "abfalter.trapping"}}
+                            </button>
                         </div>
                         {{/if}}
-                        {{#if system.expand}}
-                        <div class="armoryDescription">
-                            {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
-                        </div>
-                        <div class="armoryTags abfDivFormat">
-                            {{#each system.tags}}
-                                <span class="armoryTag">{{this}}</span>
-                            {{/each}}
+                        {{/ifIn}}
+                        {{#ifIn system.info.type "hybrid ranged"}}
+                        {{#if system.properties.ammunition.bool}}
+                        <div class="armoryWepAmmo">
+                            <button type="button" data-action="ammoWeaponToggle" class="ammoItem-toggle {{#if system.ranged.isLoaded}}kiBought{{/if}}" 
+                                data-label="system.ranged.isLoaded" data-ability="{{system.ranged.isLoaded}}" data-value="{{system.ranged.magSizeMax}}">
+                                {{#if system.ranged.isLoaded}} 
+                                    {{system.ranged.magSize}} / {{system.ranged.magSizeMax}} {{localize "abfalter.loaded"}} 
+                                {{else}} 
+                                    {{localize "abfalter.unloaded"}}
+                                {{/if}}
+                            </button>   
                         </div>
                         {{/if}}
+                        {{/ifIn}}
+                    </div>
+                    {{/if}}
+                    {{#if system.expand}}
+                    <div class="armoryDescription">
+                        {{{enrichedDesc}}}
+                    </div>
+                    <div class="armoryTags abfDivFormat">
+                        {{#each system.tags}}
+                            <span class="armoryTag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
                 </div>
                 {{/each}}
             </div>
@@ -267,7 +267,7 @@
                         </div>
                         {{#if system.expand}}
                         <div class="armoryDescription">
-                            {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
+                            {{{enrichedDesc}}}
                         </div>
                         <div class="armoryTags abfDivFormat">
                             {{#each system.tags}}
@@ -335,7 +335,7 @@
                         </div>
                         {{#if system.expand}}
                         <div class="armoryDescription">
-                            {{editor system.description target="system.description" editable=false button=false engine="prosemirror"}}
+                            {{{enrichedDesc}}}
                         </div>
                         <div class="armoryTags abfDivFormat">
                             {{#each system.tags}}

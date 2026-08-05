@@ -36,10 +36,10 @@
                 {{/if}}
 
                 {{#if resolveData.atkSettings.atkDmg}}
-                <span>{{localize "abfalter.damage"}}: {{resolveData.attackerValues.dmg}} {{resolveData.attackerValues.dmgType}} | </span>
+                <span>{{localize "abfalter.damage"}}: {{resolveData.attackerValues.dmg}} {{localize (concat "abfalter." resolveData.attackerValues.dmgType)}} | </span>
                 {{else}}
-                <span class="gm-only">{{localize "abfalter.damage"}}: {{resolveData.attackerValues.dmg}} {{resolveData.attackerValues.dmgType}} | </span>
-                <span class="player-only">{{localize "abfalter.damage"}}: ??? {{resolveData.attackerValues.dmgType}} | </span>
+                <span class="gm-only">{{localize "abfalter.damage"}}: {{resolveData.attackerValues.dmg}} {{localize (concat "abfalter." resolveData.attackerValues.dmgType)}} | </span>
+                <span class="player-only">{{localize "abfalter.damage"}}: ??? {{localize (concat "abfalter." resolveData.attackerValues.dmgType)}} | </span>
                 {{/if}}
 
                 {{#if resolveData.atkSettings.atkAtPen}}
