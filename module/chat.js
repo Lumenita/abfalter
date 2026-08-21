@@ -22,6 +22,7 @@ export function addChatListeners(chatMessage, html) {
     bindButton("button.applyDamageToActors", diceFunctions.resolveApplyDamageToActors);
     // Martial
     bindButton("button.offContinuationRoll", diceFunctions.offenseContinuationRollFunction);
+    bindButton("button.effectContinuationRoll", diceFunctions.effectContinuationRollFunction);
     // Defensive
     bindButton("button.defensiveOpenRoll", diceFunctions.defensiveOpenRollFunction);
     bindButton("button.defensiveFumbleRoll", diceFunctions.defensiveFumbleRollFunction);
@@ -276,7 +277,7 @@ async function defendButtonClicked(msg, html, ev) {
     }
 
     const defenderToken = canvas.tokens?.get(tokenId);
-    const defenderActor = game.actors?.get(actorId) ?? defenderToken?.actor;
+    const defenderActor = defenderToken?.actor ?? game.actors?.get(actorId);
 
     if (!defenderActor) {
         ui.notifications.warn("Could not find defending actor.");
@@ -294,11 +295,24 @@ async function defendButtonClicked(msg, html, ev) {
         return;
     }
 
-    await diceFunctions.defendAgainstAttacks({
-        atkDmgType: msg.flags.abfalter.attackDetails.dmgType,
-        atkMsgId: msg._id,
-        tokenId,
-    });
+    const effectDetails = msg.flags?.abfalter?.effectDetails;
+    const attackDetails = msg.flags?.abfalter?.attackDetails;
+
+    if (effectDetails) {
+        await diceFunctions.defendAgainstEffects({
+            effectMsgId: msg.id,
+            tokenId
+        });
+        return;
+    }
+
+    if (attackDetails) {
+        await diceFunctions.defendAgainstAttacks({
+            atkDmgType: attackDetails.dmgType,
+            atkMsgId: msg.id,
+            tokenId
+        });
+    }
 }
 
 async function sendDefenseClicked(msg, html, ev) {
@@ -322,7 +336,7 @@ async function sendDefenseClicked(msg, html, ev) {
         status
     });
     await msg.update({ content });
-    await diceFunctions.finalizeDefenseAgainstAttackMessage({ defenseMessageId: msg.id });
+    await diceFunctions.finalizeDefenseMessage({ defenseMessageId: msg.id });
 }
 
 //Gray out un-owned button for defense.

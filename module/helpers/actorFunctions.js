@@ -10,7 +10,7 @@ export const openOneModDialog = async () => {
 
 export const oneModDialog = async ({ content, placeholder = '' }) => {
     const html = await renderTemplates({
-        name: templates.dialog.initiative,
+        name: templates.initiative,
         context: { content, placeholder }
     });
     return new Promise((resolve) => {
@@ -32,7 +32,6 @@ export const oneModDialog = async ({ content, placeholder = '' }) => {
                         const data = new foundry.applications.ux.FormDataExtended(form).object;
                         const raw = data["dialog-input"];
                         const value = Number(raw);
-                        console.log(value);
                         const formData = {
                             confirmed: true,
                             value: value || 0

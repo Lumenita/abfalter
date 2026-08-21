@@ -43,7 +43,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             plainRoll: this.#onPlainRoll,
             openArcanaSephirah: this.#openArcanaSephirah,
             openDPCalc: this.#openDpCostCalc,
-            changeSecNums: this.#changeSecNums,
             openRestWindow: this.#openRestWindow,           // Opens Rest Window, move to configButton
             openDpOffsets: this.#openDpOffsets,             // Opens the offset window, could go into congig Button
             openResolveWindow: this.#openResolveWindow,     // Header Resolve Button
@@ -871,6 +870,12 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             case "initiative":
                 app = new initiativeWindow({ document: this.actor });
                 break;
+            case "changeSecSpec":
+                actorFunctions.changeSecondarySpecs(this.actor);
+                break;
+            case "changeSecTemp":
+                actorFunctions.changeSecondaryTemps(this.actor);
+                break;
         }
         app?.render(true);
     }
@@ -978,23 +983,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         ev.preventDefault();
         actorFunctions.restOptions(this.actor);
     }
-
-    static #changeSecNums(ev) {
-        ev.preventDefault();
-        const type = ev.target.dataset.ability;
-        switch (type) {
-            case "temp":
-                actorFunctions.changeSecondaryTemps(this.actor);
-                break;
-            case "spec":
-                actorFunctions.changeSecondarySpecs(this.actor);
-                break;
-            default:
-                break;
-        }
-
-    }
-
 
     static async #openResolveWindow(ev) {
         ev.preventDefault();

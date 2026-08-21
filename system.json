@@ -2,7 +2,7 @@
   "id": "abfalter",
   "title": "Anima Beyond Fantasy Altered",
   "description": "Engligh Version of 'Fantasy Flight Games' Anima Beyond Fantasy System altered by some house rules.",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "compatibility": {
     "minimum": 14,
     "verified": "14.365"
@@ -61,7 +61,7 @@
   "license": "LICENSE.txt",
   "url": "https://github.com/Lumenita/abfalter",
   "manifest": "https://raw.githubusercontent.com/Lumenita/abfalter/main/system.json",
-  "download": "https://github.com/Lumenita/abfalter/releases/download/v1.6.4/abfalter.zip",
+  "download": "https://github.com/Lumenita/abfalter/releases/download/v1.6.5/abfalter.zip",
   "languages": [
     {
       "lang": "en",

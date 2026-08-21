@@ -2932,7 +2932,7 @@ export function kiTechAbilitiesData() {
             optionalChar: [],
             tiers: [
                 { ability: game.i18n.localize("abfalter.kiAbilityData.lesserIntensity"), prim: 0, sec: 0, mk: -10, maint: 0, mis: 0, grs: 0, lvl: 1 },
-                { ability: game.i18n.localize("abfalter.kiAbilityData.greaterIntensity"), prim: 0, sec: 0, mk: -5, maint: 0, mis: 0, grs: 0, lvl: 1 }
+                { ability: game.i18n.localize("abfalter.kiAbilityData.greaterIntensity"), prim: 0, sec: 0, mk: -15, maint: 0, mis: 0, grs: 0, lvl: 1 }
             ],
             hasAdditionalEffect: false
         },

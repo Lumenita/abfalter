@@ -54,7 +54,13 @@ export default class abfalterCombat extends Combat {
 	 */
 	getCombatantForActor(actor) {
 		if (!actor) return null;
-		return this.combatants.find(combatant => combatant.actorId === actor.id) ?? null;
+		return this.combatants.find(combatant => {
+			if (actor.isToken) {
+				return combatant.tokenId === actor.token?.id;
+			}
+
+			return combatant.actorId === actor.id;
+		}) ?? null;
 	}
 
 	/**
@@ -123,38 +129,12 @@ export default class abfalterCombat extends Combat {
 	 */
 	async resetPsychicPotential(combatant) {
 		const actor = combatant?.actor;
-		if (!actor) return;
-
-		const maximum = this.getMaximumPsychicPotential(actor);
-
-		await combatant.setFlag(
-			SYSTEM_ID,
-			PSYCHIC_POTENTIAL_FLAG,
-			maximum
-		);
-	}
-
-	/**
-	* Restores one combatant's Psychic Potential.
-	*
-	* @param {Combatant} combatant
-	* @returns {Promise<number>}
-	*/
-	async resetPsychicPotential(combatant) {
-		const actor = combatant?.actor;
-
 		if (!actor) {
 			throw new Error("The selected combatant does not have an actor.");
 		}
 
-		const maximumPotential =
-			this.getMaximumPsychicPotential(actor);
-
-		await combatant.setFlag(
-			"abfalter",
-			"remainingPsychicPotential",
-			maximumPotential
-		);
+		const maximumPotential = this.getMaximumPsychicPotential(actor);
+		await combatant.setFlag(SYSTEM_ID, PSYCHIC_POTENTIAL_FLAG, maximumPotential);
 
 		return maximumPotential;
 	}

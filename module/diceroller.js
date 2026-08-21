@@ -1809,14 +1809,9 @@ export async function offenseContinuationRollFunction(msg, html, event) {
                 tokenId: token.id,
                 actorId: targetActor?.id ?? null,
                 name: token.name,
-                img:
-                    token.document?.texture?.src ??
-                    targetActor?.img ??
-                    "",
+                img: token.document?.texture?.src ?? targetActor?.img ?? "",
                 canDefend: game.user.isGM || isOwner,
-                state:
-                    workflow.targetStates[token.id] ??
-                    { status: "pending" }
+                state: workflow.targetStates[token.id] ?? { status: "pending" }
             };
         });
 
@@ -1850,19 +1845,520 @@ function isAttackRollPendingResolution(rollData) {
     return Boolean(lastRoll?.explode || lastRoll?.fumble);
 }
 
-/** Defensive rolls that are called from attack chat cards.
+/** Handles psychic & magic effect projection checks
+ * @param {Actor} actor - The actor using the weapon.
+ * @param {string} effectInfo - Has all values of matrix if complex.
+ * @param {string} type - complex has matrix info | simple doesn't
+ */
+export async function effectProjDialogue({actor, effectInfo}) {
+    const template = "systems/abfalter/templates/dialogues/prompt/effectProjCheck.hbs";
+    let confirmed = false;
+    const useProjection = effectInfo.useProj === true;
+    const resistanceTypes = Array.isArray(effectInfo.resTypeList) ? effectInfo.resTypeList.filter(Boolean) : [];
+    if (resistanceTypes.length === 0) {
+        ui.notifications.warn(game.i18n.localize("abfalter.noResistanceType"));
+        return;
+    }
+
+    let baseValue = 0;
+    let bonusProj = effectInfo.projBonus;
+    let baseResValue = effectInfo.resValue;
+    let finalResValue = baseResValue;
+    let finalValue = 0;
+    let finalFormula = "";
+    let ppSpent = 0;
+
+
+    if (effectInfo.type == "psychic") {
+        baseValue = actor.system.toggles.psychicModuleStatus ? actor.system.pproj.atkModule : actor.system.pproj.finalOff;
+    }
+    // Psychic only
+    
+
+    const htmlContent = await foundry.applications.handlebars.renderTemplate(template);
+    // Get Target Token & Prepare Combat Workflow
+    let selectedTargetIds = Array.from(game.user.targets).filter(t => t?.actor).map(t => t.id);
+    let targetHookId = null;
+
+    const getCurrentSelectedTargetIds = () => {
+        return Array.from(game.user.targets)
+            .filter(t => t?.actor)
+            .map(t => t.id);
+    };
+    const renderSelectedTargets = (htmlRoot) => {
+        const targetListEl = htmlRoot.querySelector('#selectedTargetsList');
+        if (!targetListEl) return;
+
+        const tokens = selectedTargetIds
+            .map(id => canvas.tokens?.get(id))
+            .filter(Boolean);
+
+        targetListEl.textContent = tokens.length
+            ? tokens.map(t => t.name).join(", ")
+            : game.i18n.localize("abfalter.none");
+    };
+    const syncSelectedTargets = (htmlRoot) => {
+        selectedTargetIds = getCurrentSelectedTargetIds();
+        renderSelectedTargets(htmlRoot);
+    };
+    const clearOptions = (el) => {
+        if (el) el.innerHTML = "";
+    };
+    const appendOption = (el, { value, label, selected = false, dataset = {} }) => {
+        if (!el) return;
+        const option = document.createElement("option");
+        option.value = String(value ?? "");
+        option.textContent = label ?? "";
+        if (selected) option.selected = true;
+
+        for (const [key, val] of Object.entries(dataset)) {
+            option.dataset[key] = String(val);
+        }
+
+        el.appendChild(option);
+    };
+    const updateRollButtonLabel = (dialog) => {
+        const root = dialog.element;
+        if (!root) return;
+
+        const rollButton =
+            root.querySelector('[data-action="roll"]') ||
+            root.querySelector('button[data-action="roll"]');
+
+        if (rollButton) {
+            rollButton.textContent = useProjection
+            ? `${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`
+            : game.i18n.localize("abfalter.dialogs.confirm");
+        }
+
+        //rollButton.disabled = isMatrixRoll && (potentialSpent < 10 || !selectedMatrixId);
+    };
+    const updateFinalValue = (html, dialog) => {
+        if (!useProjection) {
+            finalValue = 0;
+            finalFormula = "";
+            ppSpent = 0;
+
+            updateRollButtonLabel(dialog);
+            return;
+        }
+
+        const modifierValue = Number(html.querySelector('#modifierMod')?.value) || 0;
+        const selectedModifier = Number(html.querySelector('#modifierSelect')?.value) || 0;
+
+        ppSpent = Number(html.querySelector('#ppDropdown')?.value) || 0;
+
+        finalValue =
+            baseValue +
+            bonusProj +
+            (ppSpent * actor.system.psySettings.projPPValueFinal) +
+            modifierValue +
+            selectedModifier;
+
+        finalFormula =
+            `${baseValue}(${game.i18n.localize("abfalter.potential")}) + ` +
+            `${bonusProj}(${game.i18n.localize("abfalter.matrixBonus")}) + ` +
+            `${ppSpent * actor.system.psySettings.projPPValueFinal}(${game.i18n.localize("abfalter.pp")}) + ` +
+            `${modifierValue}(${game.i18n.localize("abfalter.mod")}) + ` +
+            `${selectedModifier}(${game.i18n.localize("abfalter.action")})`;
+
+        updateRollButtonLabel(dialog);
+    };
+
+    const dialog = new diceDialogV2({
+        window: {
+            title: `${actor.name} - ${game.i18n.localize('abfalter.x')}`
+        },
+        position: {
+            width: 400,
+        },
+        content: htmlContent,
+        classes: ["baseAbfalterV2"],
+        buttons: [
+            {
+                action: "roll",
+                label: useProjection
+                    ? `${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`
+                    : game.i18n.localize("abfalter.dialogs.confirm"),
+                default: true,
+                callback: () => {
+                    confirmed = true;
+                    return "roll";
+                }
+            },
+            {
+                action: "cancel",
+                label: game.i18n.localize('abfalter.dialogs.cancel'),
+                callback: () => {
+                    confirmed = false;
+                    return "cancel";
+                }
+            }
+        ],
+        onRender: async (html, dialogInstance) => {
+            const modifierInput = html.querySelector('#modifierMod');
+            const modifierSelect = html.querySelector('#modifierSelect');
+            const ppDropdown = html.querySelector('#ppDropdown');
+            const resInfo = html.querySelector("#resInfo");
+            const resModifierInput = html.querySelector("#resMod");
+            const ppMax = actor.system.psySettings.projMaxPPFinal;
+            const availablePP = actor.system.psychicPoint.value;
+            const projectionControls = html.querySelector("#projectionControls");
+            if (projectionControls) {
+                 projectionControls.hidden = !useProjection;
+            }
+
+            const populatePPDropdown = () => {
+                clearOptions(ppDropdown);
+                const usablePP = Math.min(ppMax, availablePP);
+                for (let i = 0; i <= usablePP; i++) {
+                    appendOption(ppDropdown, {
+                        value: i,
+                        label: String(i),
+                        selected: i === 0
+                    });
+                }
+            };
+
+            const populateModifierDropdown = () => {
+                clearOptions(modifierSelect);
+                for (let index = 0; index < 10; index++) {
+                    const value = -25 * index;
+
+                    appendOption(modifierSelect, {
+                        value,
+                        label: game.i18n.localize(`abfalter.activeAction${index + 1}`),
+                        selected: index === 0
+                    });
+                }
+            };
+
+            const updateResistanceValue = html => {
+                const resModifier = Number(html.querySelector("#resMod")?.value) || 0;
+                finalResValue = baseResValue + resModifier;
+                const finalValueDisplay = html.querySelector("#resFinalValue");
+                if (finalValueDisplay) {
+                    finalValueDisplay.textContent = String(finalResValue);
+                }
+            };
+
+            const updateResistanceInfo = () => {
+                if (!resInfo) return;
+
+                const localizedResistanceTypes =
+                    resistanceTypes.map(type =>
+                        game.i18n.localize(
+                            `abfalter.${String(type).toLowerCase()}`
+                        )
+                    );
+
+                const infoParts = [];
+
+                if (useProjection) {
+                    infoParts.push(
+                        `${game.i18n.localize("abfalter.baseProjShort")}: ${baseValue}`
+                    );
+
+                    if (bonusProj !== 0) {
+                        infoParts.push(
+                            `${game.i18n.localize("abfalter.projBonus")}: ${bonusProj}`
+                        );
+                    }
+                }
+
+                infoParts.push(
+                    `${game.i18n.localize("abfalter.resistance")}: ${baseResValue}`
+                );
+
+                infoParts.push(
+                    `${game.i18n.localize("abfalter.resTypes")}: ` +
+                    localizedResistanceTypes.join(", ")
+                );
+
+                resInfo.textContent = infoParts.join(" · ");
+            };
+
+            resModifierInput?.addEventListener("input", () => updateResistanceValue(html));
+            modifierInput?.addEventListener("input", () => { updateFinalValue(html, dialogInstance) });
+            ppDropdown?.addEventListener("change", () => { updateFinalValue(html, dialogInstance) });
+            modifierSelect?.addEventListener("change", () => { updateFinalValue(html, dialogInstance) });
+
+            updateResistanceValue(html);
+            populatePPDropdown();
+            populateModifierDropdown();
+            updateFinalValue(html, dialogInstance);
+            syncSelectedTargets(html);
+            targetHookId = Hooks.on("targetToken", (user, token, targeted) => {
+                if (user.id !== game.user.id) return;
+                syncSelectedTargets(html);
+            });
+        },
+        onClose: async (html) => {
+            if (targetHookId !== null) {
+                Hooks.off("targetToken", targetHookId);
+                targetHookId = null;
+            }
+            if (!confirmed) return;
+
+            if (useProjection && effectInfo.type === "psychic") {
+                await actor.update({
+                    "system.psychicPoint.value": Math.max(0, actor.system.psychicPoint.value - ppSpent)
+                });
+            }
+
+            const workflow = {
+                attackerUserId: game.user.id,
+                attackerActorId: actor.id,
+                attackerTokenId: actor.getActiveTokens()?.[0]?.id ?? null,
+                selectedDefenderIds: selectedTargetIds,
+                targetStates: Object.fromEntries(
+                    selectedTargetIds.map(id => [id, { status: "pending" }])
+                )
+            };
+
+            const effectDetails = {
+                actionName: effectInfo.type === "psychic"
+                    ? game.i18n.localize("abfalter.psychic")
+                    : game.i18n.localize("abfalter.magic"),
+                label: effectInfo.name,
+
+                effectType: effectInfo.type,
+                useProj: useProjection,
+
+                base: baseValue,
+                value: finalValue,
+                formula: finalFormula,
+                resValue: finalResValue,
+                resTypeList: resistanceTypes,
+
+                useAT: effectInfo.useAT,
+                atLabel: effectInfo.atLabel,
+                isFired: effectInfo.isFired,
+                isInvisible: effectInfo.isInvisible,
+
+                openRange: actor.system.rollRange.final,
+                fumbleRange: actor.system.fumleRange.final,
+                isPredetermined: false,
+            };
+
+            await effectRoll({actor, effectDetails, workflow});
+            //await finishPotentialMatrixMessage(matrixInfo.potentialMsgId);
+        }
+    });
+    dialog.render({ force: true });
+}
+
+async function effectRoll({actor, effectDetails, workflow}) {
+    if (!effectDetails.useProj) {
+        await createEffectResolutionMessage({effectDetails, workflow});
+        return;
+    }
+    const template = "systems/abfalter/templates/dialogues/diceRolls/effectRoll.hbs";
+    let rollData = [];
+    let num = 0;
+    let fumbleRange = effectDetails.fumbleRange;
+    const openRange = effectDetails.openRange;
+    if (effectDetails.base > 199 && fumbleRange > 1) {
+        fumbleRange -= 1;
+    }
+
+    const rollResult = await createRoll(
+        actor,
+        effectDetails.value,
+        openRange,
+        fumbleRange,
+        effectDetails.isPredetermined
+    );
+
+    effectDetails.formula = `(${rollResult.rolledDice}) + ${effectDetails.formula}`;
+
+    rollData[0] = {
+        roll: rollResult.rolledDice,
+        total: rollResult._total,
+        doubles: rollResult.doubles,
+        openRange: rollResult.openRange,
+        fumbleLevel: rollResult.fumbleLevel,
+        fumble: rollResult.fumble,
+        explode: rollResult.explode,
+        color: rollResult.color,
+        formula: effectDetails.formula,
+        label: effectDetails.label
+    };
+
+    const targetList = workflow.selectedDefenderIds
+        .map(tokenId => canvas.tokens?.get(tokenId))
+        .filter(Boolean)
+        .map(token => {
+            const targetActor = token.actor;
+            const isOwner = targetActor?.testUserPermission(game.user, "OWNER");
+
+            return {
+                tokenId: token.id,
+                actorId: targetActor?.id ?? null,
+                name: token.name,
+                img: token.document?.texture?.src ?? targetActor?.img ?? "",
+                canDefend: game.user.isGM || isOwner,
+                state: workflow.targetStates[token.id] ?? {status: "pending"}
+            };
+        });
+
+    const basicInfo = {
+        portrait: actor.prototypeToken.texture.src,
+        name: actor.name,
+        userName: game.user.isGM ? game.i18n.localize("abfalter.gm") : game.user.name
+    };
+
+    const defendLocked = isEffectRollPendingResolution(rollData);
+
+    const content = await foundry.applications.handlebars.renderTemplate(template, {
+        basicInfo,
+        rollData,
+        actor,
+        effectDetails,
+        workflow,
+        targetList,
+        defendLocked
+    });
+
+    const chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({actor}),
+        sound: effectDetails.useProj ? CONFIG.sounds.dice : null,
+        content,
+        rolls: [],
+        flags: {
+            abfalter: {
+                customChatHeaderCard: true,
+                basicInfo,
+                effectDetails,
+                rollData,
+                num,
+                workflow
+            }
+        }
+    };
+
+    const speakerMode = actor.system.rollRange.speaker;
+    let rollMode;
+
+    switch (speakerMode) {
+        case "public":
+            rollMode = "public";
+            break;
+        case "private":
+            rollMode = "gm";
+            break;
+        default:
+            rollMode = game.settings.get("core", "messageMode");
+    }
+
+    ChatMessage.applyMode(chatData, rollMode);
+    const createdMessage = await ChatMessage.create(chatData);
+}
+
+export async function effectContinuationRollFunction(msg, html, event) {
+    const template = "systems/abfalter/templates/dialogues/diceRolls/effectRoll.hbs";
+    const continuationType = event.currentTarget.dataset.rollType;
+    const rollFunction = {
+        open: performOpenRoll,
+        fumble: performFumbleRoll
+    }[continuationType];
+    if (!rollFunction) {
+        throw new Error(`Unknown effect continuation type: ${continuationType}`);
+    }
+    const { actor, num, rollData } = await rollFunction(msg);
+
+    const workflow = msg.flags.abfalter.workflow ?? {
+        selectedDefenderIds: [],
+        targetStates: {}
+    };
+
+    const targetList = workflow.selectedDefenderIds
+        .map(tokenId => canvas.tokens?.get(tokenId))
+        .filter(Boolean)
+        .map(token => {
+            const targetActor = token.actor;
+            const isOwner = targetActor?.testUserPermission( game.user, "OWNER");
+            return {
+                tokenId: token.id,
+                actorId: targetActor?.id ?? null,
+                name: token.name,
+                img: token.document?.texture?.src ?? targetActor?.img ?? "",
+                canDefend: game.user.isGM || isOwner,
+                state: workflow.targetStates[token.id] ?? { status: "pending" }
+            };
+        });
+
+    const defendLocked = isEffectRollPendingResolution(rollData);
+
+    const content = await foundry.applications.handlebars.renderTemplate(template, {
+        basicInfo: msg.flags.abfalter.basicInfo,
+        rollData,
+        actor,
+        attackDetails: msg.flags.abfalter.attackDetails,
+        workflow,
+        targetList,
+        defendLocked,
+        atkSettings: msg.flags.abfalter.atkSettings
+    });
+
+    await msg.update({
+        content,
+        "flags.abfalter.rollData": rollData,
+        "flags.abfalter.num": num
+    });
+}
+
+/** Helper function to derermine if the projection roll is fully completed.
+ * @param {*} rollData 
+ * @returns {Boolean}
+ */
+function isEffectRollPendingResolution(rollData) {
+    if (!Array.isArray(rollData) || !rollData.length) return false;
+    const lastRoll = rollData[rollData.length - 1];
+    return Boolean(lastRoll?.explode || lastRoll?.fumble);
+}
+
+/** Defensive rolls that are called from attack or effect chat cards.
  * @param {String} atkDmgType - has atk dmg type
  * @param {String} atkMsgId - has atk msg id
  * @param {String} tokenId - has defender token id
  * @returns 
  */
+
+
+
 export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
+    return defendAgainstEverything({
+        tokenId,
+        parentMessageId: atkMsgId,
+        armorType: atkDmgType,
+        resolutionType: "attack"
+    });
+}
+
+export async function defendAgainstEffects({effectMsgId, tokenId}) {
+    const msg = game.messages.get(effectMsgId);
+    const effectDetails = msg?.flags?.abfalter?.effectDetails;
+    if (!effectDetails) return;
+
+    return defendAgainstEverything({
+        tokenId,
+        parentMessageId: effectMsgId,
+        armorType: effectDetails.useAT ? effectDetails.atLabel : null,
+        resolutionType: "effect"
+    });
+}
+
+
+
+
+export async function defendAgainstEverything({tokenId, parentMessageId, armorType, resolutionType}) {
     const defenderToken = canvas.tokens?.get(tokenId);
     const actor = defenderToken?.actor;
 
     // Armor values for defensive rolls
-    const attackType = atkDmgType;
-    const armorType = [
+    const armorTypes = [
         { tag: 'cut', name: game.i18n.localize('abfalter.cut'), atValue: actor.system.armor.body.aCutFinal },
         { tag: 'imp', name: game.i18n.localize('abfalter.imp'), atValue: actor.system.armor.body.aImpFinal },
         { tag: 'thr', name: game.i18n.localize('abfalter.thr'), atValue: actor.system.armor.body.aThrFinal },
@@ -1871,7 +2367,10 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
         { tag: 'ele', name: game.i18n.localize('abfalter.ele'), atValue: actor.system.armor.body.aEleFinal },
         { tag: 'ene', name: game.i18n.localize('abfalter.ene'), atValue: actor.system.armor.body.aEneFinal }
     ];
-    const chosenArmorType = armorType.find(row => row.tag == attackType.toLowerCase());
+    
+    const chosenArmorType = armorType
+        ? armorTypes.find(row => row.tag === String(armorType).toLowerCase())
+        : null;
 
     let confirmed = false;
     let finalValue = 0;
@@ -1888,7 +2387,7 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
     let armorFinalValue = 0;
 
     const templateData = {
-        armorTypeName: chosenArmorType.name,
+        armorTypeName: chosenArmorType?.name ?? game.i18n.localize("abfalter.none")
     };
     const template = "systems/abfalter/templates/dialogues/prompt/defenseAuto.hbs";
     const htmlContent = await foundry.applications.handlebars.renderTemplate(template, templateData);
@@ -1977,7 +2476,7 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
             };
         }
 
-        const profile = selectedProfiles?.[selectedProfileIndex];
+        const profile = getSelectedProfile();
 
         return {
             block: Number(
@@ -2137,7 +2636,6 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
                     });
                 });
             };
-            populateDefenseTypeDropdown();
 
             const populateCombatDefenseDropdown = () => {
                 clearOptions(combatDefenseDropdown);
@@ -2158,7 +2656,6 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
                     selected: selectedCombatDefense === "dodge"
                 });
             };
-            populateCombatDefenseDropdown();
 
             const populateWeaponDropdown = () => {
                 clearOptions(weaponDropdown);
@@ -2196,7 +2693,6 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
                     ? null
                     : actor.items.get(selectedWeaponId);
             };
-            populateWeaponDropdown();
 
             const populateProfileDropdown = () => {
                 clearOptions(profileDropdown);
@@ -2230,7 +2726,6 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
                 });
                 profileDropdown.value = String(selectedProfileIndex);
             };
-            populateProfileDropdown();
 
             // Multiple Defense Dropdown
             const populateDefNumberDropdown = () => {
@@ -2243,7 +2738,6 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
                     });
                 });
             };
-            populateDefNumberDropdown();
 
             // Fatigue Dropdown
             const populateFatigueDropdown = () => {
@@ -2257,7 +2751,6 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
                     });
                 }
             };
-            populateFatigueDropdown();
 
             // Update on Change Listeners
             const updateArmorValue = () => {
@@ -2268,7 +2761,6 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
                     armorFinalValueEl.textContent = armorFinalValue ;
                 }
             };
-            updateArmorValue();
 
             const updateDefenseRowsVisibility = () => {
                 if (selectedDefenseType === "combat") {
@@ -2285,6 +2777,15 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
                     hideEl(profileRow);
                 }
             };
+
+            populateDefenseTypeDropdown();
+            populateWeaponDropdown();
+            populateProfileDropdown();
+            populateCombatDefenseDropdown();
+            populateDefNumberDropdown();
+            populateFatigueDropdown();
+            updateArmorValue();
+
             updateDefenseRowsVisibility();
             updateCombatBaseValue(html, dialogInstance);
 
@@ -2357,18 +2858,18 @@ export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
                 formula: finalFormula,
                 defenseType: selectedDefenseType,           // combat / magic / psychic
                 combatDefenseType: selectedCombatDefense,   // block / dodge
-                armorType: chosenArmorType.tag,
+                armorType: chosenArmorType?.tag ?? null,
                 armorFinal: armorFinalValue,
                 weaponId: chosenWeaponId,                 // __unarmed__ / weapons
                 profileIndex: chosenIndex
             };
-            autoDefenseRoll({actor, tokenId, defenseDetails, atkMsgId});
+            autoDefenseRoll({actor, tokenId, defenseDetails, parentMessageId, resolutionType});
         }
     });
     dialog.render({ force: true });
 }
 
-async function autoDefenseRoll({actor, tokenId, defenseDetails, atkMsgId}) {
+async function autoDefenseRoll({actor, tokenId, defenseDetails, parentMessageId, resolutionType}) {
     const template = "systems/abfalter/templates/dialogues/diceRolls/defensiveAutoRoll.hbs"
     let weapon; 
     let fumbleRange = 3; 
@@ -2471,8 +2972,9 @@ async function autoDefenseRoll({actor, tokenId, defenseDetails, atkMsgId}) {
                 num: num,
                 defSettings,
                 defenseWorkflow: {
-                    parentAttackMessageId: atkMsgId,
-                    defenderActorid: actor.id,
+                    parentMessageId,
+                    resolutionType,
+                    defenderActorId: actor.id,
                     defTokenId: tokenId
                 }
             } 
@@ -2496,7 +2998,7 @@ async function autoDefenseRoll({actor, tokenId, defenseDetails, atkMsgId}) {
 
     if (!needsContinuation) {
         if (isGM) {
-            await finalizeDefenseAgainstAttackMessage({
+            await finalizeDefenseMessage({
                 defenseMessageId: createdMessage.id
             });
         }
@@ -2531,7 +3033,7 @@ export async function autoDefOpenRollFunction(msg) {
     });
 
     if (!needsContinuation && isGM) {
-        await finalizeDefenseAgainstAttackMessage({
+        await finalizeDefenseMessage({
             defenseMessageId: msg.id
         });
     }
@@ -2567,14 +3069,14 @@ export async function autoDefFumbleRollFunction(msg) {
     const updatedMsg = game.messages.get(msg._id);
     if (!needsContinuation) {
         if (isGM) {
-            await finalizeDefenseAgainstAttackMessage({
+            await finalizeDefenseMessage({
                 defenseMessageId: updatedMsg.id
             });
         }
     }
 }
 
-export async function finalizeDefenseAgainstAttackMessage({ defenseMessageId }) {
+export async function finalizeDefenseMessage({defenseMessageId}) {
     const defenseMessage = game.messages.get(defenseMessageId);
     if (!defenseMessage) return;
 
@@ -2584,16 +3086,16 @@ export async function finalizeDefenseAgainstAttackMessage({ defenseMessageId }) 
 
     if (!defenseWorkflow || !defenseDetails) return;
 
-    const parentAttackMessage = game.messages.get(defenseWorkflow.parentAttackMessageId);
-    if (!parentAttackMessage) return;
+    const parentMessage = game.messages.get(defenseWorkflow.parentMessageId);
+    if (!parentMessage) return;
 
     const workflow = foundry.utils.deepClone(
-        parentAttackMessage.flags.abfalter.workflow ?? {}
+        parentMessage.flags.abfalter.workflow ?? {}
     );
 
     const tokenId = defenseWorkflow.defTokenId;
+
     if (!workflow.targetStates) workflow.targetStates = {};
-    if (!workflow.targetStates[tokenId]) workflow.targetStates[tokenId] = {};
 
     const lastRoll = rollData[rollData.length - 1];
     const finalDefenseTotal = lastRoll?.total ?? defenseDetails.finalValue;
@@ -2611,17 +3113,18 @@ export async function finalizeDefenseAgainstAttackMessage({ defenseMessageId }) 
         armorFinal: defenseDetails.armorFinal
     };
 
-    await parentAttackMessage.update({
-        "flags.abfalter.workflow": workflow
-    });
+    await parentMessage.update({"flags.abfalter.workflow": workflow});
 
-    const selectedDefenderIds = workflow.selectedDefenderIds ?? [];
-    const allDone = selectedDefenderIds.every(id =>
+    const allDone = (workflow.selectedDefenderIds ?? []).every(id =>
         workflow.targetStates?.[id]?.status === "completed"
     );
 
-    if (allDone) {
-        await createCombatResolutionMessage(parentAttackMessage);
+    if (!allDone) return;
+
+    if (defenseWorkflow.resolutionType === "effect") {
+        await createEffectResolutionMessage({msg: parentMessage});
+    } else {
+        await createCombatResolutionMessage(parentMessage);
     }
 }
 
@@ -2822,6 +3325,133 @@ async function createCombatResolutionMessage(msg) {
 
     let rollMode = game.settings.get("core", "messageMode");
     ChatMessage.applyMode(chatData, rollMode);
+    await ChatMessage.create(chatData);
+}
+
+async function createEffectResolutionMessage({msg = null, effectDetails = null, workflow = null}) {
+    if (msg) {
+        effectDetails ??= msg.flags?.abfalter?.effectDetails;
+        workflow ??= msg.flags?.abfalter?.workflow;
+    }
+
+    if (!effectDetails || !workflow) return;
+
+    const defenderIds = workflow.selectedDefenderIds ?? [];
+    const attackerToken = canvas.tokens?.get(workflow.attackerTokenId);
+
+    let finalEffectValue = null;
+
+    if (effectDetails.useProj && msg) {
+        const rollData = msg.flags?.abfalter?.rollData ?? [];
+        const lastIndex = rollData.length - 1;
+
+        finalEffectValue = Number(
+            rollData?.[lastIndex]?.total ??
+            effectDetails.value ??
+            0
+        );
+    }
+
+    const resolveData = {
+        effectDetails,
+        attackerValue: finalEffectValue,
+        defenderIds,
+        defenderValues: {},
+        resolved: false
+    };
+
+    for (const id of defenderIds) {
+        const targetState = workflow.targetStates?.[id] ?? {};
+        const token = canvas.tokens?.get(id);
+
+        if (!token?.actor) continue;
+
+        /*
+         * No projection:
+         * automatically proceed to resistance.
+         */
+        if (!effectDetails.useProj) {
+            resolveData.defenderValues[id] = {
+                portrait: token.document.texture.src,
+                name: token.name,
+
+                penetrated: true,
+                requiresResistance: true,
+
+                resValue: effectDetails.resValue,
+                resTypeList: effectDetails.resTypeList
+            };
+
+            continue;
+        }
+
+        /*
+         * Projection:
+         * compare attack vs defense normally.
+         */
+        const defenseTotal = Number(targetState.finalValue ?? 0);
+        const diff = finalEffectValue - defenseTotal;
+        const effectiveArmor = effectDetails.useAT ? Math.max(0, Number(targetState.armorFinal ?? 0)) : 0;
+        const damagePercent = diff > 0 ? calculateDamagePercentage(diff, effectiveArmor) : 0;
+        const penetrated = damagePercent >= 0.10;
+
+        resolveData.defenderValues[id] = {
+            portrait: token.document.texture.src,
+            name: token.name,
+
+            defenseTotal,
+            difference: diff,
+
+            armorFinal: Number(targetState.armorFinal ?? 0),
+            effectiveArmor,
+
+            hypotheticalDamagePercentage: Math.round(damagePercent * 100),
+
+            penetrated,
+            requiresResistance: penetrated,
+
+            resValue: effectDetails.resValue,
+            resTypeList: effectDetails.resTypeList,
+
+            defenseSubLabel: targetState.defenseSubLabel,
+            defenseName: targetState.defenseName,
+            formula: targetState.formula ?? ""
+        };
+    }
+
+    const basicInfo = {
+        portrait: attackerToken?.document?.texture?.src ?? "",
+        name: attackerToken?.actor?.name ?? "",
+        userName: game.user.isGM ? game.i18n.localize("abfalter.gm") : game.user.name
+    };
+
+    const template = "systems/abfalter/templates/dialogues/diceRolls/resolveEffectCard.hbs";
+    const content =
+        await foundry.applications.handlebars.renderTemplate(template, {
+            resolveData,
+            basicInfo,
+            isGM: game.user.isGM
+        });
+
+    const chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({
+            actor: attackerToken?.actor
+        }),
+        content,
+        flags: {
+            abfalter: {
+                resolveData,
+                basicInfo,
+                customChatHeaderCard: true,
+                effectResolution: true
+            }
+        }
+    };
+
+    const rollMode = game.settings.get("core", "messageMode");
+    ChatMessage.applyMode(chatData, rollMode);
+
     await ChatMessage.create(chatData);
 }
 
@@ -4337,7 +4967,8 @@ export async function potentialContinuationRollFunction(msg, html, event) {
 
     if (isMatrixRoll && matrixDetails) {
         const currentRoll = rollData[num];
-        const matrix = actor.items.get(matrixDetails.matrixId);
+        const rollActor = ChatMessage.getSpeakerActor(msg.speaker) ?? actor;
+        const matrix = rollActor?.items.get(matrixDetails.matrixId);
 
         matrixDetails.resolved = !rollData[num].explode && !rollData[num].fumble;
 
@@ -4357,8 +4988,6 @@ export async function potentialContinuationRollFunction(msg, html, event) {
         matrixDetails,
         matrixResolution
     });
-
-    console.log(matrixDetails, matrixResolution);
 
     await msg.update({
         content,
@@ -4479,304 +5108,6 @@ function getMatrixResolutionData({matrixDetails, rollTotal, upcastAmount = 0}) {
 }
 
 
-/** Handles psychic & magic effect projection checks
- * @param {Actor} actor - The actor using the weapon.
- * @param {string} effectInfo - Has all values of matrix if complex.
- * @param {string} type - complex has matrix info | simple doesn't
- */
-export async function effectProjDialogue({actor, effectInfo}) {
-    const template = "systems/abfalter/templates/dialogues/prompt/effectProjCheck.hbs";
-    let confirmed = false;
-    const useProjection = effectInfo.useProj === true;
-    const resistanceTypes = Array.isArray(effectInfo.resTypeList) ? effectInfo.resTypeList.filter(Boolean) : [];
-    if (resistanceTypes.length === 0) {
-        ui.notifications.warn(game.i18n.localize("abfalter.noResistanceType"));
-        return;
-    }
-
-    let baseValue = 0;
-    let bonusProj = effectInfo.projBonus;
-    let baseResValue = effectInfo.resValue;
-    let finalResValue = baseResValue;
-    let finalValue = 0;
-    let finalFormula = "";
-    let ppSpent = 0;
-
-
-    if (effectInfo.type == "psychic") {
-        baseValue = actor.system.toggles.psychicModuleStatus ? actor.system.pproj.atkModule : actor.system.pproj.finalOff;
-    }
-    // Psychic only
-    
-
-    const htmlContent = await foundry.applications.handlebars.renderTemplate(template);
-    // Get Target Token & Prepare Combat Workflow
-    let selectedTargetIds = Array.from(game.user.targets).filter(t => t?.actor).map(t => t.id);
-    let targetHookId = null;
-
-    const getCurrentSelectedTargetIds = () => {
-        return Array.from(game.user.targets)
-            .filter(t => t?.actor)
-            .map(t => t.id);
-    };
-    const renderSelectedTargets = (htmlRoot) => {
-        const targetListEl = htmlRoot.querySelector('#selectedTargetsList');
-        if (!targetListEl) return;
-
-        const tokens = selectedTargetIds
-            .map(id => canvas.tokens?.get(id))
-            .filter(Boolean);
-
-        targetListEl.textContent = tokens.length
-            ? tokens.map(t => t.name).join(", ")
-            : game.i18n.localize("abfalter.none");
-    };
-    const syncSelectedTargets = (htmlRoot) => {
-        selectedTargetIds = getCurrentSelectedTargetIds();
-        renderSelectedTargets(htmlRoot);
-    };
-    const clearOptions = (el) => {
-        if (el) el.innerHTML = "";
-    };
-    const appendOption = (el, { value, label, selected = false, dataset = {} }) => {
-        if (!el) return;
-        const option = document.createElement("option");
-        option.value = String(value ?? "");
-        option.textContent = label ?? "";
-        if (selected) option.selected = true;
-
-        for (const [key, val] of Object.entries(dataset)) {
-            option.dataset[key] = String(val);
-        }
-
-        el.appendChild(option);
-    };
-    const updateRollButtonLabel = (dialog) => {
-        const root = dialog.element;
-        if (!root) return;
-
-        const rollButton =
-            root.querySelector('[data-action="roll"]') ||
-            root.querySelector('button[data-action="roll"]');
-
-        if (rollButton) {
-            rollButton.textContent = useProjection
-            ? `${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`
-            : game.i18n.localize("abfalter.dialogs.confirm");
-        }
-
-        //rollButton.disabled = isMatrixRoll && (potentialSpent < 10 || !selectedMatrixId);
-    };
-    const updateFinalValue = (html, dialog) => {
-        if (!useProjection) {
-            finalValue = 0;
-            finalFormula = "";
-            ppSpent = 0;
-
-            updateRollButtonLabel(dialog);
-            return;
-        }
-
-        const modifierValue = Number(html.querySelector('#modifierMod')?.value) || 0;
-        const selectedModifier = Number(html.querySelector('#modifierSelect')?.value) || 0;
-
-        ppSpent = Number(html.querySelector('#ppDropdown')?.value) || 0;
-
-        finalValue =
-            baseValue +
-            bonusProj +
-            (ppSpent * actor.system.psySettings.projPPValueFinal) +
-            modifierValue +
-            selectedModifier;
-
-        finalFormula =
-            `${baseValue}(${game.i18n.localize("abfalter.potential")}) + ` +
-            `${bonusProj}(${game.i18n.localize("abfalter.matrixBonus")}) + ` +
-            `${ppSpent * actor.system.psySettings.projPPValueFinal}(${game.i18n.localize("abfalter.pp")}) + ` +
-            `${modifierValue}(${game.i18n.localize("abfalter.mod")}) + ` +
-            `${selectedModifier}(${game.i18n.localize("abfalter.action")})`;
-
-        updateRollButtonLabel(dialog);
-    };
-
-    const dialog = new diceDialogV2({
-        window: {
-            title: `${actor.name} - ${game.i18n.localize('abfalter.x')}`
-        },
-        position: {
-            width: 400,
-        },
-        content: htmlContent,
-        classes: ["baseAbfalterV2"],
-        buttons: [
-            {
-                action: "roll",
-                label: useProjection
-                    ? `${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`
-                    : game.i18n.localize("abfalter.dialogs.confirm"),
-                default: true,
-                callback: () => {
-                    confirmed = true;
-                    return "roll";
-                }
-            },
-            {
-                action: "cancel",
-                label: game.i18n.localize('abfalter.dialogs.cancel'),
-                callback: () => {
-                    confirmed = false;
-                    return "cancel";
-                }
-            }
-        ],
-        onRender: async (html, dialogInstance) => {
-            const modifierInput = html.querySelector('#modifierMod');
-            const modifierSelect = html.querySelector('#modifierSelect');
-            const ppDropdown = html.querySelector('#ppDropdown');
-            const resInfo = html.querySelector("#resInfo");
-            const ppMax = actor.system.psySettings.projMaxPPFinal;
-            const availablePP = actor.system.psychicPoint.value;
-            const projectionControls = html.querySelector("#projectionControls");
-            if (projectionControls) {
-                 projectionControls.hidden = !useProjection;
-            }
-
-            const populatePPDropdown = () => {
-                clearOptions(ppDropdown);
-                const usablePP = Math.min(ppMax, availablePP);
-                for (let i = 0; i <= usablePP; i++) {
-                    appendOption(ppDropdown, {
-                        value: i,
-                        label: String(i),
-                        selected: i === 0
-                    });
-                }
-            };
-
-            const populateModifierDropdown = () => {
-                clearOptions(modifierSelect);
-                for (let index = 0; index < 10; index++) {
-                    const value = -25 * index;
-
-                    appendOption(modifierSelect, {
-                        value,
-                        label: game.i18n.localize(`abfalter.activeAction${index + 1}`),
-                        selected: index === 0
-                    });
-                }
-            };
-
-            const updateResistanceValue = html => {
-                const resModifier = Number(html.querySelector("#resMod")?.value) || 0;
-                finalResValue = baseResValue + resModifier;
-                const finalValueDisplay = html.querySelector("#resFinalValue");
-                if (finalValueDisplay) {
-                    finalValueDisplay.textContent = String(finalResValue);
-                }
-            };
-
-            const updateResistanceInfo = () => {
-                if (!resInfo) return;
-
-                const localizedResistanceTypes =
-                    resistanceTypes.map(type =>
-                        game.i18n.localize(
-                            `abfalter.${String(type).toLowerCase()}`
-                        )
-                    );
-
-                const infoParts = [];
-
-                if (useProjection) {
-                    infoParts.push(
-                        `${game.i18n.localize("abfalter.baseProjShort")}: ${baseValue}`
-                    );
-
-                    if (bonusProj !== 0) {
-                        infoParts.push(
-                            `${game.i18n.localize("abfalter.projBonus")}: ${bonusProj}`
-                        );
-                    }
-                }
-
-                infoParts.push(
-                    `${game.i18n.localize("abfalter.resistance")}: ${baseResValue}`
-                );
-
-                infoParts.push(
-                    `${game.i18n.localize("abfalter.resTypes")}: ` +
-                    localizedResistanceTypes.join(", ")
-                );
-
-                resInfo.textContent = infoParts.join(" · ");
-            };
-
-            modifierInput?.addEventListener("input", () => { updateFinalValue(html, dialogInstance) });
-            ppDropdown?.addEventListener("change", () => { updateFinalValue(html, dialogInstance) });
-            modifierSelect?.addEventListener("change", () => { updateFinalValue(html, dialogInstance) });
-
-            populatePPDropdown();
-            populateModifierDropdown();
-            updateFinalValue(html, dialogInstance);
-            syncSelectedTargets(html);
-            targetHookId = Hooks.on("targetToken", (user, token, targeted) => {
-                if (user.id !== game.user.id) return;
-                syncSelectedTargets(html);
-            });
-        },
-        onClose: async (html) => {
-            if (targetHookId !== null) {
-                Hooks.off("targetToken", targetHookId);
-                targetHookId = null;
-            }
-            if (!confirmed) return;
-
-            const workflow = {
-                attackerUserId: game.user.id,
-                attackerActorId: actor.id,
-                attackerTokenId: actor.getActiveTokens()?.[0]?.id ?? null,
-                selectedDefenderIds: selectedTargetIds,
-                targetStates: Object.fromEntries(
-                    selectedTargetIds.map(id => [id, { status: "pending" }])
-                )
-            };
-
-            const effectDetails = {
-                actionName: effectInfo.type === "psychic"
-                    ? game.i18n.localize("abfalter.psychic")
-                    : game.i18n.localize("abfalter.magic"),
-                label: effectInfo.name,
-
-                effectType: effectInfo.type,
-                useProj: useProjection,
-
-                base: baseValue,
-                value: finalValue,
-                formula: finalFormula,
-                target: selectedAimTarget,
-                resValue: finalResValue,
-                resTypeList: resistanceTypes,
-
-                useAT: effectInfo.useAT,
-                atLabel: effectInfo.atLabel,
-                isFired: effectInfo.isFired,
-                isInvisible: effectInfo.isInvisible,
-
-                openRange: actor.system.rollRange.final,
-                fumbleRange: actor.system.fumleRange.final,
-                isPredetermined: false,
-            };
-
-            await effectRoll({actor, effectDetails, workflow});
-            //await finishPotentialMatrixMessage(matrixInfo.potentialMsgId);
-        }
-    });
-    dialog.render({ force: true });
-}
-
-async function effectRoll({actor, effectDetails, workflow}) {
-    
-}
 
 
 
