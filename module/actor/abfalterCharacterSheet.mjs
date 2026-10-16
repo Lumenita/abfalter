@@ -25,40 +25,42 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         actions: {
             toggleValue: this.#toggleValue,                     // Universal Toggle
             toggleBoughtFreeButton: this.#toggleDualBoolButton, // Universal Toggle between 3 states
-            kiAbilityItemToggle: this.#kiAbilityItemToggle,     // Toggle specifically for ki abilities, due to laziness
+            kiAbilityItemToggle: this.#kiAbilityItemToggle,     // Toggle specifically for ki abilities
+            toggleMasterBonus: this.#toggleMasterBonus,
+            //Master Buttons
+            abfRollButton: this.#hadleRollFunctions,            // Handles all roll functions
+            configButton: this.#configButton,                   // New function to handle all button clicks (class manager, initiative stats popout)
+            kiButton: this.#handleKiButton,
+
+            //To merge above
             armorTag: this.#armorTag,                           // Switch armor values in header
-            kiAccuHalf: this.#kiAccuHalf,
-            kiAccuFull: this.#kiAccuFull,
-            kiAccuReset: this.#kiAccuReset,
             magicAccuHalf: this.#magicAccuHalf,
             magicAccuFull: this.#magicAccuFull,
             magicRegenFull: this.#magicRegenFull,
             magicRegenActual: this.#magicRegenActual,
             removeMaint: this.#removeMaint,
-            addExp: this.#addExp,                           // Adds Experince Points
-            //Master Buttons
-            abfRollButton: this.#hadleRollFunctions,        // Handles all roll functions
-            configButton: this.#configButton,               // New function to handle all button clicks (class manager, initiative stats popout)
-            //To merge above
+            addExp: this.#addExp,                               // Adds Experince Points
             plainRoll: this.#onPlainRoll,
             openArcanaSephirah: this.#openArcanaSephirah,
             openDPCalc: this.#openDpCostCalc,
-            openRestWindow: this.#openRestWindow,           // Opens Rest Window, move to configButton
-            openDpOffsets: this.#openDpOffsets,             // Opens the offset window, could go into congig Button
-            openResolveWindow: this.#openResolveWindow,     // Header Resolve Button
-            rollInitiative: this.#rollInitiative,           // TODO
+            openRestWindow: this.#openRestWindow,               // Opens Rest Window, move to configButton
+            openDpOffsets: this.#openDpOffsets,                 // Opens the offset window, could go into congig Button
+            openResolveWindow: this.#openResolveWindow,         // Header Resolve Button
+            rollInitiative: this.#rollInitiative,               // TODO
             //Items
-            itemToggleValue: this.#itemToggleValue,         // Universal Item Toggle
+            itemToggleValue: this.#itemToggleValue,             // Universal Item Toggle
             itemToggleNestedValue: this.#itemToggleNestedValue, // Universal Nested Item Toggle
-            toggleElanGift: this.#toggleElanGift,           // To merge Above
-            itemToChat: this.#itemToChat,                   // Sends information about item to chat
-            subItemToChat: this.#subItemToChat,             // As above from within an item in the actor sheet, can prob merge
+            toggleElanGift: this.#toggleElanGift,               // To merge Above
+
+            itemToChat: this.#itemToChat,                       // Sends information about item to chat
+            subItemToChat: this.#subItemToChat,                 // As above from within an item in the actor sheet, can prob merge
+            
             createItem: this.#createNewItem,
             armoryAddItem: this.#armoryAddItem,
-            increase: this.#increaseQuantity,               // Armory Items quantity
-            decrease: this.#decreaseQuantity,               // Armory Items quantity
-            ammoWeaponToggle: this.#ammoWeaponToggle,       // Loads ammo onto ranged weapons
-            openMenu: this.#openMenu,                       // obsolete?
+            increase: this.#increaseQuantity,                   // Armory Items quantity
+            decrease: this.#decreaseQuantity,                   // Armory Items quantity
+            ammoWeaponToggle: this.#ammoWeaponToggle,           // Loads ammo onto ranged weapons
+            openMenu: this.#openMenu,                           // obsolete?
             //Active Effects
             createAE: this.#createActiveEffect,
             toggleAE: this.#toggleEffect,
@@ -198,6 +200,19 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 context.kiFrequencyObjList = CONFIG.abfalter.kiFrequencyDropdown;
                 context.kiActionTypeObjList = CONFIG.abfalter.kiActionTypeDropdown;
                 context.limitsObjList = CONFIG.abfalter.LimitsDropdown;
+                context.kiRecoveryList = CONFIG.abfalter.kiRecoveryDropdown;
+                context.kiAttributes = [
+                    ["agi", "Agility"],
+                    ["dex", "Dexterity"],
+                    ["con", "Constitution"],
+                    ["str", "Strength"],
+                    ["pow", "Power"],
+                    ["wp", "Willpower"]
+                ].map(([key, stat]) => ({
+                    key,
+                    stat,
+                    label: `abfalter.${key}`
+                }));
                 break;
             case "effect":
                 context.effects = this.prepareActiveEffectCategories();
@@ -209,6 +224,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 context.InnatePowerObjList = CONFIG.abfalter.innatePowerSettingDropdown;
                 context.openRollLimitsList = CONFIG.abfalter.openRollLimitsDropdown;
                 context.rollSpeakerTypeList = CONFIG.abfalter.rollSpeakerTypeDropdown;
+                context.kiAccuTypeList = CONFIG.abfalter.kiAccuTypeDropdown;
                 break;
         }
 
@@ -238,6 +254,17 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         // Prepare enriched descriptions to be seen on the actor itself
         const enrich = content => foundry.applications.ux.TextEditor.implementation.enrichHTML(content ?? "", { async: true });
         const enrichConfig = {
+            maintPower: {
+                fields: {
+                    description: "enrichedDesc"
+                }
+            },
+            mentalPattern: {
+                fields: {
+                    description: "enrichedDesc",
+                    penalty: "enrichedPenalty"
+                }
+            },
             psychicMatrix: {
                 fields: {
                     description: "enrichedDesc"
@@ -251,16 +278,25 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                     }
                 ]
             },
-            maintPower: {
-                fields: {
-                    description: "enrichedDesc"
-                }
-            },
-            mentalPattern: {
+            arsMagnus: {
                 fields: {
                     description: "enrichedDesc",
-                    penalty: "enrichedPenalty"
-                }
+                } 
+            },
+            martialArt: {
+                fields: {
+                    description: "enrichedDesc",
+                } 
+            },
+            kiSealCreature: {
+                fields: {
+                    description: "enrichedDesc",
+                } 
+            },
+            kiTechnique: {
+                fields: {
+                    description: "enrichedDesc",
+                } 
             },
             weapon: {
                 fields: {
@@ -278,9 +314,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 }
             }
         };
-
         const tasks = [];
-
         for (const [type, config] of Object.entries(enrichConfig)) {
             for (const item of context[`${type}s`] ?? []) {
                 for (const [source, output] of Object.entries(config.fields ?? {})) {
@@ -485,7 +519,8 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                             item?.type != "discipline" &&
                             item?.type != "mentalPattern" &&
                             item?.type != "maintPower" &&
-                            item?.type != "currency";
+                            item?.type != "currency" &&
+                            item?.type != "kiAbility";
                     return x;
                 },
                 onClick: async (event, element) => {
@@ -516,7 +551,20 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 onClick: async (event, element) => {
                     const item = this.actor.items.get(element.dataset.itemId);
                     if (!item) return;
-                    item.update({ "system.active": !item.system?.active });
+                    item.update({ "system.active": !item.system?.active, "system.hold": false });
+                }
+            },
+            {
+                label: game.i18n.localize("abfalter.toggleHold"),
+                icon: '<i class="fas fa-caret-right"></i>',
+                visible: (element) => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    return element.dataset.canEquip !== "false" && item?.type === "kiTechnique";
+                },
+                onClick: async (event, element) => {
+                    const item = this.actor.items.get(element.dataset.itemId);
+                    if (!item) return;
+                    item.update({ "system.hold": !item.system?.hold, "system.active": false });
                 }
             },
             {
@@ -596,6 +644,18 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         item.update({ "system.bought": value, "system.bought2": value2 });
     }
 
+    static async #toggleMasterBonus(ev) {
+        const selected = ev.target.dataset.bonus;
+        console.log(selected)
+        const current = this.actor.system.fistDamage.masterBonusSelected;
+        console.log(current)
+
+
+        await this.document.update({
+            "system.fistDamage.masterBonusSelected": current === selected ? "none" : selected
+        });
+    }
+
     static #itemToggleValue(ev) {
         ev.preventDefault();
         const target = ev.target.closest('[data-label][data-ability]');
@@ -632,9 +692,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         const currentValue = foundry.utils.getProperty(item, path);
         return item.update({ [path]: !currentValue });
     }
-
-
-    
 
     static #onPlainRoll(ev) {
         ev.preventDefault();
@@ -689,51 +746,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             default:
                 break;
         }
-    }
-
-    static #kiAccuHalf(ev) {
-        let value = this.document.system.kiPool.agi.current + (this.document.system.kiPool.agi.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.agi.accumTot / 2)) : 0);
-        let value2 = this.document.system.kiPool.con.current + (this.document.system.kiPool.con.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.con.accumTot / 2)) : 0);
-        let value3 = this.document.system.kiPool.dex.current + (this.document.system.kiPool.dex.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.dex.accumTot / 2)) : 0);
-        let value4 = this.document.system.kiPool.str.current + (this.document.system.kiPool.str.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.str.accumTot / 2)) : 0);
-        let value5 = this.document.system.kiPool.pow.current + (this.document.system.kiPool.pow.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.pow.accumTot / 2)) : 0);
-        let value6 = this.document.system.kiPool.wp.current + (this.document.system.kiPool.wp.accumulating ? Math.max(1, Math.ceil(this.document.system.kiPool.wp.accumTot / 2)) : 0);
-        this.document.update({
-            "system.kiPool.agi.current": value, "system.kiPool.con.current": value2, "system.kiPool.dex.current": value3,
-            "system.kiPool.str.current": value4, "system.kiPool.pow.current": value5, "system.kiPool.wp.current": value6
-        });
-    }
-    static #kiAccuFull(ev) {
-        let value = this.document.system.kiPool.agi.current + (this.document.system.kiPool.agi.accumulating ? this.document.system.kiPool.agi.accumTot : 0);
-        let value2 = this.document.system.kiPool.con.current + (this.document.system.kiPool.con.accumulating ? this.document.system.kiPool.con.accumTot : 0);
-        let value3 = this.document.system.kiPool.dex.current + (this.document.system.kiPool.dex.accumulating ? this.document.system.kiPool.dex.accumTot : 0);
-        let value4 = this.document.system.kiPool.str.current + (this.document.system.kiPool.str.accumulating ? this.document.system.kiPool.str.accumTot : 0);
-        let value5 = this.document.system.kiPool.pow.current + (this.document.system.kiPool.pow.accumulating ? this.document.system.kiPool.pow.accumTot : 0);
-        let value6 = this.document.system.kiPool.wp.current + (this.document.system.kiPool.wp.accumulating ? this.document.system.kiPool.wp.accumTot : 0);
-        this.document.update({
-            "system.kiPool.agi.current": value, "system.kiPool.con.current": value2, "system.kiPool.dex.current": value3,
-            "system.kiPool.str.current": value4, "system.kiPool.pow.current": value5, "system.kiPool.wp.current": value6
-        });
-    }
-    static #kiAccuReset(ev) {
-        new Dialog({
-            title: "Reset Accumulation",
-            content: game.i18n.localize('abfalter.accuKiReset'),
-            buttons: {
-                yes: {
-                    label: game.i18n.localize('abfalter.yes'),
-                    callback: () => {
-                        this.document.update({
-                            "system.kiPool.agi.current": 0, "system.kiPool.con.current": 0, "system.kiPool.dex.current": 0,
-                            "system.kiPool.str.current": 0, "system.kiPool.pow.current": 0, "system.kiPool.wp.current": 0
-                        });
-                    }
-                },
-                no: {
-                    label: game.i18n.localize('abfalter.no')
-                }
-            },
-        }).render(true);
     }
 
     static #createNewItem(ev) {
@@ -879,6 +891,38 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         }
         app?.render(true);
     }
+    static #handleKiButton(ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const target = ev.target.closest('[data-ability]');
+        const type = target.dataset.ability;
+        switch (type) {
+            case "kiAccu":
+                actorFunctions.kiAccumulate(this.actor, "full");
+                break;
+            case "kiAccuHalf":
+                actorFunctions.kiAccumulate(this.actor, "half");
+                break;
+            case "kiAccuRemoveHalf":
+                actorFunctions.kiAccumulate(this.actor, "removeHalf");
+                break;
+            case "kiAccuReset":
+                actorFunctions.kiReset(this.actor);
+                break;
+            case "kiRemoveMaint":
+                actorFunctions.kiRemoveMaint(this.actor);
+                break;
+            case "castTechnique":
+                actorFunctions.kiCast(this.actor);
+                break;
+            case "shutdown":
+                actorFunctions.kiShutdown(this.actor);
+                break;
+        }
+    }
+
+
+
 
     static #openArcanaSephirah(ev) {
         ev.preventDefault();

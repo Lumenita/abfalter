@@ -32,6 +32,7 @@ export const preloadHandlebarsTemplates = () => {
         "systems/abfalter/templates/item/details/backgroundInfo.hbs",
         "systems/abfalter/templates/item/partials/subHeader/monsterPower.hbs",
         "systems/abfalter/templates/item/partials/subHeader/spellPath.hbs",
+        "systems/abfalter/templates/item/details/zeonMaint.hbs",
         "systems/abfalter/templates/item/partials/subHeader/zeonMaint.hbs",
         "systems/abfalter/templates/item/partials/subHeader/spell.hbs",
         "systems/abfalter/templates/item/details/spell.hbs",

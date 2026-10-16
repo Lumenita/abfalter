@@ -178,6 +178,7 @@ Hooks.on('updateItem', async (item, _updateData, _options, userId) => {
         deactivateItemEffects(item);
     }
 });
+
 async function activateItemEffects(item) {
     const actor = item.actor;
     const effects = item.effects.contents;
@@ -485,7 +486,8 @@ class actorDataModel extends foundry.abstract.DataModel {
                 raceRootsStatus: makeBoolField(),
                 mentalHealthStatus: makeBoolField(),
                 weightStatus: makeBoolField(),
-                presenceStatus: makeBoolField()
+                presenceStatus: makeBoolField(),
+                automaticKi: makeBoolField()
             }),
             settings: new foundry.data.fields.SchemaField({
                 phrMult: makeLongIntField(1),
@@ -508,6 +510,7 @@ class actorDataModel extends foundry.abstract.DataModel {
                 autoLowZeonPen: makeBoolField(),
                 lowZeonPenalty: makeIntField(-10),
                 noZeonPenalty: makeIntField(-30),
+                alwaysFullKiAccu: makeStringField("query"),
             }),
             psySettings: new foundry.data.fields.SchemaField({
                 projMaxPP: makeIntField(5),
@@ -910,6 +913,8 @@ class actorDataModel extends foundry.abstract.DataModel {
                 useOfnemiZenKi: kiAbility(40)
             }),
             fistDamage: new foundry.data.fields.SchemaField({
+                maToggle: makeBoolField(),
+                masterBonusSelected: makeStringField("none"),
                 base: makeIntField(10),
                 mult: makeIntField(),
                 mult2: makeIntField(),
@@ -930,6 +935,11 @@ class actorDataModel extends foundry.abstract.DataModel {
                 wp: kiPoolAbilities(),
                 unified: makeIntField(),
                 unifiedBonus: makeIntField(),
+                customMaint: makeIntField(),
+                genericKi: makeIntField(),
+                showGenericKi: makeBoolField(),
+                recoveryInterval: makeStringField("oneHour"),
+                recoveryAmount: makeIntField(6),
                 innate: new foundry.data.fields.SchemaField({
                     type: makeStringField("POW"),
                     tag: makeStringField("POW"),
@@ -1858,6 +1868,10 @@ class zeonMaintDataModel extends foundry.abstract.DataModel {
             equipped: makeBoolField(),
             type: makeStringField("turn"),
             toggleItem: makeBoolField(),
+
+            linked: makeBoolField(),
+            maintLevel: makeStringField("basic"),
+            maintSpellId: makeStringField()
         }
     }
 
@@ -2040,9 +2054,11 @@ class monsterPowerDataModel extends foundry.abstract.DataModel {
 class kiSealCreatureDataModel extends foundry.abstract.DataModel {
     static defineSchema() {
         return {
-            description: makeStringField(),
+            description: makeHtmlField(),
             level: makeIntField(),
             expand: makeBoolField(),
+            alwaysSeals: makeBoolField(),
+            alwaysDesc: makeBoolField(),
             minor: new foundry.data.fields.SchemaField({
                 wood: makeIntField(),
                 metal: makeIntField(),
@@ -2072,6 +2088,8 @@ class kiTechniqueDataModel extends foundry.abstract.DataModel {
             showDesc: makeBoolField(false),
             showStats: makeBoolField(true),
             active: makeBoolField(false),
+            hold: makeBoolField(false),
+            holdPushed: makeBoolField(false),
             expand: makeBoolField(false),
             level: makeIntField(),
             mk: makeIntField(),
@@ -2112,7 +2130,7 @@ class kiTechniqueDataModel extends foundry.abstract.DataModel {
 class arsMagnusDataModel extends foundry.abstract.DataModel {
     static defineSchema() {
         return {
-            description: makeStringField(),
+            description: makeHtmlField(),
             expand: makeBoolField(),
             dp: makeIntField(),
             mk: makeIntField()
@@ -2127,14 +2145,53 @@ class arsMagnusDataModel extends foundry.abstract.DataModel {
 class martialArtDataModel extends foundry.abstract.DataModel {
     static defineSchema() {
         return {
-            description: makeStringField(),
+            description: makeHtmlField(),
             expand: makeBoolField(),
-            bonusAtk: makeIntField(),
-            bonusDef: makeIntField(),
-            bonusDod: makeIntField(),
-            dp: makeIntField(),
-            mk: makeIntField(),
+            category: makeStringField("basic"),
             degree: makeStringField("base"),
+            tao: makeBoolField(),
+            firstPurchase: makeBoolField(),
+            costModifier: makeIntField(),
+            baseDegrees: new foundry.data.fields.SchemaField({
+                base: new foundry.data.fields.SchemaField({
+                    bonusAtk: makeIntField(),
+                    bonusBlk: makeIntField(),
+                    bonusDod: makeIntField(),
+                    bonusMK: makeIntField()
+                }),
+                advanced: new foundry.data.fields.SchemaField({
+                    bonusAtk: makeIntField(),
+                    bonusBlk: makeIntField(),
+                    bonusDod: makeIntField(),
+                    bonusMK: makeIntField()
+                }),
+                supreme: new foundry.data.fields.SchemaField({
+                    bonusAtk: makeIntField(),
+                    bonusBlk: makeIntField(),
+                    bonusDod: makeIntField(),
+                    bonusMK: makeIntField()
+                }),
+            }),
+            advDegrees: new foundry.data.fields.SchemaField({
+                base: new foundry.data.fields.SchemaField({
+                    bonusAtk: makeIntField(),
+                    bonusBlk: makeIntField(),
+                    bonusDod: makeIntField(),
+                    bonusMK: makeIntField(),
+                    masterAtk: makeIntField(),
+                    masterBlk: makeIntField(),
+                    masterDod: makeIntField(),
+                }),
+                arcane: new foundry.data.fields.SchemaField({
+                    bonusAtk: makeIntField(),
+                    bonusBlk: makeIntField(),
+                    bonusDod: makeIntField(),
+                    bonusMK: makeIntField(),
+                    masterAtk: makeIntField(),
+                    masterBlk: makeIntField(),
+                    masterDod: makeIntField(),
+                }),
+            })
         }
     }
 
@@ -2150,7 +2207,7 @@ class kiAbilityDataModel extends foundry.abstract.DataModel {
             mk: makeIntField(),
             bought: makeBoolField(false),
             bought2: makeBoolField(false),
-            toggleItem: makeBoolField(true),
+            toggleItem: makeBoolField(false),
             indent: makeStringField("subKiBase")
         }
     }
@@ -2298,7 +2355,9 @@ function kiPoolAbilities() {
         bonus: makeIntField(),
         bonusMax: makeIntField(),
         accumulating: makeBoolField(true),
-        status: makeBoolField()
+        status: makeBoolField(),
+        maint: makeIntField(),
+        maintExtra: makeIntField()
     })
 }
 

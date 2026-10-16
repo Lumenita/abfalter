@@ -6,5 +6,5 @@ export const templates = {
     addKiTechAbility: 'systems/abfalter/templates/other/addKiTechAbility.hbs',
     dpOffsets: 'systems/abfalter/templates/other/dpOffsets.hbs',
     classManager: 'systems/abfalter/templates/other/classManager.hbs',
-    initiative: 'systems/abfalter/templates/dialogues/prompt/initiative.html',
+    initiative: 'systems/abfalter/templates/dialogues/prompt/initiative.hbs',
 }

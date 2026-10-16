@@ -4,6 +4,30 @@
 </div>
 <ul class="summary flexrow">
     <li>{{localize "abfalter.level"}}: {{system.level}}</li>
-    <li></li>
-    <li></li>
+    <li class="itemHeader65-30">
+        <label> 
+            <span> {{localize "abfalter.showSeals"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.alwaysSeals}}kiBought{{/if}}"
+                data-label="system.alwaysSeals" data-ability="{{system.alwaysSeals}}">
+                {{#if system.alwaysSeals}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                {{/if}}
+            </button>
+        </label>
+    </li>
+    <li class="itemHeader65-30">
+        <label> 
+            <span> {{localize "abfalter.showDesc"}} </span>
+            <button type="button" data-action="toggleValue" class="{{#if system.alwaysDesc}}kiBought{{/if}}"
+                data-label="system.alwaysDesc" data-ability="{{system.alwaysDesc}}">
+                {{#if system.alwaysDesc}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                {{/if}}
+            </button>
+        </label>
+    </li>
 </ul>

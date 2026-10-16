@@ -1,0 +1,76 @@
+<form class="flexcol kiCastForm">
+    <div class="kiCastTechniques">
+        {{#each techniques}}
+        <div class="kiCastTechnique" data-technique-id="{{id}}">
+            <input type="checkbox" class="kiCastSelect" data-technique-id="{{id}}">
+
+            <div class="kiCastTechniqueInfo">
+                <strong>
+                    {{name}}{{#if held}} (On Hold){{/if}}
+                </strong>
+
+                <div class="kiCastTechniqueCost">
+                    {{#each costs}}
+                        <span class="{{#if insufficient}}kiCostInsufficient{{/if}}">
+                            {{label}} {{value}}
+                        </span>
+                        {{#unless @last}} / {{/unless}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="kiCastPushContainer">
+                {{#if held}}
+                {{#if heldPushed}}
+                <strong class="kiCastPushed">
+                    PUSHED
+                </strong>
+                {{/if}}
+                {{else}}
+                {{#if canPush}}
+                <label class="kiCastPushLabel">
+                    <input type="checkbox" class="kiCastPush" data-technique-id="{{id}}">
+                    Push
+                </label>
+                {{/if}}
+                {{/if}}
+            </div>
+
+            <div class="kiCastModeContainer">
+                {{#if held}}
+                <span class="kiCastHeldCast">
+                    Cast
+                </span>
+                {{else}}
+                <select class="kiCastMode" data-technique-id="{{id}}" disabled>
+                    <option value="cast">Cast</option>
+                    <option value="hold">Hold</option>
+                </select>
+                {{/if}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <hr>
+
+    <div class="kiCastSummary">
+        <strong>Accumulation Result</strong>
+        <div class="kiAccumResult">No change</div>
+
+        <div class="kiAccumWarning" style="display:none;">
+            Not enough accumulated Ki.
+        </div>
+
+        <strong style="display:block;margin-top:8px;">
+            Activation Result
+        </strong>
+
+        <div class="kiActualResult">No change</div>
+
+        <div class="kiActualWarning" style="display:none;">
+            Not enough Ki reserve.
+        </div>
+    </div>
+
+</form>

@@ -1,10 +1,95 @@
-<section class="baseAbfalter itemPage tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+<section class="baseAbfalterV2 itemPageV2 tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
     <fieldset>
         <legend> {{ localize "abfalter.generalDetails" }} </legend>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.dp"}} </span> <input type="number" name="system.dp" value="{{system.dp}}" /> </label>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.mk"}} </span> <input type="number" name="system.mk" value="{{system.mk}}" /> </label>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.attack"}} </span> <input type="number" name="system.bonusAtk" value="{{system.bonusAtk}}" /> </label>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.block"}} </span> <input type="number" name="system.bonusDef" value="{{system.bonusDef}}" /> </label>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.dodge"}} </span> <input type="number" name="system.bonusDod" value="{{system.bonusDod}}" /> </label>
+        <div class="csSelect itemSimpleLabel abfDivFormat">
+            <label>
+                <span> {{localize "abfalter.category"}} </span>
+                <select name="system.category">
+                    {{selectOptions martialArtsCatObjList selected=system.category localize=true}}
+                </select>
+            </label>
+        </div>
+        <div class="csSelect itemSimpleLabel abfDivFormat">
+            <label>
+                <span> {{localize "abfalter.degree"}} </span>
+                <select name="system.degree">
+                    {{selectOptions martialArtsDegreeObjList selected=system.degree localize=true}}
+                </select>
+            </label>
+        </div>
+        {{#ifEquals system.category "basic"}}
+        <div class="abfDivFormat">
+            <label class="itemSimpleLabel">
+                <span> {{localize "abfalter.firstPurchase"}} </span>
+                <button type="button" data-action="toggleValue" class="{{#if system.firstPurchase}}kiBought{{/if}}"
+                    data-label="system.firstPurchase" data-ability="{{system.firstPurchase}}">
+                    {{#if system.firstPurchase}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                    {{/if}} 
+                </button>
+            </label>
+        </div>
+        {{/ifEquals}}
+        <div class="abfDivFormat">
+            <label class="itemSimpleLabel">
+                <span> {{localize "abfalter.isTao"}} </span>
+                <button type="button" data-action="toggleValue" class="{{#if system.tao}}kiBought{{/if}}"
+                    data-label="system.tao" data-ability="{{system.tao}}">
+                    {{#if system.tao}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                    {{/if}} 
+                </button>
+            </label>
+        </div>
+        <div class="abfDivFormat">
+            <label class="itemDoubleInputLabel">
+                <span> {{localize "abfalter.totalDpCost"}} </span>
+                <input type="number" name="system.costModifier" value="{{system.costModifier}}" />
+                <span> | </span>
+                <span> {{system.finalDp}} </span>
+            </label>
+        </div>
     </fieldset>
+
+    {{#each martialArtDegrees as |degree|}}
+    <fieldset>
+        <legend>{{localize degree.label}}</legend>
+        <div class="abfDivFormat">
+            <label class="itemSimpleLabel">
+                <span>{{localize "abfalter.attack"}}</span>
+                <input type="number" name="{{degree.path}}.bonusAtk" value="{{degree.data.bonusAtk}}" />
+            </label>
+            <label class="itemSimpleLabel">
+                <span>{{localize "abfalter.block"}}</span>
+                <input type="number" name="{{degree.path}}.bonusBlk" value="{{degree.data.bonusBlk}}" />
+            </label>
+            <label class="itemSimpleLabel">
+                <span>{{localize "abfalter.dodge"}}</span>
+                <input type="number" name="{{degree.path}}.bonusDod" value="{{degree.data.bonusDod}}" />
+            </label>
+            <label class="itemSimpleLabel">
+                <span>{{localize "abfalter.mk"}}</span>
+                <input type="number" name="{{degree.path}}.bonusMK" value="{{degree.data.bonusMK}}" />
+            </label>
+            {{#if degree.isAdvanced}}
+            <label class="itemSimpleLabel">
+                <span>{{localize "abfalter.masterAtk"}}</span>
+                <input type="number" name="{{degree.path}}.masterAtk" value="{{degree.data.masterAtk}}" />
+            </label>
+            <label class="itemSimpleLabel">
+                <span>{{localize "abfalter.masterBlk"}}</span>
+                <input type="number" name="{{degree.path}}.masterBlk" value="{{degree.data.masterBlk}}" />
+            </label>
+            <label class="itemSimpleLabel">
+                <span>{{localize "abfalter.masterDod"}}</span>
+                <input type="number" name="{{degree.path}}.masterDod" value="{{degree.data.masterDod}}" />
+            </label>
+            {{/if}}
+        </div>
+    </fieldset>
+    {{/each}}
 </section>

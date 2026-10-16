@@ -1,13 +1,15 @@
-<section class="baseAbfalter itemPage tab  {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+<section class="baseAbfalterV2 itemPageV2 tab  {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
     <fieldset>
         <legend> {{ localize "abfalter.generalDetails" }} </legend>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.level"}} </span> <input type="number" name="system.level" value="{{system.level}}" /> </label>
+        <div class="abfDivFormat">
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.level"}} </span> <input type="number" name="system.level" value="{{system.level}}" /> </label>
+        </div>
     </fieldset>
 
     <fieldset>
         <legend> {{localize "abfalter.kiSealsCre"}} {{ localize "abfalter.details" }} </legend>
         <div class="kiSealContent">
-            <div>
+            <div class="abfDivFormat">
                 <span> {{localize "abfalter.sealType"}} </span>
                 <span> {{localize "abfalter.sealWood"}} </span>
                 <span> {{localize "abfalter.sealMetal"}} </span>
@@ -15,7 +17,7 @@
                 <span> {{localize "abfalter.sealWater"}} </span>
                 <span> {{localize "abfalter.sealFire"}} </span>
             </div>
-            <div>
+            <div class="abfDivFormat">
                 <span> {{localize "abfalter.minor"}} </span>
                 <input name="system.minor.wood" type="number" value="{{system.minor.wood}}" />
                 <input name="system.minor.metal" type="number" value="{{system.minor.metal}}" />
@@ -23,7 +25,7 @@
                 <input name="system.minor.water" type="number" value="{{system.minor.water}}" />
                 <input name="system.minor.fire" type="number" value="{{system.minor.fire}}" />
             </div>
-            <div>
+            <div class="abfDivFormat">
                 <span> {{localize "abfalter.major"}} </span>
                 <input name="system.major.wood" type="number" value="{{system.major.wood}}" />
                 <input name="system.major.metal" type="number" value="{{system.major.metal}}" />

@@ -553,36 +553,6 @@ async function migrateScenePsychicMatrixEffects(scene, effectKeys) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * v1.6.0 — Weapon property normalization
  *

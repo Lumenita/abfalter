@@ -13,7 +13,267 @@ export default class abfalterItem extends Item {
         }
         super.prepareData();
     }
-    /* ---------- Armory Items  ---------- */
+
+    /* ---------- Mystic Items  ---------- */
+    prepareZeonMaint() {
+        this.system.spellList = [];
+        if (!this.parent) return;
+        let spellType = `${this.system.type[0].toUpperCase() + this.system.type.slice(1, this.type.length)}`
+
+        const validSpells = this.parent.items.filter(i => i.type === "spell" && i.system.maintType === spellType);
+        this.system.spellList = validSpells.map(i => ({ id: i.id, name: i.name }));
+        const selectedSpell = validSpells.find(i => i.id === this.system.maintSpellId) ?? null;
+        if (!selectedSpell) {
+            return;
+        }
+        const spellDetails = selectedSpell.system;
+        const chosenLevel = spellDetails[this.system.maintLevel];
+
+        this.name = selectedSpell.name;
+        this.system.zeon = chosenLevel.maint;
+        this.system.cost = chosenLevel.zeonCost;
+        this.system.description = chosenLevel.rollDesc;
+    }
+
+    /* ---------- Psychic Items  ---------- */
+    prepareMentalPattern() {
+        if (this.system.toggle == true) {
+            this.system.finalCost = Math.floor(+this.system.cost + +this.system.cancelCost);
+        } else {
+            this.system.finalCost = this.system.cost;
+        }
+    }
+
+    prepareMaintPower() {
+        this.system.matricesList = [];
+        if (!this.parent) return;
+        const settings = this.parent.system.psySettings;
+        const tiers = [
+            { key: "effect20", value: 20 },
+            { key: "effect40", value: 40 },
+            { key: "effect80", value: 80 },
+            { key: "effect120", value: 120 },
+            { key: "effect140", value: 140 },
+            { key: "effect180", value: 180 },
+            { key: "effect240", value: 240 },
+            { key: "effect280", value: 280 },
+            { key: "effect320", value: 320 },
+            { key: "effect440", value: 440 }
+        ];
+        this.system.finalPot = Math.floor((this.system.ppInvested * settings.maintPPValueFinal) + settings.maintIncValueFinal + this.system.value + this.parent.system.ppotential.final);
+        this.system.upcastAmountFinal = this.system.upcastAmount;
+
+        let tierIndex = tiers.findLastIndex(tier => this.system.finalPot >= tier.value);
+        if (tierIndex < 0) tierIndex = 0;
+        const upcastAmount = Math.max(Number(this.system.upcastAmountFinal) || 0, 0);
+        tierIndex = Math.min(tierIndex + upcastAmount, tiers.length - 1);
+        if (!this.system.linked) {
+            this.system.maintPotencyAchieved = tiers[tierIndex].value;;
+            return;
+        }
+
+        const validMatrices = this.parent.items.filter(i => i.type === "psychicMatrix" && i.system.maint === "Yes");
+        this.system.matricesList = validMatrices.map(i => ({ id: i.id, name: i.name }));
+        const selectedMatrix = validMatrices.find(i => i.id === this.system.maintainedMatrixId) ?? null;
+        if (!selectedMatrix) {
+            this.system.maintPotencyAchieved = "";
+            return;
+        }
+
+        const matrixDetails = selectedMatrix.system.matrixDetails;
+
+        // If the selected tier is a failure, move upward to the first successful tier.
+        while (tierIndex < tiers.length - 1 && matrixDetails[tiers[tierIndex].key]?.failure === true) tierIndex++;
+
+        const achievedTier = tiers[tierIndex];
+        const achievedEffect = matrixDetails[achievedTier.key];
+
+        if (!achievedEffect) {
+            this.system.maintPotencyAchieved = "";
+            return;
+        }
+
+        this.system.maintPotencyAchieved = achievedTier.value;
+        this.name = selectedMatrix.name
+        this.system.description = achievedEffect.description ?? "";
+    }
+
+    preparePsychicMatrix() {
+        if (this.system.maint == "Yes") {
+            this.system.maintName = game.i18n.localize('abfalter.yes');
+        } else {
+            this.system.maintName = game.i18n.localize('abfalter.no');
+        }
+        
+        this.system.descTag = `${game.i18n.localize('abfalter.level')} ` + this.system.level
+            + ` · ` + this.system.action + ` ${game.i18n.localize('abfalter.action')}`
+            + ` · ${game.i18n.localize('abfalter.type')}: ` + game.i18n.localize(`abfalter.${this.system.type}`);
+        if (this.system.maint == "Yes") this.system.descTag += ` · ${game.i18n.localize(`abfalter.maintainable`)}`;
+
+        this.system.ppPotential = Math.floor(this.system.ppInvested * 10);
+
+        if (this.parent != null) {
+            if (this.parent) {
+                this.system.finalPot = Math.floor(~~this.system.bonus + this.system.ppPotential);
+                this.system.effectAddProjFinal = Math.floor(this.system.effectAddProj + this.parent.system.psySettings.matrixResProjIncFinal);
+                this.system.upcastAmountFinal = Math.floor(this.system.upcastAmount + this.parent.system.psySettings.upcastValueFinal);
+                const settings = this.parent.system.psySettings;
+                for (const effect of Object.values(this.system.matrixDetails)) {
+                    effect.dmgValueFinal = Math.floor(
+                        (effect.dmgValue + settings.matrixDmgIncFinal) *
+                        settings.matrixDmgMultipleFinal
+                    );
+                    effect.atPenFinal = effect.atPen + settings.matrixPenIncFinal;
+                    effect.resValueFinal = effect.resValue + settings.matrixResCheckIncFinal;
+                    effect.shieldValueFinal = Math.floor(
+                        (effect.shieldValue + settings.matrixShieldIncFinal) *
+                        settings.matrixShieldMultFinal
+                    );
+                    switch(this.system.type) {
+                        case "attack":
+                            const dmgTypeList = Object.entries(effect.dmgType).filter(([, value]) => value).map(([key]) => key);
+                            const localizedDmgTypes = dmgTypeList.map(type => game.i18n.localize(`abfalter.${type.toLowerCase()}`));
+                            const dmgTypeText = localizedDmgTypes.length ? ` (${localizedDmgTypes.join(", ")})` : "";
+                            const attackInfoParts = [
+                                `${game.i18n.localize(`abfalter.dmgShort`)}: ${effect.dmgValueFinal}${dmgTypeText}`,
+                                `${game.i18n.localize(`abfalter.atPen`)}: ${effect.atPenFinal}`
+                            ];
+                            if (effect.projAdditional !== 0) {
+                                attackInfoParts.push(`${game.i18n.localize(`abfalter.projBonus`)}: ${effect.projAdditional}`);
+                            }
+                            effect.infoLine = attackInfoParts.join(" · ");
+                            break;
+                        case "effect":
+                            const resTypeList = Object.entries(effect.resType ?? {}).filter(([, value]) => value).map(([key]) => key);
+                            const localizedResTypes = resTypeList.map(type => game.i18n.localize(`abfalter.${type.toLowerCase()}`));
+                            const resTypeText = localizedResTypes.length ? ` (${localizedResTypes.join(", ")})` : "";
+                            effect.infoLine = `${game.i18n.localize(`abfalter.resistance`)}: ${effect.resValueFinal}${resTypeText}`;
+                            break;
+                        case "shield":
+                            effect.infoLine = `${game.i18n.localize(`abfalter.shield`)} ${game.i18n.localize(`abfalter.lp`)}: ${effect.shieldValue}`;
+                            break;
+                        case "basic":
+                            effect.infoLine = ``;
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
+    /* ------------ Ki Items  ------------- */
+    prepareMartialArt() {
+        const system = this.system;
+        const MARTIAL_ART_COSTS = {
+            basic: {
+                base: { normal: 20, tao: 10 },
+                advanced: { normal: 30, tao: 10 },
+                supreme: { normal: 50, tao: 20 }
+            },
+            advanced: {
+                base: { normal: 50, tao: 20 },
+                arcane: { normal: 50, tao: 20 }
+            }
+        };
+        const DEGREE_ORDER = {
+            basic: ["base", "advanced", "supreme"],
+            advanced: ["base", "arcane"]
+        };
+
+        // Martial Art category and degree
+        const category = system.category === "advanced" ? "advanced" : "basic";
+        if (category == "advanced") system.firstPurchase = false;
+        const degreeOrder = DEGREE_ORDER[category];
+        const degreeIndex = Math.max(0, degreeOrder.indexOf(system.degree));
+
+        // DP cost
+            let totalCost = 0;
+
+            for (let i = 0; i <= degreeIndex; i++) {
+                const cost = MARTIAL_ART_COSTS[category][degreeOrder[i]];
+                totalCost += system.tao ? cost.tao : cost.normal;
+            }
+
+            if (system.firstPurchase) totalCost = Math.floor(totalCost / 2);
+
+            system.finalDp = Math.max(0, totalCost + (system.costModifier ?? 0));
+
+            // Calculate bonuses
+            const bonuses = {
+                bonusAtk: 0,
+                bonusBlk: 0,
+                bonusDod: 0,
+                bonusMK: 0,
+                masterAtk: 0,
+                masterBlk: 0,
+                masterDod: 0
+            };
+
+            const degrees = category === "basic"
+                ? system.baseDegrees
+                : system.advDegrees;
+
+            for (let i = 0; i <= degreeIndex; i++) {
+                const degree = degrees?.[degreeOrder[i]];
+                if (!degree) continue;
+                // Regular bonuses stack
+                bonuses.bonusAtk += Number(degree.bonusAtk ?? 0);
+                bonuses.bonusBlk += Number(degree.bonusBlk ?? 0);
+                bonuses.bonusDod += Number(degree.bonusDod ?? 0);
+                bonuses.bonusMK += Number(degree.bonusMK ?? 0);
+
+                // Mastery bonuses use highest value
+                bonuses.masterAtk = Math.max(bonuses.masterAtk, Number(degree.masterAtk ?? 0));
+                bonuses.masterBlk = Math.max(bonuses.masterBlk, Number(degree.masterBlk ?? 0));
+                bonuses.masterDod = Math.max(bonuses.masterDod, Number(degree.masterDod ?? 0));
+            }
+
+            Object.assign(system, bonuses);
+    }
+
+    prepareKiSealCreature() {
+        this.system.showSeals = this.system.expand || this.system.alwaysSeals;
+        this.system.showDesc = this.system.expand || this.system.alwaysDesc;
+    }
+
+    prepareKiTechnique() {
+        const sys = this.system;
+        sys.maintBool = sys.maintainable === "none" ? false : true;
+        sys.unified = this.parent != null ? this.parent.system.toggles.unifiedPools : false;
+        sys.innatePower = this.parent != null ? this.parent.system.toggles.innatePower : false;
+
+        const frequencyLabel  = game.i18n.localize('abfalter.frequency');
+        const actionTypeLabel = game.i18n.localize('abfalter.actionType');
+        let frequencyTypeValue = game.i18n.localize(`abfalter.${sys.frequency}`);
+        let actionTypeValue = game.i18n.localize(`abfalter.${sys.actionType}`);
+        const tags = [];
+        if (String(sys.maintainable).toLowerCase() !== 'none') {
+            const mText = game.i18n.localize(`abfalter.` + sys.maintainable);
+            tags.push(mText);
+        }
+        if (sys.combinable) {
+            const cText = game.i18n.localize('abfalter.combinable');
+            tags.push(cText);
+        }
+        if (sys.active) {
+            const aText = game.i18n.localize('abfalter.active');
+            tags.push(aText);
+        }
+        if (sys.hold) {
+            const hText = game.i18n.localize('abfalter.hold');
+            tags.push(hText);
+        }
+        const left = `${frequencyLabel}: ${frequencyTypeValue}, ${actionTypeLabel}: ${actionTypeValue}`;
+        sys.combinedLabel = tags.length ? `${left}, ${tags.join(', ')}` : left;
+
+        for (const [key, val] of Object.entries(sys.use)) {
+            if (val > 0) {
+                sys.showColumnNumber += 1;
+            }
+        }
+    }
+
+    /* ----------- Armory Items  ---------- */
     prepareGeneralDetails() {
         this.system.priceListIds = [];
         if(this.parent != null) {
@@ -724,168 +984,12 @@ export default class abfalterItem extends Item {
         }
     }
 
-    /* ---------- Psychic Items  ---------- */
-    preparePsychicMatrix() {
-        if (this.system.maint == "Yes") {
-            this.system.maintName = game.i18n.localize('abfalter.yes');
-        } else {
-            this.system.maintName = game.i18n.localize('abfalter.no');
-        }
-        
-        this.system.descTag = `${game.i18n.localize('abfalter.level')} ` + this.system.level
-            + ` · ` + this.system.action + ` ${game.i18n.localize('abfalter.action')}`
-            + ` · ${game.i18n.localize('abfalter.type')}: ` + game.i18n.localize(`abfalter.${this.system.type}`);
-        if (this.system.maint == "Yes") this.system.descTag += ` · ${game.i18n.localize(`abfalter.maintainable`)}`;
 
-        this.system.ppPotential = Math.floor(this.system.ppInvested * 10);
 
-        if (this.parent != null) {
-            if (this.parent) {
-                this.system.finalPot = Math.floor(~~this.system.bonus + this.system.ppPotential);
-                this.system.effectAddProjFinal = Math.floor(this.system.effectAddProj + this.parent.system.psySettings.matrixResProjIncFinal);
-                this.system.upcastAmountFinal = Math.floor(this.system.upcastAmount + this.parent.system.psySettings.upcastValueFinal);
-                const settings = this.parent.system.psySettings;
-                for (const effect of Object.values(this.system.matrixDetails)) {
-                    effect.dmgValueFinal = Math.floor(
-                        (effect.dmgValue + settings.matrixDmgIncFinal) *
-                        settings.matrixDmgMultipleFinal
-                    );
-                    effect.atPenFinal = effect.atPen + settings.matrixPenIncFinal;
-                    effect.resValueFinal = effect.resValue + settings.matrixResCheckIncFinal;
-                    effect.shieldValueFinal = Math.floor(
-                        (effect.shieldValue + settings.matrixShieldIncFinal) *
-                        settings.matrixShieldMultFinal
-                    );
-                    switch(this.system.type) {
-                        case "attack":
-                            const dmgTypeList = Object.entries(effect.dmgType).filter(([, value]) => value).map(([key]) => key);
-                            const localizedDmgTypes = dmgTypeList.map(type => game.i18n.localize(`abfalter.${type.toLowerCase()}`));
-                            const dmgTypeText = localizedDmgTypes.length ? ` (${localizedDmgTypes.join(", ")})` : "";
-                            const attackInfoParts = [
-                                `${game.i18n.localize(`abfalter.dmgShort`)}: ${effect.dmgValueFinal}${dmgTypeText}`,
-                                `${game.i18n.localize(`abfalter.atPen`)}: ${effect.atPenFinal}`
-                            ];
-                            if (effect.projAdditional !== 0) {
-                                attackInfoParts.push(`${game.i18n.localize(`abfalter.projBonus`)}: ${effect.projAdditional}`);
-                            }
-                            effect.infoLine = attackInfoParts.join(" · ");
-                            break;
-                        case "effect":
-                            const resTypeList = Object.entries(effect.resType ?? {}).filter(([, value]) => value).map(([key]) => key);
-                            const localizedResTypes = resTypeList.map(type => game.i18n.localize(`abfalter.${type.toLowerCase()}`));
-                            const resTypeText = localizedResTypes.length ? ` (${localizedResTypes.join(", ")})` : "";
-                            effect.infoLine = `${game.i18n.localize(`abfalter.resistance`)}: ${effect.resValueFinal}${resTypeText}`;
-                            break;
-                        case "shield":
-                            effect.infoLine = `${game.i18n.localize(`abfalter.shield`)} ${game.i18n.localize(`abfalter.lp`)}: ${effect.shieldValue}`;
-                            break;
-                        case "basic":
-                            effect.infoLine = ``;
-                            break;
-                    }
-                }
-            }
-        }
-    }
 
-    prepareMaintPower() {
-        this.system.matricesList = [];
-        if (!this.parent) return;
-        const settings = this.parent.system.psySettings;
-        const tiers = [
-            { key: "effect20", value: 20 },
-            { key: "effect40", value: 40 },
-            { key: "effect80", value: 80 },
-            { key: "effect120", value: 120 },
-            { key: "effect140", value: 140 },
-            { key: "effect180", value: 180 },
-            { key: "effect240", value: 240 },
-            { key: "effect280", value: 280 },
-            { key: "effect320", value: 320 },
-            { key: "effect440", value: 440 }
-        ];
-        this.system.finalPot = Math.floor((this.system.ppInvested * settings.maintPPValueFinal) + settings.maintIncValueFinal + this.system.value + this.parent.system.ppotential.final);
-        this.system.upcastAmountFinal = this.system.upcastAmount;
 
-        let tierIndex = tiers.findLastIndex(tier => this.system.finalPot >= tier.value);
-        if (tierIndex < 0) tierIndex = 0;
-        const upcastAmount = Math.max(Number(this.system.upcastAmountFinal) || 0, 0);
-        tierIndex = Math.min(tierIndex + upcastAmount, tiers.length - 1);
-        if (!this.system.linked) {
-            this.system.maintPotencyAchieved = tiers[tierIndex].value;;
-            return;
-        }
-
-        const validMatrices = this.parent.items.filter(i => i.type === "psychicMatrix" && i.system.maint === "Yes");
-        this.system.matricesList = validMatrices.map(i => ({ id: i.id, name: i.name }));
-        const selectedMatrix = validMatrices.find(i => i.id === this.system.maintainedMatrixId) ?? null;
-        if (!selectedMatrix) {
-            this.system.maintPotencyAchieved = "";
-            return;
-        }
-
-        const matrixDetails = selectedMatrix.system.matrixDetails;
-
-        // If the selected tier is a failure, move upward to the first successful tier.
-        while (tierIndex < tiers.length - 1 && matrixDetails[tiers[tierIndex].key]?.failure === true) tierIndex++;
-
-        const achievedTier = tiers[tierIndex];
-        const achievedEffect = matrixDetails[achievedTier.key];
-
-        if (!achievedEffect) {
-            this.system.maintPotencyAchieved = "";
-            return;
-        }
-
-        this.system.maintPotencyAchieved = achievedTier.value;
-        this.name = selectedMatrix.name
-        this.system.description = achievedEffect.description ?? "";
-    }
-
-    prepareMentalPattern() {
-        if (this.system.toggle == true) {
-            this.system.finalCost = Math.floor(+this.system.cost + +this.system.cancelCost);
-        } else {
-            this.system.finalCost = this.system.cost;
-        }
-    }
 
     /* ---------- Other Items  ---------- */
-
-
-    prepareKiTechnique() {
-        const sys = this.system;
-        sys.maintBool = sys.maintainable === "none" ? false : true;
-        sys.unified = this.parent != null ? this.parent.system.toggles.unifiedPools : false;
-        sys.innatePower = this.parent != null ? this.parent.system.toggles.innatePower : false;
-
-        const frequencyLabel  = game.i18n.localize('abfalter.frequency');
-        const actionTypeLabel = game.i18n.localize('abfalter.actionType');
-        let frequencyTypeValue = game.i18n.localize(`abfalter.${sys.frequency}`);
-        let actionTypeValue = game.i18n.localize(`abfalter.${sys.actionType}`);
-        const tags = [];
-        if (String(sys.maintainable).toLowerCase() !== 'none') {
-            const mText = game.i18n.localize(`abfalter.` + sys.maintainable);
-            tags.push(mText);
-        }
-        if (sys.combinable) {
-            const cText = game.i18n.localize('abfalter.combinable');
-            tags.push(cText);
-        }
-        if (sys.active) {
-            const aText = game.i18n.localize('abfalter.active');
-            tags.push(aText);
-        }
-        const left = `${frequencyLabel}: ${frequencyTypeValue}, ${actionTypeLabel}: ${actionTypeValue}`;
-        sys.combinedLabel = tags.length ? `${left}, ${tags.join(', ')}` : left;
-
-        for (const [key, val] of Object.entries(sys.use)) {
-            if (val > 0) {
-                sys.showColumnNumber += 1;
-            }
-        }
-    }
-
     prepareElan() {
         for (let [key, gift] of Object.entries(this.system.gifts)) {
             if (gift.bought) {

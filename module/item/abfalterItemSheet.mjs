@@ -74,7 +74,6 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
             case "advantage":
             case "monsterPower":
             case "arsMagnus":
-            case "zeonMaint":
                 parts.effects = effects;
                 break;
             case "secondary":
@@ -88,6 +87,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
             case "mentalPattern":
             case "psychicMatrix":
             case "maintPower":
+            case "zeonMaint":
             case "martialArt":
             case "kiSealCreature":
             case "kiTechnique":
@@ -144,7 +144,6 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 break;
             case "advantage":
             case "monsterPower":
-            case "zeonMaint":
             case "arsMagnus":
                 delete tabs.details;
                 break;
@@ -222,6 +221,32 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
             }
             case "zeonMaint": {
                 context.zeonMaintObjList = CONFIG.abfalter.zeonMaintDropdown;
+                context.zeonLevelObjList = CONFIG.abfalter.spellMaintLevelDropdown;
+                context.spellOptions = Object.fromEntries(this.item.system.spellList.map(i => [i.id, i.name]));
+                break;
+            }
+
+            // Pyschic Tab
+            case "mentalPattern": {
+                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description ?? "",
+                    { async: true }
+                );
+                context.enrichedPenalty = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.penalty ?? "",
+                    { async: true }
+                );
+                break;
+            }
+            case "maintPower": {
+                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description ?? "",
+                    { async: true }
+                );
+                const actor = this.item.actor;
+                const maxPP = actor?.system.psySettings.maintMaxPPFinal || 5;
+                context.ppInvestedObjList = Object.fromEntries(
+                    Array.from({ length: maxPP + 1 }, (_, i) => [i, String(i)])
+                );
+                context.matricesOptions = Object.fromEntries(this.item.system.matricesList.map(i => [i.id, i.name]));
+
                 break;
             }
             case "psychicMatrix": {
@@ -248,33 +273,39 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 );
                 break;
             }
-            case "maintPower": {
-                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description ?? "",
-                    { async: true }
-                );
-                const actor = this.item.actor;
-                const maxPP = actor?.system.psySettings.maintMaxPPFinal || 5;
-                context.ppInvestedObjList = Object.fromEntries(
-                    Array.from({ length: maxPP + 1 }, (_, i) => [i, String(i)])
-                );
-                context.matricesOptions = Object.fromEntries(this.item.system.matricesList.map(i => [i.id, i.name]));
-
-                break;
-            }
-            case "mentalPattern": {
-                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description ?? "",
-                    { async: true }
-                );
-                context.enrichedPenalty = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.penalty ?? "",
-                    { async: true }
-                );
-            }
+            // Ki Tab
             case "kiAbility": {
                 context.indentTypeList = CONFIG.abfalter.indentTypeDropdown;
                 break;
             }
+            case "arsMagnus": {
+                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description);
+                break;
+            }
+            case "kiSealCreature": {
+                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description);
+                break;
+            }
             case "martialArt": {
-                context.martialArtsObjList = CONFIG.abfalter.martialArtsDropdown;
+                const system = this.item.system;
+                context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description);
+                context.martialArtsCatObjList = CONFIG.abfalter.martialArtsCatDropdown;
+                context.martialArtsDegreeObjList = this.item.system.category == "basic" ? CONFIG.abfalter.martialArtsDegreeDropdown : CONFIG.abfalter.martialArtsDegreeTwoDropdown;
+                const isAdvanced = system.category === "advanced";
+                const degrees = isAdvanced
+                    ? ["base", "arcane"]
+                    : ["base", "advanced", "supreme"];
+                context.martialArtDegrees = degrees.map(degree => ({
+                    degree,
+                    label: isAdvanced
+                        ? CONFIG.abfalter.martialArtsDegreeTwoDropdown[degree]
+                        : CONFIG.abfalter.martialArtsDegreeDropdown[degree],
+                    path: `system.${isAdvanced ? "advDegrees" : "baseDegrees"}.${degree}`,
+                    data: isAdvanced
+                        ? system.advDegrees[degree]
+                        : system.baseDegrees[degree],
+                    isAdvanced
+                }));
                 break;
             }
             case "kiTechnique": {
@@ -284,6 +315,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 context.kiMaintObjList = CONFIG.abfalter.kiMaintDropdown;
                 break;
             }
+            // Armory Tab
             case "armor": {
                 context.currencyOptions = Object.fromEntries(this.item.system.priceListIds.map(i => [i.id, i.name]));
                 context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description ?? "",
@@ -338,6 +370,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 context.lootTypeList = CONFIG.abfalter.lootTypeDropdown;
                 break;
             }
+            // Settings Tab
             case "class": {
                 context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description);
                 context.classppBonusObjList = {
@@ -368,6 +401,16 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 if (this.nextElementSibling) {
                     this.nextElementSibling.textContent = this.value;
                 }
+            });
+        }
+
+        // Reset Martial Art degree when category changes
+        if (this.item.type === "martialArt") {
+            this.element.querySelector('select[name="system.category"]')?.addEventListener("change", async (event) => {
+                await this.item.update({
+                    "system.category": event.target.value,
+                    "system.degree": "base"
+                });
             });
         }
     }

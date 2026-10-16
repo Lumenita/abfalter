@@ -1241,10 +1241,18 @@ abfalter.wepDamageTypeSpiritDropdown = {
     SPIRIT: "abfalter.spirit",
 }
 
-abfalter.martialArtsDropdown = {
+abfalter.martialArtsCatDropdown = {
+    basic: "abfalter.basic",
+    advanced: "abfalter.advanced",
+}
+
+abfalter.martialArtsDegreeDropdown = {
     base: "abfalter.base",
     advanced: "abfalter.advanced",
-    supreme: "abfalter.supreme",
+    supreme: "abfalter.supreme"
+}
+abfalter.martialArtsDegreeTwoDropdown = {
+    base: "abfalter.base",
     arcane: "abfalter.arcane"
 }
 
@@ -1502,4 +1510,24 @@ abfalter.psyTypeDropdown = {
     attack: "abfalter.attack",
     shield: "abfalter.shield",
     effect: "abfalter.effect"
+}
+
+abfalter.spellMaintLevelDropdown = {
+    basic: "abfalter.basic",
+    intermediate: "abfalter.intermidiate",
+    advanced: "abfalter.advanced",
+    arcane: "abfalter.arcane"
+}
+
+abfalter.kiAccuTypeDropdown = {
+    query: "abfalter.query",
+    alwaysHalf: "abfalter.alwaysHalf",
+    alwaysFull: "abfalter.alwaysFull",
+}
+
+abfalter.kiRecoveryDropdown = {
+    oneHour: "abfalter.oneHour",
+    tenMinute: "abfalter.tenMinute",
+    fiveMinute: "abfalter.fiveMinute",
+    perMinute: "abfalter.perMinute",
 }

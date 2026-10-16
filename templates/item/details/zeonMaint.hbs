@@ -1,0 +1,41 @@
+<section class="baseAbfalterV2 itemPageV2 tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+
+    <fieldset>
+        <legend> {{ localize "abfalter.generalDetails" }} </legend>
+
+
+        <div class="abfDivFormat">
+            <label class="itemSimpleLabel">
+                <span> {{localize "abfalter.psyLinked"}} </span>
+                <button type="button" data-action="toggleValue" class="{{#if system.linked}}kiBought{{/if}}"
+                    data-label="system.linked" data-ability="{{system.linked}}">
+                    {{#if system.linked}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                    {{/if}} 
+                </button>
+            </label>
+        </div>
+
+        {{#if system.linked}}
+        <div class="csSelect itemSimpleLabel abfDivFormat">
+            <label>
+                <span> {{localize "abfalter.spellList"}} </span>
+                <select name="system.maintSpellId">
+                    {{selectOptions spellOptions selected=system.maintSpellId localize=true}}
+                </select>
+            </label>
+        </div>
+
+        <div class="csSelect itemSimpleLabel abfDivFormat">
+            <label>
+                <span> {{localize "abfalter.spellStrength"}} </span>
+                <select name="system.maintLevel">
+                    {{selectOptions zeonLevelObjList selected=system.maintLevel localize=true}}
+                </select>
+            </label>
+        </div>
+        {{/if}}
+    </fieldset>
+</section>

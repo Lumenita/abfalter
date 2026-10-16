@@ -6,6 +6,8 @@ export var abfalterSettingsKeys;
     abfalterSettingsKeys["Change_Theme"] = "Change_Theme";
     abfalterSettingsKeys["Corrected_OpenRoll"] = "Corrected_OpenRoll";
     abfalterSettingsKeys["Corrected_InitiativeRoll"] = "Corrected_InitiativeRoll";
+    abfalterSettingsKeys["MartialArts_UseBonuses"] = "MartialArts_UseBonuses";
+    abfalterSettingsKeys["MartialArts_UseMastery"] = "MartialArts_UseMastery";
 })(abfalterSettingsKeys || (abfalterSettingsKeys = {}));
 export const abfalterSettings = () => {
     game.settings.register("abfalter", "migrationInProgress", {
@@ -21,22 +23,6 @@ export const abfalterSettings = () => {
         config: false,
         default: "",
         type: String
-    });
-    game.settings.register("abfalter", "forceMigration", {
-        name: game.i18n.localize('abfalter.globalSettings.forceMigration'),
-        hint: game.i18n.localize('abfalter.globalSettings.forceMigrationDetails'),
-        scope: "world",
-        config: true,
-        type: Boolean,
-        default: false
-    });
-    game.settings.register('abfalter', "systemChangeLog", {
-        name: game.i18n.localize('abfalter.globalSettings.changelogName'),
-        hint: game.i18n.localize('abfalter.globalSettings.changelogDetails'),
-        scope: 'world',
-        config: true,
-        default: false,
-        type: Boolean
     });
     game.settings.register("abfalter", "combatSettings", {
         name: game.i18n.localize('abfalter.globalSettings.combatSettingsData'),
@@ -76,11 +62,29 @@ export const abfalterSettings = () => {
         type: ABFAlterCombatSettingsForm,
         restricted: true
     });
+    game.settings.register("abfalter", "forceMigration", {
+        name: game.i18n.localize('abfalter.globalSettings.forceMigration'),
+        hint: game.i18n.localize('abfalter.globalSettings.forceMigrationDetails'),
+        scope: "world",
+        config: true,
+        requiresReload: true,
+        type: Boolean,
+        default: false
+    });
+    game.settings.register('abfalter', "systemChangeLog", {
+        name: game.i18n.localize('abfalter.globalSettings.changelogName'),
+        hint: game.i18n.localize('abfalter.globalSettings.changelogDetails'),
+        scope: 'world',
+        config: true,
+        default: false,
+        type: Boolean
+    });
     game.settings.register('abfalter', abfalterSettingsKeys.Spirit_Damage, {
         name: game.i18n.localize('abfalter.globalSettings.spiritDmg'),
         hint: game.i18n.localize('abfalter.globalSettings.spiritDetail'),
         scope: 'world',
         config: true,
+        requiresReload: true,
         default: false,
         type: Boolean
     });
@@ -89,14 +93,7 @@ export const abfalterSettings = () => {
         hint: game.i18n.localize('abfalter.globalSettings.changeThemeDetails'),
         scope: 'client',
         config: true,
-        default: false,
-        type: Boolean
-    });
-    game.settings.register('abfalter', abfalterSettingsKeys.Corrected_Fumble, {
-        name: game.i18n.localize('abfalter.globalSettings.fumbleName'),
-        hint: game.i18n.localize('abfalter.globalSettings.fumbleDetail'),
-        scope: 'world',
-        config: true,
+        requiresReload: true,
         default: false,
         type: Boolean
     });
@@ -105,11 +102,20 @@ export const abfalterSettings = () => {
         hint: game.i18n.localize('abfalter.globalSettings.meterDetail'),
         scope: 'world',
         config: true,
+        requiresReload: true,
         default: false,
         type: Boolean,
         onChange: value => {
             updateGridUnits(value);
         }
+    });
+    game.settings.register('abfalter', abfalterSettingsKeys.Corrected_Fumble, {
+        name: game.i18n.localize('abfalter.globalSettings.fumbleName'),
+        hint: game.i18n.localize('abfalter.globalSettings.fumbleDetail'),
+        scope: 'world',
+        config: true,
+        default: false,
+        type: Boolean
     });
     game.settings.register('abfalter', abfalterSettingsKeys.Corrected_OpenRoll, {
         name: game.i18n.localize('abfalter.globalSettings.openRollName'),
@@ -125,6 +131,23 @@ export const abfalterSettings = () => {
         scope: "world",
         config: true,
         default: false,
+        type: Boolean
+    });
+
+    game.settings.register('abfalter', abfalterSettingsKeys.MartialArts_UseBonuses, {
+        name: game.i18n.localize('abfalter.globalSettings.maUseBonuses'),
+        hint: game.i18n.localize('abfalter.globalSettings.maUseBonusesDetails'),
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
+    game.settings.register('abfalter', abfalterSettingsKeys.MartialArts_UseMastery, {
+        name: game.i18n.localize('abfalter.globalSettings.maUseMastery'),
+        hint: game.i18n.localize('abfalter.globalSettings.maUseMasteryDetails'),
+        scope: "world",
+        config: true,
+        default: true,
         type: Boolean
     });
 };
@@ -166,5 +189,6 @@ class ABFAlterCombatSettingsForm extends FormApplication {
         });
 
         await game.settings.set("abfalter", "combatSettings", updated);
+        
     }
 }

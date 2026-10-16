@@ -1,5 +1,7 @@
 import { renderTemplates } from '../utilities/renderTemplates.js';
 import { templates } from '../utilities/templates.js';
+import { genericDialogs } from "../dialogs.js";
+
 
 export const openOneModDialog = async () => {
     return oneModDialog({
@@ -400,5 +402,442 @@ export async function dpOffSetsWindow(actorData) {
     });
 }
 
-export async function openSpendKiWindow(actorData) {
+const KI_ATTRIBUTES = ["agi", "dex", "con", "str", "pow", "wp"];
+export function kiAccumulate(actor, amount = "full") {
+    const attributes = ["agi", "con", "dex", "str", "pow", "wp"];
+    const unifiedPools = actor.system.toggles.unifiedPools ?? false;
+
+    const updateData = {};
+
+    for (const attr of attributes) {
+        const pool = actor.system.kiPool[attr];
+        let accumulated = 0;
+
+        if (pool.accumulating) {
+            switch (amount) {
+                case "half":
+                    accumulated = Math.max(1, Math.ceil(pool.accumTot / 2));
+                    break;
+                case "removeHalf":
+                    accumulated = -Math.max(1, Math.floor(pool.accumTot / 2));
+                    break;
+                case "full":
+                    accumulated = pool.accumTot;
+                    break;
+            }
+        }
+        let newCurrent = Math.max(0, pool.current + accumulated);
+        if (!unifiedPools) { newCurrent = Math.min(newCurrent, pool.poolTot ?? 0); }
+
+        updateData[`system.kiPool.${attr}.current`] = newCurrent;
+    }
+
+    return actor.update(updateData);
+}
+
+export async function kiReset(actor) {
+    const confirmed = await genericDialogs.confirm(
+        game.i18n.localize("abfalter.ki"),
+        game.i18n.localize("abfalter.accuKiReset")
+    );
+
+    if (!confirmed) return;
+
+    actor.update({
+        "system.kiPool.agi.current": 0, "system.kiPool.con.current": 0, "system.kiPool.dex.current": 0,
+        "system.kiPool.str.current": 0, "system.kiPool.pow.current": 0, "system.kiPool.wp.current": 0
+    });
+
+    return
+}
+
+export async function kiCast(actor) {
+    const canPush = actor.system.kiAbility.kiTechPush.status ?? false;
+    const unifiedPools = actor.system.toggles.unifiedPools ?? false;
+
+    const emptyCosts = () => Object.fromEntries(KI_ATTRIBUTES.map(attr => [attr, 0]));
+
+    const getCosts = (technique, pushed = false) => {
+        const mult = pushed ? 2 : 1;
+        return Object.fromEntries(
+            KI_ATTRIBUTES.map(attr => [attr, (technique.system.use[attr] ?? 0) * mult])
+        );
+    };
+
+    const sumEntries = entries => {
+        const totals = emptyCosts();
+
+        for (const entry of entries) {
+            const costs = getCosts(entry.technique, entry.pushed);
+            for (const attr of KI_ATTRIBUTES) totals[attr] += costs[attr];
+        }
+
+        return totals;
+    };
+
+    const getUnifiedCost = costs =>
+        KI_ATTRIBUTES.reduce((total, attr) => total + costs[attr], 0);
+
+
+    // Active techniques are hidden.
+    // Held techniques always show because their accumulation has already been paid.
+    const techniques = actor.items.filter(item =>
+        item.type === "kiTechnique" &&
+        !item.system.active
+    );
+
+    if (!techniques.length) {
+        ui.notifications.warn("This actor has no inactive Ki techniques.");
+        return;
+    }
+
+    const techniqueData = techniques.map(technique => {
+        const held = technique.system.hold ?? false;
+        const heldPushed = technique.system.holdPushed ?? false;
+        const costs = getCosts(technique);
+
+        const costData = KI_ATTRIBUTES
+            .filter(attr => costs[attr] > 0)
+            .map(attr => ({
+                label: attr.toUpperCase(),
+                value: costs[attr],
+                insufficient:
+                    !held &&
+                    (actor.system.kiPool[attr]?.current ?? 0) < costs[attr]
+            }));
+
+        return {
+            id: technique.id,
+            name: technique.name,
+            held,
+            heldPushed,
+            canPush: canPush && !held,
+            costs: costData
+        };
+    });
+
+    const content = await foundry.applications.handlebars.renderTemplate(
+        "systems/abfalter/templates/dialogues/prompt/kiCast.hbs",
+        { techniques: techniqueData }
+    );
+
+    const readSelection = html => {
+        const selected = [];
+
+        html.querySelectorAll(".kiCastSelect:checked").forEach(checkbox => {
+            const id = checkbox.dataset.techniqueId;
+            const technique = actor.items.get(id);
+            if (!technique) return;
+
+            const held = technique.system.hold ?? false;
+
+            // Techniques already on Hold can only be Cast.
+            const mode = held
+                ? "cast"
+                : html.querySelector(`.kiCastMode[data-technique-id="${id}"]`)?.value ?? "cast";
+
+            // Held techniques remember whether they were pushed when put on Hold.
+            const pushed = held
+                ? technique.system.holdPushed ?? false
+                : canPush && (
+                    html.querySelector(`.kiCastPush[data-technique-id="${id}"]`)?.checked ?? false
+                );
+
+            selected.push({ technique, held, mode, pushed });
+        });
+
+        return selected;
+    };
+
+    // New Casts and new Holds pay accumulated/current Ki.
+    // Techniques already on Hold do not pay current again.
+    const getAccumulationEntries = selected =>
+        selected.filter(entry => !entry.held);
+
+    // Anything being Cast pays activation Ki.
+    // This includes techniques being activated from Hold.
+    const getActivationEntries = selected =>
+        selected.filter(entry => entry.mode === "cast");
+
+    const canPayAccumulation = selected => {
+        const costs = sumEntries(getAccumulationEntries(selected));
+
+        return KI_ATTRIBUTES.every(attr =>
+            (actor.system.kiPool[attr]?.current ?? 0) >= costs[attr]
+        );
+    };
+
+    const canPayActual = selected => {
+        const costs = sumEntries(getActivationEntries(selected));
+
+        if (unifiedPools) {
+            return (actor.system.unifiedKi?.value ?? 0) >= getUnifiedCost(costs);
+        }
+
+        return KI_ATTRIBUTES.every(attr =>
+            (actor.system.kiPool[attr]?.actual ?? 0) >= costs[attr]
+        );
+    };
+
+    const formatRemaining = value =>
+        value < 0
+            ? `<span class="kiNegative">${value}</span>`
+            : value;
+
+    const updatePreview = html => {
+        const selected = readSelection(html);
+
+        // Enable Push / Cast-Hold controls only when that technique is selected.
+        html.querySelectorAll(".kiCastSelect").forEach(checkbox => {
+            const id = checkbox.dataset.techniqueId;
+            const mode = html.querySelector(`.kiCastMode[data-technique-id="${id}"]`);
+            const push = html.querySelector(`.kiCastPush[data-technique-id="${id}"]`);
+
+            if (mode) mode.disabled = !checkbox.checked;
+            if (push) push.disabled = !checkbox.checked;
+        });
+
+        const accumCosts = sumEntries(getAccumulationEntries(selected));
+        const actualCosts = sumEntries(getActivationEntries(selected));
+
+        const accumParts = KI_ATTRIBUTES
+            .filter(attr => accumCosts[attr] > 0)
+            .map(attr => {
+                const current = actor.system.kiPool[attr]?.current ?? 0;
+                const remaining = current - accumCosts[attr];
+                return `${attr.toUpperCase()} ${formatRemaining(remaining)}`;
+            });
+
+        let actualParts;
+
+        if (unifiedPools) {
+            const cost = getUnifiedCost(actualCosts);
+            const current = actor.system.unifiedKi?.value ?? 0;
+            const remaining = current - cost;
+
+            actualParts = cost > 0
+                ? [`Unified ${formatRemaining(remaining)}`]
+                : [];
+        } else {
+            actualParts = KI_ATTRIBUTES
+                .filter(attr => actualCosts[attr] > 0)
+                .map(attr => {
+                    const current = actor.system.kiPool[attr]?.actual ?? 0;
+                    const remaining = current - actualCosts[attr];
+                    return `${attr.toUpperCase()} ${formatRemaining(remaining)}`;
+                });
+        }
+
+        const accumResult = html.querySelector(".kiAccumResult");
+        const actualResult = html.querySelector(".kiActualResult");
+        const accumWarning = html.querySelector(".kiAccumWarning");
+        const actualWarning = html.querySelector(".kiActualWarning");
+        const confirmButton = html.querySelector('button[data-action="confirm"]');
+
+        if (accumResult) {
+            accumResult.innerHTML = accumParts.length
+                ? accumParts.join(" / ")
+                : "No change";
+        }
+
+        if (actualResult) {
+            actualResult.innerHTML = actualParts.length
+                ? actualParts.join(" / ")
+                : "No change";
+        }
+
+        const enoughAccum = canPayAccumulation(selected);
+        const enoughActual = canPayActual(selected);
+
+        if (accumWarning) {
+            accumWarning.style.setProperty(
+                "display",
+                enoughAccum ? "none" : "block",
+                "important"
+            );
+        }
+
+        if (actualWarning) {
+            actualWarning.style.setProperty(
+                "display",
+                enoughActual ? "none" : "block",
+                "important"
+            );
+        }
+
+        if (confirmButton) {
+            confirmButton.disabled =
+                !selected.length ||
+                !enoughAccum ||
+                !enoughActual;
+        }
+    };
+
+    class KiCastDialog extends foundry.applications.api.DialogV2 {
+        async _onRender(context, options) {
+            await super._onRender(context, options);
+
+            const html = this.element;
+            if (!html) return;
+
+            html.querySelectorAll(".kiCastSelect, .kiCastMode, .kiCastPush").forEach(element => {
+                element.addEventListener("change", () => updatePreview(html));
+            });
+
+            updatePreview(html);
+        }
+    }
+
+    const dialog = new KiCastDialog({
+        window: { title: `${actor.name} - Ki Techniques` },
+        position: { width: 525 },
+        classes: ["baseAbfalterV2", "kiCastDialog"],
+        content,
+        buttons: [
+            {
+                action: "confirm",
+                label: game.i18n.localize("abfalter.dialogs.confirm"),
+                default: true,
+                callback: async (event, button, dlg) => {
+                    const selected = readSelection(dlg.element);
+
+                    if (!selected.length) {
+                        ui.notifications.warn("No Ki techniques selected.");
+                        return false;
+                    }
+
+                    if (!canPayAccumulation(selected)) {
+                        ui.notifications.error("You do not have enough accumulated Ki.");
+                        return false;
+                    }
+
+                    if (!canPayActual(selected)) {
+                        ui.notifications.error("You do not have enough Ki reserve.");
+                        return false;
+                    }
+
+                    const accumCosts = sumEntries(getAccumulationEntries(selected));
+                    const actualCosts = sumEntries(getActivationEntries(selected));
+                    const actorUpdate = {};
+
+                    // Pay accumulated/current Ki for newly prepared techniques.
+                    for (const attr of KI_ATTRIBUTES) {
+                        if (accumCosts[attr] <= 0) continue;
+
+                        actorUpdate[`system.kiPool.${attr}.current`] =
+                            (actor.system.kiPool[attr]?.current ?? 0) - accumCosts[attr];
+                    }
+
+                    // Pay activation cost only for techniques being Cast.
+                    if (unifiedPools) {
+                        const cost = getUnifiedCost(actualCosts);
+
+                        if (cost > 0) {
+                            actorUpdate["system.unifiedKi.value"] =
+                                (actor.system.unifiedKi?.value ?? 0) - cost;
+                        }
+                    } else {
+                        for (const attr of KI_ATTRIBUTES) {
+                            if (actualCosts[attr] <= 0) continue;
+
+                            actorUpdate[`system.kiPool.${attr}.actual`] =
+                                (actor.system.kiPool[attr]?.actual ?? 0) - actualCosts[attr];
+                        }
+                    }
+
+                    if (Object.keys(actorUpdate).length) {
+                        await actor.update(actorUpdate);
+                    }
+
+                    const itemUpdates = selected.map(entry => {
+                        // Cast immediately or activate something already On Hold.
+                        if (entry.mode === "cast") {
+                            return {
+                                _id: entry.technique.id,
+                                "system.active": true,
+                                "system.hold": false,
+                                "system.holdPushed": false
+                            };
+                        }
+
+                        // Put newly prepared technique On Hold.
+                        return {
+                            _id: entry.technique.id,
+                            "system.active": false,
+                            "system.hold": true,
+                            "system.holdPushed": entry.pushed
+                        };
+                    });
+
+                    if (itemUpdates.length) {
+                        await actor.updateEmbeddedDocuments("Item", itemUpdates);
+                    }
+
+                    const casted = selected.some(entry => entry.mode === "cast");
+                    if (casted && game.combat) {
+                        const combatant = game.combat.getCombatantForActor(actor);
+
+                        if (combatant) {
+                            await combatant.setFlag(
+                                "abfalter",
+                                "kiCastRound",
+                                game.combat.round
+                            );
+                        }
+                    }
+
+                    return "confirm";
+                }
+            },
+            {
+                action: "cancel",
+                label: game.i18n.localize("abfalter.dialogs.cancel"),
+                callback: () => "cancel"
+            }
+        ]
+    });
+
+    dialog.render(true);
+}
+
+export async function kiRemoveMaint(actor) {
+    const unifiedPools = actor.system.toggles.unifiedPools ?? false;
+    const updateData = {};
+
+    if (unifiedPools) {
+        const actual = actor.system.unifiedKi?.value ?? 0;
+        const maint = actor.system.unifiedKi?.maint ?? 0;
+
+        updateData["system.unifiedKi.value"] = Math.max(0, actual - maint);
+    } else {
+        for (const attr of KI_ATTRIBUTES) {
+            const actual = actor.system.kiPool[attr]?.actual ?? 0;
+            const maint = actor.system.kiPool[attr]?.maint ?? 0;
+
+            updateData[`system.kiPool.${attr}.actual`] =
+                Math.max(0, actual - maint);
+        }
+    }
+
+    return actor.update(updateData);
+}
+
+export async function kiShutdown(actor) {
+    const title = game.i18n.localize("abfalter.kiManage");
+    const body = `<p>${game.i18n.localize("abfalter.kiShutdownBody")}</p>`;
+    const confirmed = await genericDialogs.confirm(title, body);
+    if (!confirmed) return;
+
+    const techniques = actor.items.filter(item => item.type === "kiTechnique");
+
+    if (!techniques.length) return;
+
+    const updates = techniques.map(technique => ({
+        _id: technique.id,
+        "system.active": false,
+        "system.hold": false,
+        "system.holdPushed": false
+    }));
+
+    await actor.updateEmbeddedDocuments("Item", updates);
 }

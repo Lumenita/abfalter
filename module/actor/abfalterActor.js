@@ -18,10 +18,14 @@ export default class abfalterActor extends Actor {
         system.other.spiritSettings = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage);
         system.other.fumbleSettings = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_Fumble);
         system.other.useMeters = game.settings.get('abfalter', abfalterSettingsKeys.Use_Meters);
+        system.other.useMaBonuses = game.settings.get('abfalter', abfalterSettingsKeys.MartialArts_UseBonuses);
+        system.other.useMaMastery = game.settings.get('abfalter', abfalterSettingsKeys.MartialArts_UseMastery);
+
 
         //All Action Mod
         system.aamField.final = system.aamField.base + system.aamField.boon + system.aamField.crit + system.aamField.critBig;
         system.aamField.final += system.arsMagnus.dragonSeal * 5 || 0;
+        system.arsMagnus.dragonDoor = Math.max(0, Math.floor(system.arsMagnus.dragonSeal / 2));
 
         //Monster Powers Prep
         for (let [key, atr] of Object.entries(system.monsterChar)) {
@@ -1003,7 +1007,8 @@ export default class abfalterActor extends Actor {
             ahThrTot: 0, ahHeatMax: 0, ahHeatTot: 0, ahColdMax: 0, ahColdTot: 0, ahEleMax: 0, ahEleTot: 0, ahEneMax: 0, ahEneTot: 0, ahSptMax: 0, ahSptTot: 0, perPen: 0, usedpp: 0, matrixpp: 0, arsMk: 0,
             maMk: 0, techMk: 0, pathLvl: 0, turnMaint: 0, dayMaint: 0, spellCost: 0, wepNum: 0, wepSpd: 0, maKiAtk: 0, maKiBlk: 0, maKiDod: 0, pilot: 0, techmagic: 0, cook: 0, toy: 0,
             kiDect: 0, kiCon: 0, wepName: "", monsterCost: 0, shieldSpeed: 0, arsDp: 0, maDp: 0, mentalPatDp: 0, profPsyDp: 0, profMystDp: 0, profPrimDp: 0, advCp:0, disAdvCp: 0, bloodBondCp: 0, infoLevelMod: 0,
-            customKiAbilityMk: 0, ammoWeight: 0, ammoPresence: 0, weaponWeight: 0, weaponPresence: 0, armorWeight: 0, armorPresence: 0, lootWeight: 0, lootPresence: 0, psyMaintPP: 0
+            customKiAbilityMk: 0, ammoWeight: 0, ammoPresence: 0, weaponWeight: 0, weaponPresence: 0, armorWeight: 0, armorPresence: 0, lootWeight: 0, lootPresence: 0, psyMaintPP: 0,
+            kiMaintAgi: 0, kiMaintCon: 0, kiMaintDex: 0, kiMaintStr: 0, kiMaintPow: 0, kiMaintWp: 0, kiMaintUnified: 0, kiMaintGeneric: 0, masterAtk: 0, masterBlk: 0, masterDod: 0
         }
         const atTypes = ["cut", "imp", "thr", "heat", "cold", "ele", "ene", "spt"];
         const atStacks = Object.fromEntries(atTypes.map(t => [t, []]));
@@ -1157,14 +1162,34 @@ export default class abfalterActor extends Actor {
                     classBonuses.arsDp += parseInt(item.system.dp) || 0;
                     break;
                 case "martialArt":
-                    classBonuses.maMk += parseInt(item.system.mk) || 0;
-                    classBonuses.maDp += parseInt(item.system.dp) || 0;
-                    classBonuses.maKiAtk += parseInt(item.system.bonusAtk) || 0;
-                    classBonuses.maKiBlk += parseInt(item.system.bonusDef) || 0;
-                    classBonuses.maKiDod += parseInt(item.system.bonusDod) || 0;
+                    classBonuses.maMk += parseInt(item.system.bonusMK) || 0;
+                    classBonuses.maDp += parseInt(item.system.finalDp) || 0;
+                    if (system.other.useMaBonuses) {
+                        classBonuses.maKiAtk += parseInt(item.system.bonusAtk) || 0;
+                        classBonuses.maKiBlk += parseInt(item.system.bonusDef) || 0;
+                        classBonuses.maKiDod += parseInt(item.system.bonusDod) || 0;
+                    }
+                    if (system.other.useMaMastery && item.system.category == "advanced") {
+                        classBonuses.masterAtk = Math.max(classBonuses.masterAtk, Number(item.system.masterAtk) || 0);
+                        classBonuses.masterBlk = Math.max(classBonuses.masterBlk, Number(item.system.masterBlk) || 0);
+                        classBonuses.masterDod = Math.max(classBonuses.masterDod, Number(item.system.masterDod) || 0);
+                    }
                     break;
                 case "kiTechnique":
                     classBonuses.techMk += parseInt(item.system.mk) || 0;
+                    if (item.system.active == true && item.system.maintBool) {
+                        classBonuses.kiMaintAgi += item.system.maint.agi;
+                        classBonuses.kiMaintCon += item.system.maint.con;
+                        classBonuses.kiMaintDex += item.system.maint.dex;
+                        classBonuses.kiMaintStr += item.system.maint.str;
+                        classBonuses.kiMaintPow += item.system.maint.pow;
+                        classBonuses.kiMaintWp += item.system.maint.wp;
+                        classBonuses.kiMaintUnified += item.system.maint.unified;
+                    }
+                    if (item.system.hold == true) {
+                        classBonuses.kiMaintUnified += 1 * item.system.level;
+                        classBonuses.kiMaintGeneric += 1 * item.system.level;
+                    }
                     break;
                 case "spellPath":
                     classBonuses.pathLvl += parseInt(item.system.level) || 0;
@@ -1853,14 +1878,6 @@ export default class abfalterActor extends Actor {
             system.lifepoints.ratio = Number((system.lp.value / system.lp.max).toFixed(2));
         }
 
-
-
-
-
-
-
-
-
         system.lifepoints.threshold = stats.Constitution.final * system.settings.negHealthMult;
         system.lifepoints.isNegative = system.lp.value < 0;
         system.lifepoints.negRatio = system.lp.value < 0 && system.lifepoints.threshold > 0 ? Math.min(Math.abs(system.lp.value) / system.lifepoints.threshold, 1) : 0;
@@ -1887,6 +1904,23 @@ export default class abfalterActor extends Actor {
             system.combatValues.dodge.class = 50;
         }
         system.combatValues.dodge.final += system.combatValues.dodge.class;
+
+        system.fistDamage.masterAtk = classBonuses.masterAtk || 0;
+        system.fistDamage.masterBlk = classBonuses.masterBlk || 0;
+        system.fistDamage.masterDod = classBonuses.masterDod || 0;
+        if (system.other.useMaMastery) {
+            switch (system.fistDamage.masterBonusSelected) {
+                case "atk":
+                    system.combatValues.attack.final += classBonuses.masterAtk;
+                    break;
+                case "blk":
+                    system.combatValues.block.final += classBonuses.masterBlk;
+                    break;
+                case "dod":
+                    system.combatValues.dodge.final += classBonuses.masterDod;
+                    break;
+            }
+        }
 
         // Armor Penalties to Physical Actions
         system.combatValues.attack.final -= system.armor.wearArmor.reqPenalty;
@@ -2381,8 +2415,24 @@ export default class abfalterActor extends Actor {
         }
         system.fistDamage.final = Math.floor(system.fistDamage.base + system.fistDamage.dmgMult1 + system.fistDamage.dmgMult2 + system.fistDamage.bonus);
 
+        //Ki Pool Maint
+        system.kiPool.agi.maint = classBonuses.kiMaintAgi;
+        system.kiPool.con.maint = classBonuses.kiMaintCon;
+        system.kiPool.dex.maint = classBonuses.kiMaintDex;
+        system.kiPool.str.maint = classBonuses.kiMaintStr;
+        system.kiPool.pow.maint = classBonuses.kiMaintPow;
+        system.kiPool.wp.maint = classBonuses.kiMaintWp;
+        system.unifiedKi.maint = classBonuses.kiMaintUnified;
+        system.kiPool.genericKi = classBonuses.kiMaintGeneric;
+        if (system.toggles.unifiedPools) {
+            system.unifiedKi.maint +=
+                (system.kiPool.customMaint ?? 0) +
+                (system.toggles.dragonSeals ? system.arsMagnus.dragonSeal ?? 0 : 0);
+        } else if (system.toggles.dragonSeals) {
+            system.kiPool.genericKi += system.arsMagnus.dragonSeal ?? 0;
+        }       
 
-
+        system.kiPool.showGenericKi = system.kiPool.genericKi > 0 && !system.toggles.unifiedPools;
 
         //Monster
         system.monsterStats.powersCost = classBonuses.monsterCost;
@@ -2465,7 +2515,7 @@ export default class abfalterActor extends Actor {
         let pushSpeed;
         this.items.reduce((arr, item) => {
             if (item.type === "weapon" || item.type === "secondary" 
-                || item.type === "psychicMatrix" || item.type === "maintPower") {
+                || item.type === "psychicMatrix" || item.type === "maintPower" || item.type === "zeonMaint") {
                 item.prepareData();
                 if (item.type === "weapon") {
                     pushSpeed = item.system.pushSpeed.applied;

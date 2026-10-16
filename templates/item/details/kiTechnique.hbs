@@ -1,9 +1,11 @@
-<section class="baseAbfalter itemPage tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
+<section class="baseAbfalterV2 itemPageV2 tab {{tabs.details.cssClass}}" data-group="{{tabs.details.group}}" data-tab="{{tabs.details.id}}">
     <fieldset>
         <legend> {{ localize "abfalter.generalDetails" }} </legend>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.level"}} </span> <input type="number" name="system.level" value="{{system.level}}" /> </label>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.mk"}} </span> <input type="number" name="system.mk" value="{{system.mk}}" /> </label>
-        <div class="csSelect itemSimpleLabel">
+        <div class="abfDivFormat">
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.level"}} </span> <input type="number" name="system.level" value="{{system.level}}" /> </label>
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.mk"}} </span> <input type="number" name="system.mk" value="{{system.mk}}" /> </label>
+        </div>
+        <div class="csSelect itemSimpleLabel abfDivFormat">
             <label>
                 <span> {{localize "abfalter.maintType"}} </span>
                 <select name="system.maintainable">
@@ -11,7 +13,7 @@
                 </select>
             </label>
         </div>
-        <div class="csSelect itemSimpleLabel">
+        <div class="csSelect itemSimpleLabel abfDivFormat">
             <label>
                 <span> {{localize "abfalter.frequency"}} </span>
                 <select name="system.frequency">
@@ -19,8 +21,7 @@
                 </select>
             </label>
         </div>
-        
-        <div class="csSelect itemSimpleLabel">
+        <div class="csSelect itemSimpleLabel abfDivFormat">
             <label>
                 <span> {{localize "abfalter.actionType"}} </span>
                 <select name="system.actionType">
@@ -28,17 +29,19 @@
                 </select>
             </label>
         </div>
-        <label class="itemSimpleLabel"> <span> {{localize "abfalter.kiAbilityData.isCombinable"}} </span>
-            <button type="button" class="{{#if system.combinable}}kiBought{{/if}}" data-action="toggleValue" data-label="system.combinable" data-ability="{{system.combinable}}">
-                {{#if system.combinable}}<span>{{localize "abfalter.yes"}}</span>{{else}}<span>{{localize "abfalter.no"}}</span>{{/if}}
-            </button>
-        </label>
+        <div class="abfDivFormat">
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.kiAbilityData.isCombinable"}} </span>
+                <button type="button" class="{{#if system.combinable}}kiBought{{/if}}" data-action="toggleValue" data-label="system.combinable" data-ability="{{system.combinable}}">
+                    {{#if system.combinable}}<span>{{localize "abfalter.yes"}}</span>{{else}}<span>{{localize "abfalter.no"}}</span>{{/if}}
+                </button>
+            </label>
+        </div>
     </fieldset>
 
     <fieldset>
         <legend> {{localize "abfalter.kiTechTitle"}} {{ localize "abfalter.details" }} </legend>
 
-        <div class="kiTechGridContent">
+        <div class="kiTechGridContent abfDivFormat">
             {{!-- Header Row --}}
             <span class="kiTechGridUnderline"> {{localize "abfalter.ki"}} </span>
             <span class="kiTechGridUnderline"> {{localize "abfalter.agi"}} </span>
@@ -68,16 +71,18 @@
             <input name="system.maint.wp" type="number" value="{{system.maint.wp}}" />
             {{/if}}
         </div>
-
-        {{#if system.maintBool}}
-        <label class="itemSimpleLabel">
-            {{#if system.innatePower}}
-            <span> {{localize "abfalter.innatePowerMaint"}} </span>
-            {{else}}
-            <span> {{localize "abfalter.unifiedMaint"}} </span>
+        <div class="abfDivFormat">
+            {{#if system.maintBool}}
+            <label class="itemSimpleLabel">
+                {{#if system.innatePower}}
+                <span> {{localize "abfalter.innatePowerMaint"}} </span>
+                {{else}}
+                <span> {{localize "abfalter.unifiedMaint"}} </span>
+                {{/if}}
+                <input name="system.maint.unified" type="number" value="{{system.maint.unified}}" />
+            </label>
             {{/if}}
-            <input name="system.maint.unified" type="number" value="{{system.maint.unified}}" />
-        </label>
-        {{/if}}
+        </div>
+
     </fieldset>
 </section>

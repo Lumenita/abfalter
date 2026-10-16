@@ -154,13 +154,13 @@
                             {{#if system.expand}}
                             <div class="patternDesc">
                                 <span> {{localize "abfalter.bonus"}} </span>
-                                <div class="matrixDescription">
+                                <section class="actorItemEnrichedDesc">
                                     {{{enrichedDesc}}}
-                                </div>
+                                </section>
                                 <span> {{localize "abfalter.penalty"}} </span>
-                                <div class="matrixDescription">
+                                <section class="actorItemEnrichedDesc">
                                     {{{enrichedPenalty}}}
-                                </div>
+                                </section>
                             </div>
                             {{/if}}
                         </div>
@@ -216,9 +216,9 @@
                                 </a>
                             </div>
                             {{#if system.expand}}
-                            <div class="matrixDescription">
+                            <section class="actorItemEnrichedDesc">
                                 {{{enrichedDesc}}}
-                            </div>
+                            </section>
                             {{/if}}
                         </div>
                         {{/each}}

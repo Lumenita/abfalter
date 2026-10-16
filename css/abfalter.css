@@ -174,7 +174,24 @@ h6 {
 .lockLabel {
     pointer-events: none;
 }
+.actorItemEnrichedDesc {
+    margin: 3px 6px 8px;
+    padding: 0px 5px;
 
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-wrap: anywhere;
+    background: var(--item-description-bg, rgba(0, 0, 0, 0.15));
+
+    border: 1px solid var(--item-EnrichedDesc-border);
+    border-left: 3px solid var(--item-EnrichedDesc-leftBorder);
+    border-radius: 4px;
+}
+/* Scrollbar */
+.actorItemEnrichedDesc {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(160, 180, 210, 0.35) transparent;
+}
 /* #endRegion */
 
 /* #region @!Important classes  @v2 */
@@ -245,6 +262,7 @@ prose-mirror.editor.prosemirror.inactive > button.icon.toggle {
     --equipped: #1bb936;
     --kiBought: #4b47b7;
     --kiFree: #106810;
+    --kiHold: #eec451;
     --buttonHover: #455069;
     --customTooltip: #1f3449;
     --warningColor: #d2621e;
@@ -285,6 +303,9 @@ prose-mirror.editor.prosemirror.inactive > button.icon.toggle {
     --matrix-title-color: rgba(210, 225, 255, 0.95);
     --matrix-title-failure-color: rgba(255, 205, 205, 0.95);
     --matrix-info-color: rgba(190, 225, 255, 1);
+    /* Enriched Desc Border */
+    --item-EnrichedDesc-border: rgba(255, 255, 255, 0.08);
+    --item-EnrichedDesc-leftBorder: rgba(140, 170, 210, 0.6)
 }
 [data-theme="light"] {
     --abfalter-font-roboto-condensed: "Roboto Condensed", sans-serif;
@@ -333,6 +354,8 @@ prose-mirror.editor.prosemirror.inactive > button.icon.toggle {
 
     --kiBought: #bd603d;
     --kiFree: #3e944b;
+    --kiHold: #e08f33;
+
 
     /* Miscellaneous */
     --scrollbarColor: #8f4a45;
@@ -531,6 +554,12 @@ a.content-link {
 }
 .equipped > span {
     color: var(--equipped) !important;
+}
+.baseAbfalterV2 .abfDivFormat .kiHold {
+    color: var(--kiHold);
+}
+.kiHold > span {
+    color: var(--kiHold) !important;
 }
 .weaponEquipped {
     color: var(--equipped) !important;
@@ -1380,7 +1409,6 @@ h6 {
     display: flex;
 }
 .characteristics > div > label > a {
-    margin-left: 5px;
     font-size: 0.95rem;
     opacity: 0;
 }
@@ -3183,7 +3211,12 @@ h6 {
 /* #endregion */
 
 
-/* #region @Psychic @V2 */
+/*
+    --------------
+        Psychic
+    --------------
+*/
+/* --- #region @Psychic @V2 --- */
     /* #region Containers @V2 */
     .ppoint,
     .ppotential,
@@ -3484,6 +3517,9 @@ h6 {
         place-content: space-between;
         border-top: 1px solid var(--boxColor);
     }
+    .mentalPattern-item > div:first-of-type {
+        height: 25px;
+    }
     .mentalPattern-item:nth-child(2n) {
         background: var(--itemOffSet);
     }
@@ -3585,6 +3621,9 @@ h6 {
     }
     .pMaintPotency > label:nth-of-type(2) > input {
         width: 30%;
+    }
+    .maintPower-item > div {
+        height: 25px;
     }
     .pMaintHeader,
     .maintPower-item > div:first-of-type {
@@ -3899,689 +3938,745 @@ h6 {
     /* #endregion */
 /* #endregion */
 
-
 /*
-    **************
     --------------
           Ki
     --------------
-    **************
 */
-/* #region Containers */
-.ki .fieldsetContainer {
-    flex-direction: row;
-}
-.ki .kiAbilities {
-    width: 33.5%;
-    display: block;
-}
+/* --- #region @Ki @V2 --- */
+    /* #region Containers @V2 */
+    .kiAbilities {
+        width: 33%;
+    }
+    .kiContainerRight {
+        width: 66%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .kipool {
+        width: 57%;
+    }
+    .mk {
+        width: 43%;
+    }
 
-.s5 {
-    width: 64.5%;
-    flex-wrap: wrap;
-    gap: .5rem;
-    display: block;
-}
-.s5 > div:nth-of-type(1),
-.s5 > div:nth-of-type(2) {
-    display: flex;
-    justify-content: space-between;
-}
-.kipool {
-    width: 44%;
-}
-.kiPoolRightContainer {
-    width: 54%;
-}
-.kiMacroControls {
-    width: 44%;
-}
-.limits {
-    width: 54%;
-}
-.mk > div,
-.limits > div {
-    width: 95%;
-    margin: 0 0 0 2.5%;
-}
-.arsMagnus, .martialarts, .kiseals, .DragonSeals, .kiTech {
-    width: 100%;
-}
-/* #endregion */
+    .kiSmallContainer,
+    .kiAccu {
+        width: 33%;
+    }
+    .kiSmallerContainer {
+        width: 30%;
+    }
 
-/* #region @Ki-Abilities */
-.kiSubsection > div:first-of-type {
-    margin: -7px 0 0 0;
-}
-.kiSubsection > div:first-of-type > span { 
-    padding: 0 0 0 3px;
-}
-.kiSubsection > div:last-of-type {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-.kiSubsection > div:last-of-type > button {
-    border-bottom-right-radius: 8px;
-}
-.kiSubsection .kiAbility {
-    height: 25px;
-    border: 0px;
-    width: 15%;
-    font-size: 0px;
-}
-.kiSubsection > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.kiSubsection > div:nth-child(2n + 1) {
-    background: var(--itemOffSet);
-}
-.kiAbilities .subKi1 {
-    margin-left: 10px;
-}
-.kiAbilities .subKi2 {
-    margin-left: 30px;
-}
-.kiAbilities .subKi3 {
-    margin-left: 50px;
-}
-.kiAbilities .subKi4 {
-    margin-left: 70px;
-}
-.kiAbilities .subKi5 {
-    margin-left: 90px;
-}
-.kiActiveButton {
-    width: 17%;
-    margin: 0 0 0 7px;
-    height: 20px;
-    border-radius: 0px;
-    border: 0px;
-}
-.kiActiveButton1 {
-    width: 17%;
-    margin: 0 0 0 24px;
-    height: 20px;
-    border-radius: 0px;
-    border: 0px;
-}
-/* #endregion */
+    /* #endregion */
 
-/* #region @Ki-Abilities-Custom */
-.kiAbility-item > label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.kiAbility-item > label > button {
-    min-height: 25px;
-    border: 0px;
-    width: 15%;
-    font-size: 0px;
-}
-.kiAbility-item > label > span {
-    height: auto;
-}
-.kiAbility-item > label > input:nth-of-type(1) {
-    height: 20px;
-    width: 75%;
-}
-.kiAbility-item > label > input:nth-of-type(2) {
-    height: 25px;
-    width: 15%;
-}
-.subKiBase {
-    margin: 0 0 0 3px;
-}
-/* #endregion */
-
-/* #region @Ki-Pools */
-.kipool > div:not(:first-of-type) > div {
-    padding: 0 2.5%;
-}
-.kipool > div:first-of-type {
-    border-bottom: 1px solid var(--boxColor);
-    padding: 0 2.5%;
-    margin: -7px 0 0 0;
-}
-.kipool > div:first-of-type > span:first-of-type {
-    margin: 0 2.5% 0 19%;
-}
-.kipool > div:first-of-type,
-.kipool > div:nth-of-type(8) > div,
-.kipool > div > div {
-    display: flex;
-    justify-content: flex-start;
-}
-.kipool > div > div > span {
-    width: 19%;
-    justify-content: center;
-}
-.kipool > div > div > button {
-    width: 19%;
-    justify-content: center;
-    --button-size: 0em;
-}
-.kipool > div > span {
-    justify-content: center;
-    margin: 0 2% 0 0;
-    width: 17%;
-}
-.kipool > div > div > input {
-    margin: 0 2% 0 0;
-}
-.kipool > div > div > input,
-.kipool > div:nth-of-type(8) > div > input {
-    width: 17%;
-}
-.kipool > div > div > a {
-    width: 5%;
-    font-size: 15px;
-}
-.kipool > div > div >  a {
+    /* #region @Ki-Abilities @V2 */
+    .actorCustomTitleContainer {
+    position: relative;
+    }
+    .actorCustomTitle {
+    visibility: hidden;
     opacity: 0;
-}
-.kipool > div:hover > div > a {
-    opacity: 1;
-}
-.kipool > div > div:not(:first-of-type) > span {
-    font-size: 12px;
-    font-style: italic;
-    padding: 0 0 0 8px;
-}
-.kipool > div:nth-of-type(8) > div > span {
-    width: 36%;
-    margin: 0 2% 0 0;
-}
-/* #endregion */
-
-/* #region @MK */
-.mk > div:first-of-type {
-    margin: -5px 0 0 2.5%;
-}
-.mk > div,
-.mk > div > label {
-    display: flex;
-    justify-content: space-between;
-}
-.mk > div > label {
-    width: 50%;
-}
-.mk > div > label > span {
-    width: 60%;
-    display: flex;
-    padding: 0 0 0 4.5%;
-}
-.mk > div > label > input {
-    width: 35%;
-    margin: 0 4.5% 0 0;
-}
-.lastMK {
-    border-top: 1px solid var(--boxColor);
-    padding: 3px 0;
-}
-.mk > h5 > label > a {
-    opacity: 0;
-}
-.mk:hover > h5 > label > a {
-    opacity: 1;
-}
-/* #endregion */
-
-/* #region @Limits */
-.limits > div > select {
-    width: 100%;
-}
-.limits > div:first-of-type {
-    margin: -5px 0 0 2.5%;
-}
-
-/* #endregion */
-
-/* #region @Ki-Macro-Controls */
-.kiMacroControls > div {
-    display: flex;
-}
-.kiMacroControls > div > button {
-    width: 50%;
-    height: 25px;
-    border: 0px;
-    border-bottom: 1px solid var(--boxColor);
-}
-.kiMacroControls > div > button:first-of-type {
-    border-right: 1px solid var(--boxColor);
-}
-.kiMacroControls > button {
-    justify-self: anchor-center;
-    width: 75%;
-    height: 20px;
-    border: 0px;
-}
-/* #endregion */
-
-/* #region @Ars-Magnus */
-.arsMagnus > div:not(:nth-of-type(2)),
-.arsMagnus-item > div:first-of-type {
-    display: flex;
-}
-.arsMagnus > div:first-of-type {
-    border-bottom: 1px solid var(--boxColor);
-    margin: -7px 0 0 0;
-}
-.arsMagnus > div > span:first-of-type {
-    width: 69.35%;
-    margin: 0 0 0 2.5%;
-}
-.arsMagnus > div > span {
-    width: 9.5%;
-    margin: 0 0 0 1%;
-}
-.arsMagnus > div:nth-of-type(3) {
-    display: flex;
-    place-content: space-between;
-    border-top: 1px solid var(--boxColor);
-}
-.arsMagnus > div > span,
-.arsMagnus-item > div > span {
+    background-color: var(--color-checkbox-bg);
+    color: var(var(--textColor)); 
     text-align: center;
-}
-.arsMagnus-item > div > a {
-    width: 5%;
-    font-size: 15px;
-}
-.arsMagnus-item:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-.arsMagnus-item > div {
-    padding: 0 2.5%;
-}
-.arsMagnus-item > div > a {
-    opacity: 0;
-}
-.arsMagnus-item > div:hover > a {
+    border-radius: 4px;
+    padding: 5px;
+    position: absolute;
+    top: -100%;
+    z-index: 10;
+    left: 50%;
+    width: 200px;
+    transform: translateX(-50%);
+    transition: opacity 0.2s ease-in-out;
+    font-size: 14px;
+    pointer-events: none;
+    }
+    .actorCustomTitleContainer:hover .actorCustomTitle {
+    visibility: visible;
+    overflow: visible;
     opacity: 1;
-}
-.arsMagnus-item > div > span:first-of-type,
-.arsMagnus-item > div > input:first-of-type {
-    width: 73%;
-    margin: 0;
-}
-.arsMagnus-item > div > span,
-.arsMagnus-item > div > input {
-    width: 10%;
-    margin: 0 0 0 1%;
-}
-.arsMagnus-item > div:nth-of-type(2) {
-    padding: 3px 2.5%;
-}
-/* #endregion */
+    }
+    .kiSubContainer {
+        display: flex;
+        flex-direction: column;
+    }
+    .kiSubContainer > div:last-of-type > div:last-of-type {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .kiSubContainer > div:last-of-type > div:last-of-type > button {
+        border-bottom-right-radius: 8px;
+    }
+    .kiSubsection:not(:last-of-type) {
+        border-bottom: 1px dashed var(--boxColor);
+        margin: 0 0 3px 0;
+        padding: 0 0 3px 0;
+    }
+    .kiSubsection > div {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 0 0 5px;
+    }
+    .kiSubsection > div > div {
+        align-content: center;
+        width: 80%;
+    }
+    .baseAbfalterV2 .kiSubsection > div > div > span {
+        display: block;
+    }
+    .baseAbfalterV2 .kiSubsection > div > button {
+        width: 20%;
+        min-height: 25px;
+        height: auto;
+        border-radius: 0;
+    }
+    .kiSubsection .specialKiButton > div {
+        align-content: center;
+        width: 57%;
+    }
+    .baseAbfalterV2 .kiSubsection .specialKiButton > button:first-of-type {
+        margin: 0 3% 0 0;
+    }
+    .baseAbfalterV2 .kiSubsection > div > button {
+        width: 20%;
+        min-height: 25px;
+        height: auto;
+    }
+    .kiSubsection > div:nth-child(2n) {
+        background: var(--itemOffSet);
+    }
+    .kiAbilities .subKi1 {
+        margin-left: 7px;
+    }
+    .kiAbilities .subKi2 {
+        margin-left: 21px;
+    }
+    .kiAbilities .subKi3 {
+        margin-left: 35px;
+    }
+    .kiAbilities .subKi4 {
+        margin-left: 49px;
+    }
+    .kiAbilities .subKi5 {
+        margin-left: 63px;
+    }
 
-/* #region @Dragon-Seals */
-.DragonSeals > div {
-    display: flex;
-    padding: 0 2.5%;
-    text-align: center;
-}
-.DragonSeals > div:first-of-type {
-    margin: -7px 0 0 0;
-}
-.DragonSeals > div > :nth-child(1) {
-    width: 48%;
-    margin: 0 2% 0 0;
-}
-.DragonSeals > div > :nth-child(2) {
-    width: 20%;
-    margin: 0 5% 0 0;
-}
-.DragonSeals > div > :nth-child(3) {
-    width: 20%;
-}
-/* #endregion */
+    /* #endregion */
 
-/* #region @Martial-Arts */
-.martialarts > div:first-of-type,
-.martialArt-item > div:first-of-type {
-    display: flex;
-    justify-content: flex-start;
-}
-.martialarts > div:first-of-type {
-    border-bottom: 1px solid var(--boxColor);
-    margin: -7px 0 0 0;
-}
-.martialArt-item > div {
-    padding: 0 2.5%;
-}
-.martialArt-item:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-.martialarts > div > span,
-.martialArt-item > div > span {
-    text-align: center;
-}
-.martialarts > div > span:first-of-type {
-    width: 53.2%;
-    margin: 0 0 0 2.5%;
-}
-.martialarts > div > span:nth-of-type(2) {
-    width: 19%;
-}
-.martialarts > div > span {
-    width: 7.6%;
-    margin: 0 0 0 1%;
-}
-.martialarts > div:last-of-type {
-    display: flex;
-    place-content: space-between;
-    border-top: 1px solid var(--boxColor);
-}
-.martialArt-item > div > a {
-    width: 5%;
-    font-size: 15px;
-}
-.martialArt-item > div > a {
-    opacity: 0;
-}
-.martialArt-item > div:hover > a {
-    opacity: 1;
-}
-.martialArt-item > div > span:first-of-type,
-.martialArt-item > div > input:first-of-type {
-    width: 56%;
-    margin: 0;
-}
-.martialArt-item > div > span:nth-of-type(2),
-.martialArt-item > div:first-of-type > div {
-    width: 20%;
-    margin: 0 0 0 1%;
-}
-.martialArt-item > div > div > select {
-    width: 100%;
-}
-.martialArt-item > div > span,
-.martialArt-item > div > input {
-    width: 8%;
-    margin: 0 0 0 1%;
-}
-.martialArt-item > div:nth-of-type(2) {
-    padding: 3px 2.5%;
-}
-/* #endregion */
+    /* #region @Ki-Abilities-Custom @V2 */
+    .kiAbility-item > div {
+        padding: 0 0 0 5px;
+    }
+    .kiAbility-item:nth-child(2n + 1) {
+        background: var(--itemOffSet);
+    }
+    .kiAbility-item > div > label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .kiAbility-item > div > label > button {
+        min-height: 25px;
+        border: 0px;
+        width: 20%;
+        font-size: 0px;
+    }
+    .kiAbility-item > div > label > span {
+        height: auto;
+    }
+    .kiAbility-item > div > label > input:nth-of-type(1) {
+        width: 70%;
+    }
+    .kiAbility-item > div > label > input:nth-of-type(2) {
+        height: 25px;
+        width: 20%;
+    }
+    .subKiBase {
+        margin: 0 0 0 3px;
+    }
+    /* #endregion */
 
-/* #region @Unarmed-Damage */
-.unarmed > div,
-.unarmed > div > div {
-    display: flex;
-    justify-content: flex-start;
-}
-.unarmed > div:first-of-type {
-    border-bottom: 1px solid var(--boxColor);
-    margin: -7px 0 0 0;
-}
-.unarmed > div > span {
-    text-align: center;
-}
-.unarmed > div:first-of-type > span:first-of-type {
-    margin-left: 2.5%;
-}
-.unarmed > div > span:not(:nth-of-type(2)) {
-    width: 14.25%
-}
-.unarmed > div > input:first-of-type {
-    width: 15%;
-}
-.unarmed > div > span:nth-of-type(2) {
-    width: 66.5%
-}
-.unarmed > div > div {
-    width: 70%;
-}
-.unarmed > div > div > input {
-    width: 15%;
-}
-.unarmed > div > div > span {
-    width: 4%;
-}
-.unarmed > div > div > div {
-    width: 100%;
-}
-.unarmed > div > div > div > select {
-    width: 100%;
-}
-.unarmed > div > input:nth-of-type(2) {
-    width: 15%;
-}
-.unarmed > h5 > label > a {
-    opacity: 0;
-}
-.unarmed:hover > h5 > label > a {
-    opacity: 1;
-}
-/* #endregion */
+    /* #region @Ki-Pools @V2*/
+    .kipool > div:first-of-type {
+        border-bottom: 1px solid var(--boxColor);
+    }
+    .kipool > div:first-of-type > span {
+        width: 12%;
+        margin: 0 3% 0 0;
+        text-align: center;
+    }
+    .kipool > div:first-of-type > span:first-of-type {
+        width: 15%;
+    }
+    .kipool > div:first-of-type,
+    .kipool > div:nth-of-type(8) > div,
+    .kipool .kiPoolMain,
+    .kipool .kiPoolSub {
+        display: flex;
+        justify-content: flex-start;
+    }
+    .kipool .kiPoolMain > button {
+        width: 15%;
+        margin: 0 3% 0 0;
+        justify-content: center;
+        --button-size: 0em;
+        border-radius: 0;
+    }
+    .kipool > div:last-of-type .kiPoolMain > button {
+        border-bottom-left-radius: 8px;
+    }
+    .kipool .kiPoolMain > input {
+        width: 12%;
+        margin: 0 3% 0 0;
+    }
+    .kipool .kiPoolMain > span {
+        width: 12%;
+        margin: 0 3% 0 0;
+    }
+    .kipool .kiPoolMain > a {
+        width: 5%;
+        font-size: 15px;
+    }
+    .kipool .kiPoolMain >  a {
+        opacity: 0;
+    }
+    .kipool .kiPoolMain:hover > a {
+        opacity: 1;
+    }
+    .kipool .kiPoolSub > span:first-of-type {
+        width: 18%;
+        padding: 0 0 0 5px;
+    }
+    .kipool .kiPoolSub > input {
+        width: 12%;
+        margin: 0 3% 0 0;
+    }
+    .kipool > div > div:nth-of-type(2) > span {
+        font-style: italic;
+    }
+    .kipool .kiPoolUnified > span:first-of-type {
+        width: 33%;
+        padding: 0 0 0 5px;
+        text-align: center;
+    }
+    .kipool .kiPoolUnified > input {
+        width: 12%;
+        margin: 0 3% 0 0;
+    }
+    /* #endregion */
 
-/* #region @Ki-Seal-Creatures */
-.kisealmast > div {
-    display: flex;
-    justify-content: space-evenly;
-}
-.kisealmast > div > span,
-.kiSealsCreatures > div > span,
-.kiSealCreature-item > div > span,
-.kiSealCreature-item > div:last-of-type > div > span{
-    text-align: center;
-}
-.kisealmast > div:first-of-type > span:first-of-type {
-    margin: 0 0 0 2.5%;
-}
-.kisealmast > div:first-of-type > span:last-of-type {
-    margin: 0 2.5% 0 0;
-}
-.kisealmast > div:not(:first-of-type) {
-    padding: 0 2.5%;
-}
-.kisealmast > div > span,
-.kisealmast > div > button {
-    width: 15%;
-    height: 30px;
-}
-.kisealmast > div > button {
-    font-size: 0px;
-    border-color: var(--boxColor);
-}
-.kiseals > div:first-of-type {
-    margin: -7px 0 0 0;
-}
-.kisealmast > div:first-of-type {
-    border-top: 1px solid var(--boxColor);
-}
-.kisealmast > div:last-of-type {
-    border-bottom: 1px solid var(--boxColor);
-    padding: 0 2.5% 5px 2.5%;
-}
-.kiSealsCreatures > div:first-of-type {
-    border-bottom: 1px solid var(--boxColor);
-}
-.kiSealCreature-item {
-    padding: 0 2.5%;
-}
-.kiSealCreature-item:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-.kiSealsCreatures > div:first-of-type,
-.kiSealCreature-item > div:first-of-type {
-    display: flex;
-    justify-content: flex-start;
-}
-.kiSealsCreatures > div > span:first-of-type {
-    width: 70.3%;
-    margin: 0 0 0 7.25%;
-}
-.kiSealsCreatures > div > span {
-    width: 14.25%;
-    margin: 0 0 0 1%;
-}
-.kiSealsCreatures > div:last-of-type {
-    display: flex;
-    place-content: space-between;
-    border-top: 1px solid var(--boxColor);
-}
-.kiSealCreature-item > div > a {
-    width: 5%;
-    font-size: 15px;
-}
-.kiSealCreature-item > div > a {
-    opacity: 0;
-}
-.kiSealCreature-item > div:hover > a {
-    opacity: 1;
-}
-.kiSealCreature-item > div:first-of-type > span:first-of-type,
-.kiSealCreature-item > div:first-of-type > input:first-of-type {
-    width: 74%;
-    margin: 0;
-}
-.kiSealCreature-item > div:first-of-type > span,
-.kiSealCreature-item > div:first-of-type > input {
-    width: 15%;
-    margin: 0 0 0 1%;
-}
-.kiSealCreature-item > div:last-of-type > div {
-    display: flex;
-    justify-content: space-between;
-}
-.kiSealCreature-item > div:last-of-type > div > span:first-of-type {
-    width: 20%;
-}
-.kiSealCreature-item > div:last-of-type > div > span,
-.kiSealCreature-item > div:last-of-type > div > input {
-    width: 15%;
-}
-.kiSealCreature-item > div:last-of-type > textarea {
-    margin: 3px 0 0 0;
-}
-/* #endregion */
+    /* #region @MK @V2 */
+    .baseAbfalterV2 .mk > div > label {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+    }
+    .mk > div > label > span {
+        width: 65%;
+    }
+    .mk > div > label > input {
+        width: 35%;
+    }
+    .mkTopBorder {
+        border-top: 1px dashed var(--boxColor);
+        padding: 3px 0;
+    }
+    .mk > div > label:nth-last-of-type(2) {
+        border-top: 1px solid var(--boxColor);
+        border-bottom: 1px solid var(--boxColor);
+        padding: 3px 10px;
+    }
+    .mk > div > label:last-of-type {
+        padding: 3px 10px;
+    }
+    /* #endregion */
 
-/* #region @Item-Ki-Seals */
-.kiSealContent {
-    background: none !important;
-}
-.kiSealContent > div {
-    display: flex; 
-}
-.kiSealContent > div > span {
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-}
-.kiSealContent > div:nth-of-type(2) > span:first-of-type,
-.kiSealContent > div:nth-of-type(3) > span:first-of-type,
-.kiSealContent > div:first-of-type > span:first-of-type {
-    width: 20%;
-    margin: 0;
-}
-.kiSealContent > div > input,
-.kiSealContent > div:first-of-type > span {
-    width: 15%;
-    margin: 0 0 0 1%;
-}
-/* #endregion */
+    /* #region @Ki-Macro-Controls @V2 */
+    .kiManage > div {
+        padding: 0 10px;
+    }
+    .kiManage > div {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 6px;
+        width: 100%;
+    }
+    .kiManage > div > button {
+        min-height: 25px;
+        border-radius: 4px;
+    }
+    .kiManage > div > span {
+        border-bottom: 1px dashed var(--boxColor);
+    }
+    .kiManage > div > div {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+        width: 100%;
+    }
+    .kiManage > div > div > button {
+        min-height: 25px;
+        border-radius: 4px;
+    }
+    .kiManage > div > button:last-child {
+        margin: 0 0 5px 0;
+    }
+    .kiManage .kiManageMaint {
+        display: flex;
+    }
+    .kiManage .kiManageMaint > span {
+        width: 75%
+    }
+    .kiManage .kiManageMaint > input {
+        width: 25%
+    }
+    .kiRecovery > div {
+        padding: 0 10px;
+    }
+    .kiRecovery > div > label {
+        display: flex;
+    }
+    .kiRecovery > div > label > span {
+        width: 45%;
+    }
+    .kiRecovery > div > label > div {
+        width: 55%;
+    }
+    .kiRecovery > div > label > input{
+        width: 55%;
+    }
+    /* #endregion */
 
-/* #region @Ki-techniques */
-.kiTech > div:last-of-type {
-    display: flex;
-    place-content: space-between;
-    border-top: 1px solid var(--boxColor);
-}
-.kiTechnique-item {
-    padding: 0 2.5% 10px 2.5%;
-}
-.kiTechnique-item:nth-child(2n) {
-    background: var(--itemOffSet);
-}
-.kiTechStatsGrid {
-    display: grid;
-    grid-template-columns: 75px repeat(var(--char-count), 1fr);
-    gap: 5px 2px;
-    text-align: center;
-    align-items: center;
-    padding: 0 0 3px 0;
-}
-.kiTechStatsGrid .kiTechFirstGrid {
-    text-align: start;
-}
-.kiTechStatsGrid .kiTechFirstRow {
-    border-bottom: 1px dashed var(--boxColor);
-}
-.kiTechMainInfo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 7px 0 0 0;
-}
-.kiTechMainInfo > span {
-    width: 64%;
-    border-bottom: 1px solid var(--boxColor);
-    height: auto;
-}
-.kiTechMainInfo > span:nth-of-type(2),
-.kiTechMainInfo > span:nth-of-type(3) {
-    width: 11%;
-    justify-content: center;
-}
-.kiTechMainInfo > a {
-    width: 5%;
-    height: auto;
-}
-.kiTechMainInfo > a {
-    width: 5%;
-    font-size: 0.85rem;
-}
-.kiTechMainInfo > a {
-    opacity: 0;
-}
-.kiTechnique-item:hover > div > a {
-    opacity: 1;
-}
-.kiTechSubheader {
-    justify-items: center;
-    font-style: italic;
-    border-bottom: 1px solid var(--boxColor);
-    margin: 3px 0 7px 0;  
-    font-size: 0.8rem;
-} 
-.kiTechnique-item .editor {
-    border: 1px solid var(--boxColor);
-    padding: 0 3px;
-    border-radius: 10px;
-    max-height: 250px;
-    overflow: auto;
-}
-.kiTechUnifiedMaint {
-    display: flex;
-    justify-content: center;
-}
-.kiTechUnifiedMaint > span:last-of-type {
-    padding: 0 0 0 5px;
-}
-/* #endregion */
+    /* #region @Limits @V2 */
+    .limits > div {
+        padding: 0 10px;
+    }
+    /* #endregion */
 
-/* #region @Item-Ki-techniques */
-.kiTechGridContent {
-    display: grid;
-    grid-template-columns: 75px repeat(6, 1fr);
-    gap: 8px 2px;
-    text-align: center;
-    align-items: center;
-    padding: 0 10px;
-    margin: 0 0 5px 0;
-}
-.kiTechGridContent > input {
-    width: 80%;
-    justify-self: center;
-}
-.kiTechGridContent .kiTechGridUnderline {
-    border-bottom: 1px dashed var(--boxColor);
-}
+    /* #region @Dragon-Seals @V2 */
+    .DragonSeals > div {
+        padding: 0 10px;
+    }
+    .DragonSeals > div > label {
+    display: flex;
+    }
+    .DragonSeals > div > label > span {
+        width: 60%;
+    }
+    .DragonSeals > div > label > input {
+        width: 40%;
+    }
+    /* #endregion */
+
+    /* #region @Ars-Magnus @V2 */
+    .arsMagnus > div:first-of-type {
+        border-bottom: 1px solid var(--boxColor);
+        display: flex;
+        padding: 0 10px;
+    }
+    .arsMagnus > div > span:first-of-type {
+        width: 75%;
+    }
+    .arsMagnus > div > span {
+        width: 10%;
+        text-align: center;
+    }
+    .arsMagnus-item:nth-child(2n) {
+        background: var(--itemOffSet);
+    }
+    .arsMagnus-item > div {
+        padding: 0 10px;
+        height: 25px;
+        align-items: anchor-center;
+    }
+    .arsMagnus-item > div:first-of-type {
+        display: flex;
+    }
+    .arsMagnus-item > div > span:first-of-type {
+        width: 75%;
+        text-align: start;
+    }
+    .arsMagnus-item > div > span {
+        width: 10%;
+        text-align: center;
+    }
+    .arsMagnus-item > div > a {
+        width: 5%;
+        font-size: 15px;
+    }
+    .arsMagnus-item > div > a {
+        opacity: 0;
+    }
+    .arsMagnus-item > div:hover > a {
+        opacity: 1;
+    }
+    /* #endregion */
+
+    /* #region @Martial-Arts @V2*/
+    .masterBonusContainer > h6 {
+        border-bottom: 1px solid var(--boxColor);
+    }
+    .masterBonusContainer > div {
+        display: flex;
+        padding: 0 20% 5px 20%;
+        justify-content: space-between;
+    }
+    .masterBonusContainer > div > button{
+        width: 25%;
+    }
+    .martialarts > .maHeader {
+        border-bottom: 1px solid var(--boxColor);
+        display: flex;
+        padding: 0 10px;
+    }
+    .martialarts > .maHeader > span:first-of-type {
+        width: 45%;
+    }
+    .martialarts > .maHeader > span:nth-of-type(2),
+    .martialarts > .maHeader > span:nth-of-type(3) {
+        width: 15%;
+    }
+    .martialarts > .maHeader > span {
+        width: 10%;
+        text-align: center;
+    }
+    .martialArt-item:nth-child(2n) {
+        background: var(--itemOffSet);
+    }
+    .martialArt-item > div {
+        padding: 0 10px;
+        height: 25px;
+        align-items: anchor-center;
+    }
+    .martialArt-item > div:first-of-type {
+        display: flex;
+    }
+    .martialArt-item > div > span:first-of-type {
+        width: 45%;
+        text-align: start;
+    }
+    .martialArt-item > div > span:nth-of-type(2),
+    .martialArt-item > div > span:nth-of-type(3) {
+        width: 15%;
+    }
+    .martialArt-item > div > span {
+        width: 10%;
+        text-align: center;
+    }
+    .martialArt-item > div > a {
+        width: 5%;
+        font-size: 15px;
+    }
+    .martialArt-item > div > a {
+        opacity: 0;
+    }
+    .martialArt-item > div:hover > a {
+        opacity: 1;
+    }
+    /* #endregion */
+
+    /* #region @Unarmed-Damage @V2 */
+    .unarmed > div,
+    .unarmed > div > div {
+        display: flex;
+        justify-content: flex-start;
+    }
+    .unarmed > div:first-of-type {
+        border-bottom: 1px solid var(--boxColor);
+    }
+    .unarmed > div > span {
+        text-align: center;
+    }
+    .unarmed > div:first-of-type > span:first-of-type {
+        margin-left: 2.5%;
+    }
+    .unarmed > div > span:not(:nth-of-type(2)) {
+        width: 14.25%
+    }
+    .unarmed > div > input:first-of-type {
+        width: 15%;
+    }
+    .unarmed > div > span:nth-of-type(2) {
+        width: 66.5%
+    }
+    .unarmed > div > div {
+        width: 70%;
+    }
+    .unarmed > div > div > input {
+        width: 15%;
+    }
+    .unarmed > div > div > span {
+        width: 4%;
+    }
+    .unarmed > div > div > div {
+        width: 100%;
+    }
+    .unarmed > div > div > div > select {
+        width: 100%;
+    }
+    .unarmed > div > input:nth-of-type(2) {
+        width: 15%;
+    }
+    .unarmed > h5 > label > a {
+        opacity: 0;
+    }
+    .unarmed:hover > h5 > label > a {
+        opacity: 1;
+    }
+    /* #endregion */
+
+    /* #region @Ki-Seal-Creatures */
+    .kisealmast > div {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .kisealmast > div > span,
+    .kiSealsCreatures > div > span,
+    .kiSealCreature-item > div > span,
+    .kiSealCreature-item > div:last-of-type > div > span{
+        text-align: center;
+    }
+    .kisealmast > div {
+        padding: 0 2.5%;
+    }
+    .kisealmast .abfDivFormat > span,
+    .kisealmast .abfDivFormat > button {
+        width: 15%;
+        height: 30px;
+    }
+    .kisealmast > div > button {
+        font-size: 0px;
+        border-color: var(--boxColor);
+    }
+    .kisealmast > div:first-of-type {
+        border-top: 1px solid var(--boxColor);
+    }
+    .kisealmast > div:last-of-type {
+        border-bottom: 1px solid var(--boxColor);
+        padding: 0 2.5% 5px 2.5%;
+    }
+    .kiSealsCreatures > .kiSealHeader {
+        display: flex;
+        border-bottom: 1px solid var(--boxColor);
+        padding: 0 10px;
+    }
+    .kiSealsCreatures > .kiSealHeader > span:first-of-type {
+        width: 85%;
+    }
+    .kiSealsCreatures > .kiSealHeader > span {
+        width: 10%;
+        text-align: center;
+    }
+    .kiSealCreature-item:nth-child(2n) {
+        background: var(--itemOffSet);
+    }
+    .kiSealCreature-item > div {
+        padding: 0 10px;
+        height: 25px;
+        align-items: anchor-center;
+    }
+    .kiSealCreature-item > div:first-of-type {
+        display: flex;
+    }
+    .kiSealCreature-item > div:first-of-type > span:first-of-type {
+        width: 85%;
+        text-align: start;
+    }
+    .kiSealCreature-item > div:first-of-type > span {
+        width: 10%;
+    }
+    .kiSealCreature-item .actorKiSeals {
+        border-top: 1px dashed var(--boxColor);
+        border-bottom: 1px dashed var(--boxColor);
+        display: grid;
+        margin: 0 10px 3px 10px;
+        padding: 3px 0;
+        grid-template-columns: 70px repeat(5, 1fr);
+        gap: 5px;
+        text-align: center;
+        align-items: center;
+        height: auto;
+    }
+    .actorKiSeals > div {
+        display: contents;
+    }
+    .kiSealCreature-item > div > a {
+        width: 5%;
+        font-size: 15px;
+    }
+    .kiSealCreature-item > div > a {
+        opacity: 0;
+    }
+    .kiSealCreature-item > div:hover > a {
+        opacity: 1;
+    }
+    /* #endregion */
+
+    /* #region @Item-Ki-Seals @V2 */
+    .kiSealContent > div {
+        display: flex; 
+        justify-content: space-around;
+    }
+    .kiSealContent > div > span {
+        display: flex; 
+        align-items: center;
+        justify-content: center;
+    }
+    .kiSealContent > div > span:first-of-type {
+        width: 20%;
+    }
+    .kiSealContent > div > input,
+    .kiSealContent > div > span:not(:first-of-type) {
+        width: 15%;
+    }
+    /* #endregion */
+
+    /* #region @Ki-techniques @V2 */
+    .kiTech > div:last-of-type {
+        display: flex;
+        place-content: space-between;
+        border-top: 1px solid var(--boxColor);
+    }
+    .kiTechnique-item {
+        padding: 0 2.5% 10px 2.5%;
+    }
+    .kiTechnique-item:nth-child(2n) {
+        background: var(--itemOffSet);
+    }
+    .kiTechStatsGrid {
+        display: grid;
+        grid-template-columns: 75px repeat(var(--char-count), 1fr);
+        gap: 5px 2px;
+        text-align: center;
+        align-items: center;
+        padding: 0 0 3px 0;
+    }
+    .kiTechStatsGrid .kiTechFirstGrid {
+        text-align: start;
+    }
+    .kiTechStatsGrid .kiTechFirstRow {
+        border-bottom: 1px dashed var(--boxColor);
+    }
+    .kiTechMainInfo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 7px 0 0 0;
+    }
+    .kiTechMainInfo > span {
+        width: 64%;
+        border-bottom: 1px solid var(--boxColor);
+        height: auto;
+    }
+    .kiTechMainInfo > span:nth-of-type(2),
+    .kiTechMainInfo > span:nth-of-type(3) {
+        width: 11%;
+        justify-content: center;
+    }
+    .kiTechMainInfo > a {
+        width: 5%;
+        height: auto;
+    }
+    .kiTechMainInfo > a {
+        width: 5%;
+        font-size: 0.85rem;
+    }
+    .kiTechMainInfo > a {
+        opacity: 0;
+    }
+    .kiTechnique-item:hover > div > a {
+        opacity: 1;
+    }
+    .kiTechSubheader {
+        justify-items: center;
+        font-style: italic;
+        border-bottom: 1px solid var(--boxColor);
+        margin: 3px 0 7px 0;  
+        font-size: 0.8rem;
+    } 
+    .kiTechnique-item .editor {
+        border: 1px solid var(--boxColor);
+        padding: 0 3px;
+        border-radius: 10px;
+        max-height: 250px;
+        overflow: auto;
+    }
+    .kiTechUnifiedMaint {
+        display: flex;
+        justify-content: center;
+    }
+    .kiTechUnifiedMaint > span:last-of-type {
+        padding: 0 0 0 5px;
+    }
+    /* #endregion */
+
+    /* #region @Item-Ki-techniques @V2 */
+    .kiTechGridContent {
+        display: grid;
+        grid-template-columns: 75px repeat(6, 1fr);
+        gap: 8px 2px;
+        text-align: center;
+        align-items: center;
+        padding: 0 10px;
+        margin: 0 0 5px 0;
+    }
+    .kiTechGridContent > input {
+        width: 80%;
+        justify-self: center;
+    }
+    .kiTechGridContent .kiTechGridUnderline {
+        border-bottom: 1px dashed var(--boxColor);
+    }
+
+    /* #endregion */
+
+    /* #region @Ki-Cast @Prompt */
+    .kiCastTechnique {
+        display: grid;
+        grid-template-columns: 5% 1fr 15% 10%;
+        gap: 10px;
+        align-items: center;
+        padding: 7px 0;
+    }
+
+    .kiCastTechniqueCost {
+        font-size: 0.85em;
+        opacity: 0.75;
+    }
+
+    .kiCastPushLabel {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: bold;
+    }
+
+    .kiCastPushed {
+        font-weight: bold;
+    }
+
+    .kiActivationTitle {
+        display: block;
+        margin-top: 8px;
+    }
+
+    .kiAccumWarning,
+    .kiActualWarning {
+        color: var(--color-level-error);
+        margin-top: 4px;
+        font-weight: bold;
+    }
+
+    .kiNegative {
+        color: var(--color-level-error);
+        font-weight: bold;
+    }
+    .kiCostInsufficient {
+        color: var(--errorColor);
+    }
+    /* #endregion */
 
 /* #endregion */
 
@@ -5772,6 +5867,11 @@ h6 {
     font-size: 0px;
     align-self: center;
 }
+.extendedSettings .setSingleInput > div {
+    width: 40%;
+    align-self: center;
+}
+
 /* #endregion */
 
 
@@ -7872,6 +7972,8 @@ h6 {
     display: flex;
     flex-direction: column;
     font-size: 0.9rem;
+    max-height: 700px;
+    overflow: auto;
 }
 .kiTechAbilityContainer .kiTechAbilityTitle > span {
     font-size: 2rem;
@@ -8003,6 +8105,9 @@ h6 {
 }
 .kiAddAbilityDialog .form-footer > button {
     border: none;
+}
+.kiAddAbilityDialog > section {
+    padding: 0.5rem;
 }
 /* #endregion */
 

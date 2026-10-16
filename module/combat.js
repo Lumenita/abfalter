@@ -1,9 +1,15 @@
 import { renderTemplates } from './utilities/renderTemplates.js';
 import { templates } from './utilities/templates.js';
 import { abfalterSettingsKeys } from "./utilities/abfalterSettings.js";
+import { kiAccumulate, kiRemoveMaint  } from "./helpers/actorFunctions.js";
+
+import { genericDialogs } from './dialogs.js';
+
 
 const SYSTEM_ID = "abfalter";
 const PSYCHIC_POTENTIAL_FLAG = "remainingPsychicPotential";
+const KI_ACCUMULATION_ROUND_FLAG = "kiAccumulationRound";
+const KI_CAST_ROUND_FLAG = "kiCastRound";
 
 
 export default class abfalterCombat extends Combat {
@@ -14,6 +20,8 @@ export default class abfalterCombat extends Combat {
 	*/
     async nextRound() {
         const result = await super.nextRound();
+    	await this.resetRoundKi();
+		await this.removeKiMaintenance();
         await this.resetRoundResources();
         await super.resetAll();
 
@@ -139,176 +147,295 @@ export default class abfalterCombat extends Combat {
 		return maximumPotential;
 	}
 
-    async rollInitiative(ids, { updateTurn = false, messageOptions } = {}) {
-		let openRollIniSetting = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_InitiativeRoll);
-		let openRollSetting = game.settings.get('abfalter', abfalterSettingsKeys.Corrected_OpenRoll);
+	/**
+	 * Automatic Ki Accu Handler
+	 * 
+	 * @param {Actor} actor 
+	 * @param {combatant} combatant 
+	 * @param {String} param2 Ki amount & if NPC
+	 * @returns 
+	 */
+	async processAutomaticKi(actor, combatant, { kiAmount = null, removeHalf = false, bulk = false } = {}) {
+		if (!actor?.system.toggles?.automaticKi) return;
 
-		const mod = await openInitiativeDialog() || 0;
-        if (typeof ids === 'string') ids = [ids];
+		const round = Math.max(Number(this.round) || 0, 1);
+		const processedRound = Number(combatant.getFlag(SYSTEM_ID, KI_ACCUMULATION_ROUND_FLAG));
+		if (processedRound === round) return;
 
-        for (const id of ids) {
+		const setting = actor.system.settings?.alwaysFullKiAccu ?? "query";
+		let amount;
+
+		if (bulk) {
+			amount = setting === "alwaysFull" ? "full" : "half";
+		} else {
+			if (setting === "alwaysFull") amount = "full";
+			else if (setting === "alwaysHalf") amount = "half";
+			else amount = kiAmount;
+		}
+
+		if (!amount) return;
+
+		if (!bulk && setting === "query" && removeHalf)
+			await kiAccumulate(actor, "removeHalf");
+
+		await kiAccumulate(actor, amount);
+		await combatant.setFlag(SYSTEM_ID, KI_ACCUMULATION_ROUND_FLAG, round);
+	}
+
+	async resetRoundKi() {
+		const previousRound = (Number(this.round) || 0) - 1;
+		const attributes = ["agi", "con", "dex", "str", "pow", "wp"];
+
+		for (const combatant of this.combatants) {
+			const actor = combatant.actor;
+			if (!actor) continue;
+
+			// If a technique was cast last round, clear accumulated Ki.
+			const castRound = Number(combatant.getFlag(SYSTEM_ID, KI_CAST_ROUND_FLAG));
+			if (castRound === previousRound) {
+				const updateData = {};
+				for (const attr of attributes)
+					updateData[`system.kiPool.${attr}.current`] = 0;
+
+				await actor.update(updateData);
+			}
+
+			// Turn off active techniques which are not maintained.
+			const techniqueUpdates = actor.items
+				.filter(item =>
+					item.type === "kiTechnique" &&
+					item.system.active &&
+					!item.system.maintBool
+				)
+				.map(item => ({
+					_id: item.id,
+					"system.active": false
+				}));
+
+			if (techniqueUpdates.length)
+				await actor.updateEmbeddedDocuments("Item", techniqueUpdates);
+		}
+	}
+
+	async removeKiMaintenance() {
+		for (const combatant of this.combatants) {
+			if (combatant.actor) await kiRemoveMaint(combatant.actor);
+		}
+	}
+
+	/**
+	 * Initiative Roll and Rules
+	 */
+	async rollAll(options = {}) {
+		return super.rollAll({ ...options, abfalterBulkRoll: true });
+	}
+
+	async rollNPC(options = {}) {
+		return super.rollNPC({ ...options, abfalterBulkRoll: true });
+	}
+
+	async rollInitiative(ids, { updateTurn = false, messageOptions, abfalterBulkRoll  = false } = {}) {
+		const correctedInitiative = game.settings.get("abfalter", abfalterSettingsKeys.Corrected_InitiativeRoll); 
+		const correctedOpenRoll = game.settings.get("abfalter", abfalterSettingsKeys.Corrected_OpenRoll);
+
+		if (typeof ids === "string") ids = [ids];
+
+		for (const id of ids) {
 			const combatant = this.combatants.get(id);
 			const actor = combatant?.actor;
-			const baseInit = actor?.system.initiative.final ?? 0;
+			if (!actor) continue;
 
-			// Base roll
+			let dialogResult = {
+				mod: 0,
+				kiAmount: null,
+				removeHalf: false
+			};
+
+			if (!abfalterBulkRoll) {
+				const round = Math.max(Number(this.round) || 0, 1);
+				const processedRound = Number(
+					combatant.getFlag(SYSTEM_ID, KI_ACCUMULATION_ROUND_FLAG)
+				);
+
+				const kiAlreadyProcessed = processedRound === round;
+
+				dialogResult = await openInitiativeDialog(actor, kiAlreadyProcessed);
+				if (!dialogResult) continue;
+			}
+
+			await this.processAutomaticKi(actor, combatant, {
+				kiAmount: dialogResult.kiAmount,
+				removeHalf: dialogResult.removeHalf,
+				bulk: abfalterBulkRoll
+			});
+
+			const mod = Number(dialogResult.mod) || 0;
+			const baseInit = actor.system.initiative.final ?? 0;
+
 			const roll = await new Roll("1d100").evaluate();
 			const baseRoll = roll.total;
-
-			// Open/Fumble ranges
-			const fumbleRange = actor?.system.fumleRange.final ?? 3;
-			let openRange = actor?.system.rollRange.final ?? 90;
+			const fumbleRange = actor.system.fumleRange.final ?? 3;
+			let openRange = actor.system.rollRange.final ?? 90;
 
 			let total = baseRoll;
 			let notes = `(${baseRoll})`;
-
-			let isFumble = baseRoll <= fumbleRange;
+			const isFumble = baseRoll <= fumbleRange;
 			let hasExploded = false;
-			switch (isFumble) {
-				case true:
-					// Handle Fumble
-					let fumblePenalty = baseRoll === 1 ? -125 : baseRoll === 2 ? -100 : -75;
-					total += fumblePenalty;
-					notes += ` ${fumblePenalty}(Fumble Penalty)`;
-					break;
-				case false:
-					if (!openRollIniSetting) break;
-					
-					if (openRollSetting) {
-						const isDouble = baseRoll % 11 === 0 && baseRoll <= 99;
-						let previousRoll = baseRoll;
-    					let rollCount = 0;
-						
-						let shouldExplode = (
-							baseRoll === 100 ||
-							(isDouble && baseRoll >= openRange) ||
-							(baseRoll >= openRange)
-						);
-						
-						if (baseRoll >= openRange) openRange = Math.min(openRange + 1, 100);
 
-						while (shouldExplode) {
-							const extraRoll = await new Roll('1d100').evaluate();
-							const rollValue = extraRoll.total;
-							rollCount++;
-							total += rollValue;
-							notes += ` + ${rollValue}(Open Roll #${rollCount})`;
-							hasExploded = true;
+			if (isFumble) {
+				const penalty = baseRoll === 1 ? -125 : baseRoll === 2 ? -100 : -75;
+				total += penalty;
+				notes += ` ${penalty}(Fumble Penalty)`;
+			} else if (correctedInitiative) {
+				const isDouble = baseRoll % 11 === 0 && baseRoll <= 99;
+				let previousRoll = baseRoll;
+				let rollCount = 0;
 
-							const isDoubleAgain = rollValue % 11 === 0 && rollValue <= 99;
+				let shouldExplode = correctedOpenRoll
+					? baseRoll === 100 || baseRoll >= openRange || (isDouble && baseRoll >= openRange)
+					: baseRoll === 100 || baseRoll >= openRange || (isDouble && baseRoll > previousRoll);
 
-							if (rollValue >= openRange) openRange = Math.min(openRange + 1, 100);
+				if (correctedOpenRoll) {
+					if (baseRoll >= openRange) openRange = Math.min(openRange + 1, 100);
+				} else {
+					if (baseRoll > openRange) openRange = Math.min(baseRoll, 100);
+				}
 
-							shouldExplode = (
-								rollValue === 100 ||
-								(rollValue >= openRange) ||
-								(isDoubleAgain && rollValue > previousRoll)
-							);
+				while (shouldExplode) {
+					const extraRoll = await new Roll("1d100").evaluate();
+					const rollValue = extraRoll.total;
+					const isDoubleAgain = rollValue % 11 === 0 && rollValue <= 99;
 
-							previousRoll = rollValue;
-						}
+					rollCount++;
+					total += rollValue;
+					notes += ` + ${rollValue}(Open Roll #${rollCount})`;
+					hasExploded = true;
+
+					if (correctedOpenRoll) {
+						if (rollValue >= openRange) openRange = Math.min(openRange + 1, 100);
+
+						shouldExplode =
+							rollValue === 100 ||
+							rollValue >= openRange ||
+							(isDoubleAgain && rollValue > previousRoll);
 					} else {
-						const isDouble = baseRoll % 11 === 0 && baseRoll <= 99;
-						let previousRoll = baseRoll;
-						let rollCount = 0;
+						if (rollValue > openRange) openRange = Math.min(rollValue, 100);
 
-						let shouldExplode = (
-							baseRoll === 100 ||
-							(baseRoll >= openRange) ||
-							(isDouble && baseRoll > previousRoll)
-						);
-						if (baseRoll > openRange) openRange = Math.min(baseRoll, 100);
-
-						while (shouldExplode) {
-							const extraRoll = await new Roll('1d100').evaluate();
-							const rollValue = extraRoll.total;
-							rollCount++;
-							total += rollValue;
-							notes += ` + ${rollValue}(Open Roll #${rollCount})`;
-							hasExploded = true;
-
-							const isDoubleAgain = rollValue % 11 === 0 && rollValue <= 99;
-
-							if (rollValue > openRange) openRange = Math.min(rollValue, 100);
-
-							shouldExplode = (
-								rollValue === 100 ||
-								(rollValue > openRange) ||
-								(isDoubleAgain && rollValue > previousRoll)
-							);
-
-							previousRoll = rollValue;
-						}
+						shouldExplode =
+							rollValue === 100 ||
+							rollValue > openRange ||
+							(isDoubleAgain && rollValue > previousRoll);
 					}
-				break;
+
+					previousRoll = rollValue;
+				}
 			}
-			
-			const finalTotal = total + baseInit + Number(mod);
+
+			const finalTotal = total + baseInit + mod;
 			notes += ` + ${baseInit}(Base Ini) + ${mod}(Mod)`;
-			
+
 			const rollResult = {
-			  label: game.i18n.localize("abfalter.initiative"),
-			  result: notes,
-			  total: finalTotal,
-			  color: baseRoll <= fumbleRange ? "fumble" : (total > 0 ? "open-roll" : ""),
-			  fumble: isFumble,
-			  explode: hasExploded,
+				label: game.i18n.localize("abfalter.initiative"),
+				result: notes,
+				total: finalTotal,
+				color: isFumble ? "fumble" : (hasExploded ? "open-roll" : ""),
+				fumble: isFumble,
+				explode: hasExploded
 			};
 
-			// Send message
 			const rollData = [rollResult];
 			const label = game.i18n.localize("abfalter.initiative");
-			const template = "systems/abfalter/templates/dialogues/diceRolls/initiativeRoll.hbs";
-			const content = await foundry.applications.handlebars.renderTemplate(template, { rollData, label, actor });
+			const content = await foundry.applications.handlebars.renderTemplate(
+				"systems/abfalter/templates/dialogues/diceRolls/initiativeRoll.hbs",
+				{ rollData, label, actor }
+			);
 
 			const chatData = {
-			  user: game.user.id,
-			  speaker: ChatMessage.getSpeaker({ actor }),
-			  sound: CONFIG.sounds.dice,
-			  content,
-			  flags: { rollData, actor },
+				user: game.user.id,
+				speaker: ChatMessage.getSpeaker({ actor }),
+				sound: CONFIG.sounds.dice,
+				content,
+				flags: { rollData, actor }
 			};
 
 			ChatMessage.applyMode(chatData, game.settings.get("core", "messageMode"));
-			ChatMessage.create(chatData);
-
-			// Update initiative
+			await ChatMessage.create(chatData);
 			await this.setInitiative(id, finalTotal);
 		}
-        return this.update({ turn: 0 });
-    }
+
+		return this.update({ turn: 0 });
+	}
 }
 
-export const openInitiativeDialog = async () => {
+export const openInitiativeDialog = (actor, kiAlreadyProcessed = false) => {
+    const automaticKi = actor?.system.toggles?.automaticKi ?? false;
+    const setting = actor?.system.settings?.alwaysFullKiAccu ?? "query";
+
     return initiativeDialog({
         content: "Modifier",
-        placeholder: '0'
+        placeholder: "0",
+        showKiOptions: automaticKi && setting === "query" && !kiAlreadyProcessed
     });
-}
+};
 
-export const initiativeDialog = async ({ content, placeholder = '' }) => {
+export const initiativeDialog = async ({ content, placeholder = "", showKiOptions = false }) => {
     const html = await renderTemplates({
         name: templates.initiative,
-        context: {
-            content,
-            placeholder
-        }
+        context: { content, placeholder, showKiOptions }
     });
+
     return new Promise(resolve => {
-        new Dialog({
-            title: 'Initiative Roller',
+        let done = false;
+        const finish = value => {
+            if (done) return;
+            done = true;
+            resolve(value);
+        };
+
+        class InitiativeDialogV2 extends foundry.applications.api.DialogV2 {
+            async _onRender(context, options) {
+                await super._onRender(context, options);
+                this.element?.querySelector("#dialog-input")?.focus();
+            }
+        }
+
+        const dlg = new InitiativeDialogV2({
+            window: { title: "Initiative Roller" },
+            position: { width: 400 },
+            classes: ["baseAbfalterV2", "initiativeDialog"],
             content: html,
-            buttons: {
-                submit: {
-                    label: 'Continue',
-                    callback: html => {
-                        const results = new FormDataExtended(html.find('form')[0], {}).object;
-                        resolve(results['dialog-input']);
+            buttons: [
+                {
+                    action: "submit",
+                    label: "Continue",
+                    default: true,
+                    callback: (event, button) => {
+                        const form = button.form;
+                        finish({
+                            mod: Number(form.elements["dialog-input"]?.value) || 0,
+                            kiAmount: showKiOptions
+                                ? form.elements.kiAmount?.value ?? "full"
+                                : null,
+                            removeHalf: showKiOptions
+                                ? form.elements.removeHalf?.checked ?? false
+                                : false
+                        });
                     }
+                },
+                {
+                    action: "cancel",
+                    label: game.i18n.localize("abfalter.dialogs.cancel"),
+                    callback: () => finish(null)
                 }
-            },
-            default: 'submit',
-            render: () => $('#dialog-input').focus()
-        }).render(true);
+            ]
+        });
+
+        const originalClose = dlg.close.bind(dlg);
+        dlg.close = async (...args) => {
+            finish(null);
+            return originalClose(...args);
+        };
+
+        dlg.render(true);
     });
-}
+};
