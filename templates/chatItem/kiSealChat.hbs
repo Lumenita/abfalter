@@ -1,0 +1,19 @@
+{{> "systems/abfalter/templates/dialogues/partials/customChatHeader.hbs"}}
+<div class="itemChat baseAbfalterV2">
+    <div class="chatItemContent">
+        <div class="chatItemHeader">
+            <img src="{{img}}"/>
+            <div>
+                <span> {{name}} </span>
+                <span> {{system.descTag}} </span>
+            </div>
+            <a class="descToggle" data-value="{{descToggle}}">
+                <i class="fas fa-chevron-right fa-fw"></i>
+            </a>
+        </div>
+
+        <div class="itemDescription {{#if descToggle}}ItemDescOpen{{/if}}">
+            {{{system.description}}}
+        </div>
+    </div>
+</div>

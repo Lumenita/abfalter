@@ -818,8 +818,8 @@
                 </div>
                 {{#each system.secondaryFields.athletics as |sec key|}}
                 <div class="{{#if sec.parentField}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
-                    <button type="button" data-action="plainRoll" data-roll="{{sec.final}}" data-label="{{sec.label}}"
-                        data-type="secondaryRoll"> 
+                    <button type="button" data-action="abfRollButton" data-value="{{sec.final}}" 
+                        data-type="{{sec.label}}" data-label="secondaryRoll"> 
                         <span class="{{#if sec.armorPen}}armorpenalty{{/if}}"> {{localize (concat "abfalter."
                             sec.label)}} </span>
                         <span> {{sec.final}} </span>
@@ -869,8 +869,8 @@
                 </div>
                 {{#each system.secondaryFields.social as |sec key|}}
                 <div class="{{#if sec.parentField}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
-                    <button type="button" data-action="plainRoll" data-roll="{{sec.final}}" data-label="{{sec.label}}"
-                        data-type="secondaryRoll">
+                    <button type="button" data-action="abfRollButton" data-value="{{sec.final}}" 
+                        data-type="{{sec.label}}" data-label="secondaryRoll"> 
                         <span class="{{#if sec.armorPen}}armorpenalty{{/if}}"> {{localize (concat "abfalter."
                             sec.label)}} </span>
                         <span> {{sec.final}} </span>
@@ -920,8 +920,8 @@
                 {{#each system.secondaryFields.perceptive as |sec key|}}
                 <div
                     class="{{#if sec.parentField}}{{#if sec.display}}hidden{{/if}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
-                    <button type="button" data-action="plainRoll" data-roll="{{sec.final}}" data-label="{{sec.label}}"
-                        data-type="secondaryRoll">
+                    <button type="button" data-action="abfRollButton" data-value="{{sec.final}}" 
+                        data-type="{{sec.label}}" data-label="secondaryRoll"> 
                         <span class="{{#if sec.armorPen}}armorpenalty{{/if}}"> {{localize (concat "abfalter."
                             sec.label)}} </span>
                         <span> {{sec.final}} </span>
@@ -975,8 +975,8 @@
                 </div>
                 {{#each system.secondaryFields.intellectual as |sec key|}}
                 <div class="{{#if sec.parentField}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
-                    <button type="button" data-action="plainRoll" data-roll="{{sec.final}}" data-label="{{sec.label}}"
-                        data-type="secondaryRoll">
+                    <button type="button" data-action="abfRollButton" data-value="{{sec.final}}" 
+                        data-type="{{sec.label}}" data-label="secondaryRoll"> 
                         <span class="{{#if sec.armorPen}}armorpenalty{{/if}}"> {{localize (concat "abfalter."
                             sec.label)}} </span>
                         <span> {{sec.final}} </span>
@@ -1025,8 +1025,8 @@
                 </div>
                 {{#each system.secondaryFields.vigor as |sec key|}}
                 <div class="{{#if sec.parentField}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
-                    <button type="button" data-action="plainRoll" data-roll="{{sec.final}}" data-label="{{sec.label}}"
-                        data-type="secondaryRoll">
+                    <button type="button" data-action="abfRollButton" data-value="{{sec.final}}" 
+                        data-type="{{sec.label}}" data-label="secondaryRoll"> 
                         <span class="{{#if sec.armorPen}}armorpenalty{{/if}}"> {{localize (concat "abfalter."
                             sec.label)}} </span>
                         <span> {{sec.final}} </span>
@@ -1076,8 +1076,8 @@
                 {{#each system.secondaryFields.subterfuge as |sec key|}}
                 <div
                     class="{{#if sec.parentField}}{{#if sec.display}}hidden{{/if}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
-                    <button type="button" data-action="plainRoll" data-roll="{{sec.final}}" data-label="{{sec.label}}"
-                        data-type="secondaryRoll">
+                    <button type="button" data-action="abfRollButton" data-value="{{sec.final}}" 
+                        data-type="{{sec.label}}" data-label="secondaryRoll"> 
                         <span class="{{#if sec.armorPen}}armorpenalty{{/if}}"> {{localize (concat "abfalter."
                             sec.label)}} </span>
                         <span> {{sec.final}} </span>
@@ -1131,8 +1131,8 @@
                 </div>
                 {{#each system.secondaryFields.creative as |sec key|}}
                 <div class="{{#if sec.parentField}}{{else}}{{#if sec.fav}}{{else}}hidden{{/if}}{{/if}}">
-                    <button type="button" data-action="plainRoll" data-roll="{{sec.final}}" data-label="{{sec.label}}"
-                        data-type="secondaryRoll">
+                    <button type="button" data-action="abfRollButton" data-value="{{sec.final}}" 
+                        data-type="{{sec.label}}" data-label="secondaryRoll"> 
                         <span class="{{#if sec.armorPen}}armorpenalty{{/if}}"> {{localize (concat "abfalter."
                             sec.label)}} </span>
                         <span> {{sec.final}} </span>
@@ -1218,8 +1218,8 @@
                         </div>
                         {{else}}
                         <div class="secondaryEditCollapsed">
-                            <button type="button" data-action="plainRoll" data-roll="{{secondary.system.finalValue}}"
-                                data-label="{{secondary.name}}" data-type="customSecondaryRoll">
+                            <button type="button" data-action="abfRollButton" data-value="{{secondary.system.finalValue}}"
+                                data-type="{{secondary.name}}" data-label="customSecondaryRoll">
                                 <span> {{secondary.name}} </span>
                                 <span> {{this.system.finalValue}} </span>
                             </button>

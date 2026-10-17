@@ -125,9 +125,17 @@
                 </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="{{#if system.toggles.kiTab}}hidden{{/if}}">
                 <legend> {{localize "abfalter.settingsTab.kiSettings"}} </legend>
                 <div class="settingsSubsection abfDivFormat">
+                    <label>
+                        <span> {{localize "abfalter.kiAutoAccuType"}} </span>
+                        <div class="csSelect">
+                            <select name="system.settings.alwaysFullKiAccu">
+                                {{selectOptions kiAccuTypeList selected=system.settings.alwaysFullKiAccu localize=true}}
+                            </select>
+                        </div>
+                    </label>
                     <label class="{{#if system.toggles.innatePower}}lockLabel{{/if}}">
                         <span> {{localize "abfalter.settingsTab.unifiedKi"}} </span>
                         <button type="button" data-action="toggleValue"
@@ -192,6 +200,18 @@
                         </button>
                     </label>
                     {{/if}}
+                    <label>
+                        <span> {{localize "abfalter.interval"}} </span> 
+                        <div class="csSelect">
+                            <select name="system.kiPool.recoveryInterval">
+                                {{selectOptions kiRecoveryList selected=system.kiPool.recoveryInterval localize=true}}
+                            </select>
+                        </div>
+                    </label>
+                    <label>
+                        <span> {{localize "abfalter.amount"}} </span> 
+                        <input type="number" name="system.kiPool.recoveryAmount" value="{{system.kiPool.recoveryAmount}}"/> 
+                    </label>
                 </div>
             </fieldset>
         </div>
@@ -923,29 +943,6 @@
                         <span>|</span>
                         <input type="number" name="system.psySettings.matrixShieldMultFinal" value="{{system.psySettings.matrixShieldMultFinal}}" readonly />
                     </label>
-                </div>
-            </fieldset>
-
-            <fieldset class="extendedSettingsContainer {{#if system.toggles.kiTab}}hidden{{/if}}">
-                <legend> {{localize "abfalter.kiSettings"}} </legend>
-                <div class="extendedSettings abfDivFormat">
-                    <label class="setSingleInput">
-                        <span> {{localize "abfalter.kiAutoAccuType"}} </span>
-                        <div class="csSelect">
-                            <select name="system.settings.alwaysFullKiAccu">
-                                {{selectOptions kiAccuTypeList selected=system.settings.alwaysFullKiAccu localize=true}}
-                            </select>
-                        </div>
-                    </label>
-                </div>
-
-                <div class="extendedSettings abfDivFormat">
-                    <!--<label class="setDoubleInput">
-                        <span>{{localize "abfalter.upcastValue"}}</span>
-                        <input type="number" name="system.psySettings.upcastValue" value="{{system.psySettings.upcastValue}}" />
-                        <span>|</span>
-                        <input type="number" name="system.psySettings.upcastValueFinal" value="{{system.psySettings.upcastValueFinal}}" readonly />
-                    </label>-->
                 </div>
             </fieldset>
         </div>

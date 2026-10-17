@@ -1140,24 +1140,6 @@
                 <fieldset class="kiAccu kiManage">
                     <legend> {{localize "abfalter.kiAccu"}} </legend>
                     <div class="abfDivFormat">
-                        <label class="kiManageMaint">
-                            {{#if system.toggles.unifiedPools}}
-                            <span> {{localize "abfalter.additionalMaint"}} </span> 
-                            {{else}}
-                            <span> {{localize "abfalter.otherGenericMaint"}} </span> 
-                            {{/if}}
-                            <input type="number" name="system.kiPool.customMaint" value="{{system.kiPool.customMaint}}" /> 
-                        </label>
-                        {{#if system.kiPool.showGenericKi}}
-                        <label class="kiManageMaint">
-                            <span> {{localize "abfalter.genericKiMaint"}} </span> 
-                            <input type="number" name="system.kiPool.genericKi" value="{{system.kiPool.genericKi}}" readonly/> 
-                        </label>
-                        <span></span>
-                        {{else}}
-                        <span></span>
-                        {{/if}}
-
                         <button type="button" data-action="kiButton" data-ability="kiAccu">
                             <span> {{localize "abfalter.full"}} </span>
                         </button>
@@ -1177,20 +1159,18 @@
 
                 <div class="kiSmallerContainer">
                     <fieldset class="kiRecovery">
-                        <legend>{{localize "abfalter.kiRecovery"}}</legend>
+                        <legend>{{localize "abfalter.kiMaint"}}</legend>
                         <div class="abfDivFormat">
                             <label>
-                                <span> {{localize "abfalter.interval"}} </span> 
-                                <div class="csSelect">
-                                    <select name="system.kiPool.recoveryInterval">
-                                        {{selectOptions kiRecoveryList selected=system.kiPool.recoveryInterval localize=true}}
-                                    </select>
-                                </div>
+                                <span> {{localize "abfalter.otherMaint"}} </span> 
+                                <input type="number" name="system.kiPool.customMaint" value="{{system.kiPool.customMaint}}" /> 
                             </label>
+                            {{#if system.kiPool.showGenericKi}}
                             <label>
-                                <span> {{localize "abfalter.amount"}} </span> 
-                                <input type="number" name="system.kiPool.recoveryAmount" value="{{system.kiPool.recoveryAmount}}"/> 
+                                <span> {{localize "abfalter.genericKiMaint"}} </span> 
+                                <input type="number" name="system.kiPool.genericKi" value="{{system.kiPool.genericKi}}" readonly/> 
                             </label>
+                            {{/if}}
                         </div>
                     </fieldset>
 

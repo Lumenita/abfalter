@@ -144,9 +144,170 @@ export async function changeSecondarySpecs(actorData) {
     })
 }
 
+
 export async function calculateDpCost(actorData, classId) {
+    const template = "systems/abfalter/templates/dialogues/dpCost.hbs";
+
+    // Always use the current actor and class data.
+    const renderContent = async () => {
+        const templateData = getDpCostData(actorData, classId);
+
+        return foundry.applications.handlebars.renderTemplate(
+            template,
+            templateData
+        );
+    };
+
+    class DpCostDialog extends foundry.applications.api.DialogV2 {
+        constructor(options) {
+            super(options);
+
+            this.updateHooks = [];
+            this.refreshing = false;
+            this.refreshPending = false;
+        }
+
+        async refreshValues() {
+            if (this.refreshing) {
+                this.refreshPending = true;
+                return;
+            }
+
+            this.refreshing = true;
+
+            try {
+                do {
+                    this.refreshPending = false;
+
+                    const content = await renderContent();
+
+                    // Update only the dialog's content.
+                    const container = this.element?.querySelector(".dialog-content");
+
+                    if (container) {
+                        container.innerHTML = content;
+                    }
+
+                } while (this.refreshPending);
+            } finally {
+                this.refreshing = false;
+            }
+        }
+
+        registerHooks() {
+            const refreshActor = updatedActor => {
+                if (updatedActor.id !== actorData.id) return;
+                void this.refreshValues();
+            };
+
+            const refreshItem = item => {
+                if (item.parent?.id !== actorData.id) return;
+                void this.refreshValues();
+            };
+
+            this.updateHooks.push(
+                ["updateActor", Hooks.on("updateActor", refreshActor)],
+                ["createItem", Hooks.on("createItem", refreshItem)],
+                ["updateItem", Hooks.on("updateItem", refreshItem)],
+                ["deleteItem", Hooks.on("deleteItem", refreshItem)]
+            );
+        }
+
+        async close(options = {}) {
+            for (const [hookName, hookId] of this.updateHooks) {
+                Hooks.off(hookName, hookId);
+            }
+
+            this.updateHooks = [];
+
+            return super.close(options);
+        }
+    }
+
+    const dialog = new DpCostDialog({
+        classes: ["baseAbfalter", "abfalterDialog"],
+
+        window: {
+            title: `${actorData.name} - ${game.i18n.localize("abfalter.dpCostCalc")}`
+        },
+
+        content: await renderContent(),
+
+        position: {
+            width: 500,
+            height: "auto"
+        },
+
+        buttons: [
+            {
+                action: "close",
+                label: game.i18n.localize("abfalter.dialogs.close"),
+                callback: () => { }
+            }
+        ]
+    });
+
+    dialog.registerHooks();
+    dialog.render(true);
+}
+
+function getDpCostData(actorData, classId) {
     const system = actorData.system;
     const myLevel = system.levelinfo.level;
+
+    const naturalBonuses = {
+        green: 0,
+        blue: 0,
+        natural: 0,
+        maxGreen: myLevel,
+        maxBlue: myLevel,
+        maxNatural: myLevel * 5,
+        maxPerAbility: myLevel * 10,
+        greenEntries: [],
+        blueEntries: [],
+        naturalEntries: []
+    };
+
+    for (const [field, abilities] of Object.entries(system.secondaryFields)) {
+        if (field === "category") continue;
+
+        for (const [key, ability] of Object.entries(abilities)) {
+            if (!ability || typeof ability !== "object") continue;
+
+            const nat = Number(ability.nat) || 0;
+            const natural = Number(ability.natural) || 0;
+
+            const name = game.i18n.localize(`abfalter.${ability.label}`);
+
+            if (nat > 0) {
+                const entry = { name, value: nat };
+
+                if (ability.type === "physical") {
+                    naturalBonuses.green += nat;
+                    naturalBonuses.greenEntries.push(entry);
+                } else {
+                    naturalBonuses.blue += nat;
+                    naturalBonuses.blueEntries.push(entry);
+                }
+            }
+
+            if (natural > 0) {
+                naturalBonuses.natural += natural / 10;
+
+                naturalBonuses.naturalEntries.push({
+                    name,
+                    value: natural,
+                    warning: natural > naturalBonuses.maxPerAbility
+                });
+            }
+        }
+    }
+    naturalBonuses.warningGreen = naturalBonuses.green > naturalBonuses.maxGreen;
+    naturalBonuses.warningBlue = naturalBonuses.blue > naturalBonuses.maxBlue;
+    naturalBonuses.warningNatural = naturalBonuses.natural > naturalBonuses.maxNatural;
+    naturalBonuses.warningPerAbility = naturalBonuses.naturalEntries.some(entry => entry.warning);
+
+
     const classItem = actorData.items.get(classId);
     if (!classItem) {
         console.error(`Class item with id ${classId} not found`);
@@ -155,15 +316,16 @@ export async function calculateDpCost(actorData, classId) {
     const dpCost = classItem.system.dpCost;
     const totalDpCosts = [];
 
-    const dpLimits = [];
     let totalDP = system.levelinfo.dp;
-    dpLimits.maxPrimaryDp = Math.floor(totalDP * (dpCost.limits.primary / 100));
-    dpLimits.maxPrimaryCombatDp = Math.floor(totalDP * .5);
-    dpLimits.maxMagicDp = Math.floor(totalDP * (dpCost.limits.supernatural / 100));
+    const dpLimits = {
+        maxPrimaryDp: Math.floor(totalDP * dpCost.limits.primary / 100),
+        maxPrimaryCombatDp: Math.floor(totalDP * 0.5),
+        maxMagicDp: Math.floor(totalDP * dpCost.limits.supernatural / 100),
+        maxPsychicDp: Math.floor(totalDP * dpCost.limits.psychic / 100),
+        fortyPercent: Math.floor(totalDP * 0.4)
+    };
     dpLimits.maxMagicProjDp = Math.floor(dpLimits.maxMagicDp * .5);
-    dpLimits.maxPsychicDp = Math.floor(totalDP * (dpCost.limits.psychic / 100));
     dpLimits.maxPsychicProjDp = Math.floor(dpLimits.maxPsychicDp * .5);
-    dpLimits.fortyPercent = Math.floor(totalDP * .4);
 
     const customSecEntries = actorData.items
         .filter(item => item.type === "secondary")
@@ -215,73 +377,52 @@ export async function calculateDpCost(actorData, classId) {
     totalDpCosts.psychic = dpPsychic.reduce((acc, { value }) => acc + value, 0);
     totalDpCosts.psychicProj = dpPsychic[1].value;
 
+
+    const secondaryKeyMap = {
+        acrobatics: "acro"
+    };
+
     const dpSecondary = [
-        { name: game.i18n.localize('abfalter.lpMult'), value: Math.floor(system.lifepoints.multiple * dpCost.other.lpMult) },
-
-        { name: game.i18n.localize('abfalter.acrobatic'), value: Math.floor(system.secondaryFields.athletics.acrobatics.base * (dpCost.fields.athleticsToggle ? dpCost.fields.athletics : dpCost.subject.acro)) },
-        { name: game.i18n.localize('abfalter.athleticism'), value: Math.floor(system.secondaryFields.athletics.athleticism.base * (dpCost.fields.athleticsToggle ? dpCost.fields.athletics : dpCost.subject.athleticism)) },
-        { name: game.i18n.localize('abfalter.climb'), value: Math.floor(system.secondaryFields.athletics.climb.base * (dpCost.fields.athleticsToggle ? dpCost.fields.athletics : dpCost.subject.climb)) },
-        { name: game.i18n.localize('abfalter.jump'), value: Math.floor(system.secondaryFields.athletics.jump.base * (dpCost.fields.athleticsToggle ? dpCost.fields.athletics : dpCost.subject.jump)) },
-        { name: game.i18n.localize('abfalter.piloting'), value: Math.floor(system.secondaryFields.athletics.piloting.base * (dpCost.fields.athleticsToggle ? dpCost.fields.athletics : dpCost.subject.piloting)) },
-        { name: game.i18n.localize('abfalter.ride'), value: Math.floor(system.secondaryFields.athletics.ride.base * (dpCost.fields.athleticsToggle ? dpCost.fields.athletics : dpCost.subject.ride)) },
-        { name: game.i18n.localize('abfalter.swim'), value: Math.floor(system.secondaryFields.athletics.swim.base * (dpCost.fields.athleticsToggle ? dpCost.fields.athletics : dpCost.subject.swim)) },
-
-        { name: game.i18n.localize('abfalter.etiquette'), value: Math.floor(system.secondaryFields.social.etiquette.base * (dpCost.fields.socialToggle ? dpCost.fields.social : dpCost.subject.etiquette)) },
-        { name: game.i18n.localize('abfalter.intimidate'), value: Math.floor(system.secondaryFields.social.intimidate.base * (dpCost.fields.socialToggle ? dpCost.fields.social : dpCost.subject.intimidate)) },
-        { name: game.i18n.localize('abfalter.leadership'), value: Math.floor(system.secondaryFields.social.leadership.base * (dpCost.fields.socialToggle ? dpCost.fields.social : dpCost.subject.leadership)) },
-        { name: game.i18n.localize('abfalter.persuasion'), value: Math.floor(system.secondaryFields.social.persuasion.base * (dpCost.fields.socialToggle ? dpCost.fields.social : dpCost.subject.persuasion)) },
-        { name: game.i18n.localize('abfalter.streetwise'), value: Math.floor(system.secondaryFields.social.streetwise.base * (dpCost.fields.socialToggle ? dpCost.fields.social : dpCost.subject.streetwise)) },
-        { name: game.i18n.localize('abfalter.style'), value: Math.floor(system.secondaryFields.social.style.base * (dpCost.fields.socialToggle ? dpCost.fields.social : dpCost.subject.style)) },
-        { name: game.i18n.localize('abfalter.trading'), value: Math.floor(system.secondaryFields.social.trading.base * (dpCost.fields.socialToggle ? dpCost.fields.social : dpCost.subject.trading)) },
-
-        { name: game.i18n.localize('abfalter.notice'), value: Math.floor(system.secondaryFields.perceptive.notice.base * (dpCost.fields.perceptiveToggle ? dpCost.fields.perceptive : dpCost.subject.notice)) },
-        { name: game.i18n.localize('abfalter.search'), value: Math.floor(system.secondaryFields.perceptive.search.base * (dpCost.fields.perceptiveToggle ? dpCost.fields.perceptive : dpCost.subject.search)) },
-        { name: game.i18n.localize('abfalter.track'), value: Math.floor(system.secondaryFields.perceptive.track.base * (dpCost.fields.perceptiveToggle ? dpCost.fields.perceptive : dpCost.subject.track)) },
-
-        { name: game.i18n.localize('abfalter.animals'), value: Math.floor(system.secondaryFields.intellectual.animals.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.animals)) },
-        { name: game.i18n.localize('abfalter.appraisal'), value: Math.floor(system.secondaryFields.intellectual.appraisal.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.appraisal)) },
-        { name: game.i18n.localize('abfalter.architecture'), value: Math.floor(system.secondaryFields.intellectual.architecture.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.architecture)) },
-        { name: game.i18n.localize('abfalter.herballore'), value: Math.floor(system.secondaryFields.intellectual.herballore.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.herballore)) },
-        { name: game.i18n.localize('abfalter.history'), value: Math.floor(system.secondaryFields.intellectual.history.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.history)) },
-        { name: game.i18n.localize('abfalter.law'), value: Math.floor(system.secondaryFields.intellectual.law.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.law)) },
-        { name: game.i18n.localize('abfalter.magicAppr'), value: Math.floor(system.secondaryFields.intellectual.magicappr.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.magicappr)) },
-        { name: game.i18n.localize('abfalter.medicine'), value: Math.floor(system.secondaryFields.intellectual.medicine.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.medicine)) },
-        { name: game.i18n.localize('abfalter.memorize'), value: Math.floor(system.secondaryFields.intellectual.memorize.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.memorize)) },
-        { name: game.i18n.localize('abfalter.navigation'), value: Math.floor(system.secondaryFields.intellectual.navigation.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.navigation)) },
-        { name: game.i18n.localize('abfalter.occult'), value: Math.floor(system.secondaryFields.intellectual.occult.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.occult)) },
-        { name: game.i18n.localize('abfalter.science'), value: Math.floor(system.secondaryFields.intellectual.science.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.science)) },
-        { name: game.i18n.localize('abfalter.tactics'), value: Math.floor(system.secondaryFields.intellectual.tactics.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.tactics)) },
-        { name: game.i18n.localize('abfalter.technomagic'), value: Math.floor(system.secondaryFields.intellectual.technomagic.base * (dpCost.fields.intellectualToggle ? dpCost.fields.intellectual : dpCost.subject.technomagic)) },
-
-        { name: game.i18n.localize('abfalter.composure'), value: Math.floor(system.secondaryFields.vigor.composure.base * (dpCost.fields.vigorToggle ? dpCost.fields.vigor : dpCost.subject.composure)) },
-        { name: game.i18n.localize('abfalter.featsofstr'), value: Math.floor(system.secondaryFields.vigor.featsofstr.base * (dpCost.fields.vigorToggle ? dpCost.fields.vigor : dpCost.subject.featsofstr)) },
-        { name: game.i18n.localize('abfalter.withstpain'), value: Math.floor(system.secondaryFields.vigor.withstpain.base * (dpCost.fields.vigorToggle ? dpCost.fields.vigor : dpCost.subject.withstpain)) },
-
-        { name: game.i18n.localize('abfalter.disguise'), value: Math.floor(system.secondaryFields.subterfuge.disguise.base * (dpCost.fields.subterfugeToggle ? dpCost.fields.subterfuge : dpCost.subject.disguise)) },
-        { name: game.i18n.localize('abfalter.hide'), value: Math.floor(system.secondaryFields.subterfuge.hide.base * (dpCost.fields.subterfugeToggle ? dpCost.fields.subterfuge : dpCost.subject.hide)) },
-        { name: game.i18n.localize('abfalter.lockpicking'), value: Math.floor(system.secondaryFields.subterfuge.lockpicking.base * (dpCost.fields.subterfugeToggle ? dpCost.fields.subterfuge : dpCost.subject.lockpicking)) },
-        { name: game.i18n.localize('abfalter.poisons'), value: Math.floor(system.secondaryFields.subterfuge.poisons.base * (dpCost.fields.subterfugeToggle ? dpCost.fields.subterfuge : dpCost.subject.poisons)) },
-        { name: game.i18n.localize('abfalter.stealth'), value: Math.floor(system.secondaryFields.subterfuge.stealth.base * (dpCost.fields.subterfugeToggle ? dpCost.fields.subterfuge : dpCost.subject.stealth)) },
-        { name: game.i18n.localize('abfalter.theft'), value: Math.floor(system.secondaryFields.subterfuge.theft.base * (dpCost.fields.subterfugeToggle ? dpCost.fields.subterfuge : dpCost.subject.theft)) },
-        { name: game.i18n.localize('abfalter.traplore'), value: Math.floor(system.secondaryFields.subterfuge.traplore.base * (dpCost.fields.subterfugeToggle ? dpCost.fields.subterfuge : dpCost.subject.traplore)) },
-
-        { name: game.i18n.localize('abfalter.alchemy'), value: Math.floor(system.secondaryFields.creative.alchemy.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.alchemy)) },
-        { name: game.i18n.localize('abfalter.animism'), value: Math.floor(system.secondaryFields.creative.animism.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.animism)) },
-        { name: game.i18n.localize('abfalter.art'), value: Math.floor(system.secondaryFields.creative.art.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.art)) },
-        { name: game.i18n.localize('abfalter.cooking'), value: Math.floor(system.secondaryFields.creative.cooking.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.cooking)) },
-        { name: game.i18n.localize('abfalter.dance'), value: Math.floor(system.secondaryFields.creative.dance.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.dance)) },
-        { name: game.i18n.localize('abfalter.forging'), value: Math.floor(system.secondaryFields.creative.forging.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.forging)) },
-        { name: game.i18n.localize('abfalter.jewelry'), value: Math.floor(system.secondaryFields.creative.jewelry.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.jewelry)) },
-        { name: game.i18n.localize('abfalter.toymaking'), value: Math.floor(system.secondaryFields.creative.toymaking.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.toymaking)) },
-        { name: game.i18n.localize('abfalter.music'), value: Math.floor(system.secondaryFields.creative.music.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.music)) },
-        { name: game.i18n.localize('abfalter.runes'), value: Math.floor(system.secondaryFields.creative.runes.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.runes)) },
-        { name: game.i18n.localize('abfalter.ritualcalig'), value: Math.floor(system.secondaryFields.creative.ritualcalig.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.ritualcalig)) },
-        { name: game.i18n.localize('abfalter.slofhand'), value: Math.floor(system.secondaryFields.creative.slofhand.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.slofhand)) },
-        { name: game.i18n.localize('abfalter.tailoring'), value: Math.floor(system.secondaryFields.creative.tailoring.base * (dpCost.fields.creativeToggle ? dpCost.fields.creative : dpCost.subject.tailoring)) },
-
-        { name: game.i18n.localize('abfalter.monsterPowTitle'), value: Math.floor(system.monsterStats.totalDP) },
-        ...customSecEntries
+        {
+            name: game.i18n.localize("abfalter.lpMult"),
+            value: Math.floor(system.lifepoints.multiple * dpCost.other.lpMult)
+        }
     ];
+
+    for (const [field, abilities] of Object.entries(system.secondaryFields)) {
+        if (field === "category") continue;
+
+        const useFieldCost = dpCost.fields[`${field}Toggle`];
+        const fieldCost = dpCost.fields[field];
+
+        for (const [key, ability] of Object.entries(abilities)) {
+            if (key === "kidetection" || key === "kiconceal") continue;
+            if (!ability || typeof ability !== "object") continue;
+
+            const costKey = secondaryKeyMap[key] ?? key;
+
+            const cost = useFieldCost
+                ? fieldCost
+                : dpCost.subject[costKey];
+
+            // Skip abilities without a defined DP cost.
+            if (cost === undefined) continue;
+
+            dpSecondary.push({
+                name: game.i18n.localize(`abfalter.${ability.label}`),
+                value: Math.floor(ability.base * cost)
+            });
+        }
+    }
+
+    dpSecondary.push(
+        {
+            name: game.i18n.localize("abfalter.monsterPowTitle"),
+            value: Math.floor(system.monsterStats.totalDP)
+        },
+        ...customSecEntries
+    );
+
 
     dpLimits.maxPrimaryDp += system.levelinfo.primDpMod;
     dpLimits.maxPrimaryCombatDp += system.levelinfo.combatDpMod;
@@ -305,8 +446,7 @@ export async function calculateDpCost(actorData, classId) {
     dpWarning.all = totalDpCosts.all > totalDP;
     
   
-    const template = "systems/abfalter/templates/dialogues/dpCost.hbs";
-    const templateData = {
+    return {
         dpPrim: dpPrim,
         dpMagic: dpMagic,
         dpPsychic: dpPsychic,
@@ -315,34 +455,9 @@ export async function calculateDpCost(actorData, classId) {
         totalDP,
         dpLimits,
         dpWarning,
-        myLevel
+        myLevel,
+        naturalBonuses
     };
-
-    const htmlContent = await foundry.applications.handlebars.renderTemplate(template, templateData);
-    foundry.applications.api.DialogV2.wait({
-        classes: ["baseAbfalter", "abfalterDialog"],
-        window: { title: game.i18n.localize("abfalter.dpCostCalc") },
-        content: htmlContent,
-        position: {
-            width: 500,
-            height: "auto"
-        },
-        buttons: [
-            {
-                label: 'Calculate',
-                action: 'submit',
-                callback: async () => {
-                    await calculateDpCost(actorData, classId);
-                }
-            },
-            {
-                label: 'Close',
-                action: 'close',
-                callback: () => {}
-            }
-        ]
-    });
-
 }
 
 export async function dpOffSetsWindow(actorData) {
@@ -454,7 +569,7 @@ export async function kiReset(actor) {
 export async function kiCast(actor) {
     const canPush = actor.system.kiAbility.kiTechPush.status ?? false;
     const unifiedPools = actor.system.toggles.unifiedPools ?? false;
-
+    const localizedAttr = attr => game.i18n.localize(`abfalter.${attr}`);
     const emptyCosts = () => Object.fromEntries(KI_ATTRIBUTES.map(attr => [attr, 0]));
 
     const getCosts = (technique, pushed = false) => {
@@ -475,19 +590,19 @@ export async function kiCast(actor) {
         return totals;
     };
 
-    const getUnifiedCost = costs =>
-        KI_ATTRIBUTES.reduce((total, attr) => total + costs[attr], 0);
-
+    const getUnifiedCost = costs => KI_ATTRIBUTES.reduce((total, attr) => total + costs[attr], 0);
 
     // Active techniques are hidden.
     // Held techniques always show because their accumulation has already been paid.
-    const techniques = actor.items.filter(item =>
-        item.type === "kiTechnique" &&
-        !item.system.active
-    );
+    const techniques = actor.items
+        .filter(item =>
+            item.type === "kiTechnique" &&
+            !item.system.active
+        )
+        .sort((a, b) => a.sort - b.sort);
 
     if (!techniques.length) {
-        ui.notifications.warn("This actor has no inactive Ki techniques.");
+        ui.notifications.warn(game.i18n.localize("abfalter.noTechniques"));
         return;
     }
 
@@ -499,7 +614,7 @@ export async function kiCast(actor) {
         const costData = KI_ATTRIBUTES
             .filter(attr => costs[attr] > 0)
             .map(attr => ({
-                label: attr.toUpperCase(),
+                label: localizedAttr(attr),
                 value: costs[attr],
                 insufficient:
                     !held &&
@@ -554,8 +669,6 @@ export async function kiCast(actor) {
     const getAccumulationEntries = selected =>
         selected.filter(entry => !entry.held);
 
-    // Anything being Cast pays activation Ki.
-    // This includes techniques being activated from Hold.
     const getActivationEntries = selected =>
         selected.filter(entry => entry.mode === "cast");
 
@@ -605,7 +718,7 @@ export async function kiCast(actor) {
             .map(attr => {
                 const current = actor.system.kiPool[attr]?.current ?? 0;
                 const remaining = current - accumCosts[attr];
-                return `${attr.toUpperCase()} ${formatRemaining(remaining)}`;
+                return `${localizedAttr(attr)} ${formatRemaining(remaining)}`;
             });
 
         let actualParts;
@@ -616,7 +729,7 @@ export async function kiCast(actor) {
             const remaining = current - cost;
 
             actualParts = cost > 0
-                ? [`Unified ${formatRemaining(remaining)}`]
+                ? [`${game.i18n.localize("abfalter.unified")} ${formatRemaining(remaining)}`]
                 : [];
         } else {
             actualParts = KI_ATTRIBUTES
@@ -624,7 +737,7 @@ export async function kiCast(actor) {
                 .map(attr => {
                     const current = actor.system.kiPool[attr]?.actual ?? 0;
                     const remaining = current - actualCosts[attr];
-                    return `${attr.toUpperCase()} ${formatRemaining(remaining)}`;
+                    return `${localizedAttr(attr)} ${formatRemaining(remaining)}`;
                 });
         }
 
@@ -637,13 +750,13 @@ export async function kiCast(actor) {
         if (accumResult) {
             accumResult.innerHTML = accumParts.length
                 ? accumParts.join(" / ")
-                : "No change";
+                : `${game.i18n.localize("abfalter.noChange")}`;
         }
 
         if (actualResult) {
             actualResult.innerHTML = actualParts.length
                 ? actualParts.join(" / ")
-                : "No change";
+                : `${game.i18n.localize("abfalter.noChange")}`;
         }
 
         const enoughAccum = canPayAccumulation(selected);
@@ -689,7 +802,7 @@ export async function kiCast(actor) {
     }
 
     const dialog = new KiCastDialog({
-        window: { title: `${actor.name} - Ki Techniques` },
+        window: { title: `${actor.name} - ${game.i18n.localize("abfalter.kiTechnique")}` },
         position: { width: 525 },
         classes: ["baseAbfalterV2", "kiCastDialog"],
         content,
@@ -702,17 +815,17 @@ export async function kiCast(actor) {
                     const selected = readSelection(dlg.element);
 
                     if (!selected.length) {
-                        ui.notifications.warn("No Ki techniques selected.");
+                        ui.notifications.warn(game.i18n.localize("abfalter.noSelection"));
                         return false;
                     }
 
                     if (!canPayAccumulation(selected)) {
-                        ui.notifications.error("You do not have enough accumulated Ki.");
+                        ui.notifications.warn(game.i18n.localize("abfalter.notEnoughAccum"));
                         return false;
                     }
 
                     if (!canPayActual(selected)) {
-                        ui.notifications.error("You do not have enough Ki reserve.");
+                        ui.notifications.warn(game.i18n.localize("abfalter.notEnoughReserve"));
                         return false;
                     }
 

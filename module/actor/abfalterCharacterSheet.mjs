@@ -200,7 +200,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 context.kiFrequencyObjList = CONFIG.abfalter.kiFrequencyDropdown;
                 context.kiActionTypeObjList = CONFIG.abfalter.kiActionTypeDropdown;
                 context.limitsObjList = CONFIG.abfalter.LimitsDropdown;
-                context.kiRecoveryList = CONFIG.abfalter.kiRecoveryDropdown;
                 context.kiAttributes = [
                     ["agi", "Agility"],
                     ["dex", "Dexterity"],
@@ -225,6 +224,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
                 context.openRollLimitsList = CONFIG.abfalter.openRollLimitsDropdown;
                 context.rollSpeakerTypeList = CONFIG.abfalter.rollSpeakerTypeDropdown;
                 context.kiAccuTypeList = CONFIG.abfalter.kiAccuTypeDropdown;
+                context.kiRecoveryList = CONFIG.abfalter.kiRecoveryDropdown;
                 break;
         }
 
@@ -646,10 +646,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
 
     static async #toggleMasterBonus(ev) {
         const selected = ev.target.dataset.bonus;
-        console.log(selected)
         const current = this.actor.system.fistDamage.masterBonusSelected;
-        console.log(current)
-
 
         await this.document.update({
             "system.fistDamage.masterBonusSelected": current === selected ? "none" : selected
@@ -731,7 +728,13 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             case "weaponAttack":
                 diceFunctions.offensiveDialogue({actor: this.actor, offLabel: dataset.label, value: dataset.value, weaponId: dataset.id});
                 break;
-
+            case "secondaryRoll":
+                let localLabel = game.i18n.localize("abfalter." + dataset.type);
+                diceFunctions.secondaryDialogue({actor: this.actor, label: localLabel, value: dataset.value});
+                break;
+            case "customSecondaryRoll":
+                diceFunctions.secondaryDialogue({actor: this.actor, label: dataset.type, value: dataset.value});
+                break;
 
 
             case "offPsyProj":
@@ -891,6 +894,20 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         }
         app?.render(true);
     }
+
+    static #openDpCostCalc(ev) {
+        ev.preventDefault();
+
+        const classItems = this.actor.items.filter(item => item.type === "class");
+        if (classItems.length > 1) {
+            ui.notifications.error(game.i18n.localize('abfalter.multiClassError'));
+            console.error(game.i18n.localize('abfalter.multiClassError'));
+            return;
+        }
+        const classItem = classItems[0];
+        actorFunctions.calculateDpCost(this.actor, classItem._id);
+    }
+    
     static #handleKiButton(ev) {
         ev.preventDefault();
         ev.stopPropagation();
@@ -1010,18 +1027,7 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         item.update({ [label]: ability, 'system.ranged.magSize': value });
     }
 
-    static #openDpCostCalc(ev) {
-        ev.preventDefault();
 
-        const classItems = this.actor.items.filter(item => item.type === "class");
-        if (classItems.length > 1) {
-            ui.notifications.error(game.i18n.localize('abfalter.multiClassError'));
-            console.error(game.i18n.localize('abfalter.multiClassError'));
-            return;
-        }
-        const classItem = classItems[0];
-        actorFunctions.calculateDpCost(this.actor, classItem._id);
-    }
 
     static #openRestWindow(ev) {
         ev.preventDefault();

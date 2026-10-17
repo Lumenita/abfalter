@@ -110,5 +110,42 @@
             </div>
         </div>
 
+        <div class="dpCostStatscontainer"> 
+            <h6>
+                {{localize "abfalter.greenNats"}}
+                <span class="{{#if naturalBonuses.warningGreen}}fumbleRoll{{/if}}"> {{naturalBonuses.green}} / {{naturalBonuses.maxGreen}} </span>
+            </h6>
+            <div class="dpCostContainer">
+                {{#each naturalBonuses.greenEntries}}
+                    <div>{{name}}: {{value}}</div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="dpCostStatscontainer"> 
+            <h6>
+                {{localize "abfalter.blueNats"}} 
+                <span class="{{#if naturalBonuses.warningBlue}}fumbleRoll{{/if}}"> {{naturalBonuses.blue}} / {{naturalBonuses.maxBlue}} </span>
+            </h6>
+            <div class="dpCostContainer">
+                {{#each naturalBonuses.blueEntries}}
+                    <div>{{name}}: {{value}}</div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="dpCostStatscontainer"> 
+            <h6>
+                {{localize "abfalter.naturalBonuses"}} 
+                <span class="{{#if naturalBonuses.warningNatural}}fumbleRoll{{/if}}"> {{naturalBonuses.natural}} / {{naturalBonuses.maxNatural}} </span>
+            </h6>
+            <div class="dpCostContainer">
+                {{#each naturalBonuses.naturalEntries}}
+                    <div class="{{#if warning}}fumbleRoll{{/if}}">
+                        {{name}}: +{{value}}
+                    </div>
+                {{/each}}
+            </div>
+        </div>
     </div>
 </form>

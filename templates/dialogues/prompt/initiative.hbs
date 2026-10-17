@@ -1,24 +1,22 @@
 <form>
     {{#if showKiOptions}}
-    <hr>
-
     <div class="form-group">
-        <label>Ki Accumulation</label>
+        <label>{{localize "abfalter.kiAccumulation"}}</label>
         <select name="kiAmount">
-            <option value="full">Full Accumulation</option>
-            <option value="half">Half Accumulation</option>
+            <option value="full">{{localize "abfalter.fullAccu"}}</option>
+            <option value="half">{{localize "abfalter.halfAccu"}}</option>
         </select>
     </div>
 
     <div class="form-group">
         <label>
             <input type="checkbox" name="removeHalf">
-            Remove Half Accumulation from Last Turn
+            {{localize "abfalter.removeHalfAccu"}}
         </label>
     </div>
     {{/if}}
 
-    <div class="form-group">
+    <div class="abfDivFormat form-group">
         <label>{{content}}</label>
         <input id="dialog-input"
                type="number"

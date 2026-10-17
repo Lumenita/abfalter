@@ -162,6 +162,11 @@ export default class abfalterItem extends Item {
     }
 
     /* ------------ Ki Items  ------------- */
+    prepareArsMagnus() {
+        this.system.descTag = `${game.i18n.localize('abfalter.dp')}: ${this.system.dp}`;
+        this.system.descTag += ` · ${game.i18n.localize('abfalter.mk')}: ${this.system.mk}`;
+    }
+
     prepareMartialArt() {
         const system = this.system;
         const MARTIAL_ART_COSTS = {
@@ -187,53 +192,78 @@ export default class abfalterItem extends Item {
         const degreeIndex = Math.max(0, degreeOrder.indexOf(system.degree));
 
         // DP cost
-            let totalCost = 0;
+        let totalCost = 0;
 
-            for (let i = 0; i <= degreeIndex; i++) {
-                const cost = MARTIAL_ART_COSTS[category][degreeOrder[i]];
-                totalCost += system.tao ? cost.tao : cost.normal;
-            }
+        for (let i = 0; i <= degreeIndex; i++) {
+            const cost = MARTIAL_ART_COSTS[category][degreeOrder[i]];
+            totalCost += system.tao ? cost.tao : cost.normal;
+        }
 
-            if (system.firstPurchase) totalCost = Math.floor(totalCost / 2);
+        if (system.firstPurchase) totalCost = Math.floor(totalCost / 2);
 
-            system.finalDp = Math.max(0, totalCost + (system.costModifier ?? 0));
+        system.finalDp = Math.max(0, totalCost + (system.costModifier ?? 0));
 
-            // Calculate bonuses
-            const bonuses = {
-                bonusAtk: 0,
-                bonusBlk: 0,
-                bonusDod: 0,
-                bonusMK: 0,
-                masterAtk: 0,
-                masterBlk: 0,
-                masterDod: 0
-            };
+        // Calculate bonuses
+        const bonuses = {
+            bonusAtk: 0,
+            bonusBlk: 0,
+            bonusDod: 0,
+            bonusMK: 0,
+            masterAtk: 0,
+            masterBlk: 0,
+            masterDod: 0
+        };
 
-            const degrees = category === "basic"
-                ? system.baseDegrees
-                : system.advDegrees;
+        const degrees = category === "basic"
+            ? system.baseDegrees
+            : system.advDegrees;
 
-            for (let i = 0; i <= degreeIndex; i++) {
-                const degree = degrees?.[degreeOrder[i]];
-                if (!degree) continue;
-                // Regular bonuses stack
-                bonuses.bonusAtk += Number(degree.bonusAtk ?? 0);
-                bonuses.bonusBlk += Number(degree.bonusBlk ?? 0);
-                bonuses.bonusDod += Number(degree.bonusDod ?? 0);
-                bonuses.bonusMK += Number(degree.bonusMK ?? 0);
+        for (let i = 0; i <= degreeIndex; i++) {
+            const degree = degrees?.[degreeOrder[i]];
+            if (!degree) continue;
+            // Regular bonuses stack
+            bonuses.bonusAtk += Number(degree.bonusAtk ?? 0);
+            bonuses.bonusBlk += Number(degree.bonusBlk ?? 0);
+            bonuses.bonusDod += Number(degree.bonusDod ?? 0);
+            bonuses.bonusMK += Number(degree.bonusMK ?? 0);
 
-                // Mastery bonuses use highest value
-                bonuses.masterAtk = Math.max(bonuses.masterAtk, Number(degree.masterAtk ?? 0));
-                bonuses.masterBlk = Math.max(bonuses.masterBlk, Number(degree.masterBlk ?? 0));
-                bonuses.masterDod = Math.max(bonuses.masterDod, Number(degree.masterDod ?? 0));
-            }
+            // Mastery bonuses use highest value
+            bonuses.masterAtk = Math.max(bonuses.masterAtk, Number(degree.masterAtk ?? 0));
+            bonuses.masterBlk = Math.max(bonuses.masterBlk, Number(degree.masterBlk ?? 0));
+            bonuses.masterDod = Math.max(bonuses.masterDod, Number(degree.masterDod ?? 0));
+        }
 
-            Object.assign(system, bonuses);
+        Object.assign(system, bonuses);
+
+        this.system.descTag = `${game.i18n.localize('abfalter.' + this.system.category)}`;
+        this.system.descTag += ` · ${game.i18n.localize('abfalter.' + this.system.degree)} ${game.i18n.localize('abfalter.degree')}`;
     }
 
     prepareKiSealCreature() {
-        this.system.showSeals = this.system.expand || this.system.alwaysSeals;
-        this.system.showDesc = this.system.expand || this.system.alwaysDesc;
+        const system = this.system;
+
+        system.showSeals = system.expand || system.alwaysSeals;
+        system.showDesc = system.expand || system.alwaysDesc;
+
+        const localize = key => game.i18n.localize(`abfalter.${key}`);
+
+        const seals = [];
+
+        for (const [type, values] of Object.entries({
+            minor: system.minor,
+            major: system.major
+        })) {
+            for (const [element, amount] of Object.entries(values)) {
+                if (amount > 0) {
+                    seals.push(`${localize(type)} ${localize(`seal${element.charAt(0).toUpperCase() + element.slice(1)}`)}: ${amount}`);
+                }
+            }
+        }
+
+        system.descTag = [
+            `${localize("level")}: ${system.level}`,
+            ...seals
+        ].join(" · ");
     }
 
     prepareKiTechnique() {
@@ -984,11 +1014,6 @@ export default class abfalterItem extends Item {
         }
     }
 
-
-
-
-
-
     /* ---------- Other Items  ---------- */
     prepareElan() {
         for (let [key, gift] of Object.entries(this.system.gifts)) {
@@ -1087,14 +1112,17 @@ export default class abfalterItem extends Item {
     }
 
     chatTemplate = {
-        "spell": "systems/abfalter/templates/chatItem/spellChat.html",
-        "psychicMatrix": "systems/abfalter/templates/chatItem/psyMatrixChat.hbs",
-        "kiSealCreature": "systems/abfalter/templates/chatItem/kiSealChat.html",
-        "kiTechnique": "systems/abfalter/templates/chatItem/kitechChat.hbs",
         "weapon": "systems/abfalter/templates/chatItem/weaponChat.hbs",
         "armor": "systems/abfalter/templates/chatItem/equipmentChat.hbs",
         "ammo": "systems/abfalter/templates/chatItem/consumableChat.hbs",
         "inventory": "systems/abfalter/templates/chatItem/lootChat.hbs",
+        "arsMagnus": "systems/abfalter/templates/chatItem/arsMagnusChat.hbs",
+        "martialArt": "systems/abfalter/templates/chatItem/martialArtChat.hbs",
+        "kiSealCreature": "systems/abfalter/templates/chatItem/kiSealChat.hbs",
+        "kiTechnique": "systems/abfalter/templates/chatItem/kitechChat.hbs",
+        "psychicMatrix": "systems/abfalter/templates/chatItem/psyMatrixChat.hbs",
+
+        "spell": "systems/abfalter/templates/chatItem/spellChat.hbs",
     }
 
     async roll(label) {
@@ -1103,30 +1131,17 @@ export default class abfalterItem extends Item {
             ...this,
             owner: this.actor.id,
         };
-        cardData.actorName = this.actor.name;
-        cardData.actorImg = this.actor.prototypeToken.texture.src;
-        cardData.descToggle = false;
-        cardData.type = this.type;
+        
+        cardData.basicInfo = {
+            portrait: this.actor.prototypeToken.texture.src,
+            name: this.actor.name,
+            userName: game.user.isGM ? game.i18n.localize("abfalter.gm") : game.user.name
+        }
 
+        cardData.type = this.type;
 
         //Specialized attributes per item
         switch (this.type) {
-            case "psychicMatrix":
-                cardData.expand = true;
-                cardData.diff = "";
-                cardData.tag = this.system.descTag;
-                cardData.effect;
-                cardData.effect20 = this.system.matrixDetails.effect20.enrichedDesc;
-                cardData.effect40 = this.system.matrixDetails.effect40.enrichedDesc;
-                cardData.effect80 = this.system.matrixDetails.effect80.enrichedDesc;
-                cardData.effect120 = this.system.matrixDetails.effect120.enrichedDesc;
-                cardData.effect140 = this.system.matrixDetails.effect140.enrichedDesc;
-                cardData.effect180 = this.system.matrixDetails.effect180.enrichedDesc;
-                cardData.effect240 = this.system.matrixDetails.effect240.enrichedDesc;
-                cardData.effect280 = this.system.matrixDetails.effect280.enrichedDesc;
-                cardData.effect320 = this.system.matrixDetails.effect320.enrichedDesc;
-                cardData.effect440 = this.system.matrixDetails.effect440.enrichedDesc;
-                break;
             case "spell":
                 switch (label) {
                     case "basic":
@@ -1146,45 +1161,62 @@ export default class abfalterItem extends Item {
                         break;
                 }
                 break;
+            case "psychicMatrix":
+                cardData.expand = true;
+                cardData.diff = "";
+                cardData.effect = "";
+                cardData.infoLine = "";
+                cardData.tag = this.system.descTag;
+                cardData.difficulties = [
+                    20, 40, 80, 120, 140,
+                    180, 240, 280, 320, 440
+                ];
+
+                cardData.matrixEffects = {};
+
+                for (const difficulty of [20, 40, 80, 120, 140, 180, 240, 280, 320, 440]) {
+                    const effect = this.system.matrixDetails[`effect${difficulty}`];
+
+                    cardData.matrixEffects[difficulty] = {
+                        description: effect.description ?? "",
+                        infoLine: effect.infoLine ?? ""
+                    };
+                }
+                break;
             case "kiTechnique":
-                cardData.chatDesc = cardData.enrichedDesc;
-                console.log(cardData);
-                if (cardData.system.use.agi == 0) {
-                    cardData.agi = true;
-                }
-                if (cardData.system.use.con == 0) {
-                    cardData.con = true;
-                }
-                if (cardData.system.use.dex == 0) {
-                    cardData.dex = true;
-                }
-                if (cardData.system.use.str == 0) {
-                    cardData.str = true;
-                }
-                if (cardData.system.use.pow == 0) {
-                    cardData.pow = true;
-                }
-                if (cardData.system.use.wp == 0) {
-                    cardData.wp = true;
-                }
+                cardData.kiAttributes = ["agi", "con", "dex", "str", "pow", "wp"]
+                    .filter(attr => cardData.system.use[attr] > 0)
+                    .map(attr => ({
+                        label: game.i18n.localize(`abfalter.${attr}`),
+                        use: cardData.system.use[attr],
+                        maint: cardData.system.maint[attr]
+                    }));
                 break;
             default:
                 break;
         }
 
-        let chatData = {
+        const chatData = {
             user: game.user.id,
             speaker: game.user.id,
-            flags: { cardData }
+            flags: {            
+                abfalter: {
+                    customChatHeaderCard: true,
+                    cardData 
+                } 
+            }
         };
         chatData.content = await foundry.applications.handlebars.renderTemplate(this.chatTemplate[this.type], cardData);
         return ChatMessage.create(chatData);
     }
 
+
+
+
+
     // ---- Legacy Data Coercion for before 1.6.0 ----
     // Deprecated after 1.7.0
     static fromSource(source, options) {
-        // Clone so we don't mutate the passed object
         const s = foundry.utils.duplicate(source);
         const sys = s.system ?? {};
 

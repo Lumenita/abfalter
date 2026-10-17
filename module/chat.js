@@ -23,6 +23,7 @@ export function addChatListeners(chatMessage, html) {
     // Martial
     bindButton("button.offContinuationRoll", diceFunctions.offenseContinuationRollFunction);
     bindButton("button.effectContinuationRoll", diceFunctions.effectContinuationRollFunction);
+    bindButton("button.secondaryContinuationRoll", diceFunctions.secondaryContinuationRollFunction);
     // Defensive
     bindButton("button.defensiveOpenRoll", diceFunctions.defensiveOpenRollFunction);
     bindButton("button.defensiveFumbleRoll", diceFunctions.defensiveFumbleRollFunction);
@@ -177,8 +178,8 @@ async function matrixPrepareEffect(msg, html, ev) {
 async function spellChatUpdate(msg, html, ev) {
     const label = ev.currentTarget.getAttribute("data-label");
 
-    const template = "systems/abfalter/templates/chatItem/spellChat.html";
-    let cardData = msg.flags.cardData
+    const template = "systems/abfalter/templates/chatItem/spellChat.hbs";
+    let cardData = msg.flags.abfalter.cardData
     cardData.expand = false; 
     switch (label) {
         case "basic":
@@ -200,60 +201,53 @@ async function spellChatUpdate(msg, html, ev) {
     game.messages.get(msg._id).update({ content: content});
 }
 
-// Pasychic generic Item to Chat
 async function psychicChatUpdate(msg, html, ev) {
-    const label = ev.currentTarget.getAttribute("data-label");
+    const label = ev.currentTarget.dataset.label;
 
-    const template = "systems/abfalter/templates/chatItem/psyMatrixChat.hbs";
-    let cardData = msg.flags.cardData
-    cardData.expand = false; 
-    switch (label) {
-        case "20":
-            cardData.diff = `${game.i18n.localize(`abfalter.routine`)} (20)`;
-            cardData.effect = cardData.effect20;
-            break;
-        case "40":
-            cardData.diff = `${game.i18n.localize(`abfalter.easy`)} (40)`;
-            cardData.effect = cardData.effect40;
-            break;
-        case "80":
-            cardData.diff = `${game.i18n.localize(`abfalter.average`)} (80)`;
-            cardData.effect = cardData.effect80;
-            break;
-        case "120":
-            cardData.diff = `${game.i18n.localize(`abfalter.difficult`)} (120)`;
-            cardData.effect = cardData.effect120;
-            break;
-        case "140":
-            cardData.diff = `${game.i18n.localize(`abfalter.vDifficult`)} (140)`;
-            cardData.effect = cardData.effect140;
-            break;
-        case "180":
-            cardData.diff = `${game.i18n.localize(`abfalter.absurd`)} (180)`;
-            cardData.effect = cardData.effect180;
-            break;
-        case "240":
-            cardData.diff = `${game.i18n.localize(`abfalter.almostImp`)} (240)`;
-            cardData.effect = cardData.effect240;
-            break;
-        case "280":
-            cardData.diff = `${game.i18n.localize(`abfalter.impossible`)} (280)`;
-            cardData.effect = cardData.effect280;
-            break;
-        case "320":
-            cardData.diff = `${game.i18n.localize(`abfalter.inhuman`)} (320)`;
-            cardData.effect = cardData.effect320;
-            break;
-        case "440":
-            cardData.diff = `${game.i18n.localize(`abfalter.zen`)} (440)`;
-            cardData.effect = cardData.effect440;
-            break;
-        default:
-            break;
+    const difficulties = {
+        20: "routine",
+        40: "easy",
+        80: "average",
+        120: "difficult",
+        140: "vDifficult",
+        180: "absurd",
+        240: "almostImp",
+        280: "impossible",
+        320: "inhuman",
+        440: "zen"
+    };
+
+    if (!Object.hasOwn(difficulties, label)) return;
+
+    const cardData = foundry.utils.deepClone(msg.flags.abfalter.cardData);
+    const effect = cardData.matrixEffects?.[label];
+    console.log(cardData)
+    console.log(effect)
+
+
+    if (!effect) {
+        console.warn(`Psychic Matrix effect${label} not found`, cardData);
+        return;
     }
-    const content = await foundry.applications.handlebars.renderTemplate(template, cardData);
-    game.messages.get(msg._id).update({ content: content });
+
+    cardData.expand = false;
+    cardData.diff = `${game.i18n.localize(`abfalter.${difficulties[label]}`)} (${label})`;
+
+    cardData.effect = effect.description ?? "";
+    cardData.infoLine = effect.infoLine ?? "";
+
+    const content = await foundry.applications.handlebars.renderTemplate(
+        "systems/abfalter/templates/chatItem/psyMatrixChat.hbs",
+        cardData
+    );
+
+    await msg.update({
+        content,
+        "flags.abfalter.cardData": cardData
+    });
 }
+
+
 
 //Function for when defense button is clicked from an attack
 async function defendButtonClicked(msg, html, ev) {

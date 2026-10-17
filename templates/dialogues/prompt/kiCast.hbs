@@ -1,20 +1,20 @@
-<form class="flexcol kiCastForm">
+<form class="flexcol">
     <div class="kiCastTechniques">
         {{#each techniques}}
         <div class="kiCastTechnique" data-technique-id="{{id}}">
             <input type="checkbox" class="kiCastSelect" data-technique-id="{{id}}">
 
             <div class="kiCastTechniqueInfo">
-                <strong>
-                    {{name}}{{#if held}} (On Hold){{/if}}
-                </strong>
+                <span>
+                    {{name}}{{#if held}} ({{localize "abfalter.onHold"}}){{/if}}
+                </span>
 
                 <div class="kiCastTechniqueCost">
                     {{#each costs}}
-                        <span class="{{#if insufficient}}kiCostInsufficient{{/if}}">
-                            {{label}} {{value}}
-                        </span>
-                        {{#unless @last}} / {{/unless}}
+                    <span class="{{#if insufficient}}kiCostInsufficient{{/if}}">
+                        {{label}} {{value}}
+                    </span>
+                    {{#unless @last}} / {{/unless}}
                     {{/each}}
                 </div>
             </div>
@@ -22,15 +22,15 @@
             <div class="kiCastPushContainer">
                 {{#if held}}
                 {{#if heldPushed}}
-                <strong class="kiCastPushed">
-                    PUSHED
-                </strong>
+                <span class="kiCastPushed">
+                    {{localize "abfalter.pushedCap"}}
+                </span>
                 {{/if}}
                 {{else}}
                 {{#if canPush}}
                 <label class="kiCastPushLabel">
                     <input type="checkbox" class="kiCastPush" data-technique-id="{{id}}">
-                    Push
+                    {{localize "abfalter.push"}}
                 </label>
                 {{/if}}
                 {{/if}}
@@ -39,12 +39,12 @@
             <div class="kiCastModeContainer">
                 {{#if held}}
                 <span class="kiCastHeldCast">
-                    Cast
+                    {{localize "abfalter.cast"}}
                 </span>
                 {{else}}
                 <select class="kiCastMode" data-technique-id="{{id}}" disabled>
-                    <option value="cast">Cast</option>
-                    <option value="hold">Hold</option>
+                    <option value="cast">{{localize "abfalter.cast"}}</option>
+                    <option value="hold">{{localize "abfalter.hold"}}</option>
                 </select>
                 {{/if}}
             </div>
@@ -52,24 +52,22 @@
         {{/each}}
     </div>
 
-    <hr>
-
     <div class="kiCastSummary">
-        <strong>Accumulation Result</strong>
-        <div class="kiAccumResult">No change</div>
+        <span>{{localize "abfalter.accuResult"}}</span>
+        <div class="kiAccumResult">{{localize "abfalter.noChange"}}</div>
 
         <div class="kiAccumWarning" style="display:none;">
-            Not enough accumulated Ki.
+            {{localize "abfalter.noAccuKi"}}
         </div>
 
-        <strong style="display:block;margin-top:8px;">
-            Activation Result
-        </strong>
+        <span style="display:block;margin-top:8px;">
+            {{localize "abfalter.activeResult"}}
+        </span>
 
-        <div class="kiActualResult">No change</div>
+        <div class="kiActualResult">{{localize "abfalter.noChange"}}</div>
 
         <div class="kiActualWarning" style="display:none;">
-            Not enough Ki reserve.
+            {{localize "abfalter.noReserveKi"}}
         </div>
     </div>
 

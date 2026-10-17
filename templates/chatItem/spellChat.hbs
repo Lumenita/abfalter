@@ -1,0 +1,92 @@
+{{> "systems/abfalter/templates/dialogues/partials/customChatHeader.hbs"}}
+
+<div class="itemChat baseAbfalterV2">
+    <div class="chatItemContent">
+        <div class="chatItemHeader">
+            <img src="{{img}}"/>
+            <div>
+                <span> {{name}} </span>
+                <div> {{tag}} </div>
+            </div>
+            <a class="descToggle" data-value="{{descToggle}}">
+                <i class="fas fa-chevron-right fa-fw"></i>
+            </a>
+        </div>
+
+        <div class="itemDescription {{#if descToggle}}ItemDescOpen{{/if}}">
+            {{{system.description}}}
+        </div>
+    </div>
+
+    <div class="spellChatInfo">
+        <span> Action: {{system.action}} </span>
+        <span> | </span>
+        <span> Type: {{system.type}} </span>
+        <span> | </span>
+        <span> Proj: {{system.projection}} </span>
+    </div>
+
+    {{#if expand}}
+    <div class="spellChatButtons">
+        <button class="spellDifficulty" data-label="basic"> Basic </button>
+        <button class="spellDifficulty" data-label="int"> Intermidiate </button>
+    </div>
+    <div class="spellChatButtons">
+        <button class="spellDifficulty" data-label="adv"> Advanced </button>
+        <button class="spellDifficulty" data-label="arc"> Arcane </button>
+    </div>
+    {{/if}}
+
+    {{#if basic}}
+    <div class="spellChatDiff">
+        <span> Basic </span>
+        <div>
+            <span> Req: {{system.basic.intReq}}</span>
+            <span> | </span>
+            <span> Cost: {{system.basic.zeonCost}} Zeon </span>
+            <span> | </span>
+            <span> Maint: {{system.basic.maint}} ({{system.maintType}})</span>
+        </div>
+        <span> {{system.basic.rollDesc}} </span>
+    </div>
+    {{/if}}
+    {{#if int}}
+    <div class="spellChatDiff">
+        <span> Intermediate </span>
+        <div>
+            <span> Req: {{system.intermediate.intReq}}</span>
+            <span> | </span>
+            <span> Cost: {{system.intermediate.zeonCost}} Zeon </span>
+            <span> | </span>
+            <span> Maint: {{system.intermediate.maint}} ({{system.maintType}})</span>
+        </div>
+        <span> {{system.intermediate.rollDesc}} </span>
+    </div>
+    {{/if}}
+    {{#if adv}}
+    <div class="spellChatDiff">
+        <span> Advanced </span>
+        <div>
+            <span> Req: {{system.advanced.intReq}}</span>
+            <span> | </span>
+            <span> Cost: {{system.advanced.zeonCost}} Zeon </span>
+            <span> | </span>
+            <span> Maint: {{system.advanced.maint}} ({{system.maintType}})</span>
+        </div>
+        <span> {{system.advanced.rollDesc}} </span>
+    </div>
+    {{/if}}
+    {{#if arc}}
+    <div class="spellChatDiff">
+        <span> Arcane </span>
+        <div>
+            <span> Req: {{system.arcane.intReq}}</span>
+            <span> | </span>
+            <span> Cost: {{system.arcane.zeonCost}} Zeon </span>
+            <span> | </span>
+            <span> Maint: {{system.arcane.maint}} ({{system.maintType}})</span>
+        </div>
+        <span> {{system.arcane.rollDesc}} </span>
+    </div>
+    {{/if}}
+</div>

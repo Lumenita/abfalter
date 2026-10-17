@@ -2325,9 +2325,6 @@ function isEffectRollPendingResolution(rollData) {
  * @param {String} tokenId - has defender token id
  * @returns 
  */
-
-
-
 export async function defendAgainstAttacks({atkDmgType, atkMsgId, tokenId}) {
     return defendAgainstEverything({
         tokenId,
@@ -2349,8 +2346,6 @@ export async function defendAgainstEffects({effectMsgId, tokenId}) {
         resolutionType: "effect"
     });
 }
-
-
 
 
 export async function defendAgainstEverything({tokenId, parentMessageId, armorType, resolutionType}) {
@@ -5107,10 +5102,261 @@ function getMatrixResolutionData({matrixDetails, rollTotal, upcastAmount = 0}) {
     };
 }
 
+export async function secondaryDialogue({actor, label, value}) {
+    const template = "systems/abfalter/templates/dialogues/prompt/secondaryAbility.hbs";
+    let confirmed = false;
+    let finalValue = 0;
+    let finalFormula = "";
+    let fatigueUsed = 0;
+    let baseValue = Number(value);
+    
+    // if (event.shiftKey) {
+    //     console.log('shift key held, skipping defensive dialog.');
+    //     let theFormula = `${defBaseValue}(${game.i18n.localize("abfalter.value")}) + 0(${game.i18n.localize("abfalter.fatigue")}) + 0(${game.i18n.localize("abfalter.mod")}) + 0(${game.i18n.localize("abfalter.multipleDef")})`;
+    //     let theValue = value;
+    //     const weapon = actor.items.get(weaponId);
+    //     let chosenIndex = 0;
+    //     if (defenseType === "weapon" && weapon) {
+    //         chosenIndex = Number(weapon.system.info.lastDefUsed ?? 0);
+    //     }
+    //     const defenseDetails = {
+    //         baseValue: theValue,
+    //         finalValue: theValue,
+    //         formula: theFormula,
+    //         defenseType: defenseType,
+    //         defLabel: defLabel,
+    //         selectedAT: selectedArmorTag,
+    //         profileIndex: chosenIndex,
+    //         weaponId: weaponId,
+    //     };
+    //     defenseRoll({actor, defenseDetails});
+    //     return;
+    // }
+
+    const htmlContent = await foundry.applications.handlebars.renderTemplate(template);
+
+    // Helpers
+    const clearOptions = (el) => {
+        if (el) el.innerHTML = "";
+    };
+    const appendOption = (el, { value, label, selected = false, dataset = {} }) => {
+        if (!el) return;
+        const option = document.createElement("option");
+        option.value = String(value ?? "");
+        option.textContent = label ?? "";
+        if (selected) option.selected = true;
+
+        for (const [key, val] of Object.entries(dataset)) {
+            option.dataset[key] = String(val);
+        }
+
+        el.appendChild(option);
+    };
+
+    const updateFinalValue = (html, dialog) => {
+        const modifierValue = parseInt(html.querySelector('#modifierMod')?.value ?? 0, 10);
+        const fatigueValue = parseInt(html.querySelector('#fatigueDropdown')?.value ?? 0, 10);
+        fatigueUsed = fatigueValue;
+
+        finalValue = baseValue + (fatigueValue * actor.system.settings.fatigueValue) + modifierValue ;
+        finalFormula = `${baseValue}(${game.i18n.localize("abfalter.value")}) + ${fatigueValue * actor.system.settings.fatigueValue}(${game.i18n.localize("abfalter.fatigue")}) + ${modifierValue}(${game.i18n.localize("abfalter.mod")})`;
+
+        updateRollButtonLabel(dialog);
+    };
+    const updateRollButtonLabel = (dialog) => {
+        const root = dialog.element;
+        if (!root) return;
+
+        const rollButton =
+            root.querySelector('[data-action="roll"]') ||
+            root.querySelector('button[data-action="roll"]');
+
+        if (rollButton) {
+            rollButton.textContent = `${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`;
+        }
+    };
+
+    const dialog = new diceDialogV2({
+        window: {
+            title: `${actor.name} - ${label}`
+        },
+        position: {
+            width: 400,
+        },
+        content: htmlContent,
+        classes: ["baseAbfalterV2"],
+        buttons: [
+            {
+                action: "roll",
+                label: `${game.i18n.localize("abfalter.dialogs.roll")}: ${finalValue}`,
+                default: true,
+                callback: () => {
+                    confirmed = true;
+                    return "roll";
+                }
+            },
+            {
+                action: "cancel",
+                label: game.i18n.localize('abfalter.dialogs.cancel'),
+                callback: () => {
+                    confirmed = false;
+                    return "cancel";
+                }
+            }
+        ],
+        onRender: async (html, dialogInstance) => {
+            const modifierInput = html.querySelector('#modifierMod');
+            const fatigueDropdown = html.querySelector('#fatigueDropdown');
+            const fatigueVal = actor.system.fatigue.value;
+            const maxFatigue = actor.system.kiAbility.kiUseOfEne.status ? 5 : 2;
+
+            // Fatigue Dropdown
+            const populateFatigueDropdown = () => {
+                clearOptions(fatigueDropdown);
+                const availableFatigue = Math.min(maxFatigue, fatigueVal);
+                for (let i = 0; i <= availableFatigue; i++) {
+                    appendOption(fatigueDropdown, { 
+                        value: i,
+                        label: String(i),
+                        selected: i === 0
+                    });
+                }
+            };
+            populateFatigueDropdown();
+
+            modifierInput?.addEventListener('input', () => updateFinalValue(html, dialogInstance));
+            fatigueDropdown?.addEventListener('change', () => updateFinalValue(html, dialogInstance));
+            updateFinalValue(html, dialogInstance);
+        },
+        onClose: async (html) => {
+            if (!confirmed) return;
+            await actor.update({ 
+                "system.fatigue.value": Math.floor(actor.system.fatigue.value - fatigueUsed)
+            });
+
+            const secondaryDetails = {
+                baseValue: baseValue,
+                finalValue: finalValue,
+                formula: finalFormula,
+                label: label,
+            };
+            secondaryRoll({actor, secondaryDetails});
+        }
+    });
+    dialog.render({ force: true });
+}
+
+async function secondaryRoll({actor, secondaryDetails}) {
+    const template = "systems/abfalter/templates/dialogues/diceRolls/secondaryAbilityRoll.hbs"
+    let fumbleRange = 3; 
+    let openRange = 90; 
+    let isPredetermined = false;
+    let actionName = "secondary";
+    let secondName = secondaryDetails.label;
+    let num = 0;
+
+    if (secondaryDetails.baseValue > 199 && fumbleRange > 1) {
+        fumbleRange -= 1;
+    }
+
+    const rollResult = await createRoll(actor, secondaryDetails.finalValue, openRange, fumbleRange, isPredetermined);
+    secondaryDetails.formula = `(${rollResult.rolledDice}) + ${secondaryDetails.formula}`;
+    secondaryDetails.typeName = actionName; // Name of the weapon / magic / psychic.
+    secondaryDetails.label = secondName; // Name of profile / defense type
+
+    const rollData = [];
+    rollData[0] = {
+        roll: rollResult.rolledDice, total: rollResult._total, doubles: rollResult.doubles, openRange: rollResult.openRange, fumbleLevel: rollResult.fumbleLevel,
+        fumble: rollResult.fumble, explode: rollResult.explode, color: rollResult.color, formula: secondaryDetails.formula, label: secondaryDetails.label,
+    };
+
+    let basicInfo = {
+        portrait: actor.prototypeToken.texture.src,
+        name: actor.name,
+        userName: game.user.isGM ? game.i18n.localize("abfalter.gm") : game.user.name
+    };
+
+    const content = await foundry.applications.handlebars.renderTemplate(template, { 
+        basicInfo,
+        rollData,
+        actor,
+        secondaryDetails
+    });
+
+    const chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({ actor: actor }),
+        sound: CONFIG.sounds.dice,
+        content: content,
+        rolls: [rollResult],
+        flags: {            
+            abfalter: {
+                customChatHeaderCard: true,
+                basicInfo: basicInfo,
+                secondaryDetails: secondaryDetails,
+                rollData: rollData,
+                num: num
+            } 
+        }
+    };
+
+    const speakerMode = actor.system.rollRange.speaker; // "default" | "public" | "private"
+    let rollMode;
+    switch (speakerMode) {
+        case "public":
+            rollMode = "public";
+            break;
+        case "private":
+            rollMode = "gm";
+            break;
+        default:
+            rollMode = game.settings.get("core", "messageMode");
+    }
+    ChatMessage.applyMode(chatData, rollMode);
+    await ChatMessage.create(chatData);
+}
+
+export async function secondaryContinuationRollFunction(msg, html, event) {
+    const template = "systems/abfalter/templates/dialogues/diceRolls/secondaryAbilityRoll.hbs";
+    const continuationType = event.currentTarget.dataset.rollType;
+    const rollFunction = {
+        open: performOpenRoll,
+        fumble: performFumbleRoll
+    }[continuationType];
+    if (!rollFunction) {
+        throw new Error(
+            `Unknown offensive continuation type: ${continuationType}`
+        );
+    }
+    const { actor, num, rollData } = await rollFunction(msg);
+
+    const content = await foundry.applications.handlebars.renderTemplate(template, {
+        basicInfo: msg.flags.abfalter.basicInfo,
+        rollData,
+        actor,
+        secondaryDetails: msg.flags.abfalter.secondaryDetails
+    });
+
+    await msg.update({
+        content,
+        "flags.abfalter.rollData": rollData,
+        "flags.abfalter.num": num
+    });
+}
 
 
 
 
+
+
+
+
+
+
+
+/** -------- OLD --------
+ * Dialog plain roll
+ */
 
 export async function openModifierDialogue(actorData, finalValue, label, type) {
     const gameCopy = game;
@@ -5126,14 +5372,10 @@ export async function openModifierDialogue(actorData, finalValue, label, type) {
     if (event.shiftKey) {
         console.log('shift key held, skipping attack dialog.');
         switch (type) {
-            case "secondaryRoll":
             case "summoningRoll":
             case "combatRoll":
                 let newLabel = game.i18n.localize("abfalter." + label);
                 plainRoll(null, actorData, finalValue, newLabel);
-                break;
-            case "customSecondaryRoll":
-                plainRoll(null, actorData, finalValue, label);
                 break;
             default:
                 console.log("(Shift Key)Error: No plainRoll type found.");
@@ -5435,6 +5677,9 @@ console.log("Fumble Roll Formula", formula);
         }
     });
 }
+
+
+
 
 /** Opens the trap dialogue for melee weapons.
  * @param {Actor} actor - The actor using the weapon.

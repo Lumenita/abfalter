@@ -1,9 +1,6 @@
-<div class="itemChat baseAbfalterV2">
-    <div class="chatActorHeader">
-        <img src="{{actorImg}}">
-        <span> {{actorName}} </span>
-    </div>
+{{> "systems/abfalter/templates/dialogues/partials/customChatHeader.hbs"}}
 
+<div class="itemChat baseAbfalterV2">
     <div class="chatItemContent">
         <div class="chatItemHeader">
             <img src="{{img}}"/>
@@ -26,21 +23,32 @@
         <h6> {{localize "abfalter.rolledPot"}} </h6>
     </div>
     <div class="psychicChatButtons">
-        <button class="psychicDifficulty" data-label="20"> 20 </button>
-        <button class="psychicDifficulty" data-label="40"> 40 </button>
-        <button class="psychicDifficulty" data-label="80"> 80 </button>
-        <button class="psychicDifficulty" data-label="120"> 120 </button>
-        <button class="psychicDifficulty" data-label="140"> 140 </button>
-        <button class="psychicDifficulty" data-label="180"> 180 </button>
-        <button class="psychicDifficulty" data-label="240"> 240 </button>
-        <button class="psychicDifficulty" data-label="280"> 280 </button>
-        <button class="psychicDifficulty" data-label="320"> 320 </button>
-        <button class="psychicDifficulty" data-label="440"> 440 </button>
+        {{#each difficulties}}
+            <button class="psychicDifficulty"
+                    data-label="{{this}}">
+                {{this}}
+            </button>
+        {{/each}}
     </div>
     {{else}}
-    <div>
-        <h6> {{localize "abfalter.achDiff"}} - {{diff}}</h6>
-        <span> {{localize "abfalter.effect"}}: {{{effect}}} </span>
+    <div class="matrixSuccess">
+        <h6> 
+            {{diff}}
+            <a class="descToggle2" data-value="{{descToggle2}}">
+                <i class="fas fa-chevron-down fa-fw"></i>
+            </a>
+        </h6>
+        <div class="mastrixSuccessDesc">
+            <div class="itemDescription2 {{#if descToggle2}}ItemDescClose{{/if}}">
+                {{{effect}}}
+            </div>
+        </div>
+
+        {{#if infoLine}}
+            <div class="matrixTypeInfo">
+                {{infoLine}}
+            </div>
+        {{/if}}
     </div>
     {{/if}}
 </div>

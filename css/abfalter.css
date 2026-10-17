@@ -1267,7 +1267,7 @@ h6 {
 /* #endregion */
 /* #endregion */
 
-/* #region @Navigation Tabs */
+/* #region @Navigation Tabs @V2 */
 .sheet-tabs > ul > li > .active {
     transform: inherit;
 }
@@ -1321,6 +1321,89 @@ h6 {
     transform: skew(25deg);
     text-shadow: none;
     height: 100%;
+}
+/* #endregion */
+
+/* #region @Shared-Item @Chat */
+.itemChat .chatActorHeader {
+    display: flex;
+    padding: 0 0 7px 0;
+}
+.itemChat .chatActorHeader > img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    min-width: 40px;
+    min-height: 40px;
+    align-self: center;
+}
+.itemChat .chatActorHeader > span {
+    font-size: var(--font-size-18);
+    align-self: center;
+    padding: 0 0 0 3px;
+}
+.itemChat .chatItemContent {
+    border: 1px solid #3f3f3f;
+    border-radius: 5px;
+    padding: 7px;
+}
+.itemChat .chatItemContent .chatItemHeader {
+    display: flex;
+    padding: 0 0 5px 0;
+}
+.itemChat .chatItemContent .chatItemHeader > img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    min-width: 32px;
+    min-height: 32px;
+    align-self: center;
+    border: 1px solid black;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 7px;
+}
+.itemChat .chatItemContent .chatItemHeader > div {
+    display: flex;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    padding: 0 0 0 5px;
+}
+.itemChat .chatItemContent .chatItemHeader > div > span {
+    font-size: var(--font-size-11);
+}
+.itemChat .chatItemContent .chatItemHeader > div > span:first-of-type {
+    font-size: var(--font-size-15);
+    color: black;
+    font-weight: 600;
+}
+.itemChat .chatItemContent .chatItemHeader > a {
+    width: 10%;
+    align-self: center;
+    text-align: center;
+}
+.itemChat .itemDescription {
+    display: none;
+    max-height: 400px;
+    overflow: auto;
+}
+.itemChat .itemDescription.ItemDescOpen {
+    display: block;
+}
+.itemChat a.descToggle.ItemDescOpen i {
+    transform: rotate(90deg);
+}
+.chatItemHeader2 {
+    display: flex;
+    padding: 0 0 5px 0;
+}
+.itemChat .itemDescription2 {
+    display: block;
+}
+.itemChat .itemDescription2.ItemDescClose {
+    display: none;
+}
+.itemChat a.descToggle2.ItemDescClose i {
+    transform: rotate(-90deg);
 }
 /* #endregion */
 
@@ -3216,7 +3299,7 @@ h6 {
         Psychic
     --------------
 */
-/* --- #region @Psychic @V2 --- */
+/* #region @Psychic @V2 --- */
     /* #region Containers @V2 */
     .ppoint,
     .ppotential,
@@ -3517,14 +3600,11 @@ h6 {
         place-content: space-between;
         border-top: 1px solid var(--boxColor);
     }
-    .mentalPattern-item > div:first-of-type {
-        height: 25px;
-    }
     .mentalPattern-item:nth-child(2n) {
         background: var(--itemOffSet);
     }
     .mentalPattern-item > div:nth-of-type(1) {
-        min-height: 20px;
+        min-height: 25px;
         align-items: center;
     }
     .mentalPattern-item > div:nth-of-type(1) > span:first-of-type {
@@ -3622,9 +3702,6 @@ h6 {
     .pMaintPotency > label:nth-of-type(2) > input {
         width: 30%;
     }
-    .maintPower-item > div {
-        height: 25px;
-    }
     .pMaintHeader,
     .maintPower-item > div:first-of-type {
         display: flex;
@@ -3643,7 +3720,7 @@ h6 {
         text-align: center;
     }
     .maintPower-item > div:first-of-type {
-        min-height: 20px;
+        min-height: 25px;
     }
     .maintPower-item > div > span:first-of-type {
         width: 50%;
@@ -3943,7 +4020,7 @@ h6 {
           Ki
     --------------
 */
-/* --- #region @Ki @V2 --- */
+/* #region @Ki @V2 --- */
     /* #region Containers @V2 */
     .kiAbilities {
         width: 33%;
@@ -3968,7 +4045,6 @@ h6 {
     .kiSmallerContainer {
         width: 30%;
     }
-
     /* #endregion */
 
     /* #region @Ki-Abilities @V2 */
@@ -4062,7 +4138,6 @@ h6 {
     .kiAbilities .subKi5 {
         margin-left: 63px;
     }
-
     /* #endregion */
 
     /* #region @Ki-Abilities-Custom @V2 */
@@ -4090,7 +4165,7 @@ h6 {
         width: 70%;
     }
     .kiAbility-item > div > label > input:nth-of-type(2) {
-        height: 25px;
+        min-height: 25px;
         width: 20%;
     }
     .subKiBase {
@@ -4223,15 +4298,6 @@ h6 {
     .kiManage > div > button:last-child {
         margin: 0 0 5px 0;
     }
-    .kiManage .kiManageMaint {
-        display: flex;
-    }
-    .kiManage .kiManageMaint > span {
-        width: 75%
-    }
-    .kiManage .kiManageMaint > input {
-        width: 25%
-    }
     .kiRecovery > div {
         padding: 0 10px;
     }
@@ -4239,13 +4305,10 @@ h6 {
         display: flex;
     }
     .kiRecovery > div > label > span {
-        width: 45%;
-    }
-    .kiRecovery > div > label > div {
-        width: 55%;
+        width: 75%;
     }
     .kiRecovery > div > label > input{
-        width: 55%;
+        width: 25%;
     }
     /* #endregion */
 
@@ -4288,7 +4351,7 @@ h6 {
     }
     .arsMagnus-item > div {
         padding: 0 10px;
-        height: 25px;
+        min-height: 25px;
         align-items: anchor-center;
     }
     .arsMagnus-item > div:first-of-type {
@@ -4347,7 +4410,7 @@ h6 {
     }
     .martialArt-item > div {
         padding: 0 10px;
-        height: 25px;
+        min-height: 25px;
         align-items: anchor-center;
     }
     .martialArt-item > div:first-of-type {
@@ -4474,7 +4537,7 @@ h6 {
     }
     .kiSealCreature-item > div {
         padding: 0 10px;
-        height: 25px;
+        min-height: 25px;
         align-items: anchor-center;
     }
     .kiSealCreature-item > div:first-of-type {
@@ -4629,52 +4692,121 @@ h6 {
     .kiTechGridContent .kiTechGridUnderline {
         border-bottom: 1px dashed var(--boxColor);
     }
-
     /* #endregion */
 
-    /* #region @Ki-Cast @Prompt */
-    .kiCastTechnique {
+    /* #region @ki-Technique @Chat @V2 */
+    .kiTechChat {
+        --ki-label-width: 50px;
+        --ki-cell-width: 35px;
+
+        width: fit-content;
+        max-width: 100%;
+        margin: 4px auto;
+        border: 1px solid #777;
+        border-radius: 3px;
+        overflow: hidden;
+        font-size: 12px;
+        line-height: 1.1;
+    }
+    .kiTechChat .kiChatRow {
+        display: flex;
+        align-items: stretch;
+        min-height: 22px;
+        border-bottom: 1px solid #aaa;
+    }
+    .kiTechChat .kiChatRow:last-child {
+        border-bottom: none;
+    }
+    .kiTechChat .kiChatLabel {
+        box-sizing: border-box;
+        flex: 0 0 var(--ki-label-width);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+        font-weight: bold;
+        border-right: 1px solid #aaa;
+    }
+    .kiTechChat .kiChatTypes {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: var(--ki-cell-width);
+    }
+    .kiTechChat .kiChatTypes > span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px 1px;
+        text-align: center;
+        border-right: 1px solid #aaa;
+    }
+    .kiTechChat .kiChatTypes > span:last-child {
+        border-right: none;
+    }
+    .kiTechChat .kiChatRow:first-child {
+        background: rgba(127, 127, 127, 0.13);
+        font-weight: bold;
+    }
+    .kiTechChat .kiChatUnified {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        padding: 3px 6px;
+        text-align: center;
+        font-weight: bold;
+    }
+    /* #endregion */
+
+    /* #region @Ki-Cast @Prompt @V2 */
+    .kiCastDialog .kiCastTechniques {
+        max-height: 550px;
+        overflow: auto;
+    }
+    .kiCastDialog .kiCastTechnique {
         display: grid;
         grid-template-columns: 5% 1fr 15% 10%;
         gap: 10px;
         align-items: center;
         padding: 7px 0;
     }
-
-    .kiCastTechniqueCost {
+    .kiCastDialog .kiCastTechniqueCost {
         font-size: 0.85em;
         opacity: 0.75;
     }
-
-    .kiCastPushLabel {
+    .kiCastDialog .kiCastPushLabel {
         display: flex;
         align-items: center;
         gap: 6px;
         font-weight: bold;
     }
-
-    .kiCastPushed {
+    .kiCastDialog .kiCastPushed {
         font-weight: bold;
     }
-
-    .kiActivationTitle {
+    .kiCastDialog .kiActivationTitle {
         display: block;
         margin-top: 8px;
     }
-
-    .kiAccumWarning,
-    .kiActualWarning {
+    .kiCastDialog .kiAccumWarning,
+    .kiCastDialog .kiActualWarning {
         color: var(--color-level-error);
         margin-top: 4px;
         font-weight: bold;
     }
-
-    .kiNegative {
+    .kiCastDialog .kiNegative {
         color: var(--color-level-error);
         font-weight: bold;
     }
-    .kiCostInsufficient {
+    .kiCastDialog .kiCostInsufficient {
         color: var(--errorColor);
+    }
+    .kiCastDialog .kiCastSummary {
+        border-top: 1px solid var(--boxColor);
+        padding: 5px 0 0 0;
+        margin: 5px 0 0 0;
+    }
+    .kiCastDialog .kiCastSummary > span {
+        text-decoration: underline;
     }
     /* #endregion */
 
@@ -5690,6 +5822,12 @@ h6 {
     align-self: center;
     font-size: 0px;
 }
+.settingsOptions .settingsSubsection > label > div {
+    width: 30%;
+}
+.settingsOptions .settingsSubsection > label > input {
+    width: 30%;
+}
 .settingsOptions .settingsSubsection > label > span {
     width: 70%;
     text-align: start;
@@ -5874,7 +6012,70 @@ h6 {
 
 /* #endregion */
 
-
+/* #region @dp-calculator @V2 */
+.dpCostCalc {
+    max-height: 650px;
+    overflow: auto;
+}
+.dpCostCalc span {
+    display: grid;
+}
+.dpCostHeader,
+.dpCostMainInfo,
+.dpCostMainInfo > label {
+    display: flex;
+}
+.dpCostHeader > span {
+    font-size: 23px;
+}
+.dpCostHeader > span:nth-of-type(2) {
+    margin-left: 5px;
+    margin-right: 3px;
+}
+.dpCostMainInfo > label > span {
+    font-size: 20px;
+}
+.dpCostMainInfo {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 7px 0;
+}
+.dpCostMainInfo > label {
+    display: flex;
+    width: 48%;
+}
+.dpCostMainInfo > label > span:first-of-type {
+    margin-right: 5px;
+}
+.dpCostMainInfo > label > span:nth-of-type(2) {
+    margin-right: 3px;
+}
+.dpCostStatscontainer > h6 {
+    justify-content: start;
+    border-bottom: 1px solid var(--boxColor);
+    font-size: 20px;
+}
+.dpCostStatscontainer > h6 > span {
+    justify-content: start;
+    font-size: 18px;
+    padding: 0 0 0 7px;
+    align-content: center;
+}
+.dpCostContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+.dpCostContainer > div {
+    width: 33%;
+    box-sizing: border-box;
+    padding: 5px;
+}
+.dpCostContainer > div > span {
+    display: block;
+    text-align: start;
+}
+/* #endregion */
 
 
 
@@ -6084,60 +6285,7 @@ h6 {
 }
 /* #endregion */
 
-/* #region @dp-calculator*/
-.dpCostCalc span {
-    display: grid;
-}
-.dpCostHeader,
-.dpCostMainInfo,
-.dpCostMainInfo > label {
-    display: flex;
-}
-.dpCostHeader > span {
-    font-size: 23px;
-}
-.dpCostHeader > span:nth-of-type(2) {
-    margin-left: 5px;
-    margin-right: 3px;
-}
-.dpCostMainInfo > label > span {
-    font-size: 20px;
-}
-.dpCostMainInfo {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin: 7px 0;
-}
-.dpCostMainInfo > label {
-    display: flex;
-    width: 48%;
-}
-.dpCostMainInfo > label > span:first-of-type {
-    margin-right: 5px;
-}
-.dpCostMainInfo > label > span:nth-of-type(2) {
-    margin-right: 3px;
-}
-.dpCostStatscontainer > h6 {
-    justify-content: start;
-    border-bottom: 1px solid var(--boxColor);
-    font-size: 20px;
-}
-.dpCostContainer {
-    display: flex;
-    flex-wrap: wrap;
-}
-.dpCostContainer > div {
-    width: 33%;
-    box-sizing: border-box;
-    padding: 5px;
-}
-.dpCostContainer > div > span {
-    display: block;
-    text-align: start;
-}
-/* #endregion */
+
 
 /*
     *************
@@ -6476,7 +6624,6 @@ h6 {
 .itemPropertyContainer > div > label {
     display: flex;
     width: 33.3%;
-
 }
 .itemPropertyContainer > div > label > input::before {
     color: var(--color-checkbox-bg);
@@ -6489,6 +6636,7 @@ h6 {
     font-size: var(--font-size-13);
 }
 /* #endregion */
+
 
 /* #region Item-Global-Styles effects-list */
 .itemPage {
@@ -7218,117 +7366,7 @@ h6 {
 }
 /* #endregion */
 
-
-/*
-    **********
-    ----------
-    CHAT ITEMS
-    ----------
-    **********
-*/
-
-/* #region @Shared-Item @Chat */
-.itemChat .chatActorHeader {
-    display: flex;
-    padding: 0 0 7px 0;
-}
-.itemChat .chatActorHeader > img {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    min-width: 40px;
-    min-height: 40px;
-    align-self: center;
-}
-.itemChat .chatActorHeader > span {
-    font-size: var(--font-size-18);
-    align-self: center;
-    padding: 0 0 0 3px;
-}
-.itemChat .chatItemContent {
-    border: 1px solid #3f3f3f;
-    border-radius: 5px;
-    padding: 7px;
-}
-.itemChat .chatItemContent .chatItemHeader {
-    display: flex;
-    padding: 0 0 5px 0;
-}
-.itemChat .chatItemContent .chatItemHeader > img {
-    width: 32px;
-    height: 32px;
-    object-fit: cover;
-    min-width: 32px;
-    min-height: 32px;
-    align-self: center;
-    border: 1px solid black;
-    box-shadow: 0px 0px 5px black;
-    border-radius: 7px;
-}
-.itemChat .chatItemContent .chatItemHeader > div {
-    display: flex;
-    flex-direction: column;
-    width: -webkit-fill-available;
-    padding: 0 0 0 5px;
-}
-.itemChat .chatItemContent .chatItemHeader > div > span {
-    font-size: var(--font-size-11);
-}
-.itemChat .chatItemContent .chatItemHeader > div > span:first-of-type {
-    font-size: var(--font-size-15);
-    color: black;
-    font-weight: 600;
-}
-.itemChat .chatItemContent .chatItemHeader > a {
-    width: 10%;
-    align-self: center;
-    text-align: center;
-}
-.itemChat .itemDescription {
-    display: none;
-}
-.itemChat .itemDescription.ItemDescOpen {
-    display: block;
-}
-.itemChat a.descToggle.ItemDescOpen i {
-    transform: rotate(90deg);
-}
-.chatItemHeader2 {
-    display: flex;
-    padding: 0 0 5px 0;
-}
-.itemChat .itemDescription2 {
-    display: block;
-}
-.itemChat .itemDescription2.ItemDescClose {
-    display: none;
-}
-.itemChat a.descToggle2.ItemDescClose i {
-    transform: rotate(-90deg);
-}
-/* #endregion */
-
-/* #region @Loot-Item @Chat */
-
-/* #endregion */
-
-/* #region @Psychic-Matrix-Item @Chat */
-.psychicChatButtons {
-    display: flex;
-    flex-direction: column;
-}
-.psychicChatButtons > button {
-    width: 40%;
-    align-self: center;
-}
-/* #endregion */
-
-
-
-
-
-
-/* #region @Custom-Armor-Chat */
+/* #region @Defensive @Roll */
 .defenseArmorDisplay {
     display: grid;
     grid-template-rows: auto auto;
@@ -7348,6 +7386,30 @@ h6 {
     padding: 0px;
 }
 /* #endregion */
+
+/*
+    **********
+    ----------
+    CHAT ITEMS
+    ----------
+    **********
+*/
+
+
+/* #region @Psychic-Matrix-Item @Chat */
+.psychicChatButtons {
+    display: flex;
+    flex-direction: column;
+}
+.psychicChatButtons > button {
+    width: 40%;
+    align-self: center;
+}
+/* #endregion */
+
+
+
+
 
 
 
