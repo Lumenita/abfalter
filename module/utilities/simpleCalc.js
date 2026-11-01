@@ -31,9 +31,15 @@
   
     return 0;
   }
+
+  export function calculateCoreExxetDmgPercentage(diff,armorCount) {
+    return Math.floor((diff - 20 - 10 * armorCount) / 10) / 10;
+  }
   
   // Simple Calculator Dialog
   export function openSimpleCalculator() {
+    const combatSettings = game.settings.get('abfalter', "combatSettings");
+
     const content = `
       <style>
         #simple-calc-form .form-group {
@@ -92,7 +98,9 @@
               const counter = Math.floor(Math.abs(diff) / 2);
               resultMessage += `<b>Counterattack Bonus: +${counter}</b>`;
             } else {
-              const damagePercent = calculateDamagePercentage(diff, data.armor);
+              const damagePercent = combatSettings.resDmgFormula 
+                  ? calculateCoreExxetDmgPercentage(diff, data.armor) 
+                  : calculateDamagePercentage(diff, data.armor) ;
               const actualDamage = Math.round(data.damage * damagePercent);
               const losesAction = true;
   

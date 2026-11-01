@@ -24,10 +24,10 @@
     {{#each rollData as |roll i|}}
     <label class="explodeButtons">
         {{#if roll.explode}}
-        <button class="defensiveOpenRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
+        <button class="defensiveContinuationRoll" data-roll-type="open" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
         {{/if}}
         {{#if roll.fumble}}
-        <button class="defensiveFumbleRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
+        <button class="defensiveContinuationRoll" data-roll-type="fumble" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
         {{/if}}
     </label>
     {{/each}}

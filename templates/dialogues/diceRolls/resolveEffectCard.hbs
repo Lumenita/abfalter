@@ -68,12 +68,12 @@
                     <div class="resolveDefenderName">{{defender.name}}</div>
 
                     {{#if defender.requiresResistance}}
-                    <div class="openRoll">
-                        {{localize "abfalter.resistanceRequired"}}
-                    </div>
+                    <button type="button" class="resolveResistanceCheck" data-token-id="{{key}}">
+                        {{localize "abfalter.rollRes"}}
+                    </button>
                     {{else}}
-                    <div class="fumbleRoll">
-                        {{localize "abfalter.effectFailed"}}
+                    <div class="openRoll">
+                        {{localize "abfalter.resisted"}}
                     </div>
                     {{/if}}
                 </div>
@@ -85,55 +85,18 @@
                                 {{localize "abfalter.defense"}}: {{defender.defenseTotal}} |
                             </span>
 
-                            <span class="resolveDefenderStat">
-                                {{localize "abfalter.difference"}}: {{defender.difference}}
-                            </span>
-
                             {{#if ../resolveData.effectDetails.useAT}}
                             <span class="resolveDefenderStat">
-                                | {{localize "abfalter.finalAt"}}: {{defender.effectiveArmor}}
+                                {{localize "abfalter.finalAt"}}: {{defender.effectiveArmor}} | 
                             </span>
                             {{/if}}
-                        </div>
-
-                        <div class="resolveDefenderStatsRow">
+                            
                             <span class="resolveDefenderStat">
-                                {{localize "abfalter.dmgShort"}}: {{defender.hypotheticalDamagePercentage}}%
+                                {{localize "abfalter.diff"}}: {{defender.difference}}
                             </span>
                         </div>
-
-                        {{#if defender.defenseName}}
-                        <div class="resolveDefenderInfoRow">
-                            <span>
-                                {{defender.defenseSubLabel}} ({{defender.defenseName}})
-                            </span>
-                        </div>
-                        {{/if}}
-                    {{/if}}
-
-                    {{#if defender.requiresResistance}}
-                    <div class="resolveDefenderStatsRow">
-                        <span class="resolveDefenderStat">
-                            {{localize "abfalter.resistance"}}: {{defender.resValue}}
-                        </span>
-
-                        <span class="resolveDefenderStat">
-                            |
-                            {{#each defender.resTypeList as |type|}}
-                                {{localize (concat "abfalter." type)}}{{#unless @last}}, {{/unless}}
-                            {{/each}}
-                        </span>
-                    </div>
                     {{/if}}
                 </div>
-
-                {{#if defender.requiresResistance}}
-                <div class="resolveDefenderApplyContainer">
-                    <button type="button" class="resolveResistanceCheck" data-token-id="{{key}}">
-                        {{localize "abfalter.rollResistance"}}
-                    </button>
-                </div>
-                {{/if}}
             </div>
             {{/each}}
         </div>

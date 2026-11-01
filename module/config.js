@@ -1531,3 +1531,9 @@ abfalter.kiRecoveryDropdown = {
     fiveMinute: "abfalter.fiveMinute",
     perMinute: "abfalter.perMinute",
 }
+
+abfalter.eleImmunityDropdown = {
+    heat: "abfalter.heat",
+    cold: "abfalter.cold",
+    ele: "abfalter.ele",
+}

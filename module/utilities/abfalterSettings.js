@@ -4,10 +4,12 @@ export var abfalterSettingsKeys;
     abfalterSettingsKeys["Corrected_Fumble"] = "Corrected_Fumble";
     abfalterSettingsKeys["Use_Meters"] = "Use_Meters";
     abfalterSettingsKeys["Change_Theme"] = "Change_Theme";
+    abfalterSettingsKeys["Hide_Macro_Bar"] = "Hide_Macro_Bar";
     abfalterSettingsKeys["Corrected_OpenRoll"] = "Corrected_OpenRoll";
     abfalterSettingsKeys["Corrected_InitiativeRoll"] = "Corrected_InitiativeRoll";
     abfalterSettingsKeys["MartialArts_UseBonuses"] = "MartialArts_UseBonuses";
     abfalterSettingsKeys["MartialArts_UseMastery"] = "MartialArts_UseMastery";
+    abfalterSettingsKeys["Characteristic_Fumble"] = "Characteristic_Fumble";
 })(abfalterSettingsKeys || (abfalterSettingsKeys = {}));
 export const abfalterSettings = () => {
     game.settings.register("abfalter", "migrationInProgress", {
@@ -97,6 +99,15 @@ export const abfalterSettings = () => {
         default: false,
         type: Boolean
     });
+    game.settings.register('abfalter', abfalterSettingsKeys.Hide_Macro_Bar, {
+        name: game.i18n.localize('abfalter.globalSettings.hideMacroBarName'),
+        hint: game.i18n.localize('abfalter.globalSettings.hideMacroBarDetails'),
+        scope: 'client',
+        config: true,
+        requiresReload: true,
+        default: false,
+        type: Boolean
+    });
     game.settings.register('abfalter', abfalterSettingsKeys.Use_Meters, {
         name: game.i18n.localize('abfalter.globalSettings.meterName'),
         hint: game.i18n.localize('abfalter.globalSettings.meterDetail'),
@@ -133,12 +144,20 @@ export const abfalterSettings = () => {
         default: false,
         type: Boolean
     });
-
+    game.settings.register('abfalter', abfalterSettingsKeys.Characteristic_Fumble, {
+        name: game.i18n.localize('abfalter.globalSettings.charFumble'),
+        hint: game.i18n.localize('abfalter.globalSettings.charFumbleDetails'),
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean
+    });
     game.settings.register('abfalter', abfalterSettingsKeys.MartialArts_UseBonuses, {
         name: game.i18n.localize('abfalter.globalSettings.maUseBonuses'),
         hint: game.i18n.localize('abfalter.globalSettings.maUseBonusesDetails'),
         scope: "world",
         config: true,
+        requiresReload: true,
         default: true,
         type: Boolean
     });
@@ -147,6 +166,7 @@ export const abfalterSettings = () => {
         hint: game.i18n.localize('abfalter.globalSettings.maUseMasteryDetails'),
         scope: "world",
         config: true,
+        requiresReload: true,
         default: true,
         type: Boolean
     });

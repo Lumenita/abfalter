@@ -1,5 +1,6 @@
 import { renderTemplates } from "./renderTemplates.js";
 import { templates } from "./templates.js";
+import { abfalterSettingsKeys } from "./abfalterSettings.js";
 
 const gmMacro = [
     {
@@ -29,6 +30,10 @@ const playerMacro = [
 export const customMacroBar = async () => {
     const gameCopy = game;
     const isGM = gameCopy.user?.isGM;
+    if (game.settings.get("abfalter", abfalterSettingsKeys.Hide_Macro_Bar)) {
+        return;
+    }
+
     const [customHotbarHTML] = await renderTemplates({
         name: templates.CustomHotBar,
         context: { isGM }

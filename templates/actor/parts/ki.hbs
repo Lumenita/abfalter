@@ -1096,14 +1096,27 @@
                     <fieldset class="kiManage">
                         <legend> {{localize "abfalter.kiManage"}} </legend>
                         <div class="abfDivFormat">
-                            <button class="{{#if system.toggles.automaticKi}}kiBought{{/if}}" type="button" data-action="toggleValue" 
-                                    data-label="system.toggles.automaticKi" data-ability="{{system.toggles.automaticKi}}">
+                            <div>
+                                <button class="{{#if system.toggles.automaticKi}}kiBought{{/if}}" type="button" data-action="toggleValue" 
+                                        data-label="system.toggles.automaticKi" data-ability="{{system.toggles.automaticKi}}">
+                                    {{#if system.toggles.automaticKi}}
+                                    <span> {{localize "abfalter.kiAutomatic"}} </span>
+                                    {{else}}
+                                    <span> {{localize "abfalter.manual"}} </span>
+                                    {{/if}}
+                                </button>
                                 {{#if system.toggles.automaticKi}}
-                                <span> {{localize "abfalter.kiAutomatic"}} </span>
-                                {{else}}
-                                <span> {{localize "abfalter.manual"}} </span>
+                                    <button class="{{#if system.toggles.accumulatingKi}}kiBought{{/if}}" type="button" data-action="toggleValue" 
+                                        data-label="system.toggles.accumulatingKi" data-ability="{{system.toggles.accumulatingKi}}">
+                                    {{#if system.toggles.accumulatingKi}}
+                                    <span> {{localize "abfalter.accumulating"}} </span>
+                                    {{else}}
+                                    <span> {{localize "abfalter.standby"}} </span>
+                                    {{/if}}
+                                    </button>
                                 {{/if}}
-                            </button>
+                            </div>
+
                             <span></span>
                             <div>
                                 <button type="button" data-action="kiButton" data-ability="kiRemoveMaint">

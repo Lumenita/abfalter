@@ -75,11 +75,8 @@
                     <label> <span> {{localize "abfalter.temp"}} </span> <input type="number" name="system.pproj.temp" value="{{system.pproj.temp}}" /> </label>
                     {{#if system.toggles.psychicModuleStatus}}
                     <div class="pmodButton">
-                        <!--<button type="button" data-action="abfRollButton" data-label="offPsyProj" data-value="{{system.pproj.atkModule}}">
+                        <button type="button" data-action="abfRollButton" data-label="offPsyProj" data-value="{{system.pproj.atkModule}}">
                             <span> {{localize "abfalter.attack"}}: {{system.pproj.atkModule}} </span>
-                        </button>-->
-                        <button type="button" data-action="plainRoll" data-roll="{{system.pproj.atkModule}}" data-label="offPsyProj" data-type="combatRoll">
-                            <span> {{localize "abfalter.attack"}} </span> <span> {{system.pproj.atkModule}} </span>
                         </button>
                         {{#if system.toggles.psychicDodgeStatus}}
                         <button type="button" data-action="abfRollButton" data-label="defPsyProj" data-value="{{system.pproj.dodModule}}">
@@ -93,10 +90,7 @@
                     </div>
                     {{else}}
                     <div class="pmodButton">
-                        <!--<button type="button" data-action="abfRollButton" data-label="offPsyProj" data-value="{{system.pproj.finalOff}}">
-                            <span> <i class="fas fa-dice-d20"></i> </span>
-                        </button>-->
-                        <button type="button" data-action="plainRoll" data-roll="{{system.pproj.finalOff}}" data-label="offPsyProj" data-type="combatRoll">
+                        <button type="button" data-action="abfRollButton" data-label="offPsyProj" data-value="{{system.pproj.finalOff}}">
                             <span> {{localize "abfalter.offensive"}} </span> <span> {{system.pproj.finalOff}} </span>
                         </button>
                         <button type="button" data-action="abfRollButton" data-label="defPsyProj" data-value="{{system.pproj.finalDef}}">

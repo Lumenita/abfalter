@@ -3555,6 +3555,76 @@ h6 {
         width: 45%
     }
     /* #endregion */
+    
+    /* #region @Projection @Effect @Prompt @V@ */
+    .effectProjPrompt .resRow > label > span {
+        width: 55%;
+    }
+    .effectProjPrompt .resRow > label > input {
+        width: 21%;
+    }
+    .effectProjPrompt .resRow > label > span:nth-of-type(2) {
+        width: 3%;
+        text-align: center;
+    }
+    .effectProjPrompt .resRow > label > span:last-of-type {
+        text-align: center;
+        width: 21%;
+    }
+    .effectProjPrompt > div > label {
+        display: flex;
+    }
+    .effectProjPrompt > div > label > span {
+        width: 55%
+    }
+    .effectProjPrompt > div > label > input, 
+    .effectProjPrompt > div > label > select {
+        width: 45%
+    }
+    .effectProjPrompt > div:last-of-type {
+        border-bottom: 1px dashed var(--boxColor);
+        padding: 3px 0;
+        margin: 3px 0;
+    }
+    /* #endregion */
+
+    /* #region @Projection @General @Prompt @V@ */
+    .psychicProjectionDialog {
+        padding: 0 3%;
+    }
+    .psychicProjectionDialog > label {
+        display: flex;
+    }
+    .psychicProjectionDialog > label > span {
+        width: 40%;
+    }
+    .psychicProjectionDialog > label > select {
+        width: 60%;
+    }
+    .psychicProjectionDialog .projInfoLineSep {
+        border-top: 1px solid var(--boxColor);
+        border-bottom: 1px solid var(--boxColor);
+        padding: 4px 0;
+        margin: 4px 0;
+    }
+    .psychicProjectionDialog > div > label {
+        display: flex;
+    }
+    .psychicProjectionDialog > div > label > span {
+        width: 55%;
+    }
+    .psychicProjectionDialog > div > label > select {
+        width: 45%;
+    }
+    .psychicProjectionDialog > div > label > input {
+        width: 45%;
+    }
+    .psychicProjectionDialog > div:last-of-type {
+        border-top: 1px dashed var(--boxColor);
+        padding: 3px 0;
+        margin: 3px 0;
+    }
+    /* #endregion */
 
     /* #region @Disciplines @V2 */
     .pdisc .discipline-item:nth-child(2n) {
@@ -4813,11 +4883,9 @@ h6 {
 /* #endregion */
 
 /*
-    *************
     -------------
-    ARMORY FORMAT
+        ARMORY 
     -------------
-    *************
 */
 /* #region Containers @v2 */
 .wearArmor, .weightStats, .presenceStats, .currency {
@@ -5561,181 +5629,365 @@ h6 {
     display: flex;
     padding: 2px 10px 2px 10px !important;
 }
+
+.abfalter-ammo-dialog .form-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+}
+
+.abfalter-ammo-dialog .form-footer > button {
+    flex: none;
+    width: 100%;
+    margin: 0;
+    min-height: 30px;
+    height: 30px;
+}
+
+
 /* #endregion */
 
 /* #region Item Weapon Profile */
-.profile {
-    margin: 0px 0 5px 0;
-    border-bottom: 1px solid var(--boxColor);
-    padding: 0 0 5px 0;
+#attack-list.wepProfilesEditor {
+    --wp-border: var(--boxColor);
+    --wp-divider: var(--inputBorder);
+    --wp-text: var(--textColor);
+    --wp-surface: var(--armoryItemBackground);
+    --wp-header: var(--armoryItemHeader);
+    --wp-control: var(--buttonBg);
+    --wp-hover: var(--buttonHover);
+    display: grid;
+    gap: 7px;
+    min-width: 0;
+    color: var(--wp-text);
+    container: wep-editor / inline-size;
 }
-.wepProfileName {
-    display: flex;
-    justify-content: space-between;
+#attack-list, #attack-list * { box-sizing: border-box; }
+#attack-list .wepProfilesHeading h3 {
+    margin: 0;
+    padding: 0 4px 4px;
+    color: var(--wp-border);
+    border-bottom: 1px solid var(--wp-border);
+    font-size: 1rem;
+    font-weight: 600;
 }
-.wepProfileName > span {
-    width: 85%;
+#attack-list .wepProfilesList { display: grid; gap: 6px; min-width: 0; }
+#attack-list .profile {
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    border: 1px solid var(--wp-border);
+    border-radius: 7px;
+    overflow: hidden;
+    background: var(--wp-surface);
 }
-.wepProfileName > input {
-    width: 85%;
+#attack-list .wepProfileName {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 7px;
+    min-height: 36px;
+    padding: 4px 7px;
+    background: var(--wp-header);
 }
-.wepProfileName > a {
-    width: 5%;
+#attack-list .weapon-profile-drag-handle {
+    display: grid;
+    place-items: center;
+    min-width: 22px;
+    min-height: 26px;
+    cursor: grab;
+    color: var(--color-text-alt);
+    user-select: none;
 }
-.wepProfileType {
-    display: flex;
-    width: 99%;
-    justify-content: space-between;
-    margin: 5px 0 0 0;
+#attack-list .weapon-profile-drag-handle:active { cursor: grabbing; }
+#attack-list .wepProfileName > input,
+#attack-list .wepProfileNameText {
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
-.wepProfileType > div > label {
-    display: flex;
+#attack-list .wepProfileName > input {
+    min-height: 26px;
+    padding: 1px 6px;
+    color: var(--wp-text);
+    background: var(--wp-control);
+    border: none;
+    border-bottom: 1px solid var(--wp-divider);
+    border-radius: 2px;
+    text-align: left;
 }
-.wepProfileSelector {
-    width: 40%;
+#attack-list .wepProfileNameText {
+    display: block;
+    padding: 2px 3px;
+    color: var(--color-text-alt);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
-.wepProfileSelector > label > span:first-of-type {
-    width: 40%;
+#attack-list .wepProfileRoleBadge {
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid var(--wp-divider);
+    background: var(--wp-control);
+    color: var(--wp-text);
+    white-space: nowrap;
+    font-size: 0.73rem;
 }
-.wepProfileSelector > label > select {
-    width: 60%;
-}
-.wepProfileStats {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 0 5px 0;
-}
-.wepProfileStats > label {
-    width: 30%;
-    display: flex;
-}
-.wepProfileStats > label:nth-of-type(3n + 1),
-.wepProfileStats > label:nth-of-type(3n + 2) {
-    margin: 0 5% 0 0;
-}
-.wepProfileStats > label > span {
-    width: 40%;
-}
-.wepProfileStats > label > input {
-    width: 27%;
-}
-.wepProfileStats > label > span:nth-of-type(2) {
-    width: 3%;
+#attack-list .wepProfileActions { display: flex; align-items: center; gap: 2px; }
+#attack-list .wepProfileActions > :is(a, button) {
+    display: grid;
+    place-items: center;
+    width: 25px;
+    min-width: 25px;
+    min-height: 25px;
+    margin: 0;
+    padding: 0;
+    color: var(--color-text-alt);
+    background: transparent;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: none;
+    cursor: pointer;
     text-align: center;
 }
-.wepProfileStats > label > span:nth-of-type(3) {
-    width: 27%;
+#attack-list .wepProfileActions > :is(a, button):hover,
+#attack-list .wepProfileActions > :is(a, button):focus-visible {
+    background: var(--wp-hover);
+    outline: 1px solid var(--wp-divider);
+}
+#attack-list .wepProfileContent {
+    display: grid;
+    gap: 7px;
+    padding: 7px 9px 9px;
+    min-width: 0;
+}
+#attack-list .wepProfileType {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0;
+    width: 100%;
+}
+#attack-list .wepProfileType > label {
+    display: flex;
+    justify-content: space-around;
+    gap: 3px;
+    min-width: 0;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+#attack-list .wepProfileNotes > label {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+#attack-list .wepProfileType select {
+    width: 50%;
+    min-width: 0;
+    margin: 0;
+}
+#attack-list .wepProfileSection {
+    min-width: 0;
+    margin: 0;
+    padding: 7px;
+    border: 1px solid var(--wp-divider);
+    border-radius: 5px;
+    background: var(--wp-control);
+}
+#attack-list .wepProfileSection > legend {
+    width: auto;
+    margin: 0;
+    padding: 0 4px;
+    color: var(--wp-text);
+    font-size: 0.84rem;
+    font-weight: 600;
+}
+/* Statistics and behavior panels share the same native disclosure style. */
+#attack-list :is(.wepProfileStatSection, .wepProfileBehavior > details) {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--wp-divider);
+    border-radius: 5px;
+    background: var(--wp-control);
+}
+#attack-list :is(.wepProfileStatSection, .wepProfileBehavior > details) > summary {
+    padding: 6px 9px;
+    color: var(--wp-text);
+    font-size: 0.83rem;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+}
+#attack-list :is(.wepProfileStatSection, .wepProfileBehavior > details)[open] > summary {
+    border-bottom: 1px solid var(--wp-divider);
+}
+#attack-list :is(.wepProfileStatSection, .wepProfileBehavior > details) > summary:hover {
+    background: var(--wp-hover);
+}
+#attack-list .wepProfileStats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px 10px;
+    width: 100%;
+    margin: 0;
+    padding: 8px;
+}
+#attack-list .wepProfileStat {
+    display: grid;
+    grid-template-columns: minmax(58px, 1fr) 62px 6px 48px;
+    gap: 4px;
+    align-items: center;
+    min-width: 0;
+    font-size: 0.78rem;
+    line-height: 1.15;
+}
+#attack-list .wepProfileStatSingle {
+    grid-template-columns: minmax(58px, 1fr) 124px;
+}
+#attack-list .wepProfileStat > span:first-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+#attack-list .wepProfileStat > input {
+    min-width: 0;
+    width: 100%;
+    height: 23px;
+    min-height: 23px;
+    padding: 0 2px;
+    margin: 0;
+    background: var(--wp-control);
+    color: var(--wp-text);
+    border: 0;
+    border-bottom: 1px solid var(--wp-divider);
+    border-radius: 2px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+#attack-list .wepProfileStatDivider { text-align: center; opacity: 0.6; }
+#attack-list .wepProfileStatFinal {
+    display: grid;
+    place-items: center;
+    min-height: 23px;
+    padding: 1px 3px;
+    border-bottom: 1px solid var(--wp-divider);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
     text-align: center;
 }
-.wepProfileBasic {
-    padding: 2px 0;
+#attack-list .wepProfileStatSingle .wepProfileStatDivider,
+#attack-list .wepProfileStatSingle .wepProfileStatFinal { display: none; }
+#attack-list .wepProfileCheckboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 4px;
+    min-width: 0;
 }
-.wepProfileBasic > label,
-.wepProfileBasic > label > label {
+#attack-list .wepProfileCheckboxes > label.prop {
     display: flex;
     align-items: center;
+    gap: 5px;
+    min-width: 0;
+    min-height: 25px;
+    margin: 0;
+    padding: 2px 5px;
+    border: 1px solid var(--wp-divider);
+    border-radius: 4px;
+    background: var(--wp-surface);
+    color: var(--wp-text);
+    font-size: 0.77rem;
+    cursor: pointer;
 }
-.wepProfileBasic > label > button {
-    min-height: 24px;
-    border: none;
-    border-radius: 0;
+#attack-list .wepProfileCheckboxes > label.prop:hover { background: var(--wp-hover); }
+#attack-list .wepProfileCheckboxes input[type="checkbox"],
+#attack-list .wepProfileBehavior input[type="checkbox"] {
+    flex: 0 0 auto;
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    accent-color: var(--armorPen);
 }
-.wepProfileDmgTypeO > label > span {
-    width: 70%;
+#attack-list .wepProfileBehavior { display: grid; gap: 5px; }
+#attack-list .wepProfileBehaviorContent {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+    padding: 8px;
 }
-.wepProfileDmgTypeO > label > div {
-    width: 29%;
+#attack-list .wepProfileCheckRow,
+#attack-list .wepProfileFieldRow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    margin: 0;
+    font-size: 0.8rem;
 }
-.wepProfileVorpalO > label > button:first-of-type {
-    width: 25%;
-    margin: 0 2% 0 0;
+#attack-list .wepProfileFieldRow { justify-content: space-between; }
+#attack-list .wepProfileFieldRow > :is(input, select) {
+    width: min(55%, 155px);
+    min-width: 65px;
+    margin: 0;
 }
-.wepProfileVorpalO > label > label:first-of-type {
-    width: 36%;
-    margin: 0 2% 0 0;
+#attack-list .wepProfileNotes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
 }
-.wepProfileVorpalO > label > label:first-of-type > span {
-    width: 33%;
+#attack-list .wepProfileNotes textarea {
+    min-width: 0;
+    width: 100%;
+    min-height: 56px;
+    resize: vertical;
 }
-.wepProfileVorpalO > label > label:first-of-type > div {
-    width: 67%;
+#attack-list .wepProfileSummary {
+    padding: 2px 12px 5px 36px;
+    font-size: 0.76rem;
+    color: var(--wp-text);
+    opacity: 0.85;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.wepProfileVorpalO > label > label:nth-of-type(2) {
-    width: 35%;
+#attack-list .wepProfileAddActions { display: flex; flex-wrap: wrap; gap: 6px; }
+#attack-list .wepProfileAddActions > button {
+    flex: 1 1 170px;
+    min-height: 28px;
+    margin: 0;
+    border: 1px solid var(--wp-divider);
+    border-radius: 5px;
+    color: var(--wp-text);
+    background: var(--wp-control);
 }
-.wepProfileVorpalO > label > label:nth-of-type(2) > span{
-    width: 80%;
+#attack-list .wepProfileAddActions > button:hover { background: var(--wp-hover); }
+#attack-list .wepProfileAddActions > button i { margin-right: 5px; }
+#attack-list .wepProfileLegacy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding: 8px;
+    border: 1px solid var(--wp-border);
+    border-radius: 5px;
 }
-.wepProfileVorpalO > label > label:nth-of-type(2) > input{
-    width: 20%;
+@container wep-editor (max-width: 640px) {
+    #attack-list .wepProfileStats,
+    #attack-list .wepProfileBehaviorContent { grid-template-columns: minmax(0, 1fr); }
 }
-.wepProfileThrowableO > label > button:first-of-type {
-    width: 25%;
-    margin: 0 2% 0 0;
-}
-.wepProfileThrowableO > label > button:nth-of-type(2) {
-    width: 10%;
-    margin: 0 2% 0 0;
-}
-.wepProfileThrowableO > label > button:nth-of-type(3) {
-    width: 24%;
-    margin: 0 2% 0 0;
-}
-.wepProfileThrowableO > label > label {
-    width: 35%;
-}
-.wepProfileThrowableO > label > label > span {
-    width: 80%;
-}
-.wepProfileThrowableO > label > label > input {
-    width: 20%;
-}
-.wepProfileTrappingO > label > button:first-of-type {
-    width: 25%;
-    margin: 0 2% 0 0;
-}
-.wepProfileTrappingO > label > button:nth-of-type(2) {
-    width: 20%;
-    margin: 0 18% 0 0;
-}
-.wepProfileTrappingO > label > label {
-    width: 35%;
-}
-.wepProfileTrappingO > label > label > span {
-    width: 80%;
-}
-.wepProfileTrappingO > label > label > input {
-    width: 20%;
-}
-.wepProfileAmmunitionO > label > span:first-of-type {
-    width: 25%;
-    margin: 0 2% 0 0;
-    text-align: center;
-}
-.wepProfileAmmunitionO > label > button:nth-of-type(1) {
-    width: 10%;
-    margin: 0 2% 0 0;
-}
-.wepProfileAmmunitionO > label > button:nth-of-type(2) {
-    width: 24%;
-    margin: 0 2% 0 0;
-}
-.wepProfileAmmunitionO > label > label {
-    width: 35%;
-}
-.wepProfileAmmunitionO > label > label > span {
-    width: 80%;
-}
-.wepProfileAmmunitionO > label > label > input {
-    width: 20%;
-}
-.wepProfileNotesO > label:first-of-type {
-    margin: 0 0 3px 0;
-}
-.wepProfileNotesO > label > span {
-    width: 20%;
+@container wep-editor (max-width: 440px) {
+    #attack-list .wepProfileName { grid-template-columns: 22px minmax(0, 1fr) auto; gap: 4px; }
+    #attack-list .wepProfileRoleBadge { display: none; }
+    #attack-list .wepProfileType,
+    #attack-list .wepProfileNotes { grid-template-columns: minmax(0, 1fr); }
 }
 /* #endregion */
+
 
 
 
@@ -5746,6 +5998,7 @@ h6 {
     ---------------
     ***************
 */
+
 /* #region Bio & Info @v2 */
 .bio {
     margin: 5px 3px 0 0;

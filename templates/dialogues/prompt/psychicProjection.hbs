@@ -1,0 +1,42 @@
+<form>
+  <body>
+    <div class="abfDivFormat psychicProjectionDialog">
+        <label>
+            <span>{{localize "abfalter.psyProj"}}</span>
+            <select id="projectionMode" aria-label="{{localize 'abfalter.psyProj'}}">
+                <option value="generic">{{localize "abfalter.genericProjection"}}</option>
+                <option value="attack">{{localize "abfalter.attack"}}</option>
+                <option value="effect">{{localize "abfalter.effect"}}</option>
+            </select>
+        </label>
+        <label id="projectionMatrixRow">
+            <span>{{localize "abfalter.psychicMatrix"}}</span>
+            <select id="projectionMatrix" aria-label="{{localize 'abfalter.psychicMatrix'}}"></select>
+        </label>
+        <label id="projectionLevelRow">
+            <span>{{localize "abfalter.projectionSuccessLevel"}}</span>
+            <select id="projectionLevel" aria-label="{{localize 'abfalter.projectionSuccessLevel'}}"></select>
+        </label>
+        <label id="projectionDamageTypeRow">
+            <span>{{localize "abfalter.dmgType"}}</span>
+            <select id="projectionDamageType"></select>
+        </label>
+        <div class="projInfoLineSep" id="projectionMatrixInfo"></div>
+        <div>
+            <label>
+                <span>{{localize "abfalter.pp"}}</span>
+                <select id="projectionPP"></select>
+            </label>
+            <label>
+                <span>{{localize "abfalter.action"}}</span>
+                <select id="projectionAction"></select>
+            </label>
+            <label>
+                <span>{{localize "abfalter.mod"}}</span>
+                <input id="projectionMod" type="number" value="0" step="5" />
+            </label>
+        </div>
+        <div id="projectionTargetSummary"></div>
+    </div>
+  </body>
+</form>

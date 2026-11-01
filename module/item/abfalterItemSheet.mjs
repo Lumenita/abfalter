@@ -1,3 +1,5 @@
+import { ammoMode, loadedCount, loadWeaponAmmo, unloadWeaponAmmo, sortedProfileIds, profileSortUpdate } from "../utilities/weapon-system.js";
+import { genericDialogs } from "../dialogs.js";
 import { abfalterSettingsKeys } from "../utilities/abfalterSettings.js";
 
 const { sheets, ux } = foundry.applications;
@@ -25,6 +27,10 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
             itemToggleEachValue: this.#itemToggleEachValue, // Toggles values within #each handlebar
             kiAbilityToggle: this.#kiAbilityToggle,
             addWepAtk: this.#addWepAtk,
+            moveWepAtk: this.#moveWepAtk,
+            migrateWepProfiles: this.#migrateWepProfiles,
+            loadWeaponAmmo: this.#loadWeaponAmmo,
+            unloadWeaponAmmo: this.#unloadWeaponAmmo,
             removeWepAtk: this.#removeWepAtk,
             wepAtkToggle: this.#atkToggle,
             addElanGift: this.#addElanGift,
@@ -161,7 +167,53 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
     }
 
 
+    /**
+     * V13 form submissions must supply actual Number values to schema NumberFields.
+     * A missing data-dtype, a blank HTML number input, or duplicate legacy
+     * weapon-detail controls can otherwise make an unrelated form change fail.
+     * Keep this narrow: normalize only the ranged capacity field used
+     * by the Profiles tab, and preserve the current value for invalid inputs.
+     */
+    _processFormData(event, form, formData) {
+        const data = super._processFormData(event, form, formData);
+        if (this.item.type !== "weapon" || !data.system?.ranged) return data;
+
+        const ranged = data.system.ranged;
+        const current = this.document.system.ranged;
+        const has = key => Object.prototype.hasOwnProperty.call(ranged, key);
+
+        if (has("magSizeMax")) {
+            // Prefer our Profiles tab field if an older details template has
+            // another input with the same name.
+            const input = form.querySelector('.wepAmmoManagement [name="system.ranged.magSizeMax"]');
+            const raw = input ? input.value : ranged.magSizeMax;
+            const capacity = raw === "" || raw == null ? NaN : Number(raw);
+            ranged.magSizeMax = Number.isFinite(capacity) && capacity >= 1
+                ? Math.floor(capacity)
+                : Math.max(1, Math.floor(Number(current.magSizeMax)) || 1);
+        }
+        return data;
+    }
+
     async _prepareContext(options) {
+        // DataModel.migrateData upgrades v1 overrides in memory. Persist the
+        // converted single-field values before the player edits the sheet;
+        // otherwise an old saved replacement-base could be added again on
+        // the next render if the underlying document source is still v1.
+        if (this.item.type === "weapon" &&
+            Number(this.document._source?.system?.profilesVersion) === 1 &&
+            Number(this.document.system.profilesVersion) === 2 &&
+            !this._savingWeaponProfilesV2) {
+            this._savingWeaponProfilesV2 = true;
+            try {
+                await this.document.update({
+                    "system.attacks": foundry.utils.deepClone(this.document.system.attacks),
+                    "system.profilesVersion": 2
+                });
+            } finally {
+                this._savingWeaponProfilesV2 = false;
+            }
+        }
         const context = await super._prepareContext(options);
 
         context.item = this.item;
@@ -263,6 +315,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 context.psyTypeObjList = CONFIG.abfalter.psyTypeDropdown;
                 context.actionObjList = CONFIG.abfalter.ActionDropdown;
                 context.yesnoObjList = CONFIG.abfalter.yesnoDropdown;
+                context.eleImmunityObjList = CONFIG.abfalter.eleImmunityDropdown;
                 context.matrixLevelObjList = {
                     1: "1",
                     2: "2",
@@ -334,7 +387,6 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 context.enrichedDesc = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.item.system.description ?? "",
                     { async: true }
                 );
-
                 context.weightList = CONFIG.abfalter.weightDropdown;
                 context.distanceLongList = CONFIG.abfalter.distanceLongDropdown;
                 context.wepProfileAtkTypeList = CONFIG.abfalter.wepProfileAtkTypeDropdown;
@@ -343,7 +395,26 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
                 context.damageModObjList = CONFIG.abfalter.damageModDropdown;
                 context.wepDamageTypeObjList = CONFIG.abfalter.wepDamageTypeDropdown;
                 context.wepDamageTypeSpiritObjList = CONFIG.abfalter.wepDamageTypeSpiritDropdown;
-                context.profileTypeList = CONFIG.abfalter.profileTypeDropdown;
+                context.profileTypeList = {
+                    offensive: game.i18n.localize("abfalter.offense"),
+                    defensive: game.i18n.localize("abfalter.defense")
+                };
+                context.ammoHandlingOptions = { 
+                    direct: game.i18n.localize("abfalter.ammoDirect"), 
+                    loaded: game.i18n.localize("abfalter.ammoLoaded"), 
+                    none: game.i18n.localize("abfalter.ammoNone") 
+                };
+                context.ammoInventoryEntries = (this.item.parent?.items?.filter(i => i.type === "ammo" && i.system.type === "ammo" && Number(i.system.quantity) > 0) ?? [])
+                    .map(i=>({id:i.id,name:i.name,quantity:i.system.quantity}));
+                context.ammoMode = ammoMode(this.item);
+                context.loadedCount = loadedCount(this.item);
+                context.loadedAmmoName = this.item.system.ranged.loadedAmmo?.name ?? "";
+                context.isLoadedMode = context.ammoMode === "loaded";
+                context.isDirectMode = context.ammoMode === "direct";
+                context.legacyProfiles = !Number(this.item.system.profilesVersion) && Object.keys(this.item.system.attacks ?? {}).length > 0;
+                context.sortedWeaponProfiles = Object.fromEntries(
+                    sortedProfileIds(this.item.system.attacks).map(id => [id, this.item.system.attacks[id]])
+                );
                 context.weaponTypeList = CONFIG.abfalter.weaponTypeDropdown;
                 context.vorpalAtkList = CONFIG.abfalter.vorpalAtkDropdown;
 
@@ -404,6 +475,39 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
             });
         }
 
+        if (this.item.type === "weapon") {
+            this._bindWeaponProfileDragDrop();
+            // Preserve expanded profile settings across sheet rerenders
+            this._openProfileSections ??= new Set();
+
+            this.element.querySelectorAll(
+                '#attack-list .profile[data-profile-id] details'
+            ).forEach(details => {
+                const profileId = details.closest(".profile").dataset.profileId;
+                const section = details.querySelector("summary")?.textContent.trim();
+                const key = `${profileId}:${section}`;
+
+                // Restore previously expanded sections
+                details.open = this._openProfileSections.has(key);
+
+                // Remember whenever the user expands or collapses a section
+                details.addEventListener("toggle", () => {
+                    if (details.open) {
+                        this._openProfileSections.add(key);
+                    } else {
+                        this._openProfileSections.delete(key);
+                    }
+                });
+            });
+            this.element.querySelector('select[name="system.ranged.ammoHandling"]')?.addEventListener("change",ev=>{
+                if (loadedCount(this.item) > 0 && ev.currentTarget.value !== "loaded") {
+                    ev.preventDefault();
+                    ev.currentTarget.value = "loaded";
+                    ui.notifications.warn("Unload the weapon before changing ammunition handling.");
+                }
+            });
+        }
+
         // Reset Martial Art degree when category changes
         if (this.item.type === "martialArt") {
             this.element.querySelector('select[name="system.category"]')?.addEventListener("change", async (event) => {
@@ -452,75 +556,200 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
         this.document.update({ "system.bought": value, "system.bought2": value2 });
     }
 
-    static #addWepAtk(ev) {
+    static async #addWepAtk(ev) {
         ev.preventDefault();
-        const attacks = this.item.system.attacks;
-        const isShield = this.item.system.info?.type === "shield";
-        const isRanged = this.item.system.info?.type === "ranged";
-
-        attacks[foundry.utils.randomID()]  = {
-                expand: true,
-                name: game.i18n.localize('abfalter.newProfile'),
-                profileType: isShield ? "defensive" : "both",
-                wepType: this.item.system.info.type,
-                atkType: isShield ? "none" : isRanged ? "melee" : "ranged",
-                attack: 0,
-                finalAttack: 0,
-                block: 0,
-                finalBlock: 0,
-                dodge: 0,
-                finalDodge: 0,
-                atPen: 0,
-                finalAtPen: 0,
-                breakage: 0,
-                finalBreakage: 0,
-                damage: 0,
-                finalDamage: 0,
-                ignoreVorpal: false,
-                vorpalLocation: this.item.system.info.vorpalLocation,
-                vorpalMod: this.item.system.info.vorpalMod,
-                ignoreThrown: false,
-                fired: this.item.system.melee.throwableFired,
-                quantityConsumed: this.item.system.melee.returning,
-                consumedValue: this.item.system.melee.throwConsumption,
-                ignoreTrapping: false,
-                trappingType: this.item.system.melee.trappingType,
-                trappingValue: this.item.system.melee.trappingValue,
-                ignoreAmmo: false,
-                rangedAmmoFired: this.item.system.ranged.fired,
-                rangedAmmoConsumed: this.item.system.ranged.infiniteAmmo,
-                rangedAmmoConsumedValue: this.item.system.ranged.ammoConsumption,
-                damageType: isShield ? "NONE" : isRanged ? this.item.system.primDmgT : this.item.system.ranged.ammoDmgType,
-                attackNote: "",
-                chatNote: "",
-                standardInfo: "",
-                ignorePrecision: false,
+        if (!this.item.system.profilesVersion && Object.keys(this.item.system.attacks ?? {}).length) {
+            ui.notifications.warn("Upgrade legacy profiles before adding new ones.");
+            return;
+        }
+        const attacks = foundry.utils.deepClone(this.item.system.attacks ?? {});
+        const type = this.item.system.info.type;
+        const target = ev.target.closest("[data-role]");
+        const role = target.dataset.role === "defensive" ? "defensive" : "offensive";
+        const mode = type === "ranged" ? "ranged" : "melee";
+        const sort = Math.max(-1, ...Object.values(attacks).map(p=>Number(p.sort ?? 0))) + 1;
+        attacks[foundry.utils.randomID()] = {
+            name: role === "offensive" ? "New Attack" : "New Defense",
+            profileType: role, atkType: mode, wepType: type, sort, expand:true,
+            attack:0,block:0,dodge:0,damage:0,atPen:0,breakage:0,damageMultiplier:1,
+            ammoIndependent:false,ammoNoConsume:false,ammoCustomConsumption:false,
+            ammoConsumption: this.item.system.ranged.ammoConsumption,
+            damageType: this.item.system.primDmgT,
+            properties: { ammunition: {bool:mode === "ranged"} },
+            vorpalLocation: this.item.system.info.vorpalLocation,
+            vorpalMod: this.item.system.info.vorpalMod,
+            consumedValue:this.item.system.melee.throwConsumption,
+            quantityConsumed:this.item.system.melee.returning,
+            trappingType:this.item.system.melee.trappingType,
+            trappingValue:this.item.system.melee.trappingValue,
+            attackNote:"",chatNote:""
         };
-        if (attacks.damageType == "ANY") isRanged ? attacks.damageType = "CUT" : attacks.damageType = "THR";
-
-        this.document.update({ "system.attacks": attacks });
+        await this.document.update({"system.attacks": attacks,"system.profilesVersion":2});
     }
 
-    static #removeWepAtk(ev) {
+    /** Reorder only sort fields, leaving all custom profile settings untouched. */
+    async _saveWeaponProfileOrder(ids) {
+        await this.document.update(profileSortUpdate(ids));
+    }
+
+    static async #moveWepAtk(ev) {
+        ev.preventDefault();
+        const button = ev.target.closest('[data-action="moveWepAtk"]');
+        if (!button) return;
+        const { code, direction } = button.dataset;
+        const ids = sortedProfileIds(this.item.system.attacks);
+        const from = ids.indexOf(code);
+        const to = from + (direction === "up" ? -1 : 1);
+        if (from < 0 || to < 0 || to >= ids.length) return;
+        [ids[from], ids[to]] = [ids[to], ids[from]];
+        await this._saveWeaponProfileOrder(ids);
+    }
+
+    /** Drop above or below the hovered profile, respecting pointer position. */
+    async _dropWeaponProfile(sourceId, targetId, after = false) {
+        const ids = sortedProfileIds(this.item.system.attacks);
+        const from = ids.indexOf(sourceId);
+        if (from < 0 || !ids.includes(targetId) || sourceId === targetId) return;
+        ids.splice(from, 1);
+        ids.splice(ids.indexOf(targetId) + (after ? 1 : 0), 0, sourceId);
+        await this._saveWeaponProfileOrder(ids);
+    }
+
+    _bindWeaponProfileDragDrop() {
+        const rows = [...this.element.querySelectorAll('#attack-list .profile[data-profile-id]')];
+        const clearHighlights = () => {
+            for (const row of rows) row.style.outline = '';
+        };
+
+        for (const row of rows) {
+            const handle = row.querySelector('.weapon-profile-drag-handle');
+            if (!handle) continue;
+
+            handle.addEventListener('dragstart', event => {
+                this._draggingWeaponProfileId = row.dataset.profileId;
+                event.dataTransfer.effectAllowed = 'move';
+                event.dataTransfer.setData('text/plain', this._draggingWeaponProfileId);
+            });
+
+            handle.addEventListener('dragend', () => {
+                this._draggingWeaponProfileId = null;
+                clearHighlights();
+            });
+
+            row.addEventListener('dragover', event => {
+                if (!this._draggingWeaponProfileId || this._draggingWeaponProfileId === row.dataset.profileId) return;
+                event.preventDefault();
+                event.dataTransfer.dropEffect = 'move';
+                clearHighlights();
+                row.style.outline = '2px dashed var(--color-border-highlight, currentColor)';
+            });
+
+            row.addEventListener('drop', async event => {
+                if (!this._draggingWeaponProfileId) return;
+                event.preventDefault();
+                event.stopPropagation();
+                const sourceId = this._draggingWeaponProfileId;
+                this._draggingWeaponProfileId = null;
+                clearHighlights();
+                const rect = (row.querySelector('.wepProfileName') ?? row).getBoundingClientRect();
+                const after = event.clientY > rect.top + rect.height / 2;
+                try {
+                    await this._dropWeaponProfile(sourceId, row.dataset.profileId, after);
+                } catch (error) {
+                    console.error('Failed to reorder weapon profiles:', error);
+                    ui.notifications.error('Unable to reorder profiles.');
+                }
+            });
+        }
+    }
+
+    static async #migrateWepProfiles(ev) {
+        ev.preventDefault();
+        if (Number(this.item.system.profilesVersion)) return;
+        const old = this.item.system.attacks ?? {};
+        const migrated = {};
+        let order = 0;
+        const caps = this.item.system.properties;
+        for (const [id, source] of Object.entries(old)) {
+            const base = foundry.utils.deepClone(source);
+            base.sort = order++;
+            base.damageMultiplier = 1;
+            for (const stat of ["attack", "block", "dodge", "damage", "atPen", "breakage"]) {
+                base.properties ??= {};
+                base.properties[stat] ??= {};
+                if (!["attack", "block", "dodge", "damage"].includes(stat))
+                    base.properties[stat].bool = false;
+            }
+            delete base.speed;
+            delete base.overrideSpeed;
+            delete base.speedBase;
+            base.properties ??= {};
+            const original = source.properties ?? {};
+            base.properties.precision ??= {};
+            base.properties.precision.bool = Boolean(caps.precision.bool && !original.precision?.bool && !source.ignorePrecision);
+            for (const [prop, ignored, customized] of [
+                ["vorpal", "ignoreVorpal", "customizeVorpal"],
+                ["throwable", "ignoreThrown", "customizeThrowable"],
+                ["trapping", "ignoreTrapping", "customizeTrapping"]
+            ]) {
+                base.properties[prop] ??= {};
+                base[customized] = Boolean(original[prop]?.bool);
+                base.properties[prop].bool = Boolean(caps[prop].bool && !source[ignored]);
+            }
+            base.ammoIndependent = Boolean(source.ignoreAmmo);
+            base.ammoNoConsume = Boolean(source.rangedAmmoConsumed);
+            base.ammoCustomConsumption = Boolean(original.ammunition?.bool);
+            base.ammoConsumption = Number(source.rangedAmmoConsumedValue ?? this.item.system.ranged.ammoConsumption);
+            base.properties.ammunition ??= {};
+            base.properties.ammunition.bool = !base.ammoIndependent;
+            if (source.profileType === "both") {
+                const defense = foundry.utils.deepClone(base);
+                defense.profileType = "defensive";
+                defense.name += " (Defense)";
+                defense.sort = order++;
+                base.profileType = "offensive";
+                migrated[foundry.utils.randomID()] = defense;
+            }
+            migrated[id] = base;
+        }
+        await this.document.update({"system.attacks": migrated,"system.profilesVersion":2});
+    }
+
+    static async #loadWeaponAmmo(ev) {
+        ev.preventDefault();
+        const id = ev.currentTarget.dataset.ammoId;
+        const amount = Infinity;
+        try {
+            const moved = await loadWeaponAmmo(this.item,id,amount);
+            ui.notifications.info(
+                game.i18n.format("abfalter.loadedRounds", { moved })
+            );
+        } catch(error) { ui.notifications.warn(error.message); }
+    }
+
+    static async #unloadWeaponAmmo(ev) {
+        ev.preventDefault();
+        try {
+            const moved = await unloadWeaponAmmo(this.item);
+            ui.notifications.info(
+                game.i18n.format("abfalter.unloadedRounds", { moved })
+            );
+        } catch(error) { ui.notifications.warn(error.message); }
+    }
+
+    static async #removeWepAtk(ev) {
         ev.preventDefault();
         const target = ev.target.closest('[data-code]');
         const key = target.dataset.code;
 
-        new Dialog({
-            title: "Remove Attack",
-            content: game.i18n.localize('abfalter.confirmRemAtkPrompt'),
-            buttons: {
-                yes: {
-                    label: game.i18n.localize('abfalter.yes'),
-                    callback: () => {
-                        this.item.update({ [`system.attacks.-=${key}`]: null });
-                    }
-                },
-                no: {
-                    label: game.i18n.localize('abfalter.no')
-                }
-            },
-        }).render(true);
+        const confirmed = await genericDialogs.confirm(
+            game.i18n.localize("abfalter.removeProfile"),
+            game.i18n.localize("abfalter.confirmRemAtkPrompt")
+        );
+        if (!confirmed) return;
+        await this.item.update({
+            [`system.attacks.${key}`]: new foundry.data.operators.ForcedDeletion()
+        });
     }
 
     static async #atkToggle(ev) {
@@ -537,7 +766,7 @@ export default class abfalterItemSheet extends foundry.applications.api.Handleba
         ev.preventDefault();
         const gifts = this.item.system.gifts;
         gifts[foundry.utils.randomID()] = {
-            name: "Gift Name",
+            name: game.i18n.localize("abfalter.giftName"),
             req: 0,
             cost: 0,
             desc: "",

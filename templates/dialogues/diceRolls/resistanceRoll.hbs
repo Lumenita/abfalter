@@ -8,6 +8,16 @@
             <div class="chatCustomTitle">{{formula}}</div>
         </div>
     </div>
+    {{#if isEffectResolver}}
+    <div>
+        <span>{{effectLabel}}</span>
+    </div>
+    {{#if pendingGMAccept}}
+        <button type="button" class="acceptEffectResistance gm-only">
+            {{localize "abfalter.acceptRes"}}
+        </button>
+    {{/if}}
+    {{/if}}
     <div class="rollExplodeText">
         {{#if rollResult.explode}}
         <span class="openRoll"> {{localize "abfalter.dialogs.success"}} </span>

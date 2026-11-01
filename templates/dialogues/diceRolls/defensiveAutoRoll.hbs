@@ -90,19 +90,19 @@
     {{#if ../defSettings.defFinValue}}
     <label class="explodeButtons">
         {{#if roll.explode}}
-        <button class="autoDefOpenRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
+        <button class="autoDefContinuationRoll" data-roll-type="open" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
         {{/if}}
         {{#if roll.fumble}}
-        <button class="autoDefFumbleRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
+        <button class="autoDefContinuationRoll" data-roll-type="fumble" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
         {{/if}}
     </label>
     {{else}}
     <label class="gm-only explodeButtons">
         {{#if roll.explode}}
-        <button class="autoDefOpenRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
+        <button class="autoDefContinuationRoll" data-roll-type="open" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.openRoll"}} </button>
         {{/if}}
         {{#if roll.fumble}}
-        <button class="autoDefFumbleRoll" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
+        <button class="autoDefContinuationRoll" data-roll-type="fumble" data-actor-id="{{actor._id}}"> {{localize "abfalter.dialogs.fumbleSeverity2"}} </button>
         {{/if}}
     </label>
     {{/if}}

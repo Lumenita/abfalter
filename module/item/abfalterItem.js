@@ -1,3 +1,4 @@
+import { ammoMode, ammoStats, loadedCount, resolvedAttack } from "../utilities/weapon-system.js";
 import { abfalterSettingsKeys } from "../utilities/abfalterSettings.js";
 
 export default class abfalterItem extends Item {
@@ -341,10 +342,19 @@ export default class abfalterItem extends Item {
     prepareWeapon() {
         this.system.spiritHomebrew = game.settings.get('abfalter', abfalterSettingsKeys.Spirit_Damage); //Global Setting
         this.system.ranged.ammoIds = [];
+        const ammoHandling = ammoMode(this);
+        // Compatibility fields for existing actor templates; loadedAmmo is authoritative.
+        if (ammoHandling === "loaded") {
+            this.system.ranged.magSize = loadedCount(this);
+            this.system.ranged.isLoaded = loadedCount(this) > 0;
+        } else {
+            this.system.ranged.magSize = 0;
+            this.system.ranged.isLoaded = false;
+        }
+        this.system.ranged.hasMagazine = ammoHandling === "loaded";
 
         if (this.system.info.type == "melee") {
             this.system.properties.ammunition.bool = false;
-            this.system.properties.specialAmmo.bool = false;
         } else if (this.system.info.type == "ranged") {
             this.system.properties.throwable.bool = false;
             this.system.properties.trapping.bool = false;
@@ -356,7 +366,6 @@ export default class abfalterItem extends Item {
             this.system.properties.throwable.bool = false;
             this.system.properties.trapping.bool = false;
             this.system.properties.ammunition.bool = false;
-            this.system.properties.specialAmmo.bool = false;
         }
 
         if (this.system.properties.throwable.bool == true || this.system.info.type == "hybrid" || this.system.info.type == "ranged") {
@@ -372,7 +381,7 @@ export default class abfalterItem extends Item {
             this.system.info.hasSpecialConditions = false;
         }
 
-        if (this.system.properties.ammunition.bool == true || this.system.properties.specialAmmo.bool == true) {
+        if (this.system.properties.ammunition.bool == true) {
             this.system.info.hasAmmunition = true;
         } else {
             this.system.info.hasAmmunition = false;
@@ -445,7 +454,6 @@ export default class abfalterItem extends Item {
             }
 
             if (this.system.properties.ammunition.bool == true) {
-                this.system.ranged.hasMagazine = this.system.ranged.magSizeMax > 0 ? true : false;
 
                 const steps = Math.floor(this.system.ranged.bestReloadValue / 100);
                 const baseRT = Number(this.system.ranged.reloadTime ?? 1);
@@ -513,48 +521,18 @@ export default class abfalterItem extends Item {
                 this.system.melee.bonusDmgMod *= 2;
             }
 
-            // ========== Ammunition Stats ==========
-            if (this.system.info.hasAmmunition) { 
-                if (this.system.properties.ammunition.bool == false && this.system.properties.specialAmmo.bool == true) {
-                    this.system.ranged.ammoIds = [
-                        {id: 0, name: game.i18n.localize('abfalter.none')},
-                        ...(this.system.properties.specialAmmo.bool ? [{id: 'special', name: game.i18n.localize('abfalter.special')}] : [])
-                    ];
-                } else if (this.system.properties.ammunition.bool == true && this.system.properties.specialAmmo.bool == false){
-                    this.system.ranged.ammoIds = [
-                        {id: 0, name: game.i18n.localize('abfalter.none')},
-                        ...this.parent.items.filter(i => i.type === "ammo"  && i.system.type === "ammo").map(i => ({id: i.id, name: i.name}))
-                    ];
-                } else {
-                    this.system.ranged.ammoIds = [
-                        {id: 0, name: game.i18n.localize('abfalter.none')},
-                        ...(this.system.properties.specialAmmo.bool ? [{id: 'special', name: game.i18n.localize('abfalter.special')}] : []),
-                        ...this.parent.items.filter(i => i.type === "ammo"  && i.system.type === "ammo").map(i => ({id: i.id, name: i.name}))
-                    ];
-                }
-            } else {
-                this.system.ranged.ammoIds = [
-                    {id: 0, name: game.i18n.localize('abfalter.none')},
-                ];
-            }
-
-            if (this.system.ranged.selectedAmmo === "special" && this.system.properties.specialAmmo.bool == true) {
-                this.system.ranged.ammoAtPen = this.system.ranged.specialAtPen;
-                this.system.ranged.ammoBreak = this.system.ranged.specialBreak;
-                this.system.ranged.ammoDmgType = this.system.ranged.specialDmgType;
-                this.system.ranged.ammoDamage = this.system.ranged.specialDmg;
-            } else if(this.system.properties.ammunition.bool == true){
-                const selected = this.parent.items.get(this.system.ranged.selectedAmmo)?.system;
-                this.system.ranged.ammoAtPen = selected?.atPen || 0;
-                this.system.ranged.ammoBreak = selected?.break || 0;
-                this.system.ranged.ammoDmgType = selected?.dmgType || "THR";
-                this.system.ranged.ammoDamage = selected?.damage || 0;
-            } else {
-                this.system.ranged.ammoAtPen = 0;
-                this.system.ranged.ammoBreak = 0;
-                this.system.ranged.ammoDmgType = "THR";
-                this.system.ranged.ammoDamage = 0;
-            }
+            // ========== Ammo options from the owning actor only ========== 
+            this.system.ranged.ammoIds = [
+                {id: "none", name: game.i18n.localize("abfalter.none")},
+                ...(this.system.properties.ammunition.bool && ammoHandling === "direct" ?
+                    this.parent.items.filter(i => i.type === "ammo" && i.system.type === "ammo" && Number(i.system.quantity) > 0)
+                        .map(i => ({id:i.id, name:i.name})) : [])
+            ];
+            const ammunition = ammoStats(this);
+            this.system.ranged.ammoAtPen = Number(ammunition?.atPen ?? 0);
+            this.system.ranged.ammoBreak = Number(ammunition?.break ?? 0);
+            this.system.ranged.ammoDmgType = ammunition?.dmgType ?? "THR";
+            this.system.ranged.ammoDamage = Number(ammunition?.damage ?? 0);
             this.system.ranged.strField = this.parent.system.stats.Strength.final;
 
         } else {
@@ -582,34 +560,13 @@ export default class abfalterItem extends Item {
             this.system.melee.thrownRofCalculationTitle = game.i18n.localize("abfalter.unknown");
             this.system.melee.bonusDmgMod = 0;
             this.system.breakageStr = 0;
-            //ammunition
-            if (this.system.info.hasAmmunition) { 
-                if (this.system.properties.specialAmmo.bool == true) {
-                    this.system.ranged.ammoIds = [
-                        {id: 0, name: game.i18n.localize('abfalter.none')},
-                        ...this.parent.items.filter(i => i.type === "ammo"  && i.system.type === "ammo").map(i => ({id: i.id, name: i.name}))
-                    ];
-                } else {
-                    this.system.ranged.ammoIds = [
-                        {id: 0, name: game.i18n.localize('abfalter.none')},
-                    ];
-                }
-            } else {
-                this.system.ranged.ammoIds = [
-                    {id: 0, name: game.i18n.localize('abfalter.none')},
-                ];
-            }
-            if (this.system.ranged.selectedAmmo === "special" && this.system.properties.specialAmmo.bool == true) {
-                this.system.ranged.ammoAtPen = this.system.ranged.specialAtPen;
-                this.system.ranged.ammoBreak = this.system.ranged.specialBreak;
-                this.system.ranged.ammoDmgType = this.system.ranged.specialDmgType;
-                this.system.ranged.ammoDamage = this.system.ranged.specialDmg;
-            } else { 
-                this.system.ranged.ammoAtPen = 0;
-                this.system.ranged.ammoBreak = 0;
-                this.system.ranged.ammoDmgType = "THR";
-                this.system.ranged.ammoDamage = 0;
-            }
+            // Unowned compendium/world weapons have no inventory to select from.
+            this.system.ranged.ammoIds = [{id:"none", name:game.i18n.localize("abfalter.none")}];
+            const ammunition = ammoStats(this);
+            this.system.ranged.ammoAtPen = Number(ammunition?.atPen ?? 0);
+            this.system.ranged.ammoBreak = Number(ammunition?.break ?? 0);
+            this.system.ranged.ammoDmgType = ammunition?.dmgType ?? "THR";
+            this.system.ranged.ammoDamage = Number(ammunition?.damage ?? 0);
             this.system.ranged.strField = 0
 
         }
@@ -746,10 +703,6 @@ export default class abfalterItem extends Item {
                         break;
                 }
             }
-            // Ready to Fire 
-            if (this.system.ranged.useReadyToFire && this.system.ranged.isLoaded) {
-                this.system.derived.finalWeaponSpeed = Math.floor(20 + this.system.quality);
-            }
         }
 
         // ========== Shield Stats ==========
@@ -792,79 +745,59 @@ export default class abfalterItem extends Item {
         this.system.derived.rangedDmg =  this.system.ranged.ammoDamage + this.system.derived.rangedDmgPreAmmo;
 
 
-        // ========== Profile Setup ==========
-        for (let attack of Object.values(this.system.attacks)) {
-            attack.parentPrecision = this.system.properties.precision.bool;
-            attack.parentVorpal = this.system.properties.vorpal.bool;
-            attack.parentRangedInfAmmo = this.system.ranged.infiniteAmmo;
-            attack.parentThrowable = this.system.properties.throwable.bool;
-
+        // ========== Profile Setup ========== 
+        // Profiles inherit the weapon baseline, not the other way around.
+        // The fields below are derived; only sort, choices, and modifiers persist.
+        const sortedProfiles = Object.entries(this.system.attacks ?? {}).sort(
+            ([aId,a],[bId,b]) => Number(a.sort ?? 0)-Number(b.sort ?? 0)
+        );
+        this.system.attacks = Object.fromEntries(sortedProfiles);
+        for (const attack of Object.values(this.system.attacks)) {
             attack.wepType = this.system.info.type;
-            attack.properties.precision.parent = this.system.properties.precision.bool;
-            attack.properties.vorpal.parent = this.system.properties.vorpal.bool;
-            attack.properties.throwable.parent = this.system.properties.throwable.bool;
-            attack.properties.trapping.parent = this.system.properties.trapping.bool;
-            attack.properties.ammunition.parent = this.system.info.hasAmmunition;
-            attack.properties.note.parent = true;
-
-            if (attack.profileType == "offensive") {
-                attack.properties.attack.parent = true;
-                attack.properties.block.parent = false;
-                attack.properties.dodge.parent = false;
-                attack.properties.damage.parent = true;
-                attack.properties.damageType.parent = true;
-                attack.properties.predetermined.parent = true;
-            } else if (attack.profileType == "defensive") {
-                attack.properties.attack.parent = false;
-                attack.properties.block.parent = true;
-                attack.properties.dodge.parent = true;
-                attack.properties.damage.parent = false;
-                attack.properties.damageType.parent = false;
-                attack.properties.predetermined.parent = true;
-                attack.properties.precision.parent = false;
-                attack.properties.vorpal.parent = false;
-                attack.properties.throwable.parent = false;
-                attack.properties.trapping.parent = false;
-                attack.properties.ammunition.parent = false;
-            } else {
-                attack.properties.attack.parent = true;
-                attack.properties.block.parent = true;
-                attack.properties.dodge.parent = true;
-                attack.properties.damage.parent = true;
-                attack.properties.damageType.parent = true;
-                attack.properties.predetermined.parent = true;
+            const offensive = attack.profileType !== "defensive";
+            const mode = this.system.info.type === "hybrid" ? attack.atkType : this.system.info.type;
+            for (const prop of ["attack","block","dodge","damage","atPen","breakage","damageType","predetermined","precision","vorpal","throwable","trapping","ammunition","note"]) {
+                attack.properties[prop].parent = prop === "note" || prop === "predetermined" ||
+                    (["attack","damage","atPen","breakage","damageType","precision","vorpal","throwable","trapping","ammunition"].includes(prop) ? offensive : true);
             }
-            if (attack.wepType == 'melee' || (attack.wepType == 'hybrid' && attack.atkType == 'melee')) {
-                attack.properties.ammunition.parent = false;
-                attack.finalAttack   = attack.attack   + (attack.properties.attack.bool ? 0 : this.system.derived.baseAtk);
-                attack.finalBlock    = attack.block    + (attack.properties.block.bool ? 0 : this.system.derived.baseBlk);
-                attack.finalDodge    = attack.dodge    + (attack.properties.dodge.bool ? 0 : this.system.derived.baseDod);
-                attack.finalAtPen    = attack.atPen    + this.system.derived.meleeAtPen;
-                attack.finalBreakage = attack.breakage + this.system.derived.meleeBreak;
-                attack.finalDamage   = attack.damage   + (attack.properties.damage.bool ? 0 : this.system.derived.meleeDmg);
-            } else if (attack.wepType == 'ranged' || (attack.wepType == 'hybrid' && attack.atkType == 'ranged')) {
-                attack.properties.throwable.parent = false;
-                attack.finalAttack   = attack.attack   + (attack.properties.attack.bool ? 0 : this.system.derived.baseAtk);
-                attack.finalBlock    = attack.block    + (attack.properties.block.bool ? 0 : this.system.derived.baseBlk);
-                attack.finalDodge    = attack.dodge    + (attack.properties.dodge.bool ? 0 : this.system.derived.baseDod);
-                attack.finalAtPen    = attack.atPen    + this.system.derived.rangedAtPen;
-                attack.finalBreakage = attack.breakage + this.system.derived.rangedBreak;
-                attack.finalDamage   = attack.damage   + (attack.properties.damage.bool ? 0 : this.system.derived.rangedDmg);
-            } else { //Shield
-                attack.finalBlock = attack.block + (attack.blkOverride ? 0 : this.system.derived.baseBlk);
-                attack.finalDodge = attack.dodge + (attack.dodOverride ? 0 : this.system.derived.baseDod);
+            for (const prop of ["precision","vorpal","throwable","trapping","ammunition"]) {
+                const weaponAllows = prop === "ammunition" ? this.system.info.hasAmmunition && mode === "ranged" : this.system.properties[prop].bool;
+                const validMode = !(["throwable","trapping"].includes(prop) && mode === "ranged");
+                attack.properties[prop].parent = offensive && weaponAllows && validMode;
             }
-            // ========== Profile Information Tags ==========
+            if (mode !== "ranged") attack.properties.ammunition.parent = false;
+            if (attack.damageMultiplier === undefined) attack.damageMultiplier = 1;
+            const values = resolvedAttack(this, attack, mode === "ranged" ? ammoStats(this) : null);
+            if (!Number(this.system.profilesVersion)) {
+                // Preserve old profile results until the explicit conversion action is used.
+                // Legacy checkboxes represent replacements and property inversions.
+                if (attack.properties.precision.parent) attack.precisionActive = !attack.properties.precision.bool;
+                if (attack.properties.vorpal.parent) attack.vorpalActive = !attack.ignoreVorpal;
+                if (attack.properties.throwable.parent) attack.throwableActive = !attack.ignoreThrown;
+                if (attack.properties.trapping.parent) attack.trappingActive = !attack.ignoreTrapping;
+            }
+            attack.finalAttack = Math.floor(values.attack);
+            attack.finalBlock = Math.floor(values.block);
+            attack.finalDodge = Math.floor(values.dodge);
+            attack.finalAtPen = Math.floor(values.atPen);
+            attack.finalBreakage = Math.floor(values.breakage);
+            attack.finalDamage = Math.floor(values.damage);
+            attack.finalCriticalBoost = Math.floor(values.criticalBoost);
             attack.standardInfo = [
-                (attack.profileType === "both" || attack.profileType === "offensive") && `${game.i18n.localize('abfalter.attack')}: ${attack.finalAttack}`,
-                (attack.profileType === "both" || attack.profileType === "defensive") && `${game.i18n.localize('abfalter.block')}: ${attack.finalBlock}`,
-                (attack.profileType === "both" || attack.profileType === "defensive") && `${game.i18n.localize('abfalter.dodge')}: ${attack.finalDodge}`,
-                (attack.profileType === "both" || attack.profileType === "offensive") && `${game.i18n.localize('abfalter.breakage')}: ${attack.finalBreakage}`,
-                (attack.profileType === "both" || attack.profileType === "offensive") && `${game.i18n.localize('abfalter.atPen')}: ${attack.finalAtPen}`,
-                (attack.profileType === "both" || attack.profileType === "offensive") &&`${game.i18n.localize('abfalter.damage')}: ${attack.finalDamage}`
+                offensive && `${game.i18n.localize("abfalter.attack")}: ${attack.finalAttack}`,
+                !offensive && `${game.i18n.localize("abfalter.block")}: ${attack.finalBlock}`,
+                !offensive && `${game.i18n.localize("abfalter.dodge")}: ${attack.finalDodge}`,
+                offensive && `${game.i18n.localize("abfalter.breakage")}: ${attack.finalBreakage}`,
+                offensive && `${game.i18n.localize("abfalter.atPen")}: ${attack.finalAtPen}`,
+                offensive && `${game.i18n.localize("abfalter.damage")}: ${attack.finalDamage}`,
+                offensive && `Critical Boost: ${attack.finalCriticalBoost}`
             ].filter(Boolean).join(" · ");
         }
 
+        this.system.hasTrappingProfiles = this.system.properties.trapping.bool &&
+            Object.values(this.system.attacks ?? {}).some(profile =>
+            profile.profileType !== "defensive" && (Number(this.system.profilesVersion) ?
+                profile.properties?.trapping?.bool : !profile.ignoreTrapping));
         // ========== Description Tags ==========
         this.system.descTag = this.system.quality != "" ? `${this.system.quality > 0 ? "+" : ""}${this.system.quality} ` : "";
         this.system.descTag += game.i18n.localize(`abfalter.${this.system.info.type}`);
@@ -882,7 +815,6 @@ export default class abfalterItem extends Item {
             this.system.descTag += this.system.properties.trapping.bool == false ? "" : ` · ${game.i18n.localize('abfalter.trapping')}`;
             this.system.descTag += this.system.properties.ammunition.bool == false ? "" : ` · ${game.i18n.localize('abfalter.ammunition')}`;
             if (this.system.properties.ammunition.bool == true) this.system.descTag += this.system.ranged.infiniteAmmo == false ? "" : ` · ${game.i18n.localize('abfalter.infiniteAmmo')}`;
-            this.system.descTag += this.system.properties.specialAmmo.bool == false ? "" : ` · ${game.i18n.localize('abfalter.specialAmmo')}`;
         }
         this.system.descTag += this.system.properties.magical.bool == false ? "" : ` · ${game.i18n.localize('abfalter.magical')}`;
 
@@ -897,7 +829,7 @@ export default class abfalterItem extends Item {
         }
         if (this.system.info.type == "ranged" || this.system.info.type == "hybrid") {
             this.system.tags.push(`${this.system.derived.rangedDmg} ${game.i18n.localize('abfalter.ranged')} ${game.i18n.localize('abfalter.dmgShort')}`);
-            if (this.system.properties.ammunition.bool && this.system.ranged.hasMagazine) {
+            if (this.system.properties.ammunition.bool && ammoHandling === "loaded") {
                 this.system.tags.push(`${this.system.ranged.magSize} / ${this.system.ranged.magSizeMax} ${game.i18n.localize(`abfalter.loaded`)}`);
                 this.system.tags.push(this.system.ranged.hasClip ? `${this.system.ranged.clipRof} ${game.i18n.localize(`abfalter.clipRof`)}` : `${this.system.ranged.reloadTime} ${game.i18n.localize(`abfalter.reloadTime`)}`);
             } 

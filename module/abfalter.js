@@ -72,12 +72,15 @@ Hooks.once("init", async () => {
     game.abfalter = {
         characteristicDialogue: dice.characteristicDialogue,
         resistanceDialogue: dice.resistanceDialogue,
-        offensiveDialogue: dice.offensiveDialogue,
+        secondaryDialogue: dice.secondaryDialogue,
         defensiveDialogue: dice.defensiveDialogue,
-        //old
+        matrixAttackDialogue: dice.matrixAttackDialogue,
+        potentialDialogue: dice.potentialDialogue,
+        psychicProjectionDialogue: dice.psychicProjectionDialogue,
+        offensiveDialogue: dice.offensiveDialogue,
+        effectProjDialogue: dice.effectProjDialogue,
         openMeleeTrapDialogue: dice.openMeleeTrapDialogue,
-        openMeleeBreakDialogue: dice.openMeleeBreakDialogue,
-        plainRoll: dice.plainRoll
+        openMeleeBreakDialogue: dice.openMeleeBreakDialogue
     }
 
     CONFIG.time.roundTime = 6;
@@ -195,6 +198,7 @@ async function deactivateItemEffects(item) {
         await effect.update({ disabled: true });
     }
 }
+
 
 
 Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
@@ -487,7 +491,8 @@ class actorDataModel extends foundry.abstract.DataModel {
                 mentalHealthStatus: makeBoolField(),
                 weightStatus: makeBoolField(),
                 presenceStatus: makeBoolField(),
-                automaticKi: makeBoolField()
+                automaticKi: makeBoolField(),
+                accumulatingKi: makeBoolField()
             }),
             settings: new foundry.data.fields.SchemaField({
                 phrMult: makeLongIntField(1),
@@ -1144,10 +1149,6 @@ class weaponDataModel extends foundry.abstract.DataModel {
                     bool: makeBoolField(),
                     label: makeStringField("ammunition"),
                 }),
-                specialAmmo: new foundry.data.fields.SchemaField({
-                    bool: makeBoolField(),
-                    label: makeStringField("specialAmmo"),
-                }),
             }),
             info: new foundry.data.fields.SchemaField({
                 type: makeStringField("hybrid"),
@@ -1165,6 +1166,8 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 hasAmmunition: makeBoolField(),
                 lastWepUsed: makeIntField(),
                 lastDefUsed: makeIntField(),
+                lastWepProfileId: makeStringField(),
+                lastDefProfileId: makeStringField(),
                 proficiency: makeStringField("proficient"), //this
                 showButtonsOnActor: makeBoolField(),
                 //toMigrate
@@ -1191,6 +1194,7 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 usesRange: makeBoolField(false)
             }),
             attack: makeIntField(),
+            criticalBoost: makeIntField(),
             block: makeIntField(),
             dodge: makeIntField(),
             atPen: makeIntField(),
@@ -1242,10 +1246,20 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 twoHanded: makeBoolField(), // to properties.twoHanded.bool
             }),
             ranged: new foundry.data.fields.SchemaField({
-                specialAtPen: makeIntField(),
-                specialBreak: makeIntField(),
-                specialDmgType: makeStringField("THR"),
-                specialDmg: makeIntField(),
+                // Ammo handling: "direct" (draw when attacking), "loaded" (transfer
+                // to internal storage), or "none" (intrinsic ranged attack).
+                ammoHandling: makeStringField("direct"),
+                ammoModelVersion: makeIntField(),
+                loadedAmmo: new foundry.data.fields.SchemaField({
+                    itemId: makeStringField(),
+                    name: makeStringField(),
+                    quantity: makeIntField(),
+                    damage: makeIntField(),
+                    dmgType: makeStringField("THR"),
+                    atPen: makeIntField(),
+                    break: makeIntField(),
+                    itemData: new foundry.data.fields.ObjectField({initial: () => ({})})
+                }),
                 reloadTime: makeIntField(),
                 bestReloadValue: makeIntField(),
                 reloadTag: makeStringField("none"),
@@ -1279,7 +1293,6 @@ class weaponDataModel extends foundry.abstract.DataModel {
                 ammoDmgMod: makeIntField(), //derived
                 ammoBreakMod: makeIntField(),//derived
                 ammoAtPenMod: makeIntField(),//derived
-                specialAmmo: makeBoolField(), // to properties.specialAmmo
                 range: makeIntField(), //to range
                 rangeType: makeStringField("small"), //to rangeUnitType
                 reloadTimeFinal: makeIntField(), //no migrate all derived
@@ -1287,9 +1300,20 @@ class weaponDataModel extends foundry.abstract.DataModel {
             shield: new foundry.data.fields.SchemaField({
                 type: makeStringField("shieldBuckler")
             }),
+            profilesVersion: makeIntField(),
             attacks: new foundry.data.fields.TypedObjectField(
                 new foundry.data.fields.SchemaField({
-                    profileType: makeStringField("both"),
+                    profileType: makeStringField("offensive"),
+                    sort: makeIntField(),
+                    damageMultiplier: new foundry.data.fields.NumberField({initial: 1, min: 0}),
+                    // Positive capabilities; customization is independent of enablement.
+                    customizeThrowable: makeBoolField(),
+                    customizeVorpal: makeBoolField(),
+                    customizeTrapping: makeBoolField(),
+                    ammoIndependent: makeBoolField(),
+                    ammoNoConsume: makeBoolField(),
+                    ammoCustomConsumption: makeBoolField(),
+                    ammoConsumption: makeIntField(1),
                     wepType: makeStringField("melee"),
                     atkType: makeStringField("melee"),
                     expand: makeBoolField(true),
@@ -1313,6 +1337,18 @@ class weaponDataModel extends foundry.abstract.DataModel {
                             parent: makeBoolField(),
                             bool: makeBoolField(),
                             label: makeStringField("damage"),
+                        }),
+                        // Property checkboxes control whether the profile input
+                        // replaces its weapon baseline instead of adding to it.
+                        atPen: new foundry.data.fields.SchemaField({
+                            parent: makeBoolField(),
+                            bool: makeBoolField(),
+                            label: makeStringField("atPen"),
+                        }),
+                        breakage: new foundry.data.fields.SchemaField({
+                            parent: makeBoolField(),
+                            bool: makeBoolField(),
+                            label: makeStringField("breakage"),
                         }),
                         damageType: new foundry.data.fields.SchemaField({
                             parent: makeBoolField(),
@@ -1368,6 +1404,8 @@ class weaponDataModel extends foundry.abstract.DataModel {
                     finalBreakage: makeIntField(),
                     damage: makeIntField(),
                     finalDamage: makeIntField(),
+                    criticalMod: makeIntField(),
+                    finalCriticalBoost: makeIntField(),
                     ignoreVorpal: makeBoolField(),
                     vorpalLocation: makeStringField(),
                     vorpalMod: makeIntField(),
@@ -1395,7 +1433,37 @@ class weaponDataModel extends foundry.abstract.DataModel {
     }
 
     static migrateData(source) {
-        return super.migrateData(source);
+        const data = super.migrateData(source);
+        // v1 stored two numbers (modifier + custom replacement baseline).
+        // v2 uses a single profile number and a checkbox under properties.
+        // Converting the sum preserves the preexisting final result.
+        if (Number(data.profilesVersion) === 1 && data.attacks) {
+            for (const profile of Object.values(data.attacks)) {
+                profile.properties ??= {};
+                for (const stat of ["attack", "block", "dodge", "damage", "atPen", "breakage"]) {
+                    const name = stat[0].toUpperCase() + stat.slice(1);
+                    if (profile[`override${name}`]) {
+                        const originalBase = Number(profile[`${stat}Base`] ?? 0);
+                        const originalModifier = Number(profile[stat] ?? 0);
+                        profile[stat] = originalBase + originalModifier;
+                        profile.properties[stat] ??= {};
+                        profile.properties[stat].bool = true;
+                    }
+                    delete profile[`override${name}`];
+                    delete profile[`${stat}Base`];
+                }
+                delete profile.speed;
+                delete profile.overrideSpeed;
+                delete profile.speedBase;
+            }
+            data.profilesVersion = 2;
+        }
+        // Speed is always weapon-level, even for legacy profiles.
+        if (data.ranged) {
+            delete data.ranged.useSeparateSpeed;
+            delete data.ranged.weaponSpeed;
+        }
+        return data;
     }
 
     get type() {
@@ -1979,6 +2047,10 @@ class psychicMatrixDataModel extends foundry.abstract.DataModel {
             effectAddProj: makeIntField(),
             effectUseAT: makeBoolField(),
             effectWhichAT: makeStringField("CUT"),
+            effectFailedProj: makeBoolField(),
+            effectFailedBonus: makeIntField(),
+            effectImmunities: makeBoolField(),
+            effectImmuType: makeStringField("heat"),
             favorite: makeBoolField(),
             matrixDetails: new foundry.data.fields.SchemaField({
                 effect20: matrixStuff("routine", 20),

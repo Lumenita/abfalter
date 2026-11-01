@@ -71,13 +71,11 @@
         {{#ifEquals matrixDetails.type "effect"}}
         <div> {{localize (concat "abfalter." matrixDetails.type)}} {{localize "abfalter.info"}} </div>
         <div> {{matrixResolution.resInfo}} </div>
-        <!--
         {{#unless matrixResolution.rollFinished}}
-        <button type="button" class="effectMatrixTargets matrixButton">
+        <button type="button" class="effectMatrixTargets matrixButton {{#if matrixResolution.rollFinished}}hidden{{/if}}">
             {{localize "abfalter.selectTargets"}}
         </button>
         {{/unless}}
-        -->
         {{/ifEquals}}
     </div>
     {{else}}

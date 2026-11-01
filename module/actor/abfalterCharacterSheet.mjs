@@ -2,6 +2,7 @@ import * as diceFunctions from "../diceroller.js";
 import { metaMagicSheet } from "../helpers/metaMagicSheet.js";
 import * as actorFunctions from "../helpers/actorFunctions.js";
 import { genericDialogs } from "../dialogs.js";
+import { ammoMode, loadedCount, loadWeaponAmmo, unloadWeaponAmmo } from "../utilities/weapon-system.js";
 
 export default class abfalterCharacterSheet extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ActorSheetV2) {
     static DEFAULT_OPTIONS = {
@@ -40,7 +41,6 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             magicRegenActual: this.#magicRegenActual,
             removeMaint: this.#removeMaint,
             addExp: this.#addExp,                               // Adds Experince Points
-            plainRoll: this.#onPlainRoll,
             openArcanaSephirah: this.#openArcanaSephirah,
             openDPCalc: this.#openDpCostCalc,
             openRestWindow: this.#openRestWindow,               // Opens Rest Window, move to configButton
@@ -59,7 +59,8 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             armoryAddItem: this.#armoryAddItem,
             increase: this.#increaseQuantity,                   // Armory Items quantity
             decrease: this.#decreaseQuantity,                   // Armory Items quantity
-            ammoWeaponToggle: this.#ammoWeaponToggle,           // Loads ammo onto ranged weapons
+            weaponAmmoLoad: this.#weaponAmmoLoad,               // Transfer inventory ammunition into a weapon
+            weaponAmmoUnload: this.#weaponAmmoUnload,           // Return loaded rounds to inventory
             openMenu: this.#openMenu,                           // obsolete?
             //Active Effects
             createAE: this.#createActiveEffect,
@@ -690,27 +691,25 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         return item.update({ [path]: !currentValue });
     }
 
-    static #onPlainRoll(ev) {
-        ev.preventDefault();
-        const dataset = ev.target.dataset;
-        diceFunctions.openModifierDialogue(this.actor, dataset.roll, dataset.label, dataset.type, dataset.ability);
-    }
-
     static #hadleRollFunctions(ev) {
         ev.preventDefault();
         const dataset = ev.target.dataset;
         switch (dataset.label) {
-            case "characteristic": 
+            case "characteristic":
                 diceFunctions.characteristicDialogue({actor: this.actor, chaLabel: dataset.type, value: dataset.value});
                 break;
             case "resistance":
-                diceFunctions.resistanceDialogue({actor: this.actor, chaLabel: dataset.type, value: dataset.value});
+                diceFunctions.resistanceDialogue({actor: this.actor, resLabel: dataset.type, value: dataset.value});
                 break;
-            case "castMatrix":
-                diceFunctions.potentialDialogue({actor: this.actor, mode: "matrix"});
+            case "secondaryRoll":
+                let localLabel = game.i18n.localize("abfalter." + dataset.type);
+                diceFunctions.secondaryDialogue({actor: this.actor, label: localLabel, value: dataset.value});
                 break;
-            case "psychicPotential":
-                diceFunctions.potentialDialogue({actor: this.actor, mode: "generic"});
+            case "customSecondaryRoll":
+                diceFunctions.secondaryDialogue({actor: this.actor, label: dataset.type, value: dataset.value});
+                break;
+            case "summoning"://TODO
+                diceFunctions.summoningDialogue({ actor: this.actor, value: dataset.value, label: dataset.type });
                 break;
             case "unarmedBlock":
             case "unarmedDodge":
@@ -722,28 +721,29 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
             case "weaponDodge":
                 diceFunctions.defensiveDialogue({actor: this.actor, defLabel: dataset.label, value: dataset.value, weaponId: dataset.id});
                 break;
+            case "castMatrix":
+                diceFunctions.potentialDialogue({actor: this.actor, mode: "matrix"});
+                break;
+            case "psychicPotential":
+                diceFunctions.potentialDialogue({actor: this.actor, mode: "generic"});
+                break;
+            case "offPsyProj":
+                diceFunctions.psychicProjectionDialogue({ actor: this.actor, value: dataset.value });
+                break;
+            case "offMagicProj"://TODO
+                diceFunctions.magicProjectionDialogue({ actor: this.actor, value: dataset.value });
+                break;
             case "unarmedAttack":
                 diceFunctions.offensiveDialogue({actor: this.actor, offLabel: dataset.label, value: dataset.value, weaponId: null});
                 break;
             case "weaponAttack":
                 diceFunctions.offensiveDialogue({actor: this.actor, offLabel: dataset.label, value: dataset.value, weaponId: dataset.id});
                 break;
-            case "secondaryRoll":
-                let localLabel = game.i18n.localize("abfalter." + dataset.type);
-                diceFunctions.secondaryDialogue({actor: this.actor, label: localLabel, value: dataset.value});
-                break;
-            case "customSecondaryRoll":
-                diceFunctions.secondaryDialogue({actor: this.actor, label: dataset.type, value: dataset.value});
-                break;
 
-
-            case "offPsyProj":
-                diceFunctions.psychicOffensiveDialogue({actor: this.actor, offLabel: dataset.label, baseValue: dataset.value});
-                break;
-            case 'weaponTrap':
+            case 'weaponTrap'://TODO
                 diceFunctions.openMeleeTrapDialogue(this.actor, dataset.value, dataset.id);
                 break;
-            case 'weaponBreak':
+            case 'weaponBreak'://TODO
                 diceFunctions.openMeleeBreakDialogue(this.actor, dataset.value, dataset.id, dataset.type);
                 break;
             default:
@@ -1015,16 +1015,85 @@ export default class abfalterCharacterSheet extends foundry.applications.api.Han
         ui.notifications.info("This menu function is not implemented, eta v1.6.x"); //TODO
     }
 
-    static #ammoWeaponToggle(ev) {
+
+    static async #weaponAmmoLoad(ev) {
         ev.preventDefault();
-        let itemId = ev.target.closest(".item").dataset.itemId;
-        let item = this.actor.items.get(itemId);
-        let ability = ev.target.dataset.ability;
-        let label = ev.target.dataset.label;
-        let value = ev.target.dataset.value;
-        ability = !(ability === 'true');
-        value = ability ? value : 0;
-        item.update({ [label]: ability, 'system.ranged.magSize': value });
+        const button = ev.target.closest('[data-action="weaponAmmoLoad"]');
+        const weapon = this.actor.items.get(button?.dataset.itemId);
+        if (!weapon || weapon.type !== "weapon") return;
+
+        if (ammoMode(weapon) !== "loaded") {
+            ui.notifications.warn(game.i18n.localize("abfalter.invalidMode"));
+            return;
+        }
+
+        const capacity = Math.max(0, Math.floor(Number(weapon.system.ranged.magSizeMax) || 0));
+        const current = loadedCount(weapon);
+
+        if (current >= capacity) {
+            ui.notifications.info(game.i18n.localize("abfalter.alreadyLoaded"));
+            return;
+        }
+
+        const available = this.actor.items.filter(item => item.type === "ammo" && item.system.type === "ammo" && Number(item.system.quantity) > 0);
+        if (!available.length) {
+            ui.notifications.warn(game.i18n.localize("abfalter.noAmmo"));
+            return;
+        }
+
+        const currentId = weapon.system.ranged.loadedAmmo?.itemId;
+        let ammoId = current ? available.find(item => item.id === currentId)?.id : null;
+
+        if (!ammoId && available.length === 1) ammoId = available[0].id;
+        if (!ammoId) {
+            const choice = await foundry.applications.api.DialogV2.wait({
+                classes: ["abfalter-ammo-dialog"],
+                window: { title: game.i18n.format("abfalter.ammoLoadTitle", { weapon: weapon.name }) },
+                content: `<p>${game.i18n.localize(current ? "abfalter.topOffDescription" : "abfalter.loadDescription")}</p>`,
+                buttons: [
+                    ...available.map((item, index) => ({
+                        action: `ammo-${index}`,
+                        label: game.i18n.format("abfalter.ammoOption", { name: item.name, quantity: item.system.quantity }),
+                        callback: () => item.id
+                    })),
+                    { action: "cancel", label: game.i18n.localize("abfalter.dialogs.cancel"), callback: () => null }
+                ],
+                rejectClose: false
+            });
+
+            if (!choice || choice === "cancel") return;
+            ammoId = choice;
+        }
+
+        if (button.disabled) return;
+        button.disabled = true;
+
+        try {
+            const moved = await loadWeaponAmmo(weapon, ammoId);
+            ui.notifications.info(game.i18n.format("abfalter.loadSuccess", { count: moved, weapon: weapon.name }));
+        } catch (error) {
+            ui.notifications.warn(game.i18n.format("abfalter.loadFailed", { reason: error.message }));
+        } finally {
+            button.disabled = false;
+        }
+    }
+
+
+    static async #weaponAmmoUnload(ev) {
+        ev.preventDefault();
+        const button = ev.target.closest('[data-action="weaponAmmoUnload"]');
+        const weapon = this.actor.items.get(button?.dataset.itemId);
+        if (!weapon || weapon.type !== "weapon") return;
+        if (button.disabled) return;
+        button.disabled = true;
+        try {
+            const moved = await unloadWeaponAmmo(weapon);
+            ui.notifications.info(`Returned ${moved} round${moved === 1 ? "" : "s"} to inventory.`);
+        } catch (error) {
+            ui.notifications.warn(error.message);
+        } finally {
+            button.disabled = false;
+        }
     }
 
 

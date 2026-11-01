@@ -2512,13 +2512,14 @@ export default class abfalterActor extends Actor {
 
 
         // 2nd Item load for derived Item values.
-        let pushSpeed;
+        let pushSpeed = 0;
         this.items.reduce((arr, item) => {
             if (item.type === "weapon" || item.type === "secondary" 
                 || item.type === "psychicMatrix" || item.type === "maintPower" || item.type === "zeonMaint") {
                 item.prepareData();
-                if (item.type === "weapon") {
-                    pushSpeed = item.system.pushSpeed.applied;
+                if (item.type === "weapon" && item.system.equipped) {
+                    pushSpeed += item.system.pushSpeed.applied || 0;
+                    //pushSpeed = Math.max(pushSpeed, Number(item.system.pushSpeed.applied) || 0);
                 }
             }
         });

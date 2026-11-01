@@ -5,23 +5,13 @@
             <span id="resInfo"></span>
         </div>
 
-        <div class="armorRow" id="resRow">
+        <div class="resRow" id="resRow">
             <label for="resMod">
-                {{localize "abfalter.resistance"}}
-            </label>
-
-            <div>
-                <input
-                    type="number"
-                    id="resMod"
-                    value="0"
-                    step="1"
-                />
-
+                <span>{{localize "abfalter.resistance"}}</span>
+                <input type="number" id="resMod" value="0" step="1" />
                 <span>|</span>
-
                 <span id="resFinalValue"></span>
-            </div>
+            </label>
         </div>
 
         <div id="projectionControls">
@@ -41,10 +31,12 @@
             </label>
         </div>
 
-        <label class="target-preview-row">
-            <span>{{localize "abfalter.targets"}}</span>
-            <span id="selectedTargetsList">None</span>
-        </label>
+        <div>
+            <label class="target-preview-row">
+                <span>{{localize "abfalter.targets"}}</span>
+                <span id="selectedTargetsList">None</span>
+            </label>
+        </div>
     </div>
   </body>
 </form>

@@ -5,7 +5,7 @@
         {{#if atkSettings.atkTokName}}
         <span class="abfalterChatActor">{{basicInfo.name}}</span>
         {{else}}
-        <span class="gm-only abfalterChatActor">{{basicInfo.name}}</span>
+        <span class="gm-only abfalterChatActor">⟨{{basicInfo.name}}⟩</span>
         <span class="player-only abfalterChatActor">{{localize "abfalter.unknown"}}</span>
         {{/if}}
         <span class="abfalterCharUser">{{basicInfo.userName}}</span>
@@ -22,9 +22,9 @@
         <span> {{attackDetails.ammoName}} </span>
         {{/ifEquals}}
         {{else}}
-        <span class="gm-only"> {{attackDetails.actionName}} </span>
+        <span class="gm-only"> ⟨{{attackDetails.actionName}}⟩ </span>
         {{#ifEquals attackDetails.wepType "ranged"}}
-        <span class="gm-only"> {{attackDetails.ammoName}} </span>
+        <span class="gm-only"> ⟨{{attackDetails.ammoName}}⟩ </span>
         {{/ifEquals}}
         <span class="player-only"> {{localize "abfalter.unknownWep"}} </span>
         {{/if}}
@@ -36,21 +36,21 @@
             {{#if ../atkSettings.atkAtkName}}
                 <span> {{roll.label}}</span>
             {{else}}
-                <span class="gm-only"> {{roll.label}}</span>
+                <span class="gm-only"> ⟨{{roll.label}}⟩</span>
                 <span class="player-only"> {{localize "abfalter.defense"}}</span>
             {{/if}}
 
             {{#if ../atkSettings.atkFinValue}}
                 <span class="{{roll.color}}">{{roll.total}}</span>
             {{else}}
-                <span class="gm-only {{roll.color}}">{{roll.total}}</span>
+                <span class="gm-only {{roll.color}}">⟨{{roll.total}}⟩</span>
                 <span class="player-only">???</span>
             {{/if}}
 
             {{#if ../atkSettings.atkFormula}}
                 <div class="chatCustomTitle">{{roll.formula}}</div>
             {{else}}
-                <div class="chatCustomTitle gm-only">{{roll.formula}}</div>
+                <div class="chatCustomTitle gm-only">⟨{{roll.formula}}⟩</div>
                 <div class="chatCustomTitle player-only">???</div>
             {{/if}}
         </div>
@@ -75,13 +75,13 @@
             {{#if atkSettings.atkDmg}}
             <span> {{localize "abfalter.dmgShort"}}: {{attackDetails.dmg}} {{localize (concat "abfalter." attackDetails.dmgType)}}</span>
             {{else}}
-            <span class="gm-only"> {{localize "abfalter.dmgShort"}}: {{attackDetails.dmg}} {{localize (concat "abfalter." attackDetails.dmgType)}}</span>
+            <span class="gm-only"> {{localize "abfalter.dmgShort"}}: ⟨{{attackDetails.dmg}} {{localize (concat "abfalter." attackDetails.dmgType)}}⟩</span>
             <span class="player-only"> {{localize "abfalter.dmgShort"}}: ??? {{localize (concat "abfalter." attackDetails.dmgType)}}</span>
             {{/if}}
             {{#if atkSettings.atkAtPen}}
             <span> {{localize "abfalter.atPen"}}: {{attackDetails.atPen}}</span>
             {{else}}
-            <span class="gm-only"> {{localize "abfalter.atPen"}}: {{attackDetails.atPen}}</span>
+            <span class="gm-only"> {{localize "abfalter.atPen"}}: ⟨{{attackDetails.atPen}}⟩</span>
             <span class="player-only"> {{localize "abfalter.atPen"}}: ???</span>
             {{/if}}
         </div>

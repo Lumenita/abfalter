@@ -1,0 +1,20 @@
+<form>
+  <body>
+    <div class="abfDivFormat defenseAuto">
+        <label>
+            <span>Res Type:</span>
+            <select id="resistanceType" name="resistanceType">
+                {{#each resOptions}}
+                    <option value="{{this.value}}">
+                        {{this.label}}
+                    </option>
+                {{/each}}
+            </select>
+        </label>
+        <label> 
+            <span> {{localize "abfalter.dialogs.modifier"}} </span>
+            <input type="number" id="modifierMod" value="0" /> 
+        </label>
+    </div>
+  </body>
+</form>

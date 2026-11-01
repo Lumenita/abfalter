@@ -142,6 +142,46 @@
             </label>
         </div>
         {{/if}}
+        <div class="abfDivFormat">
+            <label class="itemSimpleLabel">
+                <span> {{localize "abfalter.effectFailedProj"}} </span>
+                <button type="button" data-action="toggleValue" class="{{#if system.effectFailedProj}}kiBought{{/if}}"
+                    data-label="system.effectFailedProj" data-ability="{{system.effectFailedProj}}">
+                    {{#if system.effectFailedProj}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                    {{/if}} 
+                </button>
+            </label>
+            {{#if system.effectFailedProj}}
+            <label class="itemSimpleLabel">
+                <span> {{localize "abfalter.effectFailedBonus"}} </span>
+                <input type="number" name="system.effectFailedBonus" value="{{system.effectFailedBonus}}" />
+            </label>
+            {{/if}}
+            <label class="itemSimpleLabel">
+                <span> {{localize "abfalter.effectImmunities"}} </span>
+                <button type="button" data-action="toggleValue" class="{{#if system.effectImmunities}}kiBought{{/if}}"
+                    data-label="system.effectImmunities" data-ability="{{system.effectImmunities}}">
+                    {{#if system.effectImmunities}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                    {{/if}} 
+                </button>
+            </label>
+        </div>
+        {{#if system.effectImmunities}}
+        <div class="csSelect itemSimpleLabel abfDivFormat">
+            <label>
+                <span> {{localize "abfalter.effectImmuType"}} </span>
+                <select name="system.effectImmuType">
+                    {{selectOptions eleImmunityObjList selected=system.effectImmuType localize=true}}
+                </select>
+            </label>
+        </div>
+        {{/if}}
         {{/ifIn}}
     </fieldset>
 

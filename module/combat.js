@@ -156,7 +156,7 @@ export default class abfalterCombat extends Combat {
 	 * @returns 
 	 */
 	async processAutomaticKi(actor, combatant, { kiAmount = null, removeHalf = false, bulk = false } = {}) {
-		if (!actor?.system.toggles?.automaticKi) return;
+		if (!actor?.system.toggles?.automaticKi || actor?.system.toggles?.accumulatingKi !== true) return;
 
 		const round = Math.max(Number(this.round) || 0, 1);
 		const processedRound = Number(combatant.getFlag(SYSTEM_ID, KI_ACCUMULATION_ROUND_FLAG));
@@ -290,10 +290,14 @@ export default class abfalterCombat extends Combat {
 				const isDouble = baseRoll % 11 === 0 && baseRoll <= 99;
 				let previousRoll = baseRoll;
 				let rollCount = 0;
+				const rollLimit = actor.system.rollRange.limits;
+				rollLimit == "unlucky";
 
-				let shouldExplode = correctedOpenRoll
-					? baseRoll === 100 || baseRoll >= openRange || (isDouble && baseRoll >= openRange)
-					: baseRoll === 100 || baseRoll >= openRange || (isDouble && baseRoll > previousRoll);
+				let shouldExplode = rollLimit !== "unlucky" && (
+					correctedOpenRoll
+						? baseRoll === 100 || baseRoll >= openRange || (isDouble && baseRoll >= openRange)
+						: baseRoll === 100 || baseRoll >= openRange || (isDouble && baseRoll > previousRoll)
+				);
 
 				if (correctedOpenRoll) {
 					if (baseRoll >= openRange) openRange = Math.min(openRange + 1, 100);
@@ -320,7 +324,6 @@ export default class abfalterCombat extends Combat {
 							(isDoubleAgain && rollValue > previousRoll);
 					} else {
 						if (rollValue > openRange) openRange = Math.min(rollValue, 100);
-
 						shouldExplode =
 							rollValue === 100 ||
 							rollValue > openRange ||
@@ -369,12 +372,13 @@ export default class abfalterCombat extends Combat {
 
 export const openInitiativeDialog = (actor, kiAlreadyProcessed = false) => {
     const automaticKi = actor?.system.toggles?.automaticKi ?? false;
+	const accumulatingKi = actor?.system.toggles?.accumulatingKi === true;
     const setting = actor?.system.settings?.alwaysFullKiAccu ?? "query";
 
     return initiativeDialog({
         content: "Modifier",
         placeholder: "0",
-        showKiOptions: automaticKi && setting === "query" && !kiAlreadyProcessed
+		showKiOptions: automaticKi && accumulatingKi && setting === "query" && !kiAlreadyProcessed
     });
 };
 

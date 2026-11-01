@@ -173,7 +173,7 @@
                             </button>
                         </div>
                         {{#ifIn system.info.type "hybrid melee"}}
-                        {{#if system.properties.trapping.bool}}
+                        {{#if system.hasTrappingProfiles}}
                         <div class="armoryWepTrap">
                             <button type="button" data-action="abfRollButton" data-label="weaponTrap" data-value="trap" data-id="{{_id}}">
                                 {{localize "abfalter.trapping"}}
@@ -184,14 +184,21 @@
                         {{#ifIn system.info.type "hybrid ranged"}}
                         {{#if system.properties.ammunition.bool}}
                         <div class="armoryWepAmmo">
-                            <button type="button" data-action="ammoWeaponToggle" class="ammoItem-toggle {{#if system.ranged.isLoaded}}kiBought{{/if}}" 
-                                data-label="system.ranged.isLoaded" data-ability="{{system.ranged.isLoaded}}" data-value="{{system.ranged.magSizeMax}}">
-                                {{#if system.ranged.isLoaded}} 
-                                    {{system.ranged.magSize}} / {{system.ranged.magSizeMax}} {{localize "abfalter.loaded"}} 
-                                {{else}} 
-                                    {{localize "abfalter.unloaded"}}
-                                {{/if}}
-                            </button>   
+                            {{#ifIn system.ranged.ammoHandling "loaded"}}
+                            <button type="button" data-action="weaponAmmoLoad" data-item-id="{{_id}}"
+                                class="ammoItem-toggle {{#if system.ranged.isLoaded}}kiBought{{/if}}"
+                                title="{{localize "abfalter.loadInfo"}}">
+                                {{system.ranged.magSize}} / {{system.ranged.magSizeMax}}
+                            </button>
+                            {{#if system.ranged.isLoaded}}
+                            <button type="button" data-action="weaponAmmoUnload" data-item-id="{{_id}}"
+                                title="{{localize "abfalter.unloadInfo"}}">{{localize "abfalter.unload"}}</button>
+                            {{/if}}
+                            {{else}}
+                            <span class="ammoItem-toggle">
+                                {{#ifIn system.ranged.ammoHandling "direct"}}{{localize "abfalter.directAmmo"}}{{else}}{{localize "abfalter.noAmmoreq"}}{{/ifIn}}
+                            </span>
+                            {{/ifIn}}   
                         </div>
                         {{/if}}
                         {{/ifIn}}

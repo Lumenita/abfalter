@@ -16,29 +16,13 @@
 
 <div class="baseAbfalterV2 defaultRollMsg" data-actor-id="{{actor._id}}">
     <div>
-        {{#if effectDetails.atkWepName}}
         <span> {{effectDetails.actionName}} </span>
-        {{#ifEquals effectDetails.wepType "ranged"}}
-        <span> {{effectDetails.ammoName}} </span>
-        {{/ifEquals}}
-        {{else}}
-        <span class="gm-only"> {{effectDetails.actionName}} </span>
-        {{#ifEquals effectDetails.wepType "ranged"}}
-        <span class="gm-only"> {{effectDetails.ammoName}} </span>
-        {{/ifEquals}}
-        <span class="player-only"> {{localize "abfalter.unknownWep"}} </span>
-        {{/if}}
     </div>
 
     <div class="defaultDefRoll">
         {{#each rollData as |roll i|}}
         <div class="chatCustomRoll chatCustomTitleContainer {{#unless ../atkSettings.atkFinValue}}{{#if i}}gm-only{{/if}}{{/unless}}">
-            {{#if ../atkSettings.atkAtkName}}
-                <span> {{roll.label}}</span>
-            {{else}}
-                <span class="gm-only"> {{roll.label}}</span>
-                <span class="player-only"> {{localize "abfalter.defense"}}</span>
-            {{/if}}
+            <span> {{roll.label}}</span>
 
             {{#if ../atkSettings.atkFinValue}}
                 <span class="{{roll.color}}">{{roll.total}}</span>
@@ -73,10 +57,22 @@
     <div class="rollTextMargin">
         <div class="offenseDmgPen">
             {{#if atkSettings.atkDmg}}
-            <span> {{localize "abfalter.dmgShort"}}: {{attackDetails.dmg}} {{localize (concat "abfalter." attackDetails.dmgType)}}</span>
+            <span> {{localize "abfalter.resShort"}}: {{effectDetails.resValue}}          
+                {{#each effectDetails.resTypeList as |type|}}
+                    <span>{{localize (concat "abfalter." type)}}{{#unless @last}}, {{/unless}}</span>
+                {{/each}}
+            </span>
             {{else}}
-            <span class="gm-only"> {{localize "abfalter.dmgShort"}}: {{attackDetails.dmg}} {{localize (concat "abfalter." attackDetails.dmgType)}}</span>
-            <span class="player-only"> {{localize "abfalter.dmgShort"}}: ??? {{localize (concat "abfalter." attackDetails.dmgType)}}</span>
+            <span class="gm-only"> {{localize "abfalter.resShort"}}: {{effectDetails.resValue}}          
+                {{#each effectDetails.resTypeList as |type|}}
+                    <span>{{localize (concat "abfalter." type)}}{{#unless @last}}, {{/unless}}</span>
+                {{/each}}
+            </span>
+            <span class="player-only"> {{localize "abfalter.resShort"}}: ???        
+                {{#each effectDetails.resTypeList as |type|}}
+                    <span>{{localize (concat "abfalter." type)}}{{#unless @last}}, {{/unless}}</span>
+                {{/each}}
+            </span>
             {{/if}}
         </div>
     </div>

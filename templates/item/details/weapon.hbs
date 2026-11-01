@@ -120,6 +120,10 @@
                 <span> | </span>
                 <span> {{system.derived.baseAtk}} </span>
             </label>
+            <label class="itemSimpleLabel">
+                <span> Critical Boost </span>
+                <input type="number" step="1" name="system.criticalBoost" value="{{system.criticalBoost}}" data-dtype="Number" />
+            </label>
             {{/ifIn}}
             <label class="itemDoubleInputLabel">
                 <span> {{localize "abfalter.block"}} </span>
@@ -135,6 +139,119 @@
             </label>
         </div>
     </fieldset>
+
+    {{#ifIn system.info.type "ranged hybrid"}}
+    {{#if system.properties.ammunition.bool}}
+    <fieldset class="wepAmmoManagement">
+        <legend>{{localize "abfalter.rangedAmmo"}}</legend>
+        <div class="abfDivFormat">
+            <label class="itemSimpleLabel">
+                <span>{{localize "abfalter.handlingType"}}</span>
+                <select name="system.ranged.ammoHandling">
+                    {{selectOptions ammoHandlingOptions selected=ammoMode}}
+                </select>
+            </label>
+        </div>
+
+        <div class="abfDivFormat">
+        {{#if isLoadedMode}}
+            <label class="itemSimpleLabel">
+                <span>{{localize "abfalter.capacity"}}</span>
+                <input type="number" min="1" step="1" name="system.ranged.magSizeMax" value="{{system.ranged.magSizeMax}}" data-dtype="Number">
+            </label>
+            <label class="itemLabelSpan">
+                <span>{{localize "abfalter.loaded"}}: {{loadedCount}} / {{system.ranged.magSizeMax}} ({{loadedAmmoName}})</span>
+            </label>
+            <label class="itemLabelSpan">
+                <span>{{localize "abfalter.loadedInfo"}}</span>
+            </label>
+        {{else}}
+        {{#if isDirectMode}}
+            <label class="itemLabelSpan">
+                <span>{{localize "abfalter.directInfo"}}</span>
+            </label>
+        {{else}}
+            <label class="itemLabelSpan">
+                <span>{{localize "abfalter.noneInfo"}}</span>
+            </label>
+        {{/if}}
+        {{/if}}
+        </div>
+        
+        <div class="abfDivFormat">
+        {{#if isDirectMode}}
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.reloadTime"}} </span> <input type="text" name="system.ranged.reloadTime" value="{{system.ranged.reloadTime}}" /> </label>
+            <div class="abfDivFormat">
+                <label class="weaponReloadDisplay atkCustomTitleContainer">
+                    <span> {{localize "abfalter.rangeAttacks"}}</span>
+                    <span>{{this.system.ranged.reloadDisplay}}</span>
+                    <div class="atkCustomTitle">{{this.system.ranged.reloadCalculationTitle}}</div>
+                </label>
+            </div>
+        {{/if}}
+
+        {{#if isLoadedMode}}
+            <label class="itemSimpleLabel hidden"> 
+                <span title="{{localize "abfalter.rdyToFireDef"}}"> {{localize "abfalter.useReadyToFire"}} </span> 
+                <button type="button" data-action="toggleValue" class="{{#if system.ranged.useReadyToFire}}kiBought{{/if}}"
+                    data-label="system.ranged.useReadyToFire" data-ability="{{system.ranged.useReadyToFire}}">
+                    {{#if system.ranged.useReadyToFire}}
+                    <span> {{localize "abfalter.yes"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.no"}} </span>
+                    {{/if}}
+                </button>
+            </label>
+            <label class="itemSimpleLabel">
+                <span title="{{localize 'abfalter.reloadInfo'}}"> {{localize "abfalter.magContainer"}} </span>
+                <button type="button" data-action="toggleValue" class="{{#if system.ranged.hasClip}}kiBought{{/if}}"
+                    data-label="system.ranged.hasClip" data-ability="{{system.ranged.hasClip}}">
+                    {{#if system.ranged.hasClip}}
+                    <span> {{localize "abfalter.clip"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.regular"}} </span>
+                    {{/if}}
+                </button>
+            </label>
+            {{#if this.system.ranged.hasClip}}
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.rof"}} </span> <input type="text" name="system.ranged.clipRof" value="{{system.ranged.clipRof}}" /> </label>
+            <div class="abfDivFormat">
+                <label class="weaponReloadDisplay atkCustomTitleContainer">
+                    <span> {{localize "abfalter.rangeRofAttacks"}}</span>
+                    <span>{{this.system.ranged.clipRofDisplay}}</span>
+                    <div class="atkCustomTitle">{{this.system.ranged.clipRofCalculationTitle}}</div>
+                </label>
+            </div>
+            {{else}}
+            <label class="itemSimpleLabel"> <span> {{localize "abfalter.reloadTime"}} </span> <input type="text" name="system.ranged.reloadTime" value="{{system.ranged.reloadTime}}" /> </label>
+            <div class="abfDivFormat">
+                <label class="weaponReloadDisplay atkCustomTitleContainer">
+                    <span> {{localize "abfalter.rangeAttacks"}}</span>
+                    <span>{{this.system.ranged.reloadDisplay}}</span>
+                    <div class="atkCustomTitle">{{this.system.ranged.reloadCalculationTitle}}</div>
+                </label>
+            </div>
+            {{/if}}
+            {{/if}}
+            {{#ifIn ammoMode "direct loaded"}}
+            <label class="itemSimpleSelectLabel">
+                <span> {{localize "abfalter.ammoConsumption"}} </span> 
+                <button type="button" data-action="toggleValue" class="{{#if system.ranged.infiniteAmmo}}kiBought{{/if}}"
+                    data-label="system.ranged.infiniteAmmo" data-ability="{{system.ranged.infiniteAmmo}}">
+                    {{#if system.ranged.infiniteAmmo}}
+                    <span> {{localize "abfalter.infiniteAmmo"}} </span>
+                    {{else}}
+                    <span> {{localize "abfalter.consumesAmmo"}} </span>
+                    {{/if}}
+                </button>
+                <input type="number" min="0" step="1" data-dtype="Number" name="system.ranged.ammoConsumption" value="{{system.ranged.ammoConsumption}}" />
+            </label>
+            {{/ifIn}}
+        </div>
+    </fieldset>
+    {{/if}}
+    {{/ifIn}}
+
 
     {{#ifIn system.info.type "hybrid melee ranged"}}
     <fieldset>
@@ -253,101 +370,10 @@
                 {{/if}}
                 <input type="number" name="system.melee.trappingValue" value="{{system.melee.trappingValue}}" />
             </label>
-
-
             {{/if}}
-
-            {{#if system.properties.ammunition.bool}}
-            <label class="itemDoubleInputButtonLabel">
-                <span title="{{localize "abfalter.reloadInfo"}}"> {{localize "abfalter.magContainer"}} </span>
-                <button type="button" data-action="toggleValue" class="{{#if system.ranged.hasClip}}kiBought{{/if}}"
-                    data-label="system.ranged.hasClip" data-ability="{{system.ranged.hasClip}}">
-                    {{#if system.ranged.hasClip}}
-                    <span> {{localize "abfalter.clip"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.regular"}} </span>
-                    {{/if}}
-                </button>
-                <input type="number" name="system.ranged.magSize" value="{{system.ranged.magSize}}" />
-                <span> | </span>
-                <input type="number" name="system.ranged.magSizeMax" value="{{system.ranged.magSizeMax}}" />
-            </label>
-            {{#if this.system.ranged.hasMagazine}}
-            <label class="itemSimpleLabel"> 
-                <span title="{{localize "abfalter.rdyToFireDef"}}"> {{localize "abfalter.useReadyToFire"}} </span> 
-                <button type="button" data-action="toggleValue" class="{{#if system.ranged.useReadyToFire}}kiBought{{/if}}"
-                    data-label="system.ranged.useReadyToFire" data-ability="{{system.ranged.useReadyToFire}}">
-                    {{#if system.ranged.useReadyToFire}}
-                    <span> {{localize "abfalter.yes"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.no"}} </span>
-                    {{/if}}
-                </button>
-            </label>
-            <label class="itemSimpleSelectLabel">
-                <span> {{localize "abfalter.ammoConsumption"}} </span> 
-                <button type="button" data-action="toggleValue" class="{{#if system.ranged.infiniteAmmo}}kiBought{{/if}}"
-                    data-label="system.ranged.infiniteAmmo" data-ability="{{system.ranged.infiniteAmmo}}">
-                    {{#if system.ranged.infiniteAmmo}}
-                    <span> {{localize "abfalter.infiniteAmmo"}} </span>
-                    {{else}}
-                    <span> {{localize "abfalter.consumesAmmo"}} </span>
-                    {{/if}}
-                </button>
-                <input type="number" name="system.ranged.ammoConsumption" value="{{system.ranged.ammoConsumption}}" />
-            </label>
-            {{#if this.system.ranged.hasClip}}
-            <label class="itemSimpleLabel"> <span> {{localize "abfalter.rof"}} </span> <input type="text" name="system.ranged.clipRof" value="{{system.ranged.clipRof}}" /> </label>
-            <div class="abfDivFormat">
-                <label class="weaponReloadDisplay atkCustomTitleContainer">
-                    <span> {{localize "abfalter.rangeRofAttacks"}}</span>
-                    <span>{{this.system.ranged.clipRofDisplay}}</span>
-                    <div class="atkCustomTitle">{{this.system.ranged.clipRofCalculationTitle}}</div>
-                </label>
-            </div>
-            {{else}}
-            <label class="itemSimpleLabel"> <span> {{localize "abfalter.reloadTime"}} </span> <input type="text" name="system.ranged.reloadTime" value="{{system.ranged.reloadTime}}" /> </label>
-            <div class="abfDivFormat">
-                <label class="weaponReloadDisplay atkCustomTitleContainer">
-                    <span> {{localize "abfalter.rangeAttacks"}}</span>
-                    <span>{{this.system.ranged.reloadDisplay}}</span>
-                    <div class="atkCustomTitle">{{this.system.ranged.reloadCalculationTitle}}</div>
-                </label>
-            </div>
-            {{/if}}
-            {{/if}}
-            {{/if}}
-
         </div>
     </fieldset>
     {{/if}}
-
-    {{#ifIn system.info.type "ranged hybrid"}}
-    {{#if system.properties.specialAmmo.bool}}
-    <fieldset>
-        <legend> {{ localize "abfalter.specialAmmunition" }} </legend>
-        <div class="abfDivFormat">
-            <label class="itemSimpleLabel"> <span> {{localize "abfalter.atPen"}} </span> <input type="number" name="system.ranged.specialAtPen" value="{{system.ranged.specialAtPen}}" /> </label>
-            <label class="itemSimpleLabel"> <span> {{localize "abfalter.breakage"}} </span> <input type="number" name="system.ranged.specialBreak" value="{{system.ranged.specialBreak}}" /> </label>
-            <label class="itemSimpleLabel"> <span> {{localize "abfalter.damage"}} </span> <input type="number" name="system.ranged.specialDmg" value="{{system.ranged.specialDmg}}" /> </label>
-        </div>
-        <div class="csSelect itemSimpleLabel abfDivFormat">
-            <label>
-                <span> {{localize "abfalter.dmgType"}} </span>
-                {{#if system.spiritHomebrew}}
-                <select class="inline-edit" name="system.ranged.specialDmgType" data-field="system.ranged.specialDmgType">
-                    {{selectOptions wepDamageTypeSpiritObjList selected=system.ranged.specialDmgType localize=true}}
-                </select>
-                {{else}}
-                <select class="inline-edit" name="system.ranged.specialDmgType" data-field="system.ranged.specialDmgType">
-                    {{selectOptions wepDamageTypeObjList selected=system.ranged.specialDmgType localize=true}}
-                </select>
-                {{/if}}
-            </label>
-        </div>
-    </fieldset>
-    {{/if}}
-    {{/ifIn}}
 
     {{#ifIn system.info.type "melee hybrid"}}
     <fieldset>
@@ -438,6 +464,7 @@
     {{#ifIn system.info.type "ranged hybrid"}}
     <fieldset>
         <legend> {{ localize "abfalter.rangeDamageDetails" }} </legend>
+        {{#if isDirectMode}}
         {{#if system.info.hasAmmunition}}
         <div class="csSelect itemSimpleLabel abfDivFormat">
             <label>
@@ -447,6 +474,7 @@
                 </select>
             </label>
         </div>
+        {{/if}}
         {{/if}}
 
         <div class="abfDivFormat">

@@ -12,11 +12,17 @@ export function addChatListeners(chatMessage, html) {
         });
     };
     // Auto Defensive
-    bindButton("button.autoDefOpenRoll", diceFunctions.autoDefOpenRollFunction);
-    bindButton("button.autoDefFumbleRoll", diceFunctions.autoDefFumbleRollFunction);
+    bindButton("button.autoDefContinuationRoll", diceFunctions.autoDefContinuationRoll);
     bindButton("button.abfDefendButton", defendButtonClicked);
     bindButton("button.sendDefenseToResolve", sendDefenseClicked);
     updateDefenseButtonOwnership(chatMessage, html);
+
+    // Resistance Resolver
+    bindButton("button.resolveResistanceCheck", resolveResClicked);
+    bindButton("button.acceptEffectResistance", acceptEffectResistanceClicked);
+    updateResistanceButtonOwnership(chatMessage, html);
+    updateResistanceAcceptButton(chatMessage, html);
+
     // Resolve Combat
     bindChange('.resolveDmgOption input[type="radio"]', diceFunctions.updateResolveDamagePreview);
     bindButton("button.applyDamageToActors", diceFunctions.resolveApplyDamageToActors);
@@ -25,8 +31,7 @@ export function addChatListeners(chatMessage, html) {
     bindButton("button.effectContinuationRoll", diceFunctions.effectContinuationRollFunction);
     bindButton("button.secondaryContinuationRoll", diceFunctions.secondaryContinuationRollFunction);
     // Defensive
-    bindButton("button.defensiveOpenRoll", diceFunctions.defensiveOpenRollFunction);
-    bindButton("button.defensiveFumbleRoll", diceFunctions.defensiveFumbleRollFunction);
+    bindButton("button.defensiveContinuationRoll", diceFunctions.defensiveContinuationRoll);
     // Psychic Stuff
     bindButton("button.potentialContinuationRoll", diceFunctions.potentialContinuationRollFunction);
     bindButton("button.selectMatrixEffect", matrixChatUpdate);
@@ -116,6 +121,11 @@ async function matrixChatUpdate(msg, html, ev) {
         matrixResolution.atLabel = item.system.effectWhichAT;
         matrixResolution.effectProjBonus = item.system.effectAddProj;
         matrixResolution.effectUseProj = item.system.effectUseProj;
+        
+        matrixResolution.resOnFailedProj = item.system.effectFailedProj;
+        matrixResolution.failedProjResBonus = item.system.effectFailedBonus;
+        matrixResolution.useImmunity = item.system.effectImmunities;
+        matrixResolution.immunityType = item.system.effectImmuType;
     }
 
     if (msg.flags.abfalter.matrixDetails.type === "shield") {
@@ -140,6 +150,7 @@ async function matrixChatUpdate(msg, html, ev) {
 } 
 
 async function matrixPrepareAttack(msg, html, ev) {
+    if (!msg.isAuthor && !game.user.isGM) return;
     const actor = game.actors.get(msg.speaker.actor);
     const info = {
         name: msg.flags.abfalter.matrixDetails.name,
@@ -157,6 +168,7 @@ async function matrixPrepareAttack(msg, html, ev) {
 }
 
 async function matrixPrepareEffect(msg, html, ev) {
+    if (!msg.isAuthor && !game.user.isGM) return;
     const actor = game.actors.get(msg.speaker.actor);
     const info = {
         name: msg.flags.abfalter.matrixDetails.name,
@@ -164,9 +176,14 @@ async function matrixPrepareEffect(msg, html, ev) {
         useProj: msg.flags.abfalter.matrixResolution.effectUseProj,
         projBonus: msg.flags.abfalter.matrixResolution.effectProjBonus,
         useAT: msg.flags.abfalter.matrixResolution.useAT,
-        atLabel: msg.flags.abfalter.matrixResolution.effectWhichAT,
+        atLabel: msg.flags.abfalter.matrixResolution.atLabel,
         resTypeList: msg.flags.abfalter.matrixResolution.resTypeList,
         resValue: msg.flags.abfalter.matrixResolution.chosenRes,
+
+        resOnFailedProj: msg.flags.abfalter.matrixResolution.resOnFailedProj,
+        failedProjResBonus: msg.flags.abfalter.matrixResolution.failedProjResBonus,
+        useImmunity: msg.flags.abfalter.matrixResolution.useImmunity,
+        immunityType: msg.flags.abfalter.matrixResolution.immunityType,
 
         isFired: msg.flags.abfalter.matrixResolution.isFired,
         isInvisible: msg.flags.abfalter.matrixResolution.isInvisible,
@@ -247,7 +264,150 @@ async function psychicChatUpdate(msg, html, ev) {
     });
 }
 
+//Function for when Resistance button is clicked from the Effect Resolver
+async function resolveResClicked(msg, html, ev) {
+    ev.preventDefault();
 
+    const button = ev.currentTarget;
+    if (button.disabled) return;
+
+    const tokenId = button.dataset.tokenId;
+
+    const defenderData = msg.flags?.abfalter?.resolveData?.defenderValues?.[tokenId];
+
+    if (!defenderData?.requiresResistance) return;
+
+    const token = canvas.tokens?.get(tokenId);
+    const actor = token?.actor;
+
+    if (!actor) return;
+
+    // Check ownership
+    if (!game.user.isGM && !actor.isOwner) return;
+
+    // Check if already rolled
+    if (resistanceAlreadyRolled(msg.id, tokenId)) return;
+
+    const resData = {
+        resValue: defenderData.resValue,
+        resTypeList: defenderData.resTypeList,
+        resBonus: defenderData.resBonus,
+        failedRes: defenderData.failedRes,
+        useImmunity: defenderData.useImmunity,
+        immunityType: defenderData.immunityType,
+        sourceMessageId: msg.id,
+        tokenId: tokenId,
+    };
+
+    try {
+        await diceFunctions.effectResolverResistance({actor: actor, resData: resData});
+    } catch (error) {
+        console.error("Resistance roll failed:", error);
+        ui.notifications.error("Resistance roll failed.");
+    } finally {
+        // Recheck after rolling, including if roll was cancelled
+        updateResistanceButtonOwnership(msg, html);
+    }
+}
+
+function resistanceAlreadyRolled(sourceMessageId, tokenId) {
+    return game.messages.some(message => {
+        const result = message.flags?.abfalter?.resistanceResult;
+
+        return (
+            result?.sourceMessageId === sourceMessageId &&
+            result?.tokenId === tokenId
+        );
+    });
+}
+
+async function acceptEffectResistanceClicked(msg, html, ev) {
+    ev.preventDefault();
+
+    if (!game.user.isGM) return;
+
+    const button = ev.currentTarget;
+    if (button.disabled) return;
+
+    button.disabled = true;
+
+    try {
+        await diceFunctions.acceptEffectResistance({
+            resistanceMessageId: msg.id
+        });
+    } catch (error) {
+        console.error("Failed to accept resistance:", error);
+        ui.notifications.error("Failed to accept resistance.");
+    } finally {
+        updateResistanceAcceptButton(msg, html);
+    }
+}
+
+function updateResistanceAcceptButton(msg, html) {
+    const buttons = html.querySelectorAll(
+        "button.acceptEffectResistance"
+    );
+    const accepted = msg.flags?.abfalter?.resistanceResult?.accepted === true;
+
+    for (const button of buttons) {
+        if (!game.user.isGM || accepted) {
+            button.remove();
+        }
+    }
+}
+
+// Gray out Resistance buttons if unowned or already rolled
+function updateResistanceButtonOwnership(msg, html) {
+    const buttons = html.querySelectorAll(
+        "button.resolveResistanceCheck"
+    );
+    if (!buttons.length) return;
+
+    for (const button of buttons) {
+        const tokenId = button.dataset.tokenId;
+        const actorId = button.dataset.actorId;
+
+        const actor = actorId
+            ? game.actors.get(actorId)
+            : null;
+
+        const token = tokenId
+            ? canvas.tokens?.get(tokenId)
+            : null;
+
+        const defenderActor = actor ?? token?.actor ?? null;
+
+        const canResist =
+            game.user.isGM ||
+            Boolean(defenderActor?.isOwner);
+
+        const alreadyRolled =
+            msg.flags?.abfalter?.resolveData?.defenderValues?.[tokenId]
+                ?.resistanceAccepted === true ||
+            resistanceAlreadyRolled(msg.id, tokenId);
+
+        const isLocked = !canResist || alreadyRolled;
+
+        button.disabled = isLocked;
+        button.classList.toggle(
+            "abf-disabled-defense",
+            isLocked
+        );
+
+        if (isLocked) {
+            button.setAttribute("aria-disabled", "true");
+
+            if (!canResist) {
+                button.title = "You do not control this target";
+            } else if (alreadyRolled) {
+                button.title = "Resistance already rolled";
+            }
+        } else {
+            button.removeAttribute("aria-disabled");
+            button.title = "";
+        }
+    }
+}
 
 //Function for when defense button is clicked from an attack
 async function defendButtonClicked(msg, html, ev) {
