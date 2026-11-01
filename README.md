@@ -35,7 +35,7 @@ I love support from the community! feel free to open a ticket on the GitHub or D
 # Me
 You can reach me on discord: @Lumenita 
 
-If you wish to support the system & what I do:  [Paypal]([https://ko-fi.com/luminitatv](https://www.paypal.com/donate/?hosted_button_id=FGLYJCJ9N7ZKL)) or [Kofi](https://ko-fi.com/luminitatv)
+If you wish to support the system & what I do:  [Paypal](https://www.paypal.com/donate/?hosted_button_id=FGLYJCJ9N7ZKL) or [Kofi](https://ko-fi.com/luminitatv)
 
 # Modules
 If there are any difficulties with modules, I can attempt to fix whatever problem that show up if its within my ability to do so.
