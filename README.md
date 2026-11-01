@@ -13,18 +13,17 @@ Elis (@Elisianthus) has contributed greatly to the system. She has created most 
 I plan to continue expanding the system with a variety of quality-of-life features, both within the character sheets and the system as a whole. If there’s anything you’d like to see added or improved, feel free to open a ticket on the GitHub repository.
 Also come join the new discord server - https://discord.gg/KyUnYUD7Bj where I'll be posting announcements on current progress of the next update and what I'm working on at the time.
 
-While the system does support spanish, french, and russian to an extent they are fairly outdated.
+While the system does support Spanish, French, and Russian, specifically French & Russian are fairly outdated.
 
 Should the Core Exxet 2.0 rulebook ever be officially released, I also intend to develop a dedicated system to support it.
 
 # Road Map
-- ~~Full implementation of a weight system for the Armory tab, & whatever small details/ui overhauls the Armory tab is lacking.~~
-- A QoL update for the Psychic Tab & UI changes on the Creature Tab.
-- A QoL update on The Ki Tab, Better Ki Technique Managment with accumulated Ki and Ki expenditure. ~~Including the ability to create custom ki Abilities~~.
-- A QoL update on the Magic Tab, showing much needed love for invocation & incarnation items, custom metamagic items, and more.
-- ~~Header update for a more stylized view of hp, fatigue, zeon, & pp while moving the details elsewhere.~~
-- Auto-combat Macro Calculator (Partially complete, only martial combat atm).
-
+- Magic Tab Overhaul
+- Auto-combat Macro Calculator (Partially complete, missing Magic compatability).
+- Creature UI Overhaul
+- General & Background UI Updates
+- Rest Feature
+- LevelMancer - Class Overhaul
 
 # Contributions
 I love support from the community! feel free to open a ticket on the GitHub or Disrcod for any feedback, suggestions, bug reports, or critiques.
@@ -36,7 +35,7 @@ I love support from the community! feel free to open a ticket on the GitHub or D
 # Me
 You can reach me on discord: @Lumenita 
 
-If you wish to support the system & what I do: https://ko-fi.com/luminitatv
+If you wish to support the system & what I do:  [Paypal]([https://ko-fi.com/luminitatv](https://www.paypal.com/donate/?hosted_button_id=FGLYJCJ9N7ZKL)) or [Kofi](https://ko-fi.com/luminitatv)
 
 # Modules
 If there are any difficulties with modules, I can attempt to fix whatever problem that show up if its within my ability to do so.
